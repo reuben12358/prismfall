@@ -225,23 +225,23 @@ BattleBack = field
 Weather = Rain,30
 #-------------------------------
 [170]   # Tidelock Gym - Lock Hall
-Name = Tidelock Gym - Lock Hall
+Name = Tidelock Gym
 MapPosition = 0,3,7
 #-------------------------------
 [171]   # Tidelock Gym - Basins (Low Water)
-Name = Tidelock Gym - Basins (Low Water)
+Name = Tidelock Gym
 MapPosition = 0,3,7
 #-------------------------------
 [172]   # Tidelock Gym - Basins (Mid Water)
-Name = Tidelock Gym - Basins (Mid Water)
+Name = Tidelock Gym
 MapPosition = 0,3,7
 #-------------------------------
 [173]   # Tidelock Gym - Basins (High Water)
-Name = Tidelock Gym - Basins (High Water)
+Name = Tidelock Gym
 MapPosition = 0,3,7
 #-------------------------------
 [174]   # Tidelock Gym - Warden's Pool
-Name = Tidelock Gym - Warden's Pool
+Name = Tidelock Gym
 MapPosition = 0,3,7
 #-------------------------------
 [280]   # Verdance - Market Terraces

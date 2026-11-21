@@ -27,7 +27,7 @@ class Cave(RMap):
         super().__init__(W, H, tid, seed, water=pool, kit={'default': 'cv' + p})
         self.p = p
         self.auto = {'w': (pool, game), 'W': ('Sea deep', 'rejuvenation')}
-        self.STAIRS = tuple(P1('%s_stair%s' % (p, e)) for e in 'lmr')
+        self.STAIRS = tuple(P1('%s_stair%s' % (p, e)) for e in 'lmr') if p + '_stairl' in STAMPS else K.STAIRS_STONE
         self.grass_var = False
         self.cls[:] = 'x'; self.ht[:] = MASS
         self.track = {}                     # (x, y) -> set of 'U','D','L','R' links

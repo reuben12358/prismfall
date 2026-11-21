@@ -23,7 +23,7 @@
 172	:FISHERMAN, "Oskar"
 172	:SWIMMER_M, "Leif"
 173	:SAILOR, "Bjorn"
-174	Prismfall.gym_battle(3)
+174	Prismfall.gym_battle(pfm_gym(:LEADER_MARISOL), double: false)
 520	:LASS, "Dory"
 520	:LASS, "Wren"
 520	:YOUNGSTER, "Pim"

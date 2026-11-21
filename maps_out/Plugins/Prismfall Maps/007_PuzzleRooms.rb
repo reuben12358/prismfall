@@ -148,4 +148,22 @@ if defined?(PrismfallPuzzles)
     end
     $game_map.need_refresh = true
   end
+  PrismfallPuzzles.room(:g3_practice, {
+    :name => "The practice lock",
+    :map => 170,
+    :start => [11, 13, 8],
+    :home => false,
+    :reset => { :switches => { 317 => false, 318 => false }, :vars => { 316 => 0 } },
+    :solved => { :switches => { 317 => true, 318 => true }, :vars => { 316 => 4 } },
+    :hints => ["Water lifts what floats. Current takes what's loose. Raise it and watch where the raft ends up.", "A shut gate stops what's drifting. The pier is just this side of the gate.", "Shut the gate with the lever, then turn the wheel: the raft drifts to the gate and lies against the pier."],
+  })
+  PrismfallPuzzles.room(:g3_basin, {
+    :name => "The basins",
+    :map => nil,
+    :start => [14, 21, 8],
+    :home => false,
+    :reset => { :switches => { 316 => false }, :vars => { 315 => 0 } },
+    :solved => { :switches => { 316 => true }, :vars => { 315 => 1 } },
+    :hints => ["Same rules as the practice lock. High water takes the raft inland; low water winds it home.", "Ma shuts the gate when she wants a boat to stop halfway: at the island.", "Raise to mid, cross the raft to the west pier and shut the gate. Raise to high: the raft parks at the island. Lower to mid, cross to the island, turn wheel C to high and ride the Race north."],
+  })
 end

@@ -592,7 +592,7 @@ template), 542 Brinewife's Rest C, 552 Dyers' Ford B- (the three dye bands are r
 Ch4: **566 Spinners' Rise C- -> B-** (was routekit: repeated straight terrace bands, noise grass), 577 Frostwick Pass C+, 570 Frostwick B,
 571-576 C+, **578 Rimewood Path D -> B**, 562 The Rimewood C, 563 Glade C, **561 Gullcry Cliffs D -> B-**, 564 Gullcry Caves
 **F** (stock Rock Cave), 565 not built, 560 Causeway C+, 568 Rehearsal B-, 160 Ebbmouth B, 167 Mill Quay B-, 161-165/168 C,
-**170-174 Tidelock Gym F** (stock Harbour/Gym tiles, bare grey basins; GYM_PUZZLES also wants its puzzle trimmed and rebuilt).
+**170-174 Tidelock Gym F** (stock Harbour/Gym tiles, bare grey basins; GYM_PUZZLES also wants its puzzle trimmed and rebuilt; done by map builder 13, 2p).
 Ch5 (580-595, Lumen 180-193, Gym 4) is not built. Worst left, in order: Tidelock Gym; the three caves (544, 545, 564; they need
 a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/previews/ch2_4_compare/`.
 - **578 Rimewood Path** (`routes_craft.build_578`): three snow terraces with stairs, the Long Ice (the Hoar Brook frozen
@@ -679,6 +679,18 @@ a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/
   (stairs) and the north chamber; the basin crossing is a 19-bar shortcut (start it on the turn), TEACH is a 7-bar
   inlet to the Pearl alcove; the gull roost tells how near the turn is; the tide-mark rock changes colour. Hidden
   passage: the weed curtain off the east shelf to a grotto (Revive). Light shafts from blowholes; Hiker Torvald.
+
+- **Gym 3, the Tidelock Gym 170-174 (job 2)**, on **tileset 58 "PF Rejuv Locks"** (the PF Rejuv sheet + `Lock Water`, the
+  Ebb's black-blue water in a quay-stone rim, solid, not surfable). The cdraw **T** palette is a timber lock-hall kit
+  (board walls between posts and rails with a tarred plinth, KITS `cvT`; Ebbmouth's grey-blue quay flags `T_f0-3`; the
+  dark roof void), with mud `cv_mud0-3`, rafts (`cv_raft_*` floating = walkable, `cv_raftS_*` adrift = solid),
+  lock gates, union-stamped sluice wheels, the Race's white water, chains, high windows, quay ladders and the dockers'
+  union banner. `layouts/tidelock.py` writes the five specs (`gen_gym3.py` is retired to
+  `layouts/old_gen_gym3.py.txt`; the old multi-map `170_tidelock_gym.yaml` now holds 170 only). At low water the piers
+  use the masonry quay kit (`qy`) two courses above the bed, with invisible blockers on their N / W / E edges and
+  ladders at x 8 and x 24. GYM_PUZZLES' trim is applied (Gym 3 "The trim"; proofs in `puzzles/tidelock.py`: 2 + 6 = 8
+  moves, rating 4). Marisol's event uses `pfm_gym(:LEADER_MARISOL)` like Gyms 1 and 2 (badge, TM03, the quay line).
+  Switch / variable names for D4, D6 and Gym 3 are in `flags.yaml`.
 
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's

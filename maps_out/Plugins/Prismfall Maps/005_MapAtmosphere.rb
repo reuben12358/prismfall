@@ -36,6 +36,11 @@ module PrismfallMaps
     542 => [6, 2, -6, 8],   # The Brinewife's Rest
     160 => [-6, -4, 6, 18],   # Ebbmouth
     167 => [-6, -4, 6, 18],   # Ebbmouth - Mill Quay
+    170 => [-6, -8, 4, 14],   # Tidelock Gym - Lock Hall
+    171 => [-6, -8, 4, 14],   # Tidelock Gym - Basins (Low Water)
+    172 => [-6, -8, 4, 14],   # Tidelock Gym - Basins (Mid Water)
+    173 => [-6, -8, 4, 14],   # Tidelock Gym - Basins (High Water)
+    174 => [-6, -8, 4, 14],   # Tidelock Gym - Warden's Pool
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall

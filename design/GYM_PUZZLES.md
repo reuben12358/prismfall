@@ -65,8 +65,10 @@ Optional Mastery rooms may sit up to **two points above** their gym; they never 
 Gym 1 auditorium 1 move / 2 states (1/10) · Gym 2 Canopy 2 / 4 (3/10; Rev 19 web trampolines) · Upper Lofts
 7 / 93 (4/10, unsolvable without the brass wire) · Granny's Knot 3 / 32 (3/10, unique) · Playhouse Backstage stage + loft
 5 / 39 (4/10, unsolvable without each scene and without the loft) · Trap Room 3 / 6 (3/10).
-**Gym 3 needs a trim before it is rebuilt** (owner of `gen_gym3.py`): its spec'd basins take 16 actions, which is a 6/10 room.
-The required route must fit 4/10 (≤ 8 actions); the bell × gate combination becomes the Culvert Mastery.
+**Gym 3 is trimmed and rebuilt** (map builder 13; model and proofs `mapgen/puzzles/tidelock.py`, maps
+`mapgen/layouts/tidelock.py`; `gen_gym3.py` retired): practice lock 2 moves (6 states), ONE basin 6 moves (13 states,
+the Race counts as a ride), 8 required moves in all = rating 4. The tide bell left the required route: the bell × gate
+combination is the Overflow Culvert Mastery's (175, not built yet). See "The trim" under Gym 3 below.
 
 **ID blocks after the swap.** Switch/variable blocks belong to the *building*, not the gym number, so nothing was renumbered:
 305–309 = the Loomhouse (now Gym 2), 310–314 = the Pell Playhouse (now Gym 1). Names in `mapgen/flags.yaml` are
@@ -557,7 +559,27 @@ Wheel C on IS: IS is dry on Mid and High.
 when she wants a boat to stop halfway." 3 the solution.
 **Reset:** Tove (on SW on every map) → V315 = 2, S315 and S316 off, transfer to 171 (14,21).
 
-### 174 Warden's Pool — arena (19×17, unchanged)
+### The trim (map builder 13, built) — supersedes the 16-action basin above where they differ
+Two rules carry both rooms, so the practice lock teaches exactly what the basin asks:
+- **Raise the water and the raft drifts inland (east)** until the end of the channel or a shut lock gate stops it.
+- **Lower the water and the chain winds the raft home** to its berth (slot 0).
+- **170 Lock Hall** (24×20): practice slots 0–6 at x 2/4/6/8/11/16/19 (rows 9–11), gate at x 14, only slot 4 (x 11) meets
+  the pier to the basin door (11,5). Wheel (3,13): Low → High drifts (`V316 = S317 && V316 <= 4 ? 4 : 6`), High → Low
+  tows home (`V316 = 0`). Gate lever (14,13) flips S317. Solution: gate, wheel (2 moves).
+- **171 / 172 / 173 Basins** (30×26; the Lock Hall door always opens on **Low**): raft slots x 3 / 14 / 25 (rows 18–20:
+  the west pier, the island jetty, the east pier); lock gate at x 19 (S316, lever on the west pier (3,10)); wheels
+  W (3,22) / E (25,22) on the south walkway, C (14,11) on the island (mid ↔ high). Entering High drifts the raft
+  (`V315 = S316 && V315 <= 1 ? 1 : 2`); entering Low winds it home (`V315 = 0`). Mid: the raft bridges the walkway and
+  the pier it lies against. Low: the bed is mud, the piers stand two quay courses above it; iron ladders at x 8 (the
+  walkway) and x 24 (the east pier); the shut gate walls the trench. High: the Race (14,9) carries you from the
+  island's north edge to the north dock and the Warden's door (14,2).
+- **Solution (6 moves):** E (mid) → cross to the west pier, shut the gate → E (high: the raft parks at the island) →
+  W (mid) → cross to the island, wheel C (high) → the Race. Raising twice with the gate open parks the raft at the east
+  pier (the Net Ball is there at low water, by the trench). Nothing soft-locks: low water always winds the raft home.
+- **Trainers** (all PBS, on `:WATER_SURFACE`): Gunnar (170), Ingrid (171, in the west bed), Leif and Oskar (172),
+  Bjorn (173, on the north dock). Apprentice Tove on 170 (`g3_practice`) and on every basin (`g3_basin`).
+
+### 174 Warden's Pool — arena (21×19, rebuilt in the timber hall kit)
 Marisol, single battle. Badge 3 + TM03 Water Pulse. The existing quay scene follows.
 
 ### 175 Overflow Culvert — MASTERY (optional; 21×15; via grate D on EP at Mid, behind a Rock Smash rock (TM98, Badge 2))

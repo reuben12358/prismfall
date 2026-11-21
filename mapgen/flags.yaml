@@ -18,6 +18,10 @@ variables:
   ROAD_RAMRACE: 603   # Spinners' Rise Ram Race: 0 not raced, 1 running, 2 won, 3 lost (rematch allowed)
   ROAD_RAMSTEPS: 604  # the Ram Race's start: $stats.distance_walked when the boy said go
   D8_FRAME: 536       # The Rehearsal (568): the replay's frame 0-4, one per step (pfp_step_clock from the map's parallel event)
+  G3_RAFT: 315        # Tidelock basins (map builder 13, the trimmed Gym 3): raft slot 0 west pier / 1 island jetty / 2 east pier
+  G3_PRACTICE_RAFT: 316  # Tidelock Lock Hall practice raft slot 0-6 (4 = against the pier)
+  D4_CART: 516        # Brinecut Mine (map builder 13): where the cart stands (0 depot, 1 A, 2 B ladder gallery, 3 C)
+  D6_TIDE_STEPS: 526  # Gullcry Caves: steps since the tide turned (0-23; pfm_tide_tick)
 switches:
   WAR_SIDE_ASH: 605   # the war maps (map builder 10): pf_choice(:war_climax) == :back_ashkaar (set by each war map's front event)
   WAR_SIDE_ISE: 606   # ... == :back_isenmar
@@ -32,7 +36,16 @@ switches:
   STAGE_FLAT_B: 311
   STAGE_FLAT_C: 312   # the rostrum
   STAGE_TRAP_DONE: 314 # Backstage Trap Room chest taken
-  GYM3_BELL: 315      # Tidelock tide bell: ON = currents run inland (north)
+  GYM3_BELL: 315      # Tidelock tide bell: ON = currents run inland (north) (the Overflow Culvert Mastery's; not on the required route)
+  G3_GATE: 316        # Tidelock basins: the lock gate across the south channel shut
+  G3_PRACTICE_GATE: 317  # Lock Hall practice gate shut
+  G3_PRACTICE_HIGH: 318  # Lock Hall practice lock filled
+  D4_POINTS_P1: 516   # Brinecut points (OFF = the left line): P1 west to the blind drift / east over the Cut
+  D4_POINTS_P2: 517   # P2: OFF = the buffer stop, ON = on to the far junction
+  D4_POINTS_P3: 518   # P3: OFF = north to the ladder gallery, ON = east to the Thistledown adit
+  D4_CART_AT_B: 519   # the cart parked at B (holds B1F's pump lever down)
+  D4_LAKE_DRAINED: 520 # B1F salt lake drained to its causeway
+  D6_HIGH_TIDE: 526   # Gullcry Caves high tide (the sand bars are under water)
 # Dungeons 501-600, 5 per dungeon (DUNGEON_PUZZLES.md section 0)
   D2_COCOON1: 506     # Deepwood lantern cocoons lit
   D2_COCOON2: 507
