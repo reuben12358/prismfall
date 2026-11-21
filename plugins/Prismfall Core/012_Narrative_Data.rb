@@ -339,7 +339,11 @@ module Prismfall
       225 => "flag(:MAGNUS_KEPT_FAITH)",
       226 => "flag(:DOMINAR_SWAYED)",
       227 => "flag(:ILSA_RECONCILED)",
-      228 => "flag(:KESTREL_REDEEMED)"
+      228 => "flag(:KESTREL_REDEEMED)",
+      229 => "flag(:ROWAN_ALIVE)",           # design/FLAGS.md S229-S232
+      230 => "flag(:WAR_ASHKAAR_WON)",
+      231 => "flag(:WAR_ISENMAR_WON)",
+      232 => "flag(:WAR_BOTH_BROKEN)"
     }
     MIRRORS_ENABLED = true
 

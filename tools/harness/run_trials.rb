@@ -480,7 +480,7 @@ $player.badges = Array.new(18) { |i| i < 2 }
 check("Scarecrow rematch (catchable EL_SUDOWOODO) open with 2 badges", tr.talk_ready?(:SCARECROW))
 $player.badges = saved_badges
 scene(:EL_PAINT_LOFT, :offer) # done quest: scene still runs, but no second gift via :complete
-check("a done quest can't complete twice", tr.record(:EL_PAINT_LOFT)[:times] >= 1)
+check("a done quest can't complete twice", tr.record(:EL_PAINT_LOFT)[:times] == 1 && !tr.complete(:EL_PAINT_LOFT, nil, false))
 
 #-------------------------------------------------------------------------------
 section("5. Badge-tier encounter swap: the Ferrymen's Mile (520)")

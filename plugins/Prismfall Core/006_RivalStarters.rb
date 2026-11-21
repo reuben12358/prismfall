@@ -226,6 +226,11 @@ module Prismfall
     def self.remap_item(item, old_species, new_species)
       return item if !item
       item_data = GameData::Item.try_get(item)
+      # Black Sludge hurts a non-Poison holder: a Venusaur swapped into Meganium/Sceptile/... gets Leftovers
+      if item_data && item_data.id == :BLACKSLUDGE
+        sp = GameData::Species.try_get(new_species)
+        return :LEFTOVERS if sp && !sp.types.include?(:POISON)
+      end
       return item if !item_data || !item_data.is_mega_stone?
       old_stones = mega_stones_for(old_species)
       return item if !old_stones.include?(item_data.id)   # not this species' stone

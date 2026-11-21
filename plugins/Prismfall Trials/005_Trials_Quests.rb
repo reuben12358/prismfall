@@ -124,6 +124,7 @@ module Prismfall
       id = id.to_sym
       q = get(id)
       raise ArgumentError, "Unknown quest #{id.inspect}" if !q
+      return false if done?(id) && !q[:repeatable]   # a finished one-off quest never pays out twice
       start(id, false) if !active?(id)
       r = record(id)
       r[:state]    = :done

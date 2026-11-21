@@ -155,12 +155,25 @@ module Prismfall
 
     # Moves/ability/nature of the event definition on top of a boss Pokemon.
     def self.apply_mon_overrides(pkmn, d)
+      pkmn.form = d[:form] if d[:form]
+      pkmn.makeMale if d[:gender] == 0
+      pkmn.makeFemale if d[:gender] == 1
+      pkmn.shiny = true if d[:shiny]
       pkmn.ability = d[:ability] if d[:ability]
+      pkmn.ability_index = d[:ability_index] if !d[:ability] && d[:ability_index]
       pkmn.nature = d[:nature] if d[:nature]
+      pkmn.item = d[:item] if d[:item]
       if d[:moves]
         pkmn.forget_all_moves
         d[:moves].each { |m| pkmn.learn_move(m) }
       end
+      if d[:ivs]
+        GameData::Stat.each_main do |s|
+          pkmn.iv[s.id] = d[:ivs].is_a?(Hash) ? (d[:ivs][s.id] || pkmn.iv[s.id]) : d[:ivs].to_i
+        end
+      end
+      (d[:evs] || {}).each { |stat, v| pkmn.ev[stat] = v }
+      pkmn.name = _INTL(d[:nickname]) if d[:nickname]
       pkmn.calc_stats
       pkmn.heal
     end

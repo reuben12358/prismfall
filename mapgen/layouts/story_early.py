@@ -13,7 +13,7 @@ import scriptpour as SP
 NAMES = {'EDDA': 'Edda', 'VOSS': 'Voss', 'CALLA': 'Calla', 'LARCH': 'Larch', 'JUNO': 'Juno', 'KESTREL': 'Kestrel',
          'ROWAN': 'Rowan', 'WENNA': 'Wenna', 'COLL': 'Coll', 'HESPER': 'Hesper', 'TAMSIN': 'Tamsin', 'THISTLE': 'Thistle'}
 SPR = {'EDDA': 'NPC 14', 'VOSS': 'trainer_GENTLEMAN', 'CALLA': 'trainer_SCIENTIST', 'LARCH': 'trainer_PROFESSOR',
-       'JUNO': 'trainer_RIVAL2', 'KESTREL': 'trainer_RIVAL1', 'ROWAN': 'trainer_POKEMONRANGER_M', 'WENNA': 'NPC 19',
+       'JUNO': 'JUNO', 'KESTREL': 'trainer_RIVAL1', 'ROWAN': 'trainer_POKEMONRANGER_M', 'WENNA': 'NPC 19',
        'COLL': 'NPC 03', 'HESPER': 'NPC 11', 'TAMSIN': 'trainer_LASS', 'THISTLE': 'trainer_BURGLAR'}
 
 

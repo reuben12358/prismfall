@@ -23,7 +23,7 @@
 #===============================================================================
 module PrismfallMaps
   JUNO_NAME    = "Juno"
-  JUNO_CHARSET = "trainer_RIVAL2"
+  JUNO_CHARSET = "JUNO"
   JUNO_WAITS   = { 522 => proc { $game_switches[105] } }   # map => when she waits outside instead of following in
   # Her map stand-ins elsewhere (same scene, earlier leg): erased while she follows, so there is never a second Juno.
   JUNO_STANDINS = { 100 => ["Juno (sendoff)"], 103 => ["Juno (station)"] }

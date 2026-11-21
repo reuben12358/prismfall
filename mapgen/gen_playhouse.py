@@ -327,7 +327,7 @@ def main():
                 {'wait': 20}]}]},
         {'type': 'event', 'name': 'Juno', 'at': list(T['juno']), 'pages': [
             {},
-            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'right'}, 'commands': [
+            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'JUNO', 'dir': 'right'}, 'commands': [
                 {'if': "$game_self_switches[[154, 0, 'JUNO']]", 'then': [say('JUNO', 'happy', "(whispering) I'll be loud quietly.")], 'else': [
                     "(Juno is in the front row with a paper cone of salt-caramel.)",
                     say('JUNO', 'happy', "I made it! I'm AUDIENCE! Go on! I'll be loud!"),

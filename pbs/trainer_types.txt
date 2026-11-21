@@ -281,7 +281,7 @@ VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_MARCHETTI]
 Name = Meridian Director
-Gender = Male
+Gender = Female
 BaseMoney = 80
 SkillLevel = 100
 BattleBGM = Battle Elite
@@ -289,7 +289,7 @@ VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_KROLL]
 Name = Meridian Director
-Gender = Male
+Gender = Female
 BaseMoney = 80
 SkillLevel = 100
 BattleBGM = Battle Elite
@@ -530,3 +530,13 @@ BaseMoney = 60
 SkillLevel = 100
 BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
+#-------------------------------
+[PLAYER_A]
+Name = Pokémon Trainer
+Gender = Male
+BaseMoney = 60
+#-------------------------------
+[PLAYER_B]
+Name = Pokémon Trainer
+Gender = Female
+BaseMoney = 60

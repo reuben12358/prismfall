@@ -311,7 +311,7 @@ def main():
         reveal_if("$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[131, e.id, 'A']] } >= 1", ['Juno']),
         {'type': 'event', 'name': 'Juno', 'at': list(A['juno']), 'pages': [
             {'commands': []},
-            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'up'}, 'commands': [
+            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'JUNO', 'dir': 'up'}, 'commands': [
                 {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "(a whisper you can hear from the top of the tree) GO ON, \\PN!")],
                  'else': ["(Juno is at the foot of the hollow, holding a hatbox with great care.)",
                           say('JUNO', 'happy', "Forty eggs! In a hatbox! Don't knock the hatbox! And don't fall on me!"),
