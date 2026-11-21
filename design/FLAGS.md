@@ -193,7 +193,7 @@ Story-side proposals still waiting on Narrative Systems: `:ch20_colors` (the PC'
 
 S181–S193 use part of the block previously reserved for per-Warden side-arc steps; S194–S220 remain reserved for those. V122–V123 use two of the reserved chapter counters.
 
-## Chapter step counters (story editor, 2026-11-21; scripts `23_SCRIPT_CH4.md` and `24_SCRIPT_CH5.md`)
+## Chapter step counters (story editor, 2026-11-21; scripts `23_SCRIPT_CH4.md`, `24_SCRIPT_CH5.md`, `25_SCRIPT_CH6.md`)
 
 From the V122–V140 block reserved for per-chapter scene counters. Events page on `>=`, so a value means "this step and everything before it has played".
 
@@ -201,8 +201,9 @@ From the V122–V140 block reserved for per-chapter scene counters. Events page 
 |---|---|---|
 | V124 | CH4_STEP | 0 = on the Hoar Road · 1 = K2 fought on Gullcry Cliffs (with S111) · 2 = met Marisol at the eel stall (comedy scene) · 3 = the strike vote on the Mill Quay (Teo met by day) · 4 = **the Night the Ebb Stopped** played (with S112; V108 goes 1 → 2 → 1 during it) · 5 = the morning after (the quay shows the `:ch4_teo` consequence; the gym opens) · 6 = Gym 3 won · 7 = Larch's confession and Hesper's letter (Chapter 4 closed: the towpath gate east to 580 opens, V102 = 5) |
 | V125 | CH5_STEP | 0 = leaving Ebbmouth · 1 = Juno's letter read at Brassfall · 2 = Juno rejoined at the Four Ways on Wallshadow Row · 3 = through Lumen West Gate (GALA INVITATION) · 4 = met Dex on the Lowlight stairs · 5 = the Lowlight blackout fixed (Circuit Gym opens) · 6 = Gym 4 won (the Spire's Gala door opens) · 7 = the Gala started · 8 = the raid: into the service lifts (951) · 9 = the Shatter and the Electivire boss done (with S113, S114; V104 = 1, 608 replaces 181) · 10 = the Lowlight aftermath with Valen done · 11 = testimony given (`:ch5_lowlight_testimony`; S115 with the broadcast) · 12 = Larch's 3 a.m. scene in the vault · 13 = Interlude I done (V101 = 2, V102 = 6) |
+| V126 | CH6_STEP | 0 = leaving Lumen · 1 = the Lowlight at dawn (Dex's glass warms; Juno's goodbye) · 2 = the Mandate checkpoint on the Mainline · 3 = arrived at Duneholt's Sandgate · 4 = the deep-works and `:ch6_drillsite` · 5 = Gym 5 won · 6 = the Ossuary door (Sahar's confession) · 7 = the murals (with S116) · 8 = K3 (with S117) · 9 = Juno's letter (chapter closed, V102 = 7) |
 
-Existing IDs these scripts set: S111 CH4_K2_DONE, S112 CH4_TEO_MET (the night), V108 EBB_STATE (1 stuttering from Ch4 arrival, 2 during the night, back to 1), V114 KESTREL_STAGE = 1 (K2), S113 CH5_GALA_DONE, S114 CH5_SHATTER, S115 CH5_MANDATE, V104 LOWLIGHT_STATE = 1, V119 INTERLUDE_ACTIVE = 1 then 0, S162 EDDA_SMUGGLER (Interlude I), S164 DEX_SHRINE (from Act II). No new switches: choices stay in Core (`:ch4_kestrel_mourner`, `:ch4_teo`, `:ch5_lowlight_testimony`), and one-off scenes use self switches.
+Existing IDs these scripts set: S111 CH4_K2_DONE, S112 CH4_TEO_MET (the night), V108 EBB_STATE (1 stuttering from Ch4 arrival, 2 during the night, back to 1), V114 KESTREL_STAGE = 1 (K2), S113 CH5_GALA_DONE, S114 CH5_SHATTER, S115 CH5_MANDATE, V104 LOWLIGHT_STATE = 1, V119 INTERLUDE_ACTIVE = 1 then 0, S162 EDDA_SMUGGLER (Interlude I), S164 DEX_SHRINE (from Act II), S116 CH6_OSSUARY_DONE, S117 CH6_K3_DONE. No new switches: choices stay in Core (`:ch4_kestrel_mourner`, `:ch4_teo`, `:ch5_lowlight_testimony`), and one-off scenes use self switches.
 
 ## Pointer rows: puzzle IDs the story touches (outside 101–300)
 

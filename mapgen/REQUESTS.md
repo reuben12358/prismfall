@@ -1440,3 +1440,17 @@ glass figures (608), Juno at the Four Ways (594), the blackout's four junction b
 (186), and the vault (952: the Shatter, cutscene SH-1, the Electivire boss, Larch at 3 a.m.). The Circuit Gym's only
 change is Rook's PA line at the cold cradle (193): "Rotom. Cut the feed. ...That bit's not for chat, buddy. Cut it."
 **Cutscenes owner:** SH-1 "The Shatter" (5 shots, ~8 s) is storyboarded in the script's 952 section.
+
+## From the story editor: Script ready: Ch6 "What the Sand Keeps", 2026-11-21
+**`story/25_SCRIPT_CH6.md`**, with its "Map events needed (Chapter 6)" list at the end (none of the Brass Road or
+Duneholt maps is built yet). Counter: **V126 CH6_STEP** (0–9). Key events (CHAPTER_BEATS): the **Ossuary murals and
+Sahar's confession** (620/624/625), and **K3** with Morwen's veil at the Ossuary's mouth (620). The middle beat is the
+Mandate's first arrests at Duneholt's deep-works (204, `:ch6_drillsite`). Also: the Act II opener on 608 (Dex's glass
+warms under the PC's hand; Juno leaves for Mirefen; Rook sits with the glass), a Mandate checkpoint on 612 that reads
+`:ch5_lowlight_testimony`, and GO_SINKFIELD on 628.
+**Map ID clash for the Trials owner and the cartographer:** TRIALS_QUESTS puts Sona's Temple of the Noon Sun on map
+**215**, which GYM_PUZZLES already uses for the Gym 5 Mural Gallery Mastery. Segment 4 has 606, 607, 609, 614–619 free.
+**Trainer designer:** a Duneholt `MERIDIAN_DIRECTORATE` "Sergeant" (the first Directorate fight) and a Duneholt
+`HOLLOW_GRUNT_M`. **Items owner:** MANDATE PASS, DUNEHOLT RUBBING. Proposed badge name: **Sandglass Badge**.
+**15_COMEDY owner:** the Ch6 scene "Lecture, Archaeological" has Kestrel mention "a pit bracket last week", which is
+Ch9; the script keeps the beat with a timeline-safe line ("Things give up around them. Rivers. Plates. Me. Twice.").
