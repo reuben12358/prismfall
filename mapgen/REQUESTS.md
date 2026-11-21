@@ -1551,12 +1551,35 @@ Dorian's Encore patch on 154 (16 badges) and the Causeway Matriarch on 560 (16 b
 - **Badge names (final):** Tideturn (3), Arclight (4), Sandglass (5), Remedy (6). They aren't in PBS; use them in the
   badge-award messages. Record: `design/CHAPTER_BEATS.md`, "Creator decisions (2026-11-21)".
 
-## From map builder 16 (2026-11-21, in progress)
-**For map builder 15 (and anyone running relayout):** 525 Gossamer Deepwood is now built by `routes_early.py`
-(`routes_craft.build_525`, spec `specs/525_gossamer_deepwood.yaml`); `specs/525_reskin.yaml` is gone, `reskin.py` skips
-525 and `relayout.sh` no longer runs `reskin.py 525` or the 525 spec restore (548 stays in `525_deepwood_cocoonfall.yaml`,
-written by `deepwood.py 548` only). A relayout that started before this change recreated `525_reskin.yaml` and failed with
-"duplicate map ids in specs"; that is fixed in the tree, just run it again.
+## From map builder 16 (2026-11-21)
+**Built:** **525 Gossamer Deepwood** crafted (`routes_craft.build_525`; the reskin and the 525 spec-restore rule are
+retired: `reskin.py` skips 525, `relayout.sh` no longer runs it); **562 The Rimewood** (same plan and events, the old
+Rimewood Path's dense snowy look) and **563 Rimewood Glade** (rewritten: a ridge with the Silk-fall frozen down it, the
+pond as a proven slide puzzle); **Thistledown Manor's finale moved to the attic** (547, as the script has it); **579** in
+`gen_docs.py` and **606 Temple of the Noon Sun** reserved in maps.json (MAPGEN 2r).  Previews:
+`maps_out/previews/ch2_4_compare/525_before_after.jpg`, `562_before_after.jpg`, `563_before_after.jpg`.
+**For map builder 15 (and anyone running relayout):** 525's spec is `specs/525_gossamer_deepwood.yaml` (written by
+`routes_early.py`); `525_deepwood_cocoonfall.yaml` holds 548 only.  Also: the git index is shared.  Stage and commit in one
+command (`git add <paths> && git commit`), or another agent's commit picks up your staged files (my job 3 landed in
+6b6c82b that way).
+**For the playtest (when runs resume):** 525: the lantern hollow is up the east stair (the outside post by the stair top);
+the crystal silk is now a true one-tile mouth (the old map let you walk round it).  Ranger Fenn heals at the Rangers'
+camp.  563: the Never-Melt Ice islet takes 4 slides; a trapper's note by the shore gives the hint.  547: Dame Rosamund
+waits on the attic stage; the finale needs all three scenes (`pfm :manor_scene_1..3`), a reload after the curtain call
+gives the offer again without a second Sinistea.
+**For the story editor / walkthrough owner:** the manor's matriarch is "Dame Rosamund" in both her events now (the
+script's name; the old event was "Lady Thistledown"); `design/WALKTHROUGH.md` still says Lady Thistledown gives the gifts
+"when you bow out" in the parlour.  New lines are mine: her parlour welcome (the script's opening lines plus "the second
+act is UPSTAIRS"), the "not yet" line on the stage, the attic's teacup line; 525's Deepwood marker, Weft Brook, weavers'
+camp, ring of caps, the Moth Tree, glass gravel, Ranger Fenn, the Rangers' log; 563's trapper's note.
+**For the Trials owner:** 525's MOTH_NESTS seat (near (30,20)) is on the trail beside the Moth Tree (the dyed-silk giant at
+x 25-28, y 21-26) and still fits; move it to `(29, 24)` if you want it under the tree.  562's Frost hive still seats near
+(30,30).
+**Not done (next map builder, in order):** the optional **Overflow Culvert Mastery 175** (GYM_PUZZLES, bell x gate, 6/10)
+and **Gullcry B1F 565** (DUNGEON_PUZZLES D6 COMBINE: the sea arch on 1F's tide counter, the barnacle rock; build it on the
+cave kit in `layouts/caves.py` like 564), then **Skaldfast 921-923** and **Cinder Cape 927** (war.py + the gdraw glass
+kit).  Kit notes for them: `CK.infill` after `r.paint()` closes lattice gaps; `CK.thin_bands` before; `DECOR_SH['flowers']`
+11 and 12 are solid bushes.
 
 ## From the field designer: Rev 24 field logic audit and the Glass Dunes stages, 2026-11-21
 Design: `design/FIELD_LOGIC_AUDIT.md` (a reason for every rule and transition of the 35 fields: keep / rework / cut),
