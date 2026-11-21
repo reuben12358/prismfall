@@ -3,6 +3,7 @@
 
   python3 -I make_placement_sheet.py sheet <before_dir> <after_dir> <out.png> [case ...]
   python3 -I make_placement_sheet.py ally <before_dir> <after_dir> <out.png> [--tag v1|before] [--title T] [--legend L] case ...
+  python3 -I make_placement_sheet.py doubles <before_dir> <after_dir> <out.png> case ...
   python3 -I make_placement_sheet.py gif <intro_dir> <frames_subdir> <out_base> [frame_ms=66] [last_frame]
 
 Marks drawn on the real-engine frames (never retouched otherwise):
@@ -167,6 +168,55 @@ def ally(bdir, adir, out, cases, before_tag="v1", title=None, legend=None):
     print(out, img.size, len(cases), "rooms")
 
 
+def mark_all(im, rows, case, view, sc=0.5):
+    """Every battler of a frame: red + = where EBDX stands it, yellow = its feet."""
+    d = ImageDraw.Draw(im)
+    for (c, v, i), f in rows.items():
+        if c != case or v != view:
+            continue
+        ax, ay = f["anchor_x"] * sc, f["anchor_y"] * sc
+        d.line([ax - 4, ay, ax + 4, ay], fill=RED); d.line([ax, ay - 4, ax, ay + 4], fill=RED)
+        fy = f["spr_y"] + (f["feet_row"] + 1 - f["oy"]) * f["zoom_y"]
+        fl = f["spr_x"] + (f["feet_l"] - f["ox"]) * f["zoom_x"]
+        fr = f["spr_x"] + (f["feet_r"] + 1 - f["ox"]) * f["zoom_x"]
+        d.line([fl * sc, fy * sc, fr * sc, fy * sc], fill=YELLOW)
+
+
+def doubles(bdir, adir, out, cases):
+    """Double battles before/after: per room, the battle camera and the send-out pull-back (1/2), BEFORE / AFTER."""
+    B, A = load(bdir), load(adir)
+    sw, sh, lab, head = 256, 192, 16, 60
+    img = Image.new("RGB", (4 * (sw + 4), head + len(cases) * (sh + lab + 6)), (14, 14, 18))
+    d = ImageDraw.Draw(img)
+    d.text((6, 4), "Double battles - real engine (mkxp-z + Essentials v21.1 + EBDX + Prismfall Bridge). Battle camera and "
+                   "send-out pull-back, 1/2 size, BEFORE / AFTER.", fill=(235, 235, 235))
+    d.text((6, 20), "BEFORE: the singles bases, EBDX's double points (near foe on the base's front rim, right-hand ally "
+                    "off its base).", fill=(200, 200, 200))
+    d.text((6, 33), "AFTER: each side's own base widened for two (art/battlebacks/doubles.py), battlers stood on it "
+                    "(007_Bridge_Placement.rb DOUBLE_FOE / DOUBLE_ALLY).   red + = where each battler stands   "
+                    "yellow = its feet", fill=(200, 200, 200))
+    y = head
+    for c in cases:
+        room, foe, pl = c.split("__")
+        d.text((6, y + 2), "%s   foes %s   allies %s" % (room.upper(), foe.upper().replace("+", " + "),
+                                                         pl.upper().replace("+", " + ")), fill=(255, 220, 120))
+        x = 0
+        for view in ("main", "sendout"):
+            for tag, rows, dd in (("before", B, bdir), ("after", A, adir)):
+                p = os.path.join(dd, "%s_%s_clean.png" % (c, view))
+                if os.path.exists(p):
+                    im = Image.open(p).convert("RGB").resize((sw, sh), Image.LANCZOS)
+                    mark_all(im, rows, c, view)
+                    img.paste(im, (x, y + lab))
+                d.rectangle([x, y + lab, x + 150, y + lab + 13], fill=(14, 14, 18))
+                d.text((x + 4, y + lab + 1), tag.upper() + (" - battle camera" if view == "main" else " - pull-back"),
+                       fill=(255, 255, 255) if tag == "before" else (140, 255, 160))
+                x += sw + 4
+        y += sh + lab + 6
+    img.save(out, optimize=True)
+    print(out, img.size, len(cases), "rooms")
+
+
 def gif(idir, sub, out, ms=66, last=None):
     src = os.path.join(idir, sub)
     files = sorted(f for f in os.listdir(src) if f.endswith((".bmp", ".png")))
@@ -226,6 +276,8 @@ def gif(idir, sub, out, ms=66, last=None):
 if __name__ == "__main__":
     if sys.argv[1] == "sheet":
         sheet(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
+    elif sys.argv[1] == "doubles":        # doubles <before> <after> <out> case...
+        doubles(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
     elif sys.argv[1] == "ally":           # ally <before> <after> <out> [--tag v1|before] [--title T] [--legend L] case...
         a = sys.argv[5:]
         kw = {}

@@ -42,6 +42,10 @@
 # battle camera (84-94% shown), and at the send-out pull-back the ally stands a
 # little further into the scene. A room whose base is painted higher still adds
 # its profile's :player_raise (FROZEN_LAKE). EBDX's stock rooms keep their own point.
+#
+# Double battles: each Prismfall room's bases are widened (art/battlebacks/
+# doubles.py -> elements/dbl_<room>_foe/_ally.png), laid over the room when that
+# side has two battlers, and the battlers stand on them (DOUBLE_FOE / DOUBLE_ALLY).
 #===============================================================================
 module PrismfallEBDX
   GROUND_SPRITES = true
@@ -55,6 +59,14 @@ module PrismfallEBDX
     :REGICE => false, :PROBOPASS => false
   }
   FOOT_TWEAK = {}
+  # Double battles (2 per side; triples keep EBDX's points). Each Prismfall room has widened copies of its own
+  # bases, elements/dbl_<room>_foe.png and _ally.png (art/battlebacks/doubles.py), laid over the room when that side
+  # has two battlers; the battlers stand on them here (room px; the same numbers as doubles.py). EBDX's own double
+  # points (foe 198,152 / 256,164, player 92,240 / 192,262) stood the near foe on the base's front rim and the
+  # right-hand ally off its base.
+  DOUBLE_FOE  = { 1 => [263, 153], 3 => [205, 151] }
+  DOUBLE_ALLY = { 0 => [91, 243], 2 => [175, 246] }
+  DOUBLE_Z    = 1          # over the room and its sky-less cut-out (both z 1, drawn earlier), under every other layer
 
   @ground_cache = {}
 
@@ -91,6 +103,23 @@ module PrismfallEBDX
       y -= step
     end
     return nil
+  end
+
+  # Widened bases for a double battle: { "img0dbl_foe" => layer, ... } for the sides that have two battlers.
+  def double_layers(data, battle)
+    return {} if !GROUND_SPRITES || !battle || !data.is_a?(Hash) || !data["prismfall_field"]
+    bd = data["backdrop"].to_s
+    return {} if !bd.start_with?("field_") || battle.pbMaxSize != 2
+    inv = 1.0 / room_scale
+    ret = {}
+    [[0, "ally"], [1, "foe"]].each do |side, tag|
+      next if battle.pbSideSize(side) != 2
+      path = EBDX_ELEMENTS + "dbl_#{bd}_#{tag}"
+      next if !pbResolveBitmap(path)
+      ret["img0dbl_#{tag}"] = { :bitmap => path, :flat => true, :x => 0, :y => 0, :ox => 0, :oy => 0,
+                                :zoom_x => inv, :zoom_y => inv, :z => DOUBLE_Z }
+    end
+    return ret
   end
 
   # Extra raise of the ally's point for one room (room px): its base was painted higher
@@ -159,12 +188,54 @@ if defined?(DynamicPokemonSprite) && defined?(EliteBattle)
       prismfall_place_adjustMetrics
       return if !PrismfallEBDX::GROUND_SPRITES
       return if !@data.is_a?(Hash) || !@data["prismfall_field"] || !@data["backdrop"].to_s.start_with?("field_")
-      return if !@battle || @battle.pbMaxSize > 1
+      return if !@battle
+      if @battle.pbMaxSize == 2
+        prismfall_double_points
+        return
+      end
+      return if @battle.pbMaxSize > 1
       lift = PrismfallEBDX::PLAYER_RAISE + PrismfallEBDX.room_player_raise(@data["prismfall_field"], @battle)
       b = @sprites["battler0"]
       b.ey -= lift if b && b.ey && lift != 0
     rescue StandardError => e
       PrismfallEBDX.log_error("BattleSceneRoom#adjustMetrics", e)
+    end
+
+    # Doubles: stand each side's two battlers on its widened base (only where the room has one).
+    def prismfall_double_points
+      lift = PrismfallEBDX.room_player_raise(@data["prismfall_field"], @battle)
+      [[PrismfallEBDX::DOUBLE_ALLY, "img0dbl_ally", lift], [PrismfallEBDX::DOUBLE_FOE, "img0dbl_foe", 0]].each do |pts, key, dy|
+        next if !@data[key]
+        pts.each do |i, (x, y)|
+          b = @sprites["battler#{i}"]
+          next if !b
+          b.ex = x
+          b.ey = y - dy
+        end
+        next if key != "img0dbl_foe" || !@battle.opponent || @battle.opponent.length < 2
+        pts.each do |i, (x, y)|
+          t = @sprites["trainer_#{i}"]
+          next if !t
+          t.ex = x
+          t.ey = y
+        end
+      end
+    end
+
+    # Doubles: add the widened bases to the room before EBDX draws it (EBDX's refresh draws from @data).
+    alias prismfall_place_refresh refresh unless method_defined?(:prismfall_place_refresh)
+    def refresh(*args)
+      if args[0].is_a?(Hash)
+        begin
+          @data.delete("img0dbl_ally") if @data.is_a?(Hash)
+          @data.delete("img0dbl_foe") if @data.is_a?(Hash)
+          extra = PrismfallEBDX.double_layers(@data, @battle)
+          extra.each { |k, v| @data[k] = v }
+        rescue StandardError => e
+          PrismfallEBDX.log_error("BattleSceneRoom#refresh (doubles)", e)
+        end
+      end
+      prismfall_place_refresh(*args)
     end
   end
 

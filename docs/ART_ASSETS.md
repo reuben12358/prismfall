@@ -66,6 +66,8 @@ the point (`007_Bridge_Placement.rb`; floating species hover 20 px above it), so
 Size the player base 1.3x the foe base (`bblib.PLAYER_SCALE`; HD foe 116x25 radii -> player 151x32.5): the send-out
 pull-back shows it whole. A room that needs its own size or a higher player base gets an entry in
 `bblib.ROOM_PLAYER`; the build passes the raise to the Bridge so the ally moves with the base.
+Double battles use widened copies of a room's own bases (`elements/dbl_<room>_foe/_ally.png`, made by
+`python3 -I art/battlebacks/doubles.py` from the built rooms): re-run it after changing a room's bases.
 Every field also gets **particle FX** drawn by the bridge. It generates the shapes itself, so no art is needed.
 Battle weather (rain, sun, sand, hail, fog) comes from EBDX's own weather layers.
 

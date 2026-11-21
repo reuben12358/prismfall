@@ -9,6 +9,7 @@ where EBDX stands the battler, yellow = the sprite's lowest opaque row (its feet
 marked): the first ~7 s of a battle, every 2nd engine frame, half speed, captioned. `ally_before_after.png`: the
 ally side in 6 rooms at the send-out pull-back and the battle camera, original vs v1 (item 5);
 `ally_v2_before_after.png`: v1 vs v2 (smaller player bases; MEADOW and FROZEN_LAKE tuned on their own).
+`doubles_before_after.png`: double battles in 6 rooms (item 6).
 
 ## What was wrong
 
@@ -37,6 +38,10 @@ ally side in 6 rooms at the send-out pull-back and the battle camera, original v
    (Joltik, Bidoof, the starters) showed only 69-79% of itself.
 
 Every other room's foe and player platform is centred on the anchors (checked on all 53 room images).
+
+6. **Double battles (all rooms).** Rooms paint one base per side, sized for one battler. EBDX's double points
+   (foe room 198,152 / 256,164, player 92,240 / 192,262) put the near foe's feet past its base's front rim and the
+   right-hand ally off its base; two big battlers overhang a singles base anyway.
 
 ## What changed
 
@@ -67,6 +72,14 @@ Every other room's foe and player platform is centred on the anchors (checked on
   player, no wildflowers on the worn cores; the two tall-grass clumps that stood there frame it instead.
 - `fields_b` (WATER_SURFACE piling, BEACH rock), `fields_f` (WASTELAND barrel), `fields_d` (MINDSCAPE stage-2
   hands): moved off the player bases. Only the base areas of these rooms changed.
+- Doubles: `art/battlebacks/doubles.py` widens each room's own bases into stadiums for two (its exact pixels, found
+  by rebuilding the room with that side's base off the canvas; left half out left, right half out right, the
+  centre slab repeated between, so rims, rings, stones and silk carry on): `elements/dbl_<room>_foe.png` /
+  `_ally.png`, 53 rooms. `007_Bridge_Placement.rb` lays them over the room (z 1, after its sky-less cut-out) when a
+  side has two battlers and stands them on them: foes at room 205,151 / 263,153 (centred on the foe base, 58 px
+  apart), allies at 91,243 / 175,246 (84 px apart; FROZEN_LAKE's extra raise applies); with two opposing
+  trainers, their intro sprites stand there too. Singles and triples are unchanged (triples keep EBDX's points).
+  Re-run `python3 -I art/battlebacks/doubles.py` after rebuilding rooms.
 
 Rebuild: `RUN=<capture copy> PP_CASES="MEADOW:TAUROS/LUCARIO;..." PP_VECTORS=1 bash tools/harness/visual/placement/run_placement.sh`
 (`PP_GROUND=0` = EBDX's own metrics, `PP_FOOT=16,-2 PP_RAISE=0 PP_ROOM_RAISE=0` = an earlier tuning,
@@ -74,4 +87,4 @@ Rebuild: `RUN=<capture copy> PP_CASES="MEADOW:TAUROS/LUCARIO;..." PP_VECTORS=1 b
 camera logs), then
 `python3 -I tools/harness/visual/placement/make_placement_sheet.py sheet|ally|gif ...`.
 
-Not verified: double/triple battles, Windows / real GPU.
+Not verified: triple battles, 1v2 / 2v1 battles in the engine, Windows / real GPU.

@@ -7,6 +7,7 @@
 #   DEMO_PLAN=placement
 #   PP_CASES="MEADOW:TAUROS/LUCARIO;GRAND_STAGE:JOLTIK/SNORLAX;NEW_MOON:3:GASTLY/BIDOOF"
 #                     field[:stage]:FOE/PLAYER (player defaults to LUCARIO)
+#                     doubles: field[:stage]:FOE1+FOE2/PLAYER1+PLAYER2 (a double wild battle)
 #   PP_VECTORS=1      also the ENEMY (intro close-up), SENDOUT (pull-back) and PLAYER framings
 #   PP_INTRO=<case#>[,<case#>...]  dump every 2nd frame of those cases from the battle start (GIF source), with
 #                     Captures/placement/intro_<case>.tsv: per dumped frame, the room camera and both battlers
@@ -25,14 +26,14 @@ module PlacementProbe
       mons = parts.pop.split("/")
       id = parts[0].to_sym
       st = (parts[1] || 1).to_i
-      [id, st, mons[0].to_sym, (mons[1] || "LUCARIO").to_sym]
+      [id, st, mons[0].split("+").map(&:to_sym), (mons[1] || "LUCARIO").split("+").map(&:to_sym)]
     end
   end
 
   def name_of(id, st, foe, pl)
     n = id.to_s.downcase
     n += "_s#{st}" if st > 1
-    "#{n}__#{foe.to_s.downcase}__#{pl.to_s.downcase}"
+    "#{n}__#{foe.map(&:to_s).join('+').downcase}__#{pl.map(&:to_s).join('+').downcase}"
   end
 
   def run_all
@@ -43,17 +44,22 @@ module PlacementProbe
     intro = (ENV["PP_INTRO"] || "-1").split(",").map(&:to_i)
     cases.each_with_index do |(id, st, foe, pl), ci|
       next if !FieldEffects.exists?(id)
-      next if !GameData::Species.exists?(foe) || !GameData::Species.exists?(pl)
+      next if (foe + pl).any? { |sp| !GameData::Species.exists?(sp) }
       @current = name_of(id, st, foe, pl)
       @done = false
       DemoRun.every = intro.include?(ci) ? 2 : 100000
       @intro_tsv = nil
-      party = [DemoRun.mon(pl, 50, [:TACKLE])]
+      party = pl.map { |sp| DemoRun.mon(sp, 50, [:TACKLE]) }
       DemoRun.battle("pp_#{@current}", party, :turns => 1) do
         $game_temp.clear_battle_rules
         setBattleRule("field", id)
         setBattleRule("fieldStage", st) if st > 1
-        WildBattle.start(foe, 50)
+        if foe.length > 1
+          setBattleRule("double")
+          WildBattle.start(foe[0], 50, foe[1], 50)
+        else
+          WildBattle.start(foe[0], 50)
+        end
       end
       DemoRun.every = 100000
       DemoRun.log("placement #{@current}: #{@done ? 'ok' : 'NO SHOT'}")
@@ -127,7 +133,7 @@ module PlacementProbe
   def probe(scene, view)
     room = scene.sprites["battlebg"]
     bg = room.instance_variable_get(:@sprites)["bg"]
-    [0, 1].each do |i|
+    (0...scene.battle.battlers.length).each do |i|
       spr = scene.sprites["pokemon_#{i}"]
       next if !spr || spr.disposed?
       anc = room.battler(i)
