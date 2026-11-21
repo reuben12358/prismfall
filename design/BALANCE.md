@@ -15,9 +15,9 @@ are defined; Gyms 8–18 fields are designed to their theme, assumptions marked 
 |---|---|---|---|
 | Feel | Approachable: learn the field, win on the second try at worst | Fair but demanding: you must use the field and type matchups; overlevelling to the cap is expected | Reborn-hard: the field is a weapon pointed at you; expect to build counter-teams and lose a few times |
 | Team size | Standard −1 (min 2); Festival always 6 | see §3 | Standard +1 (max 6) |
-| Levels | Standard −2 (cap <40), −3 (<70), −4 (70+) | Ace **at the cap**, others 1–5 below | Same as Standard through cap 23; from cap 27, others +1 (never above cap) (harness: +1 at Gyms 1–3 cost prepared teams 10–15 points) |
+| Levels | Standard −2 (cap <40), −3 (<70), −4 (70+); the story's important fights (Wardens but Brann, rivals, villains, Festival) one more from cap 40 (round 4) | Ace **at the cap**, others 1–5 below | Same as Standard through cap 23; from cap 27, others +1 (never above cap) (harness: +1 at Gyms 1–3 cost prepared teams 10–15 points) |
 | IVs / EVs | IV 4→20 by tier, **EV 0** | IV 12 / 18 / 24 / 28 / 31 (caps ≤23 / ≤35 / ≤51 / ≤71 / 72+), default EVs (min(lv×1.5, 85) each) | IV Standard + 8 (20 to cap 23, 26 to cap 35), 31 from cap 39 (Trick Room mons Spe IV 0); 252/252/4-style EVs by role, **at most 6 × level per stat** (60 at Lv 10, the full 252 from Lv 42) |
-| Sets | Standard sets minus the nastiest tool (setup / sleep / signature ability swapped, e.g. Toxapex Limber, Araquanid-free) | Full sets: 4 moves, ability, item, nature; field-synergy core of each team is present | Upgraded coverage, Hidden Abilities, Choice/Life Orb/Weakness Policy, one extra synergy piece. **Megas (all modes, §6b):** every important fight from ace 50 has one; below that only designed weak ones (Std + Hard) |
+| Sets | Standard sets minus the nastiest tool (setup / sleep / signature ability swapped, e.g. Toxapex Limber, Araquanid-free); from cap 40 no Life Orb or Choice item on the important fights (round 4) | Full sets: 4 moves, ability, item, nature; field-synergy core of each team is present. Round 4: no team carries more than two copies of its field's boosted signature attack, and the one-Pokémon sweep tools (Choice Band + Reckless, Scarf Outrage, Unburden + coverage, a seed on top of a setup move) are Hard's | Upgraded coverage, Hidden Abilities, Choice/Life Orb/Weakness Policy, one extra synergy piece. **Megas (all modes, §6b):** every important fight from ace 50 has one; below that only designed weak ones (Std + Hard) |
 | Bag items | Standard −1 | 1 Potion (cap 15) → 1 Super (to 23) → 2 Super → 2 Hyper → 2 Full Restore | 2 Super → 2 Hyper → 2 → 3 Full Restore |
 | AI skill | trainer type's own (Core sets no ceiling) | trainer type's own | Core floor 48 (`ai_skill_min`) |
 
@@ -53,6 +53,37 @@ Gyms 1–3 on Standard, and a fifth Pokémon for Tamsin dropped hers to 13%. Har
 are soft: perfect-ish IVs, EV spreads, the extra Pokémon, Focus Sash / Eviolite / seeds, and no Bag in trainer
 battles; its team size matches Reborn at Gym 1 (6). Casual stays well under them on purpose.
 
+## 1c. Calibration against Reborn and Rejuvenation, mid and late game (round 4)
+
+Same sources and method as §1b (`Data/trainers.dat`, read with `python3 -I`; the leader that hands out the badge
+at the same badge count; Rejuvenation's order from the BigJra walkthrough's badge lines). "Cap" = the level cap the
+player holds going in (Reborn `[20, 25, 35, 40, 45, 50, 55, 60, 65, 70, 70, 75, 75, 80, 85, 90, 90, 95]`,
+Rejuvenation `[18, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 85, 90, 90, 100]`). EV "def" = the engine's
+default (min(1.5 × level, 85) each, the same rule in all three games); "508" = a 252/252/4-style spread.
+
+| Badges held | Reborn (normal) | Rejuvenation (normal) | Prismfall Standard (Hard) |
+|---|---|---|---|
+| 3 (our Gym 4) | Shade: 6, Lv 35–38 / cap 40, IV 25–31, EV def, 6/6 held (2 seeds, Wide Lens), 2 Hyper | Narcissa: 6, 33–35 / 35, IV 20–31, def, 5/6 (2 Magical Seeds, Plate, Eviolite), 1 Super | Rook: 4, 25–27 / 27, IV 18, def, 4/4 (Synthetic Seed, Magnet), 2 Super (Hard 5, IV 26, 252s) |
+| 5 (Gym 6) | Serra: 6, 47–50 / 50, IV 15–31, def + one 508, 6/6, 3 Hyper | Crawli (double): 6, 43–45 / 45, IV 31, def / 504, 6/6 (2 Telluric Seeds, a Crest), 2 Hyper | Corvin (double): 5, 33–35 / 35, IV 18, def, 5/5 (Synthetic Seed), 2 Hyper (Hard 6) |
+| 7 (Gym 8) | Radomus: 6, 57–60 / 60, IV 31 (TR), def + 508, 6/6, 2 Ultra | Amber: 6, 53–55 / 55, IV 31, def / 504 / 508, 6/6 (seed, Gem, 2 Balloons) | Kaito: 5, 41–43 / 43, IV 24, def, 5/5 (Synthetic Seed, Assault Vest, Flame Orb), 2 Hyper (Hard 6, IV 31) |
+| 9 (Gym 10) | Samson: 6, 66–71 / 70, IV 23–31, 508, 6/6 (3 Synthetic Seeds, Life Orb, Sash), 2 Ultra | Flora: 6, 64–68 / 65, IV 31, 488–512, 6/6 (2 Magical Seeds), **Mega Venusaur**, 2 Max | Anja: 6, 49–51 / 51, IV 24, def, 6/6, **Mega Glalie**, 2 Full Restore (Hard IV 31, 252s, 3 FR) |
+| 12 (Gym 13) | Ciel: 6, 75–78 / 75, IV 31, 508, 6/6, **Mega Altaria**, 3 Ultra | Adam: 6, 79–83 / 80, IV 31, 504 / 508, 6/6 (seed, Gem, Sash), **Mega Aerodactyl** | Bastian: 6, 61–63 / 63, IV 28, def, 6/6 (Magical Seed, AV), **Mega Aerodactyl**, 2 FR |
+| 15 (Gym 16) | Amaria: 6, 86–92 / 90, IV 31, 508, 6/6, a **Z-crystal** (her other team: **Mega Swampert**), 2–3 Ultra | Allen & Alice (double): 6 + 6, 90–92 / 90, IV 31, 508, **Mega Gardevoir / Grimmsnarl** | Nyx (double): 6, 73–75 / 75, IV 31, def, 6/6 (Magical Seed), **Mega Absol**, 2 FR |
+| 16 (Gym 17) | Hardy: 6, 90–97 / 90, IV 31, 508, (rematch id 1: 6/6, **Mega Aerodactyl**, 2 FR) | — (18 badges; the finale is Damien: 6, 78–82, IV 31, 508, **Mega Tyranitar**) | Celestine (double): 6, 78–80 / 80, IV 31, def, Mimikyu's **Z-move**, 2 FR; Sigrun (17): 6, 83–85 / 85, **Mega Salamence** |
+| Rival, mid game | Cain 4: 5, Lv 44–46, IV 15–31, 1 held; Victoria 4: 5, 37–41, IV 20–31, 4/5 held | Ren (Gym 6 stretch): 6, 42–44, IV 20–31, 6/6 (Sash, seed, Boots) | K4 Kestrel (7 badges): 5, 41–42 / 43, IV 24, def, 5/5 (Hard 6) |
+| Rival, late game | Victoria 2: 6, 73–77, IV 31, 508, 6/6; Cain 6: 6, 81–83, 508 | Ren is a partner by then | K6 (13 badges): 6, 64–66 / 67, IV 28; K7 (16): 6, 77–79 / 80, IV 31 |
+
+**Reading.** At every badge count from 3 on, both references bring **six** Pokémon at cap−5 .. cap+2 with **IV 31
+from about Gym 5–6 and 508-EV spreads from about Gym 8–9**, almost every Pokémon holding something (seeds, Sash,
+Assault Vest, Life Orb, Crests), two or three Hyper / Ultra / Max Potions, and a leader Mega from badge 9 (Rejuvenation)
+or 12 (Reborn). Prismfall Standard sits **under** them on the stat side all the way (IV 18 → 24 → 28 → 31 by cap, never
+an EV spread; 4–5 Pokémon until Gym 10) and **with** them on items, sets, the bag and the Mega timing (from Gym 10, as
+Rejuvenation). Hard matches the references' normal mode on IVs, EVs and team size (IV 31 from cap 39, 252/252
+spreads, six from Gym 6) and adds sharper sets and the Bag ban. So Standard is already a little softer than both
+games' normal modes; what makes its late fights hard for an unprepared team is the field (every Warden's own type
+×1.2–1.5 on the field, often with a second boost, e.g. Hurricane ×1.44 and never missing on the Stormfront), which is
+also how the references' late leaders play.
+
 ## 2. Level curve
 
 Double battles (story, SPINE Rev 14): **Gyms 2, 6, 11, 16, 17** (`GYMS[:double]`; `Prismfall.gym_battle` sets the rule).
@@ -69,7 +100,7 @@ The level cap (Core) means grinding past the cap is impossible, so Standard diff
 | Hard size | 6 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
 | Casual size | 3 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
 
-Rival max levels (Standard; Hard same top, others +1 from cap 27): K1 5 · J1 15 (Saltmere, before Gym 1 since SPINE Rev 14) · K2 23 · K3 33 · J2 33 · K4 42 · J3 47 · K5 54 · K6 66 ·
+Rival max levels (Standard; Hard same top, others +1 from cap 27): K1 5 · J1 15 (Saltmere, before Gym 1 since SPINE Rev 14) · K2 23 · K3 35 (round 4; was 33) · J2 35 (was 33) · K4 42 · J3 47 · K5 54 · K6 66 ·
 K7 79. Festival aces (coordinator, SPINE Rev 3): R16 **90** · QF **92** · SF **94** · Final **96** · Hijack **100** · Arceus **100**;
 rest of each team 1–4 below. (Casual Festival teams keep 6 mons at −4 levels.) Sister-game cameos are optional sidequest fights
 (SPINE Rev 4) — see §6.
@@ -112,14 +143,14 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
 | 5 | Sahar, Desert, 31 | Hippopotas, **+Hard** Dugtrio, Sandaconda *(−C)*, Krokorok, Claydol "Effigy" | Sandaconda: Telluric Seed | sandstorm or Fire Fang bakes a Superbloom back |
 | 6 | Corvin, Corrosive Mire, 35, **double** | Galarian Weezing (never Misty Surge), Crobat *(−C)*, **+Hard** Salazzle, Amoonguss, Drapion, Toxapex "Ward" | Crobat: Synthetic Seed | Weezing's Heat Wave ×2 → Wasteland |
 | 7 | Brann, Volcanic, 39 | Torkoal, Camerupt *(−C)* (Magma Armor; **Mega**, Std + Hard, §6b: kept as designed, per the user), **+Hard** Centiskorch, Magmortar, Arcanine, Coalossal "Anvil" | Camerupt: Elemental Seed (the Cameruptite while it Megas) | Lava Plume ×3 re-melts Cinderglass; Anvil is built for Cinderglass |
-| 8 | Kaito, Colosseum, 43 | Hawlucha, **+Hard** Medicham, Machamp, Hitmontop *(−C)*, Conkeldurr, Lucario "Memory" (Std Scope Lens; Hard Life Orb; Mega only at the Festival) | Hawlucha: Synthetic Seed + Unburden | Frenzy by knockouts |
+| 8 | Kaito, Colosseum, 43 | Hawlucha, **+Hard** Medicham, Machamp, Hitmontop *(−C)*, Conkeldurr, Lucario "Memory" (Std Scope Lens; Hard Life Orb; Mega only at the Festival) | Hawlucha: Synthetic Seed (+ Unburden on Hard; Standard Limber since round 4) | Frenzy by knockouts |
 | 9 | Juno (J3), Flower Garden, 47 | see §5 | Whimsicott: Telluric Seed | growth moves; regrow from Embers |
 | 10 | Anja, Frozen Lake, 51 | Alolan Ninetales, Cloyster *(−C)*, **Glalie (Mega**, replaces Beartic), Walrein, Avalugg, Mamoswine "Matriarch" | Matriarch: Elemental Seed (Hard: Life Orb) | Body Press / High Horsepower crack the lake → Water Surface; Ice moves refreeze |
 | 11 | Odessa, Stormfront, 55, **double** | Pelipper (Keen Eye, Tailwind), **Pidgeot "Post" (Mega**, replaces Swanna), Pom-Pom Oricorio *(−C)*, Noivern, **Kilowattrel** (replaces Talonflame), Corviknight "Taxi" | Oricorio: Elemental Seed | Noivern's Sunny Day ×2 → Rainbow |
 | 12 | Ilsa, Mindscape, 59 | Bronzong, **Slowbro (Mega**, Trick Room; replaces Musharna), Espeon, Gothitelle *(−C)* (Hard: Shadow Tag), Reuniclus, Hatterene "Hush" | — | Hush's Psychic Noise ×3 → Inverse; Calm Mind ×2 calms a Nightmare |
 | 13 | Bastian, Crystal Cavern, 63 | Carbink, Alolan Golem *(−C)*, Aurorus, **Aerodactyl "Amber" (Mega**, replaces Dusk Lycanroc), Rhyperior, Gigalith "Geode" (Sturdy, no Sand Stream) | Geode: Magical Seed (Hard: Weakness Policy + Meteor Beam) | Golem's Explosion or 3 quakes → Cave; light moves relight a Dark Crystal |
 | 14 | Ysolde, Hollow Cathedral, 67 | Sableye (**Std/Casual Mega**), Spiritomb *(−C)*, Dusknoir, Cofagrigus, Gengar (**Hard Mega + Perish Song**), Chandelure "Vigil" | Cofagrigus: Magical Seed | Curse / Destiny Bond re-haunt a consecrated nave |
-| 15 | Magnus, Factory, 71 | Ferrothorn, Excadrill *(−C)* (Mold Breaker), Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine" (**Mega**, every mode) | Mark One: Synthetic Seed | Magnet Rise + Wild Charge restart a Scrapyard; nobody quakes |
+| 15 | Magnus, Factory, 71 | Ferrothorn, Excadrill *(−C)* (Mold Breaker), Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine" (**Mega**, every mode) | none since round 4 (Mark One: Sitrus, Shift Gear) | Magnet Rise + Wild Charge restart a Scrapyard; nobody quakes |
 | 16 | Nyx, New Moon, 75, **double** | Grimmsnarl, Weavile, **Absol "Omen" (Mega**, replaces Malamar), Umbreon (Wish), Zoroark "Nobody" (slot 5, Illusion of Honchkrow), Honchkrow *(−C)* | Weavile: Magical Seed (opens the Abyss) | Night Daze ×3 → Abyss; Dark attacks snuff the Lamplight |
 | 17 | Celestine, Fairy Tale, 80, **double** | Alcremie, Mimikyu (**Z-move**: Mimikium Z, Rev 23), Azumarill *(−C)*, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
 | 18 | Sigrun, Dragon's Den, 85 | Flygon, Kommo-o, **Dragonite** *(−C)* (Multiscale; replaces Goodra), Haxorus, Dragapult, Salamence "Dreamwing" (**Mega**, every mode) | Dreamwing: Amulet Coin (status-proof in the Den) | Draco Meteor reopens a cooled Cave; Dragon attacks retake a Fairy Tale |
@@ -152,12 +183,12 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
 |---|---|
 | K1 (6) | starter (Hard +Starly) |
 | K2 (21) | Staravia *(−C)*, Honedge "Morwen" (Ch4 gift), starter — Hard +Sandile |
-| K3 (33) | Staravia, Krokorok *(−C)*, Doublade (Eviolite), starter — Hard +Scyther |
+| K3 (35) | Staravia, Scyther *(−C)* (round 4: on Standard too), Krokorok *(−C)*, Doublade (Eviolite), starter |
 | K4 (42) | Staraptor, Krookodile *(−C)*, Scizor, Doublade, starter — Hard +Zweilous |
 | K5 (54) / K6 (66) | Staraptor, Krookodile *(−C)*, Scizor, Zweilous→Hydreigon (K6), starter, **Aegislash "Morwen"** |
 | K7 (79) / K8 (94) | Staraptor, Krookodile *(−C)*, **Mismagius** (from Ysolde), Hydreigon, starter, **Aegislash** ace |
 | J1 (14) | Cottonee *(−C)*, Bounsweet "Sweetpea", starter (unevolved) — Hard +Petilil. Saltmere, before Gym 1 (Rev 14) |
-| J2 (33) | Whimsicott, Lilligant *(−C)*, Steenee, starter — Hard +Floette "Everbloom" (white, SPINE Rev 12) |
+| J2 (35) | Whimsicott, Floette "Everbloom" *(−C)* (white, SPINE Rev 12; round 4: on Standard too), Lilligant *(−C)*, Steenee, starter |
 | J3 (47, `LEADER_JUNO` 30–32) | Whimsicott (Telluric Seed), Florges "Everbloom" *(−C)* (white, Flower Veil), Lilligant, starter, ace **Tsareena** — Hard +Roserade "Rowan". Flower Garden: the seed, Growth, Leech Seed, Aromatherapy and Grassy Terrain grow the garden; burn it down with Fire at stage 5. |
 | J4 (90) | Florges "Everbloom", Whimsicott, Lilligant, Comfey, starter, **Tsareena** |
 
@@ -255,7 +286,7 @@ it in place of a Mega only for the listed Z users.
 **Mega-less for story reasons** (no ring by then): the Mourner and Rowan, Kestrel before Morwen's Ring, Imre Dask,
 Morwen's Echo, Theodric, the war officers (MEGA_EVOLUTION.md §6.3).
 
-**Win rates** (prepared team at the cap, no Mega on the player's side; `run_winrates.rb` cells G7, G10, M12, K5, G11
+**Win rates** (prepared team at the cap, no Mega on the player's side; `run_winrates.rb` cells G7M, G10M, M12M, K5M, G11M (renamed in round 4; G7, G10 ... are now the round-4 cells)
 with `PRISM_PREPARED=1`, 60 fights a cell; `PRISM_FOE_NOMEGA=1` is the same fight with the foe's ring taken away):
 MEGA_EVOLUTION.md §8.
 

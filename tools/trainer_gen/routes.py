@@ -33,6 +33,7 @@ def ROUTES(P):
         132: (8, 23, {"TAROUNTULA": ("SPIDOPS", None)}),       # Loomhouse Upper Lofts (optional), 20-21
         152: (3, 23, {}), 153: (3, 23, {}),                   # Playhouse Backstage D9 (optional), 20-21
         525: (8, 23, {"LEDYBA": ("LEDIAN", None)}),            # Gossamer Deepwood, 19-20
+        577: (0, 23, {}), 578: (0, 23, {}),                   # Frostwick Pass 17-20, Rimewood Path 18-21 (map builder 13's cells, round 4)
     }
     DEFAULT_CAP = 23                                          # 560-564, 170-173: unchanged (Gym 3 stretch)
     def t(note, tt, nm, lose, mons, cap=None):
@@ -140,6 +141,30 @@ def ROUTES(P):
     t("Map 562 The Rimewood", "HIKER", "Ulf", 'Ha! No, no traps for you.', [m("TEDDIURSA", 18, "PICKUP", "ADAMANT"), m("BERGMITE", 19, "OWNTEMPO", "IMPISH")])
     t("Map 562 The Rimewood", "CAMPER", "Rook", "...Is that what the aurora's for?", [m("CUBCHOO", 18, "SNOWCLOAK", "ADAMANT"), m("SNEASEL", 19, "INNERFOCUS", "JOLLY")])
     t("Map 562 The Rimewood", "TWINS", "Ana & Ida", 'Two of us lost! Two kingdoms of losing!', [m("MORELULL", 19, "EFFECTSPORE", "MODEST"), m("SNORUNT", 19, "INNERFOCUS", "JOLLY")])
+    # Map 577 Frostwick Pass (Gym 3 stretch, 17-20) - SNOWY_MOUNTAIN: Ice x1.5, Powder Snow x2, Icy Wind x1.5, Slush Rush and
+    # Ice Body work without hail, Rock moves come down frozen. No Snow Cloak (evasion: never on Standard). Map builder 13's
+    # cells and roles (mapgen/REQUESTS.md, 2026-11-20); ROUTES.yaml: a huscarl, a forester, two sledgers.
+    t("Map 577 Frostwick Pass (double battle, cell 36,82)", "TWINS", "Kari & Kaia", "Kari: We crashed! Kaia: We ALWAYS crash.",
+      [m("SWINUB", 17, "OBLIVIOUS", "ADAMANT"), m("SNOM", 18, "ICESCALES", "MODEST")])
+    t("Map 577 Frostwick Pass (cell 25,66)", "POKEMONRANGER_F", "Liv", "The fences hold the snow. You hold your own, too.",
+      [m("DEERLING", 18, "SAPSIPPER", "JOLLY"), m("CUBCHOO", 18, "SLUSHRUSH", "ADAMANT")])
+    t("Map 577 Frostwick Pass (cell 33,37)", "CAMPER", "Eirik", "Wait for the gust to drop. That's the whole trick.",
+      [m("SNORUNT", 18, "ICEBODY", "JOLLY"), m("SWINUB", 19, "OBLIVIOUS", "ADAMANT")])
+    t("Map 577 Frostwick Pass (Handfast Arch, cell 37,16)", "BLACKBELT", "Hrodgar", "The arch stands. So do you. Pass, then.",
+      [m("CUBCHOO", 19, "SLUSHRUSH", "ADAMANT"), m("SNORUNT", 19, "INNERFOCUS", "JOLLY"), m("STANTLER", 20, "INTIMIDATE", "ADAMANT")])
+    # Map 578 Rimewood Path (Gym 3 stretch, 18-21) - SILKWOOD under snow: Bug x1.5, Grass and Fire x1.2, String Shot never
+    # misses, Swarm on. Snover's Snow Warning brings the snow its partners' Ice Body needs; the burner's Carkol and the
+    # honey-gatherer's Combee play the silk (Fire, Bug).
+    t("Map 578 Rimewood Path (cell 35,79)", "HIKER", "Ottar", "Logs don't fight back. You do. Noted.",
+      [m("TEDDIURSA", 18, "PICKUP", "ADAMANT"), m("SWINUB", 18, "OBLIVIOUS", "ADAMANT")])
+    t("Map 578 Rimewood Path (cell 36,61)", "POKEMONRANGER_M", "Ketil", "Mind the snares. Mine, and the other kind.",
+      [m("BUNEARY", 19, "LIMBER", "JOLLY"), m("CUBCHOO", 19, "RATTLED", "ADAMANT")])
+    t("Map 578 Rimewood Path (cell 43,37)", "CAMPER", "Brand", "Kiln's still hot. Warm your hands before you go on.",
+      [m("SNOVER", 19, "SNOWWARNING", "MODEST"), m("VANILLITE", 19, "ICEBODY", "MODEST"), m("CARKOL", 19, "STEAMENGINE", "ADAMANT")])
+    t("Map 578 Rimewood Path (cell 37,30)", "PICNICKER", "Hild", "Take a comb of honey. The bees won't mind. Much.",
+      [m("COMBEE", 19, "HONEYGATHER", "HASTY"), m("TEDDIURSA", 19, "HONEYGATHER", "ADAMANT"), m("DEERLING", 20, "SAPSIPPER", "JOLLY")])
+    t("Map 578 Rimewood Path (last blaze, cell 39,9)", "COOLTRAINER_F", "Ragna", "Follow the red blazes. Never the blue one.",
+      [m("SNEASEL", 20, "INNERFOCUS", "JOLLY"), m("SNOVER", 20, "SNOWWARNING", "MODEST"), m("MORELULL", 21, "EFFECTSPORE", "MODEST")])
     t("Map 563 Rimewood Glade", "POKEMONRANGER_M", "Sigurd", '...So you cut your way in. Fair.', [m("STANTLER", 19, "INTIMIDATE", "ADAMANT"), m("CRYOGONAL", 20, "LEVITATE", "CALM", "ICESHARD,RAPIDSPIN,ICYWIND,CONFUSERAY")])  # FROZEN_LAKE: Rapid Spin skates (x1.5), Icy Wind -2 Speed
     # --- Trainers named in the SPINE Rev 14 scripts (story/20_SCRIPT_CH0-2.md, story/21_SCRIPT_CH3.md) --------------
     # Map 527 Lacecliff Walk (Strand Road, BEACH, Gym 1 stretch 8-12). Beach: Mud-Slap / Mud Shot x2, Water x1.2.

@@ -102,7 +102,7 @@ where that fits the character better.
 - `tools/harness/run_trials.rb` **142/142**, including the Z-Power section (now with the Mega Ring) and the Octave
   reward (the Eevee + the Eevium Z, no ring).
 - `tools/validate_trainers.py` 0 errors; `tools/validate_fields.rb` 0 errors.
-- **Win rates** (`run_winrates.rb` cell G17, `PRISM_PREPARED=1`, Standard, 60 fights; `PRISM_FOE_NOZ=1` swaps the
+- **Win rates** (`run_winrates.rb` cell G17M (renamed in round 4), `PRISM_PREPARED=1`, Standard, 60 fights; `PRISM_FOE_NOZ=1` swaps the
   foe's crystal for a Life Orb): Celestine with her Z-move **100%** (60/60), without it **97%** (58/60). A prepared
   Steel and Poison team at the cap beats her either way; the Z-move fires (Let's Snuggle Forever) in the logged runs.
   The other Mega fights are unchanged (MEGA_EVOLUTION.md §8).

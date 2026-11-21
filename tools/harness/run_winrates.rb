@@ -16,8 +16,11 @@
 #   found it"; a fight's own :force list does the same for every run of that fight)
 #   PRISM_FOE_NOMEGA=1 takes MEGARING from every foe (the same fight without its Mega, for comparison)
 #   PRISM_FOE_NOZ=1 swaps every foe's Z-crystal for a Life Orb (the same fight without its Z-move)
-#   G7, G10, M12, K5 and G11 (SPINE Rev 21: the first Mega fights, and K5 without one) have PREPARED pools only: run
-#   them with PRISM_PREPARED=1.
+#   G7M, G10M, M12M, K5M, G11M and G17M (SPINE Rev 21/23: the Mega agent's hand-built prepared teams for the first
+#   Mega fights) have PREPARED pools only: run them with PRISM_PREPARED=1.
+#   Round 4 (tools/harness/winrates_r4.rb): G4-G18, K3-K9, J2, J4, WICK, Q8, MOURN, M12, KR13, M14, KR17, Q17, VALEN,
+#   VOSS, QH against a TYPICAL team (default) or a PREPARED one (PRISM_PREPARED=1) built from what the game hands out
+#   by then (winrate_pools.json + gifts, TMs, stones, the Mega Ring from 13 badges).
 # Writes WINRATES.md and winrates.json to PRISM_OUT (default docs/battle_captures/winrates).
 #===============================================================================
 require "json"
@@ -160,7 +163,7 @@ module WR
           :late => [:FACADE, :ROCKSMASH, :UTURN, :SURF] }   # Surf: Volcanic's advertised answer (two quench it)
   # The team is built over the whole journey: later pools include the earlier ones (a species keeps its best weight).
   POOLS[:ch3] = POOLS[:ch1_2].merge(POOLS[:ch3]) { |_k, a, b| [a, b].max }
-  %i[g7 g10 k5 g11 m12 g17].each { |k| POOLS[k] = POOLS[:ch4] }   # (realistic runs of the late cells fall back to Chapter 4: use PREPARED)
+  %i[g7 g10 k5 g11 m12 g17].each { |k| POOLS[k] = POOLS[:ch4] }   # (realistic runs of the *M cells fall back to Chapter 4: use PREPARED)
   POOLS[:ch4] = POOLS[:ch3].merge(POOLS[:ch4]) { |_k, a, b| [a, b].max }
   # A PREPARED player (PRISM_PREPARED=1): grinds every catch to the cap, keeps its strongest moves and hunts the best
   # type answers the availability doc allows by then (rare finds included), first listed first.
@@ -229,20 +232,20 @@ module WR
                :pool => :ch4, :bag => :g3, :tms => :g3, :stage => 1, :force => [:EMOLGA],
                :start => proc { Prismfall.gym_battle(3, :can_lose => true) } },
     # SPINE Rev 21: the first Mega fights, prepared teams only (PRISM_PREPARED=1), no Mega on the player's side.
-    "G7" => { :label => "Gym 7 Brann (Volcanic; weak Mega Camerupt)", :cap => 39, :badges => 6, :size => 6, :pool => :g7,
+    "G7M" => { :label => "Gym 7 Brann (Volcanic; weak Mega Camerupt)", :cap => 39, :badges => 6, :size => 6, :pool => :g7,
               :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(7, :can_lose => true) } },
-    "G10" => { :label => "Gym 10 Anja (Frozen Lake; Mega Glalie)", :cap => 51, :badges => 9, :size => 6, :pool => :g10,
+    "G10M" => { :label => "Gym 10 Anja (Frozen Lake; Mega Glalie)", :cap => 51, :badges => 9, :size => 6, :pool => :g10,
                :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(10, :can_lose => true) } },
-    "K5" => { :label => "K5 Kestrel (Skyreach, Stormfront; no Mega: no ring yet)", :cap => 55, :badges => 10, :size => 6, :pool => :k5,
+    "K5M" => { :label => "K5 Kestrel (Skyreach, Stormfront; no Mega: no ring yet)", :cap => 55, :badges => 10, :size => 6, :pool => :k5,
               :bag => :late, :tms => :late, :stage => 1,
               :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 5, :can_lose => true, :field => :STORMFRONT) } },
-    "M12" => { :label => "Ch12 Marchetti (Skyreach catwalks, Stormfront; Mega Manectric)", :cap => 55, :badges => 10, :size => 6,
+    "M12M" => { :label => "Ch12 Marchetti (Skyreach catwalks, Stormfront; Mega Manectric)", :cap => 55, :badges => 10, :size => 6,
                :pool => :m12, :bag => :late, :tms => :late, :stage => 1,
                :start => proc { setBattleRule("canLose"); setBattleRule("field", :STORMFRONT)
                                 TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene", 0) } },
-    "G17" => { :label => "Gym 17 Celestine (Fairy Tale, double; Mimikyu's Z-move)", :cap => 80, :badges => 16, :size => 6,
+    "G17M" => { :label => "Gym 17 Celestine (Fairy Tale, double; Mimikyu's Z-move)", :cap => 80, :badges => 16, :size => 6,
                :pool => :g17, :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(17, :can_lose => true) } },
-    "G11" => { :label => "Gym 11 Odessa (Stormfront, double; Mega Pidgeot)", :cap => 55, :badges => 10, :size => 6, :pool => :g11,
+    "G11M" => { :label => "Gym 11 Odessa (Stormfront, double; Mega Pidgeot)", :cap => 55, :badges => 10, :size => 6, :pool => :g11,
                :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(11, :can_lose => true) } }
   }
   FILLER = [:GROWL, :LEER, :TAILWHIP, :BABYDOLLEYES, :SANDATTACK, :SMOKESCREEN, :SWEETSCENT, :STRINGSHOT, :SPLASH,
@@ -279,7 +282,7 @@ module WR
     :SUDOWOODO => [:ROCKHEAD, 20, [:ROCKTHROW, :FLAIL, :FAKETEARS, :COPYCAT]],
     :SNOM => [:ICESCALES, 15, [:POWDERSNOW, :STRUGGLEBUG, :MIRRORCOAT, :FAIRYWIND]]
   }
-  # SPINE Rev 21 late cells (G7, G10, K5, G11): a PREPARED late-game player has more than level-up moves. Fixed sets
+  # SPINE Rev 21 late cells (G7M, G10M, K5M, G11M, M12M, G17M): a PREPARED late-game player has more than level-up moves. Fixed sets
   # with the mid-game TMs (Surf, Rock Slide, Bulldoze by Gym 7; Earthquake, Flamethrower, Ice Beam, Thunderbolt and the
   # like by Gym 10), IV 20-31, EV 85 each (Standard trainers' own default), a fitting nature; the starter (at the cap)
   # gets its own set; five of the six listed answers, shuffled by seed. No Mega: the player has no ring before 13.
@@ -401,6 +404,7 @@ module WR
   def self.party(fight, starter_lines, seed)
     rng = Random.new(seed)
     f = FIGHTS[fight]
+    return WR4.party(fight, f, starter_lines, seed, PREP, Prismfall::Difficulty.current) if f[:r4]
     if PREP && LATE[f[:pool]]
       late = LATE[f[:pool]]
       sname = STARTERS.key(starter_lines)
@@ -447,6 +451,9 @@ module WR
   end
 end
 
+load File.join(HARNESS_DIR, "winrates_r4.rb")
+WR4.fights.each { |k, v| WR::FIGHTS[k] = v }
+
 Harness.new_game_state
 if ENV["PRISM_FOE_NOZ"] == "1"
   EventHandlers.add(:on_trainer_load, :winrates_foe_noz,
@@ -469,9 +476,14 @@ MODES.each do |mode|
         Harness.set_badges(f[:badges])
         Prismfall::LevelCap.set_override(f[:lvcap] || f[:cap])
         $player.party = WR.party(fight, lines, seed)
-        bag = (mode == :HARD && ENV["PRISM_HARD_BAG"] != "1") ? [] : WR::BAG[f[:bag]].dup
+        if ENV["PRISM_SHOW_TEAMS"] && s <= ENV["PRISM_SHOW_TEAMS"].to_i
+          puts "  #{mode} #{fight} #{sname} s#{s}: " + $player.party.map { |pk|
+            "#{pk.species} #{pk.level} @#{pk.item_id} [#{pk.ability_id}] #{pk.moves.map(&:id).join('/')}" }.join(" | ")
+        end
+        bag = (mode == :HARD && ENV["PRISM_HARD_BAG"] != "1") ? [] : (f[:r4] ? WR4::BAG[WR4.bag_for(f[:badges])] : WR::BAG[f[:bag]]).dup
         $bag.clear if $bag.respond_to?(:clear)
         bag.each { |it| $bag.add(it) }
+        $bag.add(:MEGARING) if f[:r4] && f[:badges] >= 13   # SPINE Rev 21/23: the ring from Badge 13 (Megas and Z-moves)
         foe_left = nil
         log = Harness.run_battle("#{f[:label]} #{mode} #{sname} seed #{s}", :seed => seed,
                                  :setup => proc { |b| b.ally_items = [bag.dup] }) { f[:start].call }

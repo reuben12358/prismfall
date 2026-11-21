@@ -1338,6 +1338,25 @@ D5's creeping armchairs), 525 Deepwood (the §2n spec-restore rule applies), 562
 then Skaldfast 921-923 and Cinder Cape 927.
 
 
+## From the trainer designer, round 4 (2026-11-21)
+**For the map builder: the 577 / 578 route trainers are in PBS** (`tools/trainer_gen/routes.py` → `pbs/trainers.txt`,
+0 validator errors), at map builder 13's cells, classes and levels. Stock classes only (no new HUSCARL type: Hrodgar is
+a `BLACKBELT`). Version 0 for every one (Hard 100 / Casual 200 are picked by Core). Fields come from FIELD_DEFAULTS
+(577 `:SNOWY_MOUNTAIN`, 578 `:SILKWOOD`), so the events need no field rule; Kari & Kaia need `setBattleRule("double")`.
+| Map | Cell | Trainer (type, name) | Team (Standard) | Field touch |
+|---|---|---|---|---|
+| 577 | (36, 82) | `TWINS`, "Kari & Kaia" (**double**) | Swinub 17, Snom 18 | Powder Snow x2 |
+| 577 | (25, 66) | `POKEMONRANGER_F`, "Liv" | Deerling 18, Cubchoo 18 | Slush Rush works without hail here |
+| 577 | (33, 37) | `CAMPER`, "Eirik" | Snorunt 18, Swinub 19 | Ice Body heals without hail |
+| 577 | (37, 16) | `BLACKBELT`, "Hrodgar" (the huscarl at the Handfast Arch) | Cubchoo 19, Snorunt 19, Stantler 20 | Slush Rush; Intimidate |
+| 578 | (35, 79) | `HIKER`, "Ottar" (woodcutter) | Teddiursa 18, Swinub 18 | — |
+| 578 | (36, 61) | `POKEMONRANGER_M`, "Ketil" (trapper) | Buneary 19, Cubchoo 19 (Rattled) | Rattled +1 Speed off the silk's Bug hits |
+| 578 | (43, 37) | `CAMPER`, "Brand" (charcoal burner) | Snover 19, Vanillite 19, Carkol 19 | Snow Warning feeds Ice Body; Fire x1.2 on the silk |
+| 578 | (37, 30) | `PICNICKER`, "Hild" (honey-gatherer) | Combee 19, Teddiursa 19, Deerling 20 | Bug x1.5 on the silk (Combee) |
+| 578 | (39, 9) | `COOLTRAINER_F`, "Ragna" (scout at the last blaze) | Sneasel 20, Snover 20, Morelull 21 | Grass x1.2 on the silk |
+Names checked against every other trainer of the same class. No Electric or Grass hand-out: these are foes only.
+Check with `python3 -I tools/validate_map_trainers.py` once the events exist.
+
 ## From map builder 14 (2026-11-21)
 **Built:** the manor kit (`mapgen/mdraw.py`, tileset 59 "PF Rejuv Manor") and **Thistledown Manor 546/547** rebuilt with
 DUNGEON_PUZZLES D5 proved (stair hall 3/10, gallery 4/10, dining room 4/10; MAPGEN 2q); **The Wolfsrime (579)**, the
@@ -1454,69 +1473,3 @@ warms under the PC's hand; Juno leaves for Mirefen; Rook sits with the glass), a
 `HOLLOW_GRUNT_M`. **Items owner:** MANDATE PASS, DUNEHOLT RUBBING. Proposed badge name: **Sandglass Badge**.
 **15_COMEDY owner:** the Ch6 scene "Lecture, Archaeological" has Kestrel mention "a pit bracket last week", which is
 Ch9; the script keeps the beat with a timeline-safe line ("Things give up around them. Rivers. Plates. Me. Twice.").
-
-## From the story editor: Script ready: Ch7 "The Quiet Ward", 2026-11-21
-**`story/26_SCRIPT_CH7.md`**, with "Map events needed (Chapter 7)" at the end (the Leach Road and Mirefen aren't built).
-Counters: **V127 CH7_STEP** (0–7) and **V128 SWEETROT_TAKEN** (0–3, the GO_SWEET_TOOTH count). Key events: **J2 and
-the ledger** (223's dispensary; `:ch7_ledger`) and **the Ward Night** (223's Quiet Ward), which is CHAPTER_BEATS
-**proposal B** and waits on the creator's yes. It is written in and marked [PROPOSAL B], with the outline's roof scene
-printed under it as the fallback, so a builder can wire either: both set V127 = 6 and nothing later reads which one ran.
-Also: the first descent into Nadir at the Gutterfall (633), three Sweetrot offers (220, 220, 221 with the checkpoint),
-Wick at the Weeping Fen (648; a talk-down check), a Directorate "Escort" ambush on 621 only if `:ch6_drillsite ==
-:hollow`, and Gym 6 (233, double).
-**Trainer designer:** a Leach version of `MERIDIAN_DIRECTORATE` "Officer" (a double). **Items owner:** INVOICE (Key
-Item, flavour), Corvin's TM (Venoshock suggested). Proposed badge name: **Remedy Badge**.
-
-## From the Trials owner: Chapters 0–5 side content wired (2026-11-21)
-User: every chapter should matter (`design/CHAPTER_BEATS.md`), with Reborn/Rejuvenation-style side content around the key
-events. Audit: **`design/TRIALS_WIRING.md`** (`python3 -I tools/trials_wiring.py`; re-run after any build). Chapters 0–5,
-quests with every map event in a built map: **21 before → 30 now** (Ch0 0→1, Ch1 5→5, Ch2 5→8, Ch3 3→6, Ch4 7→9, Ch5 1→1);
-4 more Ch5 quests wait on map builder 15's maps. New quests: `plugins/Prismfall Trials/116_Quests_Early.rb`.
-**Built maps (done as data, `mapgen/trial_overlay.py`; no layout script touched).** New `EVENTS` and `PATCHES` entries
-(helpers `once()` for one-shot objects and `item_once()` for item balls behind a quest flag). Cells as a scratch
-build seated them; tiles were unchanged. Map builder 15's 03:34 full build already laid them into the working-tree maps.
-**Map builder 15: please commit Map100/108/109/120/160/524/527/528/548/579 with your build.** I didn't write `maps_out`.
-| Map | Events (cell) | Quest |
-|---|---|---|
-| 100 | Timburr (berth) (33,45); Loose plank 1–3 (45,45) (50,46) (52,43), the hb_plank tile; patch `Woman with crate (town)` | The Last Plank (held back since Rev 16); Two Unlisted |
-| 108 | Two mice (8,7), by Crate 7-B | Two Unlisted (Ch0 → Ch1, Tandemaus) |
-| 109 | patch `Woman with crate` (the deck; the offer expires at the scan, S102) | Two Unlisted |
-| 120 / 524 | Lyra (25,9); Moss-stone (73,11) (rock, then her Eevee on page 2); Lyra (moss-stone) (71,12) | The Moss Hymn (Octave 1/8) |
-| 160 | Aria (28,39); River note (steps) (29,41); River note (fish market) (46,34) | The Drowned Note (Octave 2/8: it needs all three notes) |
-| 527 | Tide-pool feud (22,46); Sea-cave crate 1–3 (26,44) (26,46) (30,44), shown once `quest_flag(:EL_TIDE_POOL_FEUD, :sea_cave)` | The Tide-Pool Feud |
-| 528 | Sand Crown (43,62), the Sandygast sprite; patch `Sand-sculptor` | The Crown in the Sand (Ch2: boss Sandygast, TM54) |
-| 548 | Humming cocoon (26,21), by `Glass cocoons` | The Note Under the Glass (Ch3; Joltik after Badge 3) |
-| 579 | Bracken (the den) (61,17); patch `Old drover` | Bracken Comes In (Ch4; Greavard, TM65) |
-**Map builder 14:** 548 lives in `specs/525_deepwood_cocoonfall.yaml`. If you rebuild it, keep `Glass cocoons` near (27,22),
-or move the overlay's (26,21). Shelly on 525 needs nothing new: *Someone Apologising to Bugs* (no longer a stub) completes
-when her `Prismfall.cameo_battle(:FESTIVAL_SHELLY, ...)` is won (`CAMEO_QUESTS`), so keep that call in her event.
-**Map builder 15 (Chapter 5, `story/24_SCRIPT_CH5.md`):** keys and conditions are in `design/TRIAL_EVENTS.yaml`. Add these to
-`trial_overlay.py` with your cells once your specs exist, or put them in your layouts:
-```
-PATCHES[580] = {'Fisher at the Veil': 'VEIL_FISHER'}        # the script's fisher beside the 588 Veil warp (580 item 6)
-EVENTS[588] = [once('Boundary stone 1', (x, y), 'quest_step(:IS_EBB_HOLLOW) == :ask', 'HOLLOW_STONE'),
-               once('Boundary stone 2', (x, y), 'quest_step(:IS_EBB_HOLLOW) == :ask', 'HOLLOW_STONE'),   # by house 9
-               ev('White coral', (x, y), 'HOLLOW_CORAL', 'Followers/CORSOLA_1', condition='quest_step(:IS_EBB_HOLLOW) == :coral')]  # by the eel-weir
-EVENTS[180] = [ev('Fizzbolt machine', (x, y), 'FIZZBOLT_MACHINE', tile=<vending tile>),
-               ev('Cadence (Concourse)', (x, y), 'OCTAVE_CADENCE', 'NPC ..', condition='switch(114) && var(125) >= 13 && !quest_done(:ZE_OCTAVE_OFF_BEAT)')]
-EVENTS[185] = [ev('Helpdesk Rotom', (x, y), 'HELPDESK_ROTOM', tile=<console tile>), ev('Records desk', (x, y), 'DESK_RECORDS', 'NPC ..'),
-               ev('Approvals desk', (x, y), 'DESK_APPROVALS', 'NPC ..'), ev('Compliance desk', (x, y), 'DESK_COMPLIANCE', 'NPC ..')]
-```
-181 keeps Cadence and the three Lattice junctions as TRIAL_EVENTS lists them. The script's note about Off the Beat after
-the Shatter is handled: from Act II (V125 ≥ 13) Cadence waits on the Concourse and the quest goes straight to her duel.
-The Fizzbolt and helpdesk rows are shut while V125 is 7–12 (the Gala to the Interlude). Holmsby's stones and coral must
-stay clear of the TM49 and Bleed Shard #4 balls.
-**For the story editor:** the Ch5 quests follow 24_SCRIPT_CH5. I dropped my drafts for the Brassfall lift, Lamp 47 and a
-Sluiceworks boss because the script owns those spots. Holmsby keeps the script's history (AF 296, the river lifted and
-hanging) and its Veil fisher. These new lines are mine: the woman with the crate (Ch0–1), the Sand-sculptor and the
-Pageant-goer (528), Mother Aldreth's two new offers, the old drover (579, building on map builder 14's lines), the Veil
-fisher's offer and return, the Fizzbolt machine, the helpdesk Rotom and its clerks, and Cadence after the Shatter.
-**For the distribution owner (Rev 16):** the new event Pokémon and the badges they need: Tandemaus 0, Sandygast 1 (a
-Lv 20 boss that joins at 16; no Grass move), Greavard 2 (no Dig), Joltik 3, Galarian Corsola 3, Porygon 3. The harness
-R4 check passes. **Rank-reward Pokémon now wait for badges**: Comfey Lv 35 for 8, the Deino egg for 6 and Lapras for 9.
-Before this, the Quiet Way paid 20+ points by Chapter 2, which handed out the Lv 35 Comfey at one badge.
-**For the cartographer:** Sona's Temple of the Noon Sun (Octave 4/8) moves from 215 (the Gym 5 Mastery, story editor's
-Ch6 note) to **606**. Please add it to maps.json: a small round sandstone temple off Sunbleach Flats (613).
-**Rumours:** the Wolfsrime tiers [579,3] / [579,4] have their lines now (`validate_badge_tiers`: 0 warnings).
-**Not placed yet (late chapters, maps built, outside this pass):** the Woodward on 526 (*The Old Pincer*, 12 badges),
-Dorian's Encore patch on 154 (16 badges) and the Causeway Matriarch on 560 (16 badges). TRIAL_EVENTS lists them.

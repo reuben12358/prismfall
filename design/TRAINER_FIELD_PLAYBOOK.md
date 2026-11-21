@@ -215,8 +215,8 @@ Torkoal, Camerupt, Magmortar, Arcanine, Coalossal "Anvil".
 Hawlucha, Machamp, Hitmontop, Conkeldurr, Lucario "Memory".
 - **Plan.** Punches and kicks ×1.2 on top of Fighting ×1.2; every knockout gives +1 Attack; two knockouts start a
   Frenzy (+1 crit stage for everything).
-- **Seed.** Hawlucha: **Synthetic Seed** (+1 Attack, Focus Energy, Taunted). Eating it triggers Unburden and powers
-  Acrobatics up; the set is four attacks.
+- **Seed.** Hawlucha: **Synthetic Seed** (+1 Attack, Focus Energy, Taunted). Eating it powers Acrobatics up; the set is
+  four attacks. On Hard it also triggers Unburden; Standard Hawlucha is Limber since round 4 (§8b).
 - **Abilities.** Machamp's No Guard is +1 Attack on entry; Memory's Inner Focus is +1 crit stage, with a Scope Lens.
 - **Stage play.** The Frenzy comes from knockouts. Nobody on the team uses a quake (three would drop the pit into a Cave).
 - **Counterplay.** Two stalling moves calm a Frenzy. Psychic (special Psychic is booed, ×0.8), Flying, Fairy,
@@ -297,7 +297,8 @@ Sableye, Spiritomb, Dusknoir, Cofagrigus, Gengar, Chandelure "Vigil".
 ### Gym 15: Magnus — Factory (71)
 Ferrothorn, Excadrill, Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine".
 - **Plan.** Steel ×1.5, Gear Grind ×2, Gyro Ball ×1.5, hammers ×1.3 (Engine's Hammer Arm).
-- **Seed.** Mark One: **Synthetic Seed** (+1 Attack, +1 Speed), then Shift Gear (+1 Defense as well here).
+- **Seed.** None since round 4 (§8b): Mark One holds a Sitrus and starts the line with Shift Gear (+1 Defense as well
+  here); the seeded +1 Attack / +1 Speed entry made its x2 Gear Grind a one-Pokémon sweep.
 - **Transition play / answer to the flip.** Three quakes or one explosion wreck the Factory into a Scrapyard, and
   Earthquake is the natural anti-Steel move. Mark One's Magnet Rise dodges the quakes (+1 Speed here) and, with
   Wild Charge, restarts the line: three charging moves, transform strike on the third if it is Wild Charge.
@@ -499,9 +500,41 @@ Clear Smog, Roar, Whirlwind or a Ghost type (Last Resort can't touch it) before 
 - `plugins/Prismfall Bosses/105_Boss_Mourner.rb` (new): Trevenant "Glasswood" is a 2-bar boss (3 on Hard) through a
   trainer-boss rule; each break cures it, resets drops, +1 Def and roots it (Ingrain).
 
+## 8b. Round 4 (Gyms 4–18, rivals, villains, the Festival bosses): what changed
+
+Measured against typical and prepared player teams (BALANCE.md §9, round 4). Each change takes away one
+**one-Pokémon sweep** the knockout counts pointed at (harness logs, 24–30 runs a fight), never the field engine or
+the transition play. Standard unless marked; Hard keeps the old tool unless marked; the Festival and Ruin copies
+(`promote()`, Hard sets as Standard) keep theirs. Brann (Gym 7) is untouched in every mode, per the user.
+
+| Fight | Change | Why (knockouts in the logs) |
+|---|---|---|
+| Gym 6 Corvin | Amoonguss: Clear Smog for Venoshock (Ward keeps the signature Venoshock) | the lead's always-doubled Venoshock was 51 of 137 knockouts on typical teams |
+| Gym 8 Kaito | Hawlucha: Limber (the seed's +1 Attack and Focus Energy stay), no Thunder Punch; Memory: Sitrus for the Scope Lens. **Hard:** Throat Chop for Thunder Punch | Hawlucha took 90 of 133 (typical), 42 of 101 (prepared) and 75 of 128 (Hard prepared): Unburden plus coverage for its Flying answers |
+| Gym 10 Anja | Ninetales: Ice Beam and a Sitrus (5-turn veil); Walrein: Ice Beam. **Hard:** Walrein Ice Beam too, Cloyster White Herb (was Focus Sash) | snow-sure Blizzards were 36 of 143 (typical) and 39 of 132 (Hard prepared) |
+| Gym 11 Odessa | Pelipper, Oricorio and Kilowattrel use Air Slash; Noivern and Post keep Hurricane (Casual: Air Slash on all but Kilowattrel's Thunderbolt) | five Hurricanes (x1.44 and sure-hit on the Stormfront) were 117 of 144 |
+| Gym 12 Ilsa | Bronzong: Payback for Extrasensory; Reuniclus: Leftovers (Hard Life Orb) | a Trick Room Life Orb Psychic one-shot full-HP neutral targets; Bronzong + Reuniclus 56 of 131 |
+| Gym 14 Ysolde | Dusknoir: Shadow Punch for Poltergeist; Gengar: Sitrus (Hard Life Orb) | Gengar's Life Orb STABs 48 of 144 |
+| Gym 15 Magnus | Mark One: Sitrus for the Synthetic Seed in **every** mode; it starts the line with Shift Gear | its x2 Gear Grind from a +1 / +1 entry was 53 of 102 (prepared) and 40 of 130 (Hard prepared) |
+| Gym 16 Nyx | Weavile: Knock Off for Icicle Crash; Honchkrow: Sitrus (Hard Life Orb). Casual: Umbreon without Foul Play, Weavile without Swords Dance | Weavile 47 of 144; Casual Umbreon's Foul Play 28 of 100 |
+| Gym 17 Celestine | Alcremie: Protect for Mystical Fire; Azumarill: Thick Fat (Hard and the Festival: Huge Power) | Alcremie 52, Azumarill 33 of 142 |
+| Gym 18 Sigrun | Flygon: Soft Sand and Dragon Claw (no Scarf Outrage); Dragonite: Roost for Dragon Dance; Haxorus: Dragon Claw; Kommo-o: Sitrus (Hard Throat Spray); Dragapult: Dragon Fang (Hard Life Orb). **Hard:** Dragonite Dragon Claw for Outrage. Casual: no Dragon Dance, no Dragon Darts, no Clanging Scales | Scarf Outrage 59 of 144 (typical); Dragapult, Dragonite and Kommo-o on prepared teams; Hard Dragonite's Outrage 50 of 141 |
+| K3 Kestrel | five on Standard (Scyther joins), Lv 33–35 (was four at 31–33) | a typical six won 98% |
+| J2 Juno | five on Standard (Floette "Everbloom" joins), Lv 33–35 (was four at 31–33) | a typical six won 100% |
+| K4 Kestrel | Staraptor: Quick Attack for Double-Edge; Krookodile: Intimidate (Hard Moxie) | the two took 70 of 130 |
+| K5–K8 Kestrel | Staraptor: Intimidate and a Sharp Beak (Hard and K9: Reckless + Choice Band) | its Brave Bird was the top killer of every late rival fight (27–36 of ~140) |
+| J4 Juno | Florges: Wish for Calm Mind | Calm Mind Moonblast 57 of 133 |
+| Ch7 Wick, Ch8 Quent, Ch9 the Mourner | Gardevoir, Rotom-Wash, Gourgeist join on Standard (were Hard-only); the Mourner's three a level up | typical sixes won 98 / 80 / 68% |
+| Ch12 Marchetti | Mega Manectric: Thunderbolt (Hard Thunder) | a sure-hit Thunder on the Stormfront was 41 of 137 |
+| Valen | Volcarona: Sitrus for the Magical Seed, Lv 94. Casual: Gallade without Close Combat / Swords Dance | the seeded Quiver Dance Bug Buzz was the prepared teams' top killer (33 of 109) |
+| Casual (rule) | from cap 40 the story's important fights drop one more level (two from cap 80) and hold no Life Orb or Choice item (not Brann) | a typical six won only 60–75% of Casual Gyms 11–16 and 28% of Casual Gym 18 |
+
+**Field plays checked** (harness logs, round 4; `FIELD CHANGE` / `FIELD STAGE` lines): BALANCE.md §9.
+
 ## 9. Verification
 
 Realistic and prepared win rates for K1–Gym 3 per difficulty: `design/BALANCE.md` §9 (round 3, 60 fights a cell).
+Gyms 4–18, the rivals, the villains and the Festival bosses: BALANCE.md §9, round 4 (typical and prepared teams).
 Late fights (the Octave gauntlet, the war doubles and legendaries): §6 above. Every team: `validate_trainers.py`
 0 errors, `validate_map_trainers.py` 0 errors, `field_fit.py --all` 0 problems, `run_all.rb` 0 errors.
 

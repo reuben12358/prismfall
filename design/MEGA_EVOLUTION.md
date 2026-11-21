@@ -16,7 +16,7 @@ the Mega animation, the AI's Mega, on a Prismfall field; Rev 20 capture). Code: 
 Quests: `plugins/Prismfall Trials/114_Quests_Megas.rb`, `132_EventMons_Megas.rb`, `152_Talk_Megas.rb`. Map events:
 `design/TRIAL_EVENTS.yaml` ("Mega Evolution" maps). Trainers: `tools/trainer_gen/gen.py` (`mega=` on a Pokémon,
 `MEGA_FROM`, `WEAK_MEGA`) → `pbs/trainers.txt`. Tests: `tools/harness/run_mega.rb` (report `docs/mega_test/REPORT.md`),
-`tools/harness/run_winrates.rb` (cells G7, G10, K5, G11), `tools/harness/playtest/run_mega.sh` (GIF
+`tools/harness/run_winrates.rb` (cells G7M, G10M, K5M, G11M; round 4 renamed them, §9 of BALANCE.md), `tools/harness/playtest/run_mega.sh` (GIF
 `docs/battle_captures/mega/mega_evolution_ebdx.gif`).
 
 ---------------------------------------------------------------------------------------------------
@@ -407,7 +407,7 @@ to last!", Bastian "Rock's patient. So's this.", Kestrel with Morwen's Ring "Mum
 | `001_Trials_Config.rb` | rank 3 rewards: Manectite (Zenith), Glalitite (Isenmar) |
 | `design/TRIAL_EVENTS.yaml` | "Mega Evolution" maps: 25 stone events + the quest NPCs and objects (Rev 21: 6 blocks gone, 7 new) |
 | `tools/trainer_gen/gen.py`, `cameos.py` → `pbs/trainers.txt` | `mega=` / `mega_low=` / `mega_set` / `mega_modes`, `MEGA_FROM`, `WEAK_MEGA`; every assignment in §6.2 |
-| `tools/harness/run_mega.rb`, `run_winrates.rb` (G7, G10, K5, G11 cells, `PRISM_FOE_NOMEGA`), `playtest/run_mega.sh`, `004_MegaBot.rb`, `make_mega_gif.py` | tests |
+| `tools/harness/run_mega.rb`, `run_winrates.rb` (G7M, G10M, K5M, G11M cells, `PRISM_FOE_NOMEGA`), `playtest/run_mega.sh`, `004_MegaBot.rb`, `make_mega_gif.py` | tests |
 
 Requests to other workstreams are in `mapgen/REQUESTS.md` ("From the Mega Evolution workstream", Revisions 20 and 21).
 
