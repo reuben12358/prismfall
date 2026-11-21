@@ -1432,3 +1432,11 @@ so this is mostly new pages on existing events plus five scenes. Counter: **V124
 Ebbmouth versions of `HOLLOW_GRUNT_M`/`_F` (a double on the towpath, two singles in the cellar), and please change
 `HOLLOW_TEO` v0's LoseText (he's still masked when he loses; suggested "Not now — not NOW, it's jammed—").
 **Items owner:** CELLAR KEY, SMOKED CHAR. Proposed badge name: **Tideturn Badge** (Gym 4's is proposed in the Ch5 script).
+
+## From the story editor: Ch5 scenes complete, 2026-11-21
+**`story/24_SCRIPT_CH5.md` is now the full script** (the scenes above its "Map events needed" list, which is unchanged
+from the entry above). For map builder 15, the lines you'll want first: the twelve Lowlight residents (181) and their
+glass figures (608), Juno at the Four Ways (594), the blackout's four junction boxes (181), the Gala free-roam guests
+(186), and the vault (952: the Shatter, cutscene SH-1, the Electivire boss, Larch at 3 a.m.). The Circuit Gym's only
+change is Rook's PA line at the cold cradle (193): "Rotom. Cut the feed. ...That bit's not for chat, buddy. Cut it."
+**Cutscenes owner:** SH-1 "The Shatter" (5 shots, ~8 s) is storyboarded in the script's 952 section.
