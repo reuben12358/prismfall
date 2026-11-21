@@ -376,3 +376,43 @@ events:
 - type: berry
   at: [52, 50]
   berry: ASPEARBERRY
+- type: trainer
+  at: [35, 79]
+  sight: 4
+  dir: down
+  sprite: trainer_HIKER
+  trainer: [HIKER, Ottar]
+  intro: Logs for Frostwick! But first, you!
+  after: Heave-ho. Back to the sledge.
+- type: trainer
+  at: [36, 61]
+  sight: 4
+  dir: down
+  sprite: trainer_POKEMONRANGER_M
+  trainer: [POKEMONRANGER_M, Ketil]
+  intro: Mind the snares! ...That one's mine. Battle!
+  after: If you meet a cross Teddiursa, tell it I'm sorry.
+- type: trainer
+  at: [43, 37]
+  sight: 4
+  dir: down
+  sprite: trainer_CAMPER
+  trainer: [CAMPER, Brand]
+  intro: Elowen wood, Isenmar fire, and you're standing in my smoke!
+  after: Best charcoal in two kingdoms. Neither will admit it.
+- type: trainer
+  at: [37, 30]
+  sight: 4
+  dir: down
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Hild]
+  intro: The Combee are slow in the cold. I'm not!
+  after: Take some honey for the road. ...No, not that comb.
+- type: trainer
+  at: [39, 9]
+  sight: 4
+  dir: down
+  sprite: trainer_COOLTRAINER_F
+  trainer: [COOLTRAINER_F, Ragna]
+  intro: Last blaze before the Rimewood. Prove you can read the trees.
+  after: White is the path. Blue is not. You'll do.

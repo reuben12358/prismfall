@@ -1470,6 +1470,15 @@ def build_577():
              tone=[-6, -2, 10, 10])
     h['metadata']['BattleBack'] = 'snow'
     h['gates'] = [{'name': 'Icium Z gully (Rock Smash)', 'from': [[31, 94]], 'sealed': [[69, 57], [68, 56], [70, 58]]}]   # map builder 12
+    r.m.events += [                                                                 # map builder 14: the route trainers (PBS, trainer designer round 4)
+        trainer((36, 82), 'TWINS', 'Kari & Kaia', "Kari: Sled race! Kaia: Sled BATTLE! Kari: ...Fine, a sled battle!",
+                "Kaia: We'll beat you down the hill next time. Kari: We'll beat you UP the hill.", d='down', double=True),
+        trainer((25, 66), 'POKEMONRANGER_F', 'Liv', "The avalanche fences only hold if somebody minds them. Today that somebody is battling you!",
+                "The snow's behaving. Unlike you.", d='down'),
+        trainer((33, 37), 'CAMPER', 'Eirik', "The wind's dropped for a second. Long enough for a battle!",
+                "Go on, then. Walk between the gusts.", d='down'),
+        trainer((37, 16), 'BLACKBELT', 'Hrodgar', "Elowen side, Isenmar side. Nobody crosses my arch without a fair fight.",
+                "A fair fight. Pass, and don't trust the toll hut's ledgers.", d='down')]
     r.m.events.append(obj('Snow bank', (17, 3), ['A steep bank of packed snow, scored with sled-tracks, climbs into the giant trees: the bottom of the old drove road (the Wolfsrime).',
                                              'You could slide down it from the top. Nobody climbs up it.']))   # map builder 14, added last (no RNG shift)
     r.write(h, '577_frostwick_pass.yaml', '# Frostwick Pass (577). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/577.png' if PREV else None)
@@ -1863,6 +1872,12 @@ def build_578():
     h['metadata']['BattleBack'] = 'snow'
     h['walk_from'] = [[SNARE - 2, BY + 3], [GX, GY]]                             # the snare nook (off the ice), the Silk-fall (Rock Smash)
     h['gates'] = [{'name': 'Silk-fall glade (frozen curtain, Rock Smash)', 'from': [[41, 86]], 'sealed': [[70, 35], [67, 33]]}]
+    r.m.events += [                                                                 # map builder 14: the route trainers (PBS, trainer designer round 4)
+        trainer((35, 79), 'HIKER', 'Ottar', "Logs for Frostwick! But first, you!", "Heave-ho. Back to the sledge.", d='down'),
+        trainer((36, 61), 'POKEMONRANGER_M', 'Ketil', "Mind the snares! ...That one's mine. Battle!", "If you meet a cross Teddiursa, tell it I'm sorry.", d='down'),
+        trainer((43, 37), 'CAMPER', 'Brand', "Elowen wood, Isenmar fire, and you're standing in my smoke!", "Best charcoal in two kingdoms. Neither will admit it.", d='down'),
+        trainer((37, 30), 'PICNICKER', 'Hild', "The Combee are slow in the cold. I'm not!", "Take some honey for the road. ...No, not that comb.", d='down'),
+        trainer((39, 9), 'COOLTRAINER_F', 'Ragna', "Last blaze before the Rimewood. Prove you can read the trees.", "White is the path. Blue is not. You'll do.", d='down')]
     r.write(h, '578_rimewood_path.yaml', '# Rimewood Path (578). WRITTEN BY layouts/routes_craft.py (map builder 12) - edit that script.\n',
             '/tmp/craft/578.png' if PREV else None)
 

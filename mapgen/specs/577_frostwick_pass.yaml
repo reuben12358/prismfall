@@ -928,6 +928,39 @@ events:
     trigger: action
     move: fixed
     commands: ['Forester: The wind gap above the toll hut. Walk between the gusts or it walks you back down.']
+- type: trainer
+  at: [36, 82]
+  sight: 4
+  dir: down
+  sprite: trainer_TWINS
+  trainer: [TWINS, Kari & Kaia]
+  intro: 'Kari: Sled race! Kaia: Sled BATTLE! Kari: ...Fine, a sled battle!'
+  after: 'Kaia: We''ll beat you down the hill next time. Kari: We''ll beat you UP the hill.'
+  rules: [setBattleRule("double")]
+- type: trainer
+  at: [25, 66]
+  sight: 4
+  dir: down
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [POKEMONRANGER_F, Liv]
+  intro: The avalanche fences only hold if somebody minds them. Today that somebody is battling you!
+  after: The snow's behaving. Unlike you.
+- type: trainer
+  at: [33, 37]
+  sight: 4
+  dir: down
+  sprite: trainer_CAMPER
+  trainer: [CAMPER, Eirik]
+  intro: The wind's dropped for a second. Long enough for a battle!
+  after: Go on, then. Walk between the gusts.
+- type: trainer
+  at: [37, 16]
+  sight: 4
+  dir: down
+  sprite: trainer_BLACKBELT
+  trainer: [BLACKBELT, Hrodgar]
+  intro: Elowen side, Isenmar side. Nobody crosses my arch without a fair fight.
+  after: A fair fight. Pass, and don't trust the toll hut's ledgers.
 - type: event
   name: Snow bank
   at: [17, 3]
