@@ -61,7 +61,8 @@ Each field's art lives in `Graphics/EBDX/Battlebacks/` and uses the field defini
 | Single | ~(116, 252) | ~(234, 152) |
 | Double | (92, 240) and (192, 262) | (256, 164) and (198, 152) |
 
-Paint platforms or clearings around those points.
+Paint platforms or clearings around those points: centre them there. The Bridge puts every battler's feet on
+the point (`007_Bridge_Placement.rb`; floating species hover 20 px above it), so an off-centre base shows.
 Every field also gets **particle FX** drawn by the bridge. It generates the shapes itself, so no art is needed.
 Battle weather (rain, sun, sand, hail, fog) comes from EBDX's own weather layers.
 
