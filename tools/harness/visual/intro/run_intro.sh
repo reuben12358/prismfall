@@ -23,7 +23,7 @@ find "$G/Plugins" -name '__pycache__' -prune -exec rm -rf {} +
 [[ -n "$ART" ]] && cp -r "$ART/." "$G/Graphics/"
 cp "$HERE/006_IntroCapture.rb" "$G/Plugins/ZZ Demo Autorun/"
 rm -rf "$G"/Captures/intro_*
-IC_PLAYER="$PLAYER" DEMO_PLAN=intro ISOLATE=1 DISPLAY_NUM="${DISPLAY_NUM:-178}" RUN_TIMEOUT="${RUN_TIMEOUT:-900}" \
+IC_FOE="${IC_FOE:-}" IC_PLAYER="$PLAYER" DEMO_PLAN=intro ISOLATE=1 DISPLAY_NUM="${DISPLAY_NUM:-178}" RUN_TIMEOUT="${RUN_TIMEOUT:-900}" \
   bash "$VIS/run_engine_capture.sh" run intro | grep -E "intro|command|EXCEPTION|FATAL|Error|player trainer" || true
 mkdir -p "$RUN/frames"
 for d in "$G"/Captures/intro_*/; do n="$(basename "$d")"; rm -rf "$RUN/frames/$n"; mv "$d" "$RUN/frames/$n"; done

@@ -7,7 +7,6 @@
 #===============================================================================
 if ENV["DEMO_PLAN"].to_s.start_with?("intro")
   # Rivals get EBDX's integrated VS cut-in (uses the trainer's own battle sprite; no extra art needed).
-  EliteBattle.assign_transition("integratedVS", :RIVAL_JUNO) rescue nil
 
   class << DemoRun
     def run
@@ -51,15 +50,23 @@ if ENV["DEMO_PLAN"].to_s.start_with?("intro")
       rescue => e
         log("map setup failed #{e.class}: #{e.message}")
       end
-      DemoRun.battle("intro_j1_#{ENV['IC_PLAYER'] || 'A'}", party, :turns => 1) do
+      DemoRun.battle("intro_#{(ENV['IC_FOE'].to_s.empty? ? 'juno' : ENV['IC_FOE']).downcase}_#{ENV['IC_PLAYER'] || 'A'}", party, :turns => 1) do
         40.times { Graphics.update; $scene.miniupdate }
         # Juno's pre-battle line in the overworld, with her face portrait (SPINE Rev 22)
         # (the real J1 lines from mapgen/layouts/saltmere_rj.py juno_j1)
-        pbMessage("\\pf[JUNO,happy]Juno: There you are! Tarts delivered! Forty! I ate one. Thirty-nine!")
-        pbMessage("\\pf[JUNO,neutral]Juno: Before you go in there... fight me?")
-        pbMessage("\\pf[JUNO,happy]Juno: Not a FIGHT fight. A spar. I want to know if I'm any good before you go off and get good without me.")
+        if ENV["IC_FOE"] != "DORIAN"
+          pbMessage("\\pf[JUNO,happy]Juno: There you are! Tarts delivered! Forty! I ate one. Thirty-nine!")
+          pbMessage("\\pf[JUNO,neutral]Juno: Before you go in there... fight me?")
+        end
         $game_temp.clear_battle_rules
-        Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true, field: (ENV["IC_FIELD"] || "MEADOW").to_sym)
+        if ENV["IC_FOE"] == "DORIAN"
+          pbMessage("\\pf[DORIAN,smug]Dorian: Enter, stage left, our brave challenger! The spotlight is yours, darling.")
+          $game_temp.clear_battle_rules
+          setBattleRule("field", :GRAND_STAGE) rescue nil
+          TrainerBattle.start(:LEADER_DORIAN, "Dorian")
+        else
+          Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true, field: (ENV["IC_FIELD"] || "MEADOW").to_sym)
+        end
       end
       log("done")
     end
