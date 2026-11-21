@@ -25,7 +25,16 @@
 module PrismfallVS
   ENABLED    = true
   OFF_SWITCH = nil                 # a game switch that turns the VS screen off (e.g. for a cutscene battle)
-  VS_IDS     = {}                  # trainer type => cast ID when the name doesn't match (e.g. :HOLLOW_SABLE => "KROLL")
+  VS_IDS     = {                   # trainer type => cast ID (ensures prefixed display names like "Prof. Larch" resolve)
+    :RIVAL_JUNO     => "JUNO",
+    :LEADER_JUNO    => "JUNO",
+    :RIVAL_KESTREL  => "KESTREL",
+    :LARCH          => "LARCH",
+    :LEADER_DORIAN  => "DORIAN",
+    :LEADER_TAMSIN  => "TAMSIN",
+    :LEADER_MARISOL => "MARISOL",
+    :HOLLOW_SABLE   => "KROLL"
+  }
   THEMES     = {                   # colour per cast ID (graphics/EBDX/VS/{tunnel,bandfoe,bandplayer}_<theme>.png)
     "PLAYER_A" => :teal, "PLAYER_B" => :green,
     "JUNO" => :rose, "KESTREL" => :blue, "DORIAN" => :violet, "TAMSIN" => :gold,
@@ -34,13 +43,13 @@ module PrismfallVS
   }
   DEFAULT_THEME_FOE    = :violet
   DEFAULT_THEME_PLAYER = :teal
-  # Layout (512x384), measured off the reference
+  # Layout (512x384), measured off the B2W2 reference
   TOP_Y = 40; BOT_Y = 208; BAND_H = 136
   BOLT_TOP_Y = 108; BOLT_BOT_Y = 276
   VS_CX = 256; VS_CY = 192; VS_SPLIT = 56             # EBDX's "VS." art: V is columns 0..55, S the rest
   FOE_BUST_CX = 392; PLAYER_BUST_CX = 120
   EMBLEM_CX = 240; EMBLEM_CY = 192
-  PORTRAIT_ZOOM = 1.5             # 96x96 portrait (48 native px doubled) -> 144px = 3 screen px per art px
+  PORTRAIT_ZOOM = 1.5             # 96x96 portrait fallback -> 144px; dedicated 256x136 VS busts render at 1.0
   HOLD_END = 5.2                  # seconds: when the finished screen starts to leave
   POSE_SECONDS = 1.6              # the trainer's one-shot pose, played during the challenge line
   INTRO_ZOOM = 3.0                # how close the battle opens on the trainer's silhouette
@@ -101,6 +110,7 @@ module PrismfallVS
       @vp = viewport
       @trainer = trainer
       @s = {}
+      @owned_bmps = []
       @home = {}
       @foe_id = PrismfallVS.cast_id(trainer)
       @pl_id = PrismfallVS.player_id
@@ -110,73 +120,131 @@ module PrismfallVS
       base_z = @vp.z
       # --- the overworld, darkened
       @s["world"] = Sprite.new(@vp); @s["world"].snap_screen; @s["world"].z = 1
-      @s["dim"] = Sprite.new(@vp); @s["dim"].bitmap = Bitmap.new(w, h)
+      @s["dim"] = Sprite.new(@vp); @s["dim"].bitmap = make_bmp(w, h)
       @s["dim"].bitmap.fill_rect(0, 0, w, h, Color.new(2, 2, 8)); @s["dim"].opacity = 0; @s["dim"].z = 2
-      # --- the warp tunnel (the final screen's background), two layers turning opposite ways
-      %w[tunnel tunnel2].each_with_index do |k, i|
+      # --- 3-layer perspective-rushing warp tunnel (emulates B2W2's 3D cone fly-through)
+      tbmp = PrismfallVS.themed("tunnel", @foe_theme)
+      3.times do |i|
+        k = "tunnel#{i}"
         t = Sprite.new(@vp)
-        t.bitmap = PrismfallVS.themed("tunnel", @foe_theme)
-        t.ox = t.bitmap.width / 2; t.oy = t.bitmap.height / 2
+        t.bitmap = tbmp
+        t.ox = tbmp.width / 2; t.oy = tbmp.height / 2
         t.x = VS_CX; t.y = VS_CY; t.z = 3 + i
-        t.mirror = (i == 1); t.opacity = (i == 1) ? 110 : 255
+        t.mirror = i.odd?
+        t.blend_type = (i == 0) ? 0 : 1
         @s[k] = t
       end
       @s["hole"] = Sprite.new(@vp)
-      @s["hole"].bitmap = hole_bitmap(160)
-      @s["hole"].ox = 80; @s["hole"].oy = 80; @s["hole"].x = VS_CX; @s["hole"].y = VS_CY
-      @s["hole"].zoom_x = @s["hole"].zoom_y = 0; @s["hole"].z = 6
-      # --- lightning (before the final screen)
-      @bolts = [0, 1, 2].map { |i| RPG::Cache.load_bitmap("", "#{PrismfallVS.dir}/bolt#{i}") }
+      @s["hole"].bitmap = hole_bitmap(180)
+      @s["hole"].ox = 90; @s["hole"].oy = 90; @s["hole"].x = VS_CX; @s["hole"].y = VS_CY
+      @s["hole"].zoom_x = @s["hole"].zoom_y = 0; @s["hole"].z = 7
+      # --- lightning (doubled horizontally for seamless high-speed UV scroll + additive glow)
+      @bolts = [0, 1, 2].map do |i|
+        src = RPG::Cache.load_bitmap("", "#{PrismfallVS.dir}/bolt#{i}")
+        dbl = make_bmp(src.width * 2, src.height)
+        dbl.blt(0, 0, src, src.rect)
+        dbl.blt(src.width, 0, src, src.rect)
+        [dbl, src.width, src.height]
+      end
       @s["boltT"] = Sprite.new(@vp); @s["boltB"] = Sprite.new(@vp)
       [["boltT", BOLT_TOP_Y], ["boltB", BOLT_BOT_Y]].each do |k, y|
-        @s[k].bitmap = @bolts[0]; @s[k].y = y - @bolts[0].height / 2; @s[k].z = 8
-        @s[k].src_rect = Rect.new(0, 0, 0, @bolts[0].height)
+        bmp, bw, bh = @bolts[0]
+        @s[k].bitmap = bmp; @s[k].y = y - bh / 2; @s[k].z = 9
+        @s[k].blend_type = 1
+        @s[k].src_rect = Rect.new(0, 0, 0, bh)
       end
-      # --- the two bands: own viewports so busts, emblem and names are clipped to them
+      # --- the two bands: own viewports so busts, ghost echo, sheen, emblem and names clip cleanly
       @top = Viewport.new(0, TOP_Y, w, BAND_H); @top.z = base_z + 1
       @bot = Viewport.new(0, BOT_Y, w, BAND_H); @bot.z = base_z + 1
-      @s["bgT"] = Sprite.new(@top); @s["bgT"].bitmap = PrismfallVS.themed("bandfoe", @foe_theme)
-      @s["bgB"] = Sprite.new(@bot); @s["bgB"].bitmap = PrismfallVS.themed("bandplayer", @pl_theme)
+      @s["bgT"] = Sprite.new(@top); @s["bgT"].bitmap = PrismfallVS.themed("bandfoe", @foe_theme); @s["bgT"].z = 0
+      @s["bgB"] = Sprite.new(@bot); @s["bgB"].bitmap = PrismfallVS.themed("bandplayer", @pl_theme); @s["bgB"].z = 0
+      # subtle scrolling diagonal anime speed sheen across each band
+      sheen_bmp = make_sheen_bitmap(w, BAND_H)
+      [["sheenT", @top], ["sheenB", @bot]].each do |k, vp|
+        sh = Sprite.new(vp); sh.bitmap = sheen_bmp; sh.z = 1; sh.blend_type = 1; sh.opacity = 52
+        sh.src_rect = Rect.new(0, 0, w, BAND_H)
+        @s[k] = sh
+      end
       emb = RPG::Cache.load_bitmap("", "#{PrismfallVS.dir}/emblem")
       [["embT", @top, TOP_Y], ["embB", @bot, BOT_Y]].each do |k, v, by|
-        @s[k] = Sprite.new(v); @s[k].bitmap = emb; @s[k].z = 2
+        @s[k] = Sprite.new(v); @s[k].bitmap = emb; @s[k].z = 2; @s[k].opacity = 185
         @s[k].x = EMBLEM_CX - emb.width / 2; @s[k].y = EMBLEM_CY - emb.height / 2 - by
       end
-      @s["bustT"] = make_bust(@top, @foe_id, FOE_BUST_CX)
-      @s["bustB"] = make_bust(@bot, @pl_id, PLAYER_BUST_CX)
-      @s["nameT"] = name_sprite(@top, @trainer.name.to_s, 14, 6, :left)
-      @s["nameB"] = name_sprite(@bot, ($player ? $player.name : ""), w - 14, BAND_H - 40, :right)
-      @final = %w[bgT bgB embT embB nameT nameB tunnel tunnel2]
+      # enlarged translucent ghost echo behind the foe bust (signature B2W2 Panel 5 look!)
+      @s["ghostT"] = make_ghost_bust(@top, @foe_id, FOE_BUST_CX - 64)
+      @s["bustT"]  = make_bust(@top, @foe_id, FOE_BUST_CX)
+      @s["bustB"]  = make_bust(@bot, @pl_id, PLAYER_BUST_CX)
+      @s["nameT"]  = name_sprite(@top, @trainer.name.to_s, 18, 8, :left)
+      @s["nameB"]  = name_sprite(@bot, ($player ? $player.name : ""), w - 18, BAND_H - 42, :right)
+      @final = %w[bgT bgB sheenT sheenB embT embB ghostT nameT nameB tunnel0 tunnel1 tunnel2]
       @final.each { |k| @s[k].visible = false }
-      # --- over everything: VS halves, sparks, white, black
+      # --- over everything: centered-pivot VS halves, sparks, white, black
       @over = Viewport.new(0, 0, w, h); @over.z = base_z + 2
       vsb = RPG::Cache.load_bitmap("", "Graphics/EBDX/Transitions/Common/vs")
       @vs_w = vsb.width; @vs_h = vsb.height
-      @s["V"] = Sprite.new(@over); @s["V"].bitmap = vsb; @s["V"].src_rect = Rect.new(0, 0, VS_SPLIT, vsb.height)
-      @s["S"] = Sprite.new(@over); @s["S"].bitmap = vsb; @s["S"].src_rect = Rect.new(VS_SPLIT, 0, vsb.width - VS_SPLIT, vsb.height)
-      @v_home = [VS_CX - @vs_w / 2, VS_CY - @vs_h / 2]
-      @s_home = [VS_CX - @vs_w / 2 + VS_SPLIT, VS_CY - @vs_h / 2]
+      v_w = VS_SPLIT; s_w = vsb.width - VS_SPLIT
+      @s["V"] = Sprite.new(@over); @s["V"].bitmap = vsb; @s["V"].src_rect = Rect.new(0, 0, v_w, vsb.height)
+      @s["S"] = Sprite.new(@over); @s["S"].bitmap = vsb; @s["S"].src_rect = Rect.new(VS_SPLIT, 0, s_w, vsb.height)
+      @s["V"].ox = v_w / 2; @s["V"].oy = @vs_h / 2
+      @s["S"].ox = s_w / 2; @s["S"].oy = @vs_h / 2
+      @v_home = [VS_CX - @vs_w / 2 + v_w / 2, VS_CY]
+      @s_home = [VS_CX - @vs_w / 2 + VS_SPLIT + s_w / 2, VS_CY]
       %w[V S].each { |k| @s[k].z = 20; @s[k].visible = false }
       spk = RPG::Cache.load_bitmap("", "#{PrismfallVS.dir}/spark")
-      @sparks = (0...14).map do |i|
-        sp = Sprite.new(@over); sp.bitmap = spk; sp.ox = spk.width / 2; sp.oy = spk.height / 2; sp.z = 25
-        sp.visible = false
-        a = (i * 360.0 / 14 + rand(18)) * Math::PI / 180
-        [sp, Math.cos(a), Math.sin(a), 70 + rand(80)]
+      @sparks = (0...18).map do |i|
+        sp = Sprite.new(@over); sp.bitmap = spk; sp.ox = spk.width / 2; sp.oy = spk.height / 2
+        sp.z = 25; sp.blend_type = 1; sp.visible = false
+        a = (i * 360.0 / 18 + rand(16)) * Math::PI / 180
+        [sp, Math.cos(a), Math.sin(a), 80 + rand(110), 0.7 + rand * 0.8]
       end
-      @s["white"] = Sprite.new(@over); @s["white"].bitmap = Bitmap.new(w, h)
+      @s["white"] = Sprite.new(@over); @s["white"].bitmap = make_bmp(w, h)
       @s["white"].bitmap.fill_rect(0, 0, w, h, Color.new(255, 255, 255)); @s["white"].opacity = 0; @s["white"].z = 50
-      @s["black"] = Sprite.new(@over); @s["black"].bitmap = Bitmap.new(w, h)
+      @s["black"] = Sprite.new(@over); @s["black"].bitmap = make_bmp(w, h)
       @s["black"].bitmap.fill_rect(0, 0, w, h, Color.new(0, 0, 0)); @s["black"].opacity = 0; @s["black"].z = 60
     end
 
+    def make_bmp(w, h)
+      b = Bitmap.new(w, h)
+      @owned_bmps.push(b)
+      return b
+    end
+
     def hole_bitmap(d)
-      b = Bitmap.new(d, d); r = d / 2
+      # soft-feathered radial black core so the vortex collapse blends cleanly into darkness
+      b = make_bmp(d, d); r = d / 2.0
       (0...d).each do |y|
         dy = y - r + 0.5
         next if dy.abs >= r
         hw = Math.sqrt(r * r - dy * dy)
-        b.fill_rect((r - hw).floor, y, (hw * 2).ceil, 1, Color.new(0, 0, 0))
+        x0 = (r - hw).floor; x1 = (r + hw).ceil
+        # solid inner 72%, soft feathered outer rim
+        inner_r = r * 0.72
+        if dy.abs < inner_r
+          ihw = Math.sqrt(inner_r * inner_r - dy * dy)
+          ix0 = (r - ihw).floor; ix1 = (r + ihw).ceil
+          b.fill_rect(x0, y, [ix0 - x0, 0].max, 1, Color.new(0, 0, 0, 145))
+          b.fill_rect(ix0, y, [ix1 - ix0, 0].max, 1, Color.new(0, 0, 0, 255))
+          b.fill_rect(ix1, y, [x1 - ix1, 0].max, 1, Color.new(0, 0, 0, 145))
+        else
+          b.fill_rect(x0, y, [x1 - x0, 0].max, 1, Color.new(0, 0, 0, 130))
+        end
+      end
+      return b
+    end
+
+    def make_sheen_bitmap(w, h)
+      # doubled 2*w strip of subtle diagonal white energy streaks that scrolls smoothly
+      b = make_bmp(w * 2, h)
+      stripes = [[40, 28, 120], [150, 10, 180], [270, 44, 95], [410, 16, 150]]
+      stripes.each do |sx, sw, alpha|
+        col = Color.new(255, 255, 255, alpha)
+        h.times do |y|
+          dx = -(y * 0.55).round
+          [0, w].each do |rep|
+            x = (sx + dx + rep) % (w * 2)
+            b.fill_rect(x, y, sw, 1, col)
+          end
+        end
       end
       return b
     end
@@ -189,16 +257,39 @@ module PrismfallVS
       s.zoom_x = s.zoom_y = zoom
       bw = (s.bitmap.width * zoom).round; bh = (s.bitmap.height * zoom).round
       s.x = (cx - bw / 2).round
-      s.y = BAND_H - bh                        # bottom flush with the band, top cropped by it
+      s.y = BAND_H - bh                        # bottom flush with the band
+      s.visible = false
+      @home[s] = s.x
+      return s
+    end
+
+    def make_ghost_bust(vp, id, cx)
+      file, zoom = PrismfallVS.bust(id)
+      s = Sprite.new(vp); s.z = 3
+      return s if !file
+      gz = zoom * 1.48
+      s.bitmap = RPG::Cache.load_bitmap("", file)
+      s.zoom_x = s.zoom_y = gz
+      s.blend_type = 1
+      s.opacity = 58
+      bw = (s.bitmap.width * gz).round; bh = (s.bitmap.height * gz).round
+      s.x = (cx - bw / 2).round
+      s.y = BAND_H - bh + 18
       s.visible = false
       @home[s] = s.x
       return s
     end
 
     def name_sprite(vp, text, x, y, align)
-      s = Sprite.new(vp); s.bitmap = Bitmap.new(Graphics.width, 40); s.z = 8
+      s = Sprite.new(vp); s.bitmap = make_bmp(Graphics.width, 44); s.z = 8
       pbSetSystemFont(s.bitmap)
-      pbDrawTextPositions(s.bitmap, [[text, x, 6, align, Color.new(248, 248, 248), Color.new(40, 40, 48), :outline]])
+      s.bitmap.font.size += 6
+      s.bitmap.font.bold = true
+      # bold double-drop shadow + crisp white face (matches B2W2's dramatic high-contrast nameplate)
+      pbDrawTextPositions(s.bitmap, [
+        [text, x + 2, 8, align, Color.new(10, 10, 18, 190), Color.new(10, 10, 18, 190)],
+        [text, x,     6, align, Color.new(252, 252, 255), Color.new(24, 24, 38), :outline]
+      ])
       s.y = y
       return s
     end
@@ -220,85 +311,120 @@ module PrismfallVS
 
     def frame(t)
       e = PrismfallVS
-      # 0.00-1.32: flash, flash, white-out, clears to a darkened overworld (+ the reveal flash at 2.8)
+      # 0.00-1.32: flash, flash, white-out, clears to a darkened overworld (+ reveal flash at 2.78)
       @s["white"].opacity = [e.pulse(t, 0.10, 0.22, 0.36, 225), e.pulse(t, 0.42, 0.54, 0.68, 225),
                              (t >= 0.72 && t < 1.15) ? 255 * e.prog(t, 0.72, 0.82) : 0,
                              (t >= 1.15 && t < 1.4) ? 255 * (1 - e.prog(t, 1.15, 1.32)) : 0,
-                             e.pulse(t, 2.76, 2.80, 3.05, 255)].max
+                             e.pulse(t, 2.76, 2.80, 3.06, 255)].max
       @s["dim"].opacity = 228 * e.prog(t, 0.72, 0.9)
-      # 1.30-2.80: lightning streaks in and crackles
+
+      # 1.30-2.80: organic lightning streaks in, then tears horizontally across screen with additive blaze
       if t < 2.8
-        grow = e.ease_out(e.prog(t, 1.3, 1.52))
-        bw = @bolts[0].width; bh = @bolts[0].height
+        grow = e.ease_out(e.prog(t, 1.3, 1.50))
+        idx = ((t * 24).to_i % 3)
+        bmpT, bw, bh = @bolts[idx]
+        bmpB, _,  _  = @bolts[(idx + 1) % 3]
         vis = (bw * grow).round
-        idx = ((t * 20).to_i % 3)
-        jit = (t > 1.52) ? ((t * 30).to_i.even? ? 1 : -1) : 0
-        @s["boltT"].bitmap = @bolts[idx]; @s["boltB"].bitmap = @bolts[(idx + 1) % 3]
-        @s["boltT"].src_rect = Rect.new(bw - vis, 0, vis, bh); @s["boltT"].x = bw - vis
-        @s["boltB"].src_rect = Rect.new(0, 0, vis, bh); @s["boltB"].x = 0
+        scroll = (t > 1.48) ? (((t - 1.48) * 680).to_i % bw) : 0
+        jit = (t > 1.50) ? ((t * 36).to_i.even? ? 1 : -1) : 0
+        @s["boltT"].bitmap = bmpT; @s["boltB"].bitmap = bmpB
+        @s["boltT"].src_rect = Rect.new(bw - vis + scroll, 0, vis, bh); @s["boltT"].x = bw - vis
+        @s["boltB"].src_rect = Rect.new(bw - scroll, 0, vis, bh);       @s["boltB"].x = 0
         @s["boltT"].y = BOLT_TOP_Y - bh / 2 + jit
         @s["boltB"].y = BOLT_BOT_Y - bh / 2 - jit
+        @s["boltT"].visible = @s["boltB"].visible = (t >= 1.3)
       else
         @s["boltT"].visible = @s["boltB"].visible = false
       end
-      # 2.05: busts slide in (foe from the right, player from the left)
+
+      # 2.05: busts rocket in (foe from right, player from left), then subtle cinematic drift on hold
       b = e.ease_out(e.prog(t, 2.05, 2.28))
-      [["bustT", 1], ["bustB", -1]].each do |k, dir|
+      drift = (t >= 2.8 && t < HOLD_END) ? ((t - 2.8) * 5.5) : 0.0
+      [["bustT", 1, -drift], ["bustB", -1, drift]].each do |k, dir, dx|
         sp = @s[k]; next if !@home[sp]
         sp.visible = t >= 2.05
-        sp.x = (@home[sp] + dir * 280 * (1 - b)).round
+        sp.x = (@home[sp] + dir * 290 * (1 - b) + dx).round
       end
-      # 2.40: S drops, V rises, both shrinking into place
+      if @s["ghostT"] && @home[@s["ghostT"]] && t >= 2.8
+        @s["ghostT"].x = (@home[@s["ghostT"]] + drift * 1.4).round
+      end
+
+      # 2.40: S drops huge from above, V rises huge from below (centered pivot!), slamming into "VS."
       if t >= 2.4 && t < HOLD_END
         @s["V"].visible = @s["S"].visible = true
-        v = e.ease_out(e.prog(t, 2.4, 2.72))
-        z = 3.4 - 2.4 * v
-        j = (t >= 2.8 && (t * 12).to_i.odd?) ? 1 : 0      # a one-pixel shimmy once it's locked
+        raw = e.prog(t, 2.4, 2.74)
+        v = e.ease_in(raw)
+        # 4.6x -> 1.0x slam + crisp 1.08 -> 1.0 impact settle bounce
+        z = (t < 2.74) ? (4.6 - 3.6 * v) : (1.0 + 0.12 * (1 - e.ease_out(e.prog(t, 2.74, 2.90))))
+        j = (t >= 2.82 && (t * 14).to_i.odd?) ? 1 : 0
         @s["S"].zoom_x = @s["S"].zoom_y = z
         @s["V"].zoom_x = @s["V"].zoom_y = z
-        @s["S"].x = @s_home[0] - ((z - 1) * 40).round + j
-        @s["S"].y = (@s_home[1] - 260 * (1 - v)).round
-        @s["V"].x = @v_home[0] - ((z - 1) * 60).round + j
-        @s["V"].y = (@v_home[1] + 260 * (1 - v)).round
+        @s["S"].x = @s_home[0] + j
+        @s["S"].y = (@s_home[1] - 250 * (1 - v)).round
+        @s["V"].x = @v_home[0] + j
+        @s["V"].y = (@v_home[1] + 250 * (1 - v)).round
       end
-      # 2.80: the final screen
+
+      # impact screen punch shake right when V & S lock (t = 2.76..2.98)
+      if t >= 2.76 && t < 2.98
+        amp = (6 * (1 - e.prog(t, 2.76, 2.98))).round
+        shx = ((t * 60).to_i.even? ? amp : -amp)
+        shy = ((t * 48).to_i.odd?  ? (amp / 2) : -(amp / 2))
+        @top.ox = @bot.ox = @over.ox = shx
+        @top.oy = @bot.oy = @over.oy = shy
+      else
+        @top.ox = @bot.ox = @over.ox = 0
+        @top.oy = @bot.oy = @over.oy = 0
+      end
+
+      # 2.80: final screen (3-layer 3D rushing vortex tunnel + scrolling diagonal sheen + spark burst)
       if t >= 2.8
         @final.each { |k| @s[k].visible = true }
         @s["world"].visible = @s["dim"].visible = false
-        spin = t * 26.0
-        pz = 1.0 + 0.03 * Math.sin(t * 6)
-        @s["tunnel"].angle = spin
-        @s["tunnel2"].angle = -spin * 0.7
-        @s["tunnel"].zoom_x = @s["tunnel"].zoom_y = pz
-        @s["tunnel2"].zoom_x = @s["tunnel2"].zoom_y = pz * 1.1
-        @sparks.each do |sp, dx, dy, dist|
-          u = e.prog(t, 2.82, 3.5)
+        # scrolling diagonal speed sheen across both bands
+        sw = Graphics.width
+        sp_off = ((t - 2.8) * 340).to_i % sw
+        @s["sheenT"].src_rect.x = sp_off
+        @s["sheenB"].src_rect.x = sw - sp_off
+        # 3 staggered perspective-rushing vortex layers (emulates flying through B2W2's 3D cone!)
+        accel = (t >= HOLD_END) ? (1.0 + 2.4 * e.prog(t, HOLD_END, HOLD_END + 0.45)) : 1.0
+        3.times do |i|
+          tn = @s["tunnel#{i}"]
+          phase = ((t * 0.65 * accel + i / 3.0) % 1.0)
+          z = 0.60 + 1.85 * (phase ** 1.5)
+          tn.zoom_x = tn.zoom_y = z
+          tn.angle = (i.even? ? 1 : -1) * (t * (38.0 + i * 16.0) * accel)
+          tn.opacity = (i == 0) ? 255 : (175 * Math.sin(phase * Math::PI)).round
+        end
+        @sparks.each do |sp, dx, dy, dist, sz|
+          u = e.prog(t, 2.80, 3.45)
           sp.visible = u > 0 && u < 1
           d = dist * e.ease_out(u)
-          sp.x = VS_CX + (dx * d).round; sp.y = VS_CY + (dy * d * 0.7).round
-          sp.opacity = 255 * (1 - u)
+          sp.x = VS_CX + (dx * d).round; sp.y = VS_CY + (dy * d * 0.72).round
+          sp.zoom_x = sp.zoom_y = sz * (1.1 - 0.5 * u)
+          sp.opacity = (255 * (1 - u)).round
         end
       end
-      # 5.20: bands part, VS parts, the tunnel collapses into black
+
+      # 5.20: bands split cleanly up/down, V & S shoot outward, 3D vortex swallows screen into black
       if t >= HOLD_END
         x = e.ease_in(e.prog(t, HOLD_END, HOLD_END + 0.22))
         @top.rect.y = (TOP_Y - (TOP_Y + BAND_H) * x).round
         @bot.rect.y = (BOT_Y + (Graphics.height - BOT_Y) * x).round
-        @s["V"].x = @v_home[0] - (200 * x).round
-        @s["S"].x = @s_home[0] + (200 * x).round
-        k = e.ease_in(e.prog(t, HOLD_END + 0.15, HOLD_END + 0.45))
-        @s["hole"].zoom_x = @s["hole"].zoom_y = 5.0 * k
-        pz = 1.0 + 0.8 * k
-        %w[tunnel tunnel2].each { |n| @s[n].zoom_x = @s[n].zoom_y = pz; @s[n].angle += 40 * k }
-        @s["V"].opacity = @s["S"].opacity = 255 * (1 - k)
-        @s["black"].opacity = 255 * e.prog(t, HOLD_END + 0.42, HOLD_END + 0.5)
+        @s["V"].x = @v_home[0] - (220 * x).round
+        @s["S"].x = @s_home[0] + (220 * x).round
+        k = e.ease_in(e.prog(t, HOLD_END + 0.14, HOLD_END + 0.46))
+        @s["hole"].zoom_x = @s["hole"].zoom_y = 5.4 * k
+        @s["V"].opacity = @s["S"].opacity = (255 * (1 - k)).round
+        @s["black"].opacity = (255 * e.prog(t, HOLD_END + 0.42, HOLD_END + 0.52)).round
       end
     end
 
     def dispose
-      @s.each_value { |sp| sp.dispose if !sp.disposed? }
-      @sparks.each { |sp, *_| sp.dispose if !sp.disposed? }
-      [@top, @bot, @over].each { |v| v.dispose if !v.disposed? }
+      @s.each_value { |sp| sp.dispose if sp && !sp.disposed? }
+      @sparks.each { |sp, *_| sp.dispose if sp && !sp.disposed? }
+      @owned_bmps.each { |b| b.dispose if b && !b.disposed? }
+      [@top, @bot, @over].each { |v| v.dispose if v && !v.disposed? }
     end
   end
 end
@@ -316,8 +442,9 @@ SpecialBattleIntroAnimations.register("prismfall_vs_screen", 90,
 )
 
 #===============================================================================
-# Battle start: hold the trainer's pose strip on frame 0 through EBDX's intro sweep,
-# then play it once (time-based) during "You are challenged by ...!".
+# Battle start: hold the trainer's pose strip on frame 0 through EBDX's intro sweep
+# under dramatic B2W2 spotlight dimming, then brighten and play the one-shot pose
+# during "You are challenged by ...!" (holding the final Hero frame afterwards).
 #===============================================================================
 class DynamicTrainerSprite
   alias pf_vs_play play unless method_defined?(:pf_vs_play)
@@ -342,7 +469,9 @@ class Battle::Scene
   def startSceneAnimation
     if @battle.trainerBattle? && @battle.opponent && @vector
       PrismfallVS.hold_pose = true
-      # open closer on the silhouette than EBDX's default; EBDX then sweeps back to the field
+      @pf_intro_dim_t0 = System.uptime
+      # Dramatic B2W2 spotlight dim while the camera sweeps back from the trainer silhouette
+      @viewport.tone = Tone.new(-72, -72, -56, 0) rescue nil
       v = EliteBattle.get_vector(:ENEMY)
       v[4] = PrismfallVS::INTRO_ZOOM if v[4]
       @vector = Vector.new(*v[0, 6]); @vector.battle = @battle
@@ -353,12 +482,28 @@ class Battle::Scene
   alias pf_vs_animateScene animateScene unless method_defined?(:pf_vs_animateScene)
   def animateScene(align = false, smanim = false, &block)
     pf_vs_animateScene(align, smanim, &block)
+    pf_vs_update_intro_tone
     pf_vs_update_pose
+  end
+
+  def pf_vs_update_intro_tone
+    return if !@pf_intro_dim_t0 || !@viewport
+    elapsed = System.uptime - @pf_intro_dim_t0
+    if !PrismfallVS.hold_pose
+      @viewport.tone = Tone.new(0, 0, 0, 0) rescue nil
+      @pf_intro_dim_t0 = nil
+      return
+    end
+    # Hold dark silhouette drama for ~0.55s, then smoothly illuminate over 0.45s as trainer colour returns
+    k = PrismfallVS.prog(elapsed, 0.55, 1.0)
+    @viewport.tone = Tone.new((-72 * (1 - k)).round, (-72 * (1 - k)).round, (-56 * (1 - k)).round, 0) rescue nil
   end
 
   def pf_vs_start_pose
     return if @pf_pose_t0 || !@battle.opponent
     PrismfallVS.hold_pose = false
+    @viewport.tone = Tone.new(0, 0, 0, 0) rescue nil
+    @pf_intro_dim_t0 = nil
     @pf_pose_t0 = System.uptime
     @pf_pose_last = {}
   end
