@@ -520,26 +520,37 @@ the transition play. Standard unless marked; Hard keeps the old tool unless mark
 | Fight | Change | Why (knockouts in the logs) |
 |---|---|---|
 | Gym 6 Corvin | Amoonguss: Clear Smog for Venoshock (Ward keeps the signature Venoshock) | the lead's always-doubled Venoshock was 51 of 137 knockouts on typical teams |
-| Gym 8 Kaito | Hawlucha: Limber (the seed's +1 Attack and Focus Energy stay), no Thunder Punch; Memory: Sitrus for the Scope Lens. **Hard:** Throat Chop for Thunder Punch | Hawlucha took 90 of 133 (typical), 42 of 101 (prepared) and 75 of 128 (Hard prepared): Unburden plus coverage for its Flying answers |
-| Gym 10 Anja | Ninetales: Ice Beam and a Sitrus (5-turn veil); Walrein: Ice Beam. **Hard:** Walrein Ice Beam too, Cloyster White Herb (was Focus Sash) | snow-sure Blizzards were 36 of 143 (typical) and 39 of 132 (Hard prepared) |
+| Gym 8 Kaito | Hawlucha: Limber (the seed's +1 Attack and Focus Energy stay), no Thunder Punch; Memory: Sitrus for the Scope Lens. **Hard:** Unburden kept, but Aerial Ace and Throat Chop for Acrobatics and Thunder Punch | Hawlucha took 90 of 133 (typical), 42 of 101 (prepared) and 75 of 128 (Hard prepared): Unburden plus coverage for its Flying answers |
+| Gym 10 Anja | Ninetales: Ice Beam and a Sitrus (5-turn veil); Walrein: Ice Beam and Brine; Avalugg: Careful with a Sitrus (Hard Impish, Rocky Helmet). **Hard:** Walrein Ice Beam, Bold, HP/Def EVs; Cloyster White Herb (was Focus Sash) | snow-sure Blizzards were 36 of 143 (typical) and 39 of 132 (Hard prepared) |
 | Gym 11 Odessa | Pelipper, Oricorio and Kilowattrel use Air Slash; Noivern and Post keep Hurricane (Casual: Air Slash on all but Kilowattrel's Thunderbolt) | five Hurricanes (x1.44 and sure-hit on the Stormfront) were 117 of 144 |
 | Gym 12 Ilsa | Bronzong: Payback for Extrasensory; Reuniclus: Leftovers (Hard Life Orb) | a Trick Room Life Orb Psychic one-shot full-HP neutral targets; Bronzong + Reuniclus 56 of 131 |
 | Gym 14 Ysolde | Dusknoir: Shadow Punch for Poltergeist; Gengar: Sitrus (Hard Life Orb) | Gengar's Life Orb STABs 48 of 144 |
-| Gym 15 Magnus | Mark One: Sitrus for the Synthetic Seed in **every** mode; it starts the line with Shift Gear | its x2 Gear Grind from a +1 / +1 entry was 53 of 102 (prepared) and 40 of 130 (Hard prepared) |
+| Gym 15 Magnus | Mark One: Sitrus for the Synthetic Seed in **every** mode; it starts the line with Shift Gear (Hard: Autotomize instead, no Attack boost) | its x2 Gear Grind from a +1 / +1 entry was 53 of 102 (prepared) and 40 of 130 (Hard prepared) |
 | Gym 16 Nyx | Weavile: Knock Off for Icicle Crash; Honchkrow: Sitrus (Hard Life Orb). Casual: Umbreon without Foul Play, Weavile without Swords Dance | Weavile 47 of 144; Casual Umbreon's Foul Play 28 of 100 |
 | Gym 17 Celestine | Alcremie: Protect for Mystical Fire; Azumarill: Thick Fat (Hard and the Festival: Huge Power) | Alcremie 52, Azumarill 33 of 142 |
-| Gym 18 Sigrun | Flygon: Soft Sand and Dragon Claw (no Scarf Outrage); Dragonite: Roost for Dragon Dance; Haxorus: Dragon Claw; Kommo-o: Sitrus (Hard Throat Spray); Dragapult: Dragon Fang (Hard Life Orb). **Hard:** Dragonite Dragon Claw for Outrage. Casual: no Dragon Dance, no Dragon Darts, no Clanging Scales | Scarf Outrage 59 of 144 (typical); Dragapult, Dragonite and Kommo-o on prepared teams; Hard Dragonite's Outrage 50 of 141 |
+| Gym 18 Sigrun | Flygon: Soft Sand and Dragon Claw (no Scarf Outrage); Dragonite: Inner Focus (Hard Multiscale) and Roost for Dragon Dance; Haxorus: Protect and Dragon Claw (no Dragon Dance: Dreamwing keeps the team's one dance); Kommo-o: Sitrus and Flamethrower for Clangorous Soul (Hard keeps both); Dragapult: Dragon Fang (Hard Life Orb). **Hard:** Dragonite Lum Berry and Dragon Claw (was Elemental Seed and Outrage). Casual: no Dragon Dance, no Dragon Darts, no Clanging Scales | Scarf Outrage 59 of 144 (typical); Dragapult, Dragonite and Kommo-o on prepared teams; Hard Dragonite's Outrage 50 of 141 |
 | K3 Kestrel | five on Standard (Scyther joins), Lv 33–35 (was four at 31–33) | a typical six won 98% |
-| J2 Juno | five on Standard (Floette "Everbloom" joins), Lv 33–35 (was four at 31–33) | a typical six won 100% |
+| J2 Juno | five on Standard (Floette "Everbloom" joins), Lv 33–35 (was four at 31–33); Moonblast, Petal Blizzard, Energy Ball and the starter's best level-up attacks | a typical six won 100% (still 98%: §9b, soft spot) |
 | K4 Kestrel | Staraptor: Quick Attack for Double-Edge; Krookodile: Intimidate (Hard Moxie) | the two took 70 of 130 |
 | K5–K8 Kestrel | Staraptor: Intimidate and a Sharp Beak (Hard and K9: Reckless + Choice Band) | its Brave Bird was the top killer of every late rival fight (27–36 of ~140) |
 | J4 Juno | Florges: Wish for Calm Mind | Calm Mind Moonblast 57 of 133 |
 | Ch7 Wick, Ch8 Quent, Ch9 the Mourner | Gardevoir, Rotom-Wash, Gourgeist join on Standard (were Hard-only); the Mourner's three a level up | typical sixes won 98 / 80 / 68% |
 | Ch12 Marchetti | Mega Manectric: Thunderbolt (Hard Thunder) | a sure-hit Thunder on the Stormfront was 41 of 137 |
-| Valen | Volcarona: Sitrus for the Magical Seed, Lv 94. Casual: Gallade without Close Combat / Swords Dance | the seeded Quiver Dance Bug Buzz was the prepared teams' top killer (33 of 109) |
-| Casual (rule) | from cap 40 the story's important fights drop one more level (two from cap 80) and hold no Life Orb or Choice item (not Brann) | a typical six won only 60–75% of Casual Gyms 11–16 and 28% of Casual Gym 18 |
+| Valen | Volcarona: Sitrus for the Magical Seed, Lv 94; Zygarde: Dragon Tail for Outrage (Hard and the Last Tuning keep Outrage / Coil). Casual: Gallade without Close Combat / Swords Dance | the seeded Quiver Dance Bug Buzz was the prepared teams' top killer (33 of 109) |
+| Casual (rule) | from cap 40 the story's important fights drop one more level (two from cap 80, three at the Festival, 90+) and hold no Life Orb or Choice item (not Brann) | a typical six won only 60–75% of Casual Gyms 11–16, 28% of Casual Gym 18 and 62–67% of the Final and the hijack |
 
-**Field plays checked** (harness logs, round 4; `FIELD CHANGE` / `FIELD STAGE` lines): BALANCE.md §9.
+**Field plays checked** (round 4, Standard, 12 typical + 12 prepared logged runs a gym, the `FIELD CHANGE` /
+`FIELD STAGE` lines and the move before each): the Mire burns to Wasteland under Corvin's Heat Wave (and the
+player's Fire), 16 of 24; Brann's Volcanic is quenched by Surf and re-melted by Lava Plume; Kaito's Frenzy comes every
+run; Juno's garden grows to stage 5 on Leech Seed, Growth, Grassy Terrain and Petal Dance and burns to Wildfire;
+Anja's heavy blows crack the lake (18 of 24) and her Ice moves refreeze it; Ilsa's Psychic Noise cracks the dream to
+Inverse (7) and her Calm Minds soothe a Nightmare back (6); Bastian's Explosion and quakes drop the Cave (15) and
+light moves relight it; Weavile's seed opens the Abyss on entry every run; Sigrun's Den wakes (17) and Draco Meteor /
+Clanging Scales reopen a cooled Cave. **Not seen once in 24 runs: Odessa's two Sunny Days (Stormfront → Rainbow).**
+Noivern carries the move, but the AI never picks it; a request for the field AI owner is in `mapgen/REQUESTS.md`.
+No field change was expected (and none came) at Sahar's, Ysolde's, Magnus's or Celestine's in these runs: their
+plays answer the player's flips (a Superbloom, a consecration, a Scrapyard, a roused Den), which these teams rarely
+started.
 
 ## 9. Verification
 

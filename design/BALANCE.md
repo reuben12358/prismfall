@@ -15,7 +15,7 @@ are defined; Gyms 8–18 fields are designed to their theme, assumptions marked 
 |---|---|---|---|
 | Feel | Approachable: learn the field, win on the second try at worst | Fair but demanding: you must use the field and type matchups; overlevelling to the cap is expected | Reborn-hard: the field is a weapon pointed at you; expect to build counter-teams and lose a few times |
 | Team size | Standard −1 (min 2); Festival always 6 | see §3 | Standard +1 (max 6) |
-| Levels | Standard −2 (cap <40), −3 (<70), −4 (70+); the story's important fights (Wardens but Brann, rivals, villains, Festival) one more from cap 40 (round 4) | Ace **at the cap**, others 1–5 below | Same as Standard through cap 23; from cap 27, others +1 (never above cap) (harness: +1 at Gyms 1–3 cost prepared teams 10–15 points) |
+| Levels | Standard −2 (cap <40), −3 (<70), −4 (70+); the story's important fights (Wardens but Brann, rivals, villains, Festival) one more from cap 40, two from cap 80, three at the Festival (90+) (round 4) | Ace **at the cap**, others 1–5 below | Same as Standard through cap 23; from cap 27, others +1 (never above cap) (harness: +1 at Gyms 1–3 cost prepared teams 10–15 points) |
 | IVs / EVs | IV 4→20 by tier, **EV 0** | IV 12 / 18 / 24 / 28 / 31 (caps ≤23 / ≤35 / ≤51 / ≤71 / 72+), default EVs (min(lv×1.5, 85) each) | IV Standard + 8 (20 to cap 23, 26 to cap 35), 31 from cap 39 (Trick Room mons Spe IV 0); 252/252/4-style EVs by role, **at most 6 × level per stat** (60 at Lv 10, the full 252 from Lv 42) |
 | Sets | Standard sets minus the nastiest tool (setup / sleep / signature ability swapped, e.g. Toxapex Limber, Araquanid-free); from cap 40 no Life Orb or Choice item on the important fights (round 4) | Full sets: 4 moves, ability, item, nature; field-synergy core of each team is present. Round 4: no team carries more than two copies of its field's boosted signature attack, and the one-Pokémon sweep tools (Choice Band + Reckless, Scarf Outrage, Unburden + coverage, a seed on top of a setup move) are Hard's | Upgraded coverage, Hidden Abilities, Choice/Life Orb/Weakness Policy, one extra synergy piece. **Megas (all modes, §6b):** every important fight from ace 50 has one; below that only designed weak ones (Std + Hard) |
 | Bag items | Standard −1 | 1 Potion (cap 15) → 1 Super (to 23) → 2 Super → 2 Hyper → 2 Full Restore | 2 Super → 2 Hyper → 2 → 3 Full Restore |
@@ -369,7 +369,7 @@ telegraph, not one wall. Kestrel (tag partner in the hijack per cast) does **not
 - Gen 9 note: the live base `pokemon.txt` does not list Bisharp→Kingambit (the Gen 9 Pack adds it only through its optional
   Auto-Updates PBS); the validator treats such Gen 9 evolutions as prevolutions (`MANUAL_PREVO`).
 
-## 9. Win rates (harness, round 3)
+## 9. Win rates (harness, round 3; Gyms 4–18 and the late game: §9b)
 
 `tools/harness/run_winrates.rb` (real Essentials v21.1 battle code + Prismfall plugins, AI on both sides): a **realistic**
 challenger is a starter plus catches drawn from what `POKEMON_AVAILABILITY.md` (Rev 16 distribution) and
@@ -429,6 +429,91 @@ Late fights (`/home/claude/work/trainers2/run_late.rb`, a well-built six at the 
 Eevee Octave gauntlet (Lv 87 / 89) 9 of 10 Standard and 8 of 10 Hard with planned leads, 1 and 0 of 10 without; the war
 legendaries Reshiram 7/8 Standard, 5/8 Hard; Kyogre 5/8 Standard, 0/8 Hard (a counter-team fight); war partner doubles
 6/8 (Isenmar) and 8/8 (Ashkaar) on Standard. Details: TRAINER_FIELD_PLAYBOOK.md §6.
+
+## 9b. Win rates, round 4 (Gyms 4–18, the rivals, the villains, the Festival bosses)
+
+`tools/harness/run_winrates.rb` cells G4–G18, K3–K9, J2, J4, WICK, Q8, MOURN, M12, KR13, M14, KR17, Q17, VALEN, VOSS,
+QH (`tools/harness/winrates_r4.rb`). 60 fights a cell (20 per starter), each mode's own trainer version, every fight
+at the player's hard level cap, on the battle's own field. Two player models, both built only from what the game has
+handed out by that badge count (wild tables and badge tiers: `tools/trainer_gen/pools.py` → `winrate_pools.json`;
+gifts, quest Pokémon, the three starter eggs and the Act IV fossils; level, stone, trade and friendship evolutions
+from Lumen on; gym TMs, field TMs and HMs by badge; the Mega Ring, its stones and the Z-crystals from 13 badges):
+- **Typical:** the starter at the cap and five catches drawn by encounter rate × (final BST / 450)^4, spreading types,
+  cap−0..2, random natures, IV 5–25, battle EVs (min(1.5 × level, 85)), the three best attacks it can have plus a
+  fourth or a setup move, a Sitrus and a few found items, a Mega only if a team member's stone is out (6 in 10), no
+  foe knowledge. 3 Hyper Potions (Super / Hyper before 6 badges; 2 Full Restores + 2 Hyper from 13); none on Hard.
+- **Prepared:** the starter plus five of the six best answers to that foe's actual team, by type against its team
+  **weighed by the field's type multipliers** (the field notes), rare finds included; all at the cap, IV 20–31, a
+  fitting nature, 252/252 EVs from 8 badges, moves chosen against the foe with every TM out by then, setup or
+  recovery, Protect in doubles; Life Orb / Choice / Leftovers / Sash / Assault Vest by role; one Mega and one Z from 13.
+
+Final numbers (after the round 4 changes, TRAINER_FIELD_PLAYBOOK.md §8b), typical / prepared:
+
+| Fight | Casual typ / prep | Standard typ / prep | Hard typ / prep |
+|---|---|---|---|
+| Gym 4 Rook (Neon Grid) | 98% / 100% | 40% / 98% | 2% / 62% |
+| Gym 5 Sahar (Desert) | 98% / 100% | 60% / 100% | 15% / 70% |
+| Gym 6 Corvin (Corrosive Mire, double) | 93% / 100% | 28% / 100% | 2% / 75% |
+| Gym 7 Brann (Volcanic; locked) | 75% / 100% | 15% / 93% | 2% / 70% |
+| Gym 8 Kaito (Colosseum) | 85% / 100% | 15% / 75% | 0% / 28% |
+| Gym 9 Juno, J3 (Flower Garden) | 97% / 100% | 57% / 98% | 15% / 88% |
+| Gym 10 Anja (Frozen Lake; Mega Glalie) | 93% / 100% | 7% / 55% | 2% / 23% |
+| Gym 11 Odessa (Stormfront, double; Mega Pidgeot) | 95% / 100% | 7% / 98% | 0% / 67% |
+| Gym 12 Ilsa (Mindscape; Mega Slowbro) | 77% / 100% | 12% / 88% | 7% / 55% |
+| Gym 13 Bastian (Crystal Cavern; Mega Aerodactyl) | 87% / 100% | 18% / 100% | 18% / 97% |
+| Gym 14 Ysolde (Hollow Cathedral; Mega Sableye) | 92% / 100% | 12% / 93% | 0% / 50% |
+| Gym 15 Magnus (Factory; Mega Metagross) | 77% / 100% | 12% / 87% | 0% / 35% |
+| Gym 16 Nyx (New Moon, double; Mega Absol) | 90% / 100% | 0% / 83% | 0% / 45% |
+| Gym 17 Celestine (Fairy Tale, double; Z-move) | 83% / 100% | 12% / 97% | 0% / 50% |
+| Gym 18 Sigrun (Dragon's Den; Mega Salamence) | 70% / 100% | 2% / 50% | 0% / 28% |
+| K3 Kestrel (5 badges, Desert) | 100% / 100% | 58% / 97% | 13% / 85% |
+| J2 Juno (5, Corrosive Mire) | 100% / 100% | 98% / 100% | 62% / 100% |
+| K4 Kestrel (7, Colosseum) | 93% / 100% | 25% / 85% | 0% / 42% |
+| K5 Kestrel (10, Stormfront) | 97% / 100% | 17% / 93% | 2% / 62% |
+| K6 Kestrel (13, Hollow Cathedral) | 95% / 100% | 10% / 97% | 7% / 63% |
+| K7 Kestrel (16, Fairy Tale) | 90% / 100% | 15% / 90% | 2% / 60% |
+| K8 Kestrel (Festival SF, Prism Arena) | 93% / 100% | 10% / 92% | 0% / 53% |
+| K9 Kestrel, fallen (Festival SF) | 63% / 100% | 2% / 82% | 2% / 48% |
+| J4 Juno (Festival R16; Mega Gardevoir) | 85% / 100% | 20% / 98% | 8% / 85% |
+| Ch7 Brother Wick (5) | 100% / 100% | 70% / 100% | 12% / 93% |
+| Ch8 Dr. Quent (6, Volcanic) | 100% / 100% | 60% / 87% | 13% / 55% |
+| Ch9 the Mourner (7; Trevenant boss) | 92% / 100% | 58% / 100% | 10% / 97% |
+| Ch12 Marchetti (10; Mega Manectric) | 98% / 100% | 25% / 95% | 3% / 63% |
+| Ch13 Kroll (11; Mega Sharpedo) | 98% / 100% | 17% / 98% | 2% / 93% |
+| Ch14 Marchetti (13; Mega Houndoom) | 95% / 100% | 27% / 92% | 2% / 77% |
+| Ch17 Kroll (15, Cave) | 100% / 100% | 25% / 100% | 3% / 98% |
+| Ch17 Quent, alt. (15, Cave) | 93% / 100% | 33% / 98% | 2% / 80% |
+| Final: Valen (96; Mega Gallade) | 72% / 98% | 3% / 48% | 2% / 35% |
+| Hijack: Voss (100; Mega Ampharos) | 73% / 100% | 7% / 68% | 3% / 77% |
+| Hijack: Quent (100) | 83% / 100% | 15% / 87% | 3% / 82% |
+
+**Difficulty curve.** Standard: a typical team wins 40–70% at Gyms 4, 5 and 9 and the Act II story fights before
+Gym 8 (K3, Wick, Quent, the Mourner), 15–28% at Gyms 6–8 and K4, then **0–33% from Gym 10 to the Festival** (0–7% at
+Gyms 10, 11, 16 and 18, K9, the Final and Voss); a prepared team wins 75–100% almost everywhere. **Walls:** Gym 10
+Anja (prepared 55%: her heavy blows, Avalugg's Body Press and Matriarch's High Horsepower, crack the lake into water,
+which halves the Fire answer, as designed: Fighting and Steel are the counterplay), Gym 18 Sigrun (50%: Dragon x1.5
+that becomes x2 once the Den wakes, which it did in 22 of 30 logged runs; a field request in `mapgen/REQUESTS.md`)
+and the Final (Valen 48%), the three steepest steps; Gym 8 Kaito (75%) is Act II's. **Soft spots:** J2 (typical 98%:
+the friendly rival's Grass team, with a middle-stage starter, loses its own Corrosive Mire to her Misty Terrain),
+Gym 9 Juno (typical 57%, prepared 98%), Gym 13 Bastian (prepared 100%, Hard prepared 97%), the Act II–IV villains for
+prepared Hard teams (Wick, the Mourner, Kroll 93–98%). **Hard:** a typical team almost never wins (0–18%; J2 62%), a
+prepared one 23–35% at the hardest (Gyms 8, 10, 15, 18, the Final) and 42–100% elsewhere: Hard demands preparation.
+**Casual:** 83–100% for most fights; the lowest are Kestrel fallen (K9, 63%: Hard sets promoted, by design), Sigrun
+(70%), the Final and Voss (72–73%), Brann (75%, locked), Ilsa and Magnus (77%).
+
+**Against the targets.** Prepared Standard teams sit in or above the 70–95% band except the three walls. Typical
+Standard teams reach the 35–60% band only up to Gym 9; from Gym 10 on they win 5–20%. The stat side was not the
+cause: Standard is already softer than Reborn's and Rejuvenation's normal modes (§1c), and in experiments (Gyms
+10–18 and K6, a typical team) two levels off every non-ace, IV 20, no Life Orb / Choice items, Hyper Potions for
+Full Restores and Casual's roster, all at once, moved the typical win rate only from about 6% to about 28% (Gym 10
+30%, Gym 12 18%, Gym 14 38%, Gym 16 13%, Gym 18 7%, K6 62%); even Casual (five Pokémon, 4–7 levels under the cap,
+IV 12–20, no EVs) is won 63–100% by this AI-piloted typical team. What beats
+a team that was not built for the fight is the field (the Warden's own type x1.2–1.5, often with a second boost) and
+the foe's AI using it, which is the point of the field design (§1: "you must use the field and type matchups"). So
+round 4 removed every one-Pokémon sweep the knockout counts showed (§8b) and left the type-and-field puzzle in place:
+a player who reads the field notes and brings the answers wins, as in both reference games. The AI pilot plays worse
+than a person (no planned leads, no stalling out a Trick Room or a Tailwind), so a human's typical team will do
+better than these numbers.
 
 ## 9c. Field logic audit (SPINE Rev 24): win-rate deltas
 
@@ -504,6 +589,10 @@ in the validator, so they need no row.
   `:RESHIRAM_GLASS_DUNES` / `:KYOGRE_GLASS_DUNES` in Prismfall Bosses (`106_Boss_WarLegends.rb`; the trainer designer
   took the Bosses plugin over). Cap 85.
 - Little Crucible (Trials) re-levelled to the 2-badge band (19–21). K1 Standard: no type move (Reborn / Rejuvenation).
+- **Round 4 (2026-11-21):** Gyms 4–18, K3–K9, J2, J4, the villains and the Festival bosses measured against typical
+  and prepared teams in every mode (§9b, `winrates_r4.rb`), calibrated against Reborn / Rejuvenation (§1c), sweep tools
+  moved to Hard (TRAINER_FIELD_PLAYBOOK.md §8b); the 577 / 578 route trainers built (map builder 13's cells).
+  Open: the Ch5–7 story and route trainers in `mapgen/REQUESTS.md` (the Gala tag, 580/581/592–595, the Directorate).
 - Pending: new maps' trainers as they are generated. Done: Gym 3's earned Electric answer for the Fire starter (the
   Glade's night Emolga, §9); the Saltmere audience rules (the bigger the house, the more Standing
   Ovation is yours; §9).

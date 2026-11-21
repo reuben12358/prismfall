@@ -53,7 +53,8 @@ def casual_iv(top):
 def casual_drop(top):
     return 2 if top < 40 else 3 if top < 70 else 4
 
-# Round 4 (BALANCE.md 1, 9): Casual's important fights from cap 40 drop one more level (two from cap 80) and never hold a Life Orb or a
+# Round 4 (BALANCE.md 1, 9): Casual's important fights from cap 40 drop one more level (two from cap 80, three at the
+# Festival, 90+) and never hold a Life Orb or a
 # Choice item (a typical team won only 60-75% of Casual Gyms 11-16). Brann is left exactly as designed (SPINE Rev 21).
 CASUAL_SOFT_TYPES = ("LEADER_", "RIVAL_", "CHAMPION_", "MERIDIAN_", "HOLLOW_", "ARCHSEER_", "ECHO_", "GILDED_")
 CASUAL_HARD_ITEMS = ("LIFEORB", "CHOICESPECS", "CHOICEBAND", "CHOICESCARF")
@@ -94,7 +95,7 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         elif diff == 2:
             o.update(m["casual"])
             soft = not route and casual_soft(ttype) and top >= 40
-            o["lv"] = max(2, m["lv"] - (1 if route else casual_drop(top) + ((1 if top < 80 else 2) if soft else 0)))
+            o["lv"] = max(2, m["lv"] - (1 if route else casual_drop(top) + ((1 if top < 80 else 2 if top < 90 else 3) if soft else 0)))
             if soft and o["item"] in CASUAL_HARD_ITEMS:
                 o["item"] = "SITRUSBERRY"
         if o.get("mega") and diff in mega_modes(o, cap):
@@ -405,7 +406,8 @@ warden(10, "LEADER_ANJA", "Anja", 51, "FROZEN_LAKE", "The ice held for you. It d
       mega="GLALITITE", hard={"moves": "DOUBLEEDGE,ICESHARD,CRUNCH,EXPLOSION"},
       casual={"moves": "DOUBLEEDGE,ICEFANG,CRUNCH,ICESHARD"}),
     # Round 4: Ice Beam on Standard (Blizzard in her snow was 25 of 143 knockouts on typical teams); Hard keeps Blizzard.
-    P("WALREIN", 50, "THICKFAT", "SITRUSBERRY", "MODEST", "ICEBEAM,SURF,ENCORE,PROTECT", "BS",
+    # Round 4: Brine for Surf too (Surf was 17 of 111 knockouts on prepared teams); Hard keeps Surf.
+    P("WALREIN", 50, "THICKFAT", "SITRUSBERRY", "MODEST", "ICEBEAM,BRINE,ENCORE,PROTECT", "BS",
       hard={"ab": "ICEBODY", "item": "LEFTOVERS", "nat": "BOLD", "ev": "PD", "moves": "ICEBEAM,SURF,SUPERFANG,PROTECT"}),
     # Transition play: Body Press is a "heavy blow" - three crack the lake to Water Surface (x1.3 strike), which halves
     # the challenger's Fire moves and feeds Walrein and Cloyster. Rapid Spin skates (x1.5).
@@ -717,7 +719,7 @@ rival("RIVAL_KESTREL", "Kestrel", 3, 35, "She had a seat, and a Plate... You don
       nick="Morwen", hard={"moves": "NIGHTSLASH,SHADOWSNEAK,IRONHEAD,SWORDSDANCE"}),
     starter_mon("RIVAL_KESTREL", s, 1, 35),
 ])
-rival("RIVAL_KESTREL", "Kestrel", 4, 43, "It wasn't her. It was never her. ...Don't. Just don't.", lambda s: [
+rival("RIVAL_KESTREL", "Kestrel", 4, 43, "Keep the title. I'm not here for a title.", lambda s: [
     # K4 is the Ironreach Open final (COLOSSEUM): Close Combat x1.2, Retaliate x1.3, every knockout feeds the crowd (+1 Attack,
     # on top of Krookodile's Moxie), Technician Bullet Punch is a punch (x1.2).
     # Round 4: Standard Staraptor trades Double-Edge for Quick Attack and Krookodile is Intimidate (no Moxie on top of
@@ -1242,7 +1244,7 @@ S("Ch9 - Hammer Captain Brisk, Sable's tag partner (field :COLOSSEUM). Bulldoze 
 ])
 S("Ch9 - the Mourner in the reliquary (field :COLOSSEUM). He fights defensively ('get BACK'): Protect and Spiky Shield also "
   "calm a Frenzy. Trevenant is the multi-bar boss (Prismfall Bosses config still to be written: :MOURNER_TREVENANT).",
-  "HOLLOW_MOURNER", "Mourner", 0, 43, "Not now - you don't understand - ...Juno. Don't look at me like that.", [
+  "HOLLOW_MOURNER", "Mourner", 0, 43, "Not now - you don't understand - get BACK!", [
     # Round 4: four on Standard (Gourgeist joins), a level up: the masked leader of the Hollow lost 68% of the time to a
     # typical six with three.
     P("SHIFTRY", 42, "CHLOROPHYLL", "SITRUSBERRY", "JOLLY", "FAKEOUT,LEAFBLADE,SUCKERPUNCH,PROTECT", "A",
