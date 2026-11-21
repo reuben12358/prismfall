@@ -1,5 +1,7 @@
 # Pokémon Prismfall — Dev Kit (work in progress)
 
+> **Artists (Gemini or anyone else doing character art):** start at [`art/HANDOFF_GEMINI.md`](art/HANDOFF_GEMINI.md). It has the exact file formats, a template for each one, the creator's feedback so far and the priority queue. The creator's concepts are in [`art/external/gemini/`](art/external/gemini/).
+
 A Reborn/Rejuvenation-style fangame for **Pokémon Essentials v21.1 + Elite Battle: DX**: 18 gyms across seven
 kingdoms, 31 field effects, choice-driven Festival of Champions, multiple endings, game overs and a secret Ruin Route.
 
