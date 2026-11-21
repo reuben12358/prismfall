@@ -530,9 +530,8 @@ roads:
   - id: 579
     name: The Wolfsrime
     old_name: null
-    origin: 'The old drove road from the Pass into the Rimewood, left to the wolves when Frostwick blazed the North Gate
-      road. Pretty, quiet, and nobody keeps it. (Map builder 12''s predecessor of Rimewood Path, restored as its own road
-      at the user''s request, 2026-11-21.)'
+    origin: The old drove road from the Pass into the Rimewood, left to the wolves when Frostwick blazed the North Gate
+      road. (The first Rimewood Path layout, restored by map builder 14 at the user's request, 2026-11-21.)
     kingdom: Borderland (Elowen/Isenmar)
     role: side
     mode: road
@@ -546,10 +545,10 @@ roads:
     town_map:
     - - 7
       - 11
-    landmark: The hanging bell on the birch, and the steep snow bank at the bottom that nobody climbs back up.
-    wild: 'Snover, Cubchoo, Deerling, Buneary, Snom, Hoothoot, Swinub, Spinarak, Vanillite, Teddiursa. Night: Snorunt,
-      Hoothoot, Cubchoo, Spinarak, Morelull, Teddiursa, Snom.'
-    exits: 'N: the Rimewood (its east edge). S: Frostwick Pass, down the snow bank (one way).'
+    landmark: The hanging bell on the birch, and the snow bank at the bottom that nobody climbs back up.
+    wild: 'Snover, Cubchoo, Deerling, Buneary, Snom, Hoothoot, Swinub, Spinarak, Vanillite, Teddiursa. Night: Snorunt, Hoothoot,
+      Cubchoo, Spinarak, Morelull, Teddiursa, Snom.'
+    exits: 'N: the Rimewood (its east edge, a warp). S: Frostwick Pass, down the snow bank (one way).'
     fill:
     - hoar-birch outskirts thickening into ice-glazed giants (the old Rimewood Path layout)
     - the frozen brook

@@ -84,7 +84,12 @@ REV14 = {
                      E('south', 560, 'South Gate: the Frostflat Causeway, the side road back to Saltmere')]),
     578: dict(edges=[E('south', 570, 'Frostwick North Gate'), E('north', 562)]),
     562: dict(edges=[E('south', 578), E('north', 561)],
-              notes={'RIME_GLADE': 'behind a frosted sapling (Cut: HM01 comes after Badge 2)'}),
+              notes={'RIME_GLADE': 'behind a frosted sapling (Cut: HM01 comes after Badge 2)'},
+              links=[WP((47, 26), 579, 'WOLFSRIME', 'the east edge, below the glade sapling: the Wolfsrime (old drove road)')]),
+    # map builder 14/16: the Wolfsrime (579), the first Rimewood Path layout restored as a one-way shortcut road
+    579: dict(links=[WP((37, 0), 562, 'WOLFSRIME', "N end <-> the Rimewood's east edge (562 at 47,26)"),
+                     WP((41, 87), 577, 'WOLFSRIME_BANK', 'S end: the snow bank down into Frostwick Pass (577 at 16-19,4), '
+                                                         'one way (touch events slide you down; nothing leads back up)')]),
     560: dict(edges=[E('east', 140),
                      E('north', 570, "to Frostwick's South Gate: Essentials joins opposite edges, so turn the Causeway's "
                                      "last stretch north (N edge <-> 570 S) or use a warp. The chain at the Border Stones "
@@ -125,6 +130,17 @@ EXTRA_MAPS = {
                             "can't reach)"],
               tileset_kit='G5_DESERT_CANYON', border='dunes and the Dry Tide\'s shell pavements'),
 }
+# reserved: in the plan, not built yet (the build and the validators know the id)
+EXTRA_MAPS[606] = dict(id=606, name='Temple of the Noon Sun', act=2, kingdom='Ossaria', kind='interior', size=[20, 18],
+                       tileset='Outside', bgm=None, field='NONE', segment=4, detail='outline', reserved=True, parent=613,
+                       connections_outline=['door: a round sandstone temple half under a dune, off Sunbleach Flats (613), '
+                                            'outside Duneholt'],
+                       key_features=["Sona of the Octave's temple (Espeon 'Noon', Octave 4 of 8; EEVEE_OCTAVE.md, TRIALS_QUESTS "
+                                     "OS_OCTAVE_NOON_BELL): one round room, a light-shaft in the roof that drops a circle of "
+                                     "noon light on the floor, a bronze bell, three sand drifts in the shaft (events SUN_DRIFT)"],
+                       note='moved from 215 (the Gym 5 Mural Gallery Mastery) by the Trials owner, 2026-11-21; reserved by '
+                            'map builder 16, not built yet',
+                       tileset_kit='G5_DESERT_CANYON', border='sandstone walls (interior)')
 RETIRED = {133: 'GYM_PUZZLES.md: retired in Revision 14 (Tamsin battles on 131\'s top ledge); not built'}
 
 

@@ -301,7 +301,7 @@ No place is called "Route N" any more. Each **road** joins two gym towns and has
 |---|---|---|---|---|
 | 1 | **The Strand Road** | Ferrow's Landing -> Saltmere | The Ferrymen's Mile 520 64x110 -> Windfall Row 521 120x70 (branch) -> Lacecliff Walk 527 140x64 -> Marram Down 528 110x80 | Ch 1-2 |
 | 2 | **The Weavers' Road** | Saltmere -> Briarwick | The Grey Saltings 541 70x110 -> The Dyers' Ford 552 80x72 -> Thistledown Lea 540 130x64 -> Gossamer Wood 524 90x110 | Ch 3 |
-| 3 | **The Hoar Road** | Briarwick -> Ebbmouth | Spinners' Rise 566 80x120 -> Frostwick Pass 577 72x96 -> Rimewood Path 578 80x88 -> The Rimewood 562 96x110 -> Gullcry Cliffs 561 64x130 -> Frostflat Causeway 560 140x64 (side) | Ch 4 |
+| 3 | **The Hoar Road** | Briarwick -> Ebbmouth | Spinners' Rise 566 80x120 -> Frostwick Pass 577 72x96 -> Rimewood Path 578 80x88 -> The Wolfsrime 579 80x88 (side) -> The Rimewood 562 96x110 -> Gullcry Cliffs 561 64x130 -> Frostflat Causeway 560 140x64 (side) | Ch 4 |
 | 4 | **The Lock Road** | Ebbmouth -> Lumen City | The Reedholms 580 110x90 -> The Icecutters' Haul 592 110x70 -> The Icefall Locks 581 72x120 -> Coppice Ride 595 110x72 -> Wallshadow Row 594 150x80 -> The Arc-Lamp Mile 593 110x64 | Ch 5 |
 | 5 | **The Brass Road** | Lumen City -> Duneholt | The Meridian Mainline 612 130x64 -> Candle Down 602 110x110 -> The Highwold 603 130x80 -> The Brass Dunes 600 130x72 -> The Rib Road 601 72x120 -> Sunbleach Flats 613 110x64 | Act II |
 | 6 | **The Leach Road** | Duneholt -> Mirefen | The Marrow Road 620 130x70 -> The Kneeling Stones 632 90x80 -> The Leach Canyons 621 100x100 -> Wormwood Lea 634 90x130 -> The Gutterfall 633 80x96 | Act II |
@@ -411,8 +411,6 @@ North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) 
 - **Fill:** the climb through hoar-crusted downs; the wind gap: gust tiles that push you back unless you move between gusts; the empty toll hut with two ledgers, one per kingdom, that disagree; a frozen tarn with an ice-fishing hole (Old Rod); avalanche fences and a snow-buried signpost in two scripts; shepherd's bothy (rest and a hot drink); trappers' drying racks; a row of snowmen built by Frostwick children; one is a Snorunt; 4 trainers: a huscarl, a forester, two sledgers; Road Stone III-b.
 - **Secret:** Behind the frozen waterfall at the tarn is the Hollow of the Handfast: love-carvings of a forester and a huscarl and a Soothe Bell. It feeds Frostwick's sidequest 'The Two Hearths'.
 
-**The Wolfsrime (579)**, Borderland (Elowen/Isenmar), `:SILKWOOD`, 80x88 (map builder 14, user 2026-11-21): the first Rimewood Path layout, restored as the old drove road from the Rimewood's east edge (a warp at 562 (47,26)) down to Frostwick Pass, whose S end is a snow bank you slide down into the Pass (577 (16-19,4)) and never climb: a one-way shortcut back, so the way north is still Frostwick and Rimewood Path. Drovers' bothy (heal), the old den off the road (hidden path).
-
 **Rimewood Path (578)**, Borderland (Elowen/Isenmar), `:SILKWOOD`, target **80x88** (new map). 
 *Name:* The trappers' blazed path into the frozen forest: a red axe-mark every twenty paces, and you do not leave them.
 - **Landmark:** The Blaze-Trees, and the Lantern Birch where trappers leave a light for whoever is late.
@@ -420,6 +418,14 @@ North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) 
 - **Wild:** Snover, Cubchoo, Teddiursa, Deerling, Buneary, Swinub, Vanillite. Night: Sneasel, Snorunt, Morelull.
 - **Fill:** hoar-birch outskirts thickening into ice-glazed giants; a frozen brook with a slide shortcut; charcoal burners' clearing with a kiln; trapper's lean-to (heal); the snare line: free a caught Teddiursa (it remembers you in the Rimewood); frozen silk curtains, brittle enough to break with Rock Smash; honey-stump hives; Frostwick woodcutters and a sledge of logs; 5 trainers; the Lantern Birch (relight it at night for a reward).
 - **Secret:** The Unblazed: at the one tree with a blue blaze, leave the path. The wood repeats until you follow the Stantler tracks, which lead to a clearing with the herd and one Stantler that will fight.
+
+**The Wolfsrime (579)**, Borderland (Elowen/Isenmar), `:SILKWOOD`, target **80x88** (new map). *Side road.* 
+*Name:* The old drove road from the Pass into the Rimewood, left to the wolves when Frostwick blazed the North Gate road. (The first Rimewood Path layout, restored by map builder 14 at the user's request, 2026-11-21.)
+- **Landmark:** The hanging bell on the birch, and the snow bank at the bottom that nobody climbs back up.
+- **Exits:** N: the Rimewood (its east edge, a warp). S: Frostwick Pass, down the snow bank (one way).
+- **Wild:** Snover, Cubchoo, Deerling, Buneary, Snom, Hoothoot, Swinub, Spinarak, Vanillite, Teddiursa. Night: Snorunt, Hoothoot, Cubchoo, Spinarak, Morelull, Teddiursa, Snom.
+- **Fill:** hoar-birch outskirts thickening into ice-glazed giants (the old Rimewood Path layout); the frozen brook; the drovers' old camp, a cold kiln with a Snom in the flue; the drovers' bothy (heal); an old wolf trap, a wolf's skull in a birch fork; the hanging bell.
+- **Secret:** The old den: a clawed birch marks where to leave the road; the den under a fallen giant hides a Tiny Mushroom.
 
 **The Rimewood (562)**, Borderland (Elowen/Isenmar), `:SILKWOOD`, target **96x110** (was 48x56). 
 *Name:* Kept name: the Elowen oldwood that froze when the sea did.

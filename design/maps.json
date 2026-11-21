@@ -15358,7 +15358,8 @@
       26
      ],
      "to": 579,
-     "note": "the east edge, below the glade sapling: the Wolfsrime (old drove road)"
+     "note": "the east edge, below the glade sapling: the Wolfsrime (old drove road)",
+     "link": "WOLFSRIME"
     }
    ],
    "features": [
@@ -17113,27 +17114,23 @@
    "route_plan": {
     "road": 3,
     "road_name": "The Hoar Road",
-    "role": "main",
-    "landmark": "The Blaze-Trees, and the Lantern Birch where trappers leave a light for whoever is late.",
-    "origin": "The trappers' blazed path into the frozen forest: a red axe-mark every twenty paces, and you do not leave them.",
-    "wild": "Snover, Cubchoo, Teddiursa, Deerling, Buneary, Swinub, Vanillite. Night: Sneasel, Snorunt, Morelull.",
-    "exits": "S: Frostwick (North Gate). N: the Rimewood.",
+    "role": "side",
+    "landmark": "The hanging bell on the birch, and the snow bank at the bottom that nobody climbs back up.",
+    "origin": "The old drove road from the Pass into the Rimewood, left to the wolves when Frostwick blazed the North Gate road. (The first Rimewood Path layout, restored by map builder 14 at the user's request, 2026-11-21.)",
+    "wild": "Snover, Cubchoo, Deerling, Buneary, Snom, Hoothoot, Swinub, Spinarak, Vanillite, Teddiursa. Night: Snorunt, Hoothoot, Cubchoo, Spinarak, Morelull, Teddiursa, Snom.",
+    "exits": "N: the Rimewood (its east edge, a warp). S: Frostwick Pass, down the snow bank (one way).",
     "fill": [
-     "hoar-birch outskirts thickening into ice-glazed giants",
-     "a frozen brook with a slide shortcut",
-     "charcoal burners' clearing with a kiln",
-     "trapper's lean-to (heal)",
-     "the snare line: free a caught Teddiursa (it remembers you in the Rimewood)",
-     "frozen silk curtains, brittle enough to break with Rock Smash",
-     "honey-stump hives",
-     "Frostwick woodcutters and a sledge of logs",
-     "5 trainers",
-     "the Lantern Birch (relight it at night for a reward)"
+     "hoar-birch outskirts thickening into ice-glazed giants (the old Rimewood Path layout)",
+     "the frozen brook",
+     "the drovers' old camp, a cold kiln with a Snom in the flue",
+     "the drovers' bothy (heal)",
+     "an old wolf trap, a wolf's skull in a birch fork",
+     "the hanging bell"
     ],
-    "secret": "The Unblazed: at the one tree with a blue blaze, leave the path. The wood repeats until you follow the Stantler tracks, which lead to a clearing with the herd and one Stantler that will fight.",
+    "secret": "The old den: a clawed birch marks where to leave the road; the den under a fallen giant hides a Tiny Mushroom.",
     "town_map": [
      [
-      6,
+      7,
       11
      ]
     ]
@@ -17141,11 +17138,10 @@
    "metadata": {
     "town_map_pos": [
      0,
-     6,
+     7,
      11
     ]
    },
-   "borderland": "The Rimewood",
    "added_by": "cartographer (SPINE Rev 13)",
    "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder",
    "id": 579,
@@ -17159,7 +17155,8 @@
       0
      ],
      "to": 562,
-     "note": "N end <-> the Rimewood's east edge (562 at 47,26)"
+     "note": "N end <-> the Rimewood's east edge (562 at 47,26)",
+     "link": "WOLFSRIME"
     },
     {
      "type": "warp",
@@ -17168,7 +17165,8 @@
       87
      ],
      "to": 577,
-     "note": "S end: the snow bank down into Frostwick Pass (577 at 16-19,4), one way"
+     "note": "S end: the snow bank down into Frostwick Pass (577 at 16-19,4), one way (touch events slide you down; nothing leads back up)",
+     "link": "WOLFSRIME_BANK"
     }
    ],
    "features": [
@@ -18568,6 +18566,40 @@
     ]
    },
    "borderland": "The Brass Dunes"
+  },
+  {
+   "id": 606,
+   "name": "Temple of the Noon Sun",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "interior",
+   "size": [
+    20,
+    18
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "NONE",
+   "segment": 4,
+   "detail": "outline",
+   "reserved": true,
+   "parent": 613,
+   "connections_outline": [
+    "door: a round sandstone temple half under a dune, off Sunbleach Flats (613), outside Duneholt"
+   ],
+   "key_features": [
+    "Sona of the Octave's temple (Espeon 'Noon', Octave 4 of 8; EEVEE_OCTAVE.md, TRIALS_QUESTS OS_OCTAVE_NOON_BELL): one round room, a light-shaft in the roof that drops a circle of noon light on the floor, a bronze bell, three sand drifts in the shaft (events SUN_DRIFT)"
+   ],
+   "note": "moved from 215 (the Gym 5 Mural Gallery Mastery) by the Trials owner, 2026-11-21; reserved by map builder 16, not built yet",
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "sandstone walls (interior)",
+   "metadata": {
+    "town_map_pos": [
+     0,
+     15,
+     4
+    ]
+   }
   },
   {
    "id": 608,
