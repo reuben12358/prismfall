@@ -14,7 +14,7 @@ everything a builder draws afterwards (platforms, props, layers) are unchanged.
 """
 import math, random
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 import margins as M
 import bblib
 from bblib import HD, depth_soften
@@ -618,6 +618,102 @@ def cathedral_pre(R, lab):
 
 PLANS["fbfe12b060"] = Plan(cathedral_labels, cathedral_layout, 2, sides=(46, 46), block=14, seed=21,
                            pre=cathedral_pre)
+
+
+#---------------------------------------------------------------------------------------------
+# PRISM_ARENA: princess-phoenix's arena (night panel at 2x, 512x384). Its builder lays a festival starfield over
+# the panel's top 36 rows; above it the whole arena used to hang upside down (court floor at the top of the room),
+# and the barrier wall at the panel's left edge folded back into a mirrored corner.
+#  * left margin: the barrier is a wall in perspective whose top stays at panel row ~24 while its foot drops
+#    ~0.24 px per px toward the viewer; each margin column is a wall column from 142 px to its right, scaled
+#    about the top edge to the height the wall has there (floor rows keep the old extension: plain court floor);
+#  * above the panel: night sky, painted after the builder's grade by prism_arena() below.
+#---------------------------------------------------------------------------------------------
+class PrismPlan(Plan):
+    TOP, SLOPE, D = 12, 0.24, 71                       # art px (panel / 2)
+
+    def __init__(self):
+        Plan.__init__(self, None, None, 1)
+
+    def floor_line(self, panel):
+        r, g, b = panel[..., 0], panel[..., 1], panel[..., 2]
+        fl = (r > 190) & (g > 120) & (b < 150) & (r - b > 60)
+        out = np.zeros(panel.shape[1], np.float32)
+        for x in range(panel.shape[1]):
+            col = fl[:, x]
+            out[x] = next((y for y in range(4, panel.shape[0] - 5) if col[y:y + 5].all()), panel.shape[0])
+        return out
+
+    def __call__(self, bg, origin, blur_out=True, darken=0.22, old=None):
+        old_raw = old() if old else M._orig_extend(bg, origin=origin, blur_out=False)
+        out = bblib.arr(old_raw)
+        P = np.asarray(bg.convert("RGB"), np.float32)[::2, ::2]
+        fl = self.floor_line(P)
+        T, s, D = self.TOP, self.SLOPE, self.D
+        ox, oy = int(origin[0]), int(origin[1])
+        for X in range(-(ox // 2), 0):                  # margin art columns
+            xs = X + D
+            f_here = fl[0] + s * (-X)
+            k = (fl[xs] - T) / (f_here - T)
+            for Y in range(T, int(np.ceil(f_here)) + 1):
+                sy = int(round(T + (Y - T) * k))
+                c = P[min(sy, P.shape[0] - 1), xs]
+                hx, hy = ox + 2 * X, oy + 2 * Y
+                out[hy:hy + 2, hx:hx + 2, :3] = c
+        img_ = bblib.img(out)
+        return depth_soften(img_, darken=darken) if blur_out else img_
+
+    def region_mask(self, origin, size):
+        m = np.zeros((HD[1], HD[0]), np.float32)
+        ox, oy = int(origin[0]), int(origin[1])
+        m[:oy, :] = 1
+        T, s, D = self.TOP, self.SLOPE, self.D
+        # the wall rows of the left margin (to just past its foot)
+        for hx in range(0, ox):
+            X = (hx - ox) // 2
+            f_here = 68 + s * (-X)
+            m[oy:oy + int(2 * (f_here + 2)), hx] = 1
+        return m
+
+    def region(self, R):
+        return self.region_mask((R.ox, R.oy), R.bg.size)
+
+
+PLANS["58598da0c3"] = PrismPlan()
+
+
+def prism_arena():
+    """fields_f.prism_arena on the planned room, then the festival sky above the stands: Rejuvenation's New World
+    starfield (the strip the builder lays over the panel's top) tiled upward, under the same violet wash deepening
+    toward the zenith; the prism plates' strings run up out of sight."""
+    import fields_c, fields_f
+    from fields_d import capture
+    hd, res = capture(fields_f.prism_arena, fields_c)
+    stars = bblib.game_img("rejuvenation", "battlebgNewWorld").crop((0, 0, 512, 110))
+    sky = Image.new("RGBA", (864, 150))
+    for y0 in range(150 - 110, -110, -110):
+        for x in range(0, 864, 512):
+            sky.alpha_composite(stars, (x, y0))
+    sky.alpha_composite(bblib.vgradient((864, 150), [(0, (6, 4, 26, 110)), (1, (20, 14, 60, 120))]))
+    d = ImageDraw.Draw(sky)
+    import fields_c as fc
+    for i in range(18):                                  # the same plate positions as the builder
+        a = i / 18 * 2 * math.pi + 0.1
+        x = 520 + math.cos(a) * 320
+        d.line([x, 0, x, 150], fill=(180, 160, 110, 255))
+    top = Image.new("RGBA", HD); top.alpha_composite(sky, (0, 0))
+    a = bblib.arr(hd); t = bblib.arr(top)
+    a[:150] = t[:150]
+    soft = bblib.arr(depth_soften(bblib.img(a)))
+    a[:150] = soft[:150]
+    hd = bblib.img(a)
+    bblib.save_room("field_prism_arena", hd)
+    res["origins"] = [o if o[0] != fields_c.OWN else [o[0], o[1] + ", night sky above the stands, the barrier "
+                                                                  "continued in perspective"] for o in res["origins"]]
+    return res
+
+
+BUILDERS["PRISM_ARENA"] = prism_arena
 
 
 #---------------------------------------------------------------------------------------------
