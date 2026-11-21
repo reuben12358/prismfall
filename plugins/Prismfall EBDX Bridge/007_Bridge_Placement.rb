@@ -23,7 +23,10 @@
 # (send-out, recall, legacy animations) keep working.
 #
 #   FOOT_LINE  bitmap px, + = below the anchor (sprite zoom applies: the foe is
-#              drawn at 1x and the player at 2x at the battle camera)
+#              drawn at 1x and the player at 2x at the battle camera). Foe +16:
+#              its feet a little in front of the base centre (the foe base is
+#              25 px deep each way at the battle camera), as a creature standing
+#              on a disc seen from above shows its front feet.
 #   HOVER      bitmap px above the foot line for floating species
 #   FLOATING   species => true/false, wins over the automatic rule
 #              (EBDX BattlerAltitude > 0, or Levitate for species EBDX has no
@@ -32,7 +35,7 @@
 #===============================================================================
 module PrismfallEBDX
   GROUND_SPRITES = true
-  FOOT_LINE      = { :front => 4, :back => -2 }
+  FOOT_LINE      = { :front => 16, :back => -2 }
   HOVER          = 20
   # EBDX gives these an altitude for their animation (a hop, a bounce), but they stand.
   FLOATING = {

@@ -2,7 +2,7 @@
 """Before/after sheet and battle-start GIF from the placement probe (003_PlacementProbe.rb).
 
   python3 -I make_placement_sheet.py sheet <before_dir> <after_dir> <out.png> [case ...]
-  python3 -I make_placement_sheet.py gif <intro_dir> <frames_subdir> <out_base> [frame_ms=66]
+  python3 -I make_placement_sheet.py gif <intro_dir> <frames_subdir> <out_base> [frame_ms=66] [last_frame]
 
 Marks drawn on the real-engine frames (never retouched otherwise):
   cyan ellipse  the base painted in the room (mapped through that frame's room camera)
@@ -89,7 +89,8 @@ def sheet(bdir, adir, out, cases):
     d.text((6, 20), "cyan = base painted in the room   red + = where EBDX stands the battler   yellow = sprite's "
                     "lowest opaque row (its feet) in that frame", fill=(235, 235, 235))
     d.text((6, 36), "BEFORE: EBDX's own species metrics (feet 2..26 px off the anchor), MEADOW's patch off the anchor, "
-                    "no player patch. AFTER: Bridge grounding (feet on the anchor, floaters hover 20 px), bases moved.",
+                    "no player patch. AFTER: Bridge grounding (foe feet 16 px in front of the base centre, player's on it, "
+                    "floaters 20 px above that line), bases moved.",
            fill=(200, 200, 200))
     y = head
     for c in cases:
@@ -118,9 +119,11 @@ def sheet(bdir, adir, out, cases):
     print(out, img.size, len(cases), "rooms")
 
 
-def gif(idir, sub, out, ms=66):
+def gif(idir, sub, out, ms=66, last=None):
     src = os.path.join(idir, sub)
     files = sorted(f for f in os.listdir(src) if f.endswith((".bmp", ".png")))
+    if last is not None:
+        files = files[:last + 1]
     log = {}
     p = os.path.join(idir, "intro.tsv")
     if os.path.exists(p):
@@ -153,4 +156,5 @@ if __name__ == "__main__":
     if sys.argv[1] == "sheet":
         sheet(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
     else:
-        gif(sys.argv[2], sys.argv[3], sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 66)
+        gif(sys.argv[2], sys.argv[3], sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 66,
+            int(sys.argv[6]) if len(sys.argv) > 6 else None)

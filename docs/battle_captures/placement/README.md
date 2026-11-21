@@ -34,9 +34,13 @@ Every other room's foe and player platform is centred on the anchors (checked on
 
 - `plugins/Prismfall EBDX Bridge/007_Bridge_Placement.rb` (the project's battler metric source now): when EBDX
   loads a battler bitmap, the lowest opaque row of each animation frame is measured (cached per file) and the
-  median is put on the anchor (`FOOT_LINE`: foe +4, player -2 bitmap px). Floating species (EBDX altitude > 0, or
+  median is put on the base (`FOOT_LINE`: foe +16 bitmap px = 16 screen px in front of the centre at the battle
+  camera, where the foe base is 25 px deep each way; player -2 = on the centre). Floating species (EBDX altitude > 0, or
   Levitate for species EBDX has no metrics for; `FLOATING` overrides 12 EBDX "hoppers" such as Skitty and
-  Politoed to grounded) hover a constant `HOVER` = 20 px above it; EBDX's ground shadow stays on the base. Only
+  Politoed to grounded) hover a constant `HOVER` = 20 px above that line; EBDX's ground shadow stays on the base.
+  Measured after the change (16 rooms, every camera): grounded foes' feet typically 64% of the way from the base
+  centre to its front edge (9-88% with the animation's bob), never on or past the rim; player feet typically on
+  the centre (38% behind to 16% in front). Only
   the vertical origin changes; send-out / recall / Substitute keep it; floaters don't shake the screen landing.
 - `art/battlebacks/bases.py` + `fields_h.meadow`: MEADOW's worn patch moved onto the foe point (its own pixels,
   whole art pixels), the spot refilled from the same rows, its mirror cleared, the same patch at 2x under the
