@@ -70,7 +70,7 @@ be helped on a later visit, so the order of the first seven is the player's own.
 - **Reward:** an **Eevee** (Lv 70, Adaptability; knows Last Resort, Stored Power, Shadow Ball, Quick Attack; can still
   become any Eeveelution) and the **Eevium Z**. **No ring** (SPINE Rev 23): the Warden's ring Bastian gave the PC after
   Badge 13 wakes Z-crystals too, so Vesper says "You won't need a cantor's ring for it. That Warden's ring of yours
-  hears it. Its chip and our glass came off the same crown." If Understudy is still an Eevee, Vesper points out the
+  hears it. Its chip is off the Crown's stone, and our glass came out of the night the Crown broke. They know each other." If Understudy is still an Eevee, Vesper points out the
   crystal works for it too. S177 `EEVEE_OCTAVE_DONE` is set.
   The Eighteen Shrines' "Prism" Eevee (`CR_PRISM_EEVEE`) is gone: one Eevee gift in Crownhaven, not two; that quest
   now gives the five Imprint stones.

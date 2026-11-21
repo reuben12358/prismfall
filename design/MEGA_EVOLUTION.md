@@ -66,7 +66,7 @@ Brann's Ch8 chestnut slip ("After the accident. Ten years back.") and Bastian's 
 put the three together before Ch17 says it. Pre-Ring stones hum when the PC picks them up, and go quiet at the Ring-Day.
 
 Z-crystals stay what EEVEE_OCTAVE.md made them: slivers of Glassfall glass, each tuned by the Choir to one Imprint.
-**SPINE Rev 23: the same Warden's ring wakes them** (the chip and the sliver came off the same crown), so the player
+**SPINE Rev 23: the same Warden's ring wakes them** ("the glass came out of the night it cracked. Same crown, one way or another"), so the player
 has one ring for both; Vesper's Z-Power Ring is no longer handed out. Crystals, their placement and the Z users:
 `design/Z_MOVES.md`.
 
@@ -215,8 +215,9 @@ SPINE Rev 21 withdrew the Ch8 Ring-Day (7 badges); `story/22_SCRIPT_CH8.md` keep
      as if they had stopped waiting"; and "If Meridian's linesmen come down my lifts tonight, I'd like them to meet a
      ferry child with a Warden's ring."
 - **Gives:** `MEGARING` and `AGGRONITE` (Mega Aggron is pure Steel: it answers neither Ysolde nor Magnus). No Trial gong.
-  **SPINE Rev 23:** the ring also wakes Z-crystals; Bastian says so in one line ("the chip and the sliver came off the
-  same crown. One Z-move a fight, and one to a side, same as the hearts"). `design/Z_MOVES.md`.
+  **SPINE Rev 23:** the ring also wakes Z-crystals; Bastian says so in one line ("The chip's grind off the Crown's stone,
+  and the glass came out of the night it cracked. Same crown, one way or another. One Z-move a fight, and one to a side,
+  same as the hearts"). `design/Z_MOVES.md`.
 - **Must not say:** "reset" or "Legend Plate" (checked by `run_mega.rb`). Brann isn't in the scene, so the Light Stone
   choice doesn't touch it; his reaction is in his follow-up below.
 - **Follow-up beats:** Marchetti's raid (both sides Mega). **15 badges:** Brann's spare heartstone at the Hearthguild

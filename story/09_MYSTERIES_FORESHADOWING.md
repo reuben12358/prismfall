@@ -63,3 +63,12 @@ Each one must exist in the Act I build:
 - **"Dorian is the Mourner."** A theatrical voice, he owns the stage the Mourner walked out of, and he's oddly calm afterward. Disproved on the night itself: he is in his box above the PC, shouting for the house lights, while the Mourner is on the stage.
 - **"Larch is working for Meridian."** Her past, her Lattice. She's guilty but loyal. It resolves at Ch12, when she burns her career on air.
 - **"Valen is the villain."** He's the most suspicious figure in Acts III–IV. He's the liar, not the villain. Ch20 recontextualizes.
+
+## Wording rules for rings and crystals (#1, #5, #6; SPINE Revs 21 and 23)
+- Before Ch17, a Warden's ring is "a chip of the Crown's own stone" and a Z-crystal is "Glassfall glass" or "Choir glass".
+  The link between them is "the glass came out of the night it cracked" or "same crown, one way or another". Nobody
+  names the Legend Plate (#5) or says the stone was "reset" (#6).
+- Never write that a crystal, or the glass, *is* the Crown's stone or a piece of a Plate. The PC's splinter must stay the
+  only missing piece (Ch17: "You're the missing piece").
+- Glassfall glass is ten years old (AF 290). A crystal can't be older than that, and it can't be buried in old rock
+  unless someone put it there (a Choir pilgrim leaving it to soak, 01_WORLD_LORE §3).

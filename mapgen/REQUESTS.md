@@ -1240,3 +1240,33 @@ Z-moves, tests). The Eevee Octave doc is updated (`design/EEVEE_OCTAVE.md`). No 
 **Z-Power owner (FYI):** `PrismfallZ::RING` is now `:MEGARING` (`player_ring?`; `ZPOWERRING` still counts for old saves),
 10 type crystals and 2 species crystals are added (species Z-moves keep their PBS power), and `run_trials.rb`'s Z tests
 use the Mega Ring. `playtest/run_zpower.sh` should put `MEGARING` in the Bag instead of `ZPOWERRING` next time it runs.
+
+## From the story editor: reply to the Rev 23 entry (one ring, Z-crystals), 2026-11-20
+**Mega/Z workstream (items 3–6 reviewed; strings only in 113/114, `run_trials.rb` passes).**
+1. **Lore fix, Bastian and Vesper.** "A sliver of the Crown's glass" plus "the chip and the sliver came off the same
+   crown" read as if crystals are pieces of the Crown's stone. That would scatter Legend Plate fragments across Velmora
+   and undercut Ch17's "You're the missing piece" (#1, #5).
+   - Bastian now says: "a sliver of Glassfall glass... The chip's grind off the Crown's stone, and the glass came out
+     of the night it cracked. Same crown, one way or another."
+   - Vesper now says: "a sliver of Glassfall glass, from the night we lost everything" and "Its chip is off the Crown's
+     stone, and our glass came out of the night the Crown broke. They know each other."
+   - #6 is safe: Bastian has told his crown-break story earlier in Ch14, and Vesper speaks after Ch15.
+   - Z_MOVES.md §1, EEVEE_OCTAVE.md and MEGA_EVOLUTION.md quote the new wording. The lore is in 01_WORLD_LORE §3, "Choir
+     glass": Choir pilgrims left slivers to soak where each Imprint runs strongest. That explains the wild finds.
+2. **Four crystal lines had timeline slips** (Glassfall glass is ten years old):
+   - Dorian's prop jewel "for thirty years" is now "since the Glassfall. Ten years I called it paste."
+   - The Memory Kata armband was pawned around AF 286, before the Glassfall, so the sliver is now "newer than both...
+     added on one of those yearly visits".
+   - The Tyrant's Heart sliver was "in the spoil heap" of a dig into old rock. It's now on the vertebra's crown, "where
+     some Choir pilgrim must have left it to soak".
+   - The doll's "behind its button eyes all along" didn't fit, because it had no buttons until the PC brought them.
+     The sliver is now "sewn into its chest, in newer stitches than the rest".
+   - The other four lines fit as written: Postmaster, Old Cinder, Kosk and the Moon Market.
+
+**Map builder / trainer designer: Celestine, Gym 17 (Gloaming).**
+3. Her pre-battle lines, after "Once upon a time — which is the only time there ever is, here —" (08_ACT_V Ch18):
+   "My dusk-chapels still sing the whole song: every verse the rest of Velmora stopped singing. They sang over a sliver
+   of glass for me, a year of dusks, until it knew my little ghost by heart." / "Every story needs one true thing in a
+   borrowed costume. Mine is wearing yellow."
+4. Her Z-move line, if the Z-Power plugin gets a trainer-speech hook (like EBDX's `megaOpp`): "This is the part where it
+   hugs you. Hold still. It's worse if you don't."

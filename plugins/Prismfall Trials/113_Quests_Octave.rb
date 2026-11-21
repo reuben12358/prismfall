@@ -75,8 +75,8 @@ tr.quest(:CR_OCTAVE, {
                  { :map => "The last note. Amen sits down in the grass, very pleased with itself. The singers clap, out of time, on purpose." },
                  [:VESPER, :happy, "That was every note we have. You were worth all of them."],
                  [:VESPER, :neutral, "This Eevee was born in the garden this spring. It hasn't decided anything yet. We'd like it to grow up with you."],
-                 [:VESPER, :neutral, "And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once."],
-                 [:VESPER, :neutral, "You won't need a cantor's ring for it. That Warden's ring of yours hears it. Its chip and our glass came off the same crown."],
+                 [:VESPER, :neutral, "And this. We sang over it together: a sliver of Glassfall glass, from the night we lost everything, tuned to every Imprint at once."],
+                 [:VESPER, :neutral, "You won't need a cantor's ring for it. That Warden's ring of yours hears it. Its chip is off the Crown's stone, and our glass came out of the night the Crown broke. They know each other."],
                  { :if => "party_has(:EEVEE)", :then => [
                      [:VESPER, :happy, "It works for Understudy too, if it's still undecided. An Eevee who knows Last Resort and holds that crystal can become everything at once, for a moment."]
                    ] },

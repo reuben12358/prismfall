@@ -303,6 +303,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Personality:** Whimsical and riddling, speaking in fairy-tale cadence. Gloaming's oath-binding means **she cannot lie**, so she has become an artist of the true-but-misleading.
 - **Voice:** "Once upon a time — which is the only time there ever is, here —" / "I've been waiting for you for forty years, little colorless thing. You took the long way. Everyone does." / "I cannot lie. I can, however, *phrase*."
 - **Motivation:** See the Hymn fulfilled before she dies.
+- **Team note (SPINE Rev 23):** her Mimikyu holds the **Mimikium Z**, tuned by her dusk-chapels' singing ("one true thing in a borrowed costume"). It's a Z-move, not a Mega; her ace stays Sylveon.
 - **Secret:** She keeps the **Hymn of Return**, the Accord's original liturgy, suppressed since AF 140. It says the Plates must go home when "one of no color walks the eighteen roads".
 - **Plot role:** Gym 17 and K7. Gives the PC the Hymn.
 - **Legendary tie:** Gloaming's Great Tree holds the Pixie Plate in its roots. The Ogre's masks in Elowen's folklore (Ogerpon) were carved from its fallen bark. Celestine is the one person who has always told the true version of the Ogre story, in rhyme, to anyone who'd listen.

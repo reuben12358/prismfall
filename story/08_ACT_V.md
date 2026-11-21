@@ -34,7 +34,10 @@ The road out of Underveil runs down, not up: below the drained Sump into the **L
 - **Celestine** (in her true form; the PC met her disguised in Ch3, at Briarwick's shrine) dissolves the checkpoint with one sentence the Thornguard captain can't argue with, because she can't lie and everyone knows it: "If you stop this child, the forest will remember your name, and it will say it wrong forever."
 
 ### Gym 17 (`:FAIRY_TALE`), a double battle: "the knight and the dragon"
-Thematic note: *the arena is a storybook. Choose your role (knight, dragon or thief), and the story's rules change who's strong.* Celestine: "Once upon a time — which is the only time there ever is, here —" Her ace is **Sylveon**.
+Thematic note: *the arena is a storybook. Choose your role (knight, dragon or thief), and the story's rules change who's strong.* Celestine: "Once upon a time — which is the only time there ever is, here —" Her ace is **Sylveon**. Her one power play is a **Z-move, not a Mega** (SPINE Rev 23): her **Mimikyu** holds the **Mimikium Z** (Let's Snuggle Forever). The reason is Gloaming's dusk-chapels, which still sing the whole Hymn and tuned the crystal for her storybook's ghost. Before the battle, in her voice (she cannot lie, only phrase):
+  > *"My dusk-chapels still sing the whole song: every verse the rest of Velmora stopped singing. They sang over a sliver of glass for me, a year of dusks, until it knew my little ghost by heart."*
+  > *"Every story needs one true thing in a borrowed costume. Mine is wearing yellow."*
+  When the Z-move fires: *"This is the part where it hugs you. Hold still. It's worse if you don't."* (The Hymn itself comes after the badge, in the same chapels.)
 
 ### The Hymn of Return
 In the dusk-chapel at the Great Tree's roots, Celestine gives the PC the **complete Hymn of Return**, sung for them by the Gloaming choir. If the PC received Wick's verse (Ch10) or Maren's page (Archive branch), the last verse visibly *completes* in the Key Item.
@@ -182,7 +185,7 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
 ### Day 3: Exhibitions and the Festival Grounds
 - **The Eevee Octave** (SPINE Rev 19; `design/EEVEE_OCTAVE.md`). On arrival (Day 0) the PC meets **Carol**, the Octave's Crownhaven singer, in the **Glassfall Memorial Garden** (489); her quest *The Ninth Verse* opens once the PC has helped the other seven singers on the road (Lyra, Aria, Cadence, Sona, Noct, Forte, Lento). Once all eight are helped, **Vesper** waits in the garden with the others: they want to thank the PC and test whether they can carry the power of Eevee. The **gauntlet**: the eight singers in the order the PC helped them, back to back with no healing, each with one Eeveelution on its home field using its type's **Z-move**; then Vesper's Eevee **Amen** with **Extreme Evoboost** on the Grand Stage. Open from then on, through Festival week and after.
   - Vesper, gentle: "We all lost everything the year the Crown broke. The Choir calls us the lucky ones. I think we're just... what was left." *(The singers were children in the AF 290 Glassfall; Vesper was 14.)*
-  - Reward: an **Eevee**, the **Eevium Z** and Vesper's **Z-Power Ring**. If Understudy is still an Eevee, Vesper says the crystal works for it too; if it has evolved, she notes which Imprint "claimed" it.
+  - Reward: an **Eevee** and the **Eevium Z**. There's no ring (SPINE Rev 23): the PC's Warden's ring from Cragholm wakes it. Vesper: *"Its chip is off the Crown's stone, and our glass came out of the night the Crown broke. They know each other."* If Understudy is still an Eevee, Vesper says the crystal works for it too; if it has evolved, she notes which Imprint "claimed" it.
 - **Other exhibitions** (NS §3.6, original characters only):
   - **The Pageant Bout:** Dorian and Rook in a double battle staged as "a duet for the cameras", with Rook's Rotom filming it.
   - **Juno's Garden Match**, if she wasn't the PC's R16.

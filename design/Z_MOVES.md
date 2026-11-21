@@ -15,8 +15,11 @@ and `plugins/Prismfall Mega` (one Mega and one Z per side). Stones: `design/MEGA
   Gym 13 (`OS_RING_DAY`, MEGA_EVOLUTION.md §4). `PrismfallZ::RING = :MEGARING`; the player's check is
   `PrismfallZ.player_ring?`. The name stays the base item's ("Mega Ring"); in the story it is a Warden's ring.
 - **Why it answers crystals** (Bastian says it in the Ring-Day scene, Vesper again at the Octave): a Z-crystal is a
-  sliver of the Crown's glass from the Glassfall, tuned by the Choir to one Imprint; the ring's chip is grind off the
-  Crown's own stone. "The chip and the sliver came off the same crown": the ring hears a sliver as it hears a heartstone.
+  sliver of **Glassfall glass**, tuned by the Choir to one Imprint; the ring's chip is grind off the Crown's own stone.
+  "The chip's grind off the Crown's stone, and the glass came out of the night it cracked. Same crown, one way or
+  another" (Bastian): the ring hears a sliver as it hears a heartstone. **The glass is not the Crown's stone or a
+  Plate**; the PC's splinter stays the only missing piece (story editor; 01_WORLD_LORE §3 "Choir glass", 09_MYSTERIES
+  "Wording rules"). How slivers got everywhere: Choir pilgrims left them to soak where each Imprint runs strongest.
 - **One of each per side per battle:** a side may use one Mega and one Z-move (`PrismfallMega::LIMIT` / `Z_LIMIT`).
   A Pokémon holding a crystal can't Mega Evolve; a stone holder can't hold a crystal.
 - **Save compatibility:** `ZPOWERRING` stays in `pbs/items_zpower.txt` (re-described as an old cantor's ring) and

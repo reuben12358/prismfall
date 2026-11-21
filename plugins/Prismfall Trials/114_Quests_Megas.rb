@@ -44,7 +44,7 @@ tr.quest(:OS_RING_DAY, {
       [:BASTIAN, :neutral, "A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone."],
       [:BASTIAN, :neutral, "Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint."],
       [:BASTIAN, :deadpan, "One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double."],
-      [:BASTIAN, :neutral, "And if you come by a Choir crystal, a sliver of the Crown's glass from the Glassfall, it'll answer that too: the chip and the sliver came off the same crown. One Z-move a fight, and one to a side, same as the hearts."],
+      [:BASTIAN, :neutral, "And if you come by a Choir crystal, a sliver of Glassfall glass, it'll answer that too. The chip's grind off the Crown's stone, and the glass came out of the night it cracked. Same crown, one way or another. One Z-move a fight, and one to a side, same as the hearts."],
       "He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.",
       [:BASTIAN, :neutral, "Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain."],
       [:BASTIAN, :deadpan, "Two old men who don't ask each other things. That's how you get to seventy-four."],
@@ -165,7 +165,7 @@ tr.quest(:EL_DOLL_WHO_WAITED, {
     :return => [
       "You press the buttons on. The doll blinks. It looks at the attic window, at the road below, for a long time.",
       "Then it lets go of something it has held for a very long time: a grey stone drops from its stitched hands into yours.",
-      "Tucked behind its button eyes all along: a sliver of dark glass, cold as a cellar.",
+      "And sewn into its chest, in newer stitches than the rest: a sliver of dark glass, cold as a cellar.",
       { :complete => true },
       "When you look back, it is only a doll, sitting in the sun."
     ]
@@ -219,7 +219,7 @@ tr.quest(:EL_ENCORE, {
           ["Stand very still.", [[:DORIAN, :shocked, "...Avant-garde. Terrifying. The critics will call it 'a meditation'. Brilliant."]]]] },
       "The curtain rises. The house is full. For three minutes, the whole of Saltmere forgets there is a war.",
       [:DORIAN, :sad, "Lovely. Lovely. Here. My leading lady's heartstone. Her Lopunny could kick a chandelier and land on the beat. She'd want it on a stage, not in my drawer."],
-      [:DORIAN, :happy, "And for the encore of the encore: a sliver of Choir glass the Pageant used as a prop jewel for thirty years. It was real all along. Of course it was."],
+      [:DORIAN, :happy, "And for the encore of the encore: a sliver of Choir glass the Pageant has worn as a prop jewel since the Glassfall. Ten years I called it paste. It was real all along. Of course it was."],
       { :complete => true },
       [:DORIAN, :happy, "Bow, darling. Always bow. They remember the bow."]
     ]
@@ -447,7 +447,7 @@ tr.quest(:NA_MEMORY_KATA, {
       { :map => "Kaito is at the bar, wraps on, a cup of something he isn't drinking." },
       [:KAITO, :neutral, "It was my unit's. Memory's mother wore it, at Marrowgate. She could feel them through the gate. So could I."],
       [:KAITO, :neutral, "It remembers for me. Now it can remember for you. Use it on someone who deserves it."],
-      "Wrapped with the stone, in the unit's old armband: a sliver of glass that hums like a struck gong.",
+      "Wrapped with the stone in the unit's old armband, and newer than both: a sliver of glass that hums like a struck gong. Someone has added it on one of those yearly visits.",
       { :complete => true },
       [:KAITO, :neutral, "Stand up. Again. That's the whole kata."]
     ]
@@ -505,7 +505,7 @@ tr.quest(:OS_TYRANT_HEART, {
     ],
     :return => [
       [:NASRIN, :happy, "Whole! Not a crack! The Rolls thank you. The Rolls also say you keep it; we only wanted it written down."],
-      "In the spoil heap from your dig, a sliver of glass glints: Glassfall glass, tuned to the earth. The Rolls say finders keepers.",
+      "On the vertebra's crown above your dig, where some Choir pilgrim must have left it to soak: a sliver of Glassfall glass, humming with the earth. The Rolls say finders keepers.",
       { :complete => true }
     ]
   }
