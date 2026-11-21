@@ -247,3 +247,22 @@ Recipes `thistle.py`, `mourner.py` + `mourner_p2.py`, `vesper.py` + `vesper_p2.p
   interior was lightened and the hollows made dark bark instead of black.
 - **Thin coloured strands** (Vesper's ribbons): 1-px lines side by side read as a rainbow flag; 2-px ribbons with a dark gap,
   spread at both ends, read as separate ribbons. A kneeling base costs a third of the height: wrong for a host who needs presence.
+
+## 16. Dialogue faces v1: Kestrel and Dorian (2026-11-20, SPINE Rev 22)
+
+Sheet: `art/previews/26_face_portraits_kestrel_dorian.png`. Scripts: `faces_v1.py` (exports), `sheet26.py`. Files in
+`art/work/kitbash/passes/faces_v1/` (`<NAME>_<expr>.png` 96x96 + `_48` natives). **Not installed**: the user approves first.
+Sets: KESTREL neutral/smug/angry/sad/surprised (+ `KESTREL_happy` = smug), DORIAN neutral/happy/smug/angry/surprised.
+- **Geometry from Juno:** official B2W2 VS faces land on Juno's rows when placed by eye line (Cheren `-30,+5`, Hilbert `-41,-2`):
+  eyes from y23-24, mouth y37-39, chin y43-45, crown outline at y2. Only the face (jaw, nose, neck) is kept from the donor.
+- **Male B2W2 eyes are scrappy at 48 px** (scattered iris, broken pupil lines): one clean eye stamp per character in the
+  construction of Juno's eye (2-row lash, 2x2 pupil, catchlight beside it, lit iris bottom), mirrored about x=25.
+- **Expressions are stamp operators on the base:** `lid()` moves the lash rows down (smug 2, angry/sad 1), `wide()` moves
+  them up, `pin_pupils()` shrinks the pupil, `laugh_eye()` moves the lash into an arch. Brows need 2+ rows of free forehead
+  under the fringe, or every expression looks the same.
+- **Hair:** Kestrel's fringe = Bezier locks tapering to points (flat 2-tone, cast-shadow lines, black only on the silhouette,
+  one crown arc). Tips under 3 px wide turn all-black under the outline: taper ~0.55-0.7. The same locks cracked Dorian's
+  pompadour like an eggshell; a sculpted style works better as one silhouette + tone bands + a few explicit strand curves.
+- **Who does it look like:** navy fringe over one eye + amber eyes = Kieran (SV), so Kestrel's eyes are steel grey; silver
+  hair + violet eyes + purple = Bede, so Dorian's are hazel. Red eyes on Kestrel would read as Hugh.
+- Rebuild the jaw outline by rule (donor jaw lines are often drawn in hair colour and vanish with the hair).
