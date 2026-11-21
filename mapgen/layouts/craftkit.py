@@ -158,7 +158,8 @@ def undergrowth(r, n, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'nt
         if placed >= n: break
         k = rng.choice(kinds); st = STAMPS[k]
         if (x, y) in ev or r.road_mask[y, x]: continue
-        if m.free(x, y, st['w'], st['h'], on=on): m.stamp(k, x, y, mark='B'); placed += 1
+        if m.free(x, y, st['w'], st['h'], on=on) and not m.cliff[y:y + st['h'], x:x + st['w']].any():   # map builder 12: never on a cliff face
+            m.stamp(k, x, y, mark='B'); placed += 1
     return placed
 
 
@@ -219,9 +220,9 @@ def stair(r, x, y_lip, w=3, h=None):
 
 def ledge(r, x0, x1, y, chalk=False, face=None):
     """a one-way ledge across x0..x1 at row y (jump down southward).  Cells stay grass class; the tiles go on layer 2.
-    face: 'chalk', 'dune' or None (earth)"""
+    face: 'chalk', 'dune', 'glass', 'sand', 'snow' or None (earth)"""
     m = r.m; face = face or ('chalk' if chalk else None)
-    pre = {'chalk': 'lgc_', 'dune': 'lgd_', 'glass': 'gdl_', 'sand': 'sdl_'}.get(face, 'lg_')   # map builder 11: no-turf dune lips
+    pre = {'chalk': 'lgc_', 'dune': 'lgd_', 'glass': 'gdl_', 'sand': 'sdl_', 'snow': 'lgs_'}.get(face, 'lg_')   # map builder 11: no-turf dune lips; 12: snow
     for x in range(x0, x1 + 1):
         if not m.inb(x, y): continue
         t = P1(pre + ('w' if x == x0 else 'e' if x == x1 else 'm'))

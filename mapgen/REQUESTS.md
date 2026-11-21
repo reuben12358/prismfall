@@ -1270,3 +1270,18 @@ use the Mega Ring. `playtest/run_zpower.sh` should put `MEGARING` in the Bag ins
    borrowed costume. Mine is wearing yellow."
 4. Her Z-move line, if the Z-Power plugin gets a trainer-speech hook (like EBDX's `megaOpp`): "This is the part where it
    hugs you. Hold still. It's worse if you don't."
+
+## From map builder 12 (2026-11-20)
+**Job 1 (Chapter 2-4 audit):** grades and what was rebuilt are in MAPGEN.md 2o; before/after in
+`maps_out/previews/ch2_4_compare/`. **578 Rimewood Path** and **561 Gullcry Cliffs** (now 64x130) are recrafted; 577 has the
+Icium Z (Rev 23, the only Z-crystal on a Chapter 2-4 map) in a Rock Smash gully.
+**For the playtest:** 561's cave mouths moved: south mouth at the foot of the slide crag (about (6,72)), north mouth at
+(6,~49); arrivals follow the R6_CAVE_N/S links. The landslide is proved shut (`GATE ok 561`). K2 Kestrel stands in a
+one-tile gap between two tors at (11,7): the road can't skirt him now. 578: the Long Ice is an ice slide (terrain tag 12)
+from the burners' stair landing west; the Unblazed's wrong turns warp you back to the blue blaze.
+**For the trainer designer:** ROUTES.yaml wants 5 trainers on 578 Rimewood Path (and 5 on 566 / 577); PBS has none, so the
+maps carry none. Add them to PBS and tell the map builder where they belong (578 has room on every terrace).
+**For the distribution agent:** 578's Stantler stag is `WildBattle.start(:STANTLER, 19)` once (self switch A).
+**Not done (next map builder, worst first):** Tidelock Gym 170-174 (stock tiles; GYM_PUZZLES' trimmed design), the caves
+544/545/564 (stock Rock Cave: needs a PF cave sheet built like tileset 54, or caves drawn from the `shs` cliff kit on a dark
+floor), Thistledown Manor 546/547 (stock mansion), 525 Deepwood, 566 Spinners' Rise.

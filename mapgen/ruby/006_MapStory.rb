@@ -117,3 +117,21 @@ if defined?(Prismfall::Cutscene) && Prismfall::Cutscene.respond_to?(:define)
     text "God help us, Ines."
   end
 end
+
+#-------------------------------------------------------------------------------
+# pfm_smash_silk  (map builder 12) Rock Smash on a frozen silk curtain (Rimewood Path 578): the same badge and move
+#                 checks as pbRockSmash, with the curtain's own lines. Event: {if: 'pfm_smash_silk', then: pbSmashEvent}
+#-------------------------------------------------------------------------------
+def pfm_smash_silk
+  move = :ROCKSMASH
+  movefinder = $player.get_pokemon_with_move(move)
+  if !pbCheckHiddenMoveBadge(Settings::BADGE_FOR_ROCKSMASH, false) || (!$DEBUG && !movefinder)
+    pbMessage(_INTL("A curtain of frozen silk, glazed hard as glass. One good blow would shatter it."))
+    return false
+  end
+  return false if !pbConfirmMessage(_INTL("A curtain of frozen silk, brittle as glass.\nWould you like to use Rock Smash?"))
+  speciesname = (movefinder) ? movefinder.name : $player.name
+  pbMessage(_INTL("{1} used {2}!", speciesname, GameData::Move.get(move).name))
+  pbHiddenMoveAnimation(movefinder)
+  return true
+end

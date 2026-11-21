@@ -1,36 +1,39 @@
-# Gullcry Cliffs (561). WRITTEN BY layouts/rimewood.py - edit that script.
+# Gullcry Cliffs (561). WRITTEN BY layouts/routes_craft.py (map builder 12) - edit that script.
 id: 561
 name: Gullcry Cliffs
 parent: 0
-rubric: true
-yards_ok: true
-biome: route
-display_name: Gullcry Cliffs
 bgm: Route 3
 metadata:
   Outdoor: true
   ShowArea: true
   MapPosition: [0, 8, 21]
-  BattleBack: field
+  BattleBack: snow
   Weather: [Rain, 20]
+rubric: true
+yards_ok: true
+biome: route
+field: MOUNTAIN
+display_name: Gullcry Cliffs
 tone: [-10, -6, 6, 20]
 walk_from:
-- [5, 38]
+- [6, 50]
+- [6, 76]
+- [46, 26]
+- [12, 128]
+- [12, 1]
+gates:
+- name: Gullcry landslide (the caves are the way)
+  from:
+  - [11, 128]
+  sealed_edge: N
 connections:
 - {dir: N, offset: 12, to: 160, to_offset: 22}
 - {dir: S, offset: 10, to: 562, to_offset: 12}
 raw: data/raw/561.npy
 tileset: 52
 events:
-- type: sign
-  at: [11, 34]
-  text: 'LANDSLIDE - ROAD CLOSED
-
-    Detour through Gullcry Caves.'
-  post: false
 - type: event
   name: Trainer(4)
-  at: [13, 5]
   pages:
   - graphic: {sprite: trainer_RIVAL1, dir: down}
     trigger: event_touch
@@ -53,65 +56,157 @@ events:
       - var: [KESTREL_STAGE, 1]
       - selfswitch: [A, true]
   - cond: {self: A}
+  at: [11, 7]
+- type: warp
+  name: Gullcry north mouth
+  link: R6_CAVE_N
+  arrive: [6, 50, down]
+  se: Door exit
+  at: [6, 49]
+- type: warp
+  name: Gullcry south mouth
+  link: R6_CAVE_S
+  arrive: [6, 76, down]
+  se: Door exit
+  at: [6, 75]
 - type: trainer
-  at: [12, 48]
   sight: 4
   dir: up
   sprite: trainer_BIRDKEEPER
   trainer: [BIRDKEEPER, Wren]
   intro: The gulls here are huge!
   after: Gullcry Caves are full of them.
+  at: [20, 108]
 - type: trainer
-  at: [10, 40]
   sight: 4
   dir: down
   sprite: trainer_SAILOR
   trainer: [SAILOR, Haldor]
   intro: Cliff path's shut! Battle while you wait!
   after: The caves are slippery. Mind the tide pools.
+  at: [38, 80]
 - type: trainer
-  at: [14, 14]
   sight: 4
   dir: left
   sprite: trainer_COOLTRAINER_F
   trainer: [COOLTRAINER_F, Astrid]
   intro: Isenmar breeds tough trainers. Let me show you.
   after: Ebbmouth's just north. Smell the eel?
+  at: [22, 30]
 - type: trainer
-  at: [13, 20]
   sight: 4
   dir: right
   sprite: trainer_FISHERMAN
   trainer: [FISHERMAN, Kjell]
   intro: Sea-cliff fishing is an art!
   after: The sea's restless lately.
+  at: [44, 50]
+- type: sign
+  name: Landslide sign
+  at: [16, 74]
+  text: 'LANDSLIDE - ROAD CLOSED
+
+    Detour through Gullcry Caves. The north mouth comes out above the slide.'
+  post: false
+- type: sign
+  name: Road sign
+  at: [14, 124]
+  text: GULLCRY CLIFFS -- The Hoar Road, Isenmar. ^ Ebbmouth - v The Rimewood. Mind the edge. The gulls won't.
+  post: false
+- type: event
+  name: Whalebone waymarker
+  at: [15, 112]
+  pages:
+  - trigger: action
+    commands: ['A whale''s rib, stood on end. Notches count the miles to Ebbmouth: four.']
+- type: event
+  name: 'Whalebone waymarker '
+  at: [21, 40]
+  pages:
+  - trigger: action
+    commands: ['Another rib. Two notches. Someone has added a third, smaller, and a gull.']
+- type: event
+  name: Cod-skull cairn
+  at: [23, 52]
+  pages:
+  - trigger: action
+    commands: [A cairn of cod skulls. Isenmar fishers leave one for a good season and two for a bad one., There are a lot of twos.]
+- type: event
+  name: Signal-fire platform
+  at: [50, 39]
+  pages:
+  - trigger: action
+    commands: ['THE SIGNAL FIRE. Lit when the herring come in, and once, forty years ago, when the sea froze to Ebbmouth.', The wood is stacked and dry.
+        Nobody has lit it this year.]
+- type: event
+  name: Road Stone III-c
+  at: [14, 4]
+  pages:
+  - trigger: action
+    commands: [ROAD STONE III-c. THE HOAR ROAD. "Ebbmouth 1." Somebody has chiselled a fish under it.]
+- type: event
+  name: Gull stacks
+  at: [46, 10]
+  pages:
+  - trigger: action
+    commands: [Sea stacks white with gulls. The noise never stops. That is the whole name of the place.]
+- type: event
+  name: Gannet feather
+  at: [52, 16]
+  pages:
+  - trigger: action
+    commands: ['A gannet feather is tied to a stake at the edge. Below it, a rope-and-plank stair goes over the face.']
+- type: event
+  name: Cramorant
+  at: [46, 26]
+  pages:
+  - graphic: {sprite: Followers/CRAMORANT, dir: left}
+    trigger: action
+    move: fixed
+    commands:
+    - (It has swallowed something that is not a fish. It looks very pleased with itself.)
+    - if: '!pfm?(:gannet_cramorant)'
+      then:
+      - (It coughs. Something glints on the rocks.)
+      - {script: 'pbReceiveItem(:BIGPEARL)'}
+      - {script: 'pfm_set(:gannet_cramorant)'}
+- type: event
+  name: Net-mender
+  at: [36, 112]
+  pages:
+  - graphic: {sprite: NPC 26, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Net-mender: The slide took the cliff road in the thaw. The caves are dry enough. Take the south mouth, come out above it.']
+- type: event
+  name: Stilt-hut fisher
+  at: [44, 108]
+  pages:
+  - graphic: {sprite: NPC 21, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Fisher: Huts on stilts because the sea comes up the shingle in storms. Also because it annoys the gulls.']
 - type: item
-  at: [5, 46]
+  at: [5, 120]
   item: GREATBALL
 - type: item
-  at: [20, 4]
+  at: [52, 52]
   item: MYSTICWATER
-- type: sign
-  name: Whalebone waymarker
-  at: [13, 52]
-  text: 'A whale''s rib, stood on end. Notches count the miles to Ebbmouth: four.'
-  post: false
-- type: sign
-  name: Cod-skull cairn
-  at: [16, 33]
-  text: 'A cairn of cod skulls. Isenmar fishers leave one for a good season and two for a bad one.
-
-    There are a lot of twos.'
-  post: false
-- type: warp
-  name: Gullcry north mouth
-  at: [5, 22]
-  link: R6_CAVE_N
-  arrive: [5, 23, down]
-  se: Door exit
-- type: warp
-  name: Gullcry south mouth
-  at: [5, 37]
-  link: R6_CAVE_S
-  arrive: [5, 38, down]
-  se: Door exit
+- type: item
+  at: [38, 6]
+  item: NEVERMELTICE
+  hidden: true
+  name: HiddenItem (tor)
+- type: item
+  at: [40, 28]
+  item: ETHER
+- type: item
+  at: [48, 116]
+  item: PEARL
+  hidden: true
+  name: HiddenItem (shingle)
+- type: item
+  at: [34, 84]
+  item: ICEHEAL
+  hidden: true
+  name: HiddenItem (slide toe)

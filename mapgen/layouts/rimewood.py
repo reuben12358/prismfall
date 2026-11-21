@@ -879,13 +879,13 @@ def route6(prev=None):
 
 def main():
     a = sys.argv[1:]
-    which = [x for x in a if x.isdigit()] or ['560', '570', '562', '563', '561', 'int']
+    which = [x for x in a if x.isdigit()] or ['560', '570', '562', '563', 'int']     # 561: routes_craft.build_561 (map builder 12)
     pv = '--preview' in a
     if '560' in which: route5('/tmp/rj/m560.png' if pv else None)
     if '570' in which: frostwick('/tmp/rj/m570.png' if pv else None)
     if '562' in which: rimewood('/tmp/rj/m562.png' if pv else None)
     if '563' in which: glade('/tmp/rj/m563.png' if pv else None)
-    if '561' in which: route6('/tmp/rj/m561.png' if pv else None)
+    if '561' in which: sys.exit('561 Gullcry Cliffs is written by layouts/routes_craft.py now: python3 -I layouts/routes_early.py 561')
     if 'int' in which or 'int' in a:
         import rimewood_interiors; rimewood_interiors.main()
 

@@ -389,7 +389,7 @@ Name = Gullcry Cliffs
 Outdoor = true
 ShowArea = true
 MapPosition = 0,3,9
-BattleBack = field
+BattleBack = snow
 Weather = Rain,20
 #-------------------------------
 [562]   # The Rimewood

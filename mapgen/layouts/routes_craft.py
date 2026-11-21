@@ -6,6 +6,7 @@ routes_early.py (whose helpers this module reuses); routes_early.main() dispatch
 
     python3 -I layouts/routes_early.py 527 [--preview]   then   python3 -I build.py --strict"""
 import os, sys, math, random
+import yaml
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 import rkit as K
@@ -1413,6 +1414,9 @@ def build_577():
     r.lane([(42, 70), (54, 70), (60, 66)], w=2.0, c='d', open_=(1, 2))           # to the trappers' racks
     for cx, cy_, rx, ry in ((14, 86, 6, 4), (12, 20, 8, 6), (60, 46, 4, 4), (22, 60, 5, 3), (50, 86, 4, 3), (28, 24, 4, 3)):
         r.copse(cx, cy_, rx, ry)
+    for y in range(53, 62):                                                       # map builder 12: the avalanche gully (Icium Z,
+        for x in range(63, 72):                                                   # SPINE Rev 23) in the east wood, behind a Rock
+            m.cls[y, x] = '.' if (68 <= x <= 70 and 56 <= y <= 58) or (y == 57 and 63 <= x <= 67) else 'T'   # Smash boulder
     r.finish_plan(border=0)
     CK.grass_fields(r, [(18, 46, 3.5), (30, 54, 3), (54, 58, 3), (24, 70, 3.5), (50, 80, 3), (14, 28, 3), (40, 28, 3), (34, 88, 2.5)])
     CK.woods(r, CK.SNOWWOOD, scale=10.0)
@@ -1433,6 +1437,7 @@ def build_577():
           item((59, 20), 'SOOTHEBELL'), item((8, 56), 'ICEHEAL'), item((62, 48), 'SUPERPOTION'), hidden((47, 28), 'NEVERMELTICE', 'HiddenItem (tarn)'),
           talk('Huscarl', (20, 41), 'NPC 21', ['Huscarl: Elowen side, Isenmar side. The arch doesn\'t care. Nor do I, mostly. Pass.'], d='right'),
           talk('Forester', (44, 73), 'NPC 14', ['Forester: The wind gap above the toll hut. Walk between the gusts or it walks you back down.']),
+          dict(smash((66, 57)), fixed=True),
           {'type': 'event', 'name': 'Wind', 'at': [1, 1], 'fixed': True, 'pages': [{'trigger': 'parallel', 'commands': [
               {'script': 'pfp_metronome(601, 48, 2)'}]}]})
     k = 0
@@ -1455,12 +1460,16 @@ def build_577():
     r.dress(trees=('pine2',), n_trees=0, copses=0, scatter=0)
     r.paint(glint=0.0)
     CK.paint_extras(r)
+    for y in range(53, 62):                                                       # the gully's wall: where the tree lattice left a
+        for x in range(63, 72):                                                   # gap, a snowy stone closes it (map builder 12)
+            if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0: m.L[1, y, x] = (10371, 10551)[(x + y) % 2]
     CK.snow_ground_var(r, thr=0.45)
     RW.drifts(m, 0.3, seed=577); RW.road_tracks(m, 0.12, seed=577); RW.dress_ice(m, 0.5, seed=577); RW.reed_beds(m, 50, seed=577)
     h = head(577, 'Frostwick Pass', field='SNOWY_MOUNTAIN', bgm='Route 2', weather=['Snow', 20],
              connections=[{'dir': 'S', 'offset': 30, 'to': 566, 'to_offset': 42}, {'dir': 'W', 'offset': 37, 'to': 570, 'to_offset': 23}],
              tone=[-6, -2, 10, 10])
     h['metadata']['BattleBack'] = 'snow'
+    h['gates'] = [{'name': 'Icium Z gully (Rock Smash)', 'from': [[31, 94]], 'sealed': [[69, 57], [68, 56], [70, 58]]}]   # map builder 12
     r.write(h, '577_frostwick_pass.yaml', '# Frostwick Pass (577). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/577.png' if PREV else None)
 
 
@@ -1629,3 +1638,383 @@ def build_568():
 
 
 BUILD[568] = build_568
+
+
+# ====================================================================================================== 578 Rimewood Path
+def rime_curtain(name, at_):
+    """a curtain of frozen silk across a gap: solid until Rock Smash shatters it (pfm_smash_silk, 006_MapStory.rb)"""
+    return {'type': 'event', 'name': name, 'at': list(at_), 'fixed': True, 'pages': [
+        {'graphic': {'sprite': 'pf_rime_curtain', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+            {'if': 'pfm_smash_silk', 'then': [{'script': 'pbSmashEvent(get_self)'}]}]}]}
+
+
+def lost_warp(i, at_, back, d='left'):
+    """the Unblazed: a wrong turn in the repeating wood puts you back at the blue blaze"""
+    return {'type': 'event', 'name': 'Unblazed wrong turn %d' % i, 'at': list(at_), 'fixed': True, 'pages': [
+        {'trigger': 'touch', 'commands': [
+            {'tone': [-120, -110, -60, 60, 12]}, {'wait': 12},
+            {'transfer': {'map': 578, 'x': back[0], 'y': back[1], 'dir': d}},
+            {'tone': [0, 0, 0, 0, 12]},
+            'The birches close in, every one the same... You come out of the trees beside the blue blaze again.']}]}
+
+
+def near_flat(r, name, x, y, on='.d', rad=3):
+    """r.near that also keeps the stamp off cliff faces and stair landings (map builder 12)"""
+    m = r.m; st = STAMPS[name]
+    for d in range(rad + 1):
+        for dy in range(-d, d + 1):
+            for dx in range(-d, d + 1):
+                if max(abs(dx), abs(dy)) != d: continue
+                X, Y = x + dx, y + dy
+                if m.free(X, Y, st['w'], st['h'], on=on) and not m.cliff[max(0, Y - 1):Y + st['h'] + 1, X:X + st['w']].any() \
+                        and not r.road_mask[Y:Y + st['h'], X:X + st['w']].any():
+                    m.stamp(name, X, Y, mark='B'); return (X, Y)
+    print('  (no flat room for %s near %d,%d)' % (name, x, y)); return None
+
+
+def build_578():
+    """Rimewood Path (80x88, SILKWOOD under snow; map builder 12): the trappers' blazed path from Frostwick's North Gate
+    up into the Rimewood, over three snow terraces.  Below: the hoar-birch outskirts, the woodcutters' yard, the
+    honey-stump hives and the trapper's lean-to (heal) on its bank, with a snow-bank drop back to the hives (one way).
+    Second level: birch hollows, the Lantern Birch at the burners' fork.  At the foot of the third terrace the frozen Hoar
+    Brook runs west as the Long Ice: step onto it by the stair and you slide to the frozen fall and the charcoal burners'
+    clearing (the long way round is the burners' track); a stopper half-way drops you at the snare line.  The Silk-fall
+    glade lies behind a curtain of frozen silk (Rock Smash).  Top: the ice-glazed giants, the blue blaze, and the
+    Unblazed: glades that repeat until you follow the Stantler tracks to the herd (a wrong turn puts you back at the
+    blaze); a second frozen curtain is the herd's shortcut back to the road."""
+    W, H = 80, 88
+    r = Route(578, W, H, 'snow', base='.', kit='shs')
+    m = r.m
+    lips = [(70, 1), (45, 2), (21, 3)]
+    r.terraces(lips, wobble=3.0, scale=11.0)
+    YL, LX0, LX1 = 43, 2, 38                                                     # the Long Ice's cliff: straight above the brook
+    for x in range(LX0, LX1 + 1):
+        m.ht[:YL + 1, x] = np.maximum(m.ht[:YL + 1, x], 2); m.ht[YL + 1:YL + 9, x] = np.minimum(m.ht[YL + 1:YL + 9, x], 1)
+    for h in (1, 2, 3): CK.smooth_ht(m, h, 3)
+    for x in range(LX0, LX1 + 1):
+        m.ht[:YL + 1, x] = np.maximum(m.ht[:YL + 1, x], 2); m.ht[YL + 1:YL + 9, x] = np.minimum(m.ht[YL + 1:YL + 9, x], 1)
+    r.forest_band('W', 5, wobble=3.0); r.forest_band('E', 6, wobble=3.0); r.forest_band('N', 3, wobble=2.0); r.forest_band('S', 3, wobble=2.0)
+    road = [(41.5, 87), (44, 81), (41, 75), (36, 70), (37, 63), (43, 57), (45, 50), (44, 44), (40, 38), (35, 31), (38, 25), (44, 20), (43, 13), (39, 6), (37.5, 0)]
+    r.road(road, w=3.0, open_=None)
+    r.exit('S', 40, 4); r.exit('N', 36, 4)
+    stairs = []
+    for yl, h in lips:
+        xs = [x for x in range(W) if r.road_mask[yl, x]]
+        if xs: stairs.append((min(xs) + max(0, (len(xs) - 3) // 2), yl, h))
+    BY = YL + 4                                                                  # ice rows BY, BY+1 at the cliff foot
+    BX0, BX1 = 6, 35
+    # ---- copses and woods that shape the open ground
+    for cx, cy_, rx, ry in ((20, 53, 12, 3.2), (14, 82, 6, 3), (66, 84, 7, 3), (58, 60, 6, 4), (70, 47, 6, 5), (24, 30, 6, 4),
+                            (56, 30, 5, 4), (62, 10, 5, 3), (14, 12, 6, 4), (30, 66, 5, 3), (52, 74, 4, 2.5), (10, 64, 4, 3)):
+        r.copse(cx, cy_, rx, ry)
+    # ---- below (h0): woodcutters' yard (W), hives (SE), the lean-to bank (E, h1 shelf with a one-way drop)
+    r.clearing(22, 78, 9, 5, only='T.t'); r.lane([(40, 79), (30, 78)], w=2.0, open_=None)
+    r.clearing(58, 81, 7, 3.5, only='T.t')
+    # ---- the Long Ice (west reach under the cliff) and its landings
+    for x in range(BX0, BX1 + 1):
+        for y in (BY, BY + 1): m.cls[y, x] = 'p'
+        for y in range(BY + 2, BY + 7):
+            if BX0 + 4 <= x <= BX1 - 3 and m.cls[y, x] in '.t': m.cls[y, x] = 'T'   # the south bank is wood: the ice is the way
+    for x in range(BX0 - 4, BX0):
+        for y in range(BY - 1, BY + 4): m.cls[y, x] = '.'
+    for x in range(BX1 + 1, BX1 + 6):
+        for y in range(BY, BY + 3): m.cls[y, x] = '.'
+    r.lane([(BX1 + 4, BY + 1), (43, 50)], w=2.0, open_=None)
+    SNARE = 20
+    for x in range(SNARE - 3, SNARE + 1):                                        # the snare nook in the south bank
+        for y in (BY + 2, BY + 3): m.cls[y, x] = '.'
+    r.clearing(9, 54, 5, 3.4, only='T.t')                                        # the charcoal burners' clearing
+    r.lane([(4, BY + 3), (8, 52)], w=2.0, open_=None)
+    r.lane([(12, 57), (24, 60), (36, 62)], w=2.0, open_=None)                    # the burners' track (the long way round)
+    # ---- second level: the Silk-fall glade (E) behind a frozen curtain, birch hollows
+    GX, GY, GRX, GRY = 67, 34, 5.5, 3.5
+    GAP1 = (60, 34)
+    RING = set()
+    for y in range(GY - 9, GY + 10):
+        for x in range(GX - 12, min(W, GX + 13)):
+            qi = ((x - GX) / GRX) ** 2 + ((y - GY) / GRY) ** 2
+            qo = ((x - GX) / (GRX + 3.2)) ** 2 + ((y - GY) / (GRY + 3.2)) ** 2
+            if not m.inb(x, y): continue
+            if qi <= 1.0: m.cls[y, x] = '.'
+            elif qo <= 1.0 or x >= W - 2 and abs(y - GY) <= GRY + 3: m.cls[y, x] = 'T'; RING.add((x, y))
+    for x in range(GAP1[0] - 3, GAP1[0] + 2):
+        m.cls[GAP1[1], x] = '.'; RING.discard((x, GAP1[1]))
+    r.lane([(46, 40), (52, 36), (GAP1[0] - 3, GAP1[1])], w=2.0, open_=None)
+    r.lane([(46, 27), (56, 25), (66, 25)], w=2.0, c='.', open_=(1, 2))           # the strip under the top crag (berry, hollow)
+    for x, y in RING: m.cls[y, x] = 'T'                                           # the lanes must not cut the glade's wall
+    for x in range(GAP1[0] - 3, GAP1[0] + 2): m.cls[GAP1[1], x] = '.'; RING.discard((x, GAP1[1]))
+    # ---- top (h3): the giants, the blue blaze, the Unblazed (glades A, B, the herd's clearing C)
+    BLAZE = (45, 16)
+    for x in range(48, W):
+        for y in range(0, 21):
+            if m.cls[y, x] in '.t': m.cls[y, x] = 'T'
+    r.lane([(46, 16), (57, 15)], w=3.0, c='.', open_=None)
+    r.clearing(58, 15, 4.2, 3.0); r.clearing(70, 14, 4.2, 3.0); r.clearing(66, 4, 6.5, 2.8)
+    r.lane([(57, 15), (67, 14), (70, 15)], w=3.0, c='.', open_=None)                              # A -> B (the tracks)
+    r.lane([(70, 16), (70, 10), (67, 4)], w=3.0, c='.', open_=None)                               # B -> C (the tracks)
+    r.lane([(58, 16), (58, 8)], w=3.0, c='.', open_=None)                               # A north: wrong
+    r.lane([(58, 16), (62, 20)], w=3.0, c='.', open_=None)                              # A south-east: wrong
+    r.lane([(70, 15), (73, 20)], w=3.0, c='.', open_=None)                              # B south: wrong
+    r.lane([(60, 4), (52, 5), (44, 6)], w=2.0, open_=None)                       # C west: the herd's way out (curtain)
+    GAP2 = (51, 5)
+    UNB = r.road_mask.copy(); UNB[:, :45] = False; UNB[23:, :] = False             # the Unblazed's trails: nothing may grow on them
+    for x in range(48, 60):
+        for y in (3, 4, 6, 7):
+            if m.cls[y, x] in '.d' and x in range(50, 53): m.cls[y, x] = 'T'
+    for x in range(50, 53): m.cls[5, x] = 'd' if x != GAP2[0] else '.'
+    r.finish_plan(border=0)
+    for sx, yl, h in stairs: CK.stair(r, sx, yl, w=3, h=h)
+    CK.stair(r, 25, 70, w=3, h=1)                                                # the burners' track climbs from the yard
+    for x in range(BX0, BX1 + 1):
+        for y in (BY, BY + 1): m.cls[y, x] = 'p'
+    # the lean-to bank (h1 shelf, east) and its one-way drop to the hives
+    CK.ledge(r, 54, 62, 74, face='snow')
+    CK.grass_fields(r, [(18, 76, 3), (30, 84, 2.5), (60, 66, 3.5), (28, 64, 3), (52, 52, 3.5), (30, 38, 3.5), (20, 26, 3), (30, 12, 3),
+                        (14, 34, 3), (64, 26, 2.5)])
+    CK.woods(r, CK.SNOWWOOD, scale=9.0)
+    # ---- events
+    E = []
+    E += [sign((44, 84), 'Road sign', 'RIMEWOOD PATH -- The Hoar Road. v Frostwick (North Gate) - ^ The Rimewood. Blazes: white is the path. Blue is not.'),
+          obj('The Lantern Birch', (41, 40), ['THE LANTERN BIRCH. Trappers hang a light here for whoever is late. Tonight it is out.',
+              {'if': 'PBDayNight.isNight? && !pfm?(:lantern_birch)', 'then': ['You relight the lantern. Somewhere down the path, someone laughs with relief.',
+                                                                              {'script': 'pbReceiveItem(:NEVERMELTICE)'}, {'script': 'pfm_set(:lantern_birch)'}]}]),
+          obj('Charcoal kiln', (7, 52), ["The charcoal burners' kiln, banked and smoking. Warm, for once."]),
+          talk('Charcoal burner', (11, 55), 'NPC 03', ['Charcoal burner: Elowen wood, Isenmar fire. Best charcoal in two kingdoms. Neither will admit it.',
+                                                       "Charcoal burner: Came the long way round? The brook's quicker. Step on the ice by the stair and let it take you."]),
+          talk('Trapper', (63, 72), 'NPC 22', ["Trapper: Lean-to's yours if you need it. The fire's honest.", {'heal': True}]),
+          obj('Snare line', (SNARE - 1, BY + 3), ['A snare line along the brook. One snare has caught a very cross Teddiursa.',
+              {'if': '!pfm?(:teddiursa_freed)', 'then': ['You loosen the wire. The Teddiursa bolts, then stops, and looks back at you for a long moment.', {'script': 'pfm_set(:teddiursa_freed)'}]}]),
+          obj('Honey-stump hives', (58, 80), ['Hives in old stumps, glazed with frost. The Combee inside are slow and very, very offended.']),
+          talk('Woodcutter', (25, 79), 'NPC 25', ['Woodcutter: Sledge of logs for Frostwick. Pulling it uphill builds character. Pulling it downhill builds speed.']),
+          obj('The Long Ice', (BX1 + 2, BY - 1 + 1), ['THE LONG ICE. The Hoar Brook froze straight as a rule under the crag. Trappers ride it to the burners on their boot soles.']),
+          obj('Frozen fall', (BX0 - 2, BY), ['(The Hoar Brook comes over the crag here, frozen mid-fall into a column of blue glass.)']),
+          obj('Blue blaze', (BLAZE[0], BLAZE[1] - 1), ['A blue blaze on a birch. The path is the white ones. This one points off into the trees.',
+                                                   'Faint Stantler tracks lead off the path. Follow them, and only them.']),
+          obj('Stantler tracks', (57, 17), ['Hoofprints in the crust, heading east. The other ways out of the glade are clean snow.']),
+          obj('Stantler tracks ', (69, 16), ['Hoofprints in the crust, heading north now.']),
+          obj('The Unblazed', (63, 2), ['(A clearing where the Stantler herd sleeps standing up. The tracks end here, in a hundred others.)']),
+          {'type': 'event', 'name': 'Stantler stag', 'at': [67, 3], 'pages': [
+              {'graphic': {'sprite': 'Followers/STANTLER', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  '(The stag lowers its antlers. The herd does not move: this is between you and him.)',
+                  {'script': 'WildBattle.start(:STANTLER, 19)'}, {'selfswitch': ['A', True]}]},
+              {'cond': {'self': 'A'}, 'graphic': {'sprite': 'Followers/STANTLER', 'dir': 'left'}, 'trigger': 'action', 'commands': [
+                  '(The stag watches you, unblinking. The herd lets you pass.)']}]},
+          talk('Stantler', (64, 5), 'Followers/STANTLER', ['(It is asleep standing up. One ear follows you.)'], d='left'),
+          obj('Silk-fall', (67, 32), ['THE SILK-FALL. Silk drifted off the Gossamer for a hundred years and froze where it landed. It rings when the wind moves it.']),
+          item((70, 35), 'SILKSCARF'), item((SNARE - 3, BY + 3), 'REVIVE'), item((70, 2), 'ICEHEAL'), item((10, 52), 'CHARCOAL'), item((66, 72), 'SUPERPOTION'),
+          hidden((20, 26), 'NEVERMELTICE', 'HiddenItem (birch hollow)'), hidden((BX0 - 3, BY + 2), 'PEARL', 'HiddenItem (fall pool)'),
+          {'type': 'berry', 'at': [52, 50], 'berry': 'ASPEARBERRY'}]
+    E += [rime_curtain('Frozen silk curtain', GAP1), rime_curtain('Frozen silk curtain (herd)', GAP2)]
+    k = 0
+    for (ex, ey) in ((58, 9), (61, 19), (72, 19)):                               # a wrong turn: the whole trail's width, so it can't be skirted
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                if UNB[ey + dy, ex + dx] and m.cls[ey + dy, ex + dx] == '.' and (dy == 0 or dx == 0):
+                    k += 1; E.append(lost_warp(k, (ex + dx, ey + dy), (BLAZE[0], BLAZE[1] + 1)))
+    r.add(*E)
+    for x, y in (GAP1, GAP2): m.taken[y, x] = True
+    r.seat_events(on='.dtp')
+    CK.clear_around(r)
+    m.taken |= UNB
+    # ---- set pieces
+    for n, x, y in (('wb_hut', 12, 77), ('fw_wood', 20, 75), ('fw_wood', 22, 75), ('fw_log_m', 22, 81), ('pf_sledge', 28, 80), ('fw_rack', 17, 80),
+                    ('fw_wood', 14, 79), ('fw_log_n', 26, 74), ('fw_log_s', 18, 83)):
+        near_flat(r, n, x, y, on='.d', rad=3)
+    for n, x, y in (('nt_stump_big', 55, 78), ('nt_stump', 60, 82), ('nt_stump_big', 61, 78), ('nt_stump', 64, 82)):
+        near_flat(r, n, x, y, on='.', rad=3)
+    for n, x, y in (('fw_rack', 58, 72), ('fw_brazier', 61, 72), ('fw_rack', 67, 72), ('fw_wood', 65, 73), ('fw_skull', 69, 73)):
+        near_flat(r, n, x, y, on='.d', rad=3)
+    for n, x, y in (('nt_stonering', 5, 54), ('fw_smoke_a', 7, 50), ('fw_wood', 11, 51), ('fw_wood', 13, 53), ('fw_sled', 13, 56)):
+        near_flat(r, n, x, y, on='.d', rad=2)
+    for n, x, y in (('pf_lantern', 42, 38), ('fw_stone', 39, 42)):
+        near_flat(r, n, x, y, on='.d', rad=2)
+    for x in range(SNARE - 3, SNARE + 1, 2):
+        if m.free(x, BY + 2, 1, 1, on='.'): m.stamp('fw_peg', x, BY + 2)
+    if m.free(BX0 - 5, YL - 3, 4, 5, on='.tT') or True: m.stamp('fw_fall', BX0 - 4, YL - 2, mark='B')
+    for nm, x, y in (('pf_g_tree6_ice', 2, 1), ('pf_g_tree4p_ice', 26, 2), ('pf_g_tree2_ice', 74, 24), ('pf_g_tree2_ice', 30, 46)):
+        if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.tT'): m.stamp(nm, x, y, mark='B', blend=True)
+        else: m.near(nm, x, y, on='.tT', r=4)
+    CK.fringe(r, ['pine2', 'kf_tree', 'pine2', 'kf_tree'], 170, seed=1, near_forest=4)
+    CK.undergrowth(r, 120, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
+    CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2', 'fw_drift0'], 40, box=(0, 0, W, H), clump=3, seed=7)
+    r.dress(trees=('pine2', 'kf_tree'), n_trees=W * H // 260, copses=0, scatter=12)
+    r.paint(glint=0.0)
+    CK.paint_extras(r)
+    SHRUB = (10371, 10551, 10371)                                                 # snow-buried shrubs: solid, and they read as undergrowth
+    m.L[1, BY + 1, SNARE - 1] = 10371                                            # the stopper: the lower row stops at the snare nook
+    for x, y in RING:                                                             # the glade's wall: close any gap the lattice left
+        if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and (x, y) != GAP1: m.L[1, y, x] = SHRUB[(x * 7 + y * 3) % 3]
+    for (x0, y0, x1, y1) in ((47, 0, W, 23), (BX0 + 3, BY + 2, BX1 - 2, BY + 8)):   # the Unblazed wood and the Long Ice's south bank:
+        for y in range(y0, y1):                                                   # no slipping between the trees (only the tracks,
+            for x in range(x0, x1):                                               # only the ice)
+                if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and not m.taken[y, x]: m.L[1, y, x] = SHRUB[(x * 7 + y * 3) % 3]
+    m.L[1, BY, 14] = 10551 if False else m.L[1, BY, 14]
+    TK = [STAMPS['fw_tracks%d' % i]['layers'][1][0][0] for i in range(2)]
+    for x, y in [(55 + k, 16 - (k % 2)) for k in range(6)] + [(62 + k, 14) for k in range(5)] + [(70 - (k // 3), 10 - k) for k in range(5)]:
+        if m.inb(x, y) and m.cls[y, x] in '.d' and m.L[2, y, x] == 0 and (UNB[y, x] or not m.taken[y, x]): m.L[2, y, x] = TK[(x + y) % 2]
+    CK.snow_ground_var(r, thr=0.45)
+    RW.rime_silk(m, ((30, 12), (48, 22), (63, 31), (65, 31), (70, 31), (72, 35), (26, 76), (20, 46), (8, 58)))
+    RW.drifts(m, 0.3, seed=578); RW.road_tracks(m, 0.12, seed=578); RW.dress_ice(m, 0.4, seed=578); RW.reed_beds(m, 70, seed=578)
+    h = head(578, 'Rimewood Path', field='SILKWOOD', bgm='Natural Park', weather=['Snow', 10], biome='forest',
+             connections=[{'dir': 'S', 'offset': 40, 'to': 570, 'to_offset': 27}, {'dir': 'N', 'offset': 36, 'to': 562, 'to_offset': 26}],
+             tone=[-12, -8, 8, 16])
+    h['metadata']['BattleBack'] = 'snow'
+    h['walk_from'] = [[SNARE - 2, BY + 3], [GX, GY]]                             # the snare nook (off the ice), the Silk-fall (Rock Smash)
+    h['gates'] = [{'name': 'Silk-fall glade (frozen curtain, Rock Smash)', 'from': [[41, 86]], 'sealed': [[70, 35], [67, 33]]}]
+    r.write(h, '578_rimewood_path.yaml', '# Rimewood Path (578). WRITTEN BY layouts/routes_craft.py (map builder 12) - edit that script.\n',
+            '/tmp/craft/578.png' if PREV else None)
+
+
+BUILD[578] = build_578
+
+
+# ====================================================================================================== 561 Gullcry Cliffs
+def build_561():
+    """Gullcry Cliffs (64x130, MOUNTAIN; map builder 12, replacing the 30x60 rimewood.route6): the first true Isenmar
+    ground, named for the noise.  The road keeps to the cliff-top heath from the Rimewood (S) to Ebbmouth (N) past
+    whalebone waymarkers; four headlands push their snow-capped faces out over the coves, with sea stacks where the
+    gulls nest.  South cove: the stilt fishing hamlet with its drying racks and boats, down a rope-and-plank stair.
+    Half-way, a landslide off the crags has buried road, heath and shore into the sea: the way on is the Gullcry Caves
+    (south mouth below the slide, north mouth above it).  North of the slide: the cod-skull cairn, the signal-fire
+    platform on its headland, the north cove's ice shelf, and the Gannet Stair (secret): a rope stair down the face of
+    the third headland to the rookery ledge, where a Cramorant has swallowed something that is not a fish.  At the north
+    end the path narrows between two tors above Ebbmouth: Kestrel waits there (K2)."""
+    W, H = 64, 130
+    r = Route(561, W, H, 'snow', base='.', kit='shs')
+    m = r.m
+    old = {}
+    for s_ in yaml.safe_load_all(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'specs', '561_route6.yaml'))):
+        if s_ and s_.get('id') == 561: old = s_
+    OLD = {(e.get('name') or (e.get('trainer') or [None, None])[1] or e.get('item') or e.get('text', '')[:10]): e for e in old.get('events', [])}
+    # ---- the cliff-top (h1): four headlands with south faces, coves between; the crags (h2) inland
+    CK.shelf(r, [(0, 0), (30, 0), (38, 3), (64, 6), (64, 18), (29, 18), (27, 24), (29, 31), (35, 33), (64, 35), (64, 44), (31, 45),
+                 (29, 50), (33, 56), (42, 62), (40, 70), (30, 72), (27, 78), (28, 86), (34, 90), (46, 93), (49, 100), (29, 100),
+                 (26, 106), (27, 114), (31, 121), (44, 123), (46, 129), (0, 129)], 1)
+    CK.shelf(r, [(0, 25), (11, 24), (14, 30), (13, 38), (12, 46), (0, 46)], 2)                       # crag N (the north mouth)
+    CK.shelf(r, [(0, 52), (15, 51), (19, 58), (18, 64), (14, 72), (0, 72)], 2)                         # crag S (the slide came off it)
+    CK.shelf(r, [(0, 92), (6, 90), (9, 98), (7, 112), (0, 113)], 2)                                    # the inland tor (S)
+    for h in (1, 2): CK.smooth_ht(m, h, 2)
+    # ---- the sea: shallows, then deep water; the coast line wobbles past the headland tips
+    xc = colmap(r, lambda y: 0)
+    xc = [int(round(53 + 2 * math.sin(y / 9.0) + 1.5 * (vnoise(0, y, 5611, 6.0) - 0.5) * 2)) for y in range(H)]
+    for y in range(H):
+        for x in range(W):
+            if m.ht[y, x] == 0 and x >= xc[y]: m.cls[y, x] = 'W' if x >= xc[y] + 3 + int(2 * vnoise(x, y, 5612, 4.0)) else 'w'
+    # ---- the road: Rimewood (S, x 10-13) -> the cliff-top -> the slide -> (caves) -> Kestrel's tors -> Ebbmouth (N, x 10-13)
+    r.road([(11.5, 129), (13, 120), (18, 110), (17, 100), (13, 88), (16, 80), (12, 76)], w=3.0, open_=None)
+    r.road([(8, 49), (14, 50), (19, 46), (20, 36), (18, 26), (15, 16), (12, 9), (11.5, 0)], w=3.0, open_=None)
+    r.exit('S', 10, 4); r.exit('N', 10, 4)
+    r.lane([(17, 100), (28, 96), (38, 96)], w=2.0, open_=None)                   # to the hamlet stair (headland 3's face)
+    r.lane([(20, 36), (34, 38), (46, 40)], w=2.0, open_=None)                    # to the signal-fire platform (headland 2)
+    r.lane([(15, 16), (30, 10), (44, 12)], w=2.0, open_=None)                    # out along headland 1 (the gull stacks, the Gannet Stair)
+    # ---- Kestrel's tors: the road narrows to one tile between two rock piles above Ebbmouth
+    KG = (11, 8)
+    for x in range(4, 22):
+        if abs(x - KG[0]) >= 1 and m.cls[KG[1], x] in '.d': m.cls[KG[1], x] = 'B'
+    # ---- the landslide (rows 55-70): rubble from crag S over heath and shore into the sea
+    SLIDE = (55, 70)
+    for y in range(SLIDE[0], SLIDE[1] + 1):
+        for x in range(W):
+            if m.ht[y, x] <= 1 and m.cls[y, x] in '.dtw': m.cls[y, x] = 'B' if m.cls[y, x] != 'w' or vnoise(x, y, 5613, 2.0) > 0.35 else 'w'
+    # cove shores, heath, encounter beds
+    r.forest_band('W', 3, wobble=2.0)
+    for cx, cy_, rx, ry in ((4, 10, 4, 6), (22, 122, 4, 3), (3, 82, 3, 5), (26, 92, 4, 2.5), (24, 60, 4, 3), (26, 4, 3, 2.5),
+                            (28, 40, 3, 3), (24, 22, 2.5, 3), (22, 80, 3, 2.5), (24, 110, 3, 3), (32, 60, 3, 2)):
+        r.copse(cx, cy_, rx, ry)
+    for cx, cy_, rx, ry, sd in ((40, 26, 3.5, 1.8, 1), (44, 30, 2.5, 1.4, 2), (40, 50, 3, 1.5, 3), (36, 82, 3.5, 1.6, 4), (46, 114, 2.5, 1.4, 5),
+                                (34, 116, 2, 1.2, 6)):
+        m.blob(cx, cy_, rx, ry, 'p', seed=5620 + sd, rough=0.35, only='.')      # frozen rock pools in the coves (you slide on them)
+    r.finish_plan(border=0)
+    for x, yl in ((30, 99), (38, 17), (41, 44)):                                  # rope-and-plank stairs down the headland faces
+        pass
+    CK.stair(r, 38, 100, w=2, h=1)                                                # the hamlet stair (headland 3's face)
+    CK.stair(r, 46, 44, w=2, h=1)                                                 # the north cove stair (headland 2's face)
+    GANNET = (50, 18)
+    CK.stair(r, GANNET[0], GANNET[1], w=2, h=1)                                   # the Gannet Stair (headland 3's face, secret)
+    CK.grass_fields(r, [(20, 116, 3.5), (22, 92, 3), (6, 104, 2.5), (26, 30, 3.5), (8, 16, 3), (28, 8, 3), (22, 50, 2.5), (38, 30, 2.5), (6, 120, 2.5)])
+    CK.woods(r, CK.SNOWWOOD, scale=9.0)
+    # ---- events
+    def O(key):
+        e = dict(OLD[key]); e.pop('at', None); return e
+    E = []
+    E.append(dict(O('Trainer(4)'), at=[KG[0], KG[1] - 1], fixed=True))
+    for key, at_, d in (('Wren', (20, 108), 'up'), ('Haldor', (38, 80), 'down'), ('Astrid', (22, 30), 'left'), ('Kjell', (44, 50), 'right')):
+        e = O(key); e['at'] = list(at_); e['dir'] = d; E.append(e)
+    def foot(x, y0):                                                              # the bottom row of the crag face above y0
+        y = y0
+        while y < H - 1 and not m.cliff[y, x]: y += 1
+        while y < H - 1 and m.cliff[y + 1, x]: y += 1
+        return y
+    MN, MS = (6, foot(6, 40)), (6, foot(6, 66))
+    E += [dict(O('Gullcry north mouth'), at=list(MN), arrive=[MN[0], MN[1] + 1, 'down'], fixed=True),
+          dict(O('Gullcry south mouth'), at=list(MS), arrive=[MS[0], MS[1] + 1, 'down'], fixed=True)]
+    E += [sign((15, 74), 'Landslide sign', 'LANDSLIDE - ROAD CLOSED\nDetour through Gullcry Caves. The north mouth comes out above the slide.'),
+          sign((14, 124), 'Road sign', "GULLCRY CLIFFS -- The Hoar Road, Isenmar. ^ Ebbmouth - v The Rimewood. Mind the edge. The gulls won't."),
+          obj('Whalebone waymarker', (15, 112), ["A whale's rib, stood on end. Notches count the miles to Ebbmouth: four."]),
+          obj('Whalebone waymarker ', (21, 40), ["Another rib. Two notches. Someone has added a third, smaller, and a gull."]),
+          obj('Cod-skull cairn', (23, 52), ['A cairn of cod skulls. Isenmar fishers leave one for a good season and two for a bad one.', 'There are a lot of twos.']),
+          obj('Signal-fire platform', (50, 39), ['THE SIGNAL FIRE. Lit when the herring come in, and once, forty years ago, when the sea froze to Ebbmouth.',
+                                                 'The wood is stacked and dry. Nobody has lit it this year.']),
+          obj('Road Stone III-c', (14, 4), ['ROAD STONE III-c. THE HOAR ROAD. "Ebbmouth 1." Somebody has chiselled a fish under it.']),
+          obj('Gull stacks', (46, 10), ['Sea stacks white with gulls. The noise never stops. That is the whole name of the place.']),
+          obj('Gannet feather', (GANNET[0] + 2, GANNET[1] - 2), ['A gannet feather is tied to a stake at the edge. Below it, a rope-and-plank stair goes over the face.']),
+          talk('Cramorant', (46, 26), 'Followers/CRAMORANT', ['(It has swallowed something that is not a fish. It looks very pleased with itself.)',
+               {'if': '!pfm?(:gannet_cramorant)', 'then': ['(It coughs. Something glints on the rocks.)', {'script': 'pbReceiveItem(:BIGPEARL)'},
+                                                         {'script': 'pfm_set(:gannet_cramorant)'}]}], d='left'),
+          talk('Net-mender', (36, 112), 'NPC 26', ["Net-mender: The slide took the cliff road in the thaw. The caves are dry enough. Take the south mouth, come out above it."]),
+          talk('Stilt-hut fisher', (44, 108), 'NPC 21', ["Fisher: Huts on stilts because the sea comes up the shingle in storms. Also because it annoys the gulls."]),
+          item((4, 120), 'GREATBALL'), item((52, 52), 'MYSTICWATER'), hidden((38, 6), 'NEVERMELTICE', 'HiddenItem (tor)'), item((40, 28), 'ETHER'),
+          hidden((48, 116), 'PEARL', 'HiddenItem (shingle)'), hidden((34, 84), 'ICEHEAL', 'HiddenItem (slide toe)')]
+    r.add(*E)
+    m.taken[KG[1], KG[0]] = True
+    for e in E:
+        if e.get('type') == 'warp': x, y = e['at']; m.taken[y, x] = True; m.taken[y + 1, x] = True; m.cls[y + 1, x] = 'd'
+    r.seat_events(on='.dt')
+    CK.clear_around(r)
+    # ---- set pieces: the hamlet, the beacon, stacks, waymarkers, the tors, the slide's rubble
+    for n, x, y in (('kf_flat', 32, 104), ('kf_flat', 44, 103), ('wb_hut', 38, 114), ('fw_rack', 36, 110), ('fw_rack', 41, 111), ('fw_boat', 48, 118),
+                    ('fw_boat', 50, 110), ('fw_rack', 47, 106), ('fw_wood', 42, 118), ('fw_brazier', 40, 108), ('fw_rack', 40, 84), ('fw_wood', 44, 78)):
+        near_flat(r, n, x, y, on='.', rad=3)
+    near_flat(r, 'pf_beacon', 50, 36, on='.', rad=2)
+    for n, x, y in (('pf_whalebone', 14, 116), ('pf_whalebone', 19, 92), ('pf_whalebone', 22, 42), ('pf_whalebone', 20, 22), ('pf_whalebone', 16, 6)):
+        near_flat(r, n, x, y, on='.', rad=2)
+    near_flat(r, 'fw_skull', 24, 51, on='.', rad=2)
+    for (x, y) in ((KG[0] - 2, KG[1] - 1), (KG[0] + 2, KG[1] - 1), (KG[0] - 4, KG[1]), (KG[0] + 4, KG[1])):
+        near_flat(r, 'ck_rock_big', x - 1, y - 2, on='.B', rad=1)
+    rr = random.Random(5615)                                                     # big rubble first (scattered, not in rows), then the fill
+    for _ in range(260):
+        k = rr.choice(['ck_rock_big', 'ck_boulder', 'ck_boulder', 'ck_pebbles', 'fw_stone'])
+        st = STAMPS[k]; x = rr.randrange(0, W - st['w']); y = rr.randrange(SLIDE[0], SLIDE[1] + 2 - st['h'])
+        if m.free(x, y, st['w'], st['h'], on='B') and not m.cliff[y:y + st['h'], x:x + st['w']].any(): m.stamp(k, x, y, mark='B')
+    CK.fringe(r, ['pine2', 'kf_tree', 'pine2'], 120, seed=1, near_forest=4)
+    CK.fringe(r, ['pine2', 'kf_tree'], 40, seed=2, near_forest=0)
+    CK.undergrowth(r, 90, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
+    CK.props(r, ['fw_stone', 'fw_drift2', 'fw_drift0', 'fw_wood'], 40, box=(0, 0, W, H), clump=3, seed=7)
+    r.dress(trees=('pine2', 'kf_tree'), n_trees=W * H // 500, copses=0, scatter=12)
+    r.paint(glint=0.0)
+    CK.paint_extras(r)
+    for x, y in (MN, MS): RW.cave_mouth(m, x, y)
+    for y, x in np.argwhere(m.cls == 'B'):                                       # the rubble: ice-glazed stones where no rock stands
+        if m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+            m.L[1, y, x] = 10371 if vnoise(x, y, 5616, 2.0) > 0.6 else int(np.array(STAMPS['fw_stone']['layers']).max()) if (x + y) % 2 else 10551
+    rng = random.Random(561)
+    for y, x in np.argwhere(m.cls == 'w'):                                       # shallows: rocks, kelp, drift ice at the edge
+        if m.L[2, y, x] == 0 and not m.taken[y, x]:
+            q = rng.random()
+            if q < 0.06: m.L[2, y, x] = K.P1('cs_wrock%d' % rng.randrange(3)) if q < 0.03 else K.P1('cs_wrockb%d' % rng.randrange(2))
+            elif q < 0.10: m.L[2, y, x] = STAMPS['fw_floe%d' % rng.randrange(2)]['layers'][1][0][0] or m.L[2, y, x]
+    for y, x in np.argwhere(m.cls == 'W'):
+        if m.L[2, y, x] == 0 and rng.random() < 0.05 and vnoise(x, y, 5614, 3.0) > 0.5: m.L[2, y, x] = K.P1('hb_glint%d' % rng.randrange(4))
+    CK.snow_ground_var(r, thr=0.45)
+    RW.drifts(m, 0.25, seed=561); RW.road_tracks(m, 0.12, seed=561); RW.dress_ice(m, 0.4, seed=561); RW.reed_beds(m, 30, seed=561)
+    h = head(561, 'Gullcry Cliffs', field='MOUNTAIN', bgm='Route 3', biome='route', display_name='Gullcry Cliffs',
+             connections=[{'dir': 'N', 'offset': 12, 'to': 160, 'to_offset': 22}, {'dir': 'S', 'offset': 10, 'to': 562, 'to_offset': 12}],
+             tone=[-10, -6, 6, 20])
+    h['metadata'] = dict(old.get('metadata', {}), BattleBack='snow')
+    h['walk_from'] = [[MN[0], MN[1] + 1], [MS[0], MS[1] + 1], [46, 26]]                                # both cave mouths, the rookery cove (the Gannet Stair)
+    h['gates'] = [{'name': 'Gullcry landslide (the caves are the way)', 'from': [[11, 128]], 'sealed_edge': 'N'}]
+    r.write(h, '561_route6.yaml', '# Gullcry Cliffs (561). WRITTEN BY layouts/routes_craft.py (map builder 12) - edit that script.\n',
+            '/tmp/craft/561.png' if PREV else None)
+
+
+BUILD[561] = build_561

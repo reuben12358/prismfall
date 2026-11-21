@@ -443,6 +443,95 @@ def ford(vertical):
     return im
 
 
+
+# ------------------------------------------------------------------ map builder 12 (appended at the end of pieces())
+SNOWTOP = [(150, 170, 196, 255), (196, 212, 232, 255), (222, 232, 246, 255), (238, 244, 252, 255), (252, 254, 255, 255)]
+SNOWFACE = [(92, 108, 138, 255), (128, 146, 176, 255), (170, 186, 210, 255), (206, 218, 236, 255)]
+BONE = [(104, 92, 76, 255), (168, 154, 128, 255), (214, 204, 180, 255), (240, 234, 216, 255)]
+
+
+def sheen(v):
+    """a specular streak on black glass (decal): v 0-1 a long diagonal glare band, v 2-3 a short bright glint with a
+    four-point sparkle; white core, teal falloff, fading at the ends"""
+    im = Image.new('RGBA', (16, 16), CLEAR)
+    if v < 2:
+        off = (-3, 4)[v]
+        for x in range(16):
+            yc = 15 - x * 0.75 + off
+            fade = min(1.0, min(x + 1, 16 - x) / 5.0)
+            for dy in range(-2, 3):
+                y = int(round(yc + dy))
+                if not (0 <= y < 16): continue
+                if dy == 0: c, al = (244, 255, 250), 190
+                elif abs(dy) == 1: c, al = GLASS[5][:3], 120
+                else: c, al = GLASS[4][:3], 55
+                P(im, x, y, c + (int(al * fade),))
+    else:
+        y0 = (6, 10)[v - 2]; x0 = (3, 6)[v - 2]
+        for i in range(9):
+            al = int(200 * (1 - abs(i - 4) / 5.0))
+            P(im, x0 + i, y0, (240, 255, 250, al)); P(im, x0 + i, y0 + 1, GLASS[4][:3] + (al // 3,))
+        cx = x0 + 4
+        for k in (1, 2):
+            P(im, cx, y0 - k, (255, 255, 255, 200 - 70 * k)); P(im, cx, y0 + k, (255, 255, 255, 200 - 70 * k))
+        P(im, cx, y0, (255, 255, 255, 255))
+    return im
+
+
+def sky(v):
+    """the sky reflected in the glass (decal): a soft pale wash with a brighter cloud streak, mostly transparent so the
+    black-green shows through at the edges"""
+    im = Image.new('RGBA', (16, 16), CLEAR)
+    base = ((150, 192, 228), (182, 170, 220))[v]; cloud = ((226, 238, 250), (240, 222, 236))[v]
+    for y in range(16):
+        for x in range(16):
+            d = math.hypot((x - 7.5) / 8.0, (y - 7.5) / 5.5)
+            if d >= 1.0: continue
+            al = int(95 * (1 - d) ** 0.7)
+            c = base
+            if abs((y - 6) - (x - 8) * 0.25) < 1.2 and 2 < x < 14: c, al = cloud, al + 50
+            P(im, x, y, c + (min(255, al),))
+    return im
+
+
+def spire():
+    """a crystal spire cluster (2x3): faceted prisms of clear glass, light face to the left, dark facet right, sharp
+    tips, a white edge and a sparkle; reads as crystal, not a tree"""
+    im, d = canvas(2, 3)
+    prisms = [(6, 47, 13, 9, 5), (14, 47, 20, 2, 6), (21, 47, 27, 14, 5), (10, 47, 15, 22, 4), (24, 47, 30, 28, 3)]
+    for x0, yb, x1, ytip, w in prisms:
+        mid = (x0 + x1) // 2
+        left = [(x0, yb), (x0 + 1, ytip + 8), (mid, ytip), (mid, yb)]
+        right = [(mid, yb), (mid, ytip), (x1 - 1, ytip + 8), (x1, yb)]
+        d.polygon(left, fill=(150, 224, 206, 255)); d.polygon(right, fill=(46, 104, 92, 255))
+        d.line([(mid, ytip), (mid, yb)], fill=(232, 252, 246, 255))
+        d.line([(x0, yb), (x0 + 1, ytip + 8), (mid, ytip), (x1 - 1, ytip + 8), (x1, yb)], fill=(16, 44, 40, 255))
+        d.line([(x0 + 2, ytip + 10), (mid - 1, ytip + 3)], fill=(246, 255, 252, 255))
+        for k in range(3):
+            y = ytip + 14 + k * 7
+            if y < yb - 2: d.line([(x0 + 2, y), (mid - 1, y - 2)], fill=(196, 240, 228, 255))
+    for (x, y) in ((11, 11), (17, 4)):
+        P(im, x, y, (255, 255, 255, 255)); P(im, x - 1, y, (220, 255, 245, 180)); P(im, x + 1, y, (220, 255, 245, 180))
+        P(im, x, y - 1, (220, 255, 245, 180)); P(im, x, y + 1, (220, 255, 245, 180))
+    d.ellipse([3, 44, 31, 48], fill=(0, 0, 0, 70))
+    return im, ['OO', 'OO', 'WW']
+
+
+def whalebone():
+    """a whalebone waymarker (1x2): one great rib set upright and curving seaward, rope-bound, a cairn at the foot"""
+    im, d = canvas(1, 2)
+    for t in range(26):
+        y = 28 - t; x = 5 + int(5 * math.sin(t / 26.0 * 1.9))
+        wdt = 3 if t < 18 else 2
+        for k in range(wdt):
+            P(im, x + k, y, BONE[2] if k == 0 else BONE[1])
+        P(im, x - 1, y, BONE[0]); P(im, x + wdt, y, BONE[0])
+        if t % 5 == 2: P(im, x, y, BONE[3])
+    for yy in (16, 18): d.line([(6, yy), (10, yy - 1)], fill=(122, 86, 52, 255))
+    d.ellipse([2, 26, 13, 31], fill=(132, 140, 156, 255), outline=(84, 90, 104, 255))
+    P(im, 5, 27, (190, 200, 214, 255)); P(im, 9, 28, (190, 200, 214, 255))
+    return im, ['O', 'W']
+
 def pieces():
     import ndraw
     out = {}
@@ -479,6 +568,12 @@ def pieces():
     out['wr_firering'] = (fire_ring(), ['W'], None)
     im, c = weapon_rack(); out['wr_rack'] = (im, c, None)
     im, c = glass_sled(); out['wr_glasssled'] = (im, c, None)
+    # map builder 12: snow ledges (Rimewood), glass sheen and sky decals, the crystal spire, whalebone waymarkers
+    for e in 'wme': out['lgs_' + e] = (ndraw.ledge(e, face=SNOWFACE, top=SNOWTOP), ['L'], None)
+    for v in range(4): out['gd_sheen%d' % v] = (sheen(v), ['V'], None)
+    for v in range(2): out['gd_sky%d' % v] = (sky(v), ['V'], None)
+    im, c = spire(); out['gd_spire'] = (im, c, None)
+    im, c = whalebone(); out['pf_whalebone'] = (im, c, None)
     return out
 
 

@@ -580,6 +580,42 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
   920/924/925/929/930 densified; 928 furnished. All map builder 10 event wiring is unchanged.
   Before/after: `maps_out/previews/war_compare/`.
 
+## 2o. Map builder 12 (2026-11-20): the Chapter 2-4 audit, Rimewood Path and Gullcry Cliffs recrafted
+**Audit** (every map from Saltmere's North Gate to Gym 4, graded against the map builder 10/11 roads and Saltmere/Ebbmouth;
+A = that standard, F = stock FRLG tiles or bare). Ch3: 541 Grey Saltings B, 544/545 Brinecut Mine **F** (stock Rock Cave
+template), 542 Brinewife's Rest C, 552 Dyers' Ford B- (the three dye bands are ruler-straight), 540 Thistledown Lea B,
+546/547 Thistledown Manor **D** (stock mansion tileset), 524 Gossamer Wood B-, 526 C, 120 Briarwick B, 121-126 C+, Loomhouse
+130-134 B- (puzzle engineer), 525 Gossamer Deepwood **D** (the old reskin: flat lattice and boxy lanes), 548 Cocoonfall B-.
+Ch4: 566 Spinners' Rise C- (routekit: repeated straight terrace bands, noise grass), 577 Frostwick Pass C+, 570 Frostwick B,
+571-576 C+, **578 Rimewood Path D -> B**, 562 The Rimewood C, 563 Glade C, **561 Gullcry Cliffs D -> B-**, 564 Gullcry Caves
+**F** (stock Rock Cave), 565 not built, 560 Causeway C+, 568 Rehearsal B-, 160 Ebbmouth B, 167 Mill Quay B-, 161-165/168 C,
+**170-174 Tidelock Gym F** (stock Harbour/Gym tiles, bare grey basins; GYM_PUZZLES also wants its puzzle trimmed and rebuilt).
+Ch5 (580-595, Lumen 180-193, Gym 4) is not built. Worst left, in order: Tidelock Gym; the three caves (544, 545, 564; they need
+a PF cave sheet, see below); 546/547; 525; 566. Before/after: `maps_out/previews/ch2_4_compare/`.
+- **578 Rimewood Path** (`routes_craft.build_578`): three snow terraces with stairs, the Long Ice (the Hoar Brook frozen
+  straight under the crag: step on by the stair and slide west to the frozen fall and the charcoal burners; an ice-block
+  stopper drops the lower row at the snare nook), the Silk-fall glade behind a **frozen silk curtain** (Rock Smash:
+  `pfm_smash_silk` in `ruby/006_MapStory.rb`, charset `graphics/Characters/pf_rime_curtain.png` from `mapgen/charsets.py`),
+  the Unblazed (blue blaze -> glade A -> B -> the herd: wrong turns are touch warps across the whole trail width back to the
+  blaze; the Stantler stag is a wild battle, Lv 19), a second curtain as the herd's shortcut, a snow-bank ledge, the lean-to,
+  hives, woodcutters' yard. `gates:` proves the Silk-fall shut. No trainers: PBS has none for 578 (ROUTES wants 5).
+- **561 Gullcry Cliffs** (`routes_craft.build_561`, now 64x130 as ROUTES.yaml says; `rimewood.py 561` refuses): cliff-top
+  road, four headlands with south faces and coves, the stilt hamlet down a plank stair, the signal fire, whalebone
+  waymarkers, frozen rock pools, the landslide (rows 55-70, heath to sea) with `gates:` proving the caves are the only way
+  north, both cave mouths re-seated at the crag feet (564's arrivals follow the links), the Gannet Stair to the isolated
+  rookery cove (Cramorant: Big Pearl), Kestrel (K2) in a one-tile gap between two tors. Connections and offsets unchanged
+  (N x 10-13 -> 160, S x 10-13 -> 562). Trial anchors for Old Asta and the egg ledge moved in `trial_overlay.py`.
+- **577**: the Icium Z (SPINE Rev 23) in an avalanche gully in the east wood behind a Rock Smash boulder (event from
+  `trial_overlay.py` EVENTS[577], gate-proved).
+- **Kit:** `gdraw.pieces()` gained (at its end) `lgs_w/m/e` snow ledges (`CK.ledge(face='snow')`), `gd_sheen0-3`,
+  `gd_sky0-1`, `gd_spire`, `pf_whalebone`; `routes_craft.near_flat()` (r.near that keeps off cliff faces and roads);
+  `CK.undergrowth` no longer stamps on cliff faces. **`mapgen/relayout.sh [--strict]`** runs the whole post-sheet-change
+  order (rcustom, rcompose, rstamps, every layout, `reskin.py 525` + the 525 spec restore, build). Then re-run
+  `rimewood.py 562` and build again when 561's edge moved (562 seals its N edge against the built 561).
+- **Lesson:** a band of class `T` thinner than the 3x2 tree footprint leaves walkable gaps (and lattice canopies can close a
+  lane next to a wood). Where a wall matters (a gate, a trail maze), fill unpainted `T` cells with a solid snowy shrub
+  (10371/10551) and prove it with `gates:`.
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,

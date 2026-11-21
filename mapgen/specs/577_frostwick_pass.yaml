@@ -13,6 +13,14 @@ yards_ok: true
 biome: route
 field: SNOWY_MOUNTAIN
 tone: [-6, -2, 10, 10]
+gates:
+- name: Icium Z gully (Rock Smash)
+  from:
+  - [31, 94]
+  sealed:
+  - [69, 57]
+  - [68, 56]
+  - [70, 58]
 connections:
 - {dir: S, offset: 30, to: 566, to_offset: 42}
 - {dir: W, offset: 37, to: 570, to_offset: 23}
@@ -22,6 +30,9 @@ walk_from:
 raw: data/raw/577.npy
 tileset: 52
 events:
+- type: rock_smash
+  at: [66, 57]
+  name: Rock
 - type: event
   name: Wind
   at: [1, 1]
