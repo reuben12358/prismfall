@@ -147,7 +147,8 @@ def finish(c, sc, frame, ch):
         if any(c.mat[y][x] == n for y in range(80) for x in range(80)):
             c.shade(n)
     c.fill('knot', 2); c.fill('rope', 2)
-    c.shade('jacket', sh=2, group={'jacket', 'hood', 'lining', 'sleeve', 'sleeve2'})
+    c.shade('jacket', hi=2, sh=3, group={'jacket', 'hood', 'lining', 'sleeve', 'sleeve2'})
+    c.shade('hood', hi=1, sh=2)
     c.shade('sleeve', sh=2); c.shade('sleeve2', sh=1)
     c.shade('bag', hi=1, sh=3); c.shade('hat', sh=2); c.shade('brim', sh=1)
     c.shade('ball')
@@ -177,8 +178,13 @@ def finish(c, sc, frame, ch):
     c.paint([(40, 74), (40, 75), (40, 76), (40, 77), (40, 78), (40, 79)], hx(C[2]), only={'jacket'})
     c.paint([(x, 73) for x in range(16, 34)] + [(x, 73) for x in range(47, 64)], hx(C[2]), only={'jacket'})
     c.paint([(40, 61), (40, 62), (40, 63), (40, 64), (40, 65), (40, 66), (40, 67), (40, 68), (40, 69)], hx(C[2]), only={'hood'})
-    under = [(x, y + 1) for y in range(79) for x in range(80) if c.mat[y][x] == 'hood' and c.mat[y + 1][x] == 'jacket']
-    c.paint([(x, y) for (x, y) in under if c.col[y][x] != K], hx(C[2]), only={'jacket'})
+    under = [(x, y + k) for y in range(78) for x in range(80) for k in (1, 2) if c.mat[y][x] == 'hood' and c.mat[y + 1][x] == 'jacket']
+    c.paint([(x, y) for (x, y) in under if y < 80 and c.col[y][x] != K], hx(C[2]), only={'jacket'})
+    # cloth folds pulled toward the shoulders
+    c.paint([(14, 70), (15, 69), (16, 68), (17, 67), (64, 67), (65, 68), (66, 69), (67, 70)], hx(C[2]), only={'jacket'})
+    c.paint([(20, 76), (21, 75), (22, 74), (58, 74), (59, 75), (60, 76)], hx(C[2]), only={'jacket'})
+    # hood drawstring toggles
+    c.stamp(33, 58, ['T'], L); c.stamp(47, 58, ['T'], L)
     if ch == 'A':
         c.stamp(15, 50, ['.KKKKK.', 'KtTTTuK', 'KTuuuUK', '.KKUKK.'], L)              # the duffel's cinched neck
         c.stamp(12, 54, ['KKK', 'KYK', 'KyK', 'KKK'], L)                               # the ferry tag

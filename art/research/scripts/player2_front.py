@@ -140,8 +140,9 @@ def build_A(sc):
     c.paint([(46, 57), (47, 58), (47, 59)], td, only={'trou2'})
     c.paint([(39, 49), (40, 50), (41, 49)], td, only={'trou'})
     c.paint([(34, y) for y in range(52, 66)], hx(S[0]), only={'trou'})
-    # the far fist on the rope: knuckles and finger splits
+    # the far fist on the rope: knuckles and finger splits; the loose end of the rope hangs out under the fist
     c.stamp(45, 36, ['sss.', '.d.d'], L)
+    c.stamp(45, 40, ['.KuK', '.KuK', 'KuK.', 'KuK.', 'KU..', '.K..'], L)
     c.stamp(22, 45, ['.d', 'd.'], L)
     # boots: dark soles, a lit toe cap, lace line
     for x in range(27, 39):

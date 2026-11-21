@@ -98,8 +98,7 @@ def base_A(sc):
 def features_A(c, expr, sc):
     L = legend(sc)
     # eye boxes: near (screen-left) x16-23, far x29-35; lash top row at y=23 (eye line 26)
-    E = EYES_A[{'blush': 'neutral', 'crying': 'sad', 'panic': 'surprised', 'deadpan': 'smug', 'determined': 'angry'}.get(expr, expr)
-               if expr not in EYES_A else expr]
+    E = EYES_A[expr if expr in EYES_A else {'blush': 'neutral', 'crying': 'sad', 'panic': 'surprised'}.get(expr, 'neutral')]
     ny = E.get('y', 24)
     c.stamp(17, ny, E['near'], L)
     c.stamp(29, ny, E['far'], L)
@@ -128,8 +127,10 @@ EYES_A = {
     'angry': {'near': ['........', 'KK......', '.KKKKKKK', 'KKKKKKKK', '.EEaKKWE', '.EEAKKAE', '..EAAAE.', '...sss..'],
               'far': ['........', '......KK', 'KKKKKKK.', 'KKKKKKKK', 'EEaKKWE.', 'EEAKKAE.', '.EAAAE..', '..sss...']},
 }
-EYES_A['determined'] = {'near': ['........', '........', '..KKKKK.', 'KKKKKKKK', '.EEaKKWE', '.EEAKKAE', '..EAAAE.', '...sss..'],
-                        'far': ['........', '........', '.KKKKK..', 'KKKKKKKK', 'EEaKKWE.', 'EEAKKAE.', '.EAAAE..', '..sss...']}
+EYES_A['determined'] = {'near': ['........', '..KKKKK.', 'KKKKKKKK', 'KEEaKKWK', '.EEAKKAE', '.EEAAAAE', '..EEAAE.', '...ssss.'],
+                        'far': ['........', '.KKKKK..', 'KKKKKKKK', 'KEaKKWEK', 'EEAKKAE.', 'EEAAAAE.', '.EAAEE..', '.ssss...']}
+EYES_A['deadpan'] = {'near': ['........', '........', '........', 'KKKKKKKK', '.EEaKKaE', '.EEAKKAE', '..ssss..'],
+                     'far': ['........', '........', '........', 'KKKKKKKK', 'EEaKKaE.', 'EEAKKAE.', '.ssss...']}
 
 BROWS_A = {   # (near y, rows, far y, rows) - B2 strong, 2 rows, thick at the inner end (near brow's inner end is on its right)
     'neutral': (20, ['.bBBBBB.', 'BBb.....'], 20, ['.BBBBBb.', '......bB']),
@@ -153,12 +154,12 @@ MOUTHS_A = {   # (x, y, rows): closed = line + corners, open = outlined hole + d
     'sad': (25, 37, ['.RRRR.', 'R....R', '.ss...']),
     'crying': (24, 36, ['..KKKK..', '.KooooK.', 'KoooooK.', 'KttttK..', '.KKKK...']),
     'angry': (24, 36, ['KKKKKKK', 'KTTTTTK', 'KoooooK', 'KTTTTTK', '.KKKKK.']),
-    'determined': (24, 37, ['R.....R', '.RRRRR.', '..sss..']),
+    'determined': (24, 36, ['K......', 'KKKKKKK', '.KTTTTK', '..KKKK.', '...ss..']),
     'surprised': (26, 36, ['.KKK.', 'KoooK', 'KoooK', 'KtttK', '.KKK.', '.sss.']),
     'shocked': (25, 36, ['.KKKK.', 'KooooK', 'KooooK', 'KottoK', '.KKKK.']),
     'panic': (24, 36, ['.KKKKKK.', 'KTTTTTTK', 'KooooooK', '.KttttK.', '..KKKK..']),
-    'smug': (25, 37, ['.....R', 'RRRRR.', '..ss..']),
-    'deadpan': (25, 37, ['RRRRRR', '.sss..']),
+    'smug': (25, 36, ['......R', '.....R.', 'RRRRR..', '.sss...']),
+    'deadpan': (26, 37, ['RRRR', '.ss.']),
 }
 
 MARKS = {
@@ -262,7 +263,7 @@ def base_B(sc):
 
 def features_B(c, expr, sc):
     L = legend(sc)
-    key = {'blush': 'neutral', 'crying': 'sad', 'panic': 'surprised', 'deadpan': 'smug', 'grin': 'happy'}.get(expr, expr)
+    key = {'blush': 'neutral', 'crying': 'sad', 'panic': 'surprised', 'grin': 'neutral'}.get(expr, expr)
     E = EYES_B[key if key in EYES_B else 'neutral']
     ny = E.get('y', 24)
     c.stamp(17, ny, E['near'], L)
@@ -293,6 +294,9 @@ EYES_B = {
               'far': ['........', '......KK', 'KKKKKKK.', 'KKKKKKKK', 'EEaKKWE.', 'EEAKKAE.', '.EAAAE..', '..sss...']},
 }
 
+EYES_B['deadpan'] = {'near': ['........', '........', '........', 'KKKKKKKK', '.EEaKKaE', '.EEAKKAE', '..ssss..'],
+                     'far': ['........', '........', '........', 'KKKKKKKK', 'EEaKKaE.', 'EEAKKAE.', '.ssss...']}
+
 BROWS_B = {   # B1 soft: 1 row, 4-5 px, hair-dark tone
     'neutral': (21, ['.bBBB.'], 21, ['.BBBb.']),
     'happy': (20, ['.bBBB.'], 20, ['.BBBb.']),
@@ -303,7 +307,7 @@ BROWS_B = {   # B1 soft: 1 row, 4-5 px, hair-dark tone
     'sad': (20, ['...bB.', '.BBb..'], 20, ['.Bb...', '..bBB.']),
     'crying': (20, ['...bB.', '.BBb..'], 20, ['.Bb...', '..bBB.']),
     'angry': (20, ['.Bb...', '..bBBB'], 20, ['...bB.', 'BBBb..']),
-    'grin': (20, ['.bBBB.'], 20, ['.BBBb.']),
+    'grin': (19, ['.bBBB.'], 19, ['..BBBb']),
     'smug': (21, ['.bBBB.'], 19, ['.BBBb.']),
     'deadpan': (22, ['.BBBB.'], 22, ['.BBBB.']),
 }
@@ -315,12 +319,12 @@ MOUTHS_B = {
     'sad': (25, 37, ['.RRR.', 'R...R', '.ss..']),
     'crying': (24, 36, ['..KKK..', '.KoooK.', 'KoooooK', 'KtttttK', '.KKKKK.']),
     'angry': (24, 36, ['KKKKKK', 'KTTTTK', 'KooooK', 'KTTTTK', '.KKKK.']),
-    'grin': (23, 36, ['K......', 'KKKKKKK', '.KTTTTK', '..KoooK', '...KKK.']),
+    'grin': (24, 36, ['K.....K', 'KKKKKKK', 'KTTTTTK', '.KoooK.', '..KKK..', '...s...']),
     'surprised': (26, 36, ['.KK.', 'KooK', 'KooK', 'KttK', '.KK.', '.ss.']),
     'shocked': (25, 36, ['.KKKK.', 'KooooK', 'KooooK', 'KottoK', '.KKKK.']),
     'panic': (24, 36, ['.KKKKK.', 'KTTTTTK', 'KoooooK', '.KtttK.', '..KKK..']),
-    'smug': (25, 37, ['....R', 'RRRR.', '.ss..']),
-    'deadpan': (25, 37, ['RRRRR', '.sss.']),
+    'smug': (25, 36, ['.....R', '....R.', 'RRRR..', '.ss...']),
+    'deadpan': (26, 37, ['RRR', '.s.']),
 }
 
 
