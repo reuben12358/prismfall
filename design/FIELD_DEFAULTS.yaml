@@ -480,7 +480,7 @@ maps:
   577: {name: "Frostwick Pass", kind: route, field: SNOWY_MOUNTAIN, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed."}
   578: {name: "Rimewood Path", kind: route, field: SILKWOOD, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The Blaze-Trees, and the Lantern Birch where trappers leave a light for whoever is late."}
   579: {name: "The Wolfsrime", kind: route, field: SILKWOOD, battles: [event_wild], encounters: [Land, LandNight], source: hand, why: "the old drove road under the rimed oldwood (the first Rimewood Path layout): Rimewood silk under snow"}
-  580: {name: "The Reedholms", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Isenmar route default"}
+  580: {name: "The Reedholms", kind: route, field: WATER_SURFACE, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: biome, why: "rainy reed-islet delta (Gemini review 2026-11-21)"}
   581: {name: "The Icefall Locks", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [Land], source: name, why: "name: \"Icefall\""}
   582: {name: "Lumen West Gate", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
   584: {name: "Voltaic Sluiceworks", kind: dungeon, field: SCRAPYARD, battles: [], encounters: [Cave, GoodRod, OldRod, SuperRod, Water], source: spec, why: "world spec"}

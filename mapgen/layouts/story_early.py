@@ -808,7 +808,7 @@ MART_BW = [IF('!pfm?(:bw_mart_hi)', [N('Clerk', "Antidotes go fast here. The mot
 
 HETT = [IF('$game_switches[@@CH2_MATRIARCH_DONE] && pfm?(:ledger_read) && !pfm?(:hett_reward)', [
     N('Hett', 'From the guild\'s teaching chest. Old Mother Loom would\'ve wanted a stranger to have it. She never trusted us with it.'),
-    S('pfm_money(2000)'), ITEM('TMSTRINGSHOT', 1, 'TM String Shot'), S('pfm_set(:hett_reward)'), S('pfm_quest_done(:locked_ledger)')], [
+    S('pfm_money(2000)'), ITEM('BIGROOT', 1, 'Big Root'), S('pfm_set(:hett_reward)'), S('pfm_quest_done(:locked_ledger)')], [
     IF('pfm_gym_won?(:LEADER_TAMSIN)', [N('Hett', "She signed WHAT? Alone? ...Poor fool child. Her gran would've made the whole village sign it with her, and then it'd be all our fault. That's what a guild's FOR.")], [
         IF('pfm?(:ledger_read) && !pfm?(:ledger_told)', [
             N('Hett', "...Alone. She signed it alone. Don't say anything yet. Let me think how to say it kindly. I'm out of practice."), S('pfm_set(:ledger_told)')], [

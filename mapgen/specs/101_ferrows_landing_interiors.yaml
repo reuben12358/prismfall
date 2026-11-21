@@ -3051,11 +3051,11 @@ events:
   - commands: ['\pf[JUNO,happy]Juno: Seed packets! Every one labelled! Mostly correctly!']
     trigger: action
     move: fixed
-    graphic: {sprite: trainer_RIVAL2, dir: up}
+    graphic: {sprite: JUNO, dir: up}
   - commands: ['\pf[JUNO,happy]Juno: You''ve got a partner! I''ve got a partner! Everyone''s got a partner except the kettle!']
     trigger: action
     move: fixed
-    graphic: {sprite: trainer_RIVAL2, dir: down}
+    graphic: {sprite: JUNO, dir: down}
     cond: {switch: CH1_STARTER_GOT}
   - commands: []
     trigger: action
@@ -3208,7 +3208,7 @@ events:
   - commands: ['\pf[JUNO,happy]Juno: Uncle Rowan says the Phantump likes you. It only likes him and compost.']
     trigger: action
     move: fixed
-    graphic: {sprite: trainer_RIVAL2, dir: left}
+    graphic: {sprite: JUNO, dir: left}
     cond: {switch: CH1_K1_DONE}
   - commands: []
     trigger: action

@@ -245,7 +245,7 @@ events:
   after: Lost to a tourist. Don't tell anyone.
 - type: item
   at: [78, 14]
-  item: TM19
+  item: MIRACLESEED
 - type: item
   at: [8, 82]
   item: REPEL

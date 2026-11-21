@@ -477,10 +477,14 @@ V124 = 6.
   [portrait: MARISOL, neutral] Easy to say when it's not your river.
 > I can't.
   [portrait: MARISOL, sad] No. Neither can I. That's the whole problem. That's why I swear so much.
-[if :ch2_tamsin != :keep_secret]
+[if :ch2_tamsin == :expose]
   [portrait: MARISOL, neutral] Briarwick's Warden signed with them, I hear. Then tore it up in front of her whole guild. Poor lamb.
   [name: Marisol] I'm not signing anything. I'm going to stand on this quay and swear till one of them blinks.
-[portrait: MARISOL, sad] And I'm going to keep telling my little brother where the guards walk. Don't look at me like that. You'd do it too.
+[if :ch2_tamsin == :help_confess]
+  [portrait: MARISOL, neutral] Briarwick's Warden signed with them, I hear. Then walked into her guildhall, owned up to it, and made them rewrite the whole thing. Poor lamb.
+  [name: Marisol] I'm not signing anything. I'm going to stand on this quay and swear till one of them blinks.
+[if :ch4_teo == :confront]
+  [portrait: MARISOL, sad] And I'd tell my little brother where the guards walk again. Every night. Don't look at me like that. You'd do it too.
 [portrait: MARISOL, happy] Finish your eel. There's a woman at the Center with a box of papers asking for you, and she looks like she bites.
 ```
 

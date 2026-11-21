@@ -1096,7 +1096,7 @@ def build_524():
           trainer((46, 45), 'BUGCATCHER', 'Reed', 'You walked right into my web!', "The wood's full of better bugs than mine, huh.", d='left'),
           trainer((40, 16), 'AROMALADY', 'Petra', 'Smell that? Night-blooming gossamer.', 'What a lovely, fierce scent you have.', d='down'),
           trainer((14, 52), 'CAMPER', 'Bram', 'Camping in Gossamer? Battle first, questions later!', "Lost to a tourist. Don't tell anyone.", d='down'),
-          item((78, 14), 'TM19'), item((8, 82), 'REPEL'), item((74, 50), 'POTION'), item((34, 36), 'ETHER'),
+          item((78, 14), 'MIRACLESEED'), item((8, 82), 'REPEL'), item((74, 50), 'POTION'), item((34, 36), 'ETHER'),
           {'type': 'event', 'name': 'HiddenItem', 'at': [18, 12], 'pages': ev['HiddenItem']['pages']},
           obj('Cocoon grove', (12, 77), ['A grove of silk cocoons the size of lanterns, hung in rows. Each has a weaver\'s knot-mark tied to it.']),
           talk('Weaver (harvest)', (16, 81), 'NPC 13', ['Weaver: One cocoon in three. Always leave two. The wood counts.']),

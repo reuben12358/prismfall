@@ -556,7 +556,7 @@ events:
     - move:
         who: Juno (lab yard)
         route:
-        - graphic: [trainer_RIVAL2, 0, 2, 0]
+        - graphic: [JUNO, 0, 2, 0]
         - {opacity: 255}
         - through_on
         - down
@@ -613,7 +613,7 @@ events:
       else: ['\pf[JUNO,happy]Juno: Up the lane, past the stile! Biscuit won''t wait. Biscuit never waits.']
     trigger: action
     move: fixed
-    graphic: {sprite: trainer_RIVAL2, dir: down}
+    graphic: {sprite: JUNO, dir: down}
     cond: {switch: CH1_K1_DONE}
   - commands: []
     trigger: action
@@ -766,7 +766,7 @@ events:
   - commands: ['\pf[JUNO,happy]Juno: Saltmere! Forty tarts! A PAGEANT!']
     trigger: action
     move: fixed
-    graphic: {sprite: trainer_RIVAL2, dir: down}
+    graphic: {sprite: JUNO, dir: down}
     cond:
       var: [STORY_CHAPTER, 2]
   - commands: []

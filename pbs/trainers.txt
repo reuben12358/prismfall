@@ -8381,6 +8381,41 @@ Pokemon = SPHEAL,18
     EV = 0
 # Map 564 Gullcry Caves
 #-------------------------------
+[HIKER,Halvor]
+LoseText = Salt in my boots, frost in my beard. Good trade.
+Pokemon = NACLI,19
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 8
+Pokemon = SWINUB,20
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Halvor,100]
+LoseText = Salt in my boots, frost in my beard. Good trade.
+Pokemon = NACLI,19
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 20
+Pokemon = SWINUB,20
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Halvor,200]
+LoseText = Salt in my boots, frost in my beard. Good trade.
+Pokemon = NACLI,18
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = SWINUB,19
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+#-------------------------------
 [HIKER,Torvald]
 LoseText = The gulls laugh at me every time.
 Pokemon = BINACLE,19

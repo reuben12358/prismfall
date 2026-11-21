@@ -724,7 +724,7 @@ Eevee 18 @Oran Berry / Eevee 17 @Oran Berry. Win or lose, it starts the Eevee Oc
 
 - **Items:** none on the map
 - **Hidden items:** X Attack (rope bridge, 28,21) · Tiny Mushroom (dye vats, 14,38)
-- **Gifts:** Bark Mask (Thistle) · Dusk Petal (the shrine, after Tamsin's badge) · Silk Scarf (*Sixteen Sleeves*) · Ledger Key, TM String Shot (*The Locked Ledger*) · Mother Loom's Shuttle (Tamsin) · HM01 Cut (the Cutter).
+- **Gifts:** Bark Mask (Thistle) · Dusk Petal (the shrine, after Tamsin's badge) · Silk Scarf (*Sixteen Sleeves*) · Ledger Key, Big Root (*The Locked Ledger*) · Mother Loom's Shuttle (Tamsin) · HM01 Cut (the Cutter).
 - **Battles:** Pallbearer Thistle at the pylon (63,30), at night (see Key battles).
 
 #### Loomhouse Gym — Lobby (130), the Canopy (131), Upper Lofts (132, 134)
@@ -769,7 +769,7 @@ Eevee 18 @Oran Berry / Eevee 17 @Oran Berry. Win or lose, it starts the Eevee Oc
 
 - **Items:** Silver Powder (35,5) · Great Ball (3,5) · Ether (16,6) · TM19 Giga Drain (31,2)
 - **Hidden items:** Super Potion (40,31) · Tiny Mushroom (fern bank, 5,29)
-- **Gifts:** Silver Powder and TM Struggle Bug (Shelly, 15,26). **Wild:** the glassed Masquerain (Lv 14) at Shelly's dew-pond.
+- **Gifts:** Silver Powder and Bright Powder (Shelly, 15,26). **Wild:** the glassed Masquerain (Lv 14) at Shelly's dew-pond.
 - **Trainers** (Standard; Hard +1 level, Casual −1):
     - **Bug Catcher Linden**: Nincada 19, Ledian 19, Rellor 20
     - **Poké Maniac Ferris**: Paras 19, Nincada 19, Yanma 20

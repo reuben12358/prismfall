@@ -245,7 +245,7 @@ Lamp 47. The only dark one on the Mile. The glass is clean. Someone still polish
 > Look under the base plate?
   The plate unscrews. Inside, on a wire, an engineer's brass tag:
   "No. 47. FAULT: none found.
-   Went dark 21:40, Festival night, AF 290. Every lamp on the Mile dipped at once for nine seconds. 46 came back. 47 didn't.
+   Went dark 23:40, Festival night, AF 290. Every lamp on the Mile dipped at once for nine seconds. 46 came back. 47 didn't.
    Draw spike on every grid in Zenith, same second. Source: not ours?? Refer to Chief Engineer. — L.G."
   Under it, scratched in another hand: "Referred. Referred again. Stop asking. — Spire."
   [portrait: JUNO, neutral] (if follower) Festival night, ten years ago. That's the Glassfall. Everybody's mum remembers where they were.
@@ -894,4 +894,4 @@ For map builder 15 (building these maps now) and the trainer designer. **[NEW]**
 
 **105/106 Ferrow Lighthouse — Interlude I "Lamplight"** (V119 = 1): the party swap to Kestrel; the trunk and the veil; the memory flash; a wild Bleed-touched Haunter on the stairs; the bag; Edda's boat slipping the harbour chain (S162 EDDA_SMUGGLER on); the title card II (V101 = 2, V102 = 6).
 
-**New items** (items_prismfall.txt owner): `GALAINVITATION`, `ICEBOUNDSATCHEL`, `HEATCONTRACT` (Key Items, descriptions in the script). **New boss** (BOSSES.md owner): "Overcharged" Electivire, 2 bars, Lv per the segment after Gym 4, field `:NEON_GRID` → `:BLEED` at the bar break (the first scripted any → Bleed). **Trials owner:** `ZE_OCTAVE_OFF_BEAT` lives on 181, which is replaced by 608 after the Shatter: close it with a line if unfinished, or move its offer to the Concourse (180).
+**New items** (items_prismfall.txt owner): `GALAINVITATION`, `ICEBOUNDSATCHEL`, `HEATCONTRACT` (Key Items, descriptions in the script). **New boss** (BOSSES.md owner): "Overcharged" Electivire, 2 bars, Lv per the segment after Gym 4, field `:NEON_GRID` → `:BLEED` at the bar break (the first scripted any → Bleed). **Trials owner:** `ZE_OCTAVE_OFF_BEAT` lives on 181, which is replaced by 608 after the Shatter: never close it (Cadence is Singer 3 of the Eevee Octave; closing it would lock the Octave and Eevium Z for the save): relocate her to the Concourse (180) after the Shatter).

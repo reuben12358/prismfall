@@ -662,7 +662,7 @@ events:
   - cond:
       self: A
     graphic:
-      sprite: trainer_RIVAL2
+      sprite: JUNO
       dir: up
     commands:
     - if: $game_self_switches[[131, 0, 'JUNO']]

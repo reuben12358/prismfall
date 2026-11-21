@@ -21,6 +21,8 @@ find "$G/Plugins" -name '__pycache__' -prune -exec rm -rf {} +
 [[ -d "$KIT/graphics" ]] && cp -r "$KIT/graphics/." "$G/Graphics/"
 [[ -d "$KIT/art/out/Graphics" ]] && cp -r "$KIT/art/out/Graphics/." "$G/Graphics/"
 [[ -n "$ART" ]] && cp -r "$ART/." "$G/Graphics/"
+cp "$KIT/pbs/trainer_types.txt" "$G/PBS/trainer_types_prismfall.txt"   # current trainer types (PLAYER_A/B)
+rm -f "$G/Data/trainer_types.dat"                                         # a missing .dat makes Essentials recompile PBS
 cp "$HERE/006_IntroCapture.rb" "$G/Plugins/ZZ Demo Autorun/"
 rm -rf "$G"/Captures/intro_*
 IC_FOE="${IC_FOE:-}" IC_PLAYER="$PLAYER" DEMO_PLAN=intro ISOLATE=1 DISPLAY_NUM="${DISPLAY_NUM:-178}" RUN_TIMEOUT="${RUN_TIMEOUT:-900}" \

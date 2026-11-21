@@ -37,7 +37,7 @@ SCREEN: ◆ FELLOWSHIP PRIORITY GUEST ◆ Welcome back, \PN. Meridian is glad yo
 (A folded page, green ink, the handwriting going downhill at the end of every line.)
 "\PN — They're taking me to Verdance. The Sovereign says I have to be there when they open his letter. I don't know what letter. I don't know anything any more. Come the long way if you want. I'd understand. I'd come the long way. — J."
 [name: Nell] (holding up her chalk) She saved me. The roots came up and she had her arms round me and I couldn't see anything but flowers. Tell her I've got the neatest S in Ironreach and she can have it.
-V131 = 1 is set on leaving town (below). QUEST LOG: "Eighteen Roads" — Go to Verdance. Up the Root Road: the Tailings, the Rootdeep's Lift Road, then the Crown Road west.
+V131 stays 0 until the Lift Road branch on 680 (0 → 1). QUEST LOG: "Eighteen Roads" — Go to Verdance. Up the Root Road: the Tailings, the Rootdeep's Lift Road, then the Crown Road west.
 ```
 
 ## Map 692 — The Tailings (`:SCRAPYARD`)
@@ -121,8 +121,8 @@ V131 = 1.
 [portrait: WICK, neutral] I was going to give you this at the end. There isn't going to be an end the way I thought, so you're having it now.
 (He takes a fold of old paper out of his sleeve, soft as cloth.)
 [portrait: WICK, neutral] The Hymn the Choir sings at every Festival is half a hymn. I was defrocked for reading the other half. This is the verse I could still remember after they took the book.
-(Received: HYMN FRAGMENT.) ITEM DESCRIPTION: "...and one of no colour shall walk the eighteen roads, / and carry them home, as a gift is ________. (The last word is torn away.)"
-[portrait: WICK, sad] I never found the last word. I used to think it was "kept". It isn't. Kept things don't go home.
+(Received: HYMN FRAGMENT.) ITEM DESCRIPTION: "...then one of no colour, the eighteen roads walked, / shall carry them home, as the old ones talked — / not chained, not broken, not bought, not crowned: / given back, as a gift is ________. (The last word is torn away.)"
+[portrait: WICK, sad] I never found the last word. I used to think it was "kept". It isn't. It doesn't even rhyme. Kept things don't go home.
 [name: Wick] And this. For whoever holds him. They'll read it before he does. That's all right. It's for them, too.
 (Received: WICK'S LETTER.) ITEM DESCRIPTION: "Sealed with candle-wax. 'To the keepers of Rowan Ashby. Be kind to him; he's been kind to everything else.'"
 [name: Hollow Woman] (at the kettle, a Lowmarsh weaver's shears on her belt) They took Mara at Lumen. Thistle. She'd want somebody to say thank you for the Ward, in Mirefen. So. Thank you.
@@ -465,7 +465,7 @@ Script: Prismfall.gym_battle(pfm_gym(:LEADER_JUNO), double: false)     # J3: LEA
 [portrait: JUNO, happy] ...Take it. The Meadow badge is yours.
 (Received: the MEADOW BADGE.)
 (SE: nine notes. The case's light runs along its seams and doesn't fade at the end. It just stays, softly, like a pilot light.)
-[portrait: JUNO, neutral] It's singing. Mine never sang. Uncle Rowan said yours would. He said "that one'll sing in every gym in the realm, Juno, mark me". I didn't know what he meant.
+[portrait: JUNO, neutral] It's singing. Mine never sang. I wrote to Uncle Rowan after Briarwick, about your case doing a chord. He wrote back: "That one'll sing in every gym in the realm, Juno, mark me." I didn't know what he meant.
 [portrait: JUNO, sad] I still don't.
 (Received: TM53 ENERGY BALL.)
 [portrait: JUNO, neutral] Energy Ball. It's the first move I ever taught anything. And that badge means Pokémon up to level fifty-one will listen to you. I checked. Twice. I'm very nervous about getting the numbers wrong.
@@ -481,7 +481,7 @@ V131 = 9.
 (Juno looks at the folder. She looks at the delegate. She looks at the ring on her finger.)
 [portrait: JUNO, neutral] No, thank you.
 [name: Meridian Delegate] I'm sorry?
-[portrait: JUNO, neutral] I've been to Mirefen, where the Lattice runoff makes the marsh glow. I've been to Lumen, where it cracked the Plate. I've been to Ebbmouth, where it stopped the river. I'm fifteen and I've seen three.
+[portrait: JUNO, neutral] I've been to Mirefen, where the Lattice runoff makes the marsh glow. I've been to Lumen, where it cracked the Plate. I've been to Briarwick, where it fed the Glasswood. I'm fifteen and I've seen three.
 [portrait: JUNO, angry] Verdance doesn't need a Lattice to stop it drowning. It needed a Warden. It's got one. No, thank you.
 (The delegate closes the folder. Prince Caedmon smiles at her, and at the delegate, and at his mother, warmly, at all of them.)
 [portrait: JUNO, neutral] And Majesty. Your Thornguard are standing in my garden.

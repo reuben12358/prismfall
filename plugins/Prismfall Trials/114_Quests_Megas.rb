@@ -355,13 +355,13 @@ tr.quest(:AS_BRAZIER_WRIT, {
 # Post-game, 18 badges (Mega Audino is Normal/Fairy: it answers Ysolde, Nyx and Sigrun, so rule R4 holds it until the
 # last badge): Wenlow and the Quiet Ward (Audinite).
 tr.quest(:NA_BEDSIDE_MANNER, {
-  :trial => :NADIR, :title => "Bedside Manner", :giver => "Wenlow", :map => 223,
+  :trial => :NADIR, :title => "Bedside Manner", :giver => "Corvin", :map => 223,
   :where => "Corvin Mott's Infirmary, Mirefen", :rank => 1, :points => 2, :rec_level => 86, :chapter => 21,
   :unlock => "badges >= 18", :board => true, :tags => [:mega, :kindness],
-  :summary => "CHALK: INFIRMARY NEEDS VISITORS. NOT DOCTORS. JUST VISITORS. - W.",
-  :steps => { :ask => "Wenlow wants someone to sit with the Quiet Ward's patients.",
+  :summary => "CHALK, IN A ROUND HAND THAT NOBODY HAS RUBBED OUT: INFIRMARY NEEDS VISITORS. NOT DOCTORS. JUST VISITORS. - W.",
+  :steps => { :ask => "Corvin asks you to do what Wenlow did: sit with the Quiet Ward's patients.",
               :beds => "Sit with three of the Quiet Ward's patients.",
-              :return => "Tell Wenlow how the visits went." },
+              :return => "Tell Corvin how the visits went." },
   :reward => { :items => [[:AUDINITE, 1]] },
   :scenes => {
     :offer => [
@@ -382,9 +382,19 @@ tr.quest(:NA_BEDSIDE_MANNER, {
       [:WENLOW, :happy, "Bring it back and show her sometime! She'd like that."],
       { :complete => true }
     ],
-    # After the Sump Purge (Ch16) Wenlow is gone; Corvin hands it over instead (his event only exists then).
+    # Wenlow dies in the Sump Purge (Ch16), before this quest can open (18 badges): Corvin gives it, using
+    # Wenlow's chalk note, and the visits still happen (Gemini review 2026-11-21). The :offer/:return scenes
+    # above stay for a save where WENLOW_ALIVE is somehow still on.
+    :corvin_offer => [
+      [:CORVIN, :sad, "You read the board. He chalked that up the week he started. I've not had the heart to rub it out."],
+      [:CORVIN, :neutral, "He talked to them. Every one. Said their eyes moved. ...They do. I checked. I'm a doctor."],
+      { :choice => "Sit with the patients?", :options => [
+          ["I'll sit with them.", [{ :accept => true }, { :step => :beds }, [:CORVIN, :deadpan, "Missus Garrow, by the window, first. She likes the weather. So he said."]]],
+          ["Not now.", [[:CORVIN, :neutral, "They'll keep. That's the problem with them."]]]] }
+    ],
     :corvin => [
-      [:CORVIN, :sad, "Ah. You. He left something for you. Labelled, of course. He labelled everything."],
+      [:CORVIN, :neutral, "Mister Coyle's hand twitched, the night nurse says. That's practically a party. His words."],
+      [:CORVIN, :sad, "He left something for you. Labelled, of course. He labelled everything."],
       "A pink stone on a loop of bandage, and a tag in round handwriting: FOR THE ONE WITH THE SINGING RING. SHOW MATRON SOMETIME!",
       [:CORVIN, :deadpan, "Matron's heartstone. She's too old for fighting. I'm too old for most things. Take it before I get sentimental. It's bad for the patients."],
       { :complete => true }

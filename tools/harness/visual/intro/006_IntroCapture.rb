@@ -19,12 +19,14 @@ if ENV["DEMO_PLAN"].to_s.start_with?("intro")
       $scene.createSpritesets
       30.times { Graphics.update; $scene.miniupdate }
       $player.name = (ENV["IC_PLAYER"] == "B") ? "Rae" : "Wren"
+      pbChangePlayer((ENV["IC_PLAYER"] == "B") ? 2 : 1)   # the intro's look choice (Prismfall Core 026)
       $PokemonSystem.textspeed = 1
       $PokemonSystem.battlescene = 0
       # the player's battle art: copy the chosen Gemini player onto the player's trainer type for this run
       tt = $player.trainer_type.to_s
       src = (ENV["IC_PLAYER"] == "B") ? "PLAYER_B" : "PLAYER_A"
       ["", "_back"].each do |suf|
+        break if tt.start_with?("PLAYER_")              # Prismfall Core 026 already gives the player their art
         s = "Graphics/Trainers/#{src}#{suf}.png"
         File.binwrite("Graphics/Trainers/#{tt}#{suf}.png", File.binread(s)) if File.exist?(s)
       end
