@@ -46,7 +46,7 @@ One entry per proposal folder, newest first. Verdicts are ADOPT, ADAPT, REJECT o
   - Brick Break / Psychic Fangs / Raging Bull crack glass: **ADOPT.**
   - Dragon's Den Amulet Coin hint NPC: **ADOPT.**
   - Ch14 density: **ADOPT.** The War Convoy moves to early Ch15.
-  - Early teaser Z-crystals (Icium at Badge 2, etc., silent until the ring): **ASK.** The creator rubber-stamps or cuts them.
+  - Early teaser Z-crystals (Icium at Badge 2, etc., silent until the ring): **ADOPT.** The creator approved them on 2026-11-21 (SPINE Rev 25).
 
 ---
 

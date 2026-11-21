@@ -1,5 +1,9 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 25 (user, 2026-11-21 15:18): battle start and teaser Z-crystals <<<
+- **Trainer battle start = B2W2 Elite Four VS sequence** (the creator's Shauntal reference video; supersedes the Rejuvenation band from earlier the same day). Built in `plugins/Prismfall EBDX Bridge/010_Bridge_VersusIntro.rb`. Named cast with a VS bust get it; generic trainers keep EBDX's transition. No in-battle VS overlay. The trainer's strip is a one-shot pose played during "You are challenged by...!", holding the last frame.
+- **Early teaser Z-crystals stay** (creator: "that's fine"): Icium Z (Badge 2), Steelium Z (4), Rockium Z and Grassium Z (8), Flyinium Z (10) as in `design/Z_MOVES.md`. They ring and wait, unusable until Bastian's ring at Badge 13 (Rev 23's one ring). The rest of the 18 are spread from Badge 13 on. Read Rev 23's "spread from 13 badges on" as "usable from 13 badges on".
+
 ## >>> REVISION 24 (user, 2026-11-20 23:49 – 2026-11-21 02:33): art moves out; focus on building <<<
 - **Character art goes to an outside tool (Gemini, run by the user).** Our character-art agents are laid off and on indefinite hiatus until the user says otherwise. Don't start any character sprite or portrait work here.
   - User verdicts: the player redo "god awful", "like someone drew it on pictionary", too stiff. Dorian "horrid", portrait "off". Tamsin's design "great", but her pixel art needs work and her portrait looks "extremely weird".
