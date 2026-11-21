@@ -10,13 +10,13 @@ MEADOW  Magiscarf's panel is pasted at (110,150) so its worn grass ellipse ends 
         meadow_bases() moves the worn patch onto the foe point (its own pixels and outline, shifted by whole art
         pixels; the ground it leaves is refilled from the same rows just left of it, so the hills' tufted edge
         and the grass bands run on; its mirror image in the right margin goes too) and lays the same patch, drawn
-        1.5x as big (bblib.PLAYER_SCALE), under the player.
+        1.2x as big (bblib.ROOM_PLAYER), under the player.
 
 Everything here runs on the HD canvas right after the panel is extended (to_hd) and never above the panel's
 horizon, so the painted margins above the panels are untouched.
 """
 import numpy as np
-from bblib import FOE, PLAYER, PLAYER_SCALE, arr, img
+from bblib import FOE, arr, img, player_at, player_scale
 
 # measured on the day panel at ORIGIN (110,150): core of the worn patch x 388..595, y 302..347
 MEADOW_CORE = (168, 203, 116)        # the worn patch
@@ -39,11 +39,12 @@ def keep_bare(room, before):
     return img(a)
 
 
-def _up(a):
-    """Nearest-neighbour PLAYER_SCALE enlargement of a mask or an RGBA block."""
+def _up(a, k=None):
+    """Nearest-neighbour enlargement (MEADOW's player-base scale) of a mask or an RGBA block."""
+    k = player_scale("MEADOW") if k is None else k
     h, w = a.shape[:2]
-    ys = (np.arange(int(round(h * PLAYER_SCALE))) / PLAYER_SCALE).astype(int).clip(0, h - 1)
-    xs = (np.arange(int(round(w * PLAYER_SCALE))) / PLAYER_SCALE).astype(int).clip(0, w - 1)
+    ys = (np.arange(int(round(h * k))) / k).astype(int).clip(0, h - 1)
+    xs = (np.arange(int(round(w * k))) / k).astype(int).clip(0, w - 1)
     return a[ys][:, xs]
 
 
@@ -89,14 +90,15 @@ def meadow_bases(*rooms):
     new = np.zeros_like(old); new[sy:, sx:] = old[:-sy, :-sx]
     clear = old & ~new
     mir &= ~new
-    # player patch: the same patch PLAYER_SCALE times bigger (bblib: 1.5x = 3 px art pixels), centred on PLAYER
+    # player patch: the same patch bigger (bblib.ROOM_PLAYER), centred on the room's player point
     ys, xs = np.nonzero(old)
     bx0, by0 = xs.min() // 2 * 2, ys.min() // 2 * 2
     bx1, by1 = xs.max() // 2 * 2 + 2, ys.max() // 2 * 2 + 2
     pmask = _up(old[by0:by1, bx0:bx1])
     ph, pw = pmask.shape
-    px0 = int(round(PLAYER[0] - pw / 2.0))
-    py0 = int(round(PLAYER[1] - ph / 2.0))
+    px, py = player_at("MEADOW")
+    px0 = int(round(px - pw / 2.0))
+    py0 = int(round(py - ph / 2.0))
     # the worn cores (no wildflowers on them: keep_bare)
     core = np.all(a0[..., :3].astype(np.int32) == MEADOW_CORE, -1) & old
     BARE.clear()

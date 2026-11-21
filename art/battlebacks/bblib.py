@@ -24,15 +24,30 @@ PLAYER = (261.0, 549.0)          # HD ground point of the player (room 116,244):
 FOE_D = [(576.0, 369.0), (445.5, 342.0)]     # doubles (room 256,164 / 198,152)
 PLAYER_D = [(207.0, 540.0), (432.0, 589.5)]  # doubles (room 92,240 / 192,262)
 # Player base = the foe base drawn PLAYER_SCALE times bigger (it is nearer the camera). Rejuvenation draws its player
-# base 1.77x as wide as the enemy base, but only the far half of it ever shows (a 64 px strip at the screen bottom),
-# ~1.6x the enemy base's area on screen. EBDX's send-out pull-back shows ours whole, so 2x (4x the area) read as a
-# huge disc with the ally lunging out of it; 1.5x (2.25x the area) keeps it clearly nearer than the foe's.
-PLAYER_SCALE = 1.5
+# base 1.77x as wide as the enemy base, but only the far half of it ever shows (a 64 px strip at the screen bottom):
+# ~1.6x the enemy base's area on screen, i.e. ~1.26x its radii. EBDX's send-out pull-back shows ours whole: 2x read
+# as a huge disc with the ally lunging out of it, 1.5x still too big; 1.3x (1.7x the area) matches Rejuvenation.
+PLAYER_SCALE = 1.3
+# Per-room player base: field -> (extra raise in room px, scale). The raise moves the base AND the ally (the build
+# writes it into the field's Bridge profile as :player_raise; 007_Bridge_Placement.rb adds it to PLAYER_RAISE).
+#   MEADOW       the worn patch, soft and pale with a wide rim, reads bigger than a platform of the same size
+#   FROZEN_LAKE  the ice ring's ripples read big, and the base sat at the screen's edge
+ROOM_PLAYER = {"MEADOW": (0, 1.2), "FROZEN_LAKE": (8, 1.15)}
 
 
-def pb(rx, ry):
+def player_scale(fid=None):
+    return ROOM_PLAYER.get(fid, (0, PLAYER_SCALE))[1]
+
+
+def player_at(fid=None):
+    """HD ground point of the player's base / feet in room `fid`."""
+    return (PLAYER[0], PLAYER[1] - ROOM_PLAYER.get(fid, (0, 0))[0] * S)
+
+
+def pb(rx, ry, fid=None):
     """Player-base radii for a foe base of rx, ry."""
-    return rx * PLAYER_SCALE, ry * PLAYER_SCALE
+    k = player_scale(fid)
+    return rx * k, ry * k
 # Vanilla Essentials/Reborn/Rejuvenation layout (512x384 screen): foe base centre (384,176).
 # Placing a vanilla bg at this HD origin puts its foe point exactly on the EBDX foe point.
 VANILLA_ORIGIN = (142, 166)

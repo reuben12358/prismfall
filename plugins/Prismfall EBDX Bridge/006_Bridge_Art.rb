@@ -1380,7 +1380,7 @@ module PrismfallEBDX
             {
               :bitmap => "pf_dragons_den_wyrmfire_magma",
               :hd => true,
-              :x => 28.0,
+              :x => 38.22,
               :y => 70.22,
               :ox => 0,
               :oy => 0,
@@ -2176,7 +2176,8 @@ module PrismfallEBDX
           :max => 220,
           :period => 70
         }
-      ]
+      ],
+      :player_raise => 8
     },
     # <<< FROZEN_LAKE
     # >>> GLASS_DUNES

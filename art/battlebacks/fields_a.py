@@ -595,7 +595,7 @@ def snowy_mountain():
 
 def frozen_lake(night=False):
     F = "frozen_lake"
-    hd = vanilla("rejuvenation", "Frozen", base="Frozen")
+    hd = vanilla("rejuvenation", "Frozen", base="Frozen", player_base=None)   # placed below, raised (ROOM_PLAYER)
     hz = 150 + 128
     xs = np.arange(864)
     nn = noise((1, 864), 3, 31, 3)[0]
@@ -630,7 +630,8 @@ def frozen_lake(night=False):
             d.line([(x, y + 2), (nx, ny + 2)], fill=C((40, 120, 170)), width=1)
             x, y = nx, ny
     eb = game_img("rejuvenation", "enemybaseFrozen")
-    place_foe_base(hd, eb); place_player_base_scaled(hd, eb)
+    place_foe_base(hd, eb)
+    place_player_base_scaled(hd, eb, scale=player_scale("FROZEN_LAKE"), at=player_at("FROZEN_LAKE"))
     if night:
         hd = grade(hd, mul=(0.45, 0.55, 0.75), add=(0, 6, 22))
         aur = blank()

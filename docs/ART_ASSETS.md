@@ -63,8 +63,9 @@ Each field's art lives in `Graphics/EBDX/Battlebacks/` and uses the field defini
 
 Paint platforms or clearings around those points: centre them there. The Bridge puts every battler's feet on
 the point (`007_Bridge_Placement.rb`; floating species hover 20 px above it), so an off-centre base shows.
-Size the player base 1.5x the foe base (`bblib.PLAYER_SCALE`; HD foe 116x25 radii -> player 174x37.5): the send-out
-pull-back shows it whole.
+Size the player base 1.3x the foe base (`bblib.PLAYER_SCALE`; HD foe 116x25 radii -> player 151x32.5): the send-out
+pull-back shows it whole. A room that needs its own size or a higher player base gets an entry in
+`bblib.ROOM_PLAYER`; the build passes the raise to the Bridge so the ally moves with the base.
 Every field also gets **particle FX** drawn by the bridge. It generates the shapes itself, so no art is needed.
 Battle weather (rain, sun, sand, hail, fog) comes from EBDX's own weather layers.
 

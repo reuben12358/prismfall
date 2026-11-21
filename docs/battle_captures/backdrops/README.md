@@ -45,8 +45,8 @@ carried round the arc), HOLLOW_CATHEDRAL (+Consecrated) (window, pillars, banner
 sky; the barrier continued in perspective), NEW_MOON (all stages: city lights instead of the hanging railing).
 `contact_sheet_pullback.png`: every room at the SENDOUT camera (`BD_VECTORS=1`, the `_wide` shots;
 `make_contact_sheet.py --suffix _wide`). Both contact sheets were shot with the battlers' feet on their bases
-(`007_Bridge_Placement.rb`), the player bases 1.5x the foe's and the ally's point raised (see
-`../placement/README.md`, item 5).
+(`007_Bridge_Placement.rb`), the player bases 1.3x the foe's (MEADOW 1.2x, FROZEN_LAKE 1.15x and higher) and the
+ally's point raised (see `../placement/README.md`, item 5).
 Glass transition v2 (Nov 21): FLOODED_DUNES/DESERT -> GLASS_DUNES no longer use EBDX's colour fade (a flat mint
 card over the whole room for 8 frames, the Pokemon floating on nothing, then the whole glass room - glints, plumes,
 glow layers - popping in at once, ~0.27 s in all). It plays in the room now (`008_Bridge_Transitions.rb`, assets from

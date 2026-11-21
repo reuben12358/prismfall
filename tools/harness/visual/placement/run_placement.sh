@@ -15,7 +15,10 @@ KIT="$(cd "$VIS/../../.." && pwd)"
 export RUN="${RUN:-/home/claude/run_place}"
 G="$RUN/game"
 [[ -d "$G" ]] || { echo "no capture copy at $G"; exit 1; }
-for d in "$KIT"/plugins/*/; do n="$(basename "$d")"; rm -rf "$G/Plugins/$n"; cp -r "$d" "$G/Plugins/$n"; done
+# PP_PLUGINS=<dir>: take the Prismfall plugins from there instead of the working tree (e.g. HEAD's plugins plus the
+# files under test, while someone else's half-written plugin files would break the boot)
+PL="${PP_PLUGINS:-$KIT/plugins}"
+for d in "$PL"/*/; do n="$(basename "$d")"; rm -rf "$G/Plugins/$n"; cp -r "$d" "$G/Plugins/$n"; done
 find "$G/Plugins" -name '__pycache__' -prune -exec rm -rf {} +
 [[ -d "$KIT/graphics" ]] && cp -r "$KIT/graphics/." "$G/Graphics/"
 # PP_GRAPHICS=<dir>: laid over Graphics/ after the kit (e.g. old room art for "before" shots)

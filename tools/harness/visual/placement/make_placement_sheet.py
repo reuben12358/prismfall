@@ -2,7 +2,7 @@
 """Before/after sheet and battle-start GIF from the placement probe (003_PlacementProbe.rb).
 
   python3 -I make_placement_sheet.py sheet <before_dir> <after_dir> <out.png> [case ...]
-  python3 -I make_placement_sheet.py ally <before_dir> <after_dir> <out.png> case ...
+  python3 -I make_placement_sheet.py ally <before_dir> <after_dir> <out.png> [--tag v1|before] [--title T] [--legend L] case ...
   python3 -I make_placement_sheet.py gif <intro_dir> <frames_subdir> <out_base> [frame_ms=66] [last_frame]
 
 Marks drawn on the real-engine frames (never retouched otherwise):
@@ -15,14 +15,21 @@ from PIL import Image, ImageDraw
 
 S = 2.25
 FOE, PLAYER = (234, 152), (116, 244)                     # room px: EBDX BATTLERPOS, player raised by the Bridge
-# painted bases, HD centre, rx, ry (bblib FOE / PLAYER): "before"/"v1" = player base 2x the foe's at EBDX's point,
-# "after" = 1.5x (bblib.PLAYER_SCALE) at the raised point
-OLD_BASES = [(526.5, 342.0, 116, 25), (261.0, 567.0, 232, 50)]
-NEW_BASES = [(526.5, 342.0, 116, 25), (261.0, 549.0, 174, 37.5)]
-# rooms whose bases differ: (dir tag, case prefix) -> [foe, player] (None = no base)
+ROOM_RAISE = {"frozen_lake": 8}                          # extra player raise (bblib.ROOM_PLAYER), room px
+# painted bases, HD centre, rx, ry, per capture state:
+#   "before" = the original rooms: player base 2x the foe base at EBDX's point (116,252)
+#   "v1"     = player base 1.5x, point raised 8 room px          "after" = v2: 1.3x (MEADOW 1.2x, FROZEN_LAKE 1.15x
+#              and 8 room px higher still)
+TAG_BASES = {"before": [(526.5, 342.0, 116, 25), (261.0, 567.0, 232, 50)],
+             "v1": [(526.5, 342.0, 116, 25), (261.0, 549.0, 174, 37.5)],
+             "after": [(526.5, 342.0, 116, 25), (261.0, 549.0, 151, 32.5)]}
+# rooms whose bases differ: (state, case prefix) -> [foe, player] (None = no base)
 BASES = {("before", "meadow"): [(492.0, 325.0, 118, 26), None],
-         ("v1", "meadow"): [(526.0, 343.0, 116, 26), (260.0, 568.0, 232, 54)],
-         ("after", "meadow"): [(526.0, 343.0, 116, 26), (261.0, 548.0, 175, 39)]}
+         ("v1", "meadow"): [(526.0, 343.0, 116, 26), (261.0, 548.0, 175, 39)],
+         ("after", "meadow"): [(526.0, 343.0, 116, 26), (260.0, 549.0, 146, 33)],
+         ("before", "frozen_lake"): [(526.5, 342.0, 126, 31), (261.0, 567.0, 252, 62)],
+         ("v1", "frozen_lake"): [(526.5, 342.0, 126, 31), (261.0, 549.0, 189, 46.5)],
+         ("after", "frozen_lake"): [(526.5, 342.0, 126, 31), (261.0, 531.0, 145, 35.5)]}
 CYAN, RED, YELLOW = (60, 230, 255), (255, 40, 40), (255, 230, 40)
 
 
@@ -45,7 +52,7 @@ def bases_for(tag, case):
     for (t, pre), b in BASES.items():
         if t == tag and case.startswith(pre + "__"):
             return b
-    return NEW_BASES if tag == "after" else OLD_BASES
+    return TAG_BASES[tag]
 
 
 def mark(im, rows, case, view, tag, ox=0, oy=0, sc=1.0):
@@ -94,7 +101,7 @@ def sheet(bdir, adir, out, cases):
     d.text((6, 20), "cyan = base painted in the room   red + = where EBDX stands the battler   yellow = sprite's "
                     "lowest opaque row (its feet) in that frame", fill=(235, 235, 235))
     d.text((6, 36), "BEFORE: EBDX's species metrics, MEADOW's patch off the anchor, player base 2x the foe's. AFTER: Bridge "
-                    "grounding (foe feet 16 px in front of the centre, floaters 20 px up), bases moved, player base 1.5x.",
+                    "grounding (foe feet 16 px in front of the centre, floaters 20 px up), bases moved, player base 1.3x.",
            fill=(200, 200, 200))
     y = head
     for c in cases:
@@ -123,19 +130,19 @@ def sheet(bdir, adir, out, cases):
     print(out, img.size, len(cases), "rooms")
 
 
-def ally(bdir, adir, out, cases):
-    """Ally before/after: per room, the send-out pull-back and the battle camera (whole frames, 1/2), before ("v1":
-    2x player base, EBDX's point) and after."""
+def ally(bdir, adir, out, cases, before_tag="v1", title=None, legend=None):
+    """Ally before/after: per room, the send-out pull-back and the battle camera (whole frames, 1/2), before
+    (state `before_tag`) and after."""
     B, A = load(bdir), load(adir)
     sw, sh = 256, 192
-    lab, head = 16, 44
+    lab, head = 16, 60
     W = 4 * (sw + 4)
     img = Image.new("RGB", (W, head + len(cases) * (sh + lab + 6)), (14, 14, 18))
     d = ImageDraw.Draw(img)
-    d.text((6, 4), "Ally placement - real engine. Send-out pull-back and battle camera (1/2), BEFORE / AFTER.", fill=(235, 235, 235))
-    d.text((6, 20), "BEFORE: player base 2x the foe base at EBDX's point (116,252). AFTER: 1.5x, point raised 8 room px, "
-                    "feet just in front of its centre.  cyan = painted base, red + = anchor, yellow = feet",
-           fill=(200, 200, 200))
+    d.text((6, 4), title or "Ally placement - real engine (mkxp-z + EBDX + Prismfall Bridge). Send-out pull-back and "
+                            "battle camera (1/2), BEFORE / AFTER.", fill=(235, 235, 235))
+    for k, line in enumerate((legend or "").split("\n")):
+        d.text((6, 20 + 13 * k), line, fill=(200, 200, 200))
     y = head
     for c in cases:
         foe, pl = c.split("__")[1:]
@@ -143,15 +150,17 @@ def ally(bdir, adir, out, cases):
                fill=(255, 220, 120))
         x = 0
         for view in ("sendout", "main"):
-            for tag, rows, dd in (("v1", B, bdir), ("after", A, adir)):
+            for tag, rows, dd in ((before_tag, B, bdir), ("after", A, adir)):
                 p = os.path.join(dd, "%s_%s_clean.png" % (c, view))
                 if os.path.exists(p):
                     im = Image.open(p).convert("RGB")
                     im = im.resize((sw, sh), Image.LANCZOS)
                     mark(im, rows, c, view, tag, sc=0.5)
                     img.paste(im, (x, y + lab))
-                d.text((x + 4, y + lab + 2), ("BEFORE" if tag == "v1" else "AFTER") +
-                       (" - pull-back" if view == "sendout" else " - battle camera"), fill=(255, 255, 255))
+                d.rectangle([x, y + lab, x + 150, y + lab + 13], fill=(14, 14, 18))
+                d.text((x + 4, y + lab + 1), ("BEFORE" if tag != "after" else "AFTER") +
+                       (" - pull-back" if view == "sendout" else " - battle camera"),
+                       fill=(255, 255, 255) if tag != "after" else (140, 255, 160))
                 x += sw + 4
         y += sh + lab + 6
     img.save(out, optimize=True)
@@ -164,29 +173,52 @@ def gif(idir, sub, out, ms=66, last=None):
     if last is not None:
         files = files[:last + 1]
     log = {}
-    p = os.path.join(idir, "intro.tsv")
+    p = os.path.join(idir, "intro_%s.tsv" % sub[3:] if sub.startswith("pp_") else "intro.tsv")
+    if not os.path.exists(p):
+        p = os.path.join(idir, "intro.tsv")
     if os.path.exists(p):
         for r in csv.DictReader(open(p), delimiter="\t"):
             log[int(float(r["shot"]))] = {k: float(v) for k, v in r.items()}
     frames = [Image.open(os.path.join(src, f)).convert("RGB") for f in files]
-    q = [f.quantize(160, dither=Image.NONE) for f in frames]
+    case = sub[3:] if sub.startswith("pp_") else sub
+    room, foe, pl_sp = (case.split("__") + ["", ""])[:3]
+    title = "%s battle start - foe %s, ally %s - real engine (mkxp-z + EBDX + Prismfall Bridge), every 2nd frame, " \
+            "half speed" % (room.upper(), foe.upper(), pl_sp.upper())
+    # GIF: the real frames, untouched, with a caption bar under them
+    cap = 16
+    q = []
+    for k, fr in enumerate(frames):
+        c = Image.new("RGB", (fr.width, fr.height + cap), (14, 14, 18))
+        c.paste(fr, (0, 0))
+        dc = ImageDraw.Draw(c)
+        dc.text((4, fr.height + 2), "%s battle start - real engine, half speed" % room.upper(), fill=(220, 220, 220))
+        dc.text((fr.width - 44, fr.height + 2), "%4.1fs" % (k * 2 / 60.0), fill=(255, 220, 120))
+        q.append(c.quantize(160, dither=Image.NONE))
     q[0].save(out + ".gif", save_all=True, append_images=q[1:], duration=ms, loop=0, optimize=False)
     # key frames with the marks: painted bases through each frame's camera, the anchors
     n = 8
-    strip = Image.new("RGB", (512 * 4, 384 * 2))
+    head, lab = 34, 14
+    strip = Image.new("RGB", (512 * 4, head + (384 + lab) * 2), (14, 14, 18))
+    ds = ImageDraw.Draw(strip)
+    ds.text((6, 4), title, fill=(235, 235, 235))
+    ds.text((6, 19), "Key frames. cyan = bases painted in the room (through that frame's camera)   red + = where EBDX "
+                     "stands each battler (the ally's feet land just in front of it)", fill=(200, 200, 200))
     picks = [int(k * (len(frames) - 1) / (n - 1)) for k in range(n)]
     for k, i in enumerate(picks):
         im = frames[i].copy()
         f = log.get(i)
         if f:
             d = ImageDraw.Draw(im)
-            for (bx, by, rx, ry), (ex, ey) in zip(BASES[("after", "meadow")], (FOE, PLAYER)):
+            pl = (PLAYER[0], PLAYER[1] - ROOM_RAISE.get(room, 0))
+            for (bx, by, rx, ry), (ex, ey) in zip(bases_for("after", case), (FOE, pl)):
                 cx = f["bg_x"] - (f["bg_ox"] - bx / S) * f["bg_zx"]; cy = f["bg_y"] - (f["bg_oy"] - by / S) * f["bg_zy"]
                 ex_ = f["bg_x"] - (f["bg_ox"] - ex) * f["bg_zx"]; ey_ = f["bg_y"] - (f["bg_oy"] - ey) * f["bg_zy"]
                 rxs, rys = rx / S * f["bg_zx"], ry / S * f["bg_zy"]
                 d.ellipse([cx - rxs, cy - rys, cx + rxs, cy + rys], outline=CYAN)
                 d.line([ex_ - 5, ey_, ex_ + 5, ey_], fill=RED); d.line([ex_, ey_ - 5, ex_, ey_ + 5], fill=RED)
-        strip.paste(im, ((k % 4) * 512, (k // 4) * 384))
+        x, y = (k % 4) * 512, head + (k // 4) * (384 + lab)
+        ds.text((x + 4, y), "%d. t = %.1f s" % (k + 1, i * 2 / 60.0), fill=(255, 220, 120))
+        strip.paste(im, (x, y + lab))
     strip.save(out + "_keys.png", optimize=True)
     print(out + ".gif", len(frames), "frames", os.path.getsize(out + ".gif") // 1024, "KB")
 
@@ -194,8 +226,13 @@ def gif(idir, sub, out, ms=66, last=None):
 if __name__ == "__main__":
     if sys.argv[1] == "sheet":
         sheet(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
-    elif sys.argv[1] == "ally":
-        ally(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
+    elif sys.argv[1] == "ally":           # ally <before> <after> <out> [--tag v1|before] [--title T] [--legend L] case...
+        a = sys.argv[5:]
+        kw = {}
+        for opt, key in (("--tag", "before_tag"), ("--title", "title"), ("--legend", "legend")):
+            if opt in a:
+                k = a.index(opt); kw[key] = a[k + 1]; del a[k:k + 2]
+        ally(sys.argv[2], sys.argv[3], sys.argv[4], a, **kw)
     else:
         gif(sys.argv[2], sys.argv[3], sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 66,
             int(sys.argv[6]) if len(sys.argv) > 6 else None)

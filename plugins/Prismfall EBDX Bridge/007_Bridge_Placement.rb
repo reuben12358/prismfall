@@ -27,7 +27,7 @@
 #              its feet a little in front of the base centre (the foe base is
 #              25 px deep each way at the battle camera), as a creature standing
 #              on a disc seen from above shows its front feet. Player +2: just
-#              in front of its (1.5x) base's centre.
+#              in front of its (1.3x) base's centre.
 #   HOVER      bitmap px above the foot line for floating species
 #   FLOATING   species => true/false, wins over the automatic rule
 #              (EBDX BattlerAltitude > 0, or Levitate for species EBDX has no
@@ -40,7 +40,8 @@
 # 69-79% of itself. In Prismfall rooms (whose bases art/battlebacks paints
 # around bblib.PLAYER) the point is raised PLAYER_RAISE room px: 18 px at the
 # battle camera (84-94% shown), and at the send-out pull-back the ally stands a
-# little further into the scene. EBDX's stock rooms keep their own point.
+# little further into the scene. A room whose base is painted higher still adds
+# its profile's :player_raise (FROZEN_LAKE). EBDX's stock rooms keep their own point.
 #===============================================================================
 module PrismfallEBDX
   GROUND_SPRITES = true
@@ -90,6 +91,14 @@ module PrismfallEBDX
       y -= step
     end
     return nil
+  end
+
+  # Extra raise of the ally's point for one room (room px): its base was painted higher
+  # (art/battlebacks bblib.ROOM_PLAYER -> the field's generated profile :player_raise).
+  def room_player_raise(field_id, battle = nil)
+    return 0 if field_id.nil? || field_id == :NONE
+    stage = battle ? current_stage(battle) : 1
+    return (profile_for(field_id, stage)[:player_raise] || 0).to_i
   end
 
   def floating?(species, form = 0)
@@ -148,11 +157,12 @@ if defined?(DynamicPokemonSprite) && defined?(EliteBattle)
     alias prismfall_place_adjustMetrics adjustMetrics unless method_defined?(:prismfall_place_adjustMetrics)
     def adjustMetrics
       prismfall_place_adjustMetrics
-      return if !PrismfallEBDX::GROUND_SPRITES || PrismfallEBDX::PLAYER_RAISE == 0
+      return if !PrismfallEBDX::GROUND_SPRITES
       return if !@data.is_a?(Hash) || !@data["prismfall_field"] || !@data["backdrop"].to_s.start_with?("field_")
       return if !@battle || @battle.pbMaxSize > 1
+      lift = PrismfallEBDX::PLAYER_RAISE + PrismfallEBDX.room_player_raise(@data["prismfall_field"], @battle)
       b = @sprites["battler0"]
-      b.ey -= PrismfallEBDX::PLAYER_RAISE if b && b.ey
+      b.ey -= lift if b && b.ey && lift != 0
     rescue StandardError => e
       PrismfallEBDX.log_error("BattleSceneRoom#adjustMetrics", e)
     end

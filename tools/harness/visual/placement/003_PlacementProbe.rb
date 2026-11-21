@@ -8,11 +8,12 @@
 #   PP_CASES="MEADOW:TAUROS/LUCARIO;GRAND_STAGE:JOLTIK/SNORLAX;NEW_MOON:3:GASTLY/BIDOOF"
 #                     field[:stage]:FOE/PLAYER (player defaults to LUCARIO)
 #   PP_VECTORS=1      also the ENEMY (intro close-up), SENDOUT (pull-back) and PLAYER framings
-#   PP_INTRO=<case#>  dump every 2nd frame of that case from the battle start (GIF source), with
-#                     Captures/placement/intro.tsv: per dumped frame, the room camera and both battlers
+#   PP_INTRO=<case#>[,<case#>...]  dump every 2nd frame of those cases from the battle start (GIF source), with
+#                     Captures/placement/intro_<case>.tsv: per dumped frame, the room camera and both battlers
 #   PP_WAIT=150       frames to run before the MAIN shot
 #   PP_GROUND=0       turn the Bridge's sprite grounding off (EBDX's own species metrics: "before" shots)
 #   PP_FOOT=16,-2 PP_RAISE=0   an earlier FOOT_LINE / PLAYER_RAISE (with PP_GRAPHICS = that version's rooms)
+#   PP_ROOM_RAISE=0   ignore the rooms' own extra player raise (profile :player_raise)
 # Output: Captures/placement/<case>_<view>.png (+ _clean without databoxes), Captures/placement/probe.tsv
 #===============================================================================
 module PlacementProbe
@@ -39,13 +40,14 @@ module PlacementProbe
     @tsv = "Captures/placement/probe.tsv"
     File.write(@tsv, %w[case view idx species anchor_x anchor_y spr_x spr_y ox oy zoom_x zoom_y bmp_w bmp_h
                         feet_row feet_l feet_r top_row bg_x bg_y bg_ox bg_oy bg_zx bg_zy shadow_vis].join("\t") + "\n")
-    intro = (ENV["PP_INTRO"] || "-1").to_i
+    intro = (ENV["PP_INTRO"] || "-1").split(",").map(&:to_i)
     cases.each_with_index do |(id, st, foe, pl), ci|
       next if !FieldEffects.exists?(id)
       next if !GameData::Species.exists?(foe) || !GameData::Species.exists?(pl)
       @current = name_of(id, st, foe, pl)
       @done = false
-      DemoRun.every = (ci == intro) ? 2 : 100000
+      DemoRun.every = intro.include?(ci) ? 2 : 100000
+      @intro_tsv = nil
       party = [DemoRun.mon(pl, 50, [:TACKLE])]
       DemoRun.battle("pp_#{@current}", party, :turns => 1) do
         $game_temp.clear_battle_rules
@@ -105,7 +107,7 @@ module PlacementProbe
     bg = room.instance_variable_get(:@sprites)["bg"]
     return if !bg || bg.disposed?
     @intro_tsv ||= begin
-      f = "Captures/placement/intro.tsv"
+      f = "Captures/placement/intro_#{@current}.tsv"
       File.write(f, %w[shot bg_x bg_y bg_ox bg_oy bg_zx bg_zy v0 x0 y0 oy0 z0 v1 x1 y1 oy1 z1].join("\t") + "\n")
       f
     end
@@ -187,6 +189,10 @@ if ENV["DEMO_PLAN"].to_s == "placement"
     f, b = ENV["PP_FOOT"].split(",").map(&:to_i)
     PrismfallEBDX::FOOT_LINE[:front] = f
     PrismfallEBDX::FOOT_LINE[:back] = b
+  end
+  # PP_ROOM_RAISE=0: ignore the rooms' own :player_raise (shots of the art before it existed)
+  if ENV["PP_ROOM_RAISE"] == "0" && PrismfallEBDX.respond_to?(:room_player_raise)
+    PrismfallEBDX.define_singleton_method(:room_player_raise) { |*_a| 0 }
   end
   if ENV["PP_RAISE"] && defined?(PrismfallEBDX::PLAYER_RAISE)
     PrismfallEBDX.send(:remove_const, :PLAYER_RAISE)

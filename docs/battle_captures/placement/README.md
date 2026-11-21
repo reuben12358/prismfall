@@ -5,9 +5,10 @@ command phase. `before_after_sheet.png`: 16 rooms, each at the battle camera (fo
 pull-back (1/2), before and after. Cyan = the base painted in the room (through that frame's camera), red + =
 where EBDX stands the battler, yellow = the sprite's lowest opaque row (its feet). Species: Joltik, Bidoof
 (small), Tauros, Snorlax, Wailord (large), Gyarados (tall), Gastly, Bronzong (floating), Torkoal (wide), Lucario.
-`meadow_battle_start.gif` (`_keys.png` with the bases marked): the first ~7.5 s of a MEADOW battle after the fix,
-every 2nd engine frame, half speed. `ally_before_after.png`: the ally side in 6 rooms at the send-out pull-back
-and the battle camera, before and after the player-base fix (item 5).
+`meadow_battle_start.gif` and `frozen_lake_battle_start.gif` (`_keys.png`: 8 numbered key frames with the bases
+marked): the first ~7 s of a battle, every 2nd engine frame, half speed, captioned. `ally_before_after.png`: the
+ally side in 6 rooms at the send-out pull-back and the battle camera, original vs v1 (item 5);
+`ally_v2_before_after.png`: v1 vs v2 (smaller player bases; MEADOW and FROZEN_LAKE tuned on their own).
 
 ## What was wrong
 
@@ -52,20 +53,25 @@ Every other room's foe and player platform is centred on the anchors (checked on
 - Player point: in Prismfall rooms the Bridge raises EBDX's single-battle player point 8 room px (116,252 ->
   116,244, `PLAYER_RAISE`): 18 px at the battle camera, so 84-94% of a small ally shows; EBDX's stock rooms and
   doubles keep EBDX's points.
-- Player bases: `bblib.PLAYER_SCALE` = 1.5 (was 2): every builder's player base (platforms, stumps, ring stones,
-  silk, scaled vanilla bases, MEADOW's patch) is the foe base's size x 1.5 (2.25x the area, a bit more than
-  Rejuvenation's on-screen 1.6x since ours shows whole and nearer), centred on the raised point `bblib.PLAYER`
-  (261,549 HD). Rim, texture and colours unchanged; ring stones a little smaller and fewer. Only the player-base
-  band (HD y 495-640) of the rooms changed; layers that sit there followed (a few HD layers re-cropped).
+- Player bases: `bblib.PLAYER_SCALE` = 1.3 (v1 1.5, originally 2): every builder's player base (platforms,
+  stumps, ring stones, silk, scaled vanilla bases, MEADOW's patch) is the foe base's size x 1.3 (1.7x the area:
+  Rejuvenation's on-screen ratio, ~1.6x), centred on the raised point `bblib.PLAYER` (261,549 HD). Per-room
+  exceptions live in `bblib.ROOM_PLAYER` (field -> extra raise in room px, scale): MEADOW 1.2x (the soft worn
+  patch with its pale rim reads bigger than a platform), FROZEN_LAKE 1.15x and 8 room px higher (its ripple ring
+  read big, at the screen's edge). The build writes a room's extra raise into its Bridge profile
+  (`:player_raise`), and `007_Bridge_Placement.rb` stands the ally there too, so its feet stay just in front of
+  the base's centre. Rim, texture and colours unchanged; ring stones a little smaller and fewer. Only the
+  player-base band (HD y 495-640) of the rooms changed; layers that sit there followed (a few re-cropped).
 - `art/battlebacks/bases.py` + `fields_h.meadow`: MEADOW's worn patch moved onto the foe point (its own pixels,
-  whole art pixels), the spot refilled from the same rows, its mirror cleared, the same patch 1.5x under the
+  whole art pixels), the spot refilled from the same rows, its mirror cleared, the same patch 1.2x under the
   player, no wildflowers on the worn cores; the two tall-grass clumps that stood there frame it instead.
 - `fields_b` (WATER_SURFACE piling, BEACH rock), `fields_f` (WASTELAND barrel), `fields_d` (MINDSCAPE stage-2
   hands): moved off the player bases. Only the base areas of these rooms changed.
 
 Rebuild: `RUN=<capture copy> PP_CASES="MEADOW:TAUROS/LUCARIO;..." PP_VECTORS=1 bash tools/harness/visual/placement/run_placement.sh`
-(`PP_GROUND=0` = EBDX's own metrics, `PP_FOOT=16,-2 PP_RAISE=0` = an earlier tuning, `PP_GRAPHICS=<dir>` = older
-art, `PP_INTRO=<case#>` = frame dump + camera log), then
+(`PP_GROUND=0` = EBDX's own metrics, `PP_FOOT=16,-2 PP_RAISE=0 PP_ROOM_RAISE=0` = an earlier tuning,
+`PP_GRAPHICS=<dir>` = older art, `PP_PLUGINS=<dir>` = another plugin tree, `PP_INTRO=<case#>[,...]` = frame dumps +
+camera logs), then
 `python3 -I tools/harness/visual/placement/make_placement_sheet.py sheet|ally|gif ...`.
 
 Not verified: double/triple battles, Windows / real GPU.

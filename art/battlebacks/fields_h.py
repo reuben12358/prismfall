@@ -218,7 +218,7 @@ def meadow():
     ext_day, ext_night = extended_panels()
     msk = mask_hd(sky_mask_art(ext_day))
     # worn patches where EBDX stands the battlers (bases.py): the panel's own one moved onto the foe point,
-    # the same patch 1.5x as big under the player; the two tall-grass clumps that stood on that spot frame it instead
+    # the same patch 1.2x as big under the player; the two tall-grass clumps that stood on that spot frame it instead
     hd, hn = bases.meadow_bases(to_hd(ext_day), to_hd(ext_night))
     hd = blend(hd, vgradient(HD, [(0, (255, 240, 180, 80)), (0.5, (255, 250, 200, 0)), (1, (20, 60, 20, 40))]),
                "softlight")

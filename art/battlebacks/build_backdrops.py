@@ -41,6 +41,9 @@ def main(argv):
             res = REGISTRY[fid]()
             write_preview(fid, res)
             key = fid.replace("ZZ_", "")
+            lift = bblib.ROOM_PLAYER.get(key, (0, 0))[0]
+            if lift:          # the room's player base sits higher: the Bridge stands the ally there too
+                res["profile"][S("player_raise")] = lift
             profiles[key] = res["profile"]
             origins[key] = {"sources": res["origins"], "files": sorted(set(bblib.WRITTEN))}
         elif fid.replace("ZZ_", "") in prev:
