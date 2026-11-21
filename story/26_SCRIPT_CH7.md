@@ -161,6 +161,9 @@ Script: Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 2)     # J2; version 20 + st
   (Later. The ward. Corvin is changing a dressing on Old Fen's good hand.)
   [portrait: CORVIN, neutral] I'm a doctor. I treat hands. I don't ask whose.
   [portrait: CORVIN, sad] And I'd thank you not to ask me twice, because the second time I might tell you, and then it'd be yours to carry. Not mine.
+  (Back in the dispensary. Juno looks up from the ledgers before you've said anything.)
+  [portrait: JUNO, sad] ...He wouldn't say. I can tell. Good. He's a good doctor.
+  [name: Juno] *(closing the ledger very gently)* I'm going to stop reading these now.
 Switch S118 CH7_J2_DONE = ON. V127 = 3.
 ```
 *(09 #2. NARRATIVE_KEYS: `:name_him` JUNO −3 now, +2 at Ironreach (she already knew); `:reassure` +2 now, −2 then.)*
@@ -244,6 +247,7 @@ Script: Prismfall.checkpoint     # NARRATIVE_KEYS §10: GO_SWEET_TOOTH's checkpo
 [portrait: GUTTER, happy] *(a vast shape on a barge passing under the walkway, with a Muk the size of a cart asleep beside her)* No she won't, dear. She's patient. Peaches are patient.
 ```
 *(Mother Gutter's one line; she returns in Act IV. GO_SWEET_TOOTH: "the third offer is the sweetest", Wenlow's warning after the first.)*
+*(Missability (Gemini review 2026-11-21): the vendor outside the Mirefen PC stays and repeats offer 3 on every visit to 221 until Pecharunt is beaten in Ch18, so a player chasing every Game Over for the Ruin Route can still reach GO_SWEET_TOOTH after declining offers 1-2.)*
 
 ## Maps 230–233 — the Infirmary gym (Gym 6; GYM_PUZZLES Gym 6; a double battle)
 ```
@@ -309,7 +313,7 @@ MOVE: Juno runs down the stairs with Wenlow.
 (You walk in.)
 (Inside, the chime is everywhere. The light is grey and comes from every direction. Your skin doesn't burn. Under your ribs something is very still.)
 (Ama's bed by the window. The salt in her hair has spread down onto the pillow and onto her cheek, and it's turning clear, the way the Lowlight turned clear.)
-(You lift her. She's light as a lamp. Glass and salt crackle under your hands.)
+(You lift her. She's too light for nine, except where the salt has taken hold: there she's heavy and cold as stone. Glass and salt crackle under your hands.)
 (At the Veil's edge, with Ama in your arms, you look down.)
 (Under the clear salt over her eyes, her eyes are moving. Side to side. Fast. The way eyes move when someone's dreaming.)
 WAIT 60.

@@ -124,6 +124,12 @@ class Battle::AI
     return true if failed
     return false if !FieldEffects.active?(@battle)
     return true if FieldEffects.move_failure_message(@battle, @user.battler, @move.move)
+    # A blocked move that still counts toward a field transition (:even_if_failed, e.g. Sunny Day on
+    # Stormfront -> Rainbow) isn't a wasted turn: let the AI pick it (Gemini review 2026-11-21, Odessa).
+    defn = FieldEffects.current_definition(@battle)
+    if defn && (defn[:transitions] || []).any? { |t| t[:even_if_failed] && Array(t[:moves]).include?(@move.id) }
+      return false
+    end
     weather = FieldEffects::AI_WEATHER_MOVES[@move.function_code]
     return true if weather && FieldEffects.env_spec_value(@battle, :weather, :block,
                      FieldEffects.env_spec_value(@battle, :weather, :transform, weather) || weather)

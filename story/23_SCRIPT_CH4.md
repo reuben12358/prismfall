@@ -298,26 +298,25 @@ V108 EBB_STATE = 2. WAIT 120.
 (On the far bank, at the intake, three figures in grey cowls and carved bark masks. One of them, a woman, is cutting cable at the intake's housing with a pair of shears, one clean cut, then another.)
 MOVE: Marisol comes down the towpath at a dead run in her nightshirt and an oilskin, barefoot.
 [portrait: MARISOL, shocked] Who's on the water? Who's — oh, tides take it. Pella.
-[portrait: MARISOL, angry] Kid. With me. Whoever's at that intake—
-SE: a flat, hard BANG from the intake. A shower of sparks. The whine stops dead.
-(And the river comes back. All at once. A black wall of water heaves down the channel toward the harbour, and the punt spins and goes with it, straight for the Guild Mill's race.)
-[portrait: MARISOL, shocked] The race. The RACE. She'll go under the wheel!
-[name: Marisol] The race gate! The chain's on the platform by the Guild Mill! Drop it, kid, DROP IT! I'll get the punt!
-MOVE: Marisol throws a Poké Ball into the river. A Floatzel hits the water and she goes in after it.
-(Two grey cowls run down the towpath toward you, away from the intake. They see you and stop.)
+[portrait: MARISOL, angry] Kid. Whoever's at that intake is about to let the whole river go at once. Stop them. I'm getting Pella off the water before they do.
+MOVE: Marisol throws a Poké Ball into the river. A Floatzel hits the still water and she goes in after it, swimming hard for the punt.
+(Two grey cowls run down the towpath toward you from the intake. They see you and stop.)
 [name: Bereaved] Out of the way!
 BATTLE: double battle vs [HOLLOW_GRUNT_M "Bereaved"] + [HOLLOW_GRUNT_F "Bereaved"] (Ebbmouth version; levels per BALANCE for the segment before Gym 3). Field: Water Surface (160's river).
 (WIN:)
 MOVE: the two Bereaved scatter over the footbridge. The third, the woman with the shears, is already on the far roofs. She looks back once, at you. Then she's gone.
-(At the race gate's platform a fourth figure is hauling at the chain alone. Grey cowl. Bark mask. The chain won't move. He turns, sees you, and puts himself between you and the gate.)
-[name: Masked Boy] *(through the mask, muffled)* Stay out of it! You too, ferry kid—
-[name: Masked Boy] It's jammed, it's not your business, GET BACK—
+(Mist off the dead river. At the race gate's platform, below the mill lamps, a fourth figure is hammering an iron wedge into the gate's pawl, so the race stays open and the surge hits the Guild Mill's wheel full on. Grey cowl. Bark mask. He hears you coming in the dark, sees a running shape, and puts himself between you and the gate.)
+[name: Masked Boy] *(through the mask, muffled)* Meridian? You're not dropping this gate on us. Not tonight.
+[name: Masked Boy] Get back! GET BACK—
 BATTLE: HOLLOW_TEO "Teo", version 0 (his first battle; BALANCE 4b). Field: Water Surface. (Hollow admin; can't be fled.)
-(LOSE: whiteout to the Pokémon Center; the scene restarts at the race gate, the punt still spinning in the current.)
+(LOSE: whiteout to the Pokémon Center; the scene restarts on the towpath at the race gate, the river still dead.)
 (WIN:)
-[name: Masked Boy] You don't — you don't fight like— 
-(He turns to the gate and sees the punt for the first time: a child in a nightdress, spinning toward the race, screaming for her father.)
-[name: Masked Boy] ...No. No, no, no. I didn't — there wasn't anyone on the water—
+[name: Masked Boy] You're not — you're a kid. You're just a—
+SE: a flat, hard BANG from the intake. A shower of sparks. The whine stops dead.
+(And the river comes back. All at once. A black wall of water heaves down the channel toward the harbour. Out of the mist, upriver, a punt comes spinning round the bend into the mill lamps, with a child in a nightdress clinging to it and screaming for her father, Marisol and the Floatzel thrashing behind it in the surge.)
+[portrait: MARISOL, shocked] *(from the water)* The race! The RACE! She'll go under the wheel! The GATE!
+[name: Masked Boy] ...No. No, no, no. There wasn't anyone on the water — there wasn't anyone on the WATER—
+(He wrenches at his own wedge and hauls on the chain to drop the gate. It doesn't move.)
 [name: Masked Boy] Help me. HELP me. It's jammed at the pawl, it takes two!
 > (Haul the chain with him.)
 (Only one choice. The PC takes the chain beside him. SE: iron grinding. The pawl gives. The gate drops into the race with a boom that shakes the platform.)

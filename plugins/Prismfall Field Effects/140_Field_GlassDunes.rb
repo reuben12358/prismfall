@@ -29,7 +29,8 @@
 #===============================================================================
 FieldEffects.register(:GLASS_DUNES, (lambda do
   impacts = [:EARTHQUAKE, :MAGNITUDE, :BULLDOZE, :FISSURE, :PRECIPICEBLADES, :HEADLONGRUSH, :STOMPINGTANTRUM,
-             :HIGHHORSEPOWER, :HEAVYSLAM, :ROCKSMASH, :EXPLOSION, :SELFDESTRUCT]
+             :HIGHHORSEPOWER, :HEAVYSLAM, :ROCKSMASH, :EXPLOSION, :SELFDESTRUCT,
+             :BRICKBREAK, :PSYCHICFANGS, :RAGINGBULL]   # barrier-breakers crack glass too (Gemini review 2026-11-21)
   chill   = [:BLIZZARD, :ICEBEAM, :SHEERCOLD, :GLACIATE, :FREEZEDRY, :ICICLECRASH, :AVALANCHE, :ICEHAMMER,
              :MOUNTAINGALE, :GLACIALLANCE, :FREEZINGGLARE]
   floods  = [:SURF, :MUDDYWATER, :HYDROPUMP, :WATERSPOUT, :WAVECRASH, :WATERPLEDGE, :HYDROCANNON]
@@ -301,10 +302,9 @@ FieldEffects.register(:GLASS_DUNES, (lambda do
         :fixed_damage_mods => [
           { :moves => strike_back, :mult => 1.5, :message => "The mirror glass threw {2} back even harder!" }
         ],
-        :move_stat_boosts => [
-          { :moves => mirror_images, :user_stats => { :EVASION => 1 }, :message => "{1}'s images multiplied in the mirrors!" },
-          { :moves => blinders, :target_stats => { :ACCURACY => -1 }, :message => "The mirrors threw the glare back and forth!" }
-        ],
+        # Evasion/accuracy stay at normal strength here (the extra +1/-1 was dropped: Gemini review 2026-11-21,
+        # RNG cheese); the mirrors only comment on it.
+        :move_stat_boosts => [],
         :added_effects => [],
         :status_immunity => [],
         :effect_durations => { :REFLECT     => [3, "The mirror glass caught the barrier and held it!"],

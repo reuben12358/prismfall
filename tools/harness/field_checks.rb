@@ -205,7 +205,8 @@ module Harness
       log, info = mini("CHECK Glass Dunes: Double Team on Mirror Glass", :field => :GLASS_DUNES, :stage => 2,
                        :party => [mk(:MEW, :moves => [:DOUBLETEAM])], :foe => mk(:SNORLAX), :script => [:DOUBLETEAM, :SPLASH])
       eva = info[:snaps].last&.[](:stages)&.[](:EVASION)
-      out << result("Glass Dunes: Double Team +2 evasion on Mirror Glass (the images multiply)", eva == 2,
+      # Gemini review 2026-11-21: Mirror Glass no longer amplifies evasion (RNG cheese); normal +1
+      out << result("Glass Dunes: Double Team is normal strength on Mirror Glass (+1, no amplification)", eva == 1,
                     "evasion stage #{eva.inspect} after one Double Team", log)
       out
     end

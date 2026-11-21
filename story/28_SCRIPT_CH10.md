@@ -378,7 +378,7 @@ MOVE: Juno follows the PC down the corridor, step for step.
 [if :ch10_ogre == :ogre]
   BATTLE (boss sequence): Prismfall::Bosses, `:LOYAL_THREE` [NEW] — three battles in a row, each a multi-bar boss: Okidogi, then Munkidori, then Fezandipiti. A partner battle: PC + the Ogre (`PARTNER_OGRE` [NEW]: Ogerpon, Teal Mask, Lv 48, one Pokémon, AI-controlled). Field: Bleed.
 [if :ch10_ogre == :hesitate]
-  BATTLE (boss sequence): the same `:LOYAL_THREE`, the PC alone (each boss +1 bar; Hard: a second Pokémon at each boss's side). The Ogre fights the other two in the background between battles (cutscene beats).
+  BATTLE (boss sequence): the same `:LOYAL_THREE`, the PC alone. Standard: the same bars as the partner fight; Hard: each boss +1 bar and a second Pokémon at its side. The party is healed between bosses (the Ogre drops a fistful of grove berries at your feet each time, without looking at you). The Ogre fights the other two in the background between battles (cutscene beats). *(Losing Ogerpon as a partner is the penalty; the fight stays hard, not tedious: Gemini review 2026-11-21.)*
 (Between battles, if the Ogre is your partner:) (It looks back at you each time, to check you're still there.)
 (At the third boss's last bar:) (Fezandipiti spreads its tail, and the peach smell comes off it so thick you can taste it. For a second you'd agree with anyone about anything. Then the Ogre's club comes down, and the smell breaks.)
 (LOSE: whiteout to the Verdance Pokémon Center; the trial restarts at the stairhead, with the path still open.)

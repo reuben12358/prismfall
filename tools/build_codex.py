@@ -1,40 +1,51 @@
 #!/usr/bin/env python3
-"""Render the story bible (story/*.md + design/WORLD_MAP.md + design/CAMEOS.md) into one readable HTML page: dist_web/codex.html."""
+"""Render the story bible, the playable scripts and the guides (story/*.md, design/WALKTHROUGH, CHAPTER_BEATS,
+FIELD_LOGIC_AUDIT, WORLD_MAP, CAMEOS) into one readable HTML page: dist_web/codex.html."""
 import html, pathlib, re, markdown
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "dist_web" / "codex.html"
 
-# (file, anchor, short label)
-CHAPTERS = [
-    ("story/00_OVERVIEW.md", "overview", "Overview"),
-    ("design/WALKTHROUGH.md", "walkthrough", "Walkthrough"),   # chapter-by-chapter player's guide (BIGJRA style)
-    ("design/CHAPTER_BEATS.md", "chapter-beats", "Chapter beats"),
-    ("story/01_WORLD_LORE.md", "world", "World & lore"),
-    ("design/WORLD_MAP.md", "geography", "Geography"),   # Geography v2 (SPINE Rev 18): the layout and the war in the sands
-    ("story/02_FACTIONS.md", "factions", "Factions"),
-    ("story/03_CAST.md", "cast", "Cast"),
-    ("story/04_ACT_I.md", "act-1", "Act I"),
-    ("story/20_SCRIPT_CH0-2.md", "script-1", "Script: first hour"),
-    ("story/21_SCRIPT_CH3.md", "script-2", "Script: Chapter 3"),
-    ("story/23_SCRIPT_CH4.md", "script-4", "Script: Chapter 4"),
-    ("story/24_SCRIPT_CH5.md", "script-5", "Script: Chapter 5"),
-    ("story/05_ACT_II.md", "act-2", "Act II"),
-    ("story/25_SCRIPT_CH6.md", "script-6", "Script: Chapter 6"),
-    ("story/26_SCRIPT_CH7.md", "script-7", "Script: Chapter 7"),
-    ("story/22_SCRIPT_CH8.md", "script-8", "Script: Chapter 8"),
-    ("story/06_ACT_III.md", "act-3", "Act III"),
-    ("story/07_ACT_IV.md", "act-4", "Act IV"),
-    ("story/08_ACT_V.md", "act-5", "Act V"),
-    ("story/09_MYSTERIES_FORESHADOWING.md", "mysteries", "Mysteries"),
-    ("story/14_WAR_AND_BLESSING.md", "war", "War & the Blessing"),
-    ("story/10_CHOICES_ENDINGS.md", "choices", "Choices & endings"),
-    ("story/12_RUIN_ROUTE.md", "ruin", "Ruin Route"),
-    ("story/13_CUTSCENES.md", "cutscenes", "Cutscenes"),
-    ("story/15_COMEDY.md", "comedy", "Comedy"),
-    ("story/11_FINALE_LINES.md", "finale", "Finale lines"),
-    ("design/CAMEOS.md", "cameos", "Sidequest cameos"),
+# (group, [(file, anchor, short label, spoiler?)]) - Gemini review 2026-11-21: bible first, guides last
+GROUPS = [
+    ("Story bible", [
+        ("story/00_OVERVIEW.md", "overview", "Overview", False),
+        ("story/01_WORLD_LORE.md", "world", "World & lore", False),
+        ("design/WORLD_MAP.md", "geography", "Geography", False),   # Geography v2 (SPINE Rev 18)
+        ("story/02_FACTIONS.md", "factions", "Factions", False),
+        ("story/03_CAST.md", "cast", "Cast", False),
+        ("story/04_ACT_I.md", "act-1", "Act I", False),
+        ("story/05_ACT_II.md", "act-2", "Act II", False),
+        ("story/06_ACT_III.md", "act-3", "Act III", True),
+        ("story/07_ACT_IV.md", "act-4", "Act IV", True),
+        ("story/08_ACT_V.md", "act-5", "Act V", True),
+        ("story/09_MYSTERIES_FORESHADOWING.md", "mysteries", "Mysteries", True),
+        ("story/14_WAR_AND_BLESSING.md", "war", "War & the Blessing", True),
+        ("story/10_CHOICES_ENDINGS.md", "choices", "Choices & endings", True),
+        ("story/12_RUIN_ROUTE.md", "ruin", "Ruin Route", True),
+        ("story/13_CUTSCENES.md", "cutscenes", "Cutscenes", False),
+        ("story/15_COMEDY.md", "comedy", "Comedy", False),
+        ("story/11_FINALE_LINES.md", "finale", "Finale lines", True),
+    ]),
+    ("Playable scripts", [
+        ("story/20_SCRIPT_CH0-2.md", "script-ch0-2", "Ch 0-2", False),
+        ("story/21_SCRIPT_CH3.md", "script-ch3", "Ch 3", False),
+        ("story/23_SCRIPT_CH4.md", "script-ch4", "Ch 4", False),
+        ("story/24_SCRIPT_CH5.md", "script-ch5", "Ch 5", False),
+        ("story/25_SCRIPT_CH6.md", "script-ch6", "Ch 6", False),
+        ("story/26_SCRIPT_CH7.md", "script-ch7", "Ch 7", False),
+        ("story/29_SCRIPT_CH8.md", "script-ch8", "Ch 8", False),      # the real Ch8 when written (22_ is the withdrawn Ring-Day stub)
+        ("story/27_SCRIPT_CH9.md", "script-ch9", "Ch 9", True),
+        ("story/28_SCRIPT_CH10.md", "script-ch10", "Ch 10", True),
+    ]),
+    ("Guides & reference", [
+        ("design/WALKTHROUGH.md", "walkthrough", "Walkthrough", True),   # BIGJRA-style player's guide
+        ("design/CHAPTER_BEATS.md", "chapter-beats", "Chapter beats", True),
+        ("design/FIELD_LOGIC_AUDIT.md", "field-audit", "Field logic", False),
+        ("design/CAMEOS.md", "cameos", "Sidequest cameos", False),
+    ]),
 ]
+CHAPTERS = [(f, a, l) for _, items in GROUPS for (f, a, l, _) in items]
 
 # Gym order (SPINE; Revision 14 put Saltmere first): type, city
 GYMS = [("Normal","Saltmere"),("Bug","Briarwick"),("Water","Ebbmouth"),("Electric","Lumen City"),
@@ -47,38 +58,77 @@ TYPE_COL = {"Bug":"#91a119","Normal":"#9fa19f","Water":"#2980ef","Electric":"#fa
             "Flying":"#81b9ef","Psychic":"#ef4179","Rock":"#afa981","Ghost":"#704170","Steel":"#60a1b8",
             "Dark":"#624d4e","Fairy":"#ef70ef","Dragon":"#5060e1"}
 
+LIST_RE = re.compile(r"^(\s*)([-*+]\s+|\d+\.\s+)")
+TABLE_HEAD_RE = re.compile(r"^\|.*\|\s*$")
+
+def prepass(md_text):
+    """Python-Markdown needs a blank line before a list or table that follows prose (GitHub doesn't)."""
+    out, fence = [], False
+    lines = md_text.split("\n")
+    for i, ln in enumerate(lines):
+        if ln.lstrip().startswith("```"):
+            fence = not fence
+        prev = out[-1] if out else ""
+        if not fence and prev.strip() and not ln.startswith(" "):
+            starts_list = LIST_RE.match(ln) and not LIST_RE.match(prev) and not prev.lstrip().startswith(("|", ">", "#"))
+            nxt = lines[i + 1] if i + 1 < len(lines) else ""
+            starts_table = TABLE_HEAD_RE.match(ln) and re.match(r"^\|[\s:|-]+\|\s*$", nxt) and not TABLE_HEAD_RE.match(prev)
+            if starts_list or starts_table:
+                out.append("")
+        out.append(ln)
+    return "\n".join(out)
+
+TAG_RE = re.compile(r"\[(portrait|bubble|name): ([^\]]+)\]")
+
+def style_script(body):
+    """Script readability: \\PN -> [Player], [portrait: NAME, expr] -> a small speaker tag."""
+    body = body.replace("\\PN", '<span class="pc">[Player]</span>')
+    def tag(m):
+        parts = [p.strip() for p in m.group(2).split(",")]
+        who = parts[0].title().replace("_", " ")
+        rest = " · ".join(parts[1:])
+        return f'<span class="tag tag-{m.group(1)}">{html.escape(who)}{(" · " + html.escape(rest)) if rest else ""}</span>'
+    return TAG_RE.sub(tag, body)
+
 def render(md_text, prefix):
+    md_text = prepass(md_text)
     md = markdown.Markdown(extensions=["tables", "fenced_code", "sane_lists", "toc"],
                            extension_configs={"toc": {"slugify": lambda v, s: prefix + "-" + re.sub(r"[^a-z0-9]+", "-", v.lower()).strip("-")}})
     body = md.convert(md_text)
     # wide tables scroll on phones
     body = body.replace("<table>", '<div class="scroll"><table>').replace("</table>", "</table></div>")
-    return body
+    return style_script(body)
 
 def prism_svg():
     rays = []
     n = len(GYMS)
     for i, (t, city) in enumerate(GYMS):
         y = 40 + i * (520 / (n - 1))
-        rays.append(f'<path d="M300 300 L1000 {y:.1f}" stroke="{TYPE_COL[t]}" stroke-width="9" stroke-linecap="round" opacity=".9"/>'
-                    f'<text x="1010" y="{y + 5:.1f}" class="ray">{i + 1}. {html.escape(city)}</text>')
+        rays.append(f'<path d="M260 300 L800 {y:.1f}" stroke="{TYPE_COL[t]}" stroke-width="9" stroke-linecap="round" opacity=".9"/>'
+                    f'<text x="815" y="{y + 7:.1f}" class="ray">{i + 1}. {html.escape(city)}</text>')
     return f'''<svg viewBox="0 0 1200 600" role="img" aria-label="A prism splitting light into the eighteen gym types">
   <defs><linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity=".9"/></linearGradient>
   <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#9fb6c8" stop-opacity=".18"/></linearGradient></defs>
-  <path d="M0 300 L300 300" stroke="url(#beam)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M0 300 L260 300" stroke="url(#beam)" stroke-width="12" stroke-linecap="round"/>
   {''.join(rays)}
-  <polygon points="300,120 430,420 170,420" fill="url(#glass)" stroke="currentColor" stroke-opacity=".5" stroke-width="3"/>
-  <polygon points="300,120 330,420 170,420" fill="#fff" opacity=".12"/>
+  <polygon points="260,120 390,420 130,420" fill="url(#glass)" stroke="currentColor" stroke-opacity=".5" stroke-width="3"/>
+  <polygon points="260,120 290,420 130,420" fill="#fff" opacity=".12"/>
 </svg>'''
 
 def main():
-    sections, toc = [], []
-    for path, anchor, label in CHAPTERS:
-        p = ROOT / path
-        if not p.exists():
-            continue
-        toc.append(f'<a href="#{anchor}">{html.escape(label)}</a>')
-        sections.append(f'<section class="chapter" id="{anchor}">{render(p.read_text(encoding="utf-8"), anchor)}</section>')
+    sections, navgroups = [], []
+    for group, items in GROUPS:
+        links = []
+        for path, anchor, label, spoiler in items:
+            p = ROOT / path
+            if not p.exists():
+                continue
+            pill = '<span class="spoil" title="Spoilers">spoilers</span>' if spoiler else ""
+            links.append(f'<a href="#{anchor}">{html.escape(label)}{pill}</a>')
+            banner = '<p class="spoilbar">Spoilers ahead: this chapter covers late-game twists.</p>' if spoiler else ""
+            sections.append(f'<section class="chapter" id="{anchor}" data-label="{html.escape(label)}">{banner}{render(p.read_text(encoding="utf-8"), anchor)}</section>')
+        if links:
+            navgroups.append(f'<div class="grp"><span class="gl">{html.escape(group)}</span>{"".join(links)}</div>')
     words = sum(len((ROOT / c[0]).read_text(encoding="utf-8").split()) for c in CHAPTERS if (ROOT / c[0]).exists())
     page = f'''<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -101,9 +151,22 @@ h1{{font:700 clamp(34px,5vw,52px)/1.05 Spectral,Georgia,serif;margin:0 0 14px;te
 .lede{{color:var(--muted);font-size:18px;max-width:42ch;margin:0}}
 .meta{{font:13px/1.4 Inter,system-ui,sans-serif;color:var(--muted);margin-top:16px}}
 .prism{{color:var(--ink)}} .prism svg{{width:100%;height:auto;display:block}}
-.ray{{font:600 17px Inter,system-ui,sans-serif;fill:var(--muted)}}
-nav{{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--rule);padding:10px max(5vw,16px);display:flex;flex-wrap:wrap;gap:6px 18px;font:600 14px/1.3 Inter,system-ui,sans-serif}}
-nav a{{color:var(--muted);text-decoration:none;padding:8px 0;min-height:44px;display:inline-flex;align-items:center}}
+.ray{{font:600 22px Inter,system-ui,sans-serif;fill:var(--muted)}}
+nav{{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--rule);padding:8px max(5vw,16px);font:600 14px/1.3 Inter,system-ui,sans-serif}}
+nav details{{}} nav summary{{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:12px;color:var(--ink)}}
+.grp{{display:flex;flex-wrap:wrap;gap:2px 16px;align-items:center;padding:4px 0}}
+.gl{{font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-width:9.5em}}
+nav a{{color:var(--muted);text-decoration:none;padding:6px 0;min-height:36px;display:inline-flex;align-items:center;gap:6px}}
+.spoil{{font:700 10px/1 Inter,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:#b4542a;border:1px solid currentColor;border-radius:9px;padding:2px 6px}}
+.spoilbar{{font:600 13px/1.4 Inter,sans-serif;color:#b4542a;background:var(--panel);border-left:3px solid #b4542a;padding:8px 12px;border-radius:4px}}
+.tools{{display:flex;gap:10px;align-items:center;margin-left:auto}}
+#q{{font:15px Inter,sans-serif;padding:8px 10px;border:1px solid var(--rule);border-radius:6px;background:var(--panel);color:var(--ink);width:min(320px,60vw)}}
+#hits{{position:absolute;right:max(5vw,16px);top:100%;width:min(460px,90vw);max-height:60vh;overflow:auto;background:var(--bg);border:1px solid var(--rule);border-radius:8px;box-shadow:0 8px 24px rgb(0 0 0/.18);font:14px/1.4 Inter,sans-serif;display:none}}
+#hits a{{display:block;padding:8px 12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}} #hits a small{{color:var(--muted);display:block}}
+#theme{{font:600 14px Inter,sans-serif;min-height:40px;padding:0 12px;border:1px solid var(--rule);border-radius:6px;background:var(--panel);color:var(--ink);cursor:pointer}}
+.chapter :is(h1,h2,h3,h4),.chapter{{scroll-margin-top:84px}}
+.tag{{font:600 12px/1 Inter,sans-serif;color:var(--muted);background:var(--bg);border:1px solid var(--rule);border-radius:4px;padding:1px 5px}}
+.pc{{font-weight:700;color:var(--link)}}
 nav a:hover,nav a:focus-visible{{color:var(--ink)}}
 main{{padding:0 max(5vw,16px) 80px}}
 .chapter{{max-width:68ch;margin:0 auto;padding-top:48px;border-top:1px solid var(--rule)}}
@@ -132,9 +195,33 @@ hr{{border:0;border-top:1px solid var(--rule);margin:2.4em 0}}
   <p class="meta">Working draft · {words:,} words · {len(sections)} chapters</p></div>
   <div class="prism">{prism_svg()}</div>
 </header>
-<nav aria-label="Chapters">{''.join(toc)}</nav>
+<nav aria-label="Chapters"><details open id="navd"><summary>Chapters<span class="tools"><input id="q" type="search" placeholder="Search headings..." aria-label="Search the Codex headings"><button id="theme" type="button">Theme</button></span></summary>{''.join(navgroups)}</details><div id="hits" role="listbox"></div></nav>
 <main>{''.join(sections)}</main>
 <a class="top" href="#" aria-label="Back to top">↑</a>
+<script>
+(function(){{
+  var root=document.documentElement, btn=document.getElementById('theme');
+  var saved=null; try{{saved=localStorage.getItem('codex-theme');}}catch(e){{}}
+  if(saved) root.setAttribute('data-theme',saved);
+  btn.addEventListener('click',function(e){{e.preventDefault();
+    var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var nxt=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',nxt);
+    try{{localStorage.setItem('codex-theme',nxt);}}catch(e){{}} }});
+  var q=document.getElementById('q'), hits=document.getElementById('hits');
+  q.addEventListener('click',function(e){{e.stopPropagation();}}); q.addEventListener('keydown',function(e){{e.stopPropagation();}});
+  var heads=[].slice.call(document.querySelectorAll('.chapter h1[id],.chapter h2[id],.chapter h3[id]')).map(function(h){{
+    return {{id:h.id,t:h.textContent,c:h.closest('.chapter').getAttribute('data-label')}};}});
+  q.addEventListener('input',function(){{
+    var v=q.value.trim().toLowerCase(); hits.innerHTML='';
+    if(v.length<2){{hits.style.display='none';return;}}
+    var n=0; heads.forEach(function(h){{ if(n<40 && h.t.toLowerCase().indexOf(v)>=0){{
+      var a=document.createElement('a'); a.href='#'+h.id; a.textContent=h.t;
+      var s=document.createElement('small'); s.textContent=h.c; a.appendChild(s); hits.appendChild(a); n++; }} }});
+    hits.style.display=n?'block':'none'; }});
+  hits.addEventListener('click',function(){{hits.style.display='none';}});
+  if(matchMedia('(max-width:760px)').matches) document.getElementById('navd').removeAttribute('open');
+}})();
+</script>
 </body></html>'''
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(page, encoding="utf-8")

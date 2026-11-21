@@ -374,7 +374,7 @@ conduct and cools. So the field has two stages:
 | Dragon x1.5, Fire x1.3; Water / Ice x0.7; Dragons x0.83 damage taken | keep | a dragon's lair over magma |
 | Hoard moves (Pay Day, Make It Rain); lair moves boosted; Dragon Rage 140 | keep | the hoard; dragon's rage |
 | Magma Armor, Multiscale, Flash Fire, Dragon's Maw | keep | lair |
-| Amulet Coin holders can't be statused | keep | the hoard protects its own (Sigrun's Dreamwing) |
+| Amulet Coin holders can't be statused | keep, **and teach it** | the hoard protects its own (Sigrun's Dreamwing). It fails "could a player guess it?" on its own, so the Field Notes say it plainly and a Wyrmrest dragon-tamer hints it: "Bring gold into a dragon's den, and the hoard treats you as its own." (Gemini review 2026-11-21) |
 | Nothing freezes; Stealth Rock with embers; no hail; Sun +2; no Grassy | keep | Wyrmrest is an open rift on the peaks, so sun is fine |
 | Wyrmfire stage after 4 Dragon attacks | keep | the den awakens |
 | Elemental Seed: +1 Atk / Speed, Flash Fire | keep | |

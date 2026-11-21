@@ -75,7 +75,7 @@ FieldEffects.register(:STORMFRONT, (lambda do
       { :battlers => { :abilities => [:VOLTABSORB], :in_weather => rainy },
         :chance => 15, :heal => 1/8r, :message => "{1} drew a lightning bolt!" }
     ],
-    :weather       => { :block => [:Sun], :block_message => "The storm clouds swallowed the sunlight!" },
+    :weather       => { :block => [:Sun], :block_message => "A shaft of sun pries at the storm clouds!" },   # reads as progress: it counts toward Rainbow
     :terrain       => { :extend => { :Electric => 3 } },
     :transitions   => [
       { :moves => [:SUNNYDAY], :even_if_failed => true, :to => :RAINBOW, :uses => 2,

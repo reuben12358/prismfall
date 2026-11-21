@@ -229,14 +229,16 @@ SE: a heavy WHUMP from the deep-works. A gout of sand and steam from the shaft. 
   (The sergeant looks at her squad. Her squad looks at the well. She lets go.)
   [name: Directorate Sergeant] This goes in my report.
   [portrait: SAHAR, deadpan] Spell my name right. It has an H in it nobody hears.
-  (The Hollow are gone. The Drilbur are gone, and the Excadrill. The children stay where they are, very close to Sahar.)
+  [portrait: SAHAR, sad] *(lower)* That law covers children, Sergeant. It doesn't cover them. *(the Drilbur)* I can't stop you. I'm sorry.
+  (The Hollow are gone. The sergeant's handlers loop cables onto the nearest collars before the rest can bolt: half the Drilbur go back down the shaft. The Excadrill, Ochre, fights all the way down and doesn't come back up. The rest scatter into the dunes. The children stay where they are, very close to Sahar.)
+  [portrait: SAHAR, angry] *(to no one, after)* Two hundred and ninety-six years, and the law still thinks a digger is a shovel.
 (All:)
 [portrait: SAHAR, sad] *(looking down the well)* It dropped again. Did you feel it? A whole rung, just now.
 [name: Sahar] They put collars on diggers and sent them down to drink my well for a man in Lumen. And now the Hollow have let them go, and the shaft's open, and the water will run down it like a drain.
 [portrait: SAHAR, neutral] Come to the Dig when you're ready. I'd like to hit something that's allowed to hit back.
 V126 = 4.
 ```
-*(Long-term: `:directorate` costs Sahar's Consent in Act V; `:hollow` brings Directorate ambushes in Ch7; `:sanctuary` gives Accord Standing. The Mandate Pass opens checkpoints later.)*
+*(Long-term: `:directorate` costs Sahar's Consent in Act V; `:hollow` brings Directorate ambushes in Ch7; `:sanctuary` gives Accord Standing but costs the Drilbur: half go back down the shaft with Ochre, so it is no free third option (Gemini review 2026-11-21). The Mandate Pass opens checkpoints later.)*
 
 ### Map 214 — the Sinkwells (slum) and the Elector's Palace (205–207, closed)
 ```

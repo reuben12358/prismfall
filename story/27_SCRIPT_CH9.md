@@ -421,7 +421,11 @@ MOVE: Sable walks into the dark between two props and isn't there any more.
 [portrait: MARCHETTI, neutral] *(standing in the petitioners' box)* The Directorate asks for the leash so it can keep the dog off the children, Chancellor. That's all a leash is.
 [portrait: CORVIN, deadpan] *(not standing)* I've treated a great many people who were kept off things with leashes.
 [name: Hollis] The Warden of Mirefen is out of order and correct. The Conclave will vote. Wardens, by hand. For the Mandate—
-(Hands start to go up. Brann's. Magnus's. Anja's, slowly. Not Marisol's. Not Sahar's. Not Kaito's. Rook's goes halfway and stops.)
+(Hands start to go up. Magnus's, first and steady. Anja's, slowly. Not Marisol's. Not Sahar's. Not Kaito's. Rook's goes halfway and stops.)
+[if :ch8_caldera == :shutdown]
+  (Brann keeps both fists on the table. He looks at Valen, then at you, and doesn't raise either of them.)
+[else]
+  (Brann's goes up last, after a long look at Valen, like a man lifting something heavy he doesn't want.)
 (And the lights go out.)
 ```
 *(From here to Valen's exit: no jokes.)*
@@ -448,6 +452,10 @@ BATTLE: tag battle — PC + Kestrel (RIVAL_KESTREL as partner, version 40 + slot
 SE: a long, grinding roar. Half the gallery stair comes down between the floor and the upper ring in a slide of rock and timber.
 (When the dust clears, Sable is gone. Kestrel is on the far side of the fall, on his knees, coughing.)
 [portrait: KESTREL, angry] *(through the dust)* Go UP. Go, I'll find a way round. GO.
+(Corvin climbs over the rubble with his bag open.)
+[portrait: CORVIN, deadpan] Hold still. I'm not asking. *(He sprays every Pokémon you have and slaps a field dressing on your arm.)* There. Now go and get hurt somewhere else.
+Script: $player.heal_party
+Script: Prismfall.checkpoint     # losing upstairs restarts at the top of the stair, not at "The Vote" (Gemini review 2026-11-21)
 V130 = 7.
 ```
 
@@ -468,7 +476,7 @@ V130 = 7.
 Script: Prismfall::Bosses.trainer_battle(:HOLLOW_MOURNER, "Mourner", 0, boss: :MOURNER_TREVENANT, species: :TREVENANT)     # Shiftry, Cacturne, Gourgeist, Trevenant (multi-bar); field :COLOSSEUM; he fights defensively (Protect, Spiky Shield)
 (Turn 2, or the first time the PC's Pokémon hits his:) [portrait: MOURNER, angry] Not now — you don't understand —
 (At Trevenant's first bar break:) [portrait: MOURNER, sad] Please. There isn't time. There isn't TIME.
-(LOSE: whiteout; the sequence restarts at "The Vote".)
+(LOSE: whiteout; restart at the top of the stair into 264, from the checkpoint above.)
 (WIN:)
 [portrait: MOURNER, sad] Not now. You don't understand. Get back. Get—
 ```
