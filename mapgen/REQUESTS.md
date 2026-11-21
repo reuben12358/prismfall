@@ -1369,3 +1369,18 @@ or move them with the proof; mind the MAPGEN 2n spec-restore rule), **562 the Ri
 Ranger Sigurd's night-only Emolga hint on 563, 562's D7 Frost Loom at x 39-47, y 16-21, the glade warp at (47,24) and
 the new Wolfsrime warp at (47,26)), then the Overflow Culvert Mastery 175, Gullcry B1F 565, Skaldfast 921-923 and
 Cinder Cape 927.
+
+## From the story editor: CHAPTER_BEATS.md (every chapter's 1–2 key events), 2026-11-21
+User: "try not to make each chapter thin please... we want every chapter to be significant to some extent with either 1
+or 2 key events happening each chapter." The audit is **`design/CHAPTER_BEATS.md`**: one table row per chapter (P, 1–21)
+with its two key events, the consequence the player sees later, and a status.
+- **Strong already (no change):** P, 1, 2, 3, 5, 6, 8–21.
+- **Ch4 "Both Ways" (strengthened, proposal A):** the key event is **the Night the Ebb Stopped** on Ebbmouth 160: the
+  river dies for an hour at Meridian's night export draw, the masked cell blows the Lattice intake, the river comes back
+  and drags a child's punt at the Guild mill-race, the leader's mask comes up and it's Teo, and the PC answers a Meridian
+  guard with Marisol watching (`:ch4_teo`). The second is **Larch's confession** (she designed the Lattice) as its own
+  scene after the gym. Script: `story/23_SCRIPT_CH4.md` (coming next, with its map list).
+- **Ch7 "The Quiet Ward" (proposal B, needs the creator's yes):** the night of Sable's broadcast the Hammer cuts the
+  Infirmary's power, the Quiet Ward's Bleed rises, and the PC carries the salt-haired child out and sees its eyes move.
+- **For side quests and map builders:** keep optional content *around* a key event, never between its build-up and its
+  payoff, and keep the spot on the map clear (CHAPTER_BEATS "Notes").
