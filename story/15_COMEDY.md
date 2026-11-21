@@ -133,9 +133,9 @@ From Act III the Wardens share Gale Post relay messages the PC can read at any P
 [portrait: SAHAR, deadpan] You leaned on it.
 > It was loose.
 [portrait: SAHAR, deadpan] It was not loose. Things are not "loose" around you. Things *give up*.
-[portrait: KESTREL, smug] Told you. They got us arrested in a pit bracket last week.
-[portrait: SAHAR, shocked] There are no pits in Ossaria. *(question mark)*
-[portrait: KESTREL, deadpan] ...There will be.
+[portrait: KESTREL, smug] Told you. Things give up around them. Rivers. Plates. Me. Twice.
+[portrait: SAHAR, shocked] ...Twice? *(question mark)*
+[portrait: KESTREL, deadpan] Don't.
 ```
 
 ### Ch7 — "Invoice" (Corvin, after the PC wades into the Weeping Fen)
