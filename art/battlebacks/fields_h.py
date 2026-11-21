@@ -15,6 +15,7 @@ import math, random
 import numpy as np
 from PIL import Image, ImageDraw
 import fields_e
+import bases
 from bblib import *
 from paint import *
 from props import *
@@ -216,19 +217,22 @@ def meadow():
     F = "meadow"
     ext_day, ext_night = extended_panels()
     msk = mask_hd(sky_mask_art(ext_day))
-    hd = to_hd(ext_day)
+    # worn patches where EBDX stands the battlers (bases.py): the panel's own one moved onto the foe point,
+    # the same patch at 2x under the player; the two tall-grass clumps that stood on that spot frame it instead
+    hd, hn = bases.meadow_bases(to_hd(ext_day), to_hd(ext_night))
     hd = blend(hd, vgradient(HD, [(0, (255, 240, 180, 80)), (0.5, (255, 250, 200, 0)), (1, (20, 60, 20, 40))]),
                "softlight")
     wm = fields_e.windmill(64)
     paste(hd, wm, 612, 268, "bottom")
+    bare = hd.copy()
     flowers_scatter(hd, (110, 300, 864, 693), 700, [(255, 255, 255), (255, 224, 80), (214, 150, 250), (255, 150, 180)],
                     seed=404, size=(1.5, 3.5))
+    hd = bases.keep_bare(hd, bare)                  # no wildflowers on the worn patches
     wa = np.zeros(HD[::-1], np.float32)
     wx, wy = int(round(612 - wm.width / 2)), 268 - wm.height
     wa[wy:wy + wm.height, wx:wx + wm.width] = np.asarray(wm, np.float32)[..., 3] / 255.0
     msk = msk * (wa < 0.5)
     save_room("field_meadow", hd)
-    hn = to_hd(ext_night)
     paste(hn, grade(wm, mul=(0.5, 0.5, 0.8)), 612, 268, "bottom")
     save_room("field_meadow_night", hn)
     front = front_spec("pf_meadow_front", cutout(hd, msk), z=1)
@@ -243,8 +247,8 @@ def meadow():
         layers.append(layer(F, "shaft%d" % i, cone(HD, (x - 200, 60), 10, 640, (255, 248, 200), alpha=60, angle=ang),
                             z=2, blend=1, anim=S("pulse"), min=20, max=80, period=190 + i * 60, phase=i * 1.9))
     gcol = ((62, 150, 62), (96, 184, 76), (150, 210, 100))
-    for i, (x, y, w, h, z) in enumerate(((200, 336, 60, 50, 2), (700, 340, 64, 52, 2), (90, 566, 150, 150, 24),
-                                         (190, 610, 110, 120, 24), (820, 606, 150, 160, 24), (690, 656, 110, 110, 24),
+    for i, (x, y, w, h, z) in enumerate(((200, 336, 60, 50, 2), (700, 340, 64, 52, 2), (14, 646, 150, 150, 24),
+                                         (552, 624, 110, 120, 24), (820, 606, 150, 160, 24), (690, 656, 110, 110, 24),
                                          (430, 680, 120, 90, 24))):
         t = grass_tuft(w, h, colors=gcol, seed=i)
         layers.append(layer(F, "grass%d" % i, onto(t, x - w / 2, y - h), anchor=(x, y), z=z, anim=S("sway"),
@@ -259,8 +263,8 @@ def meadow():
     _night_like(F, "sails", onto(fields_e.sails(26), 612 - 28, 268 - 58 - 28), mul=(0.5, 0.5, 0.8))
     for i, (x, ang) in enumerate(((300, 62), (430, 68), (560, 74))):
         _night_like(F, "shaft%d" % i, cone(HD, (x - 200, 60), 10, 640, (170, 182, 255), alpha=34, angle=ang))
-    for i, (x, y, w, h, z) in enumerate(((200, 336, 60, 50, 2), (700, 340, 64, 52, 2), (90, 566, 150, 150, 24),
-                                         (190, 610, 110, 120, 24), (820, 606, 150, 160, 24), (690, 656, 110, 110, 24),
+    for i, (x, y, w, h, z) in enumerate(((200, 336, 60, 50, 2), (700, 340, 64, 52, 2), (14, 646, 150, 150, 24),
+                                         (552, 624, 110, 120, 24), (820, 606, 150, 160, 24), (690, 656, 110, 110, 24),
                                          (430, 680, 120, 90, 24))):
         t = grass_tuft(w, h, colors=gcol, seed=i)
         _night_like(F, "grass%d" % i, onto(t, x - w / 2, y - h), mul=(0.68, 0.64, 0.78))

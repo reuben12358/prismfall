@@ -196,6 +196,8 @@ def mindscape_nightmare():
         if abs(x - FOE[0]) < 140 and abs(y - FOE[1]) < 50:
             continue
         h = rng.uniform(40, 90) * (0.5 + (y - 300) / 400)
+        if abs(x - PLAYER[0]) < 250 and y > PLAYER[1] - 50 and y - h < PLAYER[1] + 60:
+            x = PLAYER[0] + (262 if x > PLAYER[0] else -250)          # not over the player's platform
         w = h * 0.35
         d.polygon([(x - w / 2, y), (x - w / 2 + 2, y - h * 0.6), (x + w / 2 - 2, y - h * 0.6), (x + w / 2, y)],
                   fill=C((6, 0, 6)))

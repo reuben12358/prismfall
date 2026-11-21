@@ -3140,9 +3140,9 @@ module PrismfallEBDX
         {
           :bitmap => "pf_meadow_grass2",
           :hd => true,
-          :x => 40.0,
-          :y => 251.56,
-          :ox => 77,
+          :x => 6.22,
+          :y => 287.11,
+          :ox => 14,
           :oy => 151,
           :z => 24,
           :anim => :sway,
@@ -3153,8 +3153,8 @@ module PrismfallEBDX
         {
           :bitmap => "pf_meadow_grass3",
           :hd => true,
-          :x => 84.44,
-          :y => 271.11,
+          :x => 245.33,
+          :y => 277.33,
           :ox => 57,
           :oy => 120,
           :z => 24,

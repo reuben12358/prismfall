@@ -162,7 +162,7 @@ def wasteland():
     wm = np.zeros((693, 864), np.float32); wm[150:438, 142:654] = water
     fields_a.plat_pair(hd, (74, 66, 66), (40, 34, 38), outline=(16, 12, 14),
                        speckle=([(110, 100, 90), (50, 44, 46), (130, 160, 70)], 220))
-    for (x, y, tip) in ((330, 322, False), (356, 326, True), (150, 610, True)):
+    for (x, y, tip) in ((330, 322, False), (356, 326, True), (24, 652, True)):   # off the player platform
         paste(hd, fields_a.barrel(tipped=tip), x, y, "bottom")
     d = ImageDraw.Draw(hd)
     x, y = 716, 330

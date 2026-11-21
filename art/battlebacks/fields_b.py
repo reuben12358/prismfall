@@ -280,8 +280,8 @@ def water_surface():
     hb, beacon = harbour()
     paste(hd, posterize_alpha(hb, 2), 560, hz + 2, "bottom")
     rng = random.Random(6)
-    for (x, y, h) in ((240, 330, 60), (262, 336, 46), (760, 320, 70), (690, 300, 40), (80, 520, 150), (140, 560, 120),
-                      (840, 560, 130)):
+    for (x, y, h) in ((240, 330, 60), (262, 336, 46), (760, 320, 70), (690, 300, 40), (80, 520, 150), (14, 600, 120),
+                      (840, 560, 130)):   # none inside the player's pool (bases.py)
         paste(hd, piling(h, 10 if h < 100 else 16), x, y, "bottom")
     hd = grade(hd, mul=(0.92, 1.0, 1.02))
     save_room("field_water_surface", hd)
@@ -386,7 +386,7 @@ def beach():
     sand_top, sand_side = (238, 212, 168), (200, 166, 120)
     plat_pair(hd, sand_top, sand_side, speckle=([(220, 190, 140), (250, 236, 200), (255, 180, 170)], 140))
     d = ImageDraw.Draw(hd)
-    for (x, y, rw) in ((200, 330, 40), (760, 340, 56), (60, 560, 90), (820, 600, 70)):
+    for (x, y, rw) in ((200, 330, 40), (760, 340, 56), (40, 670, 90), (820, 600, 70)):   # off the player base
         d.ellipse([x - rw, y - rw * 0.35, x + rw, y + rw * 0.25], fill=C((120, 120, 128)), outline=C((50, 50, 60)))
         d.ellipse([x - rw * 0.7, y - rw * 0.3, x + rw * 0.3, y], fill=C((160, 160, 170)))
         d.ellipse([x + rw * 0.4, y, x + rw * 1.4, y + rw * 0.22], fill=C((90, 180, 210)), outline=C((60, 120, 150)))
