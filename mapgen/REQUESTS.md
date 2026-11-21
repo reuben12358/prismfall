@@ -1410,3 +1410,25 @@ Lv 20–26, and no Ground type handed over before Rook (they're foes, so only gi
 `ZE_OCTAVE_OFF_BEAT` sits on 181, which 608 replaces after the Shatter; close or move it. **For the puzzle engineer
 (GYM_PUZZLES Gym 4, 193):** Rook's PA line at the cold cradle changes, because "Turn it off. Rotom. Turn it *off*." is
 his line in the Lowlight after the Shatter (03_CAST); the new line is in the script.
+
+## From the story editor: Script ready: Ch4 "Both Ways", 2026-11-21
+**`story/23_SCRIPT_CH4.md`**; the wiring list is its last section, "Map events needed (Chapter 4)". The maps are built,
+so this is mostly new pages on existing events plus five scenes. Counter: **V124 CH4_STEP** (0–7, design/FLAGS.md).
+- **The key event (CHAPTER_BEATS A): "The Night the Ebb Stopped"** replaces the built "Teo" event on **160** (29,31).
+  It needs a night tone, Pella's punt with a move route down the channel to the Guild Mill's race gate (29,37), three
+  grey cowls at the intake (27,40), an explosion SE, a Hollow double on the towpath, Teo (`HOLLOW_TEO` v0) at the gate's
+  chain platform, the gate drop, Marisol's Floatzel in the water, a Meridian guard and the `:ch4_teo` choice, then
+  Kestrel. It runs on returning from **167** after the new **"The Strike Vote"** autorun there (a crowd of 6–8, Teo on
+  the wheel platform).
+- **Other scenes:** "He Followed You Here" at the eel stall (160, comedy, Marisol's first meeting); "The morning
+  after" (160, three variants by `:ch4_teo`); "Pick One" after the gym (160); **"Larch's Tide Tables"** in the Center
+  (161; replaces the built two Larch lines); Hesper's letter at the 161 Gale Post desk; the Reyes House night page (164)
+  and **166 Reyes Cellar** (in maps.json, no spec yet: please build it, ~17×13); the 167 towpath gate east to 580 (opens
+  at V124 >= 7).
+- **Changed built lines:** K2 on 561 (11,7), Marisol on 174, the Tidelock gym guide, the 160 lock-keeper, Pella (the
+  built "Child with a toy boat"), and small second pages on 566, 577, 570, 573, 575, 578, 562 (all in the list).
+- The Tidelock's Lock Hall door opens at **V124 >= 5** (the morning after the night), so the gym always follows the night.
+**Cartographer:** maps.json still calls Marisol's brother "Tomas" on 160 and 166: he's **Teo**. **Trainer designer:**
+Ebbmouth versions of `HOLLOW_GRUNT_M`/`_F` (a double on the towpath, two singles in the cellar), and please change
+`HOLLOW_TEO` v0's LoseText (he's still masked when he loses; suggested "Not now — not NOW, it's jammed—").
+**Items owner:** CELLAR KEY, SMOKED CHAR. Proposed badge name: **Tideturn Badge** (Gym 4's is proposed in the Ch5 script).
