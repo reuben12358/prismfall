@@ -85,9 +85,17 @@ where that fits the character better.
   Hymn (01_WORLD_LORE), and they tuned the crystal for the costume-ghost of her storybook. Mimikyu returns to the slot
   Mawile took; Azumarill stays the Casual cut.
 - **Nobody else:** no other fighter has a story reason for a crystal yet. Brann is unchanged (as designed, per the user).
+- **Trainer lines:** when a trainer's Z-move fires (after "...unleashed its full-force Z-Move!", before it hits) or
+  their Pokemon Mega Evolves, they may say a line: `PrismfallSpeech::LINES` in
+  `plugins/Prismfall Z-Power/005_ZPower_TrainerSpeech.rb`, keyed by trainer type and name (all versions) or type, name
+  and version; once per battle each. With EBDX the trainer slides in and speaks (EBDX's `pbTrainerSpeak`, as its battle
+  scripts do); without EBDX, or while the trainer has no front sprite yet, it is a named battle message. Celestine:
+  *"This is the part where it hugs you. Hold still. It's worse if you don't."* Real engine:
+  `docs/battle_captures/speech/`.
 
 ## 5. Tests
-- `tools/harness/run_mega.rb` **69/69**: the one ring (Mega Ring alone gives the player one Mega and one Z in one
+- `tools/harness/run_mega.rb` **74/74** (section 9: Celestine's Z-move line, once, right after the unleash; no line for
+  a trainer without one): the one ring (Mega Ring alone gives the player one Mega and one Z in one
   battle; the legacy Z-Power Ring alone still wakes crystals, not stones; no ring, no Z), the crystal distribution (all
   18 + 2 placed once, R4 with the Ring, quest/boss/event sources and gates), a species Z-move (Pulverizing Pancake), the
   crystal teaser before the Ring, and the trainer rule (36 entries per mode Mega, 3 per mode use Celestine's Z).

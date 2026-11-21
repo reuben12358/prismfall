@@ -21,6 +21,7 @@
 #      Bleed) and the Mega's new ability on entry rules (Inverse: Magic Bounce; Colosseum: No Guard); Field Notes
 #   8. the quests: the teaser before the Ring, the Ring-Day (Bastian, 13 badges), Brann's spare and the Light Stone,
 #      a boss stone (the Old Pincer), the brazier writ
+#   9. trainer speech (Z-Power 005): Celestine's line when her Mimikyu's Z-move fires; no line for a trainer without one
 # Writes docs/mega_test/REPORT.md and transcript.txt. Exit 1 on any failure.
 #===============================================================================
 require "fileutils"
@@ -651,6 +652,42 @@ scene(:AS_BRAZIER_WRIT, :offer, ["For the glory of Ashkaar."])
 check("The Brazier Writ: a lie at the brazier burns the writ (no stone, quest still open)", !$bag.has?(:SALAMENCITE) && tr.active?(:AS_BRAZIER_WRIT))
 scene(:AS_BRAZIER_WRIT, :offer, ["I don't know yet."])
 check("...the truth earns the Salamencite", $bag.has?(:SALAMENCITE) && tr.done?(:AS_BRAZIER_WRIT))
+
+#-------------------------------------------------------------------------------
+section("9. Trainer speech when a trainer's Z-move or Mega fires (Z-Power 005, data: PrismfallSpeech::LINES)")
+#-------------------------------------------------------------------------------
+SPEECH = []
+EventHandlers.add(:prismfall_trainer_speech, :mega_test_speech,
+  proc { |battle, b, event, lines| SPEECH << { :idx => b.index, :event => event, :lines => lines, :turn => battle.turnCount + 1,
+                                               :owner => battle.opponent[battle.pbGetOwnerIndexFromBattlerIndex(b.index)].name } })
+set_badges(17)
+mimikyu = lambda { mk(:MIMIKYU, 78, [:PLAYROUGH, :SHADOWCLAW, :SHADOWSNEAK, :SWORDSDANCE], :MIMIKIUMZ, :DISGUISE) }
+$player.party = [mk(:SNORLAX, 80, [:BODYSLAM, :REST], :LEFTOVERS, :THICKFAT), mk(:CHANSEY, 80, [:SOFTBOILED, :SEISMICTOSS], :EVIOLITE)]
+s0 = SPEECH.length; z0 = ZS.length
+log = run("Celestine's Mimikyu @ Mimikium Z (Let's Snuggle Forever) on Fairy Tale", :seed => 3) do
+  setBattleRule("canLose"); setBattleRule("field", :FAIRY_TALE)
+  TrainerBattle.start(npc(:LEADER_CELESTINE, "Celestine", [mimikyu.call], [:MEGARING]))
+end
+sp = SPEECH[s0..]
+cz = ZS[z0..].select { |x| x[:side] == 1 }
+text = log.text
+i_z = text.index("unleashed its full-force Z-Move")
+i_s = text.index("This is the part where it hugs you")
+check("Celestine's Mimikyu unleashed Let's Snuggle Forever", cz.length == 1 && cz[0][:z] == :LETSSNUGGLEFOREVER, cz.inspect)
+check("...and Celestine said her Z-move line once, right after the unleash (before the move hits)",
+      sp.length == 1 && sp[0][:event] == :zmove && sp[0][:owner] == "Celestine" && i_z && i_s && i_s > i_z,
+      "speech #{sp.map { |x| [x[:owner], x[:event]] }}, unleash at #{i_z.inspect}, line at #{i_s.inspect}")
+check("...in the battle transcript as \"Celestine: This is the part where it hugs you. Hold still. It's worse if you don't.\"",
+      text.include?("Celestine: This is the part where it hugs you. Hold still. It's worse if you don't."))
+s0 = SPEECH.length; z0 = ZS.length; n0 = MEGAS.length
+log = run("No line for a trainer without one: Marisol's Mega Lucario + Hydro Vortex", :seed => 5) do
+  setBattleRule("double"); setBattleRule("canLose"); setBattleRule("field", :WATER_SURFACE)
+  TrainerBattle.start(npc(:LEADER_MARISOL, "Marisol", [lucario.call, vap.call], [:MEGARING]))
+end
+check("a trainer with no lines says nothing on her Mega or her Z-move", SPEECH.length == s0 &&
+      MEGAS[n0..].any? { |x| x[:side] == 1 } && ZS[z0..].any? { |x| x[:side] == 1 }, "speech #{SPEECH[s0..].inspect}")
+mega_line = PrismfallSpeech.line_for(NPCTrainer.new("Celestine", :LEADER_CELESTINE), :mega)
+check("Celestine has no Mega line (her one power play is the Z-move, SPINE Rev 23)", mega_line.nil?)
 
 #-------------------------------------------------------------------------------
 fails = RESULTS.reject { |r| r[1] }

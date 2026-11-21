@@ -11,12 +11,9 @@ Mega: the player's Camerupt (AI-controlled) on the Volcanic field
   field: VOLCANIC | weather: None | terrain: None
   Oh! A wild Chansey appeared!
   Go! Camerupt!
-    >> sent out (player): Camerupt Lv.60 @CAMERUPTITE [MAGMAARMOR]
+    >> sent out (player): Camerupt Lv.60 @CAMERUPTITE [SOLIDROCK]
 ## FIELD CHANGE: NONE -> VOLCANIC
   Magma churns across the battlefield!
-  Camerupt's armor hardened in the magma!
-    (anim: StatUp)
-  Camerupt's Defense rose!
 
 --- Turn 1 ---
   [Camerupt 172/172 | Chansey 388/388]
@@ -29,22 +26,22 @@ Mega: the player's Camerupt (AI-controlled) on the Volcanic field
   But nothing happened!
   Camerupt used Earth Power!
   Magma erupted from below!
-    HP Chansey (foe): 388 -> 242 / 388
+    HP Chansey (foe): 388 -> 228 / 388
   (end of round)
   The volcano erupted!
-    HP Chansey (foe): 242 -> 193 / 388
+    HP Chansey (foe): 228 -> 179 / 388
   Lava rained down around the wild Chansey!
   Camerupt rode the eruption!
     (anim: StatUp)
   Camerupt's Special Attack rose!
 
 --- Turn 2 ---
-  [Camerupt 172/172 | Chansey 193/388]
+  [Camerupt 172/172 | Chansey 179/388]
   The wild Chansey used Splash!
   But nothing happened!
   Camerupt used Flamethrower!
   Camerupt drew fire up from the magma!
-    HP Chansey (foe): 193 -> 0 / 388
+    HP Chansey (foe): 179 -> 0 / 388
   The wild Chansey fainted!
     xx fainted: Chansey (foe)
   Camerupt got 4741 Exp. Points!
@@ -62,7 +59,7 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   field: FROZEN_LAKE | weather: None | terrain: None
   You are challenged by Warden Anja!
   Warden Anja sent out Ninetales!
-    >> sent out (foe): Ninetales Lv.49 @LIGHTCLAY [SNOWWARNING]
+    >> sent out (foe): Ninetales Lv.49 @SITRUSBERRY [SNOWWARNING]
   Go! Togekiss!
     >> sent out (player): Togekiss Lv.80 @LEFTOVERS [HUSTLE]
 ## FIELD CHANGE: NONE -> FROZEN_LAKE
@@ -95,9 +92,9 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   Togekiss used Flamethrower!
     HP Walrein (foe): 191 -> 138 / 191
   The lake ice groaned and cracked! (1 more)
-  The opposing Walrein used Blizzard!
-  The frozen lake lent its cold to Blizzard!
-    HP Togekiss (player): 250 -> 130 / 250
+  The opposing Walrein used Ice Beam!
+  The frozen lake lent its cold to Ice Beam!
+    HP Togekiss (player): 250 -> 147 / 250
   It's super effective!
     (anim: Frozen)
   Togekiss was frozen solid!
@@ -105,174 +102,184 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   (end of round)
     (anim: Hail)
     (anim: UseItem)
-    HP Togekiss (player): 130 -> 145 / 250
+    HP Togekiss (player): 147 -> 162 / 250
   Togekiss restored a little HP using its Leftovers!
 
 --- Turn 3 ---
-  [Togekiss 145/250 FROZEN | Walrein 138/191]
+  [Togekiss 162/250 FROZEN | Walrein 138/191]
     (anim: Frozen)
   Togekiss is frozen solid!
-  The opposing Walrein used Blizzard!
-  The frozen lake lent its cold to Blizzard!
-    HP Togekiss (player): 145 -> 25 / 250
+  The opposing Walrein used Ice Beam!
+  The frozen lake lent its cold to Ice Beam!
+    HP Togekiss (player): 162 -> 59 / 250
   It's super effective!
   The cold sealed the cracks in the ice!
   (end of round)
     (anim: Hail)
     (anim: UseItem)
-    HP Togekiss (player): 25 -> 40 / 250
+    HP Togekiss (player): 59 -> 74 / 250
   Togekiss restored a little HP using its Leftovers!
 
 --- Turn 4 ---
-  [Togekiss 40/250 FROZEN | Walrein 138/191]
-    (anim: Frozen)
-  Togekiss is frozen solid!
-  The opposing Walrein used Blizzard!
-  The frozen lake lent its cold to Blizzard!
-    HP Togekiss (player): 40 -> 0 / 250
-  It's super effective!
-  Togekiss fainted!
-    xx fainted: Togekiss (player)
-  (end of round)
-    (anim: Hail)
-  Go for it, Slowbro!
-    >> sent out (player): Slowbro Lv.80 @LEFTOVERS [OBLIVIOUS]
-
---- Turn 5 ---
-  [Slowbro 266/266 | Walrein 138/191]
-  The opposing Walrein used Blizzard!
-  The frozen lake lent its cold to Blizzard!
-    HP Slowbro (player): 266 -> 225 / 266
-  It's not very effective...
-  Slowbro used Psychic!
-    HP Walrein (foe): 138 -> 11 / 191
-    (anim: EatBerry)
-    HP Walrein (foe): 11 -> 58 / 191
-  The opposing Walrein restored its health using its Sitrus Berry!
-    (anim: StatDown)
-  The opposing Walrein's Special Defense fell!
-  (end of round)
-    (anim: Hail)
-    (anim: UseItem)
-    HP Slowbro (player): 225 -> 241 / 266
-  Slowbro restored a little HP using its Leftovers!
-
---- Turn 6 ---
-  [Slowbro 241/266 | Walrein 58/191]
-  The opposing Walrein used Blizzard!
-  The frozen lake lent its cold to Blizzard!
-    HP Slowbro (player): 241 -> 199 / 266
-  It's not very effective...
-  Slowbro used Psychic!
-    HP Walrein (foe): 58 -> 0 / 191
+  [Togekiss 74/250 FROZEN | Walrein 138/191]
+  Togekiss thawed out!
+  Togekiss used Dazzling Gleam!
+    HP Walrein (foe): 138 -> 0 / 191
   The opposing Walrein fainted!
     xx fainted: Walrein (foe)
-  Slowbro got 1451 Exp. Points!
+  Togekiss got 1451 Exp. Points!
   (end of round)
     (anim: Hail)
     (anim: UseItem)
-    HP Slowbro (player): 199 -> 215 / 266
-  Slowbro restored a little HP using its Leftovers!
+    HP Togekiss (player): 74 -> 89 / 250
+  Togekiss restored a little HP using its Leftovers!
   Warden Anja is about to send out Glalie. Will you switch your Pokémon?  [auto: No]
   Warden Anja sent out Glalie!
     >> sent out (foe): Glalie Lv.50 @GLALITITE [INNERFOCUS]
 
---- Turn 7 ---
-  [Slowbro 215/266 | Glalie 161/161]
+--- Turn 5 ---
+  [Togekiss 89/250 | Glalie 161/161]
   The opposing Glalie's Glalitite is reacting to Warden Anja's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Glalie has Mega Evolved into Mega Glalie!
-  The opposing Glalie used Crunch!
-    HP Slowbro (player): 215 -> 165 / 266
+  The opposing Glalie used Ice Shard!
+  The frozen lake lent its cold to Ice Shard!
+    HP Togekiss (player): 89 -> 30 / 250
   It's super effective!
-  Slowbro used Scald!
-    HP Glalie (foe): 161 -> 38 / 161
+  The opposing Glalie slid across the ice!
+    (anim: StatUp)
+  The opposing Glalie's Speed rose!
+  Togekiss used Flamethrower!
+    HP Glalie (foe): 161 -> 0 / 161
+  It's super effective!
+  The opposing Glalie fainted!
+    xx fainted: Glalie (foe)
+  The lake ice groaned and cracked! (2 more)
+  Togekiss got 920 Exp. Points!
   (end of round)
     (anim: Hail)
     (anim: UseItem)
-    HP Slowbro (player): 165 -> 181 / 266
-  Slowbro restored a little HP using its Leftovers!
-
---- Turn 8 ---
-  [Slowbro 181/266 | Glalie 38/161]
-  Warden Anja used a Full Restore.
-    HP Glalie (foe): 38 -> 161 / 161
-  The opposing Glalie's HP was restored.
-  Slowbro used Scald!
-    HP Glalie (foe): 161 -> 36 / 161
-  (end of round)
-  The snow stopped.
-    (anim: UseItem)
-    HP Slowbro (player): 181 -> 197 / 266
-  Slowbro restored a little HP using its Leftovers!
-
---- Turn 9 ---
-  [Slowbro 197/266 | Glalie 36/161]
-  Warden Anja used a Full Restore.
-    HP Glalie (foe): 36 -> 161 / 161
-  The opposing Glalie's HP was restored.
-  Slowbro used Scald!
-    HP Glalie (foe): 161 -> 46 / 161
-  (end of round)
-    (anim: UseItem)
-    HP Slowbro (player): 197 -> 213 / 266
-  Slowbro restored a little HP using its Leftovers!
-
---- Turn 10 ---
-  [Slowbro 213/266 | Glalie 46/161]
-  The opposing Glalie used Crunch!
-    HP Slowbro (player): 213 -> 164 / 266
-  It's super effective!
-  Slowbro used Scald!
-    HP Glalie (foe): 46 -> 0 / 161
-  The opposing Glalie fainted!
-    xx fainted: Glalie (foe)
-  Slowbro got 920 Exp. Points!
-  (end of round)
-    (anim: UseItem)
-    HP Slowbro (player): 165 -> 181 / 267
-  Slowbro restored a little HP using its Leftovers!
+    HP Togekiss (player): 31 -> 46 / 251
+  Togekiss restored a little HP using its Leftovers!
   Warden Anja is about to send out Cloyster. Will you switch your Pokémon?  [auto: No]
   Warden Anja sent out Cloyster!
     >> sent out (foe): Cloyster Lv.49 @WHITEHERB [SKILLLINK]
 
---- Turn 11 ---
-  [Slowbro 181/267 | Cloyster 128/128]
+--- Turn 6 ---
+  [Togekiss 46/251 | Cloyster 128/128]
+  The opposing Cloyster used Ice Shard!
+  The frozen lake lent its cold to Ice Shard!
+    HP Togekiss (player): 46 -> 0 / 251
+  It's super effective!
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  The opposing Cloyster slid across the ice!
+    (anim: StatUp)
+  The opposing Cloyster's Speed rose!
+  The cold sealed the cracks in the ice!
+  (end of round)
+    (anim: Hail)
+  You're in charge, Garchomp!
+    >> sent out (player): Garchomp Lv.80 @LIFEORB [SANDVEIL]
+
+--- Turn 7 ---
+  [Garchomp 287/287 | Cloyster 128/128]
+  Garchomp used Fire Fang!
+    HP Cloyster (foe): 128 -> 88 / 128
+  The lake ice groaned and cracked! (2 more)
+    HP Garchomp (player): 287 -> 259 / 287
+  Garchomp lost some of its HP!
+  The opposing Cloyster used Shell Smash!
+    (anim: StatDown)
+  The opposing Cloyster's Defense fell!
+  The opposing Cloyster's Special Defense fell!
+    (anim: StatUp)
+  The opposing Cloyster's Attack rose sharply!
+  The opposing Cloyster's Special Attack rose sharply!
+  The opposing Cloyster's Speed rose sharply!
+    (anim: UseItem)
+  The opposing Cloyster returned its status to normal using its White Herb!
+  (end of round)
+    (anim: Hail)
+
+--- Turn 8 ---
+  [Garchomp 259/287 | Cloyster 88/128]
+  The opposing Cloyster used Icicle Spear!
+  The frozen lake lent its cold to Icicle Spear!
+    HP Garchomp (player): 259 -> 124 / 287
+    HP Garchomp (player): 124 -> 0 / 287
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  It's super effective!
+  Hit 2 times!
+  The cold sealed the cracks in the ice!
+  (end of round)
+  The snow stopped.
+  Go for it, Slowbro!
+    >> sent out (player): Slowbro Lv.80 @LEFTOVERS [OBLIVIOUS]
+
+--- Turn 9 ---
+  [Slowbro 266/266 | Cloyster 88/128]
   The opposing Cloyster used Razor Shell!
-    HP Slowbro (player): 181 -> 167 / 267
+    HP Slowbro (player): 266 -> 240 / 266
   It's not very effective...
-  Slowbro used Psychic!
-    HP Cloyster (foe): 128 -> 0 / 128
+  Slowbro used Scald!
+    HP Cloyster (foe): 88 -> 0 / 128
+  It's not very effective...
   The opposing Cloyster fainted!
     xx fainted: Cloyster (foe)
   Slowbro got 960 Exp. Points!
   (end of round)
     (anim: UseItem)
-    HP Slowbro (player): 167 -> 183 / 267
+    HP Slowbro (player): 240 -> 256 / 266
   Slowbro restored a little HP using its Leftovers!
-  Warden Anja is about to send out Avalugg. Will you switch your Pokémon?  [auto: No]
   Warden Anja sent out Avalugg!
     >> sent out (foe): Avalugg Lv.50 @ROCKYHELMET [STURDY]
 
---- Turn 12 ---
-  [Slowbro 183/267 | Avalugg 176/176]
-  Slowbro used Scald!
+--- Turn 10 ---
+  [Slowbro 256/266 | Avalugg 176/176]
+  Slowbro used Psychic!
     HP Avalugg (foe): 176 -> 1 / 176
     [ability: Avalugg (foe)'s Sturdy]
   The opposing Avalugg endured the hit!
   The opposing Avalugg used Rapid Spin!
   The opposing Avalugg spun like a top on the ice!
-    HP Slowbro (player): 183 -> 161 / 267
+    HP Slowbro (player): 256 -> 234 / 266
     (anim: StatUp)
   The opposing Avalugg's Speed rose!
   (end of round)
     (anim: UseItem)
-    HP Slowbro (player): 161 -> 177 / 267
+    HP Slowbro (player): 234 -> 250 / 266
   Slowbro restored a little HP using its Leftovers!
 
+--- Turn 11 ---
+  [Slowbro 250/266 | Avalugg 1/176]
+  Warden Anja used a Full Restore.
+    HP Avalugg (foe): 1 -> 176 / 176
+  The opposing Avalugg's HP was restored.
+  Slowbro used Scald!
+    HP Avalugg (foe): 176 -> 1 / 176
+    [ability: Avalugg (foe)'s Sturdy]
+  The opposing Avalugg endured the hit!
+  (end of round)
+    (anim: UseItem)
+    HP Slowbro (player): 250 -> 266 / 266
+  Slowbro restored a little HP using its Leftovers!
+
+--- Turn 12 ---
+  [Slowbro 266/266 | Avalugg 1/176]
+  Warden Anja used a Full Restore.
+    HP Avalugg (foe): 1 -> 176 / 176
+  The opposing Avalugg's HP was restored.
+  Slowbro used Scald!
+    HP Avalugg (foe): 176 -> 1 / 176
+    [ability: Avalugg (foe)'s Sturdy]
+  The opposing Avalugg endured the hit!
+  (end of round)
+
 --- Turn 13 ---
-  [Slowbro 177/267 | Avalugg 1/176]
+  [Slowbro 266/266 | Avalugg 1/176]
   The opposing Avalugg used Recover!
     HP Avalugg (foe): 1 -> 89 / 176
   The opposing Avalugg's HP was restored.
@@ -282,10 +289,6 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
     xx fainted: Avalugg (foe)
   Slowbro got 985 Exp. Points!
   (end of round)
-    (anim: UseItem)
-    HP Slowbro (player): 177 -> 193 / 267
-  Slowbro restored a little HP using its Leftovers!
-  Warden Anja is about to send out Matriarch. Will you switch your Pokémon?  [auto: No]
   Warden Anja sent out Matriarch!
     >> sent out (foe): Matriarch Lv.51 @ELEMENTALSEED [THICKFAT]
   The opposing Matriarch settled comfortably onto the ice!
@@ -298,9 +301,9 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   The opposing Matriarch's Speed rose sharply!
 
 --- Turn 14 ---
-  [Slowbro 193/267 | Matriarch 171/195]
+  [Slowbro 266/266 | Matriarch 171/195]
   The opposing Matriarch used Knock Off!
-    HP Slowbro (player): 193 -> 118 / 267
+    HP Slowbro (player): 266 -> 201 / 266
   It's super effective!
   Slowbro dropped its Leftovers!
   Slowbro used Scald!
@@ -1499,7 +1502,7 @@ RESULT: player won after 0 turn(s)
   Bastian: A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone.
   Bastian: Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
   Bastian: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
-  Bastian: And if you come by a Choir crystal, a sliver of the Crown's glass from the Glassfall, it'll answer that too: the chip and the sliver came off the same crown. One Z-move a fight, and one to a side, same as the hearts.
+  Bastian: And if you come by a Choir crystal, a sliver of Glassfall glass, it'll answer that too. The chip's grind off the Crown's stone, and the glass came out of the night it cracked. Same crown, one way or another. One Z-move a fight, and one to a side, same as the hearts.
   He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.
   Bastian: Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain.
   Bastian: Two old men who don't ask each other things. That's how you get to seventy-four.
@@ -1620,3 +1623,193 @@ RESULT: player won after 0 turn(s)
   You put the Salamencite in your Bag's Items pocket.
   You obtained a Firium Z!
   You put the Firium Z in your Bag's Items pocket.
+
+=== 9. Trainer speech when a trainer's Z-move or Mega fires (Z-Power 005, data: PrismfallSpeech::LINES) ===
+
+Celestine's Mimikyu @ Mimikium Z (Let's Snuggle Forever) on Fairy Tale
+======================================================================
+
+--- Battle start ---
+  field: FAIRY_TALE | weather: None | terrain: None
+  You are challenged by Warden Celestine!
+  Warden Celestine sent out Mimikyu!
+    >> sent out (foe): Mimikyu Lv.78 @MIMIKIUMZ [DISGUISE]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.80 @LEFTOVERS [THICKFAT]
+## FIELD CHANGE: NONE -> FAIRY_TALE
+  Once upon a time, in a castle deep in the forest... the story begins!
+
+--- Turn 1 ---
+  [Snorlax 370/370 | Mimikyu 197/197]
+  Snorlax, switch out! Come back!
+    << recalled: Snorlax (player)
+  You're in charge, Chansey!
+    >> sent out (player): Chansey Lv.80 @EVIOLITE [NATURALCURE]
+  The opposing Mimikyu surrounded itself with its Z-Power!
+  The opposing Mimikyu unleashed its full-force Z-Move!
+  Celestine: This is the part where it hugs you. Hold still. It's worse if you don't.
+  The opposing Mimikyu used Let's Snuggle Forever!
+  The storybook's magic sparkled through Let's Snuggle Forever!
+    HP Chansey (player): 514 -> 0 / 514
+  Chansey fainted!
+    xx fainted: Chansey (player)
+  (end of round)
+  You're in charge, Snorlax!
+    >> sent out (player): Snorlax Lv.80 @LEFTOVERS [THICKFAT]
+
+--- Turn 2 ---
+  [Snorlax 370/370 | Mimikyu 197/197]
+  The opposing Mimikyu used Play Rough!
+  The opposing Mimikyu's attack missed!
+  Snorlax used Body Slam!
+  It doesn't affect the opposing Mimikyu...
+  (end of round)
+
+--- Turn 3 ---
+  [Snorlax 370/370 | Mimikyu 197/197]
+  The opposing Mimikyu used Play Rough!
+  The opposing Mimikyu's attack missed!
+  Snorlax used Body Slam!
+  It doesn't affect the opposing Mimikyu...
+  (end of round)
+
+--- Turn 4 ---
+  [Snorlax 370/370 | Mimikyu 197/197]
+  The opposing Mimikyu used Play Rough!
+  The storybook's magic sparkled through Play Rough!
+    HP Snorlax (player): 370 -> 201 / 370
+  Snorlax used Body Slam!
+  It doesn't affect the opposing Mimikyu...
+  (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 201 -> 224 / 370
+  Snorlax restored a little HP using its Leftovers!
+
+--- Turn 5 ---
+  [Snorlax 224/370 | Mimikyu 197/197]
+  The opposing Mimikyu used Play Rough!
+  The opposing Mimikyu's attack missed!
+  Snorlax used Rest!
+    (anim: Sleep)
+  Snorlax slept and became healthy!
+    HP Snorlax (player): 224 -> 370 / 370
+  Snorlax's HP was restored.
+  (end of round)
+
+--- Turn 6 ---
+  [Snorlax 370/370 SLEEP | Mimikyu 197/197]
+  The opposing Mimikyu used Play Rough!
+  The storybook's magic sparkled through Play Rough!
+    HP Snorlax (player): 370 -> 191 / 370
+    (anim: Sleep)
+  Snorlax is fast asleep.
+  (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 191 -> 214 / 370
+  Snorlax restored a little HP using its Leftovers!
+  Snorlax dreams of happily ever after.
+    HP Snorlax (player): 214 -> 237 / 370
+
+--- Turn 7 ---
+  [Snorlax 237/370 SLEEP | Mimikyu 197/197]
+  The opposing Mimikyu used Play Rough!
+  The storybook's magic sparkled through Play Rough!
+    HP Snorlax (player): 237 -> 66 / 370
+    (anim: Sleep)
+  Snorlax is fast asleep.
+  (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 66 -> 89 / 370
+  Snorlax restored a little HP using its Leftovers!
+  Snorlax dreams of happily ever after.
+    HP Snorlax (player): 89 -> 112 / 370
+
+--- Turn 8 ---
+  [Snorlax 112/370 SLEEP | Mimikyu 197/197]
+  The opposing Mimikyu used Play Rough!
+  The storybook's magic sparkled through Play Rough!
+    HP Snorlax (player): 112 -> 0 / 370
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Warden Celestine!
+  You gave $9,600 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 7 turn(s)
+
+
+No line for a trainer without one: Marisol's Mega Lucario + Hydro Vortex
+========================================================================
+
+--- Battle start ---
+  field: WATER_SURFACE | weather: None | terrain: None
+  You are challenged by Warden Marisol!
+  Warden Marisol sent out Lucario and Vaporeon!
+    >> sent out (foe): Lucario Lv.70 @LUCARIONITE [STEADFAST]
+    >> sent out (foe): Vaporeon Lv.70 @WATERIUMZ [WATERABSORB]
+  Go! Snorlax and Chansey!
+    >> sent out (player): Snorlax Lv.80 @LEFTOVERS [THICKFAT]
+    >> sent out (player): Chansey Lv.80 @EVIOLITE [NATURALCURE]
+## FIELD CHANGE: NONE -> WATER_SURFACE
+  The battle is taking place on the open water!
+
+--- Turn 1 ---
+  [Snorlax 370/370 | Lucario 199/199 | Chansey 514/514 | Vaporeon 283/283]
+  The opposing Lucario's Lucarionite is reacting to Warden Marisol's Mega Ring!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The opposing Lucario has Mega Evolved into Mega Lucario!
+  The opposing Lucario used Nasty Plot!
+    (anim: StatUp)
+  The opposing Lucario's Special Attack rose sharply!
+  The opposing Vaporeon surrounded itself with its Z-Power!
+  The opposing Vaporeon unleashed its full-force Z-Move!
+  The opposing Vaporeon used Hydro Vortex!
+  The opposing Vaporeon rode the waves into the attack!
+    HP Chansey (player): 514 -> 393 / 514
+  Chansey was swept along by the current!
+    (anim: StatDown)
+  Chansey's Speed fell!
+  Snorlax used Body Slam!
+    HP Lucario (foe): 199 -> 142 / 199
+  It's not very effective...
+  Chansey used Seismic Toss!
+    HP Vaporeon (foe): 283 -> 203 / 283
+  (end of round)
+  The opposing Vaporeon soaked up the spray.
+    HP Vaporeon (foe): 203 -> 221 / 283
+
+--- Turn 2 ---
+  [Snorlax 370/370 | Lucario 142/199 | Chansey 393/514 | Vaporeon 221/283]
+  The opposing Lucario used Aura Sphere!
+    HP Snorlax (player): 370 -> 0 / 370
+  It's super effective!
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  The opposing Vaporeon used Scald!
+  The opposing Vaporeon rode the waves into the attack!
+    HP Chansey (player): 393 -> 334 / 514
+  Chansey used Seismic Toss!
+    HP Lucario (foe): 142 -> 62 / 199
+  (end of round)
+  The opposing Vaporeon soaked up the spray.
+    HP Vaporeon (foe): 221 -> 239 / 283
+
+--- Turn 3 ---
+  [Lucario 62/199 | Chansey 334/514 | Vaporeon 239/283]
+  The opposing Lucario used Aura Sphere!
+    HP Chansey (player): 334 -> 62 / 514
+  It's super effective!
+  The opposing Vaporeon used Scald!
+  The opposing Vaporeon rode the waves into the attack!
+    HP Chansey (player): 62 -> 0 / 514
+  Chansey fainted!
+    xx fainted: Chansey (player)
+  You have no more Pokémon that can fight!
+  You lost against Warden Marisol!
+  You gave $9,600 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 2 turn(s)
+

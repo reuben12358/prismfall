@@ -3,7 +3,7 @@
 Real Essentials v21.1 battle code with Prismfall Core, Field Effects, Z-Power, Bosses, Trials and Mega; AI on both
 sides unless noted. Logic only: the EBDX animation is checked in the real engine (design/MEGA_EVOLUTION.md section 8).
 
-**69/69 checks passed.**
+**74/74 checks passed.**
 
 | | Check | Detail |
 |---|---|---|
@@ -21,11 +21,11 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | rank-reward stones are reachable before the Ring (so the R4 check holds for them) |  |
 | PASS | design/TRIAL_EVENTS.yaml places all 25 world stones (pf_mega_stone, badge-gated) and every Mega talk key |  |
 | PASS | Prismfall Z-Power is one Z per side too (owner key = side) |  |
-| PASS | the player's Camerupt Mega Evolved on turn 1 (ring in the Bag, Cameruptite held) | {:side=>0, :idx=>0, :species=>:CAMERUPT, :form=>1, :ability=>:SHEERFORCE, :old_ability=>:MAGMAARMOR, :turn=>1, :field=>: |
+| PASS | the player's Camerupt Mega Evolved on turn 1 (ring in the Bag, Cameruptite held) | {:side=>0, :idx=>0, :species=>:CAMERUPT, :form=>1, :ability=>:SHEERFORCE, :old_ability=>:SOLIDROCK, :turn=>1, :field=>:V |
 | PASS | the Mega messages and both EBDX-named animations ran |  |
 | PASS | the Mega's ability is Sheer Force (form data), and the field saw the change |  |
 | PASS | Volcanic showpiece: a Fire-type Mega primes the volcano, which erupts at the end of the round |  |
-| PASS | the Mega happens before any move that turn | 17 < 21 |
+| PASS | the Mega happens before any move that turn | 14 < 18 |
 | PASS | only one Mega in the whole battle (1 turns) |  |
 | PASS | Anja's Glalie Mega Evolved on Standard (AI, MEGARING in her items) | {:side=>1, :idx=>1, :species=>:GLALIE, :form=>1, :ability=>:REFRIGERATE, :old_ability=>:INNERFOCUS,  |
 | PASS | the AI Mega Evolves the first turn its Glalie can act | 1 turn headers in between |
@@ -76,5 +76,10 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | the player's Charizard Mega Evolved in the boss fight |  |
 | PASS | The Brazier Writ: a lie at the brazier burns the writ (no stone, quest still open) |  |
 | PASS | ...the truth earns the Salamencite |  |
+| PASS | Celestine's Mimikyu unleashed Let's Snuggle Forever | [{:side=>1, :idx=>1, :z=>:LETSSNUGGLEFOREVER, :turn=>1, :owner=>0}] |
+| PASS | ...and Celestine said her Z-move line once, right after the unleash (before the move hits) | speech [["Celestine", :zmove]], unleash at 836, line at 882 |
+| PASS | ...in the battle transcript as "Celestine: This is the part where it hugs you. Hold still. It's worse if you don't." |  |
+| PASS | a trainer with no lines says nothing on her Mega or her Z-move | speech [] |
+| PASS | Celestine has no Mega line (her one power play is the Z-move, SPINE Rev 23) |  |
 
-Megas logged: 20; Z-moves logged: 7. Battle transcripts: `transcript.txt`.
+Megas logged: 21; Z-moves logged: 9. Battle transcripts: `transcript.txt`.
