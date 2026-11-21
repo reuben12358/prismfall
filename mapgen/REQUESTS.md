@@ -1539,3 +1539,14 @@ Ch6 note) to **606**. Please add it to maps.json: a small round sandstone temple
 **Rumours:** the Wolfsrime tiers [579,3] / [579,4] have their lines now (`validate_badge_tiers`: 0 warnings).
 **Not placed yet (late chapters, maps built, outside this pass):** the Woodward on 526 (*The Old Pincer*, 12 badges),
 Dorian's Encore patch on 154 (16 badges) and the Causeway Matriarch on 560 (16 badges). TRIAL_EVENTS lists them.
+
+## From the story editor: creator decisions applied (Ch4–Ch7), 2026-11-21
+- **Ch7: the Ward Night is canon** (proposal B approved). `story/26_SCRIPT_CH7.md` no longer has the roof-only fallback;
+  wire only "The Ward Night" (223). Corvin's gym prize is **TM84 Poison Jab** (GYM_PUZZLES), and Gym 6 is a **double**
+  (Core `GYMS`); GYM_PUZZLES' "single battle" line is corrected.
+- **Ch4: morally grey.** Meridian's night draw stops the Ebb; the Hollow's blown intake restarts it recklessly. One line
+  added to "Larch's Tide Tables" (161); no event changes.
+- **Gym 4 (193):** Rook's PA line at the cold cradle is "Rotom. Cut the feed. ...That bit's not for chat, buddy. Cut it."
+  (GYM_PUZZLES now matches); "Turn it off" stays in the Lowlight (608).
+- **Badge names (final):** Tideturn (3), Arclight (4), Sandglass (5), Remedy (6). They aren't in PBS; use them in the
+  badge-award messages. Record: `design/CHAPTER_BEATS.md`, "Creator decisions (2026-11-21)".

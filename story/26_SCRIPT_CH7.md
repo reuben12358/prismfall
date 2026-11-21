@@ -2,17 +2,17 @@
 
 > **Final playable script** for Chapter 7. It covers the Leach Road (620 the Marrow Road's east end, 632 the Kneeling Stones, 621 the Leach Canyons with 630 Charwell, 634 Wormwood Lea, 633 the Gutterfall) down into Nadir, then Mirefen (220–223; the Sweet Market), the Weeping Fen 648 (Wick), and the Infirmary gym (230–233, Gym 6). None of these maps is built; the list at the end is what to build from.
 > Follows `story/25_SCRIPT_CH6.md`; conventions of `story/20_SCRIPT_CH0-2.md`.
-> Sources: 05_ACT_II Ch7, 03_CAST (Corvin, Wenlow, Juno, Wick, Sable), 09_MYSTERIES (#2, #19, #20, #21, #26), NARRATIVE_KEYS (`:ch7_ledger`, GO_SWEET_TOOTH), 15_COMEDY (Ch7 "Invoice"; running gag 7; the Nadir bits), GYM_PUZZLES Gym 6, TRIALS_QUESTS (the Gutter Book, Ch7), CAMEOS (Venam), BALANCE (J2, Corvin), `design/CHAPTER_BEATS.md` (proposal B).
-> **Proposal B is written in** ("The Ward Night", after the gym). It is marked **[PROPOSAL B]** and needs the creator's yes (CHAPTER_BEATS). If the answer is no, play the **fallback** printed under it: Sable's broadcast on the Infirmary roof, as 05_ACT_II has it. Everything else in this chapter stands either way.
+> Sources: 05_ACT_II Ch7, 03_CAST (Corvin, Wenlow, Juno, Wick, Sable), 09_MYSTERIES (#2, #19, #20, #21, #26), NARRATIVE_KEYS (`:ch7_ledger`, GO_SWEET_TOOTH), 15_COMEDY (Ch7 "Invoice"; running gag 7; the Nadir bits), GYM_PUZZLES Gym 6, TRIALS_QUESTS (the Gutter Book, Ch7), CAMEOS (Venam), BALANCE (J2, Corvin), `design/CHAPTER_BEATS.md` (proposal B, approved by the creator 2026-11-21).
+> **The Ward Night is canon** (CHAPTER_BEATS proposal B, approved by the creator 2026-11-21). It replaces 05_ACT_II's old roof scene, where Sable's broadcast was only a cliffhanger.
 
 ## Conventions
 As in the earlier scripts. **Portrait cast here:** Juno, Corvin, Wenlow, Wick, Sable (on screen), Mother Gutter (`GUTTER`, one line). **Plain:** Noct and the Octave, Six-Fingers Ottoline, Venam (cameo), the Ward's patients, the Sweetrot vendors, every townsperson and trainer. Events call `Prismfall.gym_battle(pfm_gym(:LEADER_CORVIN), double: true)`.
-**Counter:** V127 **CH7_STEP** (design/FLAGS.md): 0 east on the Marrow Road · 1 down the Gutterfall (the first descent into Nadir) · 2 the Infirmary and the Ward (Corvin, Wenlow, the patients by name) · 3 J2 and the ledger (S118) · 4 Wick at the Weeping Fen (S119) · 5 Gym 6 won · 6 the Ward Night [PROPOSAL B] or the roof (fallback) · 7 chapter closed (V102 = 8).
+**Counter:** V127 **CH7_STEP** (design/FLAGS.md): 0 east on the Marrow Road · 1 down the Gutterfall (the first descent into Nadir) · 2 the Infirmary and the Ward (Corvin, Wenlow, the patients by name) · 3 J2 and the ledger (S118) · 4 Wick at the Weeping Fen (S119) · 5 Gym 6 won · 6 the Ward Night · 7 chapter closed (V102 = 8).
 **Sweetrot counter:** V128 **SWEETROT_TAKEN** (0–3). Every vendor offer adds 1 when accepted; the third acceptance is GO_SWEET_TOOTH.
 
 ## The chapter's key events (design/CHAPTER_BEATS.md)
 1. **J2 and the ledger.** Juno, alphabetising Corvin's ledgers, finds "R.A. — Bleed-burn, right palm and fingers, lightning pattern" on the night of the Shatter. Build-up: her Ch6 letter (the right hand, the kettle, "every time"). `:ch7_ledger` decides how Ironreach hits her.
-2. **The Ward Night [PROPOSAL B].** The night of Sable's broadcast, the Hammer cuts the Infirmary's current; the Quiet Ward's Bleed rises into a Veil; the PC carries out Ama, the salt-haired girl Wenlow introduced by name, and under the glass her eyes are moving. Corvin: "They're not dying. They're *dreaming*." The Hammer becomes the Hollow's enemy on screen, and Wick's "he wants to carry them home" lands as a split.
+2. **The Ward Night.** The night of Sable's broadcast, the Hammer cuts the Infirmary's current; the Quiet Ward's Bleed rises into a Veil; the PC carries out Ama, the salt-haired girl Wenlow introduced by name, and under the glass her eyes are moving. Corvin: "They're not dying. They're *dreaming*." The Hammer becomes the Hollow's enemy on screen, and Wick's "he wants to carry them home" lands as a split.
 **No jokes** inside the Ward Night from the moment the lights go out until the dampers are back on (15_COMEDY §1). Wenlow is cheerful all chapter: write every Wenlow line so it hurts on a replay after Ch16.
 
 ---
@@ -266,15 +266,15 @@ Script: Prismfall.gym_battle(pfm_gym(:LEADER_CORVIN), double: true)     # LEADER
 (Received: the REMEDY BADGE.)
 (SE: six notes. The case's light runs along its seams like water in a channel.)
 [portrait: CORVIN, neutral] Your case sings. I'd have that looked at. Not by me. I'm busy.
-(Received: TM VENOSHOCK — item number per the items owner.)
-[portrait: CORVIN, neutral] Venoshock. Hits harder on anyone already poisoned, which is everyone down here. And that badge says Pokémon up to level thirty-nine will heed you.
+(Received: TM84 POISON JAB.)
+[portrait: CORVIN, neutral] Poison Jab. Close in, quick, and they go home feeling worse. It's the bedside manner I was never taught. And that badge says Pokémon up to level thirty-nine will heed you.
 [name: Corvin] The ferrymen will teach yours Surf. Lake Sallow's that way. Cindervault's past it. Don't drink the lake either.
 V127 = 5.
 ```
 *Surf (HM03) from the Mirefen ferrymen after the badge (Core config: Surf at 6 badges).*
 
-## Map 223 — the Infirmary roof, then the Quiet Ward: **EV "The Ward Night"** — key event 2 **[PROPOSAL B]**
-*(Autorun the first time the PC returns to the Infirmary after Gym 6; V127 == 5 → 6. Needs the creator's yes; the fallback follows.)*
+## Map 223 — the Infirmary roof, then the Quiet Ward: **EV "The Ward Night"** — key event 2
+*(Autorun the first time the PC returns to the Infirmary after Gym 6; V127 == 5 → 6.)*
 ```
 (Night. The Infirmary roof, over the blue-glowing marsh. Corvin has two tin mugs of bog coffee and a lamp. He has taken the mask off. Without it he looks older and kinder and more tired than anyone you've met.)
 [portrait: CORVIN, neutral] Sit. It's bog coffee. It tastes exactly like it sounds.
@@ -337,16 +337,6 @@ SE: from below, the clank of iron and a hiss of steam. The chime falters.
 (Received: INVOICE. "Item: one (1) ward, carried. Item: one (1) child, carried. Item: the look on my face. TOTAL: ₽0.")
 V127 = 6.
 ```
-**Fallback (if proposal B is not approved): EV "Bog Coffee"** (the roof after Gym 6, V127 == 5 → 6)
-```
-(The roof, the bog coffee, as above, to "you get used to saying you've got used to it".)
-[portrait: CORVIN, neutral] Do you know why nobody in my Ward is dead? They're not dying. They're dreaming. I can see their eyes move under the glass.
-[name: Corvin] Somebody should find out what they're dreaming about.
-(The screens flicker: Sable's broadcast, as above, to "Let's start with you." The Infirmary's lamps stay on.)
-[portrait: CORVIN, deadpan] Well. I'll set some extra beds.
-V127 = 6.
-```
-
 ## Chapter 7 close (220, the lift-foot; V127 == 6 → 7)
 ```
 (Morning. The marsh is grey again. On every wall the Hollow Ring has been painted over in the night with a hammer. Under one of them, somebody has chalked: "NOT OURS. — the Hollow".)
@@ -358,7 +348,7 @@ V127 = 7. V102 STORY_CHAPTER = 8.
 ```
 *(Juno stays in Mirefen with Corvin until the Conclave (Ch9). Sable's "Cindervault's next" is the Ch8 hook: the Hammer's bomber at the caldera.)*
 
-**Optional: "Sewer Royalty"** (Venam's cameo; CAMEOS.md #2; NA_VENAM on the Gutter Book, `badges >= 6 && S118`): Venam's Testimony ("I could hear everything") is the Envoy's proof in Ch20 and can be played for Juno in Ch10. With proposal B, the PC who saw Ama's eyes move gets one extra line from Venam: `[name: Venam] Moving eyes? Yeah. Mine did that. Nobody believed me either.`
+**Optional: "Sewer Royalty"** (Venam's cameo; CAMEOS.md #2; NA_VENAM on the Gutter Book, `badges >= 6 && S118`): Venam's Testimony ("I could hear everything") is the Envoy's proof in Ch20 and can be played for Juno in Ch10. The PC, who has seen Ama's eyes move, gets one extra line from Venam: `[name: Venam] Moving eyes? Yeah. Mine did that. Nobody believed me either.`
 
 ---
 
@@ -373,9 +363,9 @@ None of these maps is built. V127 = **CH7_STEP**, V128 = **SWEETROT_TAKEN** (des
 **633 The Gutterfall** — the lift-cage (**"Down"** autorun once at the lift; V127 = 1; a screen-tint change as the cage descends under the overhang); the lift-keeper.
 **220 Mirefen** — arrival lines (noodle-cart cook with a Kestrel page, Mirefen woman, child with an Alolan Grimer); the Ogre graffiti (sign); **the Sweet Market** on the lowest walkway (vendor 1 with offer 1; a singing child); **vendor 2** walks up after S118 (offer 2; Wenlow's panic line from above if V128 >= 2); Trials (A Five Out of Ten, Lamps Out, the Gutter Book board); the chapter-close morning (the overpainted rings, the chalk, the ferryman, Wenlow at the lift; V127 = 7, V102 = 8).
 **221 Mirefen PC** — **vendor 3** on the steps outside (`Prismfall.checkpoint` first; the GO_SWEET_TOOTH chain if V128 >= 2); Mother Gutter's barge passing under the walkway (one-line event, a big sprite and a Muk).
-**223 Corvin Mott's Infirmary** — the front ward (NPC patients); **the Quiet Ward** top floor: forty beds (decor), named patients as events (Mister Garrod, Old Fen, the Tull twins, **Ama** by the window); **"The Quiet Ward"** (first entry; Wenlow's introductions; Corvin; V127 = 2); **the dispensary** with Juno and the ledgers: **"R.A."** → J2 (`RIVAL_JUNO` version 20 + slot) → `:ch7_ledger` (S118, V127 = 3); "Invoice" on returning from the Fen; **the roof**; **"The Ward Night" [PROPOSAL B]**: a lights-out tone, a Bleed Veil event across the Quiet Ward's door, Ama's bed by the window (the PC carries her out: the PC's sprite with a carried-child pose, or a fade), the stills-to-coils SE, the Veil's fade, Old Fen's wink; or the **fallback** "Bog Coffee" on the roof. Sets V127 = 6.
+**223 Corvin Mott's Infirmary** — the front ward (NPC patients); **the Quiet Ward** top floor: forty beds (decor), named patients as events (Mister Garrod, Old Fen, the Tull twins, **Ama** by the window); **"The Quiet Ward"** (first entry; Wenlow's introductions; Corvin; V127 = 2); **the dispensary** with Juno and the ledgers: **"R.A."** → J2 (`RIVAL_JUNO` version 20 + slot) → `:ch7_ledger` (S118, V127 = 3); "Invoice" on returning from the Fen; **the roof**; **"The Ward Night"**: a lights-out tone, a Bleed Veil event across the Quiet Ward's door, Ama's bed by the window (the PC carries her out: the PC's sprite with a carried-child pose, or a fade), the stills-to-coils SE, the Veil's fade, Old Fen's wink. Sets V127 = 6.
 **648 The Weeping Fen** — Field Notes; upward rain (fog/particle); the drowned chapel; Wick with four Bereaved on straw; the talk-down check (`standing(:HOLLOW) >= 4 || choice(:ch5_lowlight_testimony) == :someone_else`) or `HOLLOW_WICK` v0 on `:BLEED`. S119, V127 = 4.
 **230–233 the Infirmary gym (Gym 6)** — as GYM_PUZZLES; Corvin's sign; the gym guide; Wenlow's hint lines; Corvin (233) double battle, the ace line, the REMEDY BADGE, the TM; the ferrymen teach Surf. V127 = 5.
 **644/645 Miasma Caverns** — Venam's cameo (CAMEOS.md), NA_VENAM.
 
-**Trainer designer:** a Leach-canyon version of `MERIDIAN_DIRECTORATE` "Officer" (a double, Lv 31–33). **Items owner:** INVOICE (Key Item, flavour; the text changes each time), Corvin's TM (Venoshock suggested). **Proposed badge name:** Remedy Badge. **Creator:** proposal B (the Ward Night) yes or no.
+**Trainer designer:** a Leach-canyon version of `MERIDIAN_DIRECTORATE` "Officer" (a double, Lv 31–33). **Items owner:** INVOICE (Key Item, flavour; the text changes each time), Corvin's TM is TM84 Poison Jab (GYM_PUZZLES). **Badge name:** the Remedy Badge (creator, 2026-11-21).

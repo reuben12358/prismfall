@@ -175,15 +175,15 @@
 - Ice-fishers in the tavern sing about "**the Sleeping Whale under the ice**". This is a Kyogre seed. ("When the whale wakes, the sea remembers it's a sea.")
 - Get the **Good Rod** at the Anglers' Guild.
 
-**Conflict.** Warden **Marisol Reyes**, elected and brash, is caught in the middle. A Hollow cell spikes the tidal Lattice at night, and the river stops entirely for an hour. A child's boat drifts toward the stalled mill-race, and the PC and Marisol rescue the kid in a battle-and-chase. The cell leader is **Teo Reyes** (`HOLLOW_TEO` admin battle), 19 and furious, and he is Marisol's brother. Marisol lets him run. The PC sees it.
+**Conflict.** Warden **Marisol Reyes**, elected and brash, is caught in the middle. At midnight Meridian's tidal Lattice runs its night export draw and the river stops entirely for an hour (the cause). A Hollow cell blows the intake to stop the draw, and the river comes back all at once: recklessly, because nobody looked at the water, where a child has taken a punt out on the dead-still river. The punt is dragged at the Guild Mill's race, the race that killed the Reyes siblings' father in AF 297, and the PC, Marisol and the masked cell leader haul the race gate down together in a battle-and-chase (script: `story/23_SCRIPT_CH4.md`, "The Night the Ebb Stopped"). The cell leader is **Teo Reyes** (`HOLLOW_TEO` admin battle), 19 and furious, and he is Marisol's brother. Marisol lets him run. The PC sees it, and a Meridian guard asks the PC, with Marisol standing there, who it was.
 - **CHOICE `:ch4_teo`:**
   - Report Teo to the Meridian guard: Meridian Standing up, Marisol's Bond down hard, and Teo is hunted (his Act II arc gets harder).
   - Keep Marisol's secret: Marisol's Bond up, Hollow Standing up a little.
   - Confront Marisol privately: Marisol's Bond up. She admits it, crying and swearing.
 
-**Gym 3 (`:WATER_SURFACE`).** Thematic note: *a current that changes direction mid-fight.* Marisol: "The Ebb runs both ways. Always has. Lately it can't decide." Her ace is **Gyarados** (from her first Magikarp on the docks). Afterward she buys the PC smoked eel and says the thing Act I needs said: "Meridian pays my people. Meridian's killing my river. Pick one, kid, I dare you." (Tamsin couldn't pick, and signed. Marisol won't, and swears.)
+**Gym 3 (`:WATER_SURFACE`).** Thematic note: *a current that changes direction mid-fight.* Marisol: "The Ebb runs both ways. Always has. Lately it can't decide." Her ace is **Gyarados** (from her first Magikarp on the docks). She awards the **Tideturn Badge**. Afterward she buys the PC smoked eel and says the thing Act I needs said: "Meridian pays my people. Meridian's killing my river. Pick one, kid, I dare you." (Tamsin couldn't pick, and signed. Marisol won't, and swears.)
 
-**Revelation.** Larch arrives by Gale Post with tide data. The stutters line up *exactly* with Meridian's Lattice draw peaks. "It's not the Hollow stopping the river. It's us. It's *my* design." This is the first crack in Larch's guilt.
+**Revelation.** Larch arrives by Gale Post with tide data. The stutters line up *exactly* with Meridian's Lattice draw peaks, and the full stop with the night export. The Hollow didn't stop the river; they started it, recklessly. "It's not the Hollow stopping the river. It's us. It's *my* design." She tells the PC she was Meridian's Chief Engineer (not yet why she left). This is the first crack in Larch's guilt, and the start of the red herring that she still works for Meridian.
 
 **Cliffhanger:** Hesper Vane's letter reaches the PC via the post: *"Whoever you are — stay away from my grandson. Everyone who gets close to that boy's mother's ghost gets hurt."* Unsigned, but on lighthouse paper.
 
@@ -201,7 +201,7 @@
 
 **Rook's gym is closed** because he's filming. The PC helps **Rook Calder** with a blackout in the Sluiceworks (wild Rotom swarm) and earns his attention. He's hyper, a little lonely, and constantly on camera: "Chat says you're cute. Chat also says you're gonna lose."
 
-**Gym 4 (`:NEON_GRID`).** Thematic note: *circuits you complete with your own body.* Rook's ace is **Rotom** (his camera drone, in battle form). After the badge, he gives the PC Flash. He's also the first person to notice the badge case pulse brighter on the fourth badge, the fourth note of a chord that started in Saltmere. He films it: "Ooh, special edition?"
+**Gym 4 (`:NEON_GRID`).** Thematic note: *circuits you complete with your own body.* Rook's ace is **Rotom** (his camera drone, in battle form). He awards the **Arclight Badge** and gives the PC Flash. He's also the first person to notice the badge case pulse brighter on the fourth badge, the fourth note of a chord that started in Saltmere. He films it: "Ooh, special edition?"
 
 **The Gala (main set piece).** Voss invites the PC, Juno, Rook and Larch (Larch refuses at first, then comes to keep an eye on things) to Meridian Spire's **Tenth Year Gala**.
 - Champagne, airships outside the windows and the **Dark Stone core** glowing black in the atrium shaft. (Zekrom seed: guests swear it "breathes".)

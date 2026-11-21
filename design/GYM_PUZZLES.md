@@ -580,7 +580,7 @@ Two rules carry both rooms, so the practice lock teaches exactly what the basin 
   Bjorn (173, on the north dock). Apprentice Tove on 170 (`g3_practice`) and on every basin (`g3_basin`).
 
 ### 174 Warden's Pool — arena (21×19, rebuilt in the timber hall kit)
-Marisol, single battle. Badge 3 + TM03 Water Pulse. The existing quay scene follows.
+Marisol, single battle. Badge 3 (the Tideturn Badge) + TM03 Water Pulse. The existing quay scene follows.
 
 ### 175 Overflow Culvert — MASTERY (optional; 21×15; via grate D on EP at Mid, behind a Rock Smash rock (TM98, Badge 2))
 One channel (rows 6–8), 5 slots (x4, 7, 10, 13, 16). Two 1×3 rafts: A (V317, starts 0) and B (V318, starts 1).
@@ -741,8 +741,8 @@ come from?" 3 the solution.
 ### 193 The Core — arena (19×15)
 Before the arena door, the **Plate cradle** (action): "The Zap Plate's cradle is cold. There's dust in it. A thick
 Meridian cable runs past it into the floor, warm to the touch." The arena door needs one splice node turned onto the
-Meridian main (1 click). The drone films it, and Rook's voice comes over the PA: "...Turn it off. Rotom. Turn it *off*."
-Rook, single battle. Badge 4 + TM43 Volt Switch + TM70 Flash.
+Meridian main (1 click). The drone films it, and Rook's voice comes over the PA, not his stream voice: "Rotom. Cut the feed. ...That bit's not for chat, buddy. Cut it." (Creator, 2026-11-21: "Turn it off. Rotom. Turn it *off*." stays in the Lowlight after the Shatter, per 03_CAST; script `story/24_SCRIPT_CH5.md`.)
+Rook, single battle. Badge 4 (the Arclight Badge) + TM43 Volt Switch + TM70 Flash.
 
 ### 950 Edit Bay — MASTERY (optional; via 191's side door; overflow ID 950 because 194–199 belong to Lumen districts)
 A 3×3 board at x = 5, 9, 13; y = 4, 8, 12. Generator west of node (0,1). **Goal: every node lit** ("B-roll needs every
@@ -847,7 +847,7 @@ on the east terrace. Fall into c and see where it takes you." 3 the solution.
 **Reset:** Nadim → V325 = 0, V326 = 1, to T0. Falls are free and need no reset.
 
 ### 213 Warden Arena (21×17)
-Sahar, single battle. Badge 5 + TM83 Bulldoze. Strength (HM04) comes from the excavators afterwards (WORLD §4).
+Sahar, single battle. Badge 5 (the Sandglass Badge) + TM83 Bulldoze. Strength (HM04) comes from the excavators afterwards (WORLD §4).
 
 ### 215 Mural Gallery — MASTERY (optional, 21×15; via the Rock Smash door in Ud)
 - Four pivoting tablets T_a–T_d (action: cycle V425–V428 through **Sun · Eye · Wave · Bone**).
@@ -936,7 +936,7 @@ y13  #############################
   2 "Basin B adds up. Bring two flasks that add to seven." 3 the plan.
 
 ### 233 The Theatre — arena (21×17)
-Corvin, single battle. Badge 6 + TM84 Poison Jab. Surf (HM03) comes from the ferrymen afterwards.
+Corvin, **double** battle (Core `GYMS` has `double: true`; 05_ACT_II "a double battle"). Badge 6 (the Remedy Badge) + TM84 Poison Jab. Surf (HM03) comes from the ferrymen afterwards.
 
 ### 234 The Quiet Ward — MASTERY (optional, 21×15; door from 232's tap end)
 - Flasks of **4 and 9** (V430/V431). A bench at the ward door.

@@ -10,7 +10,7 @@ As in `20_SCRIPT_CH0-2.md`: `[portrait: NAME, expression]` faces for the story c
 **Counter:** V124 **CH4_STEP** (design/FLAGS.md): 0 the Hoar Road · 1 K2 · 2 Marisol met · 3 the strike vote · 4 the night · 5 the morning after · 6 Gym 3 won · 7 Larch's confession (chapter closed).
 
 ## The chapter's key events (design/CHAPTER_BEATS.md)
-1. **The Night the Ebb Stopped.** Meridian's night export draw kills the river for an hour; the masked cell blows the intake; the river comes back and drags a child's punt at the Guild mill-race, the same race that killed the Reyes siblings' father; the masked boy who helps haul the gate is Teo; the PC answers a Meridian guard with Marisol standing there (`:ch4_teo`). Build-up: Teo by day at the strike vote, and the river stuttering longer each time. Payoff: the morning after shows the choice on the quay. Consequence: Teo hunted or hidden in Ch5 and Ch9, Marisol's bond and Consent.
+1. **The Night the Ebb Stopped.** Meridian's night export draw kills the river for an hour (the cause); the masked cell blows the intake to stop the draw, and in doing it brings the river back all at once, recklessly, without looking at the water; the river comes back and drags a child's punt at the Guild mill-race, the same race that killed the Reyes siblings' father; the masked boy who helps haul the gate is Teo; the PC answers a Meridian guard with Marisol standing there (`:ch4_teo`). Build-up: Teo by day at the strike vote, and the river stuttering longer each time. Payoff: the morning after shows the choice on the quay. Consequence: Teo hunted or hidden in Ch5 and Ch9, Marisol's bond and Consent.
 2. **Larch's confession.** The tide tables prove the stutters, and the full stop, are Meridian's draw. "I lit up this whole region, you know. Eleven cities on my design." The first time the PC learns their mentor built the machine (the red herring "Larch works for Meridian" starts here; it resolves in Ch12).
 **Nothing comic** inside the night from the moment the river stops until the guard leaves, or in Larch's confession once the tide tables come out (15_COMEDY §1: jokes before, a full scene after).
 
@@ -507,6 +507,7 @@ V124 = 6.
 [name: Larch] And last night. Midnight to five to one. That's the night export: Meridian runs the Lattice flat out while the Guild's asleep, fills the Prism Cells, and ships them south to the Concert of Regions on the night boats. The quarantine has an exemption for that. It always did.
 [portrait: LARCH, neutral] The Hollow blew the intake at eight minutes to one. The river came back at eight minutes to one.
 [portrait: LARCH, sad] They didn't stop your river, child. They started it.
+[portrait: LARCH, neutral] All at once, in the dark, with a child on the water, because nobody looked. Both of those are true. That's the trouble with being right in a hurry.
 WAIT 40.
 [portrait: LARCH, sad] It's not the Hollow stopping the river. It's us.
 [name: Larch] It's my design.
@@ -593,5 +594,5 @@ For the map builders (these maps are built; this is what to add or change) and t
 **170–174 Tidelock Gym** — the Lock Hall door opens at V124 >= 5. [CHANGED] the gym guide (3 lines). [CHANGED] Marisol (174): the pre-battle lines by `:ch4_teo`, the ace line, the win, the TIDETURN BADGE, the third note (a 3-note SE), TM03. Sets V124 = 6.
 
 **Cartographer (`tools/worldmap/world_data.py` → maps.json):** 160's NPC "Marisol's brother Tomas" and 166's "Tomas Reyes" are **Teo Reyes** (03_CAST). 167 connects to 580 by the towpath gate (Ch5).
-**Items owner:** CELLAR KEY, SMOKED CHAR (Key Item / flavour food, heals like a Lemonade) are new. Badge name **Tideturn Badge** is proposed here (no badge names for Gyms 3–18 exist yet).
+**Items owner:** CELLAR KEY, SMOKED CHAR (Key Item / flavour food, heals like a Lemonade) are new. Badge name: the **Tideturn Badge** (creator, 2026-11-21).
 **Trainer designer:** the two Ebbmouth `HOLLOW_GRUNT_M`/`_F` (the night, a double) and the cellar's two (singles) need Ebbmouth versions (version 0 is the Saltmere Pageant pair), Lv 20–22, Water/Dark/Poison with no Electric or Grass (Basculin, Buizel, Croagunk, Stunky). **HOLLOW_TEO v0** already exists (Carvanha, Arrokuda, Chewtle "Snapper"); please change its LoseText, because he is still masked when he loses and "Tell my sister—" gives the unmasking away a minute early. Suggested: "Not now — not NOW, it's jammed—". ("Tell my sister— no. Don't tell her anything." suits a later Teo version, after Ch4.)

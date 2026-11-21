@@ -819,7 +819,7 @@ TITLE CARD: II — IMPRINTS
 - **Comedy (15_COMEDY):** Juno's pies, the scrip store, the tram stop, the vending and kiosk quests, Rook's blackout ("This is content"), "Chat Has Opinions", Larch's formal oilskin, Quent's bet. Nothing after the Gala's lights go grey; the interlude's "Edda. Of course it's Edda." is a dry line in a separate scene.
 - **Running gags:** kelp tea bag four (182); Kestrel's tea "for later" (packed in the interlude).
 - **Distribution (SPINE Rev 16):** the only Pokémon on offer are the blackout's wild Rotom (Electric/Ghost; no Ground answer to Rook) and the optional Sluiceworks Rotom. No gifts after Gym 4 (Sahar's and Corvin's answers stay locked).
-- **Proposed badge name:** the **Arclight Badge** (Gym 4).
+- **Badge name:** the **Arclight Badge** (Gym 4; creator, 2026-11-21).
 
 
 ---

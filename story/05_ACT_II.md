@@ -28,7 +28,7 @@
   - Help the Directorate secure the site: Meridian Standing up, and you earn a "commendation" (a lightly sinister Key Item: a Mandate Pass that later opens checkpoints).
   - Get Sahar to invoke the Warden's right of sanctuary over the children: Accord Standing goes up and the Directorate backs off, furious. (Choosing the Directorate here is Sahar's Consent refusal in Act V.)
 
-**Gym 5 (`:DESERT`).** Thematic note: *dig down, because what you need is buried.* Sahar is patient, dry and coughing: "The desert keeps everything. It just doesn't keep it where you left it." Her ace is **Claydol**. She gives Strength via her excavators.
+**Gym 5 (`:DESERT`).** Thematic note: *dig down, because what you need is buried.* Sahar is patient, dry and coughing: "The desert keeps everything. It just doesn't keep it where you left it." Her ace is **Claydol**. She awards the **Sandglass Badge** and gives Strength via her excavators.
 
 **Aftermath and revelation: the Ossuary of Dunes (Unown ruins set piece).**
 - The latest dune-shift has uncovered a doorway in a giant fossil skull on the Marrow Road.
@@ -84,13 +84,13 @@
 - Brother Wick is old, half-blind and gentle, and he's here to bless dying Bereaved. He fights only because the PC forces it, or the PC can **talk him down** if Hollow Standing is high enough or they chose kindly in Ch5 (no battle).
 - After the battle (or the talk) he explains the **Wound Doctrine**: "The Choir teaches that the Plates were a gift. Child, nobody bleeds for three hundred years from a *gift*." Then, more quietly, something new: *"The Mourner doesn't want to break them anymore. He wants to carry them home. But you can't carry what you can't hold."* He looks at the PC's chest and doesn't say why.
 
-**Gym 6 (`:CORROSIVE_MIRE`), a double battle.** Thematic note: *poison is a dose; the right amount heals.* Corvin: "Don't worry. I'm a doctor. I know exactly how much this hurts." His ace is **Toxapex**. The Mirefen ferrymen give the PC Surf.
+**Gym 6 (`:CORROSIVE_MIRE`), a double battle.** Thematic note: *poison is a dose; the right amount heals.* Corvin: "Don't worry. I'm a doctor. I know exactly how much this hurts." His ace is **Toxapex**. He awards the **Remedy Badge**, and the Mirefen ferrymen give the PC Surf.
 
-**Revelation.** That night Corvin drinks bog coffee with the PC on the Infirmary roof. "Do you know why nobody in my Ward is dead? They're not dying. They're *dreaming*. I can see their eyes move under the glass." A beat. "Somebody should find out what they're dreaming about." (This seeds the Good ending's waking and Venam's Act V testimony.)
+**The Ward Night (key event; creator-approved 2026-11-21, `design/CHAPTER_BEATS.md` proposal B).** After the gym, Corvin and the PC drink bog coffee on the Infirmary roof. Every screen in Nadir flickers: **Sable**, unmasked mouth, cheerful: *"The Mourner's gone soft. The Hammer hasn't. Cindervault's next. Light for everyone, right?"* As she speaks, the Infirmary's lamps die: the Hammer has cut the Gutterfall junction that runs the Quiet Ward's dampers. The ward's Bleed rises into a Veil across its door; Corvin and Wenlow can't go in. The PC can. They carry out **Ama**, the nine-year-old with salt hair Wenlow introduced by name, and under the clear salt her eyes are moving. Juno gets the peat-fired seed-medicine stills onto the damper coils and the Veil sinks back. On the roof afterwards, Corvin: "Do you know why nobody in my Ward is dead? They're not dying. They're *dreaming*. You saw it too. Two's a study." (This seeds the Good ending's waking and Venam's testimony; the Hammer is now the Hollow's enemy on screen. Script: `story/26_SCRIPT_CH7.md`.)
 
 **Optional thread: cameo sidequest "Sewer Royalty" (Venam).** See `design/CAMEOS.md`. A loud punk girl with a Seviper has fallen through a sewer mirror into Mirefen's runoff tunnels, and she is helping Wenlow drag Sweetrot addicts to the Infirmary. Completing it earns **Venam's Testimony**, a recording of her account of being turned to stone and coming back ("I could hear everything"). It counts as one of the Envoy's proofs in Ch20 and can be played for Juno in Ch10.
 
-**Cliffhanger:** A Hollow broadcast hijacks every screen in Nadir. It isn't the Mourner. It's **Sable**, unmasked mouth, cheerful: *"The Mourner's gone soft. The Hammer hasn't. Cindervault's next. Light for everyone, right?"*
+**Cliffhanger:** Morning. On every wall in Mirefen the Hollow Ring has been painted over with a hammer, and under one of them somebody has chalked: "NOT OURS. — the Hollow". Sable's "Cindervault's next" is Chapter 8's hook.
 
 ---
 
