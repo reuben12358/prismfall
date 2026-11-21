@@ -596,7 +596,7 @@ def infill(r, palettes, pick=None, scale=10.0, seed=0, bushes=('nt_bush0', 'nt_b
                         m.taken[Y, X] = True; hole[Y, X] = False
                 done = True; placed += 1; break
             if done: continue
-            for ox in (0, -1):
+            for ox in ((0, -1) if shrubs else ()):
                 if all(m.inb(x + ox + dx, y + dy) and hole[y + dy, x + ox + dx] for dx in range(2) for dy in range(2)):
                     L = np.array(STAMPS[rng.choice(shrubs)]['layers'])
                     for dy in range(2):
@@ -607,6 +607,19 @@ def infill(r, palettes, pick=None, scale=10.0, seed=0, bushes=('nt_bush0', 'nt_b
                             m.taken[Y, X] = True; hole[Y, X] = False
                     done = True; placed += 1; break
             if done: continue
-            m.L[1, y, x] = int(np.array(STAMPS[rng.choice(bushes)]['layers']).max()); m.taken[y, x] = True; hole[y, x] = False
+            b = rng.choice(bushes)
+            m.L[1, y, x] = b if isinstance(b, int) else int(np.array(STAMPS[b]['layers']).max()); m.taken[y, x] = True; hole[y, x] = False
             placed += 1
     return placed
+
+
+def thin_bands(r, passes=2):
+    """plan time (map builder 16): forest one cell thick (a T cell with open ground on both sides, N/S or W/E) can hold
+    no lattice tree; it would be infilled as a hedge of bushes.  Open it instead (fringe trees and undergrowth dress it)"""
+    m = r.m; n = 0
+    for _ in range(passes):
+        T = m.cls == 'T'
+        pad = np.pad(T, 1, constant_values=True)
+        thin = T & ((~pad[:-2, 1:-1] & ~pad[2:, 1:-1]) | (~pad[1:-1, :-2] & ~pad[1:-1, 2:])) & ~m.taken
+        m.cls[thin] = '.'; n += int(thin.sum())
+    return n

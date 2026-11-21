@@ -1,4 +1,4 @@
-# Rimewood Glade (563). WRITTEN BY layouts/rimewood.py - edit that script.
+# Rimewood Glade (563). WRITTEN BY layouts/rimewood.py (crafted by map builder 16) - edit that script.
 id: 563
 name: Rimewood Glade
 parent: 562
@@ -25,10 +25,7 @@ events:
   intro: Isenmar ranger. Nobody finds this glade by accident.
   after: '...So you cut your way in. Fair. Stay till dark if you''ve the nerve. Something glides between the boles up here, and it crackles.'
 - type: item
-  at: [19, 14]
-  item: NEVERMELTICE
-- type: item
-  at: [28, 10]
+  at: [30, 2]
   item: REVIVE
   hidden: true
 - type: sign
@@ -42,14 +39,46 @@ events:
   post: false
 - type: sign
   name: Silk-fall
-  at: [17, 9]
+  at: [14, 9]
   text: 'THE SILK-FALL
 
     A waterfall of Gossamer silk, frozen as it fell. It rings faintly when the wind moves.'
   post: false
+- type: event
+  name: Ice note
+  at: [9, 17]
+  pages:
+  - graphic: {sprite: Object ball, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['(A trapper''s note, pinned under a stone: "Ice doesn''t stop you. Blocks do. Pick your blocks.")']
 - type: warp
   name: To the Rimewood
   at: [0, 15]
   link: RIME_GLADE
   arrive: [1, 15, right]
   se: Door exit
+- type: item
+  at: [19, 13]
+  item: NEVERMELTICE
+- type: event
+  name: Sleeping Stantler
+  at: [25, 2]
+  pages:
+  - graphic: {sprite: Followers/STANTLER, dir: down}
+    trigger: action
+    commands: [Zzz... The Stantler sleeps in the snow.]
+- type: event
+  name: Sleeping Stantler
+  at: [27, 1]
+  pages:
+  - graphic: {sprite: Followers/STANTLER, dir: down}
+    trigger: action
+    commands: [Zzz... The Stantler sleeps in the snow.]
+- type: event
+  name: Sleeping Stantler
+  at: [31, 2]
+  pages:
+  - graphic: {sprite: Followers/STANTLER, dir: down}
+    trigger: action
+    commands: [Zzz... The Stantler sleeps in the snow.]

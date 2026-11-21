@@ -589,13 +589,18 @@ def rimewood(prev=None):
             m.cls[y, x] = 'T'
     path = [(29, 56), (29, 50), (22, 46), (14, 44), (10, 38), (12, 30), (20, 27), (30, 26), (38, 22), (30, 22), (25, 20),
             (24.5, 13), (24, 10), (18, 8), (15, 4), (15, -1)]
-    m.lane(path, '.', 6.5, seed=3, only='T', wobble=1.6)
-    for cx, cy, rx, ry in ((26, 3, 5, 2.6), (34, 9, 5, 3.6), (10, 41, 5, 4), (40, 44, 5, 4), (20, 32, 8, 4.5), (44, 24, 4, 3),
-                           (35, 36, 6, 4), (12, 26, 4, 3), (8, 48, 5, 3.5)):
+    m.lane(path, '.', 4.6, seed=3, only='T', wobble=1.4)                  # map builder 16: a narrower verge, the wood closes in
+    for cx, cy, rx, ry in ((26, 3, 4, 2.2), (34, 9, 4.5, 3.2), (10, 41, 4.2, 3.4), (40, 44, 4, 3.2), (20, 32, 8, 4.5), (44, 24, 4, 3),
+                           (35, 36, 4.6, 3.2), (12, 26, 3.4, 2.6), (8, 48, 4, 3)):
         m.blob(cx, cy, rx, ry, '.', seed=cx + cy, only='T', rough=0.6)
     m.lane([(29, 56), (29, 50), (22, 46), (14, 44), (10, 38), (12, 30), (20, 27), (30, 26), (38, 22), (30, 22), (25, 21), (24.5, 14),
             (24, 11), (18, 8), (15, 4), (15, -1)], 'd', 2.6, seed=4, only='.T', wobble=0.4)
     m.lane([(24, 11), (30, 10), (35, 9)], 'd', 2.2, seed=6, only='.T', wobble=0.3)        # to the Frost Loom shelf
+    m.lane([(33, 36), (37, 40), (40, 43)], '.', 2.2, seed=8, only='T', wobble=0.3)         # map builder 16: to the child's big tree
+    for x in range(12, 16):                                                                 # the connection spans stay open
+        for y in range(0, 3): m.cls[y, x] = 'd' if m.cls[y, x] == 'd' else '.'
+    for x in range(26, 30):
+        for y in range(53, 56): m.cls[y, x] = 'd' if m.cls[y, x] == 'd' else '.'
     m.lane([(38, 22), (44, 24), (46, 24)], 'd', 2.0, seed=5, only='.T')       # to the frosted sapling (Cut) and the glade
     # the ravine (rows 15-18) under the fallen giant: frozen water, the trunk bridge at x 24-25
     for x in range(1, 47):
@@ -669,8 +674,25 @@ def rimewood(prev=None):
         if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='T.t'): m.stamp(nm, x, y)
     for cx, cy, n in ((20, 40, 2), (8, 12, 1), (40, 38, 1), (30, 46, 2), (16, 22, 2), (42, 14, 1)):
         m.trees(cx, cy, n, ['pine2', 'kf_tree'], r=3, on='.t', seed=cx + cy)
+    # ---- map builder 16: the crafted snow wood (the old Rimewood Path's look the user liked: a dense snowy lattice with
+    # blue crowns, pines and giants in front, stones, drifts and woodpiles at the foot, frozen silk in the branches)
+    import types, craftkit as CK
+    R_ = types.SimpleNamespace(m=m, seed=562, road_mask=np.isin(m.cls, ['d']), events=E, rng=random.Random(562))
+    for n, x, y in (('fw_wood', 4, 43), ('fw_wood', 6, 44), ('pf_sledge', 9, 45), ('fw_rack', 2, 44), ('fw_brazier', 11, 40),
+                    ('fw_log_m', 13, 37), ('nt_stump', 15, 41)):                  # the trapper's yard round the lodge
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.t'): m.stamp(n, x, y)
+    for n, x, y in (('nt_stonering', 24, 2), ('fw_stone', 21, 3), ('fw_stone', 30, 2), ('fw_stone', 28, 5), ('fw_stone', 20, 6)):   # the aurora clearing
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.t'): m.stamp(n, x, y)
+    for n, x, y in (('fw_skull', 38, 41), ('fw_wood', 42, 46), ('nt_stump_big', 43, 40), ('fw_peg', 36, 45)):      # the child's "big tree"
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.t'): m.stamp(n, x, y)
+    CK.thin_bands(R_)
+    CK.woods(R_, CK.SNOWWOOD, scale=9.0, accents={'snowblue': 0.05})
+    CK.fringe(R_, ['pine2', 'kf_tree', 'pine2', 'kf_tree'], 90, seed=1, near_forest=3)
+    CK.undergrowth(R_, 70, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
+    CK.props(R_, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2', 'nt_stump'], 24, box=(0, 0, m.W, m.H), clump=3, seed=7)
     m.events = E
     m.paint()
+    CK.infill(R_, CK.SNOWWOOD, bushes=(10371, 10371, 10551), shrubs=())
     for y in range(LOG[0], LOG[1] + 1):                                      # the fallen giant: an ice-glazed log bridge
         nm = 'fw_log_n' if y == LOG[0] else 'fw_log_s' if y == LOG[1] else 'fw_log_m'
         L_ = STAMPS[nm]['layers'][1][0]
@@ -682,7 +704,9 @@ def rimewood(prev=None):
     m.L[2, 0:4, 22:30][m.L[2, 0:4, 22:30] == 0] = 0
     rime_silk(m, ((6, 8), (12, 20), (30, 30), (40, 20), (20, 44), (34, 50)))
     m.scatter(8, seed=6)
-    dress_ice(m, 0.25, seed=562); reed_beds(m, 45, seed=562); drifts(m, 0.08, seed=562)
+    dress_ice(m, 0.25, seed=562); reed_beds(m, 60, seed=562); drifts(m, 0.14, seed=562)
+    CK.snow_ground_var(R_, thr=0.45); road_tracks(m, 0.12, seed=562); icy_faces(m)
+    rime_silk(m, ((14, 6), (36, 30), (8, 22), (26, 46), (44, 36), (20, 12)))
     m.seal_against([{'dir': 'N', 'offset': 12, 'to': 561, 'to_offset': 10}, {'dir': 'S', 'offset': 26, 'to': 578, 'to_offset': 36}], spans=[('S', 26, 4)],
                    keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
     m.events.append({'type': 'warp', 'name': 'To the Wolfsrime', 'at': [47, 26], 'to': {'map': 579, 'x': 37, 'y': 1, 'dir': 'down'},
@@ -765,51 +789,87 @@ def ice_floor(m, cls):
 
 # =================================================================================================== 563 Rimewood Glade
 def glade(prev=None):
+    """Rimewood Glade (563; map builder 16, crafted): behind the frosted sapling on the Rimewood's east edge.  A snow
+    ridge (h1) closes the north, and the Silk-fall comes down its face frozen as it fell; at its foot the Silk-fall pond
+    is a slide puzzle (Frozen Pond, terrain tag 12: you slide until an ice block stops you) whose islet keeps the
+    Never-Melt Ice (slide_puzzle proves it takes at least four slides and that you can slide back).  The herd sleeps on
+    the ridge (a stair at the east end), the Snowveil Shrine stands in the south-east, frosted ferns fill the hollows
+    (the night table: Emolga glides here after dark, Ranger Sigurd says so)."""
+    import types, craftkit as CK
     W, H = 34, 30
     m = snowmap(W, H, 563)
     m.cls[:, :] = 'T'
-    m.blob(16.5, 16, 13.5, 12.0, '.', seed=2, only='T', rough=0.9)
-    m.lane([(0, 15), (6, 15), (8, 21), (14, 25), (24, 25), (28, 21)], 'd', 2.0, seed=3, only='.T')
+    rng = random.Random(563)
+    for x in range(W):                                                       # the ridge
+        lip = 4 + (1 if vnoise(x, 0, 5631, 4.0) > 0.66 and not 12 <= x <= 22 else 0)
+        m.ht[:lip + 1, x] = 1
+    m.blob(16.5, 16.5, 13.0, 9.5, '.', seed=2, only='T', rough=0.8)        # the glade
+    m.blob(27.5, 2.2, 4.5, 1.8, '.', seed=21, only='T', rough=0.4)          # the herd's ground on the ridge
+    m.lane([(0, 15), (5, 15), (8, 20), (13, 23), (20, 24.5), (26, 23), (29, 20)], 'd', 2.0, seed=3, only='.T', wobble=0.3)
     m.rect(0, 14, 3, 3, 'd', only='.T')
-    m.blob(19, 14, 8.0, 5.0, 'i', seed=4, only='.', rough=0.55)                # the frozen pond (slide puzzle)
-    for y in range(0, 6):                                                   # the Silk-fall pours from the ridge at x 14-19
-        for x in list(range(9, 17)) + list(range(23, 29)): m.ht[y, x] = 1
-    for y in range(0, 9):
-        for x in range(17, 23): m.cls[y, x] = 'f'
-    m.rect(2, 22, 10, 6, 't', only='.')
-    m.blob(27, 10, 3.5, 2.2, 't', seed=8, only='.', rough=0.6); m.blob(7, 9, 2.5, 2.0, 'p', seed=9, only='.T', rough=0.3)   # break the symmetry
+    for cx, cy, rx, ry, sd in ((18.5, 12.6, 6.6, 3.4, 31), (12.6, 14.6, 3.0, 2.2, 33), (24.2, 14.6, 3.0, 2.0, 35), (18.5, 16.0, 3.4, 1.6, 37)):
+        m.blob(cx, cy, rx, ry, 'p', seed=sd, rough=0.35, only='.T')         # the Silk-fall pond (a kidney, not a box)
+    smooth(m, 'p', into='.', passes=2)
+    for y in range(8, 11):                                                   # the fall's foot runs straight into the pond
+        for x in range(16, 20): m.cls[y, x] = 'p'
+    ISLET = [(18, 12), (19, 12), (18, 13), (19, 13), (20, 13), (19, 14)]
+    for x, y in ISLET: m.cls[y, x] = '.'; m.taken[y, x] = True
+    for i, (cx, cy, sz) in enumerate(((6, 22, 3.2), (27, 10, 2.4), (7, 9.5, 2.4), (12, 26.5, 2.0), (29, 26, 1.8))):
+        m.blob(cx, cy, sz, sz * 0.7, 't', seed=50 + i, only='.', rough=0.7)    # frosted ferns (the encounters, the night table)
+    for x, y in [(x, y) for y in range(H) for x in range(W) if m.cls[y, x] in '.t' and m.ht[y, x] == 0 and y <= 7]:
+        m.cls[y, x] = 'T'                                                    # nothing hangs on the ridge's face
+    m.stairs(28, 4, w=3, kit_rows=4, c='d')
+    m.plan_cliffs()
+    for x in range(28, 31):
+        for y in (2, 3, 8, 9):
+            if m.cls[y, x] in 'T.t': m.cls[y, x] = '.'
     E = [trainer((20, 24), 'POKEMONRANGER_M', 'Sigurd', "Isenmar ranger. Nobody finds this glade by accident.",
                  "...So you cut your way in. Fair. Stay till dark if you've the nerve. Something glides between the boles up here, and it crackles.", 'left'),
-         item((19, 14), 'NEVERMELTICE'), item((30, 3), 'REVIVE', True),
+         item((30, 2), 'REVIVE', True),
          sign((28, 21), 'Snowveil Shrine', "THE SNOWVEIL SHRINE\nA pot of honey and a smoked eel sit side by side on the altar.\nNeither has been touched by the other."),
-         sign((16, 9), 'Silk-fall', "THE SILK-FALL\nA waterfall of Gossamer silk, frozen as it fell. It rings faintly when the wind moves."),
+         sign((14, 9), 'Silk-fall', "THE SILK-FALL\nA waterfall of Gossamer silk, frozen as it fell. It rings faintly when the wind moves."),
+         npc((9, 17), 'Ice note', 'Object ball', ["(A trapper's note, pinned under a stone: \"Ice doesn't stop you. Blocks do. Pick your blocks.\")"]),
          {'type': 'warp', 'name': 'To the Rimewood', 'at': [0, 15], 'link': 'RIME_GLADE', 'arrive': [1, 15, 'right'], 'se': 'Door exit'}]
     m.cls[15, 0] = 'd'
-    E = seat(m, E[:-1], on='.dti') + E[-1:]
+    E = seat(m, E[:-1], on='.dt') + E[-1:] + [item((19, 13), 'NEVERMELTICE')]
     m.taken[15, 0] = True
     for e in E:
         if e['type'] == 'sign': signboard(m, e)
-    m.near('sh_gate', 27, 17, on='.d', r=2)
-    for x, y in ((25, 4), (27, 5), (29, 4)):                                # the sleeping Stantler herd (decor events)
-        if m.free(x, y, 1, 1, on='.t'): E.append({'type': 'event', 'name': 'Sleeping Stantler', 'at': [x, y], 'pages': [
-            {'graphic': {'sprite': 'Followers/STANTLER', 'dir': 'down'}, 'trigger': 'action', 'commands': ['Zzz... The Stantler sleeps in the snow.']}]})
-    m.greenfill(3, on='.')
+    for x, y in ((25, 2), (27, 1), (31, 2)):                                # the sleeping Stantler herd (decor events)
+        if m.free(x, y, 1, 1, on='.t'):
+            E.append({'type': 'event', 'name': 'Sleeping Stantler', 'at': [x, y], 'pages': [
+                {'graphic': {'sprite': 'Followers/STANTLER', 'dir': 'down'}, 'trigger': 'action', 'commands': ['Zzz... The Stantler sleeps in the snow.']}]})
+            m.taken[y, x] = True
+    R_ = types.SimpleNamespace(m=m, seed=563, road_mask=np.isin(m.cls, ['d']), events=E, rng=rng)
+    m.stamp('fw_fall', 16, 4, mark='B')                                     # the Silk-fall, frozen down the ridge's face
+    for n, x, y in (('pf_shrine', 29, 18), ('sh_gate', 24, 18), ('fw_stone', 31, 21), ('fw_brazier', 27, 18), ('fw_wood', 4, 18),
+                    ('fw_stone', 9, 12), ('fw_stone', 25, 10), ('fw_skull', 22, 21)):
+        st = STAMPS[n]
+        if m.free(x, y, st['w'], st['h'], on='.t'): m.stamp(n, x, y)
+    for nm, x, y in (('pf_g_tree2_ice', 0, 0), ('pf_g_tree2_ice', 30, 22), ('pf_g_tree2_ice', 1, 23)):
+        if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='T.t'): m.stamp(nm, x, y, mark='B', blend=True)
+    CK.thin_bands(R_)
+    CK.woods(R_, CK.SNOWWOOD, scale=8.0, accents={'snowblue': 0.07})
+    CK.fringe(R_, ['pine2', 'kf_tree', 'pine2'], 26, seed=1, near_forest=3)
+    CK.undergrowth(R_, 24, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
     m.events = E
-    m.auto['f'] = ('Waterfall (1)', 'rejuvenation'); m.AUTO_Z = dict(m.AUTO_Z, f=0); m.JOIN = dict(m.JOIN, f='f')
     m.paint()
-    ice_floor(m, 'i')
-    for x, y in ((14, 12), (22, 11), (25, 16), (16, 17), (20, 18), (13, 15)):  # stoppers on the pond
-        if m.cls[y, x] == 'i': m.L[1, y, x] = 10371
-    for y in range(0, 9):                                                   # frozen silk over the fall
-        for x in range(17, 23):
-            if (x + y) % 2 == 0: m.L[2, y, x] = STAMPS['pf_p_strand_w']['layers'][1][0][0] or m.L[2, y, x]
-    m.scatter(14, seed=12)
-    drifts(m, 0.14, seed=564)
+    CK.infill(R_, CK.SNOWWOOD, bushes=(10371, 10371, 10551), shrubs=())
+    pond = [tuple(c[::-1]) for c in np.argwhere(m.cls == 'p')]
+    for x, y in slide_puzzle(m, pond, ISLET, (19, 13), n_rocks=(10, 16), tries=3000, seed=17):   # ice-block stoppers
+        m.L[1, y, x] = 10371 if (x + y) % 3 else 10551
+    for y in range(4, 9):                                                    # frozen silk strands over the fall
+        for x in range(16, 20):
+            if (x + y) % 2 == 0 and m.L[2, y, x] == 0: m.L[2, y, x] = STAMPS['pf_p_strand_w']['layers'][1][0][0] or m.L[2, y, x]
+    rime_silk(m, ((6, 6), (12, 5), (24, 6), (5, 13), (30, 12)))
+    m.scatter(10, seed=12)
+    reed_beds(m, 18, seed=563); drifts(m, 0.14, seed=564)
+    CK.snow_ground_var(R_, thr=0.45); road_tracks(m, 0.12, seed=563); icy_faces(m)
     if prev: m.preview(prev, 0.5)
     m.write(563, head(563, 'Rimewood Glade', biome='forest', parent=562, bgm='Natural Park',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 8, 20], 'BattleBack': 'snow', 'Weather': ['Snow', 20]},
                       tone=[-6, -2, 16, 12], _file='563_rimewood_glade.yaml'),
-            '# Rimewood Glade (563). WRITTEN BY layouts/rimewood.py - edit that script.\n')
+            '# Rimewood Glade (563). WRITTEN BY layouts/rimewood.py (crafted by map builder 16) - edit that script.\n')
     return m
 
 

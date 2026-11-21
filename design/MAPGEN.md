@@ -754,9 +754,22 @@ a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/
   (blue/violet crowns via `CK.woods(pick=)`, crystals and gravel at the crystal-silk mouth, now a true one-tile mouth),
   Shelly's dew pond with reeds and the Veil round the Masquerain's gravel pocket, the Rangers' camp (Ranger Fenn heals; the
   big stump keeps the hidden Super Potion).  Before/after: `maps_out/previews/ch2_4_compare/525_before_after.jpg`.
+- **562 The Rimewood** (`rimewood.py rimewood()`, same plan, events, connections, D7 corridor and the 47,24 / 47,26
+  warps): the verge narrowed (4.6), the clearings trimmed, a lane to the lost child's big tree; then the old Rimewood
+  Path's snowy look the user liked: `CK.woods(SNOWWOOD, snowblue accents)`, `CK.thin_bands` (one-cell forest bands open
+  to verge, not a hedge), fringe pines and frosted oaks, stones and woodpiles, `CK.infill`, the trapper's yard (wood,
+  sledge, rack, brazier), standing stones in the aurora clearing, rime silk, icicles on faces, sled tracks, snow ground
+  variants.  D7 still proves (2 pulls, 8 states); the Hoar Pond is re-searched by `slide_puzzle` (islet in 4 slides).
+- **563 Rimewood Glade** (`rimewood.py glade()`, rewritten): a snow ridge (h1) across the north with the Silk-fall as a
+  real frozen fall (`fw_fall`, silk strands over it, not the running-water autotile), the herd's sleeping ground on top
+  (stair at x 28-30), the Silk-fall pond as a **proven slide puzzle** (Frozen Pond, `slide_puzzle(n_rocks=(10, 16))`:
+  21 ice blocks, the Never-Melt Ice islet in 4 slides, a way back off), frosted-fern hollows (the Emolga night table),
+  the Snowveil Shrine.  Sigurd keeps his night-only Emolga line word for word; RIME_GLADE (0,15) unchanged.
+  Before/after: `ch2_4_compare/562_before_after.jpg`, `563_before_after.jpg`.
 - **Kit:** `CK.woods(..., pick=f)` (a palette by place); **`CK.infill(r, palettes)`** after `r.paint()`: packs every class-T
   cell the staggered lattice could not fit (ragged edges, two-row bands) with a lattice tree, a 2x2 shrub or a 1x1 bush,
-  so no forest cell is a walkable gap.  `DECOR_SH['flowers']` 11 and 12 are SOLID bushes: never use them as floor dressing.
+  so no forest cell is a walkable gap (bushes may be tile ids: snow maps use 10371 / 10551, `shrubs=()`); `CK.thin_bands(r)` at plan
+  time.  `DECOR_SH['flowers']` 11 and 12 are SOLID bushes: never use them as floor dressing.
 
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's

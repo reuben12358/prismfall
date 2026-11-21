@@ -20,7 +20,7 @@ raw: data/raw/562.npy
 tileset: 52
 events:
 - type: trainer
-  at: [14, 48]
+  at: [14, 47]
   sight: 4
   dir: right
   sprite: trainer_BUGCATCHER
@@ -28,7 +28,7 @@ events:
   intro: Bugs sleep in the ice here! I'm waking them up!
   after: They were NOT happy to be woken.
 - type: trainer
-  at: [31, 39]
+  at: [32, 38]
   sight: 4
   dir: left
   sprite: trainer_POKEMONRANGER_F
@@ -100,10 +100,10 @@ events:
   text: A fallen giant spans the ravine. Its bark is glazed in clear ice. Watch your step.
   post: false
 - type: item
-  at: [43, 47]
+  at: [41, 47]
   item: ICEHEAL
 - type: item
-  at: [8, 30]
+  at: [8, 34]
   item: GREATBALL
 - type: item
   at: [37, 7]

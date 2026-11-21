@@ -243,6 +243,9 @@ Gull cries count down the last 3 steps, and a tide-mark rock changes colour.
   - **Verified (BFS): 9 slides,** `U R U L D R D L U`.
   - The Ranger (20,24) gives the hint: "Ice doesn't stop you. Rocks do. Pick your rocks."
   - **Reward:** Never-Melt Ice + Revive (hidden).
+  - **As built (map builder 16, 2026-11-21):** the pond under the frozen Silk-fall is laid by `rimewood.slide_puzzle` (not the
+    13x9 sketch above): 21 ice blocks, the islet with the Never-Melt Ice in 4 slides, and a slide back off; Sigurd's
+    lines are unchanged and the trapper's note by the shore gives the hint ("Ice doesn't stop you. Blocks do.").
 
 ## D8 The Rehearsal (568, 34×26, `:BLEED`, bonus) — "between the frames"
 **Rule:** five seconds replay forever. Here a "second" is your step: the wagon crash advances one frame per step
