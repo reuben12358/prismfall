@@ -29,20 +29,41 @@ Portrait expressions the scripts call: `neutral, happy, sad, angry, surprised, s
 
 There's a working example of every format in `templates/`. Copy their canvas size and placement exactly.
 
-## NEW (2026-11-21): trainer battle start, the creator's direction
-The creator wants **Rejuvenation's "player vs Eizen" VS screen** and **B2W2 PWT-style animated trainer intros (Lance is the model)**. The engine side is built and captured: `docs/battle_captures/intro/juno_vs_intro.gif`, `dorian_vs_intro.gif`, `vs_intro_keys.png`. Until the art below exists, the busts are the 96x96 dialogue portraits at 1.5x.
+## NEW (2026-11-21): trainer battle start, B2W2 Elite Four style (TOP PRIORITY after the current cast packs)
+The creator chose **Pokemon Black 2/White 2's Elite Four VS sequence (Shauntal)** as "the perfect scenario". The engine already replays it beat for beat; only the art is placeholder.
+- Captures: `docs/battle_captures/intro/juno_b2w2_intro.gif`, `dorian_b2w2_intro.gif`
+- Side-by-side with the reference: `docs/battle_captures/intro/b2w2_vs_comparison.png`
+- Code: `plugins/Prismfall EBDX Bridge/010_Bridge_VersusIntro.rb`
+- Generated placeholders: `tools/vs/make_vs_assets.py`
 
-**1. VS bust** (one per main cast member and both players): `Graphics/EBDX/VS/<ID>.png`, where `<ID>` is the portrait ID (`JUNO`, `DORIAN`, `PLAYER_A`, ...).
-- **256x136** file, 128x68 native doubled (the size of one half of the VS band).
-- Big chest-up bust, cropped by the frame edges like Rejuvenation's (face about 60% of the height, shoulders and a hand or prop in shot, e.g. a Poké Ball, Dorian's cane or hat, Tamsin's needle).
-- Players face **right** (toward the seam). Opponents face **left**.
-- Transparent background: the coloured speed-line panel is drawn behind it by the game.
+Every file is PNG, hard alpha, drawn native and doubled 2x (2x2 blocks), unless a file below says otherwise.
 
-**2. One-shot intro pose:** `Graphics/Trainers/<TRAINERTYPE>.png`, the same 160x160-per-frame horizontal strip as now.
-- The strip plays **once** at battle start (~1.6 s, camera pushed in on the trainer) and **holds its last frame** for the rest of the battle.
-- It is **not a loop**. Frame 0 = a neutral stance. The middle frames = one big readable action, e.g. Lance sweeping his cape out and thrusting his arm forward, Dorian doffing his hat with a flourish, Juno twirling her bouquet up, Tamsin snapping her shawl open like wings. The last frame = the hero pose, which is also what shows during the battle.
-- **16–24 frames.** Movement should be big enough to read at 1x: whole-arm and cape swings, not 1–2 px wiggles.
-- The current Juno, Dorian and Tamsin strips are seamless loops with tiny motion. In the capture they barely register, so each needs a pose pass.
+**A. VS busts (most needed).** `Graphics/EBDX/VS/<ID>.png`, one per main cast member and both players. `<ID>` is the portrait ID (`JUNO`, `KESTREL`, `DORIAN`, `TAMSIN`, `LARCH`, `PLAYER_A`, `PLAYER_B`, then the other Wardens and rivals as they're drawn).
+- **256x160**, 128x80 native. The band shows the bottom 136 px; the top 24 px may be cut, like Shauntal's hair in the reference.
+- Big chest-up bust with a hand or prop: Rosa holds a Poké Ball, Shauntal her pen. Dorian: cane or hat. Tamsin: needle and spool. Juno: bouquet. Kestrel: Honedge hilt.
+- **Opponents face left** (they sit top-right). **Players face right** (bottom-left).
+- Transparent background. Expressive and in motion, not a stiff portrait.
+
+**B. One-shot intro pose.** `Graphics/Trainers/<TRAINERTYPE>.png`, a horizontal strip of 160x160 frames.
+- It plays **once**, over 1.6 s, while "You are challenged by ...!" shows, then **holds the last frame** for the rest of the battle.
+- **Not a loop.** Shauntal's reference: she sits reading, stands, turns, then flings her arms open with book and pen.
+- Frame 0 = a calm "before" pose (reading, arms folded, back turned). Middle frames = one big readable action. Last frame = the hero pose.
+- **16–24 frames**, with whole-body movement visible at 1x.
+- The current Juno, Dorian and Tamsin strips are subtle loops, so each needs this pass.
+
+**C. VS lightning bolts (nice to have).** `Graphics/EBDX/VS/bolt0.png`, `bolt1.png`, `bolt2.png`: three crackle variants that cycle.
+- **512x88**, transparent.
+- Thick orange-gold electric bolts with a white-hot core and a soft orange glow, irregular and organic like the reference, not a regular diamond chain.
+- They tile edge-to-edge horizontally.
+
+**D. Optional polish.** The game generates these per colour theme; hand-drawn versions win if supplied:
+- `tunnel_<theme>.png` (640x640, a radial warp of streaks around a dark centre; it is rotated in-engine)
+- `bandfoe_<theme>.png` (512x136; dark on the left, bright on the right)
+- `bandplayer_<theme>.png` (512x136; bright on the left, dark on the right)
+- `emblem.png` (300x300, a faint Poké Ball outline)
+- `spark.png`
+
+Themes: `violet, rose, blue, teal, green, gold, red, grey`.
 
 ## Queue, in priority order
 1. **Juno: new battle sprite** (`RIVAL_JUNO.png`; `LEADER_JUNO.png` for her Warden look). Match her approved portraits and overworld. Send for approval first; the creator will judge the rest by it.

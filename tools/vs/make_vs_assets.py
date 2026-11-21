@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the Rejuvenation-style trainer VS screen UI art (Prismfall EBDX Bridge 010_Bridge_VersusIntro.rb).
+"""Builds the trainer VS screen UI art (B2W2 Elite Four style; the Rejuvenation band set below is kept for reference) (Prismfall EBDX Bridge 010_Bridge_VersusIntro.rb).
 
     python3 -I tools/vs/make_vs_assets.py            -> graphics/EBDX/VS/{vs_logo,panel_<theme>,band_edge}.png
 
@@ -127,5 +127,127 @@ def main():
     print('wrote', OUT, sorted(os.listdir(OUT)))
 
 
+
+# ---------------------------------------------------------------- B2W2 Elite Four-style VS (creator's reference video 2026-11-21)
+import math
+
+
+def bolt(seed):
+    """512x88 lightning: a chain of diamonds (two interleaved zigzags), glow + orange + yellow-white core"""
+    W, H = 256, 44
+    rng = random.Random(seed)
+    up, dn = [], []
+    x = -6
+    while x < W + 12:
+        step = rng.randint(16, 28)
+        c = H // 2 + rng.randint(-4, 4)
+        a = rng.randint(7, 16)
+        up += [(x, c), (x + step // 2, c - a)]
+        dn += [(x, c), (x + step // 2, c + a)]
+        x += step
+    up.append((x, H // 2)); dn.append((x, H // 2))
+    im = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    for pts in (up, dn):
+        d.line(pts, fill=(200, 60, 6, 120), width=11)
+    for pts in (up, dn):
+        d.line(pts, fill=(246, 120, 18, 255), width=6)
+    for pts in (up, dn):
+        d.line(pts, fill=(255, 200, 64, 255), width=3)
+    for pts in (up, dn):
+        d.line(pts, fill=(255, 252, 228, 255), width=1)
+    # hard alpha (pixel art): glow pixels stay semi only where wanted
+    return im.resize((W * 2, H * 2), Image.NEAREST)
+
+
+def tunnel(theme):
+    """640x640 radial warp streaks for the VS background (rotated in-engine)"""
+    deep, mid, bright, streak = THEMES[theme]
+    N = 320
+    im = Image.new('RGB', (N, N), tuple(int(v * 0.5) for v in deep))
+    d = ImageDraw.Draw(im)
+    rng = random.Random('tunnel' + theme)
+    cx = cy = N / 2
+    R = N * 0.75
+    for i in range(90):
+        a = rng.uniform(0, 2 * math.pi)
+        wdt = rng.uniform(0.015, 0.06)
+        r0 = rng.uniform(18, 70)
+        t = rng.random()
+        col = lerp(mid, streak, t * 0.7) if rng.random() < 0.4 else lerp(deep, mid, t)
+        if rng.random() < 0.1: col = (236, 230, 250)
+        pts = [(cx + r0 * math.cos(a), cy + r0 * math.sin(a)),
+               (cx + R * math.cos(a - wdt), cy + R * math.sin(a - wdt)),
+               (cx + R * math.cos(a + wdt), cy + R * math.sin(a + wdt))]
+        d.polygon(pts, fill=col)
+    # dark core
+    for r in range(40, 0, -2):
+        k = r / 40
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=lerp((4, 2, 8), tuple(int(v * 0.5) for v in deep), k))
+    return im.resize((N * 2, N * 2), Image.NEAREST)
+
+
+def band(theme, bright_left):
+    """512x136 band background: black to the theme colour across, light sweeps"""
+    deep, mid, bright, streak = THEMES[theme]
+    W, H = 256, 68
+    im = Image.new('RGB', (W, H))
+    px = im.load()
+    for x in range(W):
+        u = x / (W - 1)
+        if bright_left: u = 1 - u
+        u = round(u ** 1.3 * 20) / 20.0                       # posterised, B2W2 cel steps
+        col = lerp((6, 4, 10), deep, min(1, u * 2)) if u < 0.5 else lerp(deep, bright if u > 0.85 else mid, (u - 0.5) * 2)
+        for y in range(H):
+            px[x, y] = col
+    d = ImageDraw.Draw(im)
+    rng = random.Random('band' + theme + str(bright_left))
+    for _ in range(4):                                     # diagonal light sweeps
+        x0 = rng.randint(W // 3, W)
+        w = rng.randint(2, 6)
+        sx = x0 if not bright_left else W - x0
+        col = lerp(deep, mid, rng.uniform(0.5, 0.9))
+        pts = [(sx, 0), (sx + w, 0), (sx + w - 30, H), (sx - 30, H)]
+        if bright_left: pts = [(W - p[0], p[1]) for p in pts]
+        d.polygon(pts, fill=col)
+    return im.resize((W * 2, H * 2), Image.NEAREST)
+
+
+def emblem():
+    """faint Poke Ball outline drawn across both bands behind the VS (300x300)"""
+    N = 150
+    im = Image.new('RGBA', (N, N), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    col = (160, 34, 26, 150)
+    d.ellipse((2, 2, N - 3, N - 3), outline=col, width=4)
+    d.rectangle((2, N // 2 - 2, N // 2 - 22, N // 2 + 2), fill=col)
+    d.rectangle((N // 2 + 22, N // 2 - 2, N - 3, N // 2 + 2), fill=col)
+    d.ellipse((N // 2 - 20, N // 2 - 20, N // 2 + 20, N // 2 + 20), outline=col, width=4)
+    d.ellipse((N // 2 - 9, N // 2 - 9, N // 2 + 9, N // 2 + 9), outline=col, width=3)
+    return im.resize((N * 2, N * 2), Image.NEAREST)
+
+
+def spark():
+    im = Image.new('RGBA', (5, 5), (0, 0, 0, 0))
+    for (x, y), c in {(2, 2): (255, 240, 200, 255), (1, 2): (255, 120, 40, 255), (3, 2): (255, 120, 40, 255),
+                      (2, 1): (255, 120, 40, 255), (2, 3): (255, 120, 40, 255), (1, 1): (220, 40, 20, 160),
+                      (3, 3): (220, 40, 20, 160), (1, 3): (220, 40, 20, 160), (3, 1): (220, 40, 20, 160)}.items():
+        im.putpixel((x, y), c)
+    return im.resize((10, 10), Image.NEAREST)
+
+
+def main_b2w2():
+    os.makedirs(OUT, exist_ok=True)
+    for i in range(3):
+        bolt(i).save(os.path.join(OUT, f'bolt{i}.png'))
+    for t in THEMES:
+        tunnel(t).save(os.path.join(OUT, f'tunnel_{t}.png'))
+        band(t, False).save(os.path.join(OUT, f'bandfoe_{t}.png'))
+        band(t, True).save(os.path.join(OUT, f'bandplayer_{t}.png'))
+    emblem().save(os.path.join(OUT, 'emblem.png'))
+    spark().save(os.path.join(OUT, 'spark.png'))
+    print('b2w2 set written')
+
+
 if __name__ == '__main__':
-    main()
+    main_b2w2()
