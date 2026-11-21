@@ -9,6 +9,7 @@
 - **Battle placement:** the ally base gets smaller (Meadow), and on Frozen Lake it moves up and gets smaller.
 - **The Glass Dunes field "looks super sick"**, but the transition into it feels weird; redo it.
 - **No thin chapters** (user, 03:09): "we want every chapter to be significant to some extent with either 1 or 2 key events happening each chapter." Per-chapter key events go in design/CHAPTER_BEATS.md, and side content ties into them.
+- **GitHub:** the project is pushed to github.com/reuben12358/prismfall (private, `main`). Gemini drops proposals in `gemini_recommends/`; Claude fetches `github/main`, merges, reviews each proposal and logs ADOPT / ADAPT / REJECT / ASK with reasons in `gemini_recommends/REVIEW.md`. The research index is `research/README.md`.
 - **Fields must make sense** (user, 03:17): every field rule needs a reason a player could guess, and transitions only where they're plausible and matter. Fields without transitions are fine. Glass Dunes gets a cooling **Mirror Glass** stage (Mirror Arena-style), sound-shatter, lingering shards, and insulation against Electric. Audit: design/FIELD_LOGIC_AUDIT.md.
 - **The old Rimewood Path layout lives on** as its own connector map ("it looks pretty"); the new 578 stays.
 
