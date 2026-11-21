@@ -1,5 +1,5 @@
-# TRIAL_EVENTS.yaml - map events for the wired Trial quests and event Pokemon (Chapters 1-4), and the Eevee Octave
-# (SPINE Rev 19, Chapters 2-20: maps 145, 120, 524, 160, 167, 181, 215, 220, 240, 340, 742, 489; design/EEVEE_OCTAVE.md)
+# TRIAL_EVENTS.yaml - map events for the wired Trial quests and event Pokemon (Chapters 0-5), and the Eevee Octave
+# (SPINE Rev 19, Chapters 2-20: maps 145, 120, 524, 160, 167, 181, 606, 220, 240, 340, 742, 489; design/EEVEE_OCTAVE.md)
 # and Mega Evolution and Z-crystals (SPINE Revs 20-21, 23; design/MEGA_EVOLUTION.md 4-5, design/Z_MOVES.md: the Ring-Day in Cragholm at 13 badges, 44 stones, 20 crystals)
 # Owner: Prismfall Trials (design/TRIALS.md). Consumer: the map builder (design/MAPGEN.md section 4 event DSL).
 # No map file was edited; place these where `near:` says and fill `at:`.
@@ -49,6 +49,7 @@ maps:
        condition: "quest_step(:EL_LAST_PLANK) == :planks", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
     - {name: Loose plank 2, key: BOATYARD_PLANK, near: "the boatyard, against the slipway", same_as: "Loose plank 1"}
     - {name: Loose plank 3, key: BOATYARD_PLANK, near: "the boatyard, under the upturned skiff", same_as: "Loose plank 1"}
+    - {name: Woman with crate (town), key: CRATE_WOMAN, patch: "existing event 'Woman with crate (town)' (the Ch0 stowaways: :landed after S103, then :return; 116_Quests_Early.rb)"}
   103:
     name: Larch Research Station (Tidewatch Station)
     events:
@@ -72,12 +73,15 @@ maps:
     - {name: Crate 7-B, near: "under the kiosk", sprite: "tile: stencilled crate, two small flames between the slats", trigger: action,
        condition: "!quest_done(:ZE_FORM_7B)", commands: ["'Two small flames flicker between the slats. They are very low.'"]}
     - {name: Customs officer, key: CUSTOMS_OFFICER, patch: "existing event 'Customs officer' (Form 7-C customs stamp)"}
+    - {name: Two mice, key: STOWAWAY_MICE, near: "curled against Crate 7-B under the kiosk", sprite: "Followers/TANDEMAUS", trigger: action,
+       condition: "quest_step(:EL_STOWAWAYS) == :find", note: "Two Unlisted (Ch0-1): the stowaways from the last ferry, warming their paws on the Charcadet's crate"}
   109:
     name: The Dovetail - Deck
     events:
     - {name: Wattrel nest, key: DOVETAIL_NEST, near: "under the furled mainsail", sprite: "Wattrel in a rope-fibre nest", trigger: action,
        condition: "quest_step(:EL_MASTER_OF_NOTHING) == :ask || (quest_done(:EL_MASTER_OF_NOTHING) && badges < 3)",
        request: "the laid-up Dovetail must be boardable after Ch1 (gangplank event at the berth on 100 -> 109)"}
+    - {name: Woman with crate, key: CRATE_WOMAN, patch: "existing event 'Woman with crate' on the deck (Two Unlisted, Ch0: the crate squeaks; the offer expires at the dock scan, S102)"}
   521:
     name: Windfall Row
     events:
@@ -257,8 +261,8 @@ maps:
        condition: "quest_step(:ZE_OCTAVE_OFF_BEAT) == :junctions", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
     - {name: Lattice junction 2, key: LATTICE_JUNCTION, near: "a junction box by the noodle bar", same_as: "Lattice junction 1"}
     - {name: Lattice junction 3, key: LATTICE_JUNCTION, near: "a junction box at the bottom of the steps", same_as: "Lattice junction 1"}
-  215:
-    name: Temple of the Noon Sun (new interior; suggested ID)
+  606:
+    name: Temple of the Noon Sun (new interior; ID 606, was 215 which GYM_PUZZLES uses for the Gym 5 Mastery)
     events:
     - {name: Temple door, request: "a small round sandstone temple half under a dune, off Sunbleach Flats (613) or Duneholt's Sandgate (203): one room, a light-shaft in the roof that drops a circle of light on the floor at noon, a bronze bell"}
     - {name: Sona, key: OCTAVE_SONA, near: "beside the sleeping Espeon in the middle of the floor", sprite: "woman in Choir grey, eyes half shut; an Espeon asleep", trigger: action,
@@ -607,3 +611,51 @@ maps:
        commands: ["{script: 'pf_mega_stone(:LATIASITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
     - {name: "Mega Stone: LATIOSITE", near: "the eon nest on the highest isle (post-game)", sprite: "Object ball", trigger: action, condition: "badges >= 18 && !has_item(:LATIOSITE)",
        commands: ["{script: 'pf_mega_stone(:LATIOSITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  # ---- Early side content, Chapters 0-5 (116_Quests_Early.rb, talk rows 153_Talk_Early.rb; 2026-11-21) -------------------
+  # 528/548/579 are built: mapgen/trial_overlay.py lays these events. 580/588/180/185 are map builder 15's (mapgen/REQUESTS.md).
+  528:
+    name: Marram Down
+    events:
+    - {name: Sand-sculptor, key: SCULPTOR, patch: "existing event 'Sand-sculptor' (The Crown in the Sand, Ch2: offer after S108 and Badge 1; report)"}
+    - {name: Sand Crown, key: SAND_CROWN, near: "beside the Sand-sculptor: her sand Crown", trigger: action,
+       note: "page 1 always (a sand crown; idle line); page 2 'Condition: quest_step(:EL_SAND_CROWN) == :ask && night' shows Followers/SANDYGAST. The scene itself checks night"}
+  548:
+    name: Cocoonfall Hollow
+    events:
+    - {name: Humming cocoon, key: GLASS_COCOON, near: "among the Matriarch's glass cocoons, south of the ravine (by 'Glass cocoons')", sprite: "Followers/JOLTIK (a small glass cocoon)", trigger: action,
+       condition: "quest_active(:EL_MATRIARCH_HUM)", note: "The Note Under the Glass (Ch3, after S107): hatches with Badge 3"}
+  579:
+    name: The Wolfsrime
+    events:
+    - {name: Old drover, key: DROVER, patch: "existing event 'Old drover' by the cold kiln (Bracken Comes In, Ch4)"}
+    - {name: Bracken (the den), key: WOLF_DEN, near: "in the hollow under the fallen giant, by 'The old den'", sprite: "Followers/GREAVARD", trigger: action,
+       condition: "quest_step(:EL_DROVERS_BELL) == :ask", note: "the drover's dog; 'The hanging bell' (42,34) keeps its own lines: its 'something answers' is the hint"}
+  580:
+    name: The Reedholms
+    events:
+    - {name: Fisher at the Veil, key: VEIL_FISHER, patch: "the script's 'Fisher at the Veil' beside the Bleed Veil warp to 588 (24_SCRIPT_CH5 580 item 6): {if: pf_trial_ready?(:VEIL_FISHER), then: talk, else: his own lines}",
+       note: "The Names in Holmsby (Ch5, Badge 3)"}
+  588:
+    name: Ebb Hollow (Holmsby)
+    events:
+    - {name: Boundary stone 1, key: HOLLOW_STONE, near: "a boundary stone at the edge of the lane, under a hanging drop of river", sprite: "tile: carved stone", trigger: action,
+       condition: "quest_step(:IS_EBB_HOLLOW) == :ask", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Boundary stone 2, key: HOLLOW_STONE, near: "a boundary stone by house number 9", same_as: "Boundary stone 1"}
+    - {name: White coral, key: HOLLOW_CORAL, near: "the last boundary stone, by the old eel-weir", sprite: "Followers/CORSOLA_1", trigger: action,
+       condition: "quest_step(:IS_EBB_HOLLOW) == :coral", note: "keep clear of the TM49 and Bleed Shard #4 balls and the 4 inspect lines"}
+  180:
+    name: Lumen City - the Concourse
+    events:
+    - {name: Fizzbolt machine, key: FIZZBOLT_MACHINE, near: "on the Concourse (the script's 'P-3NNY kiosk and the Fizzbolt machine (Trials hooks)')", sprite: "tile: brass-and-glass vending machine with a dent", trigger: action,
+       note: "The Machine Wants Compliments (Ch5, Badge 3); its rows stay shut while V125 CH5_STEP is 7-12 (the Gala to the Interlude)"}
+    - {name: Cadence (Concourse), key: OCTAVE_CADENCE, near: "by the Nadir lift-grilles, on an upturned paint tin", sprite: "woman in a cut-down Choir robe; a Jolteon at her feet", trigger: action,
+       condition: "switch(114) && var(125) >= 13 && !quest_done(:ZE_OCTAVE_OFF_BEAT)",
+       note: "Off the Beat after the Shatter: 181 becomes 608, so Cadence waits here from Act II and the quest goes straight to the duel"}
+  185:
+    name: Meridian Spire - Lobby
+    events:
+    - {name: Helpdesk Rotom, key: HELPDESK_ROTOM, near: "the helpdesk console (the script's 'helpdesk Rotom (Trials ZE_CUSTOMER_SUPPORT)')", sprite: "tile: brass console with a Rotom in the screen", trigger: action,
+       note: "Customer Support (Ch5, Badge 3): Porygon. Rows shut while V125 is 7-12"}
+    - {name: Records desk, key: DESK_RECORDS, near: "a lobby desk, west", sprite: "clerk at a desk", trigger: action}
+    - {name: Approvals desk, key: DESK_APPROVALS, near: "a lobby desk, middle", sprite: "clerk at a desk", trigger: action}
+    - {name: Compliance desk, key: DESK_COMPLIANCE, near: "the end desk with two windows (COMPLIANCE / CANCELLATIONS OF CANCELLATIONS)", sprite: "clerk between two windows", trigger: action}

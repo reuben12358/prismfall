@@ -48,16 +48,16 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   field: COLOSSEUM | weather: None | terrain: None
     |   You are challenged by Ashkaar Soldier Rekk!
     |   Ashkaar Soldier Rekk sent out Sizzlipede!
-    |     >> sent out (foe): Sizzlipede Lv.15 [FLASHFIRE]
+    |     >> sent out (foe): Sizzlipede Lv.19 [FLASHFIRE]
     |   Go! Machoke!
     |     >> sent out (player): Machoke Lv.23 [GUTS]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
     | 
     | --- Turn 1 ---
-    |   [Machoke 76/76 | Sizzlipede 43/43]
+    |   [Machoke 76/76 | Sizzlipede 52/52]
     |   Machoke used Rock Tomb!
-    |     HP Sizzlipede (foe): 43 -> 0 / 43
+    |     HP Sizzlipede (foe): 52 -> 0 / 52
     |   It's super effective!
     |   The opposing Sizzlipede fainted!
     |     xx fainted: Sizzlipede (foe)
@@ -66,22 +66,24 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
-    |   Ashkaar Soldier Rekk is about to send out Rolycoly. Will you switch your Pokémon?  [auto: No]
-    |   Ashkaar Soldier Rekk sent out Rolycoly!
-    |     >> sent out (foe): Rolycoly Lv.15 [STEAMENGINE]
+    |   Ashkaar Soldier Rekk is about to send out Carkol. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Rekk sent out Carkol!
+    |     >> sent out (foe): Carkol Lv.19 [STEAMENGINE]
     | 
     | --- Turn 2 ---
-    |   [Machoke 76/76 | Rolycoly 37/37]
-    |   Machoke used Knock Off!
-    |     HP Rolycoly (foe): 37 -> 0 / 37
-    |   The opposing Rolycoly fainted!
-    |     xx fainted: Rolycoly (foe)
+    |   [Machoke 76/76 | Carkol 63/63]
+    |   Machoke used Karate Chop!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Carkol (foe): 63 -> 0 / 63
+    |   It's super effective!
+    |   The opposing Carkol fainted!
+    |     xx fainted: Carkol (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
     |   You defeated Ashkaar Soldier Rekk!
     |   Ha! Good hit. Do it again sometime. Not to me.
-    |   You got $720 for winning!
+    |   You got $912 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 2 of 3!
     | 
@@ -89,17 +91,17 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   field: COLOSSEUM | weather: None | terrain: None
     |   You are challenged by Ashkaar Soldier Vasha!
     |   Ashkaar Soldier Vasha sent out Capsakid!
-    |     >> sent out (foe): Capsakid Lv.15 [CHLOROPHYLL]
+    |     >> sent out (foe): Capsakid Lv.19 [CHLOROPHYLL]
     |   Go! Machoke!
     |     >> sent out (player): Machoke Lv.23 [GUTS]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
     | 
     | --- Turn 1 ---
-    |   [Machoke 76/76 | Capsakid 43/43]
+    |   [Machoke 76/76 | Capsakid 52/52]
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
-    |     HP Capsakid (foe): 43 -> 0 / 43
+    |     HP Capsakid (foe): 52 -> 0 / 52
     |   The opposing Capsakid fainted!
     |     xx fainted: Capsakid (foe)
     |   The crowd went wild for Machoke!
@@ -109,16 +111,16 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   (end of round)
     |   Ashkaar Soldier Vasha is about to send out Houndour. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Soldier Vasha sent out Houndour!
-    |     >> sent out (foe): Houndour Lv.16 [EARLYBIRD]
+    |     >> sent out (foe): Houndour Lv.20 [EARLYBIRD]
     | 
     | --- Turn 2 ---
-    |   [Machoke 76/76 | Houndour 43/43]
+    |   [Machoke 76/76 | Houndour 52/52]
     |   The opposing Houndour used Bite!
-    |     HP Machoke (player): 76 -> 71 / 76
+    |     HP Machoke (player): 76 -> 68 / 76
     |   It's not very effective...
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
-    |     HP Houndour (foe): 43 -> 0 / 43
+    |     HP Houndour (foe): 52 -> 0 / 52
     |   It's super effective!
     |   The opposing Houndour fainted!
     |     xx fainted: Houndour (foe)
@@ -127,7 +129,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     |   You defeated Ashkaar Soldier Vasha!
     |   The Sergeant's going to make me run laps. Worth it.
-    |   You got $768 for winning!
+    |   You got $960 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 3 of 3!
     | 
@@ -135,21 +137,20 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   field: COLOSSEUM | weather: None | terrain: None
     |   You are challenged by Ashkaar Officer Brakka!
     |   Ashkaar Officer Brakka sent out Salandit!
-    |     >> sent out (foe): Salandit Lv.16 [CORROSION]
+    |     >> sent out (foe): Salandit Lv.20 [CORROSION]
     |   Go! Machoke!
     |     >> sent out (player): Machoke Lv.23 [GUTS]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
     | 
     | --- Turn 1 ---
-    |   [Machoke 71/76 | Salandit 45/45]
-    |   The opposing Salandit used Poison Gas!
-    |     (anim: Poison)
-    |   Machoke was poisoned!
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
-    |     HP Salandit (foe): 45 -> 0 / 45
-    |   It's not very effective...
+    |   [Machoke 68/76 | Salandit 54/54]
+    |   The opposing Salandit used Sweet Scent!
+    |     (anim: StatDown)
+    |   Machoke's evasiveness harshly fell!
+    |   Machoke used Rock Tomb!
+    |     HP Salandit (foe): 54 -> 0 / 54
+    |   It's super effective!
     |   The opposing Salandit fainted!
     |     xx fainted: Salandit (foe)
     |   The crowd went wild for Machoke!
@@ -157,41 +158,58 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 71 -> 62 / 76
-    |   Machoke was hurt by poison!
     |   Ashkaar Officer Brakka is about to send out Numel. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Officer Brakka sent out Numel!
-    |     >> sent out (foe): Numel Lv.16 [OBLIVIOUS]
+    |     >> sent out (foe): Numel Lv.20 [OBLIVIOUS]
     | 
     | --- Turn 2 ---
-    |   [Machoke 62/76 POISON | Numel 49/49]
-    |   Machoke used Rock Tomb!
-    |     HP Numel (foe): 49 -> 0 / 49
+    |   [Machoke 68/76 | Numel 59/59]
+    |   Machoke used Karate Chop!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Numel (foe): 59 -> 0 / 59
     |   The opposing Numel fainted!
     |     xx fainted: Numel (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
     |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 62 -> 53 / 76
-    |   Machoke was hurt by poison!
     | ## FIELD STAGE: COLOSSEUM is now stage 2
     |   Two down! The crowd is in a frenzy!
     |   Ashkaar Officer Brakka is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Officer Brakka sent out Fletchinder!
-    |     >> sent out (foe): Fletchinder Lv.17 [FLAMEBODY]
+    |     >> sent out (foe): Fletchinder Lv.21 [FLAMEBODY]
     | 
     | --- Turn 3 ---
-    |   [Machoke 53/76 POISON | Fletchinder 52/52]
+    |   [Machoke 68/76 | Fletchinder 62/62]
     |   The opposing Fletchinder used Growl!
     |     (anim: StatDown)
     |   Machoke's Attack fell!
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
-    |     HP Fletchinder (foe): 52 -> 0 / 52
+    |     HP Fletchinder (foe): 62 -> 11 / 62
     |   It's not very effective...
+    |     (anim: StatDown)
+    |   The opposing Fletchinder's Speed fell!
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Machoke 68/76 | Fletchinder 11/62]
+    |   Ashkaar Officer Brakka used a Super Potion.
+    |     HP Fletchinder (foe): 11 -> 62 / 62
+    |   The opposing Fletchinder's HP was restored.
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Fletchinder (foe): 62 -> 5 / 62
+    |   It's not very effective...
+    |     (anim: StatDown)
+    |   The opposing Fletchinder's Speed fell!
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Machoke 68/76 | Fletchinder 5/62]
+    |   Machoke used Rock Tomb!
+    |     HP Fletchinder (foe): 5 -> 0 / 62
+    |   It's super effective!
     |   The opposing Fletchinder fainted!
     |     xx fainted: Fletchinder (foe)
     |   The crowd went wild for Machoke!
@@ -199,7 +217,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     |   You defeated Ashkaar Officer Brakka!
     |   Three for three. Honest work.
-    |   You got $1,360 for winning!
+    |   You got $1,680 for winning!
     |   battle result code: 1
     |   (overworld message) Sergeant Brakka: Three for three. You hit like an Ashkaari. That's the nicest thing I know how to say.
     |   (overworld message) QUEST LOG: "The Little Crucible" The recruits are beaten. Now face Cinderpaw, the barge's mascot.
@@ -215,85 +233,36 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Cinderpaw shakes its ember mane. The barge deck shudders under its paws!
     | 
     | --- Turn 1 ---
-    |   [Machoke 53/76 POISON | Litleo 69/69]
+    |   [Machoke 68/76 | Litleo 68/68]
     |   The wild Litleo used Work Up!
     |     (anim: StatUp)
     |   The wild Litleo's Attack rose!
     |   The wild Litleo's Special Attack rose!
-    |   Machoke used Rock Tomb!
-    |     HP Litleo (foe): 69 -> 1 / 69
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Litleo (foe): 68 -> 1 / 68
     |   It's super effective!
     |     (anim: StatDown)
     |   The wild Litleo's Speed fell!
     |   The wild Litleo's shield shattered!
-    |     HP Litleo (foe): 1 -> 69 / 69
+    |     HP Litleo (foe): 1 -> 68 / 68
     |   The wild Litleo roars, and the crowd roars back!
     |     (anim: StatUp)
     |   The wild Litleo's Special Attack rose!
     |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 53 -> 44 / 76
-    |   Machoke was hurt by poison!
     | 
     | --- Turn 2 ---
-    |   [Machoke 44/76 POISON | Litleo 69/69]
-    |   The wild Litleo used Headbutt!
-    |     HP Machoke (player): 44 -> 23 / 76
-    |   Machoke flinched and couldn't move!
-    |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 23 -> 14 / 76
-    |   Machoke was hurt by poison!
-    | 
-    | --- Turn 3 ---
-    |   [Machoke 14/76 POISON | Litleo 69/69]
-    |   Good job, Machoke! Come back!
-    |     << recalled: Machoke (player)
-    |   You're in charge, Wartortle!
-    |     >> sent out (player): Wartortle Lv.23 [TORRENT]
-    |   The wild Litleo used Headbutt!
-    |     HP Wartortle (player): 67 -> 48 / 67
-    |   (end of round)
-    | 
-    | --- Turn 4 ---
-    |   [Wartortle 48/67 | Litleo 69/69]
-    |   Wartortle used Water Pulse!
-    |     HP Litleo (foe): 69 -> 18 / 69
+    |   [Machoke 68/76 | Litleo 68/68]
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Litleo (foe): 68 -> 0 / 68
     |   It's super effective!
-    |     (anim: Confusion)
-    |   The wild Litleo became confused!
-    |     (anim: Confusion)
-    |   The wild Litleo is confused!
-    |   The wild Litleo used Ember!
-    |   The crowd rallied behind the wild Litleo!
-    |     HP Wartortle (player): 48 -> 35 / 67
-    |   It's not very effective...
-    |   (end of round)
-    | 
-    | --- Turn 5 ---
-    |   [Wartortle 35/67 | Litleo 18/69]
-    |   Wartortle used Bite!
-    |     HP Litleo (foe): 18 -> 3 / 69
-    |     (anim: Confusion)
-    |   The wild Litleo is confused!
-    |   The wild Litleo used Ember!
-    |   The crowd rallied behind the wild Litleo!
-    |     HP Wartortle (player): 35 -> 22 / 67
-    |   It's not very effective...
-    |   (end of round)
-    | 
-    | --- Turn 6 ---
-    |   [Wartortle 22/67 | Litleo 3/69]
-    |   Wartortle used Bite!
-    |   The crowd rallied behind Wartortle!
-    |     HP Litleo (foe): 3 -> 0 / 69
     |   The wild Litleo fainted!
     |     xx fainted: Litleo (foe)
-    |   The crowd went wild for Wartortle!
+    |   The crowd went wild for Machoke!
     |     (anim: StatUp)
-    |   Wartortle's Attack rose!
+    |   Machoke's Attack rose!
     |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
-    |   Wartortle is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   battle result code: 1
     |   (overworld message) Tester obtained Litleo!
     |   (overworld message) Cinderpaw shakes its smoking mane, looks at the crew, looks at you... and trots over to sit at your feet.
@@ -616,34 +585,34 @@ Z: Lyra (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
   You are challenged by Chorister Lyra!
   Chorister Lyra sent out Moss!
-    >> sent out (foe): Moss Lv.90 @GRASSIUMZ [CHLOROPHYLL]
+    >> sent out (foe): Moss Lv.87 @GRASSIUMZ [LEAFGUARD]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> FLOWER_GARDEN
   Flowers bloom across the garden!
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Moss 263/263]
+  [Snorlax 461/461 | Moss 255/255]
   The opposing Moss surrounded itself with its Z-Power!
   The opposing Moss unleashed its full-force Z-Move!
   The opposing Moss used Bloom Doom!
   The blooming garden poured its strength into Bloom Doom!
-    HP Snorlax (player): 461 -> 105 / 461
+    HP Snorlax (player): 461 -> 133 / 461
   Snorlax used Body Slam!
-    HP Moss (foe): 263 -> 165 / 263
+    HP Moss (foe): 255 -> 154 / 255
   (end of round)
   The opposing Moss drank from the blooming garden.
-    HP Moss (foe): 165 -> 181 / 263
+    HP Moss (foe): 154 -> 170 / 255
 
 --- Turn 2 ---
-  [Snorlax 105/461 | Moss 181/263]
+  [Snorlax 133/461 | Moss 170/255]
   The opposing Moss used Leaf Blade!
   The blooming garden poured its strength into Leaf Blade!
-    HP Snorlax (player): 105 -> 0 / 461
-  Snorlax fainted!
-    xx fainted: Snorlax (player)
+    HP Snorlax (player): 133 -> 0 / 461
 ## FIELD STAGE: FLOWER_GARDEN is now stage 4
   The garden is in full flower!
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
   You have no more Pokémon that can fight!
   You lost against Chorister Lyra!
   You gave $3,600 to the winner...
@@ -659,43 +628,43 @@ Z: Aria (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: WATER_SURFACE | weather: None | terrain: None
   You are challenged by Chorister Aria!
   Chorister Aria sent out Brine!
-    >> sent out (foe): Brine Lv.90 @WATERIUMZ [WATERABSORB]
+    >> sent out (foe): Brine Lv.87 @WATERIUMZ [WATERABSORB]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> WATER_SURFACE
   The battle is taking place on the open water!
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Brine 380/380]
+  [Snorlax 461/461 | Brine 368/368]
   The opposing Brine surrounded itself with its Z-Power!
   The opposing Brine unleashed its full-force Z-Move!
   The opposing Brine used Hydro Vortex!
   The opposing Brine rode the waves into the attack!
-    HP Snorlax (player): 461 -> 217 / 461
+    HP Snorlax (player): 461 -> 237 / 461
   Snorlax used Body Slam!
-    HP Brine (foe): 380 -> 231 / 380
+    HP Brine (foe): 368 -> 215 / 368
   (end of round)
   The opposing Brine soaked up the spray.
-    HP Brine (foe): 231 -> 255 / 380
+    HP Brine (foe): 215 -> 238 / 368
 
 --- Turn 2 ---
-  [Snorlax 217/461 | Brine 255/380]
+  [Snorlax 237/461 | Brine 238/368]
   The opposing Brine used Scald!
   The opposing Brine rode the waves into the attack!
-    HP Snorlax (player): 217 -> 91 / 461
+    HP Snorlax (player): 237 -> 121 / 461
   Snorlax used Body Slam!
-    HP Brine (foe): 255 -> 109 / 380
+    HP Brine (foe): 238 -> 88 / 368
     (anim: Paralysis)
   The opposing Brine is paralyzed! It may be unable to move!
   (end of round)
   The opposing Brine soaked up the spray.
-    HP Brine (foe): 109 -> 133 / 380
+    HP Brine (foe): 88 -> 111 / 368
 
 --- Turn 3 ---
-  [Snorlax 91/461 | Brine 133/380 PARALYSIS]
+  [Snorlax 121/461 | Brine 111/368 PARALYSIS]
   The opposing Brine used Scald!
   The opposing Brine rode the waves into the attack!
-    HP Snorlax (player): 91 -> 0 / 461
+    HP Snorlax (player): 121 -> 0 / 461
   Snorlax fainted!
     xx fainted: Snorlax (player)
   You have no more Pokémon that can fight!
@@ -713,7 +682,7 @@ Z: Cadence (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: NEON_GRID | weather: None | terrain: None
   You are challenged by Chorister Cadence!
   Chorister Cadence sent out Snare!
-    >> sent out (foe): Snare Lv.90 @ELECTRIUMZ [VOLTABSORB]
+    >> sent out (foe): Snare Lv.87 @ELECTRIUMZ [VOLTABSORB]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> NEON_GRID
@@ -721,7 +690,7 @@ Z: Cadence (OCTAVE_SINGER v60) vs a neutral Snorlax
   The opposing Snare soaked up current from the grid!
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Snare 263/263]
+  [Snorlax 461/461 | Snare 255/255]
   The opposing Snare surrounded itself with its Z-Power!
   The opposing Snare unleashed its full-force Z-Move!
   The opposing Snare used Gigavolt Havoc!
@@ -731,7 +700,7 @@ Z: Cadence (OCTAVE_SINGER v60) vs a neutral Snorlax
     xx fainted: Snorlax (player)
   You have no more Pokémon that can fight!
   You lost against Chorister Cadence!
-  You gave $348 to the winner...
+  You gave $1,052 to the winner...
   battle result code: 2
   
 RESULT: player lost after 0 turn(s)
@@ -744,28 +713,28 @@ Z: Sona (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: MINDSCAPE | weather: None | terrain: None
   You are challenged by Chorister Sona!
   Chorister Sona sent out Noon!
-    >> sent out (foe): Noon Lv.90 @PSYCHIUMZ [MAGICBOUNCE]
+    >> sent out (foe): Noon Lv.87 @PSYCHIUMZ [MAGICBOUNCE]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> MINDSCAPE
   The world dissolves into a sea of drifting thoughts...
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Noon 263/263]
+  [Snorlax 461/461 | Noon 255/255]
   The opposing Noon surrounded itself with its Z-Power!
   The opposing Noon unleashed its full-force Z-Move!
   The opposing Noon used Shattered Psyche!
   The Mindscape gave the opposing Noon's thoughts real shape!
-    HP Snorlax (player): 461 -> 121 / 461
+    HP Snorlax (player): 461 -> 148 / 461
   Snorlax used Body Slam!
-    HP Noon (foe): 263 -> 91 / 263
+    HP Noon (foe): 255 -> 77 / 255
   (end of round)
 
 --- Turn 2 ---
-  [Snorlax 121/461 | Noon 91/263]
+  [Snorlax 148/461 | Noon 77/255]
   The opposing Noon used Psychic!
   The Mindscape gave the opposing Noon's thoughts real shape!
-    HP Snorlax (player): 121 -> 0 / 461
+    HP Snorlax (player): 148 -> 0 / 461
   Snorlax fainted!
     xx fainted: Snorlax (player)
   You have no more Pokémon that can fight!
@@ -782,67 +751,67 @@ Z: Noct (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: NEW_MOON | weather: None | terrain: None
   You are challenged by Chorister Noct!
   Chorister Noct sent out Wick!
-    >> sent out (foe): Wick Lv.90 @DARKINIUMZ [INNERFOCUS]
+    >> sent out (foe): Wick Lv.87 @DARKINIUMZ [INNERFOCUS]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> NEW_MOON
   The moon has gone dark over Underveil... Something moves in the shadows.
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Wick 317/317]
+  [Snorlax 461/461 | Wick 307/307]
   The opposing Wick surrounded itself with its Z-Power!
   The opposing Wick unleashed its full-force Z-Move!
   The opposing Wick used Black Hole Eclipse!
   The opposing Wick struck from the depths of the new moon!
-    HP Snorlax (player): 461 -> 304 / 461
+    HP Snorlax (player): 461 -> 318 / 461
   Snorlax used Body Slam!
-    HP Wick (foe): 317 -> 206 / 317
+    HP Wick (foe): 307 -> 193 / 307
   (end of round)
 
 --- Turn 2 ---
-  [Snorlax 304/461 | Wick 206/317]
+  [Snorlax 318/461 | Wick 193/307]
   The opposing Wick used Dark Pulse!
   The opposing Wick struck from the depths of the new moon!
   The shadows gathered around Dark Pulse!
-    HP Snorlax (player): 304 -> 200 / 461
+    HP Snorlax (player): 318 -> 222 / 461
   The shadows grow... (2 more)
   Snorlax flinched and couldn't move!
   (end of round)
 
 --- Turn 3 ---
-  [Snorlax 200/461 | Wick 206/317]
+  [Snorlax 222/461 | Wick 193/307]
   The opposing Wick used Dark Pulse!
   The opposing Wick struck from the depths of the new moon!
   The shadows gathered around Dark Pulse!
-    HP Snorlax (player): 200 -> 106 / 461
+    HP Snorlax (player): 222 -> 135 / 461
   The shadows grow... (1 more)
   Snorlax flinched and couldn't move!
   (end of round)
 
 --- Turn 4 ---
-  [Snorlax 106/461 | Wick 206/317]
+  [Snorlax 135/461 | Wick 193/307]
   The opposing Wick used Dark Pulse!
   The opposing Wick struck from the depths of the new moon!
   The shadows gathered around Dark Pulse!
-    HP Snorlax (player): 106 -> 16 / 461
+    HP Snorlax (player): 135 -> 51 / 461
 ## FIELD STAGE: NEW_MOON is now stage 2
   The shadows swallowed the stars! The new moon deepened into an abyss!
   Snorlax used Body Slam!
-    HP Wick (foe): 206 -> 93 / 317
+    HP Wick (foe): 193 -> 77 / 307
     (anim: Paralysis)
   The opposing Wick is paralyzed! It may be unable to move!
   (end of round)
 
 --- Turn 5 ---
-  [Snorlax 16/461 | Wick 93/317 PARALYSIS]
+  [Snorlax 51/461 | Wick 77/307 PARALYSIS]
   Snorlax used Body Slam!
-    HP Wick (foe): 93 -> 0 / 317
+    HP Wick (foe): 77 -> 0 / 307
   The opposing Wick fainted!
     xx fainted: Wick (foe)
   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
   You defeated Chorister Noct!
   ...Good night.
-  You got $5,400 for winning!
+  You got $5,220 for winning!
   battle result code: 1
   
 RESULT: player won after 4 turn(s)
@@ -855,28 +824,41 @@ Z: Forte (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: VOLCANIC | weather: None | terrain: None
   You are challenged by Chorister Forte!
   Chorister Forte sent out Bellows!
-    >> sent out (foe): Bellows Lv.90 @FIRIUMZ [FLASHFIRE]
+    >> sent out (foe): Bellows Lv.87 @FIRIUMZ [GUTS]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> VOLCANIC
   Magma churns across the battlefield!
-  The power of the opposing Bellows's Fire-type moves rose!
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Bellows 263/263]
+  [Snorlax 461/461 | Bellows 255/255]
   The opposing Bellows surrounded itself with its Z-Power!
   The opposing Bellows unleashed its full-force Z-Move!
   The opposing Bellows used Inferno Overdrive!
   The opposing Bellows drew fire up from the magma!
-    HP Snorlax (player): 461 -> 0 / 461
-  Snorlax fainted!
-    xx fainted: Snorlax (player)
-  You have no more Pokémon that can fight!
-  You lost against Chorister Forte!
-  You gave $3,600 to the winner...
-  battle result code: 2
+    HP Snorlax (player): 461 -> 294 / 461
+  Snorlax used Body Slam!
+    HP Bellows (foe): 255 -> 88 / 255
+  (end of round)
+
+--- Turn 2 ---
+  [Snorlax 294/461 | Bellows 88/255]
+  The opposing Bellows used Lava Plume!
+  The opposing Bellows drew fire up from the magma!
+  The lava surged up with the opposing Bellows!
+    HP Snorlax (player): 294 -> 177 / 461
+  The ground heaves... the volcano is about to erupt!
+  Snorlax used Body Slam!
+    HP Bellows (foe): 88 -> 0 / 255
+  The opposing Bellows fainted!
+    xx fainted: Bellows (foe)
+  Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Chorister Forte!
+  Too loud? ...No. Just right, and you were louder.
+  You got $5,220 for winning!
+  battle result code: 1
   
-RESULT: player lost after 0 turn(s)
+RESULT: player won after 1 turn(s)
 
 
 Z: Lento (OCTAVE_SINGER v60) vs a neutral Snorlax
@@ -886,48 +868,48 @@ Z: Lento (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: FROZEN_LAKE | weather: None | terrain: None
   You are challenged by Chorister Lento!
   Chorister Lento sent out Hush!
-    >> sent out (foe): Hush Lv.90 @ICIUMZ [ICEBODY]
+    >> sent out (foe): Hush Lv.87 @ICIUMZ [ICEBODY]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> FROZEN_LAKE
   The battle is taking place on a frozen lake!
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Hush 263/263]
+  [Snorlax 461/461 | Hush 255/255]
   The opposing Hush surrounded itself with its Z-Power!
   The opposing Hush unleashed its full-force Z-Move!
   The opposing Hush used Subzero Slammer!
   The frozen lake lent its cold to Subzero Slammer!
-    HP Snorlax (player): 461 -> 186 / 461
+    HP Snorlax (player): 461 -> 210 / 461
   Snorlax used Body Slam!
-    HP Hush (foe): 263 -> 158 / 263
+    HP Hush (foe): 255 -> 136 / 255
   (end of round)
     [ability: Hush (foe)'s Ice Body]
-    HP Hush (foe): 158 -> 174 / 263
+    HP Hush (foe): 136 -> 152 / 255
   The opposing Hush's HP was restored.
 
 --- Turn 2 ---
-  [Snorlax 186/461 | Hush 174/263]
+  [Snorlax 210/461 | Hush 152/255]
   The opposing Hush used Ice Beam!
   The frozen lake lent its cold to Ice Beam!
-    HP Snorlax (player): 186 -> 22 / 461
+    HP Snorlax (player): 210 -> 59 / 461
   Snorlax used Body Slam!
-    HP Hush (foe): 174 -> 67 / 263
+    HP Hush (foe): 152 -> 31 / 255
   (end of round)
     [ability: Hush (foe)'s Ice Body]
-    HP Hush (foe): 67 -> 83 / 263
+    HP Hush (foe): 31 -> 47 / 255
   The opposing Hush's HP was restored.
 
 --- Turn 3 ---
-  [Snorlax 22/461 | Hush 83/263]
+  [Snorlax 59/461 | Hush 47/255]
   The opposing Hush used Ice Beam!
   The frozen lake lent its cold to Ice Beam!
-    HP Snorlax (player): 22 -> 0 / 461
+    HP Snorlax (player): 59 -> 0 / 461
   Snorlax fainted!
     xx fainted: Snorlax (player)
   You have no more Pokémon that can fight!
   You lost against Chorister Lento!
-  You gave $1,800 to the winner...
+  You gave $3,600 to the winner...
   battle result code: 2
   
 RESULT: player lost after 2 turn(s)
@@ -940,35 +922,62 @@ Z: Carol (OCTAVE_SINGER v60) vs a neutral Snorlax
   field: FAIRY_TALE | weather: None | terrain: None
   You are challenged by Chorister Carol!
   Chorister Carol sent out Ribbon!
-    >> sent out (foe): Ribbon Lv.90 @FAIRIUMZ [PIXILATE]
+    >> sent out (foe): Ribbon Lv.87 @FAIRIUMZ [PIXILATE]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> FAIRY_TALE
   Once upon a time, in a castle deep in the forest... the story begins!
 
 --- Turn 1 ---
-  [Snorlax 461/461 | Ribbon 317/317]
+  [Snorlax 461/461 | Ribbon 307/307]
   The opposing Ribbon surrounded itself with its Z-Power!
   The opposing Ribbon unleashed its full-force Z-Move!
   The opposing Ribbon used Twinkle Tackle!
   The storybook's magic sparkled through Twinkle Tackle!
-    HP Snorlax (player): 461 -> 161 / 461
+    HP Snorlax (player): 461 -> 303 / 461
   Snorlax used Body Slam!
-    HP Ribbon (foe): 317 -> 164 / 317
+    HP Ribbon (foe): 307 -> 148 / 307
   (end of round)
 
 --- Turn 2 ---
-  [Snorlax 161/461 | Ribbon 164/317]
-  The opposing Ribbon used Hyper Voice!
-  The storybook's magic sparkled through Hyper Voice!
-    HP Snorlax (player): 161 -> 0 / 461
-  Snorlax fainted!
-    xx fainted: Snorlax (player)
-  You have no more Pokémon that can fight!
-  You lost against Chorister Carol!
-  battle result code: 2
+  [Snorlax 303/461 | Ribbon 148/307]
+  The opposing Ribbon used Draining Kiss!
+  The storybook's magic sparkled through Draining Kiss!
+  True love's kiss!
+    HP Snorlax (player): 303 -> 157 / 461
+  Snorlax had its energy drained!
+    HP Ribbon (foe): 148 -> 258 / 307
+  Snorlax used Body Slam!
+    HP Ribbon (foe): 258 -> 96 / 307
+  (end of round)
+
+--- Turn 3 ---
+  [Snorlax 157/461 | Ribbon 96/307]
+  The opposing Ribbon used Draining Kiss!
+  The storybook's magic sparkled through Draining Kiss!
+  True love's kiss!
+    HP Snorlax (player): 157 -> 11 / 461
+  Snorlax had its energy drained!
+    HP Ribbon (foe): 96 -> 206 / 307
+  Snorlax used Body Slam!
+    HP Ribbon (foe): 206 -> 47 / 307
+    (anim: Paralysis)
+  The opposing Ribbon is paralyzed! It may be unable to move!
+  (end of round)
+
+--- Turn 4 ---
+  [Snorlax 11/461 | Ribbon 47/307 PARALYSIS]
+  Snorlax used Body Slam!
+    HP Ribbon (foe): 47 -> 0 / 307
+  The opposing Ribbon fainted!
+    xx fainted: Ribbon (foe)
+  Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Chorister Carol!
+  And they all lived. That's the whole ending.
+  You got $5,220 for winning!
+  battle result code: 1
   
-RESULT: player lost after 1 turn(s)
+RESULT: player won after 3 turn(s)
 
 
 === 8. The Eevee Octave: eight quests, the help order, the 9-bout gauntlet, the reward ===
@@ -1045,7 +1054,7 @@ RESULT: player lost after 1 turn(s)
     |   field: MEADOW | weather: None | terrain: None
     |   You are challenged by Chorister Lyra!
     |   Chorister Lyra sent out Skiddo!
-    |     >> sent out (foe): Skiddo Lv.17 [SAPSIPPER]
+    |     >> sent out (foe): Skiddo Lv.17 @ORANBERRY [SAPSIPPER]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> MEADOW
@@ -1055,21 +1064,21 @@ RESULT: player lost after 1 turn(s)
     |   The opposing Skiddo's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Snorlax 524/524 | Skiddo 53/53]
+    |   [Snorlax 524/524 | Skiddo 52/52]
     |   Snorlax used Crunch!
-    |     HP Skiddo (foe): 53 -> 0 / 53
+    |     HP Skiddo (foe): 52 -> 0 / 52
     |   The opposing Skiddo fainted!
     |     xx fainted: Skiddo (foe)
     |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   (end of round)
     |   Chorister Lyra is about to send out Moss. Will you switch your Pokémon?  [auto: No]
     |   Chorister Lyra sent out Moss!
-    |     >> sent out (foe): Moss Lv.18 [LEAFGUARD]
+    |     >> sent out (foe): Moss Lv.18 @ORANBERRY [LEAFGUARD]
     | 
     | --- Turn 2 ---
-    |   [Snorlax 524/524 | Moss 55/55]
+    |   [Snorlax 524/524 | Moss 54/54]
     |   Snorlax used Crunch!
-    |     HP Moss (foe): 55 -> 0 / 55
+    |     HP Moss (foe): 54 -> 0 / 54
     |   The opposing Moss fainted!
     |     xx fainted: Moss (foe)
     |   You defeated Chorister Lyra!
@@ -1126,7 +1135,7 @@ RESULT: player lost after 1 turn(s)
     |   field: NEON_GRID | weather: None | terrain: None
     |   You are challenged by Chorister Cadence!
     |   Chorister Cadence sent out Klink!
-    |     >> sent out (foe): Klink Lv.25 [PLUS]
+    |     >> sent out (foe): Klink Lv.25 @ORANBERRY [PLUS]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> NEON_GRID
@@ -1136,33 +1145,29 @@ RESULT: player lost after 1 turn(s)
     |   The opposing Klink's Special Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Snorlax 524/524 | Klink 62/62]
+    |   [Snorlax 524/524 | Klink 61/61]
     |   Snorlax used Earthquake!
-    |     HP Klink (foe): 62 -> 0 / 62
+    |     HP Klink (foe): 61 -> 0 / 61
     |   It's super effective!
+    |   The grid flickers and sparks... (1 more)
     |   The opposing Klink fainted!
     |     xx fainted: Klink (foe)
-    |   The grid flickers and sparks... (1 more)
     |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   (end of round)
     |   Chorister Cadence is about to send out Snare. Will you switch your Pokémon?  [auto: No]
     |   Chorister Cadence sent out Snare!
-    |     >> sent out (foe): Snare Lv.26 [VOLTABSORB]
+    |     >> sent out (foe): Snare Lv.26 @SITRUSBERRY [VOLTABSORB]
     |   The opposing Snare soaked up current from the grid!
     | 
     | --- Turn 2 ---
-    |   [Snorlax 524/524 | Snare 77/77]
-    |   The opposing Snare used Baby-Doll Eyes!
-    |     (anim: StatDown)
-    |   Snorlax's Attack fell!
+    |   [Snorlax 524/524 | Snare 76/76]
     |   Snorlax used Earthquake!
-    |     HP Snare (foe): 77 -> 0 / 77
-    |   A critical hit!
+    |     HP Snare (foe): 76 -> 0 / 76
     |   It's super effective!
-    |   The opposing Snare fainted!
-    |     xx fainted: Snare (foe)
     | ## FIELD STAGE: NEON_GRID is now stage 2
     |   The grid shorted out! The neon lights died - only sparks light the dark!
+    |   The opposing Snare fainted!
+    |     xx fainted: Snare (foe)
     |   You defeated Chorister Cadence!
     |   Off the beat. Mine, not yours. Again tomorrow?
     |   You got $1,560 for winning!
@@ -1220,33 +1225,30 @@ RESULT: player lost after 1 turn(s)
     |   field: MEADOW | weather: None | terrain: None
     |   You are challenged by Chorister Aria!
     |   Chorister Aria sent out Spheal!
-    |     >> sent out (foe): Spheal Lv.21 [THICKFAT]
+    |     >> sent out (foe): Spheal Lv.21 @ORANBERRY [THICKFAT]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> MEADOW
     |   Tall grass ripples in the breeze across the meadow.
     | 
     | --- Turn 1 ---
-    |   [Snorlax 524/524 | Spheal 65/65]
+    |   [Snorlax 524/524 | Spheal 64/64]
     |   Snorlax used Body Slam!
     |   Snorlax stampeded through the tall grass!
-    |     HP Spheal (foe): 65 -> 0 / 65
+    |     HP Spheal (foe): 64 -> 0 / 64
     |   The opposing Spheal fainted!
     |     xx fainted: Spheal (foe)
     |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   (end of round)
     |   Chorister Aria is about to send out Brine. Will you switch your Pokémon?  [auto: No]
     |   Chorister Aria sent out Brine!
-    |     >> sent out (foe): Brine Lv.22 [WATERABSORB]
+    |     >> sent out (foe): Brine Lv.22 @ORANBERRY [WATERABSORB]
     | 
     | --- Turn 2 ---
-    |   [Snorlax 524/524 | Brine 94/94]
-    |   The opposing Brine used Baby-Doll Eyes!
-    |     (anim: StatDown)
-    |   Snorlax's Attack fell!
+    |   [Snorlax 524/524 | Brine 93/93]
     |   Snorlax used Body Slam!
     |   Snorlax stampeded through the tall grass!
-    |     HP Brine (foe): 94 -> 0 / 94
+    |     HP Brine (foe): 93 -> 0 / 93
     |   The opposing Brine fainted!
     |     xx fainted: Brine (foe)
     |   You defeated Chorister Aria!
@@ -1311,7 +1313,7 @@ RESULT: player lost after 1 turn(s)
     |   field: VOLCANIC | weather: None | terrain: None
     |   You are challenged by Chorister Forte!
     |   Chorister Forte sent out Carkol!
-    |     >> sent out (foe): Carkol Lv.37 [STEAMENGINE]
+    |     >> sent out (foe): Carkol Lv.37 @ORANBERRY [STEAMENGINE]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> VOLCANIC
@@ -1321,6 +1323,7 @@ RESULT: player lost after 1 turn(s)
     |   [Snorlax 524/524 | Carkol 119/119]
     |   Snorlax used Body Slam!
     |     HP Carkol (foe): 119 -> 0 / 119
+    |   A critical hit!
     |   It's not very effective...
     |   The opposing Carkol fainted!
     |     xx fainted: Carkol (foe)
@@ -1328,12 +1331,12 @@ RESULT: player lost after 1 turn(s)
     |   (end of round)
     |   Chorister Forte is about to send out Bellows. Will you switch your Pokémon?  [auto: No]
     |   Chorister Forte sent out Bellows!
-    |     >> sent out (foe): Bellows Lv.38 [FLASHFIRE]
+    |     >> sent out (foe): Bellows Lv.38 @SITRUSBERRY [FLASHFIRE]
     |   The power of the opposing Bellows's Fire-type moves rose!
     | 
     | --- Turn 2 ---
     |   [Snorlax 524/524 | Bellows 111/111]
-    |   Snorlax used Crunch!
+    |   Snorlax used Body Slam!
     |     HP Bellows (foe): 111 -> 0 / 111
     |   The opposing Bellows fainted!
     |     xx fainted: Bellows (foe)
@@ -1391,7 +1394,7 @@ RESULT: player lost after 1 turn(s)
     |   field: MEADOW | weather: None | terrain: None
     |   You are challenged by Chorister Sona!
     |   Chorister Sona sent out Baltoy!
-    |     >> sent out (foe): Baltoy Lv.29 [LEVITATE]
+    |     >> sent out (foe): Baltoy Lv.29 @ORANBERRY [LEVITATE]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> MEADOW
@@ -1407,13 +1410,14 @@ RESULT: player lost after 1 turn(s)
     |   (end of round)
     |   Chorister Sona is about to send out Noon. Will you switch your Pokémon?  [auto: No]
     |   Chorister Sona sent out Noon!
-    |     >> sent out (foe): Noon Lv.30 [SYNCHRONIZE]
+    |     >> sent out (foe): Noon Lv.30 @SITRUSBERRY [MAGICBOUNCE]
     | 
     | --- Turn 2 ---
-    |   [Snorlax 524/524 | Noon 88/88]
-    |   Snorlax used Crunch!
-    |     HP Noon (foe): 88 -> 0 / 88
-    |   It's super effective!
+    |   [Snorlax 524/524 | Noon 87/87]
+    |   The opposing Noon used Psybeam!
+    |     HP Snorlax (player): 524 -> 513 / 524
+    |   Snorlax used Earthquake!
+    |     HP Noon (foe): 87 -> 0 / 87
     |   The opposing Noon fainted!
     |     xx fainted: Noon (foe)
     |   You defeated Chorister Sona!
@@ -1472,46 +1476,38 @@ RESULT: player lost after 1 turn(s)
     |   field: FROZEN_LAKE | weather: None | terrain: None
     |   You are challenged by Chorister Lento!
     |   Chorister Lento sent out Froslass!
-    |     >> sent out (foe): Froslass Lv.57 [SNOWCLOAK]
+    |     >> sent out (foe): Froslass Lv.57 @SITRUSBERRY [CURSEDBODY]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> FROZEN_LAKE
     |   The battle is taking place on a frozen lake!
     | 
     | --- Turn 1 ---
-    |   [Snorlax 524/524 | Froslass 173/173]
-    |   The opposing Froslass used Will-O-Wisp!
-    |   The opposing Froslass's attack missed!
-    |   Snorlax used Crunch!
-    |     HP Froslass (foe): 173 -> 0 / 173
+    |   [Snorlax 513/524 | Froslass 174/174]
+    |   The opposing Froslass used Ice Fang!
+    |   The frozen lake lent its cold to Ice Fang!
+    |     HP Snorlax (player): 513 -> 471 / 524
+    |   Snorlax used Heavy Slam!
+    |     HP Froslass (foe): 174 -> 0 / 174
     |   It's super effective!
+    |   The lake ice groaned and cracked! (2 more)
     |   The opposing Froslass fainted!
     |     xx fainted: Froslass (foe)
     |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 471 -> 503 / 524
+    |   Snorlax restored a little HP using its Leftovers!
     |   Chorister Lento is about to send out Hush. Will you switch your Pokémon?  [auto: No]
     |   Chorister Lento sent out Hush!
-    |     >> sent out (foe): Hush Lv.58 [SNOWCLOAK]
+    |     >> sent out (foe): Hush Lv.58 @LEFTOVERS [ICEBODY]
     | 
     | --- Turn 2 ---
-    |   [Snorlax 524/524 | Hush 170/170]
-    |   The opposing Hush used Freeze-Dry!
-    |   The frozen lake lent its cold to Freeze-Dry!
-    |     HP Snorlax (player): 524 -> 467 / 524
+    |   [Snorlax 503/524 | Hush 171/171]
+    |   The opposing Hush used Blizzard!
+    |   Snorlax avoided the attack!
     |   Snorlax used Body Slam!
-    |   Snorlax's attack missed!
-    |   (end of round)
-    |     (anim: UseItem)
-    |     HP Snorlax (player): 467 -> 499 / 524
-    |   Snorlax restored a little HP using its Leftovers!
-    | 
-    | --- Turn 3 ---
-    |   [Snorlax 499/524 | Hush 170/170]
-    |   The opposing Hush used Freeze-Dry!
-    |   The frozen lake lent its cold to Freeze-Dry!
-    |     HP Snorlax (player): 499 -> 445 / 524
-    |   Snorlax used Body Slam!
-    |     HP Hush (foe): 170 -> 0 / 170
+    |     HP Hush (foe): 171 -> 0 / 171
     |   The opposing Hush fainted!
     |     xx fainted: Hush (foe)
     |   You defeated Chorister Lento!
@@ -1573,32 +1569,32 @@ RESULT: player lost after 1 turn(s)
     |   field: MEADOW | weather: None | terrain: None
     |   You are challenged by Chorister Noct!
     |   Chorister Noct sent out Murkrow!
-    |     >> sent out (foe): Murkrow Lv.33 [INSOMNIA]
+    |     >> sent out (foe): Murkrow Lv.33 @ORANBERRY [PRANKSTER]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> MEADOW
     |   Tall grass ripples in the breeze across the meadow.
     | 
     | --- Turn 1 ---
-    |   [Snorlax 445/524 | Murkrow 93/93]
+    |   [Snorlax 503/524 | Murkrow 92/92]
     |   Snorlax used Crunch!
-    |     HP Murkrow (foe): 93 -> 0 / 93
+    |     HP Murkrow (foe): 92 -> 0 / 92
     |   It's not very effective...
     |   The opposing Murkrow fainted!
     |     xx fainted: Murkrow (foe)
     |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   (end of round)
     |     (anim: UseItem)
-    |     HP Snorlax (player): 445 -> 477 / 524
+    |     HP Snorlax (player): 503 -> 524 / 524
     |   Snorlax restored a little HP using its Leftovers!
     |   Chorister Noct is about to send out Wick. Will you switch your Pokémon?  [auto: No]
     |   Chorister Noct sent out Wick!
-    |     >> sent out (foe): Wick Lv.34 [SYNCHRONIZE]
+    |     >> sent out (foe): Wick Lv.34 @SITRUSBERRY [INNERFOCUS]
     | 
     | --- Turn 2 ---
-    |   [Snorlax 477/524 | Wick 120/120]
+    |   [Snorlax 524/524 | Wick 118/118]
     |   Snorlax used Heavy Slam!
-    |     HP Wick (foe): 120 -> 0 / 120
+    |     HP Wick (foe): 118 -> 0 / 118
     |   The opposing Wick fainted!
     |     xx fainted: Wick (foe)
     |   You defeated Chorister Noct!
@@ -1661,61 +1657,97 @@ RESULT: player lost after 1 turn(s)
     |   field: FAIRY_TALE | weather: None | terrain: None
     |   You are challenged by Chorister Carol!
     |   Chorister Carol sent out Florges!
-    |     >> sent out (foe): Florges Lv.87 [FLOWERVEIL]
+    |     >> sent out (foe): Florges Lv.87 @LEFTOVERS [FLOWERVEIL]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> FAIRY_TALE
     |   Once upon a time, in a castle deep in the forest... the story begins!
     | 
     | --- Turn 1 ---
-    |   [Snorlax 477/524 | Florges 277/277]
+    |   [Snorlax 524/524 | Florges 277/277]
     |   The opposing Florges used Moonblast!
     |   The storybook's magic sparkled through Moonblast!
-    |     HP Snorlax (player): 477 -> 333 / 524
+    |     HP Snorlax (player): 524 -> 380 / 524
     |   Snorlax used Body Slam!
     |     HP Florges (foe): 277 -> 74 / 277
     |   (end of round)
     |     (anim: UseItem)
-    |     HP Snorlax (player): 333 -> 365 / 524
+    |     HP Florges (foe): 74 -> 91 / 277
+    |   The opposing Florges restored a little HP using its Leftovers!
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 380 -> 412 / 524
     |   Snorlax restored a little HP using its Leftovers!
     | 
     | --- Turn 2 ---
-    |   [Snorlax 365/524 | Florges 74/277]
-    |   The opposing Florges used Moonblast!
-    |   The storybook's magic sparkled through Moonblast!
-    |     HP Snorlax (player): 365 -> 219 / 524
+    |   [Snorlax 412/524 | Florges 91/277]
+    |   The opposing Florges used Wish!
     |   Snorlax used Earthquake!
-    |     HP Florges (foe): 74 -> 0 / 277
+    |     HP Florges (foe): 91 -> 0 / 277
     |   The opposing Florges fainted!
     |     xx fainted: Florges (foe)
     |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   (end of round)
     |     (anim: UseItem)
-    |     HP Snorlax (player): 219 -> 251 / 524
+    |     HP Snorlax (player): 412 -> 444 / 524
     |   Snorlax restored a little HP using its Leftovers!
     |   Chorister Carol is about to send out Ribbon. Will you switch your Pokémon?  [auto: No]
     |   Chorister Carol sent out Ribbon!
-    |     >> sent out (foe): Ribbon Lv.88 [PIXILATE]
+    |     >> sent out (foe): Ribbon Lv.88 @SITRUSBERRY [PIXILATE]
     | 
     | --- Turn 3 ---
-    |   [Snorlax 251/524 | Ribbon 310/310]
-    |   The opposing Ribbon used Moonblast!
-    |   The storybook's magic sparkled through Moonblast!
-    |     HP Snorlax (player): 251 -> 106 / 524
+    |   [Snorlax 444/524 | Ribbon 310/310]
+    |   The opposing Ribbon used Calm Mind!
+    |     (anim: StatUp)
+    |   The opposing Ribbon's Special Attack rose!
+    |   The opposing Ribbon's Special Defense rose!
     |   Snorlax used Body Slam!
-    |     HP Ribbon (foe): 310 -> 102 / 310
+    |     HP Ribbon (foe): 310 -> 129 / 310
+    |     (anim: EatBerry)
+    |     HP Ribbon (foe): 129 -> 206 / 310
+    |   The opposing Ribbon restored its health using its Sitrus Berry!
     |   (end of round)
+    |     HP Ribbon (foe): 206 -> 310 / 310
+    |   The opposing Florges's wish came true!
     |     (anim: UseItem)
-    |     HP Snorlax (player): 106 -> 138 / 524
+    |     HP Snorlax (player): 444 -> 476 / 524
     |   Snorlax restored a little HP using its Leftovers!
     | 
     | --- Turn 4 ---
-    |   [Snorlax 138/524 | Ribbon 102/310]
-    |   The opposing Ribbon used Moonblast!
-    |   The storybook's magic sparkled through Moonblast!
-    |     HP Snorlax (player): 138 -> 8 / 524
+    |   [Snorlax 476/524 | Ribbon 310/310]
+    |   The opposing Ribbon used Calm Mind!
+    |     (anim: StatUp)
+    |   The opposing Ribbon's Special Attack rose!
+    |   The opposing Ribbon's Special Defense rose!
     |   Snorlax used Body Slam!
-    |     HP Ribbon (foe): 102 -> 0 / 310
+    |     HP Ribbon (foe): 310 -> 111 / 310
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 476 -> 508 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    | 
+    | --- Turn 5 ---
+    |   [Snorlax 508/524 | Ribbon 111/310]
+    |   The opposing Ribbon used Draining Kiss!
+    |   The storybook's magic sparkled through Draining Kiss!
+    |   True love's kiss!
+    |     HP Snorlax (player): 508 -> 182 / 524
+    |   Snorlax had its energy drained!
+    |     HP Ribbon (foe): 111 -> 310 / 310
+    |   Snorlax used Body Slam!
+    |     HP Ribbon (foe): 310 -> 121 / 310
+    |     (anim: Paralysis)
+    |   The opposing Ribbon is paralyzed! It may be unable to move!
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 182 -> 214 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    | 
+    | --- Turn 6 ---
+    |   [Snorlax 214/524 | Ribbon 121/310 PARALYSIS]
+    |   Snorlax used Heavy Slam!
+    |   Snorlax charged in like a knight in shining armor!
+    |     HP Ribbon (foe): 121 -> 0 / 310
+    |   It's super effective!
     |   The opposing Ribbon fainted!
     |     xx fainted: Ribbon (foe)
     |   You defeated Chorister Carol!
@@ -1757,14 +1789,14 @@ RESULT: player lost after 1 turn(s)
     |   field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
     |   You are challenged by Chorister Lyra!
     |   Chorister Lyra sent out Moss!
-    |     >> sent out (foe): Moss Lv.90 @GRASSIUMZ [CHLOROPHYLL]
+    |     >> sent out (foe): Moss Lv.87 @GRASSIUMZ [LEAFGUARD]
     |   Go! Magikarp!
     |     >> sent out (player): Magikarp Lv.5 [SWIFTSWIM]
     | ## FIELD CHANGE: NONE -> FLOWER_GARDEN
     |   Flowers bloom across the garden!
     | 
     | --- Turn 1 ---
-    |   [Magikarp 18/18 | Moss 263/263]
+    |   [Magikarp 18/18 | Moss 255/255]
     |   The opposing Moss surrounded itself with its Z-Power!
     |   The opposing Moss unleashed its full-force Z-Move!
     |   The opposing Moss used Bloom Doom!
@@ -1797,13 +1829,12 @@ RESULT: player lost after 1 turn(s)
   Bout 9 of 9: Vesper and Amen!
   Vesper: That was every note we have. You were worth all of them.
   Vesper: This Eevee was born in the garden this spring. It hasn't decided anything yet. We'd like it to grow up with you.
-  Vesper: And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once. And my ring, so you can use it.
+  Vesper: And this. We sang over it together: a sliver of Glassfall glass, from the night we lost everything, tuned to every Imprint at once.
+  Vesper: You won't need a cantor's ring for it. That Warden's ring of yours hears it. Its chip is off the Crown's stone, and our glass came out of the night the Crown broke. They know each other.
   The petition is marked ANSWERED in red ink and filed in the eighteenth drawer.
   QUEST COMPLETE: "The Eevee Octave"
   You obtained an Eevium Z!
   You put the Eevium Z in your Bag's Items pocket.
-  You obtained a Z-Power Ring!
-  You put the Z-Power Ring in your Bag's Key Items pocket.
   Tester obtained Eevee!
   Eevee has been sent to Box "Box 1"!
   Your standing in The Hall of Petitions rose to Envoy!
@@ -1823,72 +1854,65 @@ RESULT: player lost after 1 turn(s)
     |   field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
     |   You are challenged by Chorister Lyra!
     |   Chorister Lyra sent out Moss!
-    |     >> sent out (foe): Moss Lv.90 @GRASSIUMZ [CHLOROPHYLL]
+    |     >> sent out (foe): Moss Lv.87 @GRASSIUMZ [LEAFGUARD]
     |   Go! Snorlax!
     |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
     | ## FIELD CHANGE: NONE -> FLOWER_GARDEN
     |   Flowers bloom across the garden!
     | 
     | --- Turn 1 ---
-    |   [Snorlax 524/524 | Moss 263/263]
+    |   [Snorlax 524/524 | Moss 255/255]
     |   The opposing Moss surrounded itself with its Z-Power!
     |   The opposing Moss unleashed its full-force Z-Move!
     |   The opposing Moss used Bloom Doom!
     |   The blooming garden poured its strength into Bloom Doom!
-    |     HP Snorlax (player): 524 -> 185 / 524
+    |     HP Snorlax (player): 524 -> 213 / 524
     |   Snorlax used Body Slam!
-    |     HP Moss (foe): 263 -> 151 / 263
+    |     HP Moss (foe): 255 -> 139 / 255
     |   (end of round)
     |     (anim: UseItem)
-    |     HP Snorlax (player): 185 -> 217 / 524
+    |     HP Snorlax (player): 213 -> 245 / 524
     |   Snorlax restored a little HP using its Leftovers!
     |   The opposing Moss drank from the blooming garden.
-    |     HP Moss (foe): 151 -> 167 / 263
+    |     HP Moss (foe): 139 -> 155 / 255
     | 
     | --- Turn 2 ---
-    |   [Snorlax 217/524 | Moss 167/263]
+    |   [Snorlax 245/524 | Moss 155/255]
     |   The opposing Moss used Knock Off!
-    |     HP Snorlax (player): 217 -> 116 / 524
+    |     HP Snorlax (player): 245 -> 152 / 524
     |   Snorlax dropped its Leftovers!
     |   Snorlax used Body Slam!
-    |     HP Moss (foe): 167 -> 55 / 263
+    |     HP Moss (foe): 155 -> 47 / 255
     |   (end of round)
     |   The opposing Moss drank from the blooming garden.
-    |     HP Moss (foe): 55 -> 71 / 263
+    |     HP Moss (foe): 47 -> 63 / 255
     | 
     | --- Turn 3 ---
-    |   [Snorlax 116/524 | Moss 71/263]
+    |   [Snorlax 152/524 | Moss 63/255]
     |   The opposing Moss used Leaf Blade!
     |   The blooming garden poured its strength into Leaf Blade!
-    |     HP Snorlax (player): 116 -> 0 / 524
-    |   Snorlax fainted!
-    |     xx fainted: Snorlax (player)
+    |     HP Snorlax (player): 152 -> 0 / 524
     | ## FIELD STAGE: FLOWER_GARDEN is now stage 4
     |   The garden is in full flower!
+    |   Snorlax fainted!
+    |     xx fainted: Snorlax (player)
     |   (end of round)
     |   The opposing Moss drank from the blooming garden.
-    |     HP Moss (foe): 71 -> 87 / 263
+    |     HP Moss (foe): 63 -> 79 / 255
     |   Just a little more! Hang in there, Volcarona!
     |     >> sent out (player): Volcarona Lv.100 @LEFTOVERS [FLAMEBODY]
     | 
     | --- Turn 4 ---
-    |   [Volcarona 311/311 | Moss 87/263]
-    |   The opposing Moss used Knock Off!
-    |     HP Volcarona (player): 311 -> 165 / 311
-    |   A critical hit!
-    |   Volcarona dropped its Leftovers!
-    |   Volcarona used Giga Drain!
-    |   The flowering garden poured its strength into Giga Drain!
-    |     HP Moss (foe): 87 -> 0 / 263
-    |   It's not very effective...
+    |   [Volcarona 311/311 | Moss 79/255]
+    |   Volcarona used Bug Buzz!
+    |     HP Moss (foe): 79 -> 0 / 255
+    |   It's super effective!
     |   The opposing Moss fainted!
     |     xx fainted: Moss (foe)
-    |   The opposing Moss had its energy drained!
-    |     HP Volcarona (player): 165 -> 209 / 311
     |   Volcarona is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Lyra!
     |   It bloomed for you. It doesn't do that for everyone.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 2 of 9: Cadence and Jolteon!
     | 
@@ -1896,7 +1920,7 @@ RESULT: player lost after 1 turn(s)
     |   field: NEON_GRID | weather: None | terrain: None
     |   You are challenged by Chorister Cadence!
     |   Chorister Cadence sent out Snare!
-    |     >> sent out (foe): Snare Lv.90 @ELECTRIUMZ [VOLTABSORB]
+    |     >> sent out (foe): Snare Lv.87 @ELECTRIUMZ [VOLTABSORB]
     |   Go! Garchomp!
     |     >> sent out (player): Garchomp Lv.100 @LIFEORB [SANDVEIL]
     | ## FIELD CHANGE: NONE -> NEON_GRID
@@ -1904,20 +1928,19 @@ RESULT: player lost after 1 turn(s)
     |   The opposing Snare soaked up current from the grid!
     | 
     | --- Turn 1 ---
-    |   [Garchomp 357/357 | Snare 263/263]
+    |   [Garchomp 357/357 | Snare 255/255]
     |   The opposing Snare used Shadow Ball!
-    |     HP Garchomp (player): 357 -> 286 / 357
-    |   Garchomp used Dragon Claw!
-    |     HP Snare (foe): 263 -> 0 / 263
-    |   A critical hit!
+    |     HP Garchomp (player): 357 -> 292 / 357
+    |   Garchomp used Stone Edge!
+    |     HP Snare (foe): 255 -> 0 / 255
     |   The opposing Snare fainted!
     |     xx fainted: Snare (foe)
-    |     HP Garchomp (player): 286 -> 251 / 357
+    |     HP Garchomp (player): 292 -> 257 / 357
     |   Garchomp lost some of its HP!
     |   Garchomp is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Cadence!
     |   Off the beat. Mine, not yours.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 3 of 9: Aria and Vaporeon!
     | 
@@ -1925,114 +1948,72 @@ RESULT: player lost after 1 turn(s)
     |   field: WATER_SURFACE | weather: None | terrain: None
     |   You are challenged by Chorister Aria!
     |   Chorister Aria sent out Brine!
-    |     >> sent out (foe): Brine Lv.90 @WATERIUMZ [WATERABSORB]
+    |     >> sent out (foe): Brine Lv.87 @WATERIUMZ [WATERABSORB]
     |   Go! Garchomp!
     |     >> sent out (player): Garchomp Lv.100 @LIFEORB [SANDVEIL]
     | ## FIELD CHANGE: NONE -> WATER_SURFACE
     |   The battle is taking place on the open water!
     | 
     | --- Turn 1 ---
-    |   [Garchomp 251/357 | Brine 380/380]
+    |   [Garchomp 257/357 | Brine 368/368]
     |   Garchomp used Fire Fang!
     |   The flames hissed into steam on the waves...
-    |     HP Brine (foe): 380 -> 340 / 380
+    |     HP Brine (foe): 368 -> 331 / 368
     |   It's not very effective...
-    |     HP Garchomp (player): 251 -> 216 / 357
+    |     HP Garchomp (player): 257 -> 222 / 357
     |   Garchomp lost some of its HP!
     |   The opposing Brine surrounded itself with its Z-Power!
     |   The opposing Brine unleashed its full-force Z-Move!
     |   The opposing Brine used Hydro Vortex!
     |   The opposing Brine rode the waves into the attack!
-    |     HP Garchomp (player): 216 -> 0 / 357
+    |     HP Garchomp (player): 222 -> 0 / 357
     |   Garchomp fainted!
     |     xx fainted: Garchomp (player)
     |   (end of round)
     |   The opposing Brine soaked up the spray.
-    |     HP Brine (foe): 340 -> 364 / 380
+    |     HP Brine (foe): 331 -> 354 / 368
     |   Go for it, Metagross!
     |     >> sent out (player): Metagross Lv.100 @LEFTOVERS [CLEARBODY]
     | 
     | --- Turn 2 ---
-    |   [Metagross 364/364 | Brine 364/380]
+    |   [Metagross 364/364 | Brine 354/368]
     |   The opposing Brine used Scald!
     |   The opposing Brine rode the waves into the attack!
-    |     HP Metagross (player): 364 -> 208 / 364
-    |   Metagross used Meteor Mash!
-    |     HP Brine (foe): 364 -> 261 / 380
-    |   It's not very effective...
+    |     HP Metagross (player): 364 -> 235 / 364
+    |   Metagross used Zen Headbutt!
+    |     HP Brine (foe): 354 -> 177 / 368
     |   (end of round)
     |     (anim: UseItem)
-    |     HP Metagross (player): 208 -> 230 / 364
+    |     HP Metagross (player): 235 -> 257 / 364
     |   Metagross restored a little HP using its Leftovers!
     |   The opposing Brine soaked up the spray.
-    |     HP Brine (foe): 261 -> 285 / 380
+    |     HP Brine (foe): 177 -> 200 / 368
     | 
     | --- Turn 3 ---
-    |   [Metagross 230/364 | Brine 285/380]
+    |   [Metagross 257/364 | Brine 200/368]
     |   The opposing Brine used Scald!
     |   The opposing Brine rode the waves into the attack!
-    |     HP Metagross (player): 230 -> 86 / 364
+    |     HP Metagross (player): 257 -> 125 / 364
     |   Metagross used Zen Headbutt!
-    |     HP Brine (foe): 285 -> 102 / 380
+    |     HP Brine (foe): 200 -> 11 / 368
     |   (end of round)
     |     (anim: UseItem)
-    |     HP Metagross (player): 86 -> 108 / 364
+    |     HP Metagross (player): 125 -> 147 / 364
     |   Metagross restored a little HP using its Leftovers!
     |   The opposing Brine soaked up the spray.
-    |     HP Brine (foe): 102 -> 126 / 380
+    |     HP Brine (foe): 11 -> 34 / 368
     | 
     | --- Turn 4 ---
-    |   [Metagross 108/364 | Brine 126/380]
-    |   The opposing Brine used Scald!
-    |   The opposing Brine rode the waves into the attack!
-    |     HP Metagross (player): 108 -> 0 / 364
-    |   Metagross fainted!
-    |     xx fainted: Metagross (player)
-    |   (end of round)
-    |   The opposing Brine soaked up the spray.
-    |     HP Brine (foe): 126 -> 150 / 380
-    |   Just a little more! Hang in there, Togekiss!
-    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
-    | 
-    | --- Turn 5 ---
-    |   [Togekiss 374/374 | Brine 150/380]
-    |   Togekiss used Air Slash!
-    |     HP Brine (foe): 150 -> 12 / 380
-    |   The opposing Brine used Scald!
-    |   The opposing Brine rode the waves into the attack!
-    |     HP Togekiss (player): 374 -> 262 / 374
-    |   (end of round)
-    |     (anim: UseItem)
-    |     HP Togekiss (player): 262 -> 285 / 374
-    |   Togekiss restored a little HP using its Leftovers!
-    |   The opposing Brine soaked up the spray.
-    |     HP Brine (foe): 12 -> 36 / 380
-    | 
-    | --- Turn 6 ---
-    |   [Togekiss 285/374 | Brine 36/380]
-    |   Togekiss used Air Slash!
-    |   Togekiss's attack missed!
-    |   The opposing Brine used Ice Beam!
-    |     HP Togekiss (player): 285 -> 158 / 374
-    |   It's super effective!
-    |   Ice is spreading across the water... (2 more)
-    |   (end of round)
-    |     (anim: UseItem)
-    |     HP Togekiss (player): 158 -> 181 / 374
-    |   Togekiss restored a little HP using its Leftovers!
-    |   The opposing Brine soaked up the spray.
-    |     HP Brine (foe): 36 -> 60 / 380
-    | 
-    | --- Turn 7 ---
-    |   [Togekiss 181/374 | Brine 60/380]
-    |   Togekiss used Air Slash!
-    |     HP Brine (foe): 60 -> 0 / 380
+    |   [Metagross 147/364 | Brine 34/368]
+    |   Metagross used Bullet Punch!
+    |     HP Brine (foe): 34 -> 0 / 368
+    |   It's not very effective...
     |   The opposing Brine fainted!
     |     xx fainted: Brine (foe)
-    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   Metagross is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Aria!
     |   The tide took the note. That's all right. It brings them back.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 4 of 9: Forte and Flareon!
     | 
@@ -2040,47 +2021,24 @@ RESULT: player lost after 1 turn(s)
     |   field: VOLCANIC | weather: None | terrain: None
     |   You are challenged by Chorister Forte!
     |   Chorister Forte sent out Bellows!
-    |     >> sent out (foe): Bellows Lv.90 @FIRIUMZ [FLASHFIRE]
-    |   Go! Tyranitar!
-    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
+    |     >> sent out (foe): Bellows Lv.87 @FIRIUMZ [GUTS]
+    |   Go! Metagross!
+    |     >> sent out (player): Metagross Lv.100 @LEFTOVERS [CLEARBODY]
     | ## FIELD CHANGE: NONE -> VOLCANIC
     |   Magma churns across the battlefield!
-    |     [ability: Tyranitar (player)'s Sand Stream]
-    |     (anim: Sandstorm)
-    |   A sandstorm brewed!
-    | ## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
-    |   The sandstorm buried the magma! It cooled into black, glassy dunes!
     | 
     | --- Turn 1 ---
-    |   [Tyranitar 404/404 | Bellows 263/263]
-    |   Tyranitar used Crunch!
-    |     HP Bellows (foe): 263 -> 42 / 263
-    |   The opposing Bellows surrounded itself with its Z-Power!
-    |   The opposing Bellows unleashed its full-force Z-Move!
-    |   The opposing Bellows used Inferno Overdrive!
-    |   The heat beneath the glass flared up with Inferno Overdrive!
-    |     HP Tyranitar (player): 404 -> 315 / 404
-    |   A critical hit!
-    |   It's not very effective...
-    |   (end of round)
-    |     (anim: Sandstorm)
-    |   The sandstorm is raging.
-    |   The opposing Bellows is buffeted by the sandstorm!
-    |     HP Bellows (foe): 42 -> 26 / 263
-    |     (anim: UseItem)
-    |     HP Tyranitar (player): 315 -> 340 / 404
-    |   Tyranitar restored a little HP using its Leftovers!
-    | 
-    | --- Turn 2 ---
-    |   [Tyranitar 340/404 | Bellows 26/263]
-    |   Tyranitar used Crunch!
-    |     HP Bellows (foe): 26 -> 0 / 263
+    |   [Metagross 147/364 | Bellows 255/255]
+    |   Metagross used Earthquake!
+    |     HP Bellows (foe): 255 -> 0 / 255
+    |   It's super effective!
     |   The opposing Bellows fainted!
     |     xx fainted: Bellows (foe)
-    |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   The ground heaves... the volcano is about to erupt!
+    |   Metagross is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Forte!
     |   Too loud? ...No. Just right, and you were louder.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 5 of 9: Sona and Espeon!
     | 
@@ -2088,32 +2046,60 @@ RESULT: player lost after 1 turn(s)
     |   field: MINDSCAPE | weather: None | terrain: None
     |   You are challenged by Chorister Sona!
     |   Chorister Sona sent out Noon!
-    |     >> sent out (foe): Noon Lv.90 @PSYCHIUMZ [MAGICBOUNCE]
-    |   Go! Tyranitar!
-    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
+    |     >> sent out (foe): Noon Lv.87 @PSYCHIUMZ [MAGICBOUNCE]
+    |   Go! Metagross!
+    |     >> sent out (player): Metagross Lv.100 @LEFTOVERS [CLEARBODY]
     | ## FIELD CHANGE: NONE -> MINDSCAPE
     |   The world dissolves into a sea of drifting thoughts...
+    | 
+    | --- Turn 1 ---
+    |   [Metagross 147/364 | Noon 255/255]
+    |   The opposing Noon surrounded itself with its Z-Power!
+    |   The opposing Noon unleashed its full-force Z-Move!
+    |   The opposing Noon used Shattered Psyche!
+    |   The Mindscape gave the opposing Noon's thoughts real shape!
+    |     HP Metagross (player): 147 -> 66 / 364
+    |   It's not very effective...
+    |   Metagross used Meteor Mash!
+    |     HP Noon (foe): 255 -> 34 / 255
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Metagross (player): 66 -> 88 / 364
+    |   Metagross restored a little HP using its Leftovers!
+    | 
+    | --- Turn 2 ---
+    |   [Metagross 88/364 | Noon 34/255]
+    |   The opposing Noon used Shadow Ball!
+    |     HP Metagross (player): 88 -> 0 / 364
+    |   It's super effective!
+    |   Metagross fainted!
+    |     xx fainted: Metagross (player)
+    |   (end of round)
+    |   Your opponent's weak! Get 'em, Tyranitar!
+    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
     |     [ability: Tyranitar (player)'s Sand Stream]
     |     (anim: Sandstorm)
     |   A sandstorm brewed!
     | 
-    | --- Turn 1 ---
-    |   [Tyranitar 340/404 | Noon 263/263]
-    |   The opposing Noon used Calm Mind!
-    |     (anim: StatUp)
-    |   The opposing Noon's Special Attack rose!
-    |   The opposing Noon's Special Defense rose!
+    | --- Turn 3 ---
+    |   [Tyranitar 404/404 | Noon 34/255]
+    |   The opposing Noon used Hyper Voice!
+    |   Hyper Voice reverberated through the dreamscape!
+    |     HP Tyranitar (player): 404 -> 360 / 404
+    |   A critical hit!
+    |   It's not very effective...
+    |   The dream rings like glass at the noise... (2 more)
     |   Tyranitar used Crunch!
     |   A nightmare took shape around Crunch!
-    |     HP Noon (foe): 263 -> 0 / 263
+    |     HP Noon (foe): 34 -> 0 / 255
     |   It's super effective!
+    |   Shadows are creeping into the dream... (2 more)
     |   The opposing Noon fainted!
     |     xx fainted: Noon (foe)
-    |   Shadows are creeping into the dream... (2 more)
     |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Sona!
     |   I heard that coming. I still couldn't stop it.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 6 of 9: Lento and Glaceon!
     | 
@@ -2121,7 +2107,7 @@ RESULT: player lost after 1 turn(s)
     |   field: FROZEN_LAKE | weather: None | terrain: None
     |   You are challenged by Chorister Lento!
     |   Chorister Lento sent out Hush!
-    |     >> sent out (foe): Hush Lv.90 @ICIUMZ [ICEBODY]
+    |     >> sent out (foe): Hush Lv.87 @ICIUMZ [ICEBODY]
     |   Go! Tyranitar!
     |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
     | ## FIELD CHANGE: NONE -> FROZEN_LAKE
@@ -2131,36 +2117,38 @@ RESULT: player lost after 1 turn(s)
     |   A sandstorm brewed!
     | 
     | --- Turn 1 ---
-    |   [Tyranitar 340/404 | Hush 263/263]
+    |   [Tyranitar 360/404 | Hush 255/255]
     |   Tyranitar used Crunch!
-    |     HP Hush (foe): 263 -> 130 / 263
+    |     HP Hush (foe): 255 -> 122 / 255
+    |     (anim: StatDown)
+    |   The opposing Hush's Defense fell!
     |   The opposing Hush surrounded itself with its Z-Power!
     |   The opposing Hush unleashed its full-force Z-Move!
     |   The opposing Hush used Subzero Slammer!
     |   The frozen lake lent its cold to Subzero Slammer!
-    |     HP Tyranitar (player): 340 -> 128 / 404
+    |     HP Tyranitar (player): 360 -> 146 / 404
     |   (end of round)
     |     (anim: Sandstorm)
     |   The sandstorm is raging.
     |   The opposing Hush is buffeted by the sandstorm!
-    |     HP Hush (foe): 130 -> 114 / 263
+    |     HP Hush (foe): 122 -> 107 / 255
     |     (anim: UseItem)
-    |     HP Tyranitar (player): 128 -> 153 / 404
+    |     HP Tyranitar (player): 146 -> 171 / 404
     |   Tyranitar restored a little HP using its Leftovers!
     |     [ability: Hush (foe)'s Ice Body]
-    |     HP Hush (foe): 114 -> 130 / 263
+    |     HP Hush (foe): 107 -> 123 / 255
     |   The opposing Hush's HP was restored.
     | 
     | --- Turn 2 ---
-    |   [Tyranitar 153/404 | Hush 130/263]
+    |   [Tyranitar 171/404 | Hush 123/255]
     |   Tyranitar used Crunch!
-    |     HP Hush (foe): 130 -> 0 / 263
+    |     HP Hush (foe): 123 -> 0 / 255
     |   The opposing Hush fainted!
     |     xx fainted: Hush (foe)
     |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Lento!
     |   Slowly, slowly. You got there first anyway.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 7 of 9: Noct and Umbreon!
     | 
@@ -2168,7 +2156,7 @@ RESULT: player lost after 1 turn(s)
     |   field: NEW_MOON | weather: None | terrain: None
     |   You are challenged by Chorister Noct!
     |   Chorister Noct sent out Wick!
-    |     >> sent out (foe): Wick Lv.90 @DARKINIUMZ [INNERFOCUS]
+    |     >> sent out (foe): Wick Lv.87 @DARKINIUMZ [INNERFOCUS]
     |   Go! Tyranitar!
     |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
     | ## FIELD CHANGE: NONE -> NEW_MOON
@@ -2178,57 +2166,34 @@ RESULT: player lost after 1 turn(s)
     |   A sandstorm brewed!
     | 
     | --- Turn 1 ---
-    |   [Tyranitar 153/404 | Wick 317/317]
-    |   Tyranitar used Ice Punch!
-    |     HP Wick (foe): 317 -> 237 / 317
+    |   [Tyranitar 171/404 | Wick 307/307]
+    |   Tyranitar used Earthquake!
+    |     HP Wick (foe): 307 -> 196 / 307
     |   The opposing Wick surrounded itself with its Z-Power!
     |   The opposing Wick unleashed its full-force Z-Move!
     |   The opposing Wick used Black Hole Eclipse!
     |   The opposing Wick struck from the depths of the new moon!
-    |     HP Tyranitar (player): 153 -> 55 / 404
+    |     HP Tyranitar (player): 171 -> 83 / 404
     |   It's not very effective...
     |   (end of round)
     |     (anim: Sandstorm)
     |   The sandstorm is raging.
     |   The opposing Wick is buffeted by the sandstorm!
-    |     HP Wick (foe): 237 -> 218 / 317
+    |     HP Wick (foe): 196 -> 177 / 307
     |     (anim: UseItem)
-    |     HP Tyranitar (player): 55 -> 80 / 404
+    |     HP Tyranitar (player): 83 -> 108 / 404
     |   Tyranitar restored a little HP using its Leftovers!
     | 
     | --- Turn 2 ---
-    |   [Tyranitar 80/404 | Wick 218/317]
-    |   Tyranitar used Crunch!
-    |   Tyranitar struck from the depths of the new moon!
-    |     HP Wick (foe): 218 -> 117 / 317
-    |   It's not very effective...
-    |     (anim: StatDown)
-    |   The opposing Wick's Defense fell!
-    |   The opposing Wick used Foul Play!
-    |   The opposing Wick struck from the depths of the new moon!
-    |     HP Tyranitar (player): 80 -> 0 / 404
-    |   It's not very effective...
-    |   Tyranitar fainted!
-    |     xx fainted: Tyranitar (player)
-    |   (end of round)
-    |     (anim: Sandstorm)
-    |   The sandstorm is raging.
-    |   The opposing Wick is buffeted by the sandstorm!
-    |     HP Wick (foe): 117 -> 98 / 317
-    |   Just a little more! Hang in there, Togekiss!
-    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
-    | 
-    | --- Turn 3 ---
-    |   [Togekiss 181/374 | Wick 98/317]
-    |   Togekiss used Aura Sphere!
-    |     HP Wick (foe): 98 -> 0 / 317
-    |   It's super effective!
+    |   [Tyranitar 108/404 | Wick 177/307]
+    |   Tyranitar used Stone Edge!
+    |     HP Wick (foe): 177 -> 0 / 307
     |   The opposing Wick fainted!
     |     xx fainted: Wick (foe)
-    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Noct!
     |   ...Good night.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 8 of 9: Carol and Sylveon!
     | 
@@ -2236,53 +2201,42 @@ RESULT: player lost after 1 turn(s)
     |   field: FAIRY_TALE | weather: None | terrain: None
     |   You are challenged by Chorister Carol!
     |   Chorister Carol sent out Ribbon!
-    |     >> sent out (foe): Ribbon Lv.90 @FAIRIUMZ [PIXILATE]
-    |   Go! Volcarona!
-    |     >> sent out (player): Volcarona Lv.100 @LEFTOVERS [FLAMEBODY]
+    |     >> sent out (foe): Ribbon Lv.87 @FAIRIUMZ [PIXILATE]
+    |   Go! Tyranitar!
+    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
     | ## FIELD CHANGE: NONE -> FAIRY_TALE
     |   Once upon a time, in a castle deep in the forest... the story begins!
+    |     [ability: Tyranitar (player)'s Sand Stream]
+    |     (anim: Sandstorm)
+    |   A sandstorm brewed!
     | 
     | --- Turn 1 ---
-    |   [Volcarona 209/311 | Ribbon 317/317]
-    |   Volcarona used Fiery Dance!
-    |   Volcarona breathed searing dragonfire!
-    |     HP Ribbon (foe): 317 -> 194 / 317
-    |   The opposing Ribbon surrounded itself with its Z-Power!
-    |   The opposing Ribbon unleashed its full-force Z-Move!
-    |   The opposing Ribbon used Twinkle Tackle!
-    |   The storybook's magic sparkled through Twinkle Tackle!
-    |     HP Volcarona (player): 209 -> 60 / 311
-    |   It's not very effective...
+    |   [Tyranitar 108/404 | Ribbon 307/307]
+    |   Tyranitar used Ice Punch!
+    |     HP Ribbon (foe): 307 -> 170 / 307
+    |     (anim: Frozen)
+    |   The opposing Ribbon was frozen solid!
+    |     (anim: Frozen)
+    |   The opposing Ribbon is frozen solid!
     |   (end of round)
+    |     (anim: Sandstorm)
+    |   The sandstorm is raging.
+    |   The opposing Ribbon is buffeted by the sandstorm!
+    |     HP Ribbon (foe): 170 -> 151 / 307
     |     (anim: UseItem)
-    |     HP Volcarona (player): 60 -> 79 / 311
-    |   Volcarona restored a little HP using its Leftovers!
+    |     HP Tyranitar (player): 108 -> 133 / 404
+    |   Tyranitar restored a little HP using its Leftovers!
     | 
     | --- Turn 2 ---
-    |   [Volcarona 79/311 | Ribbon 194/317]
-    |   Volcarona used Fiery Dance!
-    |   Volcarona breathed searing dragonfire!
-    |     HP Ribbon (foe): 194 -> 71 / 317
-    |   The opposing Ribbon used Mystical Fire!
-    |   The opposing Ribbon breathed searing dragonfire!
-    |     HP Volcarona (player): 79 -> 0 / 311
-    |   Volcarona fainted!
-    |     xx fainted: Volcarona (player)
-    |   (end of round)
-    |   Your opponent's weak! Get 'em, Togekiss!
-    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
-    | 
-    | --- Turn 3 ---
-    |   [Togekiss 181/374 | Ribbon 71/317]
-    |   Togekiss used Air Slash!
-    |   Togekiss wielded Air Slash like a true knight!
-    |     HP Ribbon (foe): 71 -> 0 / 317
+    |   [Tyranitar 133/404 | Ribbon 151/307 FROZEN]
+    |   Tyranitar used Stone Edge!
+    |     HP Ribbon (foe): 151 -> 0 / 307
     |   The opposing Ribbon fainted!
     |     xx fainted: Ribbon (foe)
-    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Chorister Carol!
     |   And they all lived. That's the whole ending.
-    |   You got $5,400 for winning!
+    |   You got $5,220 for winning!
     |   battle result code: 1
     |   (overworld message) Bout 9 of 9: Vesper and Amen!
     | 
@@ -2290,45 +2244,33 @@ RESULT: player lost after 1 turn(s)
     |   field: GRAND_STAGE | weather: None | terrain: None
     |   You are challenged by Octave Cantor Vesper!
     |   Octave Cantor Vesper sent out Amen!
-    |     >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
-    |   Go! Togekiss!
-    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
+    |     >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
+    |   Go! Tyranitar!
+    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
     | ## FIELD CHANGE: NONE -> GRAND_STAGE
     |   The curtain rises! The spotlight blazes over the stage!
+    |     [ability: Tyranitar (player)'s Sand Stream]
+    |   The opera house roof keeps the weather out!
     | 
     | --- Turn 1 ---
-    |   [Togekiss 181/374 | Amen 232/232]
-    |   Togekiss used Air Slash!
-    |     HP Amen (foe): 232 -> 87 / 232
-    |   The opposing Amen flinched and couldn't move!
-    |   (end of round)
-    |     (anim: UseItem)
-    |     HP Togekiss (player): 181 -> 204 / 374
-    |   Togekiss restored a little HP using its Leftovers!
-    | 
-    | --- Turn 2 ---
-    |   [Togekiss 204/374 | Amen 87/232]
-    |   The opposing Amen used Quick Attack!
-    |   The crowd roared for the opposing Amen!
-    |     HP Togekiss (player): 204 -> 146 / 374
-    |   Togekiss used Air Slash!
-    |     HP Amen (foe): 87 -> 0 / 232
+    |   [Tyranitar 133/404 | Amen 243/243]
+    |   Tyranitar used Stone Edge!
+    |     HP Amen (foe): 243 -> 0 / 243
     |   The opposing Amen fainted!
     |     xx fainted: Amen (foe)
-    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
     |   You defeated Octave Cantor Vesper!
     |   There. That's every note we have. ...You were worth all of them.
-    |   You got $9,200 for winning!
+    |   You got $8,900 for winning!
     |   battle result code: 1
     |   (overworld message) Vesper: That was every note we have. You were worth all of them.
     |   (overworld message) Vesper: This Eevee was born in the garden this spring. It hasn't decided anything yet. We'd like it to grow up with you.
-    |   (overworld message) Vesper: And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once. And my ring, so you can use it.
+    |   (overworld message) Vesper: And this. We sang over it together: a sliver of Glassfall glass, from the night we lost everything, tuned to every Imprint at once.
+    |   (overworld message) Vesper: You won't need a cantor's ring for it. That Warden's ring of yours hears it. Its chip is off the Crown's stone, and our glass came out of the night the Crown broke. They know each other.
     |   (overworld message) The petition is marked ANSWERED in red ink and filed in the eighteenth drawer.
     |   (overworld message) QUEST COMPLETE: "The Eevee Octave"
     |   (overworld message) You obtained an Eevium Z!
     |   (overworld message) You put the Eevium Z in your Bag's Items pocket.
-    |   (overworld message) You obtained a Z-Power Ring!
-    |   (overworld message) You put the Z-Power Ring in your Bag's Key Items pocket.
     |   (overworld message) Tester obtained Eevee!
     |   (overworld message) Eevee has been sent to Box "Box 1"!
     |   (overworld message) Your standing in The Hall of Petitions rose to Envoy!
@@ -2347,7 +2289,7 @@ Z: the reward Eevee holding the Eevium Z on the Grand Stage
   The curtain rises! The spotlight blazes over the stage!
 
 --- Turn 1 ---
-  [Eevee 167/167 | Snorlax 280/280]
+  [Eevee 163/163 | Snorlax 280/280]
   Eevee surrounded itself with its Z-Power!
   Eevee unleashed its full-force Z-Move!
   Eevee used Extreme Evoboost!
@@ -2361,7 +2303,7 @@ Z: the reward Eevee holding the Eevium Z on the Grand Stage
   A Z-Move! The audience leaps to its feet!
   The wild Snorlax used Body Slam!
   The crowd roared for the wild Snorlax!
-    HP Eevee (player): 167 -> 0 / 167
+    HP Eevee (player): 163 -> 0 / 163
   A critical hit!
   Eevee fainted!
     xx fainted: Eevee (player)
@@ -2381,7 +2323,7 @@ Champions rule: Vesper's Amen vs a Lv 100 Lugia
   field: GRAND_STAGE | weather: None | terrain: None
   You are challenged by Octave Cantor Vesper!
   Octave Cantor Vesper sent out Amen!
-    >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
+    >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
   Go! Lugia!
     >> sent out (player): Lugia Lv.100 @LEFTOVERS [PRESSURE]
 ## FIELD CHANGE: NONE -> GRAND_STAGE
@@ -2390,9 +2332,9 @@ Champions rule: Vesper's Amen vs a Lv 100 Lugia
   Lugia is exerting its pressure!
 
 --- Turn 1 ---
-  [Lugia 353/353 | Amen 232/232]
+  [Lugia 353/353 | Amen 243/243]
   Lugia used Aeroblast!
-    HP Amen (foe): 232 -> 48 / 232
+    HP Amen (foe): 243 -> 8 / 243
   A critical hit!
 ## FIELD STAGE: GRAND_STAGE is now stage 2
   What a hit! The audience leaps to its feet!
@@ -2409,23 +2351,23 @@ Champions rule: Vesper's Amen vs a Lv 100 Lugia
   The Z-Move brings the house down! Standing ovation!
   (end of round)
   The opposing Amen basked in the applause.
-    HP Amen (foe): 48 -> 63 / 232
+    HP Amen (foe): 8 -> 23 / 243
 
 --- Turn 2 ---
-  [Lugia 353/353 | Amen 63/232]
+  [Lugia 353/353 | Amen 23/243]
   The opposing Amen used Shadow Ball!
-    HP Lugia (player): 353 -> 278 / 353
+    HP Lugia (player): 353 -> 271 / 353
   It's super effective!
     (anim: StatDown)
   Lugia's Special Defense fell!
   Lugia used Aeroblast!
-    HP Amen (foe): 63 -> 0 / 232
+    HP Amen (foe): 23 -> 0 / 243
   The opposing Amen fainted!
     xx fainted: Amen (foe)
   Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
   You defeated Octave Cantor Vesper!
   There. That's every note we have. ...You were worth all of them.
-  You got $9,200 for winning!
+  You got $8,900 for winning!
   battle result code: 1
   
 RESULT: player won after 1 turn(s)
@@ -2438,14 +2380,14 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> Yes
   field: GRAND_STAGE | weather: None | terrain: None
   You are challenged by Octave Cantor Vesper!
   Octave Cantor Vesper sent out Amen!
-    >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
+    >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
   Go! Eevee!
     >> sent out (player): Eevee Lv.70 @EEVIUMZ [ADAPTABILITY]
 ## FIELD CHANGE: NONE -> GRAND_STAGE
   The curtain rises! The spotlight blazes over the stage!
 
 --- Turn 1 ---
-  [Eevee 167/167 | Amen 232/232]
+  [Eevee 163/163 | Amen 243/243]
   Unleash Eevee's Z-Power? (Last Resort becomes Extreme Evoboost)  [player answers: Yes]
   The opposing Amen surrounded itself with its Z-Power!
   The opposing Amen unleashed its full-force Z-Move!
@@ -2472,69 +2414,51 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> Yes
   (end of round)
 
 --- Turn 2 ---
-  [Eevee 167/167 | Amen 232/232]
+  [Eevee 163/163 | Amen 243/243]
   This move can't be used!
-  The opposing Amen used Quick Attack!
-  The crowd roared for the opposing Amen!
-    HP Eevee (player): 167 -> 19 / 167
-  Eevee used Stored Power!
-    HP Amen (foe): 232 -> 186 / 232
-  (end of round)
-  The opposing Amen basked in the applause.
-    HP Amen (foe): 186 -> 201 / 232
-  Eevee basked in the applause.
-    HP Eevee (player): 19 -> 29 / 167
-
---- Turn 3 ---
-  [Eevee 29/167 | Amen 201/232]
-  This move can't be used!
-  The opposing Amen used Quick Attack!
-  The crowd roared for the opposing Amen!
-    HP Eevee (player): 29 -> 0 / 167
+  The opposing Amen used Stored Power!
+    HP Eevee (player): 163 -> 0 / 163
   Eevee fainted!
     xx fainted: Eevee (player)
   (end of round)
-  The opposing Amen basked in the applause.
-    HP Amen (foe): 201 -> 216 / 232
   Eevee has no energy left to battle!
   Eevee has no energy left to battle!
-  Eevee has no energy left to battle!
-  Go for it, Lugia!
+  You're in charge, Lugia!
     >> sent out (player): Lugia Lv.100 @LEFTOVERS [PRESSURE]
     [ability: Lugia (player)'s Pressure]
   Lugia is exerting its pressure!
 
---- Turn 4 ---
-  [Lugia 353/353 | Amen 216/232]
+--- Turn 3 ---
+  [Lugia 353/353 | Amen 243/243]
   The opposing Amen used Shadow Ball!
-    HP Lugia (player): 353 -> 269 / 353
+    HP Lugia (player): 353 -> 260 / 353
   It's super effective!
   Lugia used Aeroblast!
-    HP Amen (foe): 216 -> 40 / 232
-  A critical hit!
+    HP Amen (foe): 243 -> 167 / 243
   (end of round)
     (anim: UseItem)
-    HP Lugia (player): 269 -> 291 / 353
+    HP Lugia (player): 260 -> 282 / 353
   Lugia restored a little HP using its Leftovers!
   The opposing Amen basked in the applause.
-    HP Amen (foe): 40 -> 55 / 232
+    HP Amen (foe): 167 -> 182 / 243
 
---- Turn 5 ---
-  [Lugia 291/353 | Amen 55/232]
-  The opposing Amen used Quick Attack!
-  The crowd roared for the opposing Amen!
-    HP Lugia (player): 291 -> 201 / 353
+--- Turn 4 ---
+  [Lugia 282/353 | Amen 182/243]
+  The opposing Amen used Shadow Ball!
+    HP Lugia (player): 282 -> 189 / 353
+  It's super effective!
   Lugia used Aeroblast!
-    HP Amen (foe): 55 -> 0 / 232
+    HP Amen (foe): 182 -> 0 / 243
+  A critical hit!
   The opposing Amen fainted!
     xx fainted: Amen (foe)
   Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
   You defeated Octave Cantor Vesper!
   There. That's every note we have. ...You were worth all of them.
-  You got $9,200 for winning!
+  You got $8,900 for winning!
   battle result code: 1
   
-RESULT: player won after 4 turn(s)
+RESULT: player won after 3 turn(s)
 
 
 Champions rule: the player's Eevee, Fight menu, Last Resort -> No
@@ -2544,14 +2468,14 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> No
   field: GRAND_STAGE | weather: None | terrain: None
   You are challenged by Octave Cantor Vesper!
   Octave Cantor Vesper sent out Amen!
-    >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
+    >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
   Go! Eevee!
     >> sent out (player): Eevee Lv.70 @EEVIUMZ [ADAPTABILITY]
 ## FIELD CHANGE: NONE -> GRAND_STAGE
   The curtain rises! The spotlight blazes over the stage!
 
 --- Turn 1 ---
-  [Eevee 167/167 | Amen 232/232]
+  [Eevee 163/163 | Amen 243/243]
   Unleash Eevee's Z-Power? (Last Resort becomes Extreme Evoboost)  [player answers: No]
   This move can't be used!
   The opposing Amen surrounded itself with its Z-Power!
@@ -2566,16 +2490,16 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> No
 ## FIELD STAGE: GRAND_STAGE is now stage 2
   A Z-Move! The audience leaps to its feet!
   Eevee used Stored Power!
-    HP Amen (foe): 232 -> 228 / 232
+    HP Amen (foe): 243 -> 239 / 243
   (end of round)
 
 --- Turn 2 ---
-  [Eevee 167/167 | Amen 228/232]
+  [Eevee 163/163 | Amen 239/243]
   Unleash Eevee's Z-Power? (Last Resort becomes Extreme Evoboost)  [player answers: No]
   This move can't be used!
   The opposing Amen used Quick Attack!
   The crowd roared for the opposing Amen!
-    HP Eevee (player): 167 -> 0 / 167
+    HP Eevee (player): 163 -> 0 / 163
   Eevee fainted!
     xx fainted: Eevee (player)
   (end of round)
@@ -2585,57 +2509,852 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> No
   Lugia is exerting its pressure!
 
 --- Turn 3 ---
-  [Lugia 353/353 | Amen 228/232]
+  [Lugia 353/353 | Amen 239/243]
   The opposing Amen used Shadow Ball!
-    HP Lugia (player): 353 -> 268 / 353
+    HP Lugia (player): 353 -> 250 / 353
   It's super effective!
   Lugia used Aeroblast!
-    HP Amen (foe): 228 -> 168 / 232
+    HP Amen (foe): 239 -> 163 / 243
   (end of round)
     (anim: UseItem)
-    HP Lugia (player): 268 -> 290 / 353
+    HP Lugia (player): 250 -> 272 / 353
   Lugia restored a little HP using its Leftovers!
 
 --- Turn 4 ---
-  [Lugia 290/353 | Amen 168/232]
+  [Lugia 272/353 | Amen 163/243]
   The opposing Amen used Shadow Ball!
-    HP Lugia (player): 290 -> 205 / 353
+    HP Lugia (player): 272 -> 169 / 353
   It's super effective!
   Lugia used Aeroblast!
-    HP Amen (foe): 168 -> 109 / 232
+    HP Amen (foe): 163 -> 87 / 243
   (end of round)
     (anim: UseItem)
-    HP Lugia (player): 205 -> 227 / 353
+    HP Lugia (player): 169 -> 191 / 353
   Lugia restored a little HP using its Leftovers!
 
 --- Turn 5 ---
-  [Lugia 227/353 | Amen 109/232]
+  [Lugia 191/353 | Amen 87/243]
   The opposing Amen used Shadow Ball!
-    HP Lugia (player): 227 -> 146 / 353
+    HP Lugia (player): 191 -> 93 / 353
   It's super effective!
     (anim: StatDown)
   Lugia's Special Defense fell!
   Lugia used Aeroblast!
-    HP Amen (foe): 109 -> 51 / 232
+    HP Amen (foe): 87 -> 13 / 243
   (end of round)
     (anim: UseItem)
-    HP Lugia (player): 146 -> 168 / 353
+    HP Lugia (player): 93 -> 115 / 353
   Lugia restored a little HP using its Leftovers!
 
 --- Turn 6 ---
-  [Lugia 168/353 | Amen 51/232]
+  [Lugia 115/353 | Amen 13/243]
   The opposing Amen used Shadow Ball!
-    HP Lugia (player): 168 -> 56 / 353
+    HP Lugia (player): 115 -> 0 / 353
   It's super effective!
-  Lugia used Aeroblast!
-    HP Amen (foe): 51 -> 0 / 232
-  The opposing Amen fainted!
-    xx fainted: Amen (foe)
-  Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
-  You defeated Octave Cantor Vesper!
-  There. That's every note we have. ...You were worth all of them.
-  You got $9,200 for winning!
-  battle result code: 1
+  Lugia fainted!
+    xx fainted: Lugia (player)
+  You have no more Pokémon that can fight!
+  You lost against Octave Cantor Vesper!
+  You gave $12,000 to the winner...
+  battle result code: 2
   
-RESULT: player won after 5 turn(s)
+RESULT: player lost after 5 turn(s)
 
+
+=== 9. Early side content, Chapters 0-5 (116_Quests_Early.rb): every new quest through its map events ===
+-- talk CRATE_WOMAN
+  Woman with crate: Tea service. My sister's. It's settling.
+  The crate squeaks again. Twice. In harmony.
+  Tea services don't squeak.
+  Woman with crate: ...Two mice. They got into it in port, over there. Abroad. They were in the crate before I was.
+  Woman with crate: The Landing scans everyone now. Anything without papers goes back on the boat, and after tonight the boat doesn't come back.
+  Woman with crate: So they're a tea service. Just till Saltmere. You didn't hear anything.
+  NEW QUEST: "Two Unlisted" Find the woman with the crate in Ferrow's Landing, once you have a Pokemon of your own.
+  (Your bag gives a small squeak of its own. No. That was the crate.)
+-- talk CRATE_WOMAN
+  Woman with crate: You! From the ferry. They've gone.
+  Woman with crate: I went through the gate with the crate under my arm, and it went 'Blank, Saltmere', lovely, and then the little girl's Wingull went BING and flapped off and I jumped and the lid came off.
+  Woman with crate: Two mice, straight under the customs desk. Nobody saw. The gate didn't see. It didn't see you either, I heard. Funny gate.
+  Woman with crate: I can't go in there and ask for them back. I'd have to fill in a form saying they exist.
+  QUEST LOG: "Two Unlisted" Her crate came open at the customs gate. Two mice are loose somewhere warm in the Quarantine Customs Hall.
+-- talk STOWAWAY_MICE
+  The two small flames in Crate 7-B lean toward them, the way you'd lean toward a friend. It's the warmest place in the building.
+  The mice?
+  They don't run. They climb into your sleeve together, as if they've done it before, and stay very still past the customs officer.
+  QUEST LOG: "Two Unlisted" Bring the mice back to the woman with the crate, by the Ferrow's Landing quay.
+-- talk CRATE_WOMAN
+  The mice tumble out of your sleeve and run straight up the woman's coat.
+  Woman with crate: There you are! Oh, you horrible things. You stink of customs.
+  Woman with crate: ...The Saltmere Harbour Office has one of those machines too. Penny, it's called. It counts everything that comes in.
+  Woman with crate: I can't keep them. They're unlisted. They'd go back.
+  Woman with crate: You're unlisted too, I hear. NULL. So nobody's counting you. Take them. They've already picked you; they were in your sleeve before you asked.
+  Tester obtained Tandemaus!
+  Woman with crate: Two of them, one Poke Ball. They say that's how this kind works. Don't ask me. I'm a tea service.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "Two Unlisted"
+  You obtained 2 Oran Berries!
+  You put the Oran Berries in your Bag's Berries pocket.
+-- talk SCULPTOR
+  Sand-sculptor: Every night since the Pageant, somebody walks out from Saltmere and kicks my Crown in.
+  Sand-sculptor: 'Ask your Sovereign!' they shout. As if the Sovereign's ever been to Marram Down. As if he'd notice a sand Crown.
+  Sand-sculptor: And every morning it's back. Taller. I didn't rebuild it. I've been sleeping in the wagon with a shovel.
+  Sand-sculptor: Something ate the shovel.
+  Watch the Crown tonight?
+  NEW QUEST: "The Crown in the Sand" Watch the sand Crown on Marram Down after dark.
+  Sand-sculptor: After dark, then. Bring something that isn't a shovel.
+-- talk SAND_CROWN
+  In daylight it's just a very good sand Crown, as tall as you, with a chipped stone in the middle. The sand is warm.
+  (The sculptor asked you to watch it after dark.)
+-- talk SAND_CROWN
+  Pageant-goer: Ask your Sovereign! ASK HIM! Three hundred years of--
+  He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.
+  Pageant-goer: It's got me! The Crown's got me! I take it back! Long live the Sovereign!
+  The sand lets go. He runs all the way back to Saltmere with one boot.
+  Then the Crown turns round to look at you. There's a shovel handle sticking out of the top of it.
+  The Crown slumps into an ordinary heap of sand. By morning it'll be taller.
+    | talk SAND_CROWN
+    | ===============
+    |   (overworld message) Pageant-goer: Ask your Sovereign! ASK HIM! Three hundred years of--
+    |   (overworld message) He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.
+    |   (overworld message) Pageant-goer: It's got me! The Crown's got me! I take it back! Long live the Sovereign!
+    |   (overworld message) The sand lets go. He runs all the way back to Saltmere with one boot.
+    |   (overworld message) Then the Crown turns round to look at you. There's a shovel handle sticking out of the top of it.
+    | 
+    | --- Battle start ---
+    |   field: BEACH | weather: None | terrain: None
+    |   Oh! A wild Sandygast appeared!
+    |   Go! Ivysaur!
+    |     >> sent out (player): Ivysaur Lv.22 [OVERGROW]
+    | ## FIELD CHANGE: NONE -> BEACH
+    |   Waves lap at the sandy shore...
+    |   The sand Crown heaves itself up out of the dune!
+    |   The wild Sandygast hardened in the wet sand!
+    |     (anim: StatUp)
+    |   The wild Sandygast's Defense rose!
+    |   The wild Sandygast's Special Defense rose!
+    | 
+    | --- Turn 1 ---
+    |   [Ivysaur 65/65 | Sandygast 62/62]
+    |   Ivysaur ignored orders!
+    |   Ivysaur used Sleep Powder!
+    |   The wild Sandygast's shield repelled the effect!
+    |   The wild Sandygast used Sand Attack!
+    |     (anim: StatDown)
+    |   Ivysaur's accuracy fell!
+    |   The wild Sandygast flung a whole handful of beach sand!
+    |     (anim: StatDown)
+    |   Ivysaur's accuracy fell!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Ivysaur 65/65 | Sandygast 62/62]
+    |   Ivysaur used Leech Seed!
+    |   The wild Sandygast evaded the attack!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Ivysaur (player): 65 -> 49 / 65
+    |   Ivysaur became trapped by Sand Tomb!
+    |   (end of round)
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 49 -> 41 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 3 ---
+    |   [Ivysaur 41/65 | Sandygast 62/62]
+    |   Ivysaur ignored orders!
+    |   Ivysaur used Razor Leaf!
+    |     HP Sandygast (foe): 62 -> 41 / 62
+    |   It's super effective!
+    |   The wild Sandygast used Harden!
+    |     (anim: StatUp)
+    |   The wild Sandygast's Defense rose!
+    |   (end of round)
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 41 -> 33 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 4 ---
+    |   [Ivysaur 33/65 | Sandygast 41/62]
+    |   Ivysaur used Leech Seed!
+    |   The wild Sandygast evaded the attack!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Ivysaur (player): 33 -> 16 / 65
+    |   (end of round)
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 16 -> 8 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 5 ---
+    |   [Ivysaur 8/65 | Sandygast 41/62]
+    |   Ivysaur ignored orders!
+    |   Ivysaur used Take Down!
+    |   It doesn't affect the wild Sandygast...
+    |   The wild Sandygast used Astonish!
+    |     HP Ivysaur (player): 8 -> 0 / 65
+    |   Ivysaur fainted!
+    |     xx fainted: Ivysaur (player)
+    |   (end of round)
+    |   Use next Pokémon?  [auto: Yes]
+    |   Go for it, Sneasel!
+    |     >> sent out (player): Sneasel Lv.22 [INNERFOCUS]
+    | 
+    | --- Turn 6 ---
+    |   [Sneasel 63/63 | Sandygast 41/62]
+    |   Sneasel turned away!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Sneasel (player): 63 -> 47 / 63
+    |   Sneasel became trapped by Sand Tomb!
+    |   (end of round)
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 47 -> 40 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    | 
+    | --- Turn 7 ---
+    |   [Sneasel 40/63 | Sandygast 41/62]
+    |   Sneasel ignored orders!
+    |   Sneasel used Icy Wind!
+    |     HP Sandygast (foe): 41 -> 17 / 62
+    |   It's super effective!
+    |     (anim: StatDown)
+    |   The wild Sandygast's Speed fell!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Sneasel (player): 40 -> 25 / 63
+    |   (end of round)
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 25 -> 18 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    | 
+    | --- Turn 8 ---
+    |   [Sneasel 18/63 | Sandygast 17/62]
+    |   Sneasel used Icy Wind!
+    |     HP Sandygast (foe): 17 -> 1 / 62
+    |   It's super effective!
+    |     (anim: StatDown)
+    |   The wild Sandygast's Speed fell!
+    |   The wild Sandygast's shield shattered!
+    |     HP Sandygast (foe): 1 -> 62 / 62
+    |   The wild Sandygast pulls the beach up round itself and rebuilds, taller!
+    |     (anim: StatUp)
+    |   The wild Sandygast's Defense rose!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Sneasel (player): 18 -> 4 / 63
+    |   (end of round)
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 4 -> 0 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    |   Sneasel fainted!
+    |     xx fainted: Sneasel (player)
+    |   Use next Pokémon?  [auto: Yes]
+    |   You're in charge, Haunter!
+    |     >> sent out (player): Haunter Lv.22 [LEVITATE]
+    | 
+    | --- Turn 9 ---
+    |   [Haunter 58/58 | Sandygast 62/62]
+    |   Haunter used Confuse Ray!
+    |     (anim: Confusion)
+    |   The wild Sandygast became confused!
+    |     (anim: Confusion)
+    |   The wild Sandygast is confused!
+    |   The wild Sandygast used Astonish!
+    |     HP Haunter (player): 58 -> 40 / 58
+    |   It's super effective!
+    |   (end of round)
+    | 
+    | --- Turn 10 ---
+    |   [Haunter 40/58 | Sandygast 62/62]
+    |   Haunter ignored orders!
+    |   Haunter used Night Shade!
+    |     HP Sandygast (foe): 62 -> 40 / 62
+    |   The wild Sandygast snapped out of its confusion.
+    |   The wild Sandygast used Astonish!
+    |     HP Haunter (player): 40 -> 20 / 58
+    |   It's super effective!
+    |   (end of round)
+    | 
+    | --- Turn 11 ---
+    |   [Haunter 20/58 | Sandygast 40/62]
+    |   Haunter pretended not to notice!
+    |   The wild Sandygast used Astonish!
+    |     HP Haunter (player): 20 -> 1 / 58
+    |   It's super effective!
+    |   (end of round)
+    | 
+    | --- Turn 12 ---
+    |   [Haunter 1/58 | Sandygast 40/62]
+    |   Haunter won't obey!
+    |   The wild Sandygast used Astonish!
+    |     HP Haunter (player): 1 -> 0 / 58
+    |   It's super effective!
+    |   Haunter fainted!
+    |     xx fainted: Haunter (player)
+    |   You have no more Pokémon that can fight!
+    |   You panicked and dropped $352...
+    |   battle result code: 2
+    |   (overworld message) The Crown slumps into an ordinary heap of sand. By morning it'll be taller.
+-- talk SAND_CROWN
+  Pageant-goer: Ask your Sovereign! ASK HIM! Three hundred years of--
+  He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.
+  Pageant-goer: It's got me! The Crown's got me! I take it back! Long live the Sovereign!
+  The sand lets go. He runs all the way back to Saltmere with one boot.
+  Then the Crown turns round to look at you. There's a shovel handle sticking out of the top of it.
+  The Sandygast sags into a smaller, rounder heap. Pressed into its sand is a brass letter from a ship's name-board: a W, from THE WANDERING CHORUS, the theatre barge buried in the dunes.
+  It isn't a crown. It's a stage set made of an old stage, and it's lonely for an audience.
+  What do you do?
+  The Sandygast gathers itself up and follows you, leaving a neat trail.
+  Tester obtained Sandygast!
+  QUEST LOG: "The Crown in the Sand" Tell the sand-sculptor what has been rebuilding her Crown.
+    | talk SAND_CROWN
+    | ===============
+    |   (overworld message) Pageant-goer: Ask your Sovereign! ASK HIM! Three hundred years of--
+    |   (overworld message) He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.
+    |   (overworld message) Pageant-goer: It's got me! The Crown's got me! I take it back! Long live the Sovereign!
+    |   (overworld message) The sand lets go. He runs all the way back to Saltmere with one boot.
+    |   (overworld message) Then the Crown turns round to look at you. There's a shovel handle sticking out of the top of it.
+    | 
+    | --- Battle start ---
+    |   field: BEACH | weather: None | terrain: None
+    |   Oh! A wild Sandygast appeared!
+    |   Go! Ivysaur!
+    |     >> sent out (player): Ivysaur Lv.22 [OVERGROW]
+    | ## FIELD CHANGE: NONE -> BEACH
+    |   Waves lap at the sandy shore...
+    |   The sand Crown heaves itself up out of the dune!
+    |   The wild Sandygast hardened in the wet sand!
+    |     (anim: StatUp)
+    |   The wild Sandygast's Defense rose!
+    |   The wild Sandygast's Special Defense rose!
+    | 
+    | --- Turn 1 ---
+    |   [Ivysaur 65/65 | Sandygast 66/66]
+    |   Ivysaur used Leech Seed!
+    |   The wild Sandygast was seeded!
+    |   The wild Sandygast used Sand Attack!
+    |     (anim: StatDown)
+    |   Ivysaur's accuracy fell!
+    |   The wild Sandygast flung a whole handful of beach sand!
+    |     (anim: StatDown)
+    |   Ivysaur's accuracy fell!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 66 -> 58 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    | 
+    | --- Turn 2 ---
+    |   [Ivysaur 65/65 | Sandygast 58/66]
+    |   Ivysaur used Razor Leaf!
+    |   The wild Sandygast avoided the attack!
+    |   The wild Sandygast used Harden!
+    |     (anim: StatUp)
+    |   The wild Sandygast's Defense rose!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 58 -> 50 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    | 
+    | --- Turn 3 ---
+    |   [Ivysaur 65/65 | Sandygast 50/66]
+    |   Ivysaur ignored orders!
+    |   Ivysaur used Sleep Powder!
+    |   The wild Sandygast's shield repelled the effect!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Ivysaur (player): 65 -> 51 / 65
+    |   Ivysaur became trapped by Sand Tomb!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 50 -> 42 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 51 -> 59 / 65
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 59 -> 51 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 4 ---
+    |   [Ivysaur 51/65 | Sandygast 42/66]
+    |   Ivysaur ignored orders!
+    |   Ivysaur used Leech Seed!
+    |   The wild Sandygast evaded the attack!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Ivysaur (player): 51 -> 35 / 65
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 42 -> 34 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 35 -> 43 / 65
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 43 -> 35 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 5 ---
+    |   [Ivysaur 35/65 | Sandygast 34/66]
+    |   Ivysaur pretended not to notice!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Ivysaur (player): 35 -> 18 / 65
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 34 -> 26 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 18 -> 26 / 65
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 26 -> 18 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 6 ---
+    |   [Ivysaur 18/65 | Sandygast 26/66]
+    |   Ivysaur is loafing around!
+    |   The wild Sandygast used Sand Tomb!
+    |   The wild Sandygast's attack missed!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 26 -> 18 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 18 -> 26 / 65
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 26 -> 18 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 7 ---
+    |   [Ivysaur 18/65 | Sandygast 18/66]
+    |   Ivysaur ignored orders!
+    |   Ivysaur used Sleep Powder!
+    |   The wild Sandygast's shield repelled the effect!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Ivysaur (player): 18 -> 2 / 65
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 18 -> 10 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 2 -> 10 / 65
+    |   Ivysaur was freed from Sand Tomb!
+    | 
+    | --- Turn 8 ---
+    |   [Ivysaur 10/65 | Sandygast 10/66]
+    |   Ivysaur used Razor Leaf!
+    |     HP Sandygast (foe): 10 -> 1 / 66
+    |   It's super effective!
+    |   The wild Sandygast's shield shattered!
+    |     HP Sandygast (foe): 1 -> 66 / 66
+    |   The wild Sandygast pulls the beach up round itself and rebuilds, taller!
+    |     (anim: StatUp)
+    |   The wild Sandygast's Defense rose!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Ivysaur (player): 10 -> 0 / 65
+    |   Ivysaur fainted!
+    |     xx fainted: Ivysaur (player)
+    |   (end of round)
+    |   Use next Pokémon?  [auto: Yes]
+    |   You're in charge, Sneasel!
+    |     >> sent out (player): Sneasel Lv.22 [INNERFOCUS]
+    | 
+    | --- Turn 9 ---
+    |   [Sneasel 63/63 | Sandygast 66/66]
+    |   Sneasel used Leer!
+    |     (anim: StatDown)
+    |   The wild Sandygast's Defense fell!
+    |   The wild Sandygast used Sand Attack!
+    |     (anim: StatDown)
+    |   Sneasel's accuracy fell!
+    |   The wild Sandygast flung a whole handful of beach sand!
+    |     (anim: StatDown)
+    |   Sneasel's accuracy fell!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 66 -> 58 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    | 
+    | --- Turn 10 ---
+    |   [Sneasel 63/63 | Sandygast 58/66]
+    |   Sneasel won't obey!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Sneasel (player): 63 -> 48 / 63
+    |   Sneasel became trapped by Sand Tomb!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 58 -> 50 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 48 -> 56 / 63
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 56 -> 49 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    | 
+    | --- Turn 11 ---
+    |   [Sneasel 49/63 | Sandygast 50/66]
+    |   Sneasel pretended not to notice!
+    |   The wild Sandygast used Sand Tomb!
+    |   The wild Sandygast's attack missed!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 50 -> 42 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 49 -> 57 / 63
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 57 -> 50 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    | 
+    | --- Turn 12 ---
+    |   [Sneasel 50/63 | Sandygast 42/66]
+    |   Sneasel used Bite!
+    |     HP Sandygast (foe): 42 -> 19 / 66
+    |   It's super effective!
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Sneasel (player): 50 -> 34 / 63
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 19 -> 11 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 34 -> 42 / 63
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 42 -> 35 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    | 
+    | --- Turn 13 ---
+    |   [Sneasel 35/63 | Sandygast 11/66]
+    |   Sneasel ignored orders!
+    |   Sneasel used Quick Attack!
+    |   It doesn't affect the wild Sandygast...
+    |   The wild Sandygast used Sand Tomb!
+    |     HP Sneasel (player): 35 -> 20 / 63
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 11 -> 3 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 20 -> 28 / 63
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 28 -> 21 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    | 
+    | --- Turn 14 ---
+    |   [Sneasel 21/63 | Sandygast 3/66]
+    |   Sneasel won't obey!
+    |   The wild Sandygast used Sand Tomb!
+    |   The wild Sandygast's attack missed!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Sandygast (foe): 3 -> 0 / 66
+    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 21 -> 24 / 63
+    |   The wild Sandygast fainted!
+    |     xx fainted: Sandygast (foe)
+    |   Sneasel is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   battle result code: 1
+    |   (overworld message) The Sandygast sags into a smaller, rounder heap. Pressed into its sand is a brass letter from a ship's name-board: a W, from THE WANDERING CHORUS, the theatre barge buried in the dunes.
+    |   (overworld message) It isn't a crown. It's a stage set made of an old stage, and it's lonely for an audience.
+    |   (overworld message) What do you do?
+    |   (overworld message) The Sandygast gathers itself up and follows you, leaving a neat trail.
+    |   (overworld message) Tester obtained Sandygast!
+    |   (overworld message) QUEST LOG: "The Crown in the Sand" Tell the sand-sculptor what has been rebuilding her Crown.
+-- talk SCULPTOR
+  Sand-sculptor: A Sandygast. My Crown was a Sandygast. And now it's yours.
+  Sand-sculptor: Well. It had better taste than the people kicking it. I'll build another. A smaller one. With a fence.
+  Sand-sculptor: Take this. I won it in a raffle. 'False Swipe'. I tried it on sand. It doesn't work on sand.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "The Crown in the Sand"
+  You obtained TM54 False Swipe!
+  You put the TM54 in your Bag's TMs & HMs pocket.
+-- EL_MATRIARCH_HUM / offer
+  Mother Aldreth: You went into the Hollow and came out. The wood is quieter. The moths are eating again.
+  Mother Aldreth: But my loom hums at night now. One note. Lower than the looms, higher than the wind.
+  Mother Aldreth: It comes from the Hollow. Something the Matriarch left. Go and listen, and don't touch what you don't understand.
+  Mother Aldreth: Which is everything, at your age. Touch it anyway. You will.
+  Go and listen?
+  NEW QUEST: "The Note Under the Glass" Find what is humming in Cocoonfall Hollow.
+-- talk GLASS_COCOON
+  You hold your badge case near it. The case answers with its own chord: the Footlight's note and the Weft's.
+  The cocoon's note sits just under them, patient, as if it's waiting for a third.
+  QUEST LOG: "The Note Under the Glass" A small glass cocoon by the Matriarch's nest hums one note under your badge case's chord. It is waiting for a third note (Badge 3).
+-- talk GLASS_COCOON
+  Your badge case sounds three notes together: the Footlight, the Weft, and the new one from Ebbmouth. The cocoon's hum climbs to meet them.
+  The glass cracks like ice on a pond. A Joltik tumbles out, fizzing, and looks up at you with four bright eyes.
+  It sees your hand, and the static goes out of its fur. It remembers the hand that emptied its mother.
+  It bares its mandibles, and every hair stands up.
+  It goes quiet in the ball. Maybe it will hum again, one day.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "The Note Under the Glass"
+  You obtained 2 Exp. Candy Ms!
+  You put the Exp. Candy Ms in your Bag's Medicine pocket.
+-- EL_MATRIARCH_HUM / offer
+  Mother Aldreth: You went into the Hollow and came out. The wood is quieter. The moths are eating again.
+  Mother Aldreth: But my loom hums at night now. One note. Lower than the looms, higher than the wind.
+  Mother Aldreth: It comes from the Hollow. Something the Matriarch left. Go and listen, and don't touch what you don't understand.
+  Mother Aldreth: Which is everything, at your age. Touch it anyway. You will.
+  Go and listen?
+  NEW QUEST: "The Note Under the Glass" Find what is humming in Cocoonfall Hollow.
+-- talk GLASS_COCOON
+  You hold your badge case near it. The case answers with its own chord: the Footlight's note and the Weft's.
+  The cocoon's note sits just under them, patient, as if it's waiting for a third.
+  Your badge case sounds three notes together: the Footlight, the Weft, and the new one from Ebbmouth. The cocoon's hum climbs to meet them.
+  The glass cracks like ice on a pond. A Joltik tumbles out, fizzing, and looks up at you with four bright eyes.
+  It remembers you. You sat with its mother all night while she calmed.
+  It climbs your sleeve and settles in your collar, humming in tune with the case.
+  Tester obtained Joltik!
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "The Note Under the Glass"
+  You obtained 2 Exp. Candy Ms!
+  You put the Exp. Candy Ms in your Bag's Medicine pocket.
+  Your standing in The Quiet Way rose to Evergreen!
+-- EL_SHELLY / offer
+  Mother Aldreth: There's a girl in the Deepwood who apologises to the Bugs. All of them. One at a time.
+  Mother Aldreth: She isn't from here. She isn't from anywhere I can hear. The wood keeps re-weaving the paths round her, to keep her, I think. It likes being apologised to.
+  Mother Aldreth: Go and fetch her before it decides she's a moth.
+  Find the stranger?
+  NEW QUEST: "Someone Apologising to Bugs" Find the lost stranger in the Gossamer Deepwood, past the Cut tree, and help her home.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "Someone Apologising to Bugs"
+-- talk DROVER
+  Old drover: My da drove sheep down this road every autumn. Bracken did the work. Da walked behind and took the credit.
+  Old drover: The year they blazed the North Gate road, Bracken went up the fell for a stray and never came down. Wolves, Da said. He rang that bell every night till the snow came.
+  Old drover: I ring it, some years. Can't get up there now, with these knees. Something answers. The boy says wolves.
+  Old drover: Wolves don't answer bells. Dogs do.
+  Ring the bell for him?
+  NEW QUEST: "Bracken Comes In" Ring the drover's bell up the Wolfsrime and follow whatever answers it.
+  Old drover: Up the road, on the birch past the clawed one. Ring it, then follow your ears. Bracken always came the long way.
+-- talk WOLF_DEN
+  It's a Greavard. Round its neck is a drover's collar with a brass tag, green with age: BRACKEN.
+  It drops an old bone at your feet, backs off two steps, and crouches. It wants to play.
+  Bracken licks your face and trots back into its den. It isn't tired. It has never once been tired.
+    | talk WOLF_DEN
+    | =============
+    |   (overworld message) It's a Greavard. Round its neck is a drover's collar with a brass tag, green with age: BRACKEN.
+    |   (overworld message) It drops an old bone at your feet, backs off two steps, and crouches. It wants to play.
+    | 
+    | --- Battle start ---
+    |   field: MEADOW | weather: None | terrain: None
+    |   Oh! A wild Bracken appeared!
+    |   Go! Croconaw!
+    |     >> sent out (player): Croconaw Lv.22 [TORRENT]
+    | ## FIELD CHANGE: NONE -> MEADOW
+    |   Tall grass ripples in the breeze across the meadow.
+    | 
+    | --- Turn 1 ---
+    |   [Croconaw 67/67 | Bracken 54/54]
+    |   Croconaw used Bite!
+    |     HP Bracken (foe): 54 -> 38 / 54
+    |   It's super effective!
+    |   The wild Bracken used Bite!
+    |     HP Croconaw (player): 67 -> 57 / 67
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Croconaw 57/67 | Bracken 38/54]
+    |   Croconaw used Ice Fang!
+    |     HP Bracken (foe): 38 -> 29 / 54
+    |   The wild Bracken used Headbutt!
+    |   The wild Bracken stampeded through the tall grass!
+    |     HP Croconaw (player): 57 -> 44 / 67
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Croconaw 44/67 | Bracken 29/54]
+    |   Croconaw used Ice Fang!
+    |     HP Bracken (foe): 29 -> 20 / 54
+    |     (anim: EatBerry)
+    |     HP Bracken (foe): 20 -> 30 / 54
+    |   The wild Bracken restored a little HP using its Oran Berry!
+    |   The wild Bracken used Headbutt!
+    |   The wild Bracken stampeded through the tall grass!
+    |     HP Croconaw (player): 44 -> 30 / 67
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Croconaw 30/67 | Bracken 30/54]
+    |   Croconaw used Ice Fang!
+    |     HP Bracken (foe): 30 -> 21 / 54
+    |   The wild Bracken used Headbutt!
+    |   The wild Bracken stampeded through the tall grass!
+    |     HP Croconaw (player): 30 -> 18 / 67
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Croconaw 18/67 | Bracken 21/54]
+    |   Croconaw used Bite!
+    |     HP Bracken (foe): 21 -> 2 / 54
+    |   It's super effective!
+    |   The wild Bracken used Lick!
+    |     HP Croconaw (player): 18 -> 9 / 67
+    |     (anim: Paralysis)
+    |   Croconaw is paralyzed! It may be unable to move!
+    |   (end of round)
+    | 
+    | --- Turn 6 ---
+    |   [Croconaw 9/67 PARALYSIS | Bracken 2/54]
+    |   The wild Bracken used Lick!
+    |     HP Croconaw (player): 9 -> 0 / 67
+    |   Croconaw fainted!
+    |     xx fainted: Croconaw (player)
+    |   You have no more Pokémon that can fight!
+    |   You panicked and dropped $528...
+    |   battle result code: 2
+    |   (overworld message) Bracken licks your face and trots back into its den. It isn't tired. It has never once been tired.
+-- talk WOLF_DEN
+  It's a Greavard. Round its neck is a drover's collar with a brass tag, green with age: BRACKEN.
+  It drops an old bone at your feet, backs off two steps, and crouches. It wants to play.
+  Bracken's tail thumps against the inside of the ball.
+  QUEST LOG: "Bracken Comes In" Bring Bracken down to the old drover by the cold kiln.
+-- talk DROVER
+  Bracken sits down at the old man's feet, the way it must have sat at his father's.
+  Old drover: ...That's his collar. That's Da's knot on it.
+  Old drover: He came in. Took him fifty years, but he came in.
+  Old drover: Take him down the Pass. He always liked the Pass. And take this. It was Da's. He kept it for the wolves. Never once hit one.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "Bracken Comes In"
+  You obtained TM65 Shadow Claw!
+  You put the TM65 in your Bag's TMs & HMs pocket.
+-- talk VEIL_FISHER
+  Fisher at the Veil: Holmsby. The Ebb took it in AF 296. Didn't flood it. Lifted the river clean off its bed and left it hanging.
+  Fisher at the Veil: We all walked out under it. Every soul. Bersi made a song of it, the liar. He gave us a whale.
+  Fisher at the Veil: But we left the names. Every family in Holmsby cuts its name on a boundary stone, and the stones are in there, under all that water. The Tally's never counted us.
+  Fisher at the Veil: ...They say you can walk in. Read me the names, and I'll have them cut on the Tally Mast at Ebbmouth. So the sea keeps count.
+  Read the names?
+  NEW QUEST: "The Names in Holmsby" Walk into Ebb Hollow (only you can) and read the names off Holmsby's boundary stones.
+-- talk HOLLOW_STONE
+  A boundary stone, perfectly dry. A trout drifts past it at head height, asleep. You read the names out loud, because it seems rude not to: ORM. LITTLE ORM. ORM'S DOG.
+-- talk HOLLOW_STONE
+  A boundary stone, perfectly dry under a hanging drop of river. Names cut deep, then cut again, smaller, by children: SKARD. VEN. THE VEN TWINS. BOTH OF THEM.
+  Two stones read. The fisher said three. By the old eel-weir, something white is growing over the last one.
+  QUEST LOG: "The Names in Holmsby" The last stone is by the old eel-weir, under something white.
+-- talk HOLLOW_CORAL
+  A Corsola, bleached white by the Bleed, has wrapped itself round the last stone. It isn't guarding it. It's holding on.
+  The last stone is clear. Its names are the oldest: HALDIS. BRENNA. And under them, in chalk that should have washed off years ago and didn't: WE'LL BE BACK SATERDAY.
+  QUEST LOG: "The Names in Holmsby" Bring the names back to the fisher at the Veil.
+    | talk HOLLOW_CORAL
+    | =================
+    |   (overworld message) A Corsola, bleached white by the Bleed, has wrapped itself round the last stone. It isn't guarding it. It's holding on.
+    | 
+    | --- Battle start ---
+    |   field: BLEED | weather: None | terrain: None
+    |   Oh! A wild Corsola appeared!
+    |   Go! Mightyena!
+    |     >> sent out (player): Mightyena Lv.26 [QUICKFEET]
+    | ## FIELD CHANGE: NONE -> BLEED
+    |   Reality frays at the edges... The Bleed is spreading!
+    |   The Bleed convulses... echoes of the Hollow Cathedral tear through the battlefield!
+    |   The wild Corsola is at home among the restless dead.
+    |     (anim: StatUp)
+    |   The wild Corsola's Special Defense rose!
+    | 
+    | --- Turn 1 ---
+    |   [Mightyena 80/80 | Corsola 68/68]
+    |   Mightyena used Bite!
+    |     HP Corsola (foe): 68 -> 22 / 68
+    |   It's super effective!
+    |   The wild Corsola used Ancient Power!
+    |   The Bleed warped Ancient Power into something stronger!
+    |     HP Mightyena (player): 80 -> 66 / 80
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Mightyena 66/80 | Corsola 22/68]
+    |   Mightyena used Bite!
+    |     HP Corsola (foe): 22 -> 0 / 68
+    |   It's super effective!
+    |   The wild Corsola fainted!
+    |     xx fainted: Corsola (foe)
+    |   Mightyena got 635 Exp. Points!
+    |   battle result code: 1
+    |   (overworld message) The last stone is clear. Its names are the oldest: HALDIS. BRENNA. And under them, in chalk that should have washed off years ago and didn't: WE'LL BE BACK SATERDAY.
+    |   (overworld message) QUEST LOG: "The Names in Holmsby" Bring the names back to the fisher at the Veil.
+-- talk VEIL_FISHER
+  Fisher at the Veil: ...Saterday. That's my niece. She chalked it on number nine as well. She still spells it like that, to annoy her mother.
+  Fisher at the Veil: I'll take the names up to Bersi at the Net Loft myself. You've done the walking.
+  Fisher at the Veil: He'll make it rhyme. He'll make the river forty feet high and give it teeth. Let him. As long as the names are right.
+  A new notch is cut in the Tally Mast, beside your name.
+  QUEST COMPLETE: "The Names in Holmsby"
+  You obtained 2 Exp. Candy Ms!
+  You put the Exp. Candy Ms in your Bag's Medicine pocket.
+  You obtained a Big Pearl!
+  You put the Big Pearl in your Bag's Items pocket.
+-- talk FIZZBOLT_MACHINE
+  The card reads: THIS UNIT IS UNDER OBSERVATION. PLEASE DO NOT ENCOURAGE IT. - MERIDIAN VENDING.
+  Fizzbolt machine: Coins. Coins, coins, coins. Nobody ever says anything NICE.
+  The machine is waiting.
+  NEW QUEST: "The Machine Wants Compliments" Pay the Fizzbolt machine five different compliments. It knows when you've said one before.
+  Fizzbolt machine: Well? Go on.
+  Fizzbolt machine: ...Oh. Oh. Say that again. No, don't. I'll remember it.
+  (Come back and say something else. It will want a new one.)
+-- talk FIZZBOLT_MACHINE
+  Fizzbolt machine: Well? Go on.
+  Fizzbolt machine: You SAID that. You said that ALREADY.
+  Every light on the machine goes out. It's sulking.
+-- talk FIZZBOLT_MACHINE
+  The machine's lights are off. It's facing the wall. As much as a vending machine can face anything.
+  ...After a while, one light flickers back on. It has decided to forgive you. Once.
+-- talk FIZZBOLT_MACHINE
+  Fizzbolt machine: Well? Go on.
+  Fizzbolt machine: Two! Two nice things! I'm going to tell the ticket machine. It's going to be SO jealous.
+  (Come back and say something else. It will want a new one.)
+-- talk FIZZBOLT_MACHINE
+  Fizzbolt machine: Well? Go on.
+  Fizzbolt machine: Three. I've had a Fizzbolt stuck in my chute since spring. I think it's coming loose.
+  (Come back and say something else. It will want a new one.)
+-- talk FIZZBOLT_MACHINE
+  Fizzbolt machine: Well? Go on.
+  Fizzbolt machine: Four. One more and I don't know what I'll do. Something unprofessional.
+  (Come back and say something else. It will want a new one.)
+-- talk FIZZBOLT_MACHINE
+  Fizzbolt machine: Well? Go on.
+  Fizzbolt machine: FIVE.
+  The machine shudders, rings like a till, and dispenses everything it has at once. Fizzbolt rolls across the Concourse in every direction.
+  A Rotom shoots out of the dent in the glass, does a lap of the Concourse, high-fives a streetlamp, and dives back in.
+  Fizzbolt machine: Take them. Take them all. And this, it was rattling about in my coin box. I don't know what it is. I don't care. I'm LOVED.
+  The board clacks: PRIZE AWARDED. Somewhere a small bell rings.
+  QUEST COMPLETE: "The Machine Wants Compliments"
+  You obtained 6 bottles of Soda Pop!
+  You put the bottles of Soda Pop in your Bag's Medicine pocket.
+  You obtained a Cell Battery!
+  You put the Cell Battery in your Bag's Items pocket.
+-- talk HELPDESK_ROTOM
+  Helpdesk Rotom: THANK YOU FOR CONTACTING MERIDIAN. YOUR CALL IS IMPORTANT TO US. YOU ARE CALLER NUMBER ONE. YOU HAVE ALWAYS BEEN CALLER NUMBER ONE.
+  Helpdesk Rotom: I HAVE A FORM I WOULD LIKE TO CANCEL. IT IS FORM 0. FORM 0 IS THE FORM FOR CANCELLING FORMS.
+  Helpdesk Rotom: IT NEEDS THREE STAMPS: RECORDS, APPROVALS AND COMPLIANCE. I CANNOT LEAVE THE DESK. I AM THE DESK.
+  Take Form 0?
+  NEW QUEST: "Customer Support" Get Form 0 (Cancellation of Form 0) stamped at Records, Approvals and Compliance.
+  Helpdesk Rotom: THANK YOU. PLEASE RATE YOUR EXPERIENCE. NOT YET. LATER. I GET AHEAD OF MYSELF.
+-- talk DESK_RECORDS
+  Records clerk: I can't record a form that hasn't been approved. That would be a record of nothing. Approvals, next desk.
+-- talk DESK_APPROVALS
+  Approvals clerk: I can't approve something that might not comply. Compliance, end desk, two windows.
+-- talk DESK_COMPLIANCE
+  The Compliance desk has two windows. One says COMPLIANCE. The other says CANCELLATIONS OF CANCELLATIONS.
+  Compliance clerk: Has it been recorded? I can't check a form for compliance unless there's a record of it. Records. Other end.
+-- talk DESK_COMPLIANCE
+  The Compliance desk has two windows. One says COMPLIANCE. The other says CANCELLATIONS OF CANCELLATIONS.
+  The same clerk slides along to the second window, puts on a different hat, and clears her throat.
+  Compliance clerk: A cancellation of a cancellation form? Those need no stamps at all. That's the point of them. Nobody ever comes to this window.
+  Compliance clerk: Different window, different rules. Stamped. Compliant. Don't tell the other window.
+  (Thunk.)
+-- talk DESK_APPROVALS
+  Approvals clerk: Compliant! Then it's approved. Lovely. I love it when things are approved.
+  (Thunk.)
+-- talk DESK_RECORDS
+  Records clerk: Approved? Approved. Then it can be recorded. RECORDED.
+  (Thunk.)
+  Three stamps. Form 0 is complete. It is now the most legitimate piece of paper in Lumen.
+  QUEST LOG: "Customer Support" Every desk has stamped it. Take Form 0 back to the helpdesk.
+-- talk HELPDESK_ROTOM
+  Helpdesk Rotom: THREE STAMPS. FORM 0 IS NOW CANCELLED. CANCELLING FORM 0 CANCELS FORM 0.
+  The form folds itself in half. Then in half again. Then into a shape paper can't fold into, all corners, pink and blue, and it blinks at you.
+  Helpdesk Rotom: OH. IT WAS A PORYGON. IT WAS A PORYGON THE WHOLE TIME. IT HAS BEEN IN THE SYSTEM SINCE AF 291.
+  Helpdesk Rotom: IT IS NOT MERIDIAN PROPERTY. IT IS NOT ANY FORM. PLEASE TAKE IT. PLEASE RATE YOUR EXPERIENCE. NOW. NOW IS THE TIME.
+  The board clacks: PRIZE AWARDED. Somewhere a small bell rings.
+  QUEST COMPLETE: "Customer Support"
+  Tester obtained Porygon!
+  Your standing in The Prize Exchange rose to Fellow!
+-- talk OCTAVE_CADENCE
+  Cadence: Block 9's dark now. All of it. The junctions went to glass with everything else.
+  Cadence: Snare hasn't sparked since that night. I want to hear it go flat out once, somewhere the lights can take it.
+  NEW QUEST: "Off the Beat" Find the drummer on the Lowlight steps.
+  QUEST LOG: "Off the Beat" The block stayed lit. Cadence wants to play it out properly.
+  Cadence: Snare's never been allowed to go flat out on this block. Let's find out what it's got. One, two, three, four.
+  Cadence: Off the beat. Mine, not yours. Again tomorrow?
+  Cadence: P-3NNY still wants a report on 'the source'. Your name, your report.
+  File the report as...
+  P-3NNY: REPORT FILED: SOURCE UNKNOWN. BOUNTY WITHHELD. THE REGISTRY IS DISAPPOINTED. THE REGISTRY WILL LIVE.
+  The board clacks: PRIZE AWARDED. Somewhere a small bell rings.
+  QUEST COMPLETE: "Off the Beat"
+  \PN received $800!
+  You obtained 2 Cell Batteries!
+  You put the Cell Batteries in your Bag's Items pocket.
+  The Heartwood gift is set aside for you. It will keep until you hold 8 badges.
+  For reaching the rank of Heartwood, take this.
+  Tester obtained Comfey!
+  For reaching the rank of Evergreen, take this.
+  You obtained 3 Magical Seeds!
+  You put the Magical Seeds in your Bag's Items pocket.

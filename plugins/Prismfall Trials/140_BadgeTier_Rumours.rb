@@ -69,6 +69,8 @@ Prismfall::Trials::BadgeTiers::RUMOURS.merge!({
   [570, 4] => "A pike with a see-through head hooked in the {map} channel. It looked at the angler like he was the fish.",
   [578, 3] => "A girl-shaped Pokemon on {map} who kisses travellers for luck, and a bird that leaves presents on doorsteps.",
   [578, 4] => "Floating snowflakes on {map}, where the trees glaze over, and a stag with antlers like crystal balls.",
+  [579, 3] => "The drovers' bothy on {map} keeps losing its eggs to something with a hooked claw. Then a bird in a red sack brings them back. Nobody has worked out the arrangement.",
+  [579, 4] => "A stag with antlers like crystal balls walks the old drove road on {map} at dusk. And the snowdrifts there have started biting.",
   [562, 3] => "A white beast in {map}. Some say it's warning us. Some say it's waiting. And a penguin with an ice-cube for a head.",
   [562, 4] => "Snowflakes that never land, deep in {map}, and something that smells of sweet cream.",
   [563, 3] => "Something in {map} looks like whipped cream and smells like it too.",

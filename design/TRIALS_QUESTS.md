@@ -5,13 +5,13 @@
 > Map IDs are current `maps.json` IDs (names change; IDs don't). Chapters and order follow SPINE Revision 14.
 > **Status:** *wired* = scenes written and testable (map events in `design/TRIAL_EVENTS.yaml`); *designed* = `:stub`, off the boards until wired.
 
-**106 quests** (48 wired, 58 designed) across 8 Trials.
+**111 quests** (56 wired, 55 designed) across 8 Trials.
 
 | Trial | Quests | Wired |
 |---|---|---|
-| The Quiet Way (Elowen) | 25 | 20 |
-| The Tally (Isenmar) | 12 | 6 |
-| The Prize Exchange (Zenith) | 11 | 5 |
+| The Quiet Way (Elowen) | 29 | 25 |
+| The Tally (Isenmar) | 13 | 7 |
+| The Prize Exchange (Zenith) | 11 | 7 |
 | The Gutter Book (Nadir) | 13 | 4 |
 | The Trial by Flames (Ashkaar) | 13 | 5 |
 | The Rolls of Unearthing (Ossaria) | 12 | 4 |
@@ -24,6 +24,7 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
+| **Two Unlisted** `EL_STOWAWAYS` | 0 | `` | the woman with the crate · the deck of the Dovetail (the last ferry) (109) | ★ · 5 | On the last ferry, a passenger's crate squeaks. Twice. In harmony. She would be grateful if nobody mentioned it to customs. | ORANBERRY x2; +2 pts | the Prologue's NULL scan: the crate went through the gate with you, and the gate saw nothing in either | wired |
 | **The First Lesson** `EL_FIRST_LESSON` | 1 | `switch(103)` | Brother Teasel · the wayshrine by the Accord plaque (100) | ★ · 5 | Do one kind thing in Ferrow's Landing that nobody asked you to do. Then go back to Brother Teasel. | ORANBERRY x2; silent: RES+1; +2 pts | Resonance (Harmony +1 for keeping quiet); starts the realm-wide Quiet Deeds tally | wired |
 | **The Tart Thief** `EL_TART_THIEF` | 1 | `switch(103)` | Wenna Hale · the tart stall on the quay (100) | ★ · 7 | Someone keeps stealing Wenna Hale's bramble tarts. Brother Teasel's note on the lantern: "The thief is hungry, not wicked." | $200, ORANBERRY x3; told: KESTREL-1; +2 pts | Kestrel bond (+1 if you split the evidence, -1 if you tell on him) | wired |
 | **The Scarecrow Walks** `EL_SCARECROW` | 1 | `switch(103)` | Coll Hale · the Hale farmhouse (523) | ★ · 9 | Coll Hale's scarecrow keeps moving to a different field. Coll did not build a scarecrow. | spooked: $300; spared: MIRACLESEED, RES+1; +2 pts | Resonance (Harmony +1 if you leave it be); the Sudowoodo can be caught after Badge 2 | wired |
@@ -34,12 +35,15 @@
 | **A Hole in the Sky** `EL_PAINT_LOFT` | 2 | `badges >= 1 && switch(108)` | Marguerite Fane · the Lantern Theatre paint loft (145) | ★ · 13 | The Mourner walked straight through the Pageant's painted sky. The scene-painter needs a new backdrop, and a second opinion. | +1 pts | none; the colours you pick decide the Smeargle's moves (Water/Ice, Ghost, Fairy or Ground coverage) | wired |
 | **The Sound of Saltmere** `EL_SOUND_OF_SALTMERE` | 2 | `badges >= 1; after EL_LANTERNS` | Sister Hollin · the Saltmere Lantern House (140) | ★ · 14 | A koan: find the sound Saltmere makes when nobody is performing. | +3 pts | Resonance (Harmony +1) | wired |
 | **The Orchard Sings** `EL_GLASS_FOAL` | 2 | `badges >= 1 && switch(105)` | Brother Teasel · the Ferrow's Landing wayshrine (100) | ★ · 15 | Since your badge, folk on the orchard lane hear chiming at night, like hooves on glass. | MOONSTONE; +3 pts | Resonance (Harmony +1 if you approach slowly) | wired |
+| **The Crown in the Sand** `EL_SAND_CROWN` | 2 | `badges >= 1 && switch(108)` | the sand-sculptor · the sand Crown on Marram Down (528) | ★ · 18 | Since the Pageant went grey, someone walks out from Saltmere and kicks down the sand Crown on Marram Down every night. Every morning it's back, taller. The sculptor didn't rebuild it. | TM54; centrepiece: STARDUST x2, RES+1; +3 pts | the Pageant hijack (Ch2 key event): Saltmere's anger at the Sovereign; Resonance (Harmony +1 if you leave the Sandygast to be the Crown) | wired |
 | **Three Loyal, Three Knots** `EL_THREE_KNOTS` | 3 | `badges >= 1` | Mother Aldreth · the Briarwick Lantern House (120) | ★ · 16 | A pilgrimage: re-tie the silk knots at the three wayshrines of the Loyal Three, and answer what each shrine asks. | MAGICALSEED x2; +3 pts | Lore seed for the Loyal Three / Ogerpon arc (story/04_ACT_I, Elowen legendary arc) | wired |
 | **The Horn and the Pincer** `EL_HORN_AND_PINCER` | 3 | `badges >= 2` | the lantern rope (no one signed it) · the sap tree on the old trail, Gossamer Wood (524) | ★ · 19 | Two great Bug Pokémon are fighting over the sap tree on the old trail. The trail has been blocked for a week. | HONEY x2; +2 pts | none; the one you help clears a shortcut (Heracross tears a silk wall, Pinsir crushes a log) | wired |
 | **The Silkthief** `EL_SILKTHIEF` | 3 | `badges >= 2` | Hett · the Weavers' Guildhall (123) | ★★ · 20 | Somebody is stealing finished silk straight off the drying racks at night. Hett has a theory, and it has eight legs. | $800; guardian: SILVERPOWDER, RES+1; +3 pts | Resonance (Harmony +1 if you leave the Spidops guarding the moths); Briarwick's moth tally board | wired |
 | **The Moss Hymn** `EL_OCTAVE_MOSS` | 3 | `badges >= 1` | Lyra of the Octave · under the Lantern House tree, Briarwick; the moss-stone in Gossamer Wood (524) (120) | ★ · 18 | A singer of the Octave has been singing to her Eevee for three days. It will not come down from the moss-stone in Gossamer Wood. | $800, BIGROOT; +3 pts | The Octave: Lyra (1 of 8 in gym order) | wired |
-| **Someone Apologising to Bugs** `EL_SHELLY` | 3 | `badges >= 2` | Mother Aldreth · the Briarwick Lantern House (120) | ★★ · 21 | A stranger with pink hair is lost in the Gossamer Deepwood, apologising to the Bug Pokemon. The spirits of the wood are uneasy. **Twist:** Board pointer to CAMEOS.md 'Lost in the Gossamer'. The cameo event calls Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true) and then pf_quest_complete(:EL_SHELLY). Moved from 'after Gym 1' to 'after Gym 2' by SPINE Rev 14. | SILVERPOWDER; +3 pts | Ledger cameo record (FESTIVAL_SHELLY); CAMEOS.md #1 | designed |
+| **The Note Under the Glass** `EL_MATRIARCH_HUM` | 3 | `switch(107)` | Mother Aldreth · the Briarwick Lantern House (126) | ★ · 23 | Since the Glass Matriarch fell, Mother Aldreth's lantern-loom hums at night. One note, from the direction of Cocoonfall Hollow. | EXPCANDYM x2; +3 pts | the Glass Matriarch (Ch3 key event) and :ch2_matriarch: a soothed Matriarch's last cocoon hatches to you; a silenced one's is afraid of you | wired |
+| **Someone Apologising to Bugs** `EL_SHELLY` | 3 | `badges >= 2` | Mother Aldreth · the Briarwick Lantern House (120) | ★★ · 21 | A stranger with pink hair is lost in the Gossamer Deepwood, apologising to the Bug Pokemon. The spirits of the wood are uneasy. **Twist:** Board pointer to CAMEOS.md 'Lost in the Gossamer'. The cameo event on 525 calls Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true); the Trials plugin completes this quest when that fight is won (no map change needed). | +3 pts | Ledger cameo record (FESTIVAL_SHELLY); CAMEOS.md #1. Her Deepwood event gives Silver Powder and her TM; the quest completes when she is beaten (CAMEO_QUESTS, the :prismfall_cameo_beaten handler) | wired |
 | **The Rehearsal** `EL_REHEARSAL` | 4 | `badges >= 2` | Sister Maelon · the Half-Tally, Frostwick (573) | ★★ · 20 | Off the Frostflat Causeway, a stretch of road replays five seconds of a wagon crash, over and over. Something out there is practising a tragedy. | SPELLTAG; +3 pts | Resonance (Harmony +1) | wired |
+| **Bracken Comes In** `EL_DROVERS_BELL` | 4 | `badges >= 2` | the old drover · the Wolfsrime, by the cold kiln (579) | ★ · 21 | Every autumn the old drover's da rang the bell on the Wolfsrime to call his dog in off the fell. The last autumn, Bracken never came. Something still answers the bell. | TM65; +2 pts (+1 The Tally) | borderland (Elowen + Isenmar points); the Wolfsrime's den and bell (map builder 14's lines) | wired |
 | **The Humming Lamp** `EL_LAMP_LENS` | 5 | `badges >= 3` | Hesper Vane · the Ferrow Lighthouse lamp room (106) | ★ · 23 | A paper lantern from the lighthouse: 'THE LAMP HUMS. MAKE IT STOP. - H.V.' | AMPHAROSITE; +1 pts | Kestrel's family: Morwen set the stone; it hums for the PC. | wired |
 | **Gerald** `EL_GERALD` | 10 | `badges >= 8 && switch(126)` | the Queen's Keeper of Small Creatures · the Royal Chase (682) | ★★★ · 44 | Queen Maelis's named Scatterbugs have escaped into the Royal Chase. Each one has a personality file. Gerald's is four pages long. **Twist:** Six hide-and-seek finds, each solved by reading its file (Doris likes warm stones, Percival hates the colour blue...). Gerald hides inside the Queen's own crown on its stand in the hunting lodge. Reward: Gerald, a Fancy-pattern Scatterbug. | SHINYSTONE, Scatterbug "Gerald" Lv 40 (COMPOUNDEYES); +3 pts | Elowen Crown favour (flavour); Queen Maelis comedy (15_COMEDY 'The Royal We') | designed |
 | **The Rootward Wake** `EL_ROOTWARD_WAKE` | 10 | `badges >= 8` | a Rootward laundress · the Rootward slums, Verdance (296) | ★★★ · 44 | In Verdance nothing rots, so nothing is ever properly buried. The Rootward wants one funeral done right. **Twist:** Fetch a candle that's allowed to burn out, a flower picked from outside Verdance (it wilts on the way: that's the point) and a song nobody's sung since the Bleed. A Phantump comes to the wake and sits with the mourners. If Rowan's arc has turned (S124), one mourner is a Hollow sympathiser and says so. | CLEANSETAG, TM20; +3 pts | Resonance; Rowan's theme ('everything that grows must be allowed to die') | designed |
@@ -59,6 +63,7 @@
 | **A Deed for the Skald** `IS_SKALDS_SAGA` | 4 | `badges >= 2` | Bersi Gullsong · the Ebbmouth Net Loft (160) | ★ · 19 | The Ebb Guild feast is tonight and Bersi has no new saga. He needs a deed. Any deed. He'll handle the exaggerating. | MYSTICWATER; bully: MARISOL+1; tall_tale: POTION; +2 pts | Marisol bond (+1 for flattening Gorm, who she can't touch because he's Guild) | wired |
 | **The Egg Thief of Gullcry** `IS_EGG_THIEF` | 4 | `badges >= 3` | Old Asta · the egg-gatherers' hut on the Gullcry Cliffs (561) | ★★ · 24 | Something is taking eggs off the Gullcry ledges. Old Asta wants it stopped. Then she wants it stopped harder. | $1000; let_go: EXPCANDYM x2, RES+1; +3 pts | Resonance (Harmony +1 if you let the Bombirdier keep its route) | wired |
 | **The Drowned Note** `IS_OCTAVE_DROWNED_NOTE` | 4 | `badges >= 2` | Aria of the Octave · the river steps, Ebbmouth; the Mill Quay wheel (167) (160) | ★ · 22 | A singer's Vaporeon melted into the Ebb when the river stuttered and hasn't come out. She can still hear it, sometimes. | $1200, SHELLBELL; +3 pts | The Octave: Aria (2 of 8 in gym order); a verse on the Tally Mast | wired |
+| **The Names in Holmsby** `IS_EBB_HOLLOW` | 5 | `badges >= 3` | the fisher at the Veil · the Bleed Veil on the Reedholms' south bank (580) | ★ · 25 | In AF 296 the Ebb lifted itself off its bed over Holmsby and never put itself down. Everyone walked out under it. Their names are still cut on the village's boundary stones, under the Bleed, and the Tally has never counted them. | EXPCANDYM x2, BIGPEARL; +3 pts | the Bleed's reach (Ch5's key event is the Lowlight's wound; this is an old scar of the same kind); the Tally Mast at Ebbmouth | wired |
 | **The White Stag** `IS_WHITE_STAG` | 11 | `badges >= 9` | the lodge-keeper · Snowbriar (710) | ★★ · 48 | A white stag has been seen in the royal hunting woods. Elowen law says it's the Crown's. The trappers say it's nobody's. **Twist:** Four-sighting chase in deep snow; it only appears at dawn. At the end: battle and catch (EVENT IS_WHITE_STAG), report it to the Crown's lodge (Elowen points), or let the trappers' children see it once and let it go (Harmony). | $4000; +3 pts | Elowen vs Isenmar clan rights (WORLD.md 'The White Stag'); Thane's standing flavour | designed |
 | **The Harpoon Rite** `IS_HARPOON_RITE` | 11 | `badges >= 9` | Old Halla Brinesdottir · the Great Tally, Rimeholt (306) | ★★★ · 50 | Every Harpooner earns the rank by facing the Old Bull on the ice. The Old Bull is a Cetitan. It has never once been harpooned. **Twist:** Boss Cetitan (3 bars) on :FROZEN_LAKE; the field cracks to :WATER_SURFACE at bar 2. Nobody harpoons it: the rite is to stand your ground. Win and it slaps the ice twice and swims under you (no catch). The calf that follows it out joins you (EVENT IS_CETODDLE). | NEVERMELTICE; +4 pts | Before the Thaw only (expires on S128 CH11_THAW) | designed |
 | **Eleven Years at One Hole** `IS_ELEVEN_YEARS` | 11 | `badges >= 9` | Old Torstein · the ice-fishing flats, Rimeholt (300) | ★ · 47 | Old Torstein has fished one ice-hole for eleven years waiting for a single bite. He has not noticed he is sitting on an Avalugg. **Twist:** You fish his hole; a Tatsugiri has been nibbling the bait for eleven years without ever taking the hook. When Torstein stands up to cheer, his 'seat' stands up too. 'How long has that been there?' 'About eleven years, sir.' Reward: the Tatsugiri. | Tatsugiri Lv 48 (COMMANDER); +2 pts | 15_COMEDY Isenmar bit | designed |
@@ -75,8 +80,8 @@
 | **Field Survey: Coastal** `ZE_FIELD_SURVEY` | 2 | `switch(103)` | Grant Kiosk P-3NNY · any P-3NNY kiosk (Ferrow's Landing, Saltmere, Ebbmouth) (108) | ★ · 10 | CALL FOR PROPOSALS #0002: RECORD BATTLES ON THREE (3) DIFFERENT FIELDS. DATA IS THE CURRENCY OF THE FUTURE. SO IS CURRENCY. | EXPCANDYS x3; +2 pts | Field Notes (fields_seen) | wired |
 | **The Lattice Hums Wrong** `ZE_LATTICE_HUM` | 4 | `badges >= 2` | Grant Kiosk P-3NNY/2 · the tidal Lattice station, Ebbmouth (160) | ★ · 20 | CALL FOR PROPOSALS #0003: ACOUSTIC SURVEY OF THE EBBMOUTH TIDAL LATTICE DURING 'STUTTER EVENTS'. RECORDER PROVIDED. | $300; meridian: $1500, MERIDIAN+1; guild: MARISOL+1; larch: EXPCANDYS x2; +3 pts | Meridian standing or Marisol bond, depending on who gets the recordings (foreshadows Larch's tide data in Ch4) | wired |
 | **Off the Beat** `ZE_OCTAVE_OFF_BEAT` | 5 | `badges >= 3` | Grant Kiosk P-3NNY / Cadence of the Octave · the Lowlight steps, Lumen City (181) | ★ · 26 | CALL FOR PROPOSALS #0031: NOISE COMPLIANCE, LOWLIGHT BLOCK 9. A STREET DRUMMER'S JOLTEON BLACKS OUT THE BLOCK. BOUNTY: $800. | $800, CELLBATTERY x2; unknown: RES+1; fault: $800, MERIDIAN+1; +3 pts | The Octave: Cadence (3 of 8 in gym order); Meridian standing if you file it as a Lattice fault | wired |
-| **Customer Support** `ZE_CUSTOMER_SUPPORT` | 5 | `badges >= 3` | Helpdesk Rotom · Meridian Spire lobby, Lumen City (185) | ★ · 24 | Walk a form through nine offices. The form is to cancel the form. **Twist:** Each office wants a different stamp first (circular dependency the player has to break by noticing office 4 has two doors). When the form is finally cancelled, it cancels itself out of existence. What's left on the desk is a Porygon, who was the form all along. | Porygon Lv 24 (DOWNLOAD); +3 pts | 15_COMEDY Zenith bit 'Customer Support' | designed |
-| **The Machine Wants Compliments** `ZE_FIZZBOLT` | 5 | `badges >= 3` | a Fizzbolt vending machine · Lumen City Concourse (180) | ★ · 24 | A Lumen vending machine has gained sentience from the free current and only sells Fizzbolt to people who compliment it. **Twist:** Five compliments across five visits; each needs a fresh one (choice lists rotate). Repeat a compliment and it sulks for a day. On the fifth it dispenses everything at once and a Rotom flies out to thank you, then back in. | CELLBATTERY; +2 pts | none | designed |
+| **The Machine Wants Compliments** `ZE_FIZZBOLT` | 5 | `badges >= 3` | a Fizzbolt vending machine · Lumen City Concourse (180) | ★ · 24 | A Lumen vending machine has gained sentience from the free current and only sells Fizzbolt to people who compliment it. | SODAPOP x6, CELLBATTERY; +2 pts | none (15_COMEDY: the vending quest); the free current's Rotom, one more of Lumen's | wired |
+| **Customer Support** `ZE_CUSTOMER_SUPPORT` | 5 | `badges >= 3` | Helpdesk Rotom · Meridian Spire lobby, Lumen City (185) | ★ · 24 | Walk a form through the Spire's three lobby desks. The form is to cancel the form. | Porygon Lv 24 (DOWNLOAD); +3 pts | 15_COMEDY Zenith bit 'Customer Support' | wired |
 | **Product Recall** `ZE_ROTOM_RECALL` | 5 | `badges >= 3` | the Lumen Arcade floor manager · Lumen Arcade Dept. Store (183) | ★★ · 26 | Five display appliances have walked off the shop floor. They were not supposed to be able to walk. **Twist:** A hide-and-seek in the department store; each appliance (fan, mower, fridge, washer, oven) dashes between counters when you look away. Reward: a voucher the Sluiceworks Rotom can use to change form at the Arcade. | EXPCANDYM x2; +3 pts | Teaches Rotom forms before the Sluiceworks Rotom | designed |
 | **Ten Years of Light** `ZE_LOWLIGHT_LAMPS` | 6 | `switch(114)` | a Lowlight lamp-tender · the Lowlight (Shattered) (608) | ★★ · 28 | After the Shatter, someone has been lighting small lamps at the feet of the glassed people. Nobody admits to it. **Twist:** It's Dex's Pichu, who escaped the Shatter and has been carrying spark-lamps to every glassed figure, starting with his. If you sit by the shrine it comes to you. No battle; it chooses you. It knows Volt Tackle. | Pichu "Spark" Lv 25 (LIGHTNINGROD); +3 pts | Dex shrine (S164); Homecoming foreshadowing | designed |
 | **Cut Loose** `ZE_COURIER` | 12 | `badges >= 10` | a pilot at the anchor-smithy · Anchorhold (730) | ★★★ · 52 | Deliver a sealed key-ring to an airship before the embargo inspectors board. The key-ring jingles by itself. **Twist:** The key-ring is a Klefki carrying the airship's ignition keys. Give it up and Meridian thanks you; hide it in your bag and the ship cuts loose, and the Klefki, having nobody left to hold keys for, holds yours. | Klefki Lv 50 (PRANKSTER); +4 pts | Meridian standing (handing it to the inspectors) vs the smugglers (WORLD 'Cut Loose') | designed |
@@ -123,7 +128,7 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
-| **The Noon Bell** `OS_OCTAVE_NOON_BELL` | 6 | `badges >= 4` | Sona of the Octave · the Temple of the Noon Sun, outside Duneholt (new map, off Sunbleach Flats 613) (215) | ★ · 30 | Clay tablet: the old sun temple's light-shaft has filled with sand. Its keeper needs diggers. Its keeper says she knew you'd read this. | $1500, SUNSTONE; +3 pts | The Octave: Sona (4 of 8 in gym order) | wired |
+| **The Noon Bell** `OS_OCTAVE_NOON_BELL` | 6 | `badges >= 4` | Sona of the Octave · the Temple of the Noon Sun, outside Duneholt (new map 606, off Sunbleach Flats 613; 215 is the Gym 5 Mastery) (606) | ★ · 30 | Clay tablet: the old sun temple's light-shaft has filled with sand. Its keeper needs diggers. Its keeper says she knew you'd read this. | $1500, SUNSTONE; +3 pts | The Octave: Sona (4 of 8 in gym order) | wired |
 | **Kevin** `OS_KEVIN` | 6 | `badges >= 4` | the Dig Lab interns · the Dig Lab, Duneholt (209) | ★ · 29 | The interns revived a fossil they can't identify. They call it Kevin. Kevin is a rock. Kevin is in the staff photo. **Twist:** Three tests (light, sound, being talked to kindly) over three visits. On the third Kevin turns out to be a Carbink that was asleep, and it has been listening to the interns' gossip for a month. It knows everything. | Carbink "Kevin" Lv 28 (STURDY); +2 pts | 15_COMEDY Ossaria bit | designed |
 | **The Riddle Trader** `OS_RIDDLE_CARAVAN` | 6 | `badges >= 4` | a caravan trader · Copperdune caravanserai (610) | ★ · 27 | A caravan trader only barters in riddles. She doesn't know the answers either. She wants you to find them. **Twist:** The riddles have real answers hidden in Copperdune (a buried locomotive, a mural, a Sandile who only comes out at noon). When you give her the third answer she says 'Oh! I always thought it was a goat,' and pays you in a Trapinch. | Trapinch Lv 27 (SHEERFORCE); +2 pts | 15_COMEDY Ossaria bit | designed |
 | **Tomb Freight** `OS_TOMB_FREIGHT` | 6 | `badges >= 4` | the freight-depot foreman · Copperdune (610) | ★★ · 30 | A locked railway car bound for Lumen is heavier than its manifest. Meridian says machine parts. The tomb-guild says grave goods. **Twist:** Stealth into the depot at night; the car holds an Elector's sarcophagus with an Unown inscription that names the Prismfall. | $3500; +3 pts | Meridian vs Ossarian Electors (WORLD 'Tomb Freight'); Prince-Elector Kassan | designed |
@@ -1336,6 +1341,254 @@ A gilt-edged lantern: 'ONE NIGHT ONLY. THE PLAYHOUSE REQUIRES A STAR. - D.P.'
 - [quest complete]
 - **Dorian** _(happy)_: Bow, darling. Always bow. They remember the bow.
 
+#### Two Unlisted (`EL_STOWAWAYS`)
+
+*Chapter 0 · the woman with the crate, the deck of the Dovetail (the last ferry) (map 109) · rank 1 · 2 points · unlock ``*
+
+On the last ferry, a passenger's crate squeaks. Twice. In harmony. She would be grateful if nobody mentioned it to customs.
+
+**Quest log steps:** `landed`: Find the woman with the crate in Ferrow's Landing, once you have a Pokemon of your own. · `find`: Her crate came open at the customs gate. Two mice are loose somewhere warm in the Quarantine Customs Hall. · `return`: Bring the mice back to the woman with the crate, by the Ferrow's Landing quay.
+
+**Reward:** ORANBERRY x2; +2 pts. **Touches:** the Prologue's NULL scan: the crate went through the gate with you, and the gate saw nothing in either.
+
+**Scene `offer`** (event: `pf_quest_run(:EL_STOWAWAYS, :offer)`)
+
+- [stage] A woman sits on a crate by the rail, holding the lid down with both hands. The crate squeaks.
+- **Woman with crate** _(neutral)_: Tea service. My sister's. It's settling.
+- *The crate squeaks again. Twice. In harmony.*
+- **CHOICE:** Tea services don't squeak.
+  - > Tea services don't squeak.
+    - **Woman with crate** _(sad)_: ...Two mice. They got into it in port, over there. Abroad. They were in the crate before I was.
+    - **Woman with crate** _(neutral)_: The Landing scans everyone now. Anything without papers goes back on the boat, and after tonight the boat doesn't come back.
+    - **Woman with crate** _(neutral)_: So they're a tea service. Just till Saltmere. You didn't hear anything.
+    - [quest accepted]
+    - *(Your bag gives a small squeak of its own. No. That was the crate.)*
+  - > (Say nothing.)
+    - *You say nothing. She looks at you for a long moment, then pats the crate.*
+    - **Woman with crate** _(happy)_: Good. You'll do well here. Velmora's mostly things nobody mentions.
+    - [quest accepted]
+
+**Scene `landed`** (event: `pf_quest_run(:EL_STOWAWAYS, :landed)`)
+
+- **Woman with crate** _(sad)_: You! From the ferry. They've gone.
+- **Woman with crate** _(neutral)_: I went through the gate with the crate under my arm, and it went 'Blank, Saltmere', lovely, and then the little girl's Wingull went BING and flapped off and I jumped and the lid came off.
+- **Woman with crate** _(neutral)_: Two mice, straight under the customs desk. Nobody saw. The gate didn't see. It didn't see you either, I heard. Funny gate.
+- **Woman with crate** _(sad)_: I can't go in there and ask for them back. I'd have to fill in a form saying they exist.
+- [quest step: find]
+
+**Scene `mice`** (event: `pf_quest_run(:EL_STOWAWAYS, :mice)`)
+
+- [stage] Under the kiosk, against the slats of Crate 7-B, two small mice are curled up together, warming their paws on whatever is inside it.
+- *The two small flames in Crate 7-B lean toward them, the way you'd lean toward a friend. It's the warmest place in the building.*
+- **CHOICE:** The mice?
+  - > Scoop them up.
+    - *They don't run. They climb into your sleeve together, as if they've done it before, and stay very still past the customs officer.*
+    - [quest step: return]
+  - > Leave them by the crate for now.
+    - *The mice tuck their tails round each other. They're in no hurry.*
+
+**Scene `return`** (event: `pf_quest_run(:EL_STOWAWAYS, :return)`)
+
+- *The mice tumble out of your sleeve and run straight up the woman's coat.*
+- **Woman with crate** _(happy)_: There you are! Oh, you horrible things. You stink of customs.
+- **Woman with crate** _(neutral)_: ...The Saltmere Harbour Office has one of those machines too. Penny, it's called. It counts everything that comes in.
+- **Woman with crate** _(sad)_: I can't keep them. They're unlisted. They'd go back.
+- **Woman with crate** _(neutral)_: You're unlisted too, I hear. NULL. So nobody's counting you. Take them. They've already picked you; they were in your sleeve before you asked.
+- [receive Tandemaus "Plus-One" Lv 6 (PICKUP)]
+- **Woman with crate** _(happy)_: Two of them, one Poke Ball. They say that's how this kind works. Don't ask me. I'm a tea service.
+- [quest complete]
+
+#### The Crown in the Sand (`EL_SAND_CROWN`)
+
+*Chapter 2 · the sand-sculptor, the sand Crown on Marram Down (map 528) · rank 1 · 3 points · unlock `badges >= 1 && switch(108)`*
+
+Since the Pageant went grey, someone walks out from Saltmere and kicks down the sand Crown on Marram Down every night. Every morning it's back, taller. The sculptor didn't rebuild it.
+
+**Quest log steps:** `ask`: Watch the sand Crown on Marram Down after dark. · `report`: Tell the sand-sculptor what has been rebuilding her Crown.
+
+**Reward:** TM54; centrepiece: STARDUST x2, RES+1; +3 pts. **Touches:** the Pageant hijack (Ch2 key event): Saltmere's anger at the Sovereign; Resonance (Harmony +1 if you leave the Sandygast to be the Crown).
+
+**Scene `offer`** (event: `pf_quest_run(:EL_SAND_CROWN, :offer)`)
+
+- **Sand-sculptor** _(angry)_: Every night since the Pageant, somebody walks out from Saltmere and kicks my Crown in.
+- **Sand-sculptor** _(neutral)_: 'Ask your Sovereign!' they shout. As if the Sovereign's ever been to Marram Down. As if he'd notice a sand Crown.
+- **Sand-sculptor** _(worried)_: And every morning it's back. Taller. I didn't rebuild it. I've been sleeping in the wagon with a shovel.
+- **Sand-sculptor** _(deadpan)_: Something ate the shovel.
+- **CHOICE:** Watch the Crown tonight?
+  - > I'll watch it.
+    - [quest accepted]
+    - **Sand-sculptor** _(happy)_: After dark, then. Bring something that isn't a shovel.
+  - > Not now.
+    - **Sand-sculptor** _(neutral)_: Then it's me and the wagon again. And no shovel.
+
+**Scene `crown`** (event: `pf_quest_run(:EL_SAND_CROWN, :crown)`)
+
+- [if `!night`]
+  - *In daylight it's just a very good sand Crown, as tall as you, with a chipped stone in the middle. The sand is warm.*
+  - *(The sculptor asked you to watch it after dark.)*
+  - [end scene]
+- [stage] Moonlight on the dunes. Footsteps on the Saltmere road: a man in a Pageant-goer's good coat, red in the face.
+- **Pageant-goer** _(angry)_: Ask your Sovereign! ASK HIM! Three hundred years of--
+- *He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.*
+- **Pageant-goer** _(shocked)_: It's got me! The Crown's got me! I take it back! Long live the Sovereign!
+- *The sand lets go. He runs all the way back to Saltmere with one boot.*
+- *Then the Crown turns round to look at you. There's a shovel handle sticking out of the top of it.*
+- [battle] Sandygast "Crown" Lv 20 (WATERCOMPACTION)
+  - on caught:
+    - [continue: after]
+  - on won:
+    - [continue: after]
+  - on lost:
+    - *The Crown slumps into an ordinary heap of sand. By morning it'll be taller.*
+
+**Scene `after`** (event: `pf_quest_run(:EL_SAND_CROWN, :after)`)
+
+- *The Sandygast sags into a smaller, rounder heap. Pressed into its sand is a brass letter from a ship's name-board: a W, from THE WANDERING CHORUS, the theatre barge buried in the dunes.*
+- *It isn't a crown. It's a stage set made of an old stage, and it's lonely for an audience.*
+- **CHOICE:** What do you do?
+  - > Take it with you.
+    - *The Sandygast gathers itself up and follows you, leaving a neat trail.*
+    - [Sandygast "Crown" Lv 20 (WATERCOMPACTION) joins]
+    - [quest step: report]
+  - > Leave it to be the Crown.
+    - *You pat the sand smooth. It rebuilds itself, a little taller, and settles in to be looked at.*
+    - [quest step: report]
+
+**Scene `report`** (event: `pf_quest_run(:EL_SAND_CROWN, :report)`)
+
+- [if `quest_flag(:SELF, :centrepiece)`]
+  - **Sand-sculptor** _(shocked)_: It's a Sandygast? My Crown is a Sandygast? It bites hecklers?
+  - **Sand-sculptor** _(happy)_: A Crown that rebuilds itself and bites anyone who kicks it. The free port is going to LOVE that.
+  - *(By morning she's charging a penny a look.)*
+  - **Sand-sculptor** _(neutral)_: Here. I won this in a raffle. 'False Swipe'. I tried it on sand. It doesn't work on sand.
+  - [quest complete: centrepiece]
+- [else]
+  - **Sand-sculptor** _(shocked)_: A Sandygast. My Crown was a Sandygast. And now it's yours.
+  - **Sand-sculptor** _(neutral)_: Well. It had better taste than the people kicking it. I'll build another. A smaller one. With a fence.
+  - **Sand-sculptor** _(neutral)_: Take this. I won it in a raffle. 'False Swipe'. I tried it on sand. It doesn't work on sand.
+  - [quest complete: took]
+
+#### The Note Under the Glass (`EL_MATRIARCH_HUM`)
+
+*Chapter 3 · Mother Aldreth, the Briarwick Lantern House (map 126) · rank 1 · 3 points · unlock `switch(107)`*
+
+Since the Glass Matriarch fell, Mother Aldreth's lantern-loom hums at night. One note, from the direction of Cocoonfall Hollow.
+
+**Quest log steps:** `ask`: Find what is humming in Cocoonfall Hollow. · `wait`: A small glass cocoon by the Matriarch's nest hums one note under your badge case's chord. It is waiting for a third note (Badge 3).
+
+**Reward:** EXPCANDYM x2; +3 pts. **Touches:** the Glass Matriarch (Ch3 key event) and :ch2_matriarch: a soothed Matriarch's last cocoon hatches to you; a silenced one's is afraid of you.
+
+**Scene `offer`** (event: `pf_quest_run(:EL_MATRIARCH_HUM, :offer)`)
+
+- **Mother Aldreth** _(neutral)_: You went into the Hollow and came out. The wood is quieter. The moths are eating again.
+- **Mother Aldreth** _(neutral)_: But my loom hums at night now. One note. Lower than the looms, higher than the wind.
+- **Mother Aldreth** _(neutral)_: It comes from the Hollow. Something the Matriarch left. Go and listen, and don't touch what you don't understand.
+- **Mother Aldreth** _(deadpan)_: Which is everything, at your age. Touch it anyway. You will.
+- **CHOICE:** Go and listen?
+  - > I'll listen.
+    - [quest accepted]
+  - > Not now.
+    - **Mother Aldreth** _(neutral)_: It will still be humming. Things that hum are patient.
+
+**Scene `cocoon`** (event: `pf_quest_run(:EL_MATRIARCH_HUM, :cocoon)`)
+
+- [if `quest_step(:SELF) == :ask`]
+  - [stage] Among the Matriarch's glass cocoons, one is smaller than the others, and warm. It hums.
+  - *You hold your badge case near it. The case answers with its own chord: the Footlight's note and the Weft's.*
+  - *The cocoon's note sits just under them, patient, as if it's waiting for a third.*
+- [if `badges >= 3`]
+  - [continue: hatch]
+- [else]
+  - [if `quest_step(:SELF) == :wait`]
+    - *The little cocoon hums under the glass. Your case has two notes. It wants three.*
+  - [quest step: wait]
+
+**Scene `hatch`** (event: `pf_quest_run(:EL_MATRIARCH_HUM, :hatch)`)
+
+- *Your badge case sounds three notes together: the Footlight, the Weft, and the new one from Ebbmouth. The cocoon's hum climbs to meet them.*
+- *The glass cracks like ice on a pond. A Joltik tumbles out, fizzing, and looks up at you with four bright eyes.*
+- [if `choice(:ch2_matriarch) == :soothe`]
+  - *It remembers you. You sat with its mother all night while she calmed.*
+  - *It climbs your sleeve and settles in your collar, humming in tune with the case.*
+  - [receive Joltik Lv 22 (COMPOUNDEYES)]
+  - [quest complete: soothed]
+- [else]
+  - *It sees your hand, and the static goes out of its fur. It remembers the hand that emptied its mother.*
+  - *It bares its mandibles, and every hair stands up.*
+  - [battle] Joltik Lv 22 (COMPOUNDEYES)
+    - on caught:
+      - *It goes quiet in the ball. Maybe it will hum again, one day.*
+      - [quest complete: silenced]
+    - on won:
+      - *It skitters back into the shards of its cocoon. Come back. It can't stay angry for ever, and neither can glass.*
+    - on lost:
+      - *It sparks once, triumphant, and hides in the shards of its cocoon.*
+
+#### Someone Apologising to Bugs (`EL_SHELLY`)
+
+*Chapter 3 · Mother Aldreth, the Briarwick Lantern House (map 120) · rank 2 · 3 points · unlock `badges >= 2`*
+
+A stranger with pink hair is lost in the Gossamer Deepwood, apologising to the Bug Pokemon. The spirits of the wood are uneasy.
+
+**Quest log steps:** `ask`: Find the lost stranger in the Gossamer Deepwood, past the Cut tree, and help her home.
+
+**Reward:** +3 pts. **Touches:** Ledger cameo record (FESTIVAL_SHELLY); CAMEOS.md #1. Her Deepwood event gives Silver Powder and her TM; the quest completes when she is beaten (CAMEO_QUESTS, the :prismfall_cameo_beaten handler).
+
+**Scene `offer`** (event: `pf_quest_run(:EL_SHELLY, :offer)`)
+
+- **Mother Aldreth** _(neutral)_: There's a girl in the Deepwood who apologises to the Bugs. All of them. One at a time.
+- **Mother Aldreth** _(neutral)_: She isn't from here. She isn't from anywhere I can hear. The wood keeps re-weaving the paths round her, to keep her, I think. It likes being apologised to.
+- **Mother Aldreth** _(deadpan)_: Go and fetch her before it decides she's a moth.
+- **CHOICE:** Find the stranger?
+  - > I'll find her.
+    - [quest accepted]
+  - > Not now.
+
+#### Bracken Comes In (`EL_DROVERS_BELL`)
+
+*Chapter 4 · the old drover, the Wolfsrime, by the cold kiln (map 579) · rank 1 · 2 points · unlock `badges >= 2`*
+
+Every autumn the old drover's da rang the bell on the Wolfsrime to call his dog in off the fell. The last autumn, Bracken never came. Something still answers the bell.
+
+**Quest log steps:** `ask`: Ring the drover's bell up the Wolfsrime and follow whatever answers it. · `return`: Bring Bracken down to the old drover by the cold kiln.
+
+**Reward:** TM65; +2 pts (+1 The Tally). **Touches:** borderland (Elowen + Isenmar points); the Wolfsrime's den and bell (map builder 14's lines).
+
+**Scene `offer`** (event: `pf_quest_run(:EL_DROVERS_BELL, :offer)`)
+
+- **Old drover** _(neutral)_: My da drove sheep down this road every autumn. Bracken did the work. Da walked behind and took the credit.
+- **Old drover** _(sad)_: The year they blazed the North Gate road, Bracken went up the fell for a stray and never came down. Wolves, Da said. He rang that bell every night till the snow came.
+- **Old drover** _(neutral)_: I ring it, some years. Can't get up there now, with these knees. Something answers. The boy says wolves.
+- **Old drover** _(deadpan)_: Wolves don't answer bells. Dogs do.
+- **CHOICE:** Ring the bell for him?
+  - > I'll ring it.
+    - [quest accepted]
+    - **Old drover** _(neutral)_: Up the road, on the birch past the clawed one. Ring it, then follow your ears. Bracken always came the long way.
+  - > Not now.
+    - **Old drover** _(neutral)_: No hurry. Fifty years. What's another one.
+
+**Scene `den`** (event: `pf_quest_run(:EL_DROVERS_BELL, :den)`)
+
+- [stage] In the hollow under the fallen giant, among the old bones, something grey and dog-shaped is digging. It looks up, ears high, tail going.
+- *It's a Greavard. Round its neck is a drover's collar with a brass tag, green with age: BRACKEN.*
+- *It drops an old bone at your feet, backs off two steps, and crouches. It wants to play.*
+- [battle] Greavard "Bracken" Lv 20 (FLUFFY)
+  - on caught:
+    - *Bracken's tail thumps against the inside of the ball.*
+    - [quest step: return]
+  - on won:
+    - *Bracken bounds off into the birches, delighted, and comes straight back with the bone. It wants to go again.*
+  - on lost:
+    - *Bracken licks your face and trots back into its den. It isn't tired. It has never once been tired.*
+
+**Scene `return`** (event: `pf_quest_run(:EL_DROVERS_BELL, :return)`)
+
+- *Bracken sits down at the old man's feet, the way it must have sat at his father's.*
+- **Old drover** _(shocked)_: ...That's his collar. That's Da's knot on it.
+- **Old drover** _(sad)_: He came in. Took him fifty years, but he came in.
+- **Old drover** _(neutral)_: Take him down the Pass. He always liked the Pass. And take this. It was Da's. He kept it for the wolves. Never once hit one.
+- [quest complete]
+
 ### The Tally
 
 #### Two Hearths, One Pot (`IS_TWO_HEARTHS`)
@@ -1697,6 +1950,61 @@ A Kangaskhan the size of a hut has taken the Frostflat Causeway.
   - > Wait for the tide.
     - *The young ones splash. The Matriarch doesn't move.*
 
+#### The Names in Holmsby (`IS_EBB_HOLLOW`)
+
+*Chapter 5 · the fisher at the Veil, the Bleed Veil on the Reedholms' south bank (map 580) · rank 1 · 3 points · unlock `badges >= 3`*
+
+In AF 296 the Ebb lifted itself off its bed over Holmsby and never put itself down. Everyone walked out under it. Their names are still cut on the village's boundary stones, under the Bleed, and the Tally has never counted them.
+
+**Quest log steps:** `ask`: Walk into Ebb Hollow (only you can) and read the names off Holmsby's boundary stones. · `coral`: The last stone is by the old eel-weir, under something white. · `return`: Bring the names back to the fisher at the Veil.
+
+**Reward:** EXPCANDYM x2, BIGPEARL; +3 pts. **Touches:** the Bleed's reach (Ch5's key event is the Lowlight's wound; this is an old scar of the same kind); the Tally Mast at Ebbmouth.
+
+**Scene `offer`** (event: `pf_quest_run(:IS_EBB_HOLLOW, :offer)`)
+
+- **Fisher at the Veil** _(neutral)_: Holmsby. The Ebb took it in AF 296. Didn't flood it. Lifted the river clean off its bed and left it hanging.
+- **Fisher at the Veil** _(neutral)_: We all walked out under it. Every soul. Bersi made a song of it, the liar. He gave us a whale.
+- **Fisher at the Veil** _(sad)_: But we left the names. Every family in Holmsby cuts its name on a boundary stone, and the stones are in there, under all that water. The Tally's never counted us.
+- **Fisher at the Veil** _(neutral)_: ...They say you can walk in. Read me the names, and I'll have them cut on the Tally Mast at Ebbmouth. So the sea keeps count.
+- **CHOICE:** Read the names?
+  - > I'll go in.
+    - [quest accepted]
+  - > Not now.
+    - **Fisher at the Veil** _(neutral)_: The stones aren't going anywhere. That's rather the problem.
+
+**Scene `stone`** (event: `pf_quest_run(:IS_EBB_HOLLOW, :stone)`)
+
+- [if `quest_count(:SELF, :stones) >= 2`]
+  - *A boundary stone, perfectly dry under a hanging drop of river. Names cut deep, then cut again, smaller, by children: SKARD. VEN. THE VEN TWINS. BOTH OF THEM.*
+  - *Two stones read. The fisher said three. By the old eel-weir, something white is growing over the last one.*
+  - [quest step: coral]
+- [else]
+  - *A boundary stone, perfectly dry. A trout drifts past it at head height, asleep. You read the names out loud, because it seems rude not to: ORM. LITTLE ORM. ORM'S DOG.*
+
+**Scene `coral`** (event: `pf_quest_run(:IS_EBB_HOLLOW, :coral)`)
+
+- [stage] By the old eel-weir, under a drop of river the size of a house, coral has grown out of fresh water, white as bone. It moves.
+- *A Corsola, bleached white by the Bleed, has wrapped itself round the last stone. It isn't guarding it. It's holding on.*
+- [battle] Corsola Lv 24 (CURSEDBODY)
+  - on caught:
+    - [continue: names]
+  - on won:
+    - [continue: names]
+  - on lost:
+    - *The white coral tightens round the stone. It isn't letting go yet.*
+
+**Scene `names`** (event: `pf_quest_run(:IS_EBB_HOLLOW, :names)`)
+
+- *The last stone is clear. Its names are the oldest: HALDIS. BRENNA. And under them, in chalk that should have washed off years ago and didn't: WE'LL BE BACK SATERDAY.*
+- [quest step: return]
+
+**Scene `return`** (event: `pf_quest_run(:IS_EBB_HOLLOW, :return)`)
+
+- **Fisher at the Veil** _(sad)_: ...Saterday. That's my niece. She chalked it on number nine as well. She still spells it like that, to annoy her mother.
+- **Fisher at the Veil** _(neutral)_: I'll take the names up to Bersi at the Net Loft myself. You've done the walking.
+- **Fisher at the Veil** _(happy)_: He'll make it rhyme. He'll make the river forty feet high and give it teeth. Let him. As long as the names are right.
+- [quest complete]
+
 ### The Prize Exchange
 
 #### Form 7-B (`ZE_FORM_7B`)
@@ -1930,6 +2238,16 @@ CALL FOR PROPOSALS #0031: NOISE COMPLIANCE, LOWLIGHT BLOCK 9. A STREET DRUMMER'S
 
 - **Cadence** _(neutral)_: Snare still drums. The lamps don't. Best of both.
 
+**Scene `after_shatter`** (event: `pf_quest_run(:ZE_OCTAVE_OFF_BEAT, :after_shatter)`)
+
+- [stage] The Concourse, after the Shatter. Cadence sits on an upturned paint tin by the lift-grilles, not drumming. Her Jolteon lies across her feet.
+- **Cadence** _(sad)_: Block 9's dark now. All of it. The junctions went to glass with everything else.
+- **Cadence** _(neutral)_: Snare hasn't sparked since that night. I want to hear it go flat out once, somewhere the lights can take it.
+- [if `!quest_active(:SELF)`]
+  - [quest accepted]
+- [quest step: duel]
+- [continue: duel]
+
 #### Return to Sender (`ZE_RETURN_TO_SENDER`)
 
 *Chapter 16 · Postmaster Halloran, Gale Post Hall, Skyreach (map 325) · rank 1 · 2 points · unlock `badges >= 14`*
@@ -1964,6 +2282,170 @@ CALL FOR PROPOSALS #0412: DEAD LETTERS, THREE (3). DELIVER BY HAND. PRIZE: ONE (
 - **Postmaster Halloran** _(happy)_: All three! The Post thanks you. The Post also owes you a drawer.
 - **Postmaster Halloran** _(neutral)_: In it: the heartstone the Post's first courier-bird wore. Odessa says it's wasted in a drawer. Odessa says that about most things in drawers.
 - **Postmaster Halloran** _(neutral)_: And a sliver of Choir glass someone posted in AF 290 and never collected. It crackles when the drawer opens. Take that too, before it shorts the franking machine.
+- [quest complete]
+
+#### The Machine Wants Compliments (`ZE_FIZZBOLT`)
+
+*Chapter 5 · a Fizzbolt vending machine, Lumen City Concourse (map 180) · rank 1 · 2 points · unlock `badges >= 3`*
+
+A Lumen vending machine has gained sentience from the free current and only sells Fizzbolt to people who compliment it.
+
+**Quest log steps:** `ask`: Pay the Fizzbolt machine five different compliments. It knows when you've said one before.
+
+**Reward:** SODAPOP x6, CELLBATTERY; +2 pts. **Touches:** none (15_COMEDY: the vending quest); the free current's Rotom, one more of Lumen's.
+
+**Scene `offer`** (event: `pf_quest_run(:ZE_FIZZBOLT, :offer)`)
+
+- [stage] A brass-and-glass Fizzbolt machine on the Concourse, with a Rotom-shaped dent in the glass. A card is taped beside the coin slot.
+- *The card reads: THIS UNIT IS UNDER OBSERVATION. PLEASE DO NOT ENCOURAGE IT. - MERIDIAN VENDING.*
+- **Fizzbolt machine** _(sad)_: Coins. Coins, coins, coins. Nobody ever says anything NICE.
+- **CHOICE:** The machine is waiting.
+  - > Say something nice.
+    - [quest accepted]
+    - [continue: compliment]
+  - > Walk on.
+    - **Fizzbolt machine** _(sad)_: ...Nobody ever stays, either.
+
+**Scene `compliment`** (event: `pf_quest_run(:ZE_FIZZBOLT, :compliment)`)
+
+- [if `quest_flag(:SELF, :sulking)`]
+  - *The machine's lights are off. It's facing the wall. As much as a vending machine can face anything.*
+  - *...After a while, one light flickers back on. It has decided to forgive you. Once.*
+  - [end scene]
+- **CHOICE:** **Fizzbolt machine**: Well? Go on.
+  - > Your glass is very clean.
+    - [if `quest_flag(:SELF, :c1)`]
+      - [continue: sulk]
+    - [else]
+      - [continue: nice]
+  - > You hum in a lovely key.
+    - [if `quest_flag(:SELF, :c2)`]
+      - [continue: sulk]
+    - [else]
+      - [continue: nice]
+  - > Best machine on the Concourse.
+    - [if `quest_flag(:SELF, :c3)`]
+      - [continue: sulk]
+    - [else]
+      - [continue: nice]
+  - > Your buttons are lovely to press.
+    - [if `quest_flag(:SELF, :c4)`]
+      - [continue: sulk]
+    - [else]
+      - [continue: nice]
+  - > I like your little dent.
+    - [if `quest_flag(:SELF, :c5)`]
+      - [continue: sulk]
+    - [else]
+      - [continue: nice]
+  - > You're brave, standing out here all day.
+    - [if `quest_flag(:SELF, :c6)`]
+      - [continue: sulk]
+    - [else]
+      - [continue: nice]
+
+**Scene `nice`** (event: `pf_quest_run(:ZE_FIZZBOLT, :nice)`)
+
+- [if `quest_count(:SELF, :nice) >= 5`]
+  - [continue: jackpot]
+  - [end scene]
+- [if `quest_count(:SELF, :nice) == 1`]
+  - **Fizzbolt machine** _(shocked)_: ...Oh. Oh. Say that again. No, don't. I'll remember it.
+- [if `quest_count(:SELF, :nice) == 2`]
+  - **Fizzbolt machine** _(happy)_: Two! Two nice things! I'm going to tell the ticket machine. It's going to be SO jealous.
+- [if `quest_count(:SELF, :nice) == 3`]
+  - **Fizzbolt machine** _(happy)_: Three. I've had a Fizzbolt stuck in my chute since spring. I think it's coming loose.
+- [if `quest_count(:SELF, :nice) == 4`]
+  - **Fizzbolt machine** _(neutral)_: Four. One more and I don't know what I'll do. Something unprofessional.
+- *(Come back and say something else. It will want a new one.)*
+
+**Scene `sulk`** (event: `pf_quest_run(:ZE_FIZZBOLT, :sulk)`)
+
+- **Fizzbolt machine** _(angry)_: You SAID that. You said that ALREADY.
+- *Every light on the machine goes out. It's sulking.*
+
+**Scene `jackpot`** (event: `pf_quest_run(:ZE_FIZZBOLT, :jackpot)`)
+
+- **Fizzbolt machine** _(happy)_: FIVE.
+- *The machine shudders, rings like a till, and dispenses everything it has at once. Fizzbolt rolls across the Concourse in every direction.*
+- *A Rotom shoots out of the dent in the glass, does a lap of the Concourse, high-fives a streetlamp, and dives back in.*
+- **Fizzbolt machine** _(happy)_: Take them. Take them all. And this, it was rattling about in my coin box. I don't know what it is. I don't care. I'm LOVED.
+- [quest complete]
+
+#### Customer Support (`ZE_CUSTOMER_SUPPORT`)
+
+*Chapter 5 · Helpdesk Rotom, Meridian Spire lobby, Lumen City (map 185) · rank 1 · 3 points · unlock `badges >= 3`*
+
+Walk a form through the Spire's three lobby desks. The form is to cancel the form.
+
+**Quest log steps:** `ask`: Get Form 0 (Cancellation of Form 0) stamped at Records, Approvals and Compliance. · `return`: Every desk has stamped it. Take Form 0 back to the helpdesk.
+
+**Reward:** Porygon Lv 24 (DOWNLOAD); +3 pts. **Touches:** 15_COMEDY Zenith bit 'Customer Support'.
+
+**Scene `offer`** (event: `pf_quest_run(:ZE_CUSTOMER_SUPPORT, :offer)`)
+
+- [stage] The helpdesk in the Spire lobby: a brass console with a Rotom living in its screen, wearing a headset it has no ears for.
+- **Helpdesk Rotom** _(happy)_: THANK YOU FOR CONTACTING MERIDIAN. YOUR CALL IS IMPORTANT TO US. YOU ARE CALLER NUMBER ONE. YOU HAVE ALWAYS BEEN CALLER NUMBER ONE.
+- **Helpdesk Rotom** _(neutral)_: I HAVE A FORM I WOULD LIKE TO CANCEL. IT IS FORM 0. FORM 0 IS THE FORM FOR CANCELLING FORMS.
+- **Helpdesk Rotom** _(sad)_: IT NEEDS THREE STAMPS: RECORDS, APPROVALS AND COMPLIANCE. I CANNOT LEAVE THE DESK. I AM THE DESK.
+- **CHOICE:** Take Form 0?
+  - > I'll walk it round.
+    - [quest accepted]
+    - **Helpdesk Rotom** _(happy)_: THANK YOU. PLEASE RATE YOUR EXPERIENCE. NOT YET. LATER. I GET AHEAD OF MYSELF.
+  - > Not now.
+    - **Helpdesk Rotom** _(neutral)_: YOUR CALL HAS BEEN PLACED IN A QUEUE. YOU ARE STILL NUMBER ONE.
+
+**Scene `records`** (event: `pf_quest_run(:ZE_CUSTOMER_SUPPORT, :records)`)
+
+- [if `quest_flag(:SELF, :records)`]
+  - *(Records has stamped it. The clerk is pretending not to see you, in case you have another form.)*
+  - [end scene]
+- [if `quest_flag(:SELF, :approvals)`]
+  - **Records clerk** _(neutral)_: Approved? Approved. Then it can be recorded. RECORDED.
+  - *(Thunk.)*
+  - [continue: check]
+- [else]
+  - **Records clerk** _(deadpan)_: I can't record a form that hasn't been approved. That would be a record of nothing. Approvals, next desk.
+
+**Scene `approvals`** (event: `pf_quest_run(:ZE_CUSTOMER_SUPPORT, :approvals)`)
+
+- [if `quest_flag(:SELF, :approvals)`]
+  - *(Approvals has stamped it. The clerk gives you a thumbs-up without looking.)*
+  - [end scene]
+- [if `quest_flag(:SELF, :compliance)`]
+  - **Approvals clerk** _(happy)_: Compliant! Then it's approved. Lovely. I love it when things are approved.
+  - *(Thunk.)*
+  - [continue: check]
+- [else]
+  - **Approvals clerk** _(neutral)_: I can't approve something that might not comply. Compliance, end desk, two windows.
+
+**Scene `compliance`** (event: `pf_quest_run(:ZE_CUSTOMER_SUPPORT, :compliance)`)
+
+- [if `quest_flag(:SELF, :compliance)`]
+  - *(Compliance has stamped it, at the second window.)*
+  - [end scene]
+- **CHOICE:** The Compliance desk has two windows. One says COMPLIANCE. The other says CANCELLATIONS OF CANCELLATIONS.
+  - > Window one: Compliance.
+    - **Compliance clerk** _(deadpan)_: Has it been recorded? I can't check a form for compliance unless there's a record of it. Records. Other end.
+  - > Window two: Cancellations of Cancellations.
+    - *The same clerk slides along to the second window, puts on a different hat, and clears her throat.*
+    - **Compliance clerk** _(neutral)_: A cancellation of a cancellation form? Those need no stamps at all. That's the point of them. Nobody ever comes to this window.
+    - **Compliance clerk** _(happy)_: Different window, different rules. Stamped. Compliant. Don't tell the other window.
+    - *(Thunk.)*
+    - [continue: check]
+
+**Scene `check`** (event: `pf_quest_run(:ZE_CUSTOMER_SUPPORT, :check)`)
+
+- [if `quest_flag(:SELF, :records) && quest_flag(:SELF, :approvals) && quest_flag(:SELF, :compliance)`]
+  - *Three stamps. Form 0 is complete. It is now the most legitimate piece of paper in Lumen.*
+  - [quest step: return]
+
+**Scene `return`** (event: `pf_quest_run(:ZE_CUSTOMER_SUPPORT, :return)`)
+
+- **Helpdesk Rotom** _(happy)_: THREE STAMPS. FORM 0 IS NOW CANCELLED. CANCELLING FORM 0 CANCELS FORM 0.
+- *The form folds itself in half. Then in half again. Then into a shape paper can't fold into, all corners, pink and blue, and it blinks at you.*
+- **Helpdesk Rotom** _(shocked)_: OH. IT WAS A PORYGON. IT WAS A PORYGON THE WHOLE TIME. IT HAS BEEN IN THE SYSTEM SINCE AF 291.
+- **Helpdesk Rotom** _(neutral)_: IT IS NOT MERIDIAN PROPERTY. IT IS NOT ANY FORM. PLEASE TAKE IT. PLEASE RATE YOUR EXPERIENCE. NOW. NOW IS THE TIME.
 - [quest complete]
 
 ### The Gutter Book
@@ -2370,7 +2852,7 @@ WRIT OF THE BRAZIER: the Crucible keeps one heartstone for one who earns it with
 
 #### The Noon Bell (`OS_OCTAVE_NOON_BELL`)
 
-*Chapter 6 · Sona of the Octave, the Temple of the Noon Sun, outside Duneholt (new map, off Sunbleach Flats 613) (map 215) · rank 1 · 3 points · unlock `badges >= 4`*
+*Chapter 6 · Sona of the Octave, the Temple of the Noon Sun, outside Duneholt (new map 606, off Sunbleach Flats 613; 215 is the Gym 5 Mastery) (map 606) · rank 1 · 3 points · unlock `badges >= 4`*
 
 Clay tablet: the old sun temple's light-shaft has filled with sand. Its keeper needs diggers. Its keeper says she knew you'd read this.
 

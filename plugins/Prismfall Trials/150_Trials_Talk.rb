@@ -59,7 +59,8 @@ module Prismfall
       #--- The Strand Road: Lacecliff Walk (527) ----------------------------------------
       :DOBBS => { :rows => [[:EL_TIDE_POOL_FEUD, "quest_state(:SELF) == :available", :offer]],
                   :idle => "Dobbs is up to her knees in a rock pool, humming." },
-      :TIDE_POOL => { :rows => [[:EL_TIDE_POOL_FEUD, "quest_active(:SELF)", :pool]] },
+      :TIDE_POOL => { :rows => [[:EL_TIDE_POOL_FEUD, "quest_active(:SELF)", :pool]],
+                      :idle => "A Crabrawler and a Clobbopus circle a flat rock in the big pool, fists up. Neither of them notices you." },
       #--- Saltmere (140, 143, 145, 146, 147) --------------------------------------------
       :HOLLIN => { :board => :ELOWEN, :rows => [
         [:EL_LANTERNS, "quest_state(:SELF) == :available", :offer],

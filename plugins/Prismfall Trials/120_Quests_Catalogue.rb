@@ -13,14 +13,7 @@ stub = lambda { |id, h| tr.quest(id, h.merge(:stub => true, :board => h.fetch(:b
 #===============================================================================
 # ELOWEN - The Quiet Way (later)
 #===============================================================================
-stub.call(:EL_SHELLY, {
-  :trial => :ELOWEN, :title => "Someone Apologising to Bugs", :giver => "Mother Aldreth", :map => 120, :where => "the Briarwick Lantern House",
-  :rank => 2, :points => 3, :rec_level => 21, :chapter => 3, :unlock => "badges >= 2", :tags => [:cameo, :battle],
-  :summary => "A stranger with pink hair is lost in the Gossamer Deepwood, apologising to the Bug Pokemon. The spirits of the wood are uneasy.",
-  :steps => { :ask => "Find the lost stranger in Gossamer Deepwood.", :fight => "She wants a battle before she'll believe she's really here." },
-  :reward => { :items => [[:SILVERPOWDER, 1]] }, :touches => "Ledger cameo record (FESTIVAL_SHELLY); CAMEOS.md #1",
-  :design => "Board pointer to CAMEOS.md 'Lost in the Gossamer'. The cameo event calls Prismfall.cameo_battle(:FESTIVAL_SHELLY, \"Shelly\", 1, double: true) and then pf_quest_complete(:EL_SHELLY). Moved from 'after Gym 1' to 'after Gym 2' by SPINE Rev 14."
-})
+# EL_SHELLY ("Someone Apologising to Bugs") is wired since 2026-11-21: 116_Quests_Early.rb.
 stub.call(:EL_GERALD, {
   :trial => :ELOWEN, :title => "Gerald", :giver => "the Queen's Keeper of Small Creatures", :map => 682, :where => "the Royal Chase",
   :rank => 3, :points => 3, :rec_level => 44, :chapter => 10, :unlock => "badges >= 8 && switch(126)", :tags => [:chase, :comedy, :event_mon],
@@ -110,22 +103,8 @@ stub.call(:IS_SAGA_OF_THE_ICE, {
 #===============================================================================
 # ZENITH - The Prize Exchange (later)
 #===============================================================================
-stub.call(:ZE_CUSTOMER_SUPPORT, {
-  :trial => :ZENITH, :title => "Customer Support", :giver => "Helpdesk Rotom", :map => 185, :where => "Meridian Spire lobby, Lumen City",
-  :rank => 1, :points => 3, :rec_level => 24, :chapter => 5, :unlock => "badges >= 3", :tags => [:comedy, :bureaucracy, :event_mon],
-  :summary => "Walk a form through nine offices. The form is to cancel the form.",
-  :steps => { :ask => "Get Form 0 stamped in all nine Meridian offices.", :ninth => "The ninth office is the helpdesk you started at." },
-  :reward => { :pokemon => :ZE_PORYGON }, :touches => "15_COMEDY Zenith bit 'Customer Support'",
-  :design => "Each office wants a different stamp first (circular dependency the player has to break by noticing office 4 has two doors). When the form is finally cancelled, it cancels itself out of existence. What's left on the desk is a Porygon, who was the form all along."
-})
-stub.call(:ZE_FIZZBOLT, {
-  :trial => :ZENITH, :title => "The Machine Wants Compliments", :giver => "a Fizzbolt vending machine", :map => 180, :where => "Lumen City Concourse",
-  :rank => 1, :points => 2, :rec_level => 24, :chapter => 5, :unlock => "badges >= 3", :tags => [:comedy],
-  :summary => "A Lumen vending machine has gained sentience from the free current and only sells Fizzbolt to people who compliment it.",
-  :steps => { :ask => "Compliment the machine. It knows when you don't mean it." },
-  :reward => { :items => [[:CELLBATTERY, 1]] }, :touches => "none",
-  :design => "Five compliments across five visits; each needs a fresh one (choice lists rotate). Repeat a compliment and it sulks for a day. On the fifth it dispenses everything at once and a Rotom flies out to thank you, then back in."
-})
+# ZE_CUSTOMER_SUPPORT is wired since 2026-11-21: 116_Quests_Early.rb.
+# ZE_FIZZBOLT is wired since 2026-11-21: 116_Quests_Early.rb.
 stub.call(:ZE_LOWLIGHT_LAMPS, {
   :trial => :ZENITH, :title => "Ten Years of Light", :giver => "a Lowlight lamp-tender", :map => 608, :where => "the Lowlight (Shattered)",
   :rank => 2, :points => 3, :rec_level => 28, :chapter => 6, :unlock => "switch(114)", :tags => [:kindness, :bleed, :event_mon],

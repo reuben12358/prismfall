@@ -128,17 +128,20 @@ module Prismfall
     # Mega Stones (SPINE Revs 20-21, design/MEGA_EVOLUTION.md): rank rewards are not badge-gated, so only stones that are
     # safe whenever they arrive go here (Glalitite, Manectite: usable from the Ring-Day, 13 badges); later stones
     # are rank-gated commissions with a badge unlock (114_Quests_Megas.rb).
+    # A reward with :badges => N waits at the keeper until the player holds N badges (SPINE Rev 16): the Quiet Way
+    # alone pays 20+ points by Chapter 2, so without the gate its Lv 35 Comfey would arrive at one badge. The three
+    # Pokemon rewards wait for the chapter they were designed for (EVENT_POKEMON.md; the test checks the gates).
     RANK_REWARDS = {
       :ELOWEN  => { 2 => { :items => [[:SOOTHEBELL, 1]] }, 3 => { :items => [[:TM20, 1]] },
-                    4 => { :pokemon => :EL_RANK_COMFEY }, 5 => { :items => [[:MAGICALSEED, 3]] } },
+                    4 => { :pokemon => :EL_RANK_COMFEY, :badges => 8 }, 5 => { :items => [[:MAGICALSEED, 3]] } },
       :ISENMAR => { 2 => { :items => [[:MYSTICWATER, 1]] }, 3 => { :items => [[:TM72, 1], [:GLALITITE, 1]] },
-                    4 => { :items => [[:NEVERMELTICE, 1]] }, 5 => { :pokemon => :IS_RANK_LAPRAS } },
+                    4 => { :items => [[:NEVERMELTICE, 1]] }, 5 => { :pokemon => :IS_RANK_LAPRAS, :badges => 9 } },
       :ZENITH  => { 2 => { :items => [[:EXPCANDYS, 3]] }, 3 => { :items => [[:CELLBATTERY, 2], [:MANECTITE, 1]] },
                     4 => { :items => [[:SYNTHETICSEED, 3]] }, 5 => { :items => [[:ABILITYPATCH, 1]] } },
       :NADIR   => { 2 => { :items => [[:BLACKSLUDGE, 1]] }, 3 => { :items => [[:TM12, 1]] },
                     4 => { :items => [[:EXPCANDYL, 2]] }, 5 => { :items => [[:EXPCANDYXL, 2]] } },
       :ASHKAAR => { 2 => { :items => [[:CHARCOAL, 1]] }, 3 => { :items => [[:FLAMEORB, 1]] },
-                    4 => { :pokemon => :AS_RANK_DEINO }, 5 => { :items => [[:LIFEORB, 1]] } },
+                    4 => { :pokemon => :AS_RANK_DEINO, :badges => 6 }, 5 => { :items => [[:LIFEORB, 1]] } },
       :OSSARIA => { 2 => { :items => [[:SOFTSAND, 1]] }, 3 => { :items => [[:TM28, 1]] },
                     4 => { :items => [[:TELLURICSEED, 3]] }, 5 => { :items => [[:ABILITYCAPSULE, 1]] } },
       :ANTUMBRA => { 2 => { :items => [[:SPELLTAG, 1]] }, 3 => { :items => [[:TM48, 1]] },

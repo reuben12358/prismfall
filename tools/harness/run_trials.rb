@@ -19,6 +19,10 @@
 #   8. the Eevee Octave: all eight singer quests out of gym order, the help order,
 #      Carol last, a lost and a won 9-bout gauntlet (fields, Z-moves, no healing),
 #      the reward Eevee's Extreme Evoboost on the Grand Stage
+#   9. the early side content (116_Quests_Early.rb, Chapters 0-5): every new quest
+#      through its TALK rows, badge and story gates, real boss and wild battles
+#      (Sandygast, Greavard, Galarian Corsola, Rotom), both Matriarch branches,
+#      Shelly's cameo hook, the rank-reward badge gate
 # Writes docs/trials_test/REPORT.md and transcript.txt. Exit 1 on any failure.
 #===============================================================================
 require "fileutils"
@@ -937,6 +941,245 @@ class Battle::Battler
 end
 PBDayNight.define_singleton_method(:isNight?) { |*a| __harness_isNight?(*a) }
 Prismfall.state.level_cap_override = cap_override0
+
+#-------------------------------------------------------------------------------
+section("9. Early side content, Chapters 0-5 (116_Quests_Early.rb): every new quest through its map events")
+#-------------------------------------------------------------------------------
+# Driven only through pf_trial_talk (the TALK rows the map events call), with real battles where the quest fights;
+# a capture is forced the way section 3 forces it (the headless AI never throws a ball).
+NIGHT[0] = false
+PBDayNight.define_singleton_method(:isNight?) { |*_a| NIGHT[0] }
+all_mons9 = lambda { $player.party + $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact } }
+badges9 = lambda { |n| $player.badges = Array.new(18) { |i| i < n } }
+force_catch = lambda do |&blk|
+  orig = em.method(:battle)
+  em.define_singleton_method(:battle) { |id| set_status(id, :caught); $player.party << build(id) if $player.party.length < 6; :caught }
+  begin
+    blk.call
+  ensure
+    em.define_singleton_method(:battle, orig)
+  end
+end
+# Like otalk, for a fight that may be lost and retried: answers after a lost battle are simply dropped.
+def ftalk(key, answers = [])
+  Prismfall::Trials.answers = answers.dup
+  TRANSCRIPT << "-- talk #{key}"
+  log = Harness::BattleLog.new("talk #{key}")
+  Harness.current_log = log
+  begin
+    pf_trial_talk(key)
+  ensure
+    Harness.current_log = nil
+    Prismfall::Trials.answers = []
+  end
+  TRANSCRIPT << log.text.lines.map { |l| "    | #{l.rstrip}" }.join("\n") if log.battle || !log.errors.empty?
+  log.errors.each { |e| check("no engine error in talk #{key}", false, e.inspect[0, 300]) }
+end
+retry_fight = lambda do |quest, key, answers, tries = 4|
+  tries.times do |i|
+    break if !tr.talk_ready?(key) || !tr.active?(quest)
+    $player.heal_party
+    srand(9000 + i)
+    ftalk(key, answers)
+  end
+end
+$player.party = [mk(:QUILAVA, 15, [:EMBER, :QUICKATTACK, :SMOKESCREEN, :FLAMEWHEEL])]
+
+# --- Ch0 -> Ch1: Two Unlisted ----------------------------------------------------
+[101, 102].each { |s| $game_switches[s] = false }
+badges9.call(0)
+check("Two Unlisted is offered on the Dovetail deck (Ch0, before the scan)", tr.state(:EL_STOWAWAYS) == :available && tr.talk_ready?(:CRATE_WOMAN), tr.state(:EL_STOWAWAYS))
+$game_switches[102] = true
+check("Two Unlisted expires at the dock scan if not taken (S102)", tr.state(:EL_STOWAWAYS) == :expired, tr.state(:EL_STOWAWAYS))
+$game_switches[102] = false
+otalk(:CRATE_WOMAN, ["Tea services don't squeak."])
+check("deck: accepted, step :landed", tr.at?(:EL_STOWAWAYS, :landed), tr.step(:EL_STOWAWAYS))
+[101, 102].each { |s| $game_switches[s] = true }
+$game_switches[103] = false
+check("in town before the starter the woman keeps her own lines (no gift before S103)", !tr.talk_ready?(:CRATE_WOMAN))
+$game_switches[103] = true
+otalk(:CRATE_WOMAN)
+check("after the starter: the crate came open at the gate -> step :find", tr.at?(:EL_STOWAWAYS, :find), tr.step(:EL_STOWAWAYS))
+otalk(:STOWAWAY_MICE, ["Scoop them up."])
+otalk(:CRATE_WOMAN)
+mice = all_mons9.call.find { |p| p.isSpecies?(:TANDEMAUS) }
+check("Two Unlisted done: Tandemaus 'Plus-One' Lv 6 with Pickup, 0 badges", tr.done?(:EL_STOWAWAYS) && mice && mice.level == 6 &&
+      mice.ability_id == :PICKUP && mice.name == "Plus-One", mice ? "#{mice.name} Lv#{mice.level} #{mice.ability_id}" : "none")
+
+# --- Ch2: The Crown in the Sand (boss Sandygast) ---------------------------------------
+$game_switches[108] = false
+badges9.call(1)
+check("Crown in the Sand locked before the Pageant (S108)", tr.state(:EL_SAND_CROWN) == :locked, tr.state(:EL_SAND_CROWN))
+$game_switches[108] = true
+badges9.call(0)
+check("Crown in the Sand locked with 0 badges", tr.state(:EL_SAND_CROWN) == :locked, tr.state(:EL_SAND_CROWN))
+badges9.call(1)
+otalk(:SCULPTOR, ["I'll watch it."])
+NIGHT[0] = false
+otalk(:SAND_CROWN)
+check("by day the Crown is only sand (no fight, still :ask)", tr.at?(:EL_SAND_CROWN, :ask) && em.status(:EL_SANDYGAST).nil?, em.status(:EL_SANDYGAST).inspect)
+NIGHT[0] = true
+$player.party = [mk(:IVYSAUR, 22, [:RAZORLEAF, :TAKEDOWN, :SLEEPPOWDER, :LEECHSEED]),
+                 mk(:SNEASEL, 22, [:ICYWIND, :BITE, :QUICKATTACK, :LEER]),
+                 mk(:HAUNTER, 22, [:HEX, :NIGHTSHADE, :SUCKERPUNCH, :CONFUSERAY])]
+retry_fight.call(:EL_SAND_CROWN, :SAND_CROWN, ["Take it with you."])
+crown = all_mons9.call.find { |p| p.isSpecies?(:SANDYGAST) }
+check("boss Sandygast (Lv 20, 2 bars on Standard) beaten at night; 'Crown' joins at Lv 16 with Water Compaction",
+      crown && crown.level == 16 && crown.ability_id == :WATERCOMPACTION && em.status(:EL_SANDYGAST) == :joined,
+      crown ? "#{crown.name} Lv#{crown.level} #{crown.ability_id} #{em.status(:EL_SANDYGAST)}" : "status #{em.status(:EL_SANDYGAST).inspect}")
+check("the joined Sandygast has no Grass move (no answer to Marisol, R6)", crown && crown.moves.none? { |m| GameData::Move.get(m.id).type == :GRASS })
+otalk(:SCULPTOR)
+check("Crown in the Sand done (:took) with TM54 False Swipe", tr.outcome(:EL_SAND_CROWN) == :took && $bag.has?(:TM54), tr.outcome(:EL_SAND_CROWN).inspect)
+NIGHT[0] = false
+
+# --- Ch3: The Note Under the Glass (the Matriarch's cocoon, Badge 3) ----------------------------
+$game_switches[107] = false
+check("Note Under the Glass locked before the Matriarch (S107)", tr.state(:EL_MATRIARCH_HUM) == :locked)
+$game_switches[107] = true
+check("Mother Aldreth carries the new rows (Matriarch's cocoon, Shelly)",
+      [:EL_MATRIARCH_HUM, :EL_SHELLY].all? { |q| tr::TALK[:ALDRETH][:rows].any? { |r| r[0] == q && r[2] == :offer } })
+badges9.call(2)
+scene(:EL_MATRIARCH_HUM, :offer, ["I'll listen."])
+otalk(:GLASS_COCOON)
+check("with 2 badges the cocoon only hums (step :wait, no Joltik: Electric answers Marisol)",
+      tr.at?(:EL_MATRIARCH_HUM, :wait) && all_mons9.call.none? { |p| p.isSpecies?(:JOLTIK) }, tr.step(:EL_MATRIARCH_HUM))
+badges9.call(3)
+Prismfall::Choices.clear(:ch2_matriarch)
+Prismfall::Choices.make(:ch2_matriarch, :silence, false)
+force_catch.call { otalk(:GLASS_COCOON) }
+check("silenced Matriarch: the hatchling fights (caught) -> :silenced", tr.outcome(:EL_MATRIARCH_HUM) == :silenced, tr.outcome(:EL_MATRIARCH_HUM).inspect)
+tr.reset(:EL_MATRIARCH_HUM)
+Prismfall::Trials.store[:event_mons].delete(:EL_JOLTIK)
+Prismfall::Choices.clear(:ch2_matriarch)
+Prismfall::Choices.make(:ch2_matriarch, :soothe, false)
+scene(:EL_MATRIARCH_HUM, :offer, ["I'll listen."])
+otalk(:GLASS_COCOON)
+jolt = all_mons9.call.select { |p| p.isSpecies?(:JOLTIK) }.last
+check("soothed Matriarch: Joltik Lv 22 (Compound Eyes, Electroweb) comes to you with Badge 3 -> :soothed",
+      tr.outcome(:EL_MATRIARCH_HUM) == :soothed && jolt && jolt.level == 22 && jolt.ability_id == :COMPOUNDEYES && jolt.hasMove?(:ELECTROWEB),
+      "#{tr.outcome(:EL_MATRIARCH_HUM).inspect} #{jolt ? jolt.level : 'none'}")
+
+# --- Ch3: Someone Apologising to Bugs (Shelly's cameo, completed by her fight) -----------------
+badges9.call(2)
+pts0 = tr.points(:ELOWEN)
+scene(:EL_SHELLY, :offer, ["I'll find her."])
+check("Shelly's board pointer accepted from Mother Aldreth", tr.active?(:EL_SHELLY))
+EventHandlers.trigger(:prismfall_cameo_beaten, :FESTIVAL_SHELLY, true)
+check("beating Shelly's cameo completes the quest (no map change needed); Elowen +3",
+      tr.done?(:EL_SHELLY) && tr.points(:ELOWEN) == pts0 + 3, "#{tr.state(:EL_SHELLY)} #{pts0}->#{tr.points(:ELOWEN)}")
+EventHandlers.trigger(:prismfall_cameo_beaten, :FESTIVAL_SHELLY, false)
+check("a second cameo win doesn't complete it twice", tr.record(:EL_SHELLY)[:times] == 1)
+
+# --- Ch4: Bracken Comes In (the Wolfsrime, 579) -------------------------------------------------
+badges9.call(1)
+check("Bracken locked with 1 badge", tr.state(:EL_DROVERS_BELL) == :locked)
+badges9.call(2)
+otalk(:DROVER, ["I'll ring it."])
+$player.party = [mk(:CROCONAW, 22, [:BITE, :WATERGUN, :SCARYFACE, :ICEFANG])]
+srand(2024)
+ftalk(:WOLF_DEN)
+first9 = em.status(:EL_GREAVARD)
+check("the den: a real wild battle vs Greavard 'Bracken' ran", [:won, :lost, :caught].include?(first9), first9.inspect)
+if first9 != :caught
+  check("a knocked-out Bracken comes back to play (still :ask, den still there)", tr.at?(:EL_DROVERS_BELL, :ask) && tr.talk_ready?(:WOLF_DEN))
+  force_catch.call { otalk(:WOLF_DEN) }
+end
+isen0 = tr.points(:ISENMAR)
+otalk(:DROVER)
+brk = all_mons9.call.find { |p| p.isSpecies?(:GREAVARD) }
+check("Bracken done: Greavard Lv 20 Fluffy with Howl (no Dig before Rook), TM65, Isenmar +1 (joint)",
+      tr.done?(:EL_DROVERS_BELL) && brk && brk.ability_id == :FLUFFY && brk.hasMove?(:HOWL) && !brk.hasMove?(:DIG) &&
+      $bag.has?(:TM65) && tr.points(:ISENMAR) == isen0 + 1, brk ? "#{brk.name} #{brk.ability_id}" : "none")
+check("Wolfsrime (579) badge tiers have their own rumours", tr::BadgeTiers::RUMOURS.key?([579, 3]) && tr::BadgeTiers::RUMOURS.key?([579, 4]))
+
+# --- Ch5: The Names in Holmsby (Ebb Hollow, Bleed) -------------------------------------------
+badges9.call(2)
+check("Names in Holmsby locked with 2 badges", tr.state(:IS_EBB_HOLLOW) == :locked)
+badges9.call(3)
+otalk(:VEIL_FISHER, ["I'll go in."])
+2.times { otalk(:HOLLOW_STONE) }
+check("two stones read -> the coral-covered third (:coral)", tr.at?(:IS_EBB_HOLLOW, :coral), tr.step(:IS_EBB_HOLLOW))
+$player.party = [mk(:MIGHTYENA, 26, [:CRUNCH, :BITE, :TAKEDOWN, :HOWL]), mk(:HOUNDOUR, 25, [:BITE, :EMBER, :ROAR, :SMOG])]
+retry_fight.call(:IS_EBB_HOLLOW, :HOLLOW_CORAL, [])
+check("real wild battle vs Galarian Corsola on :BLEED ran", [:won, :caught].include?(em.status(:IS_CORSOLA)), em.status(:IS_CORSOLA).inspect)
+force_catch.call { otalk(:HOLLOW_CORAL) } if tr.at?(:IS_EBB_HOLLOW, :coral)
+otalk(:VEIL_FISHER)
+check("Names in Holmsby done (Big Pearl, Exp. Candy M)", tr.done?(:IS_EBB_HOLLOW) && $bag.has?(:BIGPEARL))
+cor = em.build(:IS_CORSOLA)
+check("Holmsby's Corsola is the Galarian form (Ghost) with Cursed Body", cor.form == 1 && cor.types == [:GHOST] && cor.ability_id == :CURSEDBODY,
+      "form #{cor.form} #{cor.types.inspect}")
+
+# --- Ch5: The Machine Wants Compliments (Lumen Concourse) ------------------------------------------
+$game_variables[125] = 4
+otalk(:FIZZBOLT_MACHINE, ["Say something nice.", "Your glass is very clean."])
+otalk(:FIZZBOLT_MACHINE, ["Your glass is very clean."])
+check("a repeated compliment makes it sulk (no progress)", tr.flag(:ZE_FIZZBOLT, :sulking) == true && tr.count(:ZE_FIZZBOLT, :nice) == 1,
+      "nice=#{tr.count(:ZE_FIZZBOLT, :nice)}")
+otalk(:FIZZBOLT_MACHINE)
+check("next visit it forgives you", tr.flag(:ZE_FIZZBOLT, :sulking) == false)
+["You hum in a lovely key.", "Best machine on the Concourse.", "I like your little dent."].each { |c| otalk(:FIZZBOLT_MACHINE, [c]) }
+$game_variables[125] = 8
+check("the machine is shut during the raid (V125 7-12: nothing new between the Gala and the Interlude)", !tr.talk_ready?(:FIZZBOLT_MACHINE))
+$game_variables[125] = 13
+otalk(:FIZZBOLT_MACHINE, ["You're brave, standing out here all day."])
+check("five different compliments: done, Soda Pop x6 and a Cell Battery", tr.done?(:ZE_FIZZBOLT) && $bag.quantity(:SODAPOP) >= 6 && $bag.has?(:CELLBATTERY))
+
+# --- Ch5: Customer Support (the Spire lobby) ------------------------------------------------------
+$game_variables[125] = 4
+otalk(:HELPDESK_ROTOM, ["I'll walk it round."])
+otalk(:DESK_RECORDS); otalk(:DESK_APPROVALS); otalk(:DESK_COMPLIANCE, ["Window one: Compliance."])
+check("the three desks each want another's stamp first (none given)", [:records, :approvals, :compliance].none? { |f| tr.flag(:ZE_CUSTOMER_SUPPORT, f) })
+otalk(:DESK_COMPLIANCE, ["Window two: Cancellations of Cancellations."])
+otalk(:DESK_APPROVALS); otalk(:DESK_RECORDS)
+check("the second window breaks the loop: all three stamps -> :return", tr.at?(:ZE_CUSTOMER_SUPPORT, :return), tr.step(:ZE_CUSTOMER_SUPPORT))
+otalk(:HELPDESK_ROTOM)
+pory = all_mons9.call.find { |p| p.isSpecies?(:PORYGON) }
+check("Customer Support done: Porygon Lv 24 with Download (3 badges)", tr.done?(:ZE_CUSTOMER_SUPPORT) && pory && pory.level == 24 && pory.ability_id == :DOWNLOAD,
+      pory ? "Lv#{pory.level} #{pory.ability_id}" : "none")
+
+# --- Ch5: Off the Beat after the Shatter (Cadence on the Concourse) --------------------------------------
+saved_ob = tr.record(:ZE_OCTAVE_OFF_BEAT) ? Marshal.load(Marshal.dump(tr.record(:ZE_OCTAVE_OFF_BEAT))) : nil
+tr.reset(:ZE_OCTAVE_OFF_BEAT)
+$game_switches[114] = true
+check("after the Shatter Cadence's row skips the dead junctions", tr.talk_ready?(:OCTAVE_CADENCE) &&
+      tr::TALK[:OCTAVE_CADENCE][:rows].first[2] == :after_shatter)
+orig_tb = tr.method(:trainer_battle)
+tr.define_singleton_method(:trainer_battle) { |*_a, **_k| true }
+otalk(:OCTAVE_CADENCE, ["'Source unknown.'"])
+tr.define_singleton_method(:trainer_battle, orig_tb)
+check("Off the Beat finishes after the Shatter (straight to the duel)", tr.done?(:ZE_OCTAVE_OFF_BEAT), tr.state(:ZE_OCTAVE_OFF_BEAT))
+$game_switches[114] = false
+tr.store[:quests][:ZE_OCTAVE_OFF_BEAT] = saved_ob if saved_ob
+
+# --- Rank rewards wait for their badges (SPINE Rev 16) --------------------------------------------
+badges9.call(2)
+tr.store[:points][:ELOWEN] = [tr.points(:ELOWEN), 16].max
+tr.store[:ranks_paid][:ELOWEN] = 3
+tr.store[:event_mons].delete(:EL_RANK_COMFEY)
+tr.pay_rank_rewards(:ELOWEN)
+check("Quiet Way rank 4 reached with 2 badges: the Lv 35 Comfey is held back", em.status(:EL_RANK_COMFEY).nil? &&
+      tr.store[:ranks_paid][:ELOWEN] == 3, "#{em.status(:EL_RANK_COMFEY).inspect} paid #{tr.store[:ranks_paid][:ELOWEN]}")
+badges9.call(8)
+tr.pay_rank_rewards(:ELOWEN)
+check("with 8 badges the keeper hands the Comfey over", em.status(:EL_RANK_COMFEY) == :gifted, em.status(:EL_RANK_COMFEY).inspect)
+rank_gate_errors = []
+tr::RANK_REWARDS.each do |t, h|
+  h.each do |r, rw|
+    next if !rw[:pokemon]
+    d = em.get(rw[:pokemon])
+    b = rw[:badges] || 0
+    rank_gate_errors << "#{t} rank #{r} #{rw[:pokemon]}: no :badges gate" if !rw[:badges]
+    sp = GameData::Species.get_species_form(d[:species], d[:form] || 0)
+    gwardens.each do |w|
+      next if b >= w["n"] || b < w["n"] - horizon
+      hit = types_upto.call(sp, w["cap"], []).map(&:to_s) & w["answers"]
+      rank_gate_errors << "#{rw[:pokemon]} with #{b} badges answers #{w['warden']} (#{hit.join('/')})" if !hit.empty?
+    end
+  end
+end
+check("every rank-reward Pokemon has a badge gate and answers none of the next #{horizon} Wardens at it",
+      rank_gate_errors.empty?, rank_gate_errors.first(4).join("; "))
+PBDayNight.define_singleton_method(:isNight?) { |*a| __harness_isNight?(*a) }
 
 #-------------------------------------------------------------------------------
 fails = RESULTS.reject { |r| r[1] }

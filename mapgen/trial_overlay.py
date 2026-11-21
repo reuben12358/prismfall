@@ -6,8 +6,10 @@ puzzle modules' EVENTS, so the layout scripts stay untouched and a re-run of any
                                walkable cell (Essentials' passability on the spec's own layers) with a free neighbour.
   PATCHES[mid] = {event name: KEY}   an existing story NPC gets the branch
                                {if: pf_trial_ready?(:KEY), then: pf_trial_talk(:KEY), else: <its own lines>}.
-Skipped on purpose (a distribution agent is moving them): the Timburr gift at Ferrow's berth with its three boatyard
-planks (EL_LAST_PLANK), and the Crabrawler/Clobbopus tide-pool feud with its sea cave on Lacecliff Walk.
+The Timburr berth (EL_LAST_PLANK) and the Lacecliff tide-pool feud (EL_TIDE_POOL_FEUD), held back while the Revision 16
+distribution pass moved them after Badge 1, are laid now; so are the early side content of 116_Quests_Early.rb (Chapters
+0-4 on built maps) and the Octave singers Lyra (120/524) and Aria (160) (Trials owner, 2026-11-21).
+`once(...)` is a one-shot object (planks, items): an empty first page, the conditioned page, and an empty page on self switch A.
 Visibility conditions are the plugin's {comment: 'Condition: ...'} first command, on a page after an empty first page."""
 import os, json
 import numpy as np
@@ -25,6 +27,24 @@ def ev(name, near, key=None, sprite=None, tile=None, cond=None, condition=None, 
     if through: pg['through'] = True
     pages = [{'commands': []}, pg] if (condition or cond) else [pg]
     return {'type': 'event', 'name': name, 'near': near, 'pages': pages}
+
+
+
+def once(name, near, condition, key=None, sprite=None, tile=None, cmds=None):
+    """a one-shot object: shown while `condition` holds, gone for good (self switch A) once used"""
+    pg = {'trigger': 'action', 'commands': [{'comment': 'Condition: ' + condition}] + (cmds or [TALK(key)]) + [{'selfswitch': ['A', True]}]}
+    if sprite: pg['graphic'] = {'sprite': sprite, 'dir': 'down'}
+    if tile: pg['graphic'] = {'tile': tile}
+    return {'type': 'event', 'name': name, 'near': near, 'pages': [{'commands': []}, pg, {'cond': {'self': 'A'}, 'commands': []}]}
+
+
+def item_once(name, near, item, condition):
+    """an item ball that only appears while `condition` holds (e.g. a cave a quest opened)"""
+    return {'type': 'event', 'name': name, 'near': near, 'pages': [
+        {'commands': []},
+        {'trigger': 'action', 'graphic': {'sprite': 'Object ball', 'dir': 'down'},
+         'commands': [{'comment': 'Condition: ' + condition}, {'if': 'pbItemBall(:%s)' % item, 'then': [{'selfswitch': ['A', True]}]}]},
+        {'cond': {'self': 'A'}, 'commands': []}]}
 
 
 ST = {'switch': 'CH1_STARTER_GOT'}
@@ -94,6 +114,44 @@ PATCHES = {100: {'Wenna Hale': 'WENNA', 'Rope-skipping Girl 1': 'DEED_ROPE', 'Ol
            103: {'Professor Larch': 'LARCH'}, 106: {'Hesper Vane': 'HESPER'}, 107: {'Dockmaster': 'DOCKMASTER'},
            108: {'Customs officer': 'CUSTOMS_OFFICER'}, 523: {'Farmer Hale': 'COLL'}, 140: {'Caramel Seller': 'CARAMEL_SELLER'},
            120: {'Loyal Three shrine': 'SHRINE_SQUARE'}, 123: {'Hett': 'HETT'}, 576: {"Halvard's daughter": 'HALVARD'}}
+
+
+# ---- Trials owner, 2026-11-21: the held-back Chapter 2 events, the Octave's Lyra and Aria, and the early side content
+# (plugins/Prismfall Trials/116_Quests_Early.rb; design/TRIAL_EVENTS.yaml; design/TRIALS_WIRING.md for the audit).
+PLANK = 19385                 # tilesets 50-56 (PF Rejuv): the middle of the hb_plank stamp, a loose board
+EVENTS[100] = EVENTS[100] + [
+    ev('Timburr (berth)', (33, 50), 'BERTH_TIMBURR', 'Followers/TIMBURR', cond=ST, condition='!quest_done(:EL_LAST_PLANK)'),
+    once('Loose plank 1', (47, 45), 'quest_step(:EL_LAST_PLANK) == :planks', 'BOATYARD_PLANK', tile=PLANK),
+    once('Loose plank 2', (50, 46), 'quest_step(:EL_LAST_PLANK) == :planks', 'BOATYARD_PLANK', tile=PLANK),
+    once('Loose plank 3', (52, 44), 'quest_step(:EL_LAST_PLANK) == :planks', 'BOATYARD_PLANK', tile=PLANK)]
+EVENTS[108] = EVENTS[108] + [
+    ev('Two mice', '@Customs officer', 'STOWAWAY_MICE', 'Followers/TANDEMAUS', condition='quest_step(:EL_STOWAWAYS) == :find')]
+EVENTS[120] = EVENTS.get(120, []) + [
+    ev('Lyra', '@Lantern House door', 'OCTAVE_LYRA', 'NPC 16', condition='quest_step(:EL_OCTAVE_MOSS) != :stone')]
+EVENTS[160] = EVENTS[160] + [
+    ev('Aria', (28, 39), 'OCTAVE_ARIA', 'NPC 18'),
+    once('River note (steps)', (29, 42), 'quest_step(:IS_OCTAVE_DROWNED_NOTE) == :listen', 'EBB_NOTE'),
+    once('River note (fish market)', (45, 37), 'quest_step(:IS_OCTAVE_DROWNED_NOTE) == :listen', 'EBB_NOTE')]
+EVENTS[524] = EVENTS.get(524, []) + [
+    {'type': 'event', 'name': 'Moss-stone', 'near': (73, 11), 'pages': [
+        {'trigger': 'action', 'graphic': {'sprite': 'Object rock', 'dir': 'down'}, 'commands': [TALK('MOSS_STONE')]},
+        {'trigger': 'action', 'graphic': {'sprite': 'Followers/EEVEE', 'dir': 'down'},
+         'commands': [{'comment': 'Condition: quest_step(:EL_OCTAVE_MOSS) == :stone'}, TALK('MOSS_STONE')]}]},
+    ev('Lyra (moss-stone)', (71, 12), sprite='NPC 16', condition='quest_step(:EL_OCTAVE_MOSS) == :stone',
+       cmds=["Lyra: Shh. I'm not singing. I'm NOT. ...It's very hard. Talk to the stone, not me."])]
+EVENTS[527] = EVENTS.get(527, []) + [
+    ev('Tide-pool feud', (23, 45), 'TIDE_POOL', 'Followers/CLOBBOPUS', condition='!quest_done(:EL_TIDE_POOL_FEUD)'),
+    item_once('Sea-cave crate 1', (24, 44), 'PEARL', 'quest_flag(:EL_TIDE_POOL_FEUD, :sea_cave)'),
+    item_once('Sea-cave crate 2', (26, 44), 'BIGPEARL', 'quest_flag(:EL_TIDE_POOL_FEUD, :sea_cave)'),
+    item_once('Sea-cave crate 3', (30, 44), 'SUPERPOTION', 'quest_flag(:EL_TIDE_POOL_FEUD, :sea_cave)')]
+EVENTS[528] = EVENTS.get(528, []) + [
+    ev('Sand Crown', '@Sand-sculptor', 'SAND_CROWN', 'Followers/SANDYGAST')]
+EVENTS[548] = EVENTS.get(548, []) + [
+    ev('Humming cocoon', (26, 21), 'GLASS_COCOON', 'Followers/JOLTIK', condition='quest_active(:EL_MATRIARCH_HUM)')]
+EVENTS[579] = EVENTS.get(579, []) + [
+    ev('Bracken (the den)', '@The old den', 'WOLF_DEN', 'Followers/GREAVARD', condition='quest_step(:EL_DROVERS_BELL) == :ask')]
+PATCHES[100] = dict(PATCHES[100], **{'Woman with crate (town)': 'CRATE_WOMAN'})
+PATCHES.update({109: {'Woman with crate': 'CRATE_WOMAN'}, 528: {'Sand-sculptor': 'SCULPTOR'}, 579: {'Old drover': 'DROVER'}})
 
 
 def _layers(spec):

@@ -266,6 +266,10 @@ module Prismfall
       given = 0
       ((paid + 1)..rank(trial)).each do |r|
         rw = (RANK_REWARDS[trial] || {})[r]
+        if rw && rw[:badges] && Prismfall.badge_count < rw[:badges]   # held until the badge (SPINE Rev 16)
+          pbMessage(_INTL("The {1} gift is set aside for you. It will keep until you hold {2} badges.", rank_name(trial, r), rw[:badges]))
+          break
+        end
         if rw
           pbMessage(_INTL("For reaching the rank of {1}, take this.", rank_name(trial, r)))
           give_reward(rw)

@@ -10,6 +10,8 @@
 Event and quest-reward Pokémon: `design/EVENT_POKEMON.md` (generated). Badge-gated encounters: `design/BADGE_TIERS.md`.
 Map events: `design/TRIAL_EVENTS.yaml`. Code: `plugins/Prismfall Trials/`. Test: `tools/harness/run_trials.rb`
 (report in `docs/trials_test/REPORT.md`). Regenerate the docs with `ruby tools/trials_docs.rb`.
+**Which quests are really on the maps:** `design/TRIALS_WIRING.md` (`python3 -I tools/trials_wiring.py`, re-run after a
+map build): every quest's TALK keys followed to the built maps, the specs and `mapgen/trial_overlay.py`.
 
 Order and names follow SPINE **Revision 14** (Ferrow's Landing → the Strand Road → Saltmere, Gym 1 Normal → the Weavers'
 Road → Briarwick, Gym 2 Bug → Spinners' Rise / Frostwick / the Rimewood → Ebbmouth, Gym 3) and `design/SWAP_GYM1_GYM2.md`.
@@ -40,7 +42,9 @@ We keep all of it and change the frame:
 | — | **Rumours**: the Trial halls are where you hear that rarer Pokémon now walk old roads (`BADGE_TIERS.md`) |
 
 **Ranks.** Points from quests (1–5 each). Rank thresholds: 0 / 3 / 8 / 15 / 25 points (`RANK_POINTS`). Each Trial's
-hall keeper hands out the reward for every rank you've reached since you last spoke to them.
+hall keeper hands out the reward for every rank you've reached since you last spoke to them. A Pokémon rank reward
+carries `:badges` and waits at the keeper until then (Rev 16): the Quiet Way alone pays 20+ points by Chapter 2, so its
+Lv 35 Comfey waits for Badge 8, the Deino egg for 6 and the Lapras for 9.
 
 **Choices and bonds.** Quests only move registered keys: Bonds (`JUNO`, `KESTREL`, `MARISOL`, `VALEN`...), Standing
 (`MERIDIAN`, `HOLLOW`, `ACCORD`) and Resonance (`RES±`, Harmony/Ruin), through Core's `apply_effects`. A quest's own
@@ -196,10 +200,15 @@ can be **joint** (`:joint => { :ELOWEN => 2 }`), like *Two Hearths, One Pot*.
 
 ---
 
-## 3. The early game in brief (all wired, full dialogue in `TRIALS_QUESTS.md`)
+## 3. The early game in brief (all wired, full dialogue in `TRIALS_QUESTS.md`; map status in `TRIALS_WIRING.md`)
+
+Every chapter carries side content around its key events (`CHAPTER_BEATS.md`), never between a key event's build-up
+and its payoff: an event Pokémon, a boss that joins, a TM or a catch that waits for a badge. The 2026-11-21 pass
+(`116_Quests_Early.rb`, marked *(new)*) filled Chapter 0 and the thin spots, and wired Shelly's cameo and two Lumen stubs.
 
 | Ch | Quest (Trial) | Where (map) | Hook and twist | Reward |
 |---|---|---|---|---|
+| 0 | *(new)* Two Unlisted (Elowen) | the Dovetail deck, Ferrow's quay, customs hall (109, 100, 108) | the crate squeaks on the last ferry; the mice slip out at the NULL gate and curl up by Crate 7-B | **Tandemaus** "Plus-One" (Pickup), after the starter |
 | 1 | The First Lesson (Elowen) | Ferrow's wayshrine (100) | do one unasked kindness; *don't tell* the monk | Harmony +1, 2 pts; starts Quiet Deeds |
 | 1 | The Tart Thief (Elowen) | Ferrow's Landing (100, 103) | chase a Nickit round the village; it has been feeding Kestrel | **Nickit** (Stakeout); Kestrel ±1 |
 | 1 | The Scarecrow Walks (Elowen) | Windfall Row (521, 523) | Coll didn't build a scarecrow; water it | a Sudowoodo spar (can't be caught), or spare it (Harmony); **Sudowoodo** catchable after Badge 2 |
@@ -222,6 +231,13 @@ can be **joint** (`:joint => { :ELOWEN => 2 }`), like *Two Hearths, One Pot*.
 | 4 | The Rehearsal (Elowen) | the Rehearsal (568) | a Ditto replaying a crash it saw once | **Ditto** (Imposter) |
 | 4 | The Lattice Hums Wrong (Zenith) | Ebbmouth mill-wheels (160, 167) | who gets the recordings | Meridian +1 / Marisol +1 / Larch |
 | 4 | The Egg Thief of Gullcry (Isenmar) | Gullcry Cliffs (561) | it's a Bombirdier delivering eggs to the wrong nests | **Bombirdier** (boss) or let it work |
+| 2 | *(new)* The Crown in the Sand (Elowen, after the Pageant and Badge 1) | Marram Down (528) | since the Pageant, Saltmere hecklers kick the sand Crown in nightly; it rebuilds itself | **Sandygast** boss joins (Water Compaction), TM54 False Swipe |
+| 3 | *(new)* The Note Under the Glass (Elowen, after the Matriarch) | Briarwick (126), Cocoonfall Hollow (548) | the Matriarch's last cocoon hums under the badge case's chord; it hatches on the third note | **Joltik** after Badge 3 (gift if soothed, a fight if silenced) |
+| 3 | *(new)* Someone Apologising to Bugs (Elowen, after Badge 2) | Briarwick (126) → Deepwood (525) | board pointer to Shelly's cameo; her fight completes it | Elowen points (her event gives Silver Powder, TM) |
+| 4 | *(new)* Bracken Comes In (Elowen + Isenmar) | the Wolfsrime (579) | the drover's bell is answered by the dog that never came down | **Greavard** "Bracken" (Fluffy, Howl), TM65 Shadow Claw |
+| 5 | *(new)* The Names in Holmsby (Isenmar) | the Reedholms Veil, Ebb Hollow (580, 588) | read the drowned village's boundary stones for the Tally; white coral holds the last | **Galarian Corsola** (Cursed Body) |
+| 5 | *(new)* The Machine Wants Compliments (Zenith) | Lumen Concourse (180) | five different compliments; repeat one and it sulks | Soda Pop x6, Cell Battery |
+| 5 | *(new)* Customer Support (Zenith) | Meridian Spire lobby (185) | three desks, each wants another's stamp; the second window breaks the loop | **Porygon** (Download) |
 
 **No answers to the next Warden before the gym** (SPINE Revision 16, `design/DISTRIBUTION_STUDY.md`). Revision 14's
 "a Fighting type before Saltmere" is withdrawn: Timburr and the tide-pool duel are "1 Badge Quests" (Reborn hands out its
@@ -257,6 +273,7 @@ Gloaming), Lin (Crownhaven, postgame). The cameo event calls `pf_quest_complete(
 | `130/131_EventMons_*.rb` | event Pokémon (implemented / designed) |
 | `140_BadgeTier_Rumours.rb` | the hint lines |
 | `150_Trials_Talk.rb` | `pf_trial_talk(:KEY)`: one call per map event; the plugin decides which scene runs |
+| `116_Quests_Early.rb`, `133_EventMons_Ch0_5.rb`, `153_Talk_Early.rb` | the Chapter 0-5 side content of 2026-11-21 (quests, event Pokémon, talk rows); `CAMEO_QUESTS` completes a cameo's board quest when its `cameo_battle` is won (`:prismfall_cameo_beaten`) |
 
 **Adding a quest.** Register it in a `1xx` file with `:scenes`, add its NPCs to `TALK`, list its events in
 `TRIAL_EVENTS.yaml`, run `ruby tools/trials_docs.rb` and the harness test. The test checks every scene command, condition,

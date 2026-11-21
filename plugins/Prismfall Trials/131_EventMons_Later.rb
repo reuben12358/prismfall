@@ -9,9 +9,7 @@ em = Prismfall::EventMons
 later = lambda { |id, h| em.register(id, h.merge(:stub => true)) }
 
 #--- Zenith -------------------------------------------------------------------------
-later.call(:ZE_PORYGON, { :species => :PORYGON, :level => 24, :ability => :DOWNLOAD, :kind => :gift, :chapter => 5,
-  :map => 185, :where => "Meridian Spire lobby", :quest => :ZE_CUSTOMER_SUPPORT, :trigger => "Cancel the form that cancels the form",
-  :why => "Download Porygon: the Upgrade and Dubious Disc lines in Zenith, Act I" })
+# ZE_PORYGON is implemented since 2026-11-21: 133_EventMons_Ch0_5.rb.
 later.call(:ZE_DEX_PICHU, { :species => :PICHU, :level => 25, :ability => :LIGHTNINGROD, :kind => :gift, :chapter => 6,
   :moves => [:VOLTTACKLE, :NASTYPLOT, :CHARM, :SWEETKISS], :special_moves => [:VOLTTACKLE], :nickname => "Spark",
   :map => 608, :where => "Dex's shrine in the Shattered Lowlight", :quest => :ZE_LOWLIGHT_LAMPS, :trigger => "Sit with the shrine at dusk",

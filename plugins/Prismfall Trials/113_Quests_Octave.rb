@@ -269,6 +269,15 @@ tr.quest(:ZE_OCTAVE_OFF_BEAT, {
     ],
     :after => [
       [:CADENCE, :neutral, "Snare still drums. The lamps don't. Best of both."]
+    ],
+    # After the Shatter (S114) the Lowlight (181) is the glassed 608 and its junctions are gone: Cadence waits on the
+    # Concourse (180) from Act II, and the quest goes straight to the duel (24_SCRIPT_CH5 "Notes": the Trials owner's call).
+    :after_shatter => [
+      { :map => "The Concourse, after the Shatter. Cadence sits on an upturned paint tin by the lift-grilles, not drumming. Her Jolteon lies across her feet." },
+      [:CADENCE, :sad, "Block 9's dark now. All of it. The junctions went to glass with everything else."],
+      [:CADENCE, :neutral, "Snare hasn't sparked since that night. I want to hear it go flat out once, somewhere the lights can take it."],
+      { :if => "!quest_active(:SELF)", :then => [{ :accept => true }] },
+      { :step => :duel }, { :run => :duel }
     ]
   }
 })
@@ -277,8 +286,8 @@ tr.quest(:ZE_OCTAVE_OFF_BEAT, {
 # OSSARIA - The Rolls of Unearthing: Sona and Noon (Espeon), the sun temple, Chapter 6
 #===============================================================================
 tr.quest(:OS_OCTAVE_NOON_BELL, {
-  :trial => :OSSARIA, :title => "The Noon Bell", :giver => "Sona of the Octave", :map => 215,
-  :where => "the Temple of the Noon Sun, outside Duneholt (new map, off Sunbleach Flats 613)", :rank => 1, :points => 3,
+  :trial => :OSSARIA, :title => "The Noon Bell", :giver => "Sona of the Octave", :map => 606,
+  :where => "the Temple of the Noon Sun, outside Duneholt (new map 606, off Sunbleach Flats 613; 215 is the Gym 5 Mastery)", :rank => 1, :points => 3,
   :rec_level => 30, :chapter => 6, :unlock => "badges >= 4", :board => true, :tags => [:octave, :dig, :duel],
   :summary => "Clay tablet: the old sun temple's light-shaft has filled with sand. Its keeper needs diggers. Its keeper says she knew you'd read this.",
   :steps => { :ask => "Find the keeper of the Temple of the Noon Sun.",

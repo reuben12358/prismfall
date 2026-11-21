@@ -33,6 +33,7 @@ Prismfall::Trials::TALK.merge!({
                    :idle => "The Mill Quay wheel turns, slow and black. The Lattice hum is quieter here." },
   #--- Cadence: the Lowlight, Lumen City (181) ----------------------------------------------
   :OCTAVE_CADENCE => { :rows => [
+    [:ZE_OCTAVE_OFF_BEAT, "switch(114) && !quest_done(:SELF) && quest_step(:SELF) != :duel", :after_shatter],   # on the Concourse (180)
     [:ZE_OCTAVE_OFF_BEAT, "quest_state(:SELF) == :available", :offer],
     [:ZE_OCTAVE_OFF_BEAT, "quest_step(:SELF) == :duel", :duel],
     [:ZE_OCTAVE_OFF_BEAT, "quest_done(:SELF)", :after]],

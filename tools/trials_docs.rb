@@ -4,7 +4,7 @@
 #   design/TRIALS_QUESTS.md  - every quest per Trial + the full scripted dialogue
 #                              of the implemented quests (one source: the plugin)
 #   design/EVENT_POKEMON.md  - every event / quest-reward Pokemon
-# Usage: ruby tools/trials_docs.rb
+# Usage: ruby tools/trials_docs.rb          (--json: print the data for tools/trials_wiring.py instead)
 # Only the data files are loaded (config, registry, 1xx quests, 13x mons, 140
 # rumours) with tiny stubs; nothing from the engine runs.
 #===============================================================================
@@ -30,6 +30,35 @@ Dir.children(PLUGIN).sort.select { |f| f =~ /\A1\d\d_.*\.rb\z/ }.each { |f| load
 
 TR = Prismfall::Trials
 EM = Prismfall::EventMons
+
+# --json: print the quest / talk / event-mon data for tools/trials_wiring.py and stop (no docs written).
+if ARGV.include?("--json")
+  require "json"
+  refs = lambda do |x, acc|
+    case x
+    when Hash
+      [:event_battle, :gift, :join].each { |k| acc << x[k].to_s if x[k].is_a?(Symbol) }
+      x.each_value { |v| refs.call(v, acc) }
+    when Array then x.each { |v| refs.call(v, acc) }
+    end
+    acc
+  end
+  out = {
+    "quests" => TR.quest_ids.map do |id|
+      q = TR.get(id)
+      rws = ([q[:reward]] + (q[:outcomes] || {}).values).compact
+      { "id" => id, "trial" => q[:trial], "title" => q[:title], "chapter" => q[:chapter], "unlock" => q[:unlock], "map" => q[:map],
+        "stub" => !!q[:stub], "where" => q[:where], "scenes" => (q[:scenes] || {}).keys,
+        "mons" => (refs.call(q[:scenes] || {}, []) + rws.map { |r| r[:pokemon].to_s }.reject(&:empty?)).uniq,
+        "items" => rws.flat_map { |r| (r[:items] || []).map { |i| i[0].to_s } } }
+    end,
+    "talk" => TR::TALK.map { |k, t| [k, { "board" => t[:board], "rows" => t[:rows].map { |r| r.map(&:to_s) } }] }.to_h,
+    "mons" => EM.ids.map { |id| d = EM.get(id); { "id" => id, "species" => d[:species], "form" => d[:form], "kind" => d[:kind], "chapter" => d[:chapter],
+                                                 "badges" => d[:badges], "map" => d[:map], "quest" => d[:quest], "stub" => !!d[:stub] } }
+  }
+  puts JSON.generate(out)
+  exit
+end
 
 def name_of(spk)
   TR::SPEAKERS[spk] || spk.to_s.split("_").map(&:capitalize).join(" ")
