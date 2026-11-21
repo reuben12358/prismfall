@@ -192,6 +192,8 @@ Watched, they freeze. A chair that reaches you starts a ghost battle (Channeler)
     turns your back on the room).  Proved: 3 moves, 250 states, rating 4; unsolvable without either trapdoor.
   - State: S521 / S522 trapdoors used (each drops one chair, then jams), S523 gallery solved, S524 ladder down,
     V521 portraits in order.  Every chair is still once THISTLEDOWN_CLEARED (S176) is on.
+  - **Map builder 16:** the finale (Spell Tag + Sinistea, S176, the offer / GO_CURTAIN_CALL) is Dame Rosamund's on the attic
+    stage (547), as the script has it; the attic is reached through the dining room, so D5's COMBINE leads to it.
 
 ## D6 Gullcry Caves (564 1F 40×40, 565 B1F 32×30, `:CAVE`) — "the tide counts your steps"
 **Rule:** the sea breathes in and out. The tide toggles every **24 steps** (step hook; V526 = steps, S526 = high tide).

@@ -766,10 +766,63 @@ a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/
   21 ice blocks, the Never-Melt Ice islet in 4 slides, a way back off), frosted-fern hollows (the Emolga night table),
   the Snowveil Shrine.  Sigurd keeps his night-only Emolga line word for word; RIME_GLADE (0,15) unchanged.
   Before/after: `ch2_4_compare/562_before_after.jpg`, `563_before_after.jpg`.
+- **Thistledown Manor's finale moves to the attic (job 3, story/21_SCRIPT_CH3.md "Attic (547), after the third scene"):**
+  `manor.finale()` puts Dame Rosamund on the attic stage (17,5): the script's bravo, the Spell Tag and Sinistea Lv 14 (not
+  the script's Litwick: the distribution pass), S176, `Prismfall.checkpoint`, the offer, `GO_CURTAIN_CALL`.  Each won scene
+  sets `pfm :manor_scene_N`; a reload after the curtain call lands on her self-switch-B page (the offer again, no second
+  gift).  The parlour's event is now her welcome (the script's opening lines; "the second act is upstairs" once the
+  scenes are done).  The attic's Spell Tag ball became a Revive.
 - **Kit:** `CK.woods(..., pick=f)` (a palette by place); **`CK.infill(r, palettes)`** after `r.paint()`: packs every class-T
   cell the staggered lattice could not fit (ragged edges, two-row bands) with a lattice tree, a 2x2 shrub or a 1x1 bush,
   so no forest cell is a walkable gap (bushes may be tile ids: snow maps use 10371 / 10551, `shrubs=()`); `CK.thin_bands(r)` at plan
   time.  `DECOR_SH['flowers']` 11 and 12 are SOLID bushes: never use them as floor dressing.
+
+## 2s. Map builder 15 (2026-11-21): the Lumen kit, Lumen City, Gym 4, the Gala and the Lowlight Shatter
+- **Lumen kit** (`mapgen/ldraw.py`, appended by rcustom AFTER the manor kit, so no earlier id moved; the pf part grew to
+  `CUSTOM_ROWS = 1400`, ~1 710 tiles).  Zenith in brass, white stone, glass and light: marble slabs `lm_pave0-7`, cream
+  plaza flags, basalt setts and tram track, kerbs, brass light-conduit inlays `lm_inlay_*`, the 5x5 Meridian sunburst,
+  marble stairs, the plateau wall kit **`lmw`** (balustrade lip / ashlar face with a brass band / foot; sunburst and
+  lamp alternates), the drop over Nadir (`lm_deep*`, the `lm_nadir*` skyline band), brass railings.  **Buildings
+  `bldg()`**: verdigris / slate / brass / terracotta fish-scale mansards with oculus dormers and brass cresting, flat
+  roofs with tanks, skylights and roof gardens, glass curtain bays, arched lit windows, pilasters, dentil cornices,
+  shopfronts and awnings, neon blade signs, clocks, balconies; the Lowlight's soot-brick tenements (fire escapes,
+  laundry, pipes, the Hollow Ring, boarded windows).  Civic: `lb_pc`, `lb_arcade` (glass vault), `lb_gym` (Rook's
+  black-glass studio, the neon bolt, ON AIR), `lb_spire` (the podium and the black-cored tower rising off the map),
+  `lb_gate`, `lb_lab`, `lb_cycle`, `lb_council`, `lb_apt`.  Roof fill `lm_roof{V,S,T}0-2` closes the blocks behind the
+  fronts.  Street: arc lamps (lit / numbered / dark), banner lamps, holo pylons, the Prism fountain (6x5), the Founders'
+  Lamp, kiosks, benches, planters, topiary, street trees in grates, the tram and shelters, the airship and its mast,
+  Lattice pylons, the Nadir lift cage and grilles, steam, bunting, posters, banners, stalls, the noodle cart, the
+  cobbler, the hopscotch, wear decals; the Fixed (`lm_fixed0-7`, crystal people), Bleed glass, the Veil.  Rooms: wall
+  kits **cvZ** (studio: black glass, neon), **cvY** (civic: cream marble, brass rail, walnut), **cvQ** (vault: riveted
+  steel, hazard band) with floors, carpets; Gym 4 devices (nodes I/L/T x rotations, strips lit/unlit, generator, lamps,
+  the camera alarm, powered doors, the latch gate, the drone socket, the splice node, the Plate cradle cold / plated /
+  cracked), studio and gala props (cameras, ring lights, monitors, racks, the Dark Stone core, the vault door,
+  chandeliers).  `python3 -I ldraw.py out.png` draws the sheet.
+- **Tileset 60 "PF Rejuv Lumen"** (the PF Rejuv sheet; autotiles Still water, Sea deep, Gravel Spring, DirtDark,
+  Waterfall, Waterfall bottom, Cave Pool).  `layouts/lumenkit.py`: `City(RMap)` (classes p q r k l x n f; paving on
+  layer 2 over the same slab, as Saltmere's cobbles), `pack()` in `layouts/lumen.py` (a block: fronts on its bottom
+  row, roofs behind), and the cvZ/cvY/cvQ/lmw kit registration.  All three layouts are in relayout.sh.
+- **Lumen City** (`layouts/lumen.py`): **180 the Concourse** (96x72): North Avenue's rank, the Council Ward stair and
+  Skyport steps (closed, guarded), the Circuit Gym's square, the Prism Plaza, Meridian Spire and its gala carpet, the
+  tram boulevard, Market Street (PC, Arcade, Glide Cycles), South Walk (the West Gate, Fossil Lab, apartments), the
+  lawns on the lip over Nadir, Lantern Lane and Arc Street, the east terrace and the Lowlight stairs (edge E 52-58 ->
+  181 W 4-10).  **181 the Lowlight** (60x44) and **608 the Lowlight (Shattered)**: the same packed streets; the twelve
+  at `RES_AT`, glass on 608; `012_Lumen.rb` swaps 181 for 608 while V104 is 1-2, and 608's west landing warps back
+  through the Veil.  Interiors (`layouts/lumen_interiors.py`): 582 West Gate, 182 PC and 183 Arcade (templates), 185
+  Spire Lobby, 186 Gala Hall, **951 Service Lifts**, **952 Plate Vault** (new ids, the story editor's), 187-189.
+  Rubric: 180 85 / 24 / 14 / mirror 3.9, 181 and 608 89 / 31-36 / 11 / 0.
+- **Gym 4** (`layouts/circuit_gym.py`, proofs `puzzles/circuit.py`; GYM_PUZZLES Gym 4 "The trim (map builder 15)"):
+  190 Switchroom 2 moves (8 states, 2/10), 191 Breadboard Hall 3 moves (45 states, 4/10; two alarm traps proved),
+  192 Live Wire Hall 6 moves (12 states, 5/10; walking model with live strips, latches and the drone socket), 193 the
+  splice 1 move: **12 required moves = rating 5**.  Boards are generated into 007_PuzzleRooms.rb (`PFCircuit`,
+  `pfm_g4_power / turn / socket / shock`); node events count clicks from their start rotation.  Gym trainers are
+  placed only once PBS has them (`TRAINERS` cells; REQUESTS).
+- **Story** (`layouts/story_ch5.py`, story/24_SCRIPT_CH5.md): V125 CH5_STEP 3-12 wired on 582, 180, 181, 608, 182,
+  185, 186, 951, 952, 193; the Lowlight blackout (S424, four Rotom boxes, V321 / S423, `pfm_lumen_box`); the Gala's
+  replica -> speech -> raid -> tag battle (`pfm_lumen_tag`, graceful until PBS has the trainers); the vault: the
+  Shatter, the **OVERCHARGED** Electivire (bosses.yaml; the bar-break prompt and GO_LIVE_WIRE), S113/S114/V104;
+  608's aftermath, Valen, Voss, the testimony (`:ch5_lowlight_testimony`, S115); Larch at 3 a.m. on 952.
+  Trials overlay rows for 180 / 181 / 185 are in `trial_overlay.py`.  Overview: `maps_out/previews/lumen/lumen_overview.jpg`.
 
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
@@ -916,8 +969,8 @@ above the mat facing up, and leave onto the door tile, where the door animates y
 - Not built yet:
   - Gullcry B1F (565) and The Rehearsal (568, :BLEED): signs.
   - Reyes Cellar (166): the cellar door is barred.
-  - Routes 7–8 (580/581), Lumen City (180–193) with Gym 4, the Meridian gala and the Lowlight Shatter (Act I finale):
-    Ebbmouth's east edge stays closed with trees until 580 exists.
+  - The Lock Road (580, 592, 590/591/596, 581, 595, 594, 593) and 584/585/588: Ebbmouth's east edge stays closed until
+    580 exists.  Lumen City, Gym 4, the Gala and the Lowlight Shatter are built (2s).
 - The River Ebb's day/night current flip in town is not done; the Outside tileset has no current autotiles. Gym 3 uses
   event-driven currents instead.
 - (Fixed by map builder 13: the mine and Gullcry Caves are on the PF cave kit, tileset 57.)

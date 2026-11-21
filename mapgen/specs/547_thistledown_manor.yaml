@@ -28,7 +28,43 @@ events:
   - cond: {self: A}
 - type: item
   at: [19, 5]
-  item: SPELLTAG
+  item: REVIVE
+- type: event
+  name: Dame Rosamund
+  at: [17, 5]
+  pages:
+  - graphic: &id001 {sprite: NPC 28, dir: down, opacity: 180}
+    commands:
+    - if: pfm?(:manor_scene_1) && pfm?(:manor_scene_2) && pfm?(:manor_scene_3)
+      then:
+      - 'Dame Rosamund: Bravo. BRAVO. Darling, you have it. The thing. We''ve been rehearsing for sixty years and never had it.'
+      - {script: 'pbReceiveItem(:SPELLTAG)'}
+      - A chipped teacup rattles out of a costume trunk and follows you. It wants to see the second act.
+      - {script: 'pbAddPokemon(:SINISTEA, 14)'}
+      - switch: [THISTLEDOWN_CLEARED, true]
+      - selfswitch: [B, true]
+      - {script: Prismfall.checkpoint}
+      - 'Dame Rosamund: Stay. Join the company. Forever. The run never closes here, you know. Not ever. Nobody here has ever stopped a show.'
+      - '(In the wings, Fenwick the butler mouths a single word, very slowly: don''t.)'
+      - &id002
+        choices: ['Thank you, but I have a gym to get to.', I'd love to.]
+        cancel: 1
+        branches:
+        - - 'Dame Rosamund: (sighs) They always do. The good ones always have somewhere to be.'
+          - selfswitch: [A, true]
+        - - 'Dame Rosamund: Wonderful! Wonderful! Places, everyone!'
+          - 'Fenwick: (very quietly) Oh, dear.'
+          - (The candles all go out at once. When they come back up, you are on the attic stage in a ruff, and the dust sheets are an audience.)
+          - {script: 'Prismfall.game_over(:GO_CURTAIN_CALL)'}
+      else: ['Dame Rosamund: Not yet, darling! The second act can''t begin without the first. Your scenes: the battlements, the closet, the graveyard.']
+  - cond: {self: B}
+    graphic: *id001
+    commands:
+    - 'Dame Rosamund: Stay. Join the company. Forever. The run never closes here, you know. Not ever. Nobody here has ever stopped a show.'
+    - '(In the wings, Fenwick the butler mouths a single word, very slowly: don''t.)'
+    - *id002
+  - cond: {self: A}
+    commands: ['The little stage is empty. In the front row the dust sheets seem to be applauding, very quietly.']
 - type: event
   name: Rag doll
   pages:

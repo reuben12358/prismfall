@@ -315,10 +315,11 @@ def build_546():
 def scenes():
     out = []
     def scene(name, at, sprite, d, opacity, line, choices, wins, loses, mon, after):
+        n = int(name.split()[-1])                  # map builder 16: a won scene sets pfm :manor_scene_N (the attic finale reads it)
         out.append({'type': 'event', 'name': name, 'at': list(at), 'pages': [
             {'graphic': {'sprite': sprite, 'dir': d, 'opacity': opacity}, 'commands': [
                 line, {'choices': choices, 'cancel': 0, 'branches': [
-                    [wins, {'selfswitch': ['A', True]}],
+                    [wins, {'script': 'pfm_set(:manor_scene_%d)' % n}, {'selfswitch': ['A', True]}],
                     [loses[0], {'script': 'WildBattle.start(:%s, 13)' % mon}],
                     [loses[1], {'script': 'WildBattle.start(:%s, 13)' % mon}]]}]},
             {'cond': {'self': 'A'}, 'commands': [after]}]})
@@ -337,26 +338,52 @@ def scenes():
           ["\"Alas, poor Voltorb!\"", "\"Is it... empty?\"", "\"I'll take it.\""],
           "\"Alas indeed!\" He bows, cackling, and is gone.", ["\"EMPTY?!\"", "\"Props are NOT for keeping!\""],
           'DUSKULL', "Freshly turned earth on the conservatory tiles.")
-    out.append({'type': 'event', 'name': 'Lady Thistledown', 'at': [12, 20], 'pages': [
+    out.append({'type': 'event', 'name': 'Dame Rosamund', 'at': [12, 20], 'pages': [   # map builder 16: the welcome; the finale is the attic's
         {'graphic': {'sprite': 'NPC 28', 'dir': 'down', 'opacity': 180}, 'commands': [
-            {'if': '$game_map.events.values.select { |e| e.name[/^Scene \\d/] }.all? { |e| $game_self_switches[[@map_id, e.id, "A"]] }',
-             'then': [
-                 "Lady Thistledown: Darling. DARLING. Three scenes, three triumphs. The company has not had an understudy like you in a century.",
-                 "Behind her, the butler-ghost mouths one word at you: don't.",
-                 "Lady Thistledown: Stay for the second act. Join the Thistledown Players... forever.",
-                 {'choices': ['Bow out gracefully', 'Join the company'], 'cancel': 1, 'branches': [
-                     ["Lady Thistledown: ...A pity. Then take your bouquet. Every star needs one.", {'script': 'pbReceiveItem(:SPELLTAG)'},
-                      "A chipped teacup rattles off the mantel and follows you.", {'script': 'pbAddPokemon(:SINISTEA, 14)'},
-                      {'switch': ['THISTLEDOWN_CLEARED', True]}, {'selfswitch': ['A', True]}],
-                     [{'script': 'Prismfall.game_over(:GO_CURTAIN_CALL)'}]]}],
-             'else': ["Lady Thistledown: Places, everyone! Places! ...You. You're the new understudy? Learn your scenes."]}]},
-        {'cond': {'self': 'A'}, 'commands': ["The parlour is quiet. On the mantel, a playbill: THE THISTLEDOWN PLAYERS - FINAL SEASON."]}]})
+            {'if': SCENES_DONE, 'then': [
+                "Dame Rosamund: Three scenes, three triumphs! Darling, the second act is UPSTAIRS. The attic. The company is waiting.",
+                "Dame Rosamund: Through the dining room and up the back stair. Mind the furniture. It is terribly jealous of the talent."],
+             'else': [
+                "Dame Rosamund: A visitor! An AUDIENCE! No - better! An ACTOR! We're one short for the second act. Our Laertes passed on. Again.",
+                "Dame Rosamund: Three scenes, darling. Hit your marks, say your lines. Miss them, and the company gets... restless.",
+                "Dame Rosamund: We heard there was trouble at the Lantern two nights ago. Somebody stopped the show. (A shudder blows out three candles.) Unthinkable. Nobody stops the show."]}]},
+        {'cond': {'switch': 'THISTLEDOWN_CLEARED'}, 'commands': ["The parlour is quiet. On the mantel, a playbill: THE THISTLEDOWN PLAYERS - FINAL SEASON."]}]})
     out.append({'type': 'event', 'name': 'Ghost girl', 'at': [23, 34], 'pages': [
         {'graphic': {'sprite': 'NPC 07', 'dir': 'down', 'opacity': 140}, 'commands': [
             "A little girl in an old-fashioned dress: \"Mama says the play never ends. Is that true?\"", "When you blink, she's gone.",
             {'selfswitch': ['A', True]}]},
         {'cond': {'self': 'A'}}]})
     return out
+
+
+SCENES_DONE = 'pfm?(:manor_scene_1) && pfm?(:manor_scene_2) && pfm?(:manor_scene_3)'
+
+
+def finale():
+    """Dame Rosamund's finale on the attic stage (story/21_SCRIPT_CH3.md, "Attic (547), after the third scene"; map builder
+    16 moved it here from the parlour).  The gift is Sinistea, not the script's Litwick (Fire answers Tamsin: the
+    distribution pass, POKEMON_AVAILABILITY Ch3)."""
+    R = lambda t: 'Dame Rosamund: ' + t
+    offer = [R("Stay. Join the company. Forever. The run never closes here, you know. Not ever. Nobody here has ever stopped a show."),
+             "(In the wings, Fenwick the butler mouths a single word, very slowly: don't.)",
+             {'choices': ['Thank you, but I have a gym to get to.', "I'd love to."], 'cancel': 1, 'branches': [
+                 [R("(sighs) They always do. The good ones always have somewhere to be."), {'selfswitch': ['A', True]}],
+                 [R("Wonderful! Wonderful! Places, everyone!"), "Fenwick: (very quietly) Oh, dear.",
+                  "(The candles all go out at once. When they come back up, you are on the attic stage in a ruff, and the dust sheets are an audience.)",
+                  {'script': 'Prismfall.game_over(:GO_CURTAIN_CALL)'}]]}]
+    gfx = {'sprite': 'NPC 28', 'dir': 'down', 'opacity': 180}
+    return {'type': 'event', 'name': 'Dame Rosamund', 'at': [17, 5], 'pages': [
+        {'graphic': gfx, 'commands': [
+            {'if': SCENES_DONE, 'then': [
+                R("Bravo. BRAVO. Darling, you have it. The thing. We've been rehearsing for sixty years and never had it."),
+                {'script': 'pbReceiveItem(:SPELLTAG)'},
+                "A chipped teacup rattles out of a costume trunk and follows you. It wants to see the second act.",
+                {'script': 'pbAddPokemon(:SINISTEA, 14)'},
+                {'switch': ['THISTLEDOWN_CLEARED', True]}, {'selfswitch': ['B', True]},
+                {'script': 'Prismfall.checkpoint'}] + offer,         # (a reload after the curtain call lands on page B: the offer again, no second gift)
+             'else': [R("Not yet, darling! The second act can't begin without the first. Your scenes: the battlements, the closet, the graveyard.")]}]},
+        {'cond': {'self': 'B'}, 'graphic': gfx, 'commands': offer},
+        {'cond': {'self': 'A'}, 'commands': ["The little stage is empty. In the front row the dust sheets seem to be applauding, very quietly."]}]}
 
 
 # ================================================================================================ 547 the attic
@@ -390,7 +417,8 @@ def build_547():
             {'graphic': {'tile': P1('mn_sheet_chair')}, 'commands': [
                 "Something under a dust sheet wags its tail.", {'script': 'WildBattle.start(:GREAVARD, 16)'}, {'selfswitch': ['A', True]}]},
             {'cond': {'self': 'A'}}]},
-        {'type': 'item', 'at': [19, 5], 'item': 'SPELLTAG'},
+        {'type': 'item', 'at': [19, 5], 'item': 'REVIVE'},                          # (the Spell Tag is Dame Rosamund's now)
+        finale(),
         trial('Rag doll', (13, 4), 'ATTIC_DOLL', sprite='Followers/SHUPPET', condition='badges >= 14'),
         {'type': 'sign', 'name': 'Attic stage', 'at': [16, 4], 'post': False, 'text':
          "A little stage of packing-case boards, with tin footlights. Chalked on the back wall: ACT II - TONIGHT - AND EVERY NIGHT."},

@@ -196,6 +196,7 @@ events:
       cancel: 0
       branches:
       - - '"...Perfect. PERFECT." The ghost wipes away a spectral tear.'
+        - {script: 'pfm_set(:manor_scene_1)'}
         - selfswitch: [A, true]
       - - '"WRONG PLAY!" The ghost''s Pokémon lunges out of the dark!'
         - {script: 'WildBattle.start(:GASTLY, 13)'}
@@ -214,6 +215,7 @@ events:
       cancel: 0
       branches:
       - - '"Exquisite." She fades, delighted.'
+        - {script: 'pfm_set(:manor_scene_2)'}
         - selfswitch: [A, true]
       - - '"HOW DARE YOU."'
         - {script: 'WildBattle.start(:MISDREAVUS, 13)'}
@@ -232,6 +234,7 @@ events:
       cancel: 0
       branches:
       - - '"Alas indeed!" He bows, cackling, and is gone.'
+        - {script: 'pfm_set(:manor_scene_3)'}
         - selfswitch: [A, true]
       - - '"EMPTY?!"'
         - {script: 'WildBattle.start(:DUSKULL, 13)'}
@@ -240,28 +243,18 @@ events:
   - cond: {self: A}
     commands: [Freshly turned earth on the conservatory tiles.]
 - type: event
-  name: Lady Thistledown
+  name: Dame Rosamund
   at: [12, 20]
   pages:
   - graphic: {sprite: NPC 28, dir: down, opacity: 180}
     commands:
-    - if: $game_map.events.values.select { |e| e.name[/^Scene \d/] }.all? { |e| $game_self_switches[[@map_id, e.id, "A"]] }
-      then:
-      - 'Lady Thistledown: Darling. DARLING. Three scenes, three triumphs. The company has not had an understudy like you in a century.'
-      - 'Behind her, the butler-ghost mouths one word at you: don''t.'
-      - 'Lady Thistledown: Stay for the second act. Join the Thistledown Players... forever.'
-      - choices: [Bow out gracefully, Join the company]
-        cancel: 1
-        branches:
-        - - 'Lady Thistledown: ...A pity. Then take your bouquet. Every star needs one.'
-          - {script: 'pbReceiveItem(:SPELLTAG)'}
-          - A chipped teacup rattles off the mantel and follows you.
-          - {script: 'pbAddPokemon(:SINISTEA, 14)'}
-          - switch: [THISTLEDOWN_CLEARED, true]
-          - selfswitch: [A, true]
-        - - {script: 'Prismfall.game_over(:GO_CURTAIN_CALL)'}
-      else: ['Lady Thistledown: Places, everyone! Places! ...You. You''re the new understudy? Learn your scenes.']
-  - cond: {self: A}
+    - if: pfm?(:manor_scene_1) && pfm?(:manor_scene_2) && pfm?(:manor_scene_3)
+      then: ['Dame Rosamund: Three scenes, three triumphs! Darling, the second act is UPSTAIRS. The attic. The company is waiting.', 'Dame Rosamund: Through
+          the dining room and up the back stair. Mind the furniture. It is terribly jealous of the talent.']
+      else: ['Dame Rosamund: A visitor! An AUDIENCE! No - better! An ACTOR! We''re one short for the second act. Our Laertes passed on. Again.', 'Dame Rosamund:
+          Three scenes, darling. Hit your marks, say your lines. Miss them, and the company gets... restless.', 'Dame Rosamund: We heard there was trouble
+          at the Lantern two nights ago. Somebody stopped the show. (A shudder blows out three candles.) Unthinkable. Nobody stops the show.']
+  - cond: {switch: THISTLEDOWN_CLEARED}
     commands: ['The parlour is quiet. On the mantel, a playbill: THE THISTLEDOWN PLAYERS - FINAL SEASON.']
 - type: event
   name: Ghost girl
