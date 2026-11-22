@@ -137,6 +137,7 @@ class Battle
   def pbEOREndTerrain
     prismfall_fe_pbEOREndTerrain
     FieldEffects.end_of_round(self)
+    FieldEffects.scripted_changes(self)
   end
 
   #-----------------------------------------------------------------------------

@@ -7073,6 +7073,39 @@
    }
   },
   {
+   "id": 255,
+   "name": "Cindervault - Tap Chamber",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "dungeon",
+   "size": [
+    27,
+    21
+   ],
+   "tileset": "PF Rejuv Forge",
+   "bgm": "Cave",
+   "field": "VOLCANIC",
+   "segment": 6,
+   "detail": "built",
+   "connections_outline": [
+    "service stair up to the Slag Ward (249)"
+   ],
+   "key_features": [
+    "Meridian Standard Tap No. 7 in a magma pit",
+    "Wick's sluices (W)",
+    "Quent's damper valves (E)",
+    "the emergency lever under glass (NE)",
+    "the Caldera Crisis autorun (story/29_SCRIPT_CH8.md)"
+   ],
+   "metadata": {
+    "town_map_pos": [
+     0,
+     24,
+     8
+    ]
+   }
+  },
+  {
    "id": 260,
    "name": "Ironreach",
    "act": 2,

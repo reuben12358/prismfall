@@ -298,6 +298,13 @@ class Game_Temp
     when "fieldstage"
       self.battle_rules["fieldStage"] = [var.to_i, 1].max
       return
+    when "fieldchange"
+      # setBattleRule("fieldChange", [turn, :FIELD, "message"]): a story beat changes the field at the end of
+      # that round (Ch8: Wick's hose opens the channels on turn 3, Volcanic -> Ashen Waste). Repeatable.
+      list = (self.battle_rules["fieldChange"] ||= [])
+      turn, id, msg = Array(var)
+      list.push([[turn.to_i, 1].max, FieldEffects.normalize_id(id), msg]) if id
+      return
     end
     prismfall_fe_add_battle_rule(rule, var)
   end
@@ -316,7 +323,7 @@ def setBattleRule(*args)
   while i < args.length
     arg = args[i]
     key = (arg.is_a?(String) || arg.is_a?(Symbol)) ? arg.to_s.downcase : nil
-    if key == "field" || key == "fieldstage"
+    if key == "field" || key == "fieldstage" || key == "fieldchange"
       raise _INTL("Argument {1} expected a variable after it but didn't have one.", arg) if i + 1 >= args.length
       $game_temp.add_battle_rule(key, args[i + 1])
       i += 2
@@ -367,6 +374,7 @@ module FieldEffects
       id = base_id
       stage = base_stage
     end
+    battle.instance_variable_set(:@fe_scripted_changes, (rules["fieldChange"] || []).map(&:dup))
     return if id.nil? || id == NONE
     stage = rules["fieldStage"] if rules["fieldStage"]
     battle.fe_set_initial_field(id, stage)
@@ -480,5 +488,23 @@ module FieldEffects
     base = self.base_field(battle)
     return base if base && base != cur && self.exists?(base)
     return default
+  end
+end
+
+#===============================================================================
+# Scripted field changes (setBattleRule("fieldChange", [turn, :FIELD, "message"])):
+# applied at the end of the given round, after the field's own end-of-round rules.
+#===============================================================================
+module FieldEffects
+  def self.scripted_changes(battle)
+    list = battle.instance_variable_get(:@fe_scripted_changes)
+    return if !list || list.empty? || battle.decision > 0
+    n = (battle.instance_variable_get(:@fe_rounds_ended) || 0) + 1
+    battle.instance_variable_set(:@fe_rounds_ended, n)
+    due = list.select { |turn, _, _| turn == n }
+    due.each do |_, id, msg|
+      list.delete([n, id, msg])
+      battle.change_field(id, msg)
+    end
   end
 end

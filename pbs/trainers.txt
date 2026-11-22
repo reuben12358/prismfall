@@ -15521,6 +15521,147 @@ Pokemon = PORYGONZ,90
     Nature = TIMID
     IV = 20
     EV = 0
+# Ch8 - the Caldera Crisis (story/29_SCRIPT_CH8.md): the Hammer at Tap Seven, field :VOLCANIC (double)
+#-------------------------------
+[HOLLOW_GRUNT_M,Hammer,8]
+LoseText = They'll listen. Someday they'll listen.
+Pokemon = ELECTRODE,38
+    Moves = THUNDERBOLT,EXPLOSION,TAUNT,LIGHTSCREEN
+    Ability = AFTERMATH
+    Nature = TIMID
+    IV = 8
+Pokemon = SANDACONDA,39
+    Moves = DRILLRUN,GLARE,SANDTOMB,ROCKSLIDE
+    Ability = SANDSPIT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HOLLOW_GRUNT_M,Hammer,108]
+LoseText = They'll listen. Someday they'll listen.
+Pokemon = ELECTRODE,39
+    Moves = THUNDERBOLT,EXPLOSION,TAUNT,LIGHTSCREEN
+    Ability = AFTERMATH
+    Nature = TIMID
+    IV = 20
+Pokemon = SANDACONDA,40
+    Moves = DRILLRUN,GLARE,SANDTOMB,ROCKSLIDE
+    Ability = SANDSPIT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HOLLOW_GRUNT_M,Hammer,208]
+LoseText = They'll listen. Someday they'll listen.
+Pokemon = ELECTRODE,37
+    Moves = THUNDERBOLT,EXPLOSION,TAUNT,LIGHTSCREEN
+    Ability = AFTERMATH
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = SANDACONDA,38
+    Moves = DRILLRUN,GLARE,SANDTOMB,ROCKSLIDE
+    Ability = SANDSPIT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+#-------------------------------
+[HOLLOW_GRUNT_F,Hammer,8]
+LoseText = You saw the Lowlight. How can you stand there?
+Pokemon = THIEVUL,38
+    Moves = KNOCKOFF,SNARL,NASTYPLOT,TAUNT
+    Ability = STAKEOUT
+    Nature = TIMID
+    IV = 8
+Pokemon = TOXICROAK,39
+    Moves = POISONJAB,SUCKERPUNCH,DRAINPUNCH,FAKEOUT
+    Ability = DRYSKIN
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HOLLOW_GRUNT_F,Hammer,108]
+LoseText = You saw the Lowlight. How can you stand there?
+Pokemon = THIEVUL,39
+    Moves = KNOCKOFF,SNARL,NASTYPLOT,TAUNT
+    Ability = STAKEOUT
+    Nature = TIMID
+    IV = 20
+Pokemon = TOXICROAK,40
+    Moves = POISONJAB,SUCKERPUNCH,DRAINPUNCH,FAKEOUT
+    Ability = DRYSKIN
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HOLLOW_GRUNT_F,Hammer,208]
+LoseText = You saw the Lowlight. How can you stand there?
+Pokemon = THIEVUL,37
+    Moves = KNOCKOFF,SNARL,NASTYPLOT,TAUNT
+    Ability = STAKEOUT
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = TOXICROAK,38
+    Moves = POISONJAB,SUCKERPUNCH,DRAINPUNCH,FAKEOUT
+    Ability = DRYSKIN
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+#-------------------------------
+# Ch8 - Directorate Lieutenant at Tap Seven's emergency lever (shutdown branch; double with Quent v0)
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Lieutenant,8]
+Items = SUPERPOTION
+LoseText = This goes to the Directorate. With your name on it.
+Pokemon = SKARMORY,39
+    Moves = BRAVEBIRD,IRONHEAD,ROOST,TAILWIND
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 8
+Pokemon = GRANBULL,40
+    Moves = PLAYROUGH,CLOSECOMBAT,THUNDERFANG,BULKUP
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Lieutenant,108]
+Items = SUPERPOTION
+LoseText = This goes to the Directorate. With your name on it.
+Pokemon = SKARMORY,40
+    Moves = BRAVEBIRD,IRONHEAD,ROOST,TAILWIND
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 20
+Pokemon = GRANBULL,41
+    Moves = PLAYROUGH,CLOSECOMBAT,THUNDERFANG,BULKUP
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Lieutenant,208]
+LoseText = This goes to the Directorate. With your name on it.
+Pokemon = SKARMORY,38
+    Moves = BRAVEBIRD,IRONHEAD,ROOST,TAILWIND
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = GRANBULL,39
+    Moves = PLAYROUGH,CLOSECOMBAT,THUNDERFANG,BULKUP
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+#-------------------------------
 # Ch21 tag foe - Directorate Captain (when Marchetti is turned)
 #-------------------------------
 [MERIDIAN_DIRECTORATE,Captain,21]

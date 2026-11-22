@@ -293,7 +293,8 @@ class Scene_DemoRun
       DemoRun.run
     rescue Exception => e
       raise if e.is_a?(SystemExit)
-      DemoRun.log("FATAL #{e.class}: #{e.message}\n  " + (e.backtrace || []).first(30).join("\n  "))
+      detail = (e.respond_to?(:event_message) && e.event_message) ? "\n" + e.event_message.to_s : ""
+      DemoRun.log("FATAL #{e.class}: #{e.message}#{detail}\n  " + (e.backtrace || []).first(30).join("\n  "))
     end
     $scene = nil
     Kernel.exit!(0)

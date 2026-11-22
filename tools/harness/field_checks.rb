@@ -17,7 +17,7 @@ module Harness
     def mk(*a, **k); Probes.mk(*a, **k); end
 
     # A scripted wild battle with a full party. script / foe_script: move IDs, [:SWITCH, i], or nil (= end).
-    def mini(title, field:, party:, foe:, script:, foe_script: nil, stage: nil, rng: :mid, seed: 4242)
+    def mini(title, field:, party:, foe:, script:, foe_script: nil, stage: nil, rng: :mid, seed: 4242, rules: [])
       $player.party = party
       info = { :snaps => [] }
       setup = lambda do |battle|
@@ -56,6 +56,7 @@ module Harness
       log = Harness.run_battle(title, :seed => seed, :setup => setup) do
         setBattleRule("field", (field == :NONE) ? "none" : field)
         setBattleRule("fieldStage", stage) if stage
+        rules.each { |r| setBattleRule(*r) }
         setBattleRule("canLose")
         setBattleRule("cannotRun")
         WildBattle.start(foe)
@@ -250,8 +251,23 @@ module Harness
       out
     end
 
+    # setBattleRule("fieldChange", [turn, :FIELD, msg]): Ch8's vent (Volcanic -> Ashen Waste at the end of turn 3)
+    def scripted_field_change
+      out = []
+      log, info = mini("CHECK scripted field change: Volcanic -> Ashen Waste at the end of turn 3", :field => :VOLCANIC,
+                       :party => [mk(:MEW, :moves => [:CALMMIND])], :foe => mk(:SNORLAX),
+                       :script => [:CALMMIND, :CALMMIND, :CALMMIND, :CALMMIND, :SPLASH],
+                       :rules => [["fieldChange", [3, :ASHEN_WASTE, "Lake water roars down the old channels!"]]])
+      t = turn_of(info, :ASHEN_WASTE, 1)
+      ok = changes(log).map { |o, n, _| [o, n] } == [[:VOLCANIC, :ASHEN_WASTE]] && t == 3
+      out << result("Scripted field change (fieldChange rule): Volcanic -> Ashen Waste after round 3", ok,
+                    "changes #{fmt(changes(log))}, Ashen Waste from turn #{t.inspect} (want 3)", log)
+      out
+    end
+
     def run
-      glass_cooling + glass_cracking + glass_shards + glass_insulation_and_mirror + frozen_lake_thaw + other_audit_changes
+      glass_cooling + glass_cracking + glass_shards + glass_insulation_and_mirror + frozen_lake_thaw + other_audit_changes +
+        scripted_field_change
     end
   end
 end

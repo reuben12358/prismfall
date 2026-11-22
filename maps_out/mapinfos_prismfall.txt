@@ -61,6 +61,7 @@
 191	190	Circuit Gym - Breadboard Hall
 192	190	Circuit Gym - Live Wire Hall
 193	190	Circuit Gym - Core
+255	249	Cindervault - Tap Chamber
 280	0	Verdance - Market Terraces
 281	280	Verdance Pokémon Center
 282	280	Verdance Mart

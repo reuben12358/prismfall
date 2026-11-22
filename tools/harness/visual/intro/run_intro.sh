@@ -7,8 +7,8 @@
 #===============================================================================
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"; VIS="$(cd "$HERE/.." && pwd)"; KIT="$(cd "$VIS/../../.." && pwd)"
-ART=""; PLAYER="A"
-while [[ $# -gt 0 ]]; do case "$1" in --art) ART="$2"; shift 2;; --player) PLAYER="$2"; shift 2;; *) shift;; esac; done
+ART=""; PLAYER="A"; CAPTURE="$HERE/006_IntroCapture.rb"; PLAN="intro"
+while [[ $# -gt 0 ]]; do case "$1" in --art) ART="$2"; shift 2;; --player) PLAYER="$2"; shift 2;; --capture) CAPTURE="$2"; shift 2;; --plan) PLAN="$2"; shift 2;; *) shift;; esac; done
 export RUN="${RUN:-/home/claude/run_intro}"
 if [[ ! -d "$RUN/game" ]]; then
   mkdir -p "$RUN"; [[ -e "$RUN/build" ]] || ln -s /home/claude/run/build "$RUN/build"
@@ -21,13 +21,20 @@ find "$G/Plugins" -name '__pycache__' -prune -exec rm -rf {} +
 [[ -d "$KIT/graphics" ]] && cp -r "$KIT/graphics/." "$G/Graphics/"
 [[ -d "$KIT/art/out/Graphics" ]] && cp -r "$KIT/art/out/Graphics/." "$G/Graphics/"
 [[ -n "$ART" ]] && cp -r "$ART/." "$G/Graphics/"
+# current maps and tilesets (the assembled copy may predate them): tileset registry, map data, MapInfos
+cp -r "$KIT/maps_out/Graphics/." "$G/Graphics/" 2>/dev/null || true
+cp -r "$KIT/maps_out/Plugins/." "$G/Plugins/" 2>/dev/null || true   # map helpers (Prismfall Maps)
+python3 -I "$KIT/mapgen/merge_tilesets.py" "$G" --force | tail -1
+python3 -I "$KIT/mapgen/merge_mapinfos.py" "$G" --force 2>&1 | tail -1
 cp "$KIT/pbs/trainer_types.txt" "$G/PBS/trainer_types_prismfall.txt"   # current trainer types (PLAYER_A/B)
 rm -f "$G/Data/trainer_types.dat"                                         # a missing .dat makes Essentials recompile PBS
-cp "$HERE/006_IntroCapture.rb" "$G/Plugins/ZZ Demo Autorun/"
-rm -rf "$G"/Captures/intro_*
-IC_FOE="${IC_FOE:-}" IC_PLAYER="$PLAYER" DEMO_PLAN=intro ISOLATE=1 DISPLAY_NUM="${DISPLAY_NUM:-178}" RUN_TIMEOUT="${RUN_TIMEOUT:-900}" \
-  bash "$VIS/run_engine_capture.sh" run intro | grep -E "intro|command|EXCEPTION|FATAL|Error|player trainer" || true
+cp "$KIT/pbs/trainers.txt" "$G/PBS/trainers_prismfall.txt"             # current trainers (Ch8 Hammer/Lieutenant)
+rm -f "$G/Data/trainers.dat"
+cp "$VIS/001_DemoAutorun.rb" "$G/Plugins/ZZ Demo Autorun/"; rm -f "$G/Plugins/ZZ Demo Autorun/"00[6-9]_*.rb; cp "$CAPTURE" "$G/Plugins/ZZ Demo Autorun/"
+rm -rf "$G"/Captures/intro_* "$G"/Captures/tap_*
+IC_FOE="${IC_FOE:-}" IC_PLAYER="$PLAYER" DEMO_PLAN="$PLAN" ISOLATE=1 DISPLAY_NUM="${DISPLAY_NUM:-178}" RUN_TIMEOUT="${RUN_TIMEOUT:-900}" \
+  bash "$VIS/run_engine_capture.sh" run "$PLAN" | grep -E "intro|tap|command|EXCEPTION|FATAL|Error|player trainer|RESULT" || true
 mkdir -p "$RUN/frames"
-for d in "$G"/Captures/intro_*/; do n="$(basename "$d")"; rm -rf "$RUN/frames/$n"; mv "$d" "$RUN/frames/$n"; done
+for d in "$G"/Captures/intro_*/ "$G"/Captures/tap_*/; do [[ -d "$d" ]] || continue; n="$(basename "$d")"; rm -rf "$RUN/frames/$n"; mv "$d" "$RUN/frames/$n"; done
 cp "$G/Captures/demo.log" "$RUN/frames/" 2>/dev/null || true
 echo "frames: $RUN/frames"

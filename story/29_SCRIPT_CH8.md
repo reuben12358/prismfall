@@ -210,7 +210,7 @@ V129 = 6 (begin).
 [name: Hammer Bomber] They'll cover up a fever. They'll cover up a crack. They can't cover up a mountain. When this goes, every screen in Velmora will show it, and THEN they'll listen.
 [portrait: WICK, angry] There are families on the stairs, child.
 [name: Hammer Bomber] There were families in the Lowlight!
-BATTLE: double battle vs [HOLLOW_GRUNT_M "Hammer" + HOLLOW_GRUNT_F "Hammer"] (Cindervault version [NEW]; levels per BALANCE for the segment before Gym 8). Field: Volcanic. (Their Pokémon guard the ladder.)
+BATTLE: double battle vs [HOLLOW_GRUNT_M "Hammer" + HOLLOW_GRUNT_F "Hammer"] (version 8). Field: Volcanic. (Their Pokémon guard the ladder.)
 (LOSE: whiteout to the Cindervault Pokémon Center; restart at the top of the tap stair, Prismfall.checkpoint.)
 (WIN:)
 (The two Hammers' Pokémon go down. The bomber is cornered on the ladder, and the Splitter on the pipe is still ticking. He looks at it. He looks at you. Then he holds out his hand, and in it is a brass detonator with one red key.)
@@ -237,7 +237,7 @@ CHOICE :ch8_caldera
 > Help Wick vent it. (vent)
   Script: pf_choose(:ch8_caldera, :vent)
   [portrait: QUENT, sad] Oh, don't. Don't. Do you know what that'll do to my DATA?
-  BATTLE: MERIDIAN_QUENT "Percival", version 0. Field: Volcanic. (His team guards the valves. At the end of turn 3 Wick's hose opens the channels and the field becomes Ashen Waste: a scripted field change [NEW battle-script hook; field designer].)
+  BATTLE: MERIDIAN_QUENT "Percival", version 0. Field: Volcanic. (His team guards the valves. At the end of turn 3 Wick's hose opens the channels and the field becomes Ashen Waste: `setBattleRule("fieldChange", [3, :ASHEN_WASTE, "Lake water roars down the old channels! The fire goes grey!"])`.)
   (Quent's note in the trainer data: his Rain Dances are dampers too. Rain quenches the field to Cinderglass at once, and rain-form Castform rides the geysers.)
   (WIN:)
   [portrait: QUENT, neutral] *(wiping his spectacles)* Fine. Fine. I'll write it up as a natural experiment. "Subject vents mountain." Do you know how rare that is?
@@ -249,7 +249,7 @@ CHOICE :ch8_caldera
   Script: pf_choose(:ch8_caldera, :dampers)
   [portrait: WICK, sad] *(to the PC, without anger)* Then hold its mouth shut, if you must. It'll still have a fever.
   (The Hollow don't fight. They pick up their hose and go up the stair. But the two Hammers you beat aren't gone: they come back down with a third, and this time they're after the dampers.)
-  BATTLE: tag battle — PC + Quent (MERIDIAN_QUENT as partner, version 0 [NEW partner flag]) vs [HOLLOW_GRUNT_M "Hammer"] + [HOLLOW_GRUNT_F "Hammer"] (Cindervault version). Field: Volcanic.
+  BATTLE: tag battle — PC + Quent (MERIDIAN_QUENT as partner, version 0 [NEW partner flag]) vs [HOLLOW_GRUNT_M "Hammer"] + [HOLLOW_GRUNT_F "Hammer"] (version 8). Field: Volcanic.
   (Quent's partner AI uses Rain Dance on turn 1; the field quenches to Cinderglass, which he narrates.)
   [portrait: QUENT, happy] *(in the battle, at the quench)* Look at that! Isn't that BEAUTIFUL! Glass! Oh, I wish my mother could see this.
   (WIN:)
@@ -261,7 +261,7 @@ CHOICE :ch8_caldera
   (You walk past both of them to the red lever. The Directorate soldiers step together.)
   [name: Directorate Lieutenant] That's Sovereign's property. Step back from it.
   [portrait: QUENT, shocked] Oh, you CAN'T, that's — that's a whole tap, that's MONTHS—
-  BATTLE: double battle vs [MERIDIAN_QUENT "Percival", version 0] + [MERIDIAN_DIRECTORATE "Lieutenant", Cindervault version [NEW]]. Field: Volcanic. (The harder fight: two trainers, one of them an admin.)
+  BATTLE: double battle vs [MERIDIAN_QUENT "Percival", version 0] + [MERIDIAN_DIRECTORATE "Lieutenant", version 8]. Field: Volcanic. (The harder fight: two trainers, one of them an admin.)
   (WIN:)
   (You break the glass and pull. The lever takes your whole weight. Somewhere far down, something very large stops turning.)
   (The pipe groans. The gauges shudder, and drop, and keep dropping, and stop in the green. The forges up the walls stay lit.)
@@ -395,7 +395,7 @@ V129 = 10. V102 STORY_CHAPTER = 9.
 | 250–253 the Foundry | per GYM_PUZZLES Gym 7 |
 
 ## New data this chapter needs
-- **Trainers:** `HOLLOW_GRUNT_M/F "Hammer"` Cindervault versions; `MERIDIAN_DIRECTORATE "Lieutenant"` Cindervault version; `MERIDIAN_QUENT` v0 as a partner (dampers branch); Quent + Lieutenant as a two-trainer double (shutdown branch).
+- **Trainers:** in `pbs/trainers.txt` (2026-11-21): `HOLLOW_GRUNT_M/F "Hammer"` v8/108/208, `MERIDIAN_DIRECTORATE "Lieutenant"` v8/108/208. `MERIDIAN_QUENT` v0 doubles as the dampers partner (still needs a `MERIDIAN_QUENT_back.png` partner back sprite: Gemini art list).
 - **Items:** QUENCH BADGE (badge 7 name; story docs only); TM35 from Brann (GYM_PUZZLES).
 - **Flags:** V129 CH8_STEP is now used as above (design/FLAGS.md); `:ashkaar_watched` is a map-story flag (`pfm_set`/`pfm_get`).
 - **Game over:** GO_LET_THEM_LISTEN (NARRATIVE_KEYS §9), checkpoint at the top of the tap stair.

@@ -301,6 +301,11 @@ MapPosition = 0,16,16
 Name = Circuit Gym
 MapPosition = 0,16,16
 #-------------------------------
+[255]   # Cindervault - Tap Chamber
+Name = Cindervault
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
 [280]   # Verdance - Market Terraces
 Name = Verdance
 Outdoor = true

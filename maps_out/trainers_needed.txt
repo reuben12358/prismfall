@@ -25,6 +25,9 @@
 173	:SAILOR, "Bjorn"
 174	Prismfall.gym_battle(pfm_gym(:LEADER_MARISOL), double: false)
 193	Prismfall.gym_battle(pfm_gym(:LEADER_ROOK), double: false)
+255	:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8
+255	:MERIDIAN_QUENT, "Percival", 0
+255	:MERIDIAN_QUENT, "Percival", 0, :MERIDIAN_DIRECTORATE, "Lieutenant", 8
 520	:LASS, "Dory"
 520	:LASS, "Wren"
 520	:YOUNGSTER, "Pim"

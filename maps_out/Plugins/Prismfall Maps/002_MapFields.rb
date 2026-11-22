@@ -107,6 +107,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[252] = :VOLCANIC   # Cindervault Gym - Puzzle Room 2
   FieldEffects::MAP_FIELDS[253] = :VOLCANIC   # Cindervault Gym - Warden Arena
   FieldEffects::MAP_FIELDS[254] = :HOLLOW_CATHEDRAL   # Pyre Keep - Ancestor Crypts
+  FieldEffects::MAP_FIELDS[255] = :VOLCANIC   # Cindervault - Tap Chamber
   FieldEffects::MAP_FIELDS[260] = [:NEW_MOON, 3]   # Ironreach
   FieldEffects::MAP_FIELDS[261] = :NONE   # Ironreach Pokémon Center
   FieldEffects::MAP_FIELDS[262] = :NONE   # Ironreach Mart

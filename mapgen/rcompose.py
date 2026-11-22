@@ -50,7 +50,8 @@ AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'),
          ('pf', 62, 'Gravel Spring'), ('pf', 95, 'Packed Snow'), ('pf', 43, 'Frozen Pond'),
          ('pf', 75, 'Saltmere Cobbles'), ('pf', None, 'Saltmere Flags'),           # map builder 8 (tileset 55)
          ('pf', 43, 'Salt Lake'), ('pf', 43, 'Sea Cave'), ('pf', 43, 'Cave Pool'),   # map builder 13 (tileset 57)
-         ('pf', 43, 'Lock Water')]                                                     # map builder 13 (tileset 58, Gym 3)
+         ('pf', 43, 'Lock Water'),                                                     # map builder 13 (tileset 58, Gym 3)
+         ('pf', 43, 'Magma')]                                                          # Ch8 Tap Chamber (tileset 61)
 
 
 def _ice(x, y):
@@ -106,6 +107,9 @@ DERIVED['Cave Pool'] = ('reborn', 'Still water grey', _cave_water((70, 120, 150)
 # solid and not surfable (terrain tag 0): the basins are crossed by raft, never by Surf
 DERIVED['Lock Water'] = ('reborn', 'Still water grey', _cave_water((40, 74, 108), (26, 52, 84), (52, 56, 70), (66, 70, 84),
                          (92, 98, 114), (116, 122, 138), (146, 152, 166), (92, 98, 114)), {'tag': 0, 'pas': 15})
+# Magma: Cindervault's tap pit (Ch8, map 255) - glowing orange melt in a rim of black basalt; impassable, no Surf
+DERIVED['Magma'] = ('reborn', 'Still water grey', _cave_water((240, 122, 40), (192, 64, 22), (30, 24, 26), (50, 40, 38),
+                    (72, 56, 50), (98, 76, 62), (128, 100, 80), (84, 64, 50)), {'tag': 0, 'pas': 15})
 VBASE = 100000
 # v21.1 terrain tags for water autotiles these games leave at 0 (they script surfing differently): 5 DeepWater,
 # 6 StillWater, 7 Water, 8 Waterfall, 9 WaterfallCrest.  Fishing and surfing need them.
@@ -147,6 +151,8 @@ TILESETS = {
     60: ('PF Rejuv Lumen', [('rejuvenation', 'Still water'), ('rejuvenation', 'Sea deep'), ('pf', 'Gravel Spring'),
                             ('rejuvenation', 'DirtDark'), ('rejuvenation', 'Waterfall'), ('rejuvenation', 'Waterfall bottom'),
                             ('pf', 'Cave Pool')]),
+    # Ch8: the Tap Chamber under Cindervault's Slag Ward (255): the earth cave kit (cdraw 'E') and the magma pit
+    61: ('PF Rejuv Forge', [('pf', 'Magma'), ('pf', 'Cave Pool'), ('rejuvenation', 'Sea deep')]),
     55: ('PF Rejuv City', [('rejuvenation', 'Ocean'), ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore_2'),
                            ('pf', 'Saltmere Cobbles'), ('pf', 'Saltmere Flags'), ('rejuvenation', 'DirtDark'),
                            ('pf', 'Gravel Spring')]),

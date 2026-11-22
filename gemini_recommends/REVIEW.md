@@ -79,7 +79,8 @@ One entry per proposal folder, newest first. Verdicts are ADOPT, ADAPT, REJECT o
 
 ## 2026-11-21_ebdx-and-glass-dunes-bugs — **ADOPT, queued**
 - Particle bleach on `reconfigure`, the Flooded Dunes → Desert double flash, and `set_field_stage` skipping `on_field_start` go to the transitions agent, which is already reworking staged transitions.
-- `BATTLE_RULES_WITH_VALUE`, `damage_type` ignoring Inverse, Mega counted as a Colosseum KO, and the AI scoring gaps go to the bug-bash queue.
+- `BATTLE_RULES_WITH_VALUE`: **REJECT.** Our list matches v21.1's own `setBattleRule` exactly; `size`, `bgm` and the others don't take a value in this engine.
+- `damage_type` ignoring Inverse, Mega counted as a Colosseum KO, and the AI scoring gaps go to the bug-bash queue.
 - Emote black boxes and the white face well (014_Portraits.rb): ADOPT. Use a soft parchment tone, not pure white, so pale hair and veils read.
 - SnapEdges on Tidelock, the Playhouse backstage and 522, the Briarwick south skirt, and the Tidelock kerb and wheel labels go to the map builder.
 - Sideways NPCs, the Meadow oak clipped by the cloud strip, and the war-cutscene glass colour (bottle-green trinitite, not Shattered Ice blue): ADOPT, for polish.

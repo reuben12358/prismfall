@@ -47,6 +47,7 @@ module PrismfallMaps
     191 => [-10, -14, 6, 20],   # Circuit Gym - Breadboard Hall
     192 => [-10, -14, 6, 20],   # Circuit Gym - Live Wire Hall
     193 => [-10, -14, 6, 20],   # Circuit Gym - Core
+    255 => [34, 4, -26, 10],   # Cindervault - Tap Chamber
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
@@ -106,6 +107,7 @@ module PrismfallMaps
     147 => ["prismfall_seamist", 0, 24, 0, 100, 2, 0],   # Saltmere - Old Town
     160 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth
     167 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth - Mill Quay
+    255 => ["prismfall_cave", 0, 30, 1, 100, 1, 0],   # Cindervault - Tap Chamber
     520 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Ferrymen's Mile
     524 => ["prismfall_spores", 0, 40, 1, 100, 1, -1],   # Gossamer Wood
     525 => ["prismfall_spores", 0, 70, 1, 100, 1, -1],   # Gossamer Deepwood
