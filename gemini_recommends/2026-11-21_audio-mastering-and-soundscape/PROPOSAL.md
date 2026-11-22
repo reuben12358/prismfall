@@ -1,6 +1,6 @@
 # Proposal: Audio Mastering Pipeline, Original CC0 BGS/SE Pack & 139-Track Rejuvenation-Scale Soundtrack Blueprint (v4)
 
-- **Date:** 2026-11-21 (Updated 2026-11-22 v4: Full 139-Track Rejuvenation-Scale World + Battle Expansion)
+- **Date:** 2026-11-21 (Updated 2026-11-22 v4: Full 139-Track Ear-Audited Rejuvenation-Scale Soundtrack)
 - **Owner / Author:** Gemini (Art & Audio Direction)
 - **Status:** Ready for Claude & Creator review (zero files modified outside `gemini_recommends/`)
 
@@ -11,9 +11,9 @@
 1. **Reusable Audio Mastering & Loop-Tagging CLI (`master_track.py`):** Two-pass EBU R128 loudness normalization (`-14.0 LUFS` BGM / `-20.0 LUFS` BGS / `-12..-14 LUFS` SE, `-1.5 dBTP`), `44.1 kHz` Ogg Vorbis (`-q:a 6`), sample-accurate `LOOPSTART`/`LOOPLENGTH` Vorbis comments for seamless `mkxp-z` looping, and `--audit` reporting.
 2. **26 Original CC0 Mastered `.ogg` BGS/SE Files (`Audio/BGS/` + `Audio/SE/`):** Fills 100% of `design/AUDIO.md`'s missing weather beds, war beam-clash SEs, festival crowd SEs, field shatter/quench SEs, and 7 dialogue voice-blip `.ogg`s.
 3. **Full Rejuvenation-Scale 139-Track Pure-Instrumental Soundtrack (84 World/Towns/Roads/Dungeons/Moods + 55 Battles/Wardens/Bosses):**
-   - **100% Ear-Verified Pure Instrumental (Zero Vocals):** Zero singing, lyrics, choirs, stadium chants, or spoken lines across all 139 unique tracks (0 duplicates).
+   - **100% Ear-Verified Pure Instrumental (Zero Vocals):** Zero singing, lyrics, choirs, stadium chants, or spoken lines across all 139 unique tracks (0 MD5 duplicates).
    - **Zero Toby Fox Chiptune:** Removed all Undertale/Deltarune chiptune picks so every non-Pokémon track matches modern Rejuvenation/orchestral-electronic production value.
-   - **Real *Pokémon Rejuvenation* Catalog by Zumi (`27`) & CatchDalgo (`18`) + GlitchxCity (`8` Rejuv + `21` Remixes):** Features *Battle of the Soul (ft. CatchDalgo)*, *Geara & Zetta*, *Griselda*, *Madame X Duel*, *World Shatterer*, *VS! Master of Nightmares*, *Inconsistent_sea (VS! Eizen)*, *Xenpurgis [Körper & Augen Finale]*, *ARCHETYPE*, *Angie's Manor*, *Nightmare Realm*, *Ana's Lament*, *Of Beasts and Kingdoms*, *Leader Angie*, *Crescent*, and more!
+   - **Real *Pokémon Rejuvenation* Catalog by Zumi (`23` tracks) & CatchDalgo (`18` tracks) + GlitchxCity (`8` Rejuv + `21` Remixes):** Features *Battle of the Soul (ft. CatchDalgo)*, *Geara & Zetta*, *Griselda*, *Madame X Duel*, *World Shatterer*, *Music: Purgatorium*, *VS! Master of Nightmares*, *Inconsistent_sea (VS! Eizen)*, *Xenpurgis [Körper & Augen Finale]*, *ARCHETYPE*, *Angie's Manor*, *Nightmare Realm*, *Ana's Lament*, *Of Beasts and Kingdoms*, *Leader Angie*, *Crescent*, and more!
    - **4 Creator-Locked Placements:**
      - **GlitchxCity — *Corbeau Battle Theme (Remix)*** → **`Battle - Warden Nyx` (`LEADER_NYX`, Gym 16 Underveil `:NEW_MOON`)**
      - **GlitchxCity — *Champion Iris Battle Theme (Remix)*** → **`Battle - Festival Final` (Crownhaven Prism Arena)**
@@ -21,7 +21,7 @@
      - **Punishing: Gray Raven — *Out of My Hands*** → **`Battle - Aurelian Voss` (`MERIDIAN_VOSS`, ear-verified 0 vocals)**
 
 ### Style Distribution Across All 139 Unique Tracks
-**Non-PKMN RPG:** 38 | **Pokémon Remix:** 36 | **Rejuv / Zumi:** 27 | **Rejuv / CatchDalgo:** 18 | **Dedrum (CC BY-NC-SA):** 8 | **Rejuv / GlitchxCity:** 8 | **Official / PMD OST:** 4
+**Non-PKMN RPG:** 40 | **Pokémon Remix:** 37 | **Rejuv / Zumi:** 23 | **Rejuv / CatchDalgo:** 18 | **Dedrum (CC BY-NC-SA):** 8 | **Rejuv / GlitchxCity:** 8 | **Official / PMD OST:** 5
 
 > **Usage Transparency:** Custom Pokémon Rejuvenation tracks carry Rejuvenation's V13.5 asset-guide notice for public fangame reuse; clean non-Rejuv / CC BY-NC-SA Dedrum tracks are clearly tagged so the creator decides knowingly before public release.
 
@@ -91,7 +91,7 @@
 | # | Slot | Track | Artist | Style |
 |---:|---|---|---|---|
 | 37 | Town - Mirefen (Gym 6 Marsh Town) | Pokémon B2W2 - Virbank City (Night Remastered) | Zame | Pokémon Remix |
-| 38 | Town - Ironreach (Gym 8 Mine City) | Pokémon Rejuvenation - Gearen City Theme | Pokémon Rejuvenation OST | Rejuv / Zumi |
+| 38 | Town - Ironreach (Gym 8 Mine City) | Pokémon Rejuvenation OST - Bladestar Base (Regi Trio Synthwave) | VanilluxePavilion (Pokémon Rejuvenation) | Rejuv / Zumi |
 | 39 | Town - Underveil (Gym 16 Royal Seat) | Pokémon USUM - Po Town Remix | VanilluxePavilion | Pokémon Remix |
 | 40 | Route - Gutterfall, Leechman's Walk & Long Drop | Prizca Undercity (Pokémon Tectonic) | Dedrum (Pokémon Tectonic) | Dedrum (CC BY-NC-SA) |
 | 41 | Route - Road 16: Hanging Stair & The Drownings | Xenoblade Chronicles DE OST - The Fallen Land | ACE+ (Xenoblade Chronicles DE) | Non-PKMN RPG |
@@ -100,9 +100,9 @@
 ### Antumbra (6 tracks)
 | # | Slot | Track | Artist | Style |
 |---:|---|---|---|---|
-| 49 | Town - Lucent (Gym 12 Royal Seat) | Subcon's Royal Waltz (Zumi Remix) | Zumi (Honnojis) | Rejuv / Zumi |
+| 49 | Town - Lucent (Gym 12 Royal Seat) | Octopath Traveler OST - Town Veiled in White | Yasunori Nishiki (Octopath Traveler) | Non-PKMN RPG |
 | 50 | Town - Gravenmoor (Gym 14 Spectral Town) | Pokémon Rejuvenation - Goldenleaf Town | Pokémon Rejuvenation OST | Rejuv / Zumi |
-| 51 | Town - Glassmere & Vigil (Borderlands H/I) | Pokémon X/Y - Anistar City Remix (Crystal Corruption) | VanilluxePavilion | Pokémon Remix |
+| 51 | Town - Glassmere & Vigil (Borderlands H/I) | Pokémon X/Y - Anistar City Remix | VanilluxePavilion | Pokémon Remix |
 | 52 | Route - Looking-Glass Wood & Widdershins Walk | Hollow Knight OST - Queen's Gardens | Christopher Larkin (Hollow Knight) | Non-PKMN RPG |
 | 53 | Route - Road 13: Yesterday's Road & Obsidian Barrows | Pokémon Rejuvenation - Nightmare Realm ~ Amber & Aelita | Zumi (Honnojis) | Rejuv / Zumi |
 | 54 | Route - Roads 14–15: Hindmoor, Downflame & Noonless Road | Pokémon Rejuvenation - Nightmare Realm ~ Huey | Zumi (Honnojis) | Rejuv / Zumi |
@@ -111,8 +111,8 @@
 | # | Slot | Track | Artist | Style |
 |---:|---|---|---|---|
 | 55 | Town - Crownhaven (Lower City & Market Ring) | Trails in the Sky 1st Chapter (Remake) OST - Royal Capital Grancel | Falcom Sound Team jdk (Trails in the Sky) | Non-PKMN RPG |
-| 56 | Town - Accord Palace & Basilica | Pokémon Rejuvenation - ARCHETYPE (Third Heaven) | Zumi (Honnojis) | Rejuv / Zumi |
-| 57 | Town - Festival Grounds (Temple-Arena & Pavilions) | Pokémon Rejuvenation - Music: Festival | GlitchxCity (Pokémon Rejuvenation) | Rejuv / Zumi |
+| 56 | Town - Accord Palace & Basilica | Trails in the Sky 1st Chapter (Remake) OST - Royal Castle | Falcom Sound Team jdk (Trails in the Sky) | Non-PKMN RPG |
+| 57 | Town - Festival Grounds (Temple-Arena & Pavilions) | Pokémon B2W2 - Funfest Mission Start! (Zame Remastered) | Zame | Pokémon Remix |
 | 58 | Town - Pilgrim's Rest & Thornwatch (Borderlands J/K) | Fire Emblem Echoes - With Mila's Divine Protection (Vetrom Remix) | Vetrom | Non-PKMN RPG |
 | 59 | Route - Road 19: Pilgrim Pass & Coronation Road | Pokémon Black and White - Route 10 Remix v.II | GlitchxCity | Pokémon Remix |
 | 60 | Route - Postgame: Hallow Strait & Shardfall Isles | Octopath Traveler II OST - The Sundering Sea | Yasunori Nishiki (Octopath Traveler II) | Non-PKMN RPG |
@@ -130,7 +130,7 @@
 | 68 | Dungeon - Frostfang Pass & Ice Vault | PMD Explorers of Sky OST - Vast Ice Mountain | Official PMD OST (Explorers of Sky) | Official / PMD OST |
 | 69 | Dungeon - Cloudstair & Stormwatch Spire | Pokémon Mystery Dungeon - Sky Tower (Zumi Remix) | Zumi (Honnojis) | Rejuv / Zumi |
 | 70 | Dungeon - Geode Hollow & Darkglass Mine | Hollow Knight OST - Crystal Peak | Christopher Larkin (Hollow Knight) | Non-PKMN RPG |
-| 71 | Dungeon - Drowned Aurelia & Lightless Deep | Pokémon Rejuvenation OST - Alamissa Urben | Pokémon Rejuvenation OST | Rejuv / Zumi |
+| 71 | Dungeon - Drowned Aurelia & Lightless Deep | PMD Explorers of Sky OST - Miracle Sea | Official PMD OST (Explorers of Sky) | Official / PMD OST |
 | 72 | Dungeon - Barrow of the Wardens & Distortion Core | Pokémon Rejuvenation OST - Music: Purgatorium | CatchDalgo × Zumi (Honnojis) | Rejuv / CatchDalgo |
 | 73 | Dungeon - Sovereign's Ascent (Victory Road) | Pokémon Ruby and Sapphire - Hoenn Victory Road Theme Remix | GlitchxCity | Pokémon Remix |
 | 74 | Dungeon - Bleed Zones & The Glassed Orchard | Pokémon Platinum - Distortion World Remix v2 | GlitchxCity | Pokémon Remix |
