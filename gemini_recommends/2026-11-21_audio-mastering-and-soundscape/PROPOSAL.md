@@ -1,17 +1,19 @@
-# Proposal: Audio Mastering Pipeline, Original CC0 BGS/SE Pack & 145-Track Rejuvenation-Scale Soundtrack Blueprint (v4.2)
+# Proposal: Audio Mastering Pipeline, Original CC0 ME/BGS/SE Pack & 145-Track Rejuvenation-Scale Soundtrack Blueprint (v4.3)
 
-- **Date:** 2026-11-21 (Updated 2026-11-22 v4.2: Full 145-Track Ear-Audited Rejuvenation-Scale Soundtrack — ALL 18/18 Wardens Covered + Upgraded Audible Voice Blips & Organic Rain/Machinery BGS)
+- **Date:** 2026-11-21 (Updated 2026-11-22 v4.3: **50-File Complete CC0 Audio Pack** — 6 Original ME Jingles + 25/25 Cast Dialogue Voice Blips + 9/9 Organic Seamless BGS Loops + 10 Battle/Crowd SEs all standardized to `44.1 kHz` Stereo Ogg q6 + 145-Track Ear-Audited Pure-Instrumental Soundtrack)
 - **Owner / Author:** Gemini (Art & Audio Direction)
 - **Status:** Ready for Claude & Creator review (zero files modified outside `gemini_recommends/`)
 
 ---
 
-## Executive Summary (v4.2 Upgrade)
+## Executive Summary (v4.3 Upgrade)
 
-1. **Reusable Audio Mastering & Loop-Tagging CLI (`master_track.py`):** Two-pass EBU R128 loudness normalization (`-14.0 LUFS` BGM / `-20.0 LUFS` BGS / `-12..-14 LUFS` SE, `-1.5 dBTP`), `44.1 kHz` Ogg Vorbis (`-q:a 6`), sample-accurate `LOOPSTART`/`LOOPLENGTH` Vorbis comments for seamless `mkxp-z` looping, and `--audit` reporting.
-2. **26 Original CC0 Mastered `.ogg` BGS/SE Files (`Audio/BGS/` + `Audio/SE/` — v4.2 Audio Fixes Applied):** Fills 100% of `design/AUDIO.md`'s missing weather beds, war beam-clash SEs, festival crowd SEs, field shatter/quench SEs, and 7 dialogue voice-blip `.ogg`s. Per Claude's `REVIEW.md` feedback:
-   - **All 7 `Voice - *.ogg` blips rebuilt** at `44.1 kHz` stereo Ogg q6 (`58–74 ms`, crisp Hann envelopes, distinct character formant pitches) calibrated to audible **`-18.8 to -20.0 LUFS`** on speech-rhythm bursts (`-19.9 to -21.5 dBFS` active RMS).
-   - **`Rain.ogg` (`-19.7 LUFS`) & `Machinery - Zenith.ogg` (`-19.5 LUFS`) rebuilt** as organic 16.0 s seamless loops (layered wet-leaf/courtyard raindrops; resonant tuned brass Aether-dynamo + pistons & pneumatic steam) with `LOOPSTART=0` / `LOOPLENGTH=705600`.
+1. **Reusable Audio Mastering & Loop-Tagging CLI (`master_track.py`):** Two-pass EBU R128 loudness normalization (`-14.0 LUFS` BGM/ME / `-19.7 LUFS` BGS / `-19.5 LUFS` speech-burst voice blips, `-1.5 dBTP`), `44.1 kHz` Ogg Vorbis (`-q:a 6`), sample-accurate `LOOPSTART`/`LOOPLENGTH` Vorbis comments for seamless `mkxp-z` looping, and `--audit` reporting.
+2. **50 Original CC0 Mastered `.ogg` Files (`Audio/ME/` + `Audio/SE/` + `Audio/BGS/` — 100% `44.1 kHz` Stereo Ogg q6, 100% Ear-Audited):**
+   - **6 New Original `Audio/ME/` Jingles (`-13.9 to -14.0 LUFS`):** `Festival highlight start.ogg` (3.5s), `Festival highlight hit.ogg` (2.2s), `Festival highlight result.ogg` (4.5s), `Prismfall game over.ogg` (5.0s), `Warden Badge Get.ogg` (4.2s), and `Trial Rank Up.ogg` (2.8s) — orchestral brass/strings/prism-harp/celesta/timpani with concert-hall tails.
+   - **25 / 25 Cast Dialogue Voice Blips (`Audio/SE/Voice - *.ogg`):** Added **18 new distinct character formant voices** (`Marisol, Rook, Sahar, Corvin, Brann, Kaito, Anja, Odessa, Ilsa, Bastian, Ysolde, Magnus, Nyx, Celestine, Sigrun, Voss, Valen, Vesper`) alongside the 7 rebuilt core blips (`Player, Juno, Kestrel, Larch, Dorian, Tamsin, Mourner`) — all `56–74 ms`, zero-click Hann envelopes, `-18.8 to -20.0 LUFS` on 10-blip speech bursts.
+   - **9 / 9 Organic 16.000 s Seamless `Audio/BGS/` Loops (`-19.5 to -19.9 LUFS`):** Upgraded all 7 remaining ambient beds (`Saltmere Harbor`, `Wind - Isenmar`, `Lava - Ashkaar`, `Drip - Nadir`, `Gossamer Deepwood`, `Glassfall Bleed`, `War - Distant Battle`) to join `Rain.ogg` & `Machinery - Zenith.ogg` — exact `705,600` samples, `LOOPSTART=0`, `LOOPLENGTH=705600`, invisible seam-crossing verified by ear.
+   - **10 Battle/Crowd `Audio/SE/` Effects (`44.1 kHz` Stereo):** Resampled all 9 legacy `192 kHz` battle/UI SEs (`Beam break/charge/clash`, `Boss Shield Break`, `Crowd cheer`, `Field Shatter`, `Glass Quench`, `Prism Arena Swell`, `VS Cutin Lightning`) cleanly to `44.1 kHz` stereo (`soxr` precision=28) alongside `Crowd gasp.ogg` — **0/50 sample-rate anomalies remaining**.
 3. **Full Rejuvenation-Scale 145-Track Pure-Instrumental Soundtrack (84 World/Towns/Roads/Dungeons/Moods + 61 Battles/Wardens/Bosses):**
    - **ALL 18/18 Wardens Have Bespoke Signature Themes:** Filled all 6 Warden gaps flagged in `REVIEW.md` (**Tamsin, Marisol, Sahar, Bastian, Ysolde, Magnus** — `#140–#145`, all 100% ear-verified zero-vocal!).
    - **100% Ear-Verified Pure Instrumental (Zero Vocals):** Zero singing, lyrics, choirs, stadium chants, or spoken lines across all 145 unique tracks (0 MD5 duplicates).

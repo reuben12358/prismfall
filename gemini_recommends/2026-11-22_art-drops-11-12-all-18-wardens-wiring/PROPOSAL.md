@@ -101,3 +101,22 @@ All 12 newly completed Wardens (`CORVIN`..`SIGRUN`) need explicit `VS_IDS` and b
 ### 3. Already Auto-Wired (Zero Changes Needed)
 - `plugins/Prismfall Cutscenes/004_Actors.rb` resolves `Graphics/Trainers/<TTYPE>.png` and `Graphics/Characters/trainer_<TTYPE>.png` before `STAND_INS`.
 - `plugins/Prismfall Cutscenes/014_Portraits.rb` already lists all 25 live cast IDs in `CAST`.
+
+---
+
+### 4. Real-Engine Cast GIF QA Audit & Wave 3 Battleback Queue
+Inspected all 6 new live-engine cast captures (`docs/battle_captures/cast/{marisol,rook,sahar,mourner,voss,valen}.gif`) plus `docs/battle_captures/intro/{juno,dorian}_b2w2_intro.gif` and all 54 `graphics/EBDX/Battlebacks/battlebg/field_*_hd.png` variants:
+
+- **Cast Art Fidelity (6/6 PASS):** `MARISOL`, `ROOK`, `SAHAR`, `MOURNER`, `VOSS`, and `VALEN` render with 100% disk parity, `0` semi-transparent edge pixels, clean nameplate clearance, and identical scale/boot grounding (`head y=44..50`, boots planted squarely at `y=212`).
+- **3 Small Live-Engine Items for Claude:**
+  1. **PBS Double-Name Bug on Mourner (`cast/mourner.gif`):** Renders `"You are challenged by The Mourner Mourner!"` / `"The Mourner Mourner sent out Shiftry!"` because `pbs/trainer_types.txt:241-242` sets `[HOLLOW_MOURNER] Name = The Mourner` while `pbs/trainers.txt:10560` uses trainer name `Mourner`. Suggest changing class `Name` to `Hollow` (with trainer name `The Mourner`) or blanking the duplicate prefix.
+  2. **Silhouette Opening Headroom (`plugins/Prismfall EBDX Bridge/010_Bridge_VersusIntro.rb:61`):** `INTRO_ZOOM = 3.0` on full-proportion `160×160` sprites crops the top of every trainer's head/hat off the top edge (`y=0`) during the dramatic silhouette slide-in. Lowering `INTRO_ZOOM` to `~2.2–2.4` (or nudging the intro silhouette Y slightly down) frames full heads cleanly. *(Optional visual polish: a subtle translucent elliptical ground drop-shadow under enemy trainers helps ground boots on bright bases like `Prism Arena` and `Meadow`.)*
+  3. **Stale Intro Captures:** `docs/battle_captures/intro/dorian_b2w2_intro.gif` still shows the old pre-Gemini non-hat VS bust, diamond bolts, and static 4-frame battle sprite; `juno_b2w2_intro.gif` still shows the old giant-bouquet VS bust and old Meadow backdrop. Both disk assets are already updated and ready for re-capture whenever convenient.
+- **Wave 3 Pure-Gemini Battlebacks Queue (Post Image-Quota Reset):**
+  - **23 / 54 variants (14 / 36 fields)** are already pure-Gemini upgraded (`Mindscape`, `Prism Arena`, `Dragon's Den`, `Meadow`, `Rainbow`, `Frozen Lake`, `Flower Garden 1–5`, `Hollow Cathedral`, `Water Surface`, `Corrosive Mire`, `Bleed`, `Factory`, `Scrapyard`, `Stormfront`).
+  - **Tier 1 Priority Queue (19 variants / 12 fields — 139 default maps + 7 Gyms + Ch19 War):**
+    - *Wave 3A (10):* `GRAND_STAGE` (1/2/3 — visible in 4/6 cast GIFs), `SILKWOOD` (Gym 1), `BEACH` (Ferrow's Landing/Saltmere), `NEW_MOON` (base/`_lamplight`/`_abyss`), `NEON_GRID` (base/`_blackout`).
+    - *Wave 3B (9):* Shared-horizon Ossaria War set (`DESERT` base/`_bloom`, `FLOODED_DUNES`, `GLASS_DUNES` base/`_mirror`), shared-layout Ashkaar pair (`VOLCANIC`, `ASHEN_WASTE`), `INVERSE`, `FAIRY_TALE`.
+  - **Tier 2 Nice-to-Have (7 variants / 5 fields):** `SNOWY_MOUNTAIN`, `CAVE` (base/`_cracked`), `COLOSSEUM` (base/`_frenzy`), `UNDERWATER`, `WILDFIRE_EMBERS`.
+  - **Tier 3 Keep As-Is (5 variants / 5 fields — already cohesive):** `MOUNTAIN`, `CRYSTAL_CAVERN`, `DARK_CRYSTAL`, `WASTELAND`, `WILDFIRE`.
+
