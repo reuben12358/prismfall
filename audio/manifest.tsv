@@ -72,3 +72,22 @@ Game over	ME	Prismfall game over	(stock base project) ME: Voltorb Flip game over
 Ending: Good / Grey (hopeful)	BGM	Ending - Homecoming	dedrum_tectonic/Tectonic_Casaba_Villa_Remix.ogg	GlitchxCity - Ending / Hall of Fame remix	https://www.youtube.com/@GlitchxCity	U
 Ending: Bad / Ruin	BGM	Ending - Ruin	team_aquas_misc/ShinyDragonHunter/mus_rg_sevii_dungeon.mid	GlitchxCity - Lavender Town remix (pitch 85)	https://www.youtube.com/@GlitchxCity	U
 Credits	BGM	Credits	(stock base project)	keep stock name (Scene_Credits::BGM)		-
+Drip - Nadir (ambience loop)	BGS	Drip - Nadir	gemini_cc0/BGS/Drip - Nadir.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Glassfall Bleed (ambience loop)	BGS	Glassfall Bleed	gemini_cc0/BGS/Glassfall Bleed.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Gossamer Deepwood (ambience loop)	BGS	Gossamer Deepwood	gemini_cc0/BGS/Gossamer Deepwood.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Lava - Ashkaar (ambience loop)	BGS	Lava - Ashkaar	gemini_cc0/BGS/Lava - Ashkaar.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Machinery - Zenith (ambience loop)	BGS	Machinery - Zenith	gemini_cc0/BGS/Machinery - Zenith.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Rain (ambience loop)	BGS	Rain	gemini_cc0/BGS/Rain.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Saltmere Harbor (ambience loop)	BGS	Saltmere Harbor	gemini_cc0/BGS/Saltmere Harbor.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+War - Distant Battle (ambience loop)	BGS	War - Distant Battle	gemini_cc0/BGS/War - Distant Battle.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Wind - Isenmar (ambience loop)	BGS	Wind - Isenmar	gemini_cc0/BGS/Wind - Isenmar.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Beam break (sound effect)	SE	Beam break	gemini_cc0/SE/Beam break.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Beam charge (sound effect)	SE	Beam charge	gemini_cc0/SE/Beam charge.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Beam clash (sound effect)	SE	Beam clash	gemini_cc0/SE/Beam clash.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Boss Shield Break (sound effect)	SE	Boss Shield Break	gemini_cc0/SE/Boss Shield Break.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Crowd cheer (sound effect)	SE	Crowd cheer	gemini_cc0/SE/Crowd cheer.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Crowd gasp (sound effect)	SE	Crowd gasp	gemini_cc0/SE/Crowd gasp.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Field Shatter (sound effect)	SE	Field Shatter	gemini_cc0/SE/Field Shatter.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Glass Quench (sound effect)	SE	Glass Quench	gemini_cc0/SE/Glass Quench.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Prism Arena Swell (sound effect)	SE	Prism Arena Swell	gemini_cc0/SE/Prism Arena Swell.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+VS Cutin Lightning (sound effect)	SE	VS Cutin Lightning	gemini_cc0/SE/VS Cutin Lightning.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
