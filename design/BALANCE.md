@@ -557,6 +557,21 @@ cell is unchanged (26/30). No re-tune proposed.
 No war fight changed its result; the cooling shows up only where the Fire side stops using Fire (Reshiram in its own
 storm), which is the point of it.
 
+## 9d. Open flag: Kyogre (Ch11, `:KYOGRE_ISENMAR`) in the real engine (2026-11-21)
+In the Ch11 key-events capture (`tools/harness/visual/ch11/008_Ch11Keys.rb`, the engine's AI playing the player's side),
+Kyogre beat two cap-level parties:
+- a Lv 54 general team: 7 turns, first bar barely broken;
+- a Lv 55 team built for it (Lanturn, Ludicolo, Ferrothorn, Toxtricity, Raichu, Lucario): 10 turns, first bar broken.
+
+On Frozen Lake its Ice Beam one-shots most of a Lv 54–55 team. Aqua Ring and Calm Mind then outheal the AI's damage.
+The headless suite's Lv 100 run still wins in 3 turns (§9).
+
+The engine AI misplays, so this is a flag, not a verdict. Before Ch11 ships, run the round-4 harness at cap 55.
+Options if it confirms:
+- drop Calm Mind or Aqua Ring from bar 1;
+- open on Frozen Lake without the Ice boost on Kyogre's own moves;
+- or keep bars at 2 on Standard.
+
 ## Intentional non-learnable moves (validator allowlist)
 
 Rows here are read by `tools/validate_trainers.py`: `| TYPE,Name,Version | SPECIES | MOVE or ABILITY | reason |`.

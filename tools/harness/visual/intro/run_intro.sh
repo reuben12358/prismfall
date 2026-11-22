@@ -31,10 +31,10 @@ rm -f "$G/Data/trainer_types.dat"                                         # a mi
 cp "$KIT/pbs/trainers.txt" "$G/PBS/trainers_prismfall.txt"             # current trainers (Ch8 Hammer/Lieutenant)
 rm -f "$G/Data/trainers.dat"
 cp "$VIS/001_DemoAutorun.rb" "$G/Plugins/ZZ Demo Autorun/"; rm -f "$G/Plugins/ZZ Demo Autorun/"00[6-9]_*.rb; cp "$CAPTURE" "$G/Plugins/ZZ Demo Autorun/"
-rm -rf "$G"/Captures/intro_* "$G"/Captures/tap_*
+rm -rf "$G"/Captures/intro_* "$G"/Captures/tap_* "$G"/Captures/ch[0-9]*_*
 IC_FOE="${IC_FOE:-}" IC_PLAYER="$PLAYER" DEMO_PLAN="$PLAN" ISOLATE=1 DISPLAY_NUM="${DISPLAY_NUM:-178}" RUN_TIMEOUT="${RUN_TIMEOUT:-900}" \
   bash "$VIS/run_engine_capture.sh" run "$PLAN" | grep -E "intro|tap|command|EXCEPTION|FATAL|Error|player trainer|RESULT" || true
 mkdir -p "$RUN/frames"
-for d in "$G"/Captures/intro_*/ "$G"/Captures/tap_*/; do [[ -d "$d" ]] || continue; n="$(basename "$d")"; rm -rf "$RUN/frames/$n"; mv "$d" "$RUN/frames/$n"; done
+for d in "$G"/Captures/intro_*/ "$G"/Captures/tap_*/ "$G"/Captures/ch[0-9]*_*/; do [[ -d "$d" ]] || continue; n="$(basename "$d")"; rm -rf "$RUN/frames/$n"; mv "$d" "$RUN/frames/$n"; done
 cp "$G/Captures/demo.log" "$RUN/frames/" 2>/dev/null || true
 echo "frames: $RUN/frames"

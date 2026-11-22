@@ -3,6 +3,10 @@
 # starts a new game, runs scripted field battles with the AI playing both sides
 # and dumps frames through Graphics.screenshot. Never ship this plugin.
 #===============================================================================
+# This Linux engine build leaves stock script methods private (docs/playtest/README.md); pbMessage calls
+# Kernel.pbShowCommands, so choice boxes need it public.
+Object.send(:public, :pbShowCommands) rescue nil
+
 module DemoRun
   ROOT = "Captures"
   @rec = nil; @frame = 0; @shots = 0; @every = 3; @auto = false
