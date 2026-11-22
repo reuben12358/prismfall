@@ -6,3 +6,4 @@ Pass 2 runs only on plan quota, never on usage credits (design/MAPGEN.md, top). 
 | Map | Layout | Built | Notes for pass 2 |
 |---|---|---|---|
 | 255 Cindervault - Tap Chamber | `mapgen/layouts/cindervault.py` | 2026-11-21 | Crisis plays end to end (all three branches checked in the engine). The room reads empty in captures: the pipe, sluices and lever need stronger silhouettes; NPC staging (Wick, Larch, soldiers) sits off-screen from the player's start; the magma pit only shows at the top edge. |
+| All story maps with bracketed narrator boxes (7 layouts so far: grep `"(` in `mapgen/layouts/*.py`; cindervault, story_early, deepwood, rimewood and others) | various | — | Stage-direction pass: turn bracketed narration into move routes, emotes, screen effects and pictures; keep only short [text] lines (design/MAPGEN.md, "Stage directions"). |

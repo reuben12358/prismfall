@@ -8,6 +8,13 @@ so the story can move; (2) Claude refines its own map; (3) Gemini refines Claude
 never on usage credits: credits are for story progress only. A map that has had pass 1 but not pass 2 is listed in
 `mapgen/REFINE_QUEUE.md` so the refinement pass knows where to start.
 
+**Stage directions (creator, 2026-11-22).** A bracketed line in a script is a stage direction, not dialogue. When a map is built, each one is tagged and staged:
+- **[anim]** (the default): a move route, an emote bubble, a screen flash or shake, an SE.
+- **[pic]**: a picture or overlay, for things too big for a sprite (Kyogre's eye, the six wings, a city in the sky).
+- **[text]**: only for what can't be shown (a smell, a thought, an off-screen sound, a time skip). It stays a short narrator line, at most one or two per scene.
+
+Narrator boxes that describe something visible are a pass-1 shortcut, and pass 2 removes them.
+
 ## 1. What's built (Act I, in story order)
 | IDs | Maps | Story / mechanics |
 |---|---|---|
