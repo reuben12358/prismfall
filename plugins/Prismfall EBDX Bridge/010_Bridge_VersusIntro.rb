@@ -33,13 +33,19 @@ module PrismfallVS
     :LEADER_DORIAN  => "DORIAN",
     :LEADER_TAMSIN  => "TAMSIN",
     :LEADER_MARISOL => "MARISOL",
-    :HOLLOW_SABLE   => "KROLL"
+    :HOLLOW_SABLE   => "KROLL",
+    :MERIDIAN_VOSS  => "VOSS",       # PBS name "Aurelian"
+    :CHAMPION_VALEN => "VALEN",
+    :HOLLOW_MOURNER => "MOURNER",
+    :LEADER_ROOK    => "ROOK",
+    :LEADER_SAHAR   => "SAHAR"
   }
   THEMES     = {                   # colour per cast ID (graphics/EBDX/VS/{tunnel,bandfoe,bandplayer}_<theme>.png)
     "PLAYER_A" => :teal, "PLAYER_B" => :green,
     "JUNO" => :rose, "KESTREL" => :blue, "DORIAN" => :violet, "TAMSIN" => :gold,
     "LARCH" => :grey, "MARISOL" => :blue, "BRANN" => :red, "CELESTINE" => :violet,
-    "VOSS" => :grey, "MARCHETTI" => :red, "KROLL" => :red, "ROWAN" => :green
+    "VOSS" => :grey, "MARCHETTI" => :red, "KROLL" => :red, "ROWAN" => :green,
+    "VALEN" => :gold, "MOURNER" => :green, "ROOK" => :blue, "SAHAR" => :gold
   }
   DEFAULT_THEME_FOE    = :violet
   DEFAULT_THEME_PLAYER = :teal
