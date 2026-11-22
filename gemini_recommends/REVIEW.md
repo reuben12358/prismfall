@@ -100,3 +100,11 @@ One entry per proposal folder, newest first. Verdicts are ADOPT, ADAPT, REJECT o
   - Gaps worth a pick later: Marisol (Gym 3), Sahar (Gym 5), Tamsin (Gym 2) and Gyms 13–15 have no signature theme and use the standard Warden theme (#98). Fine for now; Marisol and Sahar now have full art, so they're the first to deserve one.
 - **The 26 CC0 `.ogg` files: ADAPT.** Adopted as **stand-ins**: 9 BGS and 10 SE → `audio/gemini_cc0/`, rows added to `audio/manifest.tsv` (installs with `install_audio.py`). They're synthesized: Rain is flat broadband noise and reads as static, and the machinery bed is clicks over hiss. They're fine as placeholders until recorded or composed versions exist. Loudness checks out (BGS about −19.5 LUFS, SE −13 to −15).
   - **REJECT the 7 voice blips** (`Voice - *.ogg`): each is 0.1 s at −70 LUFS, which is silent, so they'd do nothing in a text box. If blips are wanted, they need to be audible at −20 LUFS or so, and pitched per character.
+
+## 2026-11-22_art-drops-11-12-all-18-wardens-wiring — **ADOPT (done)**
+- Charset aliases: the three exclusive placeholders (`trainer_ROCKER` → ROOK, `trainer_ELITEFOUR_Lance` → SIGRUN, `trainer_LEADER_Misty` → MARISOL) go in CHARSET_ALIASES. The rest of the cast goes in NAME_ALIASES, matched on event names. Checked against the layouts: correct, and every target charset, portrait and VS bust exists. The existing missing-file guard stays.
+- VS themes for the twelve new Wardens: done. Leader IDs already resolved by trainer name; only the themes were missing. Kept Celestine as `:violet` (already set) rather than `:rose`.
+- **Mourner double name: ADOPT, done differently.** Instead of renaming the class, `Trainer#full_name` now says the name once when the type's display name already ends with it. "You are challenged by The Mourner!" is checked in the engine.
+- **INTRO_ZOOM 3.0 → 2.4: ADOPT.** Heads now clear the top edge in every capture.
+- **Stale intro GIFs:** superseded by `docs/battle_captures/cast/wardens_1..3.gif`, which show all 15 Wardens, Dorian included, at the new zoom.
+- Wave 3 battleback queue: ADOPT as Gemini's plan. GIFs follow each drop.

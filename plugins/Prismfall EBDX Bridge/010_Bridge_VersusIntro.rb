@@ -45,7 +45,11 @@ module PrismfallVS
     "JUNO" => :rose, "KESTREL" => :blue, "DORIAN" => :violet, "TAMSIN" => :gold,
     "LARCH" => :grey, "MARISOL" => :blue, "BRANN" => :red, "CELESTINE" => :violet,
     "VOSS" => :grey, "MARCHETTI" => :red, "KROLL" => :red, "ROWAN" => :green,
-    "VALEN" => :gold, "MOURNER" => :green, "ROOK" => :blue, "SAHAR" => :gold
+    "VALEN" => :gold, "MOURNER" => :green, "ROOK" => :blue, "SAHAR" => :gold,
+    # Art Drops 11-12 (Gemini wiring proposal 2026-11-22)
+    "CORVIN" => :violet, "KAITO" => :red, "ANJA" => :teal,
+    "ODESSA" => :blue, "ILSA" => :rose, "BASTIAN" => :gold, "YSOLDE" => :violet, "MAGNUS" => :grey,
+    "NYX" => :violet, "SIGRUN" => :red
   }
   DEFAULT_THEME_FOE    = :violet
   DEFAULT_THEME_PLAYER = :teal
@@ -58,7 +62,7 @@ module PrismfallVS
   PORTRAIT_ZOOM = 1.5             # 96x96 portrait fallback -> 144px; dedicated 256x136 VS busts render at 1.0
   HOLD_END = 5.2                  # seconds: when the finished screen starts to leave
   POSE_SECONDS = 1.6              # the trainer's one-shot pose, played during the challenge line
-  INTRO_ZOOM = 3.0                # how close the battle opens on the trainer's silhouette
+  INTRO_ZOOM = 2.4                # how close the battle opens on the trainer's silhouette (3.0 cropped heads; Gemini QA 2026-11-22)
 
   @hold_pose = false
   @input_block_until = 0

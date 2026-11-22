@@ -12,11 +12,19 @@ module Prismfall
   CHARSET_ALIASES = {
     "trainer_RIVAL2"    => "JUNO",      # Gemini pack, 2026-11-21
     "trainer_RIVAL1"    => "KESTREL",
-    "trainer_PROFESSOR" => "LARCH"
+    "trainer_PROFESSOR" => "LARCH",
+    # Exclusive placeholders (audited across maps_out and war.py; Gemini wiring proposal 2026-11-22)
+    "trainer_ROCKER"          => "ROOK",     # all 4 events are Rook (181/186/193/608)
+    "trainer_ELITEFOUR_Lance" => "SIGRUN",   # 926 Glass Dunes "Partner"
+    "trainer_LEADER_Misty"    => "MARISOL"   # 926 Glass Dunes "Partner"
   }
   NAME_ALIASES = {
-    "Dorian" => "DORIAN",
-    "Tamsin" => "TAMSIN"
+    "Dorian" => "DORIAN",  "Tamsin" => "TAMSIN",  "Marisol" => "MARISOL", "Voss" => "VOSS",
+    "Aurelian" => "VOSS",  "Valen" => "VALEN",    "Rook" => "ROOK",       "Sahar" => "SAHAR",
+    "Corvin" => "CORVIN",  "Brann" => "BRANN",    "Kaito" => "KAITO",     "Anja" => "ANJA",
+    "Odessa" => "ODESSA",  "Ilsa" => "ILSA",      "Bastian" => "BASTIAN", "Ysolde" => "YSOLDE",
+    "Magnus" => "MAGNUS",  "Nyx" => "NYX",        "Celestine" => "CELESTINE", "Sigrun" => "SIGRUN",
+    "Mourner" => "MOURNER"
   }
 
   def self.charset_alias(name, event_name = nil)
@@ -36,5 +44,19 @@ end
 class Game_Event < Game_Character
   def character_name
     return Prismfall.charset_alias(@character_name, (@event.name rescue nil))
+  end
+end
+
+#===============================================================================
+# "You are challenged by The Mourner Mourner!": when a trainer type's display name already ends with
+# the trainer's own name (type "The Mourner", trainer "Mourner"), say it once.
+#===============================================================================
+class Trainer
+  alias __prismfall_full_name full_name unless method_defined?(:__prismfall_full_name)
+
+  def full_name
+    tn = (trainer_type_name rescue "").to_s
+    return tn if !name.to_s.empty? && tn.end_with?(name.to_s)
+    return __prismfall_full_name
   end
 end
