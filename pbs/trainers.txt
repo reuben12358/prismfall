@@ -18684,3 +18684,498 @@ Pokemon = GOTHITELLE,86
     Nature = BOLD
     IV = 20
     EV = 0
+
+#-------------------------------
+# Ch11 - the Thaw: Directorate officer securing the Lattice on Tower Four's stair (double with Vell; PC + Juno v31, or + Anja v1 if JUNO_ESTRANGED). Field :FROZEN_LAKE -> :WATER_SURFACE by the fieldChange rule at round 2.
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Ostrander,11]
+Items = HYPERPOTION
+LoseText = Forty million crowns of equipment. In the lake. Write that down.
+Pokemon = MAGNEZONE,50
+    Moves = THUNDERBOLT,FLASHCANNON,BODYPRESS,VOLTSWITCH
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 8
+Pokemon = KINGAMBIT,51
+    Moves = KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE
+    Ability = DEFIANT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BRONZONG,50
+    Moves = GYROBALL,PSYSHOCK,TRICKROOM,STEALTHROCK
+    Ability = HEATPROOF
+    Item = LEFTOVERS
+    Nature = RELAXED
+    IV = 8
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Ostrander,111]
+Items = HYPERPOTION
+LoseText = Forty million crowns of equipment. In the lake. Write that down.
+Pokemon = MAGNEZONE,51
+    Moves = THUNDERBOLT,FLASHCANNON,BODYPRESS,VOLTSWITCH
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+Pokemon = KINGAMBIT,52
+    Moves = KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE
+    Ability = DEFIANT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BRONZONG,51
+    Moves = GYROBALL,PSYSHOCK,TRICKROOM,STEALTHROCK
+    Ability = HEATPROOF
+    Item = LEFTOVERS
+    Nature = RELAXED
+    IV = 20
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Ostrander,211]
+LoseText = Forty million crowns of equipment. In the lake. Write that down.
+Pokemon = MAGNEZONE,49
+    Moves = THUNDERBOLT,FLASHCANNON,BODYPRESS,VOLTSWITCH
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = KINGAMBIT,50
+    Moves = KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE
+    Ability = DEFIANT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BRONZONG,49
+    Moves = GYROBALL,PSYSHOCK,TRICKROOM,STEALTHROCK
+    Ability = HEATPROOF
+    Item = LEFTOVERS
+    Nature = RELAXED
+    IV = 0
+    EV = 0
+#-------------------------------
+# Ch11 - the Thaw: Vell, Ostrander's tag partner (rain on a field that's turning to water)
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Vell,11]
+Items = HYPERPOTION
+LoseText = They'll ask where the equipment went. I'll say the lake has it.
+Pokemon = PELIPPER,50
+    Moves = HURRICANE,SCALD,ROOST,UTURN
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 8
+Pokemon = TOXAPEX,50
+    Moves = SCALD,TOXIC,RECOVER,BANEFULBUNKER
+    Ability = REGENERATOR
+    Item = BLACKSLUDGE
+    Nature = BOLD
+    IV = 8
+Pokemon = DRAGALGE,51
+    Moves = SLUDGEBOMB,DRACOMETEOR,FOCUSBLAST,TOXICSPIKES
+    Ability = ADAPTABILITY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Vell,111]
+Items = HYPERPOTION
+LoseText = They'll ask where the equipment went. I'll say the lake has it.
+Pokemon = PELIPPER,51
+    Moves = HURRICANE,SCALD,ROOST,UTURN
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 20
+Pokemon = TOXAPEX,51
+    Moves = SCALD,TOXIC,RECOVER,BANEFULBUNKER
+    Ability = REGENERATOR
+    Item = BLACKSLUDGE
+    Nature = BOLD
+    IV = 20
+Pokemon = DRAGALGE,52
+    Moves = SLUDGEBOMB,DRACOMETEOR,FOCUSBLAST,TOXICSPIKES
+    Ability = ADAPTABILITY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Vell,211]
+LoseText = They'll ask where the equipment went. I'll say the lake has it.
+Pokemon = PELIPPER,49
+    Moves = HURRICANE,SCALD,ROOST,UTURN
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = TOXAPEX,49
+    Moves = SCALD,TOXIC,RECOVER,BANEFULBUNKER
+    Ability = REGENERATOR
+    Item = BLACKSLUDGE
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = DRAGALGE,50
+    Moves = SLUDGEBOMB,DRACOMETEOR,FOCUSBLAST,TOXICSPIKES
+    Ability = ADAPTABILITY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+#-------------------------------
+# Ch11 - the Ebbmouth Strike (stand): strikebreaker at the Lattice intake (double with the Foreman; PC + Marisol v1). Field :WATER_SURFACE.
+#-------------------------------
+[MERIDIAN_AGENT_M,Strikebreaker,11]
+Items = SUPERPOTION
+LoseText = Overtime. They said overtime.
+Pokemon = MACHAMP,50
+    Moves = DYNAMICPUNCH,KNOCKOFF,BULLETPUNCH,STONEEDGE
+    Ability = NOGUARD
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HONCHKROW,50
+    Moves = SUCKERPUNCH,BRAVEBIRD,HEATWAVE,ROOST
+    Ability = MOXIE
+    Item = SCOPELENS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[MERIDIAN_AGENT_M,Strikebreaker,111]
+Items = SUPERPOTION
+LoseText = Overtime. They said overtime.
+Pokemon = MACHAMP,51
+    Moves = DYNAMICPUNCH,KNOCKOFF,BULLETPUNCH,STONEEDGE
+    Ability = NOGUARD
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HONCHKROW,51
+    Moves = SUCKERPUNCH,BRAVEBIRD,HEATWAVE,ROOST
+    Ability = MOXIE
+    Item = SCOPELENS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[MERIDIAN_AGENT_M,Strikebreaker,211]
+LoseText = Overtime. They said overtime.
+Pokemon = MACHAMP,49
+    Moves = DYNAMICPUNCH,KNOCKOFF,BULLETPUNCH,STONEEDGE
+    Ability = NOGUARD
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HONCHKROW,49
+    Moves = SUCKERPUNCH,BRAVEBIRD,HEATWAVE,ROOST
+    Ability = MOXIE
+    Item = SCOPELENS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+#-------------------------------
+# Ch11 - the Ebbmouth Strike: the Directorate foreman with the megaphone
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Foreman,11]
+Items = SUPERPOTION
+LoseText = ...I'm writing this up as "infrastructure unrecoverable".
+Pokemon = COPPERAJAH,51
+    Moves = HEAVYSLAM,PLAYROUGH,HIGHHORSEPOWER,STEALTHROCK
+    Ability = SHEERFORCE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ELECTIVIRE,51
+    Moves = WILDCHARGE,ICEPUNCH,CROSSCHOP,EARTHQUAKE
+    Ability = MOTORDRIVE
+    Item = EXPERTBELT
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Foreman,111]
+Items = SUPERPOTION
+LoseText = ...I'm writing this up as "infrastructure unrecoverable".
+Pokemon = COPPERAJAH,52
+    Moves = HEAVYSLAM,PLAYROUGH,HIGHHORSEPOWER,STEALTHROCK
+    Ability = SHEERFORCE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ELECTIVIRE,52
+    Moves = WILDCHARGE,ICEPUNCH,CROSSCHOP,EARTHQUAKE
+    Ability = MOTORDRIVE
+    Item = EXPERTBELT
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Foreman,211]
+LoseText = ...I'm writing this up as "infrastructure unrecoverable".
+Pokemon = COPPERAJAH,50
+    Moves = HEAVYSLAM,PLAYROUGH,HIGHHORSEPOWER,STEALTHROCK
+    Ability = SHEERFORCE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ELECTIVIRE,50
+    Moves = WILDCHARGE,ICEPUNCH,CROSSCHOP,EARTHQUAKE
+    Ability = MOTORDRIVE
+    Item = EXPERTBELT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+#-------------------------------
+# Ch11 - partner: Anja in the Thaw when JUNO_ESTRANGED (pbRegisterPartner(:LEADER_ANJA, "Anja", 1))
+#-------------------------------
+[LEADER_ANJA,Anja,1]
+LoseText = ...
+Pokemon = MAMOSWINE,51
+    Moves = ICICLECRASH,HIGHHORSEPOWER,ICESHARD,KNOCKOFF
+    Ability = THICKFAT
+    Item = LIFEORB
+    Nature = ADAMANT
+    IV = 20
+Pokemon = WALREIN,50
+    Moves = ICEBEAM,SURF,PROTECT,ENCORE
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+Pokemon = WEAVILE,50
+    Moves = ICICLECRASH,KNOCKOFF,ICESHARD,LOWKICK
+    Ability = PRESSURE
+    Item = FOCUSSASH
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+# Ch11 - partner: Marisol on the strike line (:ch11_strike :stand; pbRegisterPartner(:LEADER_MARISOL, "Marisol", 1))
+#-------------------------------
+[LEADER_MARISOL,Marisol,1]
+LoseText = ...
+Pokemon = GYARADOS,51
+    Moves = WATERFALL,ICEFANG,DRAGONDANCE,EARTHQUAKE
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PELIPPER,50
+    Moves = HURRICANE,SCALD,UTURN,ROOST
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 20
+Pokemon = KINGDRA,50
+    Moves = DRACOMETEOR,HYDROPUMP,ICEBEAM,FLIPTURN
+    Ability = SWIFTSWIM
+    Item = CHOICESPECS
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+# Ch11 - partner: Juno in the Thaw (rival battle 5: pbRegisterPartner(:RIVAL_JUNO, "Juno", Prismfall::Rival.version_for(5))). Base = 50 + starter slot; the Gen 1 starter is swapped at load like every rival party.
+#-------------------------------
+[RIVAL_JUNO,Juno,50]
+Items = HYPERPOTION
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,51
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+Pokemon = BLASTOISE,50
+    Moves = HYDROPUMP,ICEBEAM,FLASHCANNON,RAPIDSPIN
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+Pokemon = FLORGES,50
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 20
+#-------------------------------
+[RIVAL_JUNO,Juno,150]
+Items = FULLRESTORE
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,51
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+Pokemon = BLASTOISE,51
+    Moves = HYDROPUMP,ICEBEAM,FLASHCANNON,RAPIDSPIN
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = FLORGES,51
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 31
+#-------------------------------
+[RIVAL_JUNO,Juno,250]
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,50
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 10
+Pokemon = BLASTOISE,49
+    Moves = HYDROPUMP,ICEBEAM,FLASHCANNON,RAPIDSPIN
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 10
+Pokemon = FLORGES,49
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 10
+#-------------------------------
+[RIVAL_JUNO,Juno,51]
+Items = HYPERPOTION
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,51
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+Pokemon = VENUSAUR,50
+    Moves = GIGADRAIN,SLUDGEBOMB,SYNTHESIS,LEECHSEED
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+Pokemon = FLORGES,50
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 20
+#-------------------------------
+[RIVAL_JUNO,Juno,151]
+Items = FULLRESTORE
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,51
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+Pokemon = VENUSAUR,51
+    Moves = GIGADRAIN,SLUDGEBOMB,SYNTHESIS,LEECHSEED
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = FLORGES,51
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 31
+#-------------------------------
+[RIVAL_JUNO,Juno,251]
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,50
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 10
+Pokemon = VENUSAUR,49
+    Moves = GIGADRAIN,SLUDGEBOMB,SYNTHESIS,LEECHSEED
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 10
+Pokemon = FLORGES,49
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 10
+#-------------------------------
+[RIVAL_JUNO,Juno,52]
+Items = HYPERPOTION
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,51
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+Pokemon = CHARIZARD,50
+    Moves = FLAMETHROWER,AIRSLASH,DRAGONPULSE,ROOST
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 20
+Pokemon = FLORGES,50
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 20
+#-------------------------------
+[RIVAL_JUNO,Juno,152]
+Items = FULLRESTORE
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,51
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+Pokemon = CHARIZARD,51
+    Moves = FLAMETHROWER,AIRSLASH,DRAGONPULSE,ROOST
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 31
+Pokemon = FLORGES,51
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 31
+#-------------------------------
+[RIVAL_JUNO,Juno,252]
+LoseText = We held it. We held the stair.
+Pokemon = TSAREENA,50
+    Name = Sweetpea
+    Moves = TROPKICK,PLAYROUGH,UTURN,RAPIDSPIN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 10
+Pokemon = CHARIZARD,49
+    Moves = FLAMETHROWER,AIRSLASH,DRAGONPULSE,ROOST
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 10
+Pokemon = FLORGES,49
+    Moves = MOONBLAST,PETALBLIZZARD,WISH,PROTECT
+    Ability = FLOWERVEIL
+    Item = LEFTOVERS
+    Nature = CALM
+    IV = 10

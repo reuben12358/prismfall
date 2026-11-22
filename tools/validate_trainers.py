@@ -95,6 +95,7 @@ RIVAL_BATTLES = OrderedDict([
     (("RIVAL_JUNO", 2), ("Juno", 35)),
     (("LEADER_JUNO", 3), ("Juno", 47)),     # J3 is the Gym 9 Warden battle
     (("RIVAL_JUNO", 4), ("Juno", 90)),
+    (("RIVAL_JUNO", 5), ("Juno", 51)),          # Ch11 tag-battle partner (the Thaw)
     (("RIVAL_JUNO", 7), ("Juno", 97)),          # Ch21 tag-battle partner (when Kestrel is Fallen)
 ])
 # Gen 1 starter line written in PBS for each starter_slot of the player

@@ -35,3 +35,27 @@ Prismfall::Bosses.register(:KYOGRE_ISENMAR, {
     { :messages => ["{1} sank back beneath the waves..."], :result => :defeated }
   ]
 })
+
+#===============================================================================
+# Kyogre - GO_WEATHER "Weather" (Ch11, story/30_SCRIPT_CH11.md). The player
+# chose "Fight it now" when the lake breathed. A Primal Kyogre far past the
+# level cap that the party can't beat; the event calls Prismfall.game_over(:GO_WEATHER)
+# afterwards whatever the result, so the battle only has to look hopeless.
+#===============================================================================
+Prismfall::Bosses.register(:KYOGRE_WEATHER, {
+  :species    => :KYOGRE,
+  :form       => 1,
+  :level      => 80,
+  :ability    => :PRIMORDIALSEA,
+  :nature     => :MODEST,
+  :ivs        => 31,
+  :evs        => { :HP => 252, :SPECIAL_ATTACK => 252, :SPECIAL_DEFENSE => 4 },
+  :moves      => [:ORIGINPULSE, :WATERSPOUT, :ICEBEAM, :THUNDER],
+  :bars       => { :default => 5 },
+  :field      => :WATER_SURFACE,
+  :catch      => false,
+  :can_run    => false,
+  :can_lose   => true,
+  :intro      => ["The sea itself rises to meet you..."],
+  :description => "Ch11 GO_WEATHER: unwinnable; the game over follows either way"
+})

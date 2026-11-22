@@ -575,7 +575,7 @@ PAPER (shown on screen, in green ink): "Dear Uncle Rowan,"
 V131 = 12. V102 STORY_CHAPTER = 11.
 QUEST LOG: "Eighteen Roads" — Earn the tenth badge in Rimeholt, up the Hart Road through the Hoarwood into Isenmar. Juno wants to come.
 ```
-*(06_ACT_III's cliffhanger. Juno travels with the PC in Ch11 to lobby the northern Wardens, unless `bond(:JUNO) <= -5`, when she goes ahead alone; `29_SCRIPT_CH11.md` has both.)*
+*(06_ACT_III's cliffhanger. Juno travels with the PC in Ch11 to lobby the northern Wardens, unless `bond(:JUNO) <= -5`, when she goes ahead alone; `30_SCRIPT_CH11.md` has both.)*
 
 ---
 
