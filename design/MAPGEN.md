@@ -3,6 +3,11 @@
 The map generator turns readable YAML specs into real RMXP map files (`Data/MapNNN.rxdata`) for Essentials v21.1 + EBDX, using
 the base project's stock tilesets. Code and specs live in `mapgen/`, output in `maps_out/`.
 
+**Workflow with Gemini (creator, 2026-11-21).** Every map goes through three passes: (1) Claude builds the initial map,
+so the story can move; (2) Claude refines its own map; (3) Gemini refines Claude's map. Pass 2 runs only on plan quota,
+never on usage credits: credits are for story progress only. A map that has had pass 1 but not pass 2 is listed in
+`mapgen/REFINE_QUEUE.md` so the refinement pass knows where to start.
+
 ## 1. What's built (Act I, in story order)
 | IDs | Maps | Story / mechanics |
 |---|---|---|
