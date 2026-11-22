@@ -1,7 +1,7 @@
 # Script: Chapter 11 — "The Thaw" (the Hart Road, Rimeholt, Gym 10, the Thaw and Kyogre; the war; the Ebbmouth Strike; the Mast Road)
 
 > **Final playable script** for Chapter 11, the second chapter of Act III. It covers the Hart Road (700 the Hart's Run, 701 the Hoarwood, 710/711 Snowbriar, optional 703 the Gossamer Heartwood, 704/705 Frostfang Pass, 712 the Whalebone Road), Rimeholt (300–314: the Thane's Harbour, the Icewall Gate, the Sled Market, Whalebone Keep, Net Row and the Sinking Quarter), the Lake Hall (Gym 10, 310–313, 315–316), the Thaw and Kyogre, the court in the Thane's Seat (307), the detour south to Ebbmouth (160, 167; optional 723), and the Mast Road out (720 the Thane's Sled-Road, 721 the Mast Glacier, 730/731 Anchorhold; optional 728 Stillwater). None of these maps is built; the list at the end is what to build from.
-> Follows `story/28_SCRIPT_CH10.md`; the Ch12 script, "Dead Letters" (not yet written), follows this (its opening reads S128, V107, V122 = 2 and `:ch11_anja`). Sources: 06_ACT_III Ch11, 14_WAR_AND_BLESSING (the Ch11 insert; War 1 `:war_warning`), 03_CAST (Anja, Eirik, Juno, Marisol, Teo, Voss), 09_MYSTERIES (#21 the sleepers dream; #24 the Sleeping Whale), NARRATIVE_KEYS (`:war_warning`, `:ch11_anja`, `:ch11_strike`, GO_WEATHER, GO_THIN_ICE, `JUNO_ESTRANGED`, `ANJA_EXPOSED`), 15_COMEDY (Ch11 "Toes"; the Isenmar bits; the Wardens' Circular), GYM_PUZZLES Gym 10, DUNGEON_PUZZLES (the Ice Vault ties), BOSSES (`:KYOGRE_ISENMAR`, `KYOGRE_WEATHER`), TRIALS_QUESTS and WALKTHROUGH Ch11 (the Tally quests), CAMEOS #5 (Alexandra), `design/CHAPTER_BEATS.md`.
+> Follows `story/28_SCRIPT_CH10.md`; `story/31_SCRIPT_CH12.md` ("Dead Letters") follows this (its opening reads S128, V107, V122 = 2 and `:ch11_anja`). Sources: 06_ACT_III Ch11, 14_WAR_AND_BLESSING (the Ch11 insert; War 1 `:war_warning`), 03_CAST (Anja, Eirik, Juno, Marisol, Teo, Voss), 09_MYSTERIES (#21 the sleepers dream; #22 Kyogre and the Sleeping Whale), NARRATIVE_KEYS (`:war_warning`, `:ch11_anja`, `:ch11_strike`, GO_WEATHER, GO_THIN_ICE, `JUNO_ESTRANGED`, `ANJA_EXPOSED`), 15_COMEDY (Ch11 "Toes"; the Isenmar bits; the Wardens' Circular), GYM_PUZZLES Gym 10, DUNGEON_PUZZLES (the Ice Vault ties), BOSSES (`:KYOGRE_ISENMAR`, `KYOGRE_WEATHER`), TRIALS_QUESTS and WALKTHROUGH Ch11 (the Tally quests), CAMEOS #5 (Alexandra), `design/CHAPTER_BEATS.md`.
 
 ## Conventions
 As in the earlier scripts. **Portrait cast here:** Juno, Anja, Eirik, Marisol, Teo, Voss (on screens only), Valen (one line, by relay), Larch (the banner only, no portrait). **Plain:** the Meridian technician Pell, the Directorate officers, the strikebreakers and their foreman, the pass-warden Bryn, the Ashkaar rider, Old Torstein, Liv (Anja's granddaughter), the ice-climbers, the ice-fisher, the skalds, the net-menders, Alexandra (cameo), every townsperson and trainer. Kyogre is a Pokémon: staging only. Events call `Prismfall.gym_battle(pfm_gym(:LEADER_ANJA), double: false)`: Gym 10 is a **single** battle.
@@ -128,7 +128,7 @@ OLD MAN (singing): "Sleep, old whale, under the white / Sleep while the Thane ke
 [name: Old Man] They used to sing that once a winter. At the long night. Now they sing it every night. Nobody says why. You don't say why about the whale.
 ```
 **Juno's third speech** (to the PC's third Pokémon, under the last arch): "Your Majesty. Your sister's city is warm. I came to ask what it costs, and who pays." (Your Pokémon looks at her properly for the first time.) [portrait: JUNO, shocked] It listened. Did you see? It *listened*.
-*(09 #24: the Sleeping Whale song is the note order for the Ice Vault's sealed door (DUNGEON_PUZZLES), and the player has heard it since Ebbmouth in Act I.)*
+*(09 #22: the Sleeping Whale song is the note order for the Ice Vault's sealed door (DUNGEON_PUZZLES), and the player has heard it since Ebbmouth in Act I.)*
 
 ## Rimeholt (300–314; Isenmar's capital on Lake Rime, `:FROZEN_LAKE`)
 
@@ -362,7 +362,7 @@ Script: Prismfall::Bosses.wild_battle(:KYOGRE_ISENMAR)
   FIELD NOTES: "It went back down. I don't think I won. I think it decided I wasn't worth staying up for."
 Switch S129 CH11_KYOGRE_DONE = ON. V132 = 6.
 ```
-*(06_ACT_III beat 5 and 09 #24. The sea is no longer fully frozen either way: V107 = 1 opens the Ice Vault's meltwater channels (DUNGEON_PUZZLES, the Ice Vault; Kyogre sleeps in 318 from now on, and `:war_legend` comes for it in Ch17–18).)*
+*(06_ACT_III beat 5 and 09 #22. The sea is no longer fully frozen either way: V107 = 1 opens the Ice Vault's meltwater channels (DUNGEON_PUZZLES, the Ice Vault; Kyogre sleeps in 318 from now on, and `:war_legend` comes for it in Ch17–18).)*
 
 ---
 

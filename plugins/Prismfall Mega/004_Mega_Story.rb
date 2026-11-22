@@ -131,3 +131,22 @@ MenuHandlers.add(:debug_menu, :prismfall_mega_menu, {
     end
   }
 })
+
+#===============================================================================
+# Meridian's keystones are Lattice-glass bands, not rings (MEGA_EVOLUTION §1.2; Larch's warning in
+# Ch12, story/31_SCRIPT_CH12.md). Their trainers carry MEGARING in PBS so the engine lets them Mega Evolve;
+# the battle message names what they really wear: "...is reacting to Meridian Director Helene's Lattice band!"
+#===============================================================================
+class Battle
+  alias __prismfall_mega_pbGetMegaRingName pbGetMegaRingName unless method_defined?(:__prismfall_mega_pbGetMegaRingName)
+
+  def pbGetMegaRingName(idxBattler)
+    if !pbOwnedByPlayer?(idxBattler)
+      owner = pbGetOwnerFromBattlerIndex(idxBattler) rescue nil
+      if owner && owner.respond_to?(:trainer_type) && owner.trainer_type.to_s.start_with?("MERIDIAN_")
+        return _INTL("Lattice band")
+      end
+    end
+    return __prismfall_mega_pbGetMegaRingName(idxBattler)
+  end
+end
