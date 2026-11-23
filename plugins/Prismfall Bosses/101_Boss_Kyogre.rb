@@ -25,7 +25,7 @@ Prismfall::Bosses.register(:KYOGRE_ISENMAR, {
            :field => :WATER_SURFACE, :field_message => "The frozen lake cracked apart into open water!",
            :learn => { 0 => :WATERSPOUT }, :stats => { :SPECIAL_ATTACK => 1 } },
     2 => { :messages => ["The Icicle Plate's hold on the sea shatters!",
-                         "The shard in your pocket hums in time with the waves..."],
+                         "The scar under your collar burns in time with the waves..."],
            :primal => true, :moves => [:ORIGINPULSE, :ICEBEAM, :THUNDER, :CALMMIND], :clear_hazards => true }
   },
   :on_defeat  => [
@@ -40,7 +40,7 @@ Prismfall::Bosses.register(:KYOGRE_ISENMAR, {
 # Kyogre - GO_WEATHER "Weather" (Ch11, story/30_SCRIPT_CH11.md). The player
 # chose "Fight it now" when the lake breathed. A Primal Kyogre far past the
 # level cap that the party can't beat; the event calls Prismfall.game_over(:GO_WEATHER)
-# afterwards whatever the result, so the battle only has to look hopeless.
+# afterwards whatever the result. The battle ends after its first round (:end_after_rounds).
 #===============================================================================
 Prismfall::Bosses.register(:KYOGRE_WEATHER, {
   :species    => :KYOGRE,
@@ -52,6 +52,7 @@ Prismfall::Bosses.register(:KYOGRE_WEATHER, {
   :evs        => { :HP => 252, :SPECIAL_ATTACK => 252, :SPECIAL_DEFENSE => 4 },
   :moves      => [:ORIGINPULSE, :WATERSPOUT, :ICEBEAM, :THUNDER],
   :bars       => { :default => 5 },
+  :end_after_rounds => 1,          # one Primal-rain round, then the event's game over (10_CHOICES_ENDINGS)
   :field      => :WATER_SURFACE,
   :catch      => false,
   :can_run    => false,

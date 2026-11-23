@@ -88,7 +88,7 @@ module Prismfall
       return list.count { |cond| Prismfall::Conditions.evaluate(cond) }
     end
 
-    # Writes MIRROR_SWITCHES (S221-S228) from their conditions.
+    # Writes MIRROR_SWITCHES (S193, S221-S232) from their conditions.
     def self.refresh_mirrors
       return if !MIRRORS_ENABLED || !$game_switches
       changed = false

@@ -218,6 +218,19 @@ class Battle
   def pbEndOfRoundPhase
     ret = prismfall_bosses_pbEndOfRoundPhase
     Prismfall::Bosses.process(self)
+    # :end_after_rounds => n ends the battle as a loss after round n (scripted, unwinnable bosses
+    # such as Ch11's GO_WEATHER Kyogre: one Primal-rain round, then the event's game over).
+    @pf_rounds_done = (@pf_rounds_done || 0) + 1
+    if @decision == 0
+      @battlers.each do |b|
+        next if !b || b.fainted? || !opposes?(b.index)
+        st = (Prismfall::Bosses.state_for(b) rescue nil)
+        n = st && st.data[:end_after_rounds]
+        next if !n || @pf_rounds_done < n
+        @decision = 2
+        break
+      end
+    end
     return ret
   end
 

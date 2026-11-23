@@ -4,7 +4,7 @@
 > Follows `story/30_SCRIPT_CH11.md`; `story/32_SCRIPT_CH13.md` follows this. Sources: 06_ACT_III Ch12 and Interlude III, 03_CAST (Odessa, Larch, Kestrel, Marchetti, Kroll, Voss, Calla, Morwen), 09_MYSTERIES (#8 the pin, #10 and #16 and #28 the letter to "I.", #12 Sable is Kroll, #14 the badge case, #15 the arena model, #23 the Stormfront Wyrm, #25 the reflection), NARRATIVE_KEYS (`:ch12_letter`, GO_FINE_PRINT, Odessa's Consent), 14_WAR_AND_BLESSING (the Ch12 insert), 15_COMEDY (Ch12 "Flight Safety"; the first mirror gag; the Wardens' Circular), GYM_PUZZLES Gym 11, MEGA_EVOLUTION §1.2 (Meridian's keystones), BALANCE (K5, Marchetti Ch12, Odessa), WALKTHROUGH Ch12, `design/CHAPTER_BEATS.md`.
 
 ## Conventions
-As in the earlier scripts. **Portrait cast here:** Larch, Odessa, Kestrel, Voss, Calla, Marchetti. Juno appears only by Circular. Sable/Kroll does not appear: she is exposed in Ch13, and nothing here may name Kroll on screen. **Plain:** Pip (the Gale Post courier boy, the gym's hint giver), the mail-ship's loader and captain's mate, the sky-river guides, the Directorate officers, the Mart clerk, the newsreader and the Meridian spokesman, every townsperson and trainer. Odessa's gym battle is a **double**: `Prismfall.gym_battle(pfm_gym(:LEADER_ODESSA), double: true)`. K5 is `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 5, field: :STORMFRONT)`. Marchetti is `TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene")` (base version; her Ch12 team, Mega Manectric).
+As in the earlier scripts. **Portrait cast here:** Larch, Odessa, Kestrel, Voss, Calla, Marchetti. Juno appears only by Circular. Sable/Kroll does not appear: she is exposed in Ch13, and nothing here may name Kroll on screen. **Plain:** Kit (the Gale Post courier boy, the gym's hint giver), the mail-ship's loader and captain's mate, the sky-river guides, the Directorate officers, the Mart clerk, the newsreader and the Meridian spokesman, every townsperson and trainer. Odessa's gym battle is a **double**: `Prismfall.gym_battle(pfm_gym(:LEADER_ODESSA), double: true)`. K5 is `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 5, field: :STORMFRONT)`. Marchetti is `TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene")` (base version; her Ch12 team, Mega Manectric).
 **Counter:** V133 **CH12_STEP** (design/FLAGS.md): 0 aboard the mail-ship · 1 moored on the Tetherline · 2 up the Cloudstair into the Mast Ward (the curfew) · 3 the Gale Post Hall: Larch and Odessa · 4 "Flight Safety" (the skiff drill; the gym opens) · 5 Gym 11 won · 6 the Larch Papers broadcast (S131) · 7 the raid: the bomb, Marchetti, Larch away by skiff, the Fellowship SUSPENDED (S132) · 8 K5 and `:ch12_letter` (S133, V114 = 2) · 9 Interlude III done (V119 3 → 0) · 10 Conductors' Causeway, the late reflection (chapter closed; V102 = 13).
 **State set here:** S131 CH12_LARCH_PAPERS, S132 CH12_GALE_RAID, S133 CH12_K5_DONE, V114 KESTREL_STAGE = 2, V119 INTERLUDE_ACTIVE = 3 then 0. Key: `:ch12_letter`. Key Items: SPLITTER CASING; MORWEN'S LETTER (if `:keep`). The Mandate arch at every Pokémon Center reads SUSPENDED from V133 >= 7 (28_SCRIPT_CH10, the Act III opener).
 
@@ -21,7 +21,7 @@ As in the earlier scripts. **Portrait cast here:** Larch, Odessa, Kestrel, Voss,
 
 ## The mail-ship (a short deck map or cutscene; autorun, V133 == 0 → 1)
 ```
-(The mail-ship's deck in the late afternoon. Sacks lashed everywhere. A Pelipper asleep on every rail. Ahead, out of the plain north of the Crownwall, a thing like a needle: a spire of masts and gantries a mile high, going straight up into a wall of cloud that never moves. Lightning walks along the inside of the cloud like veins.)
+(The mail-ship's deck in the late afternoon. Sacks lashed everywhere. A Pelipper asleep on every rail. Ahead, out of the plain south of the Crownwall, a thing like a needle: a spire of masts and gantries a mile high, going straight up into a wall of cloud that never moves. Lightning walks along the inside of the cloud like veins.)
 [name: Captain's Mate] Skyreach. And the Stormfront on top of it, the Sky Plate's own weather. Been there since before the Accord. Never rained a drop on the city. Just sits there and thinks.
 [name: Captain's Mate] We'll not moor at the top. Directorate's searching every sack at the upper docks since the Thaw. Everything from Isenmar gets opened. Captain says we go in low, on the Tetherline, and you climb.
 (Something moves in the storm wall. Very big, very dark, along the lightning, and gone.)
@@ -84,11 +84,11 @@ V133 = 2. QUEST LOG: "Eighteen Roads" — Find the Gale Post Hall. Odessa Gale's
 ```
 [portrait: LARCH, neutral] I'm going to say something tonight, \PN. On every screen. Odessa's relays reach every Center in Velmora, and every Center has a screen now, thanks to the Mandate. Meridian built me an audience.
 [portrait: LARCH, sad] Everything I wrote in AF 292. The report they buried. Rimeholt's in it. Cindervault's in it. The Ebb's in it. Lumen's Plate. I predicted all of it, and then I took their money and I let them bury it.
-[portrait: LARCH, neutral] And a Lattice technician in Rimeholt sent me something on the ship you came in on. The last hour of Tower Three. Signed "Pell". I don't know who Pell is. I'd like to buy him a drink.
+[portrait: LARCH, neutral] And a Lattice technician in Rimeholt sent me something on the ship you came in on. The last hour of Tower Three. Signed "Tage". I don't know who Tage is. I'd like to buy him a drink.
 [portrait: ODESSA, neutral] Midnight. Stormwatch Spire. The relay crown's at the top of the storm. Get your badge first. If tonight goes how I think it'll go, there won't be a gym tomorrow.
 V133 = 3.
 ```
-*(The Ch4 red herring ("Larch works for Meridian") is resolved here: she did, and she's about to say so. Pell's cache is the Ch11 GO_THIN_ICE beat's consequence.)*
+*(The Ch4 red herring ("Larch works for Meridian") is resolved here: she did, and she's about to say so. Tage's cache is the Ch11 GO_THIN_ICE beat's consequence.)*
 
 ### Map 326 — the Smugglers' Gantry: comedy scene Ch12, **"Flight Safety"** (touch, the skiff on the gantry, V133 == 3 → 4)
 ```
@@ -107,13 +107,13 @@ V133 = 3.
 V133 = 4. The Gale Post gym opens.
 ```
 *(15_COMEDY Ch12 "Flight Safety", staged as a drill so the real escape at midnight lands: the joke goes before the blow. The "(Let go of the rope)" option is the PC's only line; it's always offered, and always taken.)*
-*Also here: **the first mirror gag** (15_COMEDY): on the way back in, a puddle on the gantry. The PC's reflection is caught mid-yawn and snaps to attention. Pip, the courier boy, sees it: "Do it again!" (It won't.) (15_COMEDY gives the line to Juno; she's at the Elowen border this chapter, so Pip has it.)*
+*Also here: **the first mirror gag** (15_COMEDY): on the way back in, a puddle on the gantry. The PC's reflection is caught mid-yawn and snaps to attention. Kit, the courier boy, sees it: "Do it again!" (It won't.) (15_COMEDY gives the line to Juno; she's at the Elowen border this chapter, so Kit has it.)*
 
 ## Maps 330–334 — the Gale Post gym (Gym 11; GYM_PUZZLES Gym 11)
 Doors open at V133 >= 4. Built as GYM_PUZZLES Gym 11 ("the wind doesn't care"): 330 the Hangar (teach), 331 the Gust Deck (twist, coupled vanes), 332 the Mail Chute (combine, sacks ride the wind), 333 the Captain's Deck (arena), 334 the Dead-Letter Archive (Mastery, optional; and the stage of K5).
 - **Gym sign:** "THE GALE POST. Warden: ODESSA GALE. 'Hold onto something.'"
-- **Pip** (the hint courier in 331/332): "Every vane works two fans. Look up, the rods show which." On the third hint: "Captain says I'm not allowed to just tell you. (He tells you.)"
-- **334 the Dead-Letter Archive** is open as Mastery before the raid. Its undeliverable "Abroad — closed by quarantine" hole is visibly stuffed with a bundle tied in black ribbon. Pip: "Don't touch that one. Captain says those are the saddest letters in the world. Nobody knows who 'I.' is."
+- **Kit** (the hint courier in 331/332): "Every vane works two fans. Look up, the rods show which." On the third hint: "Captain says I'm not allowed to just tell you. (He tells you.)"
+- **334 the Dead-Letter Archive** is open as Mastery before the raid. Its undeliverable "Abroad — closed by quarantine" hole is visibly stuffed with a bundle tied in black ribbon. Kit: "Don't touch that one. Captain says those are the saddest letters in the world. Nobody knows who 'I.' is."
 
 ### 333 — the Captain's Deck: Odessa (double)
 ```
@@ -160,7 +160,7 @@ SCREEN (every screen in the realm; shown here on the booth's monitor and, in qui
 (She holds it up. It has a stamp across the front: SUPPRESSED.)
 [portrait: LARCH, neutral] Page four. Lattice extraction accelerates the Bleed. Every Plate we draw on thins the world around it. I gave them the rate. I gave them the cities that would go first.
 [portrait: LARCH, sad] Ebbmouth's river. Lumen's Plate. Cindervault's caldera. Rimeholt's lake. In that order. It's in my handwriting. I was right about all of it, and nobody stopped, and I took the money and I let them put this in a drawer.
-[portrait: LARCH, neutral] (a smaller sheet) This came to me on a mail-ship today, from a technician named Pell. It's the last hour of Rimeholt's Tower Three. The draw at a hundred and fifty-five percent. An override signed in Lumen, not in Rimeholt.
+[portrait: LARCH, neutral] (a smaller sheet) This came to me on a mail-ship today, from a technician named Tage. It's the last hour of Rimeholt's Tower Three. The draw at a hundred and fifty-five percent. An override signed in Lumen, not in Rimeholt.
 [portrait: LARCH, neutral] (another) And these are the heat contracts. Isenmar's and Ashkaar's. Side by side. Same price per—
 [portrait: LARCH, sad] (she stops herself, looks into the camera) No. You won't read that page. Nobody will. Here's the only line that matters.
 [portrait: LARCH, neutral] I designed the Lattice. I was wrong. I'm telling you now because nobody else will.
@@ -218,7 +218,7 @@ TERMINAL: Fellowship status: SUSPENDED. Priority services withdrawn. Please pres
 
 ### The dawn news (Center screens; first time the PC passes one after V133 == 7)
 ```
-SCREEN: (Meridian blue.) "—Hollow sympathiser Imogen Larch, who last night bombed Skyreach's Stormwatch relay in an attempt to—"
+SCREEN: (Meridian blue.) "—Hollow sympathiser Imelda Larch, who last night bombed Skyreach's Stormwatch relay in an attempt to—"
 SCREEN: (A Meridian spokesman at a podium with the sunburst behind him.) "We are cooperating fully with the Directorate. Professor Larch's state of mind has been a concern to her former colleagues for some time."
 SCREEN: ◆ LARCH: WANTED FOR QUESTIONING ◆
 ```
@@ -256,8 +256,8 @@ LETTER: "Keep wilting, love. Keep them small and safe and far. I'll carry the na
   RECEIVE: MORWEN'S LETTER.
 > Send it to Kestrel by Gale Post. (send)
   Script: pf_choose(:ch12_letter, :send)
-  (Pip, at the archive door with his eyes very wide, takes it from you in both hands.)
-  [name: Pip] Kestrel Vane, Meridian Spire, Lumen. That's easy. That's a real address. (He looks at it.) It's been undeliverable for twelve years. Not any more.
+  (Kit, at the archive door with his eyes very wide, takes it from you in both hands.)
+  [name: Kit] Kestrel Vane, Meridian Spire, Lumen. That's easy. That's a real address. (He looks at it.) It's been undeliverable for ten years. Not any more.
   (He puts a Postmark on it himself, carefully, in the corner, and runs.)
 > Burn it. (burn)
   > It's the last thing someone wrote. Burn it?
@@ -290,11 +290,11 @@ V133 = 8.
 (Calla Wren is by the door with a clipboard. She doesn't look up.)
 [portrait: VOSS, happy] Kestrel. Come in. Sit, sit. You look like you've been rained on. Have you been rained on?
 [portrait: KESTREL, neutral] (putting the bundle on the desk) I brought them.
-[portrait: VOSS, neutral] (not touching the bundle) In a minute. Tea first. Milk? You take milk. You took milk when you were nine and you came to the Lumen Gala with your mother and stole every sugar cube in the hall. I remember.
+[portrait: VOSS, neutral] (not touching the bundle) In a minute. Tea first. Milk? You take milk. You took milk when you were five and you came to the Lumen Gala with your mother and stole every sugar cube in the hall. I remember.
 (He gives Kestrel the chipped mug. He keeps the good one.)
 ```
 **The office (walkable; the player examines things before talking to Voss again):**
-- **A framed photograph:** a young man in a linesman's overalls on top of a pylon, grinning, with a sunburst armband. "AF 288. First Lattice line, Ferrow's Landing. — V."
+- **A framed photograph:** a young man in a linesman's overalls on top of a pylon, grinning, with a sunburst armband. "AF 281. First Lattice line, Ferrow's Landing. — V."
 - **A model under glass:** a circular arena with a crown-shaped roof and eighteen pillars. The plaque: "THE PRISM ARENA. Crownhaven. Festival of Champions." Kestrel: "...It looks like a lock."
 - **The desk:** the gold sunburst pin, set apart on a velvet square. Looked at closely, the rays are uneven, like teeth. Kestrel: "Like a key." *(09 #8 and #14: the pin is the Gilded King's sun shaped like a lock; the badge case is the key.)*
 - **The private drawer** (the desk's left side; it's not locked). See GO_FINE_PRINT below.
@@ -321,7 +321,7 @@ V133 = 8.
     > Open it.
       (The drawer slides out without a sound. One file. Very thin.)
       FILE: UNIMPRINTED-01: KEYSTONE.
-      (A photograph clipped to the front. A five-year-old on the deck of a ferry, in a coat too big for them, looking at the camera without smiling. You.)
+      (A photograph clipped to the front. A fifteen-year-old on the deck of a ferry in the rain, looking at the camera without smiling. You, on the Dovetail, the day you landed.)
       (The door opens.)
       [portrait: VOSS, neutral] Ah.
       (He doesn't sound angry. He sounds disappointed, the way a teacher is disappointed. He closes the door behind him, very gently.)
@@ -344,14 +344,14 @@ Variable V119 INTERLUDE_ACTIVE = 0. The PC's party is restored. V133 = 9.
 
 ## Map 740 — Conductors' Causeway: Chapter 12 close, **"Half a Second"** (autorun on the causeway's first puddle, V133 == 9 → 10)
 ```
-(Morning. The Glass Road south out of Zenith: a causeway of pylons and wire over a grey marsh, the Lattice lines humming overhead. It has rained in the night. The causeway is full of puddles.)
+(Morning. The Glass Road north out of Zenith: a causeway of pylons and wire over a grey marsh, the Lattice lines humming overhead. It has rained in the night. The causeway is full of puddles.)
 (You stop at the edge of one. Your reflection looks up at you: the same coat, the same bag, the badge case at your hip.)
 (You turn your head.)
 (Your reflection turns its head.)
 (Half a second later.)
 (You stay very still. So does it. Then the wind moves the water, and it's just a puddle again.)
 V133 = 10. V102 STORY_CHAPTER = 13.
-QUEST LOG: "Eighteen Roads" — South on the Glass Road to Lucent and the Athenaeum. Gym 12. Rowan's tribunal is there.
+QUEST LOG: "Eighteen Roads" — North on the Glass Road to Lucent and the Athenaeum. Gym 12. Rowan's tribunal is there.
 ```
 *(06_ACT_III's cliffhanger and 09 #25: Antumbra's mirror world, reached in Ch13 at Mirror Mere. The comedy mirror gag earlier this chapter (the yawn) is the same thing played light; this is the first time it's wrong.)*
 
@@ -367,9 +367,9 @@ None of these maps is built. **[NEW]** = an event or map not in maps.json. V133 
 **320 Mast Ward** — the arrival autorun (V133 1 → 2): the curfew bell, the searchlights (looping light events, night tint from 21:00 in-game or always at V133 2–7), the officers with wrist-bands; the screens (curfew text; from V133 >= 7 the dawn news); townsfolk as written.
 **321 PC · 322 Mart · 323 Lower Gantries · 324 Skybridge Ward** — the Mandate arch (PRIORITY GUEST, SUSPENDED from V133 >= 7); 321's Circular (Juno's post; Dorian; Anja's reply only if `:let_confess`); the sleep trigger for "Midnight" (V133 == 5) and for Interlude III (V133 == 8); 322's clerk and terminal (V133 >= 7); 323 the sky-river guides (Waterfall, from V133 >= 8); the child, the dock-hand, the clerk at the lift.
 **325 Gale Post Hall** — pigeonhole walls, overhead sack rails (decor animation), Pelipper/Corvisquire doors; "Guest of the Post" autorun (V133 2 → 3): Larch at the sorting table, Odessa on the rope; **the raid** state (V133 == 6 → 7): sacks spilled, couriers with hands up, 6 officers, Marchetti on the catwalk with Manectric, the battle; the round doors showing the skiff drop (a scripted move route on 326 seen through the doors, or a short cut to 326). From V133 >= 7: the archive noise trigger to 334.
-**326 Smugglers' Gantry** — the skiff (event sprite: wing, basket, rope), "Flight Safety" (touch, V133 3 → 4), the puddle and Pip (mirror gag, once); the skiff's empty mooring from V133 >= 7.
-**330–333 Gale Post gym (Gym 11)** — doors open at V133 >= 4; as GYM_PUZZLES Gym 11; Pip's hints; **Odessa (333), double**, her three mid-battle lines, POSTMARK BADGE, TM51; V133 = 5.
-**334 Dead-Letter Archive** — as GYM_PUZZLES Mastery; the ABROAD hole with the black-ribbon bundle (V133 < 7), then empty; **K5** (V133 == 7 → 8): letters ankle-deep (floor decor), Kestrel at the ABROAD hole with the gauntlet, the battle, the ladder exit (move route), the falling letter (a small animated event), `:ch12_letter` (the lamp on the desk; Pip at the door; Odessa's entrance).
+**326 Smugglers' Gantry** — the skiff (event sprite: wing, basket, rope), "Flight Safety" (touch, V133 3 → 4), the puddle and Kit (mirror gag, once); the skiff's empty mooring from V133 >= 7.
+**330–333 Gale Post gym (Gym 11)** — doors open at V133 >= 4; as GYM_PUZZLES Gym 11; Kit's hints; **Odessa (333), double**, her three mid-battle lines, POSTMARK BADGE, TM51; V133 = 5.
+**334 Dead-Letter Archive** — as GYM_PUZZLES Mastery; the ABROAD hole with the black-ribbon bundle (V133 < 7), then empty; **K5** (V133 == 7 → 8): letters ankle-deep (floor decor), Kestrel at the ABROAD hole with the gauntlet, the battle, the ladder exit (move route), the falling letter (a small animated event), `:ch12_letter` (the lamp on the desk; Kit at the door; Odessa's entrance).
 **744–746 Stormwatch Spire** — the "Midnight" route over the roofs (a short cutscene or a rooftop map; the checkpoint), 744/745 the maintenance stair with wild encounters and two guards, the board, **the core housing** (a big event on 745; it shifts once when the PC passes, and the shard line); **746 the Roof**: relay dishes, the glass booth, the storm overhead (fog), the broadcast autorun (V133 5 → 6, S131), the screen cuts (pictures of five earlier places), the bomb (flash, shake, the north dishes to a wrecked state), the stair down; the **SPLITTER CASING** pickup on 745.
 **Meridian Spire, Voss's office** [NEW; Lumen] — glass wall over Lumen at night (panorama), the desk with the kettle and two mugs, the photograph, the arena model, the pin, the left drawer (GO_FINE_PRINT), Calla by the door, the contract; Interlude III's party swap and V119 (3 → 0).
 **740 Conductors' Causeway** — pylons, wires, a marsh; the first puddle (the reflection autorun, V133 9 → 10, V102 = 13): the PC's reflection as a mirrored event that turns its head on a half-second delay (a move route with a wait of 15 frames).

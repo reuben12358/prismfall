@@ -4,14 +4,14 @@
 > Follows `story/28_SCRIPT_CH10.md`; `story/31_SCRIPT_CH12.md` ("Dead Letters") follows this (its opening reads S128, V107, V122 = 2 and `:ch11_anja`). Sources: 06_ACT_III Ch11, 14_WAR_AND_BLESSING (the Ch11 insert; War 1 `:war_warning`), 03_CAST (Anja, Eirik, Juno, Marisol, Teo, Voss), 09_MYSTERIES (#21 the sleepers dream; #22 Kyogre and the Sleeping Whale), NARRATIVE_KEYS (`:war_warning`, `:ch11_anja`, `:ch11_strike`, GO_WEATHER, GO_THIN_ICE, `JUNO_ESTRANGED`, `ANJA_EXPOSED`), 15_COMEDY (Ch11 "Toes"; the Isenmar bits; the Wardens' Circular), GYM_PUZZLES Gym 10, DUNGEON_PUZZLES (the Ice Vault ties), BOSSES (`:KYOGRE_ISENMAR`, `KYOGRE_WEATHER`), TRIALS_QUESTS and WALKTHROUGH Ch11 (the Tally quests), CAMEOS #5 (Alexandra), `design/CHAPTER_BEATS.md`.
 
 ## Conventions
-As in the earlier scripts. **Portrait cast here:** Juno, Anja, Eirik, Marisol, Teo, Voss (on screens only), Valen (one line, by relay), Larch (the banner only, no portrait). **Plain:** the Meridian technician Pell, the Directorate officers, the strikebreakers and their foreman, the pass-warden Bryn, the Ashkaar rider, Old Torstein, Liv (Anja's granddaughter), the ice-climbers, the ice-fisher, the skalds, the net-menders, Alexandra (cameo), every townsperson and trainer. Kyogre is a Pokémon: staging only. Events call `Prismfall.gym_battle(pfm_gym(:LEADER_ANJA), double: false)`: Gym 10 is a **single** battle.
+As in the earlier scripts. **Portrait cast here:** Juno, Anja, Eirik, Marisol, Teo, Voss (on screens only), Valen (one line, by relay), Larch (the banner only, no portrait). **Plain:** the Meridian technician Tage, the Directorate officers, the strikebreakers and their foreman, the pass-warden Bryn, the Ashkaar rider, Old Torstein, Liv (Anja's granddaughter), the ice-climbers, the ice-fisher, the skalds, the net-menders, Alexandra (cameo), every townsperson and trainer. Kyogre is a Pokémon: staging only. Events call `Prismfall.gym_battle(pfm_gym(:LEADER_ANJA), double: false)`: Gym 10 is a **single** battle.
 **Counter:** V132 **CH11_STEP** (design/FLAGS.md): 0 leaving Verdance · 1 `:war_warning` made on Frostfang Pass · 2 through Rimeholt's Icewall Gate · 3 "Toes" (Anja meets Juno; the gym opens) · 4 Gym 10 won · 5 the Thaw (S128, V107 = 1; the partner battle) · 6 Kyogre (S129) · 7 `:ch11_anja` made in the Thane's Seat · 8 the third day: war declared (V122 = 2), the column leaves · 9 the Ebbmouth Strike (S130, V108 = 3) · 10 Anchorhold, "LARCH SPEAKS TONIGHT" (chapter closed; V102 = 12).
 **State set here:** S128 CH11_THAW, S129 CH11_KYOGRE_DONE, S130 CH11_EBB_STRIKE, V107 RIMEHOLT_STATE = 1, V108 EBB_STATE = 3, V122 WAR_STATE = 2, S174 DOCTORS_CELL_QUEST (the hook only). Keys: `:war_warning`, `:ch11_anja`, `:ch11_strike`.
 
 ## The chapter's key events (design/CHAPTER_BEATS.md)
 1. **The Thaw.** Rimeholt's heat-towers overdraw (the passes are closed, so they run the local Lattice past its limit), the lake breaks under the lower town, a quarter of the city goes under, and Kyogre wakes. Build-up: the Ch8 manifest ("destination *Rimeholt*"), the grey ice under the towers, the fishers' holes that don't refreeze, the Sleeping Whale song sung too often, Anja's "When the lake breathes, you run", and Gym 10's cracking tiles. Payoff: the ice going out from under the lamps, the partner battle as the field gives way, the eye under the water. Consequence: V107 for the rest of the game (the Sinking Quarter, the refugees in Ch14, the Ice Vault's meltwater channels), Anja's Act V vote, `:war_legend` in Ch17–18.
 2. **War is declared.** Kyogre's Primal rain rolls east for three days and floods the Dominar's forward camps on Ossaria's western dunes. On the third morning every screen in Isenmar carries it: war. Build-up: Ch8's closed passes, Ch9's near-brawl at the Conclave, `:war_warning` from the top of Frostfang Pass. Payoff: the Thane's host leaving east along the Sled-Road while the evacuation column goes south. Consequence: V122 = 2, Isenmar's refugees in Elowen and Ossaria, the Siege of Skaldfast (Ch15), the war choices.
-Also: `:ch11_anja` (expose her, or let her confess), and `:ch11_strike` at the Ebbmouth picket. **No jokes** from the first red reading on Pell's console (V132 == 4, at night) to Anja on the hut roof (15_COMEDY §1: the Thaw is joke-free). **No side content** opens in Rimeholt between Gym 10 (V132 == 4) and the court (V132 == 7): the Tally board, the ice-climbers' wall and Torstein's hole all wait until the morning after.
+Also: `:ch11_anja` (expose her, or let her confess), and `:ch11_strike` at the Ebbmouth picket. **No jokes** from the first red reading on Tage's console (V132 == 4, at night) to Anja on the hut roof (15_COMEDY §1: the Thaw is joke-free). **No side content** opens in Rimeholt between Gym 10 (V132 == 4) and the court (V132 == 7): the Tally board, the ice-climbers' wall and Torstein's hole all wait until the morning after.
 
 ---
 
@@ -177,7 +177,7 @@ V132 = 3. The Lake Hall's doors open.
 *(15_COMEDY Ch11 "Toes", placed as written: before the blow, never during. It also plants the chapter's argument: Anja's choice is real, and Juno doesn't have an answer to it yet.)*
 
 ### Map 300 — the Thane's Harbour · 301 PC · 302 Mart · 304 Sled Market · 314 Net Row (townsfolk, before the Thaw)
-- **The heat-tower technician, Pell** (at the foot of the second tower, with a clipboard and a scarf knitted by somebody who loves him): "Tower Three's running at a hundred and twelve percent. It's fine. It's within tolerance. The tolerance was raised in the spring. Everything's within tolerance if you raise the tolerance." *(He is the technician of GO_THIN_ICE. Meeting him here first gives the player a face to say no to.)*
+- **The heat-tower technician, Tage** (at the foot of the second tower, with a clipboard and a scarf knitted by somebody who loves him): "Tower Three's running at a hundred and twelve percent. It's fine. It's within tolerance. The tolerance was raised in the spring. Everything's within tolerance if you raise the tolerance." *(He is the technician of GO_THIN_ICE. Meeting him here first gives the player a face to say no to.)*
 - **A fisher by an open hole:** "Thirty years I've cut holes. They close by morning. This one's been open since midsummer. Fish come up to look at me. Fish shouldn't be curious."
 - **The Sled Market:** a sled-wright: "The Thane's buying every war-sled in the city. 'Just in case.' Just in case what, I said. He said 'just in case.'" A fur-trader from the Hoarwood: "Wood's dear this year. Nobody's buying it. Everyone's got the towers."
 - **Net Row (314):** a net-mender: "My gran's house was on the harbour. Before the towers it was the coldest house in Rimeholt. Now it's the warmest, and it creaks at night like a ship."
@@ -192,7 +192,7 @@ V132 = 3. The Lake Hall's doors open.
 [portrait: EIRIK, neutral] Then Meridian came with the towers, and nobody has died of cold in Rimeholt in eight years. You can say what you like about Meridian. I will sign whatever they put in front of me, as long as nobody dies of cold.
 [portrait: EIRIK, sad] (signing another paper) And now Ashkaar has closed the passes, and the forge-heat doesn't come up the pipe from Cindervault any more, so my towers run on the lake. Meridian says the lake can take it. My sister says the lake can take it. So the lake can take it.
 ```
-*(The Ch8 manifest pays off here: Cindervault's tap fed Rimeholt; with the passes closed (V122 = 1) the towers draw on the lake's own Imprint. That's the mechanism of the Thaw, stated plainly before it happens. If V110 = 0 (`:shutdown` in Ch8) he adds: "And Cindervault shut its tap anyway. Somebody down there decided my city could do without. They were right, it turns out. We did without, by drinking the lake.")*
+*(The Ch8 manifest pays off here: Cindervault's tap fed Rimeholt; with the passes closed (V122 = 1) the towers draw on the lake's own Imprint. That's the mechanism of the Thaw, stated plainly before it happens. If `pf_chose(:ch8_caldera, :shutdown)` (V110 = 0 by default too, so check the choice, not the variable) he adds: "And Cindervault shut its tap anyway. Somebody down there decided my city could do without. They were right, it turns out. We did without, by drinking the lake.")*
 
 ## Maps 310–313, 315–316 — the Lake Hall (Gym 10; GYM_PUZZLES Gym 10)
 Doors open at V132 >= 3. Built as GYM_PUZZLES Gym 10 ("ice remembers weight"): 310 the Boathouse (teach), 311 the Ice Hall (twist), 312 the Crackwalk (combine), 313 the Warden Arena, 315 the Sounding (Mastery, optional), 316 the Under-ice Grotto (falls).
@@ -233,16 +233,16 @@ V132 = 4.
 Script: Prismfall.checkpoint
 (Fade. The harbour at night. The ice is wet. Your boots splash where yesterday they rang.)
 ```
-### Map 300 — the second tower: Pell's console (autorun at the tower foot)
+### Map 300 — the second tower: Tage's console (autorun at the tower foot)
 ```
-(Pell is at the console in the tower's hut, alone, in a coat over pyjamas. The screen is a column of numbers, and every one of them is red.)
-[name: Pell] Don't— don't touch anything. I'm— it's fine. It's a spike. Tower Three's been spiking all week, it comes back down, it always comes back down.
+(Tage is at the console in the tower's hut, alone, in a coat over pyjamas. The screen is a column of numbers, and every one of them is red.)
+[name: Tage] Don't— don't touch anything. I'm— it's fine. It's a spike. Tower Three's been spiking all week, it comes back down, it always comes back down.
 SCREEN: DRAW 141% · 148% · 155% · ICE LOAD: — · — · —
-[name: Pell] (very quietly) The ice load sensor stopped answering an hour ago. I thought it was the cold. It's built for cold.
+[name: Tage] (very quietly) The ice load sensor stopped answering an hour ago. I thought it was the cold. It's built for cold.
 [portrait: JUNO, neutral] Wake the city.
-[name: Pell] I can't, I need authorisation from—
+[name: Tage] I can't, I need authorisation from—
 [portrait: JUNO, angry] I'm a Warden. That's authorisation. WAKE THE CITY.
-(Pell's hand hovers over a big brass lever under a glass cap. He breaks the glass.)
+(Tage's hand hovers over a big brass lever under a glass cap. He breaks the glass.)
 SE: a horn, long and low, from every tower at once. Lights come on across Rimeholt, one window, ten, a hundred.
 (Then, under the horn, another sound. Deep, and everywhere, and coming up through your feet.)
 (The ice singing.)
@@ -278,7 +278,7 @@ Switch S128 CH11_THAW = ON. Variable V107 RIMEHOLT_STATE = 1.
 Script: setBattleRule("fieldChange", [2, :WATER_SURFACE, "The ice under the battlefield gives way!"])
 BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Ostrander", 11, :MERIDIAN_DIRECTORATE, "Vell", 11) — double, partner; field `:FROZEN_LAKE` → `:WATER_SURFACE` at the end of round 2 (the scripted fieldChange rule; the field can also crack earlier on its own).
 Script: pbDeregisterPartner
-(LOSE: whiteout to 301; the night restarts at Pell's console from the checkpoint.)
+(LOSE: whiteout to 301; the night restarts at Tage's console from the checkpoint.)
 (WIN:)
 (The officers' handcart goes over the edge of the stair into the black water, cases and all. One of them watches it go, and then sits down on the stair, and takes his helmet off.)
 [name: Directorate Officer] (to nobody) It's not my equipment. I don't even know what's in them.
@@ -286,9 +286,9 @@ Script: pbDeregisterPartner
 *(The partner battle is 06_ACT_III's beat 3. **Trainers (in PBS):** `[MERIDIAN_DIRECTORATE,Ostrander,11]` and `[MERIDIAN_DIRECTORATE,Vell,11]` (+100/200), Lv 50–51, built for an Ice-then-Water field: Ostrander Magnezone / Kingambit / Bronzong, Vell Pelipper (Drizzle) / Toxapex / Dragalge; partners `[RIVAL_JUNO,Juno,50–52]` (rival battle 5: Tsareena "Sweetpea", her starter, Florges; Lv 50–51; the starter swaps at load like every rival party) and `[LEADER_ANJA,Anja,1]` (Mamoswine, Walrein, Weavile; Lv 50–51). The fieldChange rule is the one Ch8 introduced (`003_FieldEffects_BattleState.rb`).)*
 ### **"It's Proof"** → GO_THIN_ICE (autorun as the platform shakes; same night)
 ```
-(Pell comes running out of the tower hut with a tiny steel cylinder in his hand, and stops dead at the top of the stair. Behind him, the hut's floor is tilting.)
-[name: Pell] The core! The data core, I've— no, this is the cache, the core's still in the rack, it's got everything, every reading, every override, who raised the tolerance, it's PROOF—
-[name: Pell] Please. Please, I can't— my legs won't— it's two steps. It's right inside the door. It'll prove who's to blame. It'll prove it wasn't us. It wasn't ME.
+(Tage comes running out of the tower hut with a tiny steel cylinder in his hand, and stops dead at the top of the stair. Behind him, the hut's floor is tilting.)
+[name: Tage] The core! The data core, I've— no, this is the cache, the core's still in the rack, it's got everything, every reading, every override, who raised the tolerance, it's PROOF—
+[name: Tage] Please. Please, I can't— my legs won't— it's two steps. It's right inside the door. It'll prove who's to blame. It'll prove it wasn't us. It wasn't ME.
 (Inside the hut, through the door, you can see the rack. A green light on it. Two steps. The ice around the hut is grey and humming.)
 ```
 ```
@@ -301,13 +301,15 @@ Script: pbDeregisterPartner
       (Above you, very far up, a white square that was the door. It gets smaller.)
       Script: Prismfall.game_over(:GO_THIN_ICE)
     > No.
-> Pull Pell off the platform. Leave it.
+> Pull Tage off the platform. Leave it.
   (You get him by the scarf. Juno gets him by the coat. He's still holding the cache.)
   (Behind you, the hut leans, and leans, and goes into the lake with a long hiss of steam, and the green light goes down into the dark like a coin.)
-  [name: Pell] (on his knees on the stair) That was everything. That was everything that happened.
+  [name: Tage] (on his knees on the stair) That was everything. That was everything that happened.
   [portrait: JUNO, neutral] (shaking) You're everything that happened. You saw it. Remember it.
+  (Tage presses the little steel cylinder into your hands, as if it's burning him.) [name: Tage] You keep it. They'll search me. They won't search a guest.
+  RECEIVE: TOWER CACHE.
 ```
-*(GO_THIN_ICE: NARRATIVE_KEYS §9, epitaph "You went back for the proof. The lake kept it, and you." Foreshadowing: Anja's "Ice remembers every weight", the Gym 10 crack tutorial, Pell's own "within tolerance". The cache Pell keeps is small and partial; it reaches the Larch Papers (Ch12) as one page that "nobody reads" (14_WAR_AND_BLESSING, the Ch12 insert).)*
+*(GO_THIN_ICE: NARRATIVE_KEYS §9, epitaph "You went back for the proof. The lake kept it, and you." Foreshadowing: Anja's "Ice remembers every weight", the Gym 10 crack tutorial, Tage's own "within tolerance". The cache Tage keeps is small and partial; it reaches the Larch Papers (Ch12) as one page that "nobody reads" (14_WAR_AND_BLESSING, the Ch12 insert).)*
 ### **"The Lake Breathes"** → GO_WEATHER (autorun, the harbour edge)
 ```
 (The black line across the harbour has stopped widening. For a moment everything is still. The bell has stopped. Even the screaming has stopped.)
@@ -316,7 +318,7 @@ Script: pbDeregisterPartner
 (In the black water beyond the second tower, something opens.)
 (An eye. Blue and gold, with ridges of red light round it like coastlines on a map. It is bigger than a house. It looks at the city. It looks at the towers.)
 (It looks at you.)
-(In your pocket, the shard goes cold, then warm.)
+(Under your collar, the colourless scar goes cold, then warm, like a hand pressed flat against your breastbone.)
 [portrait: ANJA, panic] (from somewhere across the ice, a voice you know) That's not a Pokémon, that's WEATHER. TOWERS! EVERYBODY TO THE TOWERS!
 ```
 ```
@@ -352,7 +354,7 @@ Script: Prismfall::Bosses.wild_battle(:KYOGRE_ISENMAR)
 — `:FROZEN_LAKE` → `:WATER_SURFACE` at break 1; Primal at break 2 (the shard hums); on a Harmony lean (resonance >= 2, NARRATIVE_KEYS) the last bar calms it. No catch.
 (LOSE: whiteout to 301; the night restarts at the tower foot from the checkpoint, the partner battle already won.)
 [if Prismfall::Bosses.last_result[:result] == :calmed]
-  (The shard in your pocket is warm as a hand. You take it out without meaning to, and hold it up, in the rain.)
+  (The scar under your collar is warm as a hand. You press your palm flat over your breastbone without meaning to, and white-gold light shows through your wet coat, between your fingers, in the rain.)
   (The great eye looks at it. Then at you. For a long moment it looks at you as if you were very small and very familiar, like somebody it knew a long time ago who has grown up strange.)
   (Then the eye closes. The hill of water goes down. The rain stops, here; you can see it going on, out east, a grey wall walking away across the ice.)
   FIELD NOTES: "It looked at me as if I were very small and very familiar."
@@ -375,7 +377,7 @@ Switch S129 CH11_KYOGRE_DONE = ON. V132 = 6.
 [portrait: ANJA, sad] I read them. I *read* them. And I signed anyway, because the heaters were warm.
 (She looks down at you. Rime has melted out of her eyebrows. She looks older than she did yesterday, and smaller.)
 [portrait: ANJA, neutral] My brother's holding court at noon. In the Keep. He'll want to know whose fault it was. Everyone will want to know whose fault it was.
-[portrait: ANJA, neutral] You were on that platform. You saw Pell's console. You'll be asked.
+[portrait: ANJA, neutral] You were on that platform. You saw Tage's console. You'll be asked.
 (Beside you, Juno is wet through, shaking, with somebody's baby still in her arms because she hasn't found anyone to give it to.)
 [portrait: JUNO, sad] That's what Uncle Rowan meant. Isn't it. The flowers. The heaters. It's all the same thing.
 [portrait: JUNO, crying] Everything's warm, and everything's growing, and nobody asks what it's drinking.
@@ -390,13 +392,13 @@ Switch S129 CH11_KYOGRE_DONE = ON. V132 = 6.
 [portrait: EIRIK, angry] (to Anja, not looking at the delegate) Did you know?
 (Anja doesn't answer. Eirik looks at you.)
 [portrait: EIRIK, neutral] You were on the platform. With the technician. My sister says you saw his console before the ice went. Tell me what you saw.
-(In your bag, Pell's cache. In Pell's head, every number. Anja is looking at the floor.)
+(In your bag, Tage's cache. In Tage's head, every number. Anja is looking at the floor.)
 ```
 ```
 > Tell the court what the console showed. Every number. (expose)
   Script: pf_choose(:ch11_anja, :expose)
   (You say it. Draw at a hundred and fifty-five percent. The ice load sensor dead for an hour. The tolerance raised in the spring. And the monthly readings, signed in the Warden's hand.)
-  (Pell, at the back of the hall, stands up when you say his name and says, "Yes. That's right. I'll swear to it." His voice cracks on "swear".)
+  (Tage, at the back of the hall, stands up when you say his name and says, "Yes. That's right. I'll swear to it." His voice cracks on "swear".)
   (The hall goes very quiet.)
   [portrait: EIRIK, sad] ...Anja.
   [portrait: ANJA, neutral] It's true. All of it. I read them.
@@ -548,7 +550,7 @@ Road sign: "THE THANE'S SLED-ROAD. East to Skaldfast. MILITARY TRAFFIC HAS PRIOR
 (A young harpooner on a resting sled, eating bread.)
 [name: Harpooner] My nan's house went under in the Thaw. So I'm going to fight Ashkaar. (He thinks about it.) That doesn't really follow, does it. Everyone's going, though.
 ```
-Trainers (Lv 48–52): skalds, harpooners (Isenmar soldiers; `ISENMAR_SOLDIER`), a war-sled driver. **Optional:** 728 **Stillwater** (`:BLEED`), just off the road outside Rimeholt: a waterfall hanging frozen in mid-fall without being ice. Field Notes: "Not frozen. Stopped. Like the Fixed. The water's still moving, just very, very slowly, inside itself."
+Trainers (Lv 48–52): skalds, harpooners (Isenmar soldiers; `ISENMAR_SOLDIER_M`/`_F`, new Lv 48–52 versions needed: the PBS ones are Ch19's Lv 79–82), a war-sled driver. **Optional:** 728 **Stillwater** (`:BLEED`), just off the road outside Rimeholt: a waterfall hanging frozen in mid-fall without being ice. Field Notes: "Not frozen. Stopped. Like the Fixed. The water's still moving, just very, very slowly, inside itself."
 
 ### Map 721 — The Mast Glacier (`:SNOWY_MOUNTAIN`, borderland B2)
 ```
@@ -587,9 +589,9 @@ None of these maps is built. **[NEW]** = an event or map not in maps.json. V132 
 **704/705 Frostfang Pass** — trainers; **the watch-cairn on 705's summit**: cairn and frozen flag, the stone hut, Bryn (pass-warden) with the brass glass, the Ashkaar rider and his grounded Flygon behind the cairn, the **east-view overlay** (the smoke threads and the dragon ring, a panorama or fog layer); `:war_warning` autorun (V132 0 → 1); Bryn's Corvisquire (move route, flies off) on `:warn_isenmar`; the Flygon's limping take-off (move route) on `:silent`. Later, Bryn counting the column (V132 >= 8).
 **712 The Whalebone Road** — road sign; the whale-jaw arches (decor every 10 tiles); the old man on the sled singing the Sleeping Whale; Juno's speech spot 3.
 **303 Icewall Gate** — arrival autorun (V132 == 1): the scanner arch over the rib gate (Mandate decor, text "Warmth is a right"); the gate skald; the steaming hole by the first tower. Later (V132 >= 7) the ice-climbers' wall (Rock Climb TM100).
-**300 Thane's Harbour** — the four heat-towers on platforms (tall event sprites; red lamps until V132 == 4 night, white during the Thaw, dark after V132 >= 7); the drill (Anja and six children; touch, V132 == 2); "Toes" (V132 2 → 3); Pell at the second tower; the fisher at the open hole; Old Torstein on the flats (and his Avalugg); the ice-fisher (Super Rod, V132 >= 7); **the Thaw night**: Pell's console in the tower hut (a screen event with the red column), the alarm lever, the partner battle on the platform stair (two officers and the handcart), Pell and the core (GO_THIN_ICE), the harbour edge (GO_WEATHER and Kyogre's eye: a large animated event in the water, or a fog/picture overlay), the tower-four platform (Anja at the ladder; the boss); **day three**: the screens (Center, Sled Market, Keep gate) and the two columns (east on the Sled-Road, south at the gate).
+**300 Thane's Harbour** — the four heat-towers on platforms (tall event sprites; red lamps until V132 == 4 night, white during the Thaw, dark after V132 >= 7); the drill (Anja and six children; touch, V132 == 2); "Toes" (V132 2 → 3); Tage at the second tower; the fisher at the open hole; Old Torstein on the flats (and his Avalugg); the ice-fisher (Super Rod, V132 >= 7); **the Thaw night**: Tage's console in the tower hut (a screen event with the red column), the alarm lever, the partner battle on the platform stair (two officers and the handcart), Tage and the core (GO_THIN_ICE), the harbour edge (GO_WEATHER and Kyogre's eye: a large animated event in the water, or a fog/picture overlay), the tower-four platform (Anja at the ladder; the boss); **day three**: the screens (Center, Sled Market, Keep gate) and the two columns (east on the Sled-Road, south at the gate).
 **301 PC · 302 Mart · 304 Sled Market** — townsfolk as written; 301's Circular (Marisol's strike post; Valen's reply if `:warn_both`; Wenlow's letter, S174, V132 >= 7); the sleep trigger for "Red and Climbing" (V132 == 4).
-**305–307 Whalebone Keep** — 306 the Mead Hall: Eirik signing papers (touch, once, before the Thaw); refugees after V132 >= 6; the Tally board (IS_SINKING_QUARTER, IS_HARPOON_RITE, IS_ELEVEN_YEARS, the Lapras "Saga" gift) from V132 >= 7. **307 the Thane's Seat**: the court (autorun V132 == 6 → 7): Eirik on the whale-jaw seat, Anja alone on the floor, the Meridian delegate, Pell at the back, 4 officers, 12 fishers/skalds; the `:ch11_anja` branches; the evacuation order. **308 Ice Vault**: locked this chapter (the Sleeping Whale door; DUNGEON_PUZZLES); its meltwater state follows V107.
+**305–307 Whalebone Keep** — 306 the Mead Hall: Eirik signing papers (touch, once, before the Thaw); refugees after V132 >= 6; the Tally board (IS_SINKING_QUARTER, IS_HARPOON_RITE, IS_ELEVEN_YEARS, the Lapras "Saga" gift) from V132 >= 7. **307 the Thane's Seat**: the court (autorun V132 == 6 → 7): Eirik on the whale-jaw seat, Anja alone on the floor, the Meridian delegate, Tage at the back, 4 officers, 12 fishers/skalds; the `:ch11_anja` branches; the evacuation order. **308 Ice Vault**: locked this chapter (the Sleeping Whale door; DUNGEON_PUZZLES); its meltwater state follows V107.
 **309 The Sinking Quarter** — **two states** by V107: frozen (0) and sunk (1: a quarter of the tiles to deep water, roofs as obstacles, boats as NPCs); the crack-line autorun (S128, V107 = 1); **the sprint** [NEW] (309 → 300, Gym 10 crack rules, three rescues; puzzle engineer); after the Thaw, Alexandra's cameo among the half-Fixed fishers (CAMEOS #5) and IS_SINKING_QUARTER.
 **310–313, 315–316 Lake Hall** — as GYM_PUZZLES Gym 10; Liv; the net-mender; **Anja (313), single**, her three mid-battle lines; SOUNDING BADGE, TM13; V132 = 4.
 **314 Net Row** — the net-mender's line; **"Because the Heaters Were Warm"** at dawn (V132 == 6): Anja on a half-sunk hut roof, Juno with the baby; the street ends in water after V107 = 1.

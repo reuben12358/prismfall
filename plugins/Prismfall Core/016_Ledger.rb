@@ -140,6 +140,7 @@ module Prismfall
   def self.start_ruin_route(force = false)
     return false if !force && !Ledger.ruin_unlocked?
     Prismfall.state.narrative[:ruin_route] = true
+    Prismfall::Narrative.refresh_mirrors rescue nil   # S193 RUIN_ROUTE_ACTIVE for event pages
     EventHandlers.trigger(:prismfall_ruin_route_started)
     return true
   end

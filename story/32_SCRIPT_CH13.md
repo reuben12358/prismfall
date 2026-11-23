@@ -4,7 +4,7 @@
 > Follows `story/31_SCRIPT_CH12.md`. The Act IV opener (Ch14, "The Deep Seams") follows this. Sources: 06_ACT_III Ch13, 03_CAST (Ilsa, Dask, Rowan, Juno, Kaito, Valen, Kroll/Sable, Marchetti, Wick, Celestine, Ellery, Vesper), 09_MYSTERIES (#1, #6, #9, #10, #12, #13, #16, #17, #25, #27), NARRATIVE_KEYS (`:ch13_remember`, `:ch13_kaito`, `:ch13_rowan_testimony`, `:ch13_fault`, GO_LOOKING_BACK, `KAITO_TESTIFIED`, `ROWAN_ALIVE`, `MARCHETTI_TURNED`, `IRONREACH_EVIDENCE`), 15_COMEDY (Ch13 "Thinking Loudly"), GYM_PUZZLES Gym 12, EEVEE_OCTAVE (Vesper's second meeting, Lento), BALANCE (Ilsa, Kroll Ch13), WALKTHROUGH Ch13, `design/CHAPTER_BEATS.md`.
 
 ## Conventions
-As in the earlier scripts. **Portrait cast here:** Ilsa, Juno, Rowan, Kaito, Valen, Kroll (Sable unmasked), Marchetti, Wick, Celestine, Dask, Voss (a screen), and **the PC** (the first authored line, in the Mindscape; `\pf[PLAYER,…]`). **Plain:** the child (the PC at five; no portrait, a small sprite), Ines (a voice and a silhouette), Hierophant Ellery, Vesper and the Eevee Octave, the Accord clerk of the court, the kings' observers, Verdigris's and Glassmere's townsfolk, every trainer. Gym 12 is a single battle: `Prismfall.gym_battle(pfm_gym(:LEADER_ILSA), double: false)`. Kroll is `TrainerBattle.start(:MERIDIAN_KROLL, "Sabine")` (base version: Ch13, Lv 59, Mega Sharpedo; BALANCE).
+As in the earlier scripts. **Portrait cast here:** Ilsa, Juno, Rowan, Kaito, Valen, Kroll (Sable unmasked), Marchetti, Wick, Celestine, Dask, Voss (a screen), and **the PC** (the first authored line, in the Mindscape; `\pf[PLAYER,…]`). **Plain:** the child (the PC at five; no portrait, a small sprite), Ines (a voice and a silhouette), Hierophant Ellery and the Accord choristers, Vesper (the Octave's leader, met in the cloister), the Accord clerk of the court, the kings' observers, Verdigris's and Glassmere's townsfolk, every trainer. Gym 12 is a single battle: `Prismfall.gym_battle(pfm_gym(:LEADER_ILSA), double: false)`. Kroll is `TrainerBattle.start(:MERIDIAN_KROLL, "Sabine")` (base version: Ch13, Lv 59, Mega Sharpedo; BALANCE).
 **Counter:** V134 **CH13_STEP** (design/FLAGS.md): 0 on the Causeway · 1 Kingsmead and the Glassfall Scar · 2 Mirror Mere: Dask's rule · 3 across the Threshold (S134) · 4 Lucent: Ilsa ("Thinking Loudly"; the gym opens) · 5 Gym 12 won · 6 the Mindscape (S135) · 7 Juno and the Ralts · 8 the tribunal (S136) · 9 the Fault (S137) · 10 dawn: the Secret Articles (Act III closed; V101 = 4, V102 = 14).
 **State set here:** S134 CH13_ANTUMBRA_ENTERED, S135 CH13_MINDSCAPE_DONE, S136 CH13_TRIBUNAL_DONE, S137 CH13_FAULT (Act IV's encounter version 1 everywhere), V113 ROWAN_STATUS (by `:ch13_fault`), V101 = 4. Keys: `:ch13_remember`, `:ch13_kaito`, `:ch13_rowan_testimony`, `:ch13_fault`. Key Item: SECRET ARTICLES (sealed). WICK'S LETTER is delivered here if the PC carries it.
 
@@ -22,7 +22,7 @@ As in the earlier scripts. **Portrait cast here:** Ilsa, Juno, Rowan, Kaito, Val
 ## Map 740 — Conductors' Causeway (`:STORMFRONT`) and Map 741 — the Wired Wood (borderland G), 750/751 Verdigris
 Road sign (740): "CONDUCTORS' CAUSEWAY. The Glass Road. Lucent by the Crown Road and the Mere."
 - The causeway's puddles: the PC's reflection behaves after the first one. A lineman on a pylon ladder: "Don't stare at the water out here. My granddad said the water on the Glass Road shows you what's coming. My grandma said it shows you what you'd rather not. They were both very cheerful people."
-- **The Wired Wood**: a borderland forest grown through decommissioned Lattice pylons; copper-green bark, birds nesting in insulators, a hum in the trunks. **Verdigris** (750) is a town of retired linemen. A retired lineman at the Center (751): "Larch? On the screens? I worked her first line. Ferrow's Landing, AF 288. She brought us all cake. Nobody brings linemen cake." *(Ch12's photograph on Voss's desk was the same line.)*
+- **The Wired Wood**: a borderland forest grown through decommissioned Lattice pylons; copper-green bark, birds nesting in insulators, a hum in the trunks. **Verdigris** (750) is a town of retired linemen. A retired lineman at the Center (751): "Larch? On the screens? I worked her first line. Ferrow's Landing, AF 281. She brought us all cake. Nobody brings linemen cake." *(Ch12's photograph on Voss's desk was the same line.)*
 - The Wardens' Circular at 751: Juno: "LUCENT BY THE MERE. TRIBUNAL IN FIVE DAYS. I'VE WRITTEN THE SPEECH ELEVEN TIMES." Kaito replies: "Stop at ten."
 Trainers (Lv 55–58): linemen, a pylon-climber, a researcher.
 
@@ -114,7 +114,7 @@ Doors open at V134 >= 4. As GYM_PUZZLES Gym 12 ("your reflection keeps you hones
 ```
 (A round room with no corners. The walls are mirrors. In every one, the room is slightly different.)
 [portrait: ILSA, neutral] The arena reshapes itself to what you remember. I don't choose what it shows. You do.
-[portrait: ILSA, neutral] The truth is a weapon. I've kept it sheathed for eleven years. Don't mistake that for mercy. Shall we?
+[portrait: ILSA, neutral] The truth is a weapon. I've kept it sheathed for ten years. Don't mistake that for mercy. Shall we?
 BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_ILSA), double: false) — field `:MINDSCAPE` (Topsy-Turvy → Inverse); Mega Slowbro under Trick Room.
 (Mid-battle, when the field turns:) [portrait: ILSA, shocked] (her earmuffs slipping) That's— that's not a place I put there. That's yours. Where is that?
 (Her last Pokémon, Hatterene "Hush":) [portrait: ILSA, neutral] Hush. They're loud. Quiet them.
@@ -177,7 +177,7 @@ Switch S135 CH13_MINDSCAPE_DONE = ON. V134 = 6.
 ```
 (The Reading Hall. You're in the chair. Ilsa is on the floor beside it, her earmuffs off, in her hands. She's white.)
 [portrait: ILSA, sad] (very quietly) The man in white was my father.
-[portrait: ILSA, sad] I've known for eleven years. I read it out of him at my mother's funeral. I was nineteen. I never said a word.
+[portrait: ILSA, sad] I've known for ten years. I read it out of him at my mother's funeral, the winter after the Glassfall. I was twenty-one. I never said a word.
 [portrait: ILSA, neutral] The truth is a weapon. I've kept it sheathed. Don't mistake that for mercy.
 [portrait: ILSA, neutral] (putting the earmuffs back on) The trial's in the morning. He'll be sitting at the top of the court in that white coat, presiding. And I'll be sitting next to him, and I'll be hosting it, and neither of us will say anything at all. That's the family business.
 [if :ch13_remember == :not_yet]
@@ -227,7 +227,7 @@ V134 = 7.
 ## The Glass Court [NEW; the Athenaeum, off 343]: **the tribunal** (key event 2; autorun on waking at 341 with V134 == 7 → 8)
 ```
 (The Glass Court: a round chamber under a dome of clear glass, with the upside-down city hanging in the sky beyond it. Tiers of benches. At the top, on a white chair, Valen, in his white coat with one glove on. Beside him, lower, Ilsa, earmuffs on, hosting.)
-(The Wardens' row: Juno with a Ralts in her veil, Kaito with his wraps on, Celestine smiling at nothing, others. The kings' gallery, with two chairs empty and the Ossarian's full. Meridian's lawyers. The press. Hierophant Ellery of the Prism Choir, in white and gold, with eight singers behind her: the Eevee Octave.)
+(The Wardens' row: Juno with a Ralts in her veil, Kaito with his wraps on, Celestine smiling at nothing, others. The kings' gallery: two thrones empty, Isenmar's and Ashkaar's, with junior observers at the back rail behind them; the Ossarian's full. Meridian's lawyers. The press. Hierophant Ellery of the Prism Choir, in white and gold, with a row of white-robed Accord choristers behind her.)
 (In the dock, in chains, a gaunt man with a grey-shot beard. His right hand is wrapped, and where the wrapping ends the skin is marked with a branching pattern like lightning. Rowan Ashby.)
 Variable V113 ROWAN_STATUS = 2.
 [name: Clerk of the Court] The Accord's tribunal is in session. The Sovereign presides. The Provost of Lucent hosts. Witnesses will swear.
@@ -255,12 +255,12 @@ Variable V113 ROWAN_STATUS = 2.
 > Condemn him. (condemn)
   Script: pf_choose(:ch13_rowan_testimony, :condemn)
   (You tell them about the Pageant's panic, the Conclave's dead, the glass at Ironreach. All of it true.)
-  [portrait: VALEN, neutral] The Pale Gaol. For the rest of his natural life.
+  [portrait: VALEN, neutral] The Pale Gaol. For the rest of his natural life. The court will seal the sentence at the evening session.
   (Juno stands up in the Wardens' row and walks out of the court without a word. The Ralts in her veil looks back at you over her shoulder.)
 > Plead for mercy. (mercy)
   Script: pf_choose(:ch13_rowan_testimony, :mercy)
-  (You tell them about Phantump in the lighthouse, about the mask cracking because he put himself between a child and the glass, about "everything that grows must be allowed to die".)
-  [portrait: VALEN, neutral] (after a long pause, and a look at Ilsa, who gives nothing back) House arrest. In Verdance. In the custody of the Warden of the Meadow Plate.
+  (You tell them about Phantump at Tidewatch Station, about the mask cracking because he put himself between a child and the glass, about "everything that grows must be allowed to die".)
+  [portrait: VALEN, neutral] (after a long pause, and a look at Ilsa, who gives nothing back) House arrest. In Verdance. In the custody of the Warden of the Meadow Plate. To be sealed at the evening session.
   [portrait: JUNO, crying] (in the Wardens' row, both hands over her mouth)
 > Refuse to testify. (refuse)
   Script: pf_choose(:ch13_rowan_testimony, :refuse)
@@ -300,10 +300,10 @@ Switch S136 CH13_TRIBUNAL_DONE = ON. V134 = 8.
 
 ## **The Fault** (key event 2, payoff; autorun at the evening session, V134 == 8 → 9)
 ```
-(The evening session. Rowan back in the dock. Valen in the white chair, about to speak.)
+(The evening session. Rowan back in the dock. Valen in the white chair, the seal in his gloved hand, about to speak.)
 (The water in the court's carafes shivers. Then the benches. Then the floor.)
 (Far away, under everything, something starts. A hum, low and enormous, like eighteen notes played at once by somebody who doesn't know music.)
-(In your pocket, the shard goes so hot it hurts.)
+(Under your collar, the colourless scar burns so hot it hurts, and you put your hand over it.)
 SCREEN SHAKE (long).
 (The dome's glass cracks, in one long line, then a hundred, and comes down in a slow, glittering rain.)
 (The floor of the Glass Court tilts, and the middle of it goes, into the dark undercroft below, and the water comes up through it, black and fast.)
@@ -358,7 +358,7 @@ RECEIVE: SECRET ARTICLES (sealed).
 (In every broken pane of glass around you, on every step, hundreds of tiny reflections of the morning, and in every one of them, at the edge, six black wings fold, and unfold, and fold.)
 V134 = 10. Variable V101 STORY_ACT = 4. V102 STORY_CHAPTER = 14.
 TITLE CARD: IV — The Drowned Crown.
-QUEST LOG: "Eighteen Roads" — South to Cragholm in the Bone Sands. Find Bastian Ore, the oldest Warden. He was there.
+QUEST LOG: "Eighteen Roads" — Through the Grave Glass at Vigil, north to Cragholm in the Bone Sands. Find Bastian Ore, the oldest Warden. He was there.
 ```
 *(06_ACT_III's cliffhanger and END OF ACT III. 09 #5: the Secret Articles ("One in Keeping") are read in Act IV. #25: the six wings are Giratina (Ch15).)*
 

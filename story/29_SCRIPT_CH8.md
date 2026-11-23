@@ -201,6 +201,10 @@ V129 = 6 (begin).
 (At the valves: Meridian engineers in scorched white coats around a crate of brass rings, and in the middle of them a man in round smoked spectacles, bouncing on his toes.)
 [portrait: QUENT, happy] Oh, it's YOU! The null reading! *(giggling)* Hold still, I've only got one probe.
 [portrait: QUENT, neutral] Dr. Percival Quent, Meridian Applied Sciences. These are dampers. We fit them, the draw evens out, the pressure drops, and Tap Seven keeps running. Everyone keeps their lights. It's terribly simple.
+(On the pipe's collar, under the soot, a brass plate. Brann wipes it with his sleeve and reads it out, slowly.)
+[portrait: BRANN, angry] "TAP SEVEN. CINDERVAULT. DESTINATION: RIMEHOLT — HEAT TOWERS ONE TO FOUR. SECONDARY: LUMEN GRID."
+[portrait: BRANN, angry] Rimeholt. Our fire, piped over the mountains to keep the Thane's people warm. And none of us was asked.
+[portrait: QUENT, happy] Isn't it marvellous? One mountain, two kingdoms! It's the most efficient thing I've ever seen!
 (At the old lava-channel sluices on the far wall: Wick, in his grey cowl with the hood back, and six Hollow faithful hauling a canvas hose that runs up the stair and out toward the lake pipe.)
 [portrait: WICK, neutral] Hello. *(It's exactly the way the woman in Scaldwater said it.)*
 [portrait: WICK, sad] We open the old channels and run Lake Sallow down them, onto the Imprint. The fever breaks. The mountain sleeps. And the forges go cold for a season, and the ash comes down on the Ashmarch like snow.
@@ -351,6 +355,7 @@ SE: drums. Not the Hearthguild's bells: war-drums, big ones, coming up the Pyre 
 [if :ch8_caldera == :dampers] [name: Dominar's Herald] Zenith's engineers have since bound the Flame with brass and call it mended. The Dominar does not.
 [if :ch8_caldera == :vent] [name: Dominar's Herald] The Flame was quenched by the Hollow's faithful to save the city, and Cindervault's forges are cold. The Dominar holds Zenith accountable for every one.
 [name: Dominar's Herald] Therefore. The Dominar holds Zenith responsible for this assault upon the Flame. From this hour the eastern passes of Ashkaar are closed to Meridian, to its rails, its taps and its soldiers.
+[name: Dominar's Herald] And the Flame of Ashkaar will no longer warm the beds of Isenmar. Let the Thane find his heat in his own cold lake.
 [name: Dominar's Herald] Say true: this is not war. *(a pause)* It is the door to it.
 (The drums start again. The column turns and goes down toward the Ashmarch. The square is very quiet.)
 (Sigrun is on the bell-tower's balcony above the square, in her riding leathers, watching her father's banner go. The PC can see her face from the square. She says nothing at all.)

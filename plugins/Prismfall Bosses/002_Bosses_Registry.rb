@@ -4,7 +4,7 @@
 module Prismfall
   module Bosses
     DIFFICULTY_KEYS = [:CASUAL, :STANDARD, :HARD, :default]
-    KNOWN_KEYS = [:id, :name, :nickname, :species, :level, :form, :moves, :ability, :ability_index, :item, :nature,
+    KNOWN_KEYS = [:end_after_rounds, :id, :name, :nickname, :species, :level, :form, :moves, :ability, :ability_index, :item, :nature,
                   :ivs, :evs, :gender, :shiny, :bars, :stat_mults, :status_immunity, :immunity_last_bar, :catch,
                   :catch_rate, :can_run, :can_lose, :size, :ai_skill, :ai_script, :ai_script_loop, :field, :weather,
                   :terrain, :music, :intro, :break_message, :on_break, :breaks, :on_defeat, :ebdx, :follow_prism,

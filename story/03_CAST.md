@@ -251,7 +251,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 ### 12. Ilsa Marr — Psychic — Lucent — `LEADER_ILSA` — `:MINDSCAPE`
 - **31.** Provost of the Lucent Athenaeum. Silver-blonde hair pinned with a pencil, high-collared academic robes, noise-cancelling earmuffs she wears around anyone emotional.
 - **Personality:** Cool, precise and unnervingly perceptive. She can read surface thoughts involuntarily and finds crowds unbearable. She is wry, lonely and secretly kind.
-- **Voice:** "You're thinking very loudly. Please stop." / "The truth is a weapon. I've kept it sheathed for eleven years. Don't mistake that for mercy." / *(Act V, to Valen)* "You chose a country over a daughter. Fine. Then *save the country*, Father. Don't make a child pay for it."
+- **Voice:** "You're thinking very loudly. Please stop." / "The truth is a weapon. I've kept it sheathed for ten years. Don't mistake that for mercy." / *(Act V, to Valen)* "You chose a country over a daughter. Fine. Then *save the country*, Father. Don't make a child pay for it."
 - **Motivation:** Know everything; risk nothing.
 - **Secret:** She is **Valen's estranged daughter**. She has read the Tuning, his dying and his plan for "the child" out of his mind and kept silent.
 - **Plot role:** Guides the PC through the Mindscape (Ch13), where they recover the AF 290 memory. She hosts Rowan's tribunal at the Athenaeum.

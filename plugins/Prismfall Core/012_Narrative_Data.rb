@@ -329,9 +329,10 @@ module Prismfall
       :ISENMAR_KEEPS_ANJA   => "flag(:ANJA_EXPOSED) && (flag(:TEO_SAVED) || bond(:MARISOL) > 2)"   # the one with the open account with you stays
     })
 
-    # Core-written mirror switches (design/FLAGS.md S221-S228), refreshed on every
+    # Core-written mirror switches (design/FLAGS.md S193 and S221-S232), refreshed on every
     # narrative change. Events read them, never write them.
     MIRROR_SWITCHES = {
+      193 => "ruin_route",                   # RUIN_ROUTE_ACTIVE (Gemini audit 2026-11-22 §1.1)
       221 => "flag(:TEO_SAVED)",
       222 => "flag(:CORVIN_FREED)",
       223 => "flag(:OGERPON_TRUSTED)",
