@@ -99,7 +99,7 @@ One entry per proposal folder, newest first. Verdicts are ADOPT, ADAPT, REJECT o
   - Granularity: the plan has 139 slots; `audio/manifest.tsv` and the maps' metadata use ~60 coarser ones (e.g. one "Town - Elowen"). When a track for a finer slot arrives (Saltmere vs Briarwick), the map builder gives that map its own BGM name. Nothing changes until then.
   - Gaps worth a pick later: Marisol (Gym 3), Sahar (Gym 5), Tamsin (Gym 2) and Gyms 13–15 have no signature theme and use the standard Warden theme (#98). Fine for now; Marisol and Sahar now have full art, so they're the first to deserve one.
 - **The 26 CC0 `.ogg` files: ADAPT.** Adopted as **stand-ins**: 9 BGS and 10 SE → `audio/gemini_cc0/`, rows added to `audio/manifest.tsv` (installs with `install_audio.py`). They're synthesized: Rain is flat broadband noise and reads as static, and the machinery bed is clicks over hiss. They're fine as placeholders until recorded or composed versions exist. Loudness checks out (BGS about −19.5 LUFS, SE −13 to −15).
-  - **REJECT the 7 voice blips** (`Voice - *.ogg`): each is 0.1 s at −70 LUFS, which is silent, so they'd do nothing in a text box. If blips are wanted, they need to be audible at −20 LUFS or so, and pitched per character.
+  - ~~REJECT the 7 voice blips~~ **Reversed 2026-11-22:** the −70 LUFS reading was an EBU R128 gating artifact (clips under 400 ms can't be gated). `volumedetect` shows mean ≈ −21 dB, peak ≈ −8 dB, so they're audible. All the v4.3 blips are adopted.
 
 ## 2026-11-22_art-drops-11-12-all-18-wardens-wiring — **ADOPT (done)**
 - Charset aliases: the three exclusive placeholders (`trainer_ROCKER` → ROOK, `trainer_ELITEFOUR_Lance` → SIGRUN, `trainer_LEADER_Misty` → MARISOL) go in CHARSET_ALIASES. The rest of the cast goes in NAME_ALIASES, matched on event names. Checked against the layouts: correct, and every target charset, portrait and VS bust exists. The existing missing-file guard stays.
@@ -134,3 +134,18 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   - **Part D transitions (creator-requested):** adopt the 8-preset generalisation, masking the live `_hd` target in memory, plus the 1-hit-left warning emitter and the toast. Wednesday's transitions agent owns it.
   - **I2 QoL:** adopt the field-move QoL (badge + tool), the Options menu exposure and the Ties screen.
 - **Not adopted as written:** I1.3 (moving the autorun checkpoints). With the 255 fix, a loss whites out to the last Center and the crisis replays on re-entry, so there's no trap. 952's checkpoint is still for the agents to check.
+
+## 2026-11-22_unique-trainer-classes-and-expanded-cast — **ADOPT classes now; cast and rematches queued**
+- **Done:** 37 `Name=` renames in `pbs/trainer_types.txt`: 18 Warden classes, rivals, Hollow, Meridian, Vesper, Theodric, Morwen's Echo and Dask. The VS plate now draws the class as a small line above the name. `Trainer#full_name` already de-duplicates class and name.
+- **Changed:** Kestrel is **"Lone Blade"**, not "Fallen Heir". "Fallen" collides with the `KESTREL_FALLEN` route and would read as a spoiler on the Redeemed path.
+- **Queued for the agents:** CODEX_SPEC (the class line in Codex cards), STORY_REMATCHES (post-game rematch tables), and the gauntlets. G1 doesn't go into Ch13, which is already the longest chapter; it moves to the Ch14+ hub.
+- **Story fit:** the 8 new villains and 14 side cast are adopted as a *pool*. Each gets placed as Ch14–22 are scripted, and anyone who doesn't fit a beat stays unplaced. The Ch12 dawn-news spokesman becomes "Director Camille Ashe" (Spin Doctor), seeding her before her own fight.
+
+## 2026-11-22_rejuv-v14-cutscene-cinematics-spec — **ADOPT the laws and the P0 engine fixes; the full cinematic pass is queued**
+- The two-pillar laws (pose and motion on the map, text only for speech) match the `[anim]` stage-direction rule already in `design/MAPGEN.md`. They become the cutscene agent's style law.
+- P0 engine fixes (letterbox and bust lifecycle, input lock, fade/tint stacking) go to the cutscene agent's Wednesday order, ahead of new scenes.
+- The per-chapter cinematic rewrite is P1/P2 and needs the creator's sign-off scene by scene. Nothing is rewritten silently.
+
+## 2026-11-21 audio v4.3 (WIRING_SPEC + CUTSCENE_AND_NEW_CAST_AUDIO) — **ADOPT; files in, wiring queued**
+- **Done:** the whole v4.3 CC0 pack (9 BGS, 6 ME, 58 SE including 36 voice blips) is in `audio/gemini_cc0/` with 73 manifest rows. `install_audio.py` installs 135 files cleanly. `design/AUDIO_SOUNDTRACK_PLAN.md` and `tools/audio/master_track.py` are refreshed to v4.3.
+- **Queued:** the 117-map BGM/BGS matrix via `design/MAP_AUDIO.yaml` → mapgen, the 67 trainer-type BGMs, the ME/SE hooks, the `VoiceTicker` in `014_Portraits.rb` (it must stay selftest-safe), and the cutscene audio matrix. These go to the audio agent and land with the cutscene P0 pass, so cues and scenes are tuned together.

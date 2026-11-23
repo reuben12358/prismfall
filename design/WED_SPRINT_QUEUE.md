@@ -22,3 +22,8 @@ Source: `gemini_recommends/REVIEW.md`.
 
 ## Maps (pass 2, plan quota only)
 10. `mapgen/REFINE_QUEUE.md`, including the stage-direction pass.
+
+## Added 2026-11-22 (Gemini backlog pass)
+- **Cutscene agent:** the P0 engine fixes from `gemini_recommends/2026-11-22_rejuv-v14-cutscene-cinematics-spec` (letterbox/bust lifecycle, input lock, fade/tint stacking) come before any new scene. The two-pillar laws are the style rule.
+- **Audio agent:** the v4.3 WIRING_SPEC: `design/MAP_AUDIO.yaml` → mapgen BGS, the trainer-type BGMs, the ME/SE hooks, and a selftest-safe `VoiceTicker` (014_Portraits.rb). Then the cutscene audio matrix.
+- **Codex/teams agent:** the class line on Codex cards (CODEX_SPEC), post-game rematch tables (STORY_REMATCHES), and gauntlets. G1 goes in the Ch14+ hub, not Ch13.

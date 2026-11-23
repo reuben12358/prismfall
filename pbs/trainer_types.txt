@@ -4,7 +4,7 @@
 # --- Wardens (gym leaders). Gyms 1-2 use high skill (48), the rest best skill (100). ---
 #-------------------------------
 [LEADER_TAMSIN]
-Name = Warden
+Name = Silkweaver
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -12,7 +12,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_DORIAN]
-Name = Warden
+Name = Pageant Master
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
@@ -20,7 +20,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_MARISOL]
-Name = Warden
+Name = Union Boss
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -28,7 +28,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ROOK]
-Name = Warden
+Name = Holo-Idol
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
@@ -36,7 +36,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_SAHAR]
-Name = Warden
+Name = Archaeologist
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -44,7 +44,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_CORVIN]
-Name = Warden
+Name = Plague Doctor
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
@@ -52,7 +52,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_BRANN]
-Name = Warden
+Name = Forgemaster
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
@@ -60,7 +60,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_KAITO]
-Name = Warden
+Name = Pit Champion
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
@@ -68,7 +68,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_JUNO]
-Name = Warden
+Name = Bloomkeeper
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -76,7 +76,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ANJA]
-Name = Warden
+Name = Matriarch
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -84,7 +84,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ODESSA]
-Name = Warden
+Name = Sky Courier
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -92,7 +92,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ILSA]
-Name = Warden
+Name = Provost
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -100,7 +100,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_BASTIAN]
-Name = Warden
+Name = Prospector
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
@@ -108,7 +108,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_YSOLDE]
-Name = Warden
+Name = Lantern Priest
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -116,7 +116,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_MAGNUS]
-Name = Warden
+Name = Artificer
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
@@ -124,7 +124,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_NYX]
-Name = Warden
+Name = Shadow Broker
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -132,7 +132,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_CELESTINE]
-Name = Warden
+Name = Oathbound
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -140,7 +140,7 @@ BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_SIGRUN]
-Name = Warden
+Name = Valkyrie
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
@@ -149,7 +149,7 @@ VictoryBGM = Battle victory leader
 # --- Rivals (Kestrel's gender is the story team's call; sprite decides) ---
 #-------------------------------
 [RIVAL_KESTREL]
-Name = Rival
+Name = Lone Blade
 Gender = Male
 BaseMoney = 60
 SkillLevel = 100
@@ -157,7 +157,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [RIVAL_JUNO]
-Name = Rival
+Name = Flower Girl
 Gender = Female
 BaseMoney = 60
 SkillLevel = 64
@@ -199,7 +199,7 @@ BattleBGM = Battle trainer
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [HOLLOW_ADMIN]
-Name = Hollow Keeper
+Name = Hammer Captain
 Gender = Mixed
 BaseMoney = 70
 SkillLevel = 64
@@ -207,7 +207,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_WICK]
-Name = Hollow Keeper
+Name = Apostate
 Gender = Male
 BaseMoney = 80
 SkillLevel = 100
@@ -215,7 +215,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_THISTLE]
-Name = Hollow Keeper
+Name = Threadcutter
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
@@ -223,7 +223,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_TEO]
-Name = Hollow Keeper
+Name = Firebrand
 Gender = Male
 BaseMoney = 80
 SkillLevel = 100
@@ -231,7 +231,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_SABLE]
-Name = Hollow Keeper
+Name = Platebreaker
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
@@ -239,7 +239,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_MOURNER]
-Name = The Mourner
+Name = Ash-Masked
 Gender = Male
 BaseMoney = 120
 SkillLevel = 100
@@ -280,7 +280,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_MARCHETTI]
-Name = Meridian Director
+Name = Iron Marshal
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
@@ -288,7 +288,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_KROLL]
-Name = Meridian Director
+Name = Infiltrator
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
@@ -296,7 +296,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_ASHE]
-Name = Meridian Director
+Name = Spin Doctor
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
@@ -304,7 +304,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_VOSS]
-Name = Meridian CEO
+Name = Gilded Heir
 Gender = Male
 BaseMoney = 150
 SkillLevel = 100
@@ -394,7 +394,7 @@ VictoryBGM = Battle victory leader
 # --- Added for the choice-driven Festival / finale / Ruin Route (design/NARRATIVE_KEYS.md 7) ---
 #-------------------------------
 [LEADER_ROWAN]
-Name = Gardener
+Name = Ash Gardener
 Gender = Male
 BaseMoney = 120
 SkillLevel = 100
@@ -402,7 +402,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_QUENT]
-Name = Meridian R&D Head
+Name = Null Architect
 Gender = Male
 BaseMoney = 120
 SkillLevel = 100
@@ -410,7 +410,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_DIRECTORATE]
-Name = Directorate Captain
+Name = Mandate Officer
 Gender = Mixed
 BaseMoney = 80
 SkillLevel = 100
@@ -418,7 +418,7 @@ BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
 [GILDED_THEODRIC]
-Name = The Gilded King
+Name = Gilded King
 Gender = Male
 BaseMoney = 0
 SkillLevel = 100
@@ -426,7 +426,7 @@ BattleBGM = Battle Champion
 VictoryBGM = Battle victory leader
 #-------------------------------
 [ECHO_MORWEN]
-Name = Echo of the Ghost Warden
+Name = Fading Echo
 Gender = Female
 BaseMoney = 0
 SkillLevel = 100
@@ -442,7 +442,7 @@ BattleBGM = Battle Champion
 VictoryBGM = Battle victory leader
 #-------------------------------
 [ARCHSEER_DASK]
-Name = Archseer
+Name = Veiled Seer
 Gender = Male
 BaseMoney = 150
 SkillLevel = 100
@@ -516,7 +516,7 @@ VictoryBGM = Battle victory leader
 #-------------------------------
 # The Eevee Octave (Prism Choir): Vesper Lindqvist and her seven fellow orphans. See design/TRAINER_FIELD_PLAYBOOK.md.
 [OCTAVE_VESPER]
-Name = Octave Cantor
+Name = First Voice
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100

@@ -191,9 +191,13 @@ module PrismfallVS
       @s["ghostT"] = make_ghost_bust(@top, @foe_id, FOE_BUST_CX - 64)
       @s["bustT"]  = make_bust(@top, @foe_id, FOE_BUST_CX)
       @s["bustB"]  = make_bust(@bot, @pl_id, PLAYER_BUST_CX)
-      @s["nameT"]  = name_sprite(@top, @trainer.name.to_s, 18, 8, :left)
+      # Reborn-style two-line plate: the bespoke class small above the name ("PAGEANT MASTER" / "Dorian")
+      cls = (@trainer.trainer_type_name rescue "").to_s
+      cls = "" if cls == @trainer.name.to_s || cls.end_with?(@trainer.name.to_s)
+      @s["nameT"]  = name_sprite(@top, @trainer.name.to_s, 18, (cls.empty? ? 8 : 18), :left, cls.upcase)
       @s["nameB"]  = name_sprite(@bot, ($player ? $player.name : ""), w - 18, BAND_H - 42, :right)
       @final = %w[bgT bgB sheenT sheenB embT embB ghostT nameT nameB tunnel0 tunnel1 tunnel2]
+      @final.concat(@s.keys.grep(/_class_/))   # the class line shows with the names
       @final.each { |k| @s[k].visible = false }
       # --- over everything: centered-pivot VS halves, sparks, white, black
       @over = Viewport.new(0, 0, w, h); @over.z = base_z + 2
@@ -297,8 +301,18 @@ module PrismfallVS
       return s
     end
 
-    def name_sprite(vp, text, x, y, align)
+    def name_sprite(vp, text, x, y, align, sub = "")
       s = Sprite.new(vp); s.bitmap = make_bmp(Graphics.width, 44); s.z = 8
+      if !sub.empty?
+        cl = Sprite.new(vp); cl.bitmap = make_bmp(Graphics.width, 24); cl.z = 8
+        pbSetSmallFont(cl.bitmap)
+        pbDrawTextPositions(cl.bitmap, [
+          [sub, x + 1, 3, align, Color.new(10, 10, 18, 170), Color.new(10, 10, 18, 170)],
+          [sub, x,     2, align, Color.new(255, 236, 170), Color.new(24, 24, 38), :outline]
+        ])
+        cl.y = y - 14
+        @s["#{text}_class_#{x}"] = cl
+      end
       pbSetSystemFont(s.bitmap)
       s.bitmap.font.size += 6
       s.bitmap.font.bold = true

@@ -1,33 +1,38 @@
-# Proposal: Audio Mastering Pipeline, Original CC0 BGS/SE Pack & 139-Track Rejuvenation-Scale Soundtrack Blueprint (v4)
+# Proposal: Audio Mastering Pipeline, Original CC0 ME/BGS/SE Pack & 145-Track Rejuvenation-Scale Soundtrack Blueprint (v4.3)
 
-- **Date:** 2026-11-21 (Updated 2026-11-22 v4: Full 139-Track Ear-Audited Rejuvenation-Scale Soundtrack)
+- **Date:** 2026-11-21 (Updated 2026-11-22 v4.3: **50-File Complete CC0 Audio Pack** — 6 Original ME Jingles + 25/25 Cast Dialogue Voice Blips + 9/9 Organic Seamless BGS Loops + 10 Battle/Crowd SEs all standardized to `44.1 kHz` Stereo Ogg q6 + 145-Track Ear-Audited Pure-Instrumental Soundtrack)
 - **Owner / Author:** Gemini (Art & Audio Direction)
 - **Status:** Ready for Claude & Creator review (zero files modified outside `gemini_recommends/`)
 
 ---
 
-## Executive Summary (v4 Upgrade)
+## Executive Summary (v4.3 Upgrade)
 
-1. **Reusable Audio Mastering & Loop-Tagging CLI (`master_track.py`):** Two-pass EBU R128 loudness normalization (`-14.0 LUFS` BGM / `-20.0 LUFS` BGS / `-12..-14 LUFS` SE, `-1.5 dBTP`), `44.1 kHz` Ogg Vorbis (`-q:a 6`), sample-accurate `LOOPSTART`/`LOOPLENGTH` Vorbis comments for seamless `mkxp-z` looping, and `--audit` reporting.
-2. **26 Original CC0 Mastered `.ogg` BGS/SE Files (`Audio/BGS/` + `Audio/SE/`):** Fills 100% of `design/AUDIO.md`'s missing weather beds, war beam-clash SEs, festival crowd SEs, field shatter/quench SEs, and 7 dialogue voice-blip `.ogg`s.
-3. **Full Rejuvenation-Scale 139-Track Pure-Instrumental Soundtrack (84 World/Towns/Roads/Dungeons/Moods + 55 Battles/Wardens/Bosses):**
-   - **100% Ear-Verified Pure Instrumental (Zero Vocals):** Zero singing, lyrics, choirs, stadium chants, or spoken lines across all 139 unique tracks (0 MD5 duplicates).
+1. **Reusable Audio Mastering & Loop-Tagging CLI (`master_track.py`):** Two-pass EBU R128 loudness normalization (`-14.0 LUFS` BGM/ME / `-19.7 LUFS` BGS / `-19.5 LUFS` speech-burst voice blips, `-1.5 dBTP`), `44.1 kHz` Ogg Vorbis (`-q:a 6`), sample-accurate `LOOPSTART`/`LOOPLENGTH` Vorbis comments for seamless `mkxp-z` looping, and `--audit` reporting.
+2. **50 Original CC0 Mastered `.ogg` Files (`Audio/ME/` + `Audio/SE/` + `Audio/BGS/` — 100% `44.1 kHz` Stereo Ogg q6, 100% Ear-Audited):**
+   - **6 New Original `Audio/ME/` Jingles (`-13.9 to -14.0 LUFS`):** `Festival highlight start.ogg` (3.5s), `Festival highlight hit.ogg` (2.2s), `Festival highlight result.ogg` (4.5s), `Prismfall game over.ogg` (5.0s), `Warden Badge Get.ogg` (4.2s), and `Trial Rank Up.ogg` (2.8s) — orchestral brass/strings/prism-harp/celesta/timpani with concert-hall tails.
+   - **25 / 25 Cast Dialogue Voice Blips (`Audio/SE/Voice - *.ogg`):** Added **18 new distinct character formant voices** (`Marisol, Rook, Sahar, Corvin, Brann, Kaito, Anja, Odessa, Ilsa, Bastian, Ysolde, Magnus, Nyx, Celestine, Sigrun, Voss, Valen, Vesper`) alongside the 7 rebuilt core blips (`Player, Juno, Kestrel, Larch, Dorian, Tamsin, Mourner`) — all `56–74 ms`, zero-click Hann envelopes, `-18.8 to -20.0 LUFS` on 10-blip speech bursts.
+   - **9 / 9 Organic 16.000 s Seamless `Audio/BGS/` Loops (`-19.5 to -19.9 LUFS`):** Upgraded all 7 remaining ambient beds (`Saltmere Harbor`, `Wind - Isenmar`, `Lava - Ashkaar`, `Drip - Nadir`, `Gossamer Deepwood`, `Glassfall Bleed`, `War - Distant Battle`) to join `Rain.ogg` & `Machinery - Zenith.ogg` — exact `705,600` samples, `LOOPSTART=0`, `LOOPLENGTH=705600`, invisible seam-crossing verified by ear.
+   - **10 Battle/Crowd `Audio/SE/` Effects (`44.1 kHz` Stereo):** Resampled all 9 legacy `192 kHz` battle/UI SEs (`Beam break/charge/clash`, `Boss Shield Break`, `Crowd cheer`, `Field Shatter`, `Glass Quench`, `Prism Arena Swell`, `VS Cutin Lightning`) cleanly to `44.1 kHz` stereo (`soxr` precision=28) alongside `Crowd gasp.ogg` — **0/50 sample-rate anomalies remaining**.
+3. **Full Rejuvenation-Scale 145-Track Pure-Instrumental Soundtrack (84 World/Towns/Roads/Dungeons/Moods + 61 Battles/Wardens/Bosses):**
+   - **ALL 18/18 Wardens Have Bespoke Signature Themes:** Filled all 6 Warden gaps flagged in `REVIEW.md` (**Tamsin, Marisol, Sahar, Bastian, Ysolde, Magnus** — `#140–#145`, all 100% ear-verified zero-vocal!).
+   - **100% Ear-Verified Pure Instrumental (Zero Vocals):** Zero singing, lyrics, choirs, stadium chants, or spoken lines across all 145 unique tracks (0 MD5 duplicates).
    - **Zero Toby Fox Chiptune:** Removed all Undertale/Deltarune chiptune picks so every non-Pokémon track matches modern Rejuvenation/orchestral-electronic production value.
-   - **Real *Pokémon Rejuvenation* Catalog by Zumi (`23` tracks) & CatchDalgo (`18` tracks) + GlitchxCity (`8` Rejuv + `21` Remixes):** Features *Battle of the Soul (ft. CatchDalgo)*, *Geara & Zetta*, *Griselda*, *Madame X Duel*, *World Shatterer*, *Music: Purgatorium*, *VS! Master of Nightmares*, *Inconsistent_sea (VS! Eizen)*, *Xenpurgis [Körper & Augen Finale]*, *ARCHETYPE*, *Angie's Manor*, *Nightmare Realm*, *Ana's Lament*, *Of Beasts and Kingdoms*, *Leader Angie*, *Crescent*, and more!
+   - **Real *Pokémon Rejuvenation* Catalog by Zumi (`23` tracks) & CatchDalgo (`18` tracks) + GlitchxCity (`8` Rejuv + `23` Remixes):** Features *Battle of the Soul (ft. CatchDalgo)*, *Geara & Zetta*, *Griselda*, *Madame X Duel*, *World Shatterer*, *Music: Purgatorium*, *VS! Master of Nightmares*, *Inconsistent_sea (VS! Eizen)*, *Xenpurgis [Körper & Augen Finale]*, *ARCHETYPE*, *Angie's Manor*, *Nightmare Realm*, *Ana's Lament*, *Of Beasts and Kingdoms*, *Leader Angie*, *Crescent*, and more!
    - **4 Creator-Locked Placements:**
      - **GlitchxCity — *Corbeau Battle Theme (Remix)*** → **`Battle - Warden Nyx` (`LEADER_NYX`, Gym 16 Underveil `:NEW_MOON`)**
      - **GlitchxCity — *Champion Iris Battle Theme (Remix)*** → **`Battle - Festival Final` (Crownhaven Prism Arena)**
      - **Blue Archive — *Unwelcome School*** → **`Mood - Comedy / Team Compost Chaos` (`story/15_COMEDY.md`)**
      - **Punishing: Gray Raven — *Out of My Hands*** → **`Battle - Aurelian Voss` (`MERIDIAN_VOSS`, ear-verified 0 vocals)**
 
-### Style Distribution Across All 139 Unique Tracks
-**Non-PKMN RPG:** 40 | **Pokémon Remix:** 37 | **Rejuv / Zumi:** 23 | **Rejuv / CatchDalgo:** 18 | **Dedrum (CC BY-NC-SA):** 8 | **Rejuv / GlitchxCity:** 8 | **Official / PMD OST:** 5
+### Style Distribution Across All 145 Unique Tracks
+**Non-PKMN RPG:** 44 | **Pokémon Remix:** 39 | **Rejuv / Zumi:** 23 | **Rejuv / CatchDalgo:** 18 | **Dedrum (CC BY-NC-SA):** 8 | **Rejuv / GlitchxCity:** 8 | **Official / PMD OST:** 5
 
 > **Usage Transparency:** Custom Pokémon Rejuvenation tracks carry Rejuvenation's V13.5 asset-guide notice for public fangame reuse; clean non-Rejuv / CC BY-NC-SA Dedrum tracks are clearly tagged so the creator decides knowingly before public release.
 
 ---
 
-## Complete 139-Track Soundtrack Blueprint (Every Town, Road, Dungeon, Mood & Fight)
+## Complete 145-Track Soundtrack Blueprint (Every Town, Road, Dungeon, Mood & Fight)
 
 ### Elowen (12 tracks)
 | # | Slot | Track | Artist | Style |
@@ -174,12 +179,15 @@
 | 99 | Battle — Hard Mode 2-Bar Warden Ace (104_Boss_HardWardens.rb) | Pokémon Black & White — Unova Elite 4 (Remix) | Zumi (Honnojis) | Rejuv / Zumi |
 | 100 | Battle — Warden Last Pokémon (Zero Crowd Chants) | Pokémon Black 2 & White 2 OST — Victory Lies Before You! | Game Freak / Hitomi Sato | Official / PMD OST |
 
-### Signature Wardens (12 tracks)
+### Signature Wardens (18 tracks — ALL 18/18 Wardens Covered!)
 | # | Slot | Track | Artist | Style |
 |---:|---|---|---|---|
 | 2 | Battle — Warden Nyx (LEADER_NYX, Gym 16 Underveil :NEW_MOON) ★ | Pokémon Legends: Z-A — Corbeau Battle Theme (Remix) | GlitchxCity | Pokémon Remix |
 | 101 | Battle — Warden Dorian (Gym 1 Saltmere :GRAND_STAGE) | Subcon's Royal Waltz (Your Contract Has Expired Remix) | Zumi (Honnojis) | Rejuv / Zumi |
+| 140 | Battle — Warden Tamsin (Gym 2 Briarwick :SILKWOOD) | Hollow Knight OST — Hive Knight | Christopher Larkin | Non-PKMN RPG |
+| 141 | Battle — Warden Marisol (Gym 3 Ebbmouth :WATER_SURFACE) | Octopath Traveler II OST — Battle on the Sea | Yasunori Nishiki | Non-PKMN RPG |
 | 102 | Battle — Warden Rook (Gym 4 Lumen City :NEON_GRID) | Pokémon Rejuvenation V14 — Battle: Inconsistent_sea (VS! Eizen) | Zumi (Honnojis) | Rejuv / Zumi |
+| 142 | Battle — Warden Sahar (Gym 5 Duneholt :DESERT) | Radiant Historia OST — Blue Radiance | Yoko Shimomura | Non-PKMN RPG |
 | 103 | Battle — Warden Corvin (Gym 6 Mirefen :CORROSIVE_MIRE) | Pokémon Rejuvenation — Battle: Griselda | CatchDalgo | Rejuv / CatchDalgo |
 | 104 | Battle — Warden Brann (Gym 7 Cindervault :VOLCANIC) | Pokémon Black & White — Battle! Elite Four (Remix) | CatchDalgo | Rejuv / CatchDalgo |
 | 105 | Battle — Warden Kaito (Gym 8 Ironreach :COLOSSEUM) | Persona 5 Strikers OST — Blooming Villain -Scramble- | Shoji Meguro / Atsushi Kitajoh | Non-PKMN RPG |
@@ -187,6 +195,9 @@
 | 107 | Battle — Warden Anja (Gym 10 Rimeholt :FROZEN_LAKE) | Octopath Traveler OST — Decisive Battle I | Yasunori Nishiki | Non-PKMN RPG |
 | 108 | Battle — Warden Odessa (Gym 11 Skyreach :STORMFRONT) | Ys VIII: Lacrimosa of DANA OST — Sunshine Coastline | Falcom Sound Team jdk | Non-PKMN RPG |
 | 109 | Battle — Warden Ilsa (Gym 12 Lucent :MINDSCAPE) | Pokémon Rejuvenation — Crescent Battle Theme | GlitchxCity | Rejuv / GlitchxCity |
+| 143 | Battle — Warden Bastian (Gym 13 Cragholm :CRYSTAL_CAVERN) | Pokémon RSE — Hoenn Regi Trio (Remix) | GlitchxCity | Pokémon Remix |
+| 144 | Battle — Warden Ysolde (Gym 14 Gravenmoor :HOLLOW_CATHEDRAL) | Pokémon RBY — Pokémon Tower (Remix v.II) | GlitchxCity | Pokémon Remix |
+| 145 | Battle — Warden Magnus (Gym 15 Cogsworth :FACTORY) | Trails of Cold Steel II OST — Blue Destination | Falcom Sound Team jdk | Non-PKMN RPG |
 | 110 | Battle — Warden Celestine (Gym 17 Gloaming :FAIRY_TALE) | Pokémon Ranger: Shadows of Almia — Gem Guardian (Remix) | Zumi (Honnojis) | Rejuv / Zumi |
 | 111 | Battle — Warden Sigrun (Gym 18 Wyrmrest :DRAGONS_DEN) | Pokémon ORAS — Lorekeeper Zinnia Battle Theme (Remix) | GlitchxCity | Pokémon Remix |
 

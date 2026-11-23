@@ -72,22 +72,76 @@ Game over	ME	Prismfall game over	(stock base project) ME: Voltorb Flip game over
 Ending: Good / Grey (hopeful)	BGM	Ending - Homecoming	dedrum_tectonic/Tectonic_Casaba_Villa_Remix.ogg	GlitchxCity - Ending / Hall of Fame remix	https://www.youtube.com/@GlitchxCity	U
 Ending: Bad / Ruin	BGM	Ending - Ruin	team_aquas_misc/ShinyDragonHunter/mus_rg_sevii_dungeon.mid	GlitchxCity - Lavender Town remix (pitch 85)	https://www.youtube.com/@GlitchxCity	U
 Credits	BGM	Credits	(stock base project)	keep stock name (Scene_Credits::BGM)		-
-Drip - Nadir (ambience loop)	BGS	Drip - Nadir	gemini_cc0/BGS/Drip - Nadir.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Glassfall Bleed (ambience loop)	BGS	Glassfall Bleed	gemini_cc0/BGS/Glassfall Bleed.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Gossamer Deepwood (ambience loop)	BGS	Gossamer Deepwood	gemini_cc0/BGS/Gossamer Deepwood.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Lava - Ashkaar (ambience loop)	BGS	Lava - Ashkaar	gemini_cc0/BGS/Lava - Ashkaar.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Machinery - Zenith (ambience loop)	BGS	Machinery - Zenith	gemini_cc0/BGS/Machinery - Zenith.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Rain (ambience loop)	BGS	Rain	gemini_cc0/BGS/Rain.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Saltmere Harbor (ambience loop)	BGS	Saltmere Harbor	gemini_cc0/BGS/Saltmere Harbor.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-War - Distant Battle (ambience loop)	BGS	War - Distant Battle	gemini_cc0/BGS/War - Distant Battle.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Wind - Isenmar (ambience loop)	BGS	Wind - Isenmar	gemini_cc0/BGS/Wind - Isenmar.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Beam break (sound effect)	SE	Beam break	gemini_cc0/SE/Beam break.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Beam charge (sound effect)	SE	Beam charge	gemini_cc0/SE/Beam charge.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Beam clash (sound effect)	SE	Beam clash	gemini_cc0/SE/Beam clash.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Boss Shield Break (sound effect)	SE	Boss Shield Break	gemini_cc0/SE/Boss Shield Break.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Crowd cheer (sound effect)	SE	Crowd cheer	gemini_cc0/SE/Crowd cheer.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Crowd gasp (sound effect)	SE	Crowd gasp	gemini_cc0/SE/Crowd gasp.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Field Shatter (sound effect)	SE	Field Shatter	gemini_cc0/SE/Field Shatter.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Glass Quench (sound effect)	SE	Glass Quench	gemini_cc0/SE/Glass Quench.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-Prism Arena Swell (sound effect)	SE	Prism Arena Swell	gemini_cc0/SE/Prism Arena Swell.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
-VS Cutin Lightning (sound effect)	SE	VS Cutin Lightning	gemini_cc0/SE/VS Cutin Lightning.ogg	(Gemini CC0 stand-in, synthesized; replace with a recorded or composed version)		-
+Drip - Nadir (ambience loop)	BGS	Drip - Nadir	gemini_cc0/BGS/Drip - Nadir.ogg	(Gemini CC0 v4.3)		-
+Glassfall Bleed (ambience loop)	BGS	Glassfall Bleed	gemini_cc0/BGS/Glassfall Bleed.ogg	(Gemini CC0 v4.3)		-
+Gossamer Deepwood (ambience loop)	BGS	Gossamer Deepwood	gemini_cc0/BGS/Gossamer Deepwood.ogg	(Gemini CC0 v4.3)		-
+Lava - Ashkaar (ambience loop)	BGS	Lava - Ashkaar	gemini_cc0/BGS/Lava - Ashkaar.ogg	(Gemini CC0 v4.3)		-
+Machinery - Zenith (ambience loop)	BGS	Machinery - Zenith	gemini_cc0/BGS/Machinery - Zenith.ogg	(Gemini CC0 v4.3)		-
+Rain (ambience loop)	BGS	Rain	gemini_cc0/BGS/Rain.ogg	(Gemini CC0 v4.3)		-
+Saltmere Harbor (ambience loop)	BGS	Saltmere Harbor	gemini_cc0/BGS/Saltmere Harbor.ogg	(Gemini CC0 v4.3)		-
+War - Distant Battle (ambience loop)	BGS	War - Distant Battle	gemini_cc0/BGS/War - Distant Battle.ogg	(Gemini CC0 v4.3)		-
+Wind - Isenmar (ambience loop)	BGS	Wind - Isenmar	gemini_cc0/BGS/Wind - Isenmar.ogg	(Gemini CC0 v4.3)		-
+Festival highlight hit (jingle)	ME	Festival highlight hit	gemini_cc0/ME/Festival highlight hit.ogg	(Gemini CC0 v4.3)		-
+Festival highlight result (jingle)	ME	Festival highlight result	gemini_cc0/ME/Festival highlight result.ogg	(Gemini CC0 v4.3)		-
+Festival highlight start (jingle)	ME	Festival highlight start	gemini_cc0/ME/Festival highlight start.ogg	(Gemini CC0 v4.3)		-
+Prismfall game over (jingle)	ME	Prismfall game over	gemini_cc0/ME/Prismfall game over.ogg	(Gemini CC0 v4.3)		-
+Trial Rank Up (jingle)	ME	Trial Rank Up	gemini_cc0/ME/Trial Rank Up.ogg	(Gemini CC0 v4.3)		-
+Warden Badge Get (jingle)	ME	Warden Badge Get	gemini_cc0/ME/Warden Badge Get.ogg	(Gemini CC0 v4.3)		-
+Ace Eye-Flash Zing (sound effect)	SE	Ace Eye-Flash Zing	gemini_cc0/SE/Ace Eye-Flash Zing.ogg	(Gemini CC0 v4.3)		-
+Beam break (sound effect)	SE	Beam break	gemini_cc0/SE/Beam break.ogg	(Gemini CC0 v4.3)		-
+Beam charge (sound effect)	SE	Beam charge	gemini_cc0/SE/Beam charge.ogg	(Gemini CC0 v4.3)		-
+Beam clash (sound effect)	SE	Beam clash	gemini_cc0/SE/Beam clash.ogg	(Gemini CC0 v4.3)		-
+Beam fire (sound effect)	SE	Beam fire	gemini_cc0/SE/Beam fire.ogg	(Gemini CC0 v4.3)		-
+Boss Shield Break (sound effect)	SE	Boss Shield Break	gemini_cc0/SE/Boss Shield Break.ogg	(Gemini CC0 v4.3)		-
+Chapter Card Prismatic Wipe (sound effect)	SE	Chapter Card Prismatic Wipe	gemini_cc0/SE/Chapter Card Prismatic Wipe.ogg	(Gemini CC0 v4.3)		-
+Crowd cheer (sound effect)	SE	Crowd cheer	gemini_cc0/SE/Crowd cheer.ogg	(Gemini CC0 v4.3)		-
+Crowd gasp (sound effect)	SE	Crowd gasp	gemini_cc0/SE/Crowd gasp.ogg	(Gemini CC0 v4.3)		-
+Directorate Rifle Crack (sound effect)	SE	Directorate Rifle Crack	gemini_cc0/SE/Directorate Rifle Crack.ogg	(Gemini CC0 v4.3)		-
+Ferry Foghorn (sound effect)	SE	Ferry Foghorn	gemini_cc0/SE/Ferry Foghorn.ogg	(Gemini CC0 v4.3)		-
+Field Shatter (sound effect)	SE	Field Shatter	gemini_cc0/SE/Field Shatter.ogg	(Gemini CC0 v4.3)		-
+Glass Quench (sound effect)	SE	Glass Quench	gemini_cc0/SE/Glass Quench.ogg	(Gemini CC0 v4.3)		-
+Glass Shatter Burst (sound effect)	SE	Glass Shatter Burst	gemini_cc0/SE/Glass Shatter Burst.ogg	(Gemini CC0 v4.3)		-
+Glitch Tear Static (sound effect)	SE	Glitch Tear Static	gemini_cc0/SE/Glitch Tear Static.ogg	(Gemini CC0 v4.3)		-
+Heartbeat Sub-Pulse (sound effect)	SE	Heartbeat Sub-Pulse	gemini_cc0/SE/Heartbeat Sub-Pulse.ogg	(Gemini CC0 v4.3)		-
+Impact Hitstop Boom (sound effect)	SE	Impact Hitstop Boom	gemini_cc0/SE/Impact Hitstop Boom.ogg	(Gemini CC0 v4.3)		-
+Mirror Crack (sound effect)	SE	Mirror Crack	gemini_cc0/SE/Mirror Crack.ogg	(Gemini CC0 v4.3)		-
+Prism Arena Swell (sound effect)	SE	Prism Arena Swell	gemini_cc0/SE/Prism Arena Swell.ogg	(Gemini CC0 v4.3)		-
+Ring Glass Harmonic (sound effect)	SE	Ring Glass Harmonic	gemini_cc0/SE/Ring Glass Harmonic.ogg	(Gemini CC0 v4.3)		-
+VS Cutin Lightning (sound effect)	SE	VS Cutin Lightning	gemini_cc0/SE/VS Cutin Lightning.ogg	(Gemini CC0 v4.3)		-
+Voice - Anja (sound effect)	SE	Voice - Anja	gemini_cc0/SE/Voice - Anja.ogg	(Gemini CC0 v4.3)		-
+Voice - Bastian (sound effect)	SE	Voice - Bastian	gemini_cc0/SE/Voice - Bastian.ogg	(Gemini CC0 v4.3)		-
+Voice - Brann (sound effect)	SE	Voice - Brann	gemini_cc0/SE/Voice - Brann.ogg	(Gemini CC0 v4.3)		-
+Voice - Calla (sound effect)	SE	Voice - Calla	gemini_cc0/SE/Voice - Calla.ogg	(Gemini CC0 v4.3)		-
+Voice - Celestine (sound effect)	SE	Voice - Celestine	gemini_cc0/SE/Voice - Celestine.ogg	(Gemini CC0 v4.3)		-
+Voice - Corvin (sound effect)	SE	Voice - Corvin	gemini_cc0/SE/Voice - Corvin.ogg	(Gemini CC0 v4.3)		-
+Voice - Dask (sound effect)	SE	Voice - Dask	gemini_cc0/SE/Voice - Dask.ogg	(Gemini CC0 v4.3)		-
+Voice - Dorian (sound effect)	SE	Voice - Dorian	gemini_cc0/SE/Voice - Dorian.ogg	(Gemini CC0 v4.3)		-
+Voice - Ilsa (sound effect)	SE	Voice - Ilsa	gemini_cc0/SE/Voice - Ilsa.ogg	(Gemini CC0 v4.3)		-
+Voice - Juno (sound effect)	SE	Voice - Juno	gemini_cc0/SE/Voice - Juno.ogg	(Gemini CC0 v4.3)		-
+Voice - Kaito (sound effect)	SE	Voice - Kaito	gemini_cc0/SE/Voice - Kaito.ogg	(Gemini CC0 v4.3)		-
+Voice - Kestrel (sound effect)	SE	Voice - Kestrel	gemini_cc0/SE/Voice - Kestrel.ogg	(Gemini CC0 v4.3)		-
+Voice - Kroll (sound effect)	SE	Voice - Kroll	gemini_cc0/SE/Voice - Kroll.ogg	(Gemini CC0 v4.3)		-
+Voice - Larch (sound effect)	SE	Voice - Larch	gemini_cc0/SE/Voice - Larch.ogg	(Gemini CC0 v4.3)		-
+Voice - Magnus (sound effect)	SE	Voice - Magnus	gemini_cc0/SE/Voice - Magnus.ogg	(Gemini CC0 v4.3)		-
+Voice - Marchetti (sound effect)	SE	Voice - Marchetti	gemini_cc0/SE/Voice - Marchetti.ogg	(Gemini CC0 v4.3)		-
+Voice - Marisol (sound effect)	SE	Voice - Marisol	gemini_cc0/SE/Voice - Marisol.ogg	(Gemini CC0 v4.3)		-
+Voice - Morwen (sound effect)	SE	Voice - Morwen	gemini_cc0/SE/Voice - Morwen.ogg	(Gemini CC0 v4.3)		-
+Voice - Mourner (sound effect)	SE	Voice - Mourner	gemini_cc0/SE/Voice - Mourner.ogg	(Gemini CC0 v4.3)		-
+Voice - Nyx (sound effect)	SE	Voice - Nyx	gemini_cc0/SE/Voice - Nyx.ogg	(Gemini CC0 v4.3)		-
+Voice - Odessa (sound effect)	SE	Voice - Odessa	gemini_cc0/SE/Voice - Odessa.ogg	(Gemini CC0 v4.3)		-
+Voice - Pip (sound effect)	SE	Voice - Pip	gemini_cc0/SE/Voice - Pip.ogg	(Gemini CC0 v4.3)		-
+Voice - Player (sound effect)	SE	Voice - Player	gemini_cc0/SE/Voice - Player.ogg	(Gemini CC0 v4.3)		-
+Voice - Quent (sound effect)	SE	Voice - Quent	gemini_cc0/SE/Voice - Quent.ogg	(Gemini CC0 v4.3)		-
+Voice - Rook (sound effect)	SE	Voice - Rook	gemini_cc0/SE/Voice - Rook.ogg	(Gemini CC0 v4.3)		-
+Voice - Sable (sound effect)	SE	Voice - Sable	gemini_cc0/SE/Voice - Sable.ogg	(Gemini CC0 v4.3)		-
+Voice - Sahar (sound effect)	SE	Voice - Sahar	gemini_cc0/SE/Voice - Sahar.ogg	(Gemini CC0 v4.3)		-
+Voice - Sigrun (sound effect)	SE	Voice - Sigrun	gemini_cc0/SE/Voice - Sigrun.ogg	(Gemini CC0 v4.3)		-
+Voice - Tamsin (sound effect)	SE	Voice - Tamsin	gemini_cc0/SE/Voice - Tamsin.ogg	(Gemini CC0 v4.3)		-
+Voice - Teo (sound effect)	SE	Voice - Teo	gemini_cc0/SE/Voice - Teo.ogg	(Gemini CC0 v4.3)		-
+Voice - Thistle (sound effect)	SE	Voice - Thistle	gemini_cc0/SE/Voice - Thistle.ogg	(Gemini CC0 v4.3)		-
+Voice - Valen (sound effect)	SE	Voice - Valen	gemini_cc0/SE/Voice - Valen.ogg	(Gemini CC0 v4.3)		-
+Voice - Vesper (sound effect)	SE	Voice - Vesper	gemini_cc0/SE/Voice - Vesper.ogg	(Gemini CC0 v4.3)		-
+Voice - Voss (sound effect)	SE	Voice - Voss	gemini_cc0/SE/Voice - Voss.ogg	(Gemini CC0 v4.3)		-
+Voice - Wenlow (sound effect)	SE	Voice - Wenlow	gemini_cc0/SE/Voice - Wenlow.ogg	(Gemini CC0 v4.3)		-
+Voice - Ysolde (sound effect)	SE	Voice - Ysolde	gemini_cc0/SE/Voice - Ysolde.ogg	(Gemini CC0 v4.3)		-
+Void Eat Bass Implosion (sound effect)	SE	Void Eat Bass Implosion	gemini_cc0/SE/Void Eat Bass Implosion.ogg	(Gemini CC0 v4.3)		-
