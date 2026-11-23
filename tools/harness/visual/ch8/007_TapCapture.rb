@@ -25,7 +25,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("tap")
       $PokemonSystem.battlescene = 1
       $player.party = [DemoRun.mon(:SWAMPERT, 45, [:SURF, :EARTHQUAKE, :ICEBEAM, :PROTECT]),
                        DemoRun.mon(:GARDEVOIR, 45, [:PSYCHIC, :MOONBLAST, :THUNDERBOLT, :PROTECT])]
-      $game_variables[129] = 6
+      $game_variables[129] = 5
       $game_map.setup(255)
       $game_player.moveto(13, 17); $game_player.turn_up
       $scene.disposeSpritesets rescue nil

@@ -77,30 +77,33 @@ def crisis_commands():
         "(Through the steam, on the Meridian side: a red lever under a glass cover. TAP 7 - EMERGENCY CLOSE - DIRECTORATE AUTHORISATION ONLY. Two Directorate soldiers stand in front of it.)",
         say('LARCH', 'neutral', "Three doctors. Your call, I'm afraid. I'm only a professor."),
     ]
-    vent = [{'script': 'pf_choose(:ch8_caldera, :vent)'},
+    vent = [
             say('QUENT', 'sad', "Oh, don't. Don't. Do you know what that'll do to my DATA?"),
             {'script': 'setBattleRule("field", :%s)\nsetBattleRule("fieldChange", [3, :ASHEN_WASTE, "Lake water roars down the old channels! The fire goes grey!"])' % FIELD},
             {'if': 'TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 0)', 'then': [
+                {'script': 'pf_choose(:ch8_caldera, :vent)'},
                 say('QUENT', 'neutral', 'Fine. Fine. I\'ll write it up as a natural experiment. "Subject vents mountain." Do you know how rare that is?'),
                 "(Lake water roars down the stone. Steam fills the chamber, white and then grey, and then the grey comes down as ash, soft, everywhere.)",
                 "(The gauges fall. Out of the red. Through the amber. Into the green.)",
                 say('WICK', 'sad', "There. It's asleep. It'll be cross when it wakes up."),
                 {'var': ['CINDERVAULT_STATE', 1]}, {'selfswitch': ['B', True]}], 'else': []}]
-    dampers = [{'script': 'pf_choose(:ch8_caldera, :dampers)'},
+    dampers = [
                say('WICK', 'sad', "Then hold its mouth shut, if you must. It'll still have a fever."),
                "(The Hollow pick up their hose and go. But the Hammers come back down the stair with a third, and this time they're after the dampers.)",
                {'script': 'pbRegisterPartner(:MERIDIAN_QUENT, "Percival", 0)\nsetBattleRule("field", :%s)\nsetBattleRule("double")' % FIELD},
                {'if': 'TrainerBattle.start(:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8)', 'then': [
                    {'script': 'pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)'},
+                   {'script': 'pf_choose(:ch8_caldera, :dampers)'},
                    "(The engineers lock the brass rings round the pipe. The draw evens out. The gauges fall to the amber and stay there, humming.)",
                    say('QUENT', 'happy', "Done by supper. I said! We should do this again. You're very good at holding things."),
                    {'var': ['CINDERVAULT_STATE', 2]}, {'selfswitch': ['B', True]}],
                 'else': [{'script': 'pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)'}]}]
-    shutdown = [{'script': 'pf_choose(:ch8_caldera, :shutdown)'},
+    shutdown = [
                 "Directorate Lieutenant: That's Sovereign's property. Step back from it.",
                 say('QUENT', 'shocked', "Oh, you CAN'T, that's - that's a whole tap, that's MONTHS-"),
                 {'script': 'setBattleRule("field", :%s)\nsetBattleRule("double")' % FIELD},
                 {'if': 'TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 0, :MERIDIAN_DIRECTORATE, "Lieutenant", 8)', 'then': [
+                    {'script': 'pf_choose(:ch8_caldera, :shutdown)'},
                     "(You break the glass and pull. The lever takes your whole weight. Somewhere far down, something very large stops turning.)",
                     "(The gauges shudder, and drop, and keep dropping, and stop in the green. The forges up the walls stay lit.)",
                     say('QUENT', 'sad', "Seven taps in the realm. Now six. Someone's going to be so cross with me."),
@@ -109,7 +112,7 @@ def crisis_commands():
                     {'var': ['CINDERVAULT_STATE', 0]}, {'selfswitch': ['B', True]}], 'else': []}]
     after = [{'if': "$game_self_switches[[255, @event_id, 'B']]", 'then': [
         "(Up the stair, out into the night. From the bell-tower, slowly, a single bell: one. All clear.)",
-        {'switch': ['CH8_CALDERA_DONE', True]}, {'var': ['CH8_STEP', 6]},
+        {'switch': ['CH8_CALDERA_DONE', True]}, {'var': ['CH8_STEP', 6]}, {'selfswitch': ['A', True]},
         # on to Hearthguild Hall for the Light Stone; guarded until 244 is built (a missing map would crash)
         {'if': 'pbRgssExists?("Data/Map244.rxdata")', 'then': [{'transfer': {'map': 244, 'x': 10, 'y': 8, 'dir': 'up'}}], 'else': []}],
         'else': []}]
@@ -122,11 +125,16 @@ def crisis_commands():
 def events_255(m):
     E = m.events
     E += [
-        {'type': 'warp', 'name': 'Up to the Slag Ward', 'at': [13, 19], 'to': {'map': 249, 'x': 20, 'y': 12, 'dir': 'up'}, 'se': 'Door exit'},
+        # 249 (the Slag Ward) isn't built yet: a plain warp to a missing map crashes, so guard it
+        {'type': 'event', 'name': 'Up to the Slag Ward', 'at': [13, 19], 'pages': [{'trigger': 'touch', 'commands': [
+            {'if': 'pbRgssExists?("Data/Map249.rxdata")', 'then': [{'transfer': {'map': 249, 'x': 20, 'y': 12, 'dir': 'up'}}],
+             'else': ["(The stair up to the Slag Ward is roped off. Not built yet.)"]}]}]},
         {'type': 'event', 'name': 'Atmosphere', 'at': [0, 0], 'pages': [{'trigger': 'parallel', 'commands': [{'script': 'pfm_cave_light'}, {'wait': 12}]}]},
         {'type': 'event', 'name': 'The Caldera Crisis', 'at': [13, 16], 'pages': [
             {'commands': []},
-            {'cond': {'var': ['CH8_STEP', 6]}, 'trigger': 'autorun', 'commands': crisis_commands() + [{'selfswitch': ['A', True]}]},
+            # Gym 7 won (CH8_STEP 5) opens the crisis. Self A is set only once it's resolved (see `after`), so a
+            # whiteout or a lost branch battle replays the crisis from the checkpoint instead of bricking Ch8.
+            {'cond': {'var': ['CH8_STEP', 5]}, 'trigger': 'autorun', 'commands': crisis_commands()},
             {'cond': {'self': 'A'}, 'commands': []},
             {'cond': {'switch': 'CH8_CALDERA_DONE'}, 'commands': []}]},
         {'type': 'npc', 'name': 'Quent', 'at': [21, 10], 'sprite': 'trainer_SCIENTIST', 'dir': 'left', 'commands': [

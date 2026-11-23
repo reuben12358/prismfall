@@ -16,5 +16,9 @@ Source: `gemini_recommends/REVIEW.md`.
 8. Ruin Route Inverse overlays: Ruin Gym 16 Nyx, Ruin Gym 17 Celestine (on the last mon), Ruin R7 Theodric.
 9. Ch11 harpooners (ISENMAR_SOLDIER_M/F) at Lv 48–52.
 
+## The Wednesday master audit (gemini_recommends/2026-11-22_wednesday-claude-sprint-master-audit)
+11. Work through Parts A–J in order (P0 → P1 → P2), skipping what REVIEW.md marks done (E1.1, A7, A13, A15-255, G2) and what it routes to Gemini (Gemini-owned layouts). Part D (staged transitions) is the transitions agent's; Part C3 follows REVIEW.md's economy decision.
+12. Add a post-paint BFS reachability check to `mapgen/build.py`, and gate packaging on `export_tilesets_rxdata.py --check` (stops the A9–A11 and E1.1 classes of bug recurring).
+
 ## Maps (pass 2, plan quota only)
 10. `mapgen/REFINE_QUEUE.md`, including the stage-direction pass.

@@ -14,11 +14,16 @@ fog: {name: prismfall_cave, opacity: 30, blend: 1, zoom: 100, sx: 1, sy: 0}
 raw: data/raw/255.npy
 tileset: 61
 events:
-- type: warp
+- type: event
   name: Up to the Slag Ward
   at: [13, 19]
-  to: {map: 249, x: 20, y: 12, dir: up}
-  se: Door exit
+  pages:
+  - trigger: touch
+    commands:
+    - if: pbRgssExists?("Data/Map249.rxdata")
+      then:
+      - transfer: {map: 249, x: 20, y: 12, dir: up}
+      else: [(The stair up to the Slag Ward is roped off. Not built yet.)]
 - type: event
   name: Atmosphere
   at: [0, 0]
@@ -33,7 +38,7 @@ events:
   pages:
   - commands: []
   - cond:
-      var: [CH8_STEP, 6]
+      var: [CH8_STEP, 5]
     trigger: autorun
     commands:
     - {script: Prismfall.checkpoint}
@@ -78,13 +83,13 @@ events:
       - choices: [Help Wick vent it., Help Quent fit the dampers., Shut the tap down.]
         cancel: 0
         branches:
-        - - {script: 'pf_choose(:ch8_caldera, :vent)'}
-          - '\pf[QUENT,sad]Quent: Oh, don''t. Don''t. Do you know what that''ll do to my DATA?'
+        - - '\pf[QUENT,sad]Quent: Oh, don''t. Don''t. Do you know what that''ll do to my DATA?'
           - {script: 'setBattleRule("field", :VOLCANIC)
 
               setBattleRule("fieldChange", [3, :ASHEN_WASTE, "Lake water roars down the old channels! The fire goes grey!"])'}
           - if: TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 0)
             then:
+            - {script: 'pf_choose(:ch8_caldera, :vent)'}
             - '\pf[QUENT,neutral]Quent: Fine. Fine. I''ll write it up as a natural experiment. "Subject vents mountain." Do you know how rare that is?'
             - (Lake water roars down the stone. Steam fills the chamber, white and then grey, and then the grey comes down as ash, soft, everywhere.)
             - (The gauges fall. Out of the red. Through the amber. Into the green.)
@@ -92,8 +97,7 @@ events:
             - var: [CINDERVAULT_STATE, 1]
             - selfswitch: [B, true]
             else: []
-        - - {script: 'pf_choose(:ch8_caldera, :dampers)'}
-          - '\pf[WICK,sad]Wick: Then hold its mouth shut, if you must. It''ll still have a fever.'
+        - - '\pf[WICK,sad]Wick: Then hold its mouth shut, if you must. It''ll still have a fever.'
           - (The Hollow pick up their hose and go. But the Hammers come back down the stair with a third, and this time they're after the dampers.)
           - {script: 'pbRegisterPartner(:MERIDIAN_QUENT, "Percival", 0)
 
@@ -103,20 +107,21 @@ events:
           - if: TrainerBattle.start(:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8)
             then:
             - {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
+            - {script: 'pf_choose(:ch8_caldera, :dampers)'}
             - (The engineers lock the brass rings round the pipe. The draw evens out. The gauges fall to the amber and stay there, humming.)
             - '\pf[QUENT,happy]Quent: Done by supper. I said! We should do this again. You''re very good at holding things.'
             - var: [CINDERVAULT_STATE, 2]
             - selfswitch: [B, true]
             else:
             - {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
-        - - {script: 'pf_choose(:ch8_caldera, :shutdown)'}
-          - 'Directorate Lieutenant: That''s Sovereign''s property. Step back from it.'
+        - - 'Directorate Lieutenant: That''s Sovereign''s property. Step back from it.'
           - '\pf[QUENT,shocked]Quent: Oh, you CAN''T, that''s - that''s a whole tap, that''s MONTHS-'
           - {script: 'setBattleRule("field", :VOLCANIC)
 
               setBattleRule("double")'}
           - if: TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 0, :MERIDIAN_DIRECTORATE, "Lieutenant", 8)
             then:
+            - {script: 'pf_choose(:ch8_caldera, :shutdown)'}
             - (You break the glass and pull. The lever takes your whole weight. Somewhere far down, something very large stops turning.)
             - (The gauges shudder, and drop, and keep dropping, and stop in the green. The forges up the walls stay lit.)
             - '\pf[QUENT,sad]Quent: Seven taps in the realm. Now six. Someone''s going to be so cross with me.'
@@ -130,13 +135,13 @@ events:
         - '(Up the stair, out into the night. From the bell-tower, slowly, a single bell: one. All clear.)'
         - switch: [CH8_CALDERA_DONE, true]
         - var: [CH8_STEP, 6]
+        - selfswitch: [A, true]
         - if: pbRgssExists?("Data/Map244.rxdata")
           then:
           - transfer: {map: 244, x: 10, y: 8, dir: up}
           else: []
         else: []
       else: []
-    - selfswitch: [A, true]
   - cond: {self: A}
     commands: []
   - cond: {switch: CH8_CALDERA_DONE}

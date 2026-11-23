@@ -314,15 +314,18 @@ module PrismfallVS
     def play
       t0 = System.uptime
       cues = { 0.12 => "Vs flash", 1.3 => "Vs sword", 2.8 => "Vs flash" }
-      loop do
-        t = System.uptime - t0
-        cues.keys.each { |k| next if t < k; (pbSEPlay(cues.delete(k)) rescue nil) }
-        frame(t)
-        Graphics.update
-        break if t >= HOLD_END + 0.75
+      begin
+        loop do
+          t = System.uptime - t0
+          cues.keys.each { |k| next if t < k; (pbSEPlay(cues.delete(k)) rescue nil) }
+          frame(t)
+          Graphics.update
+          break if t >= HOLD_END + 0.75
+        end
+        @vp.color = Color.new(0, 0, 0, 255)
+      ensure
+        dispose        # also on an exception mid-sequence, so nothing leaks onto the battle
       end
-      @vp.color = Color.new(0, 0, 0, 255)
-      dispose
       Graphics.update
     end
 
@@ -441,6 +444,10 @@ module PrismfallVS
     end
 
     def dispose
+      return if @disposed
+      @disposed = true
+      w = @s["world"]
+      w.bitmap.dispose if w && !w.disposed? && w.bitmap && !w.bitmap.disposed?   # snap_screen's 512x384 copy
       @s.each_value { |sp| sp.dispose if sp && !sp.disposed? }
       @sparks.each { |sp, *_| sp.dispose if sp && !sp.disposed? }
       @owned_bmps.each { |b| b.dispose if b && !b.disposed? }
@@ -466,6 +473,9 @@ SpecialBattleIntroAnimations.register("prismfall_vs_screen", 90,
 # under dramatic B2W2 spotlight dimming, then brighten and play the one-shot pose
 # during "You are challenged by ...!" (holding the final Hero frame afterwards).
 #===============================================================================
+# Everything below hooks EBDX classes; without EBDX the VS screen simply never applies.
+if defined?(EliteBattle) && defined?(DynamicTrainerSprite)
+
 class DynamicTrainerSprite
   alias pf_vs_play play unless method_defined?(:pf_vs_play)
   def play
@@ -492,7 +502,7 @@ class Battle::Scene
       @pf_intro_dim_t0 = System.uptime
       # Dramatic B2W2 spotlight dim while the camera sweeps back from the trainer silhouette
       @viewport.tone = Tone.new(-72, -72, -56, 0) rescue nil
-      v = EliteBattle.get_vector(:ENEMY)
+      v = EliteBattle.get_vector(:ENEMY).dup    # dup: never write into EBDX's shared vector table
       v[4] = PrismfallVS::INTRO_ZOOM if v[4]
       @vector = Vector.new(*v[0, 6]); @vector.battle = @battle
     end
@@ -576,3 +586,13 @@ class Vector
     pf_vs_set_inc(val)
   end
 end
+
+end   # defined?(EliteBattle)
+
+# A battle that ends (or crashes) mid-intro must not leave the pose hold or the input block behind.
+EventHandlers.add(:on_end_battle, :prismfall_vs_reset,
+  proc { |*_args|
+    PrismfallVS.hold_pose = false
+    PrismfallVS.input_block_until = 0
+  }
+)
