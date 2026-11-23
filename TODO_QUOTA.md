@@ -24,7 +24,7 @@
 
 ## 3. Teams and hooks
 - [ ] Ch15 engine hooks: `pf_echo_follow` (a recorded-path follower shared by the War Convoy's sledges and Gym 14's crypt echo); K6's one-turn `:BLEED` overload (`battle.change_field`); map-level audio mute for the Hush (808); cutscene `CE-1` "AF 290, Through Her Eyes" (letterbox, sepia tone, Glassfall sweep).
-- [ ] Balance-check Giratina `:GIRATINA_DEPTHS` at cap 71 with 14 badges.
+- [ ] Balance-check Giratina `:GIRATINA_DEPTHS` at cap 71 with 14 badges. In the first capture, after bar 1 the INVERSE field's "The Reverse World answers the wild Giratina's call!" fired every turn, and a Lv 70 party never reached the Origin bar. Check that hook vs bosses.
 - [ ] Partner teams: Redeemed Kestrel (Ch21) and Rook (Ch16 Casting Floor).
 - [ ] Ogerpon into Juno's J4 team when `OGERPON_TRUSTED` (a load hook).
 - [ ] Aurelia 824–826 `:WATER_SURFACE` overrides for Amaria and Titania.
