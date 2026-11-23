@@ -358,6 +358,35 @@ Gemini will pair this with matching pure-Gemini battlebacks so every major cross
   - **Meridian Fellowship Card Mart Discount:** Wire the promised 10% `PokemonMartAdapter#getPrice` discount & global `:fellowship_off` activation.
   - **Visual Polish:** Draw dark 2-row tray behind 18 badges on `007_TrainerCard.rb`; adjust `007_Bosses_UI.rb:101` EBDX pip offset for regular Hard-Warden databoxes; add `QUENT/VESPER/MARCHETTI/KROLL/SABLE/THISTLE` + `"NPC "` prefix support to `025_CharsetAliases.rb:36`; prevent player sprite reverting to Gen 3 Red/Leaf while fishing/cycling/surfing (`026_PlayerLooks.rb:41-46`); add `'·'` to `002_Font_Glyphs.rb`; fix `Map 522` double-Juno window (`010_JunoFollower.rb:27`); wire `secondferry` NG+ carryover (`018_Endings.rb` + `020_Passwords.rb`).
 
+---
+
+## PART J — Overworld Map Atmosphere & Battle Cinematography Spectacle Pack (Zero New Image Art!)
+
+### J1. Overworld Map Atmosphere & Lighting Bugs (All 117 Built RXDATA Maps Audited)
+1. **P0 — 72 Animated Doors Wipe `MAP_TONES` Back to `(0,0,0,0)` (`mapgen/rpg.py:265-269`):**
+   - `door_pages` emits `Tone(0,0,0,0)` *after* `Transfer Player` (and after `:on_enter_map` sets `MAP_TONES[dest]`), clobbering destination color grading on every building entry (plus 6 mid-map resets in `131, 181, 523, 545, 578, 924, 952`).
+   - **Fix:** Add `PrismfallMaps.restore_tone(frames = 6)` in `005_MapAtmosphere.rb` and replace trailing `Tone(0,0,0,0)` in `rpg.py:269`.
+2. **P0 — Water Reflections Silently Killed Across All Elowen Rivers & Lumen City (`mapgen/rcompose.py:316`):**
+   - `AUTO_TAG['Still water'] = 6` (`StillWater` reflection tag) is skipped whenever the source tile has `x == 7` → `0` water reflections on `TS 53` (`521/524/525/540/552/566`) and `TS 60` (`180/181/608`). Prioritize `AUTO_TAG[name]` before source `x` and paint `tag=16` (`Puddle`) on `541 Grey Saltings`.
+3. **P1 — Fog Never Clears Across Connections + Vanishing `prismfall_glass.png` + Night-Tone Crush (`005_MapAtmosphere.rb:126-146`):**
+   - Reset `$game_map.fog_name = ""; $game_map.fog_opacity = 0` when `!f`; hook `:on_map_or_spriteset_change` for save-loads; attenuate negative outdoor `MAP_TONES` by `0.45×` at night; move `522`/`548` off one-shot `fog_event` into `MAP_FOGS` (`prismfall_glass`) and add `prismfall_glass` to `568/608/925/926`; swap `TS 61` static 1-frame `PF Magma` (`Map 255`) to animated 4-frame `Lava.png` already on disk; color-grade the 23 flat `(0,0,0,0)` maps (esp. `150–154` Pell Playhouse & `185–186` Spire Lobby/Gala Hall).
+4. **P1 — Zero-Placement Automatic Tile-Scanned Lighting (`mapgen/ruby/013_OverworldLighting.rb`):**
+   - **600+ light & Bleed tiles are already painted in `Map*.rxdata`** (`54` `gl_lamp`, `61` `lm_arclamp`, `58` hanging lanterns/garlands, `70` braziers/campfires, `67` tall interior windows & footlights, `433` Bleed glass shards). Scan `$game_map.data` once per map load to anchor cached additive radial glow halos (`blend_type = 1`, dusk/night scaling, `S424` Lowlight blackout reactivity, `154` Playhouse spotlight cones, interior window light shafts, Bleed prism shimmer, and lightweight ambient embers/fireflies/prism dust) + 3 new 256×256 fog PNGs (`prismfall_sunbeams`, `prismfall_shadow`, `prismfall_embers`) + strolling overworld `Followers/*` Pokémon & townsfolk on quiet hub maps!
+
+### J2. Battle Cinematography, Multi-Bar Boss Drama & Z-Move/Mega Polish (`0` New Art Needed)
+1. **P0 — Multi-Bar Boss Shield-Break Spectacle (`005_Bosses_Effects.rb:43-64, 96-133`, `007_Bosses_UI.rb:13, 113-114`):**
+   - Currently **0/10** bosses wire `:music`, `:animation`, `:speech`, or break FX; `007_Bosses_UI.rb:13` erases the pip *before* `break_bar` runs; `pbBGMPlay(e[:music])` (`L128`) & `primal` (`L129`) run *last* after everything already happened.
+   - **Fix:** Add `Prismfall::Bosses::FX.on_bar_break`: `0.10s` hitstop + camera zoom `:ENEMY` + `"Boss Shield Break"` SE + boss cry + 14f shake + themed room flash + 18-particle shard burst + pip shatter spark before redraw; move `e[:music]` (auto-fallback `"Battle - Boss Final Bar"` on last bar) & `primal` to fire *first*; add wild-boss title ribbon intros + `:defeat_fx` (`:calm_dissolve`, `:cable_break_launch`, `:steam_ascend`, `:shatter_collapse`).
+2. **P0 — Enable Mid-Battle Portraits & Voice Blips (`014_Portraits.rb:812-834`):**
+   - Hook `Battle::Scene#pbDisplayMessage`, `#pbDisplayPausedMessage`, `#pbShowCommands` to run `Portrait.extract(msg)` + optional `,right` side anchor (`x = 384`, clear of player databox) + `pbSEPlay("Voice - #{aid}")`! Immediately upgrades Mourner (`105:16`), Rook (`bosses.yaml:62`), Hard Wardens (`104`), and Groudon/Sahar (`107_Boss_Act3to5.rb`).
+3. **P1 — Z-Move Ultimate Animations & 8-Eeveelution Prismatic Convergence (`001..005_ZPower`):**
+   - Replace `002_ZPower_Moves.rb:54` replaying Level-5 base animations (`Tackle`/`Ember`) with `Z_SIGNATURE_ANIMS` (`:GIGAIMPACT`, `:BLASTBURN`, `:HYDROCANNON`, `:VOLTTACKLE`, `:DRACOMETEOR`, `:DARKVOID`, `:MOONBLAST`, etc.); replace `EXTREMEEVOBOOST`'s `:WORKUP` (`001:86`) with an 8-color spiraling orb convergence + `"Prism Arena Swell"` SE; add Z-unleash camera zoom + room dim + type-colored `1.05s` `:eye_strip` cut-in; expand `PrismfallSpeech::LINES` (`005_ZPower_TrainerSpeech.rb:21-27`) from `1` entry to all Wardens/Rivals/Directors (`:ace`, `:mega`, `:zmove`) + auto `"Battle - Warden Last"` BGM switch on a Gym Warden's final mon!
+4. **P1 — Mega Cut-Ins, VS Polish & Dynamic Weather/State Field Fusion (`002..004_Mega`, `010_Bridge_VersusIntro.rb`, `002..003_Bridge`):**
+   - Pre-Mega `1.0s` `:eye_strip` cut-in (crimson-glass glitch treatment for Meridian Lattice-band Megas!) + SFX/flash on all 8 Mega field showpieces (`003_Mega_Fields.rb:53-108`).
+   - In `010_Bridge_VersusIntro.rb`: add missing `THEMES` (`QUENT/SABLE/THISTLE/VESPER`), mirrored desaturated `:REFLECTION` PC VS screen (0 new art!), 2-opponent dual-bust VS support (`L96`), `"VS Cutin Lightning"` + `Voice - <ID>` on lock, and small-font rank kicker above trainer name.
+   - In `002..003_Bridge`: wire `:prismfall_weather_changed` visual fusion (atmospheric `Tone` + Stormfront lightning rain, Ashen Waste glass sandstorm, Wasteland acid rain, Silkwood electric dew), live `:prismfall_field_visual_state` sync (`CRYSTAL_CAVERN` 4-hue glow, `PRISM_ARENA` 18-Plate sigil/beams, `VOLCANIC` primed, `ASHEN_WASTE` geyser, `NEON_GRID` S2 surge), direction-aware `transition_for(old_id, old_stage, new_id, new_stage)`, `pfl*` parallax, outdoor night fallback tone (`11/13` fields), and `:animation` hooks on field hazards across `101..140`!
+
+
 
 
 
