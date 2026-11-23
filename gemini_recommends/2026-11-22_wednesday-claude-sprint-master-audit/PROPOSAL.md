@@ -320,6 +320,44 @@ Gemini will pair this with matching pure-Gemini battlebacks so every major cross
 - **Metadata Fixes (`maps_out/PBS/map_metadata_prismfall.txt`):** Add `BattleBack = city` on `180/181/608`, `Outdoor = true` on open-air Bleed zones `522/548`, and `MapPosition` on `990`.
 - **P2 Polish:** Add Hard/Casual (`v150/250`) to all 4 `pbs/trainers_trials.txt` trainers; fix `MAGICALSEED` description (`pbs/items_fields.txt:20`: move `"theatrical"` to `SYNTHETICSEED`); fix `-Atk` natures on physical `CHANNELER,Mireille` (`TIMID` Gastly) & `FESTIVAL_TITANIA` (`BOLD` Play Rough Klefki); clean 3 `pbs/town_map.txt` redundant POIs (`L181,202,205`), stale `design/maps.json` segments (`255`, `920/924/925/926`), and decorative encounter-grass tag `2` on town maps `120/147/180`.
 
+---
+
+## PART I — End-to-End Playtest, `512×384` UI Ergonomics, Save/Game-Over & Reborn/Rejuv QoL Audit
+
+### I1. Additional P0 Save/Reload Bugs, Softlocks & Severe `512×384` UI Collisions
+1. **"Load last save" After ALL 25 Story Game Overs Fails to Reload State (`017_GameOver.rb:44-47, 162-176`):**
+   - `GameOver.trigger` and `PrismfallReloadScene#main` call `Game.load(save_data)` / `$game_temp.title_screen_calling = true` without calling **`SaveData.mark_values_as_unloaded`** — so Essentials v21.1 skips reloading already-loaded `SaveData::Value`s (leaving switches, vars, choices, party & position dirty in RAM!). Add `SaveData.mark_values_as_unloaded` at `L45` and `L171`.
+2. **Festival Level Cap Never Raises Between Rounds (`009_Festival.rb:350-352, 389-392`):**
+   - `record_result(true)` advances `state[:stage] += 1` without calling `unlock_cap_for(ruleset(nxt[:ruleset]))`, pinning the player at Lv 90/92/94/96 until they enter the next round underleveled and deliberately lose to raise the cap!
+3. **2 Autorun `Prismfall.checkpoint` Traps Softlock Saves Inside Locked Boss Rooms (`Map 952`, `Map 255`):**
+   - `952_meridian_plate_vault.yaml:24-75` and `255_cindervault_tap.yaml:35-127` call `Prismfall.checkpoint` as Command #1 inside `trigger: autorun` (directly violating `017_GameOver.rb:56-57`), trapping battered/underleveled saves in an inescapable zero-heal boss loop! Move checkpoints outside the autorun + add pre-boss heals.
+4. **`Endings.trigger` Never Saves Postgame State Before Credits + Marks `:END_GILDED_CHAIN` as `postgame? == true` (`018_Endings.rb:47-72`):**
+   - Call `Game.save if !no_postgame`, set `n[:postgame] = no_postgame ? false : id`, and add `SaveData.mark_values_as_unloaded` on the `elsif no_postgame` title return.
+5. **8 Built-Map Choices Map Cancel (`X`/`Esc`) to the Affirmative Option (`cancel: 1` Off-by-One):**
+   - `552_dyers_ford.yaml:230` (barge), `528_marram_down.yaml:28` (one-way sledge), `541_grey_saltings.yaml:218` (ring fight), `566_spinners_rise.yaml:70` (Ram Race), `525_deepwood_cocoonfall.yaml:812,833,854` (anchors), `143_saltmere_rooms.yaml:1907` → change `cancel: 1` → `cancel: 2` (1-indexed!).
+6. **4 Custom `512×384` UI Screens Clip or Overlap Text:**
+   - `009_FieldEffects_FieldNotes.rb:132,150,191-209`: `LIST_WIDTH=200` clips `"Dark Crystal Cavern"`, `"Battled here: N"` collides 50–85px into field title on `y=40`, Line 10 collides into page counter at `y=354`, and lacks `LEFT`/`RIGHT` page navigation.
+   - `019_LedgerScene.rb:96-114`: 6 long epitaphs clip past `h=72px` box into footer `y=358` (fix: `ROWS=6`, `box_y=234`, `h=114`).
+   - `017_GameOver.rb:100-107`: 4-line epitaphs (`GO_STAY_OUT`/`GO_WEATHER`) collide into Ledger count at `y=262` (use `pbSetSmallFont` + `lineheight=24`).
+   - `008_Trials_Board.rb:24-32` & `009_Trials_QuestLog.rb:21,96-97`: 45-char board items clip >512px & 27-char institution names overlap quest titles (use short `[:kingdom]` label).
+7. **Ruin Route Bugs (`012_Narrative_Data.rb:406-411`, `016_Ledger.rb:140-145`):**
+   - Register missing `:GO_R_SWEET_DREAMS` (`:ruin_exempt => true`); clamp `Resonance` to `<= -6` in `start_ruin_route` & `Resonance.set` so Harmony `+6` buff doesn't stay active on Ruin Route; add point-of-no-return confirmation + pre-branch checkpoint for `:ch15_look_back`.
+
+### I2. High-Impact Reborn/Rejuv QoL Upgrades & P1 Fixes
+- **Bag-HM / Field Tool QoL (`028_FieldMove_QoL.rb`) + Coast Packet:** Allow owning Badge + HM/TM (or Golden Tool) to use all 10 field moves (`Cut`, `Rock Smash`, `Flash`, `Strength`, `Surf`, `Fly`, `Rock Climb`, `Waterfall`, `Dive`, `Headbutt`) without wasting party moveslots; wire the documented Saltmere (`146`) ↔ Ebbmouth (`160`) ↔ Ferrow's (`100`) coast packet NPC (closing the 25-hour pre-Badge-8 Fly bottleneck).
+- **Player Options Menu (`027_Options_QoL.rb`):** Expose already-coded **Photosensitive Mode** (`$PokemonSystem.photosensitive`, also gating `003_Bridge_EBDX.rb:446` & `010_Bridge_VersusIntro.rb` strobes!), **Speed-Up / Turbo (`1×/2×/3×`)**, **Difficulty change**, **Exp. All toggle**, and **Autosave toggle**.
+- **Missing "Ties" Pause-Menu Screen + Menu Order Collision:** Add `PrismfallTiesScene` (Bonds / Factions / Resonance + exact numbers when `:OPEN_BOOK` is active — integrates cleanly with `Prismfall::Codex`!), and fix `Ledger` vs `Field Notes` both claiming `"order" => 45` (assign `43 Codex/Ties, 44 Quests, 45 Field Notes, 46 Ledger`).
+- **4 Live Dev-Text Leaks in Festival Highlights (`015_Festival_Draw.rb:84, 87, 104, 112`):** Replace raw `"(ISENMAR_EMBITTERED)"`, `":VOLCANIC cools to :ASHEN_WASTE"`, `"Marisol swears for a full caption box"`, and `"If KAITO_TESTIFIED"` with diegetic prose; collapse 7 sequential R16 popups into 1 summary + highlight picker.
+- **Trial Board Rank-4 Badge-Gate Spam (`005_Trials_Quests.rb:264-282`):** Track paid ranks per-rank so Badge-8 Elowen Rank 4 doesn't spam a popup on every board open for 6 gyms AND block Rank 5 rewards behind `break`.
+- **Missing Gauntlet & War-Theatre Heals:** Add `$player.heal_party` before Bout 1 in `Octave.run_gauntlet` & `Trials.gauntlet`, repeatable healers on `528`/`540`, a Bone-Carters' Camp (`930`) medic + post-Partner heal on `926`, a pre-K2 camp heal on `561`, and Gym Lobby heal/PC attendants (`130/150/170/190`).
+- **Other High-ROI UI/UX Fixes:**
+  - `010_Festival_BracketScene.rb:163-203`: Show live `fe.drawn(:FINAL)` (`Brann` if `VALEN_COLLAPSED`), widen `CENTER_W = 168`, fix dead border fill `L184-185`, add message on empty `exhibition_menu`.
+  - `019_LedgerScene.rb:126` & `009_Trials_QuestLog.rb:116`: Cache `@rows` outside the 60fps `loop`, add fade-in/out & `ensure` disposal, separate `:ruin_exempt` count (`23/23 (+0/2 Ruin)`).
+  - `109_dovetail.yaml:19-27`: Show visual sprite previews (`PLAYER_A.png`/`PLAYER_B.png`) during Style A/B pick instead of pitch-black screen; fix `litemode`+`Hard` hybrid in `020_Passwords.rb:35-37`.
+  - **Meridian Fellowship Card Mart Discount:** Wire the promised 10% `PokemonMartAdapter#getPrice` discount & global `:fellowship_off` activation.
+  - **Visual Polish:** Draw dark 2-row tray behind 18 badges on `007_TrainerCard.rb`; adjust `007_Bosses_UI.rb:101` EBDX pip offset for regular Hard-Warden databoxes; add `QUENT/VESPER/MARCHETTI/KROLL/SABLE/THISTLE` + `"NPC "` prefix support to `025_CharsetAliases.rb:36`; prevent player sprite reverting to Gen 3 Red/Leaf while fishing/cycling/surfing (`026_PlayerLooks.rb:41-46`); add `'·'` to `002_Font_Glyphs.rb`; fix `Map 522` double-Juno window (`010_JunoFollower.rb:27`); wire `secondferry` NG+ carryover (`018_Endings.rb` + `020_Passwords.rb`).
+
+
 
 
 
