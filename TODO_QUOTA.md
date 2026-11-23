@@ -16,13 +16,15 @@
 - [ ] `mapgen/build.py`: a post-paint BFS reachability check, and gate packaging on `export_tilesets_rxdata.py --check`.
 
 ## 2. Bosses and battle engine
-- [ ] Register the missing multi-bar bosses (Groudon `:GROUDON_UNDERSANDS` done 2026-11-22 with the Ch14 script): Loyal Three (Ch10), Giratina Altered → Origin (Ch15) plus the R1 Origin trial, Pecharunt (Ch18), Wyrmrest Reshiram on `:DRAGONS_DEN` (Ch19), Valen's Zygarde Complete (Ch21), Silvally's conduit bar (Ch21).
+- [ ] Register the missing multi-bar bosses (Groudon `:GROUDON_UNDERSANDS` and Giratina `:GIRATINA_DEPTHS` done with the Ch14/15 scripts): Loyal Three (Ch10), the R1 Origin trial (Ruin Route), Pecharunt (Ch18), Wyrmrest Reshiram on `:DRAGONS_DEN` (Ch19), Valen's Zygarde Complete (Ch21), Silvally's conduit bar (Ch21).
 - [ ] Arceus `:gym_order` field rotation on `:PRISM_ARENA` (and fix the `:prism_turn` bug).
 - [ ] Tag battles: one Mega per *trainer* (engine change, plus a harness check).
 - [ ] Groudon `:GROUDON_UNDERSANDS` balance at cap 67 with 13 badges (first capture: Precipice Blades after bar 1 swept a Lv 66 party; the capture had 12 badges, so some of the party disobeyed). Harness it like Kyogre.
 - [ ] Kyogre `:KYOGRE_ISENMAR` balance at cap 55 (`design/BALANCE.md` §9d; AI parties at Lv 54–55 lose).
 
 ## 3. Teams and hooks
+- [ ] Ch15 engine hooks: `pf_echo_follow` (a recorded-path follower shared by the War Convoy's sledges and Gym 14's crypt echo); K6's one-turn `:BLEED` overload (`battle.change_field`); map-level audio mute for the Hush (808); cutscene `CE-1` "AF 290, Through Her Eyes" (letterbox, sepia tone, Glassfall sweep).
+- [ ] Balance-check Giratina `:GIRATINA_DEPTHS` at cap 71 with 14 badges.
 - [ ] Partner teams: Redeemed Kestrel (Ch21) and Rook (Ch16 Casting Floor).
 - [ ] Ogerpon into Juno's J4 team when `OGERPON_TRUSTED` (a load hook).
 - [ ] Aurelia 824–826 `:WATER_SURFACE` overrides for Amaria and Titania.

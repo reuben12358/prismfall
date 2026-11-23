@@ -1637,8 +1637,8 @@ Ysolde, **double battle**. Badge 14 + TM30 Shadow Ball.
   is none.
 - The gravestone verses give the order. The aha: record your path past the candles with the echo, so the *echo* lights
   the last candle while you stand at the lectern (two candles are on opposite sides of a ghost wall).
-- **Reward:** Magical Seed ×2 (on Hollow Cathedral: +1 Sp. Def, the holder becomes part Ghost) + Spell Tag + **Morwen's
-  sealed letter** (story K6; Ysolde: "When he's ready. I don't think anyone is ever ready.").
+- **Reward:** Magical Seed ×2 (on Hollow Cathedral: +1 Sp. Def, the holder becomes part Ghost) + Spell Tag + the lectern text
+  (Morwen's prayer). **Morwen's sealed letter stays in the chapel for Ysolde to offer Kestrel after K6** (`story/34_SCRIPT_CH15.md` supersedes the earlier "letter as reward").
 
 **Gym 14 trainers (6):** Channeler ×3, Gentleman (revenant), Lady, Mourner-acolyte *(HOLLOW)*. Ghost trainers exist only in
 392. Lv 63–66.
