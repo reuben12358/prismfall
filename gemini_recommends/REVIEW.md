@@ -149,3 +149,10 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 ## 2026-11-21 audio v4.3 (WIRING_SPEC + CUTSCENE_AND_NEW_CAST_AUDIO) — **ADOPT; files in, wiring queued**
 - **Done:** the whole v4.3 CC0 pack (9 BGS, 6 ME, 58 SE including 36 voice blips) is in `audio/gemini_cc0/` with 73 manifest rows. `install_audio.py` installs 135 files cleanly. `design/AUDIO_SOUNDTRACK_PLAN.md` and `tools/audio/master_track.py` are refreshed to v4.3.
 - **Queued:** the 117-map BGM/BGS matrix via `design/MAP_AUDIO.yaml` → mapgen, the 67 trainer-type BGMs, the ME/SE hooks, the `VoiceTicker` in `014_Portraits.rb` (it must stay selftest-safe), and the cutscene audio matrix. These go to the audio agent and land with the cutscene P0 pass, so cues and scenes are tuned together.
+
+## 2026-11-22_bigjra-chapter-density-benchmark — **ADOPT the diagnosis and the per-chapter floor; systems mostly adopted**
+- Spot-checks hold: no route or gym trainers past Ch4, and `encounters_badgetiers.txt` stops at Badge 4 apart from 4 Badge-8 rows. This is the most useful structural audit so far.
+- The new `design/DENSITY_STANDARD.md` sets a per-chapter floor: 12–20 regular trainers, ≥4 story fights, ≥3 EventMons, 2–4 hangouts, 4–6 Slivers, ≥3 wired quests, badge overlays. **Claude writes Ch14+ to it** (a Density section in each script). Ch5–13 get retrofit passes. Retrofit trainers and maps are agent work, on quota. Story credits go to new chapters.
+- Adopted: Glassfall Slivers (100), the 6-step Trading Chain, the Mystery Egg, the 4 World Refresh Waves with overlays for Badges 5–18, and the Arcade floor passes.
+- Deferred: Imprint Relics. Crest clones would be a fourth buff system on top of Megas, Z-moves and fields.
+- Ordering: Wave 0 (Ch5 rescue) and Wave 1 (Codex, Slivers, the chain) go to the agents' Wednesday order. Wave 2's "scripts for Ch14–21" is Claude's ongoing story track.

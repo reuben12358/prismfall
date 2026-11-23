@@ -27,3 +27,4 @@ Source: `gemini_recommends/REVIEW.md`.
 - **Cutscene agent:** the P0 engine fixes from `gemini_recommends/2026-11-22_rejuv-v14-cutscene-cinematics-spec` (letterbox/bust lifecycle, input lock, fade/tint stacking) come before any new scene. The two-pillar laws are the style rule.
 - **Audio agent:** the v4.3 WIRING_SPEC: `design/MAP_AUDIO.yaml` → mapgen BGS, the trainer-type BGMs, the ME/SE hooks, and a selftest-safe `VoiceTicker` (014_Portraits.rb). Then the cutscene audio matrix.
 - **Codex/teams agent:** the class line on Codex cards (CODEX_SPEC), post-game rematch tables (STORY_REMATCHES), and gauntlets. G1 goes in the Ch14+ hub, not Ch13.
+- **Density (see `design/DENSITY_STANDARD.md`):** Wave 0, the Ch5 rescue (softlocks, the 5 Gala/Lift trainers, 16–18 Lock Road and Circuit trainers). Wave 1: Slivers (`Prismfall::Slivers` counter + exchange), the Trading Chain, the Mystery Egg, and badge overlays 5–9. Then retrofit Ch6–13 trainers to the floor.
