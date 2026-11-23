@@ -339,7 +339,7 @@ QUEST LOG: "Eighteen Roads" — South to Duneholt. Sahar Ostrand's well is dry.
 ## Transit: the Dry Tide (810) and the bone-carters' camp (930) → Duneholt
 - **The Dry Tide**: a dead salt-shore where the Glass-sea once came in. Trainer (Lv 62): a camel-driver.
 - **The bone-carters' camp (930, built)**: carts, a white bone-banner, a cook-fire. **Hangout, Zainab at the carters' fire** (from V135 >= 10).
-  - **`OS_CARTERS_DEAD`** (new; 07_ACT_IV "the bone-carters' elder", now Zainab): "There are dead in the steam-glass west of Duneholt our carts can't reach. The glass is too hot for wheels. You walk in the Glass. Bring them out to us. We don't care whose they were." Three remains markers in the Steamline's edge (the same map as Ch15's convoy; opens with it). The reward is the carters' **Spell Tag** and Zainab's spar (`SIDE_CARTER`, Lv 63: Runerigus / Cofagrigus / Mandibuzz / Palossand), and the Codex entry. *(The quest opens here and completes in Ch15, when the PC is in the Steamline.)*
+  - **`OS_CARTERS_DEAD`** (new; given by **Elder Ossa**, whose lines are already on 930: "We carry out the dead the armies leave... If you walk where we can't, bring them home. One tally-stick each."). Zainab adds: "There are dead in the steam-glass west of Duneholt. The glass is too hot for wheels. You walk in the Glass. We don't care whose they were." Three remains markers at the Steamline's edge (the same map as Ch15's convoy, and it opens with it). Each returned tally-stick goes on the Tally-wall. The reward is the carters' **Spell Tag**, Zainab's spar (`SIDE_CARTER`, Lv 63: Runerigus / Cofagrigus / Mandibuzz / Palossand) and the Codex entry. *(Opens here; completes in Ch15.)*
 
 ## Duneholt at the war's edge (200–209, 214; V135 == 10 → 11)
 ```
@@ -459,6 +459,6 @@ Only **930** is built. **[NEW]** = an event or map not in maps.json. V135 = **CH
 | 783 | Hiker | Dunstan | 63 | Krookodile, Flygon, Garganacl |
 | 783 | Deep Works Engineer *(Worker)* | Engineer Lisle | 64 | Magnezone, Excadrill, Duraludon (sun + Steel) |
 | **Gym 13** | Hiker ×2, Ruin Maniac, Worker, Gemcutter | (GYM_PUZZLES) | 59–62 | as GYM_PUZZLES |
-**Story/optional fights (new PBS):** `MERIDIAN_DIRECTORATE` "Pruitt" and "Vance" (Ch14 versions, Lv 62–63, a Mightyena/Arcanine and a Magnezone/Corviknight pair); `HOLLOW_THISTLE` partner version 14; `PROFESSOR_LARCH,Imelda,14` (M5); `LEADER_SAHAR,Sahar,14` (M7); `SIDE_LAMPRUNNER` Pip; `SIDE_CARTER` Zainab. **Boss:** `:GROUDON_UNDERSANDS` (TODO_QUOTA §2).
+**Story/optional fights (new PBS):** `MERIDIAN_DIRECTORATE` "Pruitt" and "Vance" (Ch14 versions, Lv 62–63, a Mightyena/Arcanine and a Magnezone/Corviknight pair); `HOLLOW_THISTLE` partner version 14; `PROFESSOR_LARCH,Imelda,14` (M5); `LEADER_SAHAR,Sahar,14` (M7); `SIDE_LAMPRUNNER` Pip; `SIDE_CARTER` Zainab. **Boss:** `:GROUDON_UNDERSANDS` (107_Boss_Groudon.rb).
 
 **Items owner:** LANCE MANIFESTS (Key Item), the GEODE BADGE (proposed), TM76, MEGA RING + AGGRONITE (`OS_RING_DAY`), Glassfall Slivers #1–5 of the Ch14 allotment, the Spell Tag (`OS_CARTERS_DEAD`), Hard Stone/Light Clay (relay). **Portrait requests (art, to Gemini):** Zainab Darzi; Thistle `happy`; Marchetti with the brace (`neutral` variant) if art time allows, otherwise text only.
