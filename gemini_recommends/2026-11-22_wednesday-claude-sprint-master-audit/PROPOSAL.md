@@ -174,3 +174,35 @@
    - Skip the 1.6s `POSE_SECONDS` input freeze on 1-frame generic trainers (`010_Bridge_VersusIntro.rb:540-546`); remove Arceus's duplicate Plate-shift message (`103_Boss_Arceus.rb:98`, `:form_message => ""`); clean 7 `ruby -wc` unused locals (`125:11`, `139:22`, `140:40-41`, `010:161`, `012_Sheet_Effects:270,353`).
    - **Add a post-paint within-map BFS reachability check to `mapgen/build.py`** (automatically prevents future `546`/`145`/`528`-class softlocks in <1s).
    - **Add 5 harness tests** (`tools/harness/run_all.rb` + `validate_fields.rb`): Arceus bar-break `:prism_turn` + `:prism_interval`, `calc_stats(nil, true)`, lethal `:on_entry`/seed/`Corrosive Mire` fainting, tag-partner slot-2 AI field plays, and `"never misses"` vs `:set => 100` lint.
+
+---
+
+## PART D — Universal 65-Edge Staged Field Transitions & Signposting (Creator-Requested)
+
+**Problem Verified (`001_Bridge_Config.rb:61-128`, `008_Bridge_Transitions.rb`, `art/battlebacks/transitions.py`):**
+- Prismfall has **65 total mid-battle transitions** (**46** `Field → Field` + **19** `Stage → Stage`), yet currently **only 1** (`:glass_quench`, `DESERT`/`FLOODED_DUNES` → `GLASS_DUNES`) uses `008_Bridge_Transitions.rb`'s in-room staged wave-front — AND its pre-sliced `rv00..rv15` PNGs were cut from the old procedural `fields_g` desert glass (causing a visual pop onto our new pure-Gemini `field_glass_dunes_hd.png` at `t = 1.5s`!).
+- All other 64 transitions (including `MEADOW`/`SILKWOOD`/`FLOWER_GARDEN` → `WILDFIRE`, `WILDFIRE` → `MEADOW`, `VOLCANIC` → `ASHEN_WASTE`, etc.) currently fall back to a flat 8-frame solid-color flash with zero pre-break visual warning on multi-hit counters (`uses >= 2`).
+
+### 1. Generalize `008_Bridge_Transitions.rb` to 8 Reusable Elemental Presets (Covers 65 / 65 Edges!)
+Instead of storing 65 separate pre-sliced `rv00..rv15` PNG folders, generate **reusable directional alpha-mask strips** (or mask the live target `field_<dst>_hd.png` `Bitmap` in memory at swap start using 4 geometric wave archetypes: radial ground-first spread, jagged fracture web, sweeping flood crest, prismatic distortion wipe). That keeps total disk footprint tiny (~4 MB) **and guarantees zero stale-art mismatch whenever any `_hd.png` backdrop is updated by Gemini**!
+
+| Preset | Visual Wave-Front Signature | Exact Edges Covered (All 46 Field→Field + 19 Stage→Stage) |
+|---|---|---|
+| **`:wildfire_sweep`** | Fiery orange-amber combustion front (`#FF781E → #B43C14`), ember rim, rising smoke/sparks | `MEADOW`/`SILKWOOD`/`FLOWER_GARDEN` → `WILDFIRE`, `WILDFIRE` S2→S1, `ASHEN_WASTE`/`CAVE`/`MOUNTAIN`/`SNOWY_MOUNTAIN` → `VOLCANIC`, `DRAGONS_DEN` S1→S2 (Wyrmfire), `CAVE`/`FAIRY_TALE` → `DRAGONS_DEN` |
+| **`:glass_quench`** | White-hot leading rim (`#FFFCEC`), amber cooling body, jagged glass veins, steam bursts *(re-read live `field_glass_dunes_hd.png`!)* | `DESERT`/`FLOODED_DUNES` → `GLASS_DUNES`, `GLASS_DUNES` S1⇄S2 (Mirror) |
+| **`:flood_surge`** | Foaming sapphire/teal crest wave (`#4CC8FF → #1A6CA8`), white spray/steam puffs | `DESERT`/`GLASS_DUNES` → `FLOODED_DUNES`, `BEACH`/`ASHEN_WASTE`/`CORROSIVE_MIRE`/`FROZEN_LAKE`/`UNDERWATER` → `WATER_SURFACE`, `WATER_SURFACE` → `UNDERWATER`, `WILDFIRE` S1→S2 (Embers), `VOLCANIC` → `ASHEN_WASTE` (heavy white steam quench) |
+| **`:frost_creep`** | Geometric ice-blue frost veins (`#D8F6FF → #6BC8FF`) spiderwebbing outward, frost motes | `WATER_SURFACE`/`FLOODED_DUNES` → `FROZEN_LAKE`, `MOUNTAIN` ⇄ `SNOWY_MOUNTAIN` |
+| **`:bloom_wave`** | Emerald-gold / rose-petal wave (`#C8FFAA` / `#FFE6F0`), drifting petals & sunbeams | `MEADOW` → `FLOWER_GARDEN`, `WILDFIRE`/`WASTELAND` → `MEADOW`, `DESERT` S1→S2 (Superbloom), `FLOWER_GARDEN` S1..S5, `STORMFRONT` → `RAINBOW`, `DRAGONS_DEN` → `FAIRY_TALE`, `HOLLOW_CATHEDRAL` S1→S2 (Consecrated) |
+| **`:quake_shatter`** | Jagged stone/earth fissures (`#D4B07A` / `#FF9628`), debris puffs, brief micro-shake | `FACTORY` ⇄ `SCRAPYARD`, `COLOSSEUM`/`CRYSTAL_CAVERN`/`DARK_CRYSTAL`/`DRAGONS_DEN` → `CAVE`, `CAVE` S1⇄S2, `COLOSSEUM` S1⇄S2, `GLASS_DUNES` → `ROCK`, `FAIRY_TALE` → `STEEL` |
+| **`:blight_miasma`** | Oozing toxic violet-chartreuse ripple (`#A855F7 → #4ADE80`) + rising acid-mist bubbles | `WATER_SURFACE` → `CORROSIVE_MIRE`, `CORROSIVE_MIRE`/`SCRAPYARD` → `WASTELAND`, `DESERT` S2→S1 |
+| **`:rift_eclipse`** | Prismatic crimson/violet/cyan glass-shard fracture wave + dim-out pulse | `GLASS_DUNES` → `BLEED`, `MINDSCAPE`/`HOLLOW_CATHEDRAL` → `INVERSE`, `MINDSCAPE` S1⇄S2, `CRYSTAL_CAVERN` ⇄ `DARK_CRYSTAL`, `NEON_GRID` S1⇄S2, `NEW_MOON` S1⇄S2⇄S3, `HOLLOW_CATHEDRAL` S2→S1 |
+
+### 2. Two High-Clarity In-Battle Visual Signposting Additions
+1. **Multi-Hit Pre-Break Warning Emitter (`uses - 1` hits reached):** Across the 36 multi-use transitions (`uses >= 2`), whenever a counter reaches **1 hit remaining** (e.g., `MEADOW` Hit 1 `"Sparks are catching... (1 more)"`, `FROZEN_LAKE` crack `"1 more"`, `CAVE` tremor `"1 more"`, `FACTORY` overload `"1 more"`), attach a lightweight temporary warning particle emitter matching the impending preset (drifting sparks, spreading frost motes, falling pebbles, rising steam, glitch shards) until the transition fires or resets.
+2. **Brief Field-Transform Toast Banner + CC0 SE:** Right as the staged reveal completes, slide a clean 1.2s non-blocking top banner (e.g. `"FIELD → WILDFIRE (Blaze)"` / `"STAGE 2 → CINDERGLASS"` with preset accent stripe) paired with the matching `Audio/SE/` effect (`Glass Quench`, `Field Shatter`, `Prism Arena Swell`).
+
+### 3. Paired Gemini Art Queue (Next Image-Quota Reset ~11:13 PM PST)
+Gemini will pair this with matching pure-Gemini battlebacks so every major cross-field transition stays visually locked:
+- **`WILDFIRE` + `WILDFIRE_EMBERS`** built directly from `field_meadow_hd.png`'s exact rolling Elowen horizon (seamless `MEADOW → WILDFIRE → EMBERS → MEADOW` cycle!).
+- **Creator-requested Art Studio reworks:** Bone-free Pokémon-world **Ossaria Desert 5-pack** (carved Relic/sandstone ruins & mesas, locked horizon) + fully rethought symmetrical vaulted **Hollow Cathedral 2-pack** (removing floating wood planks & stubby back arches) + remaining **`NEW_MOON_LAMPLIGHT` / `NEW_MOON_ABYSS`**.
+
