@@ -5,7 +5,7 @@
 
 ## Conventions
 As in the earlier scripts. **Portrait cast here:** Ysolde, Kestrel, Dask, Odessa, Marisol (letter only; no portrait here), Teo (if `TEO_SAVED`), Anja, Juno (Circular only), Morwen (**the echo**: `MORWEN`, translucent, `neutral`/`sad` only), Edda, Sahar (one line), and the PC (two authored lines; `\pf[PLAYER,…]`). **Plain:** the caravan-mother, the sled-runners, Dominar Hrothgar (no portrait yet; `[name: Dominar]`), the Ashkaar patrol, the Gale Post courier, the lantern-priests, the echoes (Aldous, the sweeping woman, the children, Vane Hall's servant), Ines's echo (singing only; she never speaks in this chapter), every trainer.
-**Gym 14** is a **double**: `Prismfall.gym_battle(pfm_gym(:LEADER_YSOLDE), double: true)` (GYM_PUZZLES; Core's gym table gets the double rule). **K6** is `TrainerBattle.start(:RIVAL_KESTREL, "Kestrel", 60 + slot)` (rival versioning: battle 6 × 10 + slot), on `:HOLLOW_CATHEDRAL` (the MapDefaults rows exist). **Giratina** is the new boss key `:GIRATINA_DEPTHS` (`plugins/Prismfall Bosses/108_Boss_Giratina.rb`).
+**Gym 14** is a **double**: `Prismfall.gym_battle(pfm_gym(:LEADER_YSOLDE), double: true)` (GYM_PUZZLES; Core's gym table gets the double rule). **K6** is `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 6, field: :HOLLOW_CATHEDRAL)` (versions 60–62 by starter slot), on `:HOLLOW_CATHEDRAL` (the MapDefaults rows exist). **Giratina** is the new boss key `:GIRATINA_DEPTHS` (`plugins/Prismfall Bosses/108_Boss_Giratina.rb`).
 **Counter:** V136 **CH15_STEP** (new; design/FLAGS.md): 0 Duneholt: Marisol's sledges · 1 the convoy through · 2 Vigil: the Siege news · 3 Gravenmoor: Dask and Ysolde · 4 Vane Hall walked · 5 Gym 14 won · 6 the Cathedral echo (S141) · 7 K6 (S142; V114 = 3) · 8 Morwen's Ring · 9 the prisoner · 10 the Barrow of the Wardens · 11 Giratina (S143) · 12 the Hush (chapter closed; V102 = 16).
 **State set here:** S141 CH15_ECHO_DONE, S142 CH15_K6_DONE, S143 CH15_GIRATINA_DONE, V114 KESTREL_STAGE = 3. Keys: `:war_convoy`, `:ch15_kestrel`, `:war_prisoner`, `:ch15_look_back`. Game over: `GO_ECHO`. Key Items: **MORWEN'S RING** (Edda), and the **TALLY-STICKS** ×3 handed in (`OS_CARTERS_DEAD`).
 
@@ -251,7 +251,7 @@ After the echo, before Kestrel turns: a faint singing from the loft. **Ines's ec
 [portrait: KESTREL, angry] Do you know what they called me in school? The Glassfall boy. My grandmother spat on her grave. Spat on it. I watched.
 [portrait: KESTREL, angry] And she was saving YOU.
 (The Gauntlet flares. The nave's candles gutter all at once.)
-BATTLE: TrainerBattle.start(:RIVAL_KESTREL, "Kestrel", 60 + slot) — `:HOLLOW_CATHEDRAL`; the Gauntlet overloads once (below).
+BATTLE: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 6, field: :HOLLOW_CATHEDRAL) — `:HOLLOW_CATHEDRAL`; the Gauntlet overloads once (below).
 (LOSE: the rival rule: the story continues, and Kestrel's line below swaps to "Stay down. Stay down. She'd have wanted you to stay down.")
 ```
 - **Mid-battle (on the turn his 4th Pokémon enters), the overload:** "Kestrel's Gauntlet is overloading!" The field flickers to `:BLEED` for one turn, then back to `:HOLLOW_CATHEDRAL` (`battle.change_field(:BLEED)` for 1 turn via a battle-script hook; the MapDefaults rows already note it). `[bubble: KESTREL, angry, shock]`
