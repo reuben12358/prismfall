@@ -42,7 +42,7 @@
 
 | Ch | Title | Key event 1 | Key event 2 | Consequence | Status |
 |---|---|---|---|---|---|
-| 14 | The Deep Seams | **Bastian's account** of AF 290 (men with gold suns at the dials) and the Ring-Day | **The badge case opened**: Voss has been tuning the PC (`:ch14_telemetry`), then the raid and Groudon | Engine calibration; Marchetti's turning; the aquifer refills | ● |
+| 14 | The Deep Seams | **Bastian's account** of AF 290 (men with gold suns at the dials) and the Ring-Day | **The badge case opened**: Voss has been tuning the PC (`:ch14_telemetry`), then the raid and Groudon | Engine calibration; Marchetti's turning; the aquifer refills | ● (`33_SCRIPT_CH14.md`) |
 |  | *(density note)* | Ch14 carries nine beats. Ring-Day and the opened badge case are the heart of it: **the optional War Convoy moves to early Ch15** (on the road out of Duneholt/Vigil), and Duneholt → Groudon plays as a crisp second half (Gemini review 2026-11-21). | | | |
 | 15 | The Hollow Cathedral | **The Cathedral echo**: Morwen shielding the five-year-old PC; Valen's order; Edda's night ferry | **K6**: Kestrel learns his mother ruined her name for the PC (`:ch15_kestrel`); Giratina | Morwen's Ring; Kestrel's arc; the Ruin Route door | ● |
 | 16 | Clear Air | **The Arbiter blueprints** ("Calibration subject: UNIMPRINTED-01") and **Zekrom freed** | **The Sump Purge begins, and Wenlow dies** (Interlude IV) | the Engine's first core is lost; Nadir's anger; Corvin | ● |
