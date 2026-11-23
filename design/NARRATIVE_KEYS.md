@@ -160,7 +160,7 @@ CHOICES = {
 | `:ch20_calla` | only if `choice(:ch16_rook) == :hold` OR `choice(:ch16_magnus) == :conscience` (Calla only defects if someone inside is already moving). |
 | `:sq_little_owl` | the quest's earlier steps need `bond(:ILSA) >= 3` by Ch18. `:reconciled` needs `bond(:ILSA) >= 4` at the final step, else the event records `:refused`. |
 | `:ch21_hand` | only if `flag(:VOSS_ACCEPTED)`. Without it, taking the hand is `GO_HIS_HAND`. |
-| `:ch21_reach_kestrel` `:reach` | `choice(:ch18_kestrel_ring) == :keep` (the PC still has the ring) OR `choice(:ch12_letter) != :burn` (the PC can quote Morwen). |
+| `:ch21_reach_kestrel` `:reach` | `flag(:CAN_REACH_KESTREL)`: `choice(:ch12_letter)` is `:keep` or `:send` (Morwen's own words; with `:send` he has them too) OR `bond(:KESTREL) >= 0`. The ring alone no longer counts: on the Fallen path the PC always has it. |
 | `:ch21_final` | `:return` `:keep` always; `:unmake` if `flag(:UNMAKE_OPEN)`; `:concord` if `flag(:CONCORD_OPEN)`; `:borrowed` if `flag(:BORROWED_OPEN)`. |
 
 ### 4.2 Effects (transcribe as `CHOICE_EFFECTS`, or apply by hand)

@@ -23,7 +23,7 @@ As in the earlier scripts. **Portrait cast here:** Larch, Brann, Sigrun, Quent, 
 
 **Chapter start:** V102 = 8, V129 = 0 (Ch7 close: Mirefen's chalked walls; Surf from the ferrymen). Larch travels with the PC this chapter (she left Lumen with the PC in Ch6 and has been "in the Infirmary library, being useful" through Ch7). Juno stays in Mirefen with Corvin until the Conclave.
 
-## Map 640 — Leechman's Walk (east out of Nadir, `:SWAMP` default)
+## Map 640 — Leechman's Walk (east out of Nadir, `:CORROSIVE_MIRE` default)
 ```
 ROAD SIGN: LEECHMAN'S WALK — ← Mirefen & the Sweet Market · → Lake Sallow & the Sulfur Road. Boards only. The boards know where the bottom is. You don't.
 (Plank walks on stilts over a black peat-marsh. Lanterns on poles, every tenth one lit. The air smells of eggs and pennies.)

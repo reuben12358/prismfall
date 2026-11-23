@@ -24,7 +24,10 @@ module Prismfall
     "Corvin" => "CORVIN",  "Brann" => "BRANN",    "Kaito" => "KAITO",     "Anja" => "ANJA",
     "Odessa" => "ODESSA",  "Ilsa" => "ILSA",      "Bastian" => "BASTIAN", "Ysolde" => "YSOLDE",
     "Magnus" => "MAGNUS",  "Nyx" => "NYX",        "Celestine" => "CELESTINE", "Sigrun" => "SIGRUN",
-    "Mourner" => "MOURNER"
+    "Mourner" => "MOURNER",
+    # Art Drop 13
+    "Vesper" => "VESPER", "Thistle" => "THISTLE", "Marchetti" => "MARCHETTI", "Helene" => "MARCHETTI",
+    "Quent" => "QUENT", "Percival" => "QUENT", "Kroll" => "KROLL", "Sabine" => "KROLL", "Sable" => "SABLE"
   }
 
   def self.charset_alias(name, event_name = nil)

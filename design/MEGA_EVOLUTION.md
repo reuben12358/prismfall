@@ -190,7 +190,7 @@ Sigrun, Scolipede for Tamsin's Festival team. Their stones would go after badge 
 ---------------------------------------------------------------------------------------------------
 ## 4. The Mega Ring beat: "The Ring-Day" (Chapter 14, Cragholm, after Gym 13)
 
-SPINE Rev 21 withdrew the Ch8 Ring-Day (7 badges); `story/22_SCRIPT_CH8.md` keeps the old scene, marked withdrawn.
+SPINE Rev 21 withdrew the Ch8 Ring-Day (7 badges); `story/archive/22_SCRIPT_CH8_withdrawn.md` keeps the old scene.
 
 - **When:** right after **Gym 13** (Bastian, Crystal Cavern, cap 63), **13 badges**, before Larch takes the badge case
   apart (`:ch14_telemetry`) and before Marchetti's raid. Unlock `badges >= 13 && !mega_ring`. The raid's admin battle

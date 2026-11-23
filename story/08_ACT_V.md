@@ -345,7 +345,7 @@ See Chapter 21.
   - "Your mother wilted for ten years because a god dropped its furniture on her."
   - "I'm not your enemy. I'm the only adult in this arena who'll say the true thing out loud: *we don't need it*."
 - **Between bars 2 and 3, if `KESTREL_FALLEN`:** Kestrel is revealed harnessed into the Engine as Voss's conduit, Gauntlet fused to the cradle and burning. **CHOICE `:ch21_reach_kestrel`:**
-  - **Reach** (needs Morwen's Ring or Morwen's words from a kept letter): the PC says her line, *"Be the kind that's nearest when it matters."* He comes back. The Gauntlet goes dark, and Kestrel tears himself loose.
+  - **Reach** (`CAN_REACH_KESTREL`: Morwen's letter kept or sent, or a bond that still holds): with the letter, the PC says Morwen's own words from it, *"Keep them small and safe and far. I'll carry the name."*, and then, *"She carried yours. Put it down."* Otherwise the PC holds up her ring and just says his name. He comes back. The Gauntlet goes dark, and Kestrel tears himself loose.
   - **Burn:** the PC's shard tears the Gauntlet off by force. He lives, scarred across the arm (Ruin −3).
   - **Let go:** he burns out as the Engine fires (`KESTREL_LOST`). This is the road to **The Empty Lighthouse**.
 - **On defeat:** the Engine doesn't stop. Voss drives his harness-spike into the cradle and becomes the conduit himself. "Then *I'll* hold it."

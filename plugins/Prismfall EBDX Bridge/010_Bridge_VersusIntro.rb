@@ -33,7 +33,12 @@ module PrismfallVS
     :LEADER_DORIAN  => "DORIAN",
     :LEADER_TAMSIN  => "TAMSIN",
     :LEADER_MARISOL => "MARISOL",
-    :HOLLOW_SABLE   => "KROLL",
+    :HOLLOW_SABLE   => "SABLE",      # her undercover Hollow-cloak bust: no Meridian-suit spoiler before Ch13
+    :MERIDIAN_KROLL => "KROLL",      # PBS name "Sabine"
+    :MERIDIAN_MARCHETTI => "MARCHETTI",  # PBS name "Helene"
+    :MERIDIAN_QUENT => "QUENT",      # PBS name "Percival"
+    :HOLLOW_THISTLE => "THISTLE",
+    :OCTAVE_VESPER  => "VESPER",
     :MERIDIAN_VOSS  => "VOSS",       # PBS name "Aurelian"
     :CHAMPION_VALEN => "VALEN",
     :HOLLOW_MOURNER => "MOURNER",
@@ -49,7 +54,9 @@ module PrismfallVS
     # Art Drops 11-12 (Gemini wiring proposal 2026-11-22)
     "CORVIN" => :violet, "KAITO" => :red, "ANJA" => :teal,
     "ODESSA" => :blue, "ILSA" => :rose, "BASTIAN" => :gold, "YSOLDE" => :violet, "MAGNUS" => :grey,
-    "NYX" => :violet, "SIGRUN" => :red
+    "NYX" => :violet, "SIGRUN" => :red,
+    # Art Drop 13
+    "VESPER" => :gold, "THISTLE" => :green, "QUENT" => :teal, "SABLE" => :teal
   }
   DEFAULT_THEME_FOE    = :violet
   DEFAULT_THEME_PLAYER = :teal
@@ -422,11 +429,13 @@ module PrismfallVS
         x = e.ease_in(e.prog(t, HOLD_END, HOLD_END + 0.22))
         @top.rect.y = (TOP_Y - (TOP_Y + BAND_H) * x).round
         @bot.rect.y = (BOT_Y + (Graphics.height - BOT_Y) * x).round
-        @s["V"].x = @v_home[0] - (220 * x).round
-        @s["S"].x = @s_home[0] + (220 * x).round
+        # creator-caught: at 220 px the letters stopped inside the frame at ~94% opacity for 0.24 s.
+        # They now travel 360 px (clear of 512) and fade with their own travel, not the vortex's.
+        @s["V"].x = @v_home[0] - (360 * x).round
+        @s["S"].x = @s_home[0] + (360 * x).round
         k = e.ease_in(e.prog(t, HOLD_END + 0.14, HOLD_END + 0.46))
         @s["hole"].zoom_x = @s["hole"].zoom_y = 5.4 * k
-        @s["V"].opacity = @s["S"].opacity = (255 * (1 - k)).round
+        @s["V"].opacity = @s["S"].opacity = (255 * (1 - x)).round
         @s["black"].opacity = (255 * e.prog(t, HOLD_END + 0.42, HOLD_END + 0.52)).round
       end
     end

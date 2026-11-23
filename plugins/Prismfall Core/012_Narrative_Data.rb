@@ -211,6 +211,10 @@ module Prismfall
       :KESTREL_FALLEN           => "choice(:ch18_kestrel_ring) != :give_now && choice(:ch15_kestrel) != :she_chose && (bond(:KESTREL) <= -4 || (bond(:KESTREL) <= 1 && (choice(:ch15_kestrel) == :sorry || standing(:MERIDIAN) >= 5)))",
       :KESTREL_REDEEMED         => "!flag(:KESTREL_FALLEN)",
       :KESTREL_LOST             => "flag(:KESTREL_FALLEN) && choice(:ch21_reach_kestrel) == :let_go",
+      # :reach is offered only with something to reach him with (Gemini audit 2026-11-22 §2.7): Morwen's own words
+      # (letter kept, or sent so he has them too), or a bond that still holds. The ring alone isn't enough: on the
+      # Fallen path the PC always still has it, so the old gate was always true.
+      :CAN_REACH_KESTREL        => "choice(:ch12_letter) == :keep || choice(:ch12_letter) == :send || bond(:KESTREL) >= 0",
       :KESTREL_YSOLDE_RECONCILED => "!flag(:KESTREL_FALLEN) && bond(:KESTREL) >= 5 && bond(:YSOLDE) >= 4",
       :KESTREL_BEARS            => "!flag(:KESTREL_FALLEN) && bond(:KESTREL) >= 8",
       :SIGRUN_BEARS             => "!flag(:KESTREL_BEARS) && bond(:SIGRUN) >= 6",

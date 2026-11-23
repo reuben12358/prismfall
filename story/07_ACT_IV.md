@@ -60,7 +60,7 @@ Somewhere under your ribs, something answers it.
 [name: Bastian] Is it? Can't hear a thing. Half-deaf, me.
 [portrait: BASTIAN, sad] ...I can feel it in the table, though. Holloway swore they don't sing. Thirty years at his anvil, and not one of them ever sang.
 (Larch has lowered her book.)
-[portrait: BASTIAN, worried] Well. It isn't sulking, anyway. Here: an iron heart to start you off. The Aron down the east seam wear these like warts.
+[portrait: BASTIAN, sad] Well. It isn't sulking, anyway. Here: an iron heart to start you off. The Aron down the east seam wear these like warts.
 (Received: MEGA RING. Received: AGGRONITE.)
 [if the Bag already held a Mega Stone] The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.
 [portrait: BASTIAN, happy] Wear it. If the Directorate comes down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.

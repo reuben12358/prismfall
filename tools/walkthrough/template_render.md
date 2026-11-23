@@ -1612,7 +1612,7 @@ _None placed for this chapter._
 
 ## Chapter 8 — "The Light Stone"
 
-*The Sulfur Road: Leechman's Walk (640), Lake Sallow (641, Surf) with Scaldwater (650) and Lantern Isle (658, optional), the Pyre Road (652) into Ashkaar; Cindervault (240–254) inside the Cinderhorn's caldera, the Cinderhorn (664–666) and Emberfall (668). Design only. Gym 7. Script: `story/22_SCRIPT_CH8.md` is **withdrawn** (it staged the Ring-Day here; SPINE Rev 21 moved it to Ch14).*
+*The Sulfur Road: Leechman's Walk (640), Lake Sallow (641, Surf) with Scaldwater (650) and Lantern Isle (658, optional), the Pyre Road (652) into Ashkaar; Cindervault (240–254) inside the Cinderhorn's caldera, the Cinderhorn (664–666) and Emberfall (668). Design only. Gym 7. Script: `story/29_SCRIPT_CH8.md` (the withdrawn Ring-Day draft is archived at `story/archive/22_SCRIPT_CH8_withdrawn.md`; SPINE Rev 21 moved the Ring-Day to Ch14).*
 
 ### Key events
 
