@@ -298,5 +298,28 @@ Gemini will pair this with matching pure-Gemini battlebacks so every major cross
   - `001_Prismfall_DebugMenu.rb:88`: Allow `field == :NONE` to actually pass `setBattleRule("field", :NONE)` instead of falling back to map default.
 - **P2 Cleanup & Leak Fixes:** Cache `:bitmap` particles in `002_Bridge_Core.rb:235-238` and dispose `puffbmp` in `008_Bridge_Transitions.rb:260`; guard remaining 3 unguarded `alias` sites (`009_FieldEffects_FieldNotes.rb:114`, `012_FieldEffects_TrainerPlays.rb:182,196`); fix duplicate status-cure text (`004:434`, `pbCureStatus(!msg)`); use `ab = check_ability || @ability_id` in `006:114`; gate `137_Field_Wildfire.rb:35` `burn_down` on `FieldEffects.current(battle) == :WILDFIRE`; wrap `004_Bridge_Vanilla.rb:80-111` `fade` sprite in `ensure`.
 
+---
+
+## PART H — Exhaustive PBS Data Integrity, RXDATA Encounter Tiles & Scaling Audit (758 Trainers / 117 Maps Verified)
+
+### H1. Additional P0 Dead Map Encounters & Unregistered Consumable/Story Items
+1. **Two Built Maps Have 100% Dead Wild/Fishing Tables (0 Matching Terrain Tiles in `Map*.rxdata`):**
+   - **`Map 608` (`The Lowlight (Shattered)`, `pbs/encounters.txt:966-979`):** Uses `Land,25` (12 species, sole base-table `LITWICK`/`DRIFLOON`/`PIKACHU`/`LUXIO`/`FLAAFFY`), but `Map608.rxdata` has **0 Grass/TallGrass terrain tiles** → change to `Cave,25` (step-anywhere ruin encounters) or paint Grass tiles.
+   - **`Map 570` (`Frostwick`, `pbs/encounters.txt:656-670`, `encounters_badgetiers.txt:233-238`):** Defines 5 fishing tables (incl. early `FEEBAS` & `VELUZA` explicitly advertised by `140_BadgeTier_Rumours.rb:68-69`), yet `Map570.rxdata` has **0 Water terrain tiles** (Ice-only) → paint open-channel Water (`tag 7`) tiles or relocate rod tables + rumours.
+2. **17 Custom Prismfall Items Missing From `pbs/items*.txt`:**
+   - `:FIZZBOLT` (`story_ch5.py:128`) deducts **₽60** for 2 unusable drinks that never enter `$bag`; `:OLDCHOWDER` (`story_early.py:218`, "Restores 20 HP") & `:BRAMBLETART` (`L371`, "Restores 30 HP") never enter `$bag`; `:MOTHERLOOMSSHUTTLE` (`gen_loomhouse.py:160-161`) isn't even recorded in `flags[:story_items]` on Gym win; plus 10 more story Key Items (`APPLEWOODLOG`, `BADGECASE`, `BARKMASK`, `BLEEDSHARD`, `DUSKPETAL`, `FELLOWSHIPCARD`, `LAMPTAPER`, `LEDGERKEY`, `PROMPTERSSCRIPT`, `SANDSHOVEL`).
+   - **Fix:** Add all healing foods (`Pocket = 2`, `FieldUse/BattleUse = OnPokemon`) and story Key Items (`Pocket = 8`, `Flags = KeyItem`) to `pbs/items_fields.txt` (or `pbs/items_story.txt`), and wire `gen_loomhouse.py:160-161` to `pfm_item`.
+
+### H2. Additional P1 Trainer Scaling Regressions, Dead Seeds & Self-Sabotaging Moves
+- **Hard-Mode Juno J1/J2 Starters Downgraded Below Standard (`tools/trainer_gen/gen.py:660-673`):** `starter_mon` overrides `ms` (Standard) without updating `mh` (Hard), downgrading 4 Hard Juno teams (`v110/111/112/122` — e.g. Lv 35 Hard Charmeleon loses `FLAMETHROWER`/`SLASH` for `SCRATCH`/`SMOKESCREEN`). Add `hard_moves=` (defaulting to `moves`) and regenerate `pbs/trainers.txt`.
+- **8 Festival Warden Teams Hold Dead Field Seeds on `:PRISM_ARENA` (`pbs/trainers.txt`):** `:PRISM_ARENA` accepts **only `:MAGICALSEED`**, yet `LEADER_ODESSA` (`92/192/292` Oricorio) and `LEADER_BRANN` (`96/196/296` Magmortar) hold `ELEMENTALSEED`, and `LEADER_KAITO` (`92/192` `UNBURDEN` Hawlucha) holds `SYNTHETICSEED` (breaking Unburden!). Swap to `MAGICALSEED` or `WHITEHERB`/`LIFEORB`/`HEAVYDUTYBOOTS`.
+- **12 Singles Sets Carry Doubles-Only Moves (Including Boss Healing Player!):**
+  - `HOLLOW_WICK` (`0/100`, `pbs/trainers.txt:10237,10275`) Gardevoir runs **`HEALPULSE`** in a 1v1 Singles battle (healing the player +50% HP!) → swap to `WISH`/`WILLOWISP`/`SHADOWBALL`.
+  - Singles Festival QF `LEADER_ODESSA` (`92/192/292`: `WIDEGUARD` Pelipper, `HELPINGHAND` Oricorio), `LEADER_CELESTINE` (`92/192`: `FOLLOWME` Togekiss), `ARCHSEER_DASK` (`92/292`: `QUASH` Sableye), and Gym 1 `JUGGLER,Florian` (`0/100/200`: `HELPINGHAND` Minccino).
+- **Dead `LEADER_TAMSIN` AI Support Rule (`012_FieldEffects_TrainerPlays.rb:80`):** Targets removed `:SILKTRAP` instead of Hard Vivillon's `:RAGEPOWDER`.
+- **Metadata Fixes (`maps_out/PBS/map_metadata_prismfall.txt`):** Add `BattleBack = city` on `180/181/608`, `Outdoor = true` on open-air Bleed zones `522/548`, and `MapPosition` on `990`.
+- **P2 Polish:** Add Hard/Casual (`v150/250`) to all 4 `pbs/trainers_trials.txt` trainers; fix `MAGICALSEED` description (`pbs/items_fields.txt:20`: move `"theatrical"` to `SYNTHETICSEED`); fix `-Atk` natures on physical `CHANNELER,Mireille` (`TIMID` Gastly) & `FESTIVAL_TITANIA` (`BOLD` Play Rough Klefki); clean 3 `pbs/town_map.txt` redundant POIs (`L181,202,205`), stale `design/maps.json` segments (`255`, `920/924/925/926`), and decorative encounter-grass tag `2` on town maps `120/147/180`.
+
+
 
 
