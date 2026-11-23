@@ -206,3 +206,65 @@ Gemini will pair this with matching pure-Gemini battlebacks so every major cross
 - **`WILDFIRE` + `WILDFIRE_EMBERS`** built directly from `field_meadow_hd.png`'s exact rolling Elowen horizon (seamless `MEADOW → WILDFIRE → EMBERS → MEADOW` cycle!).
 - **Creator-requested Art Studio reworks:** Bone-free Pokémon-world **Ossaria Desert 5-pack** (carved Relic/sandstone ruins & mesas, locked horizon) + fully rethought symmetrical vaulted **Hollow Cathedral 2-pack** (removing floating wood planks & stubby back arches) + remaining **`NEW_MOON_LAMPLIGHT` / `NEW_MOON_ABYSS`**.
 
+---
+
+## PART E — Core, Cutscenes, Puzzles, Tileset RXDATA & Save-Migration Audit (Verified Deduplicated Pass)
+
+### E1. Additional P0 Crashes, Softlocks & Cross-Save State Leaks
+1. **`Tilesets_prismfall.rxdata` Missing Tilesets `59`, `60`, `61` → Instant `NoMethodError` Crash Entering ALL 18 Builder 14–16 Maps (`Map 546/547`, `Map 180/181/185–193`, `Map 582`, `Map 608`, `Map 951/952`, `Map 255`):**
+   - Verified via Ruby `Marshal.load`: `maps_out/Data/Tilesets_prismfall.rxdata` only contains keys `[30, 33, 34, 40, 50..58]`, omitting `59` (Manor), `60` (Lumen/Gym 4), and `61` (Ch8 Cindervault Tap) defined in `maps_out/tilesets_prismfall.json`. Also missing `S325`, `S423`, `S424` and `V125`, `V129`, `V521` in `system_prismfall.txt` (permanently locking Gym 4 & Lumen blackout).
+   - **Fix:** Re-run `python3 -I mapgen/export_tilesets_rxdata.py` and gate packaging with `--check`.
+2. **Brinecut Mine 1F (`Map 544`): `pfm_cart_ride` Never Enables `$game_player.through = true` → 100% Progression Softlock (`011_Caves.rb:58-77`):**
+   - `"Ride cart"` has `through = true`, but `$game_player` has `through = false`, so the player stalls on the south side of the impassable row `y=21` chasm while the cart parks across the gap (blocking B1F ladder & Thistledown Lea exit). Branch `"D"` (`L76`) also skips `wait_moves(pl)` and Juno follower isn't resynced.
+   - **Fix:** Wrap `pfm_cart_ride` in `was = pl.through; begin; pl.through = true; ... ensure; pl.through = was; pl.opacity = 255; $game_temp.followers.put_followers_on_player if $game_temp.respond_to?(:followers); end`.
+3. **Tidelock Basin (`Map 171/172/173`, `:g3_basin`): Reset Teleports Player Into Solid Wall `(14, 21)` + Broken Cross-Map Reset/Skip (`007_PuzzleRooms.rb:160-168`):**
+   - On `Map 171`, `(14, 21)` is impassable tile `505` (`0x0f`), permanently trapping the player on `"Reset this room"`. Also resetting on `172/173` doesn't swap back to `171`, and `"Skip this room"` doesn't move the player to `173` / north pier.
+   - **Fix:** Change `:start => [14, 22, 8]` (passable on all 3 maps) and add map-swap `:proc` hooks to `:reset` (→ `171`) and `:solved` (→ `173`).
+4. **Rock Climb (`022_RockClimb.rb:30-42`) Never Sets `$game_player.through = true`:**
+   - Comment promises `"ignoring passability"` and `L40` resets `through = false`, yet `through = true` is never set before `pbMoveRoute($game_player, [FORWARD]*steps)` → fails in place or hangs `while $game_player.move_route_forcing` on every cliff. Wrap with `begin/ensure` + follower resync.
+5. **`monotype` Password Crashes Battle Start When Party Has 0 Matching-Type Mons (`020_Passwords.rb:173-178, 209-214`):**
+   - `monotype_blocks?` stays `false` out of battle, then marks the entire starter party `able? == false` once `in_battle = true`, crashing `pbStartBattleCore` on 15/18 types. Guard against emptying the entire party.
+6. **Cutscene `slowmo(0.0)` Permanently Deadlocks Cutscene & Skip (`012_Cinematic.rb:544-550`, `006_Scene.rb:201-204, 235-248`):**
+   - `dt *= @timescale` freezes `@time` forever on `0.0` (blocking Skip too), and skipping during `slowmo(0.2)` stretches fade 5×. Clamp `scale = [a[:scale].to_f, 0.01].max` (or track slowmo on wall-clock `dt`) and reset `@timescale = 1.0` in `begin_ending`.
+7. **Thistledown Manor (`Map 546`): `:d5_dining` Reset Permanently Loses Dropped Armchairs + Stale `PFManor.@zone` Across Save/Load (`007_PuzzleRooms.rb:177-184, 217-218, 255-258`):**
+   - Reset clears `S521/S522` but not self-switch `"A"` on `"Armchair d1"/"d2"` and omits `:proc => proc { PFManor.reset_room("d") }`. Clear `@zone` on save load / new game.
+8. **Circuit Gym (`Map 190–192`): `PFCircuit.power` Unconditional Recursion on `:alarm` (`SystemStackError`) + Stale Skip State (`007_PuzzleRooms.rb:386-390, 458-460`):**
+   - Only recurse when `!quiet`, and attach `:solved[:proc] = proc { PFCircuit.power(mid, true) }` to `:g4_190..192`.
+9. **Module-Level State Leaks Across Save/Title (`005_MapAtmosphere.rb:133-141`, `005_Puzzles_Hooks.rb:28-46`) + `Ledger.write` Silent `ENOENT` Before First Save (`016_Ledger.rb:61-65`):**
+   - Reset `@last_tone_map`/`@tone_was_set` (also in `pfm_dusk`/`pfm_day`) and `@prev_pos`/`@prev_map`/`@last_step` on save load/new game; `mkdir_p(File.dirname(path))` in `Ledger.write` before opening `.tmp`.
+
+### E2. Additional P1 Runtime & Edge-Case Fixes
+- **Partner Difficulty Remap Backward (`004_Difficulty.rb:126-137, 172-176`):** `pbLoadTrainer` remaps `pbRegisterPartner` (`MERIDIAN_QUENT` on `Map 255`, `RIVAL_JUNO` in Ch11), **buffing** your ally on Hard (`+100`) and **nerfing** your ally on Casual (`+200`). Wrap `pbRegisterPartner` with a `Difficulty.without_remap` guard.
+- **`Difficulty.apply_battle_rules` Bypasses Passwords (`004_Difficulty.rb:140-152`):** Use `setting(:trainer_bag_items)` / `setting(:force_set_style)` instead of `mode[...]`.
+- **`Festival.over_limit` Blocks `nocap` Players (`009_Festival.rb:266-269`):** Add `return [] if !Prismfall::LevelCap.enabled?`.
+- **`LevelCap.unlock_finale!` Leaves Cap Stuck at `96` (`005_LevelCap.rb:80-85`):** Clear `Prismfall.state.level_cap_override = nil`.
+- **Exp/Rare Candy Max Coerces `0` to `1` on Lv 100 / Eggs (`005_LevelCap.rb:192-215`):** Add `next 0 if ret <= 0` before clamping.
+- **`Endings.trigger` Doesn't End Active Interpreter Before `Scene_Credits` (`018_Endings.rb:64-70`):** Call `pbMapInterpreter.command_end if pbMapInterpreterRunning?` in the `if roll` branch too.
+- **`Map 181` Lowlight Junction Boxes (`Ev 41–44`) Clear on Flee/Loss:** Gate `pfm_lumen_box(i)` & Self-Switch `"A"` on `WildBattle.start` win/capture.
+- **`020_Passwords.rb` Unwired `:OPEN_BOOK`/`:SECOND_FERRY` + Traded Mons Bypass `:MONOTYPE` / Miss `:FULL_IVS` (`L43-54, 168-171`).**
+- **`014_Portraits.rb:174-206` Colored Speaker Prefix Drops Carry Face + `@scene_faces`/`@last_face` Leak Across Saves:** Allow trailing color codes after `:` in `label_of`, and reset both ivars on save load/title.
+- **`006_RivalStarters.rb:190-203` `swap_species` Wipes All 45 Hand-Crafted Rival Starter Movesets & Doesn't Reset `pkmn.ability = nil`.**
+- **P2 Disposal & F12 Guard Cleanup:** Guard unguarded aliases in `012_Cinematic_Techniques.rb:62,80,112`, `012_Sheet_Effects.rb:34,129,379`, `010_JunoFollower.rb:142,253`; wrap `Scene.fade_back`, `FaceBox#initialize`, `Bubble#initialize`, `003_Puzzles_Movement.rb` (`ride`/`shift`), and `PrismfallLumen.tag` in `ensure`; resync followers in `web_fall` & `pfm_tide_surge`; ignore erased events in `004_Puzzles_Tracers.rb:46`.
+
+---
+
+## PART F — Act I–II Script Continuity & Exhaustive Tag-Ally Roster Audit
+
+### F1. Act I–II Map / PBS / Script Contradictions to Clean Up
+1. **Circuit Gym (`Map 190–192`) Builds With ZERO Gym Trainers (`mapgen/layouts/circuit_gym.py:57-61, 151, 182, 226`):** `trainer_if` silently skips all 6 Gym 4 trainers because they have not been added to `pbs/trainers.txt` yet — add the 6 Circuit Gym trainers to `pbs/trainers.txt` and rebuild.
+2. **Ch5 Lowlight Veil (`story_ch5.py:197-206`, `Map 608`):** Drops Valen's crystal-hand reveal and uses a generic `Directorate Officer` instead of Director Marchetti's full scripted debut (`story/24_SCRIPT_CH5.md`) for two of the three testimony choices.
+3. **Ch4 Maps (`570..174`) Still Pre-Script Stubs** compared to the finalized `story/23_SCRIPT_CH4.md` — sync Ch4 dialogue/events when updating Builder 13/14.
+4. **`HOLLOW_TEO` v0 LoseText Spoils Unmasking Early (`pbs/trainers.txt:10139`):** `"Tell my sister— no. Don't tell her anything."` plays in Ch1 before Teo's identity twist; move/soften the v0 line.
+5. **Lore/Timeline Text Fixes:**
+   - **Meridian Spire Age 3-Way Contradiction (`story/24_SCRIPT_CH5.md`):** Line `344` (`"Ten years that Spire's been up there"`), Line `354` (`"Forty years I've fed the birds in the Spire's shadow"`), and Line `454` (`"Raised AF 271"` = 29 years ago) all conflict — pick ONE date (e.g. built AF 271 / 29 years ago, first Lattice switched on 10 years ago) and align `344`/`354`.
+   - **Morwen Exile Cause (`story/25_SCRIPT_CH6.md:371`):** Says Morwen died `"Of the wilting"` — align with canon (`01_WORLD_LORE` / `03_CAST` Hollow/Bleed fate).
+   - **Ch12 Juno Line Leak (`story/15_COMEDY.md:214`):** Gives Juno a puddle-reflection line in Ch12 when Juno is absent from Ch12's cast; reassign or shift to Ch11/Ch14.
+   - **Route 1 Double-Backslash Portrait Leak:** Fix `'\\pf[...]'` literal markup in Ferryman's Mile (`520`) script source, plus Saltmere harbour wilting phrasing & Ch7 Festival season wording.
+
+### F2. Exhaustive Tag-Battle Ally & Playable Roster (Art + Engine Wiring Sync)
+- **Protagonists (2):** `PLAYER_A`, `PLAYER_B` → Gemini upgrading to **16f animated fronts** + **LEFT-HAND B2W2 5f back-throws**.
+- **Core 7 Human Tag Allies (all 7 already have 16f fronts; Gemini building LEFT-HAND 5f `*_back.png`):** `RIVAL_JUNO` (+ `LEADER_JUNO`), `RIVAL_KESTREL`, `MERIDIAN_QUENT`, `LEADER_ANJA`, `LEADER_MARISOL`, `LEADER_ROOK`, `LEADER_SIGRUN`.
+- **Cameo / Interlude (+2):** `FESTIVAL_VENAM` (Ch7 tag — needs 16f front + LEFT-HAND back-throw) and `WENLOW` (Ch16 Interlude IV playable — needs LEFT-HAND back-throw); also `LEADER_ROWAN.png` missing front for Festival `v90/190/290`.
+- **Non-Human Tag Allies (2 — Engine Hook Needed):** `PARTNER_OGRE` (Ch10 Ogerpon — missing from `pbs/trainers.txt`, needs non-human partner sprite/trainer hook) and **Giratina** (Ruin Route R7).
+
+
