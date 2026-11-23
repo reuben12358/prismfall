@@ -267,4 +267,36 @@ Gemini will pair this with matching pure-Gemini battlebacks so every major cross
 - **Cameo / Interlude (+2):** `FESTIVAL_VENAM` (Ch7 tag — needs 16f front + LEFT-HAND back-throw) and `WENLOW` (Ch16 Interlude IV playable — needs LEFT-HAND back-throw); also `LEADER_ROWAN.png` missing front for Festival `v90/190/290`.
 - **Non-Human Tag Allies (2 — Engine Hook Needed):** `PARTNER_OGRE` (Ch10 Ogerpon — missing from `pbs/trainers.txt`, needs non-human partner sprite/trainer hook) and **Giratina** (Ruin Route R7).
 
+---
+
+## PART G — Field Effects (47 Files), Mega, Z-Power & EBDX Bridge Audit (100% Plugin Coverage Complete)
+
+### G1. Additional P0 Gameplay / Mechanics Bugs
+1. **`Gorilla Tactics` Z-Move Struggle Softlock (`plugins/Prismfall Z-Power/003_ZPower_Battle.rb:146-157`):**
+   - `on_unleash` rewrites `@lastMoveUsed`/`@movesUsed` to `base.id`, but never updates `user.effects[PBEffects::ChoiceBand]`. A `Gorilla Tactics` Pokémon holding a Z-Crystal gets permanently Choice-locked onto `z.id` (not in its moveset), forcing Struggle until switch-out.
+   - **Fix (`L156`):** `user.effects[PBEffects::ChoiceBand] = base.id if user.effects[PBEffects::ChoiceBand] == z.id`.
+2. **`Dancer` Copied Moves Silently Dropped by ALL Field Transitions (`004_FieldEffects_Engine.rb:756-771`, `006_FieldEffects_BattleHooks.rb:11-25, 88-92`):**
+   - `Oricorio`'s `Dancer` triggers via `pbUseMoveSimple` (bypassing `pbUseMove`), so `move_landed` sees the triggering move's `ctx[:landed] == true` and aborts — breaking `GRAND_STAGE` applause and all Dance field transitions (8 trainers in PBS!).
+   - **Fix (`006`):** Wrap `pbUseMoveSimple` with `FieldEffects.push_move_use` / `ensure pop_move_use`.
+3. **Two-Turn Moves Double-Count `uses >= 2` Field Transitions (`004_FieldEffects_Engine.rb:659`):**
+   - `next if rule[:strike_turn] && user.effects[PBEffects::TwoTurnAttack]` only guards `:DIVE` (`WATER_SURFACE`/`UNDERWATER`), allowing `Meteor Beam`, `Shadow Force`, `Solar Beam`, `Solar Blade`, and `Freeze Shock` to count BOTH charge turn and strike turn (1-turning 2-hit transitions on `DARK_CRYSTAL`, `HOLLOW_CATHEDRAL`, `FLOWER_GARDEN`, `DRAGONS_DEN`).
+   - **Fix (`004:659`):** `next if user.effects[PBEffects::TwoTurnAttack] && !rule[:on_charge]`.
+4. **`Seismic Toss` on `COLOSSEUM` Silently Gets 1.0× Instead of Documented 1.5× (`112_Field_Colosseum.rb:11, 30, 42`):**
+   - `FixedDamageMove` bypasses `pbCalcDamageMultipliers` (`:damage_mods`). Move `:SEISMICTOSS` out of `throws` into `:fixed_damage_mods => [{ :moves => [:SEISMICTOSS], :mult => 1.5, ... }]`.
+
+### G2. Additional P1 Balance, Asset & EBDX Fixes
+- **EBDX Double-Opponent Trainer Sprites Mis-Indexed (`007_Bridge_Placement.rb:67, 215-221`):** Iterates battler indices `1, 3` against `"trainer_#{i}"` instead of trainer indices `0, 1` (`each_with_index` fixes `"trainer_0"` never moving and `"trainer_1"` landing on slot 0!).
+- **Missing `dbl_field_glass_dunes_mirror_{ally,foe}.png` (`007_Bridge_Placement.rb:115-122, 208`):** Only 2 missing double-base PNGs out of 108 — causes battlers to snap off-base when `GLASS_DUNES` shifts to Stage 2 in doubles; regenerate via `art/battlebacks/doubles.py` (+ Stage-1 fallback).
+- **Casual K8 Kestrel (`v280–282`) Never Gets Morwen's Ring / Mega Scizor (`001_Mega_Config.rb:45`):** Casual K8 Scizor is Lv 85, below `:min_level => 90` → lower to `:min_level => 82`.
+- **Field Logic Edge Cases:**
+  - `112_Field_Colosseum.rb:20`: Gate `st[:kos]` accumulation on `FieldEffects.stage(battle) == 1` so Stage 2 KOs don't immediately re-trigger Frenzy on the turn it calms.
+  - `113_Field_FlowerGarden.rb:35`: Exclude `:FIRE` from Stage-5 `blades` cut-back so `Bitter Blade` can actually ignite `WILDFIRE`.
+  - `114_Field_FrozenLake.rb:64`: Add `|| FieldEffects.lingering?(battle)` so the shattering 3rd quake doesn't scatter Ice Spikes onto `WATER_SURFACE`.
+  - `107_Field_CorrosiveMire.rb:47-49`: Split `:BARBBARRAGE` (`!b.pbHasAnyStatus?`) from `:VENOSHOCK` (`!b.poisoned?`) to stop 4× (540 BP) double-dipping vs burn/para/sleep/freeze.
+  - `004_FieldEffects_Engine.rb:516-527`: Don't consume Field Seeds when `apply_battler_effect` returns `false`; `004:892`: honor Gen 9 `:COVERTCLOAK` on `:added_effects`.
+  - `010_FieldEffects_Extensions.rb:100-112`: Let activated `Flower Gift` (`FLOWER_GARDEN` S4–5) boost allies in Doubles too.
+  - `001_Prismfall_DebugMenu.rb:88`: Allow `field == :NONE` to actually pass `setBattleRule("field", :NONE)` instead of falling back to map default.
+- **P2 Cleanup & Leak Fixes:** Cache `:bitmap` particles in `002_Bridge_Core.rb:235-238` and dispose `puffbmp` in `008_Bridge_Transitions.rb:260`; guard remaining 3 unguarded `alias` sites (`009_FieldEffects_FieldNotes.rb:114`, `012_FieldEffects_TrainerPlays.rb:182,196`); fix duplicate status-cure text (`004:434`, `pbCureStatus(!msg)`); use `ab = check_ability || @ability_id` in `006:114`; gate `137_Field_Wildfire.rb:35` `burn_down` on `FieldEffects.current(battle) == :WILDFIRE`; wrap `004_Bridge_Vanilla.rb:80-111` `fade` sprite in `ensure`.
+
+
 
