@@ -19,6 +19,7 @@
 - [ ] Register the missing multi-bar bosses (Groudon `:GROUDON_UNDERSANDS` done 2026-11-22 with the Ch14 script): Loyal Three (Ch10), Giratina Altered → Origin (Ch15) plus the R1 Origin trial, Pecharunt (Ch18), Wyrmrest Reshiram on `:DRAGONS_DEN` (Ch19), Valen's Zygarde Complete (Ch21), Silvally's conduit bar (Ch21).
 - [ ] Arceus `:gym_order` field rotation on `:PRISM_ARENA` (and fix the `:prism_turn` bug).
 - [ ] Tag battles: one Mega per *trainer* (engine change, plus a harness check).
+- [ ] Groudon `:GROUDON_UNDERSANDS` balance at cap 67 with 13 badges (first capture: Precipice Blades after bar 1 swept a Lv 66 party; the capture had 12 badges, so some of the party disobeyed). Harness it like Kyogre.
 - [ ] Kyogre `:KYOGRE_ISENMAR` balance at cap 55 (`design/BALANCE.md` §9d; AI parties at Lv 54–55 lose).
 
 ## 3. Teams and hooks
@@ -44,7 +45,8 @@
 
 ## 7. Captures and GIFs
 - [ ] Ch14+ key-events GIFs need built maps. Until the maps exist, chapter GIFs use the cast/VS/backdrop harness.
-- [x] Drop 13 villain VS GIFs re-shot with class plates (`cast/villains_1..2.gif`). - [ ] Re-shoot older Warden VS GIFs (`docs/battle_captures/cast/wardens_*.gif`) so they show the new two-line class plates.
+- [x] Drop 13 villain VS GIFs re-shot with class plates (`cast/villains_1..2.gif`).
+- [ ] Re-shoot older Warden VS GIFs (`docs/battle_captures/cast/wardens_*.gif`) so they show the new two-line class plates.
 
 ---
 *Done items stay ticked for a week, then get cleared. Started 2026-11-22. This file replaces the old `design/WED_SPRINT_QUEUE.md`, which now just points here.*

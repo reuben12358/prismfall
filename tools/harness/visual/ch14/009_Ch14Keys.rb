@@ -58,7 +58,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch14")
       Prismfall.record_starter(:SCEPTILE) rescue nil
       self.every = (ENV["CK_EVERY"] || 4).to_i
       $player.party = Ch14Cap.party
-      12.times { |i| $player.badges[i] = true }
+      13.times { |i| $player.badges[i] = true }   # cap 67 after Gym 13 (12 made a Lv 66 party disobey)
       segs = (ENV["CK_SEGS"] || "ABCDEF").upcase
 
       if segs.include?("A")
@@ -104,7 +104,6 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch14")
                        "Thistle: I know where a thread will fall. This one falls here.",
                        "Marchetti: You're not under arrest. You're under — no. I'm not saying 'protection' again. Fight me or step aside."])
         end
-        $PokemonGlobal.mega_rings = true rescue nil
         $bag.add(:MEGARING) rescue nil
         DemoRun.battle("ch14_D_marchetti", Ch14Cap.party, turns: (ENV["CK_DT"] || 8).to_i) do
           setBattleRule("field", :DARK_CRYSTAL); setBattleRule("canLose")
