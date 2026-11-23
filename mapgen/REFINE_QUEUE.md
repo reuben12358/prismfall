@@ -1,5 +1,7 @@
 # Map refinement queue (pass 2)
 
+*Tracked in [`../TODO_QUOTA.md`](../TODO_QUOTA.md) §1 too, alongside Gemini's pass 3.*
+
 Maps Claude has built (pass 1) that still need Claude's own refinement pass (pass 2) before Gemini's pass 3.
 Pass 2 runs only on plan quota, never on usage credits (design/MAPGEN.md, top). Oldest first.
 

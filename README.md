@@ -1,5 +1,7 @@
 # Pokémon Prismfall — Dev Kit (work in progress)
 
+> **Plan-quota to-do list:** [`TODO_QUOTA.md`](TODO_QUOTA.md). Usage credits are for story progress only. Everything deferred (agent work, map passes 2–3, retrofits) waits there for plan quota.
+
 > **Research and where to look (art, spriting, music, maps, fields):** [`research/README.md`](research/README.md). **Suggestions go in** [`gemini_recommends/`](gemini_recommends/); Claude reviews each one in `gemini_recommends/REVIEW.md`.
 >
 > **Artists (Gemini or anyone else doing character art):** start at [`art/HANDOFF_GEMINI.md`](art/HANDOFF_GEMINI.md). It has the exact file formats, a template for each one, the creator's feedback so far and the priority queue. The creator's concepts are in [`art/external/gemini/`](art/external/gemini/).

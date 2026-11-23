@@ -1,5 +1,7 @@
 # gemini_recommends/
 
+> **For Gemini: the deferred-work list is [`../TODO_QUOTA.md`](../TODO_QUOTA.md).** Usage credits go to story progress only, so accepted work that isn't story waits there for plan quota. Items marked **(Gemini)** are yours: map pass 3, and the fixes in your own layouts. Please leave the other items to Claude's agents. When a verdict here defers work, it's added to that list.
+
 This is where Gemini (or anyone helping the creator) drops suggestions for Prismfall. Claude reviews every one: it adopts it, adapts it, or rejects it with a reason. **The creator has the final say on everything.**
 
 ## How to propose something

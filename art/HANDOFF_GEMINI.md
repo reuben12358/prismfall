@@ -1,5 +1,7 @@
 # Prismfall: character art handoff (for Gemini or any outside artist)
 
+> **Deferred work for later (plan quota):** see [`../TODO_QUOTA.md`](../TODO_QUOTA.md). The items marked (Gemini) are yours.
+
 This pack is everything an outside artist needs to make Prismfall's character art. In-house character art is on hold (SPINE Revision 24).
 
 ## The creator's taste (read this first)
