@@ -153,7 +153,14 @@ Core writes these from NARRATIVE_KEYS only if an event page condition needs one.
 | S267 | PG_GAUNTLET_OPEN | Warden's Gauntlet open |
 | S268 | PG_DISTORTION_OPEN | Distortion Core (910) open |
 | S269 | PG_CONCORD_ZERO | Quent's post-game arc started |
-| S270–S300 | (reserved) | |
+| S270 | PG_LEGENDS_BOARD_OPEN | Larch's Registry open (post-game legendary network; `story/41_SCRIPT_POSTGAME.md`) |
+| S271–S278 | PG_T1_* | Tier 1 clears: Meloetta, Ogerpon, Pecharunt, Regis, Lakes, Type: Null, Kubfu, Roamers |
+| S279 | PG_TIER2_RIFTS_OPEN | ≥ 4 Tier-1 clears + S268 |
+| S280–S284 | PG_T2_* | Tier 2 clears: UBs, Tapus, Ruin Quartet, Paradox, Calyrex |
+| S285 | PG_TIER3_APEX_OPEN | Tier-2 keystones + S267 |
+| S286–S293 | PG_T3_* | Tier 3 apex captures |
+| S294 | PG_ARCEUS_CONVERGENCE_DONE | The 18-Plate Convergence (non-Ruin endings only) |
+| S295–S300 | (reserved) | |
 
 ---
 
@@ -217,6 +224,7 @@ From the V122–V140 block reserved for per-chapter scene counters. Events page 
 | V140 | CH19_STEP | 0 = the Truce Road · 1 = Wyrmrest's gate · 2 = "Weighed" · 3 = the oath (S153) · 4 = the word from the front, the night flight · 5 = the Dry Tide at dawn (`:war_climax`) · 6 = the lines and the partner battle · 7 = the beam clash (WAR-1; S154 if a legend fought) · 8 = the truce · 9 = the Dominar (`:ch19_dominar`), the armistice (`:war_terms`) · 10 = Wyrmrest again (Reshiram on `:neither`; S154) · 11 = Gym 18 won · 12 = the Rainbow Scar and the Pilgrim Road · 13 = Crownhaven's gate (chapter closed; V102 = 20) (`story/38_SCRIPT_CH19.md`) |
 | V141 | CH20_STEP | (the Festival day itself is `Prismfall::Festival::Draw.day`) 0 = Day 0 arrival · 1 = the draw (`:ch20_colors`) · 2 = Day 1 the ceremony and the vision (S156) · 3 = Day 2 R16 · 4 = the garden court · 5 = Day 3 exhibitions and Okoro (`:ch20_envoy`) · 6 = Day 4 QF · 7 = Day 5 Corvin · 8 = the Night of Masques (S157) · 9 = Calla (`:ch20_calla`) · 10 = Valen's audience (`:ch20_audience`; S158) · 11 = Little Owl · 12 = Interlude V (V119 5 → 0) · 13 = Day 6 SF (K8; V114 = 5) · 14 = Morwen's letter · 15 = the eve of the Final (chapter closed; V102 = 21) (`story/39_SCRIPT_CH20.md`) |
 | V142 | CH21_STEP | 0 = dawn · 1 = the Final won · 2 = the Coronation (`:ch21_crown`) · 3 = the Hijack (`:ch21_hand`) · 4 = the allies move · 5 = the tag battle · 6 = the hijacker beaten (`:ch21_reach_kestrel` between bars) · 7 = Arceus descends (`:ch21_spare_voss`) · 8 = Valen holds the Ring · 9 = the True Finale won (S159) · 10 = Valen's death · 11 = Arceus speaks (`:ch21_final`) · 12 = the ending runs (`story/40_SCRIPT_CH21.md`) |
+| V143 | PG_STEP | 0 = the morning after · 1 = the Registry opens (S270) · 2 = the lighthouse (Hesper) · 3 = Valen's memorial (Zygarde) · 4 = the Spire and the Gauntlet · 5 = Concord Zero begins (S269) (`story/41_SCRIPT_POSTGAME.md`) |
 | V128 | SWEETROT_TAKEN | 0–3: Sweetrot offers accepted in Ch7 (the third acceptance is GO_SWEET_TOOTH; NARRATIVE_KEYS §10). Event state, not a choice |
 
 Existing IDs these scripts set: S111 CH4_K2_DONE, S112 CH4_TEO_MET (the night), V108 EBB_STATE (1 stuttering from Ch4 arrival, 2 during the night, back to 1), V114 KESTREL_STAGE = 1 (K2), S113 CH5_GALA_DONE, S114 CH5_SHATTER, S115 CH5_MANDATE, V104 LOWLIGHT_STATE = 1, V119 INTERLUDE_ACTIVE = 1 then 0, S162 EDDA_SMUGGLER (Interlude I), S164 DEX_SHRINE (from Act II), S116 CH6_OSSUARY_DONE, S117 CH6_K3_DONE, S118 CH7_J2_DONE, S119 CH7_WICK_DONE. No new switches: choices stay in Core (`:ch4_kestrel_mourner`, `:ch4_teo`, `:ch5_lowlight_testimony`), and one-off scenes use self switches.

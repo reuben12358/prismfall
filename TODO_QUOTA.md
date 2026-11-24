@@ -50,6 +50,9 @@
 - [ ] **Retrofit Ch6–13** to the per-chapter floor (12–20 trainers, ≥3 EventMons, hangouts, Slivers).
 - [ ] **Build from each new script's "Density" section** (Ch14 onward): the PBS trainer blocks in 3 versions, EventMons and hangouts.
 
+## 5b. Post-game build (`story/41_SCRIPT_POSTGAME.md`)
+- [ ] The `:POSTGAME` Trials category and the Registry board; the Tier 1 cards first (the T1-1 … T1-8 boss registrations with `:catch => :last_bar`; Gemini Part B.3 with the script's continuity fixes); Hesper's lighthouse scene; the Zygarde memorial; the Gauntlet's empty pedestals; the Concord Zero sub-basement.
+
 ## 6. Cutscenes, audio and Codex
 - [ ] Cutscene P0 engine fixes (letterbox and bust lifecycle, input lock, fade/tint stacking). The two-pillar laws are the style rule. Rewriting existing scenes needs Reuben's sign-off, one scene at a time.
 - [ ] Audio v4.3 wiring: `design/MAP_AUDIO.yaml` → mapgen BGS, the 67 trainer-type BGMs, the ME/SE hooks, a selftest-safe `VoiceTicker`, then the cutscene audio matrix.
