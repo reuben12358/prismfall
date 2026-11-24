@@ -24,6 +24,7 @@
 
 ## 3. Teams and hooks
 - [ ] Ch15 engine hooks: `pf_echo_follow` (a recorded-path follower shared by the War Convoy's sledges and Gym 14's crypt echo); K6's one-turn `:BLEED` overload (`battle.change_field`); map-level audio mute for the Hush (808); cutscene `CE-1` "AF 290, Through Her Eyes" (letterbox, sepia tone, Glassfall sweep).
+- [ ] Pattern across the Ch14–16 key-event captures: Groudon, Giratina and Zekrom each swept a cap-level AI-played party after their first bar. Check whether the post-break buffs stack too hard for bosses, or whether the demo AI just never switches. Run the Kyogre-style harness on all three.
 - [ ] Balance-check Giratina `:GIRATINA_DEPTHS` at cap 71 with 14 badges. In the first capture, after bar 1 the INVERSE field's "The Reverse World answers the wild Giratina's call!" fired every turn, and a Lv 70 party never reached the Origin bar. Check that hook vs bosses.
 - [ ] Partner teams: Redeemed Kestrel (Ch21). (Rook's Ch16 partner `[LEADER_ROOK,Rook,16]` is done.)
 - [ ] Ch16 engine pieces: Wenlow's interlude charset and loadout (V119 = 4); the `GO_OVERTIME` timed prompts (3 s each, defaulting to Go); the night-shift foreman patrols on 403 (reuse the Gym 16 sight cones).
