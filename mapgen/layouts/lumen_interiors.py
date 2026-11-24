@@ -71,9 +71,13 @@ def build_582():
     m = room(17, 13, 'Y', 582)
     m.box(1, 3, 15, 11); m.box(7, 12, 9, 12)
     m.plan_cliffs(rows=3)
+    # Forged brass security checkpoint railing & bollards along y=8 (replacing yellow lm_bars_*)
     for x in range(1, 16):
-        if x not in (8,): m.over.append((1, x, 8, P1('lm_bars_m' if x % 4 else 'lm_bars_l')))
-    m.keep_clear |= {(x, 8) for x in range(1, 16)} | {(8, y) for y in range(6, 12)}
+        if x == 8:
+            continue
+        t = 'lm_bollard' if x in (1, 7, 9, 15) else 'lm_railing_w' if x in (2, 10) else 'lm_railing_e' if x in (6, 14) else 'lm_railing_m'
+        m.over.append((1, x, 8, P1(t)))
+    m.keep_clear |= {(x, 8) for x in range(1, 16)} | {(8, y) for y in range(5, 13)} | {(3, 5), (3, 6), (12, 5), (12, 6), (6, 9), (6, 10), (7, 9)}
     scan = [N('Meridian Security', "Lumen West Gate. Hand on the plate, please. Tint check. It's the anniversary; we're being thorough."),
             "(Juno puts her hand on the plate. A chime. The bar glows green.)",
             N('Meridian Security', "Meadow tint, Verdance. Welcome."),
@@ -96,15 +100,36 @@ def build_582():
                 page([N('Meridian Security', "Enjoy Lumen. Enjoy the light. It's free.")], SPR['GUARD'], 'down', cond=V(3))), 6, 9),
           at(sign('Gate board', "LUMEN WEST GATE. THE ARC-LAMP MILE: ONE HUNDRED LAMPS. LIGHT FOR EVERYONE.", post=False), 3, 5),
           at(sign('Brass tube', "A brass speaking tube, polished by a lot of nervous hands.", post=False), 12, 5)]
-    m.put('lm_counter_l', 5, 9) if False else None
     for x, n in ((4, 'l'), (5, 'm'), (11, 'm'), (12, 'r')): m.over.append((1, x, 10, P1('lm_counter_' + n)))
-    m.over.append((1, 9, 9, P1('lm_holo') if False else P1('lm_lamp_on')))
-    on_faces(m, 'lm_poster0', [(5, 4), (11, 4)]); hang(m, 'lm_banner', 8, 3)
+    m.over.append((1, 9, 9, P1('lm_lamp_on')))
+    # Grand civic north bulkhead: centered Meridian banner, security telemetry monitors, alarms, & anniversary posters
+    hang(m, 'lm_banner', 8, 3)
+    hang(m, 'lm_monitors', 2, 3); hang(m, 'lm_monitors', 13, 3)
+    on_faces(m, 'lm_alarm_on', [(4, 4), (12, 4)])
+    on_faces(m, 'lm_poster0', [(5, 4), (11, 4)])
+    on_faces(m, 'lm_poster2', [(6, 4), (10, 4)])
     m.keep_clear |= {(1, 11), (2, 11), (1, 10)}
-    for name, x, y in (('lm_plant', 1, 9), ('lm_plant', 15, 9), ('lm_bench', 3, 11), ('lm_bench', 13, 11), ('lm_pillar', 1, 5), ('lm_pillar', 15, 5)):
+    for name, x, y in (
+        ('lm_pillar', 1, 5), ('lm_pillar', 15, 5),
+        ('lm_case', 5, 5), ('lm_case', 10, 5),
+        ('lm_plant', 2, 6), ('lm_plant', 14, 6),
+        ('lm_bench', 3, 11), ('lm_bench', 13, 11),
+    ):
         put_if(m, name, x, y)
     m.paint()
-    write(m, 582, 'Lumen West Gate', 180, '582_lumen_west_gate.yaml', bgm='Cedolan City')
+    # Clean emerald-and-cream checkerboard marble floor (strip noisy Y_f3 horizontal streaks)
+    y_f0, y_f2, y_f3 = P1('Y_f0'), P1('Y_f2'), P1('Y_f3')
+    for yy in range(m.H):
+        for xx in range(m.W):
+            if m.L[0, yy, xx] == y_f3:
+                m.L[0, yy, xx] = y_f2 if ((xx + yy) & 1) else y_f0
+    # Ceremonial crimson-and-brass arrival carpet runner from exit (8,12) through Scanner (8,9) & checkpoint (8,8) to north hall
+    for yy in range(5, 13):
+        for xx in (7, 8, 9):
+            part = ('n' if yy == 5 else 's' if yy == 12 else '') + ('w' if xx == 7 else 'e' if xx == 9 else '')
+            m.L[0, yy, xx] = P1('lm_carpet_' + (part or 'c'))
+    write(m, 582, 'Lumen West Gate', 180, '582_lumen_west_gate.yaml', bgm='Cedolan City',
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True})
 
 
 # ============================================================================================ 185 Meridian Spire - Lobby

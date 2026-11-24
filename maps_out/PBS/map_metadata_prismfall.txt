@@ -291,14 +291,17 @@ MapPosition = 0,16,16
 [190]   # Circuit Gym - Switchroom
 Name = Circuit Gym
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [191]   # Circuit Gym - Breadboard Hall
 Name = Circuit Gym
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [192]   # Circuit Gym - Live Wire Hall
 Name = Circuit Gym
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [193]   # Circuit Gym - Core
 Name = Circuit Gym
@@ -423,6 +426,7 @@ MapPosition = 0,6,17
 Name = Brinecut Mine
 MapPosition = 0,8,16
 BattleBack = cave1
+SnapEdges = true
 #-------------------------------
 [545]   # Brinecut Mine B1F
 Name = Brinecut Mine
@@ -482,6 +486,7 @@ Weather = Snow,20
 Name = Gullcry Caves
 MapPosition = 0,2,8
 BattleBack = cave1
+SnapEdges = true
 #-------------------------------
 [566]   # Spinners' Rise
 Name = Spinners' Rise
@@ -563,6 +568,7 @@ MapPosition = 0,7,11
 [582]   # Lumen West Gate
 Name = Lumen West Gate
 MapPosition = 0,14,14
+SnapEdges = true
 #-------------------------------
 [608]   # The Lowlight (Shattered)
 Name = The Lowlight

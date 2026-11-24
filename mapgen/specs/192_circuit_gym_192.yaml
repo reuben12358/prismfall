@@ -8,6 +8,7 @@ field: NEON_GRID
 metadata:
   Name: Circuit Gym
   MapPosition: [0, 16, 16]
+  SnapEdges: true
 tone: [-10, -14, 6, 20]
 raw: data/raw/192.npy
 tileset: 60
@@ -537,3 +538,30 @@ events:
   post: false
   text: LIVE WIRE HALL. STRIPS CARRY CURRENT WHEN THE BOARD IS POWERED. ROTOM IS NOT A TOY. (ROTOM IS A WIRE.)
   at: [9, 5]
+- type: trainer
+  at: [4, 20]
+  sight: 3
+  dir: up
+  sprite: trainer_ENGINEER
+  trainer: [ENGINEER, Kirch]
+  intro: Live wire hall! Mind your feet, the strips bite.
+  after: Latches hold. Wires don't have to. Rook's motto. Well, mine. He stole it.
+  rules: ['setBattleRule("field", :NEON_GRID)']
+- type: trainer
+  at: [23, 22]
+  sight: 3
+  dir: left
+  sprite: trainer_ROCKER
+  trainer: [ROCKER, Amp]
+  intro: Turn it up to eleven! Then turn the tee twice!
+  after: Encore? No? Fine.
+  rules: ['setBattleRule("field", :NEON_GRID)']
+- type: trainer
+  at: [23, 13]
+  sight: 3
+  dir: down
+  sprite: trainer_ENGINEER
+  trainer: [ENGINEER, Tesla]
+  intro: I test circuits. You're a circuit now. Congrats!
+  after: You conduct well.
+  rules: ['setBattleRule("field", :NEON_GRID)']

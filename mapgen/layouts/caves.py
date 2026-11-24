@@ -146,6 +146,7 @@ def events_544(m, paths, off):
 
 def dress_544(m):
     p = 'S'
+    ST = __import__('cavekit').STAMPS
     m.tile(P1('cv_hole'), 30, 6)
     m.over.append((2, 10, 9, P1('cv_chalkx')))
     m.mass_at([(39, 32), (40, 32), (41, 32), (39, 33), (40, 33), (41, 33), (39, 34), (40, 34), (41, 34), (42, 32), (44, 32)])
@@ -156,26 +157,48 @@ def dress_544(m):
     for x in range(14, 20): m.tile(P1('cv_rail_h'), x, 27)
     m.tile(P1('cv_rail_end'), 13, 27)
     for x in (15, 16, 18): m.tile(P1('cv_cart_salt'), x, 27)
-    for name, x, y in (('cv_saltblocks', 4, 28), ('cv_saltblocks', 22, 32), ('hb_crates4', 27, 32), ('hb_barrels', 3, 25),
-                       ('hb_boxes', 25, 26), ('cv_lamp_on', 12, 24), ('cv_lamp_on', 27, 24), ('cv_lamp_on', 37, 26),
-                       ('cv_lamp_on', 6, 31), ('cv_lamp_on', 45, 22), ('cv_lamp_on', 2, 9), ('cv_lamp_on', 39, 8),
-                       ('cv_lamp_on', 24, 7), ('cv_lamp_on', 23, 5), ('cv_post', 33, 29), ('cv_post', 17, 30), ('cv_post', 9, 23),
-                       ('cv_saltblocks', 31, 6), ('cv_tools', 26, 6), ('hb_barrels', 45, 9)):
-        w, h = (2, 1) if name == 'cv_saltblocks' else (4, 1) if name == 'hb_crates4' else (2, 2) if name == 'hb_boxes' else \
-            (1, 1) if name == 'cv_tools' else (1, 2)
+    # Rich mining depot & gallery hardware: salt stacks, crates, barrels, lanterns, timber supports, & tools
+    for name, x, y in (
+        ('cv_saltblocks', 4, 28), ('cv_saltblocks', 22, 32), ('cv_saltblocks', 31, 6), ('cv_saltblocks', 39, 27),
+        ('hb_crates4', 27, 32), ('hb_barrels', 3, 25), ('hb_barrels', 45, 9), ('hb_barrels', 38, 25),
+        ('hb_boxes', 25, 26), ('hb_boxes', 13, 30),
+        ('cv_lamp_on', 12, 24), ('cv_lamp_on', 27, 24), ('cv_lamp_on', 37, 26), ('cv_lamp_on', 44, 26),
+        ('cv_lamp_on', 6, 31), ('cv_lamp_on', 45, 22), ('cv_lamp_on', 2, 9), ('cv_lamp_on', 39, 8),
+        ('cv_lamp_on', 24, 7), ('cv_lamp_on', 23, 5), ('cv_lamp_on', 14, 7),
+        ('cv_post', 33, 29), ('cv_post', 17, 30), ('cv_post', 9, 23), ('cv_post', 34, 25), ('cv_post', 41, 24), ('cv_post', 28, 7),
+        ('cv_tools', 26, 6), ('cv_tools', 11, 28),
+    ):
+        L = ST[name]['layers']; w, h = len(L[0][0]), len(L[0])
         if m.free(x, y, w, h, on='.:') and not any((xx, yy) in m.keep_clear for xx in range(x, x + w) for yy in range(y, y + h)):
             m.put(name, x, y)
-    for x, y, n in ((8, 29, 'cv_tools'), (26, 31, 'wr_sacks'), (40, 30, 'cv_tools'), (13, 32, 'wr_sacks'), (35, 28, 'wr_sacks')):
-        if m.free(x, y, 1, 1, on='.'): m.tile(P1(n), x, y)
-    # salt: halite clusters and rose crystal spires against the walls, thickest in the old drifts
-    m.solid_props(['cv_xsalt', 'cv_xsalt', p + '_rock0', p + '_rock1'], 9, seed=1, box=(2, 23, 47, 37))
-    m.solid_props(['cv_xsalt', 'cv_xsalt', 'cv_xsalt', p + '_rock1'], 9, seed=2, box=(2, 3, 47, 13))
-    for x, y in ((3, 10), (37, 7), (46, 10), (33, 5), (2, 29)):
-        if m.free(x, y, 1, 2, on='.:') and (x, y + 1) not in m.keep_clear: m.put('cv_xrose2', x, y)
-    m.solid_props(['cv_xsalt', p + '_rock0'], 3, seed=3, box=(43, 13, 47, 26))
-    for x, y in ((8, 23), (19, 23), (31, 24), (40, 25), (6, 4), (18, 4), (29, 4), (40, 4)):
-        if m.cliff[y, x]: m.over.append((2, x, y, P1('cv_walllamp')))
-    m.dress(9, seed=1)
+    for x, y, n in ((8, 29, 'cv_tools'), (26, 31, 'wr_sacks'), (40, 30, 'cv_tools'), (13, 32, 'wr_sacks'),
+                    (35, 28, 'wr_sacks'), (5, 7, 'wr_sacks'), (34, 9, 'wr_sacks'), (45, 16, 'cv_tools')):
+        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear: m.tile(P1(n), x, y)
+    # Rich halite, rose, blue, & sea crystal formations (matching 545 B1F crystal cavern directly below!)
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0', p + '_rock1'], 18, seed=1, box=(2, 23, 47, 37))
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock1'], 15, seed=2, box=(2, 3, 47, 13))
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0'], 6, seed=3, box=(42, 13, 47, 26))
+    for name, x, y in (
+        # Tall rose/blue/sea crystal spires framing the drifts, ladder gallery down to 545, and depot walls
+        ('cv_xrose2', 3, 10), ('cv_xblue2', 8, 5), ('cv_xsea2', 14, 5), ('cv_xrose2', 22, 5),
+        ('cv_xblue2', 27, 5), ('cv_xrose2', 33, 5), ('cv_xsea2', 37, 7), ('cv_xrose2', 46, 10),
+        ('cv_xblue2', 45, 19), ('cv_xrose2', 2, 29), ('cv_xsea2', 4, 33), ('cv_xblue2', 15, 32),
+        ('cv_xrose2', 24, 30), ('cv_xsea2', 32, 31), ('cv_xblue2', 42, 29), ('cv_xrose2', 46, 26),
+        ('cv_xsea2', 14, 15), ('cv_xblue2', 17, 16),
+    ):
+        if m.free(x, y, 1, 2, on='.:') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
+            m.put(name, x, y)
+    # Bioluminescent brine fungi dotting the Cut chasm rims & damp salt drifts
+    for x, y in ((5, 11), (8, 11), (15, 11), (24, 11), (31, 11), (38, 11), (45, 11),
+                 (6, 23), (11, 23), (24, 23), (33, 23), (41, 23), (14, 21), (17, 21), (4, 31), (36, 31)):
+        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
+            m.over.append((2, x, y, P1('cv_fung0'))); m.taken[y, x] = True
+    # Miners' wall sconces across every gallery cliff face
+    for x, y in ((8, 23), (19, 23), (31, 24), (40, 25), (6, 4), (18, 4), (29, 4), (40, 4),
+                 (3, 23), (15, 4), (24, 4), (35, 4), (45, 4), (44, 23)):
+        if m.inb(x, y) and m.cliff[y, x]:
+            m.over.append((2, x, y, P1('cv_walllamp')))
+    m.dress(11, seed=1)
 
 
 # ====================================================================================================== 545
@@ -380,21 +403,69 @@ def events_564(m):
 
 def dress_564(m):
     p = 'L'
+    ST = __import__('cavekit').STAMPS
     m.tile(P1('cv_hole'), 29, 5)
     m.over.append((2, 40, 18, P1('cv_kelp1')))
+    # Dramatic coastal sea-cave sunbeam shafts across the tide basin
     for x, y in ((14, 15), (27, 20), (21, 27)):
         if m.inb(x + 1, y + 2): m.stamps.append(('cv_shaft', x, y))
-    for name, x, y in (('cv_drift', 4, 35), ('cv_drift', 33, 30), ('pf_whalebone', 2, 32), ('cv_frame', 31, 0)):
-        L = __import__('cavekit').STAMPS[name]['layers']; w, h = len(L[0][0]), len(L[0])
+    # Coastal wreckage, driftwood, whalebones, mine-mouth timber, barrels & lanterns
+    for name, x, y in (
+        ('cv_drift', 4, 35), ('cv_drift', 33, 30), ('cv_drift', 22, 6), ('cv_drift', 6, 11),
+        ('pf_whalebone', 2, 32), ('pf_whalebone', 36, 22), ('pf_whalebone', 25, 3),
+        ('cv_frame', 31, 0), ('cv_post', 4, 21), ('cv_post', 9, 32), ('cv_post', 35, 12),
+        ('hb_barrels', 4, 31), ('hb_barrels', 37, 27), ('wr_sacks', 12, 34), ('wr_sacks', 34, 25),
+        ('cv_lamp_on', 10, 31), ('cv_lamp_on', 8, 15), ('cv_lamp_on', 22, 11), ('cv_lamp_on', 35, 19),
+    ):
+        L = ST[name]['layers']; w, h = len(L[0][0]), len(L[0])
         if m.free(x, y, w, h, on='.:') and not any((xx, yy) in m.keep_clear for xx in range(x, x + w) for yy in range(y, y + h)):
             m.put(name, x, y)
-    m.solid_props(['cv_barn', 'cv_barn', p + '_rock0', 'cv_nest', 'cv_xsea'], 14, seed=5)
-    m.solid_props(['cv_nest', 'cv_nest', 'cv_barn'], 5, seed=6, box=(20, 1, 38, 10))
-    for x, y in ((12, 13), (31, 13), (10, 20)):
-        if m.free(x, y, 1, 2, on='.:') and (x, y + 1) not in m.keep_clear: m.put('cv_xsea2', x, y)
-    for x, y in ((24, 3), (35, 6), (8, 12), (5, 21), (36, 14)):
-        if m.cliff[y, x]: m.over.append((2, x, y, P1('cv_guano')))
-    m.dress(10, groups=[(['L_fd0', 'L_fd1', 'L_fd2', 'cv_kelp0', 'cv_kelp1', 'cv_wrack'], 6), (['L_rubble0', 'L_rubble1'], 2)], seed=3)
+    # Barnacles, tide-cave rocks, gull nests, & sea crystals along cavern walls
+    m.solid_props(['cv_barn', 'cv_barn', p + '_rock0', 'cv_nest', 'cv_xsea', 'cv_xblue'], 22, seed=5)
+    m.solid_props(['cv_nest', 'cv_nest', 'cv_barn', 'cv_xsea'], 9, seed=6, box=(20, 1, 38, 10))
+    # Tall emerald-sea & sapphire-blue crystal spires across the chambers & hidden grotto
+    for name, x, y in (
+        ('cv_xsea2', 12, 13), ('cv_xsea2', 31, 13), ('cv_xblue2', 10, 20),
+        ('cv_xsea2', 3, 29), ('cv_xblue2', 14, 34), ('cv_xsea2', 3, 14),
+        ('cv_xblue2', 11, 5), ('cv_xsea2', 21, 3), ('cv_xblue2', 36, 4),
+        ('cv_xsea2', 38, 12), ('cv_xblue2', 37, 33), ('cv_xsea2', 43, 15), ('cv_xblue2', 45, 19),
+    ):
+        if m.free(x, y, 1, 2, on='.:') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
+            m.put(name, x, y)
+    # Bioluminescent sea-cave fungi hugging the wet tide-pool rims & grotto walls
+    for x, y in ((5, 36), (13, 35), (16, 29), (24, 34), (22, 14), (29, 13), (35, 24), (32, 32), (43, 20), (8, 7)):
+        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
+            m.over.append((2, x, y, P1('cv_fung0'))); m.taken[y, x] = True
+    # Sea-crystal & barnacle reefs rising from the open tide basin (strictly NEVER touching m.bars or adjacent crossings!)
+    bar_excl = {(bx + dx, by + dy) for bx, by in m.bars for dx in (-1, 0, 1) for dy in (-1, 0, 1)}
+    def basin_spire(name, x, y):
+        L = ST[name]['layers']; h = len(L[0])
+        if all(m.inb(x, y + dy) and m.cls[y + dy, x] == 'w' and (x, y + dy) not in bar_excl for dy in range(h)):
+            for dy in range(h):
+                for z in (1, 2):
+                    if L[z][dy][0]:
+                        m.over.append((z, x, y + dy, L[z][dy][0]))
+    for name, x, y in (
+        # West sea basin reefs (x=11..15, y=15..25)
+        ('cv_xsea2', 11, 16), ('cv_xblue2', 14, 19), ('cv_xsea2', 12, 23), ('cv_xblue2', 18, 16),
+        # East sea basin reefs (x=27..32, y=14..26)
+        ('cv_xblue2', 31, 15), ('cv_xsea2', 29, 21), ('cv_xblue2', 32, 24), ('cv_xsea2', 26, 24),
+    ):
+        basin_spire(name, x, y)
+    for x, y, n in (
+        (12, 17, 'cv_xblue'), (15, 20, 'cv_xsea'), (11, 24, 'cv_xsalt'), (13, 24, 'cv_barn'),
+        (17, 17, 'cv_xsea'), (19, 17, 'cv_barn'), (12, 15, 'cv_barn'), (15, 25, 'cv_xblue'),
+        (30, 16, 'cv_xsea'), (32, 17, 'cv_barn'), (28, 22, 'cv_xblue'), (30, 22, 'cv_xsalt'),
+        (31, 25, 'cv_xsea'), (27, 25, 'cv_barn'), (29, 26, 'cv_xblue'), (32, 20, 'cv_xsea'),
+    ):
+        if m.inb(x, y) and m.cls[y, x] == 'w' and (x, y) not in bar_excl:
+            m.over.append((1, x, y, P1(n)))
+    # Gull guano streaks & warm cliff sconces along cavern rock overhangs
+    for x, y in ((24, 3), (35, 6), (8, 12), (5, 21), (36, 14), (27, 2), (14, 5)):
+        if m.inb(x, y) and m.cliff[y, x]: m.over.append((2, x, y, P1('cv_guano')))
+    for x, y in ((6, 28), (12, 28), (6, 17), (14, 4), (23, 2), (33, 2), (36, 10)):
+        if m.inb(x, y) and m.cliff[y, x]: m.over.append((2, x, y, P1('cv_walllamp')))
+    m.dress(12, groups=[(['L_fd0', 'L_fd1', 'L_fd2', 'cv_kelp0', 'cv_kelp1', 'cv_wrack'], 6), (['L_rubble0', 'L_rubble1'], 2)], seed=3)
 
 
 def main(which):
@@ -406,8 +477,8 @@ def main(which):
         m.paint()
         m.preview('/tmp/mb13/p544.png', scale=0.5)
         head = {'id': 544, 'name': 'Brinecut Mine 1F', 'parent': 540, 'bgm': 'Cave', 'field': 'CAVE',
-                'metadata': {'Name': 'Brinecut Mine', 'MapPosition': [0, 11, 23], 'BattleBack': 'cave1'},
-                'tone': [-8, -10, -4, 10], 'fog': {'name': 'prismfall_cave', 'opacity': 36, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0},
+                'metadata': {'Name': 'Brinecut Mine', 'MapPosition': [0, 11, 23], 'BattleBack': 'cave1', 'SnapEdges': True},
+                'tone': [-6, -8, 2, 10], 'fog': {'name': 'prismfall_cave', 'opacity': 36, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0},
                 'gates': [{'name': 'the Cut is crossed only by cart', 'from': [[10, 36]],
                            'sealed': [[6, 9], [18, 10], [30, 9], [41, 9], [44, 15], [15, 16]]},
                           {'name': 'from the Thistledown adit the drift and the points gallery are shut', 'from': [[42, 1]],
@@ -420,8 +491,8 @@ def main(which):
         m = build_564(); events_564(m); dress_564(m); m.paint()
         m.preview('/tmp/mb13/p564.png', scale=0.5)
         head = {'id': 564, 'name': 'Gullcry Caves', 'parent': 561, 'bgm': 'Cave', 'field': 'CAVE',
-                'metadata': {'Name': 'Gullcry Caves', 'MapPosition': [0, 8, 21], 'BattleBack': 'cave1'},
-                'tone': [-12, -6, 6, 16], 'fog': {'name': 'prismfall_seamist', 'opacity': 34, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0},
+                'metadata': {'Name': 'Gullcry Caves', 'MapPosition': [0, 8, 21], 'BattleBack': 'cave1', 'SnapEdges': True},
+                'tone': [-10, -4, 8, 14], 'fog': {'name': 'prismfall_seamist', 'opacity': 34, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0},
                 '_file': '564_gullcry_caves.yaml'}
         m.write(564, head, comment='# GENERATED by mapgen/layouts/caves.py (map builder 13): Gullcry Caves, DUNGEON_PUZZLES D6 (the tide).\n'
                                   '# Tide clock: V526 steps since the turn, S526 high tide (pfm_tide_tick).  Edit the layout script.\n')

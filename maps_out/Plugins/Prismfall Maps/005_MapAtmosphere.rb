@@ -63,7 +63,7 @@ module PrismfallMaps
     528 => [8, 4, -8, 0],   # Marram Down
     540 => [6, 4, -2, 0],   # Thistledown Lea
     541 => [0, 0, 4, 18],   # The Grey Saltings
-    544 => [-8, -10, -4, 10],   # Brinecut Mine 1F
+    544 => [-6, -8, 2, 10],   # Brinecut Mine 1F
     545 => [-10, -8, 4, 16],   # Brinecut Mine B1F
     546 => [-26, -30, -2, 34],   # Thistledown Manor
     547 => [-26, -30, -2, 34],   # Thistledown Manor - Attic
@@ -72,7 +72,7 @@ module PrismfallMaps
     561 => [-10, -6, 6, 20],   # Gullcry Cliffs
     562 => [-10, -4, 14, 16],   # The Rimewood
     563 => [-6, -2, 16, 12],   # Rimewood Glade
-    564 => [-12, -6, 6, 16],   # Gullcry Caves
+    564 => [-10, -4, 8, 14],   # Gullcry Caves
     566 => [0, 0, 4, 6],   # Spinners' Rise
     568 => [-10, -22, 20, 60],   # The Rehearsal
     570 => [-8, -4, 12, 12],   # Frostwick

@@ -21,7 +21,7 @@ from puzzles import circuit as CI
 
 TID = LK.TID
 FIELD = 'NEON_GRID'
-META = {'Name': 'Circuit Gym', 'MapPosition': [0, 16, 16]}
+META = {'Name': 'Circuit Gym', 'MapPosition': [0, 16, 16], 'SnapEdges': True}
 TONE = [-10, -14, 6, 20]
 SPARK = 'NPC 13'
 PBS = open(os.path.join(HERE, '..', 'pbs', 'trainers.txt'), encoding='utf-8').read()
@@ -119,7 +119,22 @@ def board_events(m, mid, shock=False):
 
 def dress_studio(m, props, seed=0):
     for name, x, y in props: put_if(m, name, x, y)
-    m.dress(6, groups=[(['lm_cables'], 1)], seed=seed)
+
+
+def clean_studio_floor(m):
+    """Strip noisy random cyan Z_f3 blotches so dark-glass studio tiles & circuit boards read razor-sharp."""
+    z_f0, z_f2, z_f3 = P1('Z_f0'), P1('Z_f2'), P1('Z_f3')
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.L[0, y, x] == z_f3:
+                m.L[0, y, x] = z_f2 if ((x + y) & 1) else z_f0
+
+
+def put_carpet(m, x0, y0, x1, y1):
+    for y in range(y0, y1 + 1):
+        for x in range(x0, x1 + 1):
+            part = ('n' if y == y0 else 's' if y == y1 else '') + ('w' if x == x0 else 'e' if x == x1 else '')
+            m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
 
 
 # ============================================================================================ 190 the Switchroom
@@ -151,12 +166,30 @@ def build_190():
         e = trainer_if(*t)
         if e: E.append(e)
     m.keep_clear |= {(10, 13), (10, 12), (10, 6), (10, 7), (10, 8), (10, 10), (10, 11), (3, 13), (6, 12), (14, 13), (16, 12), (17, 12)}
+    # Symmetrical broadcast lobby wall: centered ON AIR, twin neon bolts, dual monitor banks, posters & red tally alarms
     on_faces(m, 'lm_onair', [(10, 3)])
-    on_faces(m, 'lm_poster1', [(3, 4), (15, 4)]); on_faces(m, 'lm_poster0', [(5, 4)])
-    hang(m, 'lm_neonbolt', 12, 3); hang(m, 'lm_monitors', 16, 3)
-    dress_studio(m, [('lm_couch', 2, 6), ('lm_rack', 18, 5), ('lm_speaker', 1, 10), ('lm_speaker', 19, 10), ('lm_cam', 13, 11),
-                     ('lm_ring', 7, 11), ('lm_plant', 1, 5), ('lm_desk', 4, 6), ('lm_gearbox', 18, 12), ('lm_gearbox', 2, 12)], seed=3)
+    on_faces(m, 'lm_alarm_on', [(1, 4), (19, 4)])
+    on_faces(m, 'lm_poster1', [(5, 4), (15, 4)])
+    hang(m, 'lm_neonbolt', 7, 3); hang(m, 'lm_neonbolt', 12, 3)
+    hang(m, 'lm_monitors', 2, 3); hang(m, 'lm_monitors', 16, 3)
+    dress_studio(m, [
+        ('lm_plant', 1, 5), ('lm_plant', 19, 5),
+        ('lm_couch', 2, 6), ('lm_desk', 4, 6),
+        ('lm_rack', 18, 5), ('lm_rack', 19, 7),
+        ('lm_speaker', 1, 10), ('lm_speaker', 19, 10),
+        ('lm_cam', 13, 11), ('lm_ring', 7, 11),
+        ('lm_gearbox', 2, 12), ('lm_gearbox', 18, 12),
+    ], seed=3)
     m.paint()
+    clean_studio_floor(m)
+    # Plush entrance carpet welcoming challengers into Rook's studio & steel grate landing before Door 191
+    put_carpet(m, 9, 11, 11, 14)
+    for x in (9, 10, 11):
+        m.L[0, 6, x] = P1('lm_grate')
+    # Technical floor grates framing the teach generator & lamp terminals (never touching puzzle strip row y=9!)
+    for gx, gy in ((3, 8), (3, 10), (17, 8), (17, 10)):
+        if m.L[1, gy, gx] == 0:
+            m.L[0, gy, gx] = P1('lm_grate')
     return m
 
 
@@ -182,12 +215,30 @@ def build_191():
         e = trainer_if(*t)
         if e: E.append(e)
     m.keep_clear |= {(13, 23), (13, 22), (2, 23), (3, 22), (21, 6)}
-    on_faces(m, 'lm_onair', [(21, 3)]); on_faces(m, 'lm_poster1', [(4, 4), (9, 4), (17, 4)])
-    hang(m, 'lm_neonbolt', 13, 3); hang(m, 'lm_monitors', 7, 3); hang(m, 'lm_monitors', 23, 3)
-    dress_studio(m, [('lm_rack', 1, 6), ('lm_rack', 25, 6), ('lm_speaker', 25, 19), ('lm_speaker', 1, 19), ('lm_cam', 24, 11),
-                     ('lm_ring', 24, 18), ('lm_couch', 8, 22), ('lm_gearbox', 18, 22), ('lm_gearbox', 19, 22), ('lm_desk', 22, 22),
-                     ('lm_plant', 25, 22), ('lm_plant', 1, 13)], seed=4)
+    # Symmetrical high-voltage broadcast north wall
+    on_faces(m, 'lm_onair', [(21, 3)])
+    on_faces(m, 'lm_alarm_on', [(2, 4), (11, 4), (25, 4)])
+    on_faces(m, 'lm_poster1', [(4, 4), (9, 4), (16, 4)])
+    hang(m, 'lm_neonbolt', 13, 3)
+    hang(m, 'lm_monitors', 6, 3); hang(m, 'lm_monitors', 18, 3); hang(m, 'lm_monitors', 23, 3)
+    dress_studio(m, [
+        ('lm_rack', 1, 6), ('lm_rack', 1, 9), ('lm_rack', 25, 6), ('lm_rack', 25, 9),
+        ('lm_speaker', 1, 19), ('lm_speaker', 25, 19),
+        ('lm_cam', 2, 11), ('lm_cam', 24, 11),
+        ('lm_ring', 3, 18), ('lm_ring', 24, 18),
+        ('lm_couch', 7, 22), ('lm_couch', 15, 22),
+        ('lm_gearbox', 18, 22), ('lm_gearbox', 19, 22), ('lm_desk', 22, 22),
+        ('lm_plant', 1, 13), ('lm_plant', 25, 22), ('lm_plant', 4, 22),
+    ], seed=4)
     m.paint()
+    clean_studio_floor(m)
+    # Plush entrance carpet from Switchroom (12..14, 21..24) & steel grate framing around the 4x3 circuit breadboard
+    put_carpet(m, 12, 21, 14, 24)
+    board_xy = set(CI.BOARDS[191]['cells'].keys())
+    # Subtle industrial grates flanking the breadboard outer deck & Door 192 landing (zero overlap with puzzle cells!)
+    for gx, gy in [(20, 6), (22, 6), (4, 10), (4, 20), (23, 10), (23, 20), (13, 7), (13, 20)]:
+        if (gx, gy) not in board_xy and m.L[1, gy, gx] == 0:
+            m.L[0, gy, gx] = P1('lm_grate')
     return m
 
 
@@ -201,9 +252,15 @@ def build_192():
     E = m.events
     E += board_events(m, 192, shock=True)
     gx, gy = CI.FENCE_X, CI.GATE_Y
-    for y in range(6, 27):                                   # the grille fence down the middle of the hall
-        if y != gy: m.over.append((1, gx, y, P1('lm_bars_m' if y % 5 else 'lm_bars_l')))
-    m.keep_clear |= {(gx, y) for y in range(6, 27)}
+    # Sleek Meridian server-rack & brass-bollard security partition down x=13 (replacing vertical yellow picket fence
+    # AND sealing live HEAD bypass at (13, 5)!) — EVERY cell y=5..26 (y != gy) has pas=15, pri=0 on Layer 1!
+    for by in (5, 6, 15, 17, 26):
+        m.over.append((1, gx, by, P1('lm_bollard')))
+    rack_bot = STAMPS['lm_rack']['layers'][1][1][0]          # pas=15, pri=0 solid server base
+    for ry in (7, 9, 11, 13, 18, 20, 22, 24):
+        m.put('lm_rack', gx, ry)
+        m.over.append((1, gx, ry, rack_bot))                 # guarantee solid pri=0 Layer-1 under pri=2 rack top!
+    m.keep_clear |= {(gx, y) for y in range(5, 27)}
     shockp = lambda tile, sw: page([S('pfm_g4_shock')], tile=P1(tile), cond={'switch': sw, 'self': 'A'}, trigger='touch')
     gate = ev('Lock gate', page(["A brass gate. Its latch-lock is wired into the west board: it wants power, once."], tile=P1('lm_latch')),
               page([], tile=P1('lm_latch_open'), cond={'switch': CI.S_LATCH_GATE}),
@@ -226,12 +283,29 @@ def build_192():
         e = trainer_if(*t)
         if e: E.append(e)
     m.keep_clear |= {(6, 26), (6, 25), (3, 25), (4, 24), (7, 16), (8, 17), (16, 16), (17, 15), (17, 17), (20, 6), (9, 6)}
-    on_faces(m, 'lm_onair', [(20, 3)]); on_faces(m, 'lm_poster1', [(4, 4), (16, 4), (24, 4)])
-    hang(m, 'lm_neonbolt', 10, 3); hang(m, 'lm_monitors', 22, 3); hang(m, 'lm_monitors', 2, 3)
-    dress_studio(m, [('lm_rack', 25, 7), ('lm_rack', 25, 9), ('lm_speaker', 1, 20), ('lm_speaker', 25, 20), ('lm_cam', 10, 21),
-                     ('lm_ring', 16, 22), ('lm_gearbox', 11, 25), ('lm_gearbox', 12, 25), ('lm_plant', 24, 25), ('lm_plant', 1, 13),
-                     ('lm_couch', 20, 25), ('lm_desk', 9, 8)], seed=5)
+    # Symmetrical studio control wall: ON AIR over Core door, triple monitor banks, neon bolt, posters & tally alarms
+    on_faces(m, 'lm_onair', [(20, 3)])
+    on_faces(m, 'lm_alarm_on', [(1, 4), (7, 4), (17, 4), (25, 4)])
+    on_faces(m, 'lm_poster1', [(4, 4), (16, 4), (24, 4)])
+    hang(m, 'lm_neonbolt', 10, 3)
+    hang(m, 'lm_monitors', 2, 3); hang(m, 'lm_monitors', 13, 3); hang(m, 'lm_monitors', 22, 3)
+    dress_studio(m, [
+        ('lm_rack', 25, 7), ('lm_rack', 25, 9), ('lm_rack', 1, 6),
+        ('lm_speaker', 1, 20), ('lm_speaker', 25, 20),
+        ('lm_cam', 10, 21), ('lm_cam', 24, 18),
+        ('lm_ring', 16, 22), ('lm_ring', 3, 18),
+        ('lm_gearbox', 11, 25), ('lm_gearbox', 12, 25), ('lm_gearbox', 14, 25),
+        ('lm_plant', 24, 25), ('lm_plant', 1, 13), ('lm_plant', 25, 25),
+        ('lm_couch', 20, 25), ('lm_desk', 9, 8), ('lm_desk', 15, 7),
+    ], seed=5)
     m.paint()
+    clean_studio_floor(m)
+    # Entrance crimson carpet from Breadboard Hall (5..7, 25..27) + technical floor grates framing the central partition & Core door
+    put_carpet(m, 5, 25, 7, 27)
+    board_xy = set(CI.BOARDS[192]['cells'].keys())
+    for gx_c, gy_c in [(19, 6), (21, 6), (12, 15), (12, 17), (14, 15), (14, 17), (8, 12), (17, 12)]:
+        if (gx_c, gy_c) not in board_xy and m.L[1, gy_c, gx_c] == 0:
+            m.L[0, gy_c, gx_c] = P1('lm_grate')
     return m
 
 

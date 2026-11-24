@@ -8,6 +8,7 @@ field: NEON_GRID
 metadata:
   Name: Circuit Gym
   MapPosition: [0, 16, 16]
+  SnapEdges: true
 tone: [-10, -14, 6, 20]
 raw: data/raw/191.npy
 tileset: 60
@@ -1225,3 +1226,21 @@ events:
   dir: down
   commands:
   - {script: 'pfp_apprentice(:g4_191, "Spark", "This one''s a breadboard. Rook calls it ''the trap with a view''.")'}
+- type: trainer
+  at: [8, 13]
+  sight: 3
+  dir: down
+  sprite: trainer_SUPERNERD
+  trainer: [SUPERNERD, Ohm]
+  intro: I wrote Rook's board! Well. I soldered the bits that don't turn.
+  after: The middle row's a trap. I told him it was too obvious.
+  rules: ['setBattleRule("field", :NEON_GRID)']
+- type: trainer
+  at: [19, 18]
+  sight: 3
+  dir: left
+  sprite: trainer_SCIENTIST
+  trainer: [SCIENTIST, Faraday]
+  intro: The tee splits three ways. Do you know which way is the wall?
+  after: Hm. You did.
+  rules: ['setBattleRule("field", :NEON_GRID)']
