@@ -7,6 +7,7 @@ bgm: Cave
 field: VOLCANIC
 metadata:
   Name: Cindervault
+  SnapEdges: true
   MapPosition: [0, 24, 8]
   BattleBack: cave1
 tone: [34, 4, -26, 10]
@@ -148,47 +149,47 @@ events:
     commands: []
 - type: npc
   name: Quent
-  at: [21, 10]
+  at: [18, 13]
   sprite: trainer_SCIENTIST
   dir: left
   commands: ['\pf[QUENT,happy]Quent: The gauges are SO pretty when they''re red. I mean that as a scientist.']
 - type: npc
   name: Wick
-  at: [5, 10]
+  at: [8, 13]
   sprite: trainer_CHANNELER
   dir: right
   commands: ['\pf[WICK,neutral]Wick: Hello. Mind the hose. It''s the only thing in here that isn''t hot.']
 - type: npc
   name: Larch
-  at: [15, 15]
+  at: [15, 16]
   sprite: trainer_PROFESSOR
   dir: up
   commands: ['\pf[LARCH,neutral]Larch: Don''t touch anything that glows. Which is everything. Don''t touch anything.']
 - type: npc
   name: Directorate soldier
-  at: [20, 6]
+  at: [18, 10]
   sprite: trainer_COOLTRAINER_M
   dir: down
   commands: ['Directorate Soldier: Sovereign''s property. Move along.']
 - type: npc
   name: Directorate soldier b
-  at: [21, 6]
+  at: [19, 10]
   sprite: trainer_COOLTRAINER_F
   dir: down
   commands: ['Directorate Soldier: Don''t look at the lever. Looking''s how it starts.']
 - type: npc
   name: Hammer Bomber
-  at: [13, 13]
+  at: [13, 14]
   sprite: trainer_BURGLAR
-  dir: up
+  dir: down
   commands: []
 - type: sign
   name: Gauge ring
-  at: [8, 6]
+  at: [11, 8]
   post: false
   text: 'MERIDIAN STANDARD TAP No. 7. DRAW: ------>|. The needles lean into the red like they''re trying to get out of it.'
 - type: sign
   name: Emergency lever
-  at: [20, 4]
+  at: [18, 9]
   post: false
   text: TAP 7 - EMERGENCY CLOSE. DIRECTORATE AUTHORISATION ONLY. BREAK GLASS. (The glass has a fingerprint on it already.)

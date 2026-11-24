@@ -799,7 +799,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
-  at: [33, 54]
+  at: [33, 55]
 - type: event
   name: Accord Chaplain
   pages:

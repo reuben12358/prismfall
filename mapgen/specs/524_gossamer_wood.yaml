@@ -343,3 +343,27 @@ events:
   gfx: ['', 0, 2]
   name: Woodward's Hut door
   link: WOOD_HUT
+- type: event
+  name: HeadbuttTree
+  at: [47, 42]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}
+- type: event
+  name: HeadbuttTree
+  at: [63, 55]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}
+- type: event
+  name: HeadbuttTree
+  at: [30, 72]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}

@@ -140,6 +140,7 @@ ShowArea = true
 MapPosition = 0,6,18
 BattleBack = field
 Weather = Rain,10
+SnapEdges = true
 #-------------------------------
 [147]   # Saltmere - Old Town
 Name = Saltmere Old Town
@@ -148,6 +149,7 @@ ShowArea = true
 MapPosition = 0,6,18
 BattleBack = field
 Weather = Rain,10
+SnapEdges = true
 #-------------------------------
 [148]   # Saltmere Lantern House
 Name = Saltmere Lantern House
@@ -303,6 +305,7 @@ MapPosition = 0,16,16
 #-------------------------------
 [255]   # Cindervault - Tap Chamber
 Name = Cindervault
+SnapEdges = true
 MapPosition = 0,24,8
 BattleBack = cave1
 #-------------------------------
@@ -361,6 +364,7 @@ MapPosition = 0,12,16
 [522]   # The Glassed Orchard
 Name = The Glassed Orchard
 ShowArea = true
+SnapEdges = true
 MapPosition = 0,14,16
 BattleBack = field
 #-------------------------------
@@ -560,6 +564,7 @@ MapPosition = 0,14,14
 Name = The Lowlight
 Outdoor = true
 ShowArea = true
+SnapEdges = true
 MapPosition = 0,16,16
 #-------------------------------
 [920]   # The Rimed Sands

@@ -33,14 +33,16 @@ def battle(call, field=FIELD, extra=()):
 def build_255():
     m = Cave(27, 21, 'E', seed=255, pool='Magma', tid=TID)
     m.STAIRS = CK.K.STAIRS_STONE
-    m.room(13, 10, 10.5, 7.0, rough=0.25)                 # the round chamber
-    m.box(11, 17, 15, 19)                                 # the service stair down from the Slag Ward
-    m.box(10, 7, 16, 11, FLOOR, 'w')                      # the tap pit: magma round the pipe
-    m.box(11, 6, 15, 6, FLOOR, 'w'); m.box(11, 12, 15, 12, FLOOR, 'w')
-    m.box(2, 8, 4, 11)                                    # the old lava-channel sluices (west alcove)
-    m.box(22, 8, 24, 11)                                  # Quent's valve bay (east alcove)
-    m.box(19, 3, 22, 5)                                   # the emergency-lever niche (north-east)
-    m.mass_at([(12, 9), (13, 9), (14, 9)])                # the pipe's collar (solid, in the pit)
+    # Wide industrial caldera chamber centered lower so the magma pit, tap gantry, sluices,
+    # damper bay, and emergency lever all sit prominently inside the 16x12 camera from (13, 17).
+    m.room(13, 11.5, 10.6, 6.8, rough=0.18)               # the round forge chamber (x ~ 3..23, y ~ 5..18)
+    m.box(11, 16, 15, 19)                                 # service stair approach from Slag Ward
+    m.box(5, 8, 9, 15)                                    # west sluice bay (Wick's channel valves)
+    m.box(17, 8, 21, 15)                                  # east damper bay (Quent's generators)
+    m.box(9, 5, 20, 8)                                    # north gauge gallery & NE emergency-lever niche
+    # Bold octagonal magma pit right in the center of the camera viewport (x 10..16, y 9..13)
+    m.box(10, 10, 16, 12, FLOOR, 'w')
+    m.box(11, 9, 15, 13, FLOOR, 'w')
     m.tidy()
     m.plan_cliffs(rows=2)
     return m
@@ -137,45 +139,141 @@ def events_255(m):
             {'cond': {'var': ['CH8_STEP', 5]}, 'trigger': 'autorun', 'commands': crisis_commands()},
             {'cond': {'self': 'A'}, 'commands': []},
             {'cond': {'switch': 'CH8_CALDERA_DONE'}, 'commands': []}]},
-        {'type': 'npc', 'name': 'Quent', 'at': [21, 10], 'sprite': 'trainer_SCIENTIST', 'dir': 'left', 'commands': [
+        # Tightened cinematic staging: all actors sit clearly inside the 16x12 camera viewport from (13, 17)
+        {'type': 'npc', 'name': 'Quent', 'at': [18, 13], 'sprite': 'trainer_SCIENTIST', 'dir': 'left', 'commands': [
             say('QUENT', 'happy', "The gauges are SO pretty when they're red. I mean that as a scientist.")]},
-        {'type': 'npc', 'name': 'Wick', 'at': [5, 10], 'sprite': 'trainer_CHANNELER', 'dir': 'right', 'commands': [
+        {'type': 'npc', 'name': 'Wick', 'at': [8, 13], 'sprite': 'trainer_CHANNELER', 'dir': 'right', 'commands': [
             say('WICK', 'neutral', "Hello. Mind the hose. It's the only thing in here that isn't hot.")]},
-        {'type': 'npc', 'name': 'Larch', 'at': [15, 15], 'sprite': 'trainer_PROFESSOR', 'dir': 'up', 'commands': [
+        {'type': 'npc', 'name': 'Larch', 'at': [15, 16], 'sprite': 'trainer_PROFESSOR', 'dir': 'up', 'commands': [
             say('LARCH', 'neutral', "Don't touch anything that glows. Which is everything. Don't touch anything.")]},
-        {'type': 'npc', 'name': 'Directorate soldier', 'at': [20, 6], 'sprite': 'trainer_COOLTRAINER_M', 'dir': 'down', 'commands': [
+        {'type': 'npc', 'name': 'Directorate soldier', 'at': [18, 10], 'sprite': 'trainer_COOLTRAINER_M', 'dir': 'down', 'commands': [
             "Directorate Soldier: Sovereign's property. Move along."]},
-        {'type': 'npc', 'name': 'Directorate soldier b', 'at': [21, 6], 'sprite': 'trainer_COOLTRAINER_F', 'dir': 'down', 'commands': [
+        {'type': 'npc', 'name': 'Directorate soldier b', 'at': [19, 10], 'sprite': 'trainer_COOLTRAINER_F', 'dir': 'down', 'commands': [
             "Directorate Soldier: Don't look at the lever. Looking's how it starts."]},
-        {'type': 'npc', 'name': 'Hammer Bomber', 'at': [13, 13], 'sprite': 'trainer_BURGLAR', 'dir': 'up', 'commands': []},
-        {'type': 'sign', 'name': 'Gauge ring', 'at': [8, 6], 'post': False, 'text':
+        {'type': 'npc', 'name': 'Hammer Bomber', 'at': [13, 14], 'sprite': 'trainer_BURGLAR', 'dir': 'down', 'commands': []},
+        {'type': 'sign', 'name': 'Gauge ring', 'at': [11, 8], 'post': False, 'text':
          "MERIDIAN STANDARD TAP No. 7. DRAW: ------>|. The needles lean into the red like they're trying to get out of it."},
-        {'type': 'sign', 'name': 'Emergency lever', 'at': [20, 4], 'post': False, 'text':
+        {'type': 'sign', 'name': 'Emergency lever', 'at': [18, 9], 'post': False, 'text':
          "TAP 7 - EMERGENCY CLOSE. DIRECTORATE AUTHORISATION ONLY. BREAK GLASS. (The glass has a fingerprint on it already.)"},
     ]
-    m.keep_clear |= {(13, 18), (13, 17), (13, 16), (13, 15), (13, 14), (13, 13), (5, 10), (21, 10), (15, 15), (20, 5), (21, 5), (8, 7), (20, 5)}
+    m.keep_clear |= {
+        (13, 19), (13, 18), (13, 17), (13, 16), (13, 15), (13, 14), (12, 14), (14, 14),
+        (8, 13), (9, 13), (18, 13), (17, 13), (15, 16), (18, 10), (19, 10),
+        (11, 8), (12, 8), (13, 8), (14, 8), (18, 9), (19, 9),
+        # Continuous walkway loop around the magma pit
+        (9, 9), (9, 10), (9, 11), (9, 12), (9, 14), (10, 14), (11, 14), (15, 14), (16, 14), (17, 14),
+        (17, 12), (17, 11), (17, 10), (17, 9), (16, 8), (15, 8), (10, 8),
+    }
+
+
+def _place_stamp_over(m, name, x, y, base_z=1, top_z=2, top_rows=0, solid=True):
+    """Force-composite a PF Rejuv stamp into m.over (works cleanly over magma or custom decking)."""
+    L = CK.STAMPS[name]['layers']
+    h, w = len(L[0]), len(L[0][0])
+    for dy in range(h):
+        for dx in range(w):
+            for sz in (0, 1, 2):
+                t = int(L[sz][dy][dx])
+                if t:
+                    tz = top_z if (dy < top_rows or sz == 2) else base_z
+                    m.over.append((tz, x + dx, y + dy, t))
+            if solid:
+                m.taken[y + dy, x + dx] = True
+
+
+def _steel_deck_cells(m):
+    """Octagonal riveted-steel forge platform cells surrounding the central magma pit."""
+    cells = []
+    for y in range(8, 17):
+        for x in range(8, 19):
+            if m.cls[y, x] == '.' and ((8 <= x <= 18 and 8 <= y <= 15) or (11 <= x <= 15 and y == 16)):
+                cells.append((x, y))
+    return cells
 
 
 def dress_255(m):
-    for name, x, y in (('cv_sluice', 3, 9), ('cv_sluice', 3, 10), ('cv_lever_l', 20, 3), ('cv_tools', 23, 9)):
-        if name in CK.STAMPS:
-            L = CK.STAMPS[name]['layers']; w, h = len(L[0][0]), len(L[0])
-            if m.free(x, y, w, h, on='.') and not any((xx, yy) in m.keep_clear for xx in range(x, x + w) for yy in range(y, y + h)):
-                m.put(name, x, y)
-    # the tap itself: the pithead frame straddling the magma, the pipe column under it (forced: it stands in the pit)
-    m.put('cv_frame', 12, 7)
-    for y in (9, 10):
-        m.over.append((2, 13, y, P1('cv_post')))
-    m.solid_props(['E_rock0', 'E_rock0'], 4, seed=8)
-    m.dress(6, seed=3)
+    # ---- 1. Heavy pressure conduits & volcanic fissures on the outer basalt ring
+    grate, cab_h, cab_v = P1('lm_grate'), P1('lm_cable_h'), P1('lm_cable_v')
+    for x, y in ((11, 15), (15, 15), (9, 11), (17, 11), (10, 8), (16, 8), (12, 17), (14, 17)):
+        if m.cls[y, x] == '.':
+            m.over.append((1, x, y, grate))
+    for x in (8, 9):
+        m.over.append((1, x, 11, cab_h)); m.over.append((1, x, 12, cab_h))
+    for x in (17, 18):
+        m.over.append((1, x, 11, cab_h)); m.over.append((1, x, 12, cab_h))
+    for y in (15, 16, 17):
+        m.over.append((1, 11, y, cab_v)); m.over.append((1, 15, y, cab_v))
+    for x, y, k in ((6, 15, 0), (7, 15, 1), (19, 15, 0), (20, 15, 1), (10, 17, 0), (16, 17, 1), (7, 8, 1), (16, 7, 0)):
+        if m.cls[y, x] == '.' and (x, y) not in m.keep_clear:
+            m.over.append((1, x, y, P1('gd_crack%d' % k)))
+
+    # ---- 2. Colossal Meridian Standard Tap No. 7 rising straight out of the magma pit
+    _place_stamp_over(m, 'lm_pylon', 12, 8, base_z=1, top_z=2, top_rows=2, solid=True)
+    _place_stamp_over(m, 'cv_ladder', 14, 10, base_z=1, top_z=2, top_rows=1, solid=True)
+    for bx, by in ((10, 9), (16, 9), (10, 13), (16, 13)):
+        _place_stamp_over(m, 'lm_bollard', bx, by, base_z=1, top_z=2, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_steam0', 11, 9, base_z=2, top_z=2, top_rows=2, solid=False)
+    _place_stamp_over(m, 'lm_steam1', 15, 9, base_z=2, top_z=2, top_rows=2, solid=False)
+    # Brass safety railings along the south lip of the magma pit (leaving (13, 14) clear for Hammer Bomber)
+    m.over.append((1, 11, 13, P1('lm_railing_w')))
+    m.over.append((1, 12, 13, P1('lm_railing_m')))
+    m.over.append((1, 14, 13, P1('lm_railing_m')))
+    m.over.append((1, 15, 13, P1('lm_railing_e')))
+
+    # ---- 3. West Sluice Bay (Wick's old lava-channel sluices, x 5..7, y 9..14)
+    _place_stamp_over(m, 'lm_vault', 5, 9, base_z=1, top_z=2, top_rows=1, solid=True)
+    for sx, sy in ((7, 12), (6, 13), (7, 13)):
+        _place_stamp_over(m, 'cv_sluice', sx, sy, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_gearbox', 6, 12, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_steam0', 5, 12, base_z=2, top_z=2, top_rows=2, solid=False)
+
+    # ---- 4. East Damper Bay (Quent's Meridian damper generators & racks, x 19..21, y 11..14)
+    _place_stamp_over(m, 'lm_gen', 19, 11, base_z=1, top_z=2, top_rows=1, solid=True)
+    _place_stamp_over(m, 'lm_rack', 21, 11, base_z=1, top_z=2, top_rows=1, solid=True)
+    _place_stamp_over(m, 'cv_tools', 20, 13, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_junction_on', 19, 13, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_steam1', 21, 13, base_z=2, top_z=2, top_rows=2, solid=False)
+
+    # ---- 5. North Wall Gauge Ring & NE Emergency Lever (lever + brass guard rail at y=8..9, inside 16x12 camera!)
+    _place_stamp_over(m, 'lm_monitors', 10, 6, base_z=1, top_z=2, top_rows=1, solid=True)
+    _place_stamp_over(m, 'lm_monitors', 14, 6, base_z=1, top_z=2, top_rows=1, solid=True)
+    _place_stamp_over(m, 'lm_alarm_on', 9, 7, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_alarm_on', 16, 7, base_z=1, top_z=1, top_rows=0, solid=True)
+    # Emergency lever right behind the two Directorate soldiers at (18..19, 10)
+    _place_stamp_over(m, 'cv_lever_l', 18, 9, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_alarm_on', 19, 9, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_railing_w', 17, 8, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_railing_m', 18, 8, base_z=1, top_z=1, top_rows=0, solid=True)
+    _place_stamp_over(m, 'lm_railing_e', 19, 8, base_z=1, top_z=1, top_rows=0, solid=True)
+
+    # ---- 6. Forge Braziers & Industrial Lighting framing the chamber
+    for bx, by in ((10, 15), (16, 15), (8, 9), (20, 9)):
+        if m.cls[by, bx] == '.' and (bx, by) not in m.keep_clear:
+            _place_stamp_over(m, 'fw_brazier', bx, by - 1, base_z=1, top_z=2, top_rows=1, solid=True)
+    for lx, ly in ((11, 18), (15, 18)):
+        if m.cls[ly, lx] == '.' and (lx, ly) not in m.keep_clear:
+            _place_stamp_over(m, 'cv_lamp_on', lx, ly - 1, base_z=1, top_z=2, top_rows=1, solid=True)
+
+    m.solid_props(['E_rock0', 'E_rock1'], 6, seed=8)
+    m.dress(8, seed=3)
+
+
+def apply_steel_deck(m):
+    """Apply crisp riveted steel floor plates AFTER Cave.paint() so dirt floorpatches never blotch the metal deck."""
+    qf0, qf1 = P1('Q_f0'), P1('Q_f1')
+    floorpatch_ids = {P1(k) for k in CK.STAMPS if k.startswith('E_floorpatch_') or k.startswith('E_fd')}
+    for x, y in _steel_deck_cells(m):
+        m.L[0, y, x] = qf0 if (x + y) % 2 == 0 else qf1
+        if int(m.L[1, y, x]) in floorpatch_ids:
+            m.L[1, y, x] = 0
 
 
 def main():
-    m = build_255(); events_255(m); dress_255(m); m.paint()
+    m = build_255(); events_255(m); dress_255(m); m.paint(); apply_steel_deck(m)
     os.makedirs('/tmp/cv255', exist_ok=True)
     m.preview('/tmp/cv255/p255.png', scale=1.0)
     head = {'id': 255, 'name': 'Cindervault - Tap Chamber', 'parent': 249, 'bgm': 'Cave', 'field': FIELD,
-            'metadata': {'Name': 'Cindervault', 'MapPosition': [0, 24, 8], 'BattleBack': 'cave1'},
+            'metadata': {'Name': 'Cindervault', 'SnapEdges': True, 'MapPosition': [0, 24, 8], 'BattleBack': 'cave1'},
             'tone': [34, 4, -26, 10], 'fog': {'name': 'prismfall_cave', 'opacity': 30, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0},
             '_file': '255_cindervault_tap.yaml'}
     m.write(255, head, comment='# GENERATED by mapgen/layouts/cindervault.py (Ch8): the Tap Chamber, the Caldera Crisis (story/29_SCRIPT_CH8.md).\n'

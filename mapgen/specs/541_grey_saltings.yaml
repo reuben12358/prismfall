@@ -216,7 +216,7 @@ events:
       else:
       - 'Ring Boss: Crabrawler ring! Three bouts, no biting, best of three, winner gets the bucket!'
       - choices: [Step into the ring., Not now.]
-        cancel: 1
+        cancel: 2
         branches:
         - - {script: 'WildBattle.start(:CRABRAWLER, 15)'}
           - {script: 'WildBattle.start(:CRABRAWLER, 15)'}
@@ -289,3 +289,11 @@ events:
   gfx: ['', 0, 2]
   name: The Brinewife's Rest door
   link: R4_REST
+- type: rock_smash
+  at: [50, 25]
+  name: Rock
+  fixed: true
+- type: rock_smash
+  at: [55, 18]
+  name: Rock
+  fixed: true

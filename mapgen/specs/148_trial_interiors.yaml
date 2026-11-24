@@ -663,7 +663,7 @@ events:
 id: 126
 name: Briarwick Lantern House
 parent: 120
-bgm: Briarwick
+bgm: Lerucean Town
 metadata: {}
 tone: [6, 2, -6, 8]
 biome: interior
@@ -1159,13 +1159,13 @@ tiles:
   at: [10, 5]
   layer: 1
 - tile: 2539
-  at: [3, 10]
+  at: [3, 9]
   layer: 2
 - tile: 2547
-  at: [3, 11]
+  at: [3, 10]
   layer: 2
 - tile: 2555
-  at: [3, 12]
+  at: [3, 11]
   layer: 1
 - tile: 4101
   at: [11, 10]
@@ -1206,7 +1206,7 @@ events:
 id: 168
 name: The Net Loft
 parent: 160
-bgm: Ebbmouth
+bgm: Lerucean Town
 metadata: {}
 tone: [6, 2, -6, 8]
 biome: interior

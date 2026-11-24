@@ -23,7 +23,9 @@ PALE = 3402                                # Goldenleaf pale deck plank (gl part
 
 
 def sx(y):
-    return 8 + int(round(2.2 * math.sin(y / 7.0) + 1.6 * (vnoise(0, y, 6, 6.0) - 0.5)))
+    # Organic woodland stream: gentle east meander past the weavers' dye vats (y=35..44) into the south dye pool
+    dye_bend = 2.6 * math.exp(-((y - 39.5) / 6.5) ** 2)
+    return 8 + int(round(dye_bend + 2.0 * math.sin(y / 6.8) + 1.5 * (vnoise(0, y, 6, 6.0) - 0.5)))
 
 
 def ridge(x):
@@ -33,13 +35,21 @@ def ridge(x):
     return 10 + int(round(1.5 * math.sin(x / 5.0) + 1.5 * (vnoise(x, 0, 3, 6.0) - 0.5)))
 
 
-def deck(m, x0, y0, w, h, stairs=None):
-    """Sheridan raised timber deck: 9-slice top, stilts below, plank stairs down the front at stairs=x"""
+def deck(m, x0, y0, w, h, stairs=None, open_e=(), open_w=()):
+    """Sheridan raised cedar timber deck: warm 9-slice top (Layer 0 after paint so props never punch grass holes),
+    stilts below, plank stairs down the front at stairs=x (with open top entry), and open bridge joins."""
+    if not hasattr(m, '_deck_tiles'): m._deck_tiles = []
     for y in range(y0, y0 + h):
         for x in range(x0, x0 + w):
-            k = ('T' if y == y0 else 'B' if y == y0 + h - 1 else '') + ('L' if x == x0 else 'R' if x == x0 + w - 1 else '')
-            k = {'': 'C', 'T': 'T', 'B': 'B', 'L': 'L', 'R': 'R'}.get(k, k)
-            m.tile(PALE, x, y, 1); m.cls[y, x] = 'D'               # Goldenleaf's pale porch planks: lighter than Sheridan's
+            top = (y == y0)
+            bot = (y == y0 + h - 1) and not (stairs is not None and x in (stairs, stairs + 1))
+            lft = (x == x0) and (y not in open_w)
+            rgt = (x == x0 + w - 1) and (y not in open_e)
+            k = ('T' if top else 'B' if bot else '') + ('L' if lft else 'R' if rgt else '')
+            k = k or 'C'
+            tid = DECK[k]
+            m.tile(tid, x, y, 1); m.cls[y, x] = 'D'
+            m._deck_tiles.append((x, y, tid))
     if all(m.inb(x, y0 - 1) and m.cls[y0 - 1, x] in '.t' and not m.taken[y0 - 1, x] for x in range(x0, x0 + w)):
         m.fence(x0, x0 + w - 1, y0 - 1)                              # a back rail
     for x in range(x0, x0 + w):
@@ -51,9 +61,11 @@ def deck(m, x0, y0, w, h, stairs=None):
 
 
 def walkway(m, x0, x1, y):
-    """2-wide plank walkway (rows y, y+1) between x0..x1, open at both ends, stilts below where not water"""
+    """2-wide warm cedar plank walkway (rows y, y+1) between x0..x1, open left/right with N/S guard rails"""
+    if not hasattr(m, '_deck_tiles'): m._deck_tiles = []
     for x in range(x0, x1 + 1):
-        m.tile(PALE, x, y, 1); m.tile(PALE, x, y + 1, 1); m.cls[y, x] = m.cls[y + 1, x] = 'D'
+        m.tile(DECK['T'], x, y, 1); m.tile(DECK['B'], x, y + 1, 1); m.cls[y, x] = m.cls[y + 1, x] = 'D'
+        m._deck_tiles.append((x, y, DECK['T'])); m._deck_tiles.append((x, y + 1, DECK['B']))
         m.taken[y, x] = m.taken[y + 1, x] = True
 
 
@@ -67,17 +79,18 @@ def build(preview=None):
     for y in range(H):
         s = sx(y)
         for x in range(s, s + 3): m.cls[y, x] = 'w'
-    m.blob(16, 49, 5.5, 3.2, 'w', seed=7, rough=0.5)
-    m.blob(13, 46, 2.5, 2.0, 'w', seed=8, rough=0.4)
+    m.blob(16, 49, 5.8, 3.4, 'w', seed=7, rough=0.5)
+    m.blob(13, 45, 2.8, 2.2, 'w', seed=8, rough=0.4)
     for y in range(H):
         for x in range(W):
             if m.cls[y, x] == 'w': m.ht[y, x] = 0
-    # old-growth border, ragged inner edge; the ridge is forest except the knoll and the shrine
+    # old-growth border, ragged inner edge; lush curved forest skirt along the south edge framing Gossamer Wood gate
     for y in range(H):
         for x in range(W):
             if m.cls[y, x] != '.': continue
             edge = min(x, W - 1 - x, y, H - 1 - y)
-            deep = edge < 4 + 4 * vnoise(x, y, 11, 6.0)
+            s_skirt = (H - 1 - y) < 5 + int(round(2.4 * vnoise(x, 9, 13, 5.5))) and not (32 <= x <= 39)
+            deep = edge < 4 + 4 * vnoise(x, y, 11, 6.0) or s_skirt
             knoll = ((x - 36) / 9.0) ** 2 + ((y - 11) / 5.5) ** 2 < 1.0 + 0.5 * (vnoise(x, y, 4, 3.0) - 0.5)
             shrine = ((x - 22) / 5.5) ** 2 + ((y - 9) / 4.5) ** 2 < 1.0 + 0.5 * (vnoise(x, y, 5, 3.0) - 0.5)
             ridge_forest = m.ht[y, x] == 1 and not knoll and not shrine
@@ -110,21 +123,25 @@ def build(preview=None):
     m.rect(52, 0, 4, 3, 'd', only='.tT')
     m.rect(0, 29, 4, 4, 'T', only='.d')
     m.blob(40.8, 32.0, 3.6, 2.0, '.', seed=61, rough=0.2, only='d')              # the island under the Gathering Tree
-    # ---------------------------------------------------------------- buildings
+    # ---------------------------------------------------------------- buildings (steep-shingle Goldenleaf & living giant trees; exact door coords preserved!)
     E = []
     P = lambda n, at, **kw: E.append(SE.place(120, n, at, **kw))
     d = {}
-    d['gym'] = m.stamp('pf_g_elder', 30, 1, 'BW_GYM', 'Gym door')
-    d['guild'] = m.stamp('pf_g_tree6', 13, 19, 'BW_GUILD', 'Guildhall door')
-    d['pc'] = m.stamp('sh_inn', 45, 16, 'BW_PC', 'Poke Center door')             # a timber hall, not Sheridan's blue Help Center
-    d['house1'] = m.stamp('pf_g_tree4', 58, 17, 'BW_HOUSE1', 'Treetop House door')
-    d['mart'] = m.stamp('sh_cot', 26, 37, 'BW_MART', 'Mart door')
-    d['chapel'] = m.stamp('sh_big', 55, 34, 'BW_CHAPEL', 'Chapel door')
-    d['house2'] = m.stamp('pf_g_tree4', 40, 44, 'BW_HOUSE2', "Cutter's House door")
+    d['gym'] = m.stamp('pf_g_elder', 30, 1, 'BW_GYM', 'Gym door')                # door (36, 12)
+    d['guild'] = m.stamp('pf_g_tree6', 13, 19, 'BW_GUILD', 'Guildhall door')     # door (17, 26)
+    d['pc'] = m.stamp('gl_ell', 45, 19, 'BW_PC', 'Poke Center door')             # warm steep-roof lodge w/ tea patio, door (47, 25) exact!
+    d['house1'] = m.stamp('pf_g_tree4', 58, 17, 'BW_HOUSE1', 'Treetop House door')  # door (60, 23)
+    d['mart'] = m.stamp('gl_flat2', 25, 39, 'BW_MART', 'Mart door')              # steep-shingle timber mart, door (29, 43) exact!
+    d['chapel'] = m.stamp('sh_big', 55, 34, 'BW_CHAPEL', 'Chapel door')          # door (63, 42) + Locked door (58, 42) exact!
+    d['house2'] = m.stamp('pf_g_tree4', 40, 44, 'BW_HOUSE2', "Cutter's House door")  # door (42, 50)
     m.stamp('pf_g_tree2', 39, 27)                                                # the Gathering Tree on the green
     hd = []
+    # Clear organic meadow pocket right around the SW cottage gl_cot (24, 49) while keeping the lush south forest rim!
+    for y in range(49, 59):
+        for x in range(23, 32):
+            if m.cls[y, x] == 'T': m.cls[y, x] = '.'
     for nm, x, y in (('pf_g_tree4p', 20, 36), ('pf_g_tree2', 57, 7), ('pf_g_tree2', 66, 14),
-                     ('pf_g_tree2', 46, 50), ('sh_small', 65, 22), ('sh_small', 50, 35), ('sh_ell', 23, 49), ('pf_g_tree2', 8, 54),
+                     ('pf_g_tree2', 46, 50), ('gl_shed', 65, 22), ('gl_shed', 50, 36), ('gl_cot', 24, 49), ('pf_g_tree2', 8, 54),
                      ('pf_g_tree2', 67, 40)):
         if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.dT') and not (nm.startswith('pf_g') and (m.cls[y:y + STAMPS[nm]['h'], x:x + STAMPS[nm]['w']] == 'd').any()):
             m.stamp(nm, x, y)
@@ -138,18 +155,15 @@ def build(preview=None):
             d['lantern'] = m.stamp('pf_g_tree4', lx, ly, 'BW_LANTERN', 'Lantern House door', blend=True); break
     else: print('  (no room for the Lantern House tree)')
     for dx, dy in list(d.values()) + hd: m.doorpath((dx, dy), depth=8)
-    for y in range(58, 63):                                  # a clearing round the weavers' row house: no canopy over its eaves
-        for x in range(20, 34):
-            if m.cls[y, x] == 'T': m.cls[y, x] = '.' if y < 62 else 'T'
-    for x, y in ((38, 31), (39, 33), (43, 31), (42, 33), (44, 32), (37, 32)):     # flowers round the Gathering Tree
+    for x, y in ((38, 31), (39, 33), (43, 31), (42, 33), (44, 32), (37, 32), (45, 27), (44, 27)):  # lush blossoms round the Gathering Tree & PC Lodge
         if m.cls[y, x] == '.' and not m.taken[y, x]: m.tile(m.decor['flowers'][(x * 3 + y) % 6], x, y, 1)
     put = lambda nm, x, y, on='.d': (m.stamp(nm, x, y) if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on=on) and not m.cliff[y:y + STAMPS[nm]['h'], x:x + STAMPS[nm]['w']].any() else print('  (no room for %s at %d,%d)' % (nm, x, y)))
-    put('pf_pcsign', 49, 27)
-    deck(m, 22, 23, 7, 4, stairs=24)                         # the weavers' deck beside the Guildhall tree
-    deck(m, 51, 52, 5, 3, stairs=52)                         # lantern decks, south-east
-    deck(m, 59, 52, 5, 3, stairs=61)
+    put('pf_pcsign', 44, 25)
+    deck(m, 22, 23, 7, 4, stairs=24)                         # the weavers' cedar deck beside the Guildhall tree
+    deck(m, 51, 52, 5, 3, stairs=52, open_e=(52, 53))        # lantern cedar decks, south-east (open onto bridge)
+    deck(m, 59, 52, 5, 3, stairs=61, open_w=(52, 53))
     walkway(m, 56, 58, 52)
-    walkway(m, sx(30) - 2, sx(31) + 4, 30)                   # the Thistledown Lea road over the stream
+    walkway(m, sx(30) - 2, sx(31) + 4, 30)                   # cedar plank bridge over the stream
     # ---------------------------------------------------------------- events
     P('To Gossamer Wood', (35, 63)); P('To Gossamer Wood b', (36, 63))
     E.append({'type': 'sign', 'name': 'North Gate sign', 'at': list(m.snap(51, 4, '.d', r=3)), 'post': False,
@@ -181,19 +195,31 @@ def build(preview=None):
     missing = SE.unplaced(120)
     if missing: raise SystemExit('briarwick: script events not placed: %s' % missing)
     m.events += E
+    # Keep Poke Center doorstep & Briarwick Fly/HealingSpot (47, 26) strictly clear of snapped props!
+    m.taken[26, 47] = True
     # ---------------------------------------------------------------- dressing
-    for nm, x, y in (('pf_p_loom', 23, 24), ('pf_p_loom', 27, 24), ('pf_p_laundry', 23, 23), ('pf_p_vat_b', 13, 36),
-                     ('pf_p_vat_r', 15, 37), ('pf_p_vat_y', 13, 39), ('sh_crates', 51, 52), ('sh_crates', 62, 52),
+    for nm, x, y in (('pf_p_loom', 23, 24), ('pf_p_loom', 27, 24), ('pf_p_laundry', 23, 23), ('pf_p_vat_b', 14, 36),
+                     ('pf_p_vat_r', 15, 37), ('pf_p_vat_y', 14, 39), ('sh_crates', 51, 52), ('sh_crates', 62, 52),
                      ('pf_logbench', 59, 53), ('sh_campfire', 38, 36), ('sh_crates', 47, 29), ('pf_p_silk', 54, 52), ('pf_p_silk', 60, 52),
-                     ('pf_logbench', 38, 33), ('pf_logbench', 42, 33), ('hb_tables', 33, 30), ('hb_dyeline', 14, 34), ('hb_rugline', 31, 35),
+                     ('pf_logbench', 38, 33), ('pf_logbench', 42, 33), ('hb_tables', 33, 30), ('hb_dyeline', 15, 34), ('hb_rugline', 31, 35),
                      ('hb_boxes', 34, 37), ('hb_cask', 44, 29), ('hb_washline', 62, 26), ('hb_barrel', 53, 26), ('hb_tables', 44, 37),
                      ('pf_logbench', 20, 47), ('hb_keg', 31, 43), ('hb_barrel2', 57, 46), ('hb_rugline2', 20, 28), ('pf_logbench', 47, 44),
-                     ('hb_boxes2', 37, 51), ('hb_cask', 31, 54), ('pf_p_awning', 33, 29), ('pf_p_awning', 44, 36), ('hb_fish', 36, 29), ('hb_barrel', 47, 36)):
+                     ('hb_boxes2', 37, 51), ('hb_cask', 31, 54), ('pf_p_awning', 33, 29), ('pf_p_awning', 44, 36), ('hb_fish', 36, 29), ('hb_barrel', 47, 36),
+                     # Cozy Pass-2 village craft: flower planters, stone benches, well, & dye-mill barrels
+                     ('pf_planter0', 42, 26), ('pf_planter1', 26, 44), ('pf_planter2', 60, 43), ('pf_planter3', 31, 44),
+                     ('pf_stonebench', 32, 21), ('pf_stonebench', 40, 21), ('pf_well', 44, 42)):
         st = STAMPS[nm]
         if m.free(x, y, st['w'], st['h'], on='.dD') or all(m.cls[y + j, x + i] == 'D' for i in range(st['w']) for j in range(st['h'])):
             m.over += [(z, x + i, y + j, t) for z in (1, 2) for j in range(st['h']) for i in range(st['w']) for t in [st['layers'][z][j][i]] if t]
             m.taken[y:y + st['h'], x:x + st['w']] = True
         else: m.near(nm, x, y, on='.d', r=2)
+    # Shoreline reeds, azaleas, ferns & stream stones along the curved dye-mill brook
+    for nm, x, y in (('nt_reed0', 11, 33), ('nt_reed1', 12, 35), ('nt_reed0', 13, 41), ('nt_reed1', 18, 47),
+                     ('nt_reed0', 12, 52), ('nt_azalea0', 33, 19), ('nt_azalea1', 42, 19), ('nt_azalea2', 32, 59),
+                     ('nt_azalea0', 39, 59), ('nt_azalea1', 55, 29), ('nt_azalea2', 20, 49)):
+        st = STAMPS[nm]
+        if m.free(x, y, st['w'], st['h'], on='.t') and not m.cliff[y:y + st['h'], x:x + st['w']].any():
+            m.stamp(nm, x, y)
     for y in range(0, 3):                                     # above the elder's crown: wild grass, not lawn
         for x in range(26, 47):
             if m.cls[y, x] == '.' and not m.taken[y, x]: m.cls[y, x] = 't'
@@ -208,14 +234,28 @@ def build(preview=None):
                       (33, 23, 1), (43, 21, 1), (56, 27, 1), (24, 42, 1), (52, 37, 1), (30, 49, 1), (42, 41, 1), (66, 36, 1)):
         m.trees(cx, cy, n, TREES, r=3, seed=cx + cy * 5)
     for x, y in ((34, 22), (42, 27), (32, 38), (49, 35), (37, 48), (58, 29), (26, 31), (19, 30), (33, 29), (50, 45), (22, 46),
-                 (16, 40), (45, 55), (57, 55), (61, 46), (32, 55), (25, 19)):
+                 (16, 40), (45, 55), (57, 55), (61, 46), (32, 55), (25, 19), (33, 60), (38, 60)):
         if m.free(x, y - 1, 1, 2, on='.'): m.stamp('pf_lantern', x, y - 1)
-    m.beds(prefixes=('sh_',))
+    m.beds(prefixes=('sh_', 'gl_'))
     print('  yard trees', m.autotrees(26, TREES, seed=7, gap=0, box=(12, 14, 68, 60)))
     m.greenfill(2)
     # ---------------------------------------------------------------- paint
     m.paint()
-    garlands(m, ((33, 48, 28, 0), (33, 48, 38, 1), (44, 50, 27, 2), (17, 28, 30, 3), (50, 54, 33, 1), (33, 38, 56, 2), (32, 37, 45, 3)))
+    # Seat opaque Sheridan cedar deck planks on Layer 0 so deck props (looms, crates, silk racks, benches) sit on cedar, never grass!
+    for dx_, dy_, tid_ in getattr(m, '_deck_tiles', ()):
+        m.L[0, dy_, dx_] = tid_
+        if m.L[1, dy_, dx_] == tid_:
+            m.L[1, dy_, dx_] = 0
+    # Clean stray top-right pole tile (3255) from gl_cot at (24, 49) -> (30, 49)
+    if m.L[2, 49, 30] == 3255:
+        m.L[2, 49, 30] = 0
+    # Warm stepping stones along Loomhouse stair plaza, Gathering Tree green, and South Gossamer approach
+    st0 = STAMPS['pf_stepstone0']['layers'][1][0][0]
+    st1 = STAMPS['pf_stepstone1']['layers'][1][0][0]
+    for sx_, sy_ in ((36, 19), (37, 22), (39, 25), (35, 32), (45, 32), (36, 59), (35, 61), (47, 26), (29, 44)):
+        if m.inb(sx_, sy_) and m.cls[sy_, sx_] == 'd' and m.L[1, sy_, sx_] == 0 and m.L[2, sy_, sx_] == 0:
+            m.L[1, sy_, sx_] = st0 if (sx_ + sy_) % 2 == 0 else st1
+    garlands(m, ((33, 48, 28, 0), (33, 48, 38, 1), (44, 50, 27, 2), (17, 28, 30, 3), (50, 54, 33, 1), (33, 38, 56, 2), (32, 37, 45, 3), (34, 38, 60, 0)))
     m.scatter(9, seed=21, on='.T')
     m.seal_against([{'dir': 'N', 'offset': 52, 'to': 566, 'to_offset': 38}], spans=[('N', 52, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])
     if preview: m.preview(preview, 0.5)

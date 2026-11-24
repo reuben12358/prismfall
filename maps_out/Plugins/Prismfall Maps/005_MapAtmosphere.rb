@@ -55,7 +55,7 @@ module PrismfallMaps
     295 => [4, 8, -6, 0],   # Cathedral of the Evergreen
     520 => [4, 4, -4, 0],   # The Ferrymen's Mile
     521 => [6, 4, -4, 0],   # Windfall Row
-    522 => [-18, -22, 26, 70],   # The Glassed Orchard
+    522 => [-14, -18, 22, 46],   # The Glassed Orchard
     524 => [-28, -8, -30, 25],   # Gossamer Wood
     548 => [-46, -50, 4, 90],   # Cocoonfall Hollow
     525 => [-40, -24, -30, 40],   # Gossamer Deepwood
@@ -67,7 +67,7 @@ module PrismfallMaps
     545 => [-14, -12, -2, 20],   # Brinecut Mine B1F
     546 => [-26, -30, -2, 34],   # Thistledown Manor
     547 => [-26, -30, -2, 34],   # Thistledown Manor - Attic
-    552 => [6, 4, -2, 0],   # The Dyers' Ford
+    552 => [10, 6, -6, 0],   # The Dyers' Ford
     560 => [-6, -2, 10, 10],   # Frostflat Causeway
     561 => [-10, -6, 6, 20],   # Gullcry Cliffs
     562 => [-10, -4, 14, 16],   # The Rimewood
@@ -114,10 +114,12 @@ module PrismfallMaps
     541 => ["prismfall_seamist", 0, 40, 0, 200, 1, 0],   # The Grey Saltings
     544 => ["prismfall_cave", 0, 36, 1, 100, 1, 0],   # Brinecut Mine 1F
     545 => ["prismfall_cave", 0, 44, 1, 100, 1, 0],   # Brinecut Mine B1F
+    552 => ["prismfall_seamist", 0, 24, 0, 200, 1, 0],   # The Dyers' Ford
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
     564 => ["prismfall_seamist", 0, 34, 1, 100, 1, 0],   # Gullcry Caves
     568 => ["prismfall_seamist", 0, 50, 0, 100, 1, 0],   # The Rehearsal
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
+    608 => ["prismfall_glass", 0, 48, 1, 200, 2, 1],   # The Lowlight (Shattered)
     920 => ["prismfall_seamist", 0, 24, 0, 200, 1, 0],   # The Rimed Sands
     925 => ["prismfall_seamist", 0, 60, 0, 150, 2, 0],   # The Steamline
     926 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Glass Dunes

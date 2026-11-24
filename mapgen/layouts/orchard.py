@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 """The Glassed Orchard (522, :BLEED): the Pruetts' orchard, turned to glass in one winter night.  44 x 40.
-Entry from Windfall Row on the west edge (0, 36-38).  The Bleed Veil is the shimmer line across the gate (x 4).  Orchard
-terraces rise to the east; the Pruett house stands glassed at the top.  Everything here is the Bleed copy of the
-Tectonic art (tileset 40, id + B): glass-blue foliage, ash-lilac ground, mauve-grey wood, a still gall-pink pond.
-Run:  python3 -I layouts/orchard.py && python3 -I build.py 522"""
-import os, sys, math
+Built on PF Rejuv Snow (tileset 52) with a living Sheridan meadow pocket west of the Bleed Veil (x <= 4, y >= 31)
+and a frosted crystal orchard rising across two stone-stair terraces to the glassed Pruett farmhouse in the NE.
+Entry from Windfall Row on the west edge (0, 36-38).  D1 Chime Rows overlay (puzzles/dungeons.py) and Glass Foal
+trial overlay (trial_overlay.py) attach on build.
+Run:  /usr/bin/python3 -I mapgen/layouts/orchard.py && /usr/bin/python3 -I mapgen/build.py --strict 522"""
+import os, sys, math, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from wildkit import Wild, save, say, trainer, once, vnoise, B, OBJ, CU
+import numpy as np
+import rkit as K
+from rkit import STAMPS
+import routekit as RK
+from routekit import Route
+import craftkit as CK
+from terrain import vnoise
+from wildkit import say
 
 W, H = 44, 40
 VX = 4                                     # the Veil column
@@ -19,96 +27,475 @@ def show_larch():
                       "$game_self_switches[[522, ev.id, 'A']] = true if ev\n$game_map.need_refresh = true"}
 
 
+def fog_event(name, opacity=58, blend=1, zoom=200, sx=2, sy=1, hue=0):
+    """Parallel event that sets the map fog once (RMXP command 204, subtype 1)."""
+    return {'type': 'event', 'name': 'Atmosphere', 'at': [0, 0],
+            'pages': [{'trigger': 'parallel', 'commands': [{'comment': 'fog: %s (see REQUESTS.md item 3)' % name},
+                                                           {'raw': [204, [1, name, hue, opacity, blend, zoom, sx, sy]]},
+                                                           {'selfswitch': ['A', True]}]},
+                      {'cond': {'self': 'A'}}]}
+
+
+def _in_living(x, y):
+    """Living Sheridan grass pocket west of the Bleed Veil (x <= 4, y >= 31, feathering gently NW)."""
+    if x <= 3 and y >= 31:
+        return True
+    if x == 4 and y >= 32:
+        return True
+    return False
+
+
 def build():
-    c = Wild(W, H, 522, base='a')
-    c.forest_glyph = 'U'
-    c.stair_kind = 'stairs_stone@40'      # worn stone: wood would read wrong in the glass
-    def hf(x, y):
-        if x > 30 + 2 * math.sin(y / 4.0) and y < 18 + 2 * (vnoise(x, y, 3, 4.0) - 0.5): return 2
-        if x > 14 + 3 * math.sin(y / 5.0) + 2 * (vnoise(x, y, 5, 4.0) - 0.5) and y < 31 + 2 * math.sin(x / 6.0): return 1
-        return 0
-    c.set_heights(hf)
-    c.notch(18, 20, 30, 1, depth=6); c.notch(33, 35, 17, 2, depth=5)
-    # the still pond: gall-pink water, a fallen glass branch across it
-    c.pond(9, 21, 4.0, 3.0, 4, c='w', only='a')
-    c.path([(0, 37), (3, 37), (8, 36), (14, 34), (19, 35), (19, 31)], 2, 'D', 1, only='a')
-    c.path([(19, 26), (24, 22), (31, 21), (34, 19)], 2, 'D', 2, only='a')
-    c.path([(34, 14), (34, 9), (30, 6)], 2, 'D', 3, only='a')
-    c.path([(24, 22), (24, 12), (19, 8)], 2, 'D', 4, only='a')                           # orchard alley north
-    c.path([(8, 36), (6, 30), (8, 26)], 2, 'D', 5, only='a')                              # pond walk
-    c.stairs(18, 30); c.stairs(33, 17)
-    c.cliffs(face=2, keep='w')
+    # Crisp 3-row frosted Sheridan terrace cliff (top lip, mid wall, base) — proportional to a 44x40 orchard
+    if 'shs3' not in K.KITS:
+        K.KITS['shs3'] = dict(K.KITS['shs'], rows=[K.KITS['shs']['rows'][0],
+                                                   K.KITS['shs']['rows'][1],
+                                                   K.KITS['shs']['rows'][3]])
+
+    r = Route(522, W, H, theme='snow', kit='shs3', base='.')
+    m = r.m
+    # Smooth pale frosted glass-sheet turf (18442..18445) + silver frosted tall grass (18446, encounter tag 2)
+    m.grass = [[18442, 18443], [18444, 18445]]
+    m.tall = 18446
+    m.STAIRS = K.STAIRS_STONE
+    m.grass2 = None
+    m.auto['e'] = ('KristilineDirt', 'rejuvenation')
+    m.keep_under = 'de'
+
+    rng = random.Random(5222)
+
+    # ---- 1. Heightmap: two crisp unbroken frosted orchard terraces climbing NE ----
     for y in range(H):
         for x in range(W):
-            if c.g[y][x] == 'C': c.g[y][x] = 'B'
-    # border: glassed wood, thick on the north and east, a broken hedge line in the south
+            # Upper NE Pruett homestead terrace (h=2): clean unbroken west wall at x=25, south lip at y=14..15
+            if x >= 25 and y <= (15 if x <= 31 else 14):
+                m.ht[y, x] = 2
+                continue
+            # Mid central/east orchard terrace (h=1): clean unbroken west wall at x=15, gentle south lip around y=29
+            if x >= 15 and y <= (29 if x <= 30 else 30):
+                m.ht[y, x] = 1
+
+    # Clean square shelves around the two stone stairs & key landings
+    m.ht[26:30, 17:22] = 1
+    m.ht[30:35, 16:23] = 0
+    m.ht[11:15, 32:37] = 2
+    m.ht[15:20, 31:38] = 1
+    # Ensure Cracked tree M (23, 16), Glassed Wurmple (24, 18), and Glass farmhand (27, 13) sit cleanly flat
+    m.ht[15:19, 21:25] = 1
+    m.ht[11:16, 25:32] = 2
+    # Ensure D1 NE nook (38, 1..4) and Carbink (38, 6) are flat on h=2
+    m.ht[0:10, 35:43] = 2
+    # Ensure SW entry + Veil + pond + NW grove are cleanly h=0
+    m.ht[31:40, 0:15] = 0
+    m.ht[0:32, 0:15] = 0
+
+    # ---- 2. Stone stairs cutting the two terrace cliffs ----
+    CK.stair(r, 18, 29, w=3, h=1)       # South orchard stair: rows 29..31, top 28, bottom 32 (Chime post 19,33!)
+    CK.stair(r, 33, 14, w=3, h=2)       # Upper homestead stair: rows 14..16, top 13, bottom 17
+
+    # ---- 3. Still Mirror Pond on lower west orchard ----
+    px, py = 9, 23
+    for y in range(19, 28):
+        for x in range(4, 15):
+            dx = (x - px) / 4.1
+            dy = (y - py) / 2.7
+            if dx * dx + dy * dy + 0.16 * (vnoise(x, y, 5221, 3.0) - 0.5) <= 1.0:
+                if m.ht[y, x] == 0:
+                    m.cls[y, x] = 'w'
+    # Majority smooth pond shoreline for clean autotile edges
+    for _ in range(2):
+        cur = (m.cls == 'w')
+        pad = np.pad(cur, 1)
+        nb = sum(np.roll(np.roll(pad, dy, 0), dx, 1)[1:-1, 1:-1] for dy in (-1, 0, 1) for dx in (-1, 0, 1)) - cur
+        m.cls[~cur & (nb >= 5) & (m.ht == 0)] = 'w'
+        m.cls[cur & (nb <= 3)] = '.'
+
+    # ---- 4. Orchard alleys & paths ----
+    # Living dirt lane through SW gate right up to the Veil (soft organic country lane, not a rigid box)
+    for x in range(0, 5):
+        for y in (36, 37):
+            m.cls[y, x] = 'e'
+            r.road_mask[y, x] = True
+    for x in (0, 1, 2):
+        m.cls[38, x] = 'e'
+        r.road_mask[38, x] = True
+
+    def lane(pts, width=2, cls='d'):
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            steps = max(abs(x1 - x0), abs(y1 - y0), 1) * 3
+            for i in range(steps + 1):
+                t = i / float(steps)
+                cx = x0 + (x1 - x0) * t
+                cy = y0 + (y1 - y0) * t
+                for yy in range(int(cy) - 2, int(cy) + 3):
+                    for xx in range(int(cx) - 2, int(cx) + 3):
+                        if not m.inb(xx, yy):
+                            continue
+                        if (xx - cx) ** 2 + (yy - cy) ** 2 <= (width * 0.60) ** 2:
+                            if m.cls[yy, xx] != 'w':
+                                m.cls[yy, xx] = cls
+                                r.road_mask[yy, xx] = True
+
+    # Lower lane from Veil to South Stair + West Pond & Biscuit Alley
+    lane([(5, 37), (8, 35), (13, 35), (19, 34), (19, 32)], width=2.0)
+    lane([(8, 35), (5, 30), (4, 24), (4, 16), (8, 13), (11, 13)], width=1.7)
+    # Mid terrace lanes: South Stair -> Wurmple -> East Stair + SE Cracked tree H / Glass apple + NW mid alley
+    lane([(19, 28), (19, 24), (24, 21), (24, 18), (30, 19), (34, 17)], width=2.0)
+    lane([(19, 24), (18, 20), (22, 17), (23, 16)], width=1.6)
+    lane([(24, 21), (30, 24), (35, 25), (38, 24)], width=1.8)
+    # Upper homestead courtyard: East Stair -> Foal -> Pruett House -> Farmhand -> Carbink -> D1 Nook
+    lane([(34, 13), (34, 10), (30, 10), (30, 9)], width=1.9)
+    lane([(30, 12), (27, 13)], width=1.6)
+    lane([(34, 10), (38, 7), (38, 4)], width=1.7)
+    # Keep living SW entry cleanly on 'e'
+    for x in range(0, 5):
+        for y in (36, 37):
+            m.cls[y, x] = 'e'
+    for x in (0, 1, 2):
+        m.cls[38, x] = 'e'
+
+    # ---- 5. Reserve ALL sacred event / puzzle / trial / building coordinates ----
+    # Exact baseline coordinates preserved 100%!
+    P = {
+        'juno': [2, 35],
+        'larch': [2, 38],
+        'farmhand': [27, 13],
+        'apple': [38, 24],
+        'wurmple': [24, 18],
+        'carbink': [38, 6],
+        'biscuit': [11, 13],
+        'house_sign': [30, 8],
+    }
+    must_keep = [
+        (0, 36), (0, 37), (0, 38), (1, 37), (1, 38), (2, 37), (3, 37),
+        (4, 35), (4, 36), (4, 37), (5, 36), (5, 37), (6, 37), (7, 37),
+        (2, 35), (2, 38),
+        (19, 33), (19, 32), (19, 28),          # D1 Chime post + South stair
+        (4, 16), (23, 16), (35, 25),           # D1 Cracked trees L, M, H
+        (38, 4), (38, 3), (38, 2), (38, 1),    # D1 Glass hedge + Lost satchel alcove
+        (8, 34), (18, 20), (30, 12), (34, 10), # Trial overlay Glass Foal coords
+        (27, 13), (38, 24), (24, 18), (38, 6), (11, 13),
+        (30, 9), (30, 10), (29, 9), (31, 9),   # Pruett house doorstep
+        (34, 13), (34, 17),                    # Upper stair landings
+    ]
+    for x, y in must_keep:
+        r.road_mask[y, x] = True
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                xx, yy = x + dx, y + dy
+                if m.inb(xx, yy) and (x, y) not in ((38, 1), (38, 2), (38, 3)):
+                    r.road_mask[yy, xx] = True
+
+    # ---- 6. Outer crystal forest border & sealed D1 NE alcove ----
     for y in range(H):
         for x in range(W):
-            if c.g[y][x] != 'a': continue
-            if y < 2 + 3 * vnoise(x, 1, 21, 5.0) or x > W - 3 - 3 * vnoise(1, y, 22, 5.0) or y > H - 2 - 2 * vnoise(x, 2, 23, 4.0) \
-               or (x < 2 + 2 * vnoise(3, y, 24, 4.0) and not 34 <= y <= 39):
-                c.g[y][x] = 'U'
-    # darker ash under the trees of each orchard row
+            if r.road_mask[y, x] or m.cls[y, x] in 'wde':
+                continue
+            if _in_living(x, y):
+                continue
+            if x == 38 and y <= 4:
+                continue
+            n_edge = 4 + int(round(1.6 * vnoise(x, 1, 21, 4.5)))
+            s_edge = H - 4 - int(round(1.5 * vnoise(x, 2, 23, 4.5)))
+            e_edge = W - 4 - int(round(1.6 * vnoise(1, y, 22, 4.5)))
+            w_edge = 3 + int(round(1.4 * vnoise(3, y, 24, 4.5)))
+            # Keep Pruett farmhouse yard (26..35, 2..11) clear of north woods
+            if 26 <= x <= 35 and y <= 11:
+                if y < 2:
+                    m.cls[y, x] = 'T'
+                continue
+            # Tightly seal the D1 NE alcove sides around x=38, y=0..3!
+            if y <= 3 and x in (36, 37, 39, 40):
+                m.cls[y, x] = 'T'
+                continue
+            if y == 0 and x == 38:
+                m.cls[y, x] = 'T'
+                continue
+            if y < n_edge or x > e_edge or (y > s_edge and x >= 6) or (x < w_edge and y < 30):
+                m.cls[y, x] = 'T'
+
+    # ---- 7. Frosted tall grass pockets tucked between orchard rows ----
+    grass_pockets = [
+        (8, 8, 4.8, 3.0),       # NW orchard wild drift
+        (12, 18, 2.8, 2.8),     # East of pond
+        (11, 30, 3.6, 2.4),     # SW frosted hollow
+        (20, 7, 4.2, 3.4),      # North-center mid terrace
+        (21, 13, 3.0, 2.4),     # Mid-north drift
+        (29, 27, 4.4, 2.4),     # South-east mid terrace
+        (36, 21, 3.0, 2.2),     # East bluff pocket
+        (10, 37, 3.2, 1.8),     # South lower hollow
+    ]
+    for cx, cy, rx, ry in grass_pockets:
+        for y in range(max(2, int(cy - ry - 1)), min(H - 2, int(cy + ry + 2))):
+            for x in range(max(2, int(cx - rx - 1)), min(W - 2, int(cx + rx + 2))):
+                if m.cls[y, x] == '.' and not r.road_mask[y, x] and not _in_living(x, y):
+                    d2 = ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2
+                    if d2 + 0.25 * (vnoise(x, y, 5229, 2.8) - 0.5) <= 1.0:
+                        m.cls[y, x] = 't'
+
+    # ---- 8. Paint terrain base (ground, autotiles, frosted cliffs, stone stairs) ----
+    m.paint_ground()
+    m.autotiles()
+    m.cliffs()
+    m.paint_stairs()
+
+    # Subtle snow-drift variation on frosted glass ground (breaks up flat expanses gently)
     for y in range(H):
         for x in range(W):
-            pass
-    gate = (0, 37)
-    c.need(gate, (30, 7), (11, 13), (38, 24))
-    c.keep_clear([(0, 36), (0, 37), (0, 38), (2, 37), (VX, 37)], 2)
-    P = {'juno': [2, 35], 'larch': [2, 39 - 1], 'farmhand': c.spot(27, 13, 'aA'), 'apple': c.spot(38, 24, 'aA'),
-         'wurmple': c.spot(24, 18, 'D'), 'carbink': c.spot(40, 6, 'aA', r=4), 'biscuit': c.spot(11, 13, 'aA', r=4),
-         'house_sign': c.spot(30, 8, 'aA')}
-    for k in ('juno', 'larch'):
-        c.taken[P[k][1]][P[k][0]] = True
-    c.seal()
-    # ---- the Pruett house, glassed whole, at the top of the orchard
-    c.land('st:t_house_red', 28, 2, on='aA', bleed=True, r=3)
-    c.land('st:t_bench', 36, 9, on='aA', bleed=True)
-    # ---- the orchard: rows of glass apple trees on each terrace, gaps where trees have shattered
-    placed = 0
-    for row, y0 in enumerate(range(4, 34, 5)):
-        for x0 in range(5 + (row % 2) * 2, 40, 4):
-            k = (x0 * 13 + y0 * 7) % 9
-            if k == 0:                                     # a shattered tree: stump or fallen trunk in the row
-                c.obj('stump_grey' if row % 2 else 'fallen', x0, y0 + 1, on='aA', bleed=True); continue
-            if c.obj('crystal_tree' if k > 2 else 't_round', x0, y0, on='aA', bleed=k <= 2):
-                placed += 1
-                for dx, dy in ((-1, 3), (2, 3), (0, 3), (1, 3)):          # fallen glass apples under the canopy
-                    xx, yy = x0 + dx, y0 + dy
-                    if c.inb(xx, yy) and c.g[yy][xx] in 'aA' and not c.o[1][yy][xx] and not c.taken[yy][xx] and (xx + yy) % 2:
-                        c.o[1][yy][xx] = [8136, 8144, 8137, 8152][(xx * 3 + yy) % 4]
-    print('  orchard trees in rows:', placed)
-    # ---- crystal growth and dead trees; glass-thread webs strung between the rows
-    c.trees(['cry_violet', 'cry_blue', 'cry_teal', 'cry_violet_m', 'cry_blue_m', 'r_cry_spray', 'r_cry_big'], 16, on='aA', seed=2)
-    c.trees(['cry_violet_s', 'cry_blue_s', 'cry_teal_s', 'r_cry_s', 'r_cry_s2'], 26, on='aA', seed=3)
-    c.trees(['dead1', 'dead2', 'dead3', 'dead4', 'log_big', 'roots', 'creep1'], 12, on='aA', seed=4, bleed=True)
-    for nm, x, y in (('gstump_dark', 6, 4), ('crag_bare', 37, 31), ('boulder2', 14, 4), ('corpse', 40, 15)):
-        c.land(nm, x, y, on='aA', bleed=True)
-    # the gateposts at the Veil: two stone pillars, a broken arch of glass thread above
-    c.obj('pillar_moss', VX, 33, on='aA', bleed=True, force=True); c.obj('pillar_moss2', VX, 38, on='aA', bleed=True, force=True)
-    for i, (x, y) in enumerate(((22, 15), (27, 10), (31, 26), (12, 30), (38, 19), (17, 6))):
-        c.overlay(['web_nw', 'web_ne', 'web_sw', 'web_se'][i % 4] if False else 'web_s', x, y, bleed=False)
-    for x, y in ((21, 16), (22, 16), (26, 11), (27, 11), (30, 27), (31, 27), (37, 20), (38, 20)):
-        if not c.o[2][y][x]: c.o[2][y][x] = CU['strand_h']
-    # ---- ground: glass apples (crystal shards) in drifts, ash tufts, a few pale flowers that are wrong
-    c.scatter([([8136, 8137, 8138, 8144, 8145, 8152, 8153], 0.66, 2.6, 0.75)], [(8139, 3), (8140, 3), (8146, 2), (8154, 2)], density=0.05, on='aA', seed=7)
-    c.scatter([([947, 939, 955], 0.60, 3.0, 0.7), ([1024, 1035], 0.82, 2.0, 0.6)], [(1164, 10), (1172, 5), (1180, 2), (1189, 2)],
-              density=0.22, on='aA', bleed=True, seed=8)
-    c.edge_decor([8136, 8144, 8152, 8137], 0.25, on='aA', by='w', seed=2)
-    c.water_decor(0.10, c='w')
-    c.path_decor([8136, 8144], 0.04, on='D')
-    # ---- the Veil: a shimmer line across the gate (events) and light-bending sparkles overhead
-    for y in range(31, 40):
-        if c.g[y][VX] in 'aAD' or y in (35, 36, 37, 38): c.o[2][y][VX] = CU['veil']
-    for y in range(33, 40):
-        for x in (VX - 1, VX + 1):
-            if (x + y) % 3 == 0 and not c.o[2][y][x]: c.o[2][y][x] = CU['veil']
-    # ---- events (story/20_SCRIPT_CH0-2.md, "Map 522")
+            if m.cls[y, x] == '.' and not _in_living(x, y) and not m.cliff[y, x]:
+                if vnoise(x, y, 5225, 3.4) > 0.62:
+                    m.L[0, y, x] = 10395   # Kristiline crystalline snow drift
+
+    # Delicate glass-sheen sparkles floating lightly on Still Mirror Pond
+    for y in range(H):
+        for x in range(W):
+            if m.cls[y, x] == 'w' and (x * 7 + y * 13) % 11 == 0:
+                m.L[2, y, x] = 25824 + ((x + y) % 3)
+
+    # ---- 9. Living Sheridan green pocket west of the Bleed Veil ----
+    for y in range(28, H):
+        for x in range(0, 5):
+            if _in_living(x, y) or (x <= 3 and y >= 29):
+                if m.cls[y, x] in '.tT':
+                    m.L[0, y, x] = K.SH_GRASS[y & 1][x & 1]
+                    if m.cls[y, x] == 't':
+                        m.L[1, y, x] = K.SH_TALL
+                    elif not r.road_mask[y, x] and (x * 7 + y * 11) % 4 == 0:
+                        m.L[1, y, x] = K.DECOR_SH['flowers'][(x + y) % 4]
+                    elif not r.road_mask[y, x] and (x * 5 + y * 3) % 3 == 0:
+                        m.L[1, y, x] = K.DECOR_SH['green'][(x + y) % len(K.DECOR_SH['green'])]
+
+    # ---- 10. Place Pruett Farmhouse, landmarks, gateposts, and Veil ----
+    # Frosted Pruett Farmhouse (kf_aframe 5x7, door at [2, 6] -> (30, 8) exact!)
+    m.stamp('kf_aframe', 28, 2)
+    # Stone bench & frosted orchard barrels beside the farmhouse
+    m.stamp('pf_stonebench', 35, 9)
+    m.stamp('hb_barrels', 26, 7)
+    m.stamp('hb_barrel', 33, 7)
+    # Stone doorstep apron under (30, 9)
+    m.L[0, 9, 29] = 10395; m.L[0, 9, 30] = 10395; m.L[0, 9, 31] = 10395
+
+    # Mossy living stone gateposts framing the Bleed Veil (x=4, y=33..34 and y=38..39; leaves 35,36,37 open!)
+    m.stamp('nr_col', VX, 33)
+    m.stamp('nr_col', VX, 38)
+
+    # Living green oaks, pines & shrubs framing the SW pocket cleanly (zero overlap)
+    m.stamp('tr_oak2', 0, 29)
+    m.stamp('tr_pine', 3, 29)
+    m.stamp('tr_pine', 0, 32)
+    m.stamp('nt_bush0', 3, 33)
+    m.stamp('nt_bush1', 0, 39)
+
+    # Single pale fallen glass-frosted branch resting beside the Still Mirror Pond
+    m.stamp('nt_birch_h', 8, 20)
+
+    # ---- 11. Sealed D1 NE Alcove crystal walls (guaranteeing (38,3) blocks (38,1..2)) ----
+    m.stamp('nt_pine_purp', 36, 0)
+    m.stamp('nt_pine_blue', 39, 0)
+    m.stamp('cr_purple_t', 37, 2)
+    m.stamp('cr_teal_t', 39, 2)
+    m.stamp('nt_pine_blue', 37, 0)
+    m.stamp('cr_blue_c', 38, 0)
+    for yy in range(1, 5):
+        m.taken[yy, 38] = False
+
+    # ---- 12. Reserve corridors before tree placement ----
+    reserved = set(must_keep) | {(38, 1), (38, 2), (38, 3), (38, 4), (30, 8)}
+    for rx, ry in reserved:
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                if m.inb(rx + dx, ry + dy):
+                    if (rx, ry) in ((38, 1), (38, 2), (38, 3), (38, 4)) and dx != 0:
+                        continue
+                    r.road_mask[ry + dy, rx + dx] = True
+
+    def can_put_tree(nm, tx, ty, allow_border=False, strict_road=True):
+        s = STAMPS[nm]
+        w, h = s['w'], s['h']
+        if tx < 0 or ty < 0 or tx + w > W or ty + h > H:
+            return False
+        # Do not place frosted crystal trees inside living SW pocket
+        if tx < 5 and ty + h > 30:
+            return False
+        # Do not touch Pruett house or D1 alcove corridor (38, 1..4)
+        if tx < 34 and tx + w > 27 and ty < 10 and ty + h > 1:
+            return False
+        if tx <= 38 < tx + w and ty <= 4 and ty + h > 0:
+            return False
+        h0 = int(m.ht[min(H - 1, ty + h - 1), min(W - 1, tx + w // 2)])
+        # Check bottom 2 rows (solid trunk/base footprint) for collisions, roads, cliffs, water
+        for dy in range(max(0, h - 2), h):
+            for dx in range(w):
+                xx, yy = tx + dx, ty + dy
+                if m.taken[yy, xx] or m.cliff[yy, xx]:
+                    return False
+                if m.cls[yy, xx] in 'wde':
+                    return False
+                if strict_road and r.road_mask[yy, xx]:
+                    return False
+                if (xx, yy) in reserved:
+                    return False
+                if not allow_border and m.ht[yy, xx] != h0:
+                    return False
+        # Prevent tall crowns from overwriting already-placed trunks OR the two stone staircases
+        for dy in range(0, max(0, h - 2)):
+            for dx in range(w):
+                xx, yy = tx + dx, ty + dy
+                if m.bodym[yy, xx]:
+                    return False
+                if (18 <= xx <= 20 and 29 <= yy <= 31) or (33 <= xx <= 35 and 14 <= yy <= 16):
+                    return False
+        return True
+
+    # ---- 13. Place Signature Frosted Glass Apple Orchard Rows FIRST (NW, Mid-North, SE, & D1 Anchors!) ----
+    # Deliberate spaced rows of frosted apple trees (kf_tree, nt_tree_blue, nt_tree_purp, nt_deadtree)
+    # including anchor trees beside D1 Cracked Trees L (4,16), M (23,16), and H (35,25)!
+    hero_orchard = [
+        # NW Orchard Grove (around Biscuit (11,13) & Cracked tree L (4,16))
+        ('kf_tree', 5, 5), ('nt_tree_blue', 10, 6), ('nt_tree_purp', 5, 11),
+        ('kf_tree', 10, 15), ('nt_deadtree', 6, 16),
+        # Mid-North Orchard Terrace (around Cracked tree M (23,16) & Wurmple (24,18))
+        ('kf_tree', 17, 5), ('nt_tree_purp', 21, 5), ('nt_tree_blue', 17, 10),
+        ('kf_tree', 20, 10), ('nt_tree_purp', 17, 15), ('nt_deadtree', 21, 14),
+        # Central & SE Orchard Terrace (around Cracked tree H (35,25) & Glass apple (38,24))
+        ('kf_tree', 25, 22), ('nt_tree_blue', 29, 21), ('kf_tree', 33, 19),
+        ('nt_tree_purp', 37, 18), ('nt_tree_blue', 30, 25),
+        # South lower frosted grove
+        ('kf_tree', 11, 29), ('nt_tree_purp', 8, 28),
+    ]
+    placed_orchard = 0
+    for nm, ax, ay in hero_orchard:
+        if can_put_tree(nm, ax, ay, allow_border=False, strict_road=False):
+            m.stamp(nm, ax, ay)
+            placed_orchard += 1
+            # Drop gleaming ruby crystal glass apple beside select trunks on free grass
+            s = STAMPS[nm]
+            for dx, dy in ((0, s['h']), (s['w'] - 1, s['h']), (-1, s['h'] - 1)):
+                rx, ry = ax + dx, ay + dy
+                if m.inb(rx, ry) and m.cls[ry, rx] == '.' and not m.taken[ry, rx] and not r.road_mask[ry, rx] and not m.cliff[ry, rx]:
+                    if (rx * 3 + ry * 5) % 2 == 0:
+                        m.stamp('cr_red_c', rx, ry)
+                        break
+
+    # ---- 14. Lush Organic Multi-Species Crystal Canopy Border (N, E, S, NW — ZERO soldier rows!) ----
+    border_big = ['nt_tree_blue', 'nt_tree_purp', 'kf_tree', 'nt_tree_blue', 'nt_tree_purp']
+    border_small = ['nt_pine_blue', 'nt_pine_purp', 'nt_pine_blue', 'nt_pine_purp', 'nt_tree_purp']
+    pts_border = []
+    for ty in range(0, H - 2, 2):
+        for tx in range(0, W - 2, 2):
+            jx = (tx * 7 + ty * 13) % 2
+            jy = (tx * 11 + ty * 5) % 2
+            pts_border.append((min(W - 3, tx + jx), min(H - 3, ty + jy)))
+    rng.shuffle(pts_border)
+    for tx, ty in pts_border:
+        cx, cy = min(W - 1, tx + 1), min(H - 1, ty + 2)
+        if m.cls[cy, cx] != 'T':
+            continue
+        if _in_living(cx, cy) or (cx <= 4 and cy >= 28):
+            continue
+        nm = border_big[(tx * 5 + ty * 9) % len(border_big)]
+        if can_put_tree(nm, tx, ty, allow_border=True):
+            m.stamp(nm, tx, ty)
+        else:
+            nm2 = border_small[(tx * 3 + ty * 7) % len(border_small)]
+            if can_put_tree(nm2, tx, ty, allow_border=True):
+                m.stamp(nm2, tx, ty)
+
+    # Organic infill for any remaining border gaps
+    gap_pts = [(tx, ty) for ty in range(0, H - 2) for tx in range(0, W - 1) if m.cls[ty + 2, tx] == 'T']
+    rng.shuffle(gap_pts)
+    for tx, ty in gap_pts:
+        if m.taken[ty + 2, tx] or (tx <= 4 and ty >= 27):
+            continue
+        nm = rng.choice(['nt_pine_blue', 'nt_pine_purp'])
+        if can_put_tree(nm, tx, ty, allow_border=True):
+            m.stamp(nm, tx, ty)
+
+    # ---- 15. Additional Orchard Row Fillers ----
+    for row_i, y0 in enumerate(range(4, 33, 4)):
+        for x0 in range(5 + (row_i % 2) * 2, 39, 4):
+            k = (x0 * 11 + y0 * 7) % 10
+            if k == 0:
+                nm = 'nt_deadtree'
+            elif k in (1, 2, 3, 4):
+                nm = 'kf_tree'
+            elif k in (5, 6, 7):
+                nm = 'nt_tree_blue'
+            else:
+                nm = 'nt_tree_purp'
+            if can_put_tree(nm, x0, y0, allow_border=False):
+                m.stamp(nm, x0, y0)
+                placed_orchard += 1
+
+    print('  522 orchard trees placed:', placed_orchard)
+
+    # ---- 16. Crystal spires, Bleed shards, fallen ruby glass apples, & frosted undergrowth ----
+    spires = [
+        ('gd_spire', 25, 3), ('cr_purple_t', 34, 5), ('cr_teal_t', 26, 9),
+        ('gd_shard0', 13, 21), ('gd_shard1', 5, 22), ('cr_teal_t', 13, 25),
+        ('gd_spire', 22, 26), ('cr_purple_t', 15, 33), ('gd_shard0', 31, 18),
+        ('cr_teal_t', 39, 26), ('nt_log', 12, 31),
+    ]
+    for nm, sx, sy in spires:
+        s = STAMPS[nm]
+        ok = True
+        for dy in range(s['h']):
+            for dx in range(s['w']):
+                xx, yy = sx + dx, sy + dy
+                if not m.inb(xx, yy) or m.taken[yy, xx] or m.cliff[yy, xx] or r.road_mask[yy, xx] or m.cls[yy, xx] in 'wdeT':
+                    ok = False
+        if ok:
+            m.stamp(nm, sx, sy)
+
+    # Scatter walkable frost-flowers (9725), frosted twigs (10620), bleed sparkles (25824..25826),
+    # and sparse solid crystal clusters (avoiding cluttering Chime post (19,33))
+    for y in range(2, H - 2):
+        for x in range(2, W - 2):
+            if _in_living(x, y) or m.taken[y, x] or m.cliff[y, x]:
+                continue
+            if abs(x - 19) <= 3 and abs(y - 33) <= 1:
+                continue   # keep Chime post (19,33) framed cleanly
+            if m.cls[y, x] == '.' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+                rv = rng.random()
+                if not r.road_mask[y, x] and rv < 0.032:
+                    m.stamp(rng.choice(['cr_red_c', 'cr_red_c', 'cr_teal_c', 'cr_blue_c', 'gd_shard2']), x, y)
+                elif rv < 0.16:
+                    m.L[1, y, x] = rng.choice([9725, 9725, 10620])
+                elif rv < 0.24:
+                    m.L[2, y, x] = rng.choice([25824, 25825, 25826])
+            elif m.cls[y, x] == 'd' and m.L[2, y, x] == 0 and rng.random() < 0.06:
+                m.L[2, y, x] = rng.choice([25824, 25825, 25826])
+
+    # ---- 17. Commit all stamps & post-paint fixes (Pruett base + Bleed Veil!) ----
+    m.put_stamps()
+    # Patch kf_aframe bottom-left wall tile (28, 8) with solid frost-base tile 9232
+    m.L[1, 8, 28] = 9232
+    # Guarantee (38, 1..3) D1 nook corridor is clear of stray blocking tiles on L1/L2 (keeping stone road at y=4!)
+    for yy in range(1, 4):
+        m.L[1, yy, 38] = 0
+        m.L[2, yy, 38] = 0
+    # Guarantee every critical walkable coordinate is unobstructed
+    for rx, ry in [(4, 35), (4, 36), (4, 37), (1, 37), (2, 37), (3, 37), (5, 37), (6, 37),
+                   (4, 16), (23, 16), (35, 25), (19, 33), (8, 34), (18, 20), (30, 12), (34, 10),
+                   (27, 13), (38, 24), (24, 18), (38, 6), (11, 13), (30, 9)]:
+        if m.L[1, ry, rx] in (22895, 22915, 22880, 10551, 10371):
+            m.L[1, ry, rx] = 0
+
+    # Shimmering Bleed Veil curtain right down x = VX (4) across the living/glass divide (y = 30..39)
+    veil_tiles = [26048, 26049, 26050]
+    bleed_tiles = [25824, 25825, 25826]
+    for y in range(30, H):
+        if y not in (33, 34, 38, 39):
+            m.L[2, y, VX] = veil_tiles[y % 3]
+        if y >= 30 and m.L[2, y, VX + 1] == 0:
+            m.L[2, y, VX + 1] = bleed_tiles[y % 3]
+
+    # ---- 16. Events (100% contract-preserved from story/20_SCRIPT_CH0-2.md, "Map 522") ----
     E = []
     E.append({'type': 'warp', 'name': 'To Windfall Row', 'at': [0, 37], 'link': 'R2_ORCHARD', 'arrive': [1, 37, 'right']})
     E.append({'type': 'warp', 'name': 'To Windfall Row b', 'at': [0, 36], 'to': {'map': 521, 'x': 60, 'y': 22, 'dir': 'left'}})
     E.append({'type': 'warp', 'name': 'To Windfall Row c', 'at': [0, 38], 'to': {'map': 521, 'x': 60, 'y': 23, 'dir': 'left'}})
-    E.append(c.fog_event('prismfall_glass', 70, 1, 200, 2, 1))
+    E.append(fog_event('prismfall_glass', 58, 1, 200, 2, 1))
     intro = [
         {'script': 'pfm_juno_part'},   # she stops at the gate: the map's own Juno event takes over
         "(Rows of apple trees turned to clear glass. Glass apples chime in the wind. The air at the gate shimmers like heat.)",
@@ -126,7 +513,7 @@ def build():
         {'choices': ["I don't know.", "It doesn't hurt.", "..."], 'cancel': 3, 'branches': [[], [], []]},
         say('JUNO', 'shocked', "Doesn't it— aren't you— your HAIR isn't even standing up!"),
         setk('VEIL'), {'selfswitch': ['A', True]}]
-    E.append({'type': 'event', 'name': 'Orchard arrival', 'at': [1, 39 - 1], 'pages': [
+    E.append({'type': 'event', 'name': 'Orchard arrival', 'at': [1, 38], 'pages': [
         {'cond': {'switch': 'CH1_K1_DONE'}, 'trigger': 'autorun', 'commands': intro}, {'cond': {'self': 'A'}}]})
     lecture = [
         show_larch(), {'wait': 20},
@@ -151,8 +538,7 @@ def build():
         {'switch': ['CH1_ORCHARD_DONE', True]}, {'script': 'pf_bond_add(:JUNO, 1)'},
         {'script': 'pfm_juno_join(:errand)'},   # she falls in again outside (hidden on 522 while she waits at the gate)
         "QUEST: \"Biscuit\" - bring Biscuit home to Wenna at Hale's Bramble."]
-    for i, y in enumerate(range(35, 39)):
-        if c.g[y][VX] not in 'aAD' or c.o[1][y][VX]: continue
+    for i, y in enumerate((35, 36, 37)):
         E.append({'type': 'event', 'name': 'Bleed Veil %d' % (i + 1), 'at': [VX, y], 'pages': [
             {'cond': {'switch': 'CH1_K1_DONE'}, 'trigger': 'touch', 'through': True, 'commands': [
                 {'if': key('BISCUIT') + ' && ' + key('SWARM') + ' && !$game_switches[105]', 'then': lecture,
@@ -165,7 +551,7 @@ def build():
                 {'choices': ["No. Stay there.", "Take her hand."], 'cancel': 1, 'branches': [
                     [say('JUNO', 'sad', "...Right. Yes. The Professor did say never. Sorry. Go on, I'll shout directions.")],
                     [{'script': 'Prismfall.checkpoint(false)'}, say('JUNO', 'happy', "On three. One, two—"),
-                     {'se': 'Ice 1'}, "(Glass rings. Juno goes clear from the fingertips up.)", {'wait': 60},
+                     {'se': 'Anim/Ice1'}, "(Glass rings. Juno goes clear from the fingertips up.)", {'wait': 60},
                      say('JUNO', 'shocked', "\\PN, I can't feel my—"), {'script': 'Prismfall.game_over(:GO_ORCHARD)'}]]}],
              'else': [say('JUNO', 'sad', "Biscuit's in there somewhere. Past the farmhand. Please be careful.")]}]},
         {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'right'},
@@ -210,11 +596,23 @@ def build():
         {'cond': {'self': 'A'}}]})
     E.append({'type': 'sign', 'at': P['house_sign'], 'post': False, 'name': 'Pruett house',
               'text': "The Pruett house. The door is glass, and so is the key in it. A child's coat hangs on the peg inside, perfectly clear."})
-    c.events = E
-    head = {'id': 522, 'biome': 'bleed', 'name': 'The Glassed Orchard', 'palette': 'bleed', 'bgm': 'Route 2', 'parent': 521, 'field': 'BLEED', 'tone': [-18, -22, 26, 70],
-            'metadata': {'ShowArea': True, 'MapPosition': [0, 15, 22], 'BattleBack': 'field'}}
-    return c.write('522_glassed_orchard.yaml', head, "# The Glassed Orchard (522). WRITTEN BY layouts/orchard.py - edit that, not this file.\n")
+
+    m.events = E
+    head = {
+        '_file': '522_glassed_orchard.yaml',
+        'id': 522,
+        'biome': 'bleed',
+        'name': 'The Glassed Orchard',
+        'bgm': 'Route 2',
+        'parent': 521,
+        'field': 'BLEED',
+        'tone': [-14, -18, 22, 46],
+        'metadata': {'ShowArea': True, 'SnapEdges': True, 'MapPosition': [0, 15, 22], 'BattleBack': 'field'},
+        'rubric': True,
+    }
+    m.write(522, head, "# The Glassed Orchard (522). WRITTEN BY layouts/orchard.py - edit that, not this file.\n")
+    print('  wrote 522_glassed_orchard.yaml (ts=52 PF Rejuv Snow)')
 
 
 if __name__ == '__main__':
-    save('522_glassed_orchard.yaml', build())
+    build()

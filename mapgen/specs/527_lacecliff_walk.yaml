@@ -159,7 +159,7 @@ events:
     commands:
     - '\pf[JUNO,happy]Juno: Sit! You have to sit! It''s the Lacemakers'' Bench. Everyone who walks the Strand sits here or the cliffs fall in.'
     - choices: ['Is that true?', (Sit.)]
-      cancel: 1
+      cancel: 2
       branches:
       - ['\pf[JUNO,deadpan]Juno: No. But they haven''t fallen in, have they.']
       - - (You sit. Juno sits. A Wingull lands on the end of the bench. Nobody says anything for a while. The sea does most of the talking.)

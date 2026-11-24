@@ -564,6 +564,13 @@ def build_521():
     r.stamp('gl_cot', 47, 38, mark='B') if False else None
     fd = m.front('gl_cot', 50, 44, 'R2_FARM', 'Farmhouse door')
     r.events.append([e for e in m.events if e.get('link') == 'R2_FARM'][0]); m.events = []
+    # Headbutt trees in Windfall Row orchards (matching Coll's Headbutt tutor & HeadbuttLow/High tables)
+    for hx_, hy_ in ((78, 16), (92, 24), (24, 38)):
+        sx_, sy_ = m.snap(hx_, hy_, '.d', r=5)
+        if not m.taken[sy_, sx_]:
+            r.events.append({'type': 'event', 'name': 'HeadbuttTree', 'at': [sx_, sy_], 'pages': [
+                {'graphic': {'tile': K.P1('nt_bush1')}, 'trigger': 'action', 'commands': [{'script': 'pbHeadbutt'}]}]})
+            m.taken[sy_, sx_] = True
     m.cls[45:47, 49:52] = np.where(m.cls[45:47, 49:52] == 'B', 'B', 'd')
     r.stamp('gt_tower', 99, 34, mark='B') if m.free(99, 34, 3, 6, on='.') else None
     for n, x, y in (('pf_stall2', 64, 47), ('hb_barrels', 104, 55), ('hb_tubs', 94, 53), ('hb_crates4', 96, 58), ('hb_shed', 106, 56),

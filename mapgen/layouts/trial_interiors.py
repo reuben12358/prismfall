@@ -45,11 +45,11 @@ def build():
     r = Room(9, 7, door_x=3)
     r.window(4)
     r.rug(2, 2, 5, 3); r.tf('stool', 1, 3); r.tf('stool', 7, 3); r.tf('flowerpot', 0, 0); r.tf('flowerpot', 8, 0)
-    r.tf('shelf_wood', 6, -1); r.tf('plant', 0, 5); r.tf('bucket', 8, 5); r.tf('easel1', 1, 0)
+    r.tf('shelf_wood', 6, -1); r.tf('plant', 0, 4); r.tf('bucket', 8, 5); r.tf('easel1', 1, 0)
     ev = [keeper('Mother Aldreth', 'ALDRETH', r.at(4, 1), 'NPC 27', 'down'),
           obj('Lantern-loom', r.at(3, 1), 'A loom strung with paper lantern-cords instead of thread. Each knot is a name.'),
           obj('Lantern board', r.at(7, 1), cmds=[{'script': 'pf_trial_board(:ELOWEN)'}])]
-    specs.append(r.spec(head(126, 'Briarwick Lantern House', 120, 'Briarwick', 'BW_LANTERN'), ev, 'BW_LANTERN'))
+    specs.append(r.spec(head(126, 'Briarwick Lantern House', 120, 'Lerucean Town', 'BW_LANTERN'), ev, 'BW_LANTERN'))
     # ---------------------------------------------------------------- 168 The Net Loft (Ebbmouth)
     r = Room(15, 8, door_x=6)
     for fx in (2, 7, 12): r.window(fx)
@@ -59,7 +59,7 @@ def build():
     ev = [keeper('Bersi Gullsong', 'BERSI', r.at(7, 1), 'NPC 21', 'down'),
           obj('Tally Mast', r.at(6, 0), 'THE TALLY MAST. Every notch a debt, every debt a name, every name sung once a year.'),
           obj('Tally board', r.at(10, 1), cmds=[{'script': 'pf_trial_board(:ISENMAR)'}])]
-    specs.append(r.spec(head(168, 'The Net Loft', 160, 'Ebbmouth', 'EB_NETLOFT', metadata={}), ev, 'EB_NETLOFT'))
+    specs.append(r.spec(head(168, 'The Net Loft', 160, 'Lerucean Town', 'EB_NETLOFT', metadata={}), ev, 'EB_NETLOFT'))
     # ---------------------------------------------------------------- 542 The Brinewife's Rest (re-tiled from the stock house2 template)
     r = Room(11, 7, door_x=4)
     for fx in (2, 8): r.window(fx)

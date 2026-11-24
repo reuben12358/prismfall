@@ -68,7 +68,7 @@ events:
       else:
       - 'Shepherd boy: Race you to the Fleece Cross! My Skiddo knows every rock!'
       - choices: [Race him!, Not now.]
-        cancel: 1
+        cancel: 2
         branches:
         - - {script: '$game_variables[603] = 1
 

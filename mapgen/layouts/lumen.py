@@ -365,9 +365,31 @@ def build_lowlight(shattered=False):
                               cond={'var': ['CH5_STEP', 11]}, trigger='action'),
                          page(["The vault's service door. Directorate seals on it now."], cond={'var': ['CH5_STEP', 12]})), at=[48, 4]))
         rng = random.Random(608)
+        # Cataclysmic diagonal Plate Vault Bleed shockwave radiating SW from Service Door (48, 4) across Pidove Steps & Rook's Plaza
+        rift_pts = [(48, 5), (47, 7), (46, 9), (45, 11), (43, 12), (40, 12), (37, 13),
+                    (34, 15), (32, 17), (30, 19), (27, 21), (24, 23), (21, 25), (18, 25)]
+        for rx, ry in rift_pts:
+            for dy in (-1, 0, 1):
+                for dx in (-1, 0, 1):
+                    xx, yy = rx + dx, ry + dy
+                    if not (1 <= xx < 56 and 4 <= yy < 40): continue
+                    if m.cls[yy, xx] not in 'lpq' or m.taken[yy, xx] or (xx, yy) in m.keep_clear: continue
+                    dist = abs(dx) + abs(dy)
+                    if dist == 0:
+                        m.over.append((1, xx, yy, P1('gd_crack%d' % ((xx + yy) % 2))))
+                        m.over.append((2, xx, yy, P1('lm_bleed%d' % ((xx * 3 + yy) % 3))))
+                    elif dist == 1 and rng.random() < 0.72:
+                        m.over.append((2, xx, yy, P1('lm_bleed%d' % rng.randrange(3))))
+        # Erupting violet/teal Bleed crystal clusters framing the Vault alley & shattered square corners (strictly off paths/events!)
+        for cx, cy, nm in ((49, 8, 'cr_teal_c'), (46, 10, 'cr_purple_c'),
+                           (35, 14, 'cr_purple_c'), (35, 23, 'cr_teal_c'), (22, 23, 'cr_purple_c'),
+                           (23, 15, 'cr_teal_c'), (31, 16, 'cr_purple_c'), (26, 22, 'cr_purple_c'),
+                           (44, 14, 'cr_teal_c'), (46, 26, 'cr_purple_c'), (19, 24, 'cr_purple_c')):
+            if m.cls[cy, cx] in 'lpq' and not m.taken[cy, cx] and (cx, cy) not in m.keep_clear:
+                m.stamp(nm, cx, cy)
         for y in range(3, 41):
             for x in range(0, 57):
-                if m.cls[y, x] in 'lpq' and not m.taken[y, x] and rng.random() < 0.12 and (x, y) not in m.keep_clear:
+                if m.cls[y, x] in 'lpq' and not m.taken[y, x] and rng.random() < 0.14 and (x, y) not in m.keep_clear:
                     m.over.append((2, x, y, P1('lm_bleed%d' % rng.randrange(3))))
         for y in range(3, 11): m.over.append((2, 0, y, P1('lm_veil%d' % (y % 3))))
         for y in range(4, 11):                                # back through the Veil to the Concourse's terrace
@@ -378,6 +400,18 @@ def build_lowlight(shattered=False):
         for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)): m.keep_clear.add((x + dx, y + dy))
     scatter_wear(m, 6, on='lq', seed=2, kinds=(0, 1, 2))
     m.paint()
+    # Ground Rook's marble plaza (22..35, 14..23) & NW Concourse landing (0..7, 3..10) with crisp walkable slate kerbs
+    kN, kS, kE, kW = P1('lm_kerbN'), P1('lm_kerbS'), P1('lm_kerbE'), P1('lm_kerbW')
+    for x in range(22, 36):
+        if m.L[1, 14, x] == 0: m.L[1, 14, x] = kN
+        if m.L[1, 23, x] == 0: m.L[1, 23, x] = kS
+    for y in range(15, 23):
+        if m.L[1, y, 22] == 0: m.L[1, y, 22] = kW
+        if m.L[1, y, 35] == 0: m.L[1, y, 35] = kE
+    for x in range(1, 8):
+        if m.L[1, 10, x] == 0: m.L[1, 10, x] = kS
+    for y in range(3, 10):
+        if m.L[1, y, 7] == 0 and (7, y) not in m.keep_clear: m.L[1, y, 7] = kE
     sd = STAMPS['lm_sdoor']['layers']
     m.L[2, 3, 48] = next(sd[z][0][0] for z in range(3) if sd[z][0][0]); m.L[2, 4, 48] = next(sd[z][1][0] for z in range(3) if sd[z][1][0])
     m.seal_edges([('W', 4, 7)], filler=P1('lm_bollard'), sides='W')
@@ -387,8 +421,9 @@ def build_lowlight(shattered=False):
 def head_lowlight(shattered):
     if shattered:
         return dict(id=608, name='The Lowlight (Shattered)', parent=180, bgm='Underwater', rubric=True, field='BLEED',
-                    metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 16, 16], 'Name': 'The Lowlight'},
-                    tone=[-40, -50, 10, 60])
+                    metadata={'Outdoor': True, 'ShowArea': True, 'SnapEdges': True, 'MapPosition': [0, 16, 16], 'Name': 'The Lowlight'},
+                    tone=[-40, -50, 10, 60],
+                    fog={'name': 'prismfall_glass', 'opacity': 48, 'blend': 1, 'zoom': 200, 'sx': 2, 'sy': 1})
     return dict(id=181, name='Lumen City - The Lowlight', parent=180, bgm='Cedolan City', rubric=True,
                 metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 16, 16], 'Name': 'The Lowlight'},
                 connections=[{'dir': 'W', 'offset': 4, 'to': 180, 'to_offset': 52}],

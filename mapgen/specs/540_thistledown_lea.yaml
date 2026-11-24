@@ -86,15 +86,17 @@ events:
     trigger: action
     commands:
     - 'Mower: Nobody''s mown the Lea in sixty years. You can''t buy land off a dead family. They won''t come to the door.'
-    - if: '!pfm?(:mowers_heal)'
-      then:
-      - 'Mower: Sit by the fire a bit. Kettle''s on.'
-      - {heal: true}
-      - {script: 'pfm_set(:mowers_heal)'}
+    - 'Mower: Sit by the fire a bit. Kettle''s on.'
+    - {heal: true}
+    - (The party is rested.)
   - cond: {switch: CH2_THISTLE_DONE}
     graphic: {sprite: NPC 03, dir: down}
     trigger: action
-    commands: ['Mower: Woman in grey came through at dawn with two others. Shears in her belt. Nodded to me. Mannerly. Went toward the wood.']
+    commands:
+    - 'Mower: Woman in grey came through at dawn with two others. Shears in her belt. Nodded to me. Mannerly. Went toward the wood.'
+    - 'Mower: Kettle''s still on if you need a rest.'
+    - {heal: true}
+    - (The party is rested.)
 - type: trainer
   at: [52, 38]
   sight: 4

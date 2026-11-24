@@ -250,7 +250,7 @@ def build_186():
     hang(m, 'lm_banner_w', 10, 3); hang(m, 'lm_banner_w', 16, 3)
     m.keep_clear |= {(13, 6), (21, 7), (4, 8), (19, 10), (24, 11), (7, 13), (3, 13), (9, 10), (16, 11), (10, 11), (14, 7), (26, 9), (26, 14)}
     m.paint()
-    write(m, 186, 'Meridian Spire - Gala Hall', 185, '186_meridian_gala.yaml', bgm='', field='NEON_GRID')
+    write(m, 186, 'Meridian Spire - Gala Hall', 185, '186_meridian_gala.yaml', bgm='Cedolan City', field='NEON_GRID')
 
 
 # ============================================================================================ 951 the Service Lifts
