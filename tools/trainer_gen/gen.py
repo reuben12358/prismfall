@@ -1022,6 +1022,46 @@ EXTRA = []  # (note, ttype, name, base_version, cap, lose, mons, mega_std)
 def X(note, tt, nm, v, cap, lose, mons, mega_std=False):
     EXTRA.append((note, tt, nm, v, cap, lose, mons, mega_std))
 
+# ------------------------------------------------------------------------------
+# Ch5 Wave 0 rescue (2026-11-23): the Gala raid and the service-lift stair (mapgen/layouts/lumen_interiors.py 186 / 951;
+# story/24_SCRIPT_CH5.md). Right after Gym 4 (cap 27), on NEON_GRID. The events skipped these fights while they were
+# missing from PBS (mapgen/ruby/012_Lumen.rb).
+X("Ch5 Gala raid (186) - Juno as the PC's partner in the tag battle", "RIVAL_JUNO", "Juno", 13, 28,
+  "Is it over? Tell me it's over.", [
+    P("WHIMSICOTT", 27, "PRANKSTER", "SITRUSBERRY", "TIMID", "LEECHSEED,ENERGYBALL,FAIRYWIND,COTTONGUARD", "S"),
+    P("STEENEE", 27, "LEAFGUARD", "EVIOLITE", "ADAMANT", "RAZORLEAF,MAGICALLEAF,RAPIDSPIN,PLAYNICE", "BA", nick="Sweetpea"),
+    P("PETILIL", 26, "OWNTEMPO", "ORANBERRY", "MODEST", "GIGADRAIN,MAGICALLEAF,SLEEPPOWDER,LEECHSEED", "S"),
+])
+X("Ch5 Gala raid (186) - Thistle, second battle (tag with the Pallbearer)", "HOLLOW_THISTLE", "Thistle", 1, 28,
+  "...Fine. Take your bows. The vault's already open.", [
+    # The weaver again (Bug / Poison and the glassed Phantump), a step up from Briarwick. NEON_GRID: no field tricks
+    # for her here; the Pallbearer's Ghosts carry the double.
+    P("DUSTOX", 26, "SHIELDDUST", "ORANBERRY", "BOLD", "GUST,STRUGGLEBUG,POISONPOWDER,PSYBEAM", "BS",
+      casual={"moves": "GUST,STRUGGLEBUG,CONFUSION,HARDEN"}),
+    P("WHIRLIPEDE", 26, "POISONPOINT", "ORANBERRY", "IMPISH", "POISONTAIL,BUGBITE,PROTECT,IRONDEFENSE", "BPD",
+      only="nocasual"),
+    P("PHANTUMP", 28, "NATURALCURE", "SITRUSBERRY", "ADAMANT", "BRANCHPOKE,ASTONISH,LEECHSEED,WILLOWISP", "HA",
+      nick="Lowmarsh", hard={"ab": "HARVEST", "moves": "BRANCHPOKE,SHADOWCLAW,LEECHSEED,WILLOWISP"},
+      casual={"moves": "BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY"}),
+])
+X("Ch5 Gala raid (186) - Hollow Pallbearer (tag with Thistle)", "HOLLOW_GRUNT_M", "Pallbearer", 5, 28,
+  "We were told nobody gets hurt.", [
+    P("DUSKULL", 25, "LEVITATE", "ORANBERRY", "IMPISH", "SHADOWSNEAK,DISABLE,CONFUSERAY,PAYBACK", "BPD"),
+    P("GOLETT", 26, "IRONFIST", "ORANBERRY", "ADAMANT", "SHADOWPUNCH,STOMPINGTANTRUM,DEFENSECURL,CURSE", "BA",
+      only="nocasual"),
+])
+X("Ch5 service lifts (951) - the Bereaved on the stair", "HOLLOW_GRUNT_F", "Bereaved", 5, 28,
+  "He said not to hurt anyone. He said it nine times.", [
+    P("MISDREAVUS", 25, "LEVITATE", "ORANBERRY", "TIMID", "ASTONISH,CONFUSERAY,MEANLOOK,HEX", "S"),
+    P("SHUPPET", 25, "INSOMNIA", "ORANBERRY", "ADAMANT", "SHADOWSNEAK,KNOCKOFF,SCREECH,NIGHTSHADE", "A",
+      only="nocasual"),
+])
+X("Ch5 service lifts (951) - the Bereaved lower down", "HOLLOW_GRUNT_M", "Bereaved", 6, 28,
+  "The cheerful one went first. I don't like the cheerful one.", [
+    P("YAMASK", 26, "MUMMY", "ORANBERRY", "BOLD", "HEX,WILLOWISP,PROTECT,NIGHTSHADE", "BPD"),
+    P("HOUNDOUR", 25, "FLASHFIRE", "ORANBERRY", "JOLLY", "BITE,FIREFANG,ROAR,SMOG", "A", only="nocasual"),
+])
+
 X("R16 - Marisol (Grievance) / Ebb Guild exhibition, field :WATER_SURFACE", "LEADER_MARISOL", "Marisol", 90, 90,
   "The tide always comes back. So will I.", [
     # PRISM_ARENA: Drizzle halves the Flame Plate's opening turn; the Splash Plate follows (rounds 7-9) and Swift Swim

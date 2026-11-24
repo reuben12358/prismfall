@@ -137,12 +137,24 @@ events:
 - type: event
   name: Valen at the Veil
   pages:
-  - commands: ['\pf[VALEN,neutral]Valen: You were in the Lowlight when it went? And you''re... standing.', '(He looks a beat too long, then turns away.)']
+  - commands:
+    - '\pf[VALEN,neutral]Valen: You were in the Lowlight when it went? And you''re... standing.'
+    - (He looks a beat too long, then turns away.)
+    - 'Valen: Who''s in charge here?'
+    - '\pf[MARCHETTI,neutral]Marchetti: Director Marchetti, Sovereign. Meridian Security Directorate.'
+    - 'Valen: Then take statements. All of them. Including that one.'
+    - var: [CH5_STEP, 10]
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: up}
     cond:
       var: [CH5_STEP, 9]
+  - commands: ['Valen: Take statements. All of them.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_GENTLEMAN, dir: up}
+    cond:
+      var: [CH5_STEP, 10]
   - commands: []
     trigger: action
     move: fixed
@@ -209,9 +221,22 @@ events:
 - type: event
   name: Service door
   pages:
-  - commands: ['The vault''s service door hangs open. Violet light behind it, and the smell of struck metal.']
+  - commands: ['The vault''s service door hangs open. Violet light behind it, and the smell of struck metal.', (Directorate tape across it. Not now.)]
     trigger: action
     move: fixed
+  - commands:
+    - '(3 a.m. A note was waiting at the Center''s desk, in a hand you know: "Vault. Now. Bring your Flash. — I.L.")'
+    - {se: Door exit}
+    - transfer: {map: 952, x: 18, y: 16, dir: up}
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH5_STEP, 11]
+  - commands: [The vault's service door. Directorate seals on it now.]
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH5_STEP, 12]
   at: [48, 4]
 - type: warp
   name: The Veil 4

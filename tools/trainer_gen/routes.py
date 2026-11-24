@@ -34,6 +34,8 @@ def ROUTES(P):
         152: (3, 23, {}), 153: (3, 23, {}),                   # Playhouse Backstage D9 (optional), 20-21
         525: (8, 23, {"LEDYBA": ("LEDIAN", None)}),            # Gossamer Deepwood, 19-20
         577: (0, 23, {}), 578: (0, 23, {}),                   # Frostwick Pass 17-20, Rimewood Path 18-21 (map builder 13's cells, round 4)
+        # Segment 3, cap 27 (Gym 4, Lumen): the Circuit Gym's six (Ch5 Wave 0 rescue, 2026-11-23)
+        190: (0, 27, {}), 191: (0, 27, {}), 192: (0, 27, {}),
     }
     DEFAULT_CAP = 23                                          # 560-564, 170-173: unchanged (Gym 3 stretch)
     def t(note, tt, nm, lose, mons, cap=None):
@@ -184,4 +186,19 @@ def ROUTES(P):
     t("Map 552 The Dyers' Ford", "PAINTER", "Ash", "Bill her. Somebody bill her.", [m("ODDISH", 15, "CHLOROPHYLL", "MODEST"), m("MARILL", 16, "HUGEPOWER", "ADAMANT")])
     # Map 540 Thistledown Lea (MEADOW): Ada's cousin; Budew and Oddish like Ada's, a little grown up.
     t("Map 540 Thistledown Lea", "PICNICKER", "Edie", "...I'll write to Ada. I'll lie.", [m("ODDISH", 13, "RUNAWAY", "MODEST"), m("BUDEW", 13, "LEAFGUARD", "MODEST"), m("SMOLIV", 14, "EARLYBIRD", "MODEST")])
+    # --- Ch5 Wave 0 rescue (2026-11-23): Gym 4, the Circuit Gym (mapgen/layouts/circuit_gym.py TRAINERS; GYM_PUZZLES:
+    # Engineer x2, Super Nerd, Scientist, Rocker, "Circuit Tester"; Lv 23-26). NEON_GRID: Electric x1.3 on the live board,
+    # Static / Volt Absorb / Motor Drive pay, a Blackout (Ground moves) shuts the grid. Ground types are the counter.
+    t("Map 190 Circuit Gym - the Switchroom", "ENGINEER", "Volta", "Turn the sideways ones. Chat says so.",
+      [m("MAGNEMITE", 23, "STURDY", "MODEST"), m("PAWMI", 23, "STATIC", "JOLLY")])
+    t("Map 191 Circuit Gym - Breadboard Hall", "SUPERNERD", "Ohm", "The middle row's a trap. I told him it was too obvious.",
+      [m("VOLTORB", 23, "STATIC", "TIMID"), m("TADBULB", 24, "OWNTEMPO", "MODEST")])
+    t("Map 191 Circuit Gym - Breadboard Hall", "SCIENTIST", "Faraday", "Hm. You did.",
+      [m("ELEKID", 24, "STATIC", "ADAMANT"), m("BLITZLE", 24, "MOTORDRIVE", "JOLLY")])
+    t("Map 192 Circuit Gym - Live Wire Hall", "ENGINEER", "Kirch", "Latches hold. Wires don't have to. Rook's motto. Well, mine. He stole it.",
+      [m("CHINCHOU", 24, "VOLTABSORB", "MODEST"), m("MAREEP", 24, "STATIC", "MODEST"), m("JOLTIK", 25, "COMPOUNDEYES", "TIMID")])
+    t("Map 192 Circuit Gym - Live Wire Hall", "ROCKER", "Amp", "Encore? No? Fine.",
+      [m("TOXEL", 24, "RATTLED", "MODEST"), m("PICHU", 24, "STATIC", "TIMID"), m("ELECTRIKE", 25, "LIGHTNINGROD", "JOLLY")])
+    t("Map 192 Circuit Gym - Live Wire Hall (Circuit Tester)", "ENGINEER", "Tesla", "You conduct well.",
+      [m("MAGNEMITE", 25, "ANALYTIC", "MODEST"), m("SHINX", 25, "INTIMIDATE", "ADAMANT"), m("WATTREL", 26, "VOLTABSORB", "TIMID")])
     return R

@@ -19242,3 +19242,532 @@ Pokemon = OGERPON,48
     Nature = JOLLY
     IV = 20
     EV = 0,85,0,0,0,85
+#-------------------------------
+# Ch5 Wave 0 rescue (gen.py): the Gala raid and the service-lift stair
+[RIVAL_JUNO,Juno,13]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = Is it over? Tell me it's over.
+Pokemon = WHIMSICOTT,27
+    Moves = LEECHSEED,ENERGYBALL,FAIRYWIND,COTTONGUARD
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 18
+Pokemon = STEENEE,27
+    Name = Sweetpea
+    Moves = RAZORLEAF,MAGICALLEAF,RAPIDSPIN,PLAYNICE
+    Ability = LEAFGUARD
+    Item = EVIOLITE
+    Nature = ADAMANT
+    IV = 18
+Pokemon = PETILIL,26
+    Moves = GIGADRAIN,MAGICALLEAF,SLEEPPOWDER,LEECHSEED
+    Ability = OWNTEMPO
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 18
+#-------------------------------
+[RIVAL_JUNO,Juno,113]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = Is it over? Tell me it's over.
+Pokemon = WHIMSICOTT,28
+    Moves = LEECHSEED,ENERGYBALL,FAIRYWIND,COTTONGUARD
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 26
+    EV = 4,0,0,168,168,0
+Pokemon = STEENEE,28
+    Name = Sweetpea
+    Moves = RAZORLEAF,MAGICALLEAF,RAPIDSPIN,PLAYNICE
+    Ability = LEAFGUARD
+    Item = EVIOLITE
+    Nature = ADAMANT
+    IV = 26
+    EV = 168,168,4,0,0,0
+Pokemon = PETILIL,27
+    Moves = GIGADRAIN,MAGICALLEAF,SLEEPPOWDER,LEECHSEED
+    Ability = OWNTEMPO
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 26
+    EV = 4,0,0,162,162,0
+#-------------------------------
+[RIVAL_JUNO,Juno,213]
+Items = SUPERPOTION
+LoseText = Is it over? Tell me it's over.
+Pokemon = WHIMSICOTT,25
+    Moves = LEECHSEED,ENERGYBALL,FAIRYWIND,COTTONGUARD
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 8
+    EV = 0
+Pokemon = STEENEE,25
+    Name = Sweetpea
+    Moves = RAZORLEAF,MAGICALLEAF,RAPIDSPIN,PLAYNICE
+    Ability = LEAFGUARD
+    Item = EVIOLITE
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+Pokemon = PETILIL,24
+    Moves = GIGADRAIN,MAGICALLEAF,SLEEPPOWDER,LEECHSEED
+    Ability = OWNTEMPO
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 8
+    EV = 0
+#-------------------------------
+[HOLLOW_THISTLE,Thistle,1]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = ...Fine. Take your bows. The vault's already open.
+Pokemon = DUSTOX,26
+    Moves = GUST,STRUGGLEBUG,POISONPOWDER,PSYBEAM
+    Ability = SHIELDDUST
+    Item = ORANBERRY
+    Nature = BOLD
+    IV = 18
+Pokemon = WHIRLIPEDE,26
+    Moves = POISONTAIL,BUGBITE,PROTECT,IRONDEFENSE
+    Ability = POISONPOINT
+    Item = ORANBERRY
+    Nature = IMPISH
+    IV = 18
+Pokemon = PHANTUMP,28
+    Name = Lowmarsh
+    Moves = BRANCHPOKE,ASTONISH,LEECHSEED,WILLOWISP
+    Ability = NATURALCURE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[HOLLOW_THISTLE,Thistle,101]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = ...Fine. Take your bows. The vault's already open.
+Pokemon = DUSTOX,27
+    Moves = GUST,STRUGGLEBUG,POISONPOWDER,PSYBEAM
+    Ability = SHIELDDUST
+    Item = ORANBERRY
+    Nature = BOLD
+    IV = 26
+    EV = 162,0,4,0,162,0
+Pokemon = WHIRLIPEDE,27
+    Moves = POISONTAIL,BUGBITE,PROTECT,IRONDEFENSE
+    Ability = POISONPOINT
+    Item = ORANBERRY
+    Nature = IMPISH
+    IV = 26
+    EV = 162,4,162,0,0,0
+Pokemon = PHANTUMP,28
+    Name = Lowmarsh
+    Moves = BRANCHPOKE,SHADOWCLAW,LEECHSEED,WILLOWISP
+    Ability = HARVEST
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 26
+    EV = 168,168,0,0,0,4
+#-------------------------------
+[HOLLOW_THISTLE,Thistle,201]
+Items = SUPERPOTION
+LoseText = ...Fine. Take your bows. The vault's already open.
+Pokemon = DUSTOX,24
+    Moves = GUST,STRUGGLEBUG,CONFUSION,HARDEN
+    Ability = SHIELDDUST
+    Item = ORANBERRY
+    Nature = BOLD
+    IV = 8
+    EV = 0
+Pokemon = PHANTUMP,26
+    Name = Lowmarsh
+    Moves = BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY
+    Ability = NATURALCURE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+#-------------------------------
+[HOLLOW_GRUNT_M,Pallbearer,5]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = We were told nobody gets hurt.
+Pokemon = DUSKULL,25
+    Moves = SHADOWSNEAK,DISABLE,CONFUSERAY,PAYBACK
+    Ability = LEVITATE
+    Item = ORANBERRY
+    Nature = IMPISH
+    IV = 18
+Pokemon = GOLETT,26
+    Moves = SHADOWPUNCH,STOMPINGTANTRUM,DEFENSECURL,CURSE
+    Ability = IRONFIST
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[HOLLOW_GRUNT_M,Pallbearer,105]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = We were told nobody gets hurt.
+Pokemon = DUSKULL,26
+    Moves = SHADOWSNEAK,DISABLE,CONFUSERAY,PAYBACK
+    Ability = LEVITATE
+    Item = ORANBERRY
+    Nature = IMPISH
+    IV = 26
+    EV = 156,4,156,0,0,0
+Pokemon = GOLETT,27
+    Moves = SHADOWPUNCH,STOMPINGTANTRUM,DEFENSECURL,CURSE
+    Ability = IRONFIST
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 26
+    EV = 162,162,4,0,0,0
+#-------------------------------
+[HOLLOW_GRUNT_M,Pallbearer,205]
+Items = SUPERPOTION
+LoseText = We were told nobody gets hurt.
+Pokemon = DUSKULL,23
+    Moves = SHADOWSNEAK,DISABLE,CONFUSERAY,PAYBACK
+    Ability = LEVITATE
+    Item = ORANBERRY
+    Nature = IMPISH
+    IV = 8
+    EV = 0
+#-------------------------------
+[HOLLOW_GRUNT_F,Bereaved,5]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = He said not to hurt anyone. He said it nine times.
+Pokemon = MISDREAVUS,25
+    Moves = ASTONISH,CONFUSERAY,MEANLOOK,HEX
+    Ability = LEVITATE
+    Item = ORANBERRY
+    Nature = TIMID
+    IV = 18
+Pokemon = SHUPPET,25
+    Moves = SHADOWSNEAK,KNOCKOFF,SCREECH,NIGHTSHADE
+    Ability = INSOMNIA
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[HOLLOW_GRUNT_F,Bereaved,105]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = He said not to hurt anyone. He said it nine times.
+Pokemon = MISDREAVUS,26
+    Moves = ASTONISH,CONFUSERAY,MEANLOOK,HEX
+    Ability = LEVITATE
+    Item = ORANBERRY
+    Nature = TIMID
+    IV = 26
+    EV = 4,0,0,156,156,0
+Pokemon = SHUPPET,26
+    Moves = SHADOWSNEAK,KNOCKOFF,SCREECH,NIGHTSHADE
+    Ability = INSOMNIA
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,156,0,156,0,0
+#-------------------------------
+[HOLLOW_GRUNT_F,Bereaved,205]
+Items = SUPERPOTION
+LoseText = He said not to hurt anyone. He said it nine times.
+Pokemon = MISDREAVUS,23
+    Moves = ASTONISH,CONFUSERAY,MEANLOOK,HEX
+    Ability = LEVITATE
+    Item = ORANBERRY
+    Nature = TIMID
+    IV = 8
+    EV = 0
+#-------------------------------
+[HOLLOW_GRUNT_M,Bereaved,6]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = The cheerful one went first. I don't like the cheerful one.
+Pokemon = YAMASK,26
+    Moves = HEX,WILLOWISP,PROTECT,NIGHTSHADE
+    Ability = MUMMY
+    Item = ORANBERRY
+    Nature = BOLD
+    IV = 18
+Pokemon = HOUNDOUR,25
+    Moves = BITE,FIREFANG,ROAR,SMOG
+    Ability = FLASHFIRE
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 18
+#-------------------------------
+[HOLLOW_GRUNT_M,Bereaved,106]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = The cheerful one went first. I don't like the cheerful one.
+Pokemon = YAMASK,27
+    Moves = HEX,WILLOWISP,PROTECT,NIGHTSHADE
+    Ability = MUMMY
+    Item = ORANBERRY
+    Nature = BOLD
+    IV = 26
+    EV = 162,4,162,0,0,0
+Pokemon = HOUNDOUR,26
+    Moves = BITE,FIREFANG,ROAR,SMOG
+    Ability = FLASHFIRE
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 26
+    EV = 4,156,0,156,0,0
+#-------------------------------
+[HOLLOW_GRUNT_M,Bereaved,206]
+Items = SUPERPOTION
+LoseText = The cheerful one went first. I don't like the cheerful one.
+Pokemon = YAMASK,24
+    Moves = HEX,WILLOWISP,PROTECT,NIGHTSHADE
+    Ability = MUMMY
+    Item = ORANBERRY
+    Nature = BOLD
+    IV = 8
+    EV = 0
+#-------------------------------
+# Ch5 Wave 0 rescue (gen.py routes.py): Gym 4, the Circuit Gym trainers
+[ENGINEER,Volta]
+LoseText = Turn the sideways ones. Chat says so.
+Pokemon = MAGNEMITE,23
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+Pokemon = PAWMI,23
+    Ability = STATIC
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[ENGINEER,Volta,100]
+LoseText = Turn the sideways ones. Chat says so.
+Pokemon = MAGNEMITE,24
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+Pokemon = PAWMI,24
+    Ability = STATIC
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[ENGINEER,Volta,200]
+LoseText = Turn the sideways ones. Chat says so.
+Pokemon = MAGNEMITE,22
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PAWMI,22
+    Ability = STATIC
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+#-------------------------------
+[SUPERNERD,Ohm]
+LoseText = The middle row's a trap. I told him it was too obvious.
+Pokemon = VOLTORB,23
+    Ability = STATIC
+    Nature = TIMID
+    IV = 8
+Pokemon = TADBULB,24
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SUPERNERD,Ohm,100]
+LoseText = The middle row's a trap. I told him it was too obvious.
+Pokemon = VOLTORB,24
+    Ability = STATIC
+    Nature = TIMID
+    IV = 20
+Pokemon = TADBULB,25
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SUPERNERD,Ohm,200]
+LoseText = The middle row's a trap. I told him it was too obvious.
+Pokemon = VOLTORB,22
+    Ability = STATIC
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = TADBULB,23
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 0
+    EV = 0
+#-------------------------------
+[SCIENTIST,Faraday]
+LoseText = Hm. You did.
+Pokemon = ELEKID,24
+    Ability = STATIC
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BLITZLE,24
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[SCIENTIST,Faraday,100]
+LoseText = Hm. You did.
+Pokemon = ELEKID,25
+    Ability = STATIC
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BLITZLE,25
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[SCIENTIST,Faraday,200]
+LoseText = Hm. You did.
+Pokemon = ELEKID,23
+    Ability = STATIC
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BLITZLE,23
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+#-------------------------------
+[ENGINEER,Kirch]
+LoseText = Latches hold. Wires don't have to. Rook's motto. Well, mine. He stole it.
+Pokemon = CHINCHOU,24
+    Ability = VOLTABSORB
+    Nature = MODEST
+    IV = 8
+Pokemon = MAREEP,24
+    Ability = STATIC
+    Nature = MODEST
+    IV = 8
+Pokemon = JOLTIK,25
+    Ability = COMPOUNDEYES
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[ENGINEER,Kirch,100]
+LoseText = Latches hold. Wires don't have to. Rook's motto. Well, mine. He stole it.
+Pokemon = CHINCHOU,25
+    Ability = VOLTABSORB
+    Nature = MODEST
+    IV = 20
+Pokemon = MAREEP,25
+    Ability = STATIC
+    Nature = MODEST
+    IV = 20
+Pokemon = JOLTIK,26
+    Ability = COMPOUNDEYES
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[ENGINEER,Kirch,200]
+LoseText = Latches hold. Wires don't have to. Rook's motto. Well, mine. He stole it.
+Pokemon = CHINCHOU,23
+    Ability = VOLTABSORB
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = MAREEP,23
+    Ability = STATIC
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = JOLTIK,24
+    Ability = COMPOUNDEYES
+    Nature = TIMID
+    IV = 0
+    EV = 0
+#-------------------------------
+[ROCKER,Amp]
+LoseText = Encore? No? Fine.
+Pokemon = TOXEL,24
+    Ability = RATTLED
+    Nature = MODEST
+    IV = 8
+Pokemon = PICHU,24
+    Ability = STATIC
+    Nature = TIMID
+    IV = 8
+Pokemon = ELECTRIKE,25
+    Ability = LIGHTNINGROD
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[ROCKER,Amp,100]
+LoseText = Encore? No? Fine.
+Pokemon = TOXEL,25
+    Ability = RATTLED
+    Nature = MODEST
+    IV = 20
+Pokemon = PICHU,25
+    Ability = STATIC
+    Nature = TIMID
+    IV = 20
+Pokemon = ELECTRIKE,26
+    Ability = LIGHTNINGROD
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[ROCKER,Amp,200]
+LoseText = Encore? No? Fine.
+Pokemon = TOXEL,23
+    Ability = RATTLED
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PICHU,23
+    Ability = STATIC
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = ELECTRIKE,24
+    Ability = LIGHTNINGROD
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+#-------------------------------
+[ENGINEER,Tesla]
+LoseText = You conduct well.
+Pokemon = MAGNEMITE,25
+    Ability = ANALYTIC
+    Nature = MODEST
+    IV = 8
+Pokemon = SHINX,25
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = WATTREL,26
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[ENGINEER,Tesla,100]
+LoseText = You conduct well.
+Pokemon = MAGNEMITE,26
+    Ability = ANALYTIC
+    Nature = MODEST
+    IV = 20
+Pokemon = SHINX,26
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = WATTREL,27
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[ENGINEER,Tesla,200]
+LoseText = You conduct well.
+Pokemon = MAGNEMITE,24
+    Ability = ANALYTIC
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SHINX,24
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = WATTREL,25
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 0
+    EV = 0

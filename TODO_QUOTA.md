@@ -47,7 +47,8 @@
 - [ ] Work through Parts A–J in order (P0 → P1 → P2), skipping what `gemini_recommends/REVIEW.md` marks done and the Gemini-owned layouts (section 1). Part D (staged transitions) belongs to the transitions agent. The economy follows REVIEW.md: a stone/evo clerk, seeds in Marts and an EXP Share, but Rare Candy past the cap only as a password.
 
 ## 5. Content density (`design/DENSITY_STANDARD.md`)
-- [ ] **Wave 0, the Ch5 rescue:** the 3 softlocks, the 5 missing Gala/Lift trainers, and 16–18 Lock Road and Circuit Gym trainers.
+- [x] **Wave 0, the Ch5 rescue** (2026-11-23): the 3 softlocks (Valen at the Veil sets CH5_STEP 10; 608's service door leads back into the vault from step 11; `pfm_cutscene(:SH1)` is real: Cutscenes `016_Movies.rb` plays the Mourner's acting sheets and `Movies/pf_ch5_spire_shatter(_safe).ogv`); the 5 Gala/Lift trainers (Juno partner v13, Thistle v1, Pallbearer v5, Bereaved v5/v6) and the 6 Circuit Gym trainers (routes.py); the Glide Cycles Bicycle (`pfm_has?(:GALAINVITATION)`). Real-engine check: `tools/harness/visual/ch5/009_Ch5VaultCapture.rb` (Shatter → step 9, 608 door → vault, Larch → step 12).
+- [ ] **Wave 0, rest:** the Lock Road trainers (10–12) wait for its maps (580, 592, 590, 581, 595 unbuilt); Interlude I (105/106, V125 12 → 13) isn't built; Lumen Fly point.
 - [ ] **Wave 1 systems:** Glassfall Slivers (100, counter and exchange), the 6-step Trading Chain, the Mystery Egg (Ch3), and `encounters_badgetiers.txt` overlays for Badges 5–9.
 - [ ] **Retrofit Ch6–13** to the per-chapter floor (12–20 trainers, ≥3 EventMons, hangouts, Slivers).
 - [ ] **Build from each new script's "Density" section** (Ch14 onward): the PBS trainer blocks in 3 versions, EventMons and hangouts.

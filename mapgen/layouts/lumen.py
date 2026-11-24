@@ -357,7 +357,13 @@ def build_lowlight(shattered=False):
         seat(m, 608, 'Aftermath', (2, 4)); seat(m, 608, 'Rook (off camera)', (3, 9)); seat(m, 608, 'Valen at the Veil', (1, 6))
         seat(m, 608, 'Voss with the crate', (6, 9)); seat(m, 608, 'Testimony', (5, 5)); seat(m, 608, 'Spark the Pichu', (5, 7))
         seat(m, 608, 'Lowlight screen', (6, 3))
-        E.append(dict(ev('Service door', page(["The vault's service door hangs open. Violet light behind it, and the smell of struck metal."])), at=[48, 4]))
+        # Back into the Plate Vault for Larch's 3 a.m. scene (Wave 0 softlock 2: every way in locked from CH5_STEP 9).
+        E.append(dict(ev('Service door', page(["The vault's service door hangs open. Violet light behind it, and the smell of struck metal.",
+                                               "(Directorate tape across it. Not now.)"]),
+                         page(["(3 a.m. A note was waiting at the Center's desk, in a hand you know: \"Vault. Now. Bring your Flash. — I.L.\")",
+                               {'se': 'Door exit'}, {'transfer': {'map': 952, 'x': 18, 'y': 16, 'dir': 'up'}}],
+                              cond={'var': ['CH5_STEP', 11]}, trigger='action'),
+                         page(["The vault's service door. Directorate seals on it now."], cond={'var': ['CH5_STEP', 12]})), at=[48, 4]))
         rng = random.Random(608)
         for y in range(3, 41):
             for x in range(0, 57):

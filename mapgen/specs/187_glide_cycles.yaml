@@ -16,7 +16,7 @@ events:
   pages:
   - commands:
     - 'Shopkeeper: Glide Cycles! Brass frames, glass spokes, Meridian promo for gala guests.'
-    - if: $bag.has?(:GALAINVITATION) && !$bag.has?(:BICYCLE)
+    - if: pfm_has?(:GALAINVITATION) && !$bag.has?(:BICYCLE)
       then:
       - 'Shopkeeper: A gala invitation! The Chair''s guests ride free. Here.'
       - {script: 'pfm_item(:BICYCLE, 1, "BICYCLE")'}

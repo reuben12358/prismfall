@@ -298,6 +298,7 @@ def build_952():
     m.plan_cliffs(rows=3)
     E = m.events
     shatter = [S('Prismfall.checkpoint rescue nil'),
+               MV('player', ['up'] * 5),                   # close enough that the cradle and the Mourner are on screen
                "(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle's crystal is crazed all over with fine white lines.)",
                "(At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a woman in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)",
                P('MOURNER', 'neutral', "(the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its dark. That's all. That's all tonight is."),
@@ -306,13 +307,14 @@ def build_952():
                P('MOURNER', 'shocked', "What is that? What have you put on—"),
                P('SABLE', 'happy', "Light for everyone."),
                "(She steps back off the dais, almost skipping.)", {'se': 'Anim/Saint7'},
-               S('pfm_cutscene(:SH1) rescue nil'),
-               {'tone': [255, 220, 255, 0, 4]}, {'se': 'Anim/Explosion7'}, {'wait': 20}, {'tone': [0, 0, 0, 0, 30]},
+               S('pfm_cutscene(:SH1) rescue nil'),            # reach + lunge (act_ch5_mourner_reach), then Movies/pf_ch5_spire_shatter(_safe).ogv
                P('MOURNER', 'shocked', "No — no — what did you DO?"),
+               S('pfm_cutscene(:SH1_BURN) rescue nil'),       # act_ch5_mourner_burn: the smoking hand
                "(He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door and the smell of burnt brass.)",
                "(The Mourner turns and sees you. He goes still, the way he did in the Lantern Theatre.)",
                P('MOURNER', 'sad', "...You. Not you. Not here. Get out of here, child. Get OUT—"),
                "(He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door, holding his right hand away from his body. It's still smoking.)",
+               S('pfm_cutscene(:SH1_EXIT) rescue nil'),
                P('ROOK', 'shocked', "(behind you) That's it. That's the Zap Plate. That's — it's broken. It's BROKEN."),
                "(Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate's discharge, crackling white, its eyes empty. It plants itself between you and the door.)",
                P('ROOK', 'panic', "That's the vault guard! That's Meridian's — look at it, it's drunk on the — get BACK—"),
@@ -329,6 +331,7 @@ def build_952():
                    {'switch': ['CH5_GALA_DONE', True]}, {'switch': ['CH5_SHATTER', True]}, {'var': ['LOWLIGHT_STATE', 1]}, {'var': [STEP, 9]}])]
     E += [{'type': 'warp', 'name': 'Up to the lifts', 'at': [12, 18], 'to': {'map': 951, 'x': 10, 'y': 14, 'dir': 'up'}, 'se': 'Door exit'},
           at(ev('The Shatter', page([], cond=None), page(shatter, cond=V(8), trigger='autorun'), page([], cond=V(9))), 0, 18),
+          at(ev('Mourner', page([], cond=None), page([], 'act_ch5_mourner_reach', 'down', cond=V(8)), page([], cond=V(9))), 12, 8),
           at(ev('Cradle', page(["The cradle: brass and crystal on a dais, Lattice conduits running into it from every side."], tile=P1('lm_cradle_plate')),
                 page(["The cradle is split. The Zap Plate lies in it, cracked across. Its light stutters."], tile=P1('lm_cradle_cracked'), cond=V(9)),
                 page([P('LARCH', 'neutral', "(in the ruined vault at 3 a.m. with a borrowed scanner) That wasn't the Hollow's hammer. Look at the stress lines. The Plate was already cracking. Something's been drinking from it for ten years."),
@@ -376,7 +379,8 @@ def small(mid, name, link, lines, props, fn, extra=()):
 def build_small():
     small(187, 'Glide Cycles', 'LC_BIKE',
           [('Shopkeeper', 'NPC 12', 'down', [N('Shopkeeper', "Glide Cycles! Brass frames, glass spokes, Meridian promo for gala guests."),
-                                             IF('$bag.has?(:GALAINVITATION) && !$bag.has?(:BICYCLE)',
+                                             # the invitation is a story item (pfm_item keeps it out of the Bag): pfm_has?
+                                             IF('pfm_has?(:GALAINVITATION) && !$bag.has?(:BICYCLE)',
                                                 [N('Shopkeeper', "A gala invitation! The Chair's guests ride free. Here."), ITEM('BICYCLE', 1, 'BICYCLE')],
                                                 [N('Shopkeeper', "Come back with an invitation and we'll talk.")])], 4, 5)],
           [('lm_gearbox', 1, 5), ('lm_gearbox', 11, 5), ('lm_plant', 1, 7), ('lm_bench', 9, 7)], '187_glide_cycles.yaml')
