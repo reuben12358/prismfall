@@ -14,7 +14,7 @@
 |---|---|---|
 | **Part A — Gen 6–9, Regional & Mega Animated B2W2 Sprites** | Gen 1–5 (`#001–#649`) are **100% animated** (649/649 F/B/Shiny). Gen 6 is partial (**55/72 Front, 39/72 Back, 12/72 Shiny**). Gen 7–9 (**0/304**), Regional forms (**0/58** including **Hisuian Zorua `570_1`**), Primals (**0/2**), and half of Megas (**24/48 Front, 14/48 Back**) fall back to static PNGs. Across Prismfall's **795** live PBS species/forms (+23 combat Megas), the live gap is **247 Front / 263 Back** (**248 / 264** once Dorian gets Hisuian Zorua). Also caught **4 engine/asset bugs** (broken `FrontShiny`/`BackShiny` fallback path, 29 uppercase `.PNG` filenames, 141/180 oversized `192–288px` Gen 9 static PNGs, zeroed Gen 7–9 `BattlerAltitude`). | Build repeatable `tools/install_ebdx_animated_sprites.py` pulling strictly 2D Gen 5 B2W2-style horizontal strips from **Open-Source EBDX Renovation Project 4.0** / **Lucidious89 Animated Pokémon System `[SPRITES]`** + **`Ghasty001/Animated_sprites_by_Ghasty001`** + **La Base de Sky** + **Pokémon Showdown `gen5ani`** (GIF→PNG strip converter), fix `Battler Bitmaps.rb` shiny fallback path, lowercase `.PNG` extensions, and normalize strip height. |
 | **Part B — Ban Story Legendary Captures → Reborn-Style Postgame Network** | All 8 currently registered story boss files (`101`–`108_Boss_*.rb`) and Festival Arceus (`008_Festival_Data.rb`) already set `:catch => false`, and wild Paradox spawns (`pbs/encounters.txt:2848–2861`) live only on postgame Map `905`. **However, 3 active main-story leaks + 3 unregistered bosses exist:** (1) Ch10 **Type: Null Lv 45/50 gift** (`S180`, Map `699`), (2) Act IV **Kubfu Lv 60 gift** (Ironreach Dojo), (3) Act IV **Regirock Lv 64** (Stonesleep `788`), plus unregistered `:LOYAL_THREE`, `:PECHARUNT_DEEP`, and Ogerpon's Act V/Festival boundary. | Enforce hard story-lock (`!Prismfall::Endings.postgame? && !$game_switches[160]`) inside `004_Bosses_Battle.rb` + move Type: Null, Kubfu, Regirock, and all Legendary/Mythical/UB/Paradox captures into a **3-Tier Reborn-Style Postgame Network** (`S160 POSTGAME`, switches `S270–S295`), opening with **Dorian's Crownhaven Encore (Meloetta)**, **Gloamwood Masks (Loyal Three → Ogerpon)**, and culminating in **18-Plate Convergence (Arceus)**. |
-| **Part C — Gym 1 Dorian Pell (`LEADER_DORIAN`) Meloetta Ace Redesign** | Currently 5/6/3 mons (`Aipom, Minccino, Spinda, Jigglypuff, +Hard Whismur, Kecleon` ace). Damage-calc proof shows **stock `:GRAND_STAGE` double-stacks Normal × Sound (`×1.69 / ×2.10 / ×2.25`)**, turning Lv 15 Meloetta's 75 BP `RELICSONG` off 128 SpA into a **253-BP nuke that OHKOs 14/19 Badge-0 Pokémon** (even Bulbasaur/Squirtle/Kricketune). Also verified **Meloetta cannot learn `DISARMINGVOICE`** in v21.1 `PBS/pokemon.txt`, and `validate_trainers.py` flags Sketched moves on `SMEARGLE` unless allowlisted. | Upgrade Dorian to a strictly Normal-type 6-mon Theater Troupe (`Smeargle, Spinda, Jigglypuff, Chatot, Hisuian Zorua [Form=1], Meloetta [Lv 15 Ace]`; Casual 4-mon). Add 1-line `:not_moves => [:RELICSONG]` on `:GRAND_STAGE`'s Sound damage stack + 1-bar `"Matinee Rehearsal"` `register_trainer_boss` (`0.80×` Std / `0.85×` Hard / `0.78×` Cas, zero boss pips, full status vulnerability) so Lv 15 Meloetta sings `RELICSONG`, swaps **Aria ↔ Pirouette**, and stays **cleanly beatable** vs Badge-0 counters! |
+| **Part C — Gym 1 Dorian Pell (`LEADER_DORIAN`) Meloetta Ace Redesign** | Currently 5/6/3 mons (`Aipom, Minccino, Spinda, Jigglypuff, +Hard Whismur, Kecleon` ace). Damage-calc proof shows **stock `:GRAND_STAGE` double-stacks Normal × Sound (`×1.69 / ×2.10 / ×2.25`)**, turning Lv 15 Meloetta's 75 BP `RELICSONG` off 128 SpA into a **253-BP nuke that OHKOs 14/19 Badge-0 Pokémon** (even Bulbasaur/Squirtle/Kricketune). Also verified **Meloetta cannot learn `DISARMINGVOICE`** in v21.1 `PBS/pokemon.txt`, and `validate_trainers.py` flags Sketched moves on `SMEARGLE` unless allowlisted. | Upgrade Dorian to Reuben's locked strictly Normal-type 6-mon Theater Troupe (`Smeargle, Chatot, Hisuian Zorua [Form=1], Ditto, Kecleon, Meloetta [Lv 15 Ace]`; Casual 4-mon). Add 1-line `:not_moves => [:RELICSONG]` on `:GRAND_STAGE`'s Sound damage stack + 1-bar `"Matinee Rehearsal"` `register_trainer_boss` (`0.80×` Std / `0.85×` Hard / `0.78×` Cas, zero boss pips, full status vulnerability) so Lv 15 Meloetta sings `RELICSONG`, swaps **Aria ↔ Pirouette**, and stays **cleanly beatable** vs Badge-0 counters! |
 
 ---
 
@@ -73,7 +73,7 @@ Audited against `/home/antigravity/pf_engine_run/base/PBS/pokemon.txt` (**1,025 
 |---|---:|---|---|---|---|---|
 | **Meloetta Aria (`MELOETTA,0`)** | `#648` | `648.png` (`9450×63`, **150f ANIM**) | `648.png` (`8642×58`, **149f ANIM**) | **ANIM** | `96×96` / `96×96` | **READY NOW** |
 | **Meloetta Pirouette (`MELOETTA,1`)** | `#648` | `648_1.png` (`5776×76`, **76f ANIM**) | `648_1.png` (`5700×75`, **76f ANIM**) | **ANIM** | `96×96` / `96×96` | **READY NOW** |
-| **Dorian's Core Gen 1–5 Troupe** (`SMEARGLE`, `SPINDA`, `JIGGLYPUFF`, `CHATOT`) | `#235,#327,#039,#441` | **ALL 4 ANIM** (48–80f) | **ALL 4 ANIM** (47–80f) | **ALL 4 ANIM** | `96×96` | **READY NOW** |
+| **Dorian's Core Gen 1–5 Troupe** (`SMEARGLE`, `CHATOT`, `DITTO`, `KECLEON`) | `#235,#441,#132,#352` | **ALL 4 ANIM** (48–80f) | **ALL 4 ANIM** (47–80f) | **ALL 4 ANIM** | `96×96` | **READY NOW** |
 | **Hisuian Zorua (`ZORUA,1`)** | `#570` | **MISSING** | **MISSING** | **MISSING** | `ZORUA_1.PNG` (**UPPERCASE `.PNG`!** `96×96`) | **PRIORITY 1 GAP** (Gym 1!) |
 | **Hisuian Zoroark (`ZOROARK,1`)** | `#571` | **MISSING** | **MISSING** | **MISSING** | `ZOROARK_1.PNG` (uppercase `.PNG`) | GAP |
 | **Ogerpon (`OGERPON,0..3`)** | `#1017` | **MISSING** | **MISSING** | **MISSING** | **`192×192` Front / `288×288` Back** (2×/3× giant!) | **PRIORITY 1 GAP** (Ch10/Act V/PG) |
@@ -352,36 +352,27 @@ Inspired directly by *Pokémon Reborn*'s beloved postgame quest board (tiered an
 
 # PART C — Gym Leader 1 Dorian Pell (`LEADER_DORIAN`, `:GRAND_STAGE`, Cap `15`) Team Redesign with Meloetta Ace
 
-## C.1 Design Audit & Why the 2 Chosen Performers Are **Spinda** + **Jigglypuff**
+> **[CREATOR UPDATE — LOCKED 6-MON LINEUP]** Reuben finalized Dorian's exact 6-Pokémon Theater Troupe for Standard & Hard:
+> **`Smeargle` → `Chatot` → `Hisuian Zorua (Form = 1)` → `Ditto` → `Kecleon` → `Meloetta` (Ace)**!
 
-Reuben's locked 4 Pokémon for Standard & Hard:
-1. **`SMEARGLE`** (Normal — *The Set Painter / Curtain Raiser*)
-2. **`CHATOT`** (Normal/Flying — *The Diva Songbird*)
-3. **`ZORUA` (`Form = 1`, Hisuian)** (Normal/Ghost — *The Phantom Understudy*, disguised behind Meloetta via `ILLUSION`!)
-4. **`MELOETTA`** (Normal/Psychic ↔ Normal/Fighting — *The Prima Donna Ace*, Singer ↔ Dancer via `RELICSONG`!)
+## C.1 Design Audit — Reuben's 6-Mon Normal-Type Theater Troupe
 
-**Selection of Slots 2 & 3 (Completing a 100% Normal-Type 6-Mon Theater Troupe):**
+Every single slot is a pure or dual **Normal-type** performer with **ZERO role duplication** and iconic stagecraft personality:
 
-| Candidate | Types | BST | Role Overlap / Harness Risk | Verdict |
-|---|---|---:|---|---|
-| **Spinda** | Normal | 360 | **Zero overlap!** Owns the **Dance** mechanic (`TEETERDANCE` = Dance move → `+1 Speed` + applause step + confusion, `OWNTEMPO` prevents self-confusion; `COPYCAT` = stage improv!). Already on Dorian's team. | **PICK #1 (Slot 2 — Slapstick Stage Dancer)** |
-| **Jigglypuff** | Normal/Fairy | 270 | **Zero overlap!** Owns the **Soprano / Crowd `SING` mechanic** that is explicitly wired into the **Saltmere Full House reward** (`design/BALANCE.md:420` & `102_Field_GrandStage.rb:145–146` — full house disables guaranteed-hit `Sing`!). Paper 20 Base Def ensures Badge-0 physical attackers punish it cleanly; Hard `COMPETITIVE` punishes stat drops. | **PICK #2 (Slot 3 — Chorus Soprano)** |
-| *Minccino* | Normal | 300 | Redundant with Chatot (`ECHOEDVOICE`/`ROUND`/`ENCORE`) and Smeargle (`ENCORE`/`BABYDOLLEYES`). | Cut (role absorbed by Smeargle + Chatot) |
-| *Whismur* | Normal | 240 | Redundant sound-spammer; less iconic than Spinda's Dance + Jigglypuff's Soprano. | Cut |
-| *Furfrou* | Normal | 472 | **Explicitly banned by harness (`gen.py:203`)**: *"Furfrou's Fur Coat + Headbutt swept prepared teams at Lv 13–14."* | Rejected (overtuned) |
-| *Igglybuff* | Normal/Fairy | 210 | Strictly weaker/less iconic version of Jigglypuff (15 Def / 20 SpD). | Rejected |
+| Slot | Species (Lv Std / Hard) | Types | Theatrical Role | Signature Stagecraft Gimmick on `:GRAND_STAGE` |
+|---:|---|---|---|---|
+| **1** | **`SMEARGLE`** (Lv 10 / 10) | Normal | **Set Painter / Curtain Raiser** | Opens with `FAKEOUT` + `PAYDAY` (applause showpieces without heavy damage) + `ENCORE` + `BABYDOLLEYES` / Hard `PARTINGSHOT` (*"Exit, stage left!"*) @ `FOCUSSASH`. |
+| **2** | **`CHATOT`** (Lv 11 / 11) | Normal/Flying | **Diva Songbird** | Escalates applause with `ECHOEDVOICE` (Hard `ROUND`) + `PECK` + `ENCORE` — **strictly NO `CHATTER` / `BOOMBURST`** (`gen.py:203` explicitly noted Chatter swept Badge-0 teams). |
+| **3** | **`ZORUA` (`Form = 1`, Hisuian)** (Lv 12 / 12) | Normal/Ghost | **Phantom Understudy** | **`ILLUSION` copies Slot 6 (`MELOETTA`)!** Enters mid-fight disguised as the Prima Donna for a dramatic Act 1 fakeout (*"Wait, Meloetta already?!"* → breaks on hit → *"Ah! You spotted the understudy!"*). Fragile 35/40/40 bulk; `SHADOWSNEAK` + `SWIFT` + `TORMENT` / Hard `HONECLAWS` @ `SYNTHETICSEED` (**NO `BITTERMALICE` / `SHADOWBALL`**). |
+| **4** | **`DITTO`** (Lv 12 / 12) | Normal | **Body Double / Stunt Impersonator** | **Standard (`LIMBER` @ `QUICKPOWDER`, `TRANSFORM`):** steps onstage and mirrors the player's own active Pokémon with 1 turn of counterplay! **Hard (`IMPOSTER` @ `SITRUSBERRY`, `TRANSFORM`):** instant theatrical body-double transformation on entry (fair at Lv 12 `35 HP`, zero Choice Scarf cheese!). |
+| **5** | **`KECLEON`** (Lv 13 / 13) | Normal | **Quick-Change Artist** | Preserves Dorian's beloved canon quick-change performer (`03_CAST.md`, `EL_KECLEON`)! **Standard (`COLORCHANGE` @ `ORANBERRY`):** `FEINT, SHADOWSNEAK, THIEF, BIND`; **Hard (`PROTEAN` @ `SITRUSBERRY`):** `FURYSWIPES, SHADOWSNEAK, THIEF, FEINT` — live costume changes every turn right before the curtain rises on the Ace! |
+| **6** | **`MELOETTA`** (Lv 15 / 15) | Normal/Psychic ↔ Normal/Fighting | **Prima Donna Ace (Singer & Dancer)** | **Aria ↔ Pirouette mid-battle via `RELICSONG`!** Held to Act One Matinee standards (`0.80×` Std / `0.85×` Hard / `0.78×` Cas, zero boss bars); trainer partner = uncatchable in Gym 1, paying off in Postgame Tier 1 (`PG_MELOETTA`). |
 
-**Troupe Archetype Cast (Zero Role Duplication!):**
-1. **Smeargle** — *Set Painter / Stagehand* (opens with `FAKEOUT` showpiece + `PAYDAY` coin-rain showpiece + `ENCORE` + `BABYDOLLEYES` / Hard `PARTINGSHOT` "Exit, stage left!")
-2. **Spinda** — *Comic Dancer / Improv* (`TEETERDANCE` dance escalation + `COPYCAT`)
-3. **Jigglypuff** — *Chorus Soprano* (`SING` + `DISARMINGVOICE` + `POUND`/`ROUND`, ties into Saltmere Crowd mechanic)
-4. **Chatot** — *Diva Songbird* (`ECHOEDVOICE` / Hard `ROUND` + `PECK` + `ENCORE` — **strictly NO `CHATTER`, `BOOMBURST`, or `HYPERVOICE`**; `gen.py:203` explicitly noted Chatter swept prepared teams!)
-5. **Hisuian Zorua (`Form = 1`)** — *Phantom Understudy* (Normal/Ghost, enters disguised as **Meloetta** via `ILLUSION`! Fragile 35/40/40 bulk gets OHKO'd by Badge-0 Dark `Bite`/`Thief`, while `SHADOWSNEAK`/`SWIFT` punishes careless Normal/Fighting-expectant plays — **strictly NO `BITTERMALICE` or `SHADOWBALL`**!)
-6. **Meloetta** — *Prima Donna Ace* (Lv 15, Aria ↔ Pirouette via `RELICSONG` — **NOT catchable**, loyal theatrical muse holding back to Act One standards!)
+*(Casual `200` trims cleanly to a 4-mon matinee cast: `SMEARGLE Lv 8`, `CHATOT Lv 10`, `ZORUA,1 Lv 11`, `MELOETTA Lv 13`, marking `DITTO` and `KECLEON` as `only="nocasual"`.)*
 
 ---
 
-## C.2 Concrete Damage-Calc Balance Proof (Badge 0 Pool vs Lv 15 Meloetta, H-Zorua & Chatot)
+## C.2 Concrete Damage-Calc Balance Proof (Badge 0 Pool vs Lv 15 Meloetta & Troupe)
 
 ### Critical Math Discovery on `:GRAND_STAGE` + Meloetta Lv 15
 
@@ -399,7 +390,7 @@ Verified directly against `plugins/Prismfall Field Effects/004_FieldEffects_Engi
    # it STILL gets Normal x1.3/1.5/1.5, counts as a Sound move for applause + 10% confusion, and swaps Aria <-> Pirouette!
    { :flags => ["Sound"], :category => :damaging, :not_moves => [:RELICSONG], :mult => show, :message => "{2} rang through the opera house!" },
    ```
-2. **10-Line `"Act One Matinee"` Stat Scale (`plugins/Prismfall Bosses/104_Boss_HardWardens.rb` or `109_Boss_DorianMatinee.rb`):**
+2. **10-Line `"Act One Matinee"` Stat Scale (`plugins/Prismfall Bosses/109_Boss_DorianMatinee.rb`):**
    Uses Prismfall's **already-built** `Prismfall::Bosses.register_trainer_boss` (`006_Bosses_Start.rb:95–135`):
    - `:bars => 1` → `007_Bosses_UI.rb:19` draws **ZERO boss pips**; `006_Bosses_Start.rb:58` uses normal trainer databox!
    - `:status_immunity => false` → behaves 100% like a normal Gym Ace (can be paralyzed, confused, poisoned, stat-dropped)!
@@ -429,22 +420,20 @@ Verified directly against `plugins/Prismfall Field Effects/004_FieldEffects_Engi
 | **Rookidee / Fletchling** | 39 / 25–26 | 39–46 (fragile vs Aria) | 24–31 (62–79%) | Switch in **after Pirouette!** | `Pluck` (STAB 2×): 24–30 (**55–68%** + steals Berry!) | **Premier Pirouette counter**: swap in once she dances, punish Fighting typing! |
 | **Cutiefly** | 40 / 33 | 31–36 (78–90%) | 22–27 (55–68%) | `Struggle Bug` (-1 SpA!): 20–24 (45–55%) | `Fairy Wind` (STAB 2×): 22–27 (**50–61%**) | **Outspeeds Aria & threatens BOTH formes** (4× resists Fighting)! |
 
-#### Table 2 — Supporting Trio Verification (Lv 10–13 vs Lv 15 Starter `HP 46, Def 25, SpD 25`)
-- **Smeargle Lv 10** (`HP 31, Atk 11, Def 14, Spe 22, SpA 11`): `FAKEOUT` deals **4–6 (9–13%)**, `PAYDAY` deals **6–8 (13–17%)** — zero sweep threat; pure stage-setter raising applause by 1 stage before fainting in 2 hits!
-- **Chatot Lv 12** (`HP 41, Def 17, SpA 28, Spe 28`): `ECHOEDVOICE` (Turn 1) deals **15–18 (33–39%)**, Hard `ROUND` deals **21–27 (46–59%)** — scary if ignored, blown up by Badge-0 `Nacli` `Rock Throw` (**88%**) or `Shinx` `Spark` (**122% OHKO**)!
-- **Hisuian Zorua Lv 13** (`HP 33, Atk 22, Def 16, SpA 28, Spe 24`): `SHADOWSNEAK` deals **7–9 (15–20%)**, `SWIFT` deals **19–22 (41–48%)** — disguised as Meloetta via `ILLUSION`, shattered cleanly by any Dark `Bite`/`Thief` (**112–142% OHKO**) or 2 neutral STAB hits (**55% each**)!
-
-#### Pure-PBS Fallback Note (If Zero `.rb` Edits Are Desired)
-If Reuben prefers **zero `.rb` changes** (no `102_Field_GrandStage.rb` cap and no `Matinee` stat scale), then Standard Meloetta (`Lv 15, IV=0, EV=0, Impish`) **cannot safely carry `RELICSONG`** on stock `:GRAND_STAGE` (14/19 OHKO!) and would have to run `ECHOEDVOICE,QUICKATTACK,CONFUSION,SING` (2/19 OHKO S1, 6/19 S2 — playable, but loses the Aria ↔ Pirouette dance transformation!). **Therefore the 2-part fix (1-line `:not_moves => [:RELICSONG]` + 10-line `:DORIAN_MELOETTA_MATINEE`) is STRONGLY RECOMMENDED** because it preserves the iconic **Aria ↔ Pirouette `RELICSONG` transformation** at Cap 15 while hitting the exact 45–73% Standard / 33–62% Hard win-rate band!
+#### Table 2 — Supporting Cast Verification (Lv 10–13 vs Lv 15 Starter `HP 46, Def 25, SpD 25`)
+- **Smeargle Lv 10** (`HP 31, Atk 11, Def 14, Spe 22`): `FAKEOUT` deals **4–6 (9–13%)**, `PAYDAY` deals **6–8 (13–17%)** — pure curtain-raiser raising applause by 1 stage!
+- **Chatot Lv 11** (`HP 38, Def 16, SpA 26, Spe 26`): `ECHOEDVOICE` (T1) deals **14–17 (30–37%)**, Hard `ROUND` deals **19–25 (41–54%)** — checked cleanly by `Nacli` (`Rock Throw` 88%) or `Shinx` (`Spark` OHKO)!
+- **Hisuian Zorua Lv 12** (`HP 31, Atk 21, Def 15, SpA 26, Spe 23`): disguised as Slot 6 Meloetta via `ILLUSION`; `SHADOWSNEAK` **6–8 (13–17%)**, `SWIFT` **17–20 (37–43%)** — OHKO'd by any Badge-0 `Bite`/`Thief`!
+- **Ditto Lv 12** (`HP 33–35`): Standard `LIMBER` @ `QUICKPOWDER` spends 1 turn using `TRANSFORM` (giving the player a free hit or setup); Hard `IMPOSTER` @ `SITRUSBERRY` copies the player's own stats/moves on entry while keeping Ditto's low Lv 12 HP (`35`) — thrilling body-double gimmick without unfair stats!
+- **Kecleon Lv 13** (`HP 38, Atk 29, Def 24, SpD 37, Spe 16`): slow (`16 Spe`), physically punishable (`24 Def`!), `FEINT`/`THIEF`/`SHADOWSNEAK` chip cleanly (`15–22%` / `28–36%` STAB on Hard `PROTEAN`) while showcasing Dorian's signature costume-change!
 
 ---
 
 ## C.3 Drop-In Validated PBS Blocks (`pbs/trainers.txt` Lines 10–114)
 
 Verified field-by-field against `tools/validate_trainers.py` and `/home/antigravity/pf_engine_run/base/PBS/` (`pokemon.txt`, `pokemon_forms.txt`, `moves.txt`, `abilities.txt`, `items.txt` + `pbs/items_fields.txt`):
-- Exact Essentials v21.1 syntax for Hisuian Zorua: `Pokemon = ZORUA,13` + `Form = 1` (verified `ZORUA_1` in `PBS/pokemon_forms.txt`: Types `NORMAL,GHOST`, Ability `ILLUSION`).
-- Exact Essentials v21.1 syntax for Meloetta: `Pokemon = MELOETTA,15` + `Moves = RELICSONG,...` (starts in Aria Forme `Form = 0`; `RELICSONG` transforms to Pirouette `Form = 1` automatically in battle).
-- **Zero errors, zero warnings on Standard and Casual** (once the `BALANCE.md` allowlist rows in §C.5 are added for Smeargle's Sketched moves!).
+- **Exact 6-mon creator order:** `SMEARGLE` → `CHATOT` → `ZORUA,1` → `DITTO` → `KECLEON` → `MELOETTA` (and `ZORUA,1`'s `ILLUSION` automatically disguises it as the last unfainted party member — Slot 6 `MELOETTA`!).
+- **Every single move is 100% level-up legal at its exact level** (0 early-move warnings even on Hard, once Smeargle's Sketched moves are allowlisted in §C.5!).
 
 ```ini
 # Gym 1 - Dorian - field :GRAND_STAGE - cap 15
@@ -458,30 +447,30 @@ Pokemon = SMEARGLE,10
     Item = ORANBERRY
     Nature = JOLLY
     IV = 12
-Pokemon = SPINDA,10
-    Moves = TEETERDANCE,COPYCAT,TACKLE,DEFENSECURL
-    Ability = OWNTEMPO
-    Item = ORANBERRY
-    Nature = ADAMANT
-    IV = 12
-Pokemon = JIGGLYPUFF,11
-    Moves = SING,DISARMINGVOICE,POUND,DEFENSECURL
-    Ability = CUTECHARM
-    Item = ORANBERRY
-    Nature = MODEST
-    IV = 12
-Pokemon = CHATOT,12
+Pokemon = CHATOT,11
     Moves = ECHOEDVOICE,PECK,ENCORE,GROWL
     Ability = TANGLEDFEET
     Item = ORANBERRY
     Nature = TIMID
     IV = 12
-Pokemon = ZORUA,13
+Pokemon = ZORUA,12
     Form = 1
     Moves = SHADOWSNEAK,SWIFT,TORMENT,LEER
     Ability = ILLUSION
     Item = ORANBERRY
     Nature = TIMID
+    IV = 12
+Pokemon = DITTO,12
+    Moves = TRANSFORM
+    Ability = LIMBER
+    Item = QUICKPOWDER
+    Nature = TIMID
+    IV = 12
+Pokemon = KECLEON,13
+    Moves = FEINT,SHADOWSNEAK,THIEF,BIND
+    Ability = COLORCHANGE
+    Item = ORANBERRY
+    Nature = ADAMANT
     IV = 12
 Pokemon = MELOETTA,15
     Moves = RELICSONG,QUICKATTACK,CONFUSION,SING
@@ -501,35 +490,35 @@ Pokemon = SMEARGLE,10
     Nature = JOLLY
     IV = 20
     EV = 60,0,4,60,0,0
-Pokemon = SPINDA,11
-    Moves = TEETERDANCE,PSYBEAM,COPYCAT,ENCORE
-    Ability = OWNTEMPO
-    Item = SITRUSBERRY
-    Nature = TIMID
-    IV = 20
-    EV = 4,0,0,66,66,0
-Pokemon = JIGGLYPUFF,11
-    Moves = SING,DISARMINGVOICE,ROUND,DEFENSECURL
-    Ability = COMPETITIVE
-    Item = SITRUSBERRY
-    Nature = MODEST
-    IV = 20
-    EV = 66,0,4,0,66,0
-Pokemon = CHATOT,12
+Pokemon = CHATOT,11
     Moves = ROUND,ECHOEDVOICE,PECK,ENCORE
     Ability = TANGLEDFEET
     Item = ORANBERRY
     Nature = TIMID
     IV = 20
-    EV = 4,0,0,72,72,0
-Pokemon = ZORUA,13
+    EV = 4,0,0,66,66,0
+Pokemon = ZORUA,12
     Form = 1
     Moves = SHADOWSNEAK,SWIFT,HONECLAWS,SPITE
     Ability = ILLUSION
     Item = SYNTHETICSEED
     Nature = NAIVE
     IV = 20
-    EV = 0,40,0,78,40,0
+    EV = 0,36,0,72,36,0
+Pokemon = DITTO,12
+    Moves = TRANSFORM
+    Ability = IMPOSTER
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 72,0,0,72,0,0
+Pokemon = KECLEON,13
+    Moves = FURYSWIPES,SHADOWSNEAK,THIEF,FEINT
+    Ability = PROTEAN
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 78,78,4,0,0,0
 Pokemon = MELOETTA,15
     Moves = RELICSONG,QUICKATTACK,CONFUSION,ROCKSMASH
     Ability = SERENEGRACE
@@ -571,13 +560,11 @@ Pokemon = MELOETTA,13
     EV = 0
 ```
 
-*(Note on Hard `SPINDA,11`: `PSYBEAM` is a L14 level-up move, matching the existing Hard Spinda in `pbs/trainers.txt:64` and `BALANCE.md:29`'s intentional Hard early-move policy. Swap to `FAKETEARS` if strict 0-warning even on Hard is desired. Note on `ZORUA,1`: placed in Slot 5 immediately before Slot 6 `MELOETTA` so `ILLUSION` consistently disguises Hisuian Zorua as Meloetta — a dramatic mid-fight "Phantom Understudy" fakeout!)*
-
 ---
 
 ## C.4 Matching `tools/trainer_gen/gen.py` Update & `109_Boss_DorianMatinee.rb` Snippet
 
-Because `pbs/trainers.txt` is generated from `tools/trainer_gen/gen.py` (lines 175–215), Claude MUST update `gen.py` (adding optional per-mon `iv=` / `ev_override=` override support in `render()` so Meloetta emits `IV = 0` / `EV = 0` on Standard & Casual and `IV = 12` / `EV = 0` on Hard):
+Because `pbs/trainers.txt` is generated from `tools/trainer_gen/gen.py` (lines 175–215), Claude MUST update `gen.py` (adding optional per-mon `iv_override=` / `ev_override=` support in `render()` so Meloetta emits `IV = 0` / `EV = 0` on Standard & Casual and `IV = 12` / `EV = 0` on Hard):
 
 ```python
 warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The audience is yours tonight!", [
@@ -585,24 +572,24 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     P("SMEARGLE", 10, "OWNTEMPO", "ORANBERRY", "JOLLY", "FAKEOUT,PAYDAY,ENCORE,BABYDOLLEYES", "PD",
       casual={"moves": "PAYDAY,BABYDOLLEYES,TACKLE"},
       hard={"item": "FOCUSSASH", "moves": "FAKEOUT,PAYDAY,ENCORE,PARTINGSHOT"}),
-    # 2. Slapstick dancer (Teeter Dance raises applause + Speed; Copycat improvs).
-    P("SPINDA", 10, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,COPYCAT,TACKLE,DEFENSECURL", "S",
-      only="nocasual", hard={"lv": 11, "nat": "TIMID", "item": "SITRUSBERRY", "moves": "TEETERDANCE,PSYBEAM,COPYCAT,ENCORE"}),
-    # 3. Chorus soprano (ties into Saltmere Full House Sing rule; Hard Competitive punishes stat drops).
-    P("JIGGLYPUFF", 11, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",
-      only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY", "moves": "SING,DISARMINGVOICE,ROUND,DEFENSECURL"}),
-    # 4. Diva songbird (NO Chatter/Boomburst at Lv 12; Echoed Voice/Round + Encore).
-    P("CHATOT", 12, "TANGLEDFEET", "ORANBERRY", "TIMID", "ECHOEDVOICE,PECK,ENCORE,GROWL", "S",
-      casual={"ab": "KEENEYE", "nat": "HARDY", "moves": "ECHOEDVOICE,PECK,GROWL"},
+    # 2. Diva songbird (NO Chatter/Boomburst at Lv 11; Echoed Voice/Round + Encore).
+    P("CHATOT", 11, "TANGLEDFEET", "ORANBERRY", "TIMID", "ECHOEDVOICE,PECK,ENCORE,GROWL", "S",
+      casual={"lv": 10, "ab": "KEENEYE", "nat": "HARDY", "moves": "ECHOEDVOICE,PECK,GROWL"},
       hard={"moves": "ROUND,ECHOEDVOICE,PECK,ENCORE"}),
-    # 5. Phantom understudy (Hisuian Zorua Form 1; Illusion disguises it as Meloetta in Slot 6!).
-    P("ZORUA", 13, "ILLUSION", "ORANBERRY", "TIMID", "SHADOWSNEAK,SWIFT,TORMENT,LEER", "MX", form=1,
-      casual={"nat": "HARDY", "moves": "SCRATCH,SPITE,TORMENT,LEER"},
+    # 3. Phantom understudy (Hisuian Zorua Form 1; Illusion disguises it as Meloetta in Slot 6!).
+    P("ZORUA", 12, "ILLUSION", "ORANBERRY", "TIMID", "SHADOWSNEAK,SWIFT,TORMENT,LEER", "MX", form=1,
+      casual={"lv": 11, "nat": "HARDY", "moves": "SCRATCH,SPITE,TORMENT,LEER"},
       hard={"item": "SYNTHETICSEED", "nat": "NAIVE", "moves": "SHADOWSNEAK,SWIFT,HONECLAWS,SPITE"}),
+    # 4. Body double / stunt impersonator (Standard Quick Powder Transform; Hard Imposter jump-scare!).
+    P("DITTO", 12, "LIMBER", "QUICKPOWDER", "TIMID", "TRANSFORM", "PD",
+      only="nocasual", hard={"ab": "IMPOSTER", "item": "SITRUSBERRY", "nat": "JOLLY"}),
+    # 5. Quick-change artist (preserves Dorian's canon costume-change performer!).
+    P("KECLEON", 13, "COLORCHANGE", "ORANBERRY", "ADAMANT", "FEINT,SHADOWSNEAK,THIEF,BIND", "BA",
+      only="nocasual", hard={"ab": "PROTEAN", "item": "SITRUSBERRY", "moves": "FURYSWIPES,SHADOWSNEAK,THIEF,FEINT"}),
     # 6. Prima Donna ace (Meloetta Aria <-> Pirouette via Relic Song; scaled to Act One via :DORIAN_MELOETTA_MATINEE).
     P("MELOETTA", 15, "SERENEGRACE", "ORANBERRY", "HARDY", "RELICSONG,QUICKATTACK,CONFUSION,SING", "MX",
       iv_override=0, ev_override="0",
-      casual={"nat": "IMPISH", "moves": "RELICSONG,QUICKATTACK,CONFUSION,CONFIDE", "iv_override": 0, "ev_override": "0"},
+      casual={"lv": 13, "nat": "IMPISH", "moves": "RELICSONG,QUICKATTACK,CONFUSION,CONFIDE", "iv_override": 0, "ev_override": "0"},
       hard={"moves": "RELICSONG,QUICKATTACK,CONFUSION,ROCKSMASH", "iv_override": 12, "ev_override": "0"}),
 ])
 ```
@@ -661,16 +648,17 @@ Because `SMEARGLE` only lists `SKETCH` in `PBS/pokemon.txt`, `validate_trainers.
 **Lore Rationale (Why Dorian Has a Mythical Meloetta in Gym 1 — and Why She Isn't Catchable or Broken):**
 - Saltmere is *"the only city in Velmora where nothing is a miracle — so we built our own, every night at eight"* (`story/20_SCRIPT_CH0-2.md:886`). Years ago, a wandering **Meloetta** — drawn to the Pell Playhouse's songs — quietly joined Dorian's company as his Prima Donna muse. Neither the Accord nor Queen Maelis knows what she truly is; Dorian calls her his *"first violinist who refuses a salary."*
 - Because she is a seasoned stage performer testing a brand-new Badge-0 challenger, she **holds back to Matinee / Act One tempo** (`0.80×`), giving the challenger a thrilling taste of song-and-dance form-shifting (`Aria ↔ Pirouette`) without flattening them — and she is Dorian's partner (trainer battle = uncatchable), saving her **full 600-BST Opening Night battle & capture** as the triumphant opening quest of **Postgame Tier 1 (`PG_MELOETTA`: Crownhaven Encore)**!
+- Keeping **Kecleon** in Slot 5 (`Color Change` / `Protean`) AND adding **Ditto** in Slot 4 (`Transform` / `Imposter`) means Dorian's iconic *"Costume change!"* line still fits Kecleon seamlessly while his Prima Donna **Meloetta** steals the finale!
 
 ### Exact Files Mentioning Dorian's Old Kecleon Ace to Update
 
 | File & Line | Current Text | Recommended Claude Update |
 |---|---|---|
-| `story/20_SCRIPT_CH0-2.md:1070` | `(Mid-battle, when his ace enters:) [portrait: DORIAN, smug] Costume change!` | Update to: `[portrait: DORIAN, happy] Places, everyone — our Prima Donna! Aria, then Pirouette — keep up, darling!` (And optionally add a brief beat when Hisuian Zorua's Illusion breaks: `"Ah! You spotted the understudy!"`) |
-| `story/03_CAST.md:156` | `- **Ace:** **Kecleon** (the quick-change artist; Color Change is a costume change); also **Ambipom**, **Chatot** (the voice), **Furfrou**, and later **Exploud**.` | Update to: `- **Ace:** **Meloetta** (the Prima Donna — Aria the singer, Pirouette the dancer; holds back to Act One tempo in Gym 1, full power in Postgame Encore); also **Smeargle** (set painter), **Chatot** (diva), **Hisuian Zorua** (phantom understudy), **Spinda**, **Jigglypuff**, and later **Mega Lopunny** / **Exploud**.` |
-| `story/04_ACT_I.md:91` | `His ace is **Kecleon**, which changes "costume" with each type.` | Update to: `His ace is **Meloetta**, his Playhouse's wandering musical muse — singing in Aria Forme and leaping into Pirouette Forme mid-curtain-call (holding back to Act One standards for a first-badge challenger).` |
-| `plugins/Prismfall Trials/130_EventMons_Early.rb:45` & `design/EVENT_POKEMON.md:15` | `"A search-puzzle find before Gym 1: Protean (every move gets STAB), Dorian's own ace species."` | Keep `EL_KECLEON` intact (it is a fantastic Badge-0 Dark/Thief counter to Dorian's Meloetta & Hisuian Zorua!), and simply change `"Dorian's own ace species"` → `"the Lantern Theatre's quick-change prop-master"`! |
-| `design/BALANCE.md:139` & `design/TRAINER_FIELD_PLAYBOOK.md:77–84` | Old 5-mon `Aipom, Minccino, Spinda, Jigglypuff, Kecleon` table row & notes | Update to new 6-mon troupe (`Smeargle, Spinda, Jigglypuff, Chatot, Hisuian Zorua, Meloetta`) + document the `:RELICSONG` non-double-stack and `:DORIAN_MELOETTA_MATINEE` rule + re-run `tools/harness/run_winrates.rb PRISM_FIGHTS=G1` to record updated Sparse/Good/Full House win rates! |
+| `story/20_SCRIPT_CH0-2.md:1070` | `(Mid-battle, when his ace enters:) [portrait: DORIAN, smug] Costume change!` | Update ace call to: `[portrait: DORIAN, happy] Places, everyone — our Prima Donna! Aria, then Pirouette — keep up, darling!` (Keep *"Costume change!"* for Slot 5 Kecleon or add *"Ah! You spotted the understudy!"* when Hisuian Zorua's Illusion breaks!) |
+| `story/03_CAST.md:156` | `- **Ace:** **Kecleon** (the quick-change artist; Color Change is a costume change); also **Ambipom**, **Chatot** (the voice), **Furfrou**, and later **Exploud**.` | Update to: `- **Ace:** **Meloetta** (the Prima Donna — Aria the singer, Pirouette the dancer; holds back to Act One tempo in Gym 1, full power in Postgame Encore); also **Smeargle** (set painter), **Chatot** (diva), **Hisuian Zorua** (phantom understudy), **Ditto** (body double), **Kecleon** (quick-change artist), and later **Mega Lopunny** / **Exploud**.` |
+| `story/04_ACT_I.md:91` | `His ace is **Kecleon**, which changes "costume" with each type.` | Update to: `His ace is **Meloetta**, his Playhouse's wandering musical muse — singing in Aria Forme and leaping into Pirouette Forme mid-curtain-call (holding back to Act One standards for a first-badge challenger), supported by Kecleon, Ditto, Hisuian Zorua, Chatot, and Smeargle.` |
+| `plugins/Prismfall Trials/130_EventMons_Early.rb:45` & `design/EVENT_POKEMON.md:15` | `"A search-puzzle find before Gym 1: Protean (every move gets STAB), Dorian's own ace species."` | Keep `EL_KECLEON` intact (it is a fantastic Badge-0 Dark/Thief counter to Dorian's Meloetta & Hisuian Zorua!), and simply change `"Dorian's own ace species"` → `"the Lantern Theatre's quick-change co-star"`! |
+| `design/BALANCE.md:139` & `design/TRAINER_FIELD_PLAYBOOK.md:77–84` | Old 5-mon `Aipom, Minccino, Spinda, Jigglypuff, Kecleon` table row & notes | Update to Reuben's locked 6-mon troupe (`Smeargle, Chatot, Hisuian Zorua, Ditto, Kecleon, Meloetta`) + document the `:RELICSONG` non-double-stack and `:DORIAN_MELOETTA_MATINEE` rule + re-run `tools/harness/run_winrates.rb PRISM_FIGHTS=G1` to record updated Sparse/Good/Full House win rates! |
 | `tools/trainer_gen/gen.py:1083–1091` & `pbs/trainers.txt:14744–14820` (`LEADER_DORIAN,Dorian,90/190/290`) | Pageant Bout exhibition currently uses `Lopunny (Mega), Exploud, Kecleon "Encore"` | Recommend upgrading Slot 3 (`Kecleon "Encore"`) to **Lv 90 `MELOETTA`** (full 600-BST, `RELICSONG,PSYCHIC,CLOSECOMBAT,HYPERVOICE` @ `THROATSPRAY` or `LIFEORB`) so Dorian's Festival Pageant Bout pays off his Gym 1 Prima Donna at full Opening Night glory! |
 
 ---
