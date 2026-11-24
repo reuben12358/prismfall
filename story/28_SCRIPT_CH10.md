@@ -93,15 +93,15 @@ ROAD SIGN: THE ROOTDEEP — where Elowen's roots come through Nadir's roof. ← 
 [portrait: QUENT, smug] Just like that. Every time. It's modelled on something, you see. We're not allowed to say what.
 [portrait: CALLA, sad] *(very quietly, by the door)* Doctor.
 [portrait: QUENT, happy] Not allowed! I said not allowed. Calla, I'm a model of discretion.
-[name: Quent] The Chairman says you can take it with you, if you like. A gift. It likes you. Or it likes something about you. It's very hard to tell with the helmet.
+[name: Quent] The Chairman says it's yours, if you like. Not today: it can't leave the site uncalibrated before the Festival. But it's yours. It likes you. Or it likes something about you. It's very hard to tell with the helmet.
 ```
 **CHOICE `:ch10_null`**
 ```
-> Take the Type: Null. (take)
+> Accept it. (take)
   Script: pf_choose(:ch10_null, :take)
-  (Received: TYPE: NULL, Lv 45.) Switch S180 TYPE_NULL_GIFT = ON.
-  (When you lift it out of the cradle, the badge case goes quiet. The Type: Null doesn't.)
-  [portrait: QUENT, happy] Do write and tell us how it gets on. In detail. We'd love the detail.
+  (Calla presses a small brass key into your hand, the cradle's.) (Received: NULL CRADLE KEY.) Switch S180 TYPE_NULL_GIFT = ON.
+  (When you touch the cradle's glass, the badge case goes quiet. The Type: Null doesn't.)
+  [portrait: QUENT, happy] After the Festival, then. Do come back. We'd love the detail.
 > Leave it. (leave)
   Script: pf_choose(:ch10_null, :leave)
   [portrait: QUENT, sad] Oh. Well. It'll be here. It's always here.
@@ -109,7 +109,7 @@ ROAD SIGN: THE ROOTDEEP — where Elowen's roots come through Nadir's roof. ← 
 [portrait: CALLA, neutral] *(at the lift, alone)* I'm sorry. It isn't a zoo. I don't know what it is.
 V131 = 1.
 ```
-*(09 #14: the Type: Null reacts the way the badge case does. Gated by NARRATIVE_KEYS §4.1; takes priority over B. Voss +2 on `:take`.)*
+*(09 #14: the Type: Null reacts the way the badge case does. Gated by NARRATIVE_KEYS §4.1; takes priority over B. Voss +2 on `:take`. **No legendary joins the party in the main story** (Reuben's rule, 2026-11-23): S180 now means "promised", and the NULL CRADLE KEY opens the postgame `PG_TYPENULL` chain (Project NULL, Unmasked).)*
 
 **B. [else, if `standing(:HOLLOW) >= 4`] "The Leaderless" → Grudgestone Quarry 684/685 → Map 698, the Hollow Sanctuary** (S171 HOLLOW_SANCTUARY_OPEN)
 ```

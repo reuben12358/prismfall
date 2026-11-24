@@ -166,3 +166,15 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   - #42 *You Say Run* is listed for "Ch16 turning the tide". Ch16 has no comeback beat (it ends on the Purge), so keep it for Ch10 and Ch21.
 - The audition page `prismfall_anime_ost_audition.html` isn't in the bundle (only PROPOSAL.md arrived). **Gemini: please commit it** (or publish it) so Reuben can audition and export the lock-in report.
 - After the lock-in: the audio agent masters the picks with `master_track.py` and adds the new `Mood - *` / `Cutscene - *` slots to `design/AUDIO_SOUNDTRACK_PLAN.md`. This is in TODO_QUOTA §6. Nothing goes into git without the lock-in.
+
+## 2026-11-23_gen6-9-sprites-postgame-legendaries-dorian-meloetta: **ADOPT all three parts. The story rule is applied now; the engine, sprite and balance work is queued**
+- **Part B, no main-story legendary captures (Reuben's rule).**
+  - **Applied now:** Ch10's Type: Null is *promised*, not given. Calla hands over the NULL CRADLE KEY, S180 now means "promised", and `PG_TYPENULL` delivers it in the postgame. `story/28_SCRIPT_CH10.md`, `design/FLAGS.md` and `design/POKEMON_AVAILABILITY.md` are updated: Kubfu and Regirock move to the postgame, and the rule is written at the top of §4.
+  - The Ch14–16 scripts already comply: Groudon, Giratina and Zekrom are `:catch => false` bosses, and Ch14–16's EventMons are all non-legendary.
+  - Ch17+ will be written to the rule. It also means **Ogerpon stays a partner**, never party.
+  - **Queued (TODO_QUOTA):**
+    - the engine safety net (`Prismfall.legendary_catch_allowed?` gate in Bosses and catch);
+    - registering `:LOYAL_THREE` and `:PECHARUNT_DEEP` as `:catch => false`;
+    - the 3-tier postgame network as Act V / postgame design input. It gets scripted after Ch21, in story order.
+- **Part A, sprites and the 4 EBDX bugs:** adopted and queued. The shiny-fallback path fix goes in the EBDX Bridge, not the vendor plugin. The `.PNG` case normalization and the oversized Gen 9 statics are engine-asset work. The importer `tools/install_ebdx_animated_sprites.py` goes to the art pipeline.
+- **Part C, Dorian with a Meloetta ace:** adopt Reuben's locked four (Smeargle, Chatot, Hisuian Zorua and Meloetta, plus Spinda and Jigglypuff), with the **field cap** (`:not_moves => [:RELICSONG]` on Grand Stage's Sound row) and the **"Act One Matinee"** trainer-boss stat scale. The pure-PBS fallback is not adopted: it loses the Aria ↔ Pirouette dance. Gym 1 is balance-critical, so this lands only with a gym-1 harness run on quota (TODO_QUOTA §2).

@@ -28,8 +28,8 @@ Regenerate §5–6 with `--summary`; list every answer to the early Wardens with
 | after B9 | Verdance (Juno) | starter egg: any **Fire** starter | (R9) |
 | after B12 | Lucent (Ilsa's aide) | starter egg: any **Water** starter | (R9) |
 | after B13 | Cragholm museum | revival of all 10 fossil items found in Act IV (Root/Claw/Skull/Armor/Cover/Plume/Jaw/Sail + Galar fossil halves → Dracozolt/Arctozolt/Dracovish/Arctovish) | |
-| Act III branch | 699 Meridian Black Site (Meridian Standing) | Type: Null Lv 50 (Meridian's artificial-Judgment prototype). Memories found across the Bleed zones | |
-| Act IV | Ironreach dojo (any branch) | Kubfu Lv 60 (Undercity, i.e. Nadir, pit-fighting lineage) | |
+| Act III branch | 699 Meridian Black Site (Meridian Standing) | Type: Null **promised** (NULL CRADLE KEY); **collected in the postgame** (`PG_TYPENULL`) (Meridian's artificial-Judgment prototype). Memories found across the Bleed zones | |
+| Postgame | Ironreach dojo (`PG_KUBFU`) | Kubfu (moved out of Act IV: no legendary joins the party in the main story) | |
 | Act III | Royal Chase warden | Riolu egg | |
 
 Evolution notes: **trade evolutions** use the Linking Cord (Lumen Dept. 2F). Pawmot, Brambleghast and Rabsca are `Level,100` placeholders in the Gen 9 Pack PBS (their real walk/step methods are scripted), so they are also placed wild at s9–s11. Kingambit, Annihilape, Dudunsparce, Farigiraf, Archaludon, Dipplin/Hydrapple, Kleavor, Ursaluna and Wyrdeer come from evolving their wild pre-evolutions; Core must confirm those methods work (Gen 9 Pack).
@@ -48,6 +48,7 @@ Quest-reward and event Pokémon (chases, boss rewards, rival duels, kindness gif
 Rotom Lv 25 (Sluiceworks Turbine Hall) · Greavard Lv 16 (Thistledown attic, after the ghost-girl quest) · Spiritomb Lv 33 (Ossuary, Odd Keystone + 32 Bleed-zone NPC talks) · Larvesta egg (The Cinderhorn Caldera hermit) · Carbink glimpse in the Glassed Orchard (scripted, not catchable) · Gimmighoul coins hunt (Antumbra) → Gholdengo.
 
 ## 4. Legendary arcs, one per kingdom (multi-bar boss battles; levels at or below the cap)
+**Rule (Reuben, 2026-11-23):** no legendary, mythical, sub-legendary, UB or Paradox Pokémon is caught or gifted in the main story. Every story legendary is an uncatchable boss (`:catch => false`). Captures and gifts happen in the postgame legendary network (`gemini_recommends/2026-11-23_gen6-9-sprites-postgame-legendaries-dorian-meloetta`, Part B).
 | Kingdom | Legendary | Where / when | Lv |
 |---|---|---|---|
 | Elowen | **Okidogi, Munkidori, Fezandipiti** (Act III, Royal Chase / Bride Grove) → **Ogerpon** (Act V, Gloamwood) | the "Masked Ogre and the Three Loyal" folktale (Briarwick old woman foreshadows) | 46 / 78 |
@@ -55,7 +56,7 @@ Rotom Lv 25 (Sluiceworks Turbine Hall) · Greavard Lv 16 (Thistledown attic, aft
 | Zenith | **Zekrom** (Stormwatch Spire roof, storm event) | Act III | 58 |
 | Nadir | **Pecharunt** (Lightless Deep B1F; its poison chains mirror the Gilded Chain) | Act V | 78 |
 | Ashkaar | **Reshiram** (Wyrmscar Depths; truth to Zekrom's ideals) | Act V | 84 |
-| Ossaria | **Groudon** (Duneholt Undersands) + **Regirock** (Stonesleep braille) | Act IV | 64 |
+| Ossaria | **Groudon** (Duneholt Undersands; boss, not catchable; `:GROUDON_UNDERSANDS`). Regirock (Stonesleep braille) moves to the postgame (`PG_REGIS`) | Act IV | 66 |
 | Antumbra | **Giratina** (Reverse Depths 806, Act IV boss; Origin form postgame at the Distortion Core 910) | Act IV | 70 |
 | Crownhaven | **Arceus** (true finale boss; catchable on the Good ending's postgame) | Festival | 100 |
 Postgame (Hallow Strait, Shardfall Isles, Bleed rifts, Battle Tower rewards): the Kanto/Galar birds, the Beasts, Lugia/Ho-Oh, Latios/Latias (roaming), Regice/Registeel/Regieleki/Regidrago/Regigigas, the Lake trio (Lucent lakes), Dialga/Palkia, Heatran (The Cinderhorn), Cresselia/Darkrai, the Swords and Forces of Nature, Xerneas/Yveltal/Zygarde cells, Tapus, Cosmog → Solgaleo/Lunala, Necrozma, the Ultra Beasts ("Bleed rifts" lore), Zacian/Zamazenta/Eternatus, Calyrex + steeds, the Treasures of Ruin, Koraidon/Miraidon, Terapagos. Mythicals are event/password unlocks.

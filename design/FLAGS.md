@@ -121,7 +121,7 @@
 | S177 | EEVEE_OCTAVE_DONE | Eeveelution gauntlet cleared (set by the Trials quest `CR_OCTAVE` on the win; SPINE Rev 19) |
 | S178 | VANE_HALL_DONE | Vane Hall sequence completed |
 | S179 | WENLOW_ALIVE | On until Interlude IV ends (Mirefen NPC page) |
-| S180 | TYPE_NULL_GIFT | Black Site Type: Null received |
+| S180 | TYPE_NULL_GIFT | Black Site Type: Null *promised* (NULL CRADLE KEY); collected in the postgame `PG_TYPENULL` chain, since no main-story legendary captures or gifts are allowed |
 | S181–S220 | (reserved: per-Warden post-gym side-arc steps, two per Warden = 36, plus 4 spare) | |
 
 ## Switches: Core-written mirrors (S221–S260), events read-only

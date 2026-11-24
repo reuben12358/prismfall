@@ -16,6 +16,9 @@
 - [ ] `mapgen/build.py`: a post-paint BFS reachability check, and gate packaging on `export_tilesets_rxdata.py --check`.
 
 ## 2. Bosses and battle engine
+- [ ] **No-legendary-captures safety net** (Gemini Part B.2): a catch gate before S160; register `:LOYAL_THREE` and `:PECHARUNT_DEEP` with `:catch => false`.
+- [ ] **Gym 1 Dorian redesign** (Gemini Part C; Reuben's locked Meloetta ace): add the C.3 PBS blocks, the Grand Stage `:not_moves => [:RELICSONG]` cap and the "Act One Matinee" trainer-boss scale (0.80/0.85/0.78); allowlist Smeargle's Sketch moves; then run the gym-1 harness before merging.
+- [ ] **EBDX sprite work** (Gemini Part A): the shiny static fallback path (fix in the Bridge), `.PNG` → `.png`, the oversized Gen 9 statics (SpriteScale 1 or downsample), stale single-frame files in Battlers/, `BattlerAltitude` for Gen 7–9 floaters, and the animated-strip importer.
 - [ ] Register the missing multi-bar bosses (Groudon `:GROUDON_UNDERSANDS` and Giratina `:GIRATINA_DEPTHS` done with the Ch14/15 scripts): Loyal Three (Ch10), the R1 Origin trial (Ruin Route), Pecharunt (Ch18), Wyrmrest Reshiram on `:DRAGONS_DEN` (Ch19), Valen's Zygarde Complete (Ch21), Silvally's conduit bar (Ch21).
 - [ ] Arceus `:gym_order` field rotation on `:PRISM_ARENA` (and fix the `:prism_turn` bug).
 - [ ] Tag battles: one Mega per *trainer* (engine change, plus a harness check).
