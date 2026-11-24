@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-24
 - **Author:** Gemini (Task 1 Specialist — Rejuvenation V14 `AdvancedAnimations` Architect & Live `mkxp-z` Prototype Builder)
-- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64`** (exit code `0`, 2 full playable scenes captured at 30fps with synced audio; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
+- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64` — WAVE 1 + WAVE 2 COMPLETE (4 FULL SCENES)** (exit code `0`, `2,500` total native `512×384` @ 30fps live-map frames across 5 real built maps `Map 952`, `Map 608`, `Map 295`, `Map 563`, `Map 926`, with `-14.0 LUFS` synced canon audio mixes; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
 - **Target Wednesday Merge File:** `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` (prototype verified live at `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`).
 
 ---
@@ -29,39 +29,43 @@ Rejuvenation V14 achieves unforgettable RPG cinema **without leaving RPG Maker X
 
 | Layer | Viewport / Z | Rejuvenation V14 Origin | Prismfall `017_AdvancedAnimations.rb` Implementation |
 |---|---|---|---|
-| **1. Live Tilemap & Floor Decals** | `Spriteset_Map` (`z=0..300`) + `@actor_vp` floor band (`z=5`) | Real playable map (`Map 952`, `Map 608`, `Map 295`/`264`) darkened with `$game_screen.tone` (`[-80, -86, -54, 72]`) so VFX glow by contrast | `Engine#transfer_map` & `Engine#set_tone`. Floor frost/veins (`z_layer: :floor`) route into `@actor_vp` at `z=5` with `blend: :normal, opacity: 135..145` so they spread **underneath** every character cleanly without blinding white-blob overlap. |
-| **2. Variable-`frameData` Overworld Acting** | `@actor_vp` (`z=350`, synced with `$game_screen.tone`) | `Scripts/AdvancedAnimations.rb` arbitrary-grid charsets (`Arc_Renegade_Anim`, `DimensionalAelita_1/_2`, `pkmn_quilava_3` `[30, 8, 4, 8, 4]`) | `MapActor#play_clip(sheet:, grid:, frames:, ticks:)` with `TICK = 0.05s`, inline per-frame callbacks (`se:`, `cry:`, `shake:`, `flash:`, `hitstop:`, `on_frame:`), auto-aligned foot `oy`, and native B2W2 `32×48` / `64×64` pixel acting sheets + `Followers/*.png` Pokémon sprites. |
-| **3. Sparse 4-Color Additive Pixel VFX** | `@vfx_vp` (`z=420`, **untoned** `Tone(0,0,0,0)`) | Reborn *Dragonball Z* (`PRAS- Core Enforcer`), Rejuv `anim_beam.png` — thin, sparse, 4–8 color additive cells (`blend_type = 1`) instanced staggered along map paths | `MapVfx` locked to live map tile coordinates `(tx, ty)` with `grow:`, `move_to:` + parabolic `arc_h:`, `drift:` + `gravity:` + `spin:`. Staying untoned while `@actor_vp` and `Spriteset_Map` darken makes lightning arcs, shockwave domes, and crystal spears POP dramatically! |
+| **1. Live Tilemap & Floor Decals** | `Spriteset_Map` (`z=0..300`) + `@actor_vp` floor band (`z=5`) | Real playable maps (`Map 952`, `Map 608`, `Map 295`/`264`, `Map 563`/`309`, `Map 926`) darkened with `$game_screen.tone` (`[-88, -78, -30, 58]`) so VFX glow by contrast | `Engine#transfer_map` & `Engine#set_tone`. Floor frost, Lake Rime ice fissures, under-ice Kyogre eye, and Trinitite glass crust (`z_layer: :floor`) route into `@actor_vp` at `z=5` so they spread **underneath** every character cleanly without obstructing actors. |
+| **2. Variable-`frameData` Overworld Acting** | `@actor_vp` (`z=350`, synced with `$game_screen.tone`) | `Scripts/AdvancedAnimations.rb` arbitrary-grid charsets (`Arc_Renegade_Anim`, `DimensionalAelita_1/_2`, `pkmn_quilava_3` `[30, 8, 4, 8, 4]`) | `MapActor#play_clip(sheet:, grid:, frames:, ticks:)` with `TICK = 0.05s`, inline per-frame callbacks (`se:`, `cry:`, `shake:`, `flash:`, `hitstop:`, `on_frame:`), auto-aligned foot `oy`, native B2W2 `32×48` / `64×64` acting sheets, colossal overworld legendary acting sheets (`act_war1_primal_kyogre` `176×136`, `act_war1_reshiram` `128×128`), and `Followers/*.png`. |
+| **3. Sparse 4–9 Color Additive Pixel VFX** | `@vfx_vp` (`z=420`, **untoned** `Tone(0,0,0,0)`) | Reborn *Dragonball Z* (`PRAS- Core Enforcer`), Rejuv `anim_beam.png` — thin, sparse additive cells (`blend_type = 1`) instanced along live map paths | `MapVfx` locked to live map tile coordinates `(tx, ty)` with `grow:`, `move_to:` + parabolic `arc_h:`, `drift:` + `gravity:` + `spin:`, plus Wave 2 directional beam anchors (`origin: :left` / `:right`) and per-frame `set_tile`/`set_scale` for pixel-locked beam tug-of-war clashes! |
 | **4. Unified `pbZoomMap` Camera** | `@zoom_vp` (`z=89000`) | `Scripts/Camera/pbZoomMap` — calls `Graphics.snap_to_bitmap` every frame and scales that unified sprite smoothly with `ease_in_out` so autotiles & Z-layers never tear | `Engine#zoom_map(goal, duration:, focus:, ease:)`. Temporarily hides `@zoom_vp` + `@ui_vp`, snaps live `Spriteset_Map + @actor_vp + @vfx_vp` into one crisp bitmap (immediately disposing prior bitmap — zero VRAM leak!), pivots `ox/oy` onto the live focal actor/tile, and layers directional camera shake cleanly. |
-| **5. Cinema UI, Ramped Flashes & Portraits** | `@ui_vp` (`z=90000+`) | Reborn ramped flashes (`17→51→136→221→255`), `WidescreenEffect_1`, Desolation `FaceWindowVX`, `$Settings.photosensitive` | Smooth widescreen letterbox bars, `flash_ramp`, 2-frame B&W silhouette `impact_beat` + real-clock `hitstop` (auto-degraded when `Cutscene.photosensitive?`), pulsing emergency edge vignette, and crisp `PortraitBox` using `Graphics/Portraits/<ID>_<expr>.png` while the live map continues animating underneath. |
+| **5. Cinema UI, Ramped Flashes & Portraits** | `@ui_vp` (`z=90000+`) | Reborn ramped flashes (`17→51→136→221→255`), `WidescreenEffect_1`, Desolation `FaceWindowVX`, `$Settings.photosensitive` | Smooth widescreen letterbox bars, `flash_ramp`, 2-frame B&W silhouette `impact_beat` + real-clock `hitstop` (auto-degraded when `Cutscene.photosensitive?`), pulsing emergency edge vignette, and auto-sized `PortraitBox` (`name:` support for titles like `"Thane Eirik"` and `"Dominar Hrothgar"`) while the live map keeps animating underneath. |
 
 ### The 5 Audio/Timing Rules Enforced in `017_AdvancedAnimations.rb`
-1. **Anticipation Hold:** Variable `ticks:` holds coiled wind-up frames (`8–14` ticks) while `set_tone` darkens the room and `zoom_map` pushes in (`1.0× → 1.48×`).
-2. **Audio Vacuum (`bgm_cut`):** Instant 0ms `Audio.bgm_stop` (`0.38–0.45s` dead silence) right before the Splitter detonates or the mask splits — broken only by one dry SE (`Battle catch click` or branch-crack `Cut`).
-3. **Smear + 2-Frame Silhouette + Real-Clock Hitstop:** 2-tick lunge/slam smear → `impact_beat(hitstop_sec: 0.14..0.16)` freezing `world_dt = 0.0` while shake and dry shatter SE fire on frame 0.
-4. **Ramped Screen Flash + Staggered VFX Chains:** `flash_ramp(steps: [51, 136, 221, 255])` paired with tile-by-tile conduit lightning, radial ballistic shards, or 5-tile emerald Ingrain roots.
-5. **Silent Aftermath on the Visibly Scarred Map:** Long quiet hold (`WAIT 40+`) on the transformed tilemap (cracked Cradle tile `25947`, glass-frosted Lowlight square around Dex, split ash-bark mask halves & white lily lying beside collapsed Rowan, crystal-studded emerald root wall) before gentle aftermath music enters.
+1. **Anticipation Hold:** Variable `ticks:` holds coiled wind-up frames (`8–18` ticks) while `set_tone` darkens the map and `zoom_map` pushes in (`1.0× → 1.48×`).
+2. **Audio Vacuum (`bgm_cut`):** Instant 0ms `Audio.bgm_stop` (`0.28–0.45s` dead silence) right before the Spire Splitter detonates, Rowan's mask splits, Kyogre breaches Lake Rime, or the WAR-1 beam clash collapses into a single pinpoint mote — broken only by one dry SE (`Battle catch click`, `Cut`, `Anim/Ice8`, or `Anim/HealBell`).
+3. **Smear + 2-Frame Silhouette + Real-Clock Hitstop:** 2-tick lunge/slam/launch smear → `impact_beat(hitstop_sec: 0.12..0.16)` freezing `world_dt = 0.0` while shake and shatter SE fire on frame 0.
+4. **Ramped Screen Flash + Staggered VFX Chains:** `flash_ramp(steps: [51, 136, 221, 255])` paired with conduit lightning, 5-tile Ingrain roots, radial Origin Pulse spheres, live tug-of-war beams, or radioactive sea-green Trinitite shockwave domes.
+5. **Silent / Scarred Aftermath on the Transformed Map:** Long atmospheric hold on the visibly altered tilemap (cracked Cradle tile `25947`, glass-frosted Lowlight square, fallen ash-bark mask beside Rowan, midnight tropical deluge over fissured Lake Rime, vitrified emerald Trinitite crust across `Map 926`) before aftermath music enters.
 
 ---
 
-## 2. Live `mkxp-z.x86_64` Vertical Slice Verification Proof
+## 2. Live `mkxp-z.x86_64` Vertical Slice Verification Proof (Wave 1 + Wave 2)
 
-Both vertical-slice scenes were executed **100% live inside our compiled Linux `mkxp-z.x86_64` engine** on real built Prismfall `.rxdata` maps (with Prismfall custom tilesets merged via `mapgen/merge_tilesets.py`), captured at native `512×384` @ `30fps`, and verified frame-by-frame:
+All four peak cutscenes were executed **100% live inside our compiled Linux `mkxp-z.x86_64` engine** on real built Prismfall `.rxdata` maps (with Prismfall custom tilesets merged via `mapgen/merge_tilesets.py`), captured at native `512×384` @ `30fps`, and audited frame-by-frame:
 
 | Scene | Live Maps Used | Frames / Duration | Audio Architecture | Verified Proof Artifacts |
 |---|---|---|---|---|
 | **Scene 1 — Ch5 Spire Shatter (`:CH5_SHATTER`)** | `Map 952` (*Plate Vault*) → `Map 608` (*Shattered Lowlight* cutaway on frozen Dex) → scarred `Map 952` (Cradle swapped to tile `25947` + Overcharged Electivire leap) | `689` frames @ 30fps (`22.97s`, 15 synced cues) | Mix B *Girei* intro build → `0.38s` dead-silence `bgm_cut` → *Girei* choral drop right on Shatter impact + real `.ogg` SEs & `Cries/ELECTIVIRE.ogg` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch5_spire_shatter.mp4` (`2.4 MB`) & `.gif` (`991 KB`) |
 | **Scene 2 — Ch9 Trevenant Ingrain & Unmasking (`:CH9_UNMASK`)** | `Map 295` lit as Crimson Emergency Reliquary (`Tone(-28,-86,-78,42)` + red pulse vignette; **Wednesday swaps `map_id: 295 → 264`** when Iron Pit Reliquary is generated) | `593` frames @ 30fps (`19.77s`, 23 synced cues) | Rejuvenation Tension → hard `bgm_cut` silence across entire Shatter, Mourner dive, Dusk Ball pitch, Trevenant Ingrain 5-tile root wall, crimson crystal barrage & mask split → *Never Meant to Belong* solo violin after silent reveal | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch9_trevenant_unmasking.mp4` (`2.0 MB`) & `.gif` (`1.7 MB`) |
-| **24-Frame Proof Contact Sheet** | 12 Ch5 frames + 12 Ch9 frames (nearest-neighbor crisp) | `1064×1396` PNG | Visual audit pass: zero tilemap tear, unobstructed actors, crisp PortraitBox | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/96_rejuv_in_engine_cutscene_proof.png` |
-| **Interactive Showcase HTML** | Both live MP4s + clickable beat-jump timelines + 4-viewport architecture + 12 asset sheet inspector | `3.91 MB` (`< 8 MB` cap) | Playwright verified: `console_errors=0`, `page_errors=0`, both videos `512×384` `readyState=4` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/prismfall_rejuv_in_engine_cutscenes_preview.html` |
+| **Scene 3 — Ch11 Kyogre Awakens at Lake Rime (`:CH11_KYOGRE`)** | `Map 563` (*Rimewood Glade* frozen lake & icefall, Tileset 52 `PF Rejuv Snow`; **Wednesday swaps `map_id: 563 → 309/300`** when Rimeholt Harbour is built) | `589` frames @ 30fps (`19.63s`, 18 synced cues) | **`-14.0 LUFS` calibrated:** Rejuvenation Ominous → `0.35s` dead-silence `bgm_cut` on eye glint & `Anim/Ice8` → *The Rumble of Scientific Triumph* (Kevin Penkin) on Primal Kyogre breach + `Cries/KYOGRE_1.ogg` & water/ice/rain SEs | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch11_kyogre_awakens.mp4` (`3.4 MB`) & `.gif` (`2.1 MB`) |
+| **Scene 4 — Ch19 WAR-1 Primal Kyogre vs Reshiram Beam Clash (`:WAR_CLIMAX`)** | **Real built `Map 926` (*The Glass Dunes*, Tileset 56 `PF Rejuv Shore`)** — full central battlefront basin with Isenmar & Ashkaar armies, banners, Eirik, Hrothgar, Sigrun & Anja | `629` frames @ 30fps (`20.97s`, 24 synced cues) | **`-14.0 LUFS` calibrated:** *Elegy of the Dynast* → *Ashes on The Fire* (Kohta Yamamoto) during dual charge & 3.1s tug-of-war clash → `0.28s` dead-silence `bgm_cut` + solitary `Anim/HealBell` → Trinitite glass detonation → *Soundscape to Ardor* + `KYOGRE_1` & `RESHIRAM` cries | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch19_war_beam_clash.mp4` (`2.5 MB`) & `.gif` (`1.4 MB`) |
+| **Wave 1 Proof Contact Sheet** | 12 Ch5 frames + 12 Ch9 frames (`1064×1396` PNG, nearest-neighbor) | Visual QA pass | Zero tilemap tear, unobstructed actors, crisp PortraitBox | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/96_rejuv_in_engine_cutscene_proof.png` |
+| **Wave 2 Proof Contact Sheet** | 12 curated Ch11 frames + 12 curated Ch19 frames (`1064×1396` PNG, nearest-neighbor) | Visual QA pass | Zero clipped fins/banners, exact mouth-locked beam alignment, crisp Trinitite crust | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/97_rejuv_wave2_cutscene_proof.png` |
+| **Wave 1 Showcase HTML** | Live Ch5 & Ch9 MP4s + beat-jump timelines + 4-viewport arch + 12 asset sheets | `3.91 MB` (`< 8 MB`) | Playwright verified: `console_errors=0`, `page_errors=0`, both videos `512×384` `readyState=4` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/prismfall_rejuv_in_engine_cutscenes_preview.html` |
+| **Wave 2 Showcase HTML** | Live Ch11 & Ch19 MP4s + beat-jump timelines + Wave 2 engine notes + 7 VFX + 3 acting sheets + 24-frame proof | `4.60 MB` (`< 8 MB`) | Playwright verified: `console_errors=0`, `page_errors=0`, both videos `512×384` `readyState=4`, 10/10 asset sheets decoded | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/prismfall_rejuv_in_engine_cutscenes_wave2_preview.html` |
 
 ---
 
-## 3. Verified Pixel-Art Asset Manifest (All Staged in `graphics/`)
+## 3. Verified Pixel-Art Asset Manifest (All Dual-Synced in `graphics/` & `art/out/Graphics/`)
 
-Every new pixel-art sheet was authored on a native 1× pixel grid, upscaled strictly 2× `NEAREST`, and passed automated validation: **`exact2x=True`, `semi=0`, `orphans=0`**.
+Every new pixel-art sheet was authored on a native 1× pixel grid, upscaled strictly 2× `NEAREST`, and passed automated validation: **`exact2x=True`, `semi=0`, `orphans=0`**, with identical SHA-256 digests across `graphics/Animations/`, `art/out/Graphics/Animations/`, and `pf_engine_run/game/Graphics/Animations/`.
 
-### A. 10 New Additive & Live-Map VFX Sheets (`graphics/Animations/pf_vfx_*.png`)
+### A. Wave 1 — 10 Additive & Live-Map VFX Sheets (`graphics/Animations/pf_vfx_*.png`)
 | File | Dimensions | Grid | Blend / Layer | Colors | Purpose |
 |---|---|---|---|---|---|
 | `graphics/Animations/pf_vfx_vault_seal.png` | `384×192` | `4×2` | `:add` (`:floor` → `:above`) | 6 | Golden Zap Plate Meridian Seal octagon (Row 0) → unstable violet-gold overload cracks (Row 1) |
@@ -75,31 +79,44 @@ Every new pixel-art sheet was authored on a native 1× pixel grid, upscaled stri
 | `graphics/Animations/pf_vfx_smoke_and_motes.png` | `256×128` | `4×2` | `:normal` + `:add` | 10 | Row 0 rising burned-glove smoke wisps; Row 1 tumbling ash-bark mask halves, fallen mask + white lily, prism mote |
 | `graphics/Animations/pf_vfx_fist_reliquary.png` | `256×128` | `4×2` | `:normal` (`:mid`, Y-sorted) | 14 | Iron & glass Fist Plate Reliquary plinth (intact glowing crimson → Splitter armed → shattered stuttering) |
 
-### B. 2 New Overworld Acting Sheets (`graphics/Characters/act_*.png`) + Existing Canonical Sheets Used
-| File | Dimensions | Grid | Status | Notes |
+### B. Wave 2 — 7 New Crisp 2× Pixel VFX Sheets (`graphics/Animations/pf_vfx_*.png`)
+| File | Dimensions | Grid | Blend / Layer | Colors | SHA-256 (12) | Purpose |
+|---|---|---|---|---|---|---|
+| `graphics/Animations/pf_vfx_ice_fissure.png` | `512×256` | `4×2` | `:normal` (`:floor`, `z=5`) + `:add` highlight | 9 | `5acaa31f4eb6` | Row 0: Tearing black ice fissures across Lake Rime; Row 1: House-sized golden-blue Kyogre eye ringed in crimson Primal runes opening beneath dark ice |
+| `graphics/Animations/pf_vfx_origin_pulse.png` | `512×256` | `4×2` | `:add` (`:above`) | 5 | `f78e0a92400a` | Row 0: Expanding cyan-gold Origin Pulse spheres & radiant bursts; Row 1: Towering ocean breach water geysers & crashing foam crowns |
+| `graphics/Animations/pf_vfx_deluge_rain.png` | `512×256` | `4×2` | `:add` (`:above`) | 6 | `a0ba4b231cd3` | Row 0: Wind-driven diagonal torrential tropical deluge rain + splash pips; Row 1: Undulating emerald-cyan-indigo arctic aurora borealis curtains |
+| `graphics/Animations/pf_vfx_origin_beam.png` | `512×256` | `4×2` | `:add` (`:above`, `origin: :left`) | 5 | `eb93e00842e8` | Row 0: Tileable horizontal Origin Pulse ocean-energy beam segments (L→R) with golden helix ribbons; Row 1: Elliptical tidal muzzle charge collars |
+| `graphics/Animations/pf_vfx_blue_flare_beam.png` | `512×256` | `4×2` | `:add` (`:above`, `origin: :right`) | 5 | `696e8871c154` | Row 0: Tileable horizontal Reshiram Blue Flare plasma beam segments (R→L) with amber flame tongues; Row 1: Jagged plasma flare charge collars |
+| `graphics/Animations/pf_vfx_beam_clash_core.png` | `512×256` | `4×2` | `:add` (`:above`) | 6 | `39eec026520a` | Row 0: Split ocean/flame tug-of-war collision sphere with razor white vertical seam; Row 1: Emerald overload → implosion → single silent falling mote |
+| `graphics/Animations/pf_vfx_trinitite_glass_wave.png` | `768×384` | `4×2` | `:add` (`:above`) & `:normal` (`:floor`, `z=5`) | 4 | `cb90ffbfa5d5` | Row 0: Expanding radioactive sea-green Trinitite shockwave dome ring; Row 1: Pentagonal vitrified emerald Trinitite fused-glass floor crust |
+
+### C. Overworld Acting Sheets Used (`graphics/Characters/act_*.png`)
+| File | Dimensions | Grid | Wave | Notes |
 |---|---|---|---|---|
-| `graphics/Characters/act_ch9_trevenant_ingrain.png` | `256×256` | `4×4` | **NEW** (`exact2x=True, semi=0, orphans=0`, 19 colors) | Anchored directly to `Followers/TREVENANT.png`: Dusk Ball silhouette → summon ring → rear high → vertical smear slam → claws driven into floor with emerald Ingrain ring → crimson brace → crystal-frosted guard |
-| `graphics/Characters/act_ch9_mourner_throw.png` | `256×256` | `4×4` | **NEW** (`exact2x=True, semi=0, orphans=0`, 27 colors) | Anchored directly to canonical `MOURNER.png`: wire-pulling → alarm turn → explosive dive smear → skid + Dusk Ball wind-up → pitch smear → wide protective shield + crimson-white rim glare |
-| `graphics/Characters/act_ch5_mourner_reach.png` | `256×256` | `4×4` | Existing (reused) | Gently reaching for Zap Plate (`0..7`) → barehanded lunge into Shatter (`8..15`) |
-| `graphics/Characters/act_ch5_mourner_burn.png` | `256×256` | `4×4` | Existing (reused) | Cradling smoking burned glove (`0..11`) → turning & fleeing out service door (`12..15`) |
-| `graphics/Characters/act_ch9_mourner_unmask.png` | `128×192` | `4×4` | Existing (reused) | Violet shard hit → ash-bark mask splitting → Uncle Rowan revealed & collapsing to knees |
-| `graphics/Characters/Followers/ELECTIVIRE.png` | `256×256` | `4×4` | Existing (reused) | Overcharged vault guard leaping out from behind cracked cradle on Map 952 |
+| `graphics/Characters/act_ch9_trevenant_ingrain.png` | `256×256` | `4×4` | **Wave 1 NEW** (`exact2x=True, semi=0, orphans=0`, 19 colors) | Anchored to `Followers/TREVENANT.png`: Dusk Ball silhouette → rear high → vertical smear slam → Ingrain floor lock → crystal-frosted guard |
+| `graphics/Characters/act_ch9_mourner_throw.png` | `256×256` | `4×4` | **Wave 1 NEW** (`exact2x=True, semi=0, orphans=0`, 27 colors) | Anchored to canonical `MOURNER.png`: wire-pulling → alarm turn → aisle dive smear → Dusk Ball pitch → wide protective shield |
+| `graphics/Characters/act_ch5_mourner_reach.png` | `256×256` | `4×4` | Wave 1 (existing) | Reaching for Zap Plate (`0..7`) → barehanded lunge into Shatter (`8..15`) |
+| `graphics/Characters/act_ch5_mourner_burn.png` | `256×256` | `4×4` | Wave 1 (existing) | Cradling smoking burned glove (`0..11`) → turning & fleeing (`12..15`) |
+| `graphics/Characters/act_ch9_mourner_unmask.png` | `128×192` | `4×4` | Wave 1 (existing) | Violet shard hit → ash-bark mask splitting → Uncle Rowan revealed & collapsing |
+| `graphics/Characters/act_ch11_kyogre_storm.png` | `128×192` | `4×4` | **Wave 2 (existing)** | Anja in fur-trimmed parka & windblown cyan scarf: storm approach → spotting under-ice eye → shouting `"TOWERS!"` → bracing against deluge |
+| `graphics/Characters/act_war1_primal_kyogre.png` | `704×272` | `4×2` | **Wave 2 (existing)** | Colossal overworld Primal Kyogre (`176×136` cells): vertical lake/sea breach (`0..2`) → Primal Alpha flare (`3`) → Origin Pulse charge & fire (`4..5`, mouth `-63px`) → settle (`6..7`) |
+| `graphics/Characters/act_war1_reshiram.png` | `512×256` | `4×2` | **Wave 2 (existing)** | Colossal overworld Reshiram (`128×128` cells): wing unfurl & golden ignition (`0..3`) → superheated Blue Flare turbine & torrent (`4..5`, mouth `-63px`) → bank away (`6..7`) |
 
 ---
 
 ## 4. Roadmap: Converting ALL 7 Peak Cutscenes to 100% In-Engine Rejuvenation V14 Choreography
 
-All `.ogv` AI-slideshow movies are permanently retired. Every one of the 7 Peak Cutscenes runs purely inside `AdvancedAnimations` on its real tilemap:
+All `.ogv` AI-slideshow movies are permanently retired. Every one of the 7 Peak Cutscenes runs purely inside `AdvancedAnimations` on its real tilemap (**4 of 7 already live-verified in `mkxp-z.x86_64`!**):
 
 | Peak | Chapter & Scene ID | Live Map(s) | Acting Sheets (`graphics/Characters/`) | Additive / Tile VFX (`graphics/Animations/`) | Signature Rejuvenation V14 Beat | Status |
 |---|---|---|---|---|---|---|
-| **#1** | **Ch5 — Spire Shatter** (`:CH5_SHATTER` / `:SH1`) | `952` → `608` → `952` | `act_ch5_mourner_reach`, `act_ch5_mourner_burn`, `Followers/ELECTIVIRE` | `pf_vfx_vault_seal`, `pf_vfx_splitter_beacon`, `pf_vfx_prism_lightning`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_shards`, `pf_vfx_glass_frost`, `pf_vfx_smoke_and_motes` | Darkened vault `pbZoomMap 1.48×` → `0.38s bgm_cut` → 2f impact + `0.14s` hitstop → live cutaway to Map 608 frozen Dex → Electivire leap | **LIVE PROTOTYPED & VERIFIED** |
-| **#2** | **Ch9 — Trevenant Ingrain & Mourner Unmasking** (`:CH9_UNMASK` / `:IR1`) | `264` *(currently verified live on `295`)* | `act_ch9_mourner_throw`, `act_ch9_trevenant_ingrain`, `act_ch9_mourner_unmask` | `pf_vfx_fist_reliquary`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_frost`, `pf_vfx_duskball_release`, `pf_vfx_ingrain_roots`, `pf_vfx_glass_shards`, `pf_vfx_smoke_and_motes` | Crimson emergency pulse → aisle dive + ballistic Dusk Ball → 5-tile gnarled emerald Ingrain wall stopping crimson volley → stray shard mask-split + `0.16s` hitstop → silent Uncle Rowan reveal | **LIVE PROTOTYPED & VERIFIED** |
-| **#3** | **Ch11 — Primal Kyogre Thaw** (`:CH11_KYOGRE_THAW`) | `309` (*Sinking Quarter*) → `300` (*Thane's Harbour*) | `act_ch11_kyogre_storm` *(already exists!)* + new `act_ch11_kyogre_eye_under_ice` (`192×128` 3/4 tile overlay) | `pf_vfx_ice_fracture_tiles`, `pf_vfx_harbour_geyser`, `pfw_fx_origin_pulse` | Live ice-crack trails racing under PC's boots → `bgm_cut` dead vacuum → glowing blue-gold Primal Eye opening *underneath* transparent harbour ice tiles (`z=5`) → upward ice eruption & Kyogre breach! | Ready for Wave 2 (1 VFX + 1 acting sheet) |
-| **#4** | **Ch15 — Hollow Cathedral Echo & Glassfall** (`:CH15_CATHEDRAL_ECHO`) | `394` (*Hollow Cathedral*) → `806` (*Reverse Depths*) | New `act_ch15_kestrel_gauntlet`, `act_ch15_morwen_echo`, `act_ch15_giratina_origin` | `pf_vfx_ghost_flames`, `pf_vfx_portal_tear`, `pf_vfx_prism_lightning` | Kestrel slams Resonance Gauntlet onto Spooky Plate → translucent spectral AF 290 echoes replay across cathedral tiles → Morwen turns 180° toward PC in candle-spark silence → downward barrow rift opens into Giratina 6-wing unfurl | Ready for Wave 2 (3 acting + 2 VFX sheets) |
-| **#5** | **Ch19 — WAR-1 Glass Dunes Clash** (`:WAR_CLIMAX`) | `926` (*The Glass Dunes* — already built!) | Existing `act_war1_primal_kyogre`, `act_war1_reshiram`, `pfw_kyogre_*`, `pfw_reshiram` | Existing `pfw_fx_flood`, `pfw_beam_sea`, `pfw_beam_fire`, `pfw_fx_clash_core`, `pfw_fx_glass_ring` + `AdvancedAnimations#zoom_map` | Upgrade existing `013_Scenes_War_OnMap.rb` from flat `pfw_glass_dunes.png` to live `Map 926` + unified `pbZoomMap` push-ins + dead-silence `bgm_cut` glass collapse into single falling mote! | Ready for Wave 2 (0 new art required!) |
-| **#6** | **Ch21 — Valen's Crystal Arm, Zygarde Assembly & Arceus Convergence** (`:CH21_CONVERGENCE`) | `491` (*Altar Stage*) + 11-lamp cross-cuts (`106`, `182`, `223`, `294`) | New `act_ch21_valen_unglove`, `act_ch21_zygarde_complete`, `act_ch21_arceus_descent` | `pf_vfx_hex_cells` (emerald Zygarde hexagonal assembly!), `pf_vfx_18plate_wheel`, `pf_vfx_golden_chains`, `pf_vfx_shockwave_ring` | Valen tears off grey glove as crystal climbs his arm → emerald hexagonal cells fly across live arena tiles assembling Zygarde Complete → Arbiter golden chains drag Arceus through cracked sky → 18-Plate radial Convergence! | Ready for Wave 3 (3 acting + 3 VFX sheets) |
-| **#7** | **Ruin R7 — Mirror Pierce & Silent Crown** (`:RUIN_R7_PIERCE`) | `491` → `963` (*Ruined Crown*) → `106` (*Lighthouse*) | New `act_ruin_reflection_step`, `act_ruin_mirror_blade`, `act_ruin_valen_fall` | `pf_vfx_black_glass_shards`, `pf_vfx_glitch_scanlines`, `pf_vfx_smoke_and_motes` | Rejuvenation Renegade / Maria-impales-Vitus energy: trapped micro-control steps toward Reflection → dead-silence `bgm_cut` → 2f stark ink silhouette lunge + `0.18s` hitstop → slow monochrome aftermath on `Map 963` with zero music | Ready for Wave 3 (3 acting + 2 VFX sheets) |
+| **#1** | **Ch5 — Spire Shatter** (`:CH5_SHATTER` / `:SH1`) | `952` → `608` → `952` | `act_ch5_mourner_reach`, `act_ch5_mourner_burn`, `Followers/ELECTIVIRE` | `pf_vfx_vault_seal`, `pf_vfx_splitter_beacon`, `pf_vfx_prism_lightning`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_shards`, `pf_vfx_glass_frost`, `pf_vfx_smoke_and_motes` | Darkened vault `pbZoomMap 1.48×` → `0.38s bgm_cut` → 2f impact + `0.14s` hitstop → live cutaway to Map 608 frozen Dex → Electivire leap | **LIVE PROTOTYPED & VERIFIED (Wave 1)** |
+| **#2** | **Ch9 — Trevenant Ingrain & Mourner Unmasking** (`:CH9_UNMASK` / `:IR1`) | `264` *(currently verified live on `295`)* | `act_ch9_mourner_throw`, `act_ch9_trevenant_ingrain`, `act_ch9_mourner_unmask` | `pf_vfx_fist_reliquary`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_frost`, `pf_vfx_duskball_release`, `pf_vfx_ingrain_roots`, `pf_vfx_glass_shards`, `pf_vfx_smoke_and_motes` | Crimson emergency pulse → aisle dive + ballistic Dusk Ball → 5-tile gnarled emerald Ingrain wall stopping crimson volley → stray shard mask-split + `0.16s` hitstop → silent Uncle Rowan reveal | **LIVE PROTOTYPED & VERIFIED (Wave 1)** |
+| **#3** | **Ch11 — Kyogre Awakens at Lake Rime** (`:CH11_KYOGRE` / `:CH11_THAW`) | `309`/`300` *(currently verified live on `563`)* | `act_ch11_kyogre_storm`, `act_war1_primal_kyogre` | `pf_vfx_ice_fissure`, `pf_vfx_origin_pulse`, `pf_vfx_deluge_rain` | Arctic aurora midnight → jagged black ice fissures (`z=5`) → house-sized golden-blue Kyogre eye beneath ice → Anja/Juno warnings → `0.35s bgm_cut` → ocean geyser breach + Origin Pulse spheres + 2f hitstop → warm midnight tropical deluge! | **LIVE PROTOTYPED & VERIFIED (Wave 2)** |
+| **#4** | **Ch19 — WAR-1 Primal Kyogre vs Reshiram Beam Clash** (`:WAR_CLIMAX` / `:WAR1`) | **`926` (*The Glass Dunes* — real built map!)** | `act_war1_primal_kyogre`, `act_war1_reshiram`, `EIRIK`, `HROTHGAR`, `SIGRUN`, `ANJA`, `pfw_soldier_*`, `pfw_banner_*` | `pf_vfx_origin_pulse`, `pf_vfx_origin_beam`, `pf_vfx_blue_flare_beam`, `pf_vfx_beam_clash_core`, `pf_vfx_trinitite_glass_wave`, `pf_vfx_smoke_and_motes` | Warm dawn frontline pan (Eirik vs Hrothgar) → darkened two-shot dual charge → pixel-locked Origin Pulse vs Blue Flare colliding dead-center with 3.1s tug-of-war shake → `0.28s bgm_cut` pinpoint collapse → emerald Trinitite glass wave & crust sweeping live `Map 926`! | **LIVE PROTOTYPED & VERIFIED (Wave 2)** |
+| **#5** | **Ch15 — Hollow Cathedral Echo & Glassfall** (`:CH15_CATHEDRAL_ECHO`) | `394` (*Hollow Cathedral*) → `806` (*Reverse Depths*) | New `act_ch15_kestrel_gauntlet`, `act_ch15_morwen_echo`, `act_ch15_giratina_origin` | `pf_vfx_ghost_flames`, `pf_vfx_portal_tear`, `pf_vfx_prism_lightning` | Kestrel slams Resonance Gauntlet onto Spooky Plate → translucent spectral AF 290 echoes replay across cathedral tiles → Morwen turns 180° in candle-spark silence → barrow rift opens into Giratina 6-wing unfurl | Ready for Wave 3 |
+| **#6** | **Ch21 — Valen's Crystal Arm, Zygarde Assembly & Arceus Convergence** (`:CH21_CONVERGENCE`) | `491` (*Altar Stage*) + 11-lamp cross-cuts (`106`, `182`, `223`, `294`) | New `act_ch21_valen_unglove`, `act_ch21_zygarde_complete`, `act_ch21_arceus_descent` | `pf_vfx_hex_cells`, `pf_vfx_18plate_wheel`, `pf_vfx_golden_chains`, `pf_vfx_shockwave_ring` | Valen tears off grey glove as crystal climbs his arm → emerald hexagonal cells fly across live arena assembling Zygarde Complete → Arbiter golden chains drag Arceus through cracked sky → 18-Plate radial Convergence! | Ready for Wave 3 |
+| **#7** | **Ruin R7 — Mirror Pierce & Silent Crown** (`:RUIN_R7_PIERCE`) | `491` → `963` (*Ruined Crown*) → `106` (*Lighthouse*) | New `act_ruin_reflection_step`, `act_ruin_mirror_blade`, `act_ruin_valen_fall` | `pf_vfx_black_glass_shards`, `pf_vfx_glitch_scanlines`, `pf_vfx_smoke_and_motes` | Rejuvenation Renegade / Maria-impales-Vitus energy: trapped micro-control steps toward Reflection → dead-silence `bgm_cut` → 2f stark ink silhouette lunge + `0.18s` hitstop → slow monochrome aftermath on `Map 963` with zero music | Ready for Wave 3 |
 
 ---
 
@@ -107,21 +124,23 @@ All `.ogv` AI-slideshow movies are permanently retired. Every one of the 7 Peak 
 
 1. **Install `017_AdvancedAnimations.rb`:** Copy the exact verified code in §6 below into `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`.
 2. **Retire AI `.ogv` calls in `016_Movies.rb`:**
-   - Redirect `CUTSCENE_SCENES[:SH1]` to call `Prismfall::AdvancedAnimations.play_ch5_spire_shatter` (and `:IR1` → `play_ch9_trevenant_unmasking`).
+   - Redirect `CUTSCENE_SCENES[:SH1]` → `play_ch5_spire_shatter`, `:IR1` → `play_ch9_trevenant_unmasking`, `:CH11_KYOGRE` → `play_ch11_kyogre_awakens`, and `:WAR_CLIMAX` → `play_ch19_war_beam_clash` (upgrading flat picture stage `pfw_glass_dunes.png` to live `Map 926`!).
    - Keep `Cutscene.act` backwards-compatible for tiny inline event gestures, and remove all `Cutscene.movie("pf_*.ogv")` references from story scenes so no AI slideshow ever plays.
 3. **Live-Gameplay Input Mode for `PortraitBox#say`:**
-   - In `Engine#say`, add an `interactive: !@capture_dir` branch so during real player gameplay, `PortraitBox` waits for `Input.trigger?(Input::USE)` / `Input.trigger?(Input::BACK)` after typing finishes (or delegates to `pbMessage("\\pf[#{speaker_sym},#{expr}]#{text}")` when `on_map` pause is desired), while keeping `hold:` auto-advance for headless video verification captures!
-4. **Canonical BGM Mapping:**
-   - Map tags `"ch5_girei_intro"`, `"ch5_girei_climax"`, `"ch9_tension"`, `"ch9_never_meant"` to Prismfall's canonical `Audio/BGM/` filenames (matching `AUDIO_SOUNDTRACK_PLAN.md` / `2026-11-23_anime-ost-situational-bgm`).
-5. **Map 264 Handoff:**
-   - Once `mapgen` builds `Map 264` (*Iron Pit - The Reliquary*), change `eng.transfer_map(295, ...)` in `play_ch9_trevenant_unmasking` to `264` and align `(reliquary_tx, reliquary_ty)`, `(aisle_x, juno_y)` to Map 264's stairs and gallery edge.
-6. **Add `selftest/suite.ruby_stub` coverage:** Verify `AdvancedAnimations::Ease`, variable `ticks:` timing sum, `photosensitive?` flash/shake/impact degradation, and zero bitmap disposal leaks.
+   - In `Engine#say`, add an `interactive: !@capture_dir` branch so during real player gameplay, `PortraitBox` waits for `Input.trigger?(Input::USE)` / `Input.trigger?(Input::BACK)` after typing finishes, while keeping `hold:` auto-advance for headless video verification captures!
+4. **Canonical BGM Mapping (Wave 1 + Wave 2):**
+   - Map tags `"ch5_girei_intro"`, `"ch5_girei_climax"`, `"ch9_tension"`, `"ch9_never_meant"`, `"ch11_ominous"`, `"ch11_kyogre_thaw"`, `"ch19_dynast"`, `"ch19_war_clash"`, `"ch19_aftermath"` to Prismfall's canonical `Audio/BGM/` filenames (matching `AUDIO_SOUNDTRACK_PLAN.md` / `2026-11-23_anime-ost-situational-bgm`).
+5. **Map Handoffs (Built vs. Pending):**
+   - **`Map 952`, `Map 608`, `Map 926`:** Already built and running live! Zero coordinate changes needed.
+   - **Map `295 → 264` (Ch9):** Swap `eng.transfer_map(295, ...)` → `264` once Iron Pit Reliquary is generated.
+   - **Map `563 → 309/300` (Ch11):** Swap `eng.transfer_map(563, ...)` → `309` (*Sinking Quarter*) / `300` (*Thane's Harbour*) once Rimeholt Harbour is generated.
+6. **Add `selftest/suite.ruby_stub` coverage:** Verify `AdvancedAnimations::Ease`, variable `ticks:` timing sum, `MapVfx` `:left`/`:right` origins and `set_tile`/`set_scale`, `PortraitBox` custom `name:` width scaling, `photosensitive?` degradation, and zero bitmap disposal leaks.
 
 ---
 
 ## 6. Verified Live-Tested Source Code: `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`
 
-*(Exact file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, 1,282 captured frames across `Map 952`, `Map 608`, and `Map 295`.)*
+*(Exact verbatim file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, `2,500` captured frames across `Map 952`, `Map 608`, `Map 295`, `Map 563`, and `Map 926` — 2149 lines, SHA-256 `332da495ba9b568a`.)*
 
 ```ruby
 #===============================================================================
@@ -217,6 +236,9 @@ module Prismfall
         foot_pad = if name.include?("act_ch5_mourner") then 8
                    elsif name.include?("act_ch9_mourner_throw") then 6
                    elsif name.include?("act_ch9_trevenant") then 1
+                   elsif name.include?("act_war1_primal_kyogre") then 8
+                   elsif name.include?("act_war1_reshiram") then 8
+                   elsif name.include?("pfw_banner") then 2
                    else 4
                    end
         @sprite.oy = @ch - foot_pad
@@ -470,6 +492,8 @@ module Prismfall
         @stay    = stay
         @fade    = fade.to_f
         @scale   = scale.to_f
+        @scale_x = nil
+        @scale_y = nil
         @grow    = grow
         @move_to = move_to   # [tx2, ty2, dur]
         @arc_h   = arc_h.to_f
@@ -479,6 +503,7 @@ module Prismfall
         @offset  = offset
         @z_layer = z_layer
         @opacity = opacity.to_f
+        @origin_mode = origin
         @t       = 0.0
         @done    = false
 
@@ -494,9 +519,16 @@ module Prismfall
         @ch = @bmp.height / @rows
         @sprite = Sprite.new(vp)
         @sprite.bitmap = @bmp
-        if origin == :foot
+        case origin
+        when :foot
           @sprite.ox = @cw / 2
           @sprite.oy = @ch - 8
+        when :left
+          @sprite.ox = 0
+          @sprite.oy = @ch / 2
+        when :right
+          @sprite.ox = @cw
+          @sprite.oy = @ch / 2
         else
           @sprite.ox = @cw / 2
           @sprite.oy = @ch / 2
@@ -507,6 +539,16 @@ module Prismfall
       end
 
       def stop!; @done = true; end
+
+      def set_tile(tx, ty)
+        @tx = tx.to_f
+        @ty = ty.to_f
+      end
+
+      def set_scale(sx, sy = nil)
+        @scale_x = sx.to_f
+        @scale_y = (sy || sx).to_f
+      end
 
       def update(dt)
         return true if @done
@@ -541,8 +583,8 @@ module Prismfall
         end
 
         sx, sy = @engine.tile_to_screen(@tx, @ty)
-        # tile_to_screen returns foot anchor; center-anchored VFX sit at tile center (sy - 16)
-        base_y = (@sprite.oy == @ch / 2) ? (sy - 16) : sy
+        # tile_to_screen returns foot anchor; center/left/right anchored VFX sit at tile center (sy - 16)
+        base_y = (@origin_mode == :foot) ? sy : (sy - 16)
         px = sx + @offset[0]
         py = base_y + @offset[1] + arc_y
         if @drift
@@ -563,8 +605,8 @@ module Prismfall
           u = [@t / [@grow[2].to_f, 0.001].max, 1.0].min
           sc *= @grow[0] + (@grow[1] - @grow[0]) * Ease.apply(:out, u)
         end
-        @sprite.zoom_x = sc
-        @sprite.zoom_y = sc
+        @sprite.zoom_x = @scale_x ? @scale_x : sc
+        @sprite.zoom_y = @scale_y ? @scale_y : sc
         @sprite.angle  = @spin * @t
 
         op = @opacity
@@ -585,12 +627,12 @@ module Prismfall
     # Keeps live map, lighting, roots, smoke, and camera running underneath!
     #===========================================================================
     class PortraitBox
-      def initialize(ui_vp, speaker_sym, expression, text, engine)
+      def initialize(ui_vp, speaker_sym, expression, text, engine, name: nil)
         @engine = engine
         @vp = ui_vp
         @sprites = []
         @text = text.to_s
-        @name = speaker_sym.to_s.capitalize
+        @name = (name || speaker_sym.to_s.capitalize).to_s
         @chars_shown = 0.0
         @done_typing = false
 
@@ -634,16 +676,17 @@ module Prismfall
         @box.y = box_y
         @sprites << @box
 
-        # 3. Speaker Nameplate Tab
+        # 3. Speaker Nameplate Tab (auto-sized for titles like "Dominar Hrothgar")
         @name_sp = Sprite.new(@vp)
         @name_sp.z = 9510
-        nb = Bitmap.new(136, 28)
-        nb.fill_rect(0, 0, 136, 28, Color.new(16, 20, 30, 248))
-        nb.fill_rect(2, 2, 132, 24, Color.new(208, 216, 234, 255))
-        nb.fill_rect(4, 4, 128, 20, Color.new(34, 40, 58, 255))
+        nw = @name.length > 10 ? 184 : 136
+        nb = Bitmap.new(nw, 28)
+        nb.fill_rect(0, 0, nw, 28, Color.new(16, 20, 30, 248))
+        nb.fill_rect(2, 2, nw - 4, 24, Color.new(208, 216, 234, 255))
+        nb.fill_rect(4, 4, nw - 8, 20, Color.new(34, 40, 58, 255))
         set_font(nb, 18, true)
         nb.font.color = Color.new(255, 236, 176)
-        nb.draw_text(8, 2, 120, 24, @name, 0)
+        nb.draw_text(8, 2, nw - 16, 24, @name, 0)
         @name_sp.bitmap = nb
         @name_sp.x = msg_x + 6
         @name_sp.y = box_y - 22
@@ -1010,9 +1053,9 @@ module Prismfall
       #-------------------------------------------------------------------------
       # Dialogue + Timeline Wait Helpers
       #-------------------------------------------------------------------------
-      def say(speaker_sym, expr, text, hold: 1.55)
+      def say(speaker_sym, expr, text, hold: 1.55, name: nil)
         @dialogue.dispose if @dialogue
-        @dialogue = PortraitBox.new(@ui_vp, speaker_sym, expr, text, self)
+        @dialogue = PortraitBox.new(@ui_vp, speaker_sym, expr, text, self, name: name)
         until @dialogue.done_typing?
           step_frame
         end
@@ -1775,6 +1818,464 @@ module Prismfall
         end
         return { :cues => cues, :frames => fc }
       end
+
+      #-------------------------------------------------------------------------
+      # SCENE 3 — Ch11 Peak #3: "Kyogre Awakens at Lake Rime"
+      # Live Map 563 (Rimewood Glade frozen lake & icefall; Wednesday swaps
+      # map_id: 563 -> 309/300 when Rimeholt Sinking Quarter Harbour is built!)
+      #-------------------------------------------------------------------------
+      def play_ch11_kyogre_awakens(capture_dir: nil, capture_fps: 30)
+        eng = Engine.new(capture_dir: capture_dir, capture_fps: capture_fps)
+        begin
+          # 1. Stage on live built frozen-lake Map 563 under midnight arctic aurora darkness!
+          eng.transfer_map(563, 18.0, 13.8, hide_player: true)
+          # Hide static map pickup balls / ranger so Lake Rime belongs purely to the scene
+          [1, 5, 7].each do |eid|
+            ev = $game_map.events[eid]
+            ev.transparent = true if ev
+          end
+
+          eng.set_tone(-62, -52, -16, 36, duration: 0.0)
+          eng.letterbox(true, height: 32, duration: 0.0)
+          eng.play_bgm("ch11_ominous", volume: 82, tag: "ch11_ominous")
+          eng.play_se("Anim/Wind5", volume: 65)
+
+          # Shimmering emerald-cyan-indigo arctic aurora ribbons rippling above the icefall!
+          [[13.6, 9.5, 0], [18.0, 9.2, 1], [22.4, 9.5, 2]].each_with_index do |(ax, ay, ph), ai|
+            eng.spawn_vfx(:"aurora_#{ai}", sheet: "pf_vfx_deluge_rain", tx: ax, ty: ay,
+                          grid: [4, 2], frames: [4 + (ph % 4), 4 + ((ph + 1) % 4), 4 + ((ph + 2) % 4), 4 + ((ph + 3) % 4)],
+                          ticks: [7, 7, 7, 7], loops: :forever,
+                          blend: :add, opacity: 195, scale: 1.15, z_layer: :above)
+          end
+
+          # Cast positioned on the completely open south snow shore looking north across Lake Rime!
+          eng.spawn_actor(:anja, sheet: "act_ch11_kyogre_storm", tx: 15.8, ty: 18.6,
+                          grid: [4, 4], is_charset: false)
+          eng.spawn_actor(:pc,   sheet: "PLAYER_A", tx: 18.0, ty: 18.9, dir: :up, is_charset: true)
+          eng.spawn_actor(:juno, sheet: "JUNO",     tx: 20.2, ty: 18.6, dir: :up, is_charset: true)
+
+          # Beat 1: Cold aurora stillness — trio walks up onto the south bank of frozen Lake Rime
+          eng.actor(:anja).play_clip(
+            sheet: "act_ch11_kyogre_storm", grid: [4, 4], frames: [0, 1, 2, 3],
+            ticks: [10, 10, 8, 10], loops: 1, stay: true
+          )
+          eng.actor(:anja).move_to(15.8, 17.8, duration: 1.15, walk: false)
+          eng.actor(:pc).move_to(18.0, 18.0, duration: 1.25, walk: true, dir: :up)
+          eng.actor(:juno).move_to(20.2, 17.8, duration: 1.20, walk: true, dir: :up)
+          eng.pan_camera_to(18.0, 14.4, duration: 1.4, ease: :in_out)
+          eng.wait(1.6)
+
+          # Beat 2: The ice sings and tears like a page across Lake Rime!
+          eng.play_se("Anim/Earth3", volume: 88)
+          eng.shake(power: 3, duration: 0.85, decay: false)
+          [[14.2, 13.5], [18.0, 13.1], [21.8, 13.5]].each_with_index do |(fx, fy), fi|
+            eng.spawn_vfx(:"fissure_#{fi}", sheet: "pf_vfx_ice_fissure", tx: fx, ty: fy,
+                          grid: [4, 2], frames: 0..3, ticks: [4, 5, 6, 8],
+                          stay: :forever, blend: :normal, untoned: false,
+                          scale: 1.12, z_layer: :floor)
+            eng.play_se(fi == 1 ? "Anim/Ice5" : "Anim/Ice2", volume: 85, pitch: 90 + fi * 8)
+            eng.wait(0.24)
+          end
+
+          eng.actor(:anja).play_clip(
+            sheet: "act_ch11_kyogre_storm", grid: [4, 4], frames: [4, 5, 6, 7],
+            ticks: [6, 6, 6, 8], stay: true
+          )
+          eng.actor(:juno).show_emote(:exclaim, duration: 0.55)
+          eng.actor(:pc).show_emote(:exclaim, duration: 0.55)
+          eng.play_se("Exclaim", volume: 90)
+          eng.pan_camera_to(18.0, 15.6, duration: 0.45, ease: :out)
+          eng.wait(0.45)
+
+          eng.say(:JUNO, :shocked, "The ice isn't cracking— it's tearing open! Something is breathing under the lake!", hold: 1.25)
+
+          # Beat 3: Darken midnight contrast + pbZoomMap push-in -> GIANT GOLDEN EYE OPENS BENEATH THE ICE!
+          eng.pan_camera_to(18.0, 13.4, duration: 0.65, ease: :in_out)
+          eng.set_tone(-88, -78, -30, 58, duration: 0.9)
+          eng.zoom_map(1.42, duration: 1.35, focus: [18.0, 13.0], ease: :in_out)
+          eng.play_se("Anim/Water2", volume: 88, pitch: 76)
+          eng.play_se("Anim/Saint7", volume: 72, pitch: 78)
+
+          # Floor-layer abyssal pool + eye (z=5 under all actors) + additive luminous iris highlight!
+          eng.spawn_vfx(:eye_floor, sheet: "pf_vfx_ice_fissure", tx: 18.0, ty: 13.0,
+                        grid: [4, 2], frames: [4, 5, 6], ticks: [10, 10, 20],
+                        stay: :forever, blend: :normal, untoned: false,
+                        scale: 1.52, z_layer: :floor)
+          eng.spawn_vfx(:eye_glow, sheet: "pf_vfx_ice_fissure", tx: 18.0, ty: 13.0,
+                        grid: [4, 2], frames: [4, 5, 6], ticks: [10, 10, 20],
+                        stay: :forever, blend: :add, opacity: 165,
+                        scale: 1.52, z_layer: :mid)
+          eng.wait(1.75)
+
+          # Pull back onto Anja's urgent canon storm warning!
+          eng.zoom_map(1.0, duration: 0.40, ease: :out)
+          eng.pan_camera_to(18.0, 15.6, duration: 0.45, ease: :out)
+          eng.actor(:anja).play_clip(
+            sheet: "act_ch11_kyogre_storm", grid: [4, 4], frames: [7, 8, 9, 10],
+            ticks: [6, 8, 6, 12], stay: true
+          )
+          eng.wait(0.45)
+          eng.say(:ANJA, :panic, "That's not a Pokémon, that's WEATHER! TOWERS! EVERYBODY TO THE TOWERS!", hold: 1.35)
+
+          # Beat 4: LAW 2 DEAD-SILENCE VACUUM (0.35s) -> EYE BLAZING GLINT -> KYOGRE ERUPTS!
+          eng.pan_camera_to(18.0, 13.7, duration: 0.35, ease: :in_out)
+          eng.stop_vfx(:eye_floor)
+          eng.stop_vfx(:eye_glow)
+          eng.spawn_vfx(:eye_glint_f, sheet: "pf_vfx_ice_fissure", tx: 18.0, ty: 13.0,
+                        grid: [4, 2], frames: [7], hold: 0.5, stay: :forever,
+                        blend: :normal, untoned: false, scale: 1.58, z_layer: :floor)
+          eng.spawn_vfx(:eye_glint_a, sheet: "pf_vfx_ice_fissure", tx: 18.0, ty: 13.0,
+                        grid: [4, 2], frames: [7], hold: 0.5, stay: :forever,
+                        blend: :add, opacity: 225, scale: 1.58, z_layer: :above)
+          eng.bgm_cut
+          eng.play_se("Anim/Ice8", volume: 100, pitch: 90)
+          eng.wait(0.35)
+
+          # EXPLOSIVE UPWARD BREACH: 2f silhouette hitstop + Primal Kyogre cry + Kevin Penkin OST drop!
+          eng.play_se("Anim/Water5", volume: 100)
+          eng.play_se("Anim/Explosion7", volume: 95)
+          eng.play_cry(:KYOGRE_1, volume: 100)
+          eng.impact_beat(hitstop_sec: 0.14)
+          eng.play_bgm("ch11_kyogre_thaw", volume: 90, tag: "ch11_kyogre_thaw")
+          eng.flash_ramp(color: [188, 240, 255], steps: [51, 136, 221, 255],
+                         step_dur: 0.03, hold_dur: 0.10, fade_dur: 0.42)
+          eng.shake(power: 7, duration: 0.65, decay: true)
+
+          # Clear under-ice eye & auroras as the abyssal storm takes the sky!
+          eng.stop_vfx(:eye_glint_f)
+          eng.stop_vfx(:eye_glint_a)
+          3.times { |ai| eng.stop_vfx(:"aurora_#{ai}") }
+
+          # Towering ocean breach water geysers erupting through Lake Rime!
+          [[15.4, 14.1, 1.1], [18.0, 14.3, 1.35], [20.6, 14.1, 1.1]].each do |gx, gy, gsc|
+            eng.spawn_vfx(nil, sheet: "pf_vfx_origin_pulse", tx: gx, ty: gy,
+                          grid: [4, 2], frames: 4..7, ticks: [3, 4, 5, 5],
+                          blend: :add, scale: gsc, z_layer: :above, origin: :foot)
+          end
+
+          # Spawn PRIMAL KYOGRE breaching vertically out of Lake Rime (frames 0->1->2->3)!
+          eng.spawn_actor(:kyogre, sheet: "act_war1_primal_kyogre", tx: 18.0, ty: 15.1,
+                          grid: [4, 2], is_charset: false, z_bias: 20)
+          eng.actor(:kyogre).play_clip(
+            sheet: "act_war1_primal_kyogre", grid: [4, 2], frames: [0, 1, 2, 3],
+            ticks: [5, 5, 7, 18], loops: 1, stay: true
+          )
+
+          # Trio reels back on the snow shore as the gale slams them
+          eng.actor(:anja).play_clip(
+            sheet: "act_ch11_kyogre_storm", grid: [4, 4], frames: [9, 11, 12],
+            ticks: [4, 6, 16], stay: true
+          )
+          eng.actor(:pc).move_to(18.0, 18.4, duration: 0.28, walk: false, dir: :up)
+          eng.actor(:juno).move_to(20.4, 18.2, duration: 0.28, walk: false, dir: :up)
+          eng.zoom_map(1.34, duration: 0.85, focus: [18.0, 13.3], ease: :out_cubic)
+          eng.wait(1.35)
+
+          # Beat 5: ORIGIN PULSE SPHERES + 2f Impact + pbZoomMap Shockwave + WARM TORRENTIAL DELUGE!
+          eng.play_se("Anim/HyperBeam", volume: 90, pitch: 82)
+          eng.play_se("Anim/Water3", volume: 95)
+          eng.actor(:kyogre).play_clip(
+            sheet: "act_war1_primal_kyogre", grid: [4, 2], frames: [4, 5, 3],
+            ticks: [6, 10, 20], stay: true
+          )
+          # 5 radiant cyan-gold Origin Pulse spheres igniting around Primal Kyogre!
+          [[15.2, 12.1], [20.8, 12.1], [18.0, 11.1], [15.8, 14.2], [20.2, 14.2]].each_with_index do |(ox, oy), oi|
+            eng.spawn_vfx(nil, sheet: "pf_vfx_origin_pulse", tx: ox, ty: oy,
+                          grid: [4, 2], frames: 0..3, ticks: [3, 3, 4, 4],
+                          blend: :add, scale: 0.95 + (oi == 2 ? 0.22 : 0.0), z_layer: :above)
+            eng.wait(0.08) if oi < 4
+          end
+
+          eng.impact_beat(hitstop_sec: 0.12)
+          eng.flash(color: [184, 238, 255], power: 225, duration: 0.34)
+          eng.shake(power: 6, duration: 0.55, decay: true)
+          eng.spawn_vfx(nil, sheet: "pf_vfx_origin_pulse", tx: 18.0, ty: 13.1,
+                        grid: [4, 2], frames: 0..3, ticks: [3, 4, 4, 5],
+                        blend: :add, scale: 1.0, grow: [0.85, 3.2, 0.72], fade: 0.25, z_layer: :above)
+          eng.zoom_map(1.0, duration: 0.55, ease: :out_cubic)
+
+          # SUDDEN TORRENTIAL WARM DELUGE pouring out of the clear midnight sky onto the frozen lake!
+          eng.set_tone(-46, -24, 18, 22, duration: 0.85)
+          eng.play_se("Anim/Water1", volume: 82)
+          [12.0, 16.0, 20.0, 24.0].each_with_index do |rx, xi|
+            [10.0, 14.0, 18.0].each_with_index do |ry, yi|
+              ph = (xi + yi) % 4
+              eng.spawn_vfx(:"rain_#{xi}_#{yi}", sheet: "pf_vfx_deluge_rain", tx: rx, ty: ry,
+                            grid: [4, 2], frames: [ph, (ph + 1) % 4, (ph + 2) % 4, (ph + 3) % 4],
+                            ticks: [2, 2, 2, 2], loops: :forever,
+                            blend: :add, opacity: 148, scale: 1.05, z_layer: :above)
+            end
+          end
+
+          eng.wait(1.25)
+          eng.pan_camera_to(18.0, 14.6, duration: 0.5, ease: :in_out)
+          eng.actor(:anja).play_clip(
+            sheet: "act_ch11_kyogre_storm", grid: [4, 4], frames: [13, 14, 15],
+            ticks: [8, 8, 20], stay: true
+          )
+          eng.wait(0.45)
+          eng.say(:ANJA, :shocked, "Warm rain... at midnight on a frozen sea. Hold the platform— the Deep is awake!", hold: 1.40)
+
+          eng.wait(0.75)
+          eng.letterbox(false, duration: 0.45)
+          eng.wait(0.50)
+        ensure
+          cues = eng.cues.dup
+          fc   = eng.frames_captured
+          eng.dispose
+        end
+        return { :cues => cues, :frames => fc }
+      end
+
+      #-------------------------------------------------------------------------
+      # SCENE 4 — Ch19 Peak #4 (WAR-1): "Primal Kyogre vs Reshiram Beam Clash"
+      # 100% Live Built Map 926 (The Glass Dunes — central battlefront basin)!
+      #-------------------------------------------------------------------------
+      def play_ch19_war_beam_clash(capture_dir: nil, capture_fps: 30)
+        eng = Engine.new(capture_dir: capture_dir, capture_fps: capture_fps)
+        begin
+          # 1. Stage directly on REAL built Map 926 (The Glass Dunes) at crisp warm dawn!
+          eng.transfer_map(926, 25.8, 8.6, hide_player: true)
+          # Hide static frontline line-trainers (events 3..8) so our choreographed hosts own the field
+          (3..8).each do |eid|
+            ev = $game_map.events[eid]
+            ev.transparent = true if ev
+          end
+
+          eng.set_tone(12, 2, -10, 8, duration: 0.0)
+          eng.letterbox(true, height: 32, duration: 0.0)
+          eng.play_bgm("ch19_dynast", volume: 82, tag: "ch19_dynast")
+
+          # Isenmar Host (Left / West): Thane Eirik, frost-host soldiers & unobstructed flank banners!
+          eng.spawn_actor(:eirik, sheet: "EIRIK", tx: 23.5, ty: 11.3, dir: :right, is_charset: true)
+          eng.spawn_actor(:is_s1, sheet: "pfw_soldier_isenmar", tx: 22.5, ty: 9.8,  dir: :right, is_charset: true)
+          eng.spawn_actor(:is_s2, sheet: "pfw_soldier_isenmar", tx: 22.5, ty: 11.8, dir: :right, is_charset: true)
+          eng.spawn_actor(:is_s3, sheet: "pfw_soldier_isenmar", tx: 23.9, ty: 12.4, dir: :right, is_charset: true)
+          eng.spawn_actor(:is_b1, sheet: "pfw_banner_isenmar",  tx: 21.8, ty: 8.6,  grid: [1, 1], is_charset: false)
+          eng.spawn_actor(:is_b2, sheet: "pfw_banner_isenmar",  tx: 21.7, ty: 12.1, grid: [1, 1], is_charset: false)
+
+          # Ashkaar Host (Right / East): Dominar Hrothgar, ember-legion soldiers & unobstructed flank banners!
+          eng.spawn_actor(:hrothgar, sheet: "HROTHGAR", tx: 36.5, ty: 11.3, dir: :left, is_charset: true)
+          eng.spawn_actor(:as_s1, sheet: "pfw_soldier_ashkaar", tx: 37.5, ty: 9.8,  dir: :left, is_charset: true)
+          eng.spawn_actor(:as_s2, sheet: "pfw_soldier_ashkaar", tx: 37.5, ty: 11.8, dir: :left, is_charset: true)
+          eng.spawn_actor(:as_s3, sheet: "pfw_soldier_ashkaar", tx: 36.1, ty: 12.4, dir: :left, is_charset: true)
+          eng.spawn_actor(:as_b1, sheet: "pfw_banner_ashkaar",  tx: 38.2, ty: 8.6,  grid: [1, 1], is_charset: false)
+          eng.spawn_actor(:as_b2, sheet: "pfw_banner_ashkaar",  tx: 38.3, ty: 12.1, grid: [1, 1], is_charset: false)
+
+          # Center foreground witnesses along Map 926's southern rim
+          eng.spawn_actor(:pc,     sheet: "PLAYER_A", tx: 30.0, ty: 12.5, dir: :up, is_charset: true)
+          eng.spawn_actor(:anja,   sheet: "ANJA",     tx: 28.6, ty: 12.7, dir: :up, is_charset: true)
+          eng.spawn_actor(:sigrun, sheet: "SIGRUN",   tx: 31.4, ty: 12.7, dir: :up, is_charset: true)
+
+          # Beat 1: Primal Kyogre breaches on the Isenmar flank + Thane Eirik's battle cry!
+          eng.play_se("Anim/Water5", volume: 95)
+          eng.shake(power: 4, duration: 0.45)
+          eng.spawn_vfx(nil, sheet: "pf_vfx_origin_pulse", tx: 25.3, ty: 9.8,
+                        grid: [4, 2], frames: 4..7, ticks: [3, 4, 4, 5],
+                        blend: :add, scale: 1.25, z_layer: :above, origin: :foot)
+          eng.spawn_actor(:kyogre, sheet: "act_war1_primal_kyogre", tx: 25.3, ty: 9.8,
+                          grid: [4, 2], is_charset: false, z_bias: 20)
+          eng.actor(:kyogre).play_clip(
+            sheet: "act_war1_primal_kyogre", grid: [4, 2], frames: [0, 1, 2, 3],
+            ticks: [4, 4, 5, 14], stay: true
+          )
+          eng.play_cry(:KYOGRE_1, volume: 100)
+          eng.wait(0.85)
+          eng.say(:EIRIK, :angry, "Isenmar! The sea has come to the sand!", hold: 1.15, name: "Thane Eirik")
+
+          # Beat 2: Pan across the Glass Dunes to Ashkaar's flank -> Reshiram unfolds + Hrothgar answers!
+          eng.pan_camera_to(34.2, 8.6, duration: 0.85, ease: :in_out)
+          eng.wait(0.70)
+          eng.flash(color: [255, 224, 172], power: 210, duration: 0.30)
+          eng.play_se("Anim/Fire4", volume: 95)
+          eng.shake(power: 4, duration: 0.45)
+          eng.spawn_actor(:reshiram, sheet: "act_war1_reshiram", tx: 34.7, ty: 9.8,
+                          grid: [4, 2], is_charset: false, z_bias: 20)
+          eng.actor(:reshiram).play_clip(
+            sheet: "act_war1_reshiram", grid: [4, 2], frames: [0, 1, 2, 3],
+            ticks: [5, 4, 5, 14], stay: true
+          )
+          eng.play_cry(:RESHIRAM, volume: 100)
+          eng.wait(0.75)
+          eng.say(:HROTHGAR, :angry, "Then let it remember fire.", hold: 1.10, name: "Dominar Hrothgar")
+
+          # Beat 3: Center Wide Two-Shot + Darkened Map Tone Contrast + Dual Charge!
+          eng.pan_camera_to(30.0, 8.4, duration: 0.75, ease: :in_out)
+          eng.set_tone(-76, -78, -56, 64, duration: 0.75)
+          eng.play_bgm("ch19_war_clash", volume: 90, tag: "ch19_war_clash")
+          eng.wait(0.55)
+
+          # Both titans enter charge poses (frame 4) with spinning muzzle collars at exact mouth Y (-47 offset = -63px)!
+          eng.actor(:kyogre).set_cell(4)
+          eng.actor(:reshiram).set_cell(4)
+          eng.play_se("Anim/Charge_Beam", volume: 95)
+          eng.play_se("Anim/Fire5", volume: 82)
+          eng.spawn_vfx(:muzzle_l, sheet: "pf_vfx_origin_beam", tx: 26.75, ty: 9.8,
+                        grid: [4, 2], frames: 4..7, ticks: [3, 3, 3, 3], loops: :forever,
+                        blend: :add, scale: 0.85, offset: [0, -47], z_layer: :above)
+          eng.spawn_vfx(:muzzle_r, sheet: "pf_vfx_blue_flare_beam", tx: 33.45, ty: 9.8,
+                        grid: [4, 2], frames: 4..7, ticks: [3, 3, 3, 3], loops: :forever,
+                        blend: :add, scale: 0.85, offset: [0, -47], z_layer: :above)
+          eng.zoom_map(1.18, duration: 0.90, focus: [30.0, 8.2], ease: :in_out)
+          eng.wait(0.95)
+
+          # Beat 4: ORIGIN PULSE vs BLUE FLARE LAUNCH & DEAD-CENTER BEAM CLASH!
+          eng.actor(:kyogre).set_cell(5)
+          eng.actor(:reshiram).set_cell(5)
+          eng.play_se("Anim/HyperBeam", volume: 100)
+          eng.play_se("Anim/Fire6", volume: 95)
+          eng.impact_beat(hitstop_sec: 0.12)
+
+          mouth_l = 26.75
+          mouth_r = 33.45
+          beam_l = eng.spawn_vfx(:beam_l, sheet: "pf_vfx_origin_beam", tx: mouth_l, ty: 9.8,
+                                 grid: [4, 2], frames: 0..3, ticks: [2, 2, 2, 2], loops: :forever,
+                                 blend: :add, origin: :left, offset: [0, -47], z_layer: :above)
+          beam_r = eng.spawn_vfx(:beam_r, sheet: "pf_vfx_blue_flare_beam", tx: mouth_r, ty: 9.8,
+                                 grid: [4, 2], frames: 0..3, ticks: [2, 2, 2, 2], loops: :forever,
+                                 blend: :add, origin: :right, offset: [0, -47], z_layer: :above)
+
+          # Rapid 10-frame (0.33s) launch extension across the desert to dead-center tx = 30.0!
+          10.times do |fi|
+            u = (fi + 1) / 10.0
+            span_l = ((30.0 - mouth_l) * u * 32.0) / 128.0
+            span_r = ((mouth_r - 30.0) * u * 32.0) / 128.0
+            beam_l.set_scale([span_l, 0.08].max, 0.95)
+            beam_r.set_scale([span_r, 0.08].max, 0.95)
+            eng.step_frame
+          end
+
+          # DEAD-CENTER COLLISION!
+          eng.play_se("Anim/Explosion7", volume: 100)
+          eng.play_se("Anim/Ice8", volume: 88)
+          eng.impact_beat(hitstop_sec: 0.14)
+          eng.flash_ramp(color: [224, 248, 255], steps: [51, 136, 221, 255],
+                         step_dur: 0.025, hold_dur: 0.08, fade_dur: 0.28)
+          core = eng.spawn_vfx(:clash_core, sheet: "pf_vfx_beam_clash_core", tx: 30.0, ty: 9.8,
+                               grid: [4, 2], frames: 0..3, ticks: [2, 2, 2, 2], loops: :forever,
+                               blend: :add, scale: 1.25, offset: [0, -47], z_layer: :above)
+
+          # SUSTAINED TUG-OF-WAR SCREEN SHAKE (3.1s = 93 frames) with live beam push-pull!
+          eng.shake(power: 6, duration: 3.15, decay: false)
+          eng.zoom_map(1.38, duration: 0.85, focus: [30.0, 8.2], ease: :in_out)
+
+          90.times do |fi|
+            u = fi / 90.0
+            cx = 30.0 + Math.sin(u * 13.5) * 0.92 * (1.0 - 0.30 * u)
+            core.set_tile(cx, 9.8)
+            pulse_y = 0.96 + 0.14 * Math.sin(fi * 0.9).abs
+            beam_l.set_scale(((cx - mouth_l) * 32.0) / 128.0, pulse_y)
+            beam_r.set_scale(((mouth_r - cx) * 32.0) / 128.0, pulse_y)
+
+            if fi == 26
+              eng.zoom_map(1.12, duration: 0.95, focus: [30.0, 8.2], ease: :in_out)
+              eng.flash(color: [215, 246, 255], power: 145, duration: 0.12)
+              eng.play_se("Anim/Ice2", volume: 82)
+              # Sand beneath the beam seam begins fusing into emerald Trinitite glass!
+              eng.spawn_vfx(nil, sheet: "pf_vfx_trinitite_glass_wave", tx: 30.0, ty: 9.4,
+                            grid: [4, 2], frames: 4..7, ticks: [5, 5, 6, 8], stay: :forever,
+                            blend: :normal, untoned: false, opacity: 155, scale: 0.72, z_layer: :floor)
+            elsif fi == 52
+              eng.flash(color: [255, 234, 200], power: 155, duration: 0.12)
+              eng.play_se("Anim/Fire5", volume: 85)
+              # Upward/downward crystalline clash sparks
+              eng.spawn_vfx(nil, sheet: "pf_vfx_origin_pulse", tx: cx, ty: 8.3,
+                            grid: [4, 2], frames: 0..3, ticks: [2, 2, 3, 3],
+                            blend: :add, scale: 0.85, z_layer: :above)
+            elsif fi == 74
+              eng.flash(color: [216, 255, 236], power: 185, duration: 0.14)
+              eng.play_se("Anim/Saint7", volume: 88, pitch: 112)
+            end
+            eng.step_frame
+          end
+
+          # Beat 5: OVERLOAD -> 0.28s DEAD-SILENCE bgm_cut VACUUM (single collapsing mote!)
+          eng.zoom_map(1.30, duration: 0.45, focus: [30.0, 8.2], ease: :in_out)
+          eng.stop_vfx(:clash_core)
+          eng.spawn_vfx(:implode, sheet: "pf_vfx_beam_clash_core", tx: 30.0, ty: 9.8,
+                        grid: [4, 2], frames: [4, 5, 6, 7], ticks: [4, 4, 4, 9],
+                        stay: 0.15, blend: :add, scale: 1.35, offset: [0, -47], z_layer: :above)
+          eng.wait(0.55)
+
+          # Cut both beams + muzzle collars + HARD 0ms DEAD-SILENCE bgm_cut!
+          eng.stop_vfx(:beam_l)
+          eng.stop_vfx(:beam_r)
+          eng.stop_vfx(:muzzle_l)
+          eng.stop_vfx(:muzzle_r)
+          eng.bgm_cut
+          eng.play_se("Anim/HealBell", volume: 95, pitch: 120)
+          eng.wait(0.28)
+
+          # Beat 6: TRINITITE GLASS WAVE SWEEPS ACROSS LIVE MAP 926!!
+          eng.play_se("Anim/Ice8", volume: 100, pitch: 80)
+          eng.play_se("Anim/Explosion7", volume: 95)
+          eng.play_se("Anim/Saint7", volume: 88, pitch: 90)
+          eng.impact_beat(hitstop_sec: 0.14)
+          eng.flash_ramp(color: [188, 255, 224], steps: [64, 152, 232, 255],
+                         step_dur: 0.025, hold_dur: 0.12, fade_dur: 0.46)
+          eng.shake(power: 7, duration: 0.65, decay: true)
+          eng.zoom_map(1.0, duration: 0.65, ease: :out_cubic)
+
+          # Dual expanding radioactive sea-green Trinitite shockwave domes!
+          eng.spawn_vfx(nil, sheet: "pf_vfx_trinitite_glass_wave", tx: 30.0, ty: 8.6,
+                        grid: [4, 2], frames: 0..3, ticks: [3, 4, 4, 5],
+                        blend: :add, scale: 1.0, grow: [0.65, 3.8, 0.85], fade: 0.25, z_layer: :above)
+          eng.spawn_vfx(nil, sheet: "pf_vfx_trinitite_glass_wave", tx: 30.0, ty: 8.6,
+                        grid: [4, 2], frames: 0..3, ticks: [4, 5, 5, 6],
+                        blend: :add, scale: 0.85, grow: [0.45, 3.1, 1.05], fade: 0.30, z_layer: :above)
+
+          # Staggered pentagonal Trinitite fused-glass crust crystallizing outward across the desert floor!
+          [
+            [[27.4, 9.2], [32.6, 9.2]],
+            [[25.2, 9.8], [34.8, 9.8]],
+            [[28.2, 11.1], [31.8, 11.1]]
+          ].each_with_index do |pair, pi|
+            pair.each do |gx, gy|
+              eng.spawn_vfx(nil, sheet: "pf_vfx_trinitite_glass_wave", tx: gx, ty: gy,
+                            grid: [4, 2], frames: 4..7, ticks: [3, 4, 5, 8], stay: :forever,
+                            blend: :normal, untoned: false, opacity: 165, scale: 0.86, z_layer: :floor)
+            end
+            eng.play_se("Anim/Ice2", volume: 74, pitch: 88 + pi * 10)
+            eng.wait(0.22)
+          end
+
+          # Legendaries recoil and settle back as the emerald glass silence falls over the battlefield!
+          eng.actor(:kyogre).play_clip(
+            sheet: "act_war1_primal_kyogre", grid: [4, 2], frames: [6, 7],
+            ticks: [12, 24], stay: true
+          )
+          eng.actor(:reshiram).play_clip(
+            sheet: "act_war1_reshiram", grid: [4, 2], frames: [6, 7],
+            ticks: [12, 24], stay: true
+          )
+          eng.set_tone(-18, 6, -4, 68, duration: 1.4)
+          eng.play_bgm("ch19_aftermath", volume: 78, tag: "ch19_aftermath")
+
+          # Floating glass-dust motes drifting slowly over the vitrified Glass Dunes
+          10.times do |mi|
+            eng.spawn_vfx(nil, sheet: "pf_vfx_smoke_and_motes", tx: 24.0 + mi * 1.3, ty: 12.2 - (mi % 3) * 1.1,
+                          grid: [4, 2], frames: [7], hold: 4.5, blend: :add,
+                          drift: [4 - (mi % 3) * 3, -18 - (mi % 4) * 4], fade: 0.8, z_layer: :above)
+          end
+
+          # Sigrun & Anja step forward onto the newly fused emerald glass beside the PC
+          eng.actor(:anja).move_to(29.0, 11.3, duration: 0.85, walk: true, dir: :up)
+          eng.actor(:sigrun).move_to(31.0, 11.3, duration: 0.85, walk: true, dir: :up)
+          eng.wait(1.0)
+
+          eng.say(:SIGRUN, :neutral, "Father. Enough. Nobody won this morning that the dead would agree with.", hold: 1.35)
+          eng.say(:ANJA, :sad, "Eirik. Enough. The glass stops here. The Boon will settle it.", hold: 1.35)
+
+          eng.wait(0.9)
+          eng.letterbox(false, duration: 0.45)
+          eng.wait(0.55)
+        ensure
+          cues = eng.cues.dup
+          fc   = eng.frames_captured
+          eng.dispose
+        end
+        return { :cues => cues, :frames => fc }
+      end
     end
   end
 end
@@ -1782,12 +2283,13 @@ end
 # Rejuvenation V14-compatible global shorthand helpers for RMXP map events!
 def pbRejuvCutscene(id, **opts)
   case id.to_sym
-  when :CH5_SHATTER, :SH1 then Prismfall::AdvancedAnimations.play_ch5_spire_shatter(**opts)
-  when :CH9_UNMASK,  :IR1 then Prismfall::AdvancedAnimations.play_ch9_trevenant_unmasking(**opts)
+  when :CH5_SHATTER, :SH1                 then Prismfall::AdvancedAnimations.play_ch5_spire_shatter(**opts)
+  when :CH9_UNMASK,  :IR1                 then Prismfall::AdvancedAnimations.play_ch9_trevenant_unmasking(**opts)
+  when :CH11_KYOGRE, :CH11_THAW, :KYOGRE  then Prismfall::AdvancedAnimations.play_ch11_kyogre_awakens(**opts)
+  when :CH19_WAR, :WAR_CLIMAX, :WAR1      then Prismfall::AdvancedAnimations.play_ch19_war_beam_clash(**opts)
   else
     PBDebug.log("[AdvancedAnimations] Unknown scene #{id.inspect}") if defined?(PBDebug)
     nil
   end
 end
-
 ```
