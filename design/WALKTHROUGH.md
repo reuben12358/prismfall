@@ -1914,7 +1914,7 @@ _None placed for this chapter._
 
 *Field note:* "a garden you grow during the fight." The garden starts at stage 1 + the overgrowth you left in the gym puzzle (up to 5); Grass goes ×1.1 → ×1.2 → ×1.3 → ×1.5 → ×2.0, Bug and Fire grow too. Growth, Leech Seed, Aromatherapy, Grassy Terrain and her Telluric Seed (Whimsicott) grow it. *Tip:* leave little overgrowth in the puzzle, cut the garden back with Fire (stages 1–4), blades, frost or acid (acid resets it to stage 1), and burn it down at stage 5 (Fire ×2 turns it into Wildfire). If you told her about the ledger in Ch7: "You knew before me. You *knew*."
 
-**Boss — the Loyal Three** *(planned triple multi-bar sequence; not registered in Prismfall Bosses yet; Ogerpon is your partner if you stand with it).*
+**Boss — the Loyal Three** *(triple multi-bar sequence, Prismfall Bosses 112 `Prismfall::Bosses.loyal_three`; Ogerpon is your partner (a 2v1) if you stand with it).*
 
 ### Side quests
 

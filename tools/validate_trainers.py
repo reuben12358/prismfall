@@ -503,6 +503,9 @@ def validate_mon(t, mon, ref, rep, allow, megaring_items):
             # form handler (Data/Scripts/014_Pokemon/001_Pokemon-related/001_FormHandlers.rb).
             if mon.species == "ROTOM" and ROTOM_FORM_MOVES.get(form) == m:
                 continue
+            # Smeargle Sketches any move but Chatter and Struggle (mainline rule), so its learnset is not a limit.
+            if mon.species == "SMEARGLE" and m not in ("CHATTER", "STRUGGLE"):
+                continue
             if not src:
                 if allowed:
                     continue

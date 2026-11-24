@@ -1067,7 +1067,9 @@ CURTAIN ROPE (action): You haul on the rope. The house curtain flies out, the fo
 [portrait: DORIAN, smug] On my stage the house loves a show. Sing, dance, dazzle them, and they'll carry you. Bore them, and they'll let you fall.
 [portrait: DORIAN, happy] Shall we give them something to remember?
 Script: Prismfall.gym_battle(1)     # LEADER_DORIAN, :GRAND_STAGE, cap 15, single battle (GYMS double: false)
-(Mid-battle, when his ace enters:) [portrait: DORIAN, smug] Costume change!
+(Mid-battle, when Kecleon enters:) [portrait: DORIAN, smug] Costume change!
+(Mid-battle, when Hisuian Zorua's Illusion breaks:) [portrait: DORIAN, happy] Ah! You spotted the understudy!
+(Mid-battle, when his ace enters:) [portrait: DORIAN, happy] Places, everyone — our Prima Donna! Aria, then Pirouette — keep up, darling!
 (LOSE: standard whiteout to the Pokémon Center. Dorian on retry: "Act Two! I adore an Act Two. Everyone's warmed up.")
 (WIN:)
 [portrait: DORIAN, shocked] ...They're standing. Look at them. They're on their FEET.

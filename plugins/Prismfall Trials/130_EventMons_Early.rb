@@ -42,7 +42,7 @@ em.register(:EL_KECLEON, {
   :kind => :battle, :on_ko => :retry, :field => :GRAND_STAGE, :badges => 0,
   :map => 145, :where => "Lantern Theatre prop room, Saltmere", :chapter => 2,
   :quest => :EL_LANTERNS, :trigger => "Spot the prop lantern that blinks",
-  :why => "A search-puzzle find before Gym 1: Protean (every move gets STAB), Dorian's own ace species. No Ghost moves, so Protean can't turn it into a Normal-immune ghost"
+  :why => "A search-puzzle find before Gym 1: Protean (every move gets STAB), the Lantern Theatre's quick-change co-star. No Ghost moves, so Protean can't turn it into a Normal-immune ghost"
 })
 
 #--- Chapter 2 after Badge 1 ("1 Badge Quests", Reborn-style): back along the Strand Road

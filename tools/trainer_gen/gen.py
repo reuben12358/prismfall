@@ -96,6 +96,8 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
             o.update(m["casual"])
             soft = not route and casual_soft(ttype) and top >= 40
             o["lv"] = max(2, m["lv"] - (1 if route else casual_drop(top) + ((1 if top < 80 else 2 if top < 90 else 3) if soft else 0)))
+            if "lv" in m["casual"]:   # an explicit Casual level wins (Gym 1 Dorian's locked troupe)
+                o["lv"] = m["casual"]["lv"]
             if soft and o["item"] in CASUAL_HARD_ITEMS:
                 o["item"] = "SITRUSBERRY"
         if o.get("mega") and diff in mega_modes(o, cap):
@@ -132,6 +134,12 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         if o.get("gender"):
             out.append("    Gender = " + o["gender"])
         out.append("    Nature = " + o["nat"])
+        if o.get("iv_override") is not None or o.get("ev_override") is not None:
+            # Per-mon override (Gym 1 Dorian's Meloetta holds back to Act One: BALANCE.md 1b, the Matinee rule).
+            out.append("    IV = %d" % (o["iv_override"] if o.get("iv_override") is not None else std_iv(top)))
+            if o.get("ev_override") is not None:
+                out.append("    EV = " + str(o["ev_override"]))
+            continue
         if route:
             out.append("    IV = %d" % (8, 20, 0)[diff])
             if diff == 2:
@@ -173,45 +181,39 @@ def warden(gym, ttype, name, cap, field, lose, mons):
 # Field logic per team: design/TRAINER_FIELD_PLAYBOOK.md. Field data: plugins/Prismfall Field Effects/1xx_Field_*.rb.
 # SPINE Revision 14: Gym 1 is Dorian (Saltmere, Normal, single), Gym 2 is Tamsin (Briarwick, Bug, double).
 warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The audience is yours tonight!", [
-    # Gym 1, a SINGLE battle and the player's first field. Reference calibration (BALANCE.md 1b): Reborn's Julia and
-    # Rejuvenation's Venam bring SIX Pokemon to the first gym, two to five levels under the cap, with real natures, Oran
-    # Berries, a Gem and field plays (Charge Beam on Electric Terrain, Fake Out / Rollout on the Concert Venue). Dorian's
-    # troupe is built the same way: Std 5 / Hard 6 / Casual 3, cap-3 .. cap.
+    # Gym 1, a SINGLE battle and the player's first field. REUBEN'S LOCKED TROUPE (2026-11-23; Gemini proposal
+    # 2026-11-23_gen6-9-sprites-postgame-legendaries-dorian-meloetta, Part C): Smeargle, Chatot, Hisuian Zorua, Ditto,
+    # Kecleon, Meloetta (ace). Std 6 / Hard 6 / Casual 4. All Normal-type theatre. Levels and sets tuned in the G1
+    # harness (BALANCE.md section 9, 2026-11-23): no damaging sound move on Standard Chatot, Meloetta 14 with no item.
     # THE SHOW BUILDS. Grand Stage: Normal x1.3 (x1.5 from Encore up), damaging sound and dances x1.3 / x1.4 / x1.5,
-    # Fake Out x1.5. Two showpieces, two dances or two damaging sound moves raise the applause a stage; any crit does too.
-    # At Standing Ovation (stage 3) every attack gets +1 crit stage and SING NEVER MISSES - the play that punishes a
-    # careless player who lets the crowd climb. Counterplay: KO the singers first, stall (Protect, Endure, Splash...)
-    # to calm the crowd, Rock and Ghost types (Rolycoly, Sudowoodo, Sandygast) shrug off the Normal moves.
-    # 1. The stagehand opens the show: Fake Out is a showpiece (x1.5 here) - one more and the crowd rises.
-    # (Baton Pass is a Lv 11 move: Standard and Casual stay level-legal.)
-    P("AIPOM", 10, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,TAILWHIP", "A",
-      casual={"moves": "SCRATCH,ASTONISH,TAILWHIP"},
-      hard={"moves": "FAKEOUT,ASTONISH,SCRATCH,TICKLE"}),
-    # 2. The chorus: Echoed Voice and Round are damaging sound moves (x1.3 x1.3 STAB here); Echoed Voice doubles each
-    #    turn it is repeated, so the echo and the applause climb together where the player can see it - switch, or KO
-    #    the singer. Encore lasts two turns longer on this stage (it locks a player who set up); Baby-Doll Eyes also
-    #    lowers Sp. Atk here.
-    P("MINCCINO", 10, "CUTECHARM", "ORANBERRY", "MODEST", "ECHOEDVOICE,ROUND,ENCORE,BABYDOLLEYES", "S",
-      casual={"moves": "ECHOEDVOICE,POUND,BABYDOLLEYES"},
-      hard={"moves": "ECHOEDVOICE,ROUND,ENCORE,SING"}),
-    # 3. The dancer: Teeter Dance is a dance (+1 Speed and a step toward the next stage) that confuses the target;
-    #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
-    P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
-      only="nocasual", hard={"moves": "TEETERDANCE,PSYBEAM,COPYCAT,TACKLE", "item": "SITRUSBERRY"}),
-    # Hard only: the understudy who shouts. Soundproof ignores the player's sound moves (and Dorian's own songs), and
-    #    its Round is the loudest thing in the house. Glass-jawed (Def 23 base): hit it hard and early.
-    #    (Furfrou's Fur Coat + Headbutt and a Chatter Chatot both swept prepared teams at Lv 13-14 in the harness.)
-    P("WHISMUR", 12, "SOUNDPROOF", "ORANBERRY", "HARDY", "ROUND,ASTONISH,POUND,HOWL", "S", only="hard"),
-    # 4. The soprano: Sing is x1.3 accurate here and never misses at Standing Ovation; Round and Disarming Voice keep
-    #    the applause rising. A bulky HP pool to stand in the spotlight. Casual leaves her at home.
-    P("JIGGLYPUFF", 11, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",
-      only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY", "moves": "SING,DISARMINGVOICE,ROUND,DEFENSECURL"}),
-    # 5. The quick-change artist: Color Change is a costume change (it becomes the type of the move that hit it - hit
-    #    it once with Fighting, then switch). It opens with its own Fake Out ("Costume change!"); Fury Swipes hits 2-5
-    #    times and every critical hit is applause. Hard: Protean and the Synthetic Seed (Laser Focus: a sure crit).
-    P("KECLEON", 15, "COLORCHANGE", "SITRUSBERRY", "HARDY", "FURYSWIPES,SHADOWSNEAK,FEINT,LICK", "BA",
-      casual={"item": "ORANBERRY", "moves": "SCRATCH,LICK,TAILWHIP,BIND"},
-      hard={"ab": "PROTEAN", "item": "SYNTHETICSEED", "nat": "ADAMANT", "moves": "FAKEOUT,FURYSWIPES,SHADOWSNEAK,KNOCKOFF"}),
+    # Fake Out x1.5; at Standing Ovation (stage 3) +1 crit stage and Sing never misses. RELIC SONG does NOT double-stack
+    # (102_Field_GrandStage.rb :not_moves) and Gym 1's Meloetta plays the "Act One Matinee" (111_Boss_DorianMatinee.rb:
+    # stats x0.80 / Hard x0.85 / Casual x0.78; no boss pips, no status immunity). Counterplay: Rock and Ghost types,
+    # Dark moves on Zorua and Meloetta, KO the singers before the crowd climbs.
+    # 1. Set painter / curtain raiser: Fake Out and Pay Day are showpieces that build applause without hitting hard.
+    P("SMEARGLE", 9, "OWNTEMPO", "ORANBERRY", "JOLLY", "FAKEOUT,PAYDAY,ENCORE,BABYDOLLEYES", "PD",
+      casual={"moves": "PAYDAY,BABYDOLLEYES,TACKLE"},
+      hard={"lv": 10, "item": "FOCUSSASH", "moves": "FAKEOUT,PAYDAY,ENCORE,PARTINGSHOT"}),
+    # 2. Diva songbird: no Chatter / Echoed Voice / Round on Standard (each swept realistic teams on the Grand Stage).
+    P("CHATOT", 11, "TANGLEDFEET", "ORANBERRY", "TIMID", "PECK,CONFIDE,ENCORE,GROWL", "S",
+      casual={"lv": 10, "ab": "KEENEYE", "nat": "HARDY", "moves": "PECK,GROWL,CONFIDE"},
+      hard={"lv": 13, "moves": "PECK,SING,ENCORE,TAUNT"}),
+    # 3. Phantom understudy: Hisuian Zorua (Normal/Ghost); Illusion disguises it as the last party member - Meloetta.
+    P("ZORUA", 11, "ILLUSION", "ORANBERRY", "TIMID", "SWIFT,SCRATCH,TORMENT,LEER", "MX", form=1,
+      casual={"lv": 10, "nat": "HARDY", "moves": "SCRATCH,SPITE,TORMENT,LEER"},
+      hard={"lv": 12, "item": "SYNTHETICSEED", "nat": "NAIVE", "moves": "SHADOWSNEAK,SWIFT,HONECLAWS,SPITE"}),
+    # 4. Body double: Quick Powder Transform; Hard is Imposter.
+    P("DITTO", 11, "LIMBER", "QUICKPOWDER", "TIMID", "TRANSFORM", "PD",
+      only="nocasual", hard={"ab": "IMPOSTER", "item": "SITRUSBERRY", "nat": "JOLLY"}),
+    # 5. Quick-change artist ("Costume change!"): Color Change; Hard is Protean.
+    P("KECLEON", 12, "COLORCHANGE", "ORANBERRY", "HARDY", "FEINT,SHADOWSNEAK,LICK,BIND", "BA",
+      only="nocasual", hard={"lv": 13, "ab": "PROTEAN", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "FEINT,SHADOWSNEAK,THIEF,BIND"}),
+    # 6. Prima Donna ace: Meloetta, Aria <-> Pirouette via Relic Song; uncatchable (a trainer's), full power is the
+    #    post-game PG_MELOETTA "Crownhaven Encore" and the Festival Pageant Bout (v90).
+    P("MELOETTA", 14, "SERENEGRACE", "", "HARDY", "RELICSONG,QUICKATTACK,CONFUSION,SING", "MX",
+      iv_override=0, ev_override="0",
+      casual={"lv": 13, "nat": "IMPISH", "moves": "RELICSONG,QUICKATTACK,CONFUSION,CONFIDE", "iv_override": 0, "ev_override": "0"},
+      hard={"moves": "RELICSONG,QUICKATTACK,CONFUSION,ROCKSMASH", "iv_override": 12, "ev_override": "0"}),
 ])
 warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every stitch. Well sewn, challenger.", [
     # Gym 2, a DOUBLE battle: "a thread holds because it's twisted with others". Std 4 / Hard 5 / Casual 3.
@@ -1086,8 +1088,9 @@ X("Exhibition - Pageant Bout (2-vs-1 double with Rook v90): Dorian's half", "LEA
     P("LOPUNNY", 88, "LIMBER", "SILKSCARF", "JOLLY", "FAKEOUT,RETURN,HIGHJUMPKICK,ICEPUNCH", "A", mega="LOPUNNITE"),
     P("EXPLOUD", 89, "SCRAPPY", "THROATSPRAY", "MODEST", "BOOMBURST,FIREBLAST,FOCUSBLAST,ICEBEAM", "S"),
     # Grand Stage: Synthetic Seed = +1 Speed and Laser Focus; the Taunt costs an all-attack set nothing.
-    P("KECLEON", 90, "PROTEAN", "SYNTHETICSEED", "ADAMANT", "FAKEOUT,SHADOWSNEAK,KNOCKOFF,DRAINPUNCH", "BA", nick="Encore",
-      casual={"ab": "COLORCHANGE", "item": "SITRUSBERRY"}),
+    # The Prima Donna from Gym 1 at full Opening Night power (Relic Song doesn't double-stack on Grand Stage).
+    P("MELOETTA", 90, "SERENEGRACE", "THROATSPRAY", "MODEST", "RELICSONG,PSYCHIC,CLOSECOMBAT,HYPERVOICE", "S",
+      casual={"item": "SITRUSBERRY"}),
 ])
 X("Exhibition - Pageant Bout (2-vs-1 double with Dorian v90): Rook's half", "LEADER_ROOK", "Rook", 90, 90,
   "Aaand that's a wrap! Clip it, Camera!", [

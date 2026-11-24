@@ -75,13 +75,22 @@ Cottonee 13 *(−C)*, Petilil 13 *(−C)*, Bounsweet "Sweetpea" 13, starter 15 (
 - **Counterplay.** Two Fire attacks burn a Meadow (one in sun); the friendliest place to learn that.
 
 ### Gym 1: Dorian — Grand Stage, single battle (cap 15)
-Aipom 10, Minccino 10, Spinda 11 *(−C)*, Jigglypuff 11 *(−C)*, Kecleon 15; skill 100 (the ace waits for last). Hard
-adds Whismur and sharper sets (Fake Out Kecleon with Protean and the Synthetic Seed, Competitive Jigglypuff).
+Reuben's locked troupe (2026-11-23): Smeargle 9, Chatot 11, Hisuian Zorua 11, Ditto 11 *(−C)*, Kecleon 12 *(−C)*,
+**Meloetta 14** (ace); skill 100 (the ace waits for last). Hard: Sash Smeargle (Parting Shot), Sing Chatot 13, Hisuian
+Zorua 12 (Synthetic Seed, Shadow Sneak), Imposter Ditto, Protean Kecleon 13, Meloetta IV 12. Casual: Smeargle 7,
+Chatot 10, Zorua 10, Meloetta 13.
 Reference: Reborn's Julia and Rejuvenation's Venam bring six at cap −3 .. cap with berries, a Gem and field plays.
-- **The show builds.** Aipom's Fake Out is a showpiece (×1.5); Minccino's Echoed Voice and Round are damaging sound
-  moves; Spinda's Teeter Dance is a dance (+1 Speed, confusion). Two of a kind raise the applause; any crit does too.
-  At Standing Ovation Jigglypuff's **Sing never misses**, every attack gets +1 crit stage and Normal types bask (1/16).
-- **Ace.** Kecleon (Color Change, Hardy, no Fake Out on Standard: an Adamant Fake Out one-shot leads at stage 2).
+- **The show builds.** Smeargle's Fake Out and Pay Day are showpieces (×1.5); Relic Song is a damaging sound move.
+  Two of a kind raise the applause; any crit does too. At Standing Ovation Meloetta's **Sing never misses**, every
+  attack gets +1 crit stage and Normal types bask (1/16).
+- **No Chatter, no Echoed Voice, no Round on Standard.** In the harness a sound-move Chatot on the Grand Stage
+  (Normal ×1.3 and sound ×1.3–1.5 on STAB) swept realistic teams: Echoed Voice 8%, Round 13%. Standard Chatot is Peck /
+  Confide / Encore / Growl, a nuisance, not a sweeper; Hard has Sing (its Lv 13 move) and no damaging sound move.
+- **Ace: the Act One Matinee.** Meloetta (Serene Grace, Hardy, IV 0 / EV 0, no held item) is the 1-bar
+  `:DORIAN_MELOETTA_MATINEE` (Bosses 111): every stat ×0.80 (Hard ×0.85, Casual ×0.78), no pips, no status immunity.
+  Relic Song swaps Aria ↔ Pirouette and takes the Normal ×1.3 only: Grand Stage's sound boost skips it
+  (`102_Field_GrandStage.rb` `:not_moves => [:RELICSONG]`). Hisuian Zorua's Illusion wears Meloetta's face.
+  Full power is the post-game Crownhaven Encore (`PG_MELOETTA`) and the Festival Pageant Bout (v90: Lv 90, Throat Spray).
 - **Counterplay.** Rock and Ghost (Nacli, Dwebble, Sandygast), stalling moves to calm the crowd, KO the singers first.
   No Fighting type exists before Gym 1 (Rev 16 distribution).
 - **The Saltmere audience (SPINE Rev 19).** The townsfolk met set the opening stage (0–6: 1, 7–13: 2, 14+: 3), and

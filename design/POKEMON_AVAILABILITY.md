@@ -48,7 +48,7 @@ Quest-reward and event Pokémon (chases, boss rewards, rival duels, kindness gif
 Rotom Lv 25 (Sluiceworks Turbine Hall) · Greavard Lv 16 (Thistledown attic, after the ghost-girl quest) · Spiritomb Lv 33 (Ossuary, Odd Keystone + 32 Bleed-zone NPC talks) · Larvesta egg (The Cinderhorn Caldera hermit) · Carbink glimpse in the Glassed Orchard (scripted, not catchable) · Gimmighoul coins hunt (Antumbra) → Gholdengo.
 
 ## 4. Legendary arcs, one per kingdom (multi-bar boss battles; levels at or below the cap)
-**Rule (Reuben, 2026-11-23):** no legendary, mythical, sub-legendary, UB or Paradox Pokémon is caught or gifted in the main story. Every story legendary is an uncatchable boss (`:catch => false`). Captures and gifts happen in the postgame legendary network (`gemini_recommends/2026-11-23_gen6-9-sprites-postgame-legendaries-dorian-meloetta`, Part B).
+**Rule (Reuben, 2026-11-23):** no legendary, mythical, sub-legendary, UB or Paradox Pokémon is caught or gifted in the main story. Every story legendary is an uncatchable boss (`:catch => false`). Captures and gifts happen in the postgame legendary network (`gemini_recommends/2026-11-23_gen6-9-sprites-postgame-legendaries-dorian-meloetta`, Part B). Enforced in code: Prismfall Core `027_LegendaryGate.rb` (`Prismfall.legendary_catch_allowed?`) deflects every Poké Ball thrown at a wild Legendary / Mythical / Sub-Legendary / UB / Paradox (and Type: Null, Silvally, Kubfu, Urshifu) until S160 POSTGAME.
 | Kingdom | Legendary | Where / when | Lv |
 |---|---|---|---|
 | Elowen | **Okidogi, Munkidori, Fezandipiti** (Act III, Royal Chase / Bride Grove) → **Ogerpon** (Act V, Gloamwood) | the "Masked Ogre and the Three Loyal" folktale (Briarwick old woman foreshadows) | 46 / 78 |

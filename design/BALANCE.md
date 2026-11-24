@@ -37,7 +37,7 @@ cross-checked with the BigJra walkthroughs. Version 0 = the normal-mode team.
 | Fight | Reborn | Rejuvenation | Prismfall Standard (Hard / Casual) |
 |---|---|---|---|
 | First rival | Victoria: Litten Lv 5, Scratch / Growl | Ren: Froakie Lv 5, Pound / Growl, IV 4 | K1 Kestrel: the advantage starter Lv 5, **no type move** (Hard: type move + Starly; Casual Lv 3) |
-| Gym 1 | Julia: **6**, Lv 12–15, 2 Potions, IV 10 (20–24 on three), real natures; Charge / Charge Beam on Electric Terrain, Explosion, Rollout | Venam: **6**, Lv 13–16, Potion, IV 20, three Oran Berries + a Normal Gem; Fake Out, Encore, Spikes | Dorian: **5**, Lv 10–15, Potion, IV 12, Oran ×4 + Sitrus; Fake Out, Echoed Voice / Round, Teeter Dance, Sing (Hard 6, IV 20, Synthetic Seed; Casual 3) |
+| Gym 1 | Julia: **6**, Lv 12–15, 2 Potions, IV 10 (20–24 on three), real natures; Charge / Charge Beam on Electric Terrain, Explosion, Rollout | Venam: **6**, Lv 13–16, Potion, IV 20, three Oran Berries + a Normal Gem; Fake Out, Encore, Spikes | Dorian: **6**, Lv 9–14, Potion, IV 12 (Meloetta IV 0 / EV 0 and the ×0.80 Act One Matinee), Oran ×4 + Quick Powder; Fake Out, Pay Day, Encore, Illusion, Transform, Relic Song, Sing (Hard 6, IV 20, Sash / Synthetic Seed / Imposter / Protean; Casual 4) |
 | Gym 2 | Florinia: 6, Lv 22–24, 2 Super, Telluric Seed, Spore, Leech Seed, Spikes, Sandstorm | Keta: 6, Lv 22–25, 2 Super, IV 20 (ace 31), Charcoal, Black Belt, Coba | Tamsin (**double**): 4, Lv 14–19, Super, IV 12, Telluric Seed; Rain Dance + Electroweb (Hard 5: + Vivillon, Focus Sash, Eviolite) |
 | Gym 3 | Corey: 6, Lv 26–30, 2 Super, Focus Sash, Telluric Seed, Black Glasses | Marianette: 6, Lv 27–29, 2 Super, Plates, Focus Sash, Leftovers | Marisol: 4, Lv 19–23, Super, Oran Berries (Hard 5) |
 | Gym 4 | Shelly: 6, Lv 31–35, 2 Hyper, Damp Rock, Silver Powder, Leftovers, Telluric Seed | Narcissa: 6, Lv 33–35, Super, Magical Seeds, Eviolite, a Plate | Rook: 4, Lv 25–27, 2 Super, Magnet, Synthetic Seed (Hard 5) |
@@ -136,7 +136,7 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
 
 | # | Warden, field, cap | Team (ace last) | Seed / field pick | Transition or stage play |
 |---|---|---|---|---|
-| 1 | **Dorian**, Grand Stage, 15, single (SPINE Rev 14); opening stage 1–3 from the Saltmere audience (Rev 19) | Aipom 10, Minccino 10, Spinda 11 *(−C)*, Jigglypuff 11 *(−C)*, **+Hard** Whismur 12, Kecleon 15 | none on Standard (Hard: Kecleon Synthetic Seed, Protean) | Fake Out, Echoed Voice / Round and Teeter Dance raise the applause; Sing never misses at Standing Ovation; stalling lowers it |
+| 1 | **Dorian**, Grand Stage, 15, single (SPINE Rev 14); opening stage 1–3 from the Saltmere audience (Rev 19); Reuben's locked troupe (2026-11-23) | Smeargle 9, Chatot 11, Hisuian Zorua 11, Ditto 11 *(−C)*, Kecleon 12 *(−C)*, **Meloetta 14** (ace) | none on Standard (Hard: Smeargle Sash, Zorua Synthetic Seed, Imposter Ditto, Protean Kecleon) | Fake Out and Pay Day (showpieces), Relic Song (sound) raise the applause; Sing never misses at Standing Ovation; stalling lowers it. Relic Song takes the Normal boost only (no sound double stack); Meloetta is the 1-bar `:DORIAN_MELOETTA_MATINEE` (×0.80 / Hard ×0.85 / Casual ×0.78) |
 | 2 | **Tamsin**, Silkwood, 19, **double** (Rev 14) | Joltik 14, Surskit 15, **+Hard** Vivillon (Rage Powder), Dwebble 16 *(−C)* (the bird answer: Smack Down, Rock Tomb), Swadloon "Bobbin" 19 | Bobbin: Telluric Seed (Hard: Eviolite) | lead pair: Rain Dance wets the silk for Electroweb (spread); Rain douses a Wildfire |
 | 3 | Marisol, Water Surface, 23 | Pelipper 19 (Keen Eye; Hard Tailwind), Chinchou 20 *(−C)* (Hard Lanturn), **+Hard** Dewpider, Buizel 20 (Hard Floatzel), Gyarados "Lucky" 23 | none (Oran / Sitrus) | no Dive (the Water Surface ↔ Underwater loop strikes ×1.3 both ways: 103 knockouts in 60 runs); Lucky's Whirlpool ×2 traps |
 | 4 | Rook, Neon Grid, 27 | Luxio, Electabuzz *(−C)*, **+Hard** Heliolisk, Toxtricity, Rotom-Wash "Camera" | Electabuzz: Synthetic Seed | Charge reboots a Blackout |
@@ -384,9 +384,9 @@ distribution allows by then (rare finds included). 60 fights per cell (20 per st
 | Picnicker Ada (Ch1 Windfall Row, Meadow; starter 9 + two catches) | 99% | 96% (Water 52 of 60) | 93% (Water 50 of 60) | — |
 | K1 Kestrel (Lv 5, can be lost) | 100% | 15% | 0% | — |
 | J1 Juno (Meadow) | 100% | 63% | 50% | 55% |
-| Gym 1 Dorian, sparse house (stage 1) | 100% | 45% | 2% | 33% |
-| Gym 1 Dorian, good house (stage 2 + fans) | 100% | 63% | 2% | 50% |
-| Gym 1 Dorian, full house (stage 3 + fans) | 100% | 73% | 5% | 62% |
+| Gym 1 Dorian, sparse house (stage 1) | 93% | 42% | 2% | 33% (old troupe) |
+| Gym 1 Dorian, good house (stage 2 + fans) | 97% | 62% | 5% | 50% (old troupe) |
+| Gym 1 Dorian, full house (stage 3 + fans) | 100% | 75% | 5% | 62% (old troupe) |
 | Gym 2 Tamsin (Silkwood, double) | 100% | 45% | 3% | 35% |
 | K2 Kestrel (Mountain) | 98% | 58% | 5% | 35% |
 | Gym 3 Marisol (Water Surface) | 82% | 23% | 0% | 37% |
@@ -412,6 +412,22 @@ table is Emolga 5 + Joltik 3, the 8% cap). Lv 17–19, Nuzzle / Quick Attack / T
 six that found it wins **42%** on Standard (25 of 60; a second 60: 30%), Casual 95%, Hard 0% (Hard is for prepared
 teams: prepared 37%). Grass and Water starters that find it reach 73–80%. Pachirisu tested at 63% (too strong for a
 "modest" find); Emolga is the pick. The `G3E` cell in `run_winrates.rb` forces it into the team.
+
+**Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,
+1 / 2 / 3 bars, Standard HP ×1.5 and ×1.15–1.25 elsewhere, Hard HP ×1.5 and ×1.2–1.25. A typical Lv 49–51 six (60 a
+cell): with the Ogre Standard 75 / 95 / 98%, alone Okidogi 53% and Fezandipiti 92%; Hard typical 18 / 40 / 58% (alone
+5 / 57%), Hard prepared 90–100%; Casual 100%. First pass (Lv 46–48, HP ×1.2) was 100% everywhere in 3–9 turns;
+Okidogi's Bulk Up then snowballed with the break's +1 Attack (Hard alone 3%), so it has Low Kick instead.
+
+**Gym 1, Reuben's locked troupe (2026-11-23):** Smeargle, Chatot, Hisuian Zorua, Ditto, Kecleon, Meloetta (Gemini
+proposal 2026-11-23 Part C). As proposed (Lv 10–15, Echoed Voice Chatot, Oran Meloetta 15) the realistic Standard team
+won **8%** (sparse; 60 fights) and Casual 58%: the Grand Stage made Chatot's Echoed Voice (then Round) the sweeper, and
+the Matinee Meloetta finished what was left. Tuned to: Chatot without damaging sound moves (Standard / Casual),
+Smeargle 9, Zorua 11 (Swift / Scratch; Shadow Sneak is Hard's, Lv 12), Ditto 11, Kecleon 12 Hardy (Lick for Thief),
+Meloetta **14 with no held item** at the proposal's ×0.80; Hard Chatot Sing, no Fury Swipes on Hard Kecleon. Result
+(120 fights sparse, 60 per house): Casual 93 / 97 / 100%, Standard **42 / 62 / 75%** (old troupe 41–45 / 63 / 73%),
+Hard realistic 2 / 5 / 5% (old 2 / 2 / 5%). A ×0.70 Matinee also reached 42%, but kept the proposal's ×0.80 and took
+the Oran instead. The validator warns that the ace (L14) sits under the cap: intended (Act One).
 
 **The Saltmere crowd (Gym 1 rows, 2026-11-20):** the bigger the house you gathered, the more Standing Ovation is
 yours (`102_Field_GrandStage.rb`; `FieldEffects.home_crowd_foe?` / `home_crowd_full?` in Puzzles

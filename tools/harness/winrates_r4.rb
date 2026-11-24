@@ -262,6 +262,7 @@ module WR4
 
   #----------------------------------------------------------------------------- the foe
   def self.foe_types(f)
+    return f[:foe_types].call if f[:foe_types]   # a wild boss cell (no trainer to load)
     tt, nm, ver = f[:foe].call
     tr = pbLoadTrainer(tt, nm, ver) rescue nil
     return [] if !tr
@@ -471,8 +472,25 @@ module WR4
       :start => proc { setBattleRule("canLose"); setBattleRule("field", field) if field; TrainerBattle.start(tt, nm, v) } }
   end
 
+  # Ch10 Loyal Three (Bosses 112): one boss a cell; partner = the Ogre beside you (:ch10_ogre == :ogre).
+  def self.loyal(boss, partner, label)
+    { :label => label, :cap => 51, :badges => 8, :size => 6, :field => :BLEED, :foe => proc { [:NONE, "", 0] }, :r4 => true,
+      :foe_types => proc { [GameData::Species.get(Prismfall::Bosses.get(boss)[:species]).types] },
+      :start => proc {
+        setBattleRule("canLose")
+        Prismfall::Bosses.loyal_three_partner_rules if partner
+        Prismfall::Bosses.wild_battle(boss)
+        pbDeregisterPartner if partner
+      } }
+  end
+
   def self.fights
     h = {}
+    h["L3O"] = loyal(:LOYAL_THREE_OKIDOGI, true, "Ch10 Loyal Three 1/3 Okidogi, with the Ogre (Bleed)")
+    h["L3M"] = loyal(:LOYAL_THREE_MUNKIDORI, true, "Ch10 Loyal Three 2/3 Munkidori, with the Ogre (Bleed)")
+    h["L3F"] = loyal(:LOYAL_THREE_FEZANDIPITI, true, "Ch10 Loyal Three 3/3 Fezandipiti, with the Ogre (Bleed)")
+    h["L3OA"] = loyal(:LOYAL_THREE_OKIDOGI, false, "Ch10 Loyal Three 1/3 Okidogi, alone (:hesitate)")
+    h["L3FA"] = loyal(:LOYAL_THREE_FEZANDIPITI, false, "Ch10 Loyal Three 3/3 Fezandipiti, alone (:hesitate)")
     (4..18).each { |n| h["G#{n}"] = gym(n, n - 1) }
     h["K3"] = rival(:RIVAL_KESTREL, "Kestrel", 3, 5, 35, :DESERT, "K3 Kestrel (Ossuary exit, Desert)")
     h["J2"] = rival(:RIVAL_JUNO, "Juno", 2, 5, 35, :CORROSIVE_MIRE, "J2 Juno (Mirefen stilt-walk, Corrosive Mire)")

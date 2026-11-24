@@ -25,6 +25,7 @@ module Harness
     def direction; 2; end
     def move_route_forcing; false; end
     def refresh_charset; end
+    def set_movement_type(*_args); end   # pbUpdateVehicle (reached by some wild-battle paths)
   end
 
   def self.new_game_state

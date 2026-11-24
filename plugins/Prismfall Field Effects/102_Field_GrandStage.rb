@@ -73,7 +73,9 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
     {
       :type_mods   => { :NORMAL => normal },
       :damage_mods => [
-        { :flags => ["Sound"], :category => :damaging, :mult => show, :message => "{2} rang through the opera house!" },
+        # Relic Song (Normal + Sound) takes the Normal boost only - no double stack (Gym 1 Meloetta cap, Part C).
+        { :flags => ["Sound"], :category => :damaging, :not_moves => [:RELICSONG], :mult => show,
+          :message => "{2} rang through the opera house!" },
         { :flags => ["Dance"], :category => :damaging, :mult => show, :message => "The spotlight followed {1}'s dance!" },
         { :flags => ["Sound"], :user => { :abilities => [:PUNKROCK, :LIQUIDVOICE] }, :mult => 1.2 }
       ]

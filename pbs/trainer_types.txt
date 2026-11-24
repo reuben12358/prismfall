@@ -531,6 +531,12 @@ SkillLevel = 100
 BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
+[PARTNER_OGRE]
+Name = Gossamer
+Gender = Unknown
+BaseMoney = 0
+SkillLevel = 100
+#-------------------------------
 [PLAYER_A]
 Name = Pokémon Trainer
 Gender = Male

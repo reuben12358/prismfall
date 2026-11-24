@@ -248,6 +248,14 @@ class Battle
     target = (opposes?(idxBattler)) ? @battlers[idxBattler] : @battlers[idxBattler].pbDirectOpposing(true)
     target = target.allAllies[0] if target && target.fainted? && target.allAllies[0]
     st = (target && wildBattle?) ? Prismfall::Bosses.state_for(target) : nil
+    # No main-story legendaries (Core 027_LegendaryGate.rb): before S160 every wild legendary deflects the ball.
+    if target && wildBattle? && Prismfall.respond_to?(:story_legendary_locked?) &&
+       Prismfall.story_legendary_locked?(target.pokemon)
+      pbDisplayBrief(_INTL("{1} threw a {2}!", pbPlayer.name, GameData::Item.get(ball).name))
+      @scene.pbThrowAndDeflect(ball, target.index) if @scene.respond_to?(:pbThrowAndDeflect)
+      pbDisplay(_INTL(Prismfall::LEGENDARY_GATE_MESSAGE))
+      return
+    end
     if st
       if !st.catchable?
         pbDisplayBrief(_INTL("{1} threw a {2}!", pbPlayer.name, GameData::Item.get(ball).name))
