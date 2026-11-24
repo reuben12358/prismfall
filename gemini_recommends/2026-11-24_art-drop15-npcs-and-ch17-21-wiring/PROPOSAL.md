@@ -273,20 +273,34 @@ Per `TODO_QUOTA.md` §1 and `REVIEW.md:131`, the following bugs live in Gemini-o
 
 ---
 
-## 7. Next Art Queue Summary (Art Drop 16 → 17)
+## 7. Overnight Ship Addendum (2026-11-24 — ALL Below Are ALREADY PUSHED on `origin/main` & Ready to Wire Wednesday!)
 
-Full Ch0–Postgame breakdown + canon visual descriptions are catalogued in our scratch roadmap (`ART_COVERAGE_CH0_TO_POSTGAME.md`). Headlines for planning:
-- **Art Drop 16 (Must-Have Bosses, Tag Partners & Ch14–21 Story Speakers):**
-  1. **Mother Gutter (`GUTTER` / `SUMP_BARON`)** — Full boss+partner pack (12 portraits, OW, 16f front, **5f back**, VS bust) — 8 portrait calls + Ch17 critical tag partner + Ch18 + Postgame!
-  2. **Dominar Hrothgar (`HROTHGAR`)** — 12 portraits + OW (10 speaking lines Ch15/Ch19 + live on built `Map 928 #3`!)
-  3. **Prince-Elector Idris Kassan (`KASSAN`)** — 12 portraits + OW (8 portrait calls Ch14/Ch19)
-  4. **Envoy Delphine Okoro (`DELPHINE` / `OKORO`)** — 12 portraits + OW (3 portrait calls Ch20 ending branch)
-  5. **Councillor Renata Sallow (`RENATA` / `SALLOW`)** — 12 portraits + OW (2 portrait calls Ch5/Ch16 + live on built `Map 186 #9`!)
-  6. **Thane Eirik OW (`Characters/EIRIK.png`)** — sole portrait cast member missing an overworld sheet!
-  7. **Missing Tag-Partner / Follower Sprites:** `Trainers/HOLLOW_THISTLE_back.png` (Ch14 tag partner!), `Trainers/PARTNER_OGRE.png` + `PARTNER_OGRE_back.png` + `Characters/Followers/OGERPON.png` (Ch10 tag partner + Ch18 `S223` follower!)
-  8. **Ch9/Ch17/Ch18 Boss & Officer Battle Sprites:** `THORNGUARD` (Captain Rowe, Ch18), `GILDER_AUTOMATON` (Terrace Warden Golurk, Ch17), `MERIDIAN_DIRECTORATE` (Mallory & Kade Ch17 + 15 PBS fights), `HOLLOW_ADMIN` (Hammer Captain Brisk, Ch9), `REFLECTION` (Ruin Route R1–R7 portraits + front + VS bust).
-- **Art Drop 17 (Supporting Cast, Faction Grunts, Act V Variants & Cameos):**
-  - Supporting cast: **Zainab Darzi** (`ZAINAB`/`SIDE_CARTER`), **Legate Varra Kosk** (`KOSK`), **Director Camille Ashe** (`MERIDIAN_ASHE`), **Prince Caedmon** (`CAEDMON`), **Carol** (`CAROL` + `OCTAVE_SINGER`), **Tage**, **Elder Ossa**.
-  - Faction grunt battle strips: `HOLLOW_GRUNT_M/F`, `MERIDIAN_AGENT_M/F`, `ASHKAAR_SOLDIER_M/F` + `ASHKAAR_OFFICER`, `ISENMAR_SOLDIER_M/F` + `ISENMAR_OFFICER`.
-  - Act IV–V story portrait variants (explicitly requested in `story/36–40`): Valen no-glove crystal arm + light, Voss pressure suit + harness, Ilsa no-earmuffs, Anja thin, Arceus speech bust, Ines memory.
-  - Remaining 9 sister-game cameos (starting with **`FESTIVAL_SHELLY`**, already live on built Act I `Map 525`!).
+Everything previously queued in Art Drop 15 Part 2, Art Drop 16, 5 Faction Grunt Battle Strips, 15 Padless Arenas, and **all 7 Theatrical Cutscenes** shipped overnight (`fda06fb` → `df36227`) — 100% SHA-256 dual-synced across `graphics/` + `art/out/Graphics/` and `Movies/` + `art/out/Movies/`:
+
+### 7.1 Newly Shipped Cast Art Ready to Wire (`d920258`, `eea25ed`, `039f455`, `50d22d6`, `d03151b`)
+- **Portraits (`014_Portraits.rb` `CAST` + `selftest` fixture swap!):**
+  - **NOW PUSHED (`12×` expressions each, `exact2x=True, semi=0, orphans=0`):** `GUTTER`, `KASSAN`, `OKORO`, `HROTHGAR`, `RENATA` — plus `REFLECTION` (`7×`: `neutral/sad/angry/happy/shocked/deadpan` + mirror).
+  - **Important `selftest` note:** `KASSAN` and `OKORO` now have full portraits on disk; update the no-art portrait test fixtures in `plugins/Prismfall Cutscenes/selftest/suite.ruby_stub` (currently `:DELPHINE` / `:KASSAN`) to unbuilt IDs (e.g. `:ZAINAB` / `:KOSK`).
+  - Alias `:DELPHINE => "OKORO"` and `:SALLOW => "RENATA"` (or register `OKORO`/`RENATA` directly matching Ch16/Ch20 scripts).
+- **Silky B2W2 Overworlds (`025_CharsetAliases.rb`):**
+  - **NOW PUSHED (`11/11` B2W2 QA PASS):** `Characters/EIRIK.png`, `Characters/GUTTER.png`, `Characters/trainer_SUMP_BARON.png`, `Characters/KASSAN.png`, `Characters/OKORO.png`, `Characters/HROTHGAR.png` *(live on built `Map 928 #3`!)*, `Characters/RENATA.png` *(live on built `Map 186 #9`!)*, `Characters/Followers/OGERPON.png`, `Characters/trainer_THORNGUARD.png`, `Characters/trainer_GILDER_AUTOMATON.png`, `Characters/trainer_MERIDIAN_DIRECTORATE.png`, `Characters/trainer_HOLLOW_ADMIN.png`.
+- **16f Trainer Battle Strips, 5f Official B/W Back-Throws & VS Busts (`pbs/trainer_types.txt` + `010_Bridge_VersusIntro.rb`):**
+  - **NOW PUSHED:** `Trainers/SUMP_BARON.png`, `Trainers/HOLLOW_THISTLE_back.png` (Ch14 tag!), `Trainers/PARTNER_OGRE.png` + `Trainers/PARTNER_OGRE_back.png` (Ch10 tag!), `Trainers/THORNGUARD.png`, `Trainers/GILDER_AUTOMATON.png`, `Trainers/MERIDIAN_DIRECTORATE.png`, `Trainers/HOLLOW_ADMIN.png`, `Trainers/REFLECTION.png`, **`EBDX/VS/REFLECTION.png`** *(add `"REFLECTION" => :violet` in `010_Bridge_VersusIntro.rb`!)*, plus 5 faction grunt battle strips: `HOLLOW_GRUNT_M.png`, `HOLLOW_GRUNT_F.png`, `MERIDIAN_AGENT_M.png`, `ASHKAAR_SOLDIER_M.png`, `ISENMAR_SOLDIER_M.png`.
+
+### 7.2 All 7 Shipped Anime Cutscenes (`Movies/` + Pillar 1 Acting Sheets — ALL Live `mkxp-z` `exit 0`, EOF-Safe!)
+Wire all 7 into `plugins/Prismfall Cutscenes/016_Movies.rb` (and bundle `Movies/*.ogv` in `tools/package.sh` per §4!):
+
+| Wave | Story Beat | Standard & Seizure-Safe `.ogv` (`Movies/`) | Runtime | Live `mkxp-z` | Pillar 1 Acting Sheet (`graphics/Characters/`) |
+|---|---|---|---|---|---|
+| **Wave 1** | Ch5 Spire Shatter (`:SH1`) | `pf_ch5_spire_shatter(_safe).ogv` (`37ced03`) | `32.67s` | PASS (`32.73s`) | `act_ch5_mourner_reach.png`, `act_ch5_mourner_burn.png` |
+| **Wave 2** | Ch9 Mourner Unmasks (`:IR1`) | `pf_ch9_mourner_unmask(_safe).ogv` (`4735bd5`) | `41.67s` | PASS (`41.76s`) | `act_ch9_mourner_unmask.png` |
+| **Wave 3** | Ch11 Kyogre Awakens | `pf_ch11_kyogre_awakens(_safe).ogv` (`77d2343`) | `36.50s` | PASS (`36.57s`) | `act_ch11_kyogre_storm.png` (`16f` Anja) |
+| **Wave 4** | Ch19 `WAR-1` Beam Clash | `pf_ch19_war_beam_clash(_safe).ogv` (`46c5d8f`) | `48.00s` | PASS (`48.63s`) | `act_war1_primal_kyogre.png` (`8/8`), `act_war1_reshiram.png` (`8/8`) |
+| **Wave 5** | Ch21 The Ring & The Light | `pf_ch21_valen_arceus_finale(_safe).ogv` (`2475f0b`) | `45.00s` | PASS (`45.61s`) | *(uses existing cast OWs)* |
+| **Wave 6** | Ch15 `CE-1` AF 290 Glassfall | `pf_ch15_ce1_glassfall(_safe).ogv` (`e50b1da`) | `39.50s` | PASS (`40.07s`) | *(plays in Living Nave `391`)* |
+| **Wave 7** | Ruin R7 Aurelius & Mirror-Pierce | `pf_ruin_r7_aurelius_mirror_pierce(_safe).ogv` (`df36227`) | `41.25s` | PASS (`41.83s`) | *(uses `THEODRIC` + `REFLECTION`)* |
+
+### 7.3 Remaining Art Queue After Next Image Quota Reset (~06:22 PT)
+- **Art Drop 17A/B Remainder (13 turnkey calls staged):** `MERIDIAN_AGENT_F`, `ASHKAAR_SOLDIER_F`, `ISENMAR_SOLDIER_F`, `OCTAVE_SINGER` (4 strips) + 9 grunt overworlds (`trainer_HOLLOW_GRUNT_M/F`, `trainer_MERIDIAN_AGENT_M/F`, `trainer_ASHKAAR_SOLDIER_M/F`, `trainer_ISENMAR_SOLDIER_M/F`, `trainer_OCTAVE_SINGER`).
+- **Art Drop 18 (Polish / Supporting Cast & Cameos):** `SUMP_BARON_back.png` (Ch17 tag back-throw), `ZAINAB`, `KOSK`, `MERIDIAN_ASHE`, `CAEDMON`, `CAROL`, `TAGE`, `OSSA`, Act IV–V portrait variants, and `FESTIVAL_SHELLY` (Map `525`) + remaining cameos.
+
