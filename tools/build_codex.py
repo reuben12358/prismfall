@@ -46,6 +46,7 @@ GROUPS = [
         ("story/36_SCRIPT_CH17.md", "script-ch17", "Ch 17", True),
         ("story/37_SCRIPT_CH18.md", "script-ch18", "Ch 18", True),
         ("story/38_SCRIPT_CH19.md", "script-ch19", "Ch 19", True),
+        ("story/39_SCRIPT_CH20.md", "script-ch20", "Ch 20", True),
     ]),
     ("Guides & reference", [
         ("design/WALKTHROUGH.md", "walkthrough", "Walkthrough", True),   # BIGJRA-style player's guide
