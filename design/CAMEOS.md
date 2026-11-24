@@ -102,7 +102,7 @@ The Festival once invited champions through Antumbra's **Veil Gate**, but the Sy
   - Edda's divers report a woman swimming *without a suit* in the drowned galleries, singing to a Lapras, and an armored knight pacing the drained shallows above who refuses to leave.
   - Amaria followed "a city under a city" through the Glass. Drowned places call to her, and Aurelia is calling hard.
   - Titania followed Amaria.
-  - The PC dives a short underwater maze to reach Amaria, who is sitting in a flooded Gilder hall. She says the drowned city "isn't dead, it's *waiting*". This is a Ruin Route hint about Theodric's reflection.
+  - The PC dives a short underwater maze to reach Amaria, who is sitting in a flooded Gilder hall. She says the drowned city "isn't dead, it's *waiting*". This is a Ruin Route hint about Aurelius's reflection.
   - Titania won't let Amaria go home until "someone who can walk through walls" proves the way back is safe.
 - **Fight:** **double battle** vs Amaria and Titania, lv ~78, on `:WATER_SURFACE` (Amaria's side; Titania's Steel suffers). Aces: **Lapras "Deliverer"** and **Aegislash**.
 - **Reward:** a **Liquidation** TM, an **Assault Vest** from Titania ("a knight's spare"), and a **Lapras** of the PC's own: Deliverer's calf. "She'll carry you out of a flood someday." This echoes Valen's Lapras.

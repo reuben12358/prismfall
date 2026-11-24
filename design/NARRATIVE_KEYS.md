@@ -142,7 +142,7 @@ CHOICES = {
   :ch21_spare_voss        => { :values => [:shield, :let_judge], :once => true, :description => "Ch21: Arceus's Judgment strikes the hijacker (PC_SPARED_VOSS)" },
   :ch21_final             => { :values => [:return, :keep, :unmake, :concord, :borrowed], :once => true, :description => "Ch21: the final decision, spoken aloud" },
   # ---- Ruin Route
-  :ruin_voss              => { :values => [:spare, :abandon], :once => true, :description => "R4: Voss kneels to Theodric's reflection" },
+  :ruin_voss              => { :values => [:spare, :abandon], :once => true, :description => "R7: Voss kneels to Aurelius's reflection" },
   :ruin_walk              => { :values => [:me, :reflection], :once => true, :description => "R7: who walks out of the Glass" }
 }
 ```
@@ -442,7 +442,7 @@ ENTRANTS.merge!({
   :KESTREL_FALLEN => { :display => "Kestrel", :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },
   :VALEN_RUIN=> { :display => "Valen",     :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
   :QUENT     => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT,   :name => "Percival",  :version => 99, :rating => 97, :level_hint => 100 },
-  :THEODRIC  => { :display => "Theodric",  :trainer_type => :GILDED_THEODRIC,  :name => "Theodric",  :version => 0, :rating => 99, :level_hint => 100 },
+  :THEODRIC  => { :display => "Gilded King Aurelius", :trainer_type => :GILDED_THEODRIC, :name => "Aurelius",  :version => 0, :rating => 99, :level_hint => 100 },
   :MORWEN       => { :display => "Morwen", :trainer_type => :ECHO_MORWEN, :name => "Morwen", :version => 90, :exhibition => true, :rating => 0 },
   :PAGEANT_BOUT => { :display => "Dorian & Rook", :double => true, :trainer_type => [:LEADER_DORIAN, :LEADER_ROOK], :name => ["Dorian", "Rook"],
                      :version => 90, :exhibition => true, :rating => 0 }
@@ -453,7 +453,7 @@ ENTRANTS.merge!({
 ### 6.2 Where the player met every possible opponent (Rev 5 audit)
 Juno, Kestrel, Valen, Rowan, Voss: throughout. Marisol: Ch4, Ch9, Ch11, the war. Anja: Ch11, the war (prisoner). Celestine: Ch3 (disguised), Ch9, Ch18.
 Sigrun: Ch8, the war, Ch19. Kaito: Ch9, Ch13. Ysolde: Ch15 (gym, echo, K6 aftermath). Odessa: Ch12, Ch14–16. Brann: Ch8, Ch17. Quent: Ch8, Ch10, Ch14, Ch16.
-Dorian/Rook (exhibition): Ch2, Ch17 / Ch5, Ch16. Morwen's Echo: Ch13 memory, Ch15 echo. Ruin only: Dask (Ch13, R1, R4), Theodric (R3, R6).
+Dorian/Rook (exhibition): Ch2, Ch17 / Ch5, Ch16. Morwen's Echo: Ch13 memory, Ch15 echo. Ruin only: Dask (Ch13, R1, R4), Aurelius (R3, R6).
 
 ### 6.3 Draw lists (first match wins; the stage default is the appended fallback)
 ```ruby
@@ -605,7 +605,7 @@ Festival-only Warden/NPC teams use **version = ace level** (90/92/96/99) so they
 | 15 | Final (Ruin) | Valen, the Last Tuning | `[CHAMPION_VALEN, Valen, 1]` | 96 | **NEW** |
 | 16 | Hijack | Voss (default) | `[MERIDIAN_VOSS, Aurelian, 0]` | 100 | planned |
 | 17 | Hijack | Dr. Quent | `[MERIDIAN_QUENT, Percival, 99]` | 100 | **NEW** (Voss's Silvally team in Quent's hands) |
-| 18 | Hijack (Ruin) | Theodric, the Gilded Reflection | `[GILDED_THEODRIC, Theodric, 0]` | 100 | **NEW** (new trainer type) |
+| 18 | Hijack (Ruin) | Aurelius, the Gilded Reflection | `[GILDED_THEODRIC, Aurelius, 0]` | 100 | **NEW** (new trainer type) |
 | 19 | Exhibition | Pageant Bout: Dorian + Rook (double) | `[LEADER_DORIAN, Dorian, 90]` + `[LEADER_ROOK, Rook, 90]` | 90 | **NEW** ×2 |
 | 20 | Exhibition | Morwen's Echo | `[ECHO_MORWEN, Morwen, 90]` | 90 | **NEW** (new trainer type) |
 | B1–B5 | True Finale | Arceus | boss configs `ARCEUS_BOUND` (planned), `_MISCALIBRATED`, `_WAR`, `_GILDED`, `_JUDGMENT` | 100 | 4 **NEW** |
@@ -709,7 +709,7 @@ GAME_OVERS = {
   :GO_R_WELCOME_BEHIND => { :title => "Welcome, Behind",   :hint => "Ruin. The Archseer's kindness.", :ruin_exempt => true,
                             :epitaph => "You stayed behind the Glass. It remembers those who stay perfectly, and forgets them a little more each day." },
   :GO_R_KNEEL          => { :title => "Long Live the King", :hint => "Ruin. A king asks you to kneel.", :ruin_exempt => true,
-                            :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and starving, and Theodric finished his sentence." }
+                            :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and unrepentant, and King Aurelius finished his sentence." }
 }
 ```
 
@@ -744,7 +744,7 @@ on the trigger. Every trigger is a deliberate player choice with at least one co
 | GO_EARLY_CROWN | 20 | betrayal (Valen's) | accept the crown tonight | Ilsa: "Don't let him hand you anything tonight." | Sanctum door |
 | GO_HIS_HAND | 21 | betrayal | take Voss's hand (any path without `VOSS_ACCEPTED`) | Larch: "Don't let him make you a part. He's very good at parts."; K7 speech; Celestine | before the Coronation |
 | GO_R_WELCOME_BEHIND | R6 | Ruin | accept Dask's offer to stay behind the Glass | Dask's own mirrored pitch | Ruin QF |
-| GO_R_KNEEL | R7 | Ruin | kneel to Theodric | Voss kneels first; Giratina's warning | before the Ruin hijack |
+| GO_R_KNEEL | R7 | Ruin | kneel to Aurelius | Voss kneels first; Giratina's warning | before the Ruin hijack |
 
 ## 11. Ruin Route keys
 

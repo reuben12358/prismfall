@@ -1112,17 +1112,24 @@ X("Hijack - Dr. Percival Quent (Voss removed)", "MERIDIAN_QUENT", "Percival", 99
     P("SILVALLY", 100, "RKSSYSTEM", "STEELMEMORY", "JOLLY", "MULTIATTACK,PARTINGSHOT,FLAMECHARGE,SWORDSDANCE", "A",
       form=8, nick="NULL", casual={"moves": "MULTIATTACK,CRUSHCLAW,FLAMECHARGE,SCARYFACE"}),
 ])
-X("Hijack (Ruin) - Theodric, the Gilded Reflection", "GILDED_THEODRIC", "Theodric", 0, 100,
-  "Three hundred years and still the god will not kneel...", [
+X("Hijack (Ruin) - Gilded King Aurelius, the Gilded Reflection", "GILDED_THEODRIC", "Aurelius", 0, 100,
+  "Ha...! Magnificent! Three hundred years, and at last a challenger. Go—end the sky.", [
+    # The Gilded King (Gemini rework 2026-11-23, Path B "Aurelius"; the type id and art stay GILDED_THEODRIC / THEODRIC).
     # PRISM_ARENA "running Inverse" (story/12_RUIN_ROUTE; the event layers the inverted chart). Reviewed for it: under the
     # inverted chart Fighting and Ghost hit what they could not touch before (No Guard Dynamic Punch into Ghosts,
     # Close Combat into Psychic / Fairy / Flying, Poltergeist into Normal and Dark), and Kyogre + Groudon share one team
     # on purpose: the "Year of Two Weathers". Regigigas keeps Slow Start and Protect.
-    P("GOLURK", 97, "NOGUARD", "LIFEORB", "ADAMANT", "DYNAMICPUNCH,EARTHQUAKE,POLTERGEIST,STONEEDGE", "HA", casual={"item": "SITRUSBERRY"}),
-    P("AEGISLASH", 97, "STANCECHANGE", "WEAKNESSPOLICY", "QUIET", "KINGSSHIELD,SHADOWBALL,CLOSECOMBAT,SHADOWSNEAK", "BS"),
-    P("KYOGRE", 98, "DRIZZLE", "CHOICESPECS", "MODEST", "WATERSPOUT,ORIGINPULSE,ICEBEAM,THUNDER", "S", casual={"item": "LEFTOVERS"}),
-    P("GROUDON", 98, "DROUGHT", "LIFEORB", "ADAMANT", "PRECIPICEBLADES,STONEEDGE,FIREPUNCH,SWORDSDANCE", "A", casual={"item": "LEFTOVERS"}),
-    P("REGIGIGAS", 99, "SLOWSTART", "LEFTOVERS", "ADAMANT", "CRUSHGRIP,KNOCKOFF,DRAINPUNCH,PROTECT", "HA"),
+    # Treasury nicknames: Sunguard (the original of Voss's "Gilder"), Regalia (the royal blade), Deluge and Sunder (the
+    # Year of Two Weathers), Colossus (the bound titan), Gilt (the treasury).
+    P("GOLURK", 97, "NOGUARD", "LIFEORB", "ADAMANT", "DYNAMICPUNCH,EARTHQUAKE,POLTERGEIST,STONEEDGE", "HA", nick="Sunguard",
+      casual={"item": "SITRUSBERRY"}),
+    P("AEGISLASH", 97, "STANCECHANGE", "WEAKNESSPOLICY", "QUIET", "KINGSSHIELD,SHADOWBALL,CLOSECOMBAT,SHADOWSNEAK", "BS",
+      nick="Regalia"),
+    P("KYOGRE", 98, "DRIZZLE", "CHOICESPECS", "MODEST", "WATERSPOUT,ORIGINPULSE,ICEBEAM,THUNDER", "S", nick="Deluge",
+      casual={"item": "LEFTOVERS"}),
+    P("GROUDON", 98, "DROUGHT", "LIFEORB", "ADAMANT", "PRECIPICEBLADES,STONEEDGE,FIREPUNCH,SWORDSDANCE", "A", nick="Sunder",
+      casual={"item": "LEFTOVERS"}),
+    P("REGIGIGAS", 99, "SLOWSTART", "LEFTOVERS", "ADAMANT", "CRUSHGRIP,KNOCKOFF,DRAINPUNCH,PROTECT", "HA", nick="Colossus"),
     # Magical Seed on the arena (+1 Sp. Atk, +1 Sp. Def) with Nasty Plot instead of being locked by Specs: the chart
     # flips under him, so he needs to change moves.
     P("GHOLDENGO", 100, "GOODASGOLD", "MAGICALSEED", "TIMID", "MAKEITRAIN,SHADOWBALL,FOCUSBLAST,NASTYPLOT", "S", nick="Gilt",

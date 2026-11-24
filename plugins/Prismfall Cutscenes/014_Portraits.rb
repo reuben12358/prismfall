@@ -93,6 +93,7 @@ module Prismfall
       HESPER TEO THISTLE SABLE KROLL QUENT MARCHETTI HOLLIS PIP MAUD DEX MORWEN
       MAELIS DASK EIRIK HROTHGAR KASSAN RENATA GUTTER DELPHINE
       VESPER WENNA MARTIN WENLOW
+      THEODRIC VENAM COLL
     ]
 
     class << self
@@ -858,3 +859,7 @@ def pf_say(id, expression = :neutral, text = "", emote: nil, event: nil, name: n
   message = "\\#{tag}[#{id},#{expression},#{emotes},#{event}]#{label}#{text}"
   return pbMessage(message, commands, cancel)
 end
+
+# The Gilded King keeps his THEODRIC_* portrait files (Gemini rework 2026-11-23, Option 1 / Path B) but is shown as
+# "Gilded King Aurelius": [portrait: THEODRIC, smug] in scripts.
+Prismfall::Portrait.register(:THEODRIC, name: "Gilded King Aurelius", trainer: :GILDED_THEODRIC, cast: true)

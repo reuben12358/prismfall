@@ -43,7 +43,15 @@ module PrismfallVS
     :CHAMPION_VALEN => "VALEN",
     :HOLLOW_MOURNER => "MOURNER",
     :LEADER_ROOK    => "ROOK",
-    :LEADER_SAHAR   => "SAHAR"
+    :LEADER_SAHAR   => "SAHAR",
+    # Gemini wiring audit 2026-11-23: these resolve by name only by luck (or not at all: "Imre" -> DASK)
+    :GILDED_THEODRIC => "THEODRIC",  # PBS name "Aurelius" (Gilded King Aurelius; keeps Graphics/EBDX/VS/THEODRIC.png)
+    :HOLLOW_TEO     => "TEO",
+    :HOLLOW_WICK    => "WICK",
+    :LEADER_ROWAN   => "ROWAN",
+    :ECHO_MORWEN    => "MORWEN",
+    :ARCHSEER_DASK  => "DASK",       # PBS name "Imre"
+    :FESTIVAL_VENAM => "VENAM"
   }
   THEMES     = {                   # colour per cast ID (graphics/EBDX/VS/{tunnel,bandfoe,bandplayer}_<theme>.png)
     "PLAYER_A" => :teal, "PLAYER_B" => :green,
@@ -56,7 +64,9 @@ module PrismfallVS
     "ODESSA" => :blue, "ILSA" => :rose, "BASTIAN" => :gold, "YSOLDE" => :violet, "MAGNUS" => :grey,
     "NYX" => :violet, "SIGRUN" => :red,
     # Art Drop 13
-    "VESPER" => :gold, "THISTLE" => :green, "QUENT" => :teal, "SABLE" => :teal
+    "VESPER" => :gold, "THISTLE" => :green, "QUENT" => :teal, "SABLE" => :teal,
+    # 2026-11-23: the Gilded King's imperial gold (was falling back to violet), and the rest of the cast busts
+    "THEODRIC" => :gold, "TEO" => :teal, "WICK" => :green, "MORWEN" => :violet, "DASK" => :grey, "VENAM" => :violet
   }
   DEFAULT_THEME_FOE    = :violet
   DEFAULT_THEME_PLAYER = :teal

@@ -17,11 +17,12 @@ For three hundred years Velmora has lived on pieces of a sleeping god.
 ### Before the Fall: the Aureate Kingdom
 Before AF 0, one kingdom ruled the continent: **the Aureate Kingdom of House Aurel**. Its capital, **Aurelia**, rose in gold terraces up the southern sea-cliffs. The Aurels were builders and believers. Their court artificers, **the Gilders**, combined clockwork, alchemy and old Pokémon pacts into something close to science.
 
-The kingdom's last two decades were **the Blight Years**: crop-rot, a wasting plague and three failed harvests running. King **Theodric Aurel**, later called **the Gilded King**, tried to fix the world by force.
-- **First he tried to remake the land.** The Gilders woke Groudon beneath the Bone Sands and Kyogre off the western coast. The two titans nearly tore the continent in half before they were driven back to sleep. Ossaria's Unown records call this "the Year of Two Weathers". They met in Ossaria's western dunes, and the Dry Tide west of Duneholt is the seabed Kyogre's sea left there.
-- **Then he went higher.** The Gilders forged **the Gilded Chain**: eighteen golden locks, one for each Plate, around a **keystone cradle** shaped for the Legend Plate. They meant to summon Arceus and bind it to the throne. *"If heaven will not kneel, we'll build a chain."* — Theodric, as quoted in "The Gilded King".
+The kingdom's last two decades were **the Blight Years**: crop-rot, a wasting plague and three failed harvests running. King **Aurelius Aurel**, later called **the Gilded King**, did not pray to heaven for relief. He treated the blight as an insult to his crown.
+- **First he collared the world.** The Gilders woke Groudon beneath the Bone Sands and Kyogre off the western coast, to carve fresh seas and fertile soil by decree. The two titans nearly tore the continent in half rather than plow his fields, and he drove them back to sleep. Ossaria's Unown records call this "the Year of Two Weathers". They met in Ossaria's western dunes, and the Dry Tide west of Duneholt is the seabed Kyogre's sea left there.
+- **Then he turned his eyes higher.** The Gilders forged **the Gilded Chain**: eighteen golden locks, one for each Plate, around a **keystone cradle** shaped for the Legend Plate. They meant to summon Arceus and bind it to the Sun Court's throne.
+  - *"The heavens hung their light above my kingdom without asking leave, and then let rot touch my granaries. If heaven will not kneel, we'll build a chain."* — King Aurelius, as preserved in Ansel Crewe's banned play "The Gilded King".
 
-Theodric was not a monster. His people were starving, and he loved them. That is the point, and it is why Voss can quote him without irony.
+Aurelius was neither a madman nor a penitent. His people were starving, and he loved Aurelia, the way a king loves the finest thing mortal hands ever made: as *his*. He would not watch his jewel starve under an indifferent sky. That grandeur and that arrogance are why Voss can quote him three hundred years later without seeing how small his own imitation looks beside the original. (Voss's given name, Aurelian, means "heir of Aurelius": 09 #8.)
 
 ### AF 0: the Prismfall
 At midsummer, in the Sun Court of Aurelia, the Gilders performed the Calling. Arceus descended, and the Chain closed. For one heartbeat the god was bound.
@@ -38,7 +39,7 @@ Then Arceus did the only thing a god can do that a chain cannot hold: **it broke
 Survivors gathered around the fallen Plates because the Plates kept them alive. Fire that never went out. Water that never froze. Fields that bloomed in a week. Cities grew around each **Imprint**. Families who kept the Plates safe from raiders became the first **Wardens**.
 
 ### AF 4: the Concordance
-Theodric's daughter **Princess Maren Aurel** had opposed the Calling and survived the Fall. She pulled the largest surviving shard of the Legend Plate from the wreck of the keystone cradle. She renounced her house, took the name **Maren Ilse**, and climbed the high caldera at the center of the continent, where all eighteen Imprints can be seen glowing on a clear night.
+Aurelius's daughter **Princess Maren Aurel** had opposed the Calling and survived the Fall. She pulled the largest surviving shard of the Legend Plate from the wreck of the keystone cradle. She renounced her house, took the name **Maren Ilse**, and climbed the high caldera at the center of the continent, where all eighteen Imprints can be seen glowing on a clear night.
 
 There she gathered the eighteen Plate-keeping families and the war-chiefs of the provinces that would become the kingdoms. Together they signed **the Concordance**, founding **the Accord**. The caldera city became **Crownhaven**.
 

@@ -239,7 +239,7 @@ Warden with no seat (Dorian first, then Tamsin, Rook, Odessa, Ilsa, Nyx, Corvin)
 | **Final** (96), live on Day 7 | 0 | **Valen, the Last Tuning** | Ruin Route | — |
 | | 1 | **Brann** | Valen collapsed | "He asked me to. Last thing he asked." |
 | | fallback | **Valen** | — | Zygarde |
-| **Hijack** (100), live | 0 / 1 / fallback | **Theodric** (Ruin) / **Quent** (Voss discredited) / **Voss** | — | — |
+| **Hijack** (100), live | 0 / 1 / fallback | **Aurelius** (Ruin) / **Quent** (Voss discredited) / **Voss** | — | — |
 | **True Finale** (100) | — | **Arceus** variant | Judgment > Gilded > War > Miscalibrated > Bound | §6.2 |
 
 **Functions moved off the retired outsiders:** the Return confirmation is **Celestine's**, and it's an oath because she cannot lie ("Give them back.
@@ -252,7 +252,7 @@ Twenty-three times."
 1. **At least one / at most one.** Every list ends in an unconditional fallback who is *always seated* (Juno, Celestine, Kestrel, Valen; Voss), and the
    resolver stops at the first match.
 2. **No duplicates.** Persons per stage are disjoint: R16 {Marisol, Anja, Rowan, Juno}; QF {Dask, Sigrun, Kaito, Ysolde, Odessa, Celestine}; SF
-   {Kestrel}; Final {Valen, Brann}; Hijack {Theodric, Quent, Voss}. Core's validator enforces it.
+   {Kestrel}; Final {Valen, Brann}; Hijack {Aurelius, Quent, Voss}. Core's validator enforces it.
 3. **Only seated people are drawn.** Candidates whose seat depends on choices (Marisol, Anja, Odessa) carry `seated()` in their condition; Kaito,
    Ysolde and Sigrun are always seated; Rowan and Dask enter by replacing the default; Brann's stand-in is live and needs no seat.
 4. **Fifteen seats always fill.** Each seat ends in an unconditional candidate or a forfeit drawn from a pool of seven for at most three forfeits.
@@ -275,7 +275,7 @@ rule plus 2–4 key moments each). Order: a drawn path opponent wins until they 
 | "The honest one" (chased Sable, exposed Anja and Magnus) | **Marisol** | Celestine | Kestrel | Valen | **Quent** | Bound |
 | "Isenmar's sword" (backed Isenmar, occupation) | Juno | **Sigrun** | Kestrel | Valen | Voss | Bound → *Unfinished* at best |
 | "Meridian's friend" (telemetry left, oath Keep, cold audience) | Juno | **Kaito** | **Kestrel (Fallen)**, for Meridian | **Brann** | Voss | **Gilded** |
-| "The Renegade" | Juno | **Dask** | Kestrel | **Valen, Last Tuning** | **Theodric** | **Judgment** |
+| "The Renegade" | Juno | **Dask** | Kestrel | **Valen, Last Tuning** | **Aurelius** | **Judgment** |
 
 ### 3.6 Displaced defaults, exhibitions, teams
 - **Displaced:** Marisol/Anja swap seats with Juno, and the QF Wardens swap with Celestine; the displaced one plays on as an NPC. Rowan takes Juno's
@@ -284,7 +284,7 @@ rule plus 2–4 key moments each). Order: a drawn path opponent wins until they 
   match** with Marisol (Teo saved, close), **Morwen's Echo** on the Night of Masques, and the **Eevee Octave** (all eight singers helped; `design/EEVEE_OCTAVE.md`). On the
   Ruin Route only the Octave plays.
 - **Teams:** NARRATIVE_KEYS §7. **19 new Festival teams** (Marisol 90, Anja 90, Rowan 90, Celestine 92, Sigrun 92, Kaito 92, Ysolde 92, Odessa 92,
-  Dask 92, Kestrel Fallen 90–92, Brann 96, Valen 1, Quent 99, Theodric 0, Dorian 90, Rook 90, Morwen 90) plus 4 Arceus configs. Revision 6 adds none:
+  Dask 92, Kestrel Fallen 90–92, Brann 96, Valen 1, Quent 99, Aurelius 0, Dorian 90, Rook 90, Morwen 90) plus 4 Arceus configs. Revision 6 adds none:
   the other delegates are NPC-only. Retired: Isaura 2, Drey 1, Mireille 2, Thorne 1, Bastian 90, Sigrun 96, and every cameo `FESTIVAL_*` team.
 
 ---
@@ -324,7 +324,7 @@ triggers, the foreshadowing that must be on screen first, and checkpoint placeme
 | V | 22 | Early Crown | betrayal (Valen's) | accept the crown the night before the Final |
 | V | 23 | His Hand | betrayal (Voss's) | take his hand at the hijack |
 | Ruin | R1 | Welcome, Behind | Ruin-only | accept Archseer Dask's offer to stay behind the Glass |
-| Ruin | R2 | Long Live the King | Ruin-only | kneel to Theodric |
+| Ruin | R2 | Long Live the King | Ruin-only | kneel to Aurelius |
 
 **The two new ones.**
 - **Weather (Ch11).** At step 4 of the Thaw, "the lake *breathes*". Anja, already running: "That's not a Pokémon, that's *weather*. Towers!" Prompt:
@@ -367,7 +367,7 @@ Hesper Vane's lighthouse mirror has one crack per game over found; at 23 the cra
 4. **What "I learned that here" means.** In every main-route ending Arceus says "I will not take what is not given. I learned that here." It's
    talking about Judgment. It came within one heartbeat of unmaking a kingdom, and chose to break instead. Homecoming works because the Wardens
    *give*, and the PC carries the shard in Harmony. The Ruin Route is the PC deciding nobody, god or Crown or company, should hold that power again.
-5. **The Gilded King is still alive, behind the glass.** Antumbra froze the Sun Court at the instant of the Calling. Theodric's reflection stands
+5. **The Gilded King is still alive, behind the glass.** Antumbra froze the Sun Court at the instant of the Calling. Aurelius's reflection stands
    in it mid-command, the reflected Chain in his hands. Voss has dreamed of him all his life.
 
 ### 5.3 Chapter outline (replaces the rest of Ch15 through Ch21)
@@ -380,7 +380,7 @@ Hesper Vane's lighthouse mirror has one crack per game over found; at 23 the cra
   reads differently: *expose* means you ruin him so nobody stops the build; *conscience* means you persuade him to build it "to break right".
   **Gym 15 (Ruin):** Magnus on `:FACTORY`, which becomes `:SCRAPYARD` on turn one: "You came here to break it. So did I, once."
 - **R3 "The Sun Court Below"** (Underveil, Gym 16; Aurelia). Nyx sides with the Renegade; her house kept the drowned truth for three hundred years
-  and she's tired of it. **Gym 16 (Ruin):** an illusion double battle where `:NEW_MOON` runs with Inverse matchups. In the Sun Court, Theodric's
+  and she's tired of it. **Gym 16 (Ruin):** an illusion double battle where `:NEW_MOON` runs with Inverse matchups. In the Sun Court, Aurelius's
   reflection fills the mirror-wall. Voss walks in, sees him, and falls to his knees: "He's alive. Behind the glass he's still alive." He leaves
   with the cradle, serving a dead king now.
 - **R4 "Midnight in Gloaming"** (Gym 17; Pecharunt; K7). Celestine tells the PC the verse of none, and refuses the badge. **Gym 17 (Ruin):** `:FAIRY_TALE`
@@ -395,8 +395,8 @@ Hesper Vane's lighthouse mirror has one crack per game over found; at 23 the cra
   one more time. I'll die doing it. That's still better than you."). No exhibitions. Ilsa, earmuffs off: "You're thinking very loudly. Twenty-three times."
   At the Night of Masques, the actor playing the Gilded King freezes mid-line, because the mirror behind the stage is showing the real one.
 - **R7 "Every Type and None"** (the finale). At the Coronation the Engine wakes, but the hand that reaches up through the arena's crystal walls
-  isn't only Voss's: **Theodric's reflection** steps through wearing the Chain. Voss kneels (kneel with him: `GO_R_KNEEL`). When Theodric casts him
-  aside, `:ruin_voss`: *spare* him or *abandon* him to the Chain. **Hijack: Theodric.** Then Arceus descends, not dragged but *coming*, to finish what
+  isn't only Voss's: **Aurelius's reflection** steps through wearing the Chain. Voss kneels (kneel with him: `GO_R_KNEEL`). When Aurelius casts him
+  aside, `:ruin_voss`: *spare* him or *abandon* him to the Chain. **Hijack: Aurelius.** Then Arceus descends, not dragged but *coming*, to finish what
   it began. **True Finale: Arceus (Judgment)**, seven bars, Giratina at the PC's side (player side of two), the last bar on `:INVERSE` as Giratina
   turns the arena inside out. Valen holds the Ring one last time, to keep the crowd alive while god and Renegade fight. Then the Unmaking.
 
@@ -419,7 +419,7 @@ Hesper Vane's lighthouse mirror has one crack per game over found; at 23 the cra
 ### 5.5 Why it's worth playing
 It answers the three questions the main route leaves open (what Antumbra is, why the Ledger remembers, what Arceus meant by "I learned that
 here"), and once you know them, Homecoming reads differently: it was one consenting Warden away from the end of the world. It adds four
-re-fought gyms, a new Festival bracket (Dask, Valen of the Last Tuning, Theodric), the only scenes where the Gilded King speaks, Giratina as an
+re-fought gyms, a new Festival bracket (Dask, Valen of the Last Tuning, Aurelius), the only scenes where the Gilded King speaks, Giratina as an
 ally, Mirrorwalk maps, two endings, and two more graves for completionists.
 
 ---

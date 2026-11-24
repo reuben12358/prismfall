@@ -80,7 +80,7 @@ Switch S270 PG_LEGENDS_BOARD_OPEN = ON. V143 = 1.
 |---|---|
 | **T2-1 The Eleven Bleed Rifts** (`PG_UBS`) | Giratina's wound (Ch15) is still open. The rifts are where other worlds leak through. Ysolde: "The Glass is mending. Slowly. Things are getting through while it does." |
 | **T2-2 Guardians of the Shardfall** (`PG_TAPUS`) | Shardfall Isles (905): the quarantine's first islands. Edda's ferry runs there now. |
-| **T2-3 The Four Cursed Stakes of Theodric** (`PG_RUIN_QUARTET`) | The Gilded King's four curses, buried in four kingdoms' shrines. Sahar and Celestine. |
+| **T2-3 The Four Cursed Stakes of Aurelius** (`PG_RUIN_QUARTET`) | The Gilded King's four curses, buried in four kingdoms' shrines. Sahar and Celestine. |
 | **T2-4 Prism Echoes** (`PG_PARADOX`) | Shardfall's deep crater, where the Bleed made echoes of the past and the future. |
 | **T2-5 Crown of the Hoarwood** (`PG_CALYREX`) | Anja and Ysolde's winter legend. |
 

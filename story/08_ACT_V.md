@@ -314,7 +314,7 @@ See Chapter 21.
 
 **Hijacker variants** (NS §3.2):
 - **Dr. Quent** (Voss discredited: `MAGNUS_EXPOSED` plus Rook's leak plus the Night of Masques). The board removed Voss in disgrace before Day 7. Quent giggles in the harness, with Voss's Silvally team. Voss watches from the gallery, appalled at his own machine in someone else's hands.
-- **Ruin Route:** Theodric, the Gilded Reflection (`story/12_RUIN_ROUTE.md`, R7).
+- **Ruin Route:** Aurelius, the Gilded Reflection (`story/12_RUIN_ROUTE.md`, R7).
 
 **His hand.** Larch has warned the PC that morning: "Don't let him make you a part. He's very good at parts." Voss offers his hand: "Stand up. Stand with me. It doesn't have to hurt."
 - **With `VOSS_ACCEPTED`** (`:ch21_hand`):

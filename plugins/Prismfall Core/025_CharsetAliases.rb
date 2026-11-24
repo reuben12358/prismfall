@@ -27,7 +27,10 @@ module Prismfall
     "Mourner" => "MOURNER",
     # Art Drop 13
     "Vesper" => "VESPER", "Thistle" => "THISTLE", "Marchetti" => "MARCHETTI", "Helene" => "MARCHETTI",
-    "Quent" => "QUENT", "Percival" => "QUENT", "Kroll" => "KROLL", "Sabine" => "KROLL", "Sable" => "SABLE"
+    "Quent" => "QUENT", "Percival" => "QUENT", "Kroll" => "KROLL", "Sabine" => "KROLL", "Sable" => "SABLE",
+    # The Gilded King (Path B rename, 2026-11-23): "Aurelius" never matches Voss's "Aurelian" (whole words). Not bare
+    # "Gilded King": the Night of Masques actor who plays him would get the real King's sprite.
+    "Aurelius" => "THEODRIC", "Theodric" => "THEODRIC"
   }
 
   def self.charset_alias(name, event_name = nil)

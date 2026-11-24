@@ -14,7 +14,7 @@ As in the earlier scripts. The whole cast is on screen. **There are no jokes any
 | Battle | How it runs |
 |---|---|
 | The Final | `Prismfall::Festival.next_match` (stage `:FINAL`, cap 96). Valen, or his successor if `VALEN_COLLAPSED`. |
-| The Hijack | `Prismfall::Festival.next_match` (stage `:HIJACK`, cap 100). Voss, Quent if `VOSS_DISCREDITED`, or Theodric on the Ruin Route. |
+| The Hijack | `Prismfall::Festival.next_match` (stage `:HIJACK`, cap 100). Voss, Quent if `VOSS_DISCREDITED`, or Aurelius on the Ruin Route. |
 | The True Finale | `Prismfall::Festival.next_match` (stage `:ARCEUS`, cap 100). The variant comes from `Prismfall::Festival::Draw.arceus_variant`. |
 | The tag battle | Outside the stages: `pbRegisterPartner` + `TrainerBattle.start` at the "Ch21 tag foes v21" versions. |
 
@@ -107,7 +107,7 @@ V142 = 2.
   (Not Voss. Doctor Quent, in Voss's harness, giggling. In the gallery, Voss on his feet, white-faced, watching his own machine in someone else's hands.)
   [portrait: QUENT, happy] Oh, the *readings*. Oh, he never let me drive.
 [if ruin_route]
-  → 12_RUIN_ROUTE R7 (Theodric, the Gilded Reflection).
+  → 12_RUIN_ROUTE R7 (Aurelius, the Gilded Reflection).
 ```
 **His hand:**
 ```

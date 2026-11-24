@@ -38,7 +38,8 @@
 - [ ] Ch16 engine pieces: Wenlow's interlude charset and loadout (V119 = 4); the `GO_OVERTIME` timed prompts (3 s each, defaulting to Go); the night-shift foreman patrols on 403 (reuse the Gym 16 sight cones).
 - [ ] Ogerpon into Juno's J4 team when `OGERPON_TRUSTED` (a load hook).
 - [ ] Aurelia 824–826 `:WATER_SURFACE` overrides for Amaria and Titania.
-- [ ] Ruin Route Inverse overlays: Nyx, Celestine, Theodric.
+- [ ] Ruin Route Inverse overlays: Nyx, Celestine, Aurelius.
+- [x] **Gilded King rename + rework** (Gemini 2026-11-23, Path B "Aurelius", Option 1: ids/art stay GILDED_THEODRIC / THEODRIC): text across story/design/tools, `[GILDED_THEODRIC,Aurelius]` with the treasury nicknames and new LoseText, Festival display "Gilded King Aurelius", the R3 / R6 / R7 scenes (`story/42_SCRIPT_RUIN_KING.md`), mid-battle barks (Z-Power 006), and the wiring: VS_IDS + THEMES (THEODRIC gold; TEO, WICK, ROWAN, MORWEN, DASK, VENAM), Portrait CAST (THEODRIC, VENAM, COLL) and the charset alias guard. 2026-11-23. Open: `mapgen/REQUESTS.md:1118` still says Theodric (another agent's uncommitted file); Reuben's BGM pick (Cosmic Air / Zoltraak / #133).
 - [ ] Ch11 harpooners at Lv 48–52.
 
 ## 4. Wednesday master audit

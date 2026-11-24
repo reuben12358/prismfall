@@ -318,8 +318,10 @@ The play, as a staged cutscene on the planks (actors as events; Celestine voices
 (In the way: Kaito, arms folded, his Lucario beside him. [if TEO_SAVED] Teo's strikers, in their work-coats, linking arms.)
 [portrait: KAITO, neutral] It's a play, Chancellor. Sit down. You might learn something.
 (The Wardguard doesn't push.)
-(On the planks, the actor playing the Gilded King raises a gold chain to the painted sky.)
-[name: The Gilded King (actor)] If heaven will not kneel, we'll build a chain.
+(On the planks, the actor playing the Gilded King, in crimson-lined velvet and a jagged pasteboard crown, steps to the apron and raises a prop chain of painted wood to the real sky.)
+[name: The Gilded King (actor)] You ask why I do not bow before the eighteen lights, my daughter? Look down at Aurelia! Look at our aqueducts, our towers, our bread!
+[name: The Gilded King (actor)] The sky hung its splendour above MY kingdom without asking leave, and when the blight came, heaven kept its hands folded!
+[name: The Gilded King (actor)] Let priests measure their gratitude in crumbs. A king does not beg for what stands beneath his sun. If heaven will not kneel, we'll build a chain.
 (Every head in the square turns to the Meridian box.)
 (In the box, Aurelian Voss stands up. He applauds. Alone. Warmly. For a long time.)
 [portrait: VOSS, happy] Bravo. They finally cast the king correctly.

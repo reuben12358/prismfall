@@ -158,7 +158,7 @@ stage default (`PLAYER_PATH = [:JUNO, :CELESTINE, :KESTREL, :VALEN]`) is the fal
 - **R16, QF, SF** are drawn at start. A seated opponent **swaps** into the player's block and the displaced entrant plays on as an NPC.
   An unseated one (Rowan, Dask) replaces the default, who **withdraws**; that counts as out.
 - **The Final is `:live`**: it's drawn when its battle starts on Day 7. Brann stands in for a collapsed Valen without reseating anyone.
-- **The Hijack** is drawn live (Voss, Quent or Theodric).
+- **The Hijack** is drawn live (Voss, Quent or Aurelius).
 
 `Festival.drawn(:STAGE)` and `drawn(:STAGE)` return the locked entrant. `Festival.arceus_variant` returns the matching `ARCEUS_VARIANTS`
 entry for Prismfall Bosses. Opponents the player meets go to the Ledger `met` list. Validation covers seats, forfeits, match rules and

@@ -1231,11 +1231,12 @@ MOVE: Dorian unlocks a drawer, takes out a yellowed page and holds it a moment t
 [name: Dorian] Ansel Crewe wrote this in AF 52. A play called "The Gilded King". They hanged him for it, and burned every copy but one.
 [portrait: DORIAN, sad] I've never staged it. I'm a coward with excellent diction.
 [portrait: DORIAN, neutral] This is the prologue. Take it. If anyone asks, you found it in a costume. Everything in this building is in a costume.
-(Received: GILDED KING PROLOGUE. Key Item. "A yellowed page in an old hand. One line is underlined twice: 'If heaven will not kneel, we'll build a chain.'")
+(Received: GILDED KING PROLOGUE. Key Item. "A yellowed playbill page in Ansel Crewe's slanted ink, dated AF 52. 'PROLOGUE, SPOKEN BEFORE THE GOLD CURTAIN: Three harvests rotted under a quiet sky. The priests said kneel. The Gilded King laughed until the bells cracked. "My terraces do not beg rain from an absentee roof," said he. "If heaven will not kneel, we'll build a chain."' The last line is underlined twice.")
 > Why give it to me?
   [portrait: DORIAN, neutral] Because he looked at you. Out of a whole theater, he looked at you. I've been looked at by audiences for forty years, darling. I know when someone's found the person they came for.
 > Who was the Gilded King?
-  [portrait: DORIAN, deadpan] A king who wanted something very badly. That's all of them. Read it somewhere I'm not.
+  [portrait: DORIAN, deadpan] A king who looked up at the sky and decided it was trespassing on his skyline.
+  [portrait: DORIAN, neutral] Read it somewhere I'm not, darling. My neck is far too handsome for a rope.
 > ...
   [portrait: DORIAN, neutral] Yes. That's the right response to it. I've been giving it that response for thirty years.
 [portrait: DORIAN, neutral] Your next Warden is Tamsin Loom, up the Weavers' Road in Briarwick. She inherited the seat in spring and she hasn't slept since.

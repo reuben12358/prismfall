@@ -378,9 +378,9 @@ Promote the stub to the critical path: Sahar's foreman and three diggers escort-
 BATTLE: Prismfall::Bosses — :GROUDON_UNDERSANDS (multi-bar, 3 bars, Lv 66; Drought; :DESERT, harsh sun from bar 2).
 ```
 **Between bars (Sahar reads; story text, not dialogue boxes):**
-- Bar 1 → 2: *"In the King's ninth year the red one and the blue one were woken out of the deep and the sea."*
-- Bar 2 → 3: *"The King woke the red one and the blue one to remake the land. When they would not obey,"*
-- Bar 3 broken: *"...he turned his eyes to heaven."*
+- Bar 1 → 2: *"In the King's ninth year he summoned the red titan and the blue, saying: 'Remake my soil, beasts, or be broken.'"*
+- Bar 2 → 3: *"The land split and the sea boiled, and still the King did not step back from his balcony. When the titans would not obey,"*
+- Bar 3 broken: *"...he laughed, turned his eyes to heaven, and called for his goldsmiths."*
 ```
 (Groudon sags. The heat goes out of the chamber like a held breath going out of a chest.)
 (It looks at you: a long look, as if it recognises something, and doesn't like it, and doesn't blame you for it either.)
@@ -388,7 +388,7 @@ BATTLE: Prismfall::Bosses — :GROUDON_UNDERSANDS (multi-bar, 3 bars, Lv 66; Dro
 (Silence. Then, very far off, a sound you haven't heard in Duneholt: water. A trickle. Somewhere down in the dark, running the right way.)
 Switch S140 CH14_GROUDON_DONE = ON. Variable V109 DUNEHOLT_WELL = 2 (refilling). V135 = 12.
 ```
-*(LOSE: whiteout to 201; the boss restarts at bar 1. 09 #15: Theodric's Year of Two Weathers. "He turned his eyes to heaven" seeds Rayquaza and the Sky Pillar.)*
+*(LOSE: whiteout to 201; the boss restarts at bar 1. 09 #15: Aurelius's Year of Two Weathers. "He turned his eyes to heaven" (Gemini 2026-11-23 glyph wording) seeds Rayquaza and the Sky Pillar.)*
 ```
 (The well-head, an hour later. Duneholt has come out to look down it. A child drops a pebble. Everyone listens. A long way down: plink.)
 (The crowd makes a sound you'll remember.)

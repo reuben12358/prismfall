@@ -309,8 +309,9 @@ FIELD NOTES pop-up: "THE OSSUARY OF DUNES — CAVE. Unown in the walls. They are
 ```
 **The four murals** (one inspect event each, in the order the hall reaches them; Sahar comments on each)
 ```
-MURAL 1: A king in gold, on a throne under a sun, with his arms raised. Below him, his city: towers and domes and a harbour full of ships. His face has been scratched out, very carefully, by someone with a chisel and a lot of time.
+MURAL 1: A king in gold, on a throne under a sun, one hand raised as if weighing the sky itself. Below him, his city: towers and domes and a harbour full of ships. His face has been scratched out, very carefully, by someone with a chisel and a lot of time: all but the corner of a smile they missed.
 [portrait: SAHAR, neutral] A golden king. There's only one golden king in the old songs. Nobody sings that verse any more.
+[portrait: SAHAR, neutral] Look at the posture. He isn't praying. He's giving the sun an order.
 
 MURAL 2: Two titans tearing at the land: one red, rising out of the earth with fire in its back; one blue, rising out of the sea with the tide in its arms. Between them, the king's armies, very small, holding chains.
 [portrait: SAHAR, neutral] The Year of Two Weathers. The song says the sky and the earth went to war. This says somebody started it.

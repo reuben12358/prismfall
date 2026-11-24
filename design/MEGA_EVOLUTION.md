@@ -57,7 +57,7 @@ a Mega" rule gives way wherever the story gives the fighter no ring by then, and
   battle, on the player's side. K9 happens only if he never got it: no Mega.
 - **The PC's ring** is the odd one out (§4).
 - **No ring in the story, so no Mega:** listed in §6.3 (Rowan and the Mourner, Archseer Imre Dask, Morwen's Echo,
-  Theodric, the war officers). Sister-game cameo champions bring the rings of their own worlds (their Hard teams).
+  Aurelius, the war officers). Sister-game cameo champions bring the rings of their own worlds (their Hard teams).
 
 ### 1.3 Foreshadowing (09_MYSTERIES #1)
 The PC's ring was cut by Brann "ten years back" from the grind of the AF 290 reset (nobody says that part), the same
@@ -385,7 +385,7 @@ Standard and Hard only.
 | The Mourner (Ch9, 43) and Rowan at the Festival (R16, 90) | his Warden's ring went into the sealed testament before he first wore the mask, and to Juno with the seat. |
 | Archseer Imre Dask (Ruin QF, 92) | the Veiled Synod's Archseer is no Warden and has no Hearthguild ring. Rev 20's Hard-only Mega Sableye is gone too. |
 | Morwen's Echo (Exhibition, 90) | her ring is Morwen's Ring, in the PC's or Kestrel's hands by then; an echo has none. |
-| Theodric, the Gilded Reflection (Ruin hijack, 100) | a reflection of the Gilded King; the rings came three centuries after him. |
+| Aurelius, the Gilded Reflection (Ruin hijack, 100) | a reflection of the Gilded King; the rings came three centuries after him. |
 | The war officers (Ch19, 84): Ashkaar's and Isenmar's captains | soldiers of the two kingdoms, not Accord officers; the story gives them no rings. |
 | Juno J7, the war partners (Sigrun, Marisol) | on the player's side: the side's one Mega is the player's. |
 | Quent at the Ch16 tag, Rook at the Pageant Bout | they share a side with Marchetti / Dorian, whose Mega is the pair's one. |

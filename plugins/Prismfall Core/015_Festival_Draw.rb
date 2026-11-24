@@ -44,7 +44,7 @@ module Prismfall
         { :opponent => :BRANN,      :condition => "flag(:VALEN_COLLAPSED)" }
       ],
       :HIJACK => [ # default :VOSS (drawn live)
-        { :opponent => :THEODRIC, :condition => "ruin_route" },
+        { :opponent => :THEODRIC, :condition => "ruin_route" },   # Gilded King Aurelius
         { :opponent => :QUENT,    :condition => "flag(:VOSS_DISCREDITED)" }
       ]
     }

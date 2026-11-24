@@ -89,7 +89,7 @@ Somewhere under your ribs, something answers it.
 - **The bone-carters** load their carts at the west gate under the white bone-banner. Their elder asks the one who can walk in the glass to bring out the dead their carts can't reach (optional, from their camp on the Dry Tide).
 - **War 2, `:war_convoy`:** Marisol's sledges are waiting in the bazaar. The caravan-mothers will lead them west to the Steamline's edge, and the PC walks them through.
 - **Duneholt Undersands** (783, `:DESERT`) opens.
-- **Boss battle: Groudon** (multi-bar), woken by the drills, in a chamber of Unown glyphs that record Theodric's "Year of Two Weathers".
+- **Boss battle: Groudon** (multi-bar), woken by the drills, in a chamber of Unown glyphs that record Aurelius's "Year of Two Weathers".
 - Sahar is with the PC, and she reads the glyphs mid-fight (story text between bars): *"The King woke the red one and the blue one to remake the land. When they would not obey, he turned his eyes to heaven."*
 - After the battle, Groudon sinks back into the earth. The aquifer starts, very slowly, to refill. This is the first good news in an act.
 - Sahar sits down in the dust and looks west: "The King woke the red one and the blue one. Someone's going to bring the blue one here again, you know. The sand remembers the sea. It doesn't want it back."
@@ -272,7 +272,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 **Aurelian Voss in the Sun Court.**
 1. A Meridian salvage team cuts in through the throne room's far wall, and **Voss** walks in among them in a pressure suit with his helmet off in an air-pocket. He's here to collect the cradle. He is delighted to see the PC.
 2. **The reveal, his way:**
-   > *"House Aurel. My family. We changed the name and kept the grudge. I was eight when my grandfather showed me Theodric's notebooks. I was twenty-two when I realized he was right about everything except the chain. Metal was the wrong material."*
+   > *"House Aurel. My family. We changed the name and kept the grudge. I was eight when my grandfather showed me Aurelius's notebooks. I was twenty-two when I realized he was right about everything except the chain. Metal was the wrong material."*
 3. He admits AF 290 plainly: "My array. My dials. I was trying to measure the convergence. I didn't know it would break the Crown. I was very sorry about the forty people. I was even sorrier when I understood what I'd learned."
 4. On the Lowlight: *"Twelve people. I've lost more to the Bleed in a quiet week. I made those twelve *mean* something."*
 5. His philosophy: "Gods are absentee landlords. Arceus dropped its furniture on our heads three hundred years ago and never came back. I'm not trying to become a god. I'm trying to make sure we never need one again."

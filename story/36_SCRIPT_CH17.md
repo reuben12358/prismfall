@@ -286,7 +286,7 @@ Switch S148 CH17_SHARD_NAMED = ON. V138 = 8.
 [portrait: VOSS, happy] (seeing you, lit up in eighteen colours, delighted) Oh, look at that. Oh, *look* at that. Ten years of telemetry and it's nothing to seeing it in person.
 [portrait: VOSS, neutral] You'll want the story. Everyone does, at the end. Let me tell it properly.
 [portrait: VOSS, neutral] House Aurel. My family. We changed the name and kept the grudge. When the Princess broke the chain, my ancestors were the King's engineers. We went up the cliffs with our tools and our notebooks and we waited.
-[portrait: VOSS, neutral] I was eight when my grandfather showed me Theodric's notebooks. I was twenty-two when I realised he was right about everything except the chain. Metal was the wrong material.
+[portrait: VOSS, neutral] I was eight when my grandfather showed me Aurelius's notebooks. I was twenty-two when I realised he was right about everything except the chain. Metal was the wrong material.
 [portrait: VOSS, neutral] AF 290. My array. My dials. I was trying to measure the convergence. I didn't know it would break the Crown. I was very sorry about the forty people.
 [portrait: VOSS, happy] I was even sorrier when I understood what I'd learned.
 [portrait: VOSS, neutral] The Lowlight? Twelve people. I've lost more to the Bleed in a quiet week. I made those twelve *mean* something.
@@ -334,7 +334,7 @@ Switch S147 CH17_AURELIA_DONE = ON. V138 = 10.
 *(The cradle is the Arbiter Engine's keystone cradle (Ch16's blueprints: "to be recovered from site AURELIA"). It's now Voss's.)*
 
 ## Optional: **"Deliverer"** (CAMEOS §6; after Gym 16, before leaving Underveil; Edda's divers' report)
-As in CAMEOS §6: a short underwater maze in the Drowned Spires' lower galleries. Amaria sits in a flooded Gilder hall singing to her Lapras; Titania paces the shallows above. Amaria: "This city isn't dead. It's *waiting*." *(A Ruin Route hint about Theodric's reflection.)* **Fight:** a double vs Amaria and Titania (Lv ~78, `:WATER_SURFACE`; aces Lapras "Deliverer" and Aegislash). After it, they go home through the Glass. *(Cameo teams per CAMEOS. Cameos are trainers, so the no-legendaries rule doesn't apply.)*
+As in CAMEOS §6: a short underwater maze in the Drowned Spires' lower galleries. Amaria sits in a flooded Gilder hall singing to her Lapras; Titania paces the shallows above. Amaria: "This city isn't dead. It's *waiting*." *(A Ruin Route hint about Aurelius's reflection.)* **Fight:** a double vs Amaria and Titania (Lv ~78, `:WATER_SURFACE`; aces Lapras "Deliverer" and Aegislash). After it, they go home through the Glass. *(Cameo teams per CAMEOS. Cameos are trainers, so the no-legendaries rule doesn't apply.)*
 
 ## Optional: **Ironbloom** (828, `:BLEED`)
 Rust that flowers: a flooded Gilder foundry where the iron has grown petals in the Bleed. Wild Pokémon at Lv 71–74. **Glassfall Sliver** at the heart of the biggest rust-flower. Trainer (Lv 73): a scientist cataloguing the flowers ("They're iron. They're also, measurably, alive. I've stopped writing 'impossible' in my notes. I just write 'Tuesday'.").

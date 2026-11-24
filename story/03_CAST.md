@@ -359,7 +359,7 @@ Lin, Amaria, Shelly, Alexandra, Venam, Shiv, Garret, Melia and Titania (and Nova
 
 ## HISTORICAL FIGURES
 
-- **King Theodric Aurel, "the Gilded King"** (d. AF 0): tried to bind Arceus to end a famine-plague in his kingdom.
+- **King Aurelius Aurel, "the Gilded King"** (d. AF 0; Ruin Route hijacker `[GILDED_THEODRIC,Aurelius]`, Lv 100 on `:PRISM_ARENA` running Inverse; art and portraits keep the THEODRIC file names): First Sovereign of drowned Aurelia and architect of the Gilded Chain. Imperious, proud and effortlessly theatrical: he tried to collar Arceus not out of pious terror but out of royal fury that heaven let blight touch *his* kingdom. Frozen behind Antumbra's Glass at the instant of the Calling, he survives on the Ruin Route as a grinning sovereign who despises counterfeits (his kneeling descendant Voss first of all) and respects only a mortal who looks a god in the eye without flinching. He calls the PC "mongrel" until Gilt falls, and never again. He never says Fate's names; his words are "my treasury", "the Chain", "counterfeit", "know your station". (Gemini rework 2026-11-23.)
 - **Princess, later Sovereign, Maren Aurel**, called "Maren Ilse" after renouncing her house (AF −19 to 61): founded the Accord and set the Legend shard in the Crown.
 - **Ansel Crewe** (executed AF 52): playwright of "The Gilded King".
 - **Sovereign Adela Wyndham** (d. AF 270): Valen's predecessor. She died months after her last Tuning.

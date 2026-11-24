@@ -111,7 +111,7 @@ module Prismfall
       :ch21_spare_voss        => { :values => [:shield, :let_judge], :once => true, :description => "Ch21: Arceus's Judgment strikes the hijacker (PC_SPARED_VOSS)" },
       :ch21_final             => { :values => [:return, :keep, :unmake, :concord, :borrowed], :once => true, :description => "Ch21: the final decision, spoken aloud" },
       # ---- Ruin Route
-      :ruin_voss              => { :values => [:spare, :abandon], :once => true, :description => "R4: Voss kneels to Theodric's reflection" },
+      :ruin_voss              => { :values => [:spare, :abandon], :once => true, :description => "R7: Voss kneels to Aurelius's reflection" },
       :ruin_walk              => { :values => [:me, :reflection], :once => true, :description => "R7: who walks out of the Glass" }
     }
 
@@ -412,7 +412,7 @@ module Prismfall
       :GO_R_WELCOME_BEHIND => { :title => "Welcome, Behind",   :hint => "Ruin. The Archseer's kindness.", :ruin_exempt => true,
                                 :epitaph => "You stayed behind the Glass. It remembers those who stay perfectly, and forgets them a little more each day." },
       :GO_R_KNEEL          => { :title => "Long Live the King", :hint => "Ruin. A king asks you to kneel.", :ruin_exempt => true,
-                                :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and starving, and Theodric finished his sentence." }
+                                :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and unrepentant, and King Aurelius finished his sentence." }
     }
 
     # Map-builder IDs -> canonical game-over IDs (design/MAPGEN.md).

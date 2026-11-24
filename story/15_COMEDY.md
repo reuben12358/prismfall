@@ -367,7 +367,7 @@ Larch · Juno · Kestrel · Voss · Valen · Rowan (plus masked Mourner: neutral
 - Marchetti · Quent (+smug, panic) · Kroll/Sable (+smug) · Calla (+panic, crying) · Hesper (+crying)
 - Dask · Thane Eirik · Dominar Hrothgar · Prince Caedmon (+smug) · Hollis (+smug, panic) · Envoy Okoro
 - Vesper · Pip (+smug) · Dex (+happy only needs two: happy, shocked) · Hierophant Ellery · Mother Gutter
-- Morwen (echo: neutral, sad, happy) · Ines (memory: neutral, happy, sad) · Theodric (reflection: neutral, angry, smug)
+- Morwen (echo: neutral, sad, happy) · Ines (memory: neutral, happy, sad) · Aurelius (reflection: neutral, angry, smug)
 - The Reflection (the PC's sprite, mirrored: neutral, sad, angry)
 
 **Generic:** Directorate Officer, Bereaved grunt, Linesman, Wardguard, Choir porter (neutral, angry, shocked, deadpan each).

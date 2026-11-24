@@ -35,10 +35,10 @@
 - **Beats:**
   1. Underveil after the Purge. **Nyx sides with the Renegade** without being asked: her house kept the drowned truth for three hundred years and she's tired of it. "You're going to end the secret-keeping business. I should be upset."
   2. **Gym 16 (Ruin):** the illusion double battle, with `:NEW_MOON` running Inverse matchups.
-  3. Aurelia by Mirrorwalk: the Sun Court's mirror-wall is a window. Behind the glass the court stands frozen at the instant of the Calling, and **Theodric's reflection** is in it mid-command, the reflected Chain in his hands. His eyes move. (First meeting with the route's hijacker.)
+  3. Aurelia by Mirrorwalk: the Sun Court's mirror-wall is a window. Behind the glass the court stands frozen at the instant of the Calling, and **Aurelius's reflection** is in it mid-command, the reflected Chain in his hands. His eyes move. (First meeting with the route's hijacker. Full scene: `42_SCRIPT_RUIN_KING.md` R3.)
   4. **Voss walks in**, sees him, and falls to his knees: "He's alive. Behind the glass he's still alive." He leaves with the cradle, serving a dead king now. The PC watches the most reasonable man in Velmora become a zealot in ten seconds.
 - **Game over hook:** `GO_THE_THRONE` is already in the Ledger, so the throne's armrests are closed fists now. Sitting does nothing. The Reflection: "We've done that one."
-- **Cliffhanger:** Theodric's reflection mouths one word at the PC through the glass: *"Finish."*
+- **Cliffhanger:** Aurelius's reflection mouths one word at the PC through the glass: *"Finish."*
 
 ## R4 — "Midnight in Gloaming" (Gym 17; Pecharunt; K7)
 - **Beats:**
@@ -65,7 +65,7 @@
   3. **R16: Juno.** "You'll make sure Verdance never gets an autumn." She fights to stop the PC, and cries the whole match.
   4. **QF: Archseer Dask** (met Ch13, Ch15, R1). He fights to *measure* the PC, on `:INVERSE`: "Behind, welcome. Welcome, behind. The Synod must know what it is letting through."
   5. **SF: Kestrel.** He tears the Gauntlet off to fight the PC as himself. If he has the ring: "She was nearest. I'm nearest now. Stop."
-  6. **Night of Masques:** the actor playing the Gilded King freezes mid-line, because the mirror behind the stage is showing the real one.
+  6. **Night of Masques:** the actor playing the Gilded King freezes mid-line, because the mirror behind the stage is showing the real one, and the real one reviews the play (`42_SCRIPT_RUIN_KING.md` R6).
   7. **Valen's audience** is three lines long. Valen: "I know what you are now. I'll hold them quiet one more time. I'll die doing it. That's still better than you."
   8. **Final: Valen, the Last Tuning.** He fights with the Crown on and the Plates lit behind him.
 - **No exhibitions** except the Eevee Octave (its gauntlet still needs all eight singers helped). Vesper hosts it without once looking at the PC, but Understudy's siblings do.
@@ -73,10 +73,10 @@
 
 ## R7 — "Every Type and None" (the finale)
 - **Beats:**
-  1. The Engine wakes, but the hand that reaches up through the arena's crystal walls isn't only Voss's. **Theodric's reflection** steps through wearing the Chain, and the Aureate court is visible behind him in every reflective surface in Crownhaven.
-  2. Voss kneels. Theodric invites the PC to kneel with him: **`GO_R_KNEEL`**.
-  3. Theodric casts Voss aside into the Chain. **CHOICE `:ruin_voss`:** *spare* him (the PC pulls him out; he lives, hollow) or *abandon* him.
-  4. **Hijack: Theodric, the Gilded Reflection.** His team is the Gilders' court: Golurk, Aegislash, Gholdengo-gold reflections of Wardens' aces, on `:PRISM_ARENA` running Inverse.
+  1. The Engine wakes, but the hand that reaches up through the arena's crystal walls isn't only Voss's. **Aurelius's reflection** steps through wearing the Chain, and the Aureate court is visible behind him in every reflective surface in Crownhaven.
+  2. Voss kneels. Aurelius invites the PC to kneel with him: **`GO_R_KNEEL`**.
+  3. Aurelius casts Voss aside into the Chain. **CHOICE `:ruin_voss`:** *spare* him (the PC pulls him out; he lives, hollow) or *abandon* him.
+  4. **Hijack: Gilded King Aurelius, the Gilded Reflection** (scene, challenge, barks and aftermath: `42_SCRIPT_RUIN_KING.md` R7). His team is the Gilders' court: Golurk, Aegislash, Gholdengo-gold reflections of Wardens' aces, on `:PRISM_ARENA` running Inverse.
   5. **Arceus descends**, not dragged but *coming*, to finish what it began in AF 0. Valen holds the Ring one last time, to keep the crowd alive while god and Renegade fight. No Warden releases anything; all eighteen locks hold.
   6. **True Finale: Arceus (Judgment)**, seven bars, with **Giratina at the PC's side**. The last bar is on `:INVERSE` as Giratina turns the arena inside out.
   7. **The Unmaking needs a vessel.** The *none* unmakes the Chain, the Plates, Judgment and finally the Glass, and whoever carries it goes with the Glass. The Reflection offers: "I've done this twenty-three times. Let me do it once on purpose."
@@ -90,5 +90,5 @@
 
 ## Requests to other teams
 - **World:** four Mirrorwalk Reverse maps (Zenith, Nadir, Elowen, Ashkaar) and the graves floor under 806.
-- **Balance:** the Reflection (mirror party), four Ruin gym teams, Dask (QF), Valen (Last Tuning), Theodric, Arceus (Judgment), Nova.
+- **Balance:** the Reflection (mirror party), four Ruin gym teams, Dask (QF), Valen (Last Tuning), Aurelius, Arceus (Judgment), Nova.
 - **Cutscenes:** the WAR-1 Ruin variant (shots 10–12).

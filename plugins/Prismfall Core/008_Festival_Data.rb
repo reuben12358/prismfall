@@ -58,7 +58,7 @@ module Prismfall
       :KESTREL_FALLEN => { :display => "Kestrel", :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },
       :VALEN_RUIN=> { :display => "Valen",     :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
       :QUENT     => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT,   :name => "Percival",  :version => 99, :rating => 97, :level_hint => 100 },
-      :THEODRIC  => { :display => "Theodric",  :trainer_type => :GILDED_THEODRIC,  :name => "Theodric",  :version => 0, :rating => 99, :level_hint => 100 },
+      :THEODRIC  => { :display => "Gilded King Aurelius", :trainer_type => :GILDED_THEODRIC, :name => "Aurelius",  :version => 0, :rating => 99, :level_hint => 100 },
       :MORWEN       => { :display => "Morwen", :trainer_type => :ECHO_MORWEN, :name => "Morwen", :version => 90, :exhibition => true, :rating => 0 },
       :PAGEANT_BOUT => { :display => "Dorian & Rook", :double => true, :trainer_type => [:LEADER_DORIAN, :LEADER_ROOK], :name => ["Dorian", "Rook"],
                          :version => 90, :exhibition => true, :rating => 0 },

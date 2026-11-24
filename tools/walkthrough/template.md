@@ -3276,7 +3276,7 @@ _None this chapter._
 
 1. **The Final: Valen Corrigan** ("Come on, then. Show me there's another door."). His crystal spreads from shoulder to throat each time the field cycles. If `VALEN_COLLAPSED`, you fight his successor instead: **Sigrun** (Bond ≥ 5) or **Brann**, in tears ("He asked me to. Last thing he asked."). "Velmora has a new champion."
 2. **The Coronation.** ⚑ **`:ch21_crown`**: *kneel* / *stand* / *step back* (flavour the endings may read). The eighteen Plates *scream*.
-3. **The hijack** (above). The hijacker is **Voss**, or **Dr Quent** if Voss was discredited (`MAGNUS_EXPOSED` + Rook's leak + the Night of Masques), or Theodric on the Ruin Route.
+3. **The hijack** (above). The hijacker is **Voss**, or **Dr Quent** if Voss was discredited (`MAGNUS_EXPOSED` + Rook's leak + the Night of Masques), or Aurelius on the Ruin Route.
 4. **His hand** (Larch warned you that morning: "Don't let him make you a part."). ⚑ **`:ch21_hand`** with `VOSS_ACCEPTED`: *take* it (**Concord Dawn** begins here; Arceus is never fought) / *refuse* ("You promised."). Without it, ☠ **`GO_HIS_HAND` "His Hand"**: take his hand.
 5. **The allies move** (one line each, only if earned: Larch's eleven lamps): Rook cuts Lumen's grid (`ROOK_CUTS_GRID`); Nyx blacks out Meridian's comms (surgical with her bargain); Magnus disables the governor (`MAGNUS_KEPT_FAITH`); Marchetti stands the Directorate down (`MARCHETTI_TURNED`); Larch reads the miscalibration (`TELEMETRY_SABOTAGED`); Calla's schematics (one lamp or two); Sigrun and Reshiram hold the sky (with the Ashkaar legions if `DOMINAR_SWAYED`); Marisol's fleet and Edda evacuate Lower Crownhaven; Tamsin's silk nets catch the debris; the Lantern Hollow guard the pylons (`LANTERN_HOLDS`); Kaito holds the gate.
 6. **Tag battle** on the cracking arena floor: you + **Kestrel** (Redeemed) or **Juno** (J7) vs two of Marchetti, Quent and Kroll (whichever aren't turned, dead or hijacking).
@@ -3387,10 +3387,10 @@ Every game over is a deliberate choice, warned at least once on screen in the sa
 | 22 | 20 | Early Crown | accept the Crown the night before the Final |
 | 23 | 21 | His Hand | take his hand at the hijack |
 | R1 | Ruin | Welcome, Behind | accept Dask's offer to stay behind the Glass |
-| R2 | Ruin | Long Live the King | kneel to Theodric |
+| R2 | Ruin | Long Live the King | kneel to Aurelius |
 
 
 ## The Ruin Route
 
-With all 23 game overs in the Ledger (`ruin_unlocked`), the black pane in Giratina's Reverse Depths (Ch15) offers *Look back?* once more, and *Yes* walks you into the Ruin Route ("Every Type and None", `story/12_RUIN_ROUTE.md`): it replaces the rest of Ch15 through Ch21, with the Ferrymen's Mile, Archseer Dask in the quarterfinal, Valen's Last Tuning in the final, Theodric the Gilded Reflection as the hijacker, and Arceus's Judgment variant. This walkthrough doesn't cover it chapter by chapter yet.
+With all 23 game overs in the Ledger (`ruin_unlocked`), the black pane in Giratina's Reverse Depths (Ch15) offers *Look back?* once more, and *Yes* walks you into the Ruin Route ("Every Type and None", `story/12_RUIN_ROUTE.md`): it replaces the rest of Ch15 through Ch21, with the Ferrymen's Mile, Archseer Dask in the quarterfinal, Valen's Last Tuning in the final, Aurelius the Gilded Reflection as the hijacker, and Arceus's Judgment variant. This walkthrough doesn't cover it chapter by chapter yet.
 

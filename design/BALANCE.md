@@ -214,7 +214,7 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
   | `LEADER_SIGRUN,Sigrun,92` / `LEADER_ODESSA,Odessa,92` | QF draws: gym teams, promoted sets, 88–92 |
   | `CHAMPION_VALEN,Valen,1` (Last Tuning) | v0 with promoted sets; **Zygarde Form 2 (Complete)** from the start |
   | `MERIDIAN_QUENT,Percival,99` | Bronzong (TR), Metagross, Jirachi, Porygon-Z, Magnezone, Silvally "NULL" (same field hook as Voss) |
-  | `GILDED_THEODRIC,Theodric,0` | Golurk, Aegislash, Kyogre, Groudon, Regigigas, **Gholdengo "Gilt"** (100) |
+  | `GILDED_THEODRIC,Aurelius,0` | Golurk, Aegislash, Kyogre, Groudon, Regigigas, **Gholdengo "Gilt"** (100) |
   | `ECHO_MORWEN,Morwen,90` | Spiritomb, Dusknoir, Jellicent, Houndstone, Gengar, Chandelure "Lantern" (no Mismagius) |
   | `RIVAL_JUNO,Juno,70/71/72` (J7) | Ch21 tag partner: Whimsicott, starter, Tsareena (95–97) |
   | `MERIDIAN_KROLL,Sabine,21`, `MERIDIAN_MARCHETTI,Helene,21`, `MERIDIAN_QUENT,Percival,21`, `MERIDIAN_DIRECTORATE,Captain,21` | Ch21 tag foes, 3 mons each, ace 97 |
@@ -284,7 +284,7 @@ too; NPCs need a story reason for a crystal and never hold a stone and a crystal
 it in place of a Mega only for the listed Z users.
 
 **Mega-less for story reasons** (no ring by then): the Mourner and Rowan, Kestrel before Morwen's Ring, Imre Dask,
-Morwen's Echo, Theodric, the war officers (MEGA_EVOLUTION.md §6.3).
+Morwen's Echo, Aurelius, the war officers (MEGA_EVOLUTION.md §6.3).
 
 **Win rates** (prepared team at the cap, no Mega on the player's side; `run_winrates.rb` cells G7M, G10M, M12M, K5M, G11M (renamed in round 4; G7, G10 ... are now the round-4 cells)
 with `PRISM_PREPARED=1`, 60 fights a cell; `PRISM_FOE_NOMEGA=1` is the same fight with the foe's ring taken away):
@@ -601,12 +601,12 @@ in the validator, so they need no row.
 
 ## Status
 
-- Wardens, rivals (K1–K9, J1–J4, J7), villains/admins (Thistle, Teo, Ch21 foes), Valen/Voss/Quent/Theodric/Morwen,
+- Wardens, rivals (K1–K9, J1–J4, J7), villains/admins (Thistle, Teo, Ch21 foes), Valen/Voss/Quent/Aurelius/Morwen,
   every Festival entry in NARRATIVE_KEYS §7 (Rev 5/6), the Ruin teams, the cameo sidequests and
   every route/gym trainer the built maps reference: **done, 0 validator errors** (`--maps maps_out/Data`: all resolve).
 - Not trainer data (specified in §7 for Prismfall Bosses): the Arceus configs, `GIRATINA_ORIGIN_TRIAL`, `KYOGRE_WEATHER`.
 - Rev 10 field re-tune: done for Wardens, rivals, Thistle, Teo, Valen, Voss, the Festival draws and the route trainers
-  (TRAINER_FIELD_PLAYBOOK.md). Not re-tuned: cameo sidequests, Quent, Theodric, the Ch21 tag foes.
+  (TRAINER_FIELD_PLAYBOOK.md). Not re-tuned: cameo sidequests, Quent, Aurelius, the Ch21 tag foes.
 - Story teams: the Mourner, Wick, Sable, Marchetti 0–2, Quent 0–2, Kroll 0–1 all exist (round 2). Ashe has no story
   battle in the script (no team needed until one is written).
 - **Eevee Octave (SPINE Rev 19), round 3: done in `gen.py`** (moved out of `pbs/trainers_trials.txt`). Lyra 0 (Eevee 17)

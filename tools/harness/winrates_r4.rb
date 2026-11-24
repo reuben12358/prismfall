@@ -511,6 +511,7 @@ module WR4
     h["Q17"] = story(:MERIDIAN_QUENT, "Percival", 2, 15, 75, :CAVE, "Ch17 Quent (Sun Court, Cave; Mega Metagross)")
     h["VALEN"] = story(:CHAMPION_VALEN, "Valen", 0, 18, 96, :PRISM_ARENA, "Final: Valen (Prism Arena; Mega Gallade)")
     h["VOSS"] = story(:MERIDIAN_VOSS, "Aurelian", 0, 18, 100, :PRISM_ARENA, "Hijack: Voss (Prism Arena; Mega Ampharos)")
+    h["KING"] = story(:GILDED_THEODRIC, "Aurelius", 0, 18, 100, :PRISM_ARENA, "Hijack (Ruin): Gilded King Aurelius (Prism Arena)")
     h["QH"] = story(:MERIDIAN_QUENT, "Percival", 99, 18, 100, :PRISM_ARENA, "Hijack: Quent (Prism Arena; Mega Metagross)")
     h
   end

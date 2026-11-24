@@ -37,7 +37,7 @@ event still wins.
 | K6, Hollow Cathedral | 60–62 | Hollow Cathedral | TRAINER_FIELDS (the event may flicker it to the Bleed) |
 | K7, Gloaming | 70–72 | Fairy Tale | TRAINER_FIELDS |
 | Festival bracket: J4, K8, K9, Marisol/Anja/Rowan 90, Celestine/Sigrun/Kaito/Ysolde/Odessa 92, Brann 96, Valen 0 and 1 | | Prism Arena | TRAINER_FIELDS (see the note below) |
-| Hijack: Voss, Quent 99, Theodric | | Prism Arena | Core Festival stage |
+| Hijack: Voss, Quent 99, Aurelius | | Prism Arena | Core Festival stage |
 | Ch21 tag foes (version 21) | | Prism Arena | TRAINER_FIELDS |
 | Dask (Ruin QF) | `ARCHSEER_DASK` 92 | Inverse | TRAINER_FIELDS |
 | Morwen's Echo | `ECHO_MORWEN` 90 | Hollow Cathedral | TRAINER_FIELDS |
@@ -417,7 +417,7 @@ the ascendant Plate (the Memory swap is Core's job, BALANCE.md §6).
 - **Ruin Magnus (version 1).** His lead Ferrothorn has Explosion: ×1.3 on the Factory, transform strike, and the
   Scrapyard the Ruin Route asks for. Klinklang can restart the line.
 - **Ruin Nyx, Celestine, Sigrun (version 1).** Promoted gym teams; leads Weavile, Tinkaton, Haxorus.
-- **Quent 99, Theodric, Ch21 tag foes, the Reflection.** Not re-tuned beyond what they inherit (see §7).
+- **Quent 99, Aurelius, Ch21 tag foes, the Reflection.** Not re-tuned beyond what they inherit (see §7).
 
 ## 6. Story teams added in Round 2
 
@@ -497,7 +497,7 @@ Clear Smog, Roar, Whirlwind or a Ghost type (Last Resort can't touch it) before 
   hold); Alexandra (Rimeholt's sunken town, open water) no Earthquake or Stealth Rock (both fail on Water Surface);
   Shelly's sidequest is after Gym 2 now (ace 21). Lin, Melia, Shiv, Titania, Nova reviewed, unchanged.
 - **Quent 99 (hijack)**: Heatproof Bronzong for the Flame Plate's turn; Magical Seed Magnezone.
-- **Theodric**: reviewed for the inverted chart (Fighting and Ghost hit what they couldn't before); Gholdengo moved
+- **Aurelius**: reviewed for the inverted chart (Fighting and Ghost hit what they couldn't before); Gholdengo moved
   from Choice Specs to Magical Seed + Nasty Plot (the chart flips under him, so he must change moves). Hard keeps Specs.
 - **Ch21 tag foes**: Protect on the frail hitters, Tailwind Corviknight, Heatproof Bronzong with Trick Room.
 - **Juno, Ever-Bloom** (SPINE Rev 12): the white Flabébé line is the bridal blossom — Floette "Everbloom" (J2 Hard),
