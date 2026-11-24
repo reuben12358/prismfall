@@ -10,8 +10,9 @@ metadata:
   MapPosition: [0, 11, 23]
   BattleBack: cave1
   DarkMap: true
-tone: [-14, -12, -2, 20]
-fog: {name: prismfall_cave, opacity: 44, blend: 1, zoom: 100, sx: 1, sy: 0}
+  SnapEdges: true
+tone: [-10, -8, 4, 16]
+fog: {name: prismfall_cave, opacity: 40, blend: 1, zoom: 100, sx: 1, sy: 0}
 gates:
 - name: the amber islet only over the drained lake
   from:

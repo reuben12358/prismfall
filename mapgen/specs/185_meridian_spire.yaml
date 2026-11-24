@@ -4,6 +4,7 @@ name: Meridian Spire - Lobby
 parent: 180
 metadata:
   MapPosition: [0, 16, 16]
+  SnapEdges: true
 bgm: Cedolan City
 raw: data/raw/185.npy
 tileset: 60

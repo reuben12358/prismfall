@@ -238,25 +238,72 @@ def events_545(m):
 
 def dress_545(m):
     p = 'S'
+    ST = __import__('cavekit').STAMPS
     m.put('cv_ladder', 7, 3)
     m.put('cv_pump', 7, 13)
-    for x, y in ((20, 24), (21, 24), (22, 24), (23, 24), (24, 24)): m.tile(P1('cv_rail_h'), x, y)
-    m.tile(P1('cv_rail_end'), 19, 24); m.tile(P1('cv_cart'), 23, 24)
-    for name, x, y in (('cv_frame', 30, 25), ('cv_saltblocks', 4, 25), ('cv_tools', 3, 7), ('wr_sacks', 12, 26),
-                       ('cv_post', 16, 25), ('cv_post', 34, 21), ('hb_barrels', 37, 19)):
-        L = __import__('cavekit').STAMPS[name]['layers']; w, h = len(L[0][0]), len(L[0])
+    # Coherent south-gallery salt-hauling rail siding (x=15..25, y=24; row 25 stays wide open all the way across!)
+    for x in range(16, 25):
+        m.tile(P1('cv_rail_h'), x, 24)
+    m.tile(P1('cv_rail_end'), 15, 24)
+    m.tile(P1('cv_rail_end'), 25, 24)
+    m.tile(P1('cv_cart_salt'), 18, 24)
+    m.tile(P1('cv_cart'), 22, 24)
+    # Timber frames, salt-harvest staging stacks, barrels, tools, and support posts
+    for name, x, y in (
+        ('cv_frame', 30, 25), ('cv_saltblocks', 4, 25), ('cv_saltblocks', 35, 24),
+        ('cv_tools', 3, 7), ('cv_tools', 9, 13), ('wr_sacks', 12, 26), ('wr_sacks', 3, 19),
+        ('cv_post', 16, 26), ('cv_post', 29, 25), ('cv_post', 34, 21), ('cv_post', 4, 12), ('cv_post', 10, 8),
+        ('hb_barrels', 37, 19), ('hb_barrels', 3, 4),
+    ):
+        L = ST[name]['layers']; w, h = len(L[0][0]), len(L[0])
         if m.free(x, y, w, h, on='.') and not any((xx, yy) in m.keep_clear for xx in range(x, x + w) for yy in range(y, y + h)):
             m.put(name, x, y)
-    m.solid_props(['cv_xsalt', 'cv_xsalt', p + '_rock0'], 10, seed=4)
-    for x, y in ((3, 18), (30, 12), (33, 16), (38, 22), (12, 5)):
-        if m.free(x, y, 1, 2, on='.') and (x, y + 1) not in m.keep_clear: m.put('cv_xrose2', x, y)
-    for x, y in ((2, 15), (6, 21), (33, 13), (25, 27), (36, 25), (13, 27)):        # cold-glow fungus by the brine
-        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear: m.over.append((2, x, y, P1('cv_fung0'))); m.taken[y, x] = True
-    # halite cubes and rose spires standing in the brine (solid; never on the causeway)
-    for x, y, n in ((14, 11, 'cv_xsalt'), (21, 19, 'cv_xsalt'), (26, 11, 'cv_xsalt'), (34, 20, 'cv_xsalt'), (17, 21, 'cv_xsalt'),
-                    (28, 19, 'cv_xsalt'), (12, 20, 'cv_xsalt')):
-        if m.cls[y, x] == 'w' and (x, y) not in m.causeway: m.over.append((2, x, y, P1(n)))
-    m.dress(10, seed=2)
+    # Miners' wall sconces along cavern cliff faces (warm subterranean illumination)
+    for x, y in ((4, 2), (10, 2), (5, 11), (13, 22), (22, 22), (31, 22), (36, 16)):
+        if m.inb(x, y) and m.cliff[y, x]:
+            m.over.append((2, x, y, P1('cv_walllamp')))
+    # Cavern-wall salt crystals & rock boulders
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0'], 16, seed=4)
+    # Tall crystalline spires framing the ladder chamber, pump bay, amber islet, and east workings
+    for name, x, y in (
+        ('cv_xrose2', 3, 17), ('cv_xblue2', 2, 13), ('cv_xrose2', 12, 5),
+        ('cv_xrose2', 30, 12), ('cv_xsea2', 33, 12), ('cv_xrose2', 33, 16),
+        ('cv_xblue2', 38, 22), ('cv_xsea2', 35, 18), ('cv_xrose2', 5, 26), ('cv_xblue2', 14, 26),
+    ):
+        if m.free(x, y, 1, 2, on='.') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
+            m.put(name, x, y)
+    # Bioluminescent cold-glow fungus hugging the brine shore & wet ledges
+    for x, y in ((2, 15), (6, 21), (9, 20), (33, 14), (31, 16), (25, 27), (36, 25), (13, 27), (8, 8), (35, 22)):
+        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
+            m.over.append((2, x, y, P1('cv_fung0'))); m.taken[y, x] = True
+    # Rich crystalline reef formations rising from the glowing salt lagoon (strictly NEVER on y=15 causeway!)
+    def lagoon_spire(name, x, y):
+        L = ST[name]['layers']; h = len(L[0])
+        if all(m.inb(x, y + dy) and m.cls[y + dy, x] == 'w' and (x, y + dy) not in m.causeway for dy in range(h)):
+            for dy in range(h):
+                for z in (1, 2):
+                    if L[z][dy][0]:
+                        m.over.append((z, x, y + dy, L[z][dy][0]))
+    for name, x, y in (
+        # North brine reefs (rows 9..12)
+        ('cv_xrose2', 14, 10), ('cv_xblue2', 19, 9), ('cv_xsea2', 25, 10), ('cv_xrose2', 28, 9),
+        ('cv_xsea2', 16, 11), ('cv_xblue2', 22, 11),
+        # South brine reefs (rows 17..21)
+        ('cv_xrose2', 14, 19), ('cv_xsea2', 19, 18), ('cv_xblue2', 24, 19), ('cv_xrose2', 28, 18),
+        ('cv_xblue2', 16, 20), ('cv_xsea2', 34, 19),
+    ):
+        lagoon_spire(name, x, y)
+    for x, y, n in (
+        # Halite cubes & low crystal clusters around the reef spires
+        (13, 11, 'cv_xsalt'), (15, 11, 'cv_xblue'), (18, 11, 'cv_xsalt'), (20, 10, 'cv_xsea'),
+        (21, 11, 'cv_xsalt'), (24, 11, 'cv_xblue'), (26, 11, 'cv_xsalt'), (27, 10, 'cv_xsea'),
+        (12, 20, 'cv_xsalt'), (13, 19, 'cv_xsea'), (15, 20, 'cv_xsalt'), (17, 21, 'cv_xblue'),
+        (20, 20, 'cv_xsalt'), (21, 19, 'cv_xsea'), (23, 21, 'cv_xsalt'), (25, 20, 'cv_xblue'),
+        (27, 20, 'cv_xsalt'), (29, 19, 'cv_xsea'), (33, 20, 'cv_xsalt'), (34, 18, 'cv_xblue'),
+    ):
+        if m.inb(x, y) and m.cls[y, x] == 'w' and (x, y) not in m.causeway:
+            m.over.append((1, x, y, P1(n)))
+    m.dress(12, seed=2)
 
 
 # ====================================================================================================== 564
@@ -382,8 +429,8 @@ def main(which):
         m = build_545(); events_545(m); dress_545(m); m.paint()
         m.preview('/tmp/mb13/p545.png', scale=0.5)
         head = {'id': 545, 'name': 'Brinecut Mine B1F', 'parent': 544, 'bgm': 'Cave', 'field': 'CAVE',
-                'metadata': {'Name': 'Brinecut Mine', 'MapPosition': [0, 11, 23], 'BattleBack': 'cave1', 'DarkMap': True},
-                'tone': [-14, -12, -2, 20], 'fog': {'name': 'prismfall_cave', 'opacity': 44, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0},
+                'metadata': {'Name': 'Brinecut Mine', 'MapPosition': [0, 11, 23], 'BattleBack': 'cave1', 'DarkMap': True, 'SnapEdges': True},
+                'tone': [-10, -8, 4, 16], 'fog': {'name': 'prismfall_cave', 'opacity': 40, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0},
                 'gates': [{'name': 'the amber islet only over the drained lake', 'from': [[7, 5]], 'sealed': [[32, 15], [31, 13]]}],
                 '_file': '545_brinecut_mine_b1f.yaml'}
         m.write(545, head, comment='# GENERATED by mapgen/layouts/caves.py (map builder 13): Brinecut Mine B1F, the salt lake (D4 combine).\n'

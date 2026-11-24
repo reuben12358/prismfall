@@ -141,88 +141,399 @@ def deepwood():
 RAVINE = (9, 10)                                               # 548's glass ravine rows (map builder 10)
 XING = {'a': 28, 'b': 10, 'c': 19}                              # D3 bridges: a NE cocoon-house, b NW Shard house, c the nest
 ANCHORS = ((8, 22), (16, 22), (24, 22))                         # D3 anchors 1-3 at the hamlet's south edge
-BRIDGE_TILE = 17743                                             # tileset 40: the Bleed pier deck (walkable over water)
+BRIDGE_TILE = 23057                                             # tileset 52: gd_ford_v (vertical crystal-silk bridge, pas=0, pri=0)
+
+
+def _fog_event_548(name, opacity=74, blend=1, zoom=200, sx=1, sy=1, hue=0):
+    return {'type': 'event', 'name': 'Atmosphere', 'at': [0, 0],
+            'pages': [{'trigger': 'parallel', 'commands': [
+                {'comment': 'fog: %s (see REQUESTS.md item 3)' % name},
+                {'raw': [204, [1, name, hue, opacity, blend, zoom, sx, sy]]},
+                {'selfswitch': ['A', True]}]},
+                {'cond': {'self': 'A'}}]}
 
 
 def hollow():
+    import random
+    import numpy as np
+    import rkit as K
+    from rkit import STAMPS, P1
+    from routekit import Route
+
     W, H = 38, 34
-    c = Wild(W, H, 548, base='a')
-    cx, cy = 19, 15
-    def hf(x, y):
-        r = math.hypot((x - cx) / 15.5, (y - cy) / 13.0) + 0.12 * (vnoise(x, y, 4, 3.0) - 0.5)
-        return 0 if r < 1.0 else 1
-    c.set_heights(hf)
+    VX = 4
+    cx, cy = 19, 16
+    NX, NY = 19, 5
+
+    # Crisp 3-row frosted Sheridan crater rim cliff (matching 522 Glassed Orchard)
+    if 'shs3' not in K.KITS:
+        K.KITS['shs3'] = dict(K.KITS['shs'], rows=[K.KITS['shs']['rows'][0],
+                                                   K.KITS['shs']['rows'][1],
+                                                   K.KITS['shs']['rows'][3]])
+
+    r = Route(548, W, H, theme='snow', kit='shs3', base='.')
+    m = r.m
+    m.grass = [[18442, 18443], [18444, 18445]]
+    m.tall = 18446
+    m.STAIRS = K.STAIRS_STONE
+    m.grass2 = None
+    m.auto['e'] = ('KristilineDirt', 'rejuvenation')
+    m.keep_under = 'de'
+    rng = random.Random(5482)
+
+    def in_living(x, y):
+        return (x <= 3 and 13 <= y <= 19) or (x == 4 and 14 <= y <= 18)
+
+    # ---- 1. Heightmap: dramatic frosted crater rim (ht=1) ringing the depressed hollow (ht=0) ----
     for y in range(H):
         for x in range(W):
-            if c.ht[y][x] == 1 and (y > 26 and 15 <= x <= 21): c.ht[y][x] = 0      # the south gap
-            if c.ht[y][x] == 1 and (x < 5 and 14 <= y <= 18): c.ht[y][x] = 0       # the west gap (Veil)
-    c.path([(0, 16), (6, 16), (12, 15), (cx, cy)], 2, 'D', 1, only='a')
-    c.path([(18, 33), (18, 26), (cx, cy + 3)], 2, 'D', 2, only='a')
-    c.cliffs(face=2)
-    for y in range(H):
-        for x in range(W):
-            if c.g[y][x] == 'C': c.g[y][x] = 'B'
-            elif c.ht[y][x] == 1 and c.g[y][x] in 'aD': c.g[y][x] = 'U'
-    # map builder 10 (REQUESTS 20; DUNGEON_PUZZLES D3): the glass ravine across the crater's north third.  The hamlet keeps
-    # the floor; the Matriarch's nest (N centre), the Shard house (NW) and the TM81 cocoon-house (NE) stand beyond it, and
-    # three 1-wide crystal-silk bridges cross it: a (NE, x 28), b (NW, x 10), c (centre, x 19), rows 9-10
-    NX, NY = cx, 5
+            rad = math.hypot((x - cx) / 15.2, (y - cy) / 13.0) + 0.08 * (vnoise(x, y, 5481, 3.2) - 0.5)
+            m.ht[y, x] = 0 if rad < 1.0 else 1
+
+    # Carve clean openings & flats:
+    # West living entry through the Bleed Veil (x <= 6, y in 13..19)
+    m.ht[13:20, 0:7] = 0
+    # South glass-choked road pocket (x in 16..20, y >= 27)
+    m.ht[26:34, 16:21] = 0
+    # North crater amphitheater shelves behind the ravine (rows 1..8, x 8..30):
+    # row 0 stays ht=1 so the 3-row frosted cliff face hangs cleanly on rows 1..3, leaving rows 4..8 flat & open
+    m.ht[0, :] = 1
+    m.ht[1:9, 8:31] = 0
+    # Guarantee full crater bowl across the ravine & anchor terrace
+    m.ht[9:13, 6:33] = 0
+    m.ht[13:25, 5:33] = 0
+    # Majority-clean single-cell height spurs so shs3 cliff walls stay crisp and unbroken
+    for _ in range(2):
+        hi = (m.ht == 1)
+        pad = np.pad(hi, 1, constant_values=True)
+        n4 = pad[:-2, 1:-1].astype(int) + pad[2:, 1:-1] + pad[1:-1, :-2] + pad[1:-1, 2:]
+        m.ht[hi & (n4 <= 1)] = 0
+        m.ht[~hi & (n4 >= 3)] = 1
+    # Re-assert sacred flat zones after smoothing
+    m.ht[0, :] = 1
+    m.ht[1:9, 8:31] = 0
+    m.ht[9:13, 6:33] = 0
+    m.ht[13:20, 0:7] = 0
+    m.ht[26:34, 16:21] = 0
+
+    # ---- 2. The Glass Ravine (rows 9..10 across the entire walkable crater width) ----
+    # Seals the north sanctum shelves from the south crater floor except across D3 bridges a (28), b (10), c (19).
     for y in RAVINE:
         for x in range(W):
-            if c.g[y][x] in 'aD' and c.ht[y][x] == 0: c.g[y][x] = 'w'
-    c.path([(cx, cy), (cx, RAVINE[-1] + 1)], 1, 'D', 6, only='a')
-    c.path([(cx, RAVINE[0] - 1), (NX, NY + 2)], 1, 'D', 7, only='a')
-    for bx, hx in ((XING['b'], 10), (XING['a'], 28)):
-        c.path([(bx, RAVINE[-1] + 1), (bx + (1 if bx < cx else -1) * 2, 13), (cx, cy)], 1, 'D', 8 + bx, only='a')
-        c.path([(bx, RAVINE[0] - 1), (hx, 7)], 1, 'D', 9 + bx, only='a')
-    west, south = (0, 16), (18, 33)
-    c.need(west, south, (cx, cy + 3))
-    c.keep_clear([(0, 15), (0, 16), (0, 17), (18, 33), (17, 33), (19, 33)] + [(x, y) for x in XING.values() for y in (RAVINE[0] - 1, RAVINE[-1] + 1)]
-                 + list(ANCHORS), 2)
-    P = {'matriarch': [NX, NY], 'house': c.spot(12, 6, 'aD', r=3, keep=False), 'tm': c.spot(26, 6, 'aD', r=3, keep=False), 'cocoons': c.spot(27, 22, 'a'),
-         'note': c.spot(cx + 2, cy + 2, 'aD')}
-    P['juno'] = c.spot(2, 14, 'aD', r=2); P['tamsin'] = c.spot(2, 18, 'aD', r=2)
-    c.keep_clear([tuple(P['house']), tuple(P['tm']), (NX, NY + 2), (NX - 1, NY + 2), (NX + 1, NY + 2)], 2)   # the north floor stays open
-    cy_ = cy; cy = NY                                           # the nest's dressing below sits at the nest
-    for dy in range(-1, 3):                                     # the nest
+            if m.ht[y, x] == 0:
+                m.cls[y, x] = 'w'
+    # Gentle organic ravine widening away from the 3 bridgeheads (never touching x in {9..11, 18..20, 27..29})
+    for x in range(6, 33):
+        if any(abs(x - bx) <= 1 for bx in XING.values()):
+            continue
+        if m.ht[11, x] == 0 and (x in (13, 14, 15, 23, 24, 25)):
+            m.cls[11, x] = 'w'
+        if m.ht[8, x] == 0 and (x in (15, 16, 22, 23)):
+            m.cls[8, x] = 'w'
+
+    # ---- 3. Paths & clearings ----
+    def lane(pts, width=1.9, cls='d'):
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            steps = max(abs(x1 - x0), abs(y1 - y0), 1) * 3
+            for i in range(steps + 1):
+                t = i / float(steps)
+                px = x0 + (x1 - x0) * t
+                py = y0 + (y1 - y0) * t
+                for yy in range(int(py) - 2, int(py) + 3):
+                    for xx in range(int(px) - 2, int(px) + 3):
+                        if not m.inb(xx, yy) or m.cls[yy, xx] == 'w' or m.ht[yy, xx] != 0:
+                            continue
+                        if (xx - px) ** 2 + (yy - py) ** 2 <= (width * 0.58) ** 2:
+                            m.cls[yy, xx] = cls
+                            r.road_mask[yy, xx] = True
+
+    # Living dirt path through the west gate right up to the Veil
+    for x in range(0, 5):
+        for y in (15, 16, 17):
+            m.cls[y, x] = 'e'
+            r.road_mask[y, x] = True
+    # Frosted crystal paths inside the hollow: Veil -> central clearing -> all 3 bridges, 3 anchors, cocoons, south way
+    lane([(5, 16), (11, 16), (19, 16)], width=2.2)
+    lane([(19, 16), (19, 11)], width=1.8)                       # to Bridge c
+    lane([(13, 16), (10, 14), (10, 11)], width=1.8)             # to Bridge b
+    lane([(19, 16), (25, 14), (28, 12), (28, 11)], width=1.8)   # to Bridge a
+    lane([(11, 16), (8, 20), (8, 22), (16, 22), (24, 22), (27, 22)], width=2.0)   # anchor terrace & cocoons
+    lane([(19, 16), (18, 22), (18, 28), (18, 32)], width=2.0)   # south glass-choked way
+    # North sanctum paths behind each bridge
+    lane([(10, 8), (10, 6), (13, 6)], width=1.7)                # NW cocooned cottage
+    lane([(19, 8), (19, 6)], width=1.9)                         # Center Matriarch nest
+    lane([(28, 8), (27, 6), (25, 6)], width=1.7)                # NE cocoon-house & TM81
+
+    # Keep living west entry cleanly on 'e'
+    for x in range(0, 5):
+        for y in (15, 16, 17):
+            m.cls[y, x] = 'e'
+
+    # ---- 4. Reserve ALL sacred event / puzzle / trial / bridge coordinates ----
+    P = {
+        'matriarch': [NX, NY],
+        'house': [13, 6],
+        'tm': [25, 6],
+        'cocoons': [27, 22],
+        'juno': [3, 15],
+        'tamsin': [3, 18],
+    }
+    must_keep = [
+        (0, 16), (1, 16), (2, 16), (3, 16), (4, 15), (4, 16), (4, 17), (4, 18), (5, 16),
+        (3, 15), (3, 18), (2, 15), (2, 18),
+        (18, 33), (18, 32), (18, 31),
+        (NX, NY), (NX, NY + 1), (NX, NY + 2), (NX - 1, NY + 2), (NX + 1, NY + 2), (NX, 8),
+        (13, 6), (12, 6), (11, 6), (10, 6), (10, 7), (10, 8),
+        (25, 6), (26, 6), (27, 6), (28, 6), (28, 7), (28, 8),
+        (27, 22), (26, 22), (26, 21), (25, 21), (25, 22),       # Glass cocoons + trial_overlay Humming cocoon (26,21)
+    ] + list(ANCHORS) + [(bx, y) for bx in XING.values() for y in (8, 11, 12)]
+    for x, y in must_keep:
+        r.road_mask[y, x] = True
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                xx, yy = x + dx, y + dy
+                if m.inb(xx, yy) and m.cls[yy, xx] != 'w':
+                    if (xx, yy) not in ((15, 6), (16, 6), (22, 6), (23, 6)):
+                        r.road_mask[yy, xx] = True
+
+    # ---- 5. Subtle frosted tall grass pockets on crater floor (for authentic Bleed encounters) ----
+    for cx_g, cy_g, rx, ry in ((11, 26, 3.0, 2.0), (26, 26, 3.0, 2.0), (13, 19, 2.6, 1.8), (25, 17, 2.8, 1.8)):
+        for y in range(max(12, int(cy_g - ry - 1)), min(H - 3, int(cy_g + ry + 2))):
+            for x in range(max(6, int(cx_g - rx - 1)), min(W - 4, int(cx_g + rx + 2))):
+                if m.cls[y, x] == '.' and m.ht[y, x] == 0 and not r.road_mask[y, x]:
+                    if ((x - cx_g) / rx) ** 2 + ((y - cy_g) / ry) ** 2 + 0.22 * (vnoise(x, y, 5489, 2.8) - 0.5) <= 1.0:
+                        m.cls[y, x] = 't'
+
+    # ---- 6. Paint base terrain (ground, water autotiles, frosted shs3 crater cliffs) ----
+    m.paint_ground()
+    m.autotiles()
+    m.cliffs()
+
+    # Subtle crystalline snow-drift variation across frosted crater floor & rim
+    for y in range(H):
+        for x in range(W):
+            if m.cls[y, x] == '.' and not in_living(x, y) and not m.cliff[y, x]:
+                if vnoise(x, y, 5485, 3.2) > 0.60:
+                    m.L[0, y, x] = 10395
+
+    # Living Sheridan green pocket west of the Bleed Veil (x <= 3, y in 13..19)
+    for y in range(12, 21):
+        for x in range(0, 5):
+            if in_living(x, y) or (x <= 3 and 12 <= y <= 20 and m.ht[y, x] == 0):
+                if m.cls[y, x] in '.t':
+                    m.L[0, y, x] = K.SH_GRASS[y & 1][x & 1]
+                    if not r.road_mask[y, x] and (x * 7 + y * 11) % 4 == 0:
+                        m.L[1, y, x] = K.DECOR_SH['flowers'][(x + y) % 4]
+                    elif not r.road_mask[y, x] and (x * 5 + y * 3) % 3 == 0:
+                        m.L[1, y, x] = K.DECOR_SH['green'][(x + y) % len(K.DECOR_SH['green'])]
+
+    # Glass-sheen sparkles & frozen shards gleaming on the Glass Ravine surface
+    for y in range(H):
+        for x in range(W):
+            if m.cls[y, x] == 'w' and (x * 7 + y * 13) % 7 == 0 and x not in XING.values():
+                m.L[2, y, x] = 25824 + ((x + y) % 3)
+
+    # ---- 7. North Sanctum Architecture: Cocooned Cottages, Matriarch's Nest, and D3 Shelf Dividers ----
+    # NW Cocooned Cottage (kf_flat 5x4 at (10, 2) -> front wall at y=5, door at (12,5), Cocooned house event at (13,6))
+    m.stamp('kf_flat', 10, 2)
+    # NE Cocoon-House (kf_flat 5x4 at (25, 2) -> aligned cleanly on the NE shelf, TM81 at (25,6) right in its yard!)
+    m.stamp('kf_flat', 25, 2)
+    # Drape silk webs & hanging cocoons over both cocooned cottages (Layer 2 overhead, pri=2)
+    m.over.append((2, 11, 4, 22751))
+    m.over.append((2, 28, 4, 22751))
+    for wx, wy in ((11, 2), (26, 2)):
+        st = STAMPS['pf_p_web']
+        for dy in range(st['h']):
+            for dx in range(st['w']):
+                t = st['layers'][2][dy][dx]
+                if t:
+                    m.over.append((2, wx + dx, wy + dy, t))
+
+    # Matriarch's Glass-Silk Nest at (19, 5): crystalline floor dais, green root-glow, flanking crystal obelisks & web canopy
+    for dy in range(-1, 3):
         for dx in range(-2, 3):
-            c.taken[cy + dy][cx + dx] = True
-    c.seal()
-    # the nest of glass silk; green light under the roots
-    for dx, dy, t in ((-2, 0, CU['web_nw']), (2, 0, CU['web_ne']), (-2, 2, CU['web_sw']), (2, 2, CU['web_se'])):
-        c.o[2][cy + dy][cx + dx] = t
-    for dx in (-1, 0, 1):
-        c.o[1][cy + 2][cx + dx] = 1338 + B if False else 8137
-        c.o[1][cy - 1][cx + dx] = 8153
-    c.o[1][cy + 1][cx - 1] = 8080; c.o[1][cy + 1][cx + 1] = 8081
-    cy = cy_
-    # crystal trees ringing the crater; glass thread strung between them like harp strings
-    ring = []
-    for k in range(18):
-        a = k / 18.0 * 2 * math.pi
-        x = int(round(cx + 11.5 * math.cos(a))) - 1; y = int(round(cy + 9.5 * math.sin(a))) - 2
-        if c.obj('crystal_tree', x, y, on='a'): ring.append((x, y))
-    for k in range(1, 9):
-        y = cy - 8 + k * 2
-        for x in range(cx - 10, cx + 11):
-            if c.inb(x, y) and c.walkable(x, y) and not c.o[2][y][x] and (x + k) % 5 != 0:
-                c.o[2][y][x] = CU['strand_h']
-    c.trees(['cry_violet', 'cry_blue', 'cry_teal', 'r_cry_big', 'r_cry_spray', 'cry_violet_m', 'cry_blue_m'], 14, on='a', seed=2)
-    c.trees(['cocoon', 'cocoon_big', 'cocoon_low', 'cocoon', 'cocoon_big'], 34, on='a', seed=3)
-    c.trees(['cry_violet_s', 'cry_blue_s', 'cry_teal_s', 'r_cry_s', 'r_cry_s2'], 24, on='a', seed=5)
-    c.overlay('web_big', NX - 1, NY - 2)
-    for x, y in ((8, 9), (27, 8), (9, 21), (26, 22), (14, 4)):
-        c.overlay('web_big', x, y)
-    c.trees(['dead1', 'dead2', 'log_grey', 'stump_grey', 'gstump_dark'], 6, on='a', seed=4, bleed=True)
-    c.scatter([([8136, 8137, 8144, 8145, 8152], 0.55, 2.4, 0.8)], [(8139, 3), (8146, 3), (8154, 2)], density=0.10, on='aD', seed=7)
-    c.scatter([([1164, 1172], 0.6, 3.0, 0.6)], [(1164, 4), (1189, 2)], density=0.15, on='a', bleed=True, seed=8)
-    for x in range(2, 7):
-        for y in range(13, 20):
-            if x == 4: c.o[2][y][x] = c.o[2][y][x] or CU['veil']
+            xx, yy = NX + dx, NY + dy
+            if m.inb(xx, yy) and not m.cliff[yy, xx]:
+                m.L[0, yy, xx] = 10395
+    m.stamp('cr_purple_t', 17, 4)
+    m.stamp('cr_teal_t', 21, 4)
+    m.stamp('cr_blue_c', 17, 6)
+    m.stamp('cr_pink_c', 21, 6)
+    m.stamp('pf_glow', NX - 1, NY)       # faint eerie glow under the roots beneath the Matriarch!
+    # Overhanging silk web arch framing the nest above the Matriarch (leaving (19, 5) crisp and readable)
+    st = STAMPS['pf_p_web']
+    for dy in range(st['h']):
+        for dx in range(st['w']):
+            t = st['layers'][2][dy][dx]
+            if t:
+                m.over.append((2, NX - 1 + dx, NY - 2 + dy, t))
+
+    # Solid crystal-spine dividers separating the 3 north shelves (enforces D3 anchor puzzle — zero row-4/6/8 bypass!)
+    # Every cell in x in (15,16,22,23), y in 3..8 gets a solid pas=15 base on Layer 1 so players can NEVER slip behind tall crystal tips or along cliff-foot row 3!
+    for sx, c_tid in ((15, P1('cr_purple_c')), (16, P1('cr_teal_c')), (22, P1('cr_teal_c')), (23, P1('cr_purple_c'))):
+        for sy in (3, 4, 6):
+            m.L[1, sy, sx] = c_tid
+            m.taken[sy, sx] = True
+    # Divider 1 (between NW Cocooned Cottage and Center Matriarch Nest): x = 15..16, y = 4..8
+    for nm, sx, sy in (('cr_purple_t', 15, 4), ('cr_teal_t', 16, 4),
+                       ('cr_teal_t', 15, 6), ('cr_purple_t', 16, 6),
+                       ('cr_purple_c', 15, 8), ('cr_blue_c', 16, 8)):
+        m.stamp(nm, sx, sy)
+    # Divider 2 (between Center Matriarch Nest and NE Cocoon-House/TM81): x = 22..23, y = 4..8
+    for nm, sx, sy in (('cr_teal_t', 22, 4), ('cr_purple_t', 23, 4),
+                       ('cr_purple_t', 22, 6), ('cr_teal_t', 23, 6),
+                       ('cr_blue_c', 22, 8), ('cr_purple_c', 23, 8)):
+        m.stamp(nm, sx, sy)
+    # Seal outer flanks of the north amphitheater (x=8 and x=30 on rows 4..8) cleanly
+    for sx, c_tid in ((8, P1('cr_blue_c')), (30, P1('cr_teal_c'))):
+        for sy in (4, 5):
+            m.L[1, sy, sx] = c_tid
+            m.taken[sy, sx] = True
+    for nm, sx, sy in (('cr_blue_t', 8, 5), ('cr_purple_c', 8, 7), ('cr_teal_c', 8, 8),
+                       ('cr_teal_t', 30, 5), ('cr_purple_c', 30, 7), ('cr_blue_c', 30, 8)):
+        m.stamp(nm, sx, sy)
+
+    # ---- 8. West Living Gateposts, Trees, South Choked Road Crystals & Anchor Shimmer Lines ----
+    # Mossy living gateposts framing the Bleed Veil (x=4, y=12..13 and y=19..20; leaves 14..18 clear!)
+    m.stamp('nr_col', VX, 12)
+    m.stamp('nr_col', VX, 19)
+    # Living green oaks/pines west of the Veil
+    m.stamp('tr_oak2', 0, 11)
+    m.stamp('tr_pine', 0, 18)
+    m.stamp('nt_bush0', 2, 13)
+    m.stamp('nt_bush1', 2, 19)
+
+    # South Glass-Choked Road barricade framing (18, 33) (old road to Thistledown Lea choked shut with crystal!)
+    for nm, sx, sy in (('cr_purple_t', 16, 31), ('cr_teal_t', 20, 31),
+                       ('cr_purple_c', 16, 33), ('cr_teal_c', 17, 33),
+                       ('cr_blue_c', 19, 33), ('cr_purple_c', 20, 33),
+                       ('gd_shard0', 15, 29), ('gd_shard1', 21, 29)):
+        if m.inb(sx, sy) and not m.taken[sy, sx]:
+            m.stamp(nm, sx, sy)
+
+    # Crystal obelisks, warm trail lanterns, silk racks & shards anchoring the crater clearing
+    for nm, sx, sy in (('gw_spool', 29, 20), ('gw_rack', 29, 22),
+                       ('pf_lantern', 16, 14), ('pf_lantern', 22, 14),
+                       ('pf_lantern', 8, 12), ('pf_lantern', 30, 12),
+                       ('pf_lantern', 16, 27), ('pf_lantern', 20, 27),
+                       ('cr_purple_t', 13, 12), ('cr_teal_t', 24, 12),
+                       ('cr_teal_t', 7, 17), ('cr_purple_t', 30, 17),
+                       ('cr_blue_t', 12, 23), ('cr_pink_t', 22, 23),
+                       ('cr_purple_t', 14, 27), ('cr_teal_t', 22, 27),
+                       ('gd_shard0', 11, 20), ('gd_shard1', 25, 19)):
+        s = STAMPS[nm]
+        ok = True
+        for dy in range(s['h']):
+            for dx in range(s['w']):
+                xx, yy = sx + dx, sy + dy
+                if not m.inb(xx, yy) or m.taken[yy, xx] or m.cliff[yy, xx] or m.cls[yy, xx] == 'w' or r.road_mask[yy, xx]:
+                    ok = False
+        if ok:
+            m.stamp(nm, sx, sy)
+
+    # Prismatic crystal-silk glints tracing north from Anchors 1-3 toward the ravine (clean translucent shimmer!)
+    for ax, ay in ANCHORS:
+        for ty in range(12, ay):
+            if m.ht[ty, ax] == 0 and m.cls[ty, ax] in '.d' and not m.taken[ty, ax] and not m.cliff[ty, ax]:
+                m.L[2, ty, ax] = 25824 + ((ax + ty) % 3)
+
+    # ---- 9. Frosted Crystal Crater Rim Forest & Ring of Crystal Trees (zero overlaps!) ----
+    def can_put_tree(nm, tx, ty, rim_only=False):
+        s = STAMPS[nm]
+        w, h = s['w'], s['h']
+        if tx < 0 or ty < 0 or tx + w > W or ty + h > H:
+            return False
+        if tx < 5 and 11 <= ty + h and ty <= 21:
+            return False
+        for dy in range(h):
+            for dx in range(w):
+                xx, yy = tx + dx, ty + dy
+                if m.taken[yy, xx] or m.cls[yy, xx] in 'we':
+                    return False
+                if dy >= h - 2:
+                    if m.cliff[yy, xx] or r.road_mask[yy, xx]:
+                        return False
+                    if rim_only and m.ht[yy, xx] != 1:
+                        return False
+                else:
+                    # Keep canopy off key north landmarks, Veil, anchors, bridges, and existing cliffs/cottage roofs
+                    if (xx, yy) in ((NX, NY), (13, 6), (25, 6), (26, 21), (27, 22), (18, 33)) or yy in RAVINE:
+                        return False
+        return True
+
+    # Hand-placed interior crystal grove trees ringing the crater clearing like a frosted harp amphitheater
+    interior_grove = [
+        ('kf_tree', 5, 11), ('kf_tree', 30, 11),
+        ('nt_tree_purp', 12, 12), ('nt_tree_blue', 23, 12),
+        ('nt_tree_blue', 5, 19), ('nt_tree_purp', 30, 18),
+        ('nt_pine_purp', 12, 17), ('nt_pine_blue', 22, 17),
+        ('kf_tree', 8, 24), ('kf_tree', 26, 24),
+        ('nt_tree_purp', 13, 25), ('nt_tree_blue', 22, 25),
+        ('nt_pine_blue', 6, 24), ('nt_pine_purp', 30, 23),
+    ]
+    for nm, tx, ty in interior_grove:
+        if can_put_tree(nm, tx, ty, rim_only=False):
+            m.stamp(nm, tx, ty)
+
+    # Dense frosted crystal canopy crowning the raised crater rim (ht == 1; strictly non-overlapping!)
+    rim_trees = ['kf_tree', 'nt_tree_purp', 'nt_tree_blue', 'nt_pine_purp', 'nt_pine_blue']
+    for ty in range(0, H - 2):
+        for tx in range(0, W - 1):
+            if m.ht[min(H - 1, ty + 2), min(W - 1, tx + 1)] != 1:
+                continue
+            nm = rng.choice(rim_trees)
+            if can_put_tree(nm, tx, ty, rim_only=True):
+                m.stamp(nm, tx, ty)
+    # Fill remaining rim gaps with smaller frosted pines & crystal clusters so ZERO isolated rim tiles remain
+    for ty in range(0, H):
+        for tx in range(0, W):
+            if m.ht[ty, tx] != 1 or m.taken[ty, tx] or m.cliff[ty, tx]:
+                continue
+            if tx == 0 and ty in (0, 1, 2):
+                continue
+            placed = False
+            for nm in ('nt_pine_purp', 'nt_pine_blue'):
+                if can_put_tree(nm, tx, max(0, ty - 2), rim_only=True):
+                    m.stamp(nm, tx, max(0, ty - 2))
+                    placed = True
+                    break
+            if not placed:
+                m.stamp(rng.choice(['cr_purple_c', 'cr_teal_c', 'cr_blue_c', 'cr_pink_c']), tx, ty)
+
+    # Hanging crystal-silk cocoons tucked naturally beneath interior crystal tree canopies & around Glass cocoons (27, 22)
+    for gx, gy in ((6, 13), (31, 13), (13, 14), (24, 14), (6, 21), (26, 20), (28, 20), (9, 26), (27, 26)):
+        if m.inb(gx, gy + 1) and not m.cliff[gy, gx]:
+            m.over.append((2, gx, gy, 22751))
+            m.over.append((2, gx, gy + 1, 22752))
+
+    # Subtle frosted ground flowers, crystal clusters & Bleed shimmer sparkles
+    for y in range(4, H - 2):
+        for x in range(5, W - 2):
+            if m.ht[y, x] != 0 or m.taken[y, x] or m.cliff[y, x] or m.cls[y, x] == 'w':
+                continue
+            if m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+                rv = rng.random()
+                if m.cls[y, x] == '.' and not r.road_mask[y, x] and rv < 0.045:
+                    m.stamp(rng.choice(['cr_purple_c', 'cr_teal_c', 'cr_blue_c', 'cr_pink_c', 'gd_shard2']), x, y)
+                elif m.cls[y, x] == '.' and rv < 0.14:
+                    m.L[1, y, x] = rng.choice([9725, 9725, 10620])
+                elif rv < 0.22:
+                    m.L[2, y, x] = rng.choice([25824, 25825, 25826])
+
+    # ---- 10. Commit stamps & draw the shimmering Bleed Veil down x = 4 ----
+    m.put_stamps()
+    veil_tiles = [26048, 26049, 26050]
+    bleed_tiles = [25824, 25825, 25826]
+    for y in range(14, 19):
+        m.L[2, y, VX] = veil_tiles[y % 3]
+        if m.L[2, y, VX + 1] == 0:
+            m.L[2, y, VX + 1] = bleed_tiles[y % 3]
+
+    # ---- 11. Events (100% contract-preserved; cancel=2 fix on D3 anchors; Juno cleanly west of Veil) ----
     E = []
     E.append({'type': 'sign', 'name': 'Glass-choked way', 'at': [18, 33], 'post': False, 'text': 'The old way south to Thistledown Lea is choked with glass. The Deepwood is the only way in or out now.'})   # map builder 9: Rev 14, no R3_COCOON
     E.append({'type': 'warp', 'name': 'To the Deepwood', 'at': [0, 16], 'link': 'DEEP_COCOON', 'arrive': [1, 16, 'right']})
-    E.append(c.fog_event('prismfall_glass', 90, 1, 200, 1, 1))
+    E.append(_fog_event_548('prismfall_glass', 74, 1, 200, 1, 1))
     E.append({'type': 'event', 'name': 'Escort setup', 'at': [0, 1], 'pages': [
         {'trigger': 'parallel', 'commands': [{'if': key(548, 'ESCORT') + ' && !$game_switches[107]', 'then': [reveal('Juno', 'Tamsin')], 'else': []},
                                              {'selfswitch': ['A', True]}]},
@@ -249,9 +560,8 @@ def hollow():
              say('JUNO', 'sad', "I'm going to tell him about the Pageant. About what the man said about Verdance. I want to see his face when I tell him."),
              {'script': "%w[Juno Tamsin].each do |n|\n  ev = $game_map.events.values.find { |e| e.name == n }\n  ev.erase if ev\nend"}]
     for i, y in enumerate((14, 15, 16, 17, 18)):
-        if c.walkable(4, y):
-            E.append({'type': 'event', 'name': 'Veil %d' % (i + 1), 'at': [4, y], 'pages': [
-                {'cond': {'switch': 'CH2_MATRIARCH_DONE'}, 'trigger': 'touch', 'through': True, 'commands': once(548, 'OUTRO', outro)}]})
+        E.append({'type': 'event', 'name': 'Veil %d' % (i + 1), 'at': [VX, y], 'pages': [
+            {'cond': {'switch': 'CH2_MATRIARCH_DONE'}, 'trigger': 'touch', 'through': True, 'commands': once(548, 'OUTRO', outro)}]})
     boss = [
         "(At the center, a Galvantula the size of a cart, half crystal, sits on a nest of glass silk wound around something that glows faintly green beneath the roots.)",
         "It turns eight eyes on you. Four of them are glass.",
@@ -294,25 +604,35 @@ def hollow():
         E.append({'type': 'event', 'name': 'Anchor %d' % n, 'at': [ax, ay], 'pages': [{'graphic': {'sprite': 'Object ball', 'dir': 'down'}, 'commands': [
             'A cocoon anchor, its crystal threads running north to the ravine. %s' % ('The left one.' if n == 1 else 'The middle one.' if n == 2 else 'The right one.'),
             {'if': 'pfm_has?(:MOTHERLOOMSSHUTTLE) || pf_choice(:ch2_tamsin)', 'then': [
-                {'choices': ['Re-thread it.', 'Leave it.'], 'cancel': 1, 'branches': [
+                {'choices': ['Re-thread it.', 'Leave it.'], 'cancel': 2, 'branches': [
                     [{'script': '$game_switches[%d] = !$game_switches[%d]\n$game_switches[%d] = !$game_switches[%d]\n$game_map.need_refresh = true' % (a, a, b, b)},
                      {'se': 'Mining reveal'}, 'Two threads sing as they change: one draws taut, one falls slack.'], []]}],
              'else': ['The threads are glass. You would need something to re-thread them.']}]}]})
     E.append({'type': 'event', 'name': 'D3 start', 'at': [0, 2], 'pages': [   # first entry: bridges a and b start taut
         {'trigger': 'autorun', 'commands': [{'switch': ['D3_BRIDGE_A', True]}, {'switch': ['D3_BRIDGE_B', True]}, {'selfswitch': ['A', True]}]},
         {'cond': {'self': 'A'}, 'trigger': 'parallel', 'commands': []}]})
-    c.events = E
-    head = {'id': 548, 'biome': 'bleed', 'name': 'Cocoonfall Hollow', 'palette': 'bleed', 'bgm': 'Route 3', 'parent': 540, 'field': 'BLEED', 'tone': [-46, -50, 4, 90],
-            'metadata': {'ShowArea': True, 'MapPosition': [0, 11, 22], 'BattleBack': 'forest'},
-            'walk_from': [[NX, NY + 2]]}                        # beyond the ravine: reached over the D3 bridges (events)
-    return c.write('', head, '')
+
+    m.events = E
+    head = {
+        '_file': '525_deepwood_cocoonfall.yaml',
+        'id': 548,
+        'biome': 'bleed',
+        'name': 'Cocoonfall Hollow',
+        'bgm': 'Route 3',
+        'parent': 540,
+        'field': 'BLEED',
+        'tone': [-18, -22, 18, 42],
+        'metadata': {'ShowArea': True, 'SnapEdges': True, 'MapPosition': [0, 11, 22], 'BattleBack': 'forest'},
+        'walk_from': [[NX, NY + 2], [XING['b'], 8], [XING['a'], 8]],
+        'rubric': True,
+    }
+    m.write(548, head, '# Cocoonfall Hollow (548, ts=52 PF Rejuv Snow). WRITTEN BY layouts/deepwood.py hollow() - edit that, not this file.\n')
+    print('  wrote 525_deepwood_cocoonfall.yaml (548, ts=52 PF Rejuv Snow)')
 
 
 if __name__ == '__main__':
-    if sys.argv[1:] == ['548']:                                 # map builder 10: 548 alone (525 is reskin.py's)
-        txt = hollow()                                          # (built first, so a failure never truncates the spec)
-        open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'specs', '525_deepwood_cocoonfall.yaml'), 'w').write(
-            '# Remaining maps of the old 525_deepwood_cocoonfall.yaml (not re-skinned). 548 is WRITTEN BY layouts/deepwood.py hollow(): run it with 548.\n' + txt)
+    if sys.argv[1:] == ['548']:                                 # map builder 10: 548 alone (525 is routes_craft.py's)
+        hollow()
         raise SystemExit(0)
     raise SystemExit('superseded by layouts/reskin.py (MAPGEN 2h): running this would overwrite the PF Rejuv spec')
 if False:

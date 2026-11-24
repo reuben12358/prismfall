@@ -140,7 +140,13 @@ def build_185():
         put_if(m, name, x, y)
     hang(m, 'lm_banner', 9, 3); hang(m, 'lm_banner', 15, 3); on_faces(m, 'lm_poster0', [(4, 4), (20, 4)]); on_faces(m, 'lm_poster2', [(7, 4), (17, 4)])
     m.paint()
-    write(m, 185, 'Meridian Spire - Lobby', 180, '185_meridian_spire.yaml', bgm='Cedolan City')
+    y_f0, y_f2, y_f3 = P1('Y_f0'), P1('Y_f2'), P1('Y_f3')
+    for yy in range(m.H):
+        for xx in range(m.W):
+            if m.L[0, yy, xx] == y_f3:
+                m.L[0, yy, xx] = y_f2 if ((xx + yy) & 1) else y_f0
+    write(m, 185, 'Meridian Spire - Lobby', 180, '185_meridian_spire.yaml', bgm='Cedolan City',
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True})
 
 
 # ============================================================================================ 186 the Gala Hall
@@ -278,16 +284,47 @@ def build_951():
                 page([], cond={'self': 'A'})), 10, 12),
           {'type': 'warp', 'name': 'Down to the vault', 'at': [10, 16], 'to': {'map': 952, 'x': 12, 'y': 17, 'dir': 'up'}, 'se': 'Door exit'}]
     m.box(9, 16, 11, 16)
+    # Forged brass industrial balustrade along the south service ledge (replacing yellow lm_bars_m)
     for x in range(1, 20):
-        if x not in (9, 10, 11): m.over.append((1, x, 15, P1('lm_bars_m')))
-    m.keep_clear |= {(10, y) for y in range(6, 17)} | {(12, 8), (6, 11), (14, 12)}
-    put_if(m, 'lm_lift', 9, 3) if False else None
-    for name, x, y in (('lm_rack', 2, 6), ('lm_rack', 18, 6), ('lm_gearbox', 3, 12), ('lm_gearbox', 17, 9), ('lm_junction', 16, 6) if 'lm_junction' in STAMPS else ('lm_gearbox', 16, 6)):
+        if x in (9, 10, 11):
+            continue
+        t = 'lm_bollard' if x in (1, 8, 12, 19) else 'lm_railing_w' if x in (2, 13) else 'lm_railing_e' if x in (7, 18) else 'lm_railing_m'
+        m.over.append((1, x, 15, P1(t)))
+    m.keep_clear |= {(x, y) for x in (9, 10, 11) for y in range(6, 17)} | {(12, 7), (12, 8), (6, 10), (6, 11), (7, 10), (14, 12), (14, 13), (13, 13)}
+    # North service-lift bulkhead: centered freight lift door over (10, 6), emergency red alarms, & lift telemetry monitors
+    on_faces(m, 'lm_alarm_on', [(2, 4), (7, 4), (13, 4), (18, 4)])
+    on_faces(m, 'lm_vent', [(1, 5), (19, 5)])
+    hang(m, 'lm_monitors', 4, 3); hang(m, 'lm_monitors', 15, 3)
+    hang(m, 'lm_sdoor', 10, 4)
+    # Symmetrical Spire machinery bays: generators, server racks, gearboxes, junction boxes, and steam risers
+    for name, x, y in (
+        ('lm_gen', 1, 6), ('lm_gen', 18, 6),
+        ('lm_gen', 1, 12), ('lm_gen', 18, 12),
+        ('lm_rack', 4, 6), ('lm_rack', 16, 6),
+        ('lm_rack', 4, 12), ('lm_rack', 16, 11),
+        ('lm_gearbox', 3, 9), ('lm_gearbox', 17, 9),
+        ('lm_gearbox', 5, 14), ('lm_gearbox', 15, 14),
+        ('lm_junction', 5, 6), ('lm_junction', 15, 6),
+        ('lm_steam0', 2, 10), ('lm_steam1', 18, 10),
+        ('lm_bollard', 8, 6), ('lm_bollard', 13, 6),
+    ):
         put_if(m, name, x, y)
-    m.dress(5, groups=[(['lm_cables'], 1)], seed=2)
     m.paint()
+    # ---- Post-paint industrial catwalk & power conduits (walkable Layer 0/1) ----
+    # Grated steel center catwalk bordered by live Lattice power strips running straight from Gala Lift (10,6) to Vault Stair (10,16)
+    for y in range(6, 16):
+        m.L[0, y, 10] = P1('lm_grate')
+        m.L[0, y, 9] = P1('lm_strip_v_on') if y >= 7 else P1('lm_grate')
+        m.L[0, y, 11] = P1('lm_strip_v_on') if y >= 7 else P1('lm_grate')
+    # Branching floor cable buses linking east & west machinery bays into the central spine
+    for y in (8, 12):
+        for x in (5, 6, 7, 8, 12, 13, 14, 15):
+            if m.L[1, y, x] == 0:
+                m.L[1, y, x] = P1('lm_cable_h')
     write(m, 951, 'Meridian Spire - Service Lifts', 185, '951_meridian_service_lifts.yaml', bgm='Cave', field='NEON_GRID',
-          tone=[-20, -24, -10, 40])
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
+          tone=[-16, -20, -4, 34],
+          fog={'name': 'prismfall_cave', 'opacity': 32, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0})
 
 
 # ============================================================================================ 952 the Plate Vault
@@ -341,25 +378,69 @@ def build_952():
           at(ev('Service door', page(["The vault's service door. MERIDIAN CONCORD — AUTHORIZED PERSONNEL. Locked."], tile=P1('lm_pdoor')),
                 page([{'se': 'Door exit'}, {'switch': ['CH5_SHATTER', True]}, {'transfer': {'map': 608, 'x': 48, 'y': 5, 'dir': 'down'}}],
                      tile=P1('lm_pdoor_open'), cond=V(9), trigger='touch')), 18, 17)]
-    m.box(17, 18, 19, 18) if False else None
-    for x in range(3, 22):
-        for y in (11,):
-            if x != 12 and abs(x - 12) > 1: m.over.append((2, x, y, P1('lm_cable_h')))
-    for y in range(8, 18):
-        if y not in (11,): m.over.append((2, 12, y, P1('lm_cable_v'))) if y > 8 else None
-    m.keep_clear |= {(12, y) for y in range(8, 18)} | {(11, 7), (13, 7), (18, 16), (17, 17)}
-    for y in range(8, 18):
-        for x in (6, 18):
-            if y not in (11,): m.over.append((2, x, y, P1('lm_cable_v')))
-    for name, x, y in (('lm_rack', 2, 6), ('lm_rack', 22, 6), ('lm_vault', 2, 13), ('lm_gearbox', 21, 14), ('lm_pillar', 4, 6), ('lm_pillar', 20, 6),
-                       ('lm_pylon_off', 8, 5), ('lm_pylon_off', 15, 5), ('lm_rack', 2, 9), ('lm_rack', 22, 9), ('lm_junction', 9, 14), ('lm_junction', 15, 14),
-                       ('lm_gearbox', 3, 16), ('lm_gearbox', 20, 16)):
+    m.keep_clear |= {(x, y) for x in (11, 12, 13) for y in range(7, 19)} | {(10, 7), (14, 7), (18, 16), (17, 17), (19, 17), (18, 15)}
+    # Monumental north containment wall: triple telemetry monitors, warning alarms, & industrial exhaust vents
+    hang(m, 'lm_monitors', 6, 3); hang(m, 'lm_monitors', 11, 3); hang(m, 'lm_monitors', 17, 3)
+    on_faces(m, 'lm_alarm_on', [(4, 4), (9, 4), (15, 4), (20, 4)])
+    on_faces(m, 'lm_vent', [(2, 4), (22, 4)])
+    # Symmetrical Lattice Containment Sanctum hardware: active glowing Lattice pylons flanking the Cradle dais,
+    # heavy vault blast bulkhead, power damper generators, server racks, and brass safety bollards (NO stray Greek columns!)
+    for name, x, y in (
+        ('lm_pylon', 7, 6), ('lm_pylon', 16, 6),
+        ('lm_pylon_off', 4, 10), ('lm_pylon_off', 19, 10),
+        ('lm_gen', 1, 6), ('lm_gen', 22, 6),
+        ('lm_gen', 1, 14), ('lm_gen', 22, 14),
+        ('lm_vault', 1, 9),
+        ('lm_rack', 4, 6), ('lm_rack', 20, 6),
+        ('lm_rack', 22, 9), ('lm_rack', 22, 11),
+        ('lm_junction', 6, 12), ('lm_junction', 18, 12),
+        ('lm_gearbox', 4, 15), ('lm_gearbox', 21, 16),
+        ('lm_steam0', 3, 13), ('lm_steam1', 21, 13),
+        ('lm_bollard', 9, 10), ('lm_bollard', 15, 10),
+        ('lm_bollard', 10, 17), ('lm_bollard', 14, 17),
+        ('lm_bollard', 16, 17), ('lm_bollard', 20, 17),
+    ):
         put_if(m, name, x, y)
-    hang(m, 'lm_onair', 12, 3) if False else None
-    m.dress(8, groups=[(['lm_cables'], 2), (['lm_wear0'], 1)], seed=3)
     m.paint()
+    # ---- Post-paint Plate Sanctum Dais & 4-Way Illuminated Lattice Conduit Network (walkable Layer 0/1) ----
+    # Elevated marble-trimmed containment dais (9..15, 6..10) with royal crimson-and-brass core (10..14, 6..9)
+    for y in range(6, 11):
+        for x in range(9, 16):
+            m.L[0, y, x] = P1('lm_plaza0')
+    for y in range(6, 10):
+        for x in range(10, 15):
+            part = ('n' if y == 6 else 's' if y == 9 else '') + ('w' if x == 10 else 'e' if x == 14 else '')
+            m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
+    # South ceremonial power spine (x=11..13, y=10..17): blazing center Lattice conduit flanked by heavy steel grates
+    for y in range(10, 18):
+        m.L[0, y, 12] = P1('lm_strip_v_on')
+        m.L[0, y, 11] = P1('lm_grate')
+        m.L[0, y, 13] = P1('lm_grate')
+    # West & East high-voltage Lattice feed trunks directly into the Cradle dais (y=8, x=3..9 & x=15..21)
+    for x in list(range(3, 10)) + list(range(15, 22)):
+        if m.L[1, 8, x] == 0:
+            m.L[0, 8, x] = P1('lm_strip_h_on')
+    # Secondary symmetrical dark-steel Lattice perimeter ring (x=6 & x=18, y=9..14; y=14, x=6..18)
+    for y in range(9, 15):
+        for x in (6, 18):
+            if m.L[1, y, x] == 0:
+                m.L[0, y, x] = P1('lm_strip_v_on')
+    for x in range(7, 18):
+        if x not in (11, 12, 13) and m.L[1, 14, x] == 0:
+            m.L[0, 14, x] = P1('lm_strip_h_on')
+    for cx, cy in ((6, 8), (18, 8), (6, 14), (18, 14)):
+        if m.L[1, cy, cx] == 0:
+            m.L[0, cy, cx] = P1('lm_grate')
+    # Clean feeder cables running from side generators into the trunk lines (Layer 1, walkable)
+    for x in (3, 4, 5, 19, 20, 21):
+        if m.L[1, 14, x] == 0:
+            m.L[1, 14, x] = P1('lm_cable_h')
+    # Lead-in grate threshold before the south Service door (18, 17)
+    m.L[0, 16, 18] = P1('lm_grate')
     write(m, 952, 'Meridian Spire - Plate Vault', 185, '952_meridian_plate_vault.yaml', bgm='Cave', field='NEON_GRID',
-          tone=[-10, -20, 10, 30])
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
+          tone=[-8, -14, 14, 24],
+          fog={'name': 'prismfall_glass', 'opacity': 38, 'blend': 1, 'zoom': 200, 'sx': 1, 'sy': 0})
 
 
 # ============================================================================================ 187 / 188 / 189 small rooms
@@ -440,11 +521,19 @@ events: []
 """
 
 
-def main():
-    build_582(); build_185(); build_186(); build_951(); build_952(); build_small()
-    open(os.path.join(HERE, 'specs', '182_lumen_pc_arcade.yaml'), 'w').write(TEMPLATES)
-    print('wrote 582 185 186 951 952 187 188 189 182 183')
+def main(which=None):
+    sel = set(which or [])
+    builders = [('582', build_582), ('185', build_185), ('186', build_186),
+                ('951', build_951), ('952', build_952), ('small', build_small)]
+    done = []
+    for k, fn in builders:
+        if not sel or k in sel:
+            fn(); done.append(k)
+    if not sel or '182' in sel or '183' in sel:
+        open(os.path.join(HERE, 'specs', '182_lumen_pc_arcade.yaml'), 'w').write(TEMPLATES)
+        done += ['182', '183']
+    print('wrote', ' '.join(done))
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

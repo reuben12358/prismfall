@@ -270,6 +270,7 @@ MapPosition = 0,16,16
 [185]   # Meridian Spire - Lobby
 Name = Meridian Spire - Lobby
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [186]   # Meridian Spire - Gala Hall
 Name = Meridian Spire - Gala Hall
@@ -302,6 +303,7 @@ MapPosition = 0,16,16
 [193]   # Circuit Gym - Core
 Name = Circuit Gym
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [255]   # Cindervault - Tap Chamber
 Name = Cindervault
@@ -378,6 +380,7 @@ MapPosition = 0,11,15
 [548]   # Cocoonfall Hollow
 Name = Cocoonfall Hollow
 ShowArea = true
+SnapEdges = true
 MapPosition = 0,10,14
 BattleBack = forest
 #-------------------------------
@@ -426,6 +429,7 @@ Name = Brinecut Mine
 MapPosition = 0,8,16
 BattleBack = cave1
 DarkMap = true
+SnapEdges = true
 #-------------------------------
 [546]   # Thistledown Manor
 Name = Thistledown Manor
@@ -617,10 +621,12 @@ MapPosition = 0,14,3
 [951]   # Meridian Spire - Service Lifts
 Name = Meridian Spire - Service Lifts
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [952]   # Meridian Spire - Plate Vault
 Name = Meridian Spire - Plate Vault
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

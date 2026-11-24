@@ -166,14 +166,17 @@ def build_180():
         for y in range(38, 58): m.taken[y, lx:lx + 3] = False
         lamps(m, [(lx, 41), (lx + 2, 52)])
     door_events(m, placed)
-    # the Council stair (closed) and the Skyport steps (ticketed)
+    # the Council stair (closed) and the Skyport steps (ticketed) — forged brass railings & bollards (zero yellow bars)
     for y in range(1, 6):
         for i, x in enumerate(range(45, 51)): m.over.append((1, x, y, P1('lm_stair_' + ('l' if i == 0 else 'r' if i == 5 else 'm'))))
-    for x in range(44, 52): m.over.append((1, x, 6, P1('lm_bars_m' if x not in (47, 48) else 'lm_bars_l')))
+    for x, piece in ((44, 'lm_bollard'), (45, 'lm_railing_w'), (46, 'lm_railing_e'), (47, 'lm_bollard'),
+                     (48, 'lm_bollard'), (49, 'lm_railing_w'), (50, 'lm_railing_e'), (51, 'lm_bollard')):
+        m.over.append((1, x, 6, P1(piece)))
     for x, y in ((44, 1), (51, 1), (44, 4), (51, 4)): m.prop('lm_bollard', x, y)
     for y in range(1, 4):
         for i, x in enumerate(range(73, 77)): m.over.append((1, x, y, P1('lm_stair_' + ('l' if i == 0 else 'r' if i == 3 else 'm'))))
-    for x in range(73, 77): m.over.append((1, x, 4, P1('lm_bars_m')))
+    for x, piece in ((73, 'lm_bollard'), (74, 'lm_railing_w'), (75, 'lm_railing_e'), (76, 'lm_bollard')):
+        m.over.append((1, x, 4, P1(piece)))
     m.keep_clear |= {(x, y) for x in range(44, 52) for y in range(0, 8)} | {(x, y) for x in range(73, 77) for y in range(0, 6)}
     # -------- the Prism Plaza
     m.put('lm_fountain', 43, 13)
@@ -182,7 +185,22 @@ def build_180():
     for bx, by in ((31, 13), (52, 13), (31, 25), (54, 25)):              # four lawns with flowers round the fountain
         m.rect(bx, by, 6, 3, '.')
         for x, y in ((bx - 1, by), (bx + 6, by)): m.try_put('lm_topiary', x, y - 1, on='q')
-    m.inlay([(x, 22) for x in range(28, 44)] + [(x, 22) for x in range(49, 65)] + [(46, y) for y in range(29, 32)])
+    # Symmetrical Art-Deco brass light-conduit promenade framing Prism Plaza, Sun Emblem, Fountain, & Founders Statue
+    plaza_inlays = set()
+    for x in range(28, 44): plaza_inlays.add((x, 22))
+    for x in range(49, 65): plaza_inlays.add((x, 22))
+    for y in range(29, 32): plaza_inlays.add((46, y))
+    for y in (18, 19): plaza_inlays.add((46, y))
+    for x in range(30, 63):
+        plaza_inlays.add((x, 12))
+        plaza_inlays.add((x, 29))
+    for y in range(12, 30):
+        plaza_inlays.add((30, y))
+        plaza_inlays.add((62, y))
+        plaza_inlays.add((40, y))
+        plaza_inlays.add((51, y))
+    # Filter inlays strictly to open plaza marble (never inside lawns, fountain, sun, or statue footprints)
+    m.inlay([pt for pt in sorted(plaza_inlays) if m.cls[pt[1], pt[0]] == 'q' and not m.taken[pt[1], pt[0]]])
     m.keep_clear |= {(x, 22) for x in range(28, 65)} | {(46, y) for y in range(25, 32)} | {(x, 19) for x in range(40, 52)}
     lamps(m, [(41, 13), (50, 13), (41, 19), (50, 19), (38, 24), (53, 24), (30, 11), (63, 11), (30, 30), (63, 30), (43, 30), (49, 30), (38, 18), (53, 18)])
     for x, y in ((28, 13), (62, 13), (28, 25), (62, 25)): m.try_put('lm_tree', x, y, on='q')
@@ -206,6 +224,9 @@ def build_180():
     for bx in (75, 89):
         m.rect(bx, 16, 3, 12, '.')
         for y in (15, 28): m.try_put('lm_topiary', bx + 1, y - 1, on='q')
+        # Manicured palace parterre accents inside the Spire gardens
+        for py in (18, 22, 26):
+            m.try_put('lm_topiary', bx + 1, py - 1, on='.')
     m.try_put('lm_pylon', 79, 28, on='q'); m.try_put('lm_planter3', 89, 30, on='q'); m.try_put('lm_planter3', 74, 30, on='q')
     m.try_put('lm_statue', 79, 14, on='q'); m.try_put('lm_holo', 90, 13, on='q')
     for y in range(0, 47): m.prop('lm_railing_m', 92, y)
@@ -214,9 +235,14 @@ def build_180():
     for x, y in ((10, 28), (17, 28)): m.try_put('lm_tree', x, y - 1, on='p')
     lamps(m, [(13, 25), (9, 30), (19, 30), (5, 9), (17, 9), (29, 9), (58, 9), (70, 9), (23, 9), (11, 9), (64, 9)])
     m.try_put('lm_bench', 13, 30, on='p'); m.try_put('lm_holo', 15, 27, on='p')
-    # -------- the boulevard: the tram, shelters, lamps, the lift-grille
+    # -------- the boulevard: the tram, shelters, East Tram Terminal, lamps, the lift-grille
+    # Terminate the east end of the tram tracks cleanly at x=81 with bumper bollards, shelter, & terminal clock
+    for tx in (82, 83):
+        m.tracks.pop((tx, 34), None)
+    m.prop('lm_bollard', 82, 34); m.prop('lm_bollard', 82, 35)
+    m.try_put('lm_clock', 83, 33, on='rpq')
     m.put('lm_tram', 12, 34, force=True)
-    m.try_put('lm_shelter', 31, 30, on='qp'); m.try_put('lm_shelter', 67, 31, on='qp')
+    m.try_put('lm_shelter', 31, 30, on='qp'); m.try_put('lm_shelter', 67, 31, on='qp'); m.try_put('lm_shelter', 79, 30, on='qp')
     lamps(m, [(x, 32) for x in range(4, 84, 8)] + [(x, 38) for x in range(2, 84, 7)])
     for x in range(5, 83, 7):
         if m.free(x, 38, 2, 1, on='p'): m.try_put('lm_planter', x, 38, on='p')
@@ -272,6 +298,25 @@ def build_180():
         for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)): m.keep_clear.add((x + dx, y + dy))
     scatter_wear(m, 10, on='pq', seed=1, kinds=(0, 1, 1, 2, 4, 4))
     m.paint()
+    # Frame every grass lawn cutout (Prism Plaza parterres, Spire gardens, & South Esplanade lip) with crisp walkable slate kerbs
+    inlay_ids = {P1('lm_inlay_' + k) for k in ('h', 'v', 'x', 'ne', 'nw', 'se', 'sw')}
+    carpet_ids = {P1('lm_carpet_' + k) for k in ('c', 'n', 's', 'w', 'e', 'nw', 'ne', 'sw', 'se')}
+    keep_surf = inlay_ids | carpet_ids | {P1('lm_grate'), P1('lm_grate_off')}
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] not in 'pq' or m.cliff[y, x]:
+                continue
+            if m.L[0, y, x] in keep_surf or m.L[1, y, x] in keep_surf:
+                continue
+            for side, (dx, dy) in (('S', (0, 1)), ('N', (0, -1)), ('E', (1, 0)), ('W', (-1, 0))):
+                xx, yy = x + dx, y + dy
+                if m.inb(xx, yy) and m.cls[yy, xx] == '.':
+                    kt = P1('lm_kerb' + side)
+                    m.L[0, y, x] = kt
+                    # Only update Layer 1 if Layer 1 still holds the base ground tile (preserve props/lamps/trees on L1!)
+                    if m.L[1, y, x] == 0 or m.L[1, y, x] in {P1(g) for g in m.GROUND['p'] + m.GROUND['q']}:
+                        m.L[1, y, x] = kt
+                    break
     m.scatter(14, seed=4, on='.')
     m.seal_edges([('E', 52, 7)], filler=P1('lm_bollard'), sides='E')
     return m

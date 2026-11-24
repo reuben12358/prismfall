@@ -243,8 +243,18 @@ def build_193():
     m.mass_at([(1, 18), (19, 18)])
     m.plan_cliffs(rows=3)
     E = m.events
-    for x in range(1, 20):                                   # the arena's glass barrier, a door in the middle
-        if x != 10: m.over.append((1, x, 13, P1('lm_bars_m' if x % 3 else 'lm_bars_l')))
+    # Sleek forged brass barrier & bollard posts across y=13 (Arena door at (10, 13))
+    for x in range(1, 20):
+        if x == 10:
+            continue
+        if x in (1, 9, 11, 19):
+            m.over.append((1, x, 13, P1('lm_bollard')))
+        elif x in (2, 12):
+            m.over.append((1, x, 13, P1('lm_railing_w')))
+        elif x in (8, 18):
+            m.over.append((1, x, 13, P1('lm_railing_e')))
+        else:
+            m.over.append((1, x, 13, P1('lm_railing_m')))
     m.keep_clear |= {(x, 13) for x in range(1, 20)}
     SPL = CI.S_SPLICE
     juno = 'JUNO'
@@ -259,7 +269,11 @@ def build_193():
                                     tile=P1('lm_splice')),
                 page(["The node hums on the Meridian main."], tile=P1('lm_splice_on'), cond={'switch': SPL}))
     splice['at'] = [15, 15]
-    for x in range(16, 19): m.over.append((2, x, 15, P1('lm_cable_h')))
+    # Continuous Meridian main power cable running from west wall past Cold Cradle (5,15) to Splice node (15,15) & east wall
+    for x in (3, 4, 6, 7, 13, 14, 16, 17, 18):
+        m.over.append((1, x, 15, P1('lm_cable_h')))
+    for x in (8, 12):
+        m.over.append((1, x, 15, P1('lm_grate')))
     adoor = ev('Arena door', page(["Sealed. The splice node by the cradle isn't connected."], tile=P1('lm_pdoor')),
                page([], tile=P1('lm_pdoor_open'), cond={'switch': SPL}))
     adoor['at'] = [10, 13]
@@ -306,25 +320,85 @@ def build_193():
     gal_l['at'] = [17, 7]
     E += [cradle, splice, adoor, rook, drone, gal_j, gal_l,
           {'type': 'warp', 'name': 'To the Live Wire Hall', 'at': [10, 19], 'to': {'map': 192, 'x': CI.CORE_DOOR[0] + 1, 'y': CI.CORE_DOOR[1] + 1, 'dir': 'down'}, 'se': 'Door exit'}]
-    for x in range(14, 20): m.over.append((1, x, 9, P1('lm_bars_m')))       # the gallery's glass rail
-    m.keep_clear |= {(10, 18), (10, 17), (10, 16), (10, 15), (10, 14), (10, 12), (10, 11), (10, 10), (10, 9), (10, 8), (5, 16), (6, 15),
-                     (14, 15), (15, 16), (11, 7), (9, 7)}
-    on_faces(m, 'lm_onair', [(10, 3)]); hang(m, 'lm_neonbolt', 4, 3); hang(m, 'lm_neonbolt', 15, 3)
+    # VIP gallery brass balcony rail along y=9 (x=14..19)
+    for x in range(14, 20):
+        t = 'lm_bollard' if x in (14, 19) else 'lm_railing_w' if x == 15 else 'lm_railing_e' if x == 18 else 'lm_railing_m'
+        m.over.append((1, x, 9, P1(t)))
+    m.keep_clear |= {(10, 18), (10, 17), (10, 16), (10, 15), (10, 14), (10, 12), (10, 11), (10, 10), (10, 9), (10, 8),
+                     (5, 16), (6, 15), (4, 15), (14, 15), (15, 16), (11, 7), (9, 7),
+                     (14, 7), (14, 8), (15, 7), (15, 8), (16, 8), (17, 8)}
+    # Symmetrical high-tech studio north wall: monitors, neon bolts, ON AIR sign, posters & red tally alarms
+    on_faces(m, 'lm_onair', [(10, 3)])
+    on_faces(m, 'lm_alarm_on', [(2, 4), (18, 4)])
+    on_faces(m, 'lm_poster1', [(1, 4), (19, 4)])
+    hang(m, 'lm_neonbolt', 4, 3); hang(m, 'lm_neonbolt', 15, 3)
     hang(m, 'lm_monitors', 7, 3); hang(m, 'lm_monitors', 12, 3)
-    for name, x, y in (('lm_speaker', 1, 7), ('lm_speaker', 19, 10), ('lm_cam', 3, 10), ('lm_ring', 13, 11), ('lm_rack', 1, 15),
-                       ('lm_rack', 19, 15), ('lm_cam', 7, 11), ('lm_plant', 2, 17), ('lm_plant', 18, 17), ('lm_gearbox', 13, 17)):
+    # Broadcast rig, speakers, cameras, ring-lights, server racks, and lounge props
+    for name, x, y in (
+        ('lm_speaker', 1, 6), ('lm_speaker', 19, 10),
+        ('lm_rack', 1, 9), ('lm_rack', 1, 15), ('lm_rack', 19, 15),
+        ('lm_cam', 3, 8), ('lm_ring', 3, 10),
+        ('lm_cam', 14, 10), ('lm_ring', 16, 11),
+        ('lm_plant', 19, 6), ('lm_table', 18, 8),
+        ('lm_plant', 2, 17), ('lm_plant', 18, 17),
+        ('lm_couch', 15, 17), ('lm_gearbox', 3, 17), ('lm_gearbox', 13, 17),
+    ):
         put_if(m, name, x, y)
     m.paint()
+    # ---- Post-paint floor refinement: strip noisy cyan Z_f3 blotches & lay Neon Grid arena, carpets & cradle plinth ----
+    z_f0, z_f1, z_f2, z_f3 = P1('Z_f0'), P1('Z_f1'), P1('Z_f2'), P1('Z_f3')
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.L[0, y, x] == z_f3:
+                m.L[0, y, x] = z_f2 if ((x + y) & 1) else z_f0
+    # Elevated marble plinth under Cold Plate Cradle (4..6, 14..15)
+    for y in (14, 15):
+        for x in (4, 5, 6):
+            m.L[0, y, x] = P1('lm_plaza0')
+    # Antechamber plush crimson-and-brass carpet runner (9..11, 14..19)
+    for y in range(14, 20):
+        for x in (9, 10, 11):
+            part = ('n' if y == 14 else 's' if y == 19 else '') + ('w' if x == 9 else 'e' if x == 11 else '')
+            m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
+    # VIP Broadcast Gallery plush carpet (15..19, 6..8)
+    for y in (6, 7, 8):
+        for x in range(15, 20):
+            part = ('n' if y == 6 else 's' if y == 8 else '') + ('w' if x == 15 else 'e' if x == 19 else '')
+            m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
+    # Glowing Neon Grid Arena perimeter & center battle runway (5..13, 6..11) — 100% cohesive dark-glass & neon cyan!
+    for x in range(6, 13):
+        if m.L[1, 6, x] == 0:
+            m.L[0, 6, x] = P1('lm_strip_h_on')
+        if x != 10 and m.L[1, 11, x] == 0:
+            m.L[0, 11, x] = P1('lm_strip_h_on')
+    for y in range(7, 11):
+        if m.L[1, y, 5] == 0:
+            m.L[0, y, 5] = P1('lm_strip_v_on')
+        if m.L[1, y, 13] == 0:
+            m.L[0, y, 13] = P1('lm_strip_v_on')
+    # Sleek dark-steel junction grates at the 4 corners & center cross + neon cyan runway straight to Rook (10,7)
+    for cx, cy in ((5, 6), (13, 6), (5, 11), (13, 11), (10, 11)):
+        m.L[0, cy, cx] = P1('lm_grate')
+    for y in (8, 9, 10, 12):
+        m.L[0, y, 10] = P1('lm_strip_v_on')
+    # Subtle stage corner grates inside the Neon Grid arena
+    for gx, gy in ((7, 8), (12, 8), (7, 10), (12, 10)):
+        if m.L[1, gy, gx] == 0:
+            m.L[0, gy, gx] = P1('lm_grate')
     return m
 
 
-def main():
+def main(which=None):
+    sel = set(which or [])
     for b, mid, nm in ((build_190, 190, 'Circuit Gym - Switchroom'), (build_191, 191, 'Circuit Gym - Breadboard Hall'),
                        (build_192, 192, 'Circuit Gym - Live Wire Hall'), (build_193, 193, 'Circuit Gym - Core')):
+        if sel and str(mid) not in sel:
+            continue
         m = b()
-        write(m, mid, nm)
+        extra = {'metadata': {**META, 'SnapEdges': True}} if mid == 193 else None
+        write(m, mid, nm, extra=extra)
         print('wrote', mid)
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

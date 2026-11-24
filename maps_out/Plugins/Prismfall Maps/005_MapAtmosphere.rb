@@ -57,14 +57,14 @@ module PrismfallMaps
     521 => [6, 4, -4, 0],   # Windfall Row
     522 => [-14, -18, 22, 46],   # The Glassed Orchard
     524 => [-28, -8, -30, 25],   # Gossamer Wood
-    548 => [-46, -50, 4, 90],   # Cocoonfall Hollow
+    548 => [-18, -22, 18, 42],   # Cocoonfall Hollow
     525 => [-40, -24, -30, 40],   # Gossamer Deepwood
     527 => [6, 4, -6, 0],   # Lacecliff Walk
     528 => [8, 4, -8, 0],   # Marram Down
     540 => [6, 4, -2, 0],   # Thistledown Lea
     541 => [0, 0, 4, 18],   # The Grey Saltings
     544 => [-8, -10, -4, 10],   # Brinecut Mine 1F
-    545 => [-14, -12, -2, 20],   # Brinecut Mine B1F
+    545 => [-10, -8, 4, 16],   # Brinecut Mine B1F
     546 => [-26, -30, -2, 34],   # Thistledown Manor
     547 => [-26, -30, -2, 34],   # Thistledown Manor - Attic
     552 => [10, 6, -6, 0],   # The Dyers' Ford
@@ -93,8 +93,8 @@ module PrismfallMaps
     928 => [16, 0, -10, 0],   # Ashkaar Siege Camp - Command Pavilion
     929 => [16, 8, 0, 10],   # The Observers' Mesa
     930 => [14, 8, 0, 6],   # The Bone-Carters' Camp
-    951 => [-20, -24, -10, 40],   # Meridian Spire - Service Lifts
-    952 => [-10, -20, 10, 30],   # Meridian Spire - Plate Vault
+    951 => [-16, -20, -4, 34],   # Meridian Spire - Service Lifts
+    952 => [-8, -14, 14, 24],   # Meridian Spire - Plate Vault
   }
 
   # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
@@ -113,7 +113,7 @@ module PrismfallMaps
     525 => ["prismfall_spores", 0, 70, 1, 100, 1, -1],   # Gossamer Deepwood
     541 => ["prismfall_seamist", 0, 40, 0, 200, 1, 0],   # The Grey Saltings
     544 => ["prismfall_cave", 0, 36, 1, 100, 1, 0],   # Brinecut Mine 1F
-    545 => ["prismfall_cave", 0, 44, 1, 100, 1, 0],   # Brinecut Mine B1F
+    545 => ["prismfall_cave", 0, 40, 1, 100, 1, 0],   # Brinecut Mine B1F
     552 => ["prismfall_seamist", 0, 24, 0, 200, 1, 0],   # The Dyers' Ford
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
     564 => ["prismfall_seamist", 0, 34, 1, 100, 1, 0],   # Gullcry Caves
@@ -123,6 +123,8 @@ module PrismfallMaps
     920 => ["prismfall_seamist", 0, 24, 0, 200, 1, 0],   # The Rimed Sands
     925 => ["prismfall_seamist", 0, 60, 0, 150, 2, 0],   # The Steamline
     926 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Glass Dunes
+    951 => ["prismfall_cave", 0, 32, 1, 100, 1, 0],   # Meridian Spire - Service Lifts
+    952 => ["prismfall_glass", 0, 38, 1, 200, 1, 0],   # Meridian Spire - Plate Vault
   }
 
   def self.apply_map_fog
