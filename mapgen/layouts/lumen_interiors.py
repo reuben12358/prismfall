@@ -354,13 +354,54 @@ def build_951():
 
 # ============================================================================================ 952 the Plate Vault
 def build_952():
-    m = room(25, 19, 'Q', 952)
-    m.room(12, 10, 10.5, 6.5, rough=0.15)
-    m.box(1, 3, 23, 17); m.box(11, 18, 13, 18)
+    from cavekit import PIT, TER
+    # Sleek dark obsidian-slate subterranean Spire chamber ('Z') with 3-tier architectural material hierarchy:
+    #   MASS (outer carved cliff vault) -> cvZ dark obsidian walls
+    #   TER  (elevated Plate Sanctum)   -> lmw monumental Spire ashlar marble & brass balustrade
+    #   FLOOR (suspended catwalk/bays)  -> cvQ dark riveted vault steel drop-walls over the abyssal chasm!
+    #   PIT  (deep reactor power shaft) -> lm_deep0..5 abyssal dark indigo void!
+    m = room(25, 19, 'Z', 952)
+    m.kit = {TER: 'lmw', FLOOR: 'cvQ', 'default': 'cvZ'}
+
+    # ---- 1. Sculpt the Black Void: Round/Octagonal Subterranean Cliff Vault + Deep Abyssal Power Chasm ----
+    # Carve an organic rounded/octagonal subterranean abyssal power shaft (PIT) into the dark cliff MASS
+    m.room(12.0, 9.6, 10.2, 6.2, h=PIT, c='p', rough=0.14, seed=9)
+    # Trim the outer corners firmly into dark sculpted cliff MASS so the silhouette is NEVER a rectangular box!
+    m.mass_at(
+        [(x, y) for y in range(0, 4) for x in range(0, 25)] +
+        [(x, y) for y in range(4, 6) for x in list(range(0, 4)) + list(range(21, 25))] +
+        [(x, y) for y in range(6, 15) for x in (0, 1, 2, 22, 23, 24)] +
+        [(x, y) for y in range(14, 19) for x in list(range(0, 6)) + list(range(20, 25))] +
+        [(x, 18) for x in list(range(0, 11)) + list(range(14, 25))]
+    )
+    # Recessed monumental north containment apse framing the elevated Plate Sanctum (x=8..16, y=3..4 -> MASS lip at y=1..2)
+    m.box(8, 3, 16, 4, PIT, 'p')
+
+    # ---- 2. Elevated Central Plate Containment Sanctum (TER, ht=2 -> lmw marble retaining wall!) ----
+    # x=9..15, y=5..10: lmw lip hangs on y=10, ashlar face on y=11, marble footing on y=12 (dropping into abyssal PIT!)
+    # That leaves ALL 25 tiles of the 5x5 golden Meridian sunburst medallion (lm_sun at x=10..14, y=5..9) 100% unobstructed!
+    m.box(9, 5, 15, 10, TER, '.')
+
+    # ---- 3. Suspended Steel-Grate Catwalk Bridge (FLOOR, ht=1, x=11..13, y=11..15) ----
+    # Spans straight across the abyssal reactor shaft from the South Lift Vestibule right up to the marble Sanctum steps!
+    m.box(11, 11, 13, 15, FLOOR, '.')
+
+    # ---- 4. Sculpted South Lift Vestibule, West Vault Control Bay, & Recessed East Service Door Alcove (FLOOR) ----
+    # Asymmetric multi-bay south chamber: Lift entrance (12,18), West control console bay (6..10, 15..17), East Service door (18,17)
+    m.box(6, 15, 19, 17, FLOOR, '.')
+    m.box(11, 18, 13, 18, FLOOR, '.')
+    # Carve architectural wall notches at the SW/SE ends so the vestibule silhouette reads as shaped chambers, not a strip
+    m.mass_at([(6, 17), (19, 15)])
+
+    # Grand monumental marble staircase rising cleanly from Catwalk (y=12) onto the Plate Sanctum Dais (y=10)!
+    # Walkable seamlessly during The Shatter's 5-step walk-in (12, 17 -> 12)!
+    m.stairs(11, 10, w=3, n=3, c='.')
     m.plan_cliffs(rows=3)
+
+    # ---- 5. Events (100% gameplay & cutscene contract preserved!) ----
     E = m.events
     shatter = [S('Prismfall.checkpoint rescue nil'),
-               MV('player', ['up'] * 5),                   # close enough that the cradle and the Mourner are on screen
+               MV('player', ['up'] * 5),                   # walks smoothly up catwalk (12,17..12) to foot of marble dais stairs!
                "(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle's crystal is crazed all over with fine white lines.)",
                "(At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a woman in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)",
                P('MOURNER', 'neutral', "(the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its dark. That's all. That's all tonight is."),
@@ -403,69 +444,132 @@ def build_952():
           at(ev('Service door', page(["The vault's service door. MERIDIAN CONCORD — AUTHORIZED PERSONNEL. Locked."], tile=P1('lm_pdoor')),
                 page([{'se': 'Door exit'}, {'switch': ['CH5_SHATTER', True]}, {'transfer': {'map': 608, 'x': 48, 'y': 5, 'dir': 'down'}}],
                      tile=P1('lm_pdoor_open'), cond=V(9), trigger='touch')), 18, 17)]
-    m.keep_clear |= {(x, y) for x in (11, 12, 13) for y in range(7, 19)} | {(10, 7), (14, 7), (18, 16), (17, 17), (19, 17), (18, 15)}
-    # Monumental north containment wall: triple telemetry monitors, warning alarms, & industrial exhaust vents
-    hang(m, 'lm_monitors', 6, 3); hang(m, 'lm_monitors', 11, 3); hang(m, 'lm_monitors', 17, 3)
-    on_faces(m, 'lm_alarm_on', [(4, 4), (9, 4), (15, 4), (20, 4)])
-    on_faces(m, 'lm_vent', [(2, 4), (22, 4)])
-    # Symmetrical Lattice Containment Sanctum hardware: active glowing Lattice pylons flanking the Cradle dais,
-    # heavy vault blast bulkhead, power damper generators, server racks, and brass safety bollards (NO stray Greek columns!)
+    m.keep_clear |= {(x, y) for x in (11, 12, 13) for y in range(6, 19)} | {(10, 7), (14, 7), (10, 8), (14, 8), (12, 6), (18, 16), (17, 17), (19, 17), (18, 15), (17, 16), (16, 16), (15, 16), (14, 16)}
+
+    # ---- 6. Monumental North Containment Wall Hardware (Golden Sanctuary Window, Meridian Banners, Alarms, Vents) ----
+    # Deep royal navy-and-gold Meridian banners flanking a tall golden sanctuary glass window directly behind the Zap Plate Dais!
+    hang(m, 'lm_window', 12, 2)
+    hang(m, 'lm_banner', 10, 2)
+    hang(m, 'lm_banner', 14, 2)
+    on_faces(m, 'lm_alarm_on', [(9, 3), (15, 3)])
+    on_faces(m, 'lm_vent', [(6, 4), (18, 4)])
+
+    # ---- 7. Abyssal Chasm Reactor Architecture (Towering Glowing Cores & Pylons rising out of the Deep Void!) ----
+    # Placed directly into the non-walkable abyssal PIT bays (all solid pas=15 bases, pri>=1 tops — zero stranded floor!)
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+
+    # Flanking glowing Meridian energy cores & containment pylons rising majestically out of the abyssal shaft!
+    abyss_piece('lm_core', 4, 6)       # West abyssal reactor core (3x4 glowing violet-gold power column!)
+    abyss_piece('lm_core', 18, 6)      # East abyssal reactor core (3x4 glowing violet-gold power column!)
+    abyss_piece('lm_pylon', 7, 10)     # SW abyssal Lattice coil flanking the catwalk chasm
+    abyss_piece('lm_pylon', 16, 10)    # SE abyssal Lattice coil flanking the catwalk chasm
+    abyss_piece('lm_pylon_off', 4, 10) # Outer W damper coil in the deep shaft
+    abyss_piece('lm_pylon_off', 19, 10)# Outer E damper coil in the deep shaft
+    # Luminous glowing energy rings & steam plumes rising out of the power shaft
+    for rx, ry in ((7, 7), (17, 7), (9, 12), (15, 12)):
+        abyss_piece('lm_ring', rx, ry)
+    for sx, sy in ((5, 12), (19, 12)):
+        abyss_piece('lm_steam0', sx, sy)
+
+    # ---- 8. Elevated Plate Sanctum Framing (Marble Pillars, Arc-Lamps, Dramatic Overhead Light Shaft & Glow!) ----
+    # Frame the four corners of the elevated marble Plate Sanctum with classical Spire pillars & golden arc-lamps
     for name, x, y in (
-        ('lm_pylon', 7, 6), ('lm_pylon', 16, 6),
-        ('lm_pylon_off', 4, 10), ('lm_pylon_off', 19, 10),
-        ('lm_gen', 1, 6), ('lm_gen', 22, 6),
-        ('lm_gen', 1, 14), ('lm_gen', 22, 14),
-        ('lm_vault', 1, 9),
-        ('lm_rack', 4, 6), ('lm_rack', 20, 6),
-        ('lm_rack', 22, 9), ('lm_rack', 22, 11),
-        ('lm_junction', 6, 12), ('lm_junction', 18, 12),
-        ('lm_gearbox', 4, 15), ('lm_gearbox', 21, 16),
-        ('lm_steam0', 3, 13), ('lm_steam1', 21, 13),
-        ('lm_bollard', 9, 10), ('lm_bollard', 15, 10),
+        ('lm_pillar', 9, 4), ('lm_pillar', 15, 4),
+        ('lm_arclamp', 9, 7), ('lm_arclamp', 15, 7),
+        # West South-Vestibule Vault Control Bay (asymmetric hardware opposite East Service Door!)
+        ('lm_rack', 6, 15), ('lm_gearbox', 7, 17), ('lm_junction', 8, 17),
         ('lm_bollard', 10, 17), ('lm_bollard', 14, 17),
-        ('lm_bollard', 16, 17), ('lm_bollard', 20, 17),
+        ('lm_bollard', 16, 17), ('lm_bollard', 19, 17),
+        ('lm_lamp_on', 15, 15), ('lm_lamp_on', 9, 15),
     ):
         put_if(m, name, x, y)
+
+    # Forged brass safety railings along the north chasm overlook of the South Vestibule (y=15, x=7..10 & 14..18)
+    for x in (7, 8, 9, 10, 14, 15, 16, 17, 18):
+        if x in (10, 14, 18):
+            t = 'lm_bollard'
+        elif x in (7, 15):
+            t = 'lm_railing_w'
+        elif x in (9, 17):
+            t = 'lm_railing_e'
+        else:
+            t = 'lm_railing_m'
+        if (x, 15) not in m.keep_clear:
+            m.over.append((1, x, 15, P1(t)))
+            m.taken[15, x] = True
+
+    # Safety bollards solidly grounded on dark obsidian bridge curbs along the Catwalk edges (x=10 & x=14, y=12..14!)
+    for y in (12, 13, 14):
+        m.over.append((1, 10, y, P1('lm_bollard')))
+        m.over.append((1, 14, y, P1('lm_bollard')))
+
+    # Dramatic overhead shafts of light & golden aura pouring onto the Zap Plate Cradle!
+    m.stamps.append(('cv_shaft', 11, 5))
+    m.stamps.append(('pf_glow', 11, 6))
+    m.stamps.append(('pf_glow', 12, 6))
+
     m.paint()
-    # ---- Post-paint Plate Sanctum Dais & 4-Way Illuminated Lattice Conduit Network (walkable Layer 0/1) ----
-    # Elevated marble-trimmed containment dais (9..15, 6..10) with royal crimson-and-brass core (10..14, 6..9)
-    for y in range(6, 11):
+
+    # ---- 9. Post-Paint Architectural Floor Craft (Deep Void Chasm, Golden Sunburst Medallion, Catwalk, Energy Conduits) ----
+    # Replace generic cave pit with deep rich Meridian abyssal void tiles (lm_deep0..5, all pas=15!)
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+
+    # Solid dark obsidian girder curbs directly beneath the catwalk bridge bollards (x=10 & x=14, y=12..14) so nothing floats!
+    # Combined cell is pas=15 (lm_bollard on L1), so zero stranded floor and zero passguard hits!
+    for y in (12, 13, 14):
+        m.L[0, y, 10] = P1('Z_f0')
+        m.L[0, y, 14] = P1('Z_f0')
+
+    # Elevated Plate Sanctum Dais (x=9..15, y=5..9):
+    # Outer marble trim (lm_plaza0) + 5x5 MONUMENTAL GOLDEN MERIDIAN SUNBURST MEDALLION (lm_sun) dead-centered on Cradle (12,7)!
+    for y in range(5, 10):
         for x in range(9, 16):
             m.L[0, y, x] = P1('lm_plaza0')
-    for y in range(6, 10):
-        for x in range(10, 15):
-            part = ('n' if y == 6 else 's' if y == 9 else '') + ('w' if x == 10 else 'e' if x == 14 else '')
-            m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
-    # South ceremonial power spine (x=11..13, y=10..17): blazing center Lattice conduit flanked by heavy steel grates
-    for y in range(10, 18):
+    sun_L = STAMPS['lm_sun']['layers'][0]
+    for dy in range(5):
+        for dx in range(5):
+            m.L[0, 5 + dy, 10 + dx] = sun_L[dy][dx]
+
+    # Suspended Catwalk Bridge (x=11..13, y=13..15) + Vestibule approach (y=16..17):
+    # Dark riveted steel grates flanking a blazing central cyan-gold Lattice energy spine straight up to the marble stairs!
+    for y in range(13, 18):
         m.L[0, y, 12] = P1('lm_strip_v_on')
         m.L[0, y, 11] = P1('lm_grate')
         m.L[0, y, 13] = P1('lm_grate')
-    # West & East high-voltage Lattice feed trunks directly into the Cradle dais (y=8, x=3..9 & x=15..21)
-    for x in list(range(3, 10)) + list(range(15, 22)):
-        if m.L[1, 8, x] == 0:
-            m.L[0, 8, x] = P1('lm_strip_h_on')
-    # Secondary symmetrical dark-steel Lattice perimeter ring (x=6 & x=18, y=9..14; y=14, x=6..18)
-    for y in range(9, 15):
-        for x in (6, 18):
-            if m.L[1, y, x] == 0:
-                m.L[0, y, x] = P1('lm_strip_v_on')
-    for x in range(7, 18):
-        if x not in (11, 12, 13) and m.L[1, 14, x] == 0:
-            m.L[0, 14, x] = P1('lm_strip_h_on')
-    for cx, cy in ((6, 8), (18, 8), (6, 14), (18, 14)):
-        if m.L[1, cy, cx] == 0:
-            m.L[0, cy, cx] = P1('lm_grate')
-    # Clean feeder cables running from side generators into the trunk lines (Layer 1, walkable)
-    for x in (3, 4, 5, 19, 20, 21):
-        if m.L[1, 14, x] == 0:
-            m.L[1, 14, x] = P1('lm_cable_h')
-    # Lead-in grate threshold before the south Service door (18, 17)
-    m.L[0, 16, 18] = P1('lm_grate')
+
+    # South Vestibule: pure sleek dark obsidian-slate (Z_f0..3) so the glowing white-gold Marble Dais pops as the sole radiant focus!
+    for y in (15, 16, 17):
+        for x in range(6, 20):
+            if m.cls[y, x] == '.' and x not in (11, 12, 13):
+                m.L[0, y, x] = P1('Z_f%d' % ((x * 3 + y) % 4))
+    # Glowing cyan-gold Lattice floor conduit branching sleekly from center lift spine -> Service door (18,17) & West Control Bay
+    for x in range(14, 19):
+        m.L[0, 16, x] = P1('lm_strip_h_on')
+    m.L[0, 17, 18] = P1('lm_grate')
+    for x in range(8, 11):
+        m.L[0, 16, x] = P1('lm_strip_h_on')
+    m.L[0, 16, 7] = P1('lm_grate')
+
+    # Soft cliff-foot shadow along the north dais backdrop (y=5 on non-sunburst outer marble wings)
+    for x in (9, 15):
+        if m.L[1, 5, x] == 0 and m.L[2, 5, x] == 0:
+            m.L[2, 5, x] = P1('Z_shadow')
+
     write(m, 952, 'Meridian Spire - Plate Vault', 185, '952_meridian_plate_vault.yaml', bgm='Cave', field='NEON_GRID',
           metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
-          tone=[-8, -14, 14, 24],
-          fog={'name': 'prismfall_glass', 'opacity': 38, 'blend': 1, 'zoom': 200, 'sx': 1, 'sy': 0})
+          tone=[-12, -16, 16, 28],
+          fog={'name': 'prismfall_glass', 'opacity': 36, 'blend': 1, 'zoom': 200, 'sx': 1, 'sy': 0})
 
 
 # ============================================================================================ 187 / 188 / 189 small rooms

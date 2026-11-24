@@ -94,7 +94,7 @@ module PrismfallMaps
     929 => [16, 8, 0, 10],   # The Observers' Mesa
     930 => [14, 8, 0, 6],   # The Bone-Carters' Camp
     951 => [-16, -20, -4, 34],   # Meridian Spire - Service Lifts
-    952 => [-8, -14, 14, 24],   # Meridian Spire - Plate Vault
+    952 => [-12, -16, 16, 28],   # Meridian Spire - Plate Vault
   }
 
   # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
@@ -124,7 +124,7 @@ module PrismfallMaps
     925 => ["prismfall_seamist", 0, 60, 0, 150, 2, 0],   # The Steamline
     926 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Glass Dunes
     951 => ["prismfall_cave", 0, 32, 1, 100, 1, 0],   # Meridian Spire - Service Lifts
-    952 => ["prismfall_glass", 0, 38, 1, 200, 1, 0],   # Meridian Spire - Plate Vault
+    952 => ["prismfall_glass", 0, 36, 1, 200, 1, 0],   # Meridian Spire - Plate Vault
   }
 
   def self.apply_map_fog

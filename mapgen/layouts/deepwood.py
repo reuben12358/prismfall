@@ -162,10 +162,10 @@ def hollow():
 
     W, H = 38, 34
     VX = 4
-    cx, cy = 19, 16
+    cx, cy = 19, 17
     NX, NY = 19, 5
 
-    # Crisp 3-row frosted Sheridan crater rim cliff (matching 522 Glassed Orchard)
+    # Crisp 3-row frosted Sheridan crater rim cliff (lip / face / base, all pas=15)
     if 'shs3' not in K.KITS:
         K.KITS['shs3'] = dict(K.KITS['shs'], rows=[K.KITS['shs']['rows'][0],
                                                    K.KITS['shs']['rows'][1],
@@ -173,98 +173,138 @@ def hollow():
 
     r = Route(548, W, H, theme='snow', kit='shs3', base='.')
     m = r.m
-    m.grass = [[18442, 18443], [18444, 18445]]
-    m.tall = 18446
-    m.STAIRS = K.STAIRS_STONE
+    # Calm Kristiline snow base (texture lives in layered crystal turf, packed snow, drifts, and canopies — NOT blinding flat white!)
+    m.grass = K.SNOW_GROUND
+    m.tall = K.SNOW_TALL
+    m.STAIRS = tuple(STAMPS['fw_stair_' + k]['layers'][1][0][0] for k in 'lmr')
     m.grass2 = None
-    m.auto['e'] = ('KristilineDirt', 'rejuvenation')
+    m.lattice = K.RMap.TREES_SNOW
+    # Use KristilineWatersFrozen ('o') for the jagged glowing crystal-rimmed Glass Ravine,
+    # Packed Snow ('d') for winding frosted footpaths, KristilineDirt ('e') for living entry, Frozen Pond ('p') for side melt-pools
+    m.auto = {
+        'd': ('Packed Snow', 'pf'),
+        'e': ('KristilineDirt', 'rejuvenation'),
+        'w': ('KristilineWatersFrozen', 'rejuvenation'),
+        'o': ('KristilineWatersFrozen', 'rejuvenation'),
+        'p': ('Frozen Pond', 'pf'),
+        'W': ('Sea deep', 'rejuvenation'),
+    }
+    m.JOIN = dict(K.RMap.JOIN, w='woW', o='woW', p='p', e='e')
+    m.AUTO_Z = dict(K.RMap.AUTO_Z, w=0, o=0, p=0, e=1)
     m.keep_under = 'de'
-    rng = random.Random(5482)
+    rng = random.Random(5488)
 
     def in_living(x, y):
         return (x <= 3 and 13 <= y <= 19) or (x == 4 and 14 <= y <= 18)
 
-    # ---- 1. Heightmap: dramatic frosted crater rim (ht=1) ringing the depressed hollow (ht=0) ----
-    for y in range(H):
-        for x in range(W):
-            rad = math.hypot((x - cx) / 15.2, (y - cy) / 13.0) + 0.08 * (vnoise(x, y, 5481, 3.2) - 0.5)
-            m.ht[y, x] = 0 if rad < 1.0 else 1
+    # ---- 1. Sculpted Asymmetric Crater Bowl + Three Recessed North Cathedral Cliff Alcoves ----
+    # Continuous smooth amphitheater rim (ht=1) with ZERO floating 2-wide interior cliff stubs!
+    m.ht[:, :] = 1
+    # Main organic asymmetric basin floor (x 5..32, y 11..27, wider on W/E, narrower curving waist south)
+    for y in range(11, 29):
+        for x in range(5, 34):
+            # Asymmetric bulge: SW opens slightly for frozen pond cove, SE pinches inward with crystal grove
+            shift_x = -0.8 if y >= 23 else 0.4 * math.sin((y - 11) * 0.45)
+            rx = 13.6 - (1.8 if y >= 24 else 0.0)
+            ry = 8.8
+            q = ((x - (19.0 + shift_x)) / rx) ** 2 + ((y - 18.8) / ry) ** 2
+            q += 0.14 * (vnoise(x, y, 5481, 4.0) - 0.5)
+            if q <= 1.0:
+                m.ht[y, x] = 0
 
-    # Carve clean openings & flats:
-    # West living entry through the Bleed Veil (x <= 6, y in 13..19)
-    m.ht[13:20, 0:7] = 0
-    # South glass-choked road pocket (x in 16..20, y >= 27)
-    m.ht[26:34, 16:21] = 0
-    # North crater amphitheater shelves behind the ravine (rows 1..8, x 8..30):
-    # row 0 stays ht=1 so the 3-row frosted cliff face hangs cleanly on rows 1..3, leaving rows 4..8 flat & open
+    # Carve clean sacred depressed zones:
+    m.ht[13:20, 0:9] = 0                    # West living grove entry through Veil
+    m.ht[9:14, 6:33] = 0                    # Full Glass Ravine & bridgehead terrace
+    m.ht[14:24, 6:32] = 0                   # Clean interior bowl (trees & crystals shape internal sightlines!)
+    m.ht[24:29, 6:16] = 0                   # SW curved frozen melt-pond cove
+    m.ht[24:28, 22:30] = 0                  # SE sunken crystal-shrine alcove
+    m.ht[24:34, 16:21] = 0                  # South glass-choked gorge
+
+    # THREE RECESSED NORTH CATHEDRAL ALCOVES (y=1..8) separated by SOLID RAISED CLIFF SPURS (ht=1)
     m.ht[0, :] = 1
-    m.ht[1:9, 8:31] = 0
-    # Guarantee full crater bowl across the ravine & anchor terrace
-    m.ht[9:13, 6:33] = 0
-    m.ht[13:25, 5:33] = 0
-    # Majority-clean single-cell height spurs so shs3 cliff walls stay crisp and unbroken
-    for _ in range(2):
+    m.ht[1:9, 9:15] = 0                     # NW Cocooned Cottage alcove
+    m.ht[1:9, 17:22] = 0                    # Center Glass Matriarch Cathedral alcove
+    m.ht[1:9, 24:30] = 0                    # NE Cocoon-House & TM81 alcove
+    m.ht[0:7, 15:17] = 1; m.ht[7:9, 15:17] = 0
+    m.ht[0:7, 22:24] = 1; m.ht[7:9, 22:24] = 0
+    m.ht[0:7, 0:9] = 1; m.ht[0:7, 30:38] = 1
+    m.ht[7:9, 6:9] = 0; m.ht[7:9, 30:33] = 0
+
+    # Clean any 1-cell jagged cliff spurs so shs3 walls read as smooth continuous natural ridges
+    for _ in range(3):
         hi = (m.ht == 1)
         pad = np.pad(hi, 1, constant_values=True)
         n4 = pad[:-2, 1:-1].astype(int) + pad[2:, 1:-1] + pad[1:-1, :-2] + pad[1:-1, 2:]
         m.ht[hi & (n4 <= 1)] = 0
         m.ht[~hi & (n4 >= 3)] = 1
-    # Re-assert sacred flat zones after smoothing
-    m.ht[0, :] = 1
-    m.ht[1:9, 8:31] = 0
-    m.ht[9:13, 6:33] = 0
-    m.ht[13:20, 0:7] = 0
-    m.ht[26:34, 16:21] = 0
 
-    # ---- 2. The Glass Ravine (rows 9..10 across the entire walkable crater width) ----
-    # Seals the north sanctum shelves from the south crater floor except across D3 bridges a (28), b (10), c (19).
+    # Re-assert sacred flat zones & solid cliff spurs
+    m.ht[0, :] = 1
+    m.ht[1:9, 9:15] = 0; m.ht[1:9, 17:22] = 0; m.ht[1:9, 24:30] = 0
+    m.ht[0:7, 15:17] = 1; m.ht[7:9, 15:17] = 0
+    m.ht[0:7, 22:24] = 1; m.ht[7:9, 22:24] = 0
+    m.ht[0:7, 0:9] = 1; m.ht[0:7, 30:38] = 1
+    m.ht[9:14, 6:33] = 0; m.ht[14:24, 6:32] = 0
+    m.ht[13:20, 0:9] = 0; m.ht[24:34, 16:21] = 0
+
+    # ---- 2. The Jagged Glass Ravine (KristilineWatersFrozen 'w') & Asymmetric SW Frozen Melt-Pond ('p') ----
     for y in RAVINE:
         for x in range(W):
             if m.ht[y, x] == 0:
                 m.cls[y, x] = 'w'
-    # Gentle organic ravine widening away from the 3 bridgeheads (never touching x in {9..11, 18..20, 27..29})
+    # Organic jagged ravine coves curving into y=11..12 between the 3 bridgeheads (NEVER touching x in {9..11, 18..20, 27..29})
     for x in range(6, 33):
         if any(abs(x - bx) <= 1 for bx in XING.values()):
             continue
-        if m.ht[11, x] == 0 and (x in (13, 14, 15, 23, 24, 25)):
+        if m.ht[11, x] == 0 and x in (6, 7, 8, 12, 13, 14, 15, 16, 22, 23, 24, 25, 26, 30, 31, 32):
             m.cls[11, x] = 'w'
-        if m.ht[8, x] == 0 and (x in (15, 16, 22, 23)):
-            m.cls[8, x] = 'w'
+        if m.ht[12, x] == 0 and x in (13, 14, 15, 23, 24, 25):
+            m.cls[12, x] = 'w'
+    # Deep twilight water core along center of wider ravine bays
+    for y, x in ((10, 14), (10, 15), (10, 23), (10, 24), (11, 14), (11, 24)):
+        if m.cls[y, x] == 'w':
+            m.cls[y, x] = 'W'
 
-    # ---- 3. Paths & clearings ----
-    def lane(pts, width=1.9, cls='d'):
-        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
-            steps = max(abs(x1 - x0), abs(y1 - y0), 1) * 3
-            for i in range(steps + 1):
-                t = i / float(steps)
-                px = x0 + (x1 - x0) * t
-                py = y0 + (y1 - y0) * t
+    # Asymmetric organic SW Frozen Melt-Pond curving around (8..13, 25..28) (SE is a completely different crystal-shrine grove!)
+    for y in range(25, 29):
+        for x in range(6, 15):
+            if m.ht[y, x] == 0 and m.cls[y, x] == '.':
+                if ((x - 10.2) / 3.4) ** 2 + ((y - 26.8) / 1.9) ** 2 + 0.25 * (vnoise(x, y, 5484, 2.2) - 0.5) <= 1.0:
+                    m.cls[y, x] = 'p'
+
+    # ---- 3. Sinuous Organic Winding Footpaths ----
+    def lane(pts, width=1.75, cls='d', wobble=0.35):
+        P_pts = [pts[0]] + list(pts) + [pts[-1]]
+        for i in range(1, len(P_pts) - 2):
+            p0, p1, p2, p3 = P_pts[i - 1], P_pts[i], P_pts[i + 1], P_pts[i + 2]
+            steps = max(abs(p2[0] - p1[0]), abs(p2[1] - p1[1]), 1) * 4
+            for k in range(steps + 1):
+                t = k / float(steps); t2, t3 = t * t, t * t * t
+                px = 0.5 * (2 * p1[0] + (-p0[0] + p2[0]) * t + (2 * p0[0] - 5 * p1[0] + 4 * p2[0] - p3[0]) * t2 + (-p0[0] + 3 * p1[0] - 3 * p2[0] + p3[0]) * t3)
+                py = 0.5 * (2 * p1[1] + (-p0[1] + p2[1]) * t + (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * t2 + (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * t3)
+                rad = width * 0.50 + wobble * (vnoise(px, py, 5486, 3.0) - 0.5)
                 for yy in range(int(py) - 2, int(py) + 3):
                     for xx in range(int(px) - 2, int(px) + 3):
-                        if not m.inb(xx, yy) or m.cls[yy, xx] == 'w' or m.ht[yy, xx] != 0:
+                        if not m.inb(xx, yy) or m.cls[yy, xx] in 'wWp' or m.ht[yy, xx] != 0:
                             continue
-                        if (xx - px) ** 2 + (yy - py) ** 2 <= (width * 0.58) ** 2:
+                        if (xx - px) ** 2 + (yy - py) ** 2 <= rad * rad:
                             m.cls[yy, xx] = cls
                             r.road_mask[yy, xx] = True
 
-    # Living dirt path through the west gate right up to the Veil
     for x in range(0, 5):
         for y in (15, 16, 17):
             m.cls[y, x] = 'e'
             r.road_mask[y, x] = True
-    # Frosted crystal paths inside the hollow: Veil -> central clearing -> all 3 bridges, 3 anchors, cocoons, south way
-    lane([(5, 16), (11, 16), (19, 16)], width=2.2)
-    lane([(19, 16), (19, 11)], width=1.8)                       # to Bridge c
-    lane([(13, 16), (10, 14), (10, 11)], width=1.8)             # to Bridge b
-    lane([(19, 16), (25, 14), (28, 12), (28, 11)], width=1.8)   # to Bridge a
-    lane([(11, 16), (8, 20), (8, 22), (16, 22), (24, 22), (27, 22)], width=2.0)   # anchor terrace & cocoons
-    lane([(19, 16), (18, 22), (18, 28), (18, 32)], width=2.0)   # south glass-choked way
-    # North sanctum paths behind each bridge
-    lane([(10, 8), (10, 6), (13, 6)], width=1.7)                # NW cocooned cottage
-    lane([(19, 8), (19, 6)], width=1.9)                         # Center Matriarch nest
-    lane([(28, 8), (27, 6), (25, 6)], width=1.7)                # NE cocoon-house & TM81
 
-    # Keep living west entry cleanly on 'e'
+    lane([(5, 16), (9, 16), (13, 17), (19, 17)], width=1.9)                    # Veil -> central crystal heart
+    lane([(9, 16), (10, 14), (10, 11)], width=1.55)                            # NW spur to Bridge b
+    lane([(19, 17), (19, 14), (19, 11)], width=1.7)                            # ceremonial axis to Bridge c
+    lane([(19, 17), (24, 16), (28, 14), (28, 11)], width=1.55)                 # NE curve to Bridge a
+    lane([(9, 16), (8, 19), (8, 22), (12, 23), (16, 22), (20, 23), (24, 22), (27, 22)], width=1.8)  # Anchor terrace arc
+    lane([(19, 17), (17, 22), (19, 27), (18, 32)], width=1.7)                  # gently curving south choked way
+    lane([(10, 8), (10, 6), (13, 6)], width=1.55)
+    lane([(19, 8), (19, 6)], width=1.7)
+    lane([(28, 8), (27, 6), (25, 6)], width=1.55)
     for x in range(0, 5):
         for y in (15, 16, 17):
             m.cls[y, x] = 'e'
@@ -285,60 +325,192 @@ def hollow():
         (NX, NY), (NX, NY + 1), (NX, NY + 2), (NX - 1, NY + 2), (NX + 1, NY + 2), (NX, 8),
         (13, 6), (12, 6), (11, 6), (10, 6), (10, 7), (10, 8),
         (25, 6), (26, 6), (27, 6), (28, 6), (28, 7), (28, 8),
-        (27, 22), (26, 22), (26, 21), (25, 21), (25, 22),       # Glass cocoons + trial_overlay Humming cocoon (26,21)
+        (27, 22), (26, 22), (26, 21), (25, 21), (25, 22),
     ] + list(ANCHORS) + [(bx, y) for bx in XING.values() for y in (8, 11, 12)]
     for x, y in must_keep:
         r.road_mask[y, x] = True
         for dy in (-1, 0, 1):
             for dx in (-1, 0, 1):
                 xx, yy = x + dx, y + dy
-                if m.inb(xx, yy) and m.cls[yy, xx] != 'w':
-                    if (xx, yy) not in ((15, 6), (16, 6), (22, 6), (23, 6)):
+                if m.inb(xx, yy) and m.cls[yy, xx] not in 'wWp' and m.ht[yy, xx] == 0:
+                    if (xx, yy) not in ((15, 6), (16, 6), (22, 6), (23, 6), (15, 7), (16, 7), (22, 7), (23, 7), (15, 8), (16, 8), (22, 8), (23, 8)):
                         r.road_mask[yy, xx] = True
 
-    # ---- 5. Subtle frosted tall grass pockets on crater floor (for authentic Bleed encounters) ----
-    for cx_g, cy_g, rx, ry in ((11, 26, 3.0, 2.0), (26, 26, 3.0, 2.0), (13, 19, 2.6, 1.8), (25, 17, 2.8, 1.8)):
+    # ---- 5. Dense Interlocking Perimeter Forest (class 'T' -> TREES_SNOW lattice!) ----
+    m.plan_cliffs(rows=3)
+    for y in range(H):
+        for x in range(W):
+            if m.ht[y, x] == 1 and not m.cliff[y, x] and not in_living(x, y):
+                if not (x in (15, 16, 22, 23) and y <= 8):
+                    m.cls[y, x] = 'T'
+    # Organic woodland peninsulas sweeping into the lower flanks to hug the basin snugly
+    for cx_t, cy_t, rx_t, ry_t in ((5, 24, 2.4, 3.2), (32, 20, 2.6, 4.0), (14, 31, 2.6, 2.6), (23, 30, 3.0, 3.2)):
+        for y in range(max(0, int(cy_t - ry_t - 1)), min(H, int(cy_t + ry_t + 2))):
+            for x in range(max(0, int(cx_t - rx_t - 1)), min(W, int(cx_t + rx_t + 2))):
+                if m.ht[y, x] == 0 and m.cls[y, x] == '.' and not r.road_mask[y, x] and not m.cliff[y, x]:
+                    if ((x - cx_t) / rx_t) ** 2 + ((y - cy_t) / ry_t) ** 2 <= 1.0:
+                        m.cls[y, x] = 'T'
+
+    # ---- 6. Frosted Tall Grass Pockets tucked naturally beside trails & crystal groves ----
+    for cx_g, cy_g, rx, ry in ((12, 19, 2.2, 1.5), (24, 18, 2.5, 1.6), (15, 26, 2.0, 1.5), (22, 25, 2.2, 1.5)):
         for y in range(max(12, int(cy_g - ry - 1)), min(H - 3, int(cy_g + ry + 2))):
             for x in range(max(6, int(cx_g - rx - 1)), min(W - 4, int(cx_g + rx + 2))):
-                if m.cls[y, x] == '.' and m.ht[y, x] == 0 and not r.road_mask[y, x]:
+                if m.cls[y, x] == '.' and m.ht[y, x] == 0 and not r.road_mask[y, x] and not m.cliff[y, x]:
                     if ((x - cx_g) / rx) ** 2 + ((y - cy_g) / ry) ** 2 + 0.22 * (vnoise(x, y, 5489, 2.8) - 0.5) <= 1.0:
                         m.cls[y, x] = 't'
 
-    # ---- 6. Paint base terrain (ground, water autotiles, frosted shs3 crater cliffs) ----
+    # ---- 7. Paint Base Terrain, Autotiles, Cliffs, and Interlocking Snow-Forest Lattice ----
     m.paint_ground()
     m.autotiles()
     m.cliffs()
+    m.forest(K.RMap.TREES_SNOW, vstep=2)
 
-    # Subtle crystalline snow-drift variation across frosted crater floor & rim
+    # ---- 8. Seamless Layered Crystalline Ground (White Snow -> Lavender Crystal -> Deep Amethyst Core) ----
+    def paint_bordered_turf(mask, tiles_3x3, inner_4, center_alts=()):
+        nw, n_, ne, w_, c_, e_, sw, s_, se = tiles_3x3
+        in_nw, in_ne, in_sw, in_se = inner_4
+        for y in range(H):
+            for x in range(W):
+                if not mask[y, x]:
+                    continue
+                up = y > 0 and mask[y - 1, x]
+                dn = y + 1 < H and mask[y + 1, x]
+                lf = x > 0 and mask[y, x - 1]
+                rt = x + 1 < W and mask[y, x + 1]
+                if not up and not lf: t = nw
+                elif not up and not rt: t = ne
+                elif not dn and not lf: t = sw
+                elif not dn and not rt: t = se
+                elif not up: t = n_
+                elif not dn: t = s_
+                elif not lf: t = w_
+                elif not rt: t = e_
+                else:
+                    ul = y > 0 and x > 0 and mask[y - 1, x - 1]
+                    ur = y > 0 and x + 1 < W and mask[y - 1, x + 1]
+                    dl = y + 1 < H and x > 0 and mask[y + 1, x - 1]
+                    dr = y + 1 < H and x + 1 < W and mask[y + 1, x + 1]
+                    if not ul and in_nw: t = in_nw
+                    elif not ur and in_ne: t = in_ne
+                    elif not dl and in_sw: t = in_sw
+                    elif not dr and in_se: t = in_se
+                    elif center_alts and ((x * 7 + y * 13) % 3 == 0):
+                        t = center_alts[(x + y) % len(center_alts)]
+                    else:
+                        t = c_
+                m.L[0, y, x] = t
+
+    # White-snow-bordered lavender crystal turf (9901..9934): organic Bleed aura spreading across the hollow floor & north alcoves!
+    lav_mask = np.zeros((H, W), dtype=bool)
+    for cx_l, cy_l, rx_l, ry_l in (
+        (19, 17, 6.2, 4.4),   # wide central crystal heart
+        (10, 13, 2.5, 2.2),   # Bridge b crystal verge
+        (19, 12, 2.6, 2.2),   # Bridge c crystal verge
+        (28, 13, 2.5, 2.2),   # Bridge a crystal verge
+        (8, 22, 3.4, 2.4),    # Anchor 1 crystalline ring
+        (16, 22, 3.8, 2.5),   # Anchor 2 crystalline ring
+        (25, 22, 4.4, 2.8),   # Anchor 3 + Glass cocoons grove
+        (11, 6, 3.4, 3.0),    # NW cottage shelf
+        (19, 6, 3.4, 3.2),    # Center Matriarch shelf
+        (27, 6, 3.4, 3.0),    # NE cottage shelf
+    ):
+        for y in range(3, H - 2):
+            for x in range(5, W - 2):
+                if m.ht[y, x] == 0 and m.cls[y, x] in '.dt' and not m.cliff[y, x]:
+                    if ((x - cx_l) / rx_l) ** 2 + ((y - cy_l) / ry_l) ** 2 + 0.16 * (vnoise(x, y, 5491, 2.8) - 0.5) <= 1.0:
+                        lav_mask[y, x] = True
+    for _ in range(2):
+        pad = np.pad(lav_mask, 1, constant_values=False)
+        n4 = pad[:-2, 1:-1].astype(int) + pad[2:, 1:-1] + pad[1:-1, :-2] + pad[1:-1, 2:]
+        ok_l = (m.ht == 0) & np.isin(m.cls, ['.', 'd', 't']) & ~m.cliff
+        lav_mask = (lav_mask & (n4 >= 2)) | (~lav_mask & ok_l & (n4 >= 3))
+    paint_bordered_turf(
+        lav_mask,
+        (9901, 9902, 9903, 9909, 9910, 9911, 9917, 9918, 9919),
+        (9925, 9926, 9933, 9934),
+        center_alts=(9929, 9931, 9910),
+    )
+
+    # Deeper twilight-amethyst core (9488..9506) NESTED STRICTLY INSIDE lav_mask (1-tile inset = ZERO sharp snow seam!)
+    pad_lav = np.pad(lav_mask, 1, constant_values=False)
+    lav_inner = lav_mask & pad_lav[:-2, 1:-1] & pad_lav[2:, 1:-1] & pad_lav[1:-1, :-2] & pad_lav[1:-1, 2:]
+    ame_mask = np.zeros((H, W), dtype=bool)
+    # Matriarch cathedral floor (x=17..21, y=4..8) sits cleanly between solid cliff spurs!
+    for y in range(4, 9):
+        for x in range(17, 22):
+            if m.ht[y, x] == 0 and not m.cliff[y, x] and m.cls[y, x] not in 'wWp':
+                ame_mask[y, x] = True
+    # Central harp core nested cleanly inside lavender turf
+    for y in range(15, 20):
+        for x in range(16, 23):
+            if lav_inner[y, x]:
+                ame_mask[y, x] = True
+    paint_bordered_turf(
+        ame_mask,
+        (9488, 9489, 9490, 9496, 9497, 9498, 9504, 9505, 9506),
+        (9491, 9492, 9499, 9500),
+        center_alts=(9497, 9500),
+    )
+
+    # Soft shaded snow variation on remaining plain snow tiles
     for y in range(H):
         for x in range(W):
-            if m.cls[y, x] == '.' and not in_living(x, y) and not m.cliff[y, x]:
-                if vnoise(x, y, 5485, 3.2) > 0.60:
+            if m.cls[y, x] == '.' and not in_living(x, y) and not m.cliff[y, x] and not lav_mask[y, x] and not ame_mask[y, x]:
+                if vnoise(x, y, 5485, 3.0) > 0.54:
                     m.L[0, y, x] = 10395
 
-    # Living Sheridan green pocket west of the Bleed Veil (x <= 3, y in 13..19)
-    for y in range(12, 21):
+    # Living Sheridan emerald forest pocket west of the Bleed Veil (x <= 3, y 12..20)
+    for y in range(11, 22):
         for x in range(0, 5):
-            if in_living(x, y) or (x <= 3 and 12 <= y <= 20 and m.ht[y, x] == 0):
-                if m.cls[y, x] in '.t':
-                    m.L[0, y, x] = K.SH_GRASS[y & 1][x & 1]
-                    if not r.road_mask[y, x] and (x * 7 + y * 11) % 4 == 0:
-                        m.L[1, y, x] = K.DECOR_SH['flowers'][(x + y) % 4]
-                    elif not r.road_mask[y, x] and (x * 5 + y * 3) % 3 == 0:
-                        m.L[1, y, x] = K.DECOR_SH['green'][(x + y) % len(K.DECOR_SH['green'])]
+            if in_living(x, y) or (x <= 3 and 11 <= y <= 21 and m.ht[y, x] == 0):
+                if m.cls[y, x] in '.tT':
+                    m.L[0, y, x] = K.GRASS_DARK[y & 1][x & 1] if (x <= 1 or y in (12, 13, 19, 20)) else K.SH_GRASS[y & 1][x & 1]
+                    if not r.road_mask[y, x] and m.L[1, y, x] == 0:
+                        if (x * 7 + y * 11) % 3 == 0:
+                            m.L[1, y, x] = K.DECOR_SH['flowers'][(x + y) % len(K.DECOR_SH['flowers'])]
+                        elif (x * 5 + y * 3) % 2 == 0:
+                            m.L[1, y, x] = K.DECOR_SH['green'][(x + y) % len(K.DECOR_SH['green'])]
 
-    # Glass-sheen sparkles & frozen shards gleaming on the Glass Ravine surface
-    for y in range(H):
-        for x in range(W):
-            if m.cls[y, x] == 'w' and (x * 7 + y * 13) % 7 == 0 and x not in XING.values():
-                m.L[2, y, x] = 25824 + ((x + y) % 3)
+    # Helper to place raw Rejuvenation Kristiline multi-tile hero sprites cleanly with exact passability/priority
+    def put_kf_sprite(x0, y0, top_rows, bot_rows, force=False, allow_canopy_overlap=True):
+        h_top, h_bot = len(top_rows), len(bot_rows)
+        w = len(bot_rows[0])
+        if x0 < 0 or y0 < 0 or x0 + w > W or y0 + h_top + h_bot > H:
+            return False
+        if not force:
+            for dy in range(h_bot):
+                for dx in range(w):
+                    t = bot_rows[dy][dx]
+                    if t == 0: continue
+                    xx, yy = x0 + dx, y0 + h_top + dy
+                    if m.taken[yy, xx] or m.cliff[yy, xx] or m.cls[yy, xx] in 'wWpe' or r.road_mask[yy, xx]:
+                        return False
+        for dy in range(h_top):
+            for dx in range(w):
+                t = top_rows[dy][dx]
+                if t and m.inb(x0 + dx, y0 + dy):
+                    m.over.append((2, x0 + dx, y0 + dy, t))
+        for dy in range(h_bot):
+            for dx in range(w):
+                t = bot_rows[dy][dx]
+                if t and m.inb(x0 + dx, y0 + h_top + dy):
+                    m.over.append((1, x0 + dx, y0 + h_top + dy, t))
+                    m.taken[y0 + h_top + dy, x0 + dx] = True
+        return True
 
-    # ---- 7. North Sanctum Architecture: Cocooned Cottages, Matriarch's Nest, and D3 Shelf Dividers ----
-    # NW Cocooned Cottage (kf_flat 5x4 at (10, 2) -> front wall at y=5, door at (12,5), Cocooned house event at (13,6))
+    KF_TEAL_PINE_A = ([[0, 9833, 9834, 0], [0, 9841, 9842, 0]], [[0, 9849, 9850, 0], [0, 9857, 9858, 0]])
+    KF_TEAL_PINE_B = ([[0, 9837, 9838, 0], [0, 9845, 9846, 0]], [[0, 9853, 9854, 0], [0, 9861, 9862, 0]])
+    KF_SPRUCE_A = ([[9944, 9945, 9946], [9952, 9953, 9954]], [[9960, 9961, 9962], [9968, 9969, 9970]])
+    KF_SPRUCE_B = ([[9947, 9948, 9949], [9955, 9956, 9957]], [[9963, 9964, 9965], [9971, 9972, 9973]])
+    KF_CRYS_STAR = ([[9884, 9887]], [[9892, 9895]])
+    KF_CRYS_BLADES = ([[9886, 9885]], [[9894, 9893]])
+    KF_CRYS_MONO = ([[9868, 9869]], [[9876, 9877]])
+    KF_CRYS_SHRUB_A = ([[9864, 9865]], [[9872, 9873]])
+    KF_CRYS_SHRUB_B = ([[9880, 9881]], [[9888, 9889]])
+
+    # ---- 9. North Cathedral Architecture: Cocooned Cottages, Matriarch Dais, Cliff-Spur Crystal Spines ----
     m.stamp('kf_flat', 10, 2)
-    # NE Cocoon-House (kf_flat 5x4 at (25, 2) -> aligned cleanly on the NE shelf, TM81 at (25,6) right in its yard!)
     m.stamp('kf_flat', 25, 2)
-    # Drape silk webs & hanging cocoons over both cocooned cottages (Layer 2 overhead, pri=2)
     m.over.append((2, 11, 4, 22751))
     m.over.append((2, 28, 4, 22751))
     for wx, wy in ((11, 2), (26, 2)):
@@ -348,179 +520,191 @@ def hollow():
                 t = st['layers'][2][dy][dx]
                 if t:
                     m.over.append((2, wx + dx, wy + dy, t))
+    m.stamp('cr_purple_c', 9, 5); m.stamp('cr_teal_c', 14, 5)
+    m.stamp('cr_blue_c', 29, 5); m.stamp('cr_purple_c', 24, 5)
+    m.stamp('pf_lantern', 9, 6); m.stamp('pf_lantern', 29, 6)
 
-    # Matriarch's Glass-Silk Nest at (19, 5): crystalline floor dais, green root-glow, flanking crystal obelisks & web canopy
-    for dy in range(-1, 3):
-        for dx in range(-2, 3):
-            xx, yy = NX + dx, NY + dy
-            if m.inb(xx, yy) and not m.cliff[yy, xx]:
-                m.L[0, yy, xx] = 10395
-    m.stamp('cr_purple_t', 17, 4)
-    m.stamp('cr_teal_t', 21, 4)
-    m.stamp('cr_blue_c', 17, 6)
-    m.stamp('cr_pink_c', 21, 6)
-    m.stamp('pf_glow', NX - 1, NY)       # faint eerie glow under the roots beneath the Matriarch!
-    # Overhanging silk web arch framing the nest above the Matriarch (leaving (19, 5) crisp and readable)
+    # Glass Matriarch Cathedral Dais at (19, 5)
+    m.stamp('pf_glow', NX - 1, NY)
+    m.stamp('cr_purple_t', 17, 4); m.stamp('cr_teal_t', 21, 4)
+    m.stamp('fw_brazier', 17, 6); m.stamp('fw_brazier', 21, 6)
+    m.stamp('cr_blue_c', 17, 8); m.stamp('cr_pink_c', 21, 8)
     st = STAMPS['pf_p_web']
     for dy in range(st['h']):
         for dx in range(st['w']):
             t = st['layers'][2][dy][dx]
             if t:
                 m.over.append((2, NX - 1 + dx, NY - 2 + dy, t))
+    # Frozen waterfall cascades pouring down the outer cliff shoulders into the Glass Ravine flanks
+    m.stamp('fw_fall', 5, 4)
+    m.stamp('fw_fall', 30, 4)
 
-    # Solid crystal-spine dividers separating the 3 north shelves (enforces D3 anchor puzzle — zero row-4/6/8 bypass!)
-    # Every cell in x in (15,16,22,23), y in 3..8 gets a solid pas=15 base on Layer 1 so players can NEVER slip behind tall crystal tips or along cliff-foot row 3!
-    for sx, c_tid in ((15, P1('cr_purple_c')), (16, P1('cr_teal_c')), (22, P1('cr_teal_c')), (23, P1('cr_purple_c'))):
-        for sy in (3, 4, 6):
-            m.L[1, sy, sx] = c_tid
-            m.taken[sy, sx] = True
-    # Divider 1 (between NW Cocooned Cottage and Center Matriarch Nest): x = 15..16, y = 4..8
-    for nm, sx, sy in (('cr_purple_t', 15, 4), ('cr_teal_t', 16, 4),
-                       ('cr_teal_t', 15, 6), ('cr_purple_t', 16, 6),
-                       ('cr_purple_c', 15, 8), ('cr_blue_c', 16, 8)):
-        m.stamp(nm, sx, sy)
-    # Divider 2 (between Center Matriarch Nest and NE Cocoon-House/TM81): x = 22..23, y = 4..8
-    for nm, sx, sy in (('cr_teal_t', 22, 4), ('cr_purple_t', 23, 4),
-                       ('cr_purple_t', 22, 6), ('cr_teal_t', 23, 6),
-                       ('cr_blue_c', 22, 8), ('cr_purple_c', 23, 8)):
-        m.stamp(nm, sx, sy)
-    # Seal outer flanks of the north amphitheater (x=8 and x=30 on rows 4..8) cleanly
-    for sx, c_tid in ((8, P1('cr_blue_c')), (30, P1('cr_teal_c'))):
-        for sy in (4, 5):
-            m.L[1, sy, sx] = c_tid
-            m.taken[sy, sx] = True
-    for nm, sx, sy in (('cr_blue_t', 8, 5), ('cr_purple_c', 8, 7), ('cr_teal_c', 8, 8),
-                       ('cr_teal_t', 30, 5), ('cr_purple_c', 30, 7), ('cr_blue_c', 30, 8)):
-        m.stamp(nm, sx, sy)
+    # Crown the two raised north cliff dividers (x=15..16 & x=22..23) with GIANT LAVENDER CRYSTAL STAR CLUSTERS
+    for sx in (15, 22):
+        put_kf_sprite(sx, 2, *KF_CRYS_STAR, force=True)
+        put_kf_sprite(sx, 4, *KF_CRYS_BLADES, force=True)
+        for dx, cnm in ((0, 'cr_purple_c'), (1, 'cr_teal_c')):
+            m.L[1, 8, sx + dx] = P1(cnm)
+            m.taken[8, sx + dx] = True
 
-    # ---- 8. West Living Gateposts, Trees, South Choked Road Crystals & Anchor Shimmer Lines ----
-    # Mossy living gateposts framing the Bleed Veil (x=4, y=12..13 and y=19..20; leaves 14..18 clear!)
+    # ---- 10. West Living Forest Framing (Lush Green Oaks + Giant Tree + Mossy Ruin Gateposts) ----
     m.stamp('nr_col', VX, 12)
     m.stamp('nr_col', VX, 19)
-    # Living green oaks/pines west of the Veil
-    m.stamp('tr_oak2', 0, 11)
-    m.stamp('tr_pine', 0, 18)
-    m.stamp('nt_bush0', 2, 13)
-    m.stamp('nt_bush1', 2, 19)
+    m.stamp('pf_g_tree2', 0, 8)
+    m.stamp('tr_oak2', 0, 19)
+    m.stamp('nt_bush0', 2, 13); m.stamp('nt_bush1', 2, 19)
+    m.stamp('pf_lantern', 2, 14)
 
-    # South Glass-Choked Road barricade framing (18, 33) (old road to Thistledown Lea choked shut with crystal!)
-    for nm, sx, sy in (('cr_purple_t', 16, 31), ('cr_teal_t', 20, 31),
-                       ('cr_purple_c', 16, 33), ('cr_teal_c', 17, 33),
-                       ('cr_blue_c', 19, 33), ('cr_purple_c', 20, 33),
-                       ('gd_shard0', 15, 29), ('gd_shard1', 21, 29)):
-        if m.inb(sx, sy) and not m.taken[sy, sx]:
+    # ---- 11. Pure Wild Giant Frosted Trees & Dense Overlapping Crystal-Spruce Groves (NO treehouses!) ----
+    for nm, tx, ty in (
+        ('pf_g_tree2_ice', 0, 0),     # NW ancient frosted giant tree
+        ('pf_g_tree2_ice', 34, 0),    # NE ancient frosted giant tree
+        ('pf_g_tree2_ice', 1, 21),    # W-SW tall frosted giant tree
+        ('pf_g_tree2_ice', 33, 14),   # E tall frosted giant tree
+        ('pf_g_tree2_ice', 1, 27),    # SW corner ancient frosted giant tree (no doors!)
+        ('pf_g_tree2_ice', 33, 27),   # SE corner ancient frosted giant tree (no doors!)
+    ):
+        s = STAMPS[nm]
+        if tx + s['w'] <= W and ty + s['h'] <= H:
+            m.stamp(nm, tx, ty)
+
+    # SE Asymmetric Focal Landmark: Ancient Ruined Frost Shrine + Fallen Column placed FIRST so spruces frame it cleanly!
+    for nm, sx, sy in (('pf_shrine', 24, 24), ('nr_colfall', 21, 28)):
+        s = STAMPS[nm]
+        if all(m.inb(sx + dx, sy + dy) and not m.taken[sy + dy, sx + dx] and not m.cliff[sy + dy, sx + dx]
+               and m.cls[sy + dy, sx + dx] not in 'wWp' and not r.road_mask[sy + dy, sx + dx]
+               for dy in range(s['h']) for dx in range(s['w'])):
             m.stamp(nm, sx, sy)
 
-    # Crystal obelisks, warm trail lanterns, silk racks & shards anchoring the crater clearing
-    for nm, sx, sy in (('gw_spool', 29, 20), ('gw_rack', 29, 22),
-                       ('pf_lantern', 16, 14), ('pf_lantern', 22, 14),
-                       ('pf_lantern', 8, 12), ('pf_lantern', 30, 12),
-                       ('pf_lantern', 16, 27), ('pf_lantern', 20, 27),
-                       ('cr_purple_t', 13, 12), ('cr_teal_t', 24, 12),
-                       ('cr_teal_t', 7, 17), ('cr_purple_t', 30, 17),
-                       ('cr_blue_t', 12, 23), ('cr_pink_t', 22, 23),
-                       ('cr_purple_t', 14, 27), ('cr_teal_t', 22, 27),
-                       ('gd_shard0', 11, 20), ('gd_shard1', 25, 19)):
+    # Dense overlapping interior groves (clusters of 3-5 trees + crystal stars) framing intimate sightlines!
+    for tx, ty, sp in (
+        # NW-center & NE-center twin pine-spruce clusters framing the Bridge c ceremonial axis
+        (12, 12, KF_TEAL_PINE_A), (14, 13, KF_SPRUCE_B),
+        (22, 12, KF_TEAL_PINE_B), (20, 13, KF_SPRUCE_A),
+        # Outer west & east flank groves hugging the crater cliffs
+        (5, 11, KF_SPRUCE_A), (30, 11, KF_SPRUCE_B),
+        (5, 17, KF_TEAL_PINE_B), (30, 16, KF_TEAL_PINE_A),
+        # Lower-mid groves pinching the anchor terrace from the south coves
+        (11, 22, KF_SPRUCE_A), (19, 23, KF_TEAL_PINE_A),
+        # SE Crystal-Shrine grove (asymmetric dense evergreen-crystal wood framing the ruined shrine at (24,24)!)
+        (27, 23, KF_SPRUCE_B), (28, 25, KF_TEAL_PINE_B), (22, 25, KF_SPRUCE_A),
+        # SW pond bank overhanging spruces
+        (5, 25, KF_TEAL_PINE_A), (13, 27, KF_SPRUCE_B),
+        # South gorge flanks
+        (13, 29, KF_TEAL_PINE_B), (20, 28, KF_TEAL_PINE_A),
+    ):
+        put_kf_sprite(tx, ty, *sp)
+
+    # Rich kf_tree & purple/blue bleed trees woven into the grove clusters
+    for nm, tx, ty in (
+        ('kf_tree', 5, 10), ('kf_tree', 29, 10),
+        ('nt_tree_purp', 11, 16), ('nt_tree_blue', 24, 15),
+        ('nt_pine_purp', 12, 18), ('nt_pine_blue', 23, 17),
+        ('nt_tree_blue', 5, 20), ('nt_tree_purp', 29, 18),
+        ('nt_pine_purp', 21, 29), ('nt_pine_blue', 15, 29),
+    ):
+        s = STAMPS[nm]
+        if tx >= 0 and ty >= 0 and tx + s['w'] <= W and ty + s['h'] <= H:
+            foot_ok = True
+            for dy in range(max(0, s['h'] - 2), s['h']):
+                for dx in range(s['w']):
+                    xx, yy = tx + dx, ty + dy
+                    if m.taken[yy, xx] or m.cliff[yy, xx] or m.cls[yy, xx] in 'wWpe' or r.road_mask[yy, xx]:
+                        foot_ok = False
+            if foot_ok:
+                m.stamp(nm, tx, ty)
+
+    # Clustered giant Rejuvenation crystal star-bursts, sapphire monoliths & frosted berry-crystal shrubs
+    for tx, ty, sp in (
+        (13, 15, KF_CRYS_STAR), (23, 15, KF_CRYS_BLADES),
+        (6, 17, KF_CRYS_MONO), (30, 15, KF_CRYS_STAR),
+        (9, 23, KF_CRYS_SHRUB_A), (21, 23, KF_CRYS_SHRUB_B),
+        (28, 24, KF_CRYS_MONO), (26, 26, KF_CRYS_STAR), (23, 27, KF_CRYS_MONO),  # SE crystal-shrine cluster!
+        (14, 29, KF_CRYS_SHRUB_B), (21, 30, KF_CRYS_BLADES),
+    ):
+        put_kf_sprite(tx, ty, *sp)
+    # Dramatic twin giant crystal bursts choking the south road shut around (18, 33) (cleanly off x=18 path!)
+    put_kf_sprite(15, 31, *KF_CRYS_STAR, force=True)
+    put_kf_sprite(20, 31, *KF_CRYS_STAR, force=True)
+
+    # South Glass-Choked Road barricade crystal clusters framing (18, 33)
+    for nm, sx, sy in (('cr_purple_c', 16, 33), ('cr_teal_c', 17, 33),
+                       ('cr_blue_c', 19, 33), ('cr_purple_c', 20, 33),
+                       ('gd_shard0', 16, 28), ('gd_shard1', 20, 28)):
+        if m.inb(sx, sy) and not m.taken[sy, sx] and not r.road_mask[sy, sx]:
+            m.stamp(nm, sx, sy)
+
+    # Warm braziers, lanterns, silk racks, glowing crystal obelisks & frosted reeds
+    for nm, sx, sy in (
+        ('gw_spool', 29, 20), ('gw_rack', 29, 22),
+        ('fw_brazier', 17, 12), ('fw_brazier', 21, 12),
+        ('fw_brazier', 23, 25),                                # warm brazier beside the SE crystal shrine!
+        ('pf_lantern', 8, 12), ('pf_lantern', 30, 12),
+        ('pf_lantern', 6, 15), ('pf_lantern', 16, 26), ('pf_lantern', 20, 26),
+        ('cr_purple_t', 7, 21), ('cr_teal_t', 15, 20), ('cr_blue_t', 23, 20),
+        ('cr_pink_t', 29, 21), ('gd_shard0', 11, 21), ('gd_shard1', 25, 20),
+        ('fw_reeds0', 7, 25), ('fw_reeds1', 12, 28), ('fw_reeds0', 8, 28), ('fw_reeds1', 13, 25),
+    ):
         s = STAMPS[nm]
         ok = True
         for dy in range(s['h']):
             for dx in range(s['w']):
                 xx, yy = sx + dx, sy + dy
-                if not m.inb(xx, yy) or m.taken[yy, xx] or m.cliff[yy, xx] or m.cls[yy, xx] == 'w' or r.road_mask[yy, xx]:
+                if not m.inb(xx, yy) or m.taken[yy, xx] or m.cliff[yy, xx] or m.cls[yy, xx] in 'wWp' or r.road_mask[yy, xx]:
                     ok = False
         if ok:
             m.stamp(nm, sx, sy)
 
-    # Prismatic crystal-silk glints tracing north from Anchors 1-3 toward the ravine (clean translucent shimmer!)
-    for ax, ay in ANCHORS:
-        for ty in range(12, ay):
-            if m.ht[ty, ax] == 0 and m.cls[ty, ax] in '.d' and not m.taken[ty, ax] and not m.cliff[ty, ax]:
-                m.L[2, ty, ax] = 25824 + ((ax + ty) % 3)
-
-    # ---- 9. Frosted Crystal Crater Rim Forest & Ring of Crystal Trees (zero overlaps!) ----
-    def can_put_tree(nm, tx, ty, rim_only=False):
-        s = STAMPS[nm]
-        w, h = s['w'], s['h']
-        if tx < 0 or ty < 0 or tx + w > W or ty + h > H:
-            return False
-        if tx < 5 and 11 <= ty + h and ty <= 21:
-            return False
-        for dy in range(h):
-            for dx in range(w):
-                xx, yy = tx + dx, ty + dy
-                if m.taken[yy, xx] or m.cls[yy, xx] in 'we':
-                    return False
-                if dy >= h - 2:
-                    if m.cliff[yy, xx] or r.road_mask[yy, xx]:
-                        return False
-                    if rim_only and m.ht[yy, xx] != 1:
-                        return False
-                else:
-                    # Keep canopy off key north landmarks, Veil, anchors, bridges, and existing cliffs/cottage roofs
-                    if (xx, yy) in ((NX, NY), (13, 6), (25, 6), (26, 21), (27, 22), (18, 33)) or yy in RAVINE:
-                        return False
-        return True
-
-    # Hand-placed interior crystal grove trees ringing the crater clearing like a frosted harp amphitheater
-    interior_grove = [
-        ('kf_tree', 5, 11), ('kf_tree', 30, 11),
-        ('nt_tree_purp', 12, 12), ('nt_tree_blue', 23, 12),
-        ('nt_tree_blue', 5, 19), ('nt_tree_purp', 30, 18),
-        ('nt_pine_purp', 12, 17), ('nt_pine_blue', 22, 17),
-        ('kf_tree', 8, 24), ('kf_tree', 26, 24),
-        ('nt_tree_purp', 13, 25), ('nt_tree_blue', 22, 25),
-        ('nt_pine_blue', 6, 24), ('nt_pine_purp', 30, 23),
-    ]
-    for nm, tx, ty in interior_grove:
-        if can_put_tree(nm, tx, ty, rim_only=False):
-            m.stamp(nm, tx, ty)
-
-    # Dense frosted crystal canopy crowning the raised crater rim (ht == 1; strictly non-overlapping!)
-    rim_trees = ['kf_tree', 'nt_tree_purp', 'nt_tree_blue', 'nt_pine_purp', 'nt_pine_blue']
-    for ty in range(0, H - 2):
-        for tx in range(0, W - 1):
-            if m.ht[min(H - 1, ty + 2), min(W - 1, tx + 1)] != 1:
-                continue
-            nm = rng.choice(rim_trees)
-            if can_put_tree(nm, tx, ty, rim_only=True):
-                m.stamp(nm, tx, ty)
-    # Fill remaining rim gaps with smaller frosted pines & crystal clusters so ZERO isolated rim tiles remain
+    # Seal EVERY remaining walkable rim pocket (ht == 1) with solid pines/crystals/stones so ZERO stranded rim tiles exist!
     for ty in range(0, H):
         for tx in range(0, W):
             if m.ht[ty, tx] != 1 or m.taken[ty, tx] or m.cliff[ty, tx]:
                 continue
             if tx == 0 and ty in (0, 1, 2):
                 continue
-            placed = False
-            for nm in ('nt_pine_purp', 'nt_pine_blue'):
-                if can_put_tree(nm, tx, max(0, ty - 2), rim_only=True):
-                    m.stamp(nm, tx, max(0, ty - 2))
-                    placed = True
-                    break
-            if not placed:
-                m.stamp(rng.choice(['cr_purple_c', 'cr_teal_c', 'cr_blue_c', 'cr_pink_c']), tx, ty)
+            # Even if L2 has a tree canopy overhang, put solid rock/crystal on L1 if L1 is empty so the cell is truly impassable
+            if m.L[1, ty, tx] == 0:
+                m.over.append((1, tx, ty, P1(rng.choice(['cr_purple_c', 'cr_teal_c', 'cr_blue_c', 'fw_stone']))))
+                m.taken[ty, tx] = True
 
-    # Hanging crystal-silk cocoons tucked naturally beneath interior crystal tree canopies & around Glass cocoons (27, 22)
-    for gx, gy in ((6, 13), (31, 13), (13, 14), (24, 14), (6, 21), (26, 20), (28, 20), (9, 26), (27, 26)):
+    # Hanging crystal-silk cocoons & glowing aura tucked naturally around the interior groves & Glass cocoons (27, 22)
+    m.stamp('pf_glow', 26, 21)
+    for gx, gy in ((6, 13), (31, 13), (13, 14), (24, 14), (6, 21), (26, 20), (28, 20), (14, 25), (24, 25)):
         if m.inb(gx, gy + 1) and not m.cliff[gy, gx]:
             m.over.append((2, gx, gy, 22751))
             m.over.append((2, gx, gy + 1, 22752))
 
-    # Subtle frosted ground flowers, crystal clusters & Bleed shimmer sparkles
+    # Shimmering crystal-silk harp threads tracing north from Anchors 1-3 toward the Glass Ravine
+    for ax, ay in ANCHORS:
+        for ty in range(12, ay):
+            if m.ht[ty, ax] == 0 and m.cls[ty, ax] in '.d' and not m.taken[ty, ax] and not m.cliff[ty, ax]:
+                m.L[2, ty, ax] = 25824 + ((ax + ty) % 3)
+
+    # Glass-sheen glints on the jagged frozen ravine surface
+    for y in range(H):
+        for x in range(W):
+            if m.cls[y, x] in 'wW' and (x * 7 + y * 13) % 6 == 0 and x not in XING.values():
+                m.L[2, y, x] = 25824 + ((x + y) % 3)
+
+    # Ground micro-detailing: snowdrifts, ice cracks, frosted flora & subtle Bleed glints
+    drifts = [P1('fw_drift0'), P1('fw_drift1'), P1('fw_drift2')]
+    cracks = [P1('fw_crack0'), P1('fw_crack1'), P1('fw_crack2')]
     for y in range(4, H - 2):
         for x in range(5, W - 2):
-            if m.ht[y, x] != 0 or m.taken[y, x] or m.cliff[y, x] or m.cls[y, x] == 'w':
+            if m.ht[y, x] != 0 or m.taken[y, x] or m.cliff[y, x] or m.cls[y, x] in 'wWptT':
                 continue
             if m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
                 rv = rng.random()
-                if m.cls[y, x] == '.' and not r.road_mask[y, x] and rv < 0.045:
-                    m.stamp(rng.choice(['cr_purple_c', 'cr_teal_c', 'cr_blue_c', 'cr_pink_c', 'gd_shard2']), x, y)
-                elif m.cls[y, x] == '.' and rv < 0.14:
-                    m.L[1, y, x] = rng.choice([9725, 9725, 10620])
-                elif rv < 0.22:
+                if m.cls[y, x] == '.' and not r.road_mask[y, x] and rv < 0.04:
+                    m.stamp(rng.choice(['cr_purple_c', 'cr_teal_c', 'cr_blue_c', 'gd_shard2']), x, y)
+                elif m.cls[y, x] == '.' and rv < 0.13:
+                    m.L[1, y, x] = rng.choice(drifts + [9725, 10620])
+                elif lav_mask[y, x] and rv < 0.15:
+                    m.L[1, y, x] = rng.choice(cracks)
+                elif rv < 0.21:
                     m.L[2, y, x] = rng.choice([25824, 25825, 25826])
 
-    # ---- 10. Commit stamps & draw the shimmering Bleed Veil down x = 4 ----
+    # ---- 12. Commit stamps & draw the shimmering Bleed Veil down x = 4 ----
     m.put_stamps()
     veil_tiles = [26048, 26049, 26050]
     bleed_tiles = [25824, 25825, 25826]
@@ -529,7 +713,7 @@ def hollow():
         if m.L[2, y, VX + 1] == 0:
             m.L[2, y, VX + 1] = bleed_tiles[y % 3]
 
-    # ---- 11. Events (100% contract-preserved; cancel=2 fix on D3 anchors; Juno cleanly west of Veil) ----
+    # ---- 13. Events (100% contract-preserved; cancel=2 fix on D3 anchors; Juno cleanly west of Veil) ----
     E = []
     E.append({'type': 'sign', 'name': 'Glass-choked way', 'at': [18, 33], 'post': False, 'text': 'The old way south to Thistledown Lea is choked with glass. The Deepwood is the only way in or out now.'})   # map builder 9: Rev 14, no R3_COCOON
     E.append({'type': 'warp', 'name': 'To the Deepwood', 'at': [0, 16], 'link': 'DEEP_COCOON', 'arrive': [1, 16, 'right']})

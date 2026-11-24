@@ -203,20 +203,115 @@ def dress_544(m):
 
 # ====================================================================================================== 545
 def build_545():
+    import numpy as np
+    from terrain import vnoise
     m = Cave(40, 30, 'S', seed=545, pool='Salt Lake')
     B = m.box
-    B(3, 4, 12, 9); B(4, 3, 10, 3); B(2, 5, 13, 8)                    # the ladder chamber
-    B(4, 9, 9, 13)                                                    # down to the pump bay
-    B(2, 13, 10, 21); B(3, 12, 8, 22)                                 # the pump bay on the west shore
-    B(11, 9, 35, 22, FLOOR, 'w'); B(13, 8, 30, 8, FLOOR, 'w'); B(14, 23, 26, 23, FLOOR, 'w')   # the salt lake
-    B(30, 12, 33, 17); B(31, 11, 32, 18)                              # the amber islet
-    B(4, 23, 13, 27); B(5, 24, 37, 27); B(27, 23, 37, 23); B(30, 28, 34, 28)   # the south gallery
-    B(34, 18, 38, 27); B(36, 17, 38, 17)                              # the old workings
-    m.mass_at([(36, y) for y in range(9, 17)] + [(37, y) for y in range(9, 17)])
-    m.mass_at([(11, 22), (12, 22), (11, 23), (12, 23), (13, 23)])
-    m.mass_at([(20, 26), (21, 26), (21, 27)])                         # a fallen block in the south gallery
+
+    # ---- 1. Elevated NW Ladder Terrace (TER, ht=2) descending cleanly via stone stairs into West Pump Bay (FLOOR, ht=1) ----
+    # TER ends cleanly on y=8 -> 3-row salt cliff occupies y=8 (lip), y=9 (face), y=10 (base), leaving y=11..12 open!
+    m.room(8.0, 5.6, 5.0, 2.8, h=TER, c='.', rough=0.28, seed=11)
+    B(4, 4, 12, 8, TER, '.')
+    B(5, 3, 10, 4, TER, '.')
+    # Ensure y=9..12 below the ladder terrace is FLOOR so stairs(5, 8, w=3, n=3) open straight onto walkable Pump Bay floor!
+    B(3, 9, 10, 12, FLOOR, '.')
+
+    # ---- 2. West Pump Bay & SW Lagoon Overlook (FLOOR, ht=1) ----
+    m.room(6.2, 16.5, 4.4, 5.0, h=FLOOR, c='.', rough=0.30, seed=17)
+    B(3, 11, 10, 21, FLOOR, '.')
+    B(4, 21, 10, 24, FLOOR, '.')
+    # Sunken glowing turquoise brine drainage channel carved into the far west rock beside the Pump Wheel!
+    B(1, 14, 2, 18, FLOOR, 'w')
+
+    # ---- 3. Organic Jagged Subterranean Salt Lagoon (ZERO rectangular swimming pool!) ----
+    for y in range(8, 23):
+        for x in range(11, 36):
+            q = ((x - 22.8) / 12.6) ** 2 + ((y - 15.2) / 6.9) ** 2
+            q += 0.22 * (vnoise(x, y, 5459, 3.5) - 0.5)
+            if q <= 1.0:
+                m.cls[y, x] = 'w'; m.ht[y, x] = FLOOR
+    # Guarantee clean water corridor across causeway (x=11..29, y=14..16) & ring around Amber Islet (29..34, 11..18)
+    B(11, 14, 29, 16, FLOOR, 'w')
+    B(29, 11, 34, 18, FLOOR, 'w')
+    # Recessed north waterfall spring pool (TER opened back to y=2 so y=5..6 shows sparkling brine spilling over y=7 waterfall!)
+    B(21, 9, 25, 13, FLOOR, 'w')
+    B(22, 2, 23, 6, TER, 'w')
+
+    # Carve dramatic asymmetric ROCK-MASS HEADLANDS & STEPPED CRYSTAL REEFS (no blocky piano-key stubs or twin square boxes!)
+    # Bold sculpted NW headland (solid mass tapering organically into lagoon)
+    m.mass_at([(x, y) for x in range(12, 17) for y in range(7, 10)] + [(13, 10), (14, 10), (15, 10), (14, 11)])
+    # Tapered NE stalagmite cape flanking the waterfall grotto
+    m.mass_at([(x, y) for x in range(26, 30) for y in range(7, 10)] + [(27, 10), (28, 10)])
+    # Asymmetric south-center curved rock buttress (ends at y=20 so cliff base sits on y=22, leaving y=23 walkable!)
+    m.mass_at([(x, y) for x in range(20, 23) for y in range(18, 21)])
+    # TWO ASYMMETRIC CARVED ROCK-MASS CRYSTAL ISLETS rising organically from the lagoon (different shapes & offsets!):
+    m.mass_at([(14, 18), (15, 18), (16, 18), (14, 19), (15, 19), (16, 19)])             # SW stepped crystal reef (base y=21)
+    m.mass_at([(25, 17), (26, 17), (25, 18), (26, 18), (27, 18), (26, 19), (27, 19)])   # SE diagonal staggered crystal reef
+
+    # Amber Islet (30..33, 12..17): surrounded by impassable water on W/N/S and rock MASS on E!
+    B(30, 12, 33, 17, FLOOR, '.')
+    m.mass_at([(34, y) for y in range(9, 21)] + [(35, y) for y in range(8, 16)])
+
+    # ---- 4. Open Waterfront South Minecart Promenade & East Old Workings (FLOOR, ht=1) ----
+    # Water laps naturally along y=21..22; south promenade y=23..26 overlooks the glowing lagoon & crystal islets!
+    B(11, 21, 33, 22, FLOOR, 'w')
+    B(4, 23, 14, 27, FLOOR, '.')
+    B(11, 23, 29, 27, FLOOR, '.')
+    B(28, 23, 38, 27, FLOOR, '.')
+    B(35, 17, 38, 26, FLOOR, '.')
+    B(35, 16, 37, 17, FLOOR, '.')
+    # Sculpt asymmetric rock alcoves & ceiling-pillar buttresses along the south outer wall (y=27..28)
+    m.mass_at([(10, 27), (11, 27), (11, 28)])
+    m.mass_at([(19, 27), (20, 27), (21, 27), (20, 28)])
+    m.mass_at([(31, 27), (32, 27), (32, 28)])
+    # Natural rocky headland separating lagoon SE bay from East Workings (x=34, y=18..22 -> cliff faces east/south cleanly)
+    m.mass_at([(34, 18), (34, 19), (34, 20), (34, 21)])
+    # Ensure Lamps 3 (17,23) & 4 (24,23) stand right on the walkable waterfront promenade overlooking the lagoon!
+    for lx in (17, 24):
+        m.cls[23, lx] = '.'; m.ht[23, lx] = FLOOR
+        m.cls[24, lx] = '.'; m.ht[24, lx] = FLOOR
+    # Ensure Pump Bay shore around (10, 12..22) is clean walkable FLOOR (so Lamp 2 (10,12) & south turn are wide open!)
+    for y in range(11, 24):
+        for x in (8, 9, 10):
+            if m.ht[y, x] == FLOOR:
+                m.cls[y, x] = '.'
+
     m.tidy()
+    # Re-assert strict seal around Amber Islet & clean waterfall/causeway/south-promenade geometry after tidy()
+    for y in range(11, 21):
+        m.cls[y, 34] = 'x'; m.ht[y, 34] = MASS
+    for x in range(11, 30):
+        m.cls[15, x] = 'w'; m.ht[15, x] = FLOOR
+    for x in range(29, 34):
+        m.cls[11, x] = 'w'; m.ht[11, x] = FLOOR
+        m.cls[18, x] = 'w'; m.ht[18, x] = FLOOR
+    for y in range(12, 18):
+        m.cls[y, 29] = 'w'; m.ht[y, 29] = FLOOR
+    # Keep Lamp 2 (10,12) and its neighbours (9,12), (10,13) clean open FLOOR
+    for xx, yy in ((9, 11), (10, 11), (9, 12), (10, 12), (9, 13), (10, 13)):
+        m.cls[yy, xx] = '.'; m.ht[yy, xx] = FLOOR
+    # Keep South Waterfront Promenade (x=10..33, y=23..26) & East Workings (35..37, 17..26) cleanly walkable FLOOR
+    for x in range(11, 34):
+        if m.ht[22, x] == FLOOR:
+            m.cls[22, x] = 'w'
+        for y in (23, 24, 25, 26):
+            m.cls[y, x] = '.'; m.ht[y, x] = FLOOR
+    for y in range(17, 27):
+        for x in (35, 36, 37):
+            m.cls[y, x] = '.'; m.ht[y, x] = FLOOR
+    # Keep upper waterfall spring pool cleanly open water on (22..23, 2..6) so y=5..6 shines above the cliff!
+    for xx in (22, 23):
+        for yy in range(2, 7):
+            m.cls[yy, xx] = 'w'; m.ht[yy, xx] = TER
+    # Keep west brine drainage channel cleanly turquoise brine (1..2, 14..18)
+    for xx in (1, 2):
+        for yy in range(14, 19):
+            m.cls[yy, xx] = 'w'; m.ht[yy, xx] = FLOOR
+
+    # Stone stairway cleanly spanning the 3-row TER->FLOOR cliff (y=8 lip, y=9 face, y=10 base -> opens onto y=11 FLOOR!)
+    m.stairs(5, 8, w=3, n=3, c='.')
     m.causeway = [(x, 15) for x in range(11, 30)]
+    m.patch_args = (0.56, 4.2)
     m.plan_cliffs(rows=3)
     return m
 
@@ -256,77 +351,129 @@ def events_545(m):
         b = (64 if i > 0 else 0) | (4 if i < n - 1 else 0)
         E.append({'type': 'event', 'name': 'Causeway %d,%d' % (x, y), 'at': [x, y], 'pages': [
             {}, {'cond': {'switch': S_LAKE}, 'graphic': {'tile': P1('S_floorpatch_%02d' % NB2AUTO[b])}}]})
-    m.keep_clear |= {(7, 5), (8, 15), (9, 15), (10, 15), (30, 15), (24, 24)} | set(m.causeway)
+    m.keep_clear |= ({(7, 5), (6, 5), (8, 5), (5, 7), (6, 7), (7, 7), (5, 8), (6, 8), (7, 8),
+                      (5, 11), (6, 11), (7, 11), (6, 12), (8, 12), (9, 12), (10, 12), (10, 13),
+                      (8, 15), (9, 14), (9, 15), (10, 15), (9, 19), (10, 18), (10, 20),
+                      (30, 15), (31, 15), (31, 14), (31, 16), (32, 15),
+                      (17, 23), (17, 24), (24, 23), (24, 24), (25, 25), (26, 25),
+                      (35, 17), (35, 18), (36, 17), (36, 18), (36, 26), (37, 25), (37, 26)}
+                     | {(x, 25) for x in range(8, 37)}
+                     | {(x, 24) for x in range(8, 15)}
+                     | {(36, y) for y in range(17, 27)}
+                     | set(m.causeway))
 
 
 def dress_545(m):
     p = 'S'
+    import rcompose as RC
     ST = __import__('cavekit').STAMPS
     m.put('cv_ladder', 7, 3)
     m.put('cv_pump', 7, 13)
-    # Coherent south-gallery salt-hauling rail siding (x=15..25, y=24; row 25 stays wide open all the way across!)
-    for x in range(16, 25):
+
+    # ---- 1. Subterranean Brine Waterfall cascading cleanly from TER spring ledge (y=6) down cliff (y=7..9) into lagoon (y=10)! ----
+    wf_crest = RC.vauto('rejuvenation', 'Waterfall crest', 0)
+    wf_mid = RC.vauto('rejuvenation', 'Waterfall', 0)
+    wf_bot = RC.vauto('rejuvenation', 'Waterfall bottom', 0)
+    for wx in (22, 23):
+        m.over.append((2, wx, 7, wf_crest))
+        m.over.append((2, wx, 8, wf_mid))
+        m.over.append((2, wx, 9, wf_mid))
+        m.over.append((2, wx, 10, wf_bot))
+
+    # ---- 2. Atmospheric Subterranean Light Shafts (cv_shaft, pri=2) & Warm Glow Pools (pf_glow, pri=5) ----
+    for sx, sy in ((12, 12), (22, 11), (31, 12), (18, 23)):
+        if m.inb(sx + 1, sy + 2):
+            m.stamps.append(('cv_shaft', sx, sy))
+    m.stamps.append(('pf_glow', 31, 13))        # golden bioluminescent aura illuminating Old Amber on the islet!
+    m.stamps.append(('pf_glow', 8, 15))         # warm pool of light beside the brine pump & causeway head
+
+    # ---- 3. Timber Causeway Launch Pier (x=10, y=14..16) & South Minecart Hauling Siding (y=24) ----
+    m.over.append((1, 10, 14, P1('cv_raft_t')))
+    m.over.append((1, 10, 15, P1('cv_raft_m')))
+    m.over.append((1, 10, 16, P1('cv_raft_b')))
+    for x in range(16, 24):
         m.tile(P1('cv_rail_h'), x, 24)
     m.tile(P1('cv_rail_end'), 15, 24)
-    m.tile(P1('cv_rail_end'), 25, 24)
+    m.tile(P1('cv_rail_end'), 24, 24)
     m.tile(P1('cv_cart_salt'), 18, 24)
-    m.tile(P1('cv_cart'), 22, 24)
-    # Timber frames, salt-harvest staging stacks, barrels, tools, and support posts
+    m.tile(P1('cv_cart'), 21, 24)
+
+    # ---- 4. Lived-In Subterranean Salt-Mine Vignettes (Timber Frames, Barrels, Salt Stacks, Sump Sluice & Posts) ----
     for name, x, y in (
-        ('cv_frame', 30, 25), ('cv_saltblocks', 4, 25), ('cv_saltblocks', 35, 24),
-        ('cv_tools', 3, 7), ('cv_tools', 9, 13), ('wr_sacks', 12, 26), ('wr_sacks', 3, 19),
-        ('cv_post', 16, 26), ('cv_post', 29, 25), ('cv_post', 34, 21), ('cv_post', 4, 12), ('cv_post', 10, 8),
-        ('hb_barrels', 37, 19), ('hb_barrels', 3, 4),
+        ('cv_frame', 28, 23), ('cv_frame', 35, 21),
+        ('cv_saltblocks', 4, 25), ('cv_saltblocks', 35, 25), ('cv_saltblocks', 4, 6),
+        ('cv_tools', 9, 4), ('cv_tools', 4, 15),
+        ('wr_sacks', 12, 26), ('wr_sacks', 3, 20), ('wr_sacks', 37, 22),
+        ('cv_post', 3, 13), ('cv_post', 3, 17), ('cv_post', 15, 26), ('cv_post', 26, 26), ('cv_post', 35, 23),
+        ('hb_barrels', 3, 5), ('hb_barrels', 37, 19), ('hb_boxes', 4, 21),
+        ('cv_sluice', 3, 15), ('cv_chain', 6, 13),
     ):
         L = ST[name]['layers']; w, h = len(L[0][0]), len(L[0])
         if m.free(x, y, w, h, on='.') and not any((xx, yy) in m.keep_clear for xx in range(x, x + w) for yy in range(y, y + h)):
             m.put(name, x, y)
-    # Miners' wall sconces along cavern cliff faces (warm subterranean illumination)
-    for x, y in ((4, 2), (10, 2), (5, 11), (13, 22), (22, 22), (31, 22), (36, 16)):
+
+    # ---- 5. Warm Miners' Wall Sconces along Cavern Cliff Faces ----
+    for x, y in ((4, 2), (10, 2), (8, 9), (14, 10), (27, 9), (36, 15), (34, 19)):
         if m.inb(x, y) and m.cliff[y, x]:
             m.over.append((2, x, y, P1('cv_walllamp')))
-    # Cavern-wall salt crystals & rock boulders
-    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0'], 16, seed=4)
-    # Tall crystalline spires framing the ladder chamber, pump bay, amber islet, and east workings
-    for name, x, y in (
-        ('cv_xrose2', 3, 17), ('cv_xblue2', 2, 13), ('cv_xrose2', 12, 5),
-        ('cv_xrose2', 30, 12), ('cv_xsea2', 33, 12), ('cv_xrose2', 33, 16),
-        ('cv_xblue2', 38, 22), ('cv_xsea2', 35, 18), ('cv_xrose2', 5, 26), ('cv_xblue2', 14, 26),
-    ):
-        if m.free(x, y, 1, 2, on='.') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
-            m.put(name, x, y)
-    # Bioluminescent cold-glow fungus hugging the brine shore & wet ledges
-    for x, y in ((2, 15), (6, 21), (9, 20), (33, 14), (31, 16), (25, 27), (36, 25), (13, 27), (8, 8), (35, 22)):
-        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
-            m.over.append((2, x, y, P1('cv_fung0'))); m.taken[y, x] = True
-    # Rich crystalline reef formations rising from the glowing salt lagoon (strictly NEVER on y=15 causeway!)
-    def lagoon_spire(name, x, y):
+
+    # ---- 6. Clustered Stalagmites & Tall Crystal Spires ANCHORED ON SOLID ROCK (Shorelines, Promontories, Rock Islets!) ----
+    def rock_cluster_spire(name, x, y):
         L = ST[name]['layers']; h = len(L[0])
-        if all(m.inb(x, y + dy) and m.cls[y + dy, x] == 'w' and (x, y + dy) not in m.causeway for dy in range(h)):
+        if all(m.inb(x, y + dy) and (x, y + dy) not in m.causeway for dy in range(h)):
             for dy in range(h):
                 for z in (1, 2):
                     if L[z][dy][0]:
                         m.over.append((z, x, y + dy, L[z][dy][0]))
+                        if z == 1:
+                            m.taken[y + dy, x] = True
+
     for name, x, y in (
-        # North brine reefs (rows 9..12)
-        ('cv_xrose2', 14, 10), ('cv_xblue2', 19, 9), ('cv_xsea2', 25, 10), ('cv_xrose2', 28, 9),
-        ('cv_xsea2', 16, 11), ('cv_xblue2', 22, 11),
-        # South brine reefs (rows 17..21)
-        ('cv_xrose2', 14, 19), ('cv_xsea2', 19, 18), ('cv_xblue2', 24, 19), ('cv_xrose2', 28, 18),
-        ('cv_xblue2', 16, 20), ('cv_xsea2', 34, 19),
+        # NW sculpted rock headland (x=12..16, y=7..11)
+        ('cv_xrose2', 13, 8), ('cv_xblue2', 14, 9), ('cv_xsea2', 15, 9), ('S_stal', 12, 8),
+        # NE stalagmite cape flanking the waterfall grotto (x=26..29, y=7..10)
+        ('cv_xsea2', 27, 8), ('cv_xrose2', 28, 9), ('S_stal', 26, 8),
+        # SW stepped crystal reef rock islet (x=14..16, y=18..19)
+        ('cv_xrose2', 14, 17), ('cv_xblue2', 15, 18), ('cv_xsea2', 16, 18),
+        # SE diagonal staggered crystal reef islet (x=25..27, y=17..19)
+        ('cv_xblue2', 25, 16), ('cv_xrose2', 26, 17), ('S_stal', 27, 18),
+        # South-center rock buttress (x=20..22, y=18..20)
+        ('cv_xsea2', 20, 17), ('cv_xrose2', 21, 18), ('S_stal', 22, 18),
     ):
-        lagoon_spire(name, x, y)
+        rock_cluster_spire(name, x, y)
+
+    # Low crystal skirts & halite cubes hugging ONLY solid rock-islet bases & cliff shores (ZERO mid-water stickers!)
     for x, y, n in (
-        # Halite cubes & low crystal clusters around the reef spires
-        (13, 11, 'cv_xsalt'), (15, 11, 'cv_xblue'), (18, 11, 'cv_xsalt'), (20, 10, 'cv_xsea'),
-        (21, 11, 'cv_xsalt'), (24, 11, 'cv_xblue'), (26, 11, 'cv_xsalt'), (27, 10, 'cv_xsea'),
-        (12, 20, 'cv_xsalt'), (13, 19, 'cv_xsea'), (15, 20, 'cv_xsalt'), (17, 21, 'cv_xblue'),
-        (20, 20, 'cv_xsalt'), (21, 19, 'cv_xsea'), (23, 21, 'cv_xsalt'), (25, 20, 'cv_xblue'),
-        (27, 20, 'cv_xsalt'), (29, 19, 'cv_xsea'), (33, 20, 'cv_xsalt'), (34, 18, 'cv_xblue'),
+        (13, 10, 'cv_xsalt'), (15, 10, 'cv_xsea'), (14, 11, 'cv_xblue'),
+        (26, 9, 'cv_xsalt'), (29, 9, 'cv_xblue'),
+        (14, 19, 'cv_xsalt'), (16, 19, 'cv_xsea'), (25, 18, 'cv_xsalt'), (27, 19, 'cv_xblue'),
+        (20, 20, 'cv_xsalt'), (22, 20, 'cv_xblue'), (21, 9, 'cv_xsea'), (24, 9, 'cv_xblue'),
     ):
-        if m.inb(x, y) and m.cls[y, x] == 'w' and (x, y) not in m.causeway:
+        if m.inb(x, y) and (x, y) not in m.causeway:
             m.over.append((1, x, y, P1(n)))
-    m.dress(12, seed=2)
+            m.taken[y, x] = True
+
+    # Walkable-chamber tall crystal spires & stalagmites framing Ladder Terrace, Pump Bay, Amber Islet, & South/East Workings
+    for name, x, y in (
+        ('cv_xrose2', 3, 5), ('cv_xblue2', 12, 4), ('S_stal', 3, 11),
+        ('cv_xrose2', 3, 18), ('cv_xsea2', 9, 20),
+        ('cv_xrose2', 30, 12), ('cv_xsea2', 33, 12), ('cv_xblue2', 33, 16), ('cv_xrose2', 30, 16),
+        ('cv_xblue2', 38, 17), ('cv_xsea2', 38, 23), ('S_stal', 35, 26),
+        ('cv_xrose2', 5, 26), ('cv_xblue2', 13, 26), ('S_stal', 29, 26),
+    ):
+        if m.free(x, y, 1, 2, on='.') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
+            m.put(name, x, y)
+
+    # Clustered wall-foot salt crystals & rocks
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0'], 14, seed=4)
+
+    # Bioluminescent cold-glow fungus hugging wet lagoon shores, sump rim, & Amber Islet
+    for x, y in ((3, 15), (4, 18), (7, 20), (9, 21), (32, 13), (31, 16), (33, 15), (16, 26), (25, 26), (37, 24), (9, 7), (4, 7)):
+        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
+            m.over.append((2, x, y, P1('cv_fung0' if (x + y) % 2 == 0 else 'cv_fung1')))
+            m.taken[y, x] = True
+
+    m.dress(14, seed=2)
 
 
 # ====================================================================================================== 564
