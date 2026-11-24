@@ -53,7 +53,7 @@
 | Ch | Title | Key event 1 | Key event 2 | Consequence | Status |
 |---|---|---|---|---|---|
 | 18 | Once Upon a Time | **Pecharunt** in the Lightless Deep (the Sweetrot thralls freed) | **The Hymn of Return** and **K7** (Kestrel begs the PC to stay out; `:ch18_kestrel_ring`; GO_STAY_OUT) | the Return path; Kestrel's Mega at K8 | ● (`37_SCRIPT_CH18.md`) |
-| 19 | The Last Gate | **Sigrun's trial and oath** (`:ch19_oath`), Reshiram wakes | **The Battle of the Glass Dunes** (WAR-1, `:war_climax`) | the war's outcome; the Festival seats | ● |
+| 19 | The Last Gate | **Sigrun's trial and oath** (`:ch19_oath`), Reshiram wakes | **The Battle of the Glass Dunes** (WAR-1, `:war_climax`) | the war's outcome; the Festival seats | ● (`38_SCRIPT_CH19.md`) |
 | 20 | The Festival of Champions | **The opening ceremony**: all eighteen Plates and the Tuning, and the PC's shard sees Arceus | **Valen's audience** (`:ch20_audience`) and the Night of Masques; K8 | the Consent count on Tamsin's banners; Larch's Engine board | ● |
 | 21 | Sovereign | **The hijack**: Voss and the Arbiter Engine | **Arceus**, Valen's death and the final choice (`:ch21_final`) | the endings | ● |
 
