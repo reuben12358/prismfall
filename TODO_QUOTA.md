@@ -43,6 +43,7 @@
 ## 6. Cutscenes, audio and Codex
 - [ ] Cutscene P0 engine fixes (letterbox and bust lifecycle, input lock, fade/tint stacking). The two-pillar laws are the style rule. Rewriting existing scenes needs Reuben's sign-off, one scene at a time.
 - [ ] Audio v4.3 wiring: `design/MAP_AUDIO.yaml` → mapgen BGS, the 67 trainer-type BGMs, the ME/SE hooks, a selftest-safe `VoiceTicker`, then the cutscene audio matrix.
+- [ ] Anime OST pool (`gemini_recommends/2026-11-23_anime-ost-situational-bgm`): Reuben auditions and locks, then the audio agent masters and slots the locked picks. Gemini needs to commit the audition page first.
 - [ ] Codex: the class line on cards (CODEX_SPEC), post-game rematch tables (STORY_REMATCHES), gauntlets (G1 in the Ch14+ hub).
 
 ## 7. Captures and GIFs

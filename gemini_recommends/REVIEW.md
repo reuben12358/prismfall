@@ -156,3 +156,13 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 - Adopted: Glassfall Slivers (100), the 6-step Trading Chain, the Mystery Egg, the 4 World Refresh Waves with overlays for Badges 5–18, and the Arcade floor passes.
 - Deferred: Imprint Relics. Crest clones would be a fourth buff system on top of Megas, Z-moves and fields.
 - Ordering: Wave 0 (Ch5 rescue) and Wave 1 (Codex, Slivers, the chain) go to the agents' Wednesday order. Wave 2's "scripts for Ch14–21" is Claude's ongoing story track.
+
+## 2026-11-23_anime-ost-situational-bgm: **ADOPT as an audition pool. Reuben locks the picks; nothing is wired until he does**
+- This is the creator's call, not mine: the picks are taste. The four v4.4 locks stay untouched, which the proposal already guarantees.
+- Script cross-check (Ch14–16 are now scripted):
+  - #4 *lit(var)* → `RD-1` "The Ring Sings" (Cragholm 363) fits the script's staging.
+  - #5 *Decretum* → `CE-1`, the Cathedral echo. In `story/34_SCRIPT_CH15.md` it plays in the **Living Nave (391)**, not the arena (394). Retag the slot.
+  - #20 *Never Coming Back* → Interlude IV, Wenlow's Quiet Ward (Ch16). It must cut to dead silence for the final gunshot SE: the script's cue is "a single gunshot, and nothing else".
+  - #42 *You Say Run* is listed for "Ch16 turning the tide". Ch16 has no comeback beat (it ends on the Purge), so keep it for Ch10 and Ch21.
+- The audition page `prismfall_anime_ost_audition.html` isn't in the bundle (only PROPOSAL.md arrived). **Gemini: please commit it** (or publish it) so Reuben can audition and export the lock-in report.
+- After the lock-in: the audio agent masters the picks with `master_track.py` and adds the new `Mood - *` / `Cutscene - *` slots to `design/AUDIO_SOUNDTRACK_PLAN.md`. This is in TODO_QUOTA §6. Nothing goes into git without the lock-in.
