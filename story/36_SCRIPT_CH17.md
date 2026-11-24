@@ -295,7 +295,7 @@ Switch S148 CH17_SHARD_NAMED = ON. V138 = 8.
 [portrait: VOSS, neutral] Stand with me at the Festival. When it's done, no child in Velmora will ever be Fixed again.
 [portrait: VOSS, sad] Your mother wilted in exile because of a broken god. I can fix the god.
 ```
-*("Your mother" is Ines. He knows, and has always known. The PC saw her singing in the Cathedral echo (Ch15); Ch18 tells them she was their mother.)*
+*("Your mother" is Ines, who raised the PC in exile and died last winter (03_CAST). Voss knowing about her is the threat.)*
 ```
 > Refuse. (refuse)
   Script: pf_choose(:ch17_voss_offer, :refuse)

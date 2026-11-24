@@ -16,10 +16,10 @@
 - [ ] `mapgen/build.py`: a post-paint BFS reachability check, and gate packaging on `export_tilesets_rxdata.py --check`.
 
 ## 2. Bosses and battle engine
-- [ ] **No-legendary-captures safety net** (Gemini Part B.2): a catch gate before S160; register `:LOYAL_THREE` and `:PECHARUNT_DEEP` with `:catch => false`.
+- [ ] **No-legendary-captures safety net** (Gemini Part B.2): a catch gate before S160; register `:LOYAL_THREE` with `:catch => false` (`:PECHARUNT_DEEP` is done).
 - [ ] **Gym 1 Dorian redesign** (Gemini Part C; Reuben's locked Meloetta ace): add the C.3 PBS blocks, the Grand Stage `:not_moves => [:RELICSONG]` cap and the "Act One Matinee" trainer-boss scale (0.80/0.85/0.78); allowlist Smeargle's Sketch moves; then run the gym-1 harness before merging.
 - [ ] **EBDX sprite work** (Gemini Part A): the shiny static fallback path (fix in the Bridge), `.PNG` → `.png`, the oversized Gen 9 statics (SpriteScale 1 or downsample), stale single-frame files in Battlers/, `BattlerAltitude` for Gen 7–9 floaters, and the animated-strip importer.
-- [ ] Register the missing multi-bar bosses (Groudon `:GROUDON_UNDERSANDS` and Giratina `:GIRATINA_DEPTHS` done with the Ch14/15 scripts): Loyal Three (Ch10), the R1 Origin trial (Ruin Route), Pecharunt (Ch18), Wyrmrest Reshiram on `:DRAGONS_DEN` (Ch19), Valen's Zygarde Complete (Ch21), Silvally's conduit bar (Ch21).
+- [ ] Register the missing multi-bar bosses (Groudon, Giratina and Pecharunt `:PECHARUNT_DEEP` done with the Ch14/15/18 scripts): Loyal Three (Ch10), the R1 Origin trial (Ruin Route) Wyrmrest Reshiram on `:DRAGONS_DEN` (Ch19), Valen's Zygarde Complete (Ch21), Silvally's conduit bar (Ch21).
 - [ ] Arceus `:gym_order` field rotation on `:PRISM_ARENA` (and fix the `:prism_turn` bug).
 - [ ] Tag battles: one Mega per *trainer* (engine change, plus a harness check).
 - [ ] Groudon `:GROUDON_UNDERSANDS` balance at cap 67 with 13 badges (first capture: Precipice Blades after bar 1 swept a Lv 66 party; the capture had 12 badges, so some of the party disobeyed). Harness it like Kyogre.
@@ -30,6 +30,7 @@
 - [ ] Pattern across the Ch14–16 key-event captures: Groudon, Giratina and Zekrom each swept a cap-level AI-played party after their first bar. Check whether the post-break buffs stack too hard for bosses, or whether the demo AI just never switches. Run the Kyogre-style harness on all three.
 - [ ] Balance-check Giratina `:GIRATINA_DEPTHS` at cap 71 with 14 badges. In the first capture, after bar 1 the INVERSE field's "The Reverse World answers the wild Giratina's call!" fired every turn, and a Lv 70 party never reached the Origin bar. Check that hook vs bosses.
 - [ ] Partner teams: Redeemed Kestrel (Ch21).
+- [ ] Ch18: new trainer type `THORNGUARD` (Captain Rowe); the Ogerpon follower (S223, never in the party); Gloaming's permanent-dusk tone and the lantern-moth market.
 - [ ] Ch17 PBS and types: new trainer types `SUMP_BARON` (Mother Gutter: partner v17, ledger fight) and `GILDER_AUTOMATON` (the Terrace Warden); Directorate Mallory and Kade; the Sun Court glow sequence (18 lamps, a PC glow overlay). (Rook's Ch16 partner `[LEADER_ROOK,Rook,16]` is done.)
 - [ ] Ch16 engine pieces: Wenlow's interlude charset and loadout (V119 = 4); the `GO_OVERTIME` timed prompts (3 s each, defaulting to Go); the night-shift foreman patrols on 403 (reuse the Gym 16 sight cones).
 - [ ] Ogerpon into Juno's J4 team when `OGERPON_TRUSTED` (a load hook).
