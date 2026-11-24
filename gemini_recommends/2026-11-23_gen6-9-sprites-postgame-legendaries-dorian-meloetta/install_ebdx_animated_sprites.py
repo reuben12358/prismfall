@@ -115,11 +115,17 @@ SPOTLIGHT_BOSS_FORMS: Set[Tuple[str, int]] = {
 }
 
 # Strict 2D Gen 5 B2W2 pixel-art verification thresholds
-MAX_2D_UNIQUE_RGB = 180          # Gen 5 sprites are ~15-32 colors; complex crystals (Glimmora/Mega Sableye) reach ~125
+MAX_2D_UNIQUE_RGB = 180          # Gen 5 sprites are ~15-32 colors; complex crystals (Glimmora/Mega Sableye) reach ~129
 MAX_PRE_CLEAN_SEMI_RATIO = 0.05  # >5% semi-transparent pixels => anti-aliased 3D render / soft art -> REJECT
 MAX_1X_FRAME_SIZE = 192          # Largest stock B2W2 strip is Lugia (154px); allows wide 1x wingspans like Noivern (182px)
 MIN_1X_FRAME_SIZE = 16
-MAX_GIF_FRAMES = 180
+MAX_GIF_FRAMES = 200
+
+# Stock EBDX form-ID bugs: stock Front/658_1.png mistakenly stores Ash-Greninja (which is GRENINJA_2 in v21.1 PBS),
+# whereas GRENINJA_1 is pre-transform Battle Bond Greninja (visually identical to base GRENINJA).
+STOCK_MISSLOTTED_FORM_ALIASES: Dict[Tuple[str, int], Tuple[str, int]] = {
+    ("GRENINJA", 1): ("GRENINJA", 0),
+}
 
 # Ghasty001 filename aliases -> canonical Essentials (SPECIES, form) key
 GHASTY_ALIASES = {
@@ -218,6 +224,7 @@ class ConversionResult:
     source_path: str
     frame_size: int
     frame_count: int
+    unique_frames: int
     unique_rgb: int
     was_downscaled_2x: bool
     output_bytes: int
@@ -476,13 +483,80 @@ def to_showdown_slug(entry: FormEntry) -> Optional[str]:
     if entry.species == "URSHIFU" and entry.form == 1:
         return "urshifu-rapidstrike"
     if entry.species == "ZYGARDE":
-        zmap = {1: "10", 2: "complete"}
+        zmap = {1: "10", 2: "complete", 3: "complete"}
         if entry.form in zmap:
             return f"zygarde-{zmap[entry.form]}"
     if entry.species == "TERAPAGOS":
         tmap = {1: "terastal", 2: "stellar"}
         if entry.form in tmap:
             return f"terapagos-{tmap[entry.form]}"
+    if entry.species == "ZACIAN" and entry.form == 1:
+        return "zacian-crowned"
+    if entry.species == "ZAMAZENTA" and entry.form == 1:
+        return "zamazenta-crowned"
+    if entry.species == "CALYREX":
+        return {1: "calyrex-ice", 2: "calyrex-shadow"}.get(entry.form)
+    if entry.species == "NECROZMA":
+        return {1: "necrozma-duskmane", 2: "necrozma-dawnwings", 3: "necrozma-ultra", 4: "necrozma-ultra"}.get(entry.form)
+    if entry.species == "LYCANROC":
+        return {1: "lycanroc-midnight", 2: "lycanroc-dusk"}.get(entry.form)
+    if entry.species == "MIMIKYU" and entry.form == 1:
+        return "mimikyu-busted"
+    if entry.species == "WISHIWASHI" and entry.form == 1:
+        return "wishiwashi-school"
+    if entry.species == "EISCUE" and entry.form == 1:
+        return "eiscue-noice"
+    if entry.species == "MORPEKO" and entry.form == 1:
+        return "morpeko-hangry"
+    if entry.species == "TATSUGIRI":
+        return {1: "tatsugiri-droopy", 2: "tatsugiri-stretchy"}.get(entry.form)
+    if entry.species == "URSALUNA" and entry.form == 1:
+        return "ursaluna-bloodmoon"
+    if entry.species == "MAUSHOLD" and entry.form == 1:
+        return "maushold-four"
+    if entry.species == "AEGISLASH" and entry.form == 1:
+        return "aegislash-blade"
+    if entry.species == "HOOPA" and entry.form == 1:
+        return "hoopa-unbound"
+    if entry.species == "MAGEARNA" and entry.form == 1:
+        return "magearna-original"
+    if entry.species == "BASCULIN":
+        return {1: "basculin-bluestriped", 2: "basculin-whitestriped"}.get(entry.form)
+    if entry.species == "TOXTRICITY" and entry.form == 1:
+        return "toxtricity-lowkey"
+    if entry.species == "PALAFIN" and entry.form == 1:
+        return "palafin-hero"
+    if entry.species == "MINIOR":
+        return {
+            7: "minior-red", 8: "minior-orange", 9: "minior-yellow", 10: "minior-green",
+            11: "minior-blue", 12: "minior-indigo", 13: "minior-violet",
+        }.get(entry.form)
+    if entry.species == "SILVALLY" and fn.startswith("type: "):
+        t = fn.replace("type: ", "").strip()
+        return f"silvally-{t}" if t and t != "unknown" else None
+    if entry.species == "ARCEUS" and fn.startswith("type: "):
+        t = fn.replace("type: ", "").strip()
+        return f"arceus-{t}" if t and t != "unknown" else None
+    if entry.species == "FLABEBE" and fn:
+        return f"flabebe-{fn.split()[0]}"
+    if entry.species == "VIVILLON" and fn:
+        return f"vivillon-{fn.replace(' pattern', '').replace(' ', '').replace('-', '')}"
+    if entry.species == "ALCREMIE" and fn:
+        return f"alcremie-{fn.replace(' ', '')}"
+    if entry.species == "DARMANITAN" and "zen" in fn:
+        return "darmanitan-zen"
+    if entry.species == "KELDEO" and entry.form == 1:
+        return "keldeo-resolute"
+    if entry.species == "KYUREM":
+        return {1: "kyurem-white", 2: "kyurem-black"}.get(entry.form)
+    if entry.species == "SHAYMIN" and entry.form == 1:
+        return "shaymin-sky"
+    if entry.species == "DEOXYS":
+        return {1: "deoxys-attack", 2: "deoxys-defense", 3: "deoxys-speed"}.get(entry.form)
+    if entry.species == "ROTOM":
+        return {1: "rotom-heat", 2: "rotom-wash", 3: "rotom-frost", 4: "rotom-fan", 5: "rotom-mow"}.get(entry.form)
+    if entry.species == "CASTFORM":
+        return {1: "castform-sunny", 2: "castform-rainy", 3: "castform-snowy"}.get(entry.form)
     if "origin" in fn:
         return f"{base}-origin"
     if "therian" in fn:
@@ -628,14 +702,18 @@ def extract_frames_from_png_strip(path: Path) -> List[Image.Image]:
         return [rgba.crop((i * h, 0, (i + 1) * h, h)) for i in range(n)]
 
 
+def count_unique_frames(frames: Sequence[Image.Image]) -> int:
+    return len({f.tobytes() for f in frames})
+
+
 def build_ebdx_strip(
     frames: List[Image.Image],
     min_frame_size: int = 0,
     keep_union_square: bool = True,
-) -> Tuple[Image.Image, int, int, int, bool]:
+) -> Tuple[Image.Image, int, int, int, int, bool]:
     """Convert RGBA frames into a verified, drift-free EBDX `N*S × S` horizontal RGBA PNG strip.
 
-    Returns: (strip_image, frame_size_S, frame_count_N, unique_rgb, was_downscaled_2x)
+    Returns: (strip_image, frame_size_S, frame_count_N, unique_frames, unique_rgb, was_downscaled_2x)
     """
     if len(frames) < 2:
         raise ValueError(f"Too few frames: {len(frames)}")
@@ -647,6 +725,9 @@ def build_ebdx_strip(
 
     # 2. Strict 2D pixel-art check & halo removal
     cleaned, uniq_rgb, _ = _clean_alpha_and_measure_2d(frames)
+    uniq_frames = count_unique_frames(cleaned)
+    if uniq_frames < 2:
+        raise ValueError("Rejected fake animation: all cleaned frames are identical")
 
     # 3. Auto-downscale exact 2× pre-upscaled pixel art back to native 1× Gen 5 resolution
     was_2x = False
@@ -687,7 +768,7 @@ def build_ebdx_strip(
         crop = f.crop((ux0, uy0, ux1, uy1))
         strip.paste(crop, (i * cell + dx, dy))
 
-    return strip, cell, n, uniq_rgb, was_2x
+    return strip, cell, n, uniq_frames, uniq_rgb, was_2x
 
 
 # ---------------------------------------------------------------------------
@@ -977,6 +1058,13 @@ def print_audit(audit: Dict[str, object], title: str = "EBDX ANIMATED SPRITE AUD
         cols = [f"{s[v]['animated']:4d} (-{s[v]['gaps']:<3d})" for v in VIEWS]
         print(f"{label:<32s} {t:5d}  {cols[0]:>12s}  {cols[1]:>12s}  {cols[2]:>12s}  {cols[3]:>12s}")
 
+    print(f"\n{'Full National Dex Category':<32s} {'Total':>5s}  {'Front':>12s}  {'Back':>12s}  {'FrontShiny':>12s}  {'BackShiny':>12s}")
+    print("-" * 96)
+    for cat, s in audit["full_by_category"].items():
+        t = s["total"]
+        cols = [f"{s[v]['animated']:4d} (-{s[v]['gaps']:<3d})" for v in VIEWS]
+        print(f"{cat:<32s} {t:5d}  {cols[0]:>12s}  {cols[1]:>12s}  {cols[2]:>12s}  {cols[3]:>12s}")
+
     print(f"\n{'Prismfall Live+Spotlight Category':<32s} {'Total':>5s}  {'Front':>12s}  {'Back':>12s}  {'FrontShiny':>12s}  {'BackShiny':>12s}")
     print("-" * 96)
     for cat, s in audit["prismfall_by_category"].items():
@@ -1009,59 +1097,84 @@ def select_target_entries(pbs: PBSIndex, roster: RosterSlices, scope: str) -> Li
     return [pbs.entries[k] for k in sorted(keys, key=lambda kv: (pbs.entries[kv].dex, kv[1])) if k in pbs.entries]
 
 
+def _is_non_b2w2_entry(entry: FormEntry) -> bool:
+    """True for Gen 6–9 or Mega/Primal/Regional forms (NOT official Game Freak Gen 1–5 B2W2 rips)."""
+    return entry.generation >= 6 or entry.category in ("Mega", "Primal", "Alolan", "Galarian", "Hisuian", "Paldean")
+
+
 def _convert_and_write_one(
     entry: FormEntry,
+    lookup_entry: FormEntry,
     view: str,
     sources: Sequence[LocalSpriteSource],
     showdown: Optional[ShowdownGen5AniSource],
     out_battlers: Path,
     min_frame_size: int,
     prefer_more_frames: bool,
+    showdown_upgrade_threshold: int = 25,
+    min_beat_stock: Optional[Tuple[int, int]] = None,
     female: bool = False,
-) -> Tuple[Optional[ConversionResult], List[str]]:
+) -> Tuple[Optional[ConversionResult], List[str], bool]:
+    """Convert best strictly-2D candidate for `(entry, view)` and write EBDX strip.
+
+    Returns: `(result_or_None, errors, kept_stock)`
+    """
     errors: List[str] = []
-    candidates: List[Tuple[str, str, List[Image.Image]]] = []
+    # Each built candidate: (src_name, src_path, strip, cell, nframes, uniq_frames, uniq_rgb, was_2x)
+    built: List[Tuple[str, str, Image.Image, int, int, int, int, bool]] = []
 
     for src in sources:
-        p = src.lookup(view, entry, female=female)
+        p = src.lookup(view, lookup_entry, female=female)
         if not p:
             continue
         try:
             frames = extract_frames_from_gif(p) if p.suffix.lower() == ".gif" else extract_frames_from_png_strip(p)
-            candidates.append((src.name, str(p), frames))
+            strip, cell, nframes, uniq_frames, uniq_rgb, was_2x = build_ebdx_strip(frames, min_frame_size=min_frame_size)
+            built.append((src.name, str(p), strip, cell, nframes, uniq_frames, uniq_rgb, was_2x))
             if not prefer_more_frames:
                 break
         except Exception as exc:
             errors.append(f"{src.name}:{p.name}: {exc}")
 
-    # Pick candidate with most frames when prefer_more_frames is enabled, else first valid
+    # Pick candidate with best (unique_frames, total_frames) when prefer_more_frames is enabled
     chosen = None
-    if candidates:
-        candidates_ordered = sorted(candidates, key=lambda c: len(c[2]), reverse=True) if prefer_more_frames else candidates
-        for src_name, src_path, frames in candidates_ordered:
-            try:
-                strip, cell, nframes, uniq_rgb, was_2x = build_ebdx_strip(frames, min_frame_size=min_frame_size)
-                chosen = (src_name, src_path, strip, cell, nframes, uniq_rgb, was_2x)
-                break
-            except Exception as exc:
-                errors.append(f"{src_name}:{Path(src_path).name}: {exc}")
+    if built:
+        chosen = max(built, key=lambda c: (c[5], c[4])) if prefer_more_frames else built[0]
 
-    # Fallback to strictly-2D Showdown gen5ani* GIFs if enabled
-    if chosen is None and showdown is not None and not female:
+    # Check strictly-2D Showdown gen5ani* GIFs if missing OR if current best is low-frame and prefer_more_frames is on
+    should_try_showdown = (
+        showdown is not None
+        and not female
+        and (
+            chosen is None
+            or (prefer_more_frames and showdown_upgrade_threshold > 0 and chosen[4] <= showdown_upgrade_threshold)
+        )
+    )
+    if should_try_showdown:
         try:
-            fetched = showdown.fetch_gif(view, entry)
+            fetched = showdown.fetch_gif(view, lookup_entry)
             if fetched is not None:
                 gif_bytes, url = fetched
                 frames = extract_frames_from_gif(gif_bytes)
-                strip, cell, nframes, uniq_rgb, was_2x = build_ebdx_strip(frames, min_frame_size=min_frame_size)
-                chosen = ("showdown_gen5ani", url, strip, cell, nframes, uniq_rgb, was_2x)
+                strip, cell, nframes, uniq_frames, uniq_rgb, was_2x = build_ebdx_strip(frames, min_frame_size=min_frame_size)
+                sd_cand = ("showdown_gen5ani", url, strip, cell, nframes, uniq_frames, uniq_rgb, was_2x)
+                # Only replace existing local candidate when Showdown genuinely has STRICTLY MORE unique frames
+                if chosen is None or sd_cand[5] > chosen[5]:
+                    chosen = sd_cand
         except Exception as exc:
             errors.append(f"showdown_gen5ani: {exc}")
 
     if chosen is None:
-        return None, errors
+        return None, errors, False
 
-    src_name, src_path, strip, cell, nframes, uniq_rgb, was_2x = chosen
+    src_name, src_path, strip, cell, nframes, uniq_frames, uniq_rgb, was_2x = chosen
+
+    # If upgrading an already-animated stock Gen 6 / Mega strip, only overwrite if strictly smoother!
+    if min_beat_stock is not None:
+        stock_uniq, stock_total = min_beat_stock
+        if (uniq_frames, nframes) <= (stock_uniq, stock_total):
+            return None, [], True
+
     sub_dir = out_battlers / view / ("Female" if female else "")
     sub_dir.mkdir(parents=True, exist_ok=True)
     out_file = sub_dir / f"{entry.ebdx_stem}.png"
@@ -1077,12 +1190,14 @@ def _convert_and_write_one(
             source_path=src_path,
             frame_size=cell,
             frame_count=nframes,
+            unique_frames=uniq_frames,
             unique_rgb=uniq_rgb,
             was_downscaled_2x=was_2x,
             output_bytes=out_file.stat().st_size,
             female=female,
         ),
         errors,
+        False,
     )
 
 
@@ -1095,23 +1210,46 @@ def run_install(
     showdown: Optional[ShowdownGen5AniSource],
     scope: str,
     overwrite_existing: bool,
+    upgrade_stock_non_b2w2: bool,
+    showdown_upgrade_threshold: int,
     min_frame_size: int,
     prefer_more_frames: bool,
     include_female: bool,
     workers: int,
 ) -> Tuple[List[ConversionResult], List[Dict[str, object]]]:
     entries = select_target_entries(pbs, roster, scope)
-    jobs: List[Tuple[FormEntry, str, bool]] = []
+    if showdown is not None:
+        # Pre-warm directory indices on the main thread for thread-safe parallel lookups
+        for v in VIEWS:
+            showdown._ensure_index(v)
+
+    # Job tuple: (target_entry, lookup_entry, view, female, min_beat_stock)
+    jobs: List[Tuple[FormEntry, FormEntry, str, bool, Optional[Tuple[int, int]]]] = []
 
     for entry in entries:
+        alias_key = STOCK_MISSLOTTED_FORM_ALIASES.get(entry.key) if upgrade_stock_non_b2w2 else None
+        lookup_entry = pbs.entries[alias_key] if (alias_key and alias_key in pbs.entries) else entry
+
         for view in VIEWS:
             existing = resolve_ebdx_battler([engine_battlers], view, entry)
-            already_anim, _ = is_animated_strip_fast(existing)
-            if already_anim and not overwrite_existing:
-                continue
-            jobs.append((entry, view, False))
-            if include_female:
-                # Only enqueue distinct animated female variants (ignore leftover static _female files)
+            already_anim, (ew, eh) = is_animated_strip_fast(existing)
+
+            if alias_key is not None:
+                # Explicitly replace stock's mis-slotted form (e.g. stock Front/658_1.png Ash-Greninja -> base Greninja)
+                jobs.append((entry, lookup_entry, view, False, None))
+            elif not already_anim or overwrite_existing:
+                jobs.append((entry, lookup_entry, view, False, None))
+            elif upgrade_stock_non_b2w2 and _is_non_b2w2_entry(entry) and existing is not None:
+                try:
+                    st_frames = extract_frames_from_png_strip(existing)
+                    st_uniq = count_unique_frames(st_frames)
+                    st_total = len(st_frames)
+                except Exception:
+                    st_uniq, st_total = 0, (ew // eh if eh else 0)
+                jobs.append((entry, lookup_entry, view, False, (st_uniq, st_total)))
+
+            # Always check distinct animated Female/ variants even when the base/male sprite is already animated!
+            if include_female and alias_key is None:
                 has_anim_fem = False
                 for s in sources:
                     fp = s.lookup(view, entry, female=True)
@@ -1120,44 +1258,57 @@ def run_install(
                         break
                 if has_anim_fem:
                     fem_path = engine_battlers / view / "Female" / f"{entry.ebdx_stem}.png"
-                    if overwrite_existing or not is_animated_strip_fast(fem_path)[0]:
-                        jobs.append((entry, view, True))
+                    fem_anim, _ = is_animated_strip_fast(fem_path)
+                    if overwrite_existing or not fem_anim:
+                        jobs.append((entry, entry, view, True, None))
+                    elif upgrade_stock_non_b2w2 and _is_non_b2w2_entry(entry):
+                        try:
+                            st_frames = extract_frames_from_png_strip(fem_path)
+                            jobs.append((entry, entry, view, True, (count_unique_frames(st_frames), len(st_frames))))
+                        except Exception:
+                            jobs.append((entry, entry, view, True, None))
 
-    print(f"[install] Scope='{scope}' -> {len(entries)} species/forms, {len(jobs)} missing/static sprite jobs across {VIEWS}...")
+    print(f"[install] Scope='{scope}' -> {len(entries)} species/forms, {len(jobs)} candidate sprite jobs across {VIEWS}...")
     t0 = time.time()
     installed: List[ConversionResult] = []
     skipped: List[Dict[str, object]] = []
+    kept_stock = 0
 
-    def worker(job: Tuple[FormEntry, str, bool]):
-        e, v, fem = job
+    def worker(job: Tuple[FormEntry, FormEntry, str, bool, Optional[Tuple[int, int]]]):
+        e, le, v, fem, min_beat = job
         return e, v, fem, *_convert_and_write_one(
             entry=e,
+            lookup_entry=le,
             view=v,
             sources=sources,
             showdown=showdown,
             out_battlers=out_battlers,
             min_frame_size=min_frame_size,
             prefer_more_frames=prefer_more_frames,
+            showdown_upgrade_threshold=showdown_upgrade_threshold,
+            min_beat_stock=min_beat,
             female=fem,
         )
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
-        for idx, (e, v, fem, res, errs) in enumerate(ex.map(worker, jobs), 1):
+        for idx, (e, v, fem, res, errs, was_kept) in enumerate(ex.map(worker, jobs), 1):
             if res is not None:
                 installed.append(res)
+            elif was_kept:
+                kept_stock += 1
             else:
                 skipped.append({"species": e.sym_name, "dex": e.ebdx_stem, "view": v, "female": fem, "errors": errs})
             if idx % 200 == 0 or idx == len(jobs):
-                print(f"  progress: {idx}/{len(jobs)} processed ({len(installed)} installed, {len(skipped)} unresolved)")
+                print(f"  progress: {idx}/{len(jobs)} processed ({len(installed)} installed, {kept_stock} kept stock, {len(skipped)} unresolved)")
 
     elapsed = time.time() - t0
     total_mb = sum(r.output_bytes for r in installed) / (1024 * 1024)
-    print(f"[install] Done in {elapsed:.1f}s -> {len(installed)} strips written ({total_mb:.2f} MB), {len(skipped)} unresolved.")
+    print(f"[install] Done in {elapsed:.1f}s -> {len(installed)} strips written ({total_mb:.2f} MB), {kept_stock} stock preserved, {len(skipped)} unresolved.")
     return installed, skipped
 
 
 # ---------------------------------------------------------------------------
-# Strict Strip Verifier
+# Strict Strip Verifier (Motion, Unique Frames, 2D Palette/Alpha, Canonical Names)
 # ---------------------------------------------------------------------------
 
 def verify_strips_dir(verify_dir: Path, pbs: Optional[PBSIndex] = None) -> Dict[str, object]:
@@ -1168,6 +1319,11 @@ def verify_strips_dir(verify_dir: Path, pbs: Optional[PBSIndex] = None) -> Dict[
     per_view = Counter()
     heights: List[int] = []
     frames_list: List[int] = []
+    unique_frames_list: List[int] = []
+    low4_strips: List[str] = []
+    low10_strips: List[Dict[str, object]] = []
+    uniq_le4_strips: List[Dict[str, object]] = []
+    high_rgb_gt64: List[Dict[str, object]] = []
 
     for view in VIEWS:
         vdir = verify_dir / view
@@ -1207,31 +1363,26 @@ def verify_strips_dir(verify_dir: Path, pbs: Optional[PBSIndex] = None) -> Dict[
                         failures.append({"file": rel, "reason": f"Not a multi-frame square strip: {w}x{h}"})
                         continue
                     nf = w // h
-                    f0 = im.crop((0, 0, h, h))
-                    b0 = f0.tobytes()
-                    any_diff = False
-                    for fi in (nf // 2, nf - 1, 1):
-                        if 0 <= fi < nf and im.crop((fi * h, 0, (fi + 1) * h, h)).tobytes() != b0:
-                            any_diff = True
-                            break
-                    if not any_diff:
-                        # Check every frame if quick probe matched
-                        for fi in range(1, nf):
-                            if im.crop((fi * h, 0, (fi + 1) * h, h)).tobytes() != b0:
-                                any_diff = True
-                                break
-                    if not any_diff:
-                        failures.append({"file": rel, "reason": f"All {nf} frames are identical"})
+                    frame_bytes = [im.crop((fi * h, 0, (fi + 1) * h, h)).tobytes() for fi in range(nf)]
+                    uniq_f = len(set(frame_bytes))
+                    if uniq_f <= 1:
+                        failures.append({"file": rel, "reason": f"Frozen animation: all {nf} frames are identical"})
                         continue
+                    f0 = im.crop((0, 0, h, h))
                     # Strict 2D pixel art verification on frame 0
                     data = f0.get_flattened_data()
                     semi = 0
+                    nont = 0
                     rgb = set()
                     for r, g, b, a in data:
                         if a > 0:
+                            nont += 1
                             if a < 255:
                                 semi += 1
                             rgb.add((r, g, b))
+                    if nont == 0:
+                        failures.append({"file": rel, "reason": "Empty transparent frame 0"})
+                        continue
                     if semi > 0:
                         failures.append({"file": rel, "reason": f"Has {semi} semi-transparent halo pixels"})
                         continue
@@ -1240,11 +1391,21 @@ def verify_strips_dir(verify_dir: Path, pbs: Optional[PBSIndex] = None) -> Dict[
                         continue
                     heights.append(h)
                     frames_list.append(nf)
+                    unique_frames_list.append(uniq_f)
+                    if nf <= 4:
+                        low4_strips.append(rel)
+                    if nf <= 10:
+                        low10_strips.append({"file": rel, "frames": nf, "unique_frames": uniq_f, "h": h})
+                    if uniq_f <= 4:
+                        uniq_le4_strips.append({"file": rel, "frames": nf, "unique_frames": uniq_f, "h": h})
+                    if len(rgb) > 64:
+                        high_rgb_gt64.append({"file": rel, "unique_rgb": len(rgb), "frames": nf, "h": h})
             except Exception as exc:
                 failures.append({"file": rel, "reason": f"Unreadable PNG: {exc}"})
 
     heights.sort()
     frames_list.sort()
+    unique_frames_list.sort()
     summary = {
         "verify_dir": str(verify_dir),
         "checked_strips": checked,
@@ -1258,6 +1419,15 @@ def verify_strips_dir(verify_dir: Path, pbs: Optional[PBSIndex] = None) -> Dict[
         "frames_min_med_max": (
             (frames_list[0], frames_list[len(frames_list) // 2], frames_list[-1]) if frames_list else (0, 0, 0)
         ),
+        "unique_frames_min_med_max": (
+            (unique_frames_list[0], unique_frames_list[len(unique_frames_list) // 2], unique_frames_list[-1])
+            if unique_frames_list else (0, 0, 0)
+        ),
+        "low4_count": len(low4_strips),
+        "low10_count": len(low10_strips),
+        "uniq_le4_count": len(uniq_le4_strips),
+        "high_rgb_gt64_count": len(high_rgb_gt64),
+        "high_rgb_gt64": high_rgb_gt64,
         "failures": failures,
     }
     return summary
@@ -1286,7 +1456,7 @@ def normalize_png_extensions(graphics_pokemon_dir: Path) -> List[Tuple[str, str]
 
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     ap = argparse.ArgumentParser(
-        description="Pokémon Prismfall — Gen 6–9, Regional Variants & Mega Evolutions EBDX Animated B2W2 Sprite Importer"
+        description="Pokémon Prismfall — Full National Dex (#001–#1025 + 395 Forms) EBDX Animated B2W2 Sprite Importer"
     )
     ap.add_argument("--engine", type=Path, default=Path("/home/antigravity/pf_engine_run/base"),
                     help="Path to Essentials + EBDX engine directory containing PBS/ and Graphics/EBDX/Battlers/")
@@ -1297,23 +1467,27 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     ap.add_argument("--source", action="append", default=[],
                     help="Local sprite source in `name=/path/to/dir` format (repeatable in priority order)")
     ap.add_argument("--fetch-showdown-gaps", action="store_true",
-                    help="Fallback to strictly-2D Pokémon Showdown gen5ani* GIF buckets for any remaining gaps")
+                    help="Fetch strictly-2D Pokémon Showdown gen5ani* GIFs for missing slots and low-frame upgrades")
     ap.add_argument("--showdown-cache", type=Path, default=None,
                     help="Optional cache directory for Showdown gen5ani indices/GIFs")
+    ap.add_argument("--showdown-upgrade-threshold", type=int, default=25,
+                    help="With --prefer-more-frames & --fetch-showdown-gaps, probe Showdown when local best <= N frames (default: 25)")
     ap.add_argument("--audit", action="store_true",
                     help="Print quantitative before/after EBDX animation coverage audit")
     ap.add_argument("--install-prismfall", action="store_true",
-                    help="Install missing/static Prismfall live animated strips into --out-battlers (or engine)")
-    ap.add_argument("--scope", choices=("live", "prismfall", "prismfall-plus-forms", "all"), default="prismfall",
-                    help="Species/form scope for --install-prismfall (default: prismfall = 796 live + 23 spotlight bosses)")
+                    help="Install missing/static/upgradable animated strips into --out-battlers (or engine)")
+    ap.add_argument("--scope", choices=("live", "prismfall", "prismfall-plus-forms", "all"), default="all",
+                    help="Species/form scope for --install-prismfall (default: all = full 1,420-entry National Dex + 395 forms)")
     ap.add_argument("--out-battlers", type=Path, default=None,
                     help="Target Graphics/EBDX/Battlers/ directory (defaults to <engine>/Graphics/EBDX/Battlers/)")
     ap.add_argument("--overlay-audit", type=Path, default=None,
                     help="Additional battlers overlay directory to include during --audit")
     ap.add_argument("--overwrite-existing", action="store_true",
                     help="Overwrite already-animated EBDX strips (default: preserve stock Gen 1–5 & existing strips)")
+    ap.add_argument("--upgrade-stock-non-b2w2", action="store_true",
+                    help="Upgrade low-frame stock Gen 6 & Mega/Regional fan strips when sources have strictly more unique frames (NEVER touches Gen 1–5 official B2W2!) and fix stock 658_1 mis-slot")
     ap.add_argument("--prefer-more-frames", action="store_true",
-                    help="When multiple local sources provide a sprite, pick the one with the highest frame count")
+                    help="When multiple sources provide a sprite, pick the one with the most unique frames")
     ap.add_argument("--include-female", action="store_true",
                     help="Also install distinct animated Female/ variants when provided by sources")
     ap.add_argument("--min-frame-size", type=int, default=0,
@@ -1347,6 +1521,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "prismfall_pbs": str(args.prismfall_pbs),
         "out_battlers": str(out_battlers),
         "scope": args.scope,
+        "upgrade_stock_non_b2w2": args.upgrade_stock_non_b2w2,
+        "showdown_upgrade_threshold": args.showdown_upgrade_threshold,
     }
 
     if args.audit:
@@ -1378,6 +1554,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             showdown=showdown,
             scope=args.scope,
             overwrite_existing=args.overwrite_existing,
+            upgrade_stock_non_b2w2=args.upgrade_stock_non_b2w2,
+            showdown_upgrade_threshold=args.showdown_upgrade_threshold,
             min_frame_size=args.min_frame_size,
             prefer_more_frames=args.prefer_more_frames,
             include_female=args.include_female,
@@ -1416,6 +1594,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"  Per view: {vsummary['per_view']}")
         print(f"  Frame size (min/med/max): {vsummary['height_min_med_max']} px")
         print(f"  Frame count (min/med/max): {vsummary['frames_min_med_max']} frames")
+        print(f"  Unique frames (min/med/max): {vsummary['unique_frames_min_med_max']} unique")
+        print(
+            f"  Quality flags: <=4f={vsummary['low4_count']} | <=10f={vsummary['low10_count']} | "
+            f"<=4 unique={vsummary['uniq_le4_count']} | >64 RGB={vsummary['high_rgb_gt64_count']}"
+        )
         if vsummary["failures"]:
             print("  FAILURES (first 20):")
             for fail in vsummary["failures"][:20]:
