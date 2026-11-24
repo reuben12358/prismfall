@@ -169,6 +169,7 @@ module Prismfall
         @owned   = []     # extra sprites/bitmaps to dispose
         @particles = Particles.new(self)
         @time    = 0.0
+        @real_time = 0.0  # wall-clock seconds; a slowmo at scale 0 (hitstop) runs on this, not on @time
         @timescale = 1.0
         @next    = 0
         @fx_acc  = 0.0
@@ -191,6 +192,8 @@ module Prismfall
         @curtain_sprite = solid([0, 0, 0], Z_CURTAIN)
         @memo_bgm = @definition.uses?(:bgm) && @definition.options[:restore_bgm] != false
         $game_system.bgm_memorize if @memo_bgm && $game_system && $game_system.respond_to?(:bgm_memorize)
+        @memo_bgs = @definition.uses?(:bgs) && @definition.options[:restore_bgm] != false
+        $game_system.bgs_memorize if @memo_bgs && $game_system && $game_system.respond_to?(:bgs_memorize)
         if on_map?
           @curtain = 0.0                # on-map scenes start and end on the live map, no black
         else
@@ -198,8 +201,11 @@ module Prismfall
         end
       end
 
+      attr_reader :real_time
+
       def update(dt)
         check_skip(dt)
+        @real_time += dt
         dt *= @timescale
         @time += dt
         @camera.sx = @camera.sy = 0.0
@@ -711,6 +717,8 @@ module Prismfall
       def op_cry(a, _dur); Sound.cry(a[:species], a[:volume] || 90, a[:pitch] || 100); nil; end
       def op_bgm_fade(a, _dur); Sound.fade(:bgm, a[:seconds]); nil; end
       def op_bgs_fade(a, _dur); Sound.fade(:bgs, a[:seconds]); nil; end
+      def op_bgm_cut(_a, _dur); (Audio.bgm_stop rescue nil); nil; end
+      def op_bgs_cut(_a, _dur); @used_bgs = true; (Audio.bgs_stop rescue nil); nil; end
 
       def op_call(a, _dur)
         a[:proc].call(self)
@@ -737,9 +745,13 @@ module Prismfall
         [@fx_back_bmp, @fx_front_bmp, @frost_bmp, @decal].compact.each { |b| b.dispose if !b.disposed? }
         @viewport.dispose
         @ui.dispose
-        Sound.fade(:bgs, 0.5) if @used_bgs
+        @timescale = 1.0
+        Sound.fade(:bgs, 0.5) if @used_bgs && !@memo_bgs
         if @memo_bgm && $game_system && $game_system.respond_to?(:bgm_restore)
           $game_system.bgm_restore
+        end
+        if @memo_bgs && $game_system && $game_system.respond_to?(:bgs_restore)
+          $game_system.bgs_restore
         end
       end
 

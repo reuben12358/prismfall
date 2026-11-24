@@ -63,10 +63,11 @@ module Prismfall
         @sprite = Sprite.new(scene.ui)
         @sprite.bitmap = @bmp
         @sprite.z = Scene::Z_TEXT
+        bar = (scene.respond_to?(:bar_height) ? scene.bar_height.to_f.round : 0)   # keep clear of the letterbox
         @sprite.y = case a[:position]
-                    when :top    then 8
+                    when :top    then 8 + bar
                     when :center then (scene.h - @h) / 2
-                    else scene.h - @h - 8
+                    else scene.h - @h - 8 - bar
                     end
         @base = Util.color(a[:color] || TEXT_COLOR)
         @shadow = Util.color(TEXT_SHADOW)

@@ -57,7 +57,8 @@
 - [ ] The `:POSTGAME` Trials category and the Registry board; the Tier 1 cards first (the T1-1 … T1-8 boss registrations with `:catch => :last_bar`; Gemini Part B.3 with the script's continuity fixes); Hesper's lighthouse scene; the Zygarde memorial; the Gauntlet's empty pedestals; the Concord Zero sub-basement.
 
 ## 6. Cutscenes, audio and Codex
-- [ ] Cutscene P0 engine fixes (letterbox and bust lifecycle, input lock, fade/tint stacking). The two-pillar laws are the style rule. Rewriting existing scenes needs Reuben's sign-off, one scene at a time.
+- [x] Cutscene P0 engine fixes from the cinematics spec §2.0 (2026-11-23): `hitstop` / `slowmo(0)` on the wall clock (no more deadlock), `bgm_cut` / `bgs_cut` and BGS memorize/restore, captions clear the letterbox bars; selftest 159/159 (the no-art portrait checks now use Delphine / Kassan: Martin and Wenna have art). Plus `016_Movies.rb` (play_movie, acting sheets).
+- [ ] Cutscene P0, rest (Wednesday audit wording): bust lifecycle, input lock, fade/tint stacking. The two-pillar laws are the style rule. Rewriting existing scenes needs Reuben's sign-off, one scene at a time.
 - [ ] Audio v4.3 wiring: `design/MAP_AUDIO.yaml` → mapgen BGS, the 67 trainer-type BGMs, the ME/SE hooks, a selftest-safe `VoiceTicker`, then the cutscene audio matrix.
 - [ ] Anime OST pool (`gemini_recommends/2026-11-23_anime-ost-situational-bgm`): Reuben auditions and locks, then the audio agent masters and slots the locked picks. Gemini needs to commit the audition page first.
 - [ ] Codex: the class line on cards (CODEX_SPEC), post-game rematch tables (STORY_REMATCHES), gauntlets (G1 in the Ch14+ hub).

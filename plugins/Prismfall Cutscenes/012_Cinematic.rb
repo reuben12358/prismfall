@@ -541,12 +541,28 @@ module Prismfall
         return ImpactFrames.new(self, a[:count] || 2, dur / (a[:count] || 2).to_f)
       end
 
+      # Slows the scene clock for `dur` scene seconds; at scale <= 0.001 (a hitstop) the scene clock stops, so the
+      # duration is counted on the wall clock instead (Gemini cinematics P0: slowmo(0.0) used to freeze forever).
+      class SlowmoEffect < Effect
+        def initialize(scale, dur, real)
+          @scale = scale; @d = dur; @real = real; @rt0 = nil
+        end
+
+        def update(scene, lt, _dt)
+          @rt0 ||= scene.real_time
+          elapsed = (@real) ? scene.real_time - @rt0 : lt
+          done = elapsed >= @d
+          scene.timescale = (done) ? 1.0 : @scale
+          return done
+        end
+
+        def dispose; end
+      end
+
       def op_slowmo(a, dur)
-        scale = a[:scale].to_f
-        Class.new(Effect) {
-          define_method(:initialize) { |sc, d| @scale = sc; @d = d }
-          define_method(:update) { |scene, lt, _dt| scene.timescale = (lt >= @d) ? 1.0 : @scale; lt >= @d }
-        }.new(scale, dur)
+        scale = [a[:scale].to_f, 0.0].max
+        real = a.key?(:real) ? a[:real] : scale <= 0.001
+        return SlowmoEffect.new(scale, dur, real)
       end
 
       attr_accessor :timescale
@@ -596,6 +612,8 @@ module Prismfall
     class Builder
       def impact_frames(**o); add(:impact_frames, o, o[:duration] || ((o[:count] || 2) * 0.07), true); end
       def slowmo(scale, **o); add(:slowmo, o.merge(:scale => scale), o[:duration] || 0.5); end
+      # A real-clock freeze-frame on impact (Law 3): the scene stops for `duration` wall-clock seconds.
+      def hitstop(duration = 0.14, **o); add(:slowmo, o.merge(:scale => 0.0, :real => true), duration); end
       def fracture(**o);      add(:fracture, check_points(o), o[:duration] || 1.0); end
       def rim(id, **o);       add(:rim, o.merge(:id => ref(id))); end
       def glow(**o);          add(:glow, o, o[:duration] || 1.0); end

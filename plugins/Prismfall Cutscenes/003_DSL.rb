@@ -205,6 +205,9 @@ module Prismfall
       def cry(species, **o); add(:cry, o.merge(:species => species)); end
       def bgm_fade(seconds = 1.0); add(:bgm_fade, { :seconds => seconds }); end
       def bgs_fade(seconds = 1.0); add(:bgs_fade, { :seconds => seconds }); end
+      # Dead silence on the cut (no fade tail): the impact vacuum before a shatter.
+      def bgm_cut; add(:bgm_cut, {}); end
+      def bgs_cut; add(:bgs_cut, {}); end
 
       #-------------------------------------------------------------------------
       # Beams
