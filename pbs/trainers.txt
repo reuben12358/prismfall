@@ -14790,6 +14790,31 @@ Pokemon = KECLEON,90
     IV = 31
     EV = 252,252,4,0,0,0
 #-------------------------------
+# Ch16 - Rook as the player's PARTNER on the Strade Works casting floor (tag double vs Marchetti v2 + Quent v1; field :FACTORY -> :SCRAPYARD).
+# pbRegisterPartner(:LEADER_ROOK, "Rook", 16). Off-camera Rook: no drone feed, the Rotom is just his friend now.
+[LEADER_ROOK,Rook,16]
+LoseText = ...No camera. Good. Nobody saw that.
+Pokemon = ROTOM,69
+    Form = 1
+    Name = Camera
+    Moves = THUNDERBOLT,OVERHEAT,WILLOWISP,VOLTSWITCH
+    Ability = LEVITATE
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 28
+Pokemon = TOXTRICITY,70
+    Moves = OVERDRIVE,SLUDGEBOMB,BOOMBURST,PROTECT
+    Ability = PUNKROCK
+    Item = THROATSPRAY
+    Nature = MODEST
+    IV = 28
+Pokemon = ELECTIVIRE,71
+    Moves = WILDCHARGE,FIREPUNCH,ICEPUNCH,PROTECT
+    Ability = MOTORDRIVE
+    Item = LIFEORB
+    Nature = JOLLY
+    IV = 28
+#-------------------------------
 [LEADER_DORIAN,Dorian,290]
 Items = MEGARING,FULLRESTORE
 LoseText = Encore! ENCORE!
