@@ -413,6 +413,22 @@ six that found it wins **42%** on Standard (25 of 60; a second 60: 30%), Casual 
 teams: prepared 37%). Grass and Water starters that find it reach 73–80%. Pachirisu tested at 63% (too strong for a
 "modest" find); Emolga is the pick. The `G3E` cell in `run_winrates.rb` forces it into the team.
 
+**Multi-bar legend bosses (2026-11-23; `winrates_r4.rb` cells BKYO, BGRO, BGIR, BZEK; 30 fights a cell).** The Ch14–16
+captures saw Groudon, Giratina and Zekrom sweep cap-level parties after bar 1; the harness agreed (typical 0% on every
+one, prepared Kyogre 7%, Groudon 33%, Giratina 0%). The cause was the same each time: full offensive EVs plus a setup
+move (Bulk Up, Calm Mind, Hone Claws) plus +1 to the attacking stat at every break. Rebuilt the war-legends way: no
+offensive EVs (HP and defences instead), the setup move swapped out (Kyogre Scary Face / Aqua Ring, Groudon Rock Tomb,
+Giratina Dragon Tail; Zekrom keeps Hone Claws), every break hardens (+1 Def or Sp. Def) instead of sharpening, Standard
+×0.9 offence (Groudon ×0.85), Casual ×0.75 offence and ×0.85 HP. Now, typical / prepared:
+| Boss (cap) | Casual typical | Standard typical | Standard prepared | Hard prepared |
+|---|---|---|---|---|
+| Kyogre, Isenmar (55) | 57% | 0% | 70% | 37% |
+| Groudon, Undersands (67) | 73% | 3% | 53% | 23% |
+| Giratina, Reverse Depths (71) | 100% | 50% | (17%: the prepared model picks answers by the normal chart, wrong on Inverse) | — |
+| Zekrom, the Engine (75) | 60% | 10% | 100% | 20% |
+These stay counter-team fights on Standard (a typical six loses; one built for the boss wins). Open: whether Reuben wants
+typical teams to have a chance at Standard legends (then Standard ×0.8 and 2 bars), and Groudon's prepared 53%.
+
 **Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,
 1 / 2 / 3 bars, Standard HP ×1.5 and ×1.15–1.25 elsewhere, Hard HP ×1.5 and ×1.2–1.25. A typical Lv 49–51 six (60 a
 cell): with the Ogre Standard 75 / 95 / 98%, alone Okidogi 53% and Fezandipiti 92%; Hard typical 18 / 40 / 58% (alone

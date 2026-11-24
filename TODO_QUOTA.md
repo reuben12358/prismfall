@@ -23,13 +23,13 @@
 - [ ] Register the missing multi-bar bosses (Groudon, Giratina, Pecharunt and Wyrmrest Reshiram `:RESHIRAM_WYRMREST` done with the Ch14/15/18/19 scripts; Loyal Three (Ch10) registered 2026-11-23): the R1 Origin trial (Ruin Route) Valen's Zygarde Complete (Ch21), Silvally's conduit bar (Ch21).
 - [ ] Arceus `:gym_order` field rotation on `:PRISM_ARENA` (and fix the `:prism_turn` bug).
 - [ ] Tag battles: one Mega per *trainer* (engine change, plus a harness check).
-- [ ] Groudon `:GROUDON_UNDERSANDS` balance at cap 67 with 13 badges (first capture: Precipice Blades after bar 1 swept a Lv 66 party; the capture had 12 badges, so some of the party disobeyed). Harness it like Kyogre.
-- [ ] Kyogre `:KYOGRE_ISENMAR` balance at cap 55 (`design/BALANCE.md` §9d; AI parties at Lv 54–55 lose).
+- [x] Groudon `:GROUDON_UNDERSANDS` balance at cap 67 with 13 badges (first capture: Precipice Blades after bar 1 swept a Lv 66 party; the capture had 12 badges, so some of the party disobeyed). Harness it like Kyogre.
+- [x] Kyogre `:KYOGRE_ISENMAR` balance at cap 55 (`design/BALANCE.md` §9d; AI parties at Lv 54–55 lose).
 
 ## 3. Teams and hooks
 - [ ] Ch15 engine hooks: `pf_echo_follow` (a recorded-path follower shared by the War Convoy's sledges and Gym 14's crypt echo); K6's one-turn `:BLEED` overload (`battle.change_field`); map-level audio mute for the Hush (808); cutscene `CE-1` "AF 290, Through Her Eyes" (letterbox, sepia tone, Glassfall sweep).
-- [ ] Pattern across the Ch14–16 key-event captures: Groudon, Giratina and Zekrom each swept a cap-level AI-played party after their first bar. Check whether the post-break buffs stack too hard for bosses, or whether the demo AI just never switches. Run the Kyogre-style harness on all three.
-- [ ] Balance-check Giratina `:GIRATINA_DEPTHS` at cap 71 with 14 badges. In the first capture, after bar 1 the INVERSE field's "The Reverse World answers the wild Giratina's call!" fired every turn, and a Lv 70 party never reached the Origin bar. Check that hook vs bosses.
+- [x] Pattern across the Ch14–16 key-event captures: Groudon, Giratina and Zekrom each swept a cap-level AI-played party after their first bar. Check whether the post-break buffs stack too hard for bosses, or whether the demo AI just never switches. Run the Kyogre-style harness on all three. **Done 2026-11-23:** the cause was offensive EVs + a setup move + +1 attack per break; rebuilt and harnessed (winrates_r4 BKYO/BGRO/BGIR/BZEK; BALANCE.md §9 "Multi-bar legend bosses"). Still a counter-team fight on Standard for a typical six: Reuben's call.
+- [x] Balance-check Giratina `:GIRATINA_DEPTHS` at cap 71 with 14 badges. In the first capture, after bar 1 the INVERSE field's "The Reverse World answers the wild Giratina's call!" fired every turn, and a Lv 70 party never reached the Origin bar. Check that hook vs bosses.
 - [ ] Partner teams: Redeemed Kestrel (Ch21), `[RIVAL_KESTREL,Kestrel,21]` (the script registers version 21).
 - [ ] Ch21 staging: the hijack cutscene, the allies montage (Larch's 11-lamp overlay from `tally(:ENGINE_BREAKS)`), Valen's crystal-spread hook in the Final, the 18 pylon release/refusal kneels, Valen into light, and the ending vignettes keyed by ending ID.
 - [ ] Ch20: the Grounds Ladder (12 challengers, Lv 88–90); Valen playable (Interlude V, V119 = 5); the ceremony procession (18 Warden events plus the pylon animation); the white vision; the Night of Masques stage; the consent banners (white/grey by NS §6.2); Kestrel's Gauntlet tear-off battle hook at K8.

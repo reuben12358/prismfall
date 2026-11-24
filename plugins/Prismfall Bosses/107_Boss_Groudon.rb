@@ -14,10 +14,13 @@ Prismfall::Bosses.register(:GROUDON_UNDERSANDS, {
   :ability    => :DROUGHT,
   :nature     => :ADAMANT,
   :ivs        => 31,
-  :evs        => { :HP => 252, :ATTACK => 252, :DEFENSE => 4 },
-  :moves      => [:EARTHQUAKE, :STONEEDGE, :FIREPUNCH, :BULKUP],
+  # Balance 2026-11-23 (cell BGRO): no Attack EVs, no Bulk Up, the first break hardens it (was +1 Attack): Precipice
+  # Blades after bar 1 swept prepared parties (33%).
+  :evs        => { :HP => 252, :DEFENSE => 128, :SPECIAL_DEFENSE => 128 },
+  :moves      => [:EARTHQUAKE, :STONEEDGE, :FIREPUNCH, :ROCKTOMB],
   :bars       => { :CASUAL => 2, :default => 3 },
-  :stat_mults => { :HARD => { :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 } },
+  :stat_mults => { :CASUAL => { :HP => 0.85, :ATTACK => 0.75 }, :STANDARD => { :ATTACK => 0.85 },
+                   :HARD => { :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 } },
   :field      => :DESERT,
   :catch      => false,
   :intro      => ["The red rock opens one eye... Groudon has awoken beneath the dry well!",
@@ -26,11 +29,11 @@ Prismfall::Bosses.register(:GROUDON_UNDERSANDS, {
   :breaks     => {
     1 => { :messages => ["Sahar reads: \"In the King's ninth year he summoned the red titan and the blue, saying: 'Remake my soil, beasts, or be broken.'\"",
                          "The glyph chamber grows hot as a forge!"],
-           :learn => { 3 => :PRECIPICEBLADES }, :stats => { :ATTACK => 1 } },
+           :learn => { 3 => :PRECIPICEBLADES }, :stats => { :DEFENSE => 1 } },
     2 => { :messages => ["Sahar reads: \"The land split and the sea boiled, and still the King did not step back from his balcony. When the titans would not obey,\"",
                          "The Earth Plate's hold on the land shatters!",
                          "The scar under your collar burns like a coal..."],
-           :primal => true, :moves => [:PRECIPICEBLADES, :HEATCRASH, :STONEEDGE, :BULKUP], :clear_hazards => true }
+           :primal => true, :moves => [:PRECIPICEBLADES, :HEATCRASH, :STONEEDGE, :ROCKTOMB], :clear_hazards => true }
   },
   :on_defeat  => [
     { :condition  => proc { |_battle, _battler, _st| Prismfall::Bosses.harmony_lean? },

@@ -484,8 +484,19 @@ module WR4
       } }
   end
 
+  # A wild multi-bar boss at its chapter's cap (TODO_QUOTA §3: the Ch14-16 captures saw these sweep AI parties).
+  def self.wild_boss(boss, cap, badges, label)
+    { :label => label, :cap => cap, :badges => badges, :size => 6, :foe => proc { [:NONE, "", 0] }, :r4 => true,
+      :foe_types => proc { [GameData::Species.get(Prismfall::Bosses.get(boss)[:species]).types] },
+      :start => proc { setBattleRule("canLose"); Prismfall::Bosses.wild_battle(boss) } }
+  end
+
   def self.fights
     h = {}
+    h["BKYO"] = wild_boss(:KYOGRE_ISENMAR, 55, 10, "Ch12 Kyogre, Isenmar (Frozen Lake -> Water Surface; cap 55)")
+    h["BGRO"] = wild_boss(:GROUDON_UNDERSANDS, 67, 13, "Ch14 Groudon, the Undersands (Desert; cap 67)")
+    h["BGIR"] = wild_boss(:GIRATINA_DEPTHS, 71, 14, "Ch15 Giratina, Reverse Depths (Inverse; cap 71)")
+    h["BZEK"] = wild_boss(:ZEKROM_ENGINE, 75, 15, "Ch16 Zekrom, the Cogsworth Engine (Factory -> Scrapyard; cap 75)")
     h["L3O"] = loyal(:LOYAL_THREE_OKIDOGI, true, "Ch10 Loyal Three 1/3 Okidogi, with the Ogre (Bleed)")
     h["L3M"] = loyal(:LOYAL_THREE_MUNKIDORI, true, "Ch10 Loyal Three 2/3 Munkidori, with the Ogre (Bleed)")
     h["L3F"] = loyal(:LOYAL_THREE_FEZANDIPITI, true, "Ch10 Loyal Three 3/3 Fezandipiti, with the Ogre (Bleed)")
