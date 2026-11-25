@@ -2194,6 +2194,104 @@ for _s in (0, 1, 2):
           nick="Morwen"),
     ], nobag="partner")
 
+# --- Post-game: the Warden's Gauntlet (story/41_SCRIPT_POSTGAME.md P4): all eighteen, back to back, Lv 100 ------------
+# Version 98 for every Warden; Juno is LEADER_JUNO 60 / 61 / 62 (Prismfall::Rival.version_for(6): her starter follows
+# the player's). Teams 96-100, ace 100. From Gym 6 on these are the gym six with the Hard sets promoted to Standard
+# (as the Festival draws do); Gyms 1-5 are rebuilt with the same partners grown up (Bobbin is a Leavanny now).
+# "No fields, no Plates" in Homecoming is a battle rule for the event (setBattleRule("field", :NONE)); the teams are
+# the same either way. Refusing Wardens are simply not called.
+GAUNTLET_LV = [96, 97, 98, 98, 99, 100]
+def gauntlet_from_gym(name):
+    """The gym team in its own order (Nyx's Zoroark stays in front of the Honchkrow it copies), Hard sets promoted,
+    levels by rank: the gym's ace is the 100."""
+    mons = drop_only(promote([w for w in WARDENS if w[2] == name][0][6]))
+    rank = sorted(range(len(mons)), key=lambda i: (mons[i]["lv"], i))
+    lv = dict(zip(rank, GAUNTLET_LV[-len(rank):]))
+    out = []
+    for i, m in enumerate(mons):
+        m = dict(m, lv=lv[i])
+        m["hard"] = {k: v for k, v in m["hard"].items() if k != "lv"}
+        m["casual"] = {k: v for k, v in m["casual"].items() if k != "lv"}
+        out.append(m)
+    return out
+def gauntlet(tt, nm, lose, mons, v=98):
+    S("Post-game - the Warden's Gauntlet: %s (Lv 100; no field in Homecoming)" % nm, tt, nm, v, 100, lose, mons)
+gauntlet("LEADER_DORIAN", "Dorian", "First on the bill, first off it. Darling, what an exit.", [
+    P("SMEARGLE", 96, "OWNTEMPO", "FOCUSSASH", "JOLLY", "FAKEOUT,STICKYWEB,ENCORE,PARTINGSHOT", "PD",
+      hard={"moves": "SPORE,STICKYWEB,ENCORE,PARTINGSHOT"}, casual={"item": "SITRUSBERRY", "moves": "FAKEOUT,PAYDAY,ENCORE,PARTINGSHOT"}),
+    P("CHATOT", 97, "KEENEYE", "THROATSPRAY", "TIMID", "CHATTER,HYPERVOICE,HEATWAVE,ENCORE", "S",
+      hard={"moves": "BOOMBURST,CHATTER,HEATWAVE,NASTYPLOT"}),
+    P("ZOROARK", 98, "ILLUSION", "LIFEORB", "TIMID", "SHADOWBALL,HYPERVOICE,FLAMETHROWER,UTURN", "S", form=1,
+      hard={"moves": "SHADOWBALL,HYPERVOICE,FLAMETHROWER,NASTYPLOT"}),
+    P("LOPUNNY", 98, "LIMBER", "SILKSCARF", "JOLLY", "FAKEOUT,RETURN,HIGHJUMPKICK,ICEPUNCH", "A", mega="LOPUNNITE"),
+    P("EXPLOUD", 99, "SCRAPPY", "THROATSPRAY", "MODEST", "BOOMBURST,FIREBLAST,FOCUSBLAST,ICEBEAM", "S",
+      casual={"moves": "HYPERVOICE,FLAMETHROWER,FOCUSBLAST,ICEBEAM"}),
+    P("MELOETTA", 100, "SERENEGRACE", "THROATSPRAY", "MODEST", "RELICSONG,PSYCHIC,CLOSECOMBAT,HYPERVOICE", "S",
+      casual={"item": "SITRUSBERRY"}),
+])
+gauntlet("LEADER_TAMSIN", "Tamsin", "Unpicked again! Oh, I do like how you sew.", [
+    P("GALVANTULA", 96, "COMPOUNDEYES", "FOCUSSASH", "TIMID", "STICKYWEB,THUNDER,BUGBUZZ,ENERGYBALL", "S",
+      casual={"item": "SITRUSBERRY", "moves": "ELECTROWEB,THUNDERBOLT,BUGBUZZ,ENERGYBALL"}),
+    P("MASQUERAIN", 97, "INTIMIDATE", "SITRUSBERRY", "MODEST", "AIRSLASH,BUGBUZZ,HYDROPUMP,TAILWIND", "BS",
+      hard={"moves": "QUIVERDANCE,AIRSLASH,BUGBUZZ,HYDROPUMP"}),
+    P("VIVILLON", 98, "COMPOUNDEYES", "LEFTOVERS", "TIMID", "HURRICANE,BUGBUZZ,ENERGYBALL,STUNSPORE", "S",
+      hard={"moves": "HURRICANE,BUGBUZZ,SLEEPPOWDER,QUIVERDANCE"}),
+    P("CRUSTLE", 98, "STURDY", "SITRUSBERRY", "ADAMANT", "STONEEDGE,XSCISSOR,EARTHQUAKE,STEALTHROCK", "A",
+      hard={"item": "WHITEHERB", "moves": "STONEEDGE,XSCISSOR,EARTHQUAKE,SHELLSMASH"}),
+    P("RIBOMBEE", 99, "SHIELDDUST", "SITRUSBERRY", "TIMID", "MOONBLAST,BUGBUZZ,PSYCHIC,STUNSPORE", "S",
+      hard={"item": "LIFEORB", "moves": "QUIVERDANCE,MOONBLAST,BUGBUZZ,PSYCHIC"}),
+    P("LEAVANNY", 100, "OVERCOAT", "LIFEORB", "JOLLY", "LEAFBLADE,XSCISSOR,KNOCKOFF,SHADOWCLAW", "A", nick="Bobbin",
+      hard={"moves": "LEAFBLADE,XSCISSOR,KNOCKOFF,SWORDSDANCE"}, casual={"ab": "SWARM"}),
+])
+_marisol90 = [e for e in EXTRA if e[1] == "LEADER_MARISOL" and e[3] == 90][0][6]
+gauntlet("LEADER_MARISOL", "Marisol", "Ha! Tide's out. Buy me a drink and I'll call it a draw.", relevel(_marisol90, GAUNTLET_LV))
+gauntlet("LEADER_ROOK", "Rook", "And CUT. No retakes. ...Okay, one retake. Tomorrow.", [
+    P("LUXRAY", 96, "INTIMIDATE", "MAGNET", "ADAMANT", "WILDCHARGE,CRUNCH,ICEFANG,VOLTSWITCH", "A",
+      hard={"ab": "GUTS", "item": "FLAMEORB", "moves": "FACADE,WILDCHARGE,CRUNCH,PLAYROUGH"}),
+    P("BOLTUND", 97, "STRONGJAW", "SITRUSBERRY", "JOLLY", "THUNDERFANG,PSYCHICFANGS,CRUNCH,PLAYROUGH", "A",
+      hard={"item": "LIFEORB", "moves": "THUNDERFANG,PSYCHICFANGS,FIREFANG,PLAYROUGH"}),
+    P("HELIOLISK", 98, "DRYSKIN", "LIFEORB", "TIMID", "THUNDERBOLT,HYPERVOICE,GRASSKNOT,VOLTSWITCH", "S",
+      hard={"moves": "THUNDERBOLT,HYPERVOICE,GRASSKNOT,FOCUSBLAST"}),
+    P("ELECTIVIRE", 98, "MOTORDRIVE", "EXPERTBELT", "JOLLY", "WILDCHARGE,ICEPUNCH,CROSSCHOP,EARTHQUAKE", "A"),
+    P("TOXTRICITY", 99, "PUNKROCK", "THROATSPRAY", "MODEST", "OVERDRIVE,SLUDGEBOMB,BOOMBURST,VOLTSWITCH", "S",
+      casual={"moves": "OVERDRIVE,SLUDGEBOMB,HYPERVOICE,VOLTSWITCH"}),
+    P("ROTOM", 100, "LEVITATE", "LEFTOVERS", "TIMID", "HYDROPUMP,THUNDERBOLT,WILLOWISP,VOLTSWITCH", "S", form=2, nick="Camera",
+      hard={"moves": "HYDROPUMP,THUNDERBOLT,WILLOWISP,NASTYPLOT"}),
+])
+gauntlet("LEADER_SAHAR", "Sahar", "The sand keeps this one too. Under a better heading.", [
+    P("HIPPOWDON", 96, "SANDSTREAM", "SMOOTHROCK", "IMPISH", "EARTHQUAKE,CRUNCH,SLACKOFF,STEALTHROCK", "PD",
+      hard={"moves": "EARTHQUAKE,STONEEDGE,SLACKOFF,YAWN"}, casual={"moves": "HIGHHORSEPOWER,CRUNCH,SLACKOFF,STEALTHROCK"}),
+    P("DUGTRIO", 97, "SANDFORCE", "FOCUSSASH", "JOLLY", "EARTHQUAKE,SUCKERPUNCH,STONEEDGE,MEMENTO", "A",
+      hard={"ab": "ARENATRAP"}, casual={"item": "SITRUSBERRY", "moves": "EARTHQUAKE,SUCKERPUNCH,ROCKSLIDE,NIGHTSLASH"}),
+    P("SANDACONDA", 98, "SANDSPIT", "LEFTOVERS", "IMPISH", "HIGHHORSEPOWER,STONEEDGE,GLARE,BRUTALSWING", "BPD",
+      hard={"moves": "EARTHQUAKE,STONEEDGE,GLARE,COIL"}),
+    P("KROOKODILE", 98, "INTIMIDATE", "SITRUSBERRY", "JOLLY", "CRUNCH,EARTHQUAKE,ROCKSLIDE,FIREFANG", "A",
+      hard={"ab": "MOXIE", "item": "LIFEORB", "moves": "KNOCKOFF,EARTHQUAKE,STONEEDGE,CLOSECOMBAT"}),
+    # The archaeologist's own find: it and the Terrace Warden came out of the same Gilder mould.
+    P("GOLURK", 99, "IRONFIST", "SITRUSBERRY", "ADAMANT", "EARTHQUAKE,SHADOWPUNCH,ICEPUNCH,HAMMERARM", "HA",
+      hard={"ab": "NOGUARD", "moves": "DYNAMICPUNCH,EARTHQUAKE,POLTERGEIST,STONEEDGE"}),
+    P("CLAYDOL", 100, "LEVITATE", "SOFTSAND", "MODEST", "EARTHPOWER,PSYCHIC,ICEBEAM,RAPIDSPIN", "BS", nick="Effigy",
+      hard={"item": "LEFTOVERS", "moves": "SCORCHINGSANDS,PSYCHIC,ICEBEAM,CALMMIND"}),
+])
+for _nm, _lose in (
+        ("Corvin", "Clean. Again. The mire's started keeping a tally in your favour."),
+        ("Brann", "HA! Still tempered! Go on, the queue behind me's getting cold."),
+        ("Kaito", "...Good. It remembers. So do I. Next."),
+        ("Anja", "The ice held for you twice. It doesn't hold for anyone twice."),
+        ("Odessa", "Tailwinds, flyer. Eleven down. Don't look at the board."),
+        ("Ilsa", "Quiet again. I'm getting used to you. Don't tell anyone."),
+        ("Bastian", "Flawless. Twice-cut. I'd set you in a crown, and I've decided not to make any more of those."),
+        ("Ysolde", "The candles are still lit. Go on. They'll wait for you."),
+        ("Magnus", "Efficient. I redesigned around you. It wasn't enough. Good."),
+        ("Nyx", "Lights on, sweetheart. You're still real. Two more."),
+        ("Celestine", "And the tale turns its page again. I do like the ones that don't end."),
+        ("Sigrun", "All eighteen, in order. That's what we taught you. Go and rest, Champion.")):
+    gauntlet("LEADER_" + _nm.upper(), _nm, _lose, gauntlet_from_gym(_nm))
+_j4 = [r for r in RIVALS if r[0] == "RIVAL_JUNO" and r[2] == 4][0][5]
+for _s in (0, 1, 2):
+    gauntlet("LEADER_JUNO", "Juno", "Ninth on the bill and crying again. Happy crying! Go, go, go.",
+             relevel(_j4(_s), GAUNTLET_LV), v=60 + _s)
+
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
 
