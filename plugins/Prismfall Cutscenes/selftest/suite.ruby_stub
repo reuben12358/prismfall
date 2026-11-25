@@ -582,7 +582,7 @@ begin
   idx = tr::Script.exec_one({ :choice => [:JUNO, :neutral, "Pull me through?", :bubble], :options => [["No.", []], ["Yes.", []]] }, { :quest => :TEST, :scene => :t })
   r6 = seen.last.class
   $menu_choice = 0
-  check "say: face by default, name label kept", r1 == [P::FaceBox, "Juno: Face by default."], r1.inspect
+  check "say: face by default, name label kept", r1[0] <= P::FaceBox && r1[1] == "Juno: Face by default.", r1.inspect
   check "say(..., :bubble) and [.., :bubble] rows", r2 == P::Bubble && r4 == P::Bubble && r6 == P::Bubble, [r2, r4, r6].inspect
   check "row option hash: bubble + emote + event", r3 == [P::Bubble, [:sweat], 1], r3.inspect
   check "cast without art: plain box", r5 == [4, "Kassan: No art yet."], r5.inspect
@@ -594,6 +594,169 @@ ensure
   $opt[:assets] = false
 end
 check "trials lines leave nothing behind", $live == before, [$live, before].inspect
+
+section "expressive conversations (018): the two-speaker stage"
+X = Prismfall::Expressive
+$opt[:assets] = true
+P.new_conversation
+P.instance_variable_set(:@last_face, nil)
+t0, d0 = X.extract_inline_tags("[portrait: KESTREL, sad]\\pfe[dots]\\pfp[guarded]\\pfa[step_back] Kestrel: ...Keep off the ridge.")
+t1, d1 = X.extract_inline_tags("[name: Juno] [emote: question, Kestrel] Why?")
+check "acting tags stripped, portrait tag left for 014", t0 == "[portrait: KESTREL, sad] Kestrel: ...Keep off the ridge." &&
+      d0 == { :emotes => [{ :kind => "dots", :target => nil }], :pose => { :pose => "guarded", :target => nil }, :act => { :kind => "step_back", :target => nil } } &&
+      t1 == "[name: Juno] Why?" && d1[:emotes] == [{ :kind => "question", :target => "Kestrel" }], [t0, d0, t1, d1].inspect
+check "emote names and aliases", X.resolve_emote("Dots") == :dots && X.resolve_emote(:shock) == :double_exclaim && X.resolve_emote(:nope).nil?
+trace = []
+$on_frame = proc do
+  v = P.current
+  next if !v.is_a?(X::StageView)
+  trace.push(v.panels.map { |pn| [pn.side, pn.id] + pn.sprites.map { |s| [s.x, s.y] } + [pn.sprites[0].tone.red.round, pn.sprites[1].opacity] })
+end
+pbMessage("\\pf[JUNO,happy]Juno: Kestrel! You came back.")
+v1 = seen.last
+a1 = trace.dup
+trace.clear
+pbMessage("\\pf[KESTREL,deadpan]Kestrel: Don't make a fuss.")
+v2 = seen.last
+a2 = trace.dup
+trace.clear
+check "first speaker: left, fades in, alone", v1.is_a?(X::StageView) && v1.side == :left && v1.entry == :pop && v1.listener.nil? && v1.rect == [0, 160, 128, 128], [v1.class, v1.side, v1.entry, v1.rect].inspect
+check "fade in is alpha only", a1.first[0][-1] < 255 && a1.last[0][-1] == 255 && a1.map { |f| f[0][2] }.uniq == [[0, 160]] && a1.map { |f| f[0][3] }.uniq == [[16, 176]], [a1.first, a1.last].inspect
+check "the reply: right side, the first speaker stays, dimmed", v2.side == :right && v2.entry == :pop && v2.rect == [384, 160, 128, 128] && v2.listener && v2.listener.id == :JUNO && v2.listener.side == :left, [v2.side, v2.rect, v2.listener && v2.listener.id].inspect
+check "listener dims smoothly to the listener tone; speaker stays bright", a2.first[1][-2].between?(-41, 0) && a2.last[1][-2] == -42 && a2.all? { |f| f[0][-2] == 0 }, [a2.first, a2.last].inspect
+check "nothing on the stage moves a pixel", a2.map { |f| f[0][2, 2] }.uniq == [[[384, 160], [400, 176]]] && a2.map { |f| f[1][2, 2] }.uniq == [[[0, 160], [16, 176]]], a2.map { |f| [f[0][2], f[1][2]] }.uniq.inspect
+pbMessage("\\pf[JUNO,sad]Juno: You heard what happened.")
+v3 = seen.last
+a3 = trace.dup
+trace.clear
+check "back to the first speaker: her side, a cross-fade, no nudge", v3.side == :left && v3.entry == :swap && v3.listener.id == :KESTREL && File.basename(v3.file) == "JUNO_sad.png" &&
+      a3.all? { |f| f[0][2] == [0, 160] && f[0][3] == [16, 176] } && a3.first[0].length == 7 && a3.first[0][-2].between?(-42, -1) && a3.last[0][-2] == 0, [v3.entry, a3.first, a3.last].inspect
+pbMessage("Juno: (an untagged line keeps her face and Kestrel beside her)")
+check "carried line: same faces, no entry", seen.last.entry == :none && seen.last.listener && seen.last.listener.id == :KESTREL, seen.last.entry
+pbMessage("\\pf[LARCH,deadpan]Larch: A third voice.")
+v4 = seen.last
+check "third speaker takes the side of whoever spoke longest ago", v4.side == :right && v4.listener.id == :JUNO && X.stage.side_of(:KESTREL).nil?, [v4.side, v4.listener && v4.listener.id].inspect
+pbMessage("(Narration: a pause.)")
+pbMessage("\\pf[JUNO,sad]Juno: After a pause the stage starts again.")
+check "after a gap: the speaker alone, on her own side", seen.last.side == :left && seen.last.listener.nil? && seen.last.entry == :pop, [seen.last.side, seen.last.entry].inspect
+pbMessage("\\pfb[LARCH,angry,anger,1]Larch: A bubble is still 014's bubble.")
+check "bubble lines are untouched", seen.last.is_a?(P::Bubble)
+check "no sprite outlives its message box", P.current.nil? && $live == before, [$live, before].inspect
+X.dual_stage = false
+P.new_conversation
+P.instance_variable_set(:@last_face, nil)
+pf_say(:JUNO, :happy, "Stage off.")
+check "dual_stage = false: 014's own face window", seen.last.instance_of?(P::FaceBox) && seen.last.entry == :pop, seen.last.class
+X.dual_stage = true
+$on_frame = nil
+
+section "expressive conversations (018): balloons and overworld acting"
+# The stub has no map classes, so give 018 a small Game_Character and load its hooks again.
+class Game_Character
+  attr_accessor :name, :x, :y, :direction, :character_name, :move_route_forcing, :walking, :transparent
+  attr_reader :routes
+  def initialize(name, x, y, dir = 2, charset = "NPC 01")
+    @name = name; @x = x; @y = y; @direction = dir; @character_name = charset; @routes = 0
+  end
+  def screen_x; (@x * 32) + 16; end
+  def screen_y; (@y * 32) + 32; end
+  def moving?; @walking ? true : false; end
+  def jumping?; false; end
+  def update; end
+  def force_move_route(route); @routes += 1; end
+end
+class Scene_Map
+  def update; end
+  def transfer_player(*args); end
+  def disposeSpritesets(*args); end
+end
+def pbMapInterpreterRunning?; $interp_running ? true : false; end
+old_verbose = $VERBOSE
+$VERBOSE = nil
+load File.join(PLUGIN_DIR, "018_ExpressiveDialogue.rb")
+$VERBOSE = old_verbose
+old_scene = $scene
+old_map_events = $game_map.events
+old_player = $game_player
+juno = Game_Character.new("Juno (lab yard)", 5, 5)
+kes = Game_Character.new("Kestrel K1", 7, 5, 4)
+packets = Game_Character.new("Juno's seed packets", 1, 1)
+brann = Game_Character.new("Brann", 5, 8)
+$game_map.events = { 1 => juno, 2 => kes, 3 => packets, 4 => brann }
+$game_player = Game_Character.new("player", 5, 7, 8)
+$scene = Scene_Map.new
+P.new_conversation
+P.instance_variable_set(:@last_face, nil)
+check "a name finds its event by prefix, not by possessive", X.resolve_character(:JUNO).equal?(juno) && X.resolve_character("Kestrel").equal?(kes) &&
+      X.resolve_character(:PLAYER).equal?($game_player) && X.resolve_character(4).equal?(brann) && X.resolve_character(:NOBODY).nil?
+4.times { |i| pbMessage("\\pf[#{i.even? ? 'JUNO,neutral' : 'KESTREL,angry'}]#{i.even? ? 'Juno' : 'Kestrel'}: line #{i}") }
+check "no balloon unless a line asks for one", X.emotes_shown == 0 && X.emotes.count == 0
+check "nobody is turned for the speaker by default", juno.direction == 2 && kes.direction == 4
+shots = []
+$on_frame = proc { shots.push(X.emotes.count) }
+$msg_frames = 44                                   # 1.1 s at 40 fps: longer than a balloon
+pbMessage("\\pf[KESTREL,sad]\\pfe[dots]Kestrel: ...Keep off the ridge tonight.")
+$msg_frames = nil
+$on_frame = nil
+check "\\pfe[dots]: one balloon, over the speaker, gone inside a second", X.emotes_shown == 1 && shots.max == 1 && shots.last == 0 && $shown.last == "Kestrel: ...Keep off the ridge tonight.", [X.emotes_shown, shots.max, shots.last, $shown.last].inspect
+b = pf_emote(:JUNO, :question)
+check "balloon sits on the pixel grid over the head, on its row", b && b.sprite.x == juno.screen_x && b.sprite.y == juno.screen_y - 46 && b.sprite.src_rect.y == 2 * 32 && b.sprite.src_rect.x == 0, b && [b.sprite.x, b.sprite.y, b.sprite.src_rect.y].inspect
+pbMessage("[name: Dock Hand] [emote: exclaim, Brann] Oi!")
+check "[emote: kind, Target] on a plain line", X.emotes_shown == 3 && $shown.last == "[name: Dock Hand] Oi!", [X.emotes_shown, $shown.last].inspect
+check "a fourth balloon in one conversation is dropped", pf_emote(:JUNO, :sweat).nil? && X.emotes_shown == 3 && pf_emote(:JUNO, :sweat, force: true) && pf_emote(:JUNO, :nope, force: true).nil?
+X.clear_all
+check "conversation over: balloons, viewport and sheet released", X.emotes.count == 0 && !X.active? && $live == before, [$live, before].inspect
+P.new_conversation
+pbMessage("\\pf[JUNO,happy]Juno: Facing you.")
+check "automatic stance: a speaker facing the camera only", juno.pf_pose_sheet == "pose_JUNO" && juno.pf_pose_index == 0 && juno.pf_pose_auto, [juno.pf_pose_sheet, juno.pf_pose_index].inspect
+pbMessage("\\pf[KESTREL,angry]Kestrel: Side on.")
+check "...not one who is turned away from it", kes.pf_pose_sheet.nil?
+juno.direction = 4
+juno.update
+check "turning drops an automatic stance", juno.pf_pose_sheet.nil?
+pbMessage("\\pf[KESTREL,angry]\\pfp[crossed]\\pfa[step_back]Kestrel: Asked for.")
+check "\\pfp[crossed]: the stance a line asks for", kes.pf_pose_sheet == "pose_KESTREL" && kes.pf_pose_index == 0 && !kes.pf_pose_auto, [kes.pf_pose_sheet, kes.pf_pose_index].inspect
+$clock += 0.3
+kes.update
+off = [kes.pf_visual_ox, kes.pf_visual_oy]
+check "\\pfa[step_back]: four pixels back from where he faces, held", off == [4, 0] && !kes.pf_acting?, off.inspect
+pf_step_return(:KESTREL)
+$clock += 0.3
+kes.update
+check "pf_step_return: back on his tile", [kes.pf_visual_ox, kes.pf_visual_oy] == [0, 0]
+pf_nod(:JUNO)
+$clock += 0.11
+juno.update
+mid = juno.pf_visual_oy
+$clock += 0.2
+juno.update
+check "pf_nod: a two pixel dip and back", mid == 2 && juno.pf_visual_oy == 0, [mid, juno.pf_visual_oy].inspect
+check "pf_pose on a four-row sheet uses the shared names", pf_pose(:BRANN, :brace) == true && brann.pf_pose_sheet == "pose_BRANN" && brann.pf_pose_index == 2 && pf_pose(:BRANN, :nonsense) == false
+brann.walking = true
+brann.update
+check "walking off ends a stance", brann.pf_pose_sheet.nil?
+brann.walking = false
+check "pf_face_each_other turns two free characters", pf_face_each_other(:JUNO, :KESTREL) && juno.direction == 6 && kes.direction == 4
+kes.force_move_route(nil)
+kes.direction = 2
+check "...but never one its event has walked into place", kes.pf_staged && kes.routes == 1 && pf_turn_toward(:KESTREL, :JUNO) == false && kes.direction == 2
+X.auto_face = true
+P.new_conversation
+juno.direction = 2
+brann.direction = 2
+pbMessage("\\pf[JUNO,neutral]Juno: One.")
+pbMessage("\\pf[BRANN,neutral]Brann: Two.")
+check "auto_face (opt-in): speaker and last speaker turn to each other", juno.direction == 2 && brann.direction == 8 && !kes.pf_staged, [juno.direction, brann.direction].inspect
+X.auto_face = false
+$scene = old_scene
+pbMessage("\\pf[JUNO,happy]\\pfe[exclaim]Juno: Off the map screen nothing acts.")
+check "off the map: tags stripped, no balloon", $shown.last == "Juno: Off the map screen nothing acts." && X.emotes.count == 0
+X.clear_all
+P.new_conversation
+$game_map.events = old_map_events
+$game_player = old_player
+$opt[:assets] = false
+check "expressive lines leave nothing behind", $live == before && !X.active?, [$live, before].inspect
 
 section "debug menu"
 h = MenuHandlers::HANDLERS[:debug_menu] || {}
@@ -607,6 +770,28 @@ ids[1..-1].each do |i|
   r = (h[i]["effect"].call; true) rescue $!
   check "debug effect #{i}", r == true, r.inspect
 end
+
+section "live-map scene registry (016) and the AdvancedAnimations engine (017)"
+aa = Prismfall::AdvancedAnimations
+check "engine loaded, cut plates prepended", defined?(aa::Engine) && aa::Engine.ancestors.include?(aa::CutPlateExtension)
+check "the movie path is gone", !C.respond_to?(:movie) && !C.respond_to?(:movie_file)
+bad = C::SCENES.reject { |_, i| aa.respond_to?(i[:play]) }.keys
+check "every registered scene has its play method", bad.empty?, bad.inspect
+names = C::SCENES.keys + C::SCENES.values.flat_map { |i| i[:aliases] }
+check "scene ids and aliases are unique", names.uniq.length == names.length, names.group_by { |n| n }.select { |_, v| v.length > 1 }.keys.inspect
+check "aliases resolve", C.scene_key(:IR1) == :CH9_UNMASK && C.scene_key("war1") == :WAR_CLIMAX && C.scene_key(:SH1_DC) == :CH5_DC && C.scene_key(:CE1) == :CH15_GLASSFALL
+check "unknown id is a logged no-op", pfm_cutscene(:NO_SUCH_SCENE) == false && C.scene_log.last.include?("no such scene"), C.scene_log.last
+r = [:CH9_UNMASK, :CH21_ARCEUS, :RUIN_R7_AURELIUS, :CH2_PAGEANT, :SH1].map { |i| (pfm_cutscene(i) rescue $!) }
+check "a scene that can't play here returns false, never raises", r.all? { |v| v == false }, r.inspect
+check "SH1_BURN is a no-op that succeeds", pfm_cutscene(:SH1_BURN) == true
+check "pbRejuvCutscene: unknown id is nil", pbRejuvCutscene(:NO_SUCH_SCENE).nil?
+check "audio tags map to Prismfall's files", C.scene_bgm("ch9_tension") == "Mood - Tension" && C.scene_se("ch16_gunshot") == "Directorate Rifle Crack" && C.scene_se("Exclaim") == "Exclaim"
+$opt[:audio] = false
+check "a tag with no file is silent and listed", C.scene_bgm("ruin_cosmic_air").nil? && C.missing_audio.include?("BGM/ruin_cosmic_air"), C.missing_audio.inspect
+$opt[:audio] = nil
+check "captures stay inside the game folder", aa.safe_capture_dir("/tmp/x").nil? && aa.safe_capture_dir("../x").nil? && aa.safe_capture_dir("Captures/x") == "Captures/x"
+src017 = File.read(File.join(PLUGIN_DIR, "017_AdvancedAnimations.rb"))
+check "the Gilded King is AURELIUS in the scene code", !src017.include?("THEODRIC") && src017.include?('eng.say(:AURELIUS, :neutral, "Know your place, mongrel."')
 
 puts
 puts "#{$checks} checks, #{$fails.length} failed. Frames simulated: #{$stats[:frames]}, fill_rects: #{$stats[:fill]}, sprites: #{$stats[:sprites]}, bitmaps: #{$stats[:bitmaps]}"
