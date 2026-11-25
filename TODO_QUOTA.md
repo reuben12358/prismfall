@@ -104,3 +104,8 @@
 - [x] Ch18: `THORNGUARD` Captain Rowe (`[THORNGUARD,Captain Rowe]`, Lv 75–77).
 - [x] Ch19: partners `[LEADER_SIGRUN,Sigrun,19]` / `[LEADER_MARISOL,Marisol,19]` rebuilt to the script; the lines (`ISENMAR_TRENCHER` Ulfa, Bersi; `ISENMAR_HIRDMAN` Hjalmar + Torunn, Styr; `ASHKAAR_SOLDIER` Garrok, Senna; `ASHKAAR_EMBER_RIDER` Vharn + Ashild, Kessa); the Toll `[ASHKAAR_OFFICER,Orrin]`; `[THORNWATCH,Brome]`. Maps 920–926 (mapgen/layouts/war.py) still call the Rev 18 "Soldier"/"Captain" blocks and stage the partner double on 926: re-wire them to the script.
 - [ ] Next, in order: Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).
+
+## Status: Audio v4.3 wiring agent (2026-11-25)
+*Running note so the work can be picked up. Checks: `python3 -I mapgen/map_audio.py --check`, `ruby "plugins/Prismfall Cutscenes/selftest/voice.ruby_stub"`, the Cutscenes selftest.*
+- [x] Checkpoint 1 (commit 43a6ec2): `design/MAP_AUDIO.yaml` (117 maps) → `mapgen/map_audio.py` → `maps_out/Plugins/Prismfall Maps/013_MapAudio.rb` (run-time, installed files only); `Prismfall Core/031_AudioCues.rb` (cues, stock stand-ins for trainer BGMs, title, boss / field SE); badge / trial-rank / game-over jingles; default wild boss music; the nine v5 field-audio BGS in `audio/gemini_cc0/BGS`. Trainer-type BGMs are in `pbs/trainer_types.txt` (went in with f0c31c3); the VS lightning cue is in `010_Bridge_VersusIntro.rb` (went in with afad6dd).
+- [ ] In the tree, not committed yet: `plugins/Prismfall Cutscenes/014_Portraits_Voice.rb` (VoiceTicker) + `selftest/voice.ruby_stub`, the AUDIO cue matrix in `001_Config.rb`. Then: one real-engine check (a map's BGS, a trainer battle's BGM), the v5 BGS verdict in `gemini_recommends/REVIEW.md`, tick §6.
