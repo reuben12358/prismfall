@@ -1,4 +1,4 @@
-# The Rimewood (562). WRITTEN BY layouts/rimewood.py - edit that script.
+# The Rimewood (562). WRITTEN BY layouts/wave11_wilds_craft.py (Wave 11 Rejuv V14 Craft).
 id: 562
 name: The Rimewood
 parent: 0
@@ -16,6 +16,8 @@ tone: [-10, -4, 14, 16]
 fog: {name: prismfall_spores, opacity: 30, blend: 1, zoom: 100, sx: 1, sy: 1}
 connections:
 - {dir: N, offset: 12, to: 561, to_offset: 10}
+walk_from:
+- [13, 1]
 raw: data/raw/562.npy
 tileset: 52
 events:
