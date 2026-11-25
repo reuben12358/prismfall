@@ -76,7 +76,7 @@
   1. The Engine wakes, but the hand that reaches up through the arena's crystal walls isn't only Voss's. **Aurelius's reflection** steps through wearing the Chain, and the Aureate court is visible behind him in every reflective surface in Crownhaven.
   2. Voss kneels. Aurelius invites the PC to kneel with him: **`GO_R_KNEEL`**.
   3. Aurelius casts Voss aside into the Chain. **CHOICE `:ruin_voss`:** *spare* him (the PC pulls him out; he lives, hollow) or *abandon* him.
-  4. **Hijack: Gilded King Aurelius, the Gilded Reflection** (scene, challenge, barks and aftermath: `42_SCRIPT_RUIN_KING.md` R7). His team is the Gilders' court: Golurk, Aegislash, Gholdengo-gold reflections of Wardens' aces, on `:PRISM_ARENA` running Inverse.
+  4. **Hijack: Gilded King Aurelius, the Gilded Reflection** (scene, challenge, barks and aftermath: `42_SCRIPT_RUIN_KING.md` R7). His team is his treasury: Sunguard (Golurk), Regalia (Aegislash), Deluge (Kyogre), Sunder (Groudon), Colossus (Regigigas) and Gilt (Gholdengo), on :PRISM_ARENA running Inverse.
   5. **Arceus descends**, not dragged but *coming*, to finish what it began in AF 0. Valen holds the Ring one last time, to keep the crowd alive while god and Renegade fight. No Warden releases anything; all eighteen locks hold.
   6. **True Finale: Arceus (Judgment)**, seven bars, with **Giratina at the PC's side**. The last bar is on `:INVERSE` as Giratina turns the arena inside out.
   7. **The Unmaking needs a vessel.** The *none* unmakes the Chain, the Plates, Judgment and finally the Glass, and whoever carries it goes with the Glass. The Reflection offers: "I've done this twenty-three times. Let me do it once on purpose."

@@ -178,3 +178,13 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
     - the 3-tier postgame network as Act V / postgame design input. It gets scripted after Ch21, in story order.
 - **Part A, sprites and the 4 EBDX bugs:** adopted and queued. The shiny-fallback path fix goes in the EBDX Bridge, not the vendor plugin. The `.PNG` case normalization and the oversized Gen 9 statics are engine-asset work. The importer `tools/install_ebdx_animated_sprites.py` goes to the art pipeline.
 - **Part C, Dorian with a Meloetta ace:** adopt Reuben's locked four (Smeargle, Chatot, Hisuian Zorua and Meloetta, plus Spinda and Jigglypuff), with the **field cap** (`:not_moves => [:RELICSONG]` on Grand Stage's Sound row) and the **"Act One Matinee"** trainer-boss stat scale. The pure-PBS fallback is not adopted: it loses the Aria ↔ Pirouette dance. Gym 1 is balance-critical, so this lands only with a gym-1 harness run on quota (TODO_QUOTA §2).
+
+## 2026-11-23 gilded-king-aurelian-gilgamesh-rework and 2026-11-24 aurelius-personality-not-gob — ADOPTED (Claude, 2026-11-25)
+- Path B "Aurelius" applied everywhere; on 2026-11-24 Reuben asked for the internal ids too: `GILDED_THEODRIC` → `GILDED_AURELIUS`,
+  `THEODRIC` → `AURELIUS` (trainer type, PBS, Festival key, VS id, portrait id, charset, every art file). Gemini: use the new
+  names in scene code and art drops.
+- Personality-only audit applied in full: the portal line, the Chain-from-the-crystal toss and the "thousand blades" bark are
+  gone; §3.1–3.7 and §4.2 are in `story/42_SCRIPT_RUIN_KING.md` and Z-Power `006_ZPower_TrainerBarks.rb` (house punctuation;
+  "hollow one" kept in the R6 closing line). `story/12_RUIN_ROUTE.md` team note synced.
+- His battle music: on pause (Reuben), until the audio pass settles.
+

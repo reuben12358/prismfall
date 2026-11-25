@@ -10,9 +10,11 @@
 > Inverse, with the gold VS screen (EBDX Bridge `010_Bridge_VersusIntro.rb`) and his mid-battle barks (Z-Power
 > `006_ZPower_TrainerBarks.rb`). Map events named "Aurelius" wear his overworld sprite (`025_CharsetAliases.rb`).
 >
-> **Voice.** Effortless, unhurried amusement; never a rant. "Mongrel" is for counterfeits and for the PC until Gilt
-> falls, then never again. His words: *my treasury, the Chain, counterfeit, know your station, my court, the original*.
-> No Fate names. One to three short sentences a box.
+> **Voice.** Archer Gilgamesh's *personality* only, grounded in Velmora (Reuben, 2026-11-24): **no** golden portals, **no**
+> summoned or floating weapons, no Fate names or romaji. Effortless, lounging amusement; casual, absolute possessiveness;
+> never a rant. "Mongrel" is for counterfeits, panicking crowds, and the PC up to Gilt's send-out; it is dropped for good
+> once Gilt is cornered, in his LoseText and after the battle. His words: *my treasury, the Chain, counterfeit, know your
+> station, my court, the original*. One to three short sentences a box.
 
 ---
 
@@ -26,27 +28,27 @@
 [portrait: AURELIUS, happy] Pity. My artificers spent six months on those armrests.
 (The mirror-wall is not a reflection of the ruins. It is a window into AF 0: the Sun Court in dry midsummer gold, banners taut in mid-air, Gilders frozen mid-chant, sparks hung like dust, and at its centre King Aurelius Aurel, the blazing Gilded Chain in his hands, mid-command.)
 (Nothing behind the glass moves. Not a banner. Not a mote of light.)
-(Then his golden eyes slide sideways and lock onto you.)
-[portrait: AURELIUS, neutral] Well, now. What wandered through the glass?
-[portrait: AURELIUS, smug] No colour in your chest. No tint in your step. And behind your heel...
-(His gaze drops to the Reflection at your shoulder.)
-[portrait: AURELIUS, happy] Ha. Twenty-three graves, and you wear your own corpse for a shadow. Three centuries of drowned fish, and at last something mildly entertaining.
+(Then his golden eyes slide sideways and lock onto you. Slowly, while his whole court stays frozen in midsummer dust, only King Aurelius lowers the Chain with a bored sigh and strolls down his dais to lean against the inside of the glass.)
+[portrait: AURELIUS, smug] Well, now. No tribute, no bowed head. Who gave you leave to wander into my court, mongrel?
+[portrait: AURELIUS, neutral] Wait... no colour in your chest. No tint in your step. And standing behind your heel...
+(His gaze drops to the Reflection at your shoulder, and his amusement sharpens into real interest.)
+[portrait: AURELIUS, happy] Ha! Twenty-three graves, and you wear your own corpse for a shadow. Three centuries of drowned fish, and at last something worth looking at.
 (SFX: a hydraulic hiss. The pressure-door shears open; Meridian floodlights cut across the marble. Aurelian Voss steps into the air-pocket, helmet under his arm, and stops dead at the sight of the Sun Court.)
 [portrait: VOSS, shocked] ...No.
 (His case slips from his fingers and clangs on the marble. For the first time in the game, the calmest man in Velmora drops to both knees.)
 [portrait: VOSS, crying] He's alive. Three hundred years, behind the glass, he's still alive...
 [portrait: VOSS, neutral] Your Majesty. House Aurel kept the notebooks. I built the Spire on your foundations. I brought back the cradle.
-(Behind the glass the King tilts his chin down at the kneeling man in charcoal wool and a pressure-collar. The smile doesn't fade. It turns cold.)
+(Behind the glass the King tilts his chin down at the kneeling man in charcoal wool and a pressure-collar. The smile doesn't fade. It turns cold as winter gold.)
 [portrait: AURELIUS, deadpan] ...Stand up, whatever you are. You're getting mud on my reflection.
-[portrait: AURELIUS, smug] "House Aurel"? In that mourning-coat? You look like a tax collector who stole the silverware during a fire.
+[portrait: AURELIUS, smug] "House Aurel"? In that mourning-coat? You pitched a shopkeeper's tower on my drowned roof, and you expect applause, like a clerk who stole the silverware during a fire.
 [portrait: VOSS, shocked] I built the Engine! Eighteen pylons in Crownhaven! Better than metal, my lord. It only needs the cradle.
-[portrait: AURELIUS, neutral] (two fingers, waved, without looking at him) Then fetch your little brass toy and set the stage, clerk. Even a stray hound can carry a bone to the right door.
+[portrait: AURELIUS, neutral] (two fingers, waved lazily, without looking at him) Then fetch your little brass toy and set the stage, mongrel. Even a stray hound can carry a bone to the right door.
 (Voss doesn't hear the contempt, or won't. His salvage team hoists the keystone cradle and retreats to the submarine lock.)
 [portrait: VOSS, happy] It will be ready at the Coronation, Your Majesty. Every lock. Every light.
-(The lock seals. Only you, your Reflection and the King behind the glass remain. He presses gauntleted fingertips to the inside of the mirror, opposite your chest.)
+(The lock seals. Only you, your Reflection and the King behind the glass remain. He rests one gauntleted palm lightly against the inside of the mirror, opposite your chest.)
 [portrait: AURELIUS, smug] Look at him. Three hundred years, and my bloodline prays to a ghost in a pane of glass.
-[portrait: AURELIUS, neutral] You, however, did not kneel. You didn't even blink.
-(A slow grin: a king spotting a gladiator who might actually draw blood.)
+[portrait: AURELIUS, neutral] You, however, did not kneel. You did not even lower your eyes.
+(A slow, dangerous grin: a sovereign spotting the first challenger in three centuries who might make him sit up.)
 [portrait: AURELIUS, happy] Bring that little tin crown to Crownhaven, hollow thing. Let the merchant finish building my door.
 (His fingers close on the Chain. One word, through the glass, like struck gold:)
 [portrait: AURELIUS, smug] "Finish."
@@ -63,15 +65,17 @@
 (The ropes won't move. Inside the mirror the King leans on the gilded frame, one elbow propped, like a patron at a rehearsal.)
 [portrait: AURELIUS, smug] Passable velvet, actor. Though you play my laugh far too humbly.
 [portrait: AURELIUS, deadpan] And tell whoever stitched that crown that my goldsmiths went off the sea-cliffs for proportions that sloppy.
-(Gasps. The Wardguard reach for Poké Balls and stop: every shield, every lantern pane, every Basilica window shows the same golden gaze.)
+(Gasps. The Wardguard reach for Poké Balls and freeze: every shield, every lantern pane, every Basilica window shows the same golden gaze looking down at them.)
+[portrait: AURELIUS, deadpan] Lower those Poké Balls, mongrels. Did I grant you leave to interrupt my play?
 [portrait: AURELIUS, neutral] Ansel Crewe, was it? The playwright they hanged for remembering me?
 [portrait: AURELIUS, happy] A decent second act. A cowardly third. He has me weeping as Aurelia sinks. How tedious. When the sky broke over my head, I did not weep. I applauded.
 (Celestine steps out of the wings, pale, unable to lie even now.)
 [portrait: CELESTINE, shocked] ...You're not a memory. The Glass kept you whole.
 [portrait: AURELIUS, smug] A truth-speaker? Charming. Maren's songbirds still keep their feathers. Sing your third verse, little bird, if you have the stomach.
-(His eyes pass the stage lights, Dorian, the Wardguard, Voss trembling in the Meridian box, and settle on you.)
+(His eyes pass the stage lights, Dorian, the Wardguard, Voss trembling in the Meridian box, and settle squarely on you.)
 [portrait: AURELIUS, happy] Ah. There sits my real audience.
-[portrait: AURELIUS, smug] Enjoy tomorrow, hollow one. Beat the tired old caretaker with the crystal arm, pick up his little silver hoop... and try not to bore me when the curtain rises for real.
+[portrait: AURELIUS, smug] Every Plate in this realm was mine before your grandparents learned to draw breath.
+[portrait: AURELIUS, smug] Beat the tired old caretaker tomorrow, hollow one, pick up my little silver hoop... and try not to bore me when the curtain rises for real.
 (He snaps his fingers inside the glass. Every torch in the square dies. When the lanterns relight, the mirror shows only frightened faces, and one hairline golden crack shaped like a crown.)
 [portrait: DORIAN, panic] ...Thirty years in the theatre, darling, and I have never had a review from the title character.
 ```
@@ -92,7 +96,7 @@
 [portrait: AURELIUS, angry] You built a shopkeeper's tower on my drowned roof, wired a clerk's harness out of scraps from my sewers, and crawled to my glass on your knees!
 [portrait: AURELIUS, smug] And they named you for me. "Aurelian": heir of Aurelius. A copper coin stamped with the sovereign's face.
 [portrait: AURELIUS, neutral] Know your place, mongrel.
-(Two links of the Chain lash out of the crystal like whips, snap the harness straps and throw the chief executive of Meridian twenty feet across the arena into the Chain's burning perimeter.)
+(With a lazy flick of his gauntlet he catches Voss by the steel collar of the harness, snapping the straps clean, and flings the chief executive of Meridian twenty feet across the flagstones into the Arbiter Engine's burning golden perimeter.)
 [portrait: VOSS, panic] No, Your Majesty, I'm your heir—!
 [portrait: AURELIUS, deadpan] A king has no heirs while he is standing in the room.
 ```
@@ -102,7 +106,8 @@
 ```
 (The King turns his back on Voss, already bored, and faces you across the humming keystone cradle. The inverted light of the eighteen Plates moves across his crown.)
 [portrait: AURELIUS, smug] Now, then. The clerk is out of the way, and the sky is already listening.
-[portrait: AURELIUS, neutral] You walked through twenty-three graves to open my door. A finer errand than any servant I left in the salt.
+[portrait: AURELIUS, neutral] Every Plate, every crown, every worthy specimen in this land was mine before your grandparents learned to breathe. I am merely collecting interest.
+[portrait: AURELIUS, smug] You walked through twenty-three graves to open my door. A finer errand than any servant I left in the salt.
 (He holds out one open, gauntleted hand: not Voss's offer of partnership, a monarch granting an audience.)
 [portrait: AURELIUS, smug] Kneel, mongrel. Set that little hoop at my feet, and I will be generous. I am always generous to things that know their station.
 (At your shoulder, Giratina's presence coils cold behind the Black Case: a warning in the glass.)
@@ -131,23 +136,23 @@
 
 ### The challenge
 ```
-(He steps back onto the centre ring. Eighteen golden portals ripple open behind his cape like mirrored shields; the Prism field inverts: strengths to weaknesses, the sky to inverted gold.)
-[portrait: AURELIUS, neutral] Let us see what three hundred years of mortal mediocrity has produced.
-[portrait: AURELIUS, smug] You mean to unmake the sky? To erase the Plates I spent a kingdom's blood to collar?
-[portrait: AURELIUS, happy] Audacious! Unforgivable! Utterly magnificent!
-[portrait: AURELIUS, angry] Come, then, mongrel. Stand before the First Sovereign of Aurelia and show me whether you deserve to look heaven in the eye!
+(He steps back onto the centre ring and lifts a single gilded Poké Ball in a relaxed, raised palm, the Chain's links chiming softly across his breastplate. Round the stadium rim all eighteen crystal pylons of the Arbiter Engine flare Aureate gold together; the Prism field turns inside out: strengths to weaknesses, the Crownhaven sky to cold inverted gold.)
+[portrait: AURELIUS, smug] Look up, mongrel. Let us see what three hundred years of mortal mediocrity has produced.
+[portrait: AURELIUS, neutral] You mean to unmake the sky? To erase the eighteen Plates I spent a kingdom's blood to claim?
+[portrait: AURELIUS, happy] Hahaha! Audacious! Unforgivable! Utterly magnificent!
+[portrait: AURELIUS, angry] Stand your ground, insolent mongrel! Face the First Sovereign of Aurelia and prove you have the spine to look heaven in the eye!
 BATTLE: Prismfall::Festival.next_match (stage :HIJACK on the Ruin Route) -> [GILDED_AURELIUS,Aurelius] on :PRISM_ARENA, the event layering Inverse. Gold VS screen (AURELIUS). LoseText: "Ha...! Magnificent! Three hundred years, and at last a challenger. Go—end the sky."
 ```
 **His team, the treasury** (`tools/trainer_gen/gen.py`, BALANCE.md): Sunguard (Golurk, the original of Voss's "Gilder"),
 Regalia (Aegislash), Deluge (Kyogre) and Sunder (Groudon): the Year of Two Weathers, Colossus (Regigigas), Gilt
 (Gholdengo, Lv 100). No Mega Ring: the rings came three centuries after him.
 
-**Barks in battle** (Z-Power `006_ZPower_TrainerBarks.rb`; each once per battle): Sunguard's send-out ("Witness the
-original, mongrel..."), Regalia's ("A thousand blades were forged after Aurelia sank..."), the first titan ("...the Year
-of Two Weathers"), Colossus ("Even a sleeping titan stands when its king commands..."), the end of the first round on
-the inverted arena ("Even heaven's own laws twist backward beneath my heels!"), Gilt's send-out ("You tore through my
-court and my titans alike? Splendid!..."), and Gilt under a third of its HP ("Hahaha! Yes! That cold, unflinching
-glare..."). From Gilt on, no "mongrel".
+**Barks in battle** (Z-Power `006_ZPower_TrainerBarks.rb`; each once per battle; his Pokémon and his manner, never
+portals): Sunguard's send-out ("Witness the original, mongrel."), the end of the first round on the inverted arena ("Look
+up, mongrel. Even heaven's own laws bow backward in my court..."), Regalia's ("Every petty king since Aurelia sank has
+worn tin and called it regalia..."), the first titan ("...I collared the sea and the earth merely to tend my gardens!"),
+Colossus ("I grant you five heartbeats, mongrel..."), Gilt's send-out ("Hahaha! Well played, mongrel!": the last time he
+says the word), and Gilt under a third of its HP ("Hahaha! Yes! That cold, unflinching glare...").
 
 ### After the battle (right before Arceus descends)
 ```
@@ -174,3 +179,4 @@ glare..."). From Gilt on, no "mongrel".
 - **Dorian and Ansel Crewe's play:** delightful, slightly timid theatre.
 - **Valen:** pitying scorn. "Ten generations of clerks polishing the bars of their own cage, and calling the bruise 'duty.'"
 - **Princess Maren:** the one mortal he never calls a mongrel. "My daughter was the only soul in Aurelia who dared tell me no without lowering her chin. Pity she built a monastery out of her backbone."
+- **Staging guardrail:** personality only, never Fate powers. He never opens golden portals or summons floating swords; his dominance is his bearing, his words, the Arbiter Engine's pylons and Chain, and his six Pokémon.

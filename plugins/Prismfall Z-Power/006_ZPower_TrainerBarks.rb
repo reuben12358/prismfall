@@ -12,22 +12,25 @@
 #===============================================================================
 module PrismfallSpeech
   BARKS = {
-    # Ruin Route R7, the Hijack: Gilded King Aurelius (Gemini rework 2026-11-23, story/42_SCRIPT_RUIN_KING.md D4).
-    # "mongrel" stops when Gilt comes out: from then on he is talking to a rival.
+    # Ruin Route R7, the Hijack: Gilded King Aurelius (story/42_SCRIPT_RUIN_KING.md). Gilgamesh's personality only
+    # (Reuben 2026-11-24: no portals, no summoned weapons). "Mongrel" turns to delighted respect on Gilt's send-out and
+    # is gone for good once Gilt is cornered (:ace_low), in his LoseText and after the battle.
     [:GILDED_AURELIUS, "Aurelius"] => {
       :sendout => {
-        :GOLURK    => "Witness the original, mongrel. That corroded toy Voss dredged from the silt was my doorstep's dust.",
-        :AEGISLASH => ["A thousand blades were forged after Aurelia sank. Every one a crude copy of mine.",
-                       "Regalia. Show them royal steel."],
-        [:KYOGRE, :GROUDON] => ["Before I forged a chain for heaven, I leashed the sea and the earth to plow my gardens!",
-                                "Let us see if you survive the Year of Two Weathers."],
-        :REGIGIGAS => "Even a sleeping titan stands when its king commands. Survive five heartbeats, and earn being crushed.",
-        :GHOLDENGO => ["Hmph...! You tore through my court and my titans alike? Splendid!",
-                       "Then drown in the whole treasury of Aurelia. Gilt, make it rain!"]
+        :GOLURK    => ["Witness the original, mongrel.",
+                       "That corroded toy Voss dredged from the silt was merely dust on my doorstep."],
+        :AEGISLASH => ["Every petty king since Aurelia sank has worn tin and called it regalia. Counterfeits, the lot of them.",
+                       "Regalia. Remind this mongrel what royal steel looks like."],
+        [:KYOGRE, :GROUDON] => ["Before I chained the sky, I collared the sea and the earth merely to tend my gardens!",
+                                "Entertain me, mongrel. Let us see if you survive the Year of Two Weathers."],
+        :REGIGIGAS => ["Even a sleeping titan rises when I snap my fingers.",
+                       "I grant you five heartbeats, mongrel. Amuse me before Colossus wakes."],
+        :GHOLDENGO => ["Hahaha! Well played, mongrel! You tore through my court and my titans without lowering your chin!",
+                       "Then you have earned the full weight of Aurelia's vault. Gilt, Make It Rain!"]
       },
-      :round1  => "Even heaven's own laws twist backward beneath my heels! Adapt, or shatter!",
+      :round1  => "Look up, mongrel. Even heaven's own laws bow backward in my court. Try not to trip on your own shadow.",
       :ace_low => ["Hahaha! Yes! That cold, unflinching glare: neither kneeling nor begging!",
-                   "Strike harder, challenger! Show me the fang that dares bite a god!"]
+                   "Strike harder, challenger! Show me the willpower that dares look a god in the eye!"]
     }
   }
 
