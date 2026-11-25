@@ -311,21 +311,45 @@ def build_192():
 
 # ============================================================================================ 193 the Core
 def build_193():
+    from cavekit import PIT, TER
+    # Sculpted Rejuvenation-grade Stepped Neon Broadcast Amphitheater:
+    #   MASS  -> cvZ sculpted dark obsidian-glass studio silhouette (narrowed entrance tunnel + recessed wings)
+    #   TER   -> lmw elevated white-gold marble VIP Broadcast Balcony for Juno (16,7) & Larch (17,7)
+    #   FLOOR -> cvZ sleek dark-glass Neon Grid central arena, recessed Cold Cradle sanctuary & Splice bay
+    #   PIT   -> lm_deep0..5 starry dark-glass studio light wells flanking the arena with glowing pylons & holos!
     m = hall(21, 20, 193)
-    m.box(1, 3, 19, 18)
-    m.box(9, 19, 11, 19)
-    m.mass_at([(1, 18), (19, 18)])
+    m.kit = {TER: 'lmw', FLOOR: 'cvZ', 'default': 'cvZ'}
+
+    # ---- 1. Sculpt the Black Void: Multi-Wing Amphitheater, Narrowed Entrance Tunnel & Light-Well Chasms ----
+    # Main Broadcast Studio Arena (x=4..17, y=3..12) + Recessed West & East Antechamber Alcoves (x=3..17, y=13..16)
+    m.box(4, 3, 17, 12, FLOOR, '.')
+    m.box(3, 13, 17, 16, FLOOR, '.')
+    # Narrowed crimson-carpet entrance tunnel (x=8..12, y=17..18; x=9..11, y=19) drawing eyes straight to Rook!
+    m.box(8, 17, 12, 18, FLOOR, '.')
+    m.box(9, 19, 11, 19, FLOOR, '.')
+
+    # Flanking dark-glass studio light-well chasms (PIT -> lm_deep0..5!)
+    m.box(1, 3, 3, 12, PIT, 'p')          # West studio light-well chasm flanking the Neon Grid arena!
+    m.box(18, 9, 19, 12, PIT, 'p')        # East light-well chasm dropping beneath the elevated VIP balcony!
+
+    # ---- 2. Elevated VIP Broadcast Viewing Balcony (TER, lmw marble balustrade, x=14..19, y=3..8) ----
+    # Juno (16,7) & Larch (17,7) cheer from an elevated luxury VIP balcony overlooking Rook's Neon Grid arena!
+    m.box(14, 3, 19, 8, TER, '.')
+    # Grand VIP balcony stairs rising smoothly from mezzanine (y=11) up to Juno & Larch (y=8)!
+    m.stairs(15, 8, w=3, n=3, c='.')
     m.plan_cliffs(rows=3)
+
+    # ---- 3. Events (100% Cold Cradle, Splice node, Arena door, Rook, Drone, Juno, Larch & warp preserved!) ----
     E = m.events
-    # Sleek forged brass barrier & bollard posts across y=13 (Arena door at (10, 13))
-    for x in range(1, 20):
+    # Sleek forged brass barrier & bollard posts sealing y=13 (x=3..17, ONLY Arena door (10,13) crosses!)
+    for x in range(3, 18):
         if x == 10:
             continue
-        if x in (1, 9, 11, 19):
+        if x in (3, 9, 11, 17):
             m.over.append((1, x, 13, P1('lm_bollard')))
-        elif x in (2, 12):
+        elif x in (4, 12):
             m.over.append((1, x, 13, P1('lm_railing_w')))
-        elif x in (8, 18):
+        elif x in (8, 16):
             m.over.append((1, x, 13, P1('lm_railing_e')))
         else:
             m.over.append((1, x, 13, P1('lm_railing_m')))
@@ -343,8 +367,8 @@ def build_193():
                                     tile=P1('lm_splice')),
                 page(["The node hums on the Meridian main."], tile=P1('lm_splice_on'), cond={'switch': SPL}))
     splice['at'] = [15, 15]
-    # Continuous Meridian main power cable running from west wall past Cold Cradle (5,15) to Splice node (15,15) & east wall
-    for x in (3, 4, 6, 7, 13, 14, 16, 17, 18):
+    # Continuous Meridian main power cable running from west alcove past Cold Cradle (5,15) to Splice node (15,15) & east wall
+    for x in (3, 4, 6, 7, 13, 14, 16, 17):
         m.over.append((1, x, 15, P1('lm_cable_h')))
     for x in (8, 12):
         m.over.append((1, x, 15, P1('lm_grate')))
@@ -394,71 +418,108 @@ def build_193():
     gal_l['at'] = [17, 7]
     E += [cradle, splice, adoor, rook, drone, gal_j, gal_l,
           {'type': 'warp', 'name': 'To the Live Wire Hall', 'at': [10, 19], 'to': {'map': 192, 'x': CI.CORE_DOOR[0] + 1, 'y': CI.CORE_DOOR[1] + 1, 'dir': 'down'}, 'se': 'Door exit'}]
-    # VIP gallery brass balcony rail along y=9 (x=14..19)
-    for x in range(14, 20):
-        t = 'lm_bollard' if x in (14, 19) else 'lm_railing_w' if x == 15 else 'lm_railing_e' if x == 18 else 'lm_railing_m'
-        m.over.append((1, x, 9, P1(t)))
-    m.keep_clear |= {(10, 18), (10, 17), (10, 16), (10, 15), (10, 14), (10, 12), (10, 11), (10, 10), (10, 9), (10, 8),
-                     (5, 16), (6, 15), (4, 15), (14, 15), (15, 16), (11, 7), (9, 7),
-                     (14, 7), (14, 8), (15, 7), (15, 8), (16, 8), (17, 8)}
-    # Symmetrical high-tech studio north wall: monitors, neon bolts, ON AIR sign, posters & red tally alarms
+
+    m.keep_clear |= ({(10, y) for y in range(7, 20)}
+                     | {(9, 17), (11, 17), (9, 18), (11, 18), (9, 14), (11, 14),
+                        (4, 15), (6, 15), (5, 16), (4, 16), (6, 16),
+                        (14, 15), (16, 15), (15, 16), (14, 16), (16, 16),
+                        (11, 7), (9, 7), (11, 11), (12, 11), (13, 11), (14, 11),
+                        (15, 11), (16, 11), (17, 11), (15, 7), (16, 8), (17, 8), (15, 8)})
+
+    # ---- 4. North Broadcast Studio Bulkhead (ON AIR, Neon Bolts, Dual Monitor Banks, Tally Alarms, Posters) ----
     on_faces(m, 'lm_onair', [(10, 3)])
-    on_faces(m, 'lm_alarm_on', [(2, 4), (18, 4)])
-    on_faces(m, 'lm_poster1', [(1, 4), (19, 4)])
-    hang(m, 'lm_neonbolt', 4, 3); hang(m, 'lm_neonbolt', 15, 3)
-    hang(m, 'lm_monitors', 7, 3); hang(m, 'lm_monitors', 12, 3)
-    # Broadcast rig, speakers, cameras, ring-lights, server racks, and lounge props
+    on_faces(m, 'lm_alarm_on', [(5, 4), (14, 4)])
+    on_faces(m, 'lm_poster1', [(4, 4), (18, 4)])
+    hang(m, 'lm_neonbolt', 6, 3); hang(m, 'lm_neonbolt', 12, 3)
+    hang(m, 'lm_monitors', 8, 3); hang(m, 'lm_monitors', 15, 3)
+
+    # ---- 5. Dark-Glass Studio Light-Well Architecture (Glowing Pylons, Energy Rings & Broadcast Holos in PIT!) ----
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+
+    abyss_piece('lm_pylon', 1, 5)       # NW glowing Lattice broadcast tower rising out of the west light well!
+    abyss_piece('lm_holo', 3, 6)        # Floating neon studio holographic totem on chasm edge
+    abyss_piece('lm_ring', 2, 10)       # Studio energy induction ring inside west chasm
+    abyss_piece('lm_steam0', 1, 10)
+    abyss_piece('lm_ring', 18, 11)      # East light-well glowing induction ring cleanly below the VIP marble cliff!
+
+    # ---- 6. Broadcast Rig, Spotlighted Cold Cradle Sanctuary, VIP Lounge & Tunnel Props ----
     for name, x, y in (
-        ('lm_speaker', 1, 6), ('lm_speaker', 19, 10),
-        ('lm_rack', 1, 9), ('lm_rack', 1, 15), ('lm_rack', 19, 15),
-        ('lm_cam', 3, 8), ('lm_ring', 3, 10),
-        ('lm_cam', 14, 10), ('lm_ring', 16, 11),
-        ('lm_plant', 19, 6), ('lm_table', 18, 8),
-        ('lm_plant', 2, 17), ('lm_plant', 18, 17),
-        ('lm_couch', 15, 17), ('lm_gearbox', 3, 17), ('lm_gearbox', 13, 17),
+        # Broadcast cameras, speakers & ring-lights framing Rook's Neon Grid arena (cleanly off the cyan strip!)
+        ('lm_speaker', 5, 5), ('lm_speaker', 17, 11),
+        ('lm_cam', 5, 8), ('lm_ring', 5, 10),
+        ('lm_cam', 13, 11), ('lm_ring', 15, 11),
+        # Elevated VIP Viewing Balcony luxury lounge dressing behind & beside Juno & Larch
+        ('lm_plant', 19, 5), ('lm_table', 18, 7), ('lm_planter', 16, 5),
+        # Spotlighted Cold Cradle Sanctuary & East Splice Control Bay hardware
+        ('lm_pillar', 3, 13), ('lm_arclamp', 7, 14),
+        ('lm_rack', 3, 15), ('lm_rack', 17, 14),
+        ('lm_gearbox', 3, 16), ('lm_gearbox', 17, 16),
+        # Narrowed entrance tunnel framing bollards & broadcast plants
+        ('lm_plant', 8, 17), ('lm_plant', 12, 17),
+        ('lm_bollard', 8, 18), ('lm_bollard', 12, 18),
     ):
         put_if(m, name, x, y)
+
+    # Dramatic double-centered overhead spotlights (cv_shaft + pf_glow) illuminating Rook's stage & the Cold Plate Cradle!
+    m.stamps.append(('cv_shaft', 9, 5))
+    m.stamps.append(('pf_glow', 9, 6))
+    m.stamps.append(('pf_glow', 10, 6))
+    m.stamps.append(('cv_shaft', 4, 13))
+    m.stamps.append(('pf_glow', 4, 14))
+    m.stamps.append(('pf_glow', 5, 14))
+
     m.paint()
-    # ---- Post-paint floor refinement: strip noisy cyan Z_f3 blotches & lay Neon Grid arena, carpets & cradle plinth ----
-    z_f0, z_f1, z_f2, z_f3 = P1('Z_f0'), P1('Z_f1'), P1('Z_f2'), P1('Z_f3')
+
+    # ---- 7. Post-Paint Floor Craft (Starry Light Wells, Clean Obsidian Glass, Neon Grid Arena, Marble Plinth & Carpets!) ----
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
     for y in range(m.H):
         for x in range(m.W):
-            if m.L[0, y, x] == z_f3:
-                m.L[0, y, x] = z_f2 if ((x + y) & 1) else z_f0
-    # Elevated marble plinth under Cold Plate Cradle (4..6, 14..15)
-    for y in (14, 15):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+    clean_studio_floor(m)
+
+    # Cold Plate Cradle elevated marble sanctuary plinth (x=4..6, y=14..16) with pale ashlar outer border!
+    for y in (14, 15, 16):
         for x in (4, 5, 6):
-            m.L[0, y, x] = P1('lm_plaza0')
-    # Antechamber plush crimson-and-brass carpet runner (9..11, 14..19)
-    for y in range(14, 20):
-        for x in (9, 10, 11):
-            part = ('n' if y == 14 else 's' if y == 19 else '') + ('w' if x == 9 else 'e' if x == 11 else '')
-            m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
-    # VIP Broadcast Gallery plush carpet (15..19, 6..8)
-    for y in (6, 7, 8):
-        for x in range(15, 20):
-            part = ('n' if y == 6 else 's' if y == 8 else '') + ('w' if x == 15 else 'e' if x == 19 else '')
-            m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
-    # Glowing Neon Grid Arena perimeter & center battle runway (5..13, 6..11) — 100% cohesive dark-glass & neon cyan!
-    for x in range(6, 13):
+            if m.cls[y, x] == '.':
+                m.L[0, y, x] = P1('lm_plaza0') if (x == 5 or y == 15) else P1('lm_pave0')
+
+    # Narrowed crimson-and-gold entrance tunnel carpet leading eyes straight through Arena Door (10,13) to Rook!
+    put_carpet(m, 9, 14, 11, 19)
+    # Elevated VIP Broadcast Balcony royal crimson carpet (15..19, 5..7)
+    put_carpet(m, 15, 5, 19, 7)
+
+    # Glowing Neon Grid Central Arena perimeter & battle runway (x=6..13, y=6..10)
+    for x in range(7, 13):
         if m.L[1, 6, x] == 0:
             m.L[0, 6, x] = P1('lm_strip_h_on')
-        if x != 10 and m.L[1, 11, x] == 0:
-            m.L[0, 11, x] = P1('lm_strip_h_on')
-    for y in range(7, 11):
-        if m.L[1, y, 5] == 0:
-            m.L[0, y, 5] = P1('lm_strip_v_on')
+        if x != 10 and m.L[1, 10, x] == 0:
+            m.L[0, 10, x] = P1('lm_strip_h_on')
+    for y in range(7, 10):
+        if m.L[1, y, 6] == 0:
+            m.L[0, y, 6] = P1('lm_strip_v_on')
         if m.L[1, y, 13] == 0:
             m.L[0, y, 13] = P1('lm_strip_v_on')
-    # Sleek dark-steel junction grates at the 4 corners & center cross + neon cyan runway straight to Rook (10,7)
-    for cx, cy in ((5, 6), (13, 6), (5, 11), (13, 11), (10, 11)):
+    # Industrial dark-steel corner anchor grates & central blazing neon runway straight from Arena Door to Rook (10,7)!
+    for cx, cy in ((6, 6), (13, 6), (6, 10), (13, 10), (10, 10), (10, 12)):
         m.L[0, cy, cx] = P1('lm_grate')
-    for y in (8, 9, 10, 12):
+    for y in (8, 9, 11):
         m.L[0, y, 10] = P1('lm_strip_v_on')
-    # Subtle stage corner grates inside the Neon Grid arena
-    for gx, gy in ((7, 8), (12, 8), (7, 10), (12, 10)):
+    # Subtle stage inner grates framing Rook's battle zone
+    for gx, gy in ((8, 7), (12, 7), (8, 9), (12, 9)):
         if m.L[1, gy, gx] == 0:
             m.L[0, gy, gx] = P1('lm_grate')
+    # Glowing cyan conduit connecting Mezzanine (12..14, 11) toward the VIP Balcony steps
+    for x in (11, 12, 13, 14):
+        if m.L[1, 11, x] == 0:
+            m.L[0, 11, x] = P1('lm_strip_h_on')
     return m
 
 

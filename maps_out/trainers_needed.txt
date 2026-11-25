@@ -1,3 +1,6 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-545	:HIKER, "Gorse"
-545	:HIKER, "Holt"
+193	Prismfall.gym_battle(pfm_gym(:LEADER_ROOK), double: false)
+544	:BLACKBELT, "Saul"
+544	:BLACKBELT, "Taro"
+544	:HIKER, "Bram"
+564	:HIKER, "Torvald"

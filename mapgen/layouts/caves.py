@@ -51,29 +51,129 @@ def atmosphere(script=None, fog='prismfall_cave', opacity=50):
 def build_544():
     m = Cave(48, 38, 'S', seed=544, pool='Salt Lake')
     B = m.box
-    # --- north: drift A (FLOOR), the points gallery + ladder gallery (TERRACE), C (FLOOR) and the Thistledown adit
-    B(3, 5, 9, 13); B(2, 8, 10, 12); B(4, 4, 7, 4)                                   # A, the blind drift
-    B(15, 5, 22, 13, TER); B(14, 7, 23, 12, TER); B(17, 4, 20, 4, TER)               # the points gallery
-    B(25, 5, 34, 13, TER); B(26, 4, 32, 4, TER); B(24, 8, 26, 11, TER); B(35, 8, 35, 12, TER)   # the ladder gallery
-    B(38, 4, 45, 13); B(37, 6, 46, 12); B(41, 0, 43, 3)                              # C, and the adit to the Lea
-    # --- the Cut (PIT), the rib across it, the east gallery
-    B(2, 14, 41, 22, PIT, 'p'); B(4, 13, 4, 13, PIT, 'p'); B(11, 13, 12, 13, PIT, 'p'); B(36, 13, 36, 13, PIT, 'p')
-    B(13, 14, 17, 22)                                                                # the rib (FLOOR)
-    B(43, 13, 46, 26); B(42, 20, 46, 25)                                             # C's long way down
-    m.mass_at([(42, y) for y in range(13, 20)])
-    # --- the depot hall (FLOOR) and its east arm, the south adit to the Saltings
-    B(3, 23, 41, 31); B(2, 25, 44, 30); B(5, 32, 34, 33); B(36, 26, 46, 31); B(6, 34, 13, 34)
-    B(9, 35, 11, 37)
-    B(39, 32, 44, 34)                                                                # the rock-smash alcove
+
+    # ---- 1. Organic Sculpted North Galleries: Drift A (FLOOR), Points + Ladder Galleries (TER), Gallery C (FLOOR) ----
+    # Drift A (NW blind salt drift, FLOOR) with jagged walls & recessed glowing brine seepage cove foreshadowing B1F!
+    m.room(6.2, 8.6, 4.4, 4.0, h=FLOOR, c='.', rough=0.30, seed=11)
+    B(3, 5, 9, 12); B(4, 4, 7, 5); B(5, 11, 8, 12); B(9, 9, 10, 11)
+    B(1, 7, 2, 10, FLOOR, 'w')                                                       # NW brine seepage pocket
+
+    # Points Gallery + Ladder Gallery (TER, ht=2) sculpted into two organically linked vaulted caverns!
+    m.room(18.5, 8.6, 5.2, 4.2, h=TER, c='.', rough=0.28, seed=13)
+    B(14, 6, 22, 12, TER); B(14, 12, 17, 13, TER); B(17, 4, 20, 6, TER)
+    m.room(29.8, 8.5, 5.6, 4.2, h=TER, c='.', rough=0.28, seed=17)
+    B(25, 5, 35, 12, TER); B(23, 8, 26, 10, TER); B(33, 10, 35, 13, TER)
+    B(33, 4, 35, 6, TER, 'w')                                                        # NE elevated brine seepage spring
+    # Natural rock buttresses partially pinching Points Gallery from Ladder Gallery (wide walkable arch at y=7..10!)
+    m.mass_at([(23, 4), (24, 4), (23, 5), (24, 5), (23, 12), (24, 12), (23, 13), (24, 13)])
+
+    # Thistledown Gallery C (FLOOR) & curving East Descent Gallery
+    m.room(41.8, 8.6, 4.6, 4.4, h=FLOOR, c='.', rough=0.28, seed=21)
+    B(38, 5, 45, 13); B(41, 0, 43, 5)
+    B(43, 13, 46, 26)
+    m.room(44.2, 22.8, 2.8, 3.8, h=FLOOR, c='.', rough=0.26, seed=23)
+
+    # Strictly seal Drift A from Points (only crawlway crosses!) and Ladder Gallery from Gallery C!
+    m.mass_at([(x, y) for x in (11, 12, 13) for y in range(4, 14)] +
+              [(x, y) for x in (36, 37) for y in range(4, 14)] +
+              [(42, y) for y in range(13, 20)])
+
+    # ---- 2. The Cut Abyssal Chasm (PIT) with Sculpted Overhangs & Rising Rock-Mass Crystal Spires! ----
+    B(2, 14, 41, 22, PIT, 'p')
+    B(4, 13, 4, 13, PIT, 'p'); B(11, 13, 12, 13, PIT, 'p'); B(36, 13, 36, 13, PIT, 'p')
+    # The Rib (FLOOR) spanning the Cut strictly flanked by PIT on x=12 & x=18 so ledge (14..16,21) is 100% unbypassable!
+    B(13, 14, 17, 22)
+    # 7 Asymmetric Solid Rock-Mass Crystal Spires rising inside the Cut Chasm (strictly clear of ALL rails & Depot rim!):
+    # North spires sit on y=14..15 (cliff base y=17, cleanly above y=18 trestle!); South spires sit on y=19..20 (base y=22!)
+    m.mass_at(
+        [(8, 14), (9, 14), (10, 14), (8, 15), (9, 15)] +                             # NW Cut spire
+        [(3, 19), (4, 19), (3, 20), (4, 20)] +                                       # Far-SW Cut spire
+        [(8, 19), (9, 19), (10, 19), (9, 20), (10, 20)] +                            # SW Cut spire
+        [(23, 14), (24, 14), (25, 14), (24, 15), (25, 15)] +                         # Central-N Cut spire
+        [(23, 19), (24, 19), (25, 19), (23, 20), (24, 20)] +                         # Central-S Cut spire
+        [(36, 14), (37, 14), (38, 14), (36, 15), (37, 15)] +                         # East-N Cut spire
+        [(31, 19), (32, 19), (31, 20), (32, 20)] +                                   # East-Mid Cut spire
+        [(36, 19), (37, 19), (38, 19), (37, 20), (38, 20)]                           # Far-East Cut spire
+    )
+
+    # ---- 3. Multi-Tier Sculpted South Depot Hall (FLOOR + Elevated SW Salt-Works Terrace + Brine Sumps!) ----
+    m.room(10.5, 29.0, 8.6, 5.2, h=FLOOR, c='.', rough=0.30, seed=31)
+    m.room(25.0, 28.2, 10.4, 5.2, h=FLOOR, c='.', rough=0.30, seed=33)
+    m.room(39.5, 28.5, 7.2, 4.4, h=FLOOR, c='.', rough=0.28, seed=35)
+    B(4, 23, 41, 31); B(5, 31, 34, 33); B(36, 26, 46, 31); B(6, 33, 13, 34)
+    B(9, 34, 11, 37)
+    B(39, 32, 44, 34)                                                                # Rock-smash ETHER alcove
+
+    # Elevated SW Salt-Works Overlook Terrace (TER, x=2..9, y=23..25) descending via stone stairs onto the Depot floor!
+    B(2, 23, 9, 25, TER, '.')
+    B(3, 26, 9, 28, FLOOR, '.')
+    # Glowing subterranean turquoise brine seepage coves linking 1F visually to 545 B1F's glowing Salt Lake!
+    B(1, 30, 3, 33, FLOOR, 'w')                                                      # SW brine sump cove
+    B(33, 23, 37, 25, FLOOR, 'w')                                                    # NE depot brine seepage pool
+
+    # Sculpted rock buttresses, ceiling pillars & strict Rock-smash alcove seal
     m.mass_at([(x, 32) for x in range(35, 39)] + [(38, 33), (38, 34), (45, 32), (45, 33), (45, 34)])
-    for cells in ([(24, 31), (25, 31), (24, 30)], [(8, 26), (9, 26)], [(33, 33), (34, 33), (34, 32)]):   # rock pillars
+    for cells in ([(24, 31), (25, 31), (24, 30), (25, 30)],
+                  [(16, 33), (17, 33), (18, 33), (17, 34), (18, 34)],
+                  [(28, 33), (29, 33), (30, 33), (29, 34), (30, 34)],
+                  [(32, 32), (33, 32), (34, 32), (33, 33), (34, 33)],
+                  [(36, 23), (37, 23)],
+                  [(2, 23), (2, 24)]):
         m.mass_at(cells)
-    # --- the crawlway: drift A's east wall to the points gallery (the hidden passage)
+
+    m.tidy()
+    # Re-assert strict Cut/Rib/crawlway/brine-cove & event-pad invariants after tidy()
+    for x in (11, 12, 13):
+        for y in range(4, 14):
+            m.cls[y, x] = 'x'; m.ht[y, x] = MASS
+    for x in (36, 37):
+        for y in range(4, 14):
+            m.cls[y, x] = 'x'; m.ht[y, x] = MASS
+    for y in range(13, 20):
+        m.cls[y, 42] = 'x'; m.ht[y, 42] = MASS
+    for y in range(19, 23):
+        m.cls[y, 12] = 'p'; m.ht[y, 12] = PIT
+        m.cls[y, 18] = 'p'; m.ht[y, 18] = PIT
+    for y in range(23, 26):
+        for x in range(3, 10):
+            m.cls[y, x] = '.'; m.ht[y, x] = TER
+    for y in range(26, 29):
+        for x in range(3, 10):
+            m.cls[y, x] = '.'; m.ht[y, x] = FLOOR
+    for y in range(30, 34):
+        for x in (1, 2, 3):
+            m.cls[y, x] = 'w'; m.ht[y, x] = FLOOR
+    # Organic curved NE depot brine cove (never a plain rectangle!)
+    for xx, yy in ((33, 23), (34, 23), (35, 23), (33, 24), (34, 24), (35, 24), (36, 24), (33, 25), (34, 25), (35, 25)):
+        m.cls[yy, xx] = 'w'; m.ht[yy, xx] = FLOOR
+    for xx, yy in ((36, 23), (37, 23)):
+        m.cls[yy, xx] = 'x'; m.ht[yy, xx] = MASS
+    for xx, yy in ((37, 24), (36, 25), (37, 25)):
+        m.cls[yy, xx] = '.'; m.ht[yy, xx] = FLOOR
+    for y in range(7, 11):
+        for x in (1, 2):
+            m.cls[y, x] = 'w'; m.ht[y, x] = FLOOR
+    for y in range(4, 7):
+        for x in (33, 34, 35):
+            m.cls[y, x] = 'w'; m.ht[y, x] = TER
+    # Guarantee clean walkable floor on every landing, depot, lever, and adit pad
+    for x0, y0, x1, y1, h in (
+        (4, 5, 10, 12, FLOOR), (14, 6, 22, 12, TER), (25, 5, 32, 12, TER), (33, 10, 35, 12, TER),
+        (38, 5, 45, 13, FLOOR), (41, 0, 43, 5, FLOOR), (43, 13, 46, 30, FLOOR),
+        (6, 28, 32, 31, FLOOR), (19, 23, 25, 28, FLOOR), (35, 27, 45, 31, FLOOR), (9, 34, 11, 37, FLOOR),
+    ):
+        for yy in range(y0, y1 + 1):
+            for xx in range(x0, x1 + 1):
+                if m.cls[yy, xx] != 'w':
+                    m.cls[yy, xx] = '.'; m.ht[yy, xx] = h
+
+    # ---- 4. Crawlway, Multi-Tier Stairs, One-Way Ledges & Exact D4 Minecart Rail Network ----
     m.crawl([(11, 10), (12, 10), (13, 10)])
-    m.stairs(14, 13, w=3, n=3, c='.')
+    m.stairs(14, 13, w=3, n=3, c='.')                                                # Points Gallery TER -> Rib FLOOR
+    m.stairs(4, 25, w=3, n=3, c='.')                                                 # SW Salt-Works Terrace TER -> Depot FLOOR
     m.ledge(14, 16, 21)
     m.ledge(43, 46, 19)
-    # --- the line: depot -> F1 -> A | F2 -> D | F3 -> B | C
+    # Exact D4 track waypoints (100% invariant with puzzles/dungeons.py!)
     DEPOT, F1, F2, F3 = (20, 25), (20, 18), (29, 18), (34, 18)
     A_END, B_END, C_END, D_END = (6, 12), (34, 12), (40, 12), (29, 22)
     lines = {'A': [DEPOT, F1, (6, 18), A_END], 'D': [DEPOT, F1, F2, D_END],
@@ -83,6 +183,7 @@ def build_544():
     m.rails([(20, 25), (20, 26)])
     paths = {k: Cave.path(v) for k, v in lines.items()}
     off = {'A': 'U', 'B': 'U', 'C': 'U'}
+    m.patch_args = (0.56, 4.2)                                                       # Rich salt-crust ground layering matching 545!
     m.plan_cliffs(rows=3)
     m.geo = dict(DEPOT=DEPOT, A_END=A_END, B_END=B_END, C_END=C_END, D_END=D_END)
     return m, paths, off
@@ -141,7 +242,13 @@ def events_544(m, paths, off):
         {'type': 'rock_smash', 'name': 'Rock', 'at': [43, 32], 'sprite': 'pf_cave_rock_S'},
         {'type': 'item', 'at': [43, 34], 'item': 'ETHER'},
     ]
-    m.keep_clear |= {(20, 26), (10, 36), (42, 1), (6, 11), (34, 11), (40, 11), (21, 25), (19, 25), (10, 10), (14, 10), (43, 31), (43, 33)}
+    m.keep_clear |= ({(20, 26), (10, 36), (10, 35), (42, 1), (42, 2), (6, 11), (34, 11), (40, 11),
+                      (21, 25), (19, 25), (22, 26), (10, 10), (14, 10), (43, 31), (43, 33),
+                      (30, 7), (29, 6), (31, 6), (18, 10), (21, 10), (8, 30), (7, 29), (7, 31),
+                      (4, 24), (5, 24), (6, 24), (4, 28), (5, 28), (6, 28),
+                      (26, 28), (27, 28), (28, 28), (29, 28), (37, 28), (36, 29), (38, 29),
+                      (17, 7), (17, 8), (43, 7), (42, 7), (44, 13), (44, 14), (44, 15)}
+                     | {(x, 27) for x in range(13, 21)})
 
 
 def dress_544(m):
@@ -151,54 +258,108 @@ def dress_544(m):
     m.over.append((2, 10, 9, P1('cv_chalkx')))
     m.mass_at([(39, 32), (40, 32), (41, 32), (39, 33), (40, 33), (41, 33), (39, 34), (40, 34), (41, 34), (42, 32), (44, 32)])
     m.tile(P1('cv_rail_end'), 29, 23)
-    # pit-prop frames over the adits
-    m.put('cv_frame', 9, 34); m.put('cv_frame', 41, 1)
-    # the depot siding: salt carts waiting on a spur west of the main line
+
+    # ---- 1. Dramatic Atmospheric Cavern Light Shafts (cv_shaft, pri=2) & Warm Glow Pools (pf_glow, pri=5) ----
+    for sx, sy in ((19, 24), (18, 8), (29, 6), (5, 7), (41, 7), (36, 26)):
+        if m.inb(sx + 1, sy + 2):
+            m.stamps.append(('cv_shaft', sx, sy))
+    m.stamps.append(('pf_glow', 29, 6))                                              # glow around Ladder Down to B1F
+    m.stamps.append(('pf_glow', 20, 24))                                             # warm lantern pool at Depot cart & P1
+    m.stamps.append(('pf_glow', 19, 8))                                              # spotlight on Points Gallery P2/P3 levers
+
+    # ---- 2. Shadowed Minecart Timber Portals, Siding Spur & Brine Sump Docks ----
+    for fx, fy in ((9, 34), (41, 1), (15, 25), (43, 22)):
+        m.put('cv_frame', fx, fy)
+    # Depot siding spur west of main line
     for x in range(14, 20): m.tile(P1('cv_rail_h'), x, 27)
     m.tile(P1('cv_rail_end'), 13, 27)
     for x in (15, 16, 18): m.tile(P1('cv_cart_salt'), x, 27)
-    # Rich mining depot & gallery hardware: salt stacks, crates, barrels, lanterns, timber supports, & tools
+    # Weathered timber sump docks beside the SW & NE brine seepage pools
+    for dy, t in ((30, 'cv_raft_t'), (31, 'cv_raft_m'), (32, 'cv_raft_b')):
+        m.over.append((1, 4, dy, P1(t)))
+    for dy, t in ((23, 'cv_raft_t'), (24, 'cv_raft_m'), (25, 'cv_raft_b')):
+        m.over.append((1, 32, dy, P1(t)))
+
+    # ---- 3. Clustered Mining Depot Vignettes (Salt Stacks, Crates, Barrels, Sluice, Lanterns & Timber Supports) ----
     for name, x, y in (
-        ('cv_saltblocks', 4, 28), ('cv_saltblocks', 22, 32), ('cv_saltblocks', 31, 6), ('cv_saltblocks', 39, 27),
-        ('hb_crates4', 27, 32), ('hb_barrels', 3, 25), ('hb_barrels', 45, 9), ('hb_barrels', 38, 25),
-        ('hb_boxes', 25, 26), ('hb_boxes', 13, 30),
-        ('cv_lamp_on', 12, 24), ('cv_lamp_on', 27, 24), ('cv_lamp_on', 37, 26), ('cv_lamp_on', 44, 26),
-        ('cv_lamp_on', 6, 31), ('cv_lamp_on', 45, 22), ('cv_lamp_on', 2, 9), ('cv_lamp_on', 39, 8),
-        ('cv_lamp_on', 24, 7), ('cv_lamp_on', 23, 5), ('cv_lamp_on', 14, 7),
-        ('cv_post', 33, 29), ('cv_post', 17, 30), ('cv_post', 9, 23), ('cv_post', 34, 25), ('cv_post', 41, 24), ('cv_post', 28, 7),
-        ('cv_tools', 26, 6), ('cv_tools', 11, 28),
+        ('cv_saltblocks', 7, 23), ('cv_saltblocks', 21, 32), ('cv_saltblocks', 27, 5), ('cv_saltblocks', 39, 26),
+        ('hb_crates4', 27, 32), ('hb_barrels', 3, 23), ('hb_barrels', 45, 9), ('hb_barrels', 38, 24),
+        ('hb_boxes', 25, 26), ('hb_boxes', 12, 31),
+        ('cv_sluice', 4, 33), ('cv_chain', 31, 24), ('cv_chain', 29, 5),
+        ('cv_lamp_on', 12, 24), ('cv_lamp_on', 26, 24), ('cv_lamp_on', 38, 26), ('cv_lamp_on', 45, 26),
+        ('cv_lamp_on', 6, 32), ('cv_lamp_on', 45, 21), ('cv_lamp_on', 3, 9), ('cv_lamp_on', 39, 8),
+        ('cv_lamp_on', 25, 7), ('cv_lamp_on', 22, 6), ('cv_lamp_on', 14, 7), ('cv_lamp_on', 8, 24),
+        ('cv_post', 11, 28), ('cv_post', 28, 30), ('cv_post', 41, 24), ('cv_post', 28, 7),
+        ('cv_tools', 26, 6), ('cv_tools', 12, 29),
     ):
         L = ST[name]['layers']; w, h = len(L[0][0]), len(L[0])
         if m.free(x, y, w, h, on='.:') and not any((xx, yy) in m.keep_clear for xx in range(x, x + w) for yy in range(y, y + h)):
             m.put(name, x, y)
-    for x, y, n in ((8, 29, 'cv_tools'), (26, 31, 'wr_sacks'), (40, 30, 'cv_tools'), (13, 32, 'wr_sacks'),
-                    (35, 28, 'wr_sacks'), (5, 7, 'wr_sacks'), (34, 9, 'wr_sacks'), (45, 16, 'cv_tools')):
+    for x, y, n in ((9, 29, 'cv_tools'), (26, 31, 'wr_sacks'), (40, 30, 'cv_tools'), (14, 32, 'wr_sacks'),
+                    (35, 28, 'wr_sacks'), (5, 7, 'wr_sacks'), (33, 9, 'wr_sacks'), (45, 16, 'cv_tools')):
         if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear: m.tile(P1(n), x, y)
-    # Rich halite, rose, blue, & sea crystal formations (matching 545 B1F crystal cavern directly below!)
+
+    # ---- 4. Towering Crystal & Stalagmite Clusters ANCHORED ON SOLID CUT CHASM SPIRES! ----
+    def rock_spire(name, x, y):
+        L = ST[name]['layers']; h = len(L[0])
+        if all(m.inb(x, y + dy) and (x, y + dy) not in m.track for dy in range(h)):
+            for dy in range(h):
+                for z in (1, 2):
+                    if L[z][dy][0]:
+                        m.over.append((z, x, y + dy, L[z][dy][0]))
+                        if z == 1: m.taken[y + dy, x] = True
+
+    for name, x, y in (
+        # NW Cut spire (8..10, 14..15)
+        ('cv_xrose2', 8, 13), ('cv_xblue2', 9, 14), ('S_stal', 10, 13),
+        # SW Cut spires (3..4, 19..20) & (8..10, 19..20)
+        ('cv_xsea2', 3, 18), ('S_stal', 4, 19), ('cv_xrose2', 9, 18), ('cv_xblue2', 10, 19),
+        # Central Cut spires (23..25, 14..15) & (23..25, 19..20)
+        ('cv_xblue2', 24, 13), ('cv_xsea2', 25, 14), ('S_stal', 23, 13),
+        ('cv_xrose2', 23, 18), ('cv_xblue2', 24, 19), ('S_stal', 25, 18),
+        # East Cut spires (36..38, 14..15), (31..32, 19..20), (36..38, 19..20)
+        ('cv_xsea2', 36, 13), ('cv_xrose2', 37, 14), ('S_stal', 38, 13),
+        ('cv_xblue2', 31, 18), ('S_stal', 32, 19),
+        ('cv_xrose2', 37, 18), ('cv_xsea2', 38, 19),
+        # Natural rock buttress between Points & Ladder Galleries (23..24, 4..5)
+        ('cv_xrose2', 23, 4), ('S_stal', 24, 4),
+    ):
+        rock_spire(name, x, y)
+
+    # Low halite crystal skirts hugging ONLY solid rock chasm spires (ZERO mid-pit floating stickers!)
+    for x, y, n in ((8, 15, 'cv_xsalt'), (9, 20, 'cv_xsea'), (24, 15, 'cv_xsalt'), (23, 20, 'cv_xblue'),
+                    (36, 15, 'cv_xsalt'), (37, 20, 'cv_xsea'), (32, 20, 'cv_xsalt')):
+        if m.inb(x, y) and (x, y) not in m.track:
+            m.over.append((1, x, y, P1(n))); m.taken[y, x] = True
+
+    # ---- 5. Clustered Chamber Crystal Spires, Salt Stalagmites (S_stal), & Bioluminescent Fungi ----
     m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0', p + '_rock1'], 18, seed=1, box=(2, 23, 47, 37))
-    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock1'], 15, seed=2, box=(2, 3, 47, 13))
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock1'], 14, seed=2, box=(2, 3, 47, 13))
     m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0'], 6, seed=3, box=(42, 13, 47, 26))
     for name, x, y in (
-        # Tall rose/blue/sea crystal spires framing the drifts, ladder gallery down to 545, and depot walls
-        ('cv_xrose2', 3, 10), ('cv_xblue2', 8, 5), ('cv_xsea2', 14, 5), ('cv_xrose2', 22, 5),
-        ('cv_xblue2', 27, 5), ('cv_xrose2', 33, 5), ('cv_xsea2', 37, 7), ('cv_xrose2', 46, 10),
-        ('cv_xblue2', 45, 19), ('cv_xrose2', 2, 29), ('cv_xsea2', 4, 33), ('cv_xblue2', 15, 32),
-        ('cv_xrose2', 24, 30), ('cv_xsea2', 32, 31), ('cv_xblue2', 42, 29), ('cv_xrose2', 46, 26),
-        ('cv_xsea2', 14, 15), ('cv_xblue2', 17, 16),
+        ('cv_xrose2', 3, 10), ('cv_xblue2', 8, 5), ('S_stal', 9, 5), ('cv_xsea2', 14, 5), ('cv_xrose2', 22, 5),
+        ('cv_xblue2', 27, 5), ('S_stal', 32, 5), ('cv_xsea2', 38, 6), ('cv_xrose2', 46, 10),
+        ('cv_xblue2', 45, 19), ('S_stal', 3, 27), ('cv_xrose2', 5, 33), ('cv_xblue2', 15, 32),
+        ('S_stal', 24, 30), ('cv_xsea2', 31, 31), ('cv_xblue2', 42, 29), ('cv_xrose2', 46, 26),
+        ('cv_xsea2', 14, 16), ('cv_xblue2', 16, 17), ('S_stal', 38, 23),
     ):
         if m.free(x, y, 1, 2, on='.:') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
             m.put(name, x, y)
-    # Bioluminescent brine fungi dotting the Cut chasm rims & damp salt drifts
-    for x, y in ((5, 11), (8, 11), (15, 11), (24, 11), (31, 11), (38, 11), (45, 11),
-                 (6, 23), (11, 23), (24, 23), (33, 23), (41, 23), (14, 21), (17, 21), (4, 31), (36, 31)):
+
+    # Bioluminescent cold/amber brine fungi hugging damp brine coves, Cut rims & salt drifts
+    for x, y in ((4, 9), (8, 11), (15, 11), (25, 11), (31, 11), (38, 11), (45, 11),
+                 (5, 31), (11, 23), (24, 23), (31, 24), (38, 24), (41, 23), (14, 20), (16, 20), (35, 31)):
         if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
-            m.over.append((2, x, y, P1('cv_fung0'))); m.taken[y, x] = True
-    # Miners' wall sconces across every gallery cliff face
-    for x, y in ((8, 23), (19, 23), (31, 24), (40, 25), (6, 4), (18, 4), (29, 4), (40, 4),
-                 (3, 23), (15, 4), (24, 4), (35, 4), (45, 4), (44, 23)):
+            m.over.append((2, x, y, P1('cv_fung0' if (x + y) % 2 == 0 else 'cv_fung1')))
+            m.taken[y, x] = True
+
+    # Warm miners' wall sconces across every gallery cliff face
+    for x, y in ((6, 4), (15, 4), (20, 4), (29, 4), (39, 4), (45, 4),
+                 (5, 22), (11, 22), (26, 22), (39, 22), (44, 22), (7, 26)):
         if m.inb(x, y) and m.cliff[y, x]:
             m.over.append((2, x, y, P1('cv_walllamp')))
-    m.dress(11, seed=1)
+
+    m.dress(14, seed=1)
 
 
 # ====================================================================================================== 545
@@ -478,41 +639,122 @@ def dress_545(m):
 
 # ====================================================================================================== 564
 def build_564():
+    from terrain import vnoise
     m = Cave(46, 40, 'L', seed=564, pool='Sea Cave')
     B = m.box
-    # the south chamber (FLOOR), the mouth to the cliffs below
+
+    # ---- 1. Sculpted South Smuggler's Cove (FLOOR) & Teach Tide Inlet ----
+    m.room(8.8, 33.2, 6.8, 4.4, h=FLOOR, c='.', rough=0.30, seed=11)
     B(3, 29, 15, 37); B(2, 31, 16, 36); B(6, 38, 9, 39)
-    # TEACH: the little inlet east of the south chamber, its bar and the far alcove
-    B(17, 30, 23, 35, FLOOR, 'w'); B(24, 31, 28, 35)
-    # the west gallery climbing north (FLOOR -> stairs -> TERRACE) and the high gallery across the north-west
+    # Teach inlet east of South Cove (curving tidal pool + sculpted far pearl cove)
+    m.room(20.0, 32.8, 4.2, 3.0, h=FLOOR, c='w', rough=0.25, seed=13)
+    B(17, 30, 23, 35, FLOOR, 'w')
+    m.room(26.2, 33.0, 2.8, 2.8, h=FLOOR, c='.', rough=0.26, seed=15)
+    B(24, 31, 28, 35)
+
+    # ---- 2. Sculpted West Climbing Gallery (FLOOR -> TER) & NW High Gallery (TER) ----
+    m.room(5.5, 22.8, 3.6, 5.4, h=FLOOR, c='.', rough=0.28, seed=19)
     B(3, 18, 8, 28); B(2, 20, 9, 26)
+    m.room(5.8, 11.8, 4.2, 5.2, h=TER, c='.', rough=0.28, seed=21)
     B(3, 7, 9, 17, TER); B(2, 9, 10, 15, TER)
     B(10, 4, 18, 9, TER); B(9, 5, 19, 8, TER)
-    # the north chamber (TERRACE) and its landing on the basin (FLOOR)
+
+    # ---- 3. Sculpted North Gull Roost Cathedral (TER) & Basin Landing (FLOOR) ----
+    m.room(28.5, 5.6, 9.2, 4.2, h=TER, c='.', rough=0.28, seed=23)
     B(20, 2, 37, 9, TER); B(22, 1, 35, 10, TER); B(31, 0, 34, 0, TER)
-    # the basin: sea water with deep holes, sand bars that dry at low tide
-    B(10, 14, 33, 27, FLOOR, 'w'); B(12, 13, 31, 28, FLOOR, 'w')
-    B(21, 11, 30, 15); B(22, 16, 26, 16)                              # the landing under the north chamber
-    B(15, 28, 18, 29)                                                 # the bar head in the south chamber
-    B(34, 10, 39, 24); B(35, 25, 38, 27)                              # the east shelf (a side way off the north chamber)
-    B(31, 28, 38, 33); B(33, 34, 38, 36)                              # its lobe
-    B(42, 15, 45, 21); B(43, 14, 44, 22)                              # the hidden grotto
-    m.mass_at([(11, 28), (12, 29), (10, 27), (31, 11), (32, 11)])
+    # Carved cathedral ceiling buttresses breaking up the north wall
+    m.mass_at([(20, 2), (21, 2), (20, 3), (36, 2), (37, 2), (37, 3)])
+
+    # ---- 4. Organic Sculpted Sea-Cave Basin (ZERO giant boxy teal rectangle!) ----
+    for y in range(12, 29):
+        for x in range(10, 34):
+            q = ((x - 21.8) / 12.2) ** 2 + ((y - 20.5) / 8.0) ** 2
+            q += 0.22 * (vnoise(x, y, 5649, 3.4) - 0.5)
+            if q <= 1.0:
+                m.cls[y, x] = 'w'; m.ht[y, x] = FLOOR
+    B(11, 14, 32, 27, FLOOR, 'w')
+
+    # Recessed NW coastal waterfall cascade spring on TER (x=13..14, y=8..9) spilling down cliff (y=9..11) into sea (y=12)!
+    B(13, 8, 14, 9, TER, 'w')
+    B(13, 10, 14, 13, FLOOR, 'w')
+
+    # Basin landing under North Cathedral (sculpted organic cape), South Bar Head, East Shelf & Hidden Kelp Grotto
+    m.room(25.2, 13.4, 5.0, 2.5, h=FLOOR, c='.', rough=0.25, seed=29)
+    B(21, 11, 29, 15); B(22, 15, 26, 16)
+    B(15, 28, 18, 29)                                                                # South bar head
+    m.room(36.5, 17.5, 3.2, 7.6, h=FLOOR, c='.', rough=0.26, seed=31)
+    B(34, 10, 39, 24); B(35, 24, 38, 27)
+    m.room(35.0, 31.8, 4.2, 4.4, h=FLOOR, c='.', rough=0.28, seed=33)
+    B(32, 28, 38, 33); B(33, 33, 38, 36)
+    # Organic curved SE coastal tide pool nook (never a plain rectangle!)
+    for xx, yy in ((31, 34), (31, 35), (32, 35), (31, 36), (32, 36), (33, 36)):
+        m.cls[yy, xx] = 'w'; m.ht[yy, xx] = FLOOR
+    m.room(43.5, 18.0, 2.2, 4.2, h=FLOOR, c='.', rough=0.24, seed=37)
+    B(42, 15, 45, 21); B(43, 14, 44, 22)                                             # Hidden kelp grotto
+
+    # ---- 5. Bold Coastal Rock Headlands & 4 Asymmetric SOLID ROCK SEA-STACKS (ZERO floating mid-water stickers!) ----
+    # All 4 sea-stack islets + their 2-row south cliffs are strictly clear of EVERY cell in m.bars & Pearl Rock (27,17)!
+    m.mass_at(
+        # 4 Sculpted Coastal Headlands breaking up every rectangular corner of the tide basin
+        [(10, 14), (11, 14), (10, 15), (11, 15), (10, 16), (11, 16)] +               # NW headland
+        [(10, 23), (11, 23), (10, 24), (11, 24), (10, 25), (11, 25), (10, 26), (11, 26),
+         (10, 27), (11, 27), (11, 28), (12, 29)] +                                   # SW coastal spur
+        [(31, 11), (32, 11), (31, 12), (32, 12), (31, 13), (32, 13), (33, 13),
+         (32, 14), (33, 14), (33, 15)] +                                             # NE rocky cape
+        [(32, 25), (33, 25), (32, 26), (33, 26), (31, 27), (32, 27), (33, 27)] +     # SE rocky buttress
+        # 4 Sculptural Asymmetric Solid Slate Rock Sea-Stacks rising organically from the sea basin!
+        [(12, 19), (13, 19), (14, 19), (11, 20), (12, 20), (13, 20), (14, 20)] +     # West Sea-Stack A (cliff base y=22)
+        [(15, 14), (16, 14), (17, 14), (16, 15), (17, 15)] +                         # NW Tidal Reef B (cliff base y=17)
+        [(28, 20), (29, 20), (30, 20), (28, 21), (29, 21), (30, 21)] +               # East Sea-Stack C (cliff base y=23)
+        [(26, 24), (27, 24), (25, 25), (26, 25), (27, 25), (28, 25)] +               # SE Tidal Stack D (cliff base y=27)
+        # Wave-carved rock teeth framing the South Cove & Teach Inlet (strictly clear of teach sandbar y=33!)
+        [(2, 29), (3, 29), (13, 36), (14, 36), (15, 36), (14, 37), (15, 37),
+         (17, 35), (18, 35), (22, 30), (23, 30)]
+    )
+
     m.tidy()
+    # Re-assert strict waterfall spring, Teach inlet water seal, jetty floor & crawlway wall integrity after tidy()
+    for y in range(14, 23):
+        for x in (40, 41):
+            m.cls[y, x] = 'x'; m.ht[y, x] = MASS
+    for y in (30, 31, 32, 34, 35):
+        for x in range(17, 24):
+            if (x, y) not in ((17, 35), (18, 35), (22, 30), (23, 30)):
+                m.cls[y, x] = 'w'; m.ht[y, x] = FLOOR
+    for x in (13, 14):
+        for y in (8, 9):
+            m.cls[y, x] = 'w'; m.ht[y, x] = TER
+        for y in range(10, 14):
+            m.cls[y, x] = 'w'; m.ht[y, x] = FLOOR
+        for y in (5, 6, 7):
+            m.cls[y, x] = '.'; m.ht[y, x] = TER
+    # Guarantee clean walkable FLOOR on South Cove jetty (x=15..16, y=31..35!), bar heads, North landing & Teach alcove!
+    for x0, y0, x1, y1, h in (
+        (15, 31, 16, 35, FLOOR), (14, 28, 18, 29, FLOOR), (22, 13, 27, 15, FLOOR), (24, 31, 28, 35, FLOOR),
+        (6, 36, 9, 39, FLOOR), (31, 0, 34, 4, TER), (35, 13, 39, 24, FLOOR), (42, 15, 45, 21, FLOOR),
+    ):
+        for yy in range(y0, y1 + 1):
+            for xx in range(x0, x1 + 1):
+                m.cls[yy, xx] = '.'; m.ht[yy, xx] = h
+
     m.crawl([(40, 18), (41, 18)])
     m.stairs(4, 17, w=3, n=3, c='.')
     m.stairs(25, 10, w=3, n=3, c='.')
     m.stairs(35, 9, w=3, n=3, c='.')
     m.ledge(3, 6, 25)
+
+    # Exact D6 Tide Sandbars (100% invariant with pfm_tide_tick!)
     teach = [(x, 33) for x in range(17, 24)]
     twist = [(17, 27), (17, 26), (17, 25), (18, 25), (19, 25), (20, 25), (20, 24), (20, 23), (21, 23), (22, 23), (23, 23),
              (23, 22), (23, 21), (23, 20), (23, 19), (24, 19), (24, 18), (24, 17), (24, 16)]
     spit = [(25, 17), (26, 17)]
     for x, y in teach + twist + spit:
         m.cls[y, x] = 'b'; m.ht[y, x] = FLOOR
-    m.cls[17, 27] = '.'; m.ht[17, 27] = FLOOR                          # the pearl rock at the end of the spit
+    m.cls[17, 27] = '.'; m.ht[17, 27] = FLOOR                                        # Pearl Rock at end of spit (BIGPEARL)
     assert len(twist) == 19
     m.bars = teach + twist + spit
+
+    m.patch_args = (0.58, 4.5)
     m.plan_cliffs(rows=3)
     return m
 
@@ -545,74 +787,122 @@ def events_564(m):
     for x, y in m.bars:
         E.append({'type': 'event', 'name': 'Tide %d,%d' % (x, y), 'at': [x, y], 'pages': [
             {}, {'cond': {'switch': S_TIDE}, 'graphic': {'tile': P1('cv_flood')}}]})
-    m.keep_clear |= {(7, 38), (32, 1), (14, 27), (13, 31), (10, 35), (29, 6), (39, 18), (39, 17), (39, 19), (17, 28), (14, 29), (24, 15)} | set(m.bars)
+    m.keep_clear |= ({(7, 38), (7, 37), (32, 1), (32, 2), (14, 27), (13, 31), (10, 35), (29, 6),
+                      (39, 18), (39, 17), (39, 19), (17, 28), (16, 28), (15, 28), (14, 29), (24, 15),
+                      (25, 13), (26, 13), (27, 13), (35, 12), (36, 12), (37, 12), (36, 16), (36, 17), (36, 18),
+                      (15, 33), (16, 33), (24, 33), (25, 33), (26, 33), (27, 34), (25, 34), (42, 18), (43, 18), (44, 18), (43, 17),
+                      (4, 16), (5, 16), (6, 16), (4, 20), (5, 20), (6, 20), (27, 17)} | set(m.bars))
 
 
 def dress_564(m):
     p = 'L'
+    import rcompose as RC
     ST = __import__('cavekit').STAMPS
     m.tile(P1('cv_hole'), 29, 5)
     m.over.append((2, 40, 18, P1('cv_kelp1')))
-    # Dramatic coastal sea-cave sunbeam shafts across the tide basin
-    for x, y in ((14, 15), (27, 20), (21, 27)):
-        if m.inb(x + 1, y + 2): m.stamps.append(('cv_shaft', x, y))
-    # Coastal wreckage, driftwood, whalebones, mine-mouth timber, barrels & lanterns
+
+    # ---- 1. Subterranean Coastal Sea-Cascade Waterfall pouring from NW High Terrace (y=8) down cliff (y=9..12) into Basin! ----
+    wf_crest = RC.vauto('rejuvenation', 'Waterfall crest', 0)
+    wf_mid = RC.vauto('rejuvenation', 'Waterfall', 0)
+    wf_bot = RC.vauto('rejuvenation', 'Waterfall bottom', 0)
+    for wx in (13, 14):
+        m.over.append((2, wx, 9, wf_crest))
+        m.over.append((2, wx, 10, wf_mid))
+        m.over.append((2, wx, 11, wf_mid))
+        m.over.append((2, wx, 12, wf_bot))
+
+    # ---- 2. Dramatic Sea-Cave Sunbeam Shafts (cv_shaft, pri=2) & Bioluminescent Glow Pools (pf_glow, pri=5) ----
+    for x, y in ((13, 12), (26, 16), (19, 22), (20, 31), (26, 5), (43, 16)):
+        if m.inb(x + 1, y + 2):
+            m.stamps.append(('cv_shaft', x, y))
+    m.stamps.append(('pf_glow', 26, 16))                                             # coastal shimmer on Big Pearl rock (27,17)!
+    m.stamps.append(('pf_glow', 19, 32))                                             # sun-dappled gleam over Teach sandbar
+    m.stamps.append(('pf_glow', 43, 16))                                             # ethereal aura inside Hidden Kelp Grotto!
+    m.stamps.append(('pf_glow', 13, 12))                                             # misty glow at coastal waterfall splash pool!
+
+    # ---- 3. Weathered Coastal Timber Jetties (strictly over walkable FLOOR!) & Sea-Cave Mouth Frames ----
+    for dy, t in ((32, 'cv_raft_t'), (33, 'cv_raft_m'), (34, 'cv_raft_b')):
+        m.over.append((1, 16, dy, P1(t)))                                            # Teach sandbar launch jetty (100% walkable!)
+    m.over.append((1, 16, 28, P1('cv_raft_m')))                                      # Twist sandbar launch plank
+
+    # ---- 4. Coastal Driftwood, Whalebone Alcoves, Smuggler Barrels, Sea-Cave Portals & Lanterns ----
     for name, x, y in (
-        ('cv_drift', 4, 35), ('cv_drift', 33, 30), ('cv_drift', 22, 6), ('cv_drift', 6, 11),
-        ('pf_whalebone', 2, 32), ('pf_whalebone', 36, 22), ('pf_whalebone', 25, 3),
-        ('cv_frame', 31, 0), ('cv_post', 4, 21), ('cv_post', 9, 32), ('cv_post', 35, 12),
+        ('cv_frame', 31, 0), ('cv_frame', 6, 36),
+        ('cv_drift', 4, 35), ('cv_drift', 33, 30), ('cv_drift', 22, 6), ('cv_drift', 6, 11), ('cv_drift', 25, 31),
+        ('pf_whalebone', 3, 32), ('pf_whalebone', 37, 22), ('pf_whalebone', 25, 3), ('pf_whalebone', 4, 8),
+        ('cv_post', 4, 21), ('cv_post', 9, 32), ('cv_post', 35, 13), ('cv_post', 15, 31),
         ('hb_barrels', 4, 31), ('hb_barrels', 37, 27), ('wr_sacks', 12, 34), ('wr_sacks', 34, 25),
-        ('cv_lamp_on', 10, 31), ('cv_lamp_on', 8, 15), ('cv_lamp_on', 22, 11), ('cv_lamp_on', 35, 19),
+        ('cv_lamp_on', 10, 31), ('cv_lamp_on', 8, 15), ('cv_lamp_on', 22, 12), ('cv_lamp_on', 35, 19), ('cv_lamp_on', 24, 31),
     ):
         L = ST[name]['layers']; w, h = len(L[0][0]), len(L[0])
         if m.free(x, y, w, h, on='.:') and not any((xx, yy) in m.keep_clear for xx in range(x, x + w) for yy in range(y, y + h)):
             m.put(name, x, y)
-    # Barnacles, tide-cave rocks, gull nests, & sea crystals along cavern walls
-    m.solid_props(['cv_barn', 'cv_barn', p + '_rock0', 'cv_nest', 'cv_xsea', 'cv_xblue'], 22, seed=5)
-    m.solid_props(['cv_nest', 'cv_nest', 'cv_barn', 'cv_xsea'], 9, seed=6, box=(20, 1, 38, 10))
-    # Tall emerald-sea & sapphire-blue crystal spires across the chambers & hidden grotto
-    for name, x, y in (
-        ('cv_xsea2', 12, 13), ('cv_xsea2', 31, 13), ('cv_xblue2', 10, 20),
-        ('cv_xsea2', 3, 29), ('cv_xblue2', 14, 34), ('cv_xsea2', 3, 14),
-        ('cv_xblue2', 11, 5), ('cv_xsea2', 21, 3), ('cv_xblue2', 36, 4),
-        ('cv_xsea2', 38, 12), ('cv_xblue2', 37, 33), ('cv_xsea2', 43, 15), ('cv_xblue2', 45, 19),
-    ):
-        if m.free(x, y, 1, 2, on='.:') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
-            m.put(name, x, y)
-    # Bioluminescent sea-cave fungi hugging the wet tide-pool rims & grotto walls
-    for x, y in ((5, 36), (13, 35), (16, 29), (24, 34), (22, 14), (29, 13), (35, 24), (32, 32), (43, 20), (8, 7)):
-        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
-            m.over.append((2, x, y, P1('cv_fung0'))); m.taken[y, x] = True
-    # Sea-crystal & barnacle reefs rising from the open tide basin (strictly NEVER touching m.bars or adjacent crossings!)
-    bar_excl = {(bx + dx, by + dy) for bx, by in m.bars for dx in (-1, 0, 1) for dy in (-1, 0, 1)}
-    def basin_spire(name, x, y):
+
+    # ---- 5. Clustered Emerald/Sapphire Crystals, Slate Stalagmites (L_stal), Barnacles & Gulls ON SOLID SEA-STACKS! ----
+    # ZERO floating mid-water stickers! Every single reef spire & barnacle is anchored solidly on carved rock sea-stacks & capes!
+    bar_set = set(m.bars) | {(27, 17)}
+    def stack_piece(name, x, y):
         L = ST[name]['layers']; h = len(L[0])
-        if all(m.inb(x, y + dy) and m.cls[y + dy, x] == 'w' and (x, y + dy) not in bar_excl for dy in range(h)):
+        if all(m.inb(x, y + dy) and (x, y + dy) not in bar_set for dy in range(h)):
             for dy in range(h):
                 for z in (1, 2):
                     if L[z][dy][0]:
                         m.over.append((z, x, y + dy, L[z][dy][0]))
+                        if z == 1: m.taken[y + dy, x] = True
+
     for name, x, y in (
-        # West sea basin reefs (x=11..15, y=15..25)
-        ('cv_xsea2', 11, 16), ('cv_xblue2', 14, 19), ('cv_xsea2', 12, 23), ('cv_xblue2', 18, 16),
-        # East sea basin reefs (x=27..32, y=14..26)
-        ('cv_xblue2', 31, 15), ('cv_xsea2', 29, 21), ('cv_xblue2', 32, 24), ('cv_xsea2', 26, 24),
+        # West Sea-Stack A (11..14, 19..20)
+        ('cv_xsea2', 11, 19), ('cv_xsea2', 12, 18), ('cv_xblue2', 13, 19), ('L_stal', 14, 18),
+        # NW Tidal Reef B (15..17, 14..15) flanking the coastal waterfall splash pool
+        ('cv_xblue2', 16, 13), ('cv_xsea2', 17, 14), ('L_stal', 15, 13),
+        # East Sea-Stack C (28..30, 20..21)
+        ('cv_xsea2', 28, 19), ('cv_xblue2', 29, 20), ('L_stal', 30, 19),
+        # SE Tidal Stack D (25..28, 24..25)
+        ('cv_xblue2', 26, 23), ('cv_xsea2', 27, 24), ('L_stal', 25, 24), ('L_stal', 28, 24),
+        # Sculpted Coastal Headlands (NW, SW, NE, SE capes!)
+        ('L_stal', 10, 14), ('cv_xsea2', 11, 14),
+        ('L_stal', 10, 24), ('cv_xblue2', 11, 25),
+        ('cv_xsea2', 32, 12), ('L_stal', 33, 13),
+        ('cv_xblue2', 32, 25), ('L_stal', 33, 25),
     ):
-        basin_spire(name, x, y)
+        stack_piece(name, x, y)
+
+    # Barnacles, gull nests & low sea-crystals hugging ONLY solid rock sea-stacks & coastal headlands!
     for x, y, n in (
-        (12, 17, 'cv_xblue'), (15, 20, 'cv_xsea'), (11, 24, 'cv_xsalt'), (13, 24, 'cv_barn'),
-        (17, 17, 'cv_xsea'), (19, 17, 'cv_barn'), (12, 15, 'cv_barn'), (15, 25, 'cv_xblue'),
-        (30, 16, 'cv_xsea'), (32, 17, 'cv_barn'), (28, 22, 'cv_xblue'), (30, 22, 'cv_xsalt'),
-        (31, 25, 'cv_xsea'), (27, 25, 'cv_barn'), (29, 26, 'cv_xblue'), (32, 20, 'cv_xsea'),
+        (13, 20, 'cv_barn'), (14, 20, 'cv_xsea'), (12, 19, 'cv_nest'),
+        (16, 15, 'cv_barn'), (17, 15, 'cv_xblue'),
+        (28, 21, 'cv_barn'), (29, 21, 'cv_nest'), (30, 21, 'cv_xsea'),
+        (25, 25, 'cv_barn'), (26, 25, 'cv_xblue'), (27, 25, 'cv_nest'),
+        (10, 16, 'cv_barn'), (11, 26, 'cv_barn'), (33, 15, 'cv_barn'), (31, 27, 'cv_barn'),
     ):
-        if m.inb(x, y) and m.cls[y, x] == 'w' and (x, y) not in bar_excl:
-            m.over.append((1, x, y, P1(n)))
+        if m.inb(x, y) and (x, y) not in bar_set:
+            m.over.append((1, x, y, P1(n))); m.taken[y, x] = True
+
+    # ---- 6. Chamber Slate Stalagmites (L_stal), Crystal Outcrops, Gull Nests, Bioluminescent Fungi & Cliff Sconces ----
+    m.solid_props(['cv_barn', 'cv_barn', p + '_rock0', 'cv_nest', 'cv_xsea', 'cv_xblue'], 20, seed=5)
+    m.solid_props(['cv_nest', 'cv_nest', 'cv_barn', 'cv_xsea'], 10, seed=6, box=(20, 1, 38, 10))
+    for name, x, y in (
+        ('cv_xsea2', 3, 29), ('L_stal', 2, 31), ('cv_xblue2', 12, 35), ('L_stal', 4, 13),
+        ('cv_xsea2', 3, 14), ('cv_xblue2', 11, 5), ('L_stal', 18, 5), ('cv_xsea2', 22, 3),
+        ('L_stal', 35, 3), ('cv_xblue2', 36, 4), ('cv_xsea2', 38, 12), ('L_stal', 38, 21),
+        ('cv_xblue2', 37, 34), ('L_stal', 33, 33), ('cv_xsea2', 43, 15), ('cv_xblue2', 45, 19), ('L_stal', 42, 20),
+    ):
+        if m.free(x, y, 1, 2, on='.:') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
+            m.put(name, x, y)
+
+    # Bioluminescent sea-cave fungi hugging wet tide-pool rims & hidden grotto walls
+    for x, y in ((5, 36), (12, 35), (15, 29), (25, 35), (22, 14), (29, 13), (35, 24), (33, 34), (43, 20), (8, 7), (28, 32)):
+        if m.free(x, y, 1, 1, on='.') and (x, y) not in m.keep_clear:
+            m.over.append((2, x, y, P1('cv_fung0' if (x + y) % 2 == 0 else 'cv_fung1')))
+            m.taken[y, x] = True
+
     # Gull guano streaks & warm cliff sconces along cavern rock overhangs
-    for x, y in ((24, 3), (35, 6), (8, 12), (5, 21), (36, 14), (27, 2), (14, 5)):
+    for x, y in ((24, 3), (35, 6), (8, 12), (5, 21), (36, 14), (27, 2), (16, 4)):
         if m.inb(x, y) and m.cliff[y, x]: m.over.append((2, x, y, P1('cv_guano')))
-    for x, y in ((6, 28), (12, 28), (6, 17), (14, 4), (23, 2), (33, 2), (36, 10)):
+    for x, y in ((6, 28), (12, 28), (6, 17), (16, 4), (23, 2), (33, 2), (36, 10), (26, 30)):
         if m.inb(x, y) and m.cliff[y, x]: m.over.append((2, x, y, P1('cv_walllamp')))
-    m.dress(12, groups=[(['L_fd0', 'L_fd1', 'L_fd2', 'cv_kelp0', 'cv_kelp1', 'cv_wrack'], 6), (['L_rubble0', 'L_rubble1'], 2)], seed=3)
+
+    m.dress(14, groups=[(['L_fd0', 'L_fd1', 'L_fd2', 'cv_kelp0', 'cv_kelp1', 'cv_wrack'], 6), (['L_rubble0', 'L_rubble1'], 2)], seed=3)
 
 
 def main(which):

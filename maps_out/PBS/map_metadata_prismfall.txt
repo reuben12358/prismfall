@@ -275,6 +275,7 @@ SnapEdges = true
 [186]   # Meridian Spire - Gala Hall
 Name = Meridian Spire - Gala Hall
 MapPosition = 0,16,16
+SnapEdges = true
 #-------------------------------
 [187]   # Glide Cycles
 Name = Glide Cycles

@@ -43,6 +43,7 @@ module PrismfallMaps
     174 => [-6, -8, 4, 14],   # Tidelock Gym - Warden's Pool
     180 => [6, 4, 0, 0],   # Lumen City - The Concourse
     181 => [-24, -28, -8, 30],   # Lumen City - The Lowlight
+    186 => [4, 0, -6, 10],   # Meridian Spire - Gala Hall
     190 => [-10, -14, 6, 20],   # Circuit Gym - Switchroom
     191 => [-10, -14, 6, 20],   # Circuit Gym - Breadboard Hall
     192 => [-10, -14, 6, 20],   # Circuit Gym - Live Wire Hall
@@ -93,7 +94,7 @@ module PrismfallMaps
     928 => [16, 0, -10, 0],   # Ashkaar Siege Camp - Command Pavilion
     929 => [16, 8, 0, 10],   # The Observers' Mesa
     930 => [14, 8, 0, 6],   # The Bone-Carters' Camp
-    951 => [-16, -20, -4, 34],   # Meridian Spire - Service Lifts
+    951 => [-14, -18, 8, 30],   # Meridian Spire - Service Lifts
     952 => [-12, -16, 16, 28],   # Meridian Spire - Plate Vault
   }
 

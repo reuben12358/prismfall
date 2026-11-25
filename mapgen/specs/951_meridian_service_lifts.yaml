@@ -7,7 +7,7 @@ metadata:
   SnapEdges: true
 bgm: Cave
 field: NEON_GRID
-tone: [-16, -20, -4, 34]
+tone: [-14, -18, 8, 30]
 fog: {name: prismfall_cave, opacity: 32, blend: 1, zoom: 100, sx: 1, sy: 0}
 raw: data/raw/951.npy
 tileset: 60
