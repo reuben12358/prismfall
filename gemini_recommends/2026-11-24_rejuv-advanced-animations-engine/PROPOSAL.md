@@ -4968,3 +4968,58 @@ def pbRejuvCutsceneWave2(id, **opts)
 end
 
 ```
+
+---
+
+## 12. Final Pair Complete (12/12 Expanded Master Slate): Ch13 Glass Court & Ch17 Drowned Aurelia Sun Court + `pbZoomMap` Overscan Fix
+
+Both final scenes of the 12-scene animated master slate were recorded 100% live inside `mkxp-z.x86_64` on the remastered Gen 5 B2W2 tilesets (`512×384`, `30fps`, `-14.0 LUFS`, `0` console/runtime exceptions):
+
+1. **`:CH13_FAULT` — Ch13 Glass Court: Sable Unmasked, Voss's Broadcast & The Fault (`Map 287` → `Map 174`, `42.53s`)**
+   - Full Ruby choreography staged in sibling file [`ch13_ch17_scenes_final.rb`](./ch13_ch17_scenes_final.rb).
+   - Pure-pixel `2×` assets already dual-synced to `graphics/` and `art/out/Graphics/`:
+     - `Characters/act_ch13_kroll_vault.png` (`256×256`, `foot_pad = 2`)
+     - `Animations/pf_vfx_ch13_fault_vfx.png` (`512×256` `4×2`)
+     - `Pictures/cut_ch13_voss_broadcast_90deg.png` (`512×384` — **ZERO PC** during cold public broadcast)
+     - `Pictures/cut_ch13_fault_90deg.png` (`512×384` — shattering dome, chained Rowan & pinned Marchetti)
+2. **`:CH17_SUN_COURT` — Ch17 Drowned Aurelia Sun Court: The Missing Piece & Voss's Torch Breach (`Map 186`, `37.53s`)**
+   - Full Ruby choreography staged in sibling file [`ch13_ch17_scenes_final.rb`](./ch13_ch17_scenes_final.rb).
+   - Pure-pixel `2×` assets already dual-synced to `graphics/` and `art/out/Graphics/`:
+     - `Characters/act_ch17_voss_palm.png` (`256×256`, `foot_pad = 2`)
+     - `Animations/pf_vfx_ch17_sun_court.png` (`512×256` `4×2`)
+     - `Animations/pf_vfx_ch17_golden_hand.png` (`512×256` `4×2`)
+     - `Pictures/cut_ch17_voss_breach_90deg.png` (`512×384` — molten torch breach & colossal Broken Golden Hand)
+
+### Required 2 Engine Micro-Patches When Merging `017_AdvancedAnimations.rb`
+1. **Add Ch13 & Ch17 acting sheets to `foot_pad = 2`:**
+   ```ruby
+   elsif name.include?("act_ch11_anja") || name.include?("act_ch11_juno") ||
+         name.include?("act_ch5_dex") || name.include?("act_ch2_dorian") ||
+         name.include?("act_ch19_valen") || name.include?("act_ch19_kestrel") ||
+         name.include?("act_ch15_glassfall") || name.include?("act_ch21_valen") ||
+         name.include?("act_ch13_kroll") || name.include?("act_ch17_voss") then 2
+   ```
+2. **Exact integer overscan clamping in `render_zoom_snapshot` (`pbZoomMap` top-edge peel-away fix):**
+   ```ruby
+   fx, fy = focus_screen_point
+   w = Graphics.width.to_f
+   h = Graphics.height.to_f
+   z = [@zoom.to_f, 1.001].max
+   sx = (w / 2.0 + @shake_x).round
+   sy = (h / 2.0 + @shake_y).round
+   min_fx = (sx / z).ceil
+   max_fx = (w - (w - sx) / z).floor
+   min_fy = (sy / z).ceil
+   max_fy = (h - (h - sy) / z).floor
+   ox = min_fx <= max_fx ? [[fx.round, min_fx].max, max_fx].min : (w / 2.0).round
+   oy = min_fy <= max_fy ? [[fy.round, min_fy].max, max_fy].min : (h / 2.0).round
+   @zoom_sp.ox = ox
+   @zoom_sp.oy = oy
+   @zoom_sp.x  = sx
+   @zoom_sp.y  = sy
+   ```
+3. **Wire dispatchers in `pbRejuvCutscene`:**
+   ```ruby
+   when :CH13_FAULT, :CH13_GLASS_COURT, :CH13_DC then Prismfall::AdvancedAnimations.play_ch13_glass_court_fault(**opts)
+   when :CH17_SUN_COURT, :CH17_BREACH, :CH17_DC  then Prismfall::AdvancedAnimations.play_ch17_sun_court_breach(**opts)
+   ```
