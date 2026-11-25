@@ -11657,6 +11657,5953 @@ Pokemon = MINUN,24
     Nature = TIMID
     IV = 0
     EV = 0
+# Map 602 Candle Down
+#-------------------------------
+[GENTLEMAN,Aldous]
+LoseText = The coach is late and so, it seems, am I.
+Pokemon = TRUMBEAK,26
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SQUAWKABILLY,27
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+Pokemon = FEAROW,28
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[GENTLEMAN,Aldous,100]
+LoseText = The coach is late and so, it seems, am I.
+Pokemon = TRUMBEAK,27
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SQUAWKABILLY,28
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+Pokemon = FEAROW,29
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[GENTLEMAN,Aldous,200]
+LoseText = The coach is late and so, it seems, am I.
+Pokemon = TRUMBEAK,25
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SQUAWKABILLY,26
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = FEAROW,27
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 602 Candle Down
+#-------------------------------
+[LASS,Wynne]
+LoseText = I lit a cairn for luck. Wrong cairn.
+Pokemon = CLEFFA,26
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 8
+Pokemon = TOGEPI,27
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 8
+Pokemon = MILCERY,28
+    Ability = SWEETVEIL
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LASS,Wynne,100]
+LoseText = I lit a cairn for luck. Wrong cairn.
+Pokemon = CLEFFA,27
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 20
+Pokemon = TOGEPI,28
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 20
+Pokemon = MILCERY,29
+    Ability = SWEETVEIL
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LASS,Wynne,200]
+LoseText = I lit a cairn for luck. Wrong cairn.
+Pokemon = CLEFFA,25
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = TOGEPI,26
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = MILCERY,27
+    Ability = SWEETVEIL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 602 Candle Down
+#-------------------------------
+[CAMPER,Garth]
+LoseText = You can see into the Wall from here. I was looking at that.
+Pokemon = IGGLYBUFF,26
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 8
+Pokemon = STUFFUL,27
+    Ability = KLUTZ
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MUNCHLAX,28
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CAMPER,Garth,100]
+LoseText = You can see into the Wall from here. I was looking at that.
+Pokemon = IGGLYBUFF,27
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 20
+Pokemon = STUFFUL,28
+    Ability = KLUTZ
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MUNCHLAX,29
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CAMPER,Garth,200]
+LoseText = You can see into the Wall from here. I was looking at that.
+Pokemon = IGGLYBUFF,25
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = STUFFUL,26
+    Ability = KLUTZ
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MUNCHLAX,27
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 603 The Highwold
+#-------------------------------
+[TAMER,Colm]
+LoseText = The flock's scattered to the dew-pond. Again.
+Pokemon = TANDEMAUS,26
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 8
+Pokemon = EEVEE,27
+    Ability = ADAPTABILITY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FLAAFFY,28
+    Ability = STATIC
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[TAMER,Colm,100]
+LoseText = The flock's scattered to the dew-pond. Again.
+Pokemon = TANDEMAUS,27
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 20
+Pokemon = EEVEE,28
+    Ability = ADAPTABILITY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FLAAFFY,29
+    Ability = STATIC
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[TAMER,Colm,200]
+LoseText = The flock's scattered to the dew-pond. Again.
+Pokemon = TANDEMAUS,25
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = EEVEE,26
+    Ability = ADAPTABILITY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FLAAFFY,27
+    Ability = STATIC
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 603 The Highwold
+#-------------------------------
+[PICNICKER,Nessa]
+LoseText = Windy up here. Blew my whole plan away.
+Pokemon = CHERUBI,26
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 8
+Pokemon = SKIPLOOM,27
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SUNFLORA,28
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[PICNICKER,Nessa,100]
+LoseText = Windy up here. Blew my whole plan away.
+Pokemon = CHERUBI,27
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 20
+Pokemon = SKIPLOOM,28
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SUNFLORA,29
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[PICNICKER,Nessa,200]
+LoseText = Windy up here. Blew my whole plan away.
+Pokemon = CHERUBI,25
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SKIPLOOM,26
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SUNFLORA,27
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 603 The Highwold
+#-------------------------------
+[PSYCHIC_F,Iseult]
+LoseText = The Wold Stones said you'd come. They didn't say this.
+Pokemon = HATENNA,26
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 8
+Pokemon = CHINGLING,27
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 8
+Pokemon = DROWZEE,28
+    Ability = FOREWARN
+    Nature = CAREFUL
+    IV = 8
+#-------------------------------
+[PSYCHIC_F,Iseult,100]
+LoseText = The Wold Stones said you'd come. They didn't say this.
+Pokemon = HATENNA,27
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 20
+Pokemon = CHINGLING,28
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 20
+Pokemon = DROWZEE,29
+    Ability = FOREWARN
+    Nature = CAREFUL
+    IV = 20
+#-------------------------------
+[PSYCHIC_F,Iseult,200]
+LoseText = The Wold Stones said you'd come. They didn't say this.
+Pokemon = HATENNA,25
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CHINGLING,26
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = DROWZEE,27
+    Ability = FOREWARN
+    Nature = CAREFUL
+    IV = 0
+    EV = 0
+# Map 612 The Meridian Mainline
+#-------------------------------
+[ENGINEER,Pryce]
+LoseText = Signal's at danger. Should've read it myself.
+Pokemon = LUXIO,26
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MANECTRIC,27
+    Ability = LIGHTNINGROD
+    Nature = TIMID
+    IV = 8
+Pokemon = ELECTABUZZ,28
+    Ability = STATIC
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[ENGINEER,Pryce,100]
+LoseText = Signal's at danger. Should've read it myself.
+Pokemon = LUXIO,27
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MANECTRIC,28
+    Ability = LIGHTNINGROD
+    Nature = TIMID
+    IV = 20
+Pokemon = ELECTABUZZ,29
+    Ability = STATIC
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[ENGINEER,Pryce,200]
+LoseText = Signal's at danger. Should've read it myself.
+Pokemon = LUXIO,25
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MANECTRIC,26
+    Ability = LIGHTNINGROD
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = ELECTABUZZ,27
+    Ability = STATIC
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 612 The Meridian Mainline
+#-------------------------------
+[BIRDKEEPER,Corbin]
+LoseText = They roost on the gantries. They'll be up there a while now.
+Pokemon = NATU,26
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 8
+Pokemon = STARAVIA,27
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DRIFLOON,28
+    Ability = AFTERMATH
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BIRDKEEPER,Corbin,100]
+LoseText = They roost on the gantries. They'll be up there a while now.
+Pokemon = NATU,27
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 20
+Pokemon = STARAVIA,28
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DRIFLOON,29
+    Ability = AFTERMATH
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BIRDKEEPER,Corbin,200]
+LoseText = They roost on the gantries. They'll be up there a while now.
+Pokemon = NATU,25
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = STARAVIA,26
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DRIFLOON,27
+    Ability = AFTERMATH
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 612 The Meridian Mainline
+#-------------------------------
+[SUPERNERD,Tobias]
+LoseText = I had the timetable memorised. You weren't on it.
+Pokemon = CUFANT,26
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PORYGON,27
+    Ability = DOWNLOAD
+    Nature = MODEST
+    IV = 8
+Pokemon = PERRSERKER,28
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SUPERNERD,Tobias,100]
+LoseText = I had the timetable memorised. You weren't on it.
+Pokemon = CUFANT,27
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PORYGON,28
+    Ability = DOWNLOAD
+    Nature = MODEST
+    IV = 20
+Pokemon = PERRSERKER,29
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SUPERNERD,Tobias,200]
+LoseText = I had the timetable memorised. You weren't on it.
+Pokemon = CUFANT,25
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PORYGON,26
+    Ability = DOWNLOAD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PERRSERKER,27
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 604 Static Tunnels
+#-------------------------------
+[HIKER,Garrick]
+LoseText = Can't see my hand down here. Saw that coming, though.
+Pokemon = MAGNEMITE,27
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+Pokemon = ONIX,28
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 8
+Pokemon = BOLDORE,29
+    Ability = WEAKARMOR
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Garrick,100]
+LoseText = Can't see my hand down here. Saw that coming, though.
+Pokemon = MAGNEMITE,28
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+Pokemon = ONIX,29
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 20
+Pokemon = BOLDORE,30
+    Ability = WEAKARMOR
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Garrick,200]
+LoseText = Can't see my hand down here. Saw that coming, though.
+Pokemon = MAGNEMITE,26
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = ONIX,27
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = BOLDORE,28
+    Ability = WEAKARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 604 Static Tunnels
+#-------------------------------
+[BURGLAR,Sly]
+LoseText = Copper wire's worth good money. You're worth trouble.
+Pokemon = JOLTIK,27
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 8
+Pokemon = LIEPARD,28
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 8
+Pokemon = MAGNETON,29
+    Ability = MAGNETPULL
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BURGLAR,Sly,100]
+LoseText = Copper wire's worth good money. You're worth trouble.
+Pokemon = JOLTIK,28
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 20
+Pokemon = LIEPARD,29
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 20
+Pokemon = MAGNETON,30
+    Ability = MAGNETPULL
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BURGLAR,Sly,200]
+LoseText = Copper wire's worth good money. You're worth trouble.
+Pokemon = JOLTIK,26
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = LIEPARD,27
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MAGNETON,28
+    Ability = MAGNETPULL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 605 Static Tunnels Depths
+#-------------------------------
+[POKEMANIAC,Otho]
+LoseText = The rare ones live deeper. So does my disappointment.
+Pokemon = BAGON,28
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DRATINI,29
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LARVITAR,30
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMANIAC,Otho,100]
+LoseText = The rare ones live deeper. So does my disappointment.
+Pokemon = BAGON,29
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DRATINI,30
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LARVITAR,31
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMANIAC,Otho,200]
+LoseText = The rare ones live deeper. So does my disappointment.
+Pokemon = BAGON,27
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DRATINI,28
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LARVITAR,29
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 600 The Brass Dunes
+#-------------------------------
+[RUINMANIAC,Hadrian]
+LoseText = The rails end where the sand starts. Everything does.
+Pokemon = SILICOBRA,26
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DRILBUR,27
+    Ability = SANDFORCE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAWILE,28
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Hadrian,100]
+LoseText = The rails end where the sand starts. Everything does.
+Pokemon = SILICOBRA,27
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DRILBUR,28
+    Ability = SANDFORCE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAWILE,29
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Hadrian,200]
+LoseText = The rails end where the sand starts. Everything does.
+Pokemon = SILICOBRA,25
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DRILBUR,26
+    Ability = SANDFORCE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAWILE,27
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 600 The Brass Dunes
+#-------------------------------
+[CAMPER,Idris]
+LoseText = Sand in the kettle, sand in the tent. Sand in my eyes just now.
+Pokemon = DIGLETT,26
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 8
+Pokemon = DIGGERSBY,27
+    Ability = CHEEKPOUCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SANDSLASH,28
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CAMPER,Idris,100]
+LoseText = Sand in the kettle, sand in the tent. Sand in my eyes just now.
+Pokemon = DIGLETT,27
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 20
+Pokemon = DIGGERSBY,28
+    Ability = CHEEKPOUCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SANDSLASH,29
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CAMPER,Idris,200]
+LoseText = Sand in the kettle, sand in the tent. Sand in my eyes just now.
+Pokemon = DIGLETT,25
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = DIGGERSBY,26
+    Ability = CHEEKPOUCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SANDSLASH,27
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 600 The Brass Dunes
+#-------------------------------
+[POKEMONRANGER_F,Maren]
+LoseText = Green on one side, gold on the other. I guard the seam.
+Pokemon = EXEGGCUTE,26
+    Ability = CHLOROPHYLL
+    Nature = BOLD
+    IV = 8
+Pokemon = CACNEA,27
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SWADLOON,28
+    Ability = LEAFGUARD
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_F,Maren,100]
+LoseText = Green on one side, gold on the other. I guard the seam.
+Pokemon = EXEGGCUTE,27
+    Ability = CHLOROPHYLL
+    Nature = BOLD
+    IV = 20
+Pokemon = CACNEA,28
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SWADLOON,29
+    Ability = LEAFGUARD
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_F,Maren,200]
+LoseText = Green on one side, gold on the other. I guard the seam.
+Pokemon = EXEGGCUTE,25
+    Ability = CHLOROPHYLL
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = CACNEA,26
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SWADLOON,27
+    Ability = LEAFGUARD
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 601 The Rib Road
+#-------------------------------
+[HIKER,Zahir]
+LoseText = The storm buries the road each night. Today it buried me.
+Pokemon = ROCKRUFF,26
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BONSLY,27
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SANDILE,28
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Zahir,100]
+LoseText = The storm buries the road each night. Today it buried me.
+Pokemon = ROCKRUFF,27
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BONSLY,28
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SANDILE,29
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Zahir,200]
+LoseText = The storm buries the road each night. Today it buried me.
+Pokemon = ROCKRUFF,25
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BONSLY,26
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SANDILE,27
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 601 The Rib Road
+#-------------------------------
+[BLACKBELT,Kadir]
+LoseText = I train against the wind. The wind hits softer.
+Pokemon = TRAPINCH,26
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GIBLE,27
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HIPPOPOTAS,28
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BLACKBELT,Kadir,100]
+LoseText = I train against the wind. The wind hits softer.
+Pokemon = TRAPINCH,27
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GIBLE,28
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HIPPOPOTAS,29
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BLACKBELT,Kadir,200]
+LoseText = I train against the wind. The wind hits softer.
+Pokemon = TRAPINCH,25
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GIBLE,26
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HIPPOPOTAS,27
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 601 The Rib Road
+#-------------------------------
+[COOLTRAINER_M,Rashid]
+LoseText = Duneholt's past the red rocks. Go on, you'll manage.
+Pokemon = SANDILE,26
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GIBLE,27
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SANDSHREW,28
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[COOLTRAINER_M,Rashid,100]
+LoseText = Duneholt's past the red rocks. Go on, you'll manage.
+Pokemon = SANDILE,27
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GIBLE,28
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SANDSHREW,29
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[COOLTRAINER_M,Rashid,200]
+LoseText = Duneholt's past the red rocks. Go on, you'll manage.
+Pokemon = SANDILE,25
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GIBLE,26
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SANDSHREW,27
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 613 Sunbleach Flats
+#-------------------------------
+[BEAUTY,Samira]
+LoseText = Linen bleaches white in a week out here. I went white in a minute.
+Pokemon = JIGGLYPUFF,26
+    Ability = CUTECHARM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MEOWTH,27
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 8
+Pokemon = MIMEJR,28
+    Ability = SOUNDPROOF
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BEAUTY,Samira,100]
+LoseText = Linen bleaches white in a week out here. I went white in a minute.
+Pokemon = JIGGLYPUFF,27
+    Ability = CUTECHARM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MEOWTH,28
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 20
+Pokemon = MIMEJR,29
+    Ability = SOUNDPROOF
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BEAUTY,Samira,200]
+LoseText = Linen bleaches white in a week out here. I went white in a minute.
+Pokemon = JIGGLYPUFF,25
+    Ability = CUTECHARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MEOWTH,26
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MIMEJR,27
+    Ability = SOUNDPROOF
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 613 Sunbleach Flats
+#-------------------------------
+[YOUNGSTER,Nabil]
+LoseText = I was guarding the frames! From you, mostly!
+Pokemon = HAPPINY,26
+    Ability = SERENEGRACE
+    Nature = MODEST
+    IV = 8
+Pokemon = DITTO,27
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DELCATTY,28
+    Ability = CUTECHARM
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[YOUNGSTER,Nabil,100]
+LoseText = I was guarding the frames! From you, mostly!
+Pokemon = HAPPINY,27
+    Ability = SERENEGRACE
+    Nature = MODEST
+    IV = 20
+Pokemon = DITTO,28
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DELCATTY,29
+    Ability = CUTECHARM
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[YOUNGSTER,Nabil,200]
+LoseText = I was guarding the frames! From you, mostly!
+Pokemon = HAPPINY,25
+    Ability = SERENEGRACE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = DITTO,26
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DELCATTY,27
+    Ability = CUTECHARM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 208 Necropolis of the Electors
+#-------------------------------
+[CHANNELER,Zenobia]
+LoseText = The Electors voted. It was unanimous. I lose.
+Pokemon = GREAVARD,28
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 8
+Pokemon = POLTCHAGEIST,29
+    Ability = HOSPITALITY
+    Nature = MODEST
+    IV = 8
+Pokemon = PUMPKABOO,30
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CHANNELER,Zenobia,100]
+LoseText = The Electors voted. It was unanimous. I lose.
+Pokemon = GREAVARD,29
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 20
+Pokemon = POLTCHAGEIST,30
+    Ability = HOSPITALITY
+    Nature = MODEST
+    IV = 20
+Pokemon = PUMPKABOO,31
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CHANNELER,Zenobia,200]
+LoseText = The Electors voted. It was unanimous. I lose.
+Pokemon = GREAVARD,27
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = POLTCHAGEIST,28
+    Ability = HOSPITALITY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PUMPKABOO,29
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 208 Necropolis of the Electors
+#-------------------------------
+[RUINMANIAC,Lucan]
+LoseText = Eighteen tomb doors and I knocked on yours.
+Pokemon = SHEDINJA,28
+    Ability = WONDERGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GIMMIGHOUL,29
+    Ability = RATTLED
+    Nature = MODEST
+    IV = 8
+Pokemon = ONIX,30
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Lucan,100]
+LoseText = Eighteen tomb doors and I knocked on yours.
+Pokemon = SHEDINJA,29
+    Ability = WONDERGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GIMMIGHOUL,30
+    Ability = RATTLED
+    Nature = MODEST
+    IV = 20
+Pokemon = ONIX,31
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Lucan,200]
+LoseText = Eighteen tomb doors and I knocked on yours.
+Pokemon = SHEDINJA,27
+    Ability = WONDERGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GIMMIGHOUL,28
+    Ability = RATTLED
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = ONIX,29
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 210 Duneholt Gym - Entrance
+#-------------------------------
+[PICNICKER,Layla]
+LoseText = The sand took my sandwich and you took the rest.
+Pokemon = PANSAGE,28
+    Ability = GLUTTONY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TOEDSCOOL,29
+    Ability = MYCELIUMMIGHT
+    Nature = CALM
+    IV = 8
+Pokemon = MUDBRAY,30
+    Ability = STAMINA
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[PICNICKER,Layla,100]
+LoseText = The sand took my sandwich and you took the rest.
+Pokemon = PANSAGE,29
+    Ability = GLUTTONY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TOEDSCOOL,30
+    Ability = MYCELIUMMIGHT
+    Nature = CALM
+    IV = 20
+Pokemon = MUDBRAY,31
+    Ability = STAMINA
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[PICNICKER,Layla,200]
+LoseText = The sand took my sandwich and you took the rest.
+Pokemon = PANSAGE,27
+    Ability = GLUTTONY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TOEDSCOOL,28
+    Ability = MYCELIUMMIGHT
+    Nature = CALM
+    IV = 0
+    EV = 0
+Pokemon = MUDBRAY,29
+    Ability = STAMINA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 211 Duneholt Gym - Puzzle Room 1
+#-------------------------------
+[RUINMANIAC,Darius]
+LoseText = Dig where the Warden says. I dug in the wrong place.
+Pokemon = LARVITAR,28
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TIRTOUGA,29
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GLIGAR,30
+    Ability = HYPERCUTTER
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Darius,100]
+LoseText = Dig where the Warden says. I dug in the wrong place.
+Pokemon = LARVITAR,29
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TIRTOUGA,30
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GLIGAR,31
+    Ability = HYPERCUTTER
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Darius,200]
+LoseText = Dig where the Warden says. I dug in the wrong place.
+Pokemon = LARVITAR,27
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TIRTOUGA,28
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GLIGAR,29
+    Ability = HYPERCUTTER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 211 Duneholt Gym - Puzzle Room 1
+#-------------------------------
+[HIKER,Osman]
+LoseText = Buried to the knees. Carry on over me.
+Pokemon = ARCHEN,28
+    Ability = DEFEATIST
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CORSOLA,29
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 8
+Pokemon = SUDOWOODO,30
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Osman,100]
+LoseText = Buried to the knees. Carry on over me.
+Pokemon = ARCHEN,29
+    Ability = DEFEATIST
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CORSOLA,30
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 20
+Pokemon = SUDOWOODO,31
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Osman,200]
+LoseText = Buried to the knees. Carry on over me.
+Pokemon = ARCHEN,27
+    Ability = DEFEATIST
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CORSOLA,28
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SUDOWOODO,29
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 212 Duneholt Gym - Puzzle Room 2
+#-------------------------------
+[RUINMANIAC,Farah]
+LoseText = Every layer's older than the last. I feel ancient.
+Pokemon = CRANIDOS,28
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GRAVELER,29
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DUGTRIO,30
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Farah,100]
+LoseText = Every layer's older than the last. I feel ancient.
+Pokemon = CRANIDOS,29
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GRAVELER,30
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DUGTRIO,31
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Farah,200]
+LoseText = Every layer's older than the last. I feel ancient.
+Pokemon = CRANIDOS,27
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GRAVELER,28
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DUGTRIO,29
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 212 Duneholt Gym - Puzzle Room 2
+#-------------------------------
+[HIKER,Burak]
+LoseText = Sahar reads sand like a book. You're the next chapter.
+Pokemon = SHIELDON,28
+    Ability = STURDY
+    Nature = BOLD
+    IV = 8
+Pokemon = GRAVELER,29
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DUGTRIO,30
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[HIKER,Burak,100]
+LoseText = Sahar reads sand like a book. You're the next chapter.
+Pokemon = SHIELDON,29
+    Ability = STURDY
+    Nature = BOLD
+    IV = 20
+Pokemon = GRAVELER,30
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DUGTRIO,31
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[HIKER,Burak,200]
+LoseText = Sahar reads sand like a book. You're the next chapter.
+Pokemon = SHIELDON,27
+    Ability = STURDY
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = GRAVELER,28
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DUGTRIO,29
+    Ability = ARENATRAP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 620 The Marrow Road
+#-------------------------------
+[RUINMANIAC,Cyrus]
+LoseText = There's a city under this road. It can keep me.
+Pokemon = TRAPINCH,30
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SILICOBRA,31
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HIPPOPOTAS,32
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Cyrus,100]
+LoseText = There's a city under this road. It can keep me.
+Pokemon = TRAPINCH,31
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SILICOBRA,32
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HIPPOPOTAS,33
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Cyrus,200]
+LoseText = There's a city under this road. It can keep me.
+Pokemon = TRAPINCH,29
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SILICOBRA,30
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HIPPOPOTAS,31
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 620 The Marrow Road
+#-------------------------------
+[HIKER,Tariq]
+LoseText = Three days to the next well. I'll walk it off.
+Pokemon = NACLSTACK,30
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 8
+Pokemon = KLAWF,31
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SANDSLASH,32
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Tariq,100]
+LoseText = Three days to the next well. I'll walk it off.
+Pokemon = NACLSTACK,31
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 20
+Pokemon = KLAWF,32
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SANDSLASH,33
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Tariq,200]
+LoseText = Three days to the next well. I'll walk it off.
+Pokemon = NACLSTACK,29
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = KLAWF,30
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SANDSLASH,31
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 620 The Marrow Road
+#-------------------------------
+[COOLTRAINER_F,Soraya]
+LoseText = The deep desert doesn't forgive. You don't either.
+Pokemon = HIPPOPOTAS,30
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KROKOROK,31
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MUDBRAY,32
+    Ability = STAMINA
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[COOLTRAINER_F,Soraya,100]
+LoseText = The deep desert doesn't forgive. You don't either.
+Pokemon = HIPPOPOTAS,31
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KROKOROK,32
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MUDBRAY,33
+    Ability = STAMINA
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[COOLTRAINER_F,Soraya,200]
+LoseText = The deep desert doesn't forgive. You don't either.
+Pokemon = HIPPOPOTAS,29
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KROKOROK,30
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MUDBRAY,31
+    Ability = STAMINA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 620 The Marrow Road
+#-------------------------------
+[TAMER,Jamil]
+LoseText = The caravan moves at dusk. So does my pride.
+Pokemon = PERSIAN,29
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 8
+Pokemon = GIRAFARIG,30
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 8
+Pokemon = MUDSDALE,31
+    Ability = OWNTEMPO
+    Nature = ADAMANT
+    IV = 8
+Pokemon = URSARING,32
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[TAMER,Jamil,100]
+LoseText = The caravan moves at dusk. So does my pride.
+Pokemon = PERSIAN,30
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 20
+Pokemon = GIRAFARIG,31
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 20
+Pokemon = MUDSDALE,32
+    Ability = OWNTEMPO
+    Nature = ADAMANT
+    IV = 20
+Pokemon = URSARING,33
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[TAMER,Jamil,200]
+LoseText = The caravan moves at dusk. So does my pride.
+Pokemon = PERSIAN,28
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = GIRAFARIG,29
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = MUDSDALE,30
+    Ability = OWNTEMPO
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = URSARING,31
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 632 The Kneeling Stones
+#-------------------------------
+[PSYCHIC_M,Ezra]
+LoseText = The stones kneel to something. Not to me, clearly.
+Pokemon = GOTHITA,29
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 8
+Pokemon = SOLOSIS,30
+    Ability = MAGICGUARD
+    Nature = MODEST
+    IV = 8
+Pokemon = SPOINK,31
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 8
+Pokemon = WOBBUFFET,32
+    Ability = SHADOWTAG
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[PSYCHIC_M,Ezra,100]
+LoseText = The stones kneel to something. Not to me, clearly.
+Pokemon = GOTHITA,30
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 20
+Pokemon = SOLOSIS,31
+    Ability = MAGICGUARD
+    Nature = MODEST
+    IV = 20
+Pokemon = SPOINK,32
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 20
+Pokemon = WOBBUFFET,33
+    Ability = SHADOWTAG
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[PSYCHIC_M,Ezra,200]
+LoseText = The stones kneel to something. Not to me, clearly.
+Pokemon = GOTHITA,28
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SOLOSIS,29
+    Ability = MAGICGUARD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SPOINK,30
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = WOBBUFFET,31
+    Ability = SHADOWTAG
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 632 The Kneeling Stones
+#-------------------------------
+[BLACKBELT,Navid]
+LoseText = Duneholt, Charwell, Vigil. I'll take the long way to all three.
+Pokemon = PANCHAM,30
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MACHOKE,31
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PRIMEAPE,32
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BLACKBELT,Navid,100]
+LoseText = Duneholt, Charwell, Vigil. I'll take the long way to all three.
+Pokemon = PANCHAM,31
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MACHOKE,32
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PRIMEAPE,33
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BLACKBELT,Navid,200]
+LoseText = Duneholt, Charwell, Vigil. I'll take the long way to all three.
+Pokemon = PANCHAM,29
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MACHOKE,30
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PRIMEAPE,31
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 632 The Kneeling Stones
+#-------------------------------
+[PICNICKER,Dalia]
+LoseText = A crossroads picnic. Everyone passes, nobody stops. You stopped.
+Pokemon = TOEDSCOOL,30
+    Ability = MYCELIUMMIGHT
+    Nature = CALM
+    IV = 8
+Pokemon = BAYLEEF,31
+    Ability = OVERGROW
+    Nature = BOLD
+    IV = 8
+Pokemon = DARTRIX,32
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[PICNICKER,Dalia,100]
+LoseText = A crossroads picnic. Everyone passes, nobody stops. You stopped.
+Pokemon = TOEDSCOOL,31
+    Ability = MYCELIUMMIGHT
+    Nature = CALM
+    IV = 20
+Pokemon = BAYLEEF,32
+    Ability = OVERGROW
+    Nature = BOLD
+    IV = 20
+Pokemon = DARTRIX,33
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[PICNICKER,Dalia,200]
+LoseText = A crossroads picnic. Everyone passes, nobody stops. You stopped.
+Pokemon = TOEDSCOOL,29
+    Ability = MYCELIUMMIGHT
+    Nature = CALM
+    IV = 0
+    EV = 0
+Pokemon = BAYLEEF,30
+    Ability = OVERGROW
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = DARTRIX,31
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 624 Ossuary of Dunes
+#-------------------------------
+[RUINMANIAC,Anwar]
+LoseText = The murals show a trainer winning here. I assumed it was me.
+Pokemon = FLITTLE,31
+    Ability = FRISK
+    Nature = MODEST
+    IV = 8
+Pokemon = BRONZOR,32
+    Ability = HEATPROOF
+    Nature = BOLD
+    IV = 8
+Pokemon = UNOWN,33
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HOUNDSTONE,34
+    Ability = SANDRUSH
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Anwar,100]
+LoseText = The murals show a trainer winning here. I assumed it was me.
+Pokemon = FLITTLE,32
+    Ability = FRISK
+    Nature = MODEST
+    IV = 20
+Pokemon = BRONZOR,33
+    Ability = HEATPROOF
+    Nature = BOLD
+    IV = 20
+Pokemon = UNOWN,34
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HOUNDSTONE,35
+    Ability = SANDRUSH
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Anwar,200]
+LoseText = The murals show a trainer winning here. I assumed it was me.
+Pokemon = FLITTLE,30
+    Ability = FRISK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BRONZOR,31
+    Ability = HEATPROOF
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = UNOWN,32
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HOUNDSTONE,33
+    Ability = SANDRUSH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 624 Ossuary of Dunes
+#-------------------------------
+[CHANNELER,Shirin]
+LoseText = They're restless. You woke them, you settle them.
+Pokemon = GREAVARD,32
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SABLEYE,33
+    Ability = STALL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = COFAGRIGUS,34
+    Ability = MUMMY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[CHANNELER,Shirin,100]
+LoseText = They're restless. You woke them, you settle them.
+Pokemon = GREAVARD,33
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SABLEYE,34
+    Ability = STALL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = COFAGRIGUS,35
+    Ability = MUMMY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[CHANNELER,Shirin,200]
+LoseText = They're restless. You woke them, you settle them.
+Pokemon = GREAVARD,31
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SABLEYE,32
+    Ability = STALL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = COFAGRIGUS,33
+    Ability = MUMMY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 624 Ossuary of Dunes
+#-------------------------------
+[POKEMANIAC,Faisal]
+LoseText = Boulders, bones and me. One of us had to give.
+Pokemon = BALTOY,31
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAROWAK,32
+    Ability = LIGHTNINGROD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = RUNERIGUS,33
+    Ability = WANDERINGSPIRIT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = RAMPARDOS,34
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMANIAC,Faisal,100]
+LoseText = Boulders, bones and me. One of us had to give.
+Pokemon = BALTOY,32
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAROWAK,33
+    Ability = LIGHTNINGROD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = RUNERIGUS,34
+    Ability = WANDERINGSPIRIT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = RAMPARDOS,35
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMANIAC,Faisal,200]
+LoseText = Boulders, bones and me. One of us had to give.
+Pokemon = BALTOY,30
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAROWAK,31
+    Ability = LIGHTNINGROD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = RUNERIGUS,32
+    Ability = WANDERINGSPIRIT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = RAMPARDOS,33
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 628 Sinkfield
+#-------------------------------
+[POKEMONRANGER_M,Edmund]
+LoseText = The field swallowed the plough. Keep to the stones.
+Pokemon = PALPITOAD,30
+    Ability = HYDRATION
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MARSHTOMP,31
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = QUAGSIRE,32
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 8
+Pokemon = WHISCASH,33
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_M,Edmund,100]
+LoseText = The field swallowed the plough. Keep to the stones.
+Pokemon = PALPITOAD,31
+    Ability = HYDRATION
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MARSHTOMP,32
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = QUAGSIRE,33
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 20
+Pokemon = WHISCASH,34
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_M,Edmund,200]
+LoseText = The field swallowed the plough. Keep to the stones.
+Pokemon = PALPITOAD,29
+    Ability = HYDRATION
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MARSHTOMP,30
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = QUAGSIRE,31
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = WHISCASH,32
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 628 Sinkfield
+#-------------------------------
+[LASS,Marjory]
+LoseText = That was our barley. That was our barn. That was my team.
+Pokemon = PIDGEOTTO,31
+    Ability = TANGLEDFEET
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TRANQUILL,32
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = VIGOROTH,33
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[LASS,Marjory,100]
+LoseText = That was our barley. That was our barn. That was my team.
+Pokemon = PIDGEOTTO,32
+    Ability = TANGLEDFEET
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TRANQUILL,33
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = VIGOROTH,34
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[LASS,Marjory,200]
+LoseText = That was our barley. That was our barn. That was my team.
+Pokemon = PIDGEOTTO,30
+    Ability = TANGLEDFEET
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TRANQUILL,31
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = VIGOROTH,32
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 621 The Leach Canyons
+#-------------------------------
+[BURGLAR,Crake]
+LoseText = Foundry throws away better than Mirefen buys.
+Pokemon = SHROODLE,30
+    Ability = UNBURDEN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GLIMMET,31
+    Ability = TOXICDEBRIS
+    Nature = MODEST
+    IV = 8
+Pokemon = IVYSAUR,32
+    Ability = OVERGROW
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BURGLAR,Crake,100]
+LoseText = Foundry throws away better than Mirefen buys.
+Pokemon = SHROODLE,31
+    Ability = UNBURDEN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GLIMMET,32
+    Ability = TOXICDEBRIS
+    Nature = MODEST
+    IV = 20
+Pokemon = IVYSAUR,33
+    Ability = OVERGROW
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BURGLAR,Crake,200]
+LoseText = Foundry throws away better than Mirefen buys.
+Pokemon = SHROODLE,29
+    Ability = UNBURDEN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GLIMMET,30
+    Ability = TOXICDEBRIS
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = IVYSAUR,31
+    Ability = OVERGROW
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 621 The Leach Canyons
+#-------------------------------
+[SUPERNERD,Linus]
+LoseText = The runoff's four colours today. I'm the fifth: green.
+Pokemon = GULPIN,30
+    Ability = LIQUIDOOZE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ARBOK,31
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GRAFAIAI,32
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[SUPERNERD,Linus,100]
+LoseText = The runoff's four colours today. I'm the fifth: green.
+Pokemon = GULPIN,31
+    Ability = LIQUIDOOZE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ARBOK,32
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GRAFAIAI,33
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[SUPERNERD,Linus,200]
+LoseText = The runoff's four colours today. I'm the fifth: green.
+Pokemon = GULPIN,29
+    Ability = LIQUIDOOZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ARBOK,30
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GRAFAIAI,31
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 621 The Leach Canyons
+#-------------------------------
+[FISHERMAN,Dunn]
+LoseText = Don't eat what I catch here. I don't.
+Pokemon = CROCONAW,30
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BIBAREL,31
+    Ability = UNAWARE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BRIONNE,32
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[FISHERMAN,Dunn,100]
+LoseText = Don't eat what I catch here. I don't.
+Pokemon = CROCONAW,31
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BIBAREL,32
+    Ability = UNAWARE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BRIONNE,33
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[FISHERMAN,Dunn,200]
+LoseText = Don't eat what I catch here. I don't.
+Pokemon = CROCONAW,29
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BIBAREL,30
+    Ability = UNAWARE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BRIONNE,31
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 634 Wormwood Lea
+#-------------------------------
+[AROMALADY,Melisande]
+LoseText = Wormwood's bitter. So is this, a little.
+Pokemon = APPLIN,29
+    Ability = RIPEN
+    Nature = BOLD
+    IV = 8
+Pokemon = KIRLIA,30
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 8
+Pokemon = FLOETTE,31
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 8
+Pokemon = MRMIME,32
+    Ability = SOUNDPROOF
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[AROMALADY,Melisande,100]
+LoseText = Wormwood's bitter. So is this, a little.
+Pokemon = APPLIN,30
+    Ability = RIPEN
+    Nature = BOLD
+    IV = 20
+Pokemon = KIRLIA,31
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 20
+Pokemon = FLOETTE,32
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 20
+Pokemon = MRMIME,33
+    Ability = SOUNDPROOF
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[AROMALADY,Melisande,200]
+LoseText = Wormwood's bitter. So is this, a little.
+Pokemon = APPLIN,28
+    Ability = RIPEN
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = KIRLIA,29
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = FLOETTE,30
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = MRMIME,31
+    Ability = SOUNDPROOF
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 634 Wormwood Lea
+#-------------------------------
+[BUGCATCHER,Kit]
+LoseText = The water-meadows hum at dusk. That's mostly my team.
+Pokemon = WIMPOD,29
+    Ability = WIMPOUT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PINECO,30
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = RABSCA,31
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 8
+Pokemon = SCYTHER,32
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Kit,100]
+LoseText = The water-meadows hum at dusk. That's mostly my team.
+Pokemon = WIMPOD,30
+    Ability = WIMPOUT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PINECO,31
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = RABSCA,32
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 20
+Pokemon = SCYTHER,33
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Kit,200]
+LoseText = The water-meadows hum at dusk. That's mostly my team.
+Pokemon = WIMPOD,28
+    Ability = WIMPOUT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PINECO,29
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = RABSCA,30
+    Ability = SYNCHRONIZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SCYTHER,31
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 634 Wormwood Lea
+#-------------------------------
+[FISHERMAN,Aylmer]
+LoseText = The Ironway fords here. So did you, right over me.
+Pokemon = HORSEA,29
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 8
+Pokemon = SHELLOS,30
+    Ability = STORMDRAIN
+    Nature = MODEST
+    IV = 8
+Pokemon = STARYU,31
+    Ability = ILLUMINATE
+    Nature = TIMID
+    IV = 8
+Pokemon = WUGTRIO,32
+    Ability = RATTLED
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[FISHERMAN,Aylmer,100]
+LoseText = The Ironway fords here. So did you, right over me.
+Pokemon = HORSEA,30
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 20
+Pokemon = SHELLOS,31
+    Ability = STORMDRAIN
+    Nature = MODEST
+    IV = 20
+Pokemon = STARYU,32
+    Ability = ILLUMINATE
+    Nature = TIMID
+    IV = 20
+Pokemon = WUGTRIO,33
+    Ability = RATTLED
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[FISHERMAN,Aylmer,200]
+LoseText = The Ironway fords here. So did you, right over me.
+Pokemon = HORSEA,28
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SHELLOS,29
+    Ability = STORMDRAIN
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = STARYU,30
+    Ability = ILLUMINATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = WUGTRIO,31
+    Ability = RATTLED
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 634 Wormwood Lea (double battle)
+#-------------------------------
+[TWINS,Tilly & Milly]
+LoseText = Tilly: Bitters! Milly: She means she's bitter.
+Pokemon = DOLLIV,31
+    Ability = EARLYBIRD
+    Nature = MODEST
+    IV = 8
+Pokemon = GROTLE,32
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[TWINS,Tilly & Milly,100]
+LoseText = Tilly: Bitters! Milly: She means she's bitter.
+Pokemon = DOLLIV,32
+    Ability = EARLYBIRD
+    Nature = MODEST
+    IV = 20
+Pokemon = GROTLE,33
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[TWINS,Tilly & Milly,200]
+LoseText = Tilly: Bitters! Milly: She means she's bitter.
+Pokemon = DOLLIV,30
+    Ability = EARLYBIRD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GROTLE,31
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 633 The Gutterfall
+#-------------------------------
+[BIKER,Rudge]
+LoseText = The falls run blue. Nobody asks why. Don't you start.
+Pokemon = ZORUA,30
+    Ability = ILLUSION
+    Nature = MODEST
+    IV = 8
+Pokemon = MASCHIFF,31
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MURKROW,32
+    Ability = SUPERLUCK
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BIKER,Rudge,100]
+LoseText = The falls run blue. Nobody asks why. Don't you start.
+Pokemon = ZORUA,31
+    Ability = ILLUSION
+    Nature = MODEST
+    IV = 20
+Pokemon = MASCHIFF,32
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MURKROW,33
+    Ability = SUPERLUCK
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BIKER,Rudge,200]
+LoseText = The falls run blue. Nobody asks why. Don't you start.
+Pokemon = ZORUA,29
+    Ability = ILLUSION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = MASCHIFF,30
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MURKROW,31
+    Ability = SUPERLUCK
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 633 The Gutterfall
+#-------------------------------
+[CUEBALL,Knox]
+LoseText = Ladder-town rules: loser climbs down. Long way down.
+Pokemon = RIOLU,30
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CROAGUNK,31
+    Ability = ANTICIPATION
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GURDURR,32
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CUEBALL,Knox,100]
+LoseText = Ladder-town rules: loser climbs down. Long way down.
+Pokemon = RIOLU,31
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CROAGUNK,32
+    Ability = ANTICIPATION
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GURDURR,33
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CUEBALL,Knox,200]
+LoseText = Ladder-town rules: loser climbs down. Long way down.
+Pokemon = RIOLU,29
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CROAGUNK,30
+    Ability = ANTICIPATION
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GURDURR,31
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 633 The Gutterfall
+#-------------------------------
+[YOUNGSTER,Tad]
+LoseText = I can hold my breath the whole ladder. Watch. ...Later.
+Pokemon = TENTACOOL,30
+    Ability = LIQUIDOOZE
+    Nature = CALM
+    IV = 8
+Pokemon = WHIRLIPEDE,31
+    Ability = POISONPOINT
+    Nature = IMPISH
+    IV = 8
+Pokemon = VENOMOTH,32
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[YOUNGSTER,Tad,100]
+LoseText = I can hold my breath the whole ladder. Watch. ...Later.
+Pokemon = TENTACOOL,31
+    Ability = LIQUIDOOZE
+    Nature = CALM
+    IV = 20
+Pokemon = WHIRLIPEDE,32
+    Ability = POISONPOINT
+    Nature = IMPISH
+    IV = 20
+Pokemon = VENOMOTH,33
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[YOUNGSTER,Tad,200]
+LoseText = I can hold my breath the whole ladder. Watch. ...Later.
+Pokemon = TENTACOOL,29
+    Ability = LIQUIDOOZE
+    Nature = CALM
+    IV = 0
+    EV = 0
+Pokemon = WHIRLIPEDE,30
+    Ability = POISONPOINT
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = VENOMOTH,31
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 230 Mirefen Gym - Entrance
+#-------------------------------
+[AROMALADY,Rue]
+LoseText = The Warden's herbs sting before they heal. Like that did.
+Pokemon = GLOOM,31
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 8
+Pokemon = ROSELIA,32
+    Ability = POISONPOINT
+    Nature = MODEST
+    IV = 8
+Pokemon = FLORAGATO,33
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 8
+Pokemon = THWACKEY,34
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[AROMALADY,Rue,100]
+LoseText = The Warden's herbs sting before they heal. Like that did.
+Pokemon = GLOOM,32
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 20
+Pokemon = ROSELIA,33
+    Ability = POISONPOINT
+    Nature = MODEST
+    IV = 20
+Pokemon = FLORAGATO,34
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 20
+Pokemon = THWACKEY,35
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[AROMALADY,Rue,200]
+LoseText = The Warden's herbs sting before they heal. Like that did.
+Pokemon = GLOOM,30
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = ROSELIA,31
+    Ability = POISONPOINT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = FLORAGATO,32
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = THWACKEY,33
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 231 Mirefen Gym - Puzzle Room 1
+#-------------------------------
+[SCIENTIST,Hester]
+LoseText = Dose makes the poison. I misjudged the dose.
+Pokemon = STUNKY,32
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KOFFING,33
+    Ability = NEUTRALIZINGGAS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HAUNTER,34
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[SCIENTIST,Hester,100]
+LoseText = Dose makes the poison. I misjudged the dose.
+Pokemon = STUNKY,33
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KOFFING,34
+    Ability = NEUTRALIZINGGAS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HAUNTER,35
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[SCIENTIST,Hester,200]
+LoseText = Dose makes the poison. I misjudged the dose.
+Pokemon = STUNKY,31
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KOFFING,32
+    Ability = NEUTRALIZINGGAS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HAUNTER,33
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 231 Mirefen Gym - Puzzle Room 1
+#-------------------------------
+[BURGLAR,Finch]
+LoseText = I only scavenge what the ward throws out. Like me, now.
+Pokemon = SALANDIT,32
+    Ability = CORROSION
+    Nature = MODEST
+    IV = 8
+Pokemon = STUNKY,33
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ARIADOS,34
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BURGLAR,Finch,100]
+LoseText = I only scavenge what the ward throws out. Like me, now.
+Pokemon = SALANDIT,33
+    Ability = CORROSION
+    Nature = MODEST
+    IV = 20
+Pokemon = STUNKY,34
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ARIADOS,35
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BURGLAR,Finch,200]
+LoseText = I only scavenge what the ward throws out. Like me, now.
+Pokemon = SALANDIT,31
+    Ability = CORROSION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = STUNKY,32
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ARIADOS,33
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 232 Mirefen Gym - Puzzle Room 2
+#-------------------------------
+[SCIENTIST,Lorcan]
+LoseText = Mind the sludge. It's had a longer day than you.
+Pokemon = NIDORINA,32
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = NIDORINO,33
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = WEEPINBELL,34
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SCIENTIST,Lorcan,100]
+LoseText = Mind the sludge. It's had a longer day than you.
+Pokemon = NIDORINA,33
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = NIDORINO,34
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = WEEPINBELL,35
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SCIENTIST,Lorcan,200]
+LoseText = Mind the sludge. It's had a longer day than you.
+Pokemon = NIDORINA,31
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = NIDORINO,32
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = WEEPINBELL,33
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 232 Mirefen Gym - Puzzle Room 2
+#-------------------------------
+[BURGLAR,Mudge]
+LoseText = Corvin patched me up twice. Third time's on you.
+Pokemon = IMPIDIMP,32
+    Ability = PRANKSTER
+    Nature = MODEST
+    IV = 8
+Pokemon = INKAY,33
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MIGHTYENA,34
+    Ability = QUICKFEET
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BURGLAR,Mudge,100]
+LoseText = Corvin patched me up twice. Third time's on you.
+Pokemon = IMPIDIMP,33
+    Ability = PRANKSTER
+    Nature = MODEST
+    IV = 20
+Pokemon = INKAY,34
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MIGHTYENA,35
+    Ability = QUICKFEET
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BURGLAR,Mudge,200]
+LoseText = Corvin patched me up twice. Third time's on you.
+Pokemon = IMPIDIMP,31
+    Ability = PRANKSTER
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = INKAY,32
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MIGHTYENA,33
+    Ability = QUICKFEET
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 640 Leechman's Walk
+#-------------------------------
+[FISHERMAN,Gil]
+LoseText = Leeches for the ward, a copper a jar. You're bad for business.
+Pokemon = CLAUNCHER,33
+    Ability = MEGALAUNCHER
+    Nature = MODEST
+    IV = 8
+Pokemon = CLAMPERL,34
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = QWILFISH,35
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 8
+Pokemon = LANTURN,36
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[FISHERMAN,Gil,100]
+LoseText = Leeches for the ward, a copper a jar. You're bad for business.
+Pokemon = CLAUNCHER,34
+    Ability = MEGALAUNCHER
+    Nature = MODEST
+    IV = 20
+Pokemon = CLAMPERL,35
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = QWILFISH,36
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 20
+Pokemon = LANTURN,37
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[FISHERMAN,Gil,200]
+LoseText = Leeches for the ward, a copper a jar. You're bad for business.
+Pokemon = CLAUNCHER,32
+    Ability = MEGALAUNCHER
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CLAMPERL,33
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = QWILFISH,34
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = LANTURN,35
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 640 Leechman's Walk
+#-------------------------------
+[POKEMONRANGER_F,Fenella]
+LoseText = Stay on the boards. The fen keeps what it's given.
+Pokemon = QUILLADIN,33
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SERVINE,34
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CARNIVINE,35
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = VICTREEBEL,36
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_F,Fenella,100]
+LoseText = Stay on the boards. The fen keeps what it's given.
+Pokemon = QUILLADIN,34
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SERVINE,35
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CARNIVINE,36
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = VICTREEBEL,37
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_F,Fenella,200]
+LoseText = Stay on the boards. The fen keeps what it's given.
+Pokemon = QUILLADIN,32
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SERVINE,33
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CARNIVINE,34
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = VICTREEBEL,35
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 640 Leechman's Walk
+#-------------------------------
+[CUEBALL,Brakk]
+LoseText = Plateau folk don't come down here. Now I know why.
+Pokemon = CROAGUNK,33
+    Ability = ANTICIPATION
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PRIMEAPE,34
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 8
+Pokemon = CRAWDAUNT,35
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SKUNTANK,36
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CUEBALL,Brakk,100]
+LoseText = Plateau folk don't come down here. Now I know why.
+Pokemon = CROAGUNK,34
+    Ability = ANTICIPATION
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PRIMEAPE,35
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 20
+Pokemon = CRAWDAUNT,36
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SKUNTANK,37
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CUEBALL,Brakk,200]
+LoseText = Plateau folk don't come down here. Now I know why.
+Pokemon = CROAGUNK,32
+    Ability = ANTICIPATION
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PRIMEAPE,33
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = CRAWDAUNT,34
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SKUNTANK,35
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 640 Leechman's Walk
+#-------------------------------
+[BUGCATCHER,Midge]
+LoseText = They bite. Not hard enough, though.
+Pokemon = LOKIX,34
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 8
+Pokemon = SEVIPER,35
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SWALOT,36
+    Ability = LIQUIDOOZE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Midge,100]
+LoseText = They bite. Not hard enough, though.
+Pokemon = LOKIX,35
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 20
+Pokemon = SEVIPER,36
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SWALOT,37
+    Ability = LIQUIDOOZE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Midge,200]
+LoseText = They bite. Not hard enough, though.
+Pokemon = LOKIX,33
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SEVIPER,34
+    Ability = SHEDSKIN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SWALOT,35
+    Ability = LIQUIDOOZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 644 Miasma Caverns
+#-------------------------------
+[HIKER,Grubb]
+LoseText = Breathe through your sleeve. I should've battled through mine.
+Pokemon = GRIMER,35
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TRUBBISH,36
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GLIMMET,37
+    Ability = TOXICDEBRIS
+    Nature = MODEST
+    IV = 8
+Pokemon = NIDOQUEEN,38
+    Ability = RIVALRY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Grubb,100]
+LoseText = Breathe through your sleeve. I should've battled through mine.
+Pokemon = GRIMER,36
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TRUBBISH,37
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GLIMMET,38
+    Ability = TOXICDEBRIS
+    Nature = MODEST
+    IV = 20
+Pokemon = NIDOQUEEN,39
+    Ability = RIVALRY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Grubb,200]
+LoseText = Breathe through your sleeve. I should've battled through mine.
+Pokemon = GRIMER,34
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TRUBBISH,35
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GLIMMET,36
+    Ability = TOXICDEBRIS
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = NIDOQUEEN,37
+    Ability = RIVALRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 644 Miasma Caverns
+#-------------------------------
+[SCIENTIST,Vane]
+LoseText = Sample forty-one: my own defeat. Noted.
+Pokemon = MAREANIE,35
+    Ability = MERCILESS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ELGYEM,36
+    Ability = TELEPATHY
+    Nature = MODEST
+    IV = 8
+Pokemon = GRUMPIG,37
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 8
+Pokemon = GARBODOR,38
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SCIENTIST,Vane,100]
+LoseText = Sample forty-one: my own defeat. Noted.
+Pokemon = MAREANIE,36
+    Ability = MERCILESS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ELGYEM,37
+    Ability = TELEPATHY
+    Nature = MODEST
+    IV = 20
+Pokemon = GRUMPIG,38
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 20
+Pokemon = GARBODOR,39
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SCIENTIST,Vane,200]
+LoseText = Sample forty-one: my own defeat. Noted.
+Pokemon = MAREANIE,34
+    Ability = MERCILESS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ELGYEM,35
+    Ability = TELEPATHY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GRUMPIG,36
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GARBODOR,37
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 645 Miasma Caverns B1F
+#-------------------------------
+[BURGLAR,Soot]
+LoseText = Whatever Lumen pours down, somebody down here sells.
+Pokemon = MORPEKO,36
+    Ability = HUNGERSWITCH
+    Nature = JOLLY
+    IV = 8
+Pokemon = CACTURNE,37
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MALAMAR,38
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BURGLAR,Soot,100]
+LoseText = Whatever Lumen pours down, somebody down here sells.
+Pokemon = MORPEKO,37
+    Ability = HUNGERSWITCH
+    Nature = JOLLY
+    IV = 20
+Pokemon = CACTURNE,38
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MALAMAR,39
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BURGLAR,Soot,200]
+LoseText = Whatever Lumen pours down, somebody down here sells.
+Pokemon = MORPEKO,35
+    Ability = HUNGERSWITCH
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = CACTURNE,36
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MALAMAR,37
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 645 Miasma Caverns B1F
+#-------------------------------
+[POKEMANIAC,Quill]
+LoseText = It glows down here. So do they. So did you, just then.
+Pokemon = JANGMOO,35
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GOLBAT,36
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 8
+Pokemon = SCOLIPEDE,37
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 8
+Pokemon = MUK,38
+    Ability = STICKYHOLD
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMANIAC,Quill,100]
+LoseText = It glows down here. So do they. So did you, just then.
+Pokemon = JANGMOO,36
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GOLBAT,37
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 20
+Pokemon = SCOLIPEDE,38
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 20
+Pokemon = MUK,39
+    Ability = STICKYHOLD
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMANIAC,Quill,200]
+LoseText = It glows down here. So do they. So did you, just then.
+Pokemon = JANGMOO,34
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GOLBAT,35
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SCOLIPEDE,36
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MUK,37
+    Ability = STICKYHOLD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 648 The Weeping Fen
+#-------------------------------
+[CHANNELER,Lenore]
+LoseText = The fen weeps for them. I only listen.
+Pokemon = HONEDGE,36
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FRILLISH,37
+    Ability = WATERABSORB
+    Nature = MODEST
+    IV = 8
+Pokemon = DUSCLOPS,38
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CHANNELER,Lenore,100]
+LoseText = The fen weeps for them. I only listen.
+Pokemon = HONEDGE,37
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FRILLISH,38
+    Ability = WATERABSORB
+    Nature = MODEST
+    IV = 20
+Pokemon = DUSCLOPS,39
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CHANNELER,Lenore,200]
+LoseText = The fen weeps for them. I only listen.
+Pokemon = HONEDGE,35
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FRILLISH,36
+    Ability = WATERABSORB
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = DUSCLOPS,37
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 641 Lake Sallow
+#-------------------------------
+[SWIMMER_M,Dale]
+LoseText = Cold lake, warm welcome. Well. Cold lake.
+Pokemon = DUCKLETT,34
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SLOWPOKE,35
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = POLIWHIRL,36
+    Ability = DAMP
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[SWIMMER_M,Dale,100]
+LoseText = Cold lake, warm welcome. Well. Cold lake.
+Pokemon = DUCKLETT,35
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SLOWPOKE,36
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = POLIWHIRL,37
+    Ability = DAMP
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[SWIMMER_M,Dale,200]
+LoseText = Cold lake, warm welcome. Well. Cold lake.
+Pokemon = DUCKLETT,33
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SLOWPOKE,34
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = POLIWHIRL,35
+    Ability = DAMP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 641 Lake Sallow
+#-------------------------------
+[SWIMMER_F,Nerys]
+LoseText = You crossed faster than the ferry. Don't tell Madoc.
+Pokemon = AZUMARILL,34
+    Ability = HUGEPOWER
+    Nature = BOLD
+    IV = 8
+Pokemon = LUMINEON,35
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 8
+Pokemon = KINGLER,36
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SWIMMER_F,Nerys,100]
+LoseText = You crossed faster than the ferry. Don't tell Madoc.
+Pokemon = AZUMARILL,35
+    Ability = HUGEPOWER
+    Nature = BOLD
+    IV = 20
+Pokemon = LUMINEON,36
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 20
+Pokemon = KINGLER,37
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SWIMMER_F,Nerys,200]
+LoseText = You crossed faster than the ferry. Don't tell Madoc.
+Pokemon = AZUMARILL,33
+    Ability = HUGEPOWER
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = LUMINEON,34
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = KINGLER,35
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 641 Lake Sallow
+#-------------------------------
+[FISHERMAN,Pike]
+LoseText = Named for the fish. The fish has more wins.
+Pokemon = SEADRA,34
+    Ability = POISONPOINT
+    Nature = TIMID
+    IV = 8
+Pokemon = SEAKING,35
+    Ability = WATERVEIL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ARAQUANID,36
+    Ability = WATERBUBBLE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FISHERMAN,Pike,100]
+LoseText = Named for the fish. The fish has more wins.
+Pokemon = SEADRA,35
+    Ability = POISONPOINT
+    Nature = TIMID
+    IV = 20
+Pokemon = SEAKING,36
+    Ability = WATERVEIL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ARAQUANID,37
+    Ability = WATERBUBBLE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FISHERMAN,Pike,200]
+LoseText = Named for the fish. The fish has more wins.
+Pokemon = SEADRA,33
+    Ability = POISONPOINT
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = SEAKING,34
+    Ability = WATERVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ARAQUANID,35
+    Ability = WATERBUBBLE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 641 Lake Sallow
+#-------------------------------
+[SAILOR,Madoc]
+LoseText = East shore's Ashkaar. You can smell it from mid-lake.
+Pokemon = FROGADIER,33
+    Ability = TORRENT
+    Nature = TIMID
+    IV = 8
+Pokemon = QUAXWELL,34
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MASQUERAIN,35
+    Ability = INTIMIDATE
+    Nature = MODEST
+    IV = 8
+Pokemon = SWANNA,36
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[SAILOR,Madoc,100]
+LoseText = East shore's Ashkaar. You can smell it from mid-lake.
+Pokemon = FROGADIER,34
+    Ability = TORRENT
+    Nature = TIMID
+    IV = 20
+Pokemon = QUAXWELL,35
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MASQUERAIN,36
+    Ability = INTIMIDATE
+    Nature = MODEST
+    IV = 20
+Pokemon = SWANNA,37
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[SAILOR,Madoc,200]
+LoseText = East shore's Ashkaar. You can smell it from mid-lake.
+Pokemon = FROGADIER,32
+    Ability = TORRENT
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = QUAXWELL,33
+    Ability = TORRENT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MASQUERAIN,34
+    Ability = INTIMIDATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SWANNA,35
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 641 Lake Sallow
+#-------------------------------
+[TUBER_M,Finn]
+LoseText = I can swim to the island and back! I can't do this, though.
+Pokemon = FEEBAS,34
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ZANGOOSE,35
+    Ability = IMMUNITY
+    Nature = JOLLY
+    IV = 8
+Pokemon = BASCULIN,36
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[TUBER_M,Finn,100]
+LoseText = I can swim to the island and back! I can't do this, though.
+Pokemon = FEEBAS,35
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ZANGOOSE,36
+    Ability = IMMUNITY
+    Nature = JOLLY
+    IV = 20
+Pokemon = BASCULIN,37
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[TUBER_M,Finn,200]
+LoseText = I can swim to the island and back! I can't do this, though.
+Pokemon = FEEBAS,33
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ZANGOOSE,34
+    Ability = IMMUNITY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = BASCULIN,35
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 652 The Pyre Road
+#-------------------------------
+[TAMER,Kael]
+LoseText = Every pyre's a house's dead. Mine'll hear about this.
+Pokemon = VULPIX,33
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 8
+Pokemon = PANSEAR,34
+    Ability = GLUTTONY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BRAIXEN,35
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 8
+Pokemon = CROCALOR,36
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[TAMER,Kael,100]
+LoseText = Every pyre's a house's dead. Mine'll hear about this.
+Pokemon = VULPIX,34
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 20
+Pokemon = PANSEAR,35
+    Ability = GLUTTONY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BRAIXEN,36
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 20
+Pokemon = CROCALOR,37
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[TAMER,Kael,200]
+LoseText = Every pyre's a house's dead. Mine'll hear about this.
+Pokemon = VULPIX,32
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PANSEAR,33
+    Ability = GLUTTONY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BRAIXEN,34
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CROCALOR,35
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 652 The Pyre Road
+#-------------------------------
+[BURGLAR,Scorch]
+LoseText = Ash hides footprints. Doesn't hide a loss.
+Pokemon = FLETCHINDER,34
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CHARMELEON,35
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 8
+Pokemon = QUILAVA,36
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BURGLAR,Scorch,100]
+LoseText = Ash hides footprints. Doesn't hide a loss.
+Pokemon = FLETCHINDER,35
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CHARMELEON,36
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 20
+Pokemon = QUILAVA,37
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BURGLAR,Scorch,200]
+LoseText = Ash hides footprints. Doesn't hide a loss.
+Pokemon = FLETCHINDER,33
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CHARMELEON,34
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = QUILAVA,35
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 652 The Pyre Road
+#-------------------------------
+[COOLTRAINER_M,Varro]
+LoseText = The Caldera Gate's ahead. Brann's no gentler than I was.
+Pokemon = RABOOT,34
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 8
+Pokemon = TORRACAT,35
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 8
+Pokemon = CAMERUPT,36
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[COOLTRAINER_M,Varro,100]
+LoseText = The Caldera Gate's ahead. Brann's no gentler than I was.
+Pokemon = RABOOT,35
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 20
+Pokemon = TORRACAT,36
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 20
+Pokemon = CAMERUPT,37
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[COOLTRAINER_M,Varro,200]
+LoseText = The Caldera Gate's ahead. Brann's no gentler than I was.
+Pokemon = RABOOT,33
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = TORRACAT,34
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = CAMERUPT,35
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 652 The Pyre Road
+#-------------------------------
+[LASS,Asha]
+LoseText = I came to light a pyre for Gran. She'd have laughed at this.
+Pokemon = DARUMAKA,34
+    Ability = HUSTLE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAGBY,35
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LITLEO,36
+    Ability = RIVALRY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LASS,Asha,100]
+LoseText = I came to light a pyre for Gran. She'd have laughed at this.
+Pokemon = DARUMAKA,35
+    Ability = HUSTLE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAGBY,36
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LITLEO,37
+    Ability = RIVALRY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LASS,Asha,200]
+LoseText = I came to light a pyre for Gran. She'd have laughed at this.
+Pokemon = DARUMAKA,33
+    Ability = HUSTLE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAGBY,34
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LITLEO,35
+    Ability = RIVALRY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 658 Lantern Isle
+#-------------------------------
+[TUBER_F,Kiki]
+LoseText = The lanterns float out at night! I floated out just now.
+Pokemon = PRINPLUP,34
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 8
+Pokemon = PYUKUMUKU,35
+    Ability = INNARDSOUT
+    Nature = IMPISH
+    IV = 8
+Pokemon = DEWOTT,36
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[TUBER_F,Kiki,100]
+LoseText = The lanterns float out at night! I floated out just now.
+Pokemon = PRINPLUP,35
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 20
+Pokemon = PYUKUMUKU,36
+    Ability = INNARDSOUT
+    Nature = IMPISH
+    IV = 20
+Pokemon = DEWOTT,37
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[TUBER_F,Kiki,200]
+LoseText = The lanterns float out at night! I floated out just now.
+Pokemon = PRINPLUP,33
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PYUKUMUKU,34
+    Ability = INNARDSOUT
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = DEWOTT,35
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 658 Lantern Isle
+#-------------------------------
+[SWIMMER_F,Leilani]
+LoseText = Warm water makes me slow. That's my excuse.
+Pokemon = WISHIWASHI,33
+    Ability = SCHOOLING
+    Nature = MODEST
+    IV = 8
+Pokemon = WARTORTLE,34
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 8
+Pokemon = DRIZZILE,35
+    Ability = TORRENT
+    Nature = TIMID
+    IV = 8
+Pokemon = SHARPEDO,36
+    Ability = ROUGHSKIN
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[SWIMMER_F,Leilani,100]
+LoseText = Warm water makes me slow. That's my excuse.
+Pokemon = WISHIWASHI,34
+    Ability = SCHOOLING
+    Nature = MODEST
+    IV = 20
+Pokemon = WARTORTLE,35
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 20
+Pokemon = DRIZZILE,36
+    Ability = TORRENT
+    Nature = TIMID
+    IV = 20
+Pokemon = SHARPEDO,37
+    Ability = ROUGHSKIN
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[SWIMMER_F,Leilani,200]
+LoseText = Warm water makes me slow. That's my excuse.
+Pokemon = WISHIWASHI,32
+    Ability = SCHOOLING
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = WARTORTLE,33
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = DRIZZILE,34
+    Ability = TORRENT
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = SHARPEDO,35
+    Ability = ROUGHSKIN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 658 Lantern Isle
+#-------------------------------
+[BEAUTY,Noelani]
+LoseText = Island flowers, island pride. Both wilted.
+Pokemon = FOMANTIS,33
+    Ability = LEAFGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = STEENEE,34
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GROVYLE,35
+    Ability = OVERGROW
+    Nature = TIMID
+    IV = 8
+Pokemon = TROPIUS,36
+    Ability = SOLARPOWER
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BEAUTY,Noelani,100]
+LoseText = Island flowers, island pride. Both wilted.
+Pokemon = FOMANTIS,34
+    Ability = LEAFGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = STEENEE,35
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GROVYLE,36
+    Ability = OVERGROW
+    Nature = TIMID
+    IV = 20
+Pokemon = TROPIUS,37
+    Ability = SOLARPOWER
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BEAUTY,Noelani,200]
+LoseText = Island flowers, island pride. Both wilted.
+Pokemon = FOMANTIS,32
+    Ability = LEAFGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = STEENEE,33
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GROVYLE,34
+    Ability = OVERGROW
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = TROPIUS,35
+    Ability = SOLARPOWER
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 658 Lantern Isle
+#-------------------------------
+[BIRDKEEPER,Keoni]
+LoseText = They'll sulk in the palms till sundown.
+Pokemon = SWABLU,33
+    Ability = NATURALCURE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CORVISQUIRE,34
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MINIOR,35
+    Ability = SHIELDSDOWN
+    Nature = BOLD
+    IV = 8
+Pokemon = TOUCANNON,36
+    Ability = SKILLLINK
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BIRDKEEPER,Keoni,100]
+LoseText = They'll sulk in the palms till sundown.
+Pokemon = SWABLU,34
+    Ability = NATURALCURE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CORVISQUIRE,35
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MINIOR,36
+    Ability = SHIELDSDOWN
+    Nature = BOLD
+    IV = 20
+Pokemon = TOUCANNON,37
+    Ability = SKILLLINK
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BIRDKEEPER,Keoni,200]
+LoseText = They'll sulk in the palms till sundown.
+Pokemon = SWABLU,32
+    Ability = NATURALCURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CORVISQUIRE,33
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MINIOR,34
+    Ability = SHIELDSDOWN
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = TOUCANNON,35
+    Ability = SKILLLINK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 658 Lantern Isle
+#-------------------------------
+[FISHERMAN,Makoa]
+LoseText = Best fishing in Velmora and I still came up empty.
+Pokemon = MANTYKE,32
+    Ability = WATERABSORB
+    Nature = CALM
+    IV = 8
+Pokemon = CARVANHA,34
+    Ability = ROUGHSKIN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SEEL,35
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FISHERMAN,Makoa,100]
+LoseText = Best fishing in Velmora and I still came up empty.
+Pokemon = MANTYKE,33
+    Ability = WATERABSORB
+    Nature = CALM
+    IV = 20
+Pokemon = CARVANHA,35
+    Ability = ROUGHSKIN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SEEL,36
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FISHERMAN,Makoa,200]
+LoseText = Best fishing in Velmora and I still came up empty.
+Pokemon = MANTYKE,31
+    Ability = WATERABSORB
+    Nature = CALM
+    IV = 0
+    EV = 0
+Pokemon = CARVANHA,33
+    Ability = ROUGHSKIN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SEEL,34
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 254 Pyre Keep - Ancestor Crypts
+#-------------------------------
+[CHANNELER,Thessaly]
+LoseText = The Ashfall dead are proud. You've embarrassed several.
+Pokemon = SLUGMA,36
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = LITWICK,37
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 8
+Pokemon = TALONFLAME,38
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[CHANNELER,Thessaly,100]
+LoseText = The Ashfall dead are proud. You've embarrassed several.
+Pokemon = SLUGMA,37
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = LITWICK,38
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 20
+Pokemon = TALONFLAME,39
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[CHANNELER,Thessaly,200]
+LoseText = The Ashfall dead are proud. You've embarrassed several.
+Pokemon = SLUGMA,35
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = LITWICK,36
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = TALONFLAME,37
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 250 Cindervault Gym - Entrance
+#-------------------------------
+[CAMPER,Flint]
+LoseText = Kindler's job is to start the fire. You put me out.
+Pokemon = LITWICK,36
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 8
+Pokemon = SALAZZLE,37
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 8
+Pokemon = SCOVILLAIN,38
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CAMPER,Flint,100]
+LoseText = Kindler's job is to start the fire. You put me out.
+Pokemon = LITWICK,37
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 20
+Pokemon = SALAZZLE,38
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 20
+Pokemon = SCOVILLAIN,39
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CAMPER,Flint,200]
+LoseText = Kindler's job is to start the fire. You put me out.
+Pokemon = LITWICK,35
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SALAZZLE,36
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = SCOVILLAIN,37
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 251 Cindervault Gym - Puzzle Room 1
+#-------------------------------
+[ENGINEER,Garran]
+LoseText = Bellows up, bellows down. I'm winded either way.
+Pokemon = QUILAVA,36
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 8
+Pokemon = CARKOL,37
+    Ability = STEAMENGINE
+    Nature = BOLD
+    IV = 8
+Pokemon = PONYTA,38
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[ENGINEER,Garran,100]
+LoseText = Bellows up, bellows down. I'm winded either way.
+Pokemon = QUILAVA,37
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 20
+Pokemon = CARKOL,38
+    Ability = STEAMENGINE
+    Nature = BOLD
+    IV = 20
+Pokemon = PONYTA,39
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[ENGINEER,Garran,200]
+LoseText = Bellows up, bellows down. I'm winded either way.
+Pokemon = QUILAVA,35
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CARKOL,36
+    Ability = STEAMENGINE
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = PONYTA,37
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 251 Cindervault Gym - Puzzle Room 1
+#-------------------------------
+[BLACKBELT,Ivar]
+LoseText = I hold the tongs. I couldn't hold you.
+Pokemon = COMBUSKEN,36
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MONFERNO,37
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PIGNITE,38
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BLACKBELT,Ivar,100]
+LoseText = I hold the tongs. I couldn't hold you.
+Pokemon = COMBUSKEN,37
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MONFERNO,38
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PIGNITE,39
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BLACKBELT,Ivar,200]
+LoseText = I hold the tongs. I couldn't hold you.
+Pokemon = COMBUSKEN,35
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MONFERNO,36
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PIGNITE,37
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 252 Cindervault Gym - Puzzle Room 2
+#-------------------------------
+[ENGINEER,Oda]
+LoseText = The forge wants an hour to cool. So do I.
+Pokemon = MONFERNO,36
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CROCALOR,37
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 8
+Pokemon = PIGNITE,38
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ENGINEER,Oda,100]
+LoseText = The forge wants an hour to cool. So do I.
+Pokemon = MONFERNO,37
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CROCALOR,38
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 20
+Pokemon = PIGNITE,39
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ENGINEER,Oda,200]
+LoseText = The forge wants an hour to cool. So do I.
+Pokemon = MONFERNO,35
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CROCALOR,36
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PIGNITE,37
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 252 Cindervault Gym - Puzzle Room 2
+#-------------------------------
+[COOLTRAINER_M,Dain]
+LoseText = Brann doesn't talk much. He'll let the forge do it.
+Pokemon = NUMEL,36
+    Ability = SIMPLE
+    Nature = MODEST
+    IV = 8
+Pokemon = DARMANITAN,37
+    Ability = SHEERFORCE
+    Nature = JOLLY
+    IV = 8
+Pokemon = CINDERACE,38
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[COOLTRAINER_M,Dain,100]
+LoseText = Brann doesn't talk much. He'll let the forge do it.
+Pokemon = NUMEL,37
+    Ability = SIMPLE
+    Nature = MODEST
+    IV = 20
+Pokemon = DARMANITAN,38
+    Ability = SHEERFORCE
+    Nature = JOLLY
+    IV = 20
+Pokemon = CINDERACE,39
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[COOLTRAINER_M,Dain,200]
+LoseText = Brann doesn't talk much. He'll let the forge do it.
+Pokemon = NUMEL,35
+    Ability = SIMPLE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = DARMANITAN,36
+    Ability = SHEERFORCE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = CINDERACE,37
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 660 The Ashmarch
+#-------------------------------
+[HIKER,Tuff]
+LoseText = Ash to the ankles. Now up to the neck.
+Pokemon = SLUGMA,38
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = CHARCADET,39
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HOUNDOOM,40
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[HIKER,Tuff,100]
+LoseText = Ash to the ankles. Now up to the neck.
+Pokemon = SLUGMA,39
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = CHARCADET,40
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HOUNDOOM,41
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[HIKER,Tuff,200]
+LoseText = Ash to the ankles. Now up to the neck.
+Pokemon = SLUGMA,37
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CHARCADET,38
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HOUNDOOM,39
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 660 The Ashmarch
+#-------------------------------
+[CAMPER,Embry]
+LoseText = Soot-grass burns if you look at it wrong. I looked wrong.
+Pokemon = GROWLITHE,37
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SCOVILLAIN,38
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAGMAR,39
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 8
+Pokemon = ARMAROUGE,40
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[CAMPER,Embry,100]
+LoseText = Soot-grass burns if you look at it wrong. I looked wrong.
+Pokemon = GROWLITHE,38
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SCOVILLAIN,39
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAGMAR,40
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 20
+Pokemon = ARMAROUGE,41
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[CAMPER,Embry,200]
+LoseText = Soot-grass burns if you look at it wrong. I looked wrong.
+Pokemon = GROWLITHE,36
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SCOVILLAIN,37
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAGMAR,38
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = ARMAROUGE,39
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 660 The Ashmarch
+#-------------------------------
+[BIRDKEEPER,Vesna]
+LoseText = They ride the thermals. I ride the consequences.
+Pokemon = NOCTOWL,38
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 8
+Pokemon = SKARMORY,39
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TALONFLAME,40
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BIRDKEEPER,Vesna,100]
+LoseText = They ride the thermals. I ride the consequences.
+Pokemon = NOCTOWL,39
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 20
+Pokemon = SKARMORY,40
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TALONFLAME,41
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BIRDKEEPER,Vesna,200]
+LoseText = They ride the thermals. I ride the consequences.
+Pokemon = NOCTOWL,37
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SKARMORY,38
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TALONFLAME,39
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 673 The Wyrmtongue
+#-------------------------------
+[SAILOR,Marek]
+LoseText = Beacon's lit for the Warfort, not for me.
+Pokemon = KABUTO,38
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = OMANYTE,39
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = WAILMER,40
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SAILOR,Marek,100]
+LoseText = Beacon's lit for the Warfort, not for me.
+Pokemon = KABUTO,39
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = OMANYTE,40
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = WAILMER,41
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SAILOR,Marek,200]
+LoseText = Beacon's lit for the Warfort, not for me.
+Pokemon = KABUTO,37
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = OMANYTE,38
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = WAILMER,39
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 673 The Wyrmtongue
+#-------------------------------
+[FISHERMAN,Ostap]
+LoseText = The sea's warm off the spit. The fish come pre-cooked.
+Pokemon = FINIZEN,38
+    Ability = WATERVEIL
+    Nature = ADAMANT
+    IV = 8
+Pokemon = WAILMER,39
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SWANNA,40
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[FISHERMAN,Ostap,100]
+LoseText = The sea's warm off the spit. The fish come pre-cooked.
+Pokemon = FINIZEN,39
+    Ability = WATERVEIL
+    Nature = ADAMANT
+    IV = 20
+Pokemon = WAILMER,40
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SWANNA,41
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[FISHERMAN,Ostap,200]
+LoseText = The sea's warm off the spit. The fish come pre-cooked.
+Pokemon = FINIZEN,37
+    Ability = WATERVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = WAILMER,38
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SWANNA,39
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 673 The Wyrmtongue
+#-------------------------------
+[COOLTRAINER_F,Ilka]
+LoseText = The legions drill here at dawn. I thought I was ready for them.
+Pokemon = GOOMY,38
+    Ability = HYDRATION
+    Nature = MODEST
+    IV = 8
+Pokemon = FRAXURE,39
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GABITE,40
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[COOLTRAINER_F,Ilka,100]
+LoseText = The legions drill here at dawn. I thought I was ready for them.
+Pokemon = GOOMY,39
+    Ability = HYDRATION
+    Nature = MODEST
+    IV = 20
+Pokemon = FRAXURE,40
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GABITE,41
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[COOLTRAINER_F,Ilka,200]
+LoseText = The legions drill here at dawn. I thought I was ready for them.
+Pokemon = GOOMY,37
+    Ability = HYDRATION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = FRAXURE,38
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GABITE,39
+    Ability = SANDVEIL
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 662 The Cinderglass Barrens
+#-------------------------------
+[RUINMANIAC,Varrick]
+LoseText = A glass-storm scours you clean. So do you.
+Pokemon = SOLROCK,38
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GARGANACL,39
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HIPPOWDON,40
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Varrick,100]
+LoseText = A glass-storm scours you clean. So do you.
+Pokemon = SOLROCK,39
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GARGANACL,40
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HIPPOWDON,41
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Varrick,200]
+LoseText = A glass-storm scours you clean. So do you.
+Pokemon = SOLROCK,37
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GARGANACL,38
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HIPPOWDON,39
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 662 The Cinderglass Barrens
+#-------------------------------
+[BIKER,Slag]
+LoseText = Obsidian shreds a tyre in a mile. I walked the rest.
+Pokemon = KROKOROK,38
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CLODSIRE,39
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = NIDOKING,40
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BIKER,Slag,100]
+LoseText = Obsidian shreds a tyre in a mile. I walked the rest.
+Pokemon = KROKOROK,39
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CLODSIRE,40
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = NIDOKING,41
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BIKER,Slag,200]
+LoseText = Obsidian shreds a tyre in a mile. I walked the rest.
+Pokemon = KROKOROK,37
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CLODSIRE,38
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = NIDOKING,39
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 662 The Cinderglass Barrens
+#-------------------------------
+[POKEMANIAC,Gideon]
+LoseText = Something big sleeps under the black dunes. Not me. I'm wide awake now.
+Pokemon = AXEW,37
+    Ability = RIVALRY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = VIBRAVA,38
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TYRUNT,39
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DIPPLIN,40
+    Ability = GLUTTONY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[POKEMANIAC,Gideon,100]
+LoseText = Something big sleeps under the black dunes. Not me. I'm wide awake now.
+Pokemon = AXEW,38
+    Ability = RIVALRY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = VIBRAVA,39
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TYRUNT,40
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DIPPLIN,41
+    Ability = GLUTTONY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[POKEMANIAC,Gideon,200]
+LoseText = Something big sleeps under the black dunes. Not me. I'm wide awake now.
+Pokemon = AXEW,36
+    Ability = RIVALRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = VIBRAVA,37
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TYRUNT,38
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DIPPLIN,39
+    Ability = GLUTTONY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 663 The Petrified Ashwood
+#-------------------------------
+[POKEMONRANGER_M,Alaric]
+LoseText = Half these trees are stone. One of them isn't a tree.
+Pokemon = LUNATONE,38
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 8
+Pokemon = CRADILY,40
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KABUTOPS,40
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_M,Alaric,100]
+LoseText = Half these trees are stone. One of them isn't a tree.
+Pokemon = LUNATONE,39
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 20
+Pokemon = CRADILY,41
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KABUTOPS,41
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_M,Alaric,200]
+LoseText = Half these trees are stone. One of them isn't a tree.
+Pokemon = LUNATONE,37
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CRADILY,39
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KABUTOPS,39
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 663 The Petrified Ashwood
+#-------------------------------
+[HIKER,Petros]
+LoseText = I leaned on a trunk and it walked off.
+Pokemon = RHYHORN,37
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = AMAURA,38
+    Ability = REFRIGERATE
+    Nature = MODEST
+    IV = 8
+Pokemon = CARRACOSTA,39
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = OMASTAR,40
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[HIKER,Petros,100]
+LoseText = I leaned on a trunk and it walked off.
+Pokemon = RHYHORN,38
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = AMAURA,39
+    Ability = REFRIGERATE
+    Nature = MODEST
+    IV = 20
+Pokemon = CARRACOSTA,40
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = OMASTAR,41
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[HIKER,Petros,200]
+LoseText = I leaned on a trunk and it walked off.
+Pokemon = RHYHORN,36
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = AMAURA,37
+    Ability = REFRIGERATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CARRACOSTA,38
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = OMASTAR,39
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 663 The Petrified Ashwood
+#-------------------------------
+[PSYCHIC_F,Sybil]
+LoseText = The forest remembers being green. I remember winning.
+Pokemon = DUOSION,37
+    Ability = MAGICGUARD
+    Nature = MODEST
+    IV = 8
+Pokemon = HATTREM,38
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 8
+Pokemon = GOTHORITA,39
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 8
+Pokemon = CHIMECHO,40
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[PSYCHIC_F,Sybil,100]
+LoseText = The forest remembers being green. I remember winning.
+Pokemon = DUOSION,38
+    Ability = MAGICGUARD
+    Nature = MODEST
+    IV = 20
+Pokemon = HATTREM,39
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 20
+Pokemon = GOTHORITA,40
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 20
+Pokemon = CHIMECHO,41
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[PSYCHIC_F,Sybil,200]
+LoseText = The forest remembers being green. I remember winning.
+Pokemon = DUOSION,36
+    Ability = MAGICGUARD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = HATTREM,37
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GOTHORITA,38
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CHIMECHO,39
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 664 The Cinderhorn 1F
+#-------------------------------
+[BLACKBELT,Ragnar]
+LoseText = I punch basalt to toughen up. Basalt's kinder.
+Pokemon = EMBOAR,40
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BLAZIKEN,41
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = INFERNAPE,42
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BLACKBELT,Ragnar,100]
+LoseText = I punch basalt to toughen up. Basalt's kinder.
+Pokemon = EMBOAR,41
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BLAZIKEN,42
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = INFERNAPE,43
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BLACKBELT,Ragnar,200]
+LoseText = I punch basalt to toughen up. Basalt's kinder.
+Pokemon = EMBOAR,39
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BLAZIKEN,40
+    Ability = BLAZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = INFERNAPE,41
+    Ability = BLAZE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 664 The Cinderhorn 1F
+#-------------------------------
+[HIKER,Magda]
+LoseText = Mind the lava tubes. They don't mind you.
+Pokemon = LAIRON,40
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAGCARGO,41
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = GOLEM,42
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Magda,100]
+LoseText = Mind the lava tubes. They don't mind you.
+Pokemon = LAIRON,41
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAGCARGO,42
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = GOLEM,43
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Magda,200]
+LoseText = Mind the lava tubes. They don't mind you.
+Pokemon = LAIRON,39
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAGCARGO,40
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GOLEM,41
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 665 The Cinderhorn 2F
+#-------------------------------
+[SUPERNERD,Wendel]
+LoseText = The tap's reading high. So was my confidence.
+Pokemon = PONYTA,40
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 8
+Pokemon = HEATMOR,41
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 8
+Pokemon = CERULEDGE,42
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[SUPERNERD,Wendel,100]
+LoseText = The tap's reading high. So was my confidence.
+Pokemon = PONYTA,41
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 20
+Pokemon = HEATMOR,42
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 20
+Pokemon = CERULEDGE,43
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[SUPERNERD,Wendel,200]
+LoseText = The tap's reading high. So was my confidence.
+Pokemon = PONYTA,39
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = HEATMOR,40
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CERULEDGE,41
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 666 The Cinderhorn Caldera
+#-------------------------------
+[COOLTRAINER_M,Dorn]
+LoseText = Top of the Cinderhorn. Nowhere to go but down.
+Pokemon = SALAZZLE,40
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 8
+Pokemon = SIMISEAR,41
+    Ability = GLUTTONY
+    Nature = JOLLY
+    IV = 8
+Pokemon = MAGMORTAR,42
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[COOLTRAINER_M,Dorn,100]
+LoseText = Top of the Cinderhorn. Nowhere to go but down.
+Pokemon = SALAZZLE,41
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 20
+Pokemon = SIMISEAR,42
+    Ability = GLUTTONY
+    Nature = JOLLY
+    IV = 20
+Pokemon = MAGMORTAR,43
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[COOLTRAINER_M,Dorn,200]
+LoseText = Top of the Cinderhorn. Nowhere to go but down.
+Pokemon = SALAZZLE,39
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = SIMISEAR,40
+    Ability = GLUTTONY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MAGMORTAR,41
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 668 Emberfall
+#-------------------------------
+[CHANNELER,Isaura]
+LoseText = The fire's cold here. Touch it. No, don't.
+Pokemon = DREEPY,40
+    Ability = CLEARBODY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LAMPENT,41
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 8
+Pokemon = TURTONATOR,42
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[CHANNELER,Isaura,100]
+LoseText = The fire's cold here. Touch it. No, don't.
+Pokemon = DREEPY,41
+    Ability = CLEARBODY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LAMPENT,42
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 20
+Pokemon = TURTONATOR,43
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[CHANNELER,Isaura,200]
+LoseText = The fire's cold here. Touch it. No, don't.
+Pokemon = DREEPY,39
+    Ability = CLEARBODY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LAMPENT,40
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = TURTONATOR,41
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 661 The Ironway
+#-------------------------------
+[HIKER,Bruna]
+LoseText = Ore goes down, miners go up. I'm going home.
+Pokemon = ANORITH,38
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LILEEP,39
+    Ability = SUCTIONCUPS
+    Nature = CALM
+    IV = 8
+Pokemon = BASTIODON,40
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[HIKER,Bruna,100]
+LoseText = Ore goes down, miners go up. I'm going home.
+Pokemon = ANORITH,39
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LILEEP,40
+    Ability = SUCTIONCUPS
+    Nature = CALM
+    IV = 20
+Pokemon = BASTIODON,41
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[HIKER,Bruna,200]
+LoseText = Ore goes down, miners go up. I'm going home.
+Pokemon = ANORITH,37
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LILEEP,38
+    Ability = SUCTIONCUPS
+    Nature = CALM
+    IV = 0
+    EV = 0
+Pokemon = BASTIODON,39
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 661 The Ironway
+#-------------------------------
+[ENGINEER,Jory]
+LoseText = Winding gear's sound. My nerve, less so.
+Pokemon = KLINK,37
+    Ability = MINUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FERROSEED,38
+    Ability = IRONBARBS
+    Nature = IMPISH
+    IV = 8
+Pokemon = PINCURCHIN,39
+    Ability = LIGHTNINGROD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TOGEDEMARU,40
+    Ability = IRONBARBS
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[ENGINEER,Jory,100]
+LoseText = Winding gear's sound. My nerve, less so.
+Pokemon = KLINK,38
+    Ability = MINUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FERROSEED,39
+    Ability = IRONBARBS
+    Nature = IMPISH
+    IV = 20
+Pokemon = PINCURCHIN,40
+    Ability = LIGHTNINGROD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TOGEDEMARU,41
+    Ability = IRONBARBS
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[ENGINEER,Jory,200]
+LoseText = Winding gear's sound. My nerve, less so.
+Pokemon = KLINK,36
+    Ability = MINUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FERROSEED,37
+    Ability = IRONBARBS
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = PINCURCHIN,38
+    Ability = LIGHTNINGROD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TOGEDEMARU,39
+    Ability = IRONBARBS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 661 The Ironway
+#-------------------------------
+[CRUSHGIRL,Kerra]
+LoseText = The Pit's that way. They hit harder than me. Barely.
+Pokemon = SCRAGGY,38
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SAWK,39
+    Ability = STURDY
+    Nature = JOLLY
+    IV = 8
+Pokemon = THROH,40
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CRUSHGIRL,Kerra,100]
+LoseText = The Pit's that way. They hit harder than me. Barely.
+Pokemon = SCRAGGY,39
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SAWK,40
+    Ability = STURDY
+    Nature = JOLLY
+    IV = 20
+Pokemon = THROH,41
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CRUSHGIRL,Kerra,200]
+LoseText = The Pit's that way. They hit harder than me. Barely.
+Pokemon = SCRAGGY,37
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SAWK,38
+    Ability = STURDY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = THROH,39
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 672 The Long Drop
+#-------------------------------
+[BURGLAR,Latch]
+LoseText = The cage only goes down. Like my luck.
+Pokemon = VAROOM,38
+    Ability = OVERCOAT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TINKATUFF,39
+    Ability = OWNTEMPO
+    Nature = CAREFUL
+    IV = 8
+Pokemon = DRAPION,40
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BURGLAR,Latch,100]
+LoseText = The cage only goes down. Like my luck.
+Pokemon = VAROOM,39
+    Ability = OVERCOAT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TINKATUFF,40
+    Ability = OWNTEMPO
+    Nature = CAREFUL
+    IV = 20
+Pokemon = DRAPION,41
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BURGLAR,Latch,200]
+LoseText = The cage only goes down. Like my luck.
+Pokemon = VAROOM,37
+    Ability = OVERCOAT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TINKATUFF,38
+    Ability = OWNTEMPO
+    Nature = CAREFUL
+    IV = 0
+    EV = 0
+Pokemon = DRAPION,39
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 672 The Long Drop
+#-------------------------------
+[CUEBALL,Dregs]
+LoseText = Nobody takes the lift for the view.
+Pokemon = MEDITITE,38
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SCRAGGY,39
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TOXICROAK,40
+    Ability = DRYSKIN
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[CUEBALL,Dregs,100]
+LoseText = Nobody takes the lift for the view.
+Pokemon = MEDITITE,39
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SCRAGGY,40
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TOXICROAK,41
+    Ability = DRYSKIN
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[CUEBALL,Dregs,200]
+LoseText = Nobody takes the lift for the view.
+Pokemon = MEDITITE,37
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SCRAGGY,38
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TOXICROAK,39
+    Ability = DRYSKIN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 672 The Long Drop
+#-------------------------------
+[GAMBLER,Marlow]
+LoseText = I had odds on myself. Long ones, it turns out.
+Pokemon = LOUDRED,38
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ABSOL,39
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KROOKODILE,40
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[GAMBLER,Marlow,100]
+LoseText = I had odds on myself. Long ones, it turns out.
+Pokemon = LOUDRED,39
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ABSOL,40
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KROOKODILE,41
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[GAMBLER,Marlow,200]
+LoseText = I had odds on myself. Long ones, it turns out.
+Pokemon = LOUDRED,37
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ABSOL,38
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KROOKODILE,39
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 263 The Iron Pit
+#-------------------------------
+[BLACKBELT,Dunmore]
+LoseText = Pit rules. You stood, I didn't.
+Pokemon = MACHOKE,39
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MEDICHAM,39
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HARIYAMA,40
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BLACKBELT,Dunmore,100]
+LoseText = Pit rules. You stood, I didn't.
+Pokemon = MACHOKE,40
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MEDICHAM,40
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HARIYAMA,41
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BLACKBELT,Dunmore,200]
+LoseText = Pit rules. You stood, I didn't.
+Pokemon = MACHOKE,38
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MEDICHAM,38
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HARIYAMA,39
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 263 The Iron Pit
+#-------------------------------
+[CRUSHGIRL,Ysa]
+LoseText = Chalk your hands next time. Oh. You did.
+Pokemon = PANCHAM,40
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MIENFOO,40
+    Ability = REGENERATOR
+    Nature = ADAMANT
+    IV = 8
+Pokemon = THROH,40
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CRUSHGIRL,Ysa,100]
+LoseText = Chalk your hands next time. Oh. You did.
+Pokemon = PANCHAM,41
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MIENFOO,41
+    Ability = REGENERATOR
+    Nature = ADAMANT
+    IV = 20
+Pokemon = THROH,41
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CRUSHGIRL,Ysa,200]
+LoseText = Chalk your hands next time. Oh. You did.
+Pokemon = PANCHAM,39
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MIENFOO,39
+    Ability = REGENERATOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = THROH,39
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 263 The Iron Pit
+#-------------------------------
+[BLACKBELT,Gristle]
+LoseText = The old style still works. On the old.
+Pokemon = HITMONCHAN,41
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HITMONLEE,41
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 8
+Pokemon = SAWK,41
+    Ability = STURDY
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BLACKBELT,Gristle,100]
+LoseText = The old style still works. On the old.
+Pokemon = HITMONCHAN,42
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HITMONLEE,42
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 20
+Pokemon = SAWK,42
+    Ability = STURDY
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BLACKBELT,Gristle,200]
+LoseText = The old style still works. On the old.
+Pokemon = HITMONCHAN,40
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HITMONLEE,40
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SAWK,40
+    Ability = STURDY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 270 Ironreach Gym - Entrance
+#-------------------------------
+[BLACKBELT,Goro]
+LoseText = A fist is a promise. Mine broke.
+Pokemon = SCRAFTY,40
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PAWMOT,41
+    Ability = VOLTABSORB
+    Nature = JOLLY
+    IV = 8
+Pokemon = PANGORO,42
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BLACKBELT,Goro,100]
+LoseText = A fist is a promise. Mine broke.
+Pokemon = SCRAFTY,41
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PAWMOT,42
+    Ability = VOLTABSORB
+    Nature = JOLLY
+    IV = 20
+Pokemon = PANGORO,43
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BLACKBELT,Goro,200]
+LoseText = A fist is a promise. Mine broke.
+Pokemon = SCRAFTY,39
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PAWMOT,40
+    Ability = VOLTABSORB
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = PANGORO,41
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 271 Ironreach Gym - Puzzle Room 1
+#-------------------------------
+[CRUSHGIRL,Mika]
+LoseText = You stepped where I stepped. Then past me.
+Pokemon = HAKAMOO,40
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HITMONTOP,41
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GRAPPLOCT,42
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CRUSHGIRL,Mika,100]
+LoseText = You stepped where I stepped. Then past me.
+Pokemon = HAKAMOO,41
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HITMONTOP,42
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GRAPPLOCT,43
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CRUSHGIRL,Mika,200]
+LoseText = You stepped where I stepped. Then past me.
+Pokemon = HAKAMOO,39
+    Ability = SOUNDPROOF
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HITMONTOP,40
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GRAPPLOCT,41
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 271 Ironreach Gym - Puzzle Room 1
+#-------------------------------
+[BLACKBELT,Hideo]
+LoseText = The sand of the Pit keeps every footprint. Yours are over mine.
+Pokemon = HITMONLEE,40
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 8
+Pokemon = PASSIMIAN,41
+    Ability = RECEIVER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BEWEAR,42
+    Ability = FLUFFY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BLACKBELT,Hideo,100]
+LoseText = The sand of the Pit keeps every footprint. Yours are over mine.
+Pokemon = HITMONLEE,41
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 20
+Pokemon = PASSIMIAN,42
+    Ability = RECEIVER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BEWEAR,43
+    Ability = FLUFFY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BLACKBELT,Hideo,200]
+LoseText = The sand of the Pit keeps every footprint. Yours are over mine.
+Pokemon = HITMONLEE,39
+    Ability = RECKLESS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = PASSIMIAN,40
+    Ability = RECEIVER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BEWEAR,41
+    Ability = FLUFFY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 272 Ironreach Gym - Puzzle Room 2
+#-------------------------------
+[CRUSHGIRL,Aiko]
+LoseText = Kaito says losing is a lesson. I'm very educated.
+Pokemon = MORGREM,40
+    Ability = FRISK
+    Nature = MODEST
+    IV = 8
+Pokemon = HITMONCHAN,41
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PANGORO,42
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CRUSHGIRL,Aiko,100]
+LoseText = Kaito says losing is a lesson. I'm very educated.
+Pokemon = MORGREM,41
+    Ability = FRISK
+    Nature = MODEST
+    IV = 20
+Pokemon = HITMONCHAN,42
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PANGORO,43
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CRUSHGIRL,Aiko,200]
+LoseText = Kaito says losing is a lesson. I'm very educated.
+Pokemon = MORGREM,39
+    Ability = FRISK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = HITMONCHAN,40
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PANGORO,41
+    Ability = MOLDBREAKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 272 Ironreach Gym - Puzzle Room 2 (double battle)
+#-------------------------------
+[CRUSHKIN,Jin & Rei]
+LoseText = Jin: Together! Rei: We lost together, yes.
+Pokemon = HARIYAMA,40
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CRABOMINABLE,41
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PAWMOT,42
+    Ability = VOLTABSORB
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[CRUSHKIN,Jin & Rei,100]
+LoseText = Jin: Together! Rei: We lost together, yes.
+Pokemon = HARIYAMA,41
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CRABOMINABLE,42
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PAWMOT,43
+    Ability = VOLTABSORB
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[CRUSHKIN,Jin & Rei,200]
+LoseText = Jin: Together! Rei: We lost together, yes.
+Pokemon = HARIYAMA,39
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CRABOMINABLE,40
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PAWMOT,41
+    Ability = VOLTABSORB
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 273 Ironreach Gym - Puzzle Room 3
+#-------------------------------
+[CUEBALL,Tetsu]
+LoseText = Pit Brawler. Was. Give me a minute.
+Pokemon = MORGREM,40
+    Ability = FRISK
+    Nature = MODEST
+    IV = 8
+Pokemon = MEDICHAM,41
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HITMONTOP,42
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CUEBALL,Tetsu,100]
+LoseText = Pit Brawler. Was. Give me a minute.
+Pokemon = MORGREM,41
+    Ability = FRISK
+    Nature = MODEST
+    IV = 20
+Pokemon = MEDICHAM,42
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HITMONTOP,43
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CUEBALL,Tetsu,200]
+LoseText = Pit Brawler. Was. Give me a minute.
+Pokemon = MORGREM,39
+    Ability = FRISK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = MEDICHAM,40
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HITMONTOP,41
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
 #===============================================================================
 # VILLAIN ADMINS
 #===============================================================================
