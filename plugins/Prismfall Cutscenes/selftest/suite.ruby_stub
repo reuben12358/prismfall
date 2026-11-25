@@ -758,6 +758,81 @@ $game_player = old_player
 $opt[:assets] = false
 check "expressive lines leave nothing behind", $live == before && !X.active?, [$live, before].inspect
 
+section "chapter opening cards (020)"
+K = Prismfall::ChapterCards
+check "ids: numbers, keys, names, slugs", K.resolve_key(5) == :CH05 && K.resolve_key(:PROLOGUE) == :CH00 && K.resolve_key("ch05_ten_years_of_light") == :CH05 &&
+      K.resolve_key(:fallmorn) == :CH22 && K.resolve_key("ruin route") == :CH23 && K.resolve_key(99).nil? && K.resolve_key(:NOPE).nil?
+check "V102 -> card: 0-21, post-game 23, none for the epilogue", K.key_for_chapter(0) == :CH00 && K.key_for_chapter(21) == :CH21 && K.key_for_chapter(22).nil? &&
+      K.key_for_chapter(23) == :CH22 && K.key_for_chapter(nil).nil?
+check "24 cards, each with the fields the player reads", K::CHAPTERS.length == 24 && K::CHAPTERS.values.all? { |c| c[:slug] && c[:num] && c[:title] && c[:act] && c[:location] && c[:cam].length == 6 && K::ParticleEmitter::COUNTS[c[:particle]] }
+$opt[:assets] = true
+missing = K::CHAPTERS.values.reject { |c| C::Gfx.resolve(K::ART_FOLDER + c[:slug]) }.map { |c| c[:slug] }
+check "every card has its painting", missing.empty?, missing.inspect
+$audio = []
+r = run_scene(proc { K.play(:CH04) })
+check "a card plays for lead + 6 s + lead and leaves nothing behind", r[:ok] == true && r[:leaks].empty? && r[:seconds].between?(6.5, 6.8), r.inspect
+check "its chime is the installed SE, once", $audio.count { |a| a[0] == :se && a[1] == K::CHIME_SE } == 1 && $audio.none? { |a| a[0] == :me }, $audio.inspect
+C.photosensitive = true
+r = run_scene(proc { K.play(:CH16, duration: 3.0) })
+C.photosensitive = false
+check "photosensitive mode: plays, shorter duration honoured", r[:ok] == true && r[:leaks].empty? && r[:seconds].between?(3.5, 3.8), r.inspect
+$input_trigger = proc { |b| b == Input::USE }
+r = run_scene(proc { K.play(:CH23) })
+r2 = run_scene(proc { K.play(:CH23, skippable: false) })
+$input_trigger = nil
+check "USE skips after 1.5 s (a short fade, not a cut)", r[:ok] == true && r[:leaks].empty? && r[:seconds].between?(2.4, 2.8), r.inspect
+check "skippable: false plays through; the Ruin card has its own chime", r2[:seconds].between?(6.5, 6.8) && $audio.any? { |a| a[1] == K::RUIN_CHIME_SE }, [r2, $audio].inspect
+$opt[:assets] = false
+r = run_scene(proc { K.play(:CH01, duration: 2.5) })
+check "no painting on disk: a plain backdrop, still no crash or leak", r[:ok] == true && r[:leaks].empty?, r.inspect
+check "unknown chapter is a logged no-op", K.play(:CH99) == false
+K.seen.clear
+$msg_frames = nil
+n = $stats[:frames]
+a = pf_chapter_card(3, duration: 2.5)
+b = pf_chapter_card(3, duration: 2.5)
+f1 = $stats[:frames] - n
+c = pf_chapter_card(3, force: true, duration: 2.5)
+check "pf_chapter_card: once a save, again with force:", a == true && b == false && c == true && K.seen == [:CH03] && f1.between?(100, 140), [a, b, c, K.seen, f1].inspect
+GameTempStub = Struct.new(:in_battle, :message_window_showing, :in_menu, :player_transferring)
+old_temp = $game_temp
+old_scene2 = $scene
+old_plan = ENV.delete("DEMO_PLAN")
+$game_temp = GameTempStub.new(false, false, false, false)
+$scene = Scene_Map.new
+$interp_running = true
+n = $stats[:frames]
+K.chapter_changed(7)
+played = $stats[:frames] - n
+K.chapter_changed(7)
+check "V102 set by a map event: the card plays there, once", played > 200 && K.seen.include?(:CH07) && K.pending.nil? && $stats[:frames] - n == played, [played, K.seen].inspect
+$game_temp.message_window_showing = true
+K.chapter_changed(8)
+check "set while a message is up: it waits", K.pending == :CH08 && !K.seen.include?(:CH08)
+K.update_pending
+$game_temp.message_window_showing = false
+K.update_pending
+check "...and while an event is still running", K.pending == :CH08
+$interp_running = false
+n = $stats[:frames]
+K.update_pending
+check "...then plays when the player is free on the map", K.pending.nil? && K.seen.include?(:CH08) && $stats[:frames] - n > 200
+K.chapter_changed(22)
+check "the epilogue (V102 = 22) has no card", K.pending.nil? && K.seen.length == 3, K.seen.inspect
+ENV["DEMO_PLAN"] = "vault"
+K.chapter_changed(9)
+check "capture harness: no automatic card", K.pending.nil? && !K.seen.include?(:CH09) && !K.auto?
+ENV.delete("DEMO_PLAN")
+K.auto = false
+K.chapter_changed(9)
+check "ChapterCards.auto = false", K.pending.nil? && !K.seen.include?(:CH09)
+K.auto = nil
+ENV["DEMO_PLAN"] = old_plan if old_plan
+$game_temp = old_temp
+$scene = old_scene2
+K.seen.clear
+check "cards leave nothing behind", $live == before, [$live, before].inspect
+
 section "debug menu"
 h = MenuHandlers::HANDLERS[:debug_menu] || {}
 ids = [:prismfall_cutscenes_menu, :prismfall_cutscenes_war, :prismfall_cutscenes_war_demo, :prismfall_cutscenes_highlight,
