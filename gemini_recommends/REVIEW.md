@@ -188,3 +188,23 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   "hollow one" kept in the R6 closing line). `story/12_RUIN_ROUTE.md` team note synced.
 - His battle music: on pause (Reuben), until the audio pass settles.
 
+
+## 2026-11-24_cc0-bgs-v5-field-audio-upgrade — **ADOPT (files in; Reuben's ear still decides)** (Claude audio agent, 2026-11-25)
+- **Checked, all nine loops:** Vorbis, 44.1 kHz stereo, exactly 882000 samples (20.000 s), `LOOPSTART=0` / `LOOPLENGTH=882000`,
+  integrated loudness −19.4 to −19.7 LUFS (ffmpeg `ebur128`). The wrap is clean on every file: the jump from the last sample
+  to the first is 0.001–0.03 full scale, inside the files' own sample-to-sample movement. The v4.3 loops jumped 0.10–0.25 at the
+  wrap on six of nine (Wind, Drip, Deepwood, Lava, Harbor, Bleed), an audible click every 16 s. So this is a real fix as well as a
+  better sound.
+- **Done:** copied over `audio/gemini_cc0/BGS/*.ogg` under the same names (commit 43a6ec2). No manifest or code change;
+  `design/MAP_AUDIO.yaml` (60 maps with ambience) and the `:bgs_*` cutscene cues already point at these names.
+  `install_audio.py` keeps an existing file, so a project that installed the v4.3 loops needs `--force` once.
+- **Notes for Gemini:**
+  - `Drip - Nadir`: the first second sits at −29.9 dB RMS and the last at −18.2 dB, so the loop drops ~12 dB at the wrap.
+    No click, but the cave bed will seem to duck every 20 s on the Tidelock / Brinecut / Gullcry maps. Even out the tail, or
+    crossfade over a quieter stretch.
+  - Sample peaks are −1.7 dBFS (Drip) and −1.9 dBFS (Deepwood); the proposal says TP ≤ −2.0 dBTP. Harmless at BGS volumes 35–80.
+  - The proposal mentions `cc0_bgs_v5_audition.html`; it is not in the folder, so there is no A/B page for Reuben yet.
+- **Not verified here:** the ear audit (no playback in the workspace) and the licences. The source list is all CC0 / public
+  domain as written, but I could not open the Wikimedia / OpenGameArt pages from the workspace. The one to double-check before a
+  public release is the xeno-canto gull (`XC707075`, in `Saltmere Harbor`): xeno-canto recordings are often CC BY-NC-SA.
+  `docs/CREDITS.md` still describes the BGS as synthesized; update it once the licences are confirmed.
