@@ -101,4 +101,5 @@
 *Running note so the work can be picked up. Source of every block: `tools/trainer_gen/gen.py`, the section "CH16-CH21 STORY FIGHTS, THE GROUNDS LADDER AND THE WARDEN'S GAUNTLET". Check with `python3 -I tools/check_script_trainers.py` (scripts vs PBS) and `python3 -I tools/validate_trainers.py`.*
 - [x] Ch16: `[MERIDIAN_DIRECTORATE,Grane]` / `[...,Tull]` (Interlude IV, Lv 60–62, no Bag).
 - [x] Ch17: `SUMP_BARON` Mother Gutter (partner v17 + the ledger fight v0), `[MERIDIAN_DIRECTORATE,Mallory]` + `[...,Kade]` (the barricade tag double), `GILDER_AUTOMATON` the Terrace Warden.
-- [ ] Next, in order: Ch18 (THORNGUARD Rowe), Ch19 (partners v19, the lines, the Toll, Thornwatch), Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).
+- [x] Ch18: `THORNGUARD` Captain Rowe (`[THORNGUARD,Captain Rowe]`, Lv 75–77).
+- [ ] Next, in order: Ch19 (partners v19, the lines, the Toll, Thornwatch), Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).

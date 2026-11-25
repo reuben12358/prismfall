@@ -1834,6 +1834,25 @@ S("Ch17 - the Terrace Warden, a Gilder-machine Golurk and its works (field :UNDE
       casual={"ab": "IRONFIST", "item": "SITRUSBERRY", "moves": "SHADOWPUNCH,EARTHQUAKE,HAMMERARM,ICEPUNCH"}),
 ], nobag=True)
 
+# --- Ch18: Captain Rowe at the Gloamwood Verge checkpoint (841, :FAIRY_TALE "the dusk"; single) --------------------
+# FAIRY_TALE: Fairy and Dragon x1.5, Steel x1.3, blade moves x1.3 (Leaf Blade, Shadow Claw), spells (Magical Leaf x1.5).
+# The Thornguard are Elowen's green: Tsareena's Play Rough is the Fairy x1.5 hit, Rillaboom's Grassy Terrain heals the
+# squad and powers Drum Beating. Counterplay: Fire (it also hits as Dragon here), Flying, Poison.
+S("Ch18 - Thornguard Captain Rowe, \"by royal order\" (field :FAIRY_TALE; single). Play Rough x1.5, blade moves x1.3; "
+  "Rillaboom's Grassy Surge feeds the whole squad.",
+  "THORNGUARD", "Captain Rowe", 0, 80, "Fine. Then twelve of us.", [
+    P("TSAREENA", 75, "QUEENLYMAJESTY", "SITRUSBERRY", "JOLLY", "TROPKICK,PLAYROUGH,HIGHJUMPKICK,UTURN", "A",
+      hard={"item": "LIFEORB", "moves": "POWERWHIP,PLAYROUGH,HIGHJUMPKICK,UTURN"},
+      casual={"ab": "LEAFGUARD", "moves": "TROPKICK,PLAYROUGH,LOWSWEEP,UTURN"}),
+    # Hard only: the thorn in the hedge. Technician Magical Leaf is a spell here (x1.5); Sludge Bomb for Fairies.
+    P("ROSERADE", 76, "TECHNICIAN", "FOCUSSASH", "TIMID", "MAGICALLEAF,SLUDGEBOMB,SHADOWBALL,SLEEPPOWDER", "S", only="hard"),
+    P("TREVENANT", 76, "NATURALCURE", "LEFTOVERS", "IMPISH", "HORNLEECH,SHADOWCLAW,WILLOWISP,LEECHSEED", "BPD",
+      only="nocasual", hard={"ab": "HARVEST", "item": "SITRUSBERRY", "moves": "WOODHAMMER,POLTERGEIST,WILLOWISP,LEECHSEED"}),
+    P("RILLABOOM", 77, "GRASSYSURGE", "MIRACLESEED", "ADAMANT", "DRUMBEATING,KNOCKOFF,HIGHHORSEPOWER,UTURN", "HA",
+      hard={"item": "LIFEORB", "moves": "GRASSYGLIDE,WOODHAMMER,KNOCKOFF,HIGHHORSEPOWER"},
+      casual={"ab": "OVERGROW", "item": "SITRUSBERRY"}),
+])
+
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
 

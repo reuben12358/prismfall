@@ -28234,6 +28234,79 @@ Pokemon = GOLURK,69
     Nature = ADAMANT
     IV = 20
     EV = 0
+# Ch18 - Thornguard Captain Rowe, "by royal order" (field :FAIRY_TALE; single). Play Rough x1.5, blade moves x1.3; Rillaboom's Grassy Surge feeds the whole squad.
+#-------------------------------
+[THORNGUARD,Captain Rowe]
+Items = FULLRESTORE,FULLRESTORE
+LoseText = Fine. Then twelve of us.
+Pokemon = TSAREENA,75
+    Moves = TROPKICK,PLAYROUGH,HIGHJUMPKICK,UTURN
+    Ability = QUEENLYMAJESTY
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+Pokemon = TREVENANT,76
+    Moves = HORNLEECH,SHADOWCLAW,WILLOWISP,LEECHSEED
+    Ability = NATURALCURE
+    Item = LEFTOVERS
+    Nature = IMPISH
+    IV = 31
+Pokemon = RILLABOOM,77
+    Moves = DRUMBEATING,KNOCKOFF,HIGHHORSEPOWER,UTURN
+    Ability = GRASSYSURGE
+    Item = MIRACLESEED
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[THORNGUARD,Captain Rowe,100]
+Items = FULLRESTORE,FULLRESTORE,FULLRESTORE
+LoseText = Fine. Then twelve of us.
+Pokemon = TSAREENA,76
+    Moves = POWERWHIP,PLAYROUGH,HIGHJUMPKICK,UTURN
+    Ability = QUEENLYMAJESTY
+    Item = LIFEORB
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = ROSERADE,76
+    Moves = MAGICALLEAF,SLUDGEBOMB,SHADOWBALL,SLEEPPOWDER
+    Ability = TECHNICIAN
+    Item = FOCUSSASH
+    Nature = TIMID
+    IV = 31
+    EV = 4,0,0,252,252,0
+Pokemon = TREVENANT,77
+    Moves = WOODHAMMER,POLTERGEIST,WILLOWISP,LEECHSEED
+    Ability = HARVEST
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 31
+    EV = 252,4,252,0,0,0
+Pokemon = RILLABOOM,78
+    Moves = GRASSYGLIDE,WOODHAMMER,KNOCKOFF,HIGHHORSEPOWER
+    Ability = GRASSYSURGE
+    Item = LIFEORB
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[THORNGUARD,Captain Rowe,200]
+Items = FULLRESTORE
+LoseText = Fine. Then twelve of us.
+Pokemon = TSAREENA,71
+    Moves = TROPKICK,PLAYROUGH,LOWSWEEP,UTURN
+    Ability = LEAFGUARD
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+Pokemon = RILLABOOM,73
+    Moves = DRUMBEATING,KNOCKOFF,HIGHHORSEPOWER,UTURN
+    Ability = OVERGROW
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
 #===============================================================================
 # FESTIVAL OF CHAMPIONS - final and hijack
 #===============================================================================

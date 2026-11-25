@@ -418,7 +418,7 @@ None of this chapter's maps is built. **[NEW]** = an event or map not in maps.js
 | **Gym 17** | 8 princesses + Lady + Beauty | (GYM_PUZZLES) | 76–79 | as GYM_PUZZLES |
 
 **Story fights:**
-- `THORNGUARD` Captain Rowe: a **new trainer type, "Thornguard"**. Lv 77: Rillaboom, Tsareena, Trevenant.
+- `[THORNGUARD,Captain Rowe]` (**added to PBS**; trainer type "Thornguard", also for the Verge's Thornguard Ilsabet). Lv 75–77: Tsareena, Trevenant, Rillaboom (Grassy Surge); Hard adds Roserade.
 - K7 and Gym 17: existing PBS.
 - **Boss:** `:PECHARUNT_DEEP` (109_Boss_Pecharunt.rb; `:catch => false`).
 
