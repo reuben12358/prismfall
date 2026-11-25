@@ -1,4 +1,4 @@
-# The Rehearsal (568, :BLEED). WRITTEN BY layouts/routes_craft.py (map builder 10) - edit that script.
+# The Rehearsal (568, :BLEED). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).
 id: 568
 name: The Rehearsal
 parent: 560
@@ -310,13 +310,13 @@ events:
   - graphic: {sprite: NPC 07, dir: up}
     through: true
     trigger: touch
-    commands: &id001 ['You pass through the moment, and it shivers.']
+    commands: ['You pass through the moment, and it shivers.']
   - cond:
       var: [D8_FRAME, 3]
     graphic: {sprite: NPC 07, dir: right}
     through: true
     trigger: touch
-    commands: *id001
+    commands: ['You pass through the moment, and it shivers.']
 - type: event
   name: Onlooker 1
   at: [8, 7]
