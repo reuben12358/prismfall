@@ -1711,7 +1711,8 @@ X("Ch7 Mirefen graffiti ring (220) - Riot Punk Zara, optional street rival", "PU
     P("OBSTAGOON", 36, "GUTS", "FLAMEORB", "JOLLY", "FACADE,NIGHTSLASH,OBSTRUCT,SNARL", "A", only="nocasual",
       hard={"moves": "FACADE,KNOCKOFF,OBSTRUCT,CROSSCHOP"}),
     P("TOXTRICITY", 37, "PUNKROCK", "SITRUSBERRY", "MODEST", "DISCHARGE,VENOSHOCK,SNARL,SCREECH", "S", nick="Voltage",
-      hard={"item": "THROATSPRAY", "moves": "DISCHARGE,VENOSHOCK,SNARL,NOBLEROAR"}),
+      hard={"item": "THROATSPRAY", "moves": "DISCHARGE,VENOSHOCK,SNARL,NOBLEROAR"},
+      casual={"moves": "SHOCKWAVE,VENOSHOCK,SNARL,SCREECH"}),   # two levels down: Discharge comes at 36
 ])
 X("Ch17 Moon Market graffiti ring (423) - Riot Punk Zara, rematch", "PUNK_ZARA", "Zara", 1, 77,
   "Ha! STILL can't touch you. Go wreck Voss's stage. I'll hold the Sump wall.", [

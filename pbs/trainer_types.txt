@@ -1,6 +1,7 @@
 # Pokémon Prismfall - trainer types (Essentials v21.1 format). Ships as trainer_types_prismfall.txt.
 # SkillLevel tiers (v21.1 AI): 1-31 basic, 32+ switches/HP-aware, 48+ high, 100+ best (adds ReserveLastPokemon).
-# Prismfall Core raises the floor to 48 on Hard. BGM names are stock base-project files; swap for custom tracks later.
+# Prismfall Core raises the floor to 48 on Hard. BattleBGM / IntroBGM name the Prismfall slots of audio/manifest.tsv (Audio v4.3,
+# design/AUDIO.md 5.A); while a track is not installed, Prismfall Core 031_AudioCues plays the stock track instead. VictoryBGM is stock.
 # --- Wardens (gym leaders). Gyms 1-2 use high skill (48), the rest best skill (100). ---
 #-------------------------------
 [LEADER_TAMSIN]
@@ -8,7 +9,7 @@ Name = Silkweaver
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_DORIAN]
@@ -16,7 +17,7 @@ Name = Pageant Master
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_MARISOL]
@@ -24,7 +25,7 @@ Name = Union Boss
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ROOK]
@@ -32,7 +33,7 @@ Name = Holo-Idol
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_SAHAR]
@@ -40,7 +41,7 @@ Name = Archaeologist
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_CORVIN]
@@ -48,7 +49,7 @@ Name = Plague Doctor
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_BRANN]
@@ -56,7 +57,7 @@ Name = Forgemaster
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_KAITO]
@@ -64,7 +65,7 @@ Name = Pit Champion
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_JUNO]
@@ -72,7 +73,7 @@ Name = Bloomkeeper
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Juno
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ANJA]
@@ -80,7 +81,7 @@ Name = Matriarch
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ODESSA]
@@ -88,7 +89,7 @@ Name = Sky Courier
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_ILSA]
@@ -96,7 +97,7 @@ Name = Provost
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_BASTIAN]
@@ -104,7 +105,7 @@ Name = Prospector
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_YSOLDE]
@@ -112,7 +113,7 @@ Name = Lantern Priest
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_MAGNUS]
@@ -120,7 +121,7 @@ Name = Artificer
 Gender = Male
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_NYX]
@@ -128,7 +129,7 @@ Name = Shadow Broker
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_CELESTINE]
@@ -136,7 +137,7 @@ Name = Oathbound
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_SIGRUN]
@@ -144,7 +145,7 @@ Name = Valkyrie
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 # --- Rivals (Kestrel's gender is the story team's call; sprite decides) ---
 #-------------------------------
@@ -153,7 +154,8 @@ Name = Lone Blade
 Gender = Male
 BaseMoney = 60
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Kestrel
+BattleBGM = Battle - Kestrel
 VictoryBGM = Battle victory leader
 #-------------------------------
 [RIVAL_JUNO]
@@ -161,7 +163,7 @@ Name = Flower Girl
 Gender = Female
 BaseMoney = 60
 SkillLevel = 64
-BattleBGM = Battle Elite
+BattleBGM = Battle - Juno
 VictoryBGM = Battle victory leader
 # --- The Accord ---
 #-------------------------------
@@ -170,7 +172,8 @@ Name = Sovereign
 Gender = Male
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+IntroBGM = Theme - Accord
+BattleBGM = Battle - Valen
 VictoryBGM = Battle victory leader
 # --- The Hollow ---
 #-------------------------------
@@ -179,7 +182,8 @@ Name = Hollow Acolyte
 Gender = Mixed
 BaseMoney = 40
 SkillLevel = 32
-BattleBGM = Battle trainer
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [HOLLOW_GRUNT_M]
@@ -187,7 +191,8 @@ Name = Hollow Acolyte
 Gender = Male
 BaseMoney = 40
 SkillLevel = 32
-BattleBGM = Battle trainer
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [HOLLOW_GRUNT_F]
@@ -195,7 +200,8 @@ Name = Hollow Acolyte
 Gender = Female
 BaseMoney = 40
 SkillLevel = 32
-BattleBGM = Battle trainer
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [HOLLOW_ADMIN]
@@ -203,7 +209,8 @@ Name = Hammer Captain
 Gender = Mixed
 BaseMoney = 70
 SkillLevel = 64
-BattleBGM = Battle Elite
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_WICK]
@@ -211,7 +218,8 @@ Name = Apostate
 Gender = Male
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_THISTLE]
@@ -219,7 +227,8 @@ Name = Threadcutter
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_TEO]
@@ -227,7 +236,8 @@ Name = Firebrand
 Gender = Male
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_SABLE]
@@ -235,7 +245,8 @@ Name = Platebreaker
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Hollow Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [HOLLOW_MOURNER]
@@ -243,7 +254,8 @@ Name = Ash-Masked
 Gender = Male
 BaseMoney = 120
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Hollow
+BattleBGM = Battle - Mourner
 VictoryBGM = Battle victory leader
 # --- Meridian Concord ---
 #-------------------------------
@@ -252,7 +264,8 @@ Name = Meridian Agent
 Gender = Mixed
 BaseMoney = 40
 SkillLevel = 32
-BattleBGM = Battle trainer
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [MERIDIAN_AGENT_M]
@@ -260,7 +273,8 @@ Name = Meridian Agent
 Gender = Male
 BaseMoney = 40
 SkillLevel = 32
-BattleBGM = Battle trainer
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [MERIDIAN_AGENT_F]
@@ -268,7 +282,8 @@ Name = Meridian Agent
 Gender = Female
 BaseMoney = 40
 SkillLevel = 32
-BattleBGM = Battle trainer
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [MERIDIAN_ADMIN]
@@ -276,7 +291,8 @@ Name = Meridian Director
 Gender = Mixed
 BaseMoney = 70
 SkillLevel = 64
-BattleBGM = Battle Elite
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_MARCHETTI]
@@ -284,7 +300,8 @@ Name = Iron Marshal
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_KROLL]
@@ -292,7 +309,8 @@ Name = Infiltrator
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_ASHE]
@@ -300,7 +318,8 @@ Name = Spin Doctor
 Gender = Female
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_VOSS]
@@ -308,7 +327,8 @@ Name = Gilded Heir
 Gender = Male
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Voss
 VictoryBGM = Battle victory leader
 # --- Festival of Champions cameo champions: FESTIVAL_<NAME> from design/CAMEOS.md (appended below when it lands) ---
 #-------------------------------
@@ -317,7 +337,7 @@ Name = Champion
 Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_AMARIA]
@@ -325,7 +345,7 @@ Name = Gym Leader
 Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_SHELLY]
@@ -333,7 +353,7 @@ Name = Champion
 Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_ALEXANDRA]
@@ -341,7 +361,7 @@ Name = Acting Champion
 Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_VENAM]
@@ -349,7 +369,7 @@ Name = Gym Leader
 Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_SHIV]
@@ -357,7 +377,7 @@ Name = Champion
 Gender = Male
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_GARRET]
@@ -365,7 +385,7 @@ Name = Gym Leader
 Gender = Male
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_MELIA]
@@ -373,7 +393,7 @@ Name = Gym Leader
 Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_TITANIA]
@@ -381,15 +401,15 @@ Name = Gym Leader
 Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [FESTIVAL_NOVA]
 Name = Team Crescent
-Gender = Mixed
+Gender = Female
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 # --- Added for the choice-driven Festival / finale / Ruin Route (design/NARRATIVE_KEYS.md 7) ---
 #-------------------------------
@@ -398,7 +418,7 @@ Name = Ash Gardener
 Gender = Male
 BaseMoney = 120
 SkillLevel = 100
-BattleBGM = Battle Elite
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_QUENT]
@@ -406,7 +426,8 @@ Name = Null Architect
 Gender = Male
 BaseMoney = 120
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [MERIDIAN_DIRECTORATE]
@@ -414,7 +435,8 @@ Name = Mandate Officer
 Gender = Mixed
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+IntroBGM = Theme - Meridian
+BattleBGM = Battle - Meridian Admin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [GILDED_AURELIUS]
@@ -430,7 +452,7 @@ Name = Fading Echo
 Gender = Female
 BaseMoney = 0
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [REFLECTION]
@@ -438,7 +460,7 @@ Name = Reflection
 Gender = Mixed
 BaseMoney = 0
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Ruin
 VictoryBGM = Battle victory leader
 #-------------------------------
 [ARCHSEER_DASK]
@@ -446,7 +468,7 @@ Name = Veiled Seer
 Gender = Male
 BaseMoney = 150
 SkillLevel = 100
-BattleBGM = Battle Champion
+BattleBGM = Battle - Ruin
 VictoryBGM = Battle victory leader
 # --- War arc (SPINE Rev 6): generic soldiers/officers. Name "Soldier"/"Officer"; version = encounter number (<100). ---
 #-------------------------------
@@ -455,7 +477,7 @@ Name = Ashkaar Soldier
 Gender = Mixed
 BaseMoney = 48
 SkillLevel = 48
-BattleBGM = Battle trainer
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [ASHKAAR_SOLDIER_M]
@@ -463,7 +485,7 @@ Name = Ashkaar Soldier
 Gender = Male
 BaseMoney = 48
 SkillLevel = 48
-BattleBGM = Battle trainer
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [ASHKAAR_SOLDIER_F]
@@ -471,7 +493,7 @@ Name = Ashkaar Soldier
 Gender = Female
 BaseMoney = 48
 SkillLevel = 48
-BattleBGM = Battle trainer
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [ASHKAAR_OFFICER]
@@ -479,7 +501,7 @@ Name = Ashkaar Officer
 Gender = Mixed
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory leader
 #-------------------------------
 [ISENMAR_SOLDIER]
@@ -487,7 +509,7 @@ Name = Isenmar Soldier
 Gender = Mixed
 BaseMoney = 48
 SkillLevel = 48
-BattleBGM = Battle trainer
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [ISENMAR_SOLDIER_M]
@@ -495,7 +517,7 @@ Name = Isenmar Soldier
 Gender = Male
 BaseMoney = 48
 SkillLevel = 48
-BattleBGM = Battle trainer
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [ISENMAR_SOLDIER_F]
@@ -503,7 +525,7 @@ Name = Isenmar Soldier
 Gender = Female
 BaseMoney = 48
 SkillLevel = 48
-BattleBGM = Battle trainer
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory trainer
 #-------------------------------
 [ISENMAR_OFFICER]
@@ -511,7 +533,7 @@ Name = Isenmar Officer
 Gender = Mixed
 BaseMoney = 80
 SkillLevel = 100
-BattleBGM = Battle Elite
+BattleBGM = War - Battlefield
 VictoryBGM = Battle victory leader
 #-------------------------------
 # The Eevee Octave (Prism Choir): Vesper Lindqvist and her seven fellow orphans. See design/TRAINER_FIELD_PLAYBOOK.md.
@@ -520,7 +542,7 @@ Name = First Voice
 Gender = Female
 BaseMoney = 100
 SkillLevel = 100
-BattleBGM = Battle Gym Leader
+BattleBGM = Battle - Cameo
 VictoryBGM = Battle victory leader
 #-------------------------------
 [OCTAVE_SINGER]
@@ -528,7 +550,59 @@ Name = Chorister
 Gender = Mixed
 BaseMoney = 60
 SkillLevel = 100
-BattleBGM = Battle Elite
+BattleBGM = Battle - Cameo
+VictoryBGM = Battle victory leader
+# --- Art-backed cast types (Gemini Art Drops 15-17 wiring, 2026-11-25) ---
+#-------------------------------
+[LARCH]
+Name = Professor
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle - Warden
+VictoryBGM = Battle victory leader
+# Interlude IV's player side (Core 028); Graphics/Trainers/WENLOW(_back).
+#-------------------------------
+[WENLOW]
+Name = Apprentice Medic
+Gender = Male
+BaseMoney = 60
+SkillLevel = 100
+# Zara Rourke, a Nadir street rival: the punk art first drawn for Venam, on an original character.
+#-------------------------------
+[PUNK_ZARA]
+Name = Riot Punk
+Gender = Female
+BaseMoney = 75
+SkillLevel = 100
+BattleBGM = Battle - Warden
+VictoryBGM = Battle victory leader
+# Ch17 (story/36_SCRIPT_CH17.md): Mother Gutter. Teams are the PBS agent's.
+#-------------------------------
+[SUMP_BARON]
+Name = Sump Baron
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle - Hollow Admin
+VictoryBGM = Battle victory leader
+# Ch17: the Terrace Warden, a Gilder machine with nobody inside.
+#-------------------------------
+[GILDER_AUTOMATON]
+Name = Gilder Automaton
+Gender = Unknown
+BaseMoney = 0
+SkillLevel = 100
+BattleBGM = Battle - Boss
+VictoryBGM = Battle victory leader
+# Ch18 (story/37_SCRIPT_CH18.md): Captain Rowe and the Queen's Thornguard.
+#-------------------------------
+[THORNGUARD]
+Name = Thornguard
+Gender = Mixed
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
 [PARTNER_OGRE]
