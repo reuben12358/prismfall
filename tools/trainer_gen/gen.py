@@ -1679,22 +1679,25 @@ soldier("ISENMAR_SOLDIER_M", "Soldier", 2, "The tide's on our side. It's just sl
     P("SEISMITOAD", 82, "SWIFTSWIM", "SITRUSBERRY", "MODEST", "MUDDYWATER,EARTHPOWER,SLUDGEWAVE,PROTECT", "S", only="nocasual"),
     P("CLOYSTER", 82, "SKILLLINK", "WHITEHERB", "ADAMANT", "ICICLESPEAR,ROCKBLAST,SHELLSMASH,PROTECT", "A", only="hard"),
 ], "the Glass Dunes, Isenmar line (map 926, Desert; partner double with Captain 1)")
-# -- The partners (one version: the same ally in every mode). Each brings the answer to the other host's plan.
-S("Ch19 war partner - Sigrun beside the PC on the Glass Dunes (backing Ashkaar, or standing between). Against the sea: "
-  "dragons resist the Water, Flygon's Levitate spares it Mamoswine's Earthquake, Scorching Sands is x1.5 on the dunes, "
-  "and Heat Wave x1.3 dries the bloom (two Fire attacks bake it back to sand).",
+# -- The partners (one version: the same ally in every mode), as story/38_SCRIPT_CH19.md "the lines" lists them
+# (2026-11-25; they were Flygon / Dragonite / Salamence and Pelipper / Lanturn / Gyarados for the Rev 18 Glass Dunes
+# double). Lv 83-84, under Gym 18's 85: this is before her badge. No Mega: the side's one Mega is the player's.
+S("Ch19 war partner - Sigrun beside the PC in the lines (backing Ashkaar: 920 :FROZEN_LAKE vs the Thane's Hirdmen; "
+  "standing between: 925 :BLEED vs the mixed pair). Against the ice: Heat Wave is a crack in the frozen sand (three "
+  "Fire attacks or heavy blows break it), Infiltrator Dragapult ignores the Aurora Veil, Mold Breaker Haxorus brings "
+  "Close Combat for the Ice types. Her dragons are 4x weak here: protect them.",
   "LEADER_SIGRUN", "Sigrun", 19, 85, "Hold here. Let them come to us.", [
-    P("FLYGON", 83, "LEVITATE", "SOFTSAND", "JOLLY", "SCORCHINGSANDS,DRAGONCLAW,ROCKSLIDE,UTURN", "A"),
-    P("DRAGONITE", 84, "MULTISCALE", "LUMBERRY", "ADAMANT", "EXTREMESPEED,DRAGONCLAW,FIREPUNCH,PROTECT", "A"),
-    P("SALAMENCE", 85, "INTIMIDATE", "SITRUSBERRY", "NAIVE", "HEATWAVE,DRAGONCLAW,ROCKSLIDE,PROTECT", "MX", nick="Dreamwing"),
+    P("HAXORUS", 83, "MOLDBREAKER", "LUMBERRY", "JOLLY", "DRAGONCLAW,CLOSECOMBAT,XSCISSOR,PROTECT", "A"),
+    P("DRAGAPULT", 84, "INFILTRATOR", "SITRUSBERRY", "NAIVE", "DRAGONDARTS,FLAMETHROWER,SHADOWBALL,PROTECT", "MX"),
+    P("SALAMENCE", 84, "INTIMIDATE", "SITRUSBERRY", "TIMID", "HEATWAVE,DRAGONPULSE,TAILWIND,PROTECT", "S", nick="Dreamwing"),
 ], nobag="partner")
-S("Ch19 war partner - Marisol beside the PC on the Glass Dunes (backing Isenmar). Against the glass: Drizzle takes the "
-  "sky from Torkoal's sun and soaks the dunes (Ashkaar's Eruption and Heat Wave are halved in rain), Gyarados' Intimidate "
-  "blunts Coalossal and Garchomp, and Lanturn's Volt Absorb and Scald cover the rest.",
+S("Ch19 war partner - Marisol beside the PC in the lines (backing Isenmar: 924 :DESERT vs the Ember-Riders). Against "
+  "the sand: Kingdra's Rain Dance soaks the dunes into the Superbloom (the Water nerf lifts, Fire is halved in the rain) "
+  "and switches on both Swift Swimmers; Lucky's Intimidate blunts Tyranitar, Dracozolt and the Hisuian Arcanine.",
   "LEADER_MARISOL", "Marisol", 19, 85, "Ha! Keep your head down and your Pokemon up.", [
-    P("PELIPPER", 83, "DRIZZLE", "DAMPROCK", "MODEST", "HURRICANE,SCALD,TAILWIND,PROTECT", "BS"),
-    P("LANTURN", 84, "VOLTABSORB", "SITRUSBERRY", "MODEST", "SCALD,THUNDERBOLT,ICEBEAM,PROTECT", "BS"),
-    P("GYARADOS", 85, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "WATERFALL,DRAGONDANCE,CRUNCH,ICEFANG", "A", nick="Lucky"),
+    P("BARRASKEWDA", 83, "SWIFTSWIM", "MYSTICWATER", "ADAMANT", "LIQUIDATION,CLOSECOMBAT,PSYCHICFANGS,PROTECT", "A"),
+    P("KINGDRA", 84, "SWIFTSWIM", "DAMPROCK", "MODEST", "RAINDANCE,MUDDYWATER,DRAGONPULSE,PROTECT", "S"),
+    P("GYARADOS", 84, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "WATERFALL,ICEFANG,THUNDERWAVE,PROTECT", "A", nick="Lucky"),
 ], nobag="partner")
 
 # ------------------------------------------------------------------------------
@@ -1852,6 +1855,201 @@ S("Ch18 - Thornguard Captain Rowe, \"by royal order\" (field :FAIRY_TALE; single
       hard={"item": "LIFEORB", "moves": "GRASSYGLIDE,WOODHAMMER,KNOCKOFF,HIGHHORSEPOWER"},
       casual={"ab": "OVERGROW", "item": "SITRUSBERRY"}),
 ])
+
+# --- Ch19 "The Last Gate": the lines (story/38_SCRIPT_CH19.md), the Thornwatch duel, the Dominar's Toll -----------------
+# The script's lines: a gauntlet through the side you did NOT back, then a partner double.
+#   :back_ashkaar  -> 920 Isenmar's trench-lines: Trenchers Ulfa and Bersi (singles, Lv 83), then PC + Sigrun vs the
+#                     Thane's Hirdmen Hjalmar + Torunn on :FROZEN_LAKE (the frozen sand), Lv 84.
+#   :back_isenmar  -> 924 the Siege Camp's earthworks: Soldiers Garrok and Senna (singles, Lv 83), then PC + Marisol vs
+#                     the Ember-Riders Vharn + Ashild on :DESERT, Lv 84.
+#   :stand_between -> 925 the Steamline: Trencher Ulfa and Soldier Garrok (one a side, singles), then PC + Sigrun vs the
+#                     mixed pair, Hirdman Styr + Ember-Rider Kessa, on :BLEED, Lv 84.
+# (The older Rev 18 blocks - "Soldier" / "Captain" 0-2 on 920-926 - stay for the maps built from them, mapgen/layouts/
+# war.py; when those maps are re-wired to the script they call the blocks below.)
+# FROZEN_LAKE: Ice x1.5, Slush Rush / Ice Body work without hail, Aurora Veil works without hail, Thick Fat and Ice
+# Scales +1 Defense on entry, priority strikes and spins slide (+1 Speed), Rapid Spin x1.5, Ice Spinner / Triple Axel
+# x1.3; three Fire attacks, quakes or heavy blows crack it (-> Water Surface) and every Ice attack refreezes a crack.
+# So Isenmar never quakes here, and Sigrun's Heat Wave is the crack. THE HIRDMEN'S ANSWER TO DRAGONS: Baxcalibur's
+# Thermal Exchange drinks that Heat Wave (+1 Attack, no burn), Frosmoth's Wide Guard stops it, Milotic's Competitive
+# turns Dreamwing's Intimidate into +2 Sp. Atk. The player's answer: single-target Fire and Fighting, Steel, and take
+# Vanilluxe (the hail and the Veil) first.
+def trencher(nm, lose, mons, note):
+    S("Ch19 the lines - " + note, "ISENMAR_TRENCHER", nm, 0, 85, lose, mons, nobag=True)
+trencher("Ulfa", "Dig in, they said. I dug. You walked round.", [
+    # Slush Rush needs no hail on the frozen sand; Rapid Spin is x1.5 and slides (+1 Speed).
+    P("SANDSLASH", 82, "SLUSHRUSH", "SITRUSBERRY", "ADAMANT", "ICICLECRASH,IRONHEAD,RAPIDSPIN,KNOCKOFF", "A", form=1,
+      hard={"item": "LIFEORB", "moves": "TRIPLEAXEL,IRONHEAD,RAPIDSPIN,SWORDSDANCE"},
+      casual={"moves": "ICICLECRASH,IRONHEAD,RAPIDSPIN,METALCLAW"}),
+    P("CRABOMINABLE", 82, "IRONFIST", "SITRUSBERRY", "ADAMANT", "ICEHAMMER,CLOSECOMBAT,THUNDERPUNCH,STONEEDGE", "HA",
+      only="nocasual"),
+    P("MRRIME", 82, "SCREENCLEANER", "SITRUSBERRY", "MODEST", "FREEZEDRY,PSYCHIC,FOCUSBLAST,RAPIDSPIN", "S", only="hard"),
+    # The whale the harpooners follow. Thick Fat: +1 Defense on entry here; Ice Spinner x1.3, Ice Shard slides.
+    P("CETITAN", 83, "THICKFAT", "SITRUSBERRY", "ADAMANT", "ICESPINNER,LIQUIDATION,ICESHARD,PLAYROUGH", "HA",
+      hard={"ab": "SLUSHRUSH", "moves": "ICESPINNER,LIQUIDATION,ICESHARD,BELLYDRUM"},
+      casual={"moves": "AVALANCHE,LIQUIDATION,ICESHARD,BODYSLAM"}),
+], "Isenmar Trencher Ulfa, first trench (map 920 the Rimed Sands, :FROZEN_LAKE; also the Isenmar side of the "
+   "Steamline, 925 :BLEED, on :stand_between). Slush Rush without hail; Rapid Spin x1.5.")
+trencher("Bersi", "The sand was warm when we got here. We fixed that. Didn't help.", [
+    P("BARBARACLE", 82, "TOUGHCLAWS", "SITRUSBERRY", "ADAMANT", "RAZORSHELL,STONEEDGE,CROSSCHOP,POISONJAB", "A",
+      only="nocasual", hard={"item": "WHITEHERB", "moves": "RAZORSHELL,STONEEDGE,CROSSCHOP,SHELLSMASH"}),
+    # Aqua Jet is a priority strike: it slides (+1 Speed). Rock Slide freezes into ice boulders (also Ice).
+    P("BEARTIC", 82, "SLUSHRUSH", "SITRUSBERRY", "ADAMANT", "ICICLECRASH,SUPERPOWER,AQUAJET,ROCKSLIDE", "A",
+      hard={"item": "LIFEORB", "moves": "ICICLECRASH,SUPERPOWER,AQUAJET,SWORDSDANCE"}, casual={"ab": "SWIFTSWIM"}),
+    P("ARCTOZOLT", 82, "SLUSHRUSH", "MAGNET", "NAIVE", "BOLTBEAK,ICICLECRASH,LOWKICK,FREEZEDRY", "MX", only="hard"),
+    # Snow Warning: hail lasts 3 turns longer here and Blizzard cannot miss in it.
+    P("ABOMASNOW", 83, "SNOWWARNING", "ICYROCK", "QUIET", "BLIZZARD,WOODHAMMER,ICESHARD,EARTHPOWER", "HS",
+      casual={"ab": "SOUNDPROOF", "item": "SITRUSBERRY", "moves": "ICEBEAM,WOODHAMMER,ICESHARD,EARTHPOWER"}),
+], "Isenmar Trencher Bersi, second trench (map 920, :FROZEN_LAKE). Snow Warning hail (+3 turns) for Blizzard and "
+   "Slush Rush.")
+def hirdman(nm, lose, mons, note):
+    S("Ch19 the lines - " + note, "ISENMAR_HIRDMAN", nm, 0, 85, lose, mons, nobag=True)
+hirdman("Hjalmar", "The Thane's shield. ...Cracked. Tell him it took two of you.", [
+    # Aurora Veil works without hail on the frozen sand; Snow Warning brings the hail anyway (Blizzard spread).
+    P("VANILLUXE", 83, "SNOWWARNING", "LIGHTCLAY", "MODEST", "AURORAVEIL,BLIZZARD,FREEZEDRY,PROTECT", "BS",
+      casual={"ab": "ICEBODY", "item": "SITRUSBERRY", "moves": "ICEBEAM,FREEZEDRY,FLASHCANNON,PROTECT"}),
+    # Ice Scales: +1 Defense on entry here. Wide Guard is the drilled answer to Sigrun's Heat Wave; Tailwind.
+    P("FROSMOTH", 83, "ICESCALES", "SITRUSBERRY", "MODEST", "BUGBUZZ,ICEBEAM,TAILWIND,WIDEGUARD", "BS", only="nocasual",
+      hard={"moves": "BUGBUZZ,BLIZZARD,TAILWIND,WIDEGUARD"}),
+    P("CRYOGONAL", 83, "LEVITATE", "SITRUSBERRY", "TIMID", "FREEZEDRY,FLASHCANNON,RAPIDSPIN,PROTECT", "S", only="hard"),
+    # Thermal Exchange: a Fire hit is +1 Attack and it can't be burned. Ice Shard slides (+1 Speed).
+    P("BAXCALIBUR", 84, "THERMALEXCHANGE", "SITRUSBERRY", "ADAMANT", "ICICLECRASH,DRAGONCLAW,ICESHARD,PROTECT", "A",
+      hard={"item": "LOADEDDICE", "moves": "ICICLESPEAR,GLAIVERUSH,ICESHARD,PROTECT"}),
+], "Thane's Hirdman Hjalmar, tag DOUBLE with Torunn vs the PC + Sigrun (map 920, :FROZEN_LAKE). The shield: Aurora "
+   "Veil, Wide Guard, Thermal Exchange against the dragons' fire.")
+hirdman("Torunn", "We drilled for dragons. Nobody drilled for you.", [
+    # Competitive: Dreamwing's Intimidate is +2 Sp. Atk. Muddy Water is the spread.
+    P("MILOTIC", 83, "COMPETITIVE", "SITRUSBERRY", "MODEST", "MUDDYWATER,ICEBEAM,RECOVER,PROTECT", "BS",
+      hard={"item": "MYSTICWATER"}, casual={"ab": "MARVELSCALE", "moves": "WATERPULSE,ICEBEAM,RECOVER,PROTECT"}),
+    P("EISCUE", 83, "ICEFACE", "SITRUSBERRY", "JOLLY", "ICICLECRASH,LIQUIDATION,ZENHEADBUTT,PROTECT", "A", only="nocasual",
+      hard={"moves": "ICICLECRASH,LIQUIDATION,BELLYDRUM,PROTECT"}),
+    # Hard only: a second Veil, and Moonblast for the dragons.
+    P("NINETALES", 83, "SNOWWARNING", "LIGHTCLAY", "TIMID", "AURORAVEIL,BLIZZARD,MOONBLAST,PROTECT", "S", form=1, only="hard"),
+    # The axe. Triple Axel is x1.3 on the ice (and x1.5 Ice); Ice Shard slides.
+    P("WEAVILE", 84, "PRESSURE", "SITRUSBERRY", "JOLLY", "TRIPLEAXEL,KNOCKOFF,ICESHARD,PROTECT", "A",
+      hard={"item": "LIFEORB", "moves": "TRIPLEAXEL,KNOCKOFF,ICESHARD,FAKEOUT"},
+      casual={"moves": "ICEPUNCH,NIGHTSLASH,ICESHARD,PROTECT"}),
+], "Thane's Hirdman Torunn, Hjalmar's tag partner (map 920, :FROZEN_LAKE). The axe: Competitive Milotic punishes "
+   "Intimidate, Weavile's Triple Axel is x1.3 on the ice.")
+hirdman("Styr", "North and east agree on one thing, and it's you. ...It was you.", [
+    # BLEED: attacks that don't match the user's type are x1.2, so this side is all coverage.
+    P("STARMIE", 83, "NATURALCURE", "SITRUSBERRY", "TIMID", "HYDROPUMP,ICEBEAM,THUNDERBOLT,PROTECT", "S",
+      hard={"ab": "ANALYTIC", "item": "EXPERTBELT"}),
+    P("FROSLASS", 83, "CURSEDBODY", "SITRUSBERRY", "TIMID", "ICEBEAM,SHADOWBALL,THUNDERBOLT,PROTECT", "S", only="nocasual",
+      hard={"item": "FOCUSSASH", "moves": "ICEBEAM,SHADOWBALL,ICYWIND,DESTINYBOND"}),
+    # Thick Fat for a borrowed Volcanic.
+    P("MAMOSWINE", 83, "THICKFAT", "SITRUSBERRY", "ADAMANT", "ICICLECRASH,HIGHHORSEPOWER,ICESHARD,PROTECT", "A", only="hard"),
+    P("BASCULEGION", 84, "ADAPTABILITY", "SITRUSBERRY", "ADAMANT", "WAVECRASH,PSYCHICFANGS,ICEFANG,PROTECT", "A",
+      hard={"item": "MYSTICWATER", "moves": "WAVECRASH,PHANTOMFORCE,ICEFANG,PROTECT"},
+      casual={"ab": "SWIFTSWIM", "moves": "LIQUIDATION,PSYCHICFANGS,ICEFANG,PROTECT"}),
+], "Thane's Hirdman Styr, the mixed pair: tag DOUBLE with Ember-Rider Kessa vs the PC + Sigrun on the Steamline "
+   "(map 925, :BLEED; :stand_between). Off-type attacks are x1.2 in the Bleed: coverage sets.")
+# DESERT (924; the script fights the earthworks and the partner double on the dunes): Ground and Fire x1.2, Water x0.8
+# and Ice x0.75 until rain soaks the sand (-> Superbloom: the nerfs lift, Grass x1.5, Chlorophyll on); Sand Rush, Sand
+# Force and Solar Power work without weather; Scorching Sands x1.5; sandstorm lasts 3 turns longer and bakes a Superbloom
+# back. THE EMBER-RIDERS' ANSWER TO THE SEA: Dracozolt's Sand Rush Bolt Beak (it always moves first, so it is always
+# doubled) into Marisol's Water types, and Tyranitar's Sand Stream to bake her bloom dry. The player's answer: Ground
+# (Bolt Beak can't touch it), and knock out Tyranitar before Marisol's Rain Dance goes up.
+def ashkaar(nm, lose, mons, note):
+    S("Ch19 the lines - " + note, "ASHKAAR_SOLDIER", nm, 0, 85, lose, mons, nobag=True)
+ashkaar("Garrok", "The earthworks hold. I don't. Tell the Dominar the first part.", [
+    P("DARMANITAN", 82, "SHEERFORCE", "SITRUSBERRY", "JOLLY", "FLAREBLITZ,ROCKSLIDE,EARTHQUAKE,UTURN", "A",
+      hard={"item": "LIFEORB", "moves": "FLAREBLITZ,ROCKSLIDE,EARTHQUAKE,SUPERPOWER"},
+      casual={"moves": "FIREPUNCH,ROCKSLIDE,BULLDOZE,UTURN"}),
+    # Sand Stream: the storm lasts 3 turns longer on the dunes.
+    P("GIGALITH", 82, "SANDSTREAM", "SMOOTHROCK", "ADAMANT", "STONEEDGE,EARTHQUAKE,HEAVYSLAM,STEALTHROCK", "HA",
+      only="nocasual", hard={"moves": "STONEEDGE,EARTHQUAKE,HEAVYSLAM,EXPLOSION"}),
+    # Hard only: Solar Power is free on the dunes; Solar Beam x1.5. The Electric answer to Isenmar's Water.
+    P("HELIOLISK", 82, "SOLARPOWER", "SITRUSBERRY", "TIMID", "THUNDERBOLT,SOLARBEAM,DRAGONPULSE,VOLTSWITCH", "S", only="hard"),
+    P("SALAZZLE", 83, "CORROSION", "SITRUSBERRY", "TIMID", "FLAMETHROWER,SLUDGEWAVE,DRAGONPULSE,ENCORE", "S",
+      hard={"item": "FOCUSSASH", "moves": "FLAMETHROWER,SLUDGEWAVE,DRAGONPULSE,NASTYPLOT"},
+      casual={"moves": "INCINERATE,SLUDGEBOMB,DRAGONPULSE,ENCORE"}),
+], "Ashkaar Soldier Garrok, first earthwork (map 924 the Siege Camp, :DESERT; also the Ashkaar side of the "
+   "Steamline, 925 :BLEED, on :stand_between). Fire and Ground x1.2 on the sand.")
+ashkaar("Senna", "Second gate. ...Open, apparently.", [
+    P("HOUNDOOM", 82, "FLASHFIRE", "SITRUSBERRY", "TIMID", "FLAMETHROWER,DARKPULSE,SLUDGEBOMB,WILLOWISP", "S",
+      hard={"item": "LIFEORB", "moves": "FIREBLAST,DARKPULSE,SLUDGEBOMB,NASTYPLOT"}),
+    # Sand Rush works without a storm here.
+    P("LYCANROC", 82, "SANDRUSH", "SITRUSBERRY", "JOLLY", "STONEEDGE,ACCELEROCK,DRILLRUN,PSYCHICFANGS", "A", only="nocasual",
+      hard={"item": "LIFEORB", "moves": "STONEEDGE,ACCELEROCK,DRILLRUN,SWORDSDANCE"}),
+    P("ARCHEOPS", 82, "DEFEATIST", None, "JOLLY", "ROCKSLIDE,ACROBATICS,EARTHQUAKE,UTURN", "A", only="hard"),
+    # An Ashkaar knight. Scorching Sands is x1.5 on the dunes.
+    P("ARMAROUGE", 83, "FLASHFIRE", "SITRUSBERRY", "MODEST", "ARMORCANNON,PSYSHOCK,SCORCHINGSANDS,AURASPHERE", "S",
+      hard={"item": "LIFEORB"}, casual={"moves": "FLAMETHROWER,PSYSHOCK,SCORCHINGSANDS,AURASPHERE"}),
+], "Ashkaar Soldier Senna, second earthwork (map 924, :DESERT). Sand Rush Lycanroc; Armarouge's Scorching Sands x1.5.")
+def rider(nm, lose, mons, note):
+    S("Ch19 the lines - " + note, "ASHKAAR_EMBER_RIDER", nm, 0, 85, lose, mons, nobag=True)
+rider("Vharn", "She brought the sea to a desert. ...And it stayed.", [
+    P("CYCLIZAR", 83, "REGENERATOR", "SITRUSBERRY", "JOLLY", "DOUBLEEDGE,DRAGONCLAW,KNOCKOFF,PROTECT", "A",
+      hard={"item": "SILKSCARF", "moves": "DOUBLEEDGE,DRAGONCLAW,KNOCKOFF,TAUNT"},
+      casual={"ab": "SHEDSKIN", "moves": "BODYSLAM,DRAGONCLAW,KNOCKOFF,PROTECT"}),
+    # Power Whip is for Marisol's Water types.
+    P("CENTISKORCH", 83, "FLASHFIRE", "SITRUSBERRY", "ADAMANT", "FIRELASH,POWERWHIP,KNOCKOFF,PROTECT", "HA", only="nocasual",
+      hard={"item": "CHARCOAL", "moves": "FIRELASH,POWERWHIP,LEECHLIFE,PROTECT"}),
+    # Hard only: Chlorophyll is on in Marisol's Superbloom (and its Grass is x1.5 there): her rain makes it faster.
+    P("SCOVILLAIN", 83, "CHLOROPHYLL", "SITRUSBERRY", "MODEST", "FLAMETHROWER,ENERGYBALL,RAGEPOWDER,PROTECT", "S", only="hard"),
+    # Sand Stream (3 turns longer here) bakes a Superbloom back to dunes and switches Dracozolt's Sand Rush on twice over.
+    P("TYRANITAR", 84, "SANDSTREAM", "SITRUSBERRY", "ADAMANT", "ROCKSLIDE,CRUNCH,LOWKICK,PROTECT", "HA",
+      hard={"item": "SMOOTHROCK", "moves": "ROCKSLIDE,CRUNCH,FIREPUNCH,PROTECT"},
+      casual={"ab": "UNNERVE", "moves": "ROCKSLIDE,CRUNCH,BRICKBREAK,PROTECT"}),
+], "Ember-Rider Vharn, tag DOUBLE with Ashild vs the PC + Marisol (map 924, :DESERT). Tyranitar's sandstorm bakes "
+   "Marisol's Superbloom dry.")
+rider("Ashild", "My mount's still standing. I'm the one who fell off.", [
+    # Sand Rush without weather on the dunes: Bolt Beak moves first, so it is doubled, into a Water team.
+    P("DRACOZOLT", 83, "SANDRUSH", "SITRUSBERRY", "ADAMANT", "BOLTBEAK,DRAGONCLAW,FIREFANG,PROTECT", "A",
+      hard={"item": "MAGNET", "moves": "BOLTBEAK,DRAGONCLAW,HIGHHORSEPOWER,PROTECT"},
+      casual={"ab": "VOLTABSORB", "moves": "THUNDERPUNCH,DRAGONCLAW,FIREFANG,PROTECT"}),
+    P("CERULEDGE", 83, "FLASHFIRE", "SITRUSBERRY", "ADAMANT", "BITTERBLADE,SHADOWCLAW,PSYCHOCUT,PROTECT", "A", only="nocasual",
+      hard={"item": "LIFEORB", "moves": "BITTERBLADE,POLTERGEIST,CLOSECOMBAT,PROTECT"}),
+    P("VOLCARONA", 83, "FLAMEBODY", "SITRUSBERRY", "TIMID", "QUIVERDANCE,HEATWAVE,BUGBUZZ,PROTECT", "S", only="hard"),
+    # A Hisuian Arcanine, Fire and Rock: Ashkaar's two colours. Rock Head: no recoil.
+    P("ARCANINE", 84, "ROCKHEAD", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,ROCKSLIDE,EXTREMESPEED,PROTECT", "A", form=1,
+      hard={"item": "HARDSTONE", "moves": "FLAREBLITZ,HEADSMASH,EXTREMESPEED,PROTECT"},
+      casual={"ab": "INTIMIDATE", "moves": "FIREFANG,ROCKSLIDE,EXTREMESPEED,PROTECT"}),
+], "Ember-Rider Ashild, Vharn's tag partner (map 924, :DESERT). The engine: Sand Rush Dracozolt's Bolt Beak.")
+rider("Kessa", "You stood between. So we both had something to aim at.", [
+    # BLEED: off-type attacks x1.2 (Drill Run, Wild Charge).
+    P("RAPIDASH", 83, "FLASHFIRE", "SITRUSBERRY", "JOLLY", "FLAREBLITZ,DRILLRUN,WILDCHARGE,PROTECT", "A",
+      hard={"item": "LIFEORB", "moves": "FLAREBLITZ,HIGHHORSEPOWER,WILDCHARGE,PROTECT"},
+      casual={"moves": "FLAMEWHEEL,DRILLRUN,WILDCHARGE,PROTECT"}),
+    P("ALTARIA", 83, "NATURALCURE", "SITRUSBERRY", "MODEST", "DRAGONPULSE,DAZZLINGGLEAM,FLAMETHROWER,PROTECT", "BS",
+      only="nocasual", hard={"ab": "CLOUDNINE", "moves": "DRAGONPULSE,DAZZLINGGLEAM,FLAMETHROWER,TAILWIND"}),
+    P("MAGMORTAR", 83, "FLAMEBODY", "SITRUSBERRY", "MODEST", "HEATWAVE,THUNDERBOLT,FOCUSBLAST,PROTECT", "S", only="hard"),
+    P("GOODRA", 84, "SAPSIPPER", "SITRUSBERRY", "MODEST", "DRAGONPULSE,FLAMETHROWER,THUNDERBOLT,PROTECT", "BS",
+      hard={"item": "ASSAULTVEST", "moves": "DRACOMETEOR,FLAMETHROWER,THUNDERBOLT,SLUDGEBOMB"},
+      casual={"moves": "DRAGONPULSE,FLAMETHROWER,WATERPULSE,PROTECT"}),
+], "Ember-Rider Kessa, the mixed pair: Hirdman Styr's tag partner on the Steamline (map 925, :BLEED; :stand_between).")
+# The Dominar's Toll (892, the Pilgrim Road; after Gym 18, so the player's cap is the Festival's 90): "It's always a
+# battle. It's a very old toll." An officer's four, Lv 82-84, no Bag.
+S("Ch19 - the Dominar's Toll, the pass-guard (map 892; single). Ashkaar's colours: Fire, Dragon, Rock, and the "
+  "Dominar's steel.",
+  "ASHKAAR_OFFICER", "Orrin", 0, 90, "Toll's paid. ...Habit. Go on through.", [
+    P("PYROAR", 82, "UNNERVE", "SITRUSBERRY", "TIMID", "HYPERVOICE,FLAMETHROWER,DARKPULSE,NOBLEROAR", "S",
+      hard={"item": "LIFEORB", "moves": "HYPERVOICE,FIREBLAST,DARKPULSE,WILLOWISP"}),
+    P("TYRANTRUM", 83, "ROCKHEAD", "SITRUSBERRY", "ADAMANT", "HEADSMASH,DRAGONCLAW,EARTHQUAKE,CRUNCH", "A", only="nocasual",
+      hard={"moves": "HEADSMASH,DRAGONCLAW,EARTHQUAKE,DRAGONDANCE"}),
+    P("FLYGON", 83, "LEVITATE", "SITRUSBERRY", "JOLLY", "EARTHQUAKE,DRAGONCLAW,STONEEDGE,UTURN", "A", only="hard"),
+    P("ARCHALUDON", 83, "STAMINA", "SITRUSBERRY", "MODEST", "FLASHCANNON,DRAGONPULSE,BODYPRESS,THUNDERWAVE", "BS",
+      hard={"item": "LEFTOVERS", "moves": "FLASHCANNON,DRAGONPULSE,BODYPRESS,STEALTHROCK"},
+      casual={"moves": "FLASHCANNON,DRAGONPULSE,BODYPRESS,METALSOUND"}),
+    P("CHARIZARD", 84, "BLAZE", "SITRUSBERRY", "TIMID", "FLAMETHROWER,AIRSLASH,DRAGONPULSE,ROOST", "S",
+      hard={"ab": "SOLARPOWER", "item": "LIFEORB", "moves": "FIREBLAST,AIRSLASH,DRAGONPULSE,FOCUSBLAST"},
+      casual={"moves": "FLAMETHROWER,AIRSLASH,DRAGONPULSE,SCARYFACE"}),
+], nobag=True)
+# The Thornwatch duel (870, optional): the watch-captain's spar, Lv 82. The hedge and the bell: thorns, a bell, and the
+# orchard-dragon of the Elowen-Ashkaar border. Hard: Shiftry's Tailwind switches on Brambleghast's Wind Rider (+1 Attack).
+S("Ch19 optional - the Thornwatch duel: Watch-Captain Brome's spar (map 870; single; no Bag).",
+  "THORNWATCH", "Brome", 0, 85, "Three hundred years of ringing that bell, and you're the first thing worth ringing it for.", [
+    P("BRONZONG", 80, "LEVITATE", "SITRUSBERRY", "RELAXED", "GYROBALL,ZENHEADBUTT,CONFUSERAY,STEALTHROCK", "PD", tr=True,
+      hard={"item": "LEFTOVERS", "moves": "GYROBALL,BODYPRESS,TRICKROOM,STEALTHROCK"}),
+    P("BRAMBLEGHAST", 80, "WINDRIDER", "SITRUSBERRY", "JOLLY", "POWERWHIP,SHADOWSNEAK,RAPIDSPIN,SPIKES", "A", only="nocasual",
+      hard={"item": "FOCUSSASH", "moves": "POWERWHIP,POLTERGEIST,RAPIDSPIN,SPIKES"}),
+    P("SHIFTRY", 81, "CHLOROPHYLL", "SITRUSBERRY", "JOLLY", "LEAFBLADE,KNOCKOFF,SUCKERPUNCH,TAILWIND", "A", only="hard"),
+    P("FERROTHORN", 81, "IRONBARBS", "ROCKYHELMET", "RELAXED", "POWERWHIP,GYROBALL,LEECHSEED,THUNDERWAVE", "BPD",
+      casual={"item": "SITRUSBERRY", "moves": "POWERWHIP,GYROBALL,INGRAIN,THUNDERWAVE"}),
+    P("HYDRAPPLE", 82, "REGENERATOR", "SITRUSBERRY", "MODEST", "FICKLEBEAM,GIGADRAIN,EARTHPOWER,RECOVER", "BS",
+      nick="Windfall", hard={"item": "LEFTOVERS", "moves": "FICKLEBEAM,GIGADRAIN,EARTHPOWER,NASTYPLOT"},
+      casual={"ab": "SUPERSWEETSYRUP", "moves": "DRAGONPULSE,GIGADRAIN,EARTHPOWER,SYRUPBOMB"}),
+], nobag=True)
 
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md

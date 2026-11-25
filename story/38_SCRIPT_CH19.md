@@ -196,7 +196,10 @@ V140 = 5.
 - **`:stand_between`** goes **through the Steamline** (925), between both hosts. There's one fight on each side (an Isenmar trencher and an Ashkaar soldier, Lv 83). Then comes the partner battle **PC + Sigrun** against a *mixed* pair, an Isenmar hirdman and an Ashkaar ember-rider who've both decided the PC is the enemy, on `:BLEED` (the Steamline). Sigrun: "They agree on something. Wonderful. It's us."
 ```
 Script: pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)   # or (:LEADER_MARISOL, "Marisol", 19) on :back_isenmar
-BATTLE: TrainerBattle.start(<pair A>, <pair B>) — tag double; the field as above; Lv 84.
+BATTLE (`:back_ashkaar`):  TrainerBattle.start(:ISENMAR_HIRDMAN, "Hjalmar", :ISENMAR_HIRDMAN, "Torunn") — tag double; `:FROZEN_LAKE`; Lv 83–84.
+BATTLE (`:back_isenmar`):  TrainerBattle.start(:ASHKAAR_EMBER_RIDER, "Vharn", :ASHKAAR_EMBER_RIDER, "Ashild") — tag double; `:DESERT`; Lv 83–84.
+BATTLE (`:stand_between`): TrainerBattle.start(:ISENMAR_HIRDMAN, "Styr", :ASHKAAR_EMBER_RIDER, "Kessa") — tag double; `:BLEED`; Lv 83–84.
+(The gauntlet singles before it: `[ISENMAR_TRENCHER,Ulfa]` and `[ISENMAR_TRENCHER,Bersi]` on 920; `[ASHKAAR_SOLDIER,Garrok]` and `[ASHKAAR_SOLDIER,Senna]` on 924; Ulfa and Garrok on 925.)
 (LOSE: whiteout to 930; the lines restart, and the choice is kept.)
 V140 = 6.
 ```
@@ -444,10 +447,10 @@ QUEST LOG: "The Festival of Champions" — Crownhaven. Seven days. Valen said he
 | **Gym 18** | Cool Trainer ×4, Ace Trainer ×2 | (GYM_PUZZLES) | 81–84 | as GYM_PUZZLES |
 
 **Story fights (new PBS):**
-- Partners: `LEADER_SIGRUN` partner v19 (Salamence, Dragapult, Haxorus; Lv 84) and `LEADER_MARISOL` partner v19 (Gyarados, Kingdra, Barraskewda; Lv 84).
-- The war pairs, Lv 83–84: `ISENMAR_TRENCHER` ×2, Thane's Hirdmen ×2, `ASHKAAR_SOLDIER` ×2, Ember-Riders ×2, and the mixed pair. New trainer types are needed if Isenmar's don't exist.
-- The Dominar's Toll pass-guard (`ASHKAAR_OFFICER`, Lv 84).
-- The Thornwatch captain (optional, Lv 82).
+- Partners (**in PBS**, one version each): `[LEADER_SIGRUN,Sigrun,19]` (Haxorus 83, Dragapult 84, Salamence "Dreamwing" 84) and `[LEADER_MARISOL,Marisol,19]` (Barraskewda 83, Kingdra 84 with Rain Dance, Gyarados "Lucky" 84).
+- The war pairs, Lv 82–84 (**in PBS**, no Bag; new trainer types `ISENMAR_TRENCHER`, `ISENMAR_HIRDMAN` "Thane's Hirdman", `ASHKAAR_EMBER_RIDER` "Ember-Rider"): Trenchers Ulfa and Bersi, Hirdmen Hjalmar + Torunn, Soldiers Garrok and Senna (`ASHKAAR_SOLDIER`), Ember-Riders Vharn + Ashild, and the mixed pair Hirdman Styr + Ember-Rider Kessa.
+- The Dominar's Toll pass-guard: `[ASHKAAR_OFFICER,Orrin]` (**in PBS**; Pyroar, Tyrantrum, Archaludon, Charizard 84; no Bag).
+- The Thornwatch captain (optional): `[THORNWATCH,Brome]` (**in PBS**; new type "Watch-Captain"; Bronzong, Brambleghast, Ferrothorn, Hydrapple "Windfall" 82; no Bag).
 
 **Bosses:** `:RESHIRAM_GLASS_DUNES` / `:KYOGRE_GLASS_DUNES` (existing), `:RESHIRAM_WYRMREST` (**new**, 110).
 

@@ -102,4 +102,5 @@
 - [x] Ch16: `[MERIDIAN_DIRECTORATE,Grane]` / `[...,Tull]` (Interlude IV, Lv 60–62, no Bag).
 - [x] Ch17: `SUMP_BARON` Mother Gutter (partner v17 + the ledger fight v0), `[MERIDIAN_DIRECTORATE,Mallory]` + `[...,Kade]` (the barricade tag double), `GILDER_AUTOMATON` the Terrace Warden.
 - [x] Ch18: `THORNGUARD` Captain Rowe (`[THORNGUARD,Captain Rowe]`, Lv 75–77).
-- [ ] Next, in order: Ch19 (partners v19, the lines, the Toll, Thornwatch), Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).
+- [x] Ch19: partners `[LEADER_SIGRUN,Sigrun,19]` / `[LEADER_MARISOL,Marisol,19]` rebuilt to the script; the lines (`ISENMAR_TRENCHER` Ulfa, Bersi; `ISENMAR_HIRDMAN` Hjalmar + Torunn, Styr; `ASHKAAR_SOLDIER` Garrok, Senna; `ASHKAAR_EMBER_RIDER` Vharn + Ashild, Kessa); the Toll `[ASHKAAR_OFFICER,Orrin]`; `[THORNWATCH,Brome]`. Maps 920–926 (mapgen/layouts/war.py) still call the Rev 18 "Soldier"/"Captain" blocks and stage the partner double on 926: re-wire them to the script.
+- [ ] Next, in order: Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).

@@ -605,6 +605,38 @@ SkillLevel = 100
 BattleBGM = Battle - Warden
 VictoryBGM = Battle victory leader
 #-------------------------------
+[THORNWATCH]
+Name = Watch-Captain
+Gender = Mixed
+BaseMoney = 64
+SkillLevel = 100
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ISENMAR_TRENCHER]
+Name = Isenmar Trencher
+Gender = Mixed
+BaseMoney = 48
+SkillLevel = 48
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ISENMAR_HIRDMAN]
+Name = Thane's Hirdman
+Gender = Mixed
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[ASHKAAR_EMBER_RIDER]
+Name = Ember-Rider
+Gender = Mixed
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
 [PARTNER_OGRE]
 Name = Gossamer
 Gender = Unknown
