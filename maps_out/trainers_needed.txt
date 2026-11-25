@@ -1,3 +1,14 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-145	:HOLLOW_GRUNT_M, "Grunt", :HOLLOW_GRUNT_F, "Grunt"
-145	:OCTAVE_VESPER, "Vesper", 0, :OCTAVE_SINGER, "Lyra", 0
+920	:ISENMAR_OFFICER, "Captain"
+920	:ISENMAR_SOLDIER_F, "Soldier"
+920	:ISENMAR_SOLDIER_M, "Soldier"
+924	:ASHKAAR_OFFICER, "Captain"
+924	:ASHKAAR_SOLDIER_F, "Soldier"
+924	:ASHKAAR_SOLDIER_M, "Soldier"
+925	:ASHKAAR_SOLDIER_M, "Soldier", 1
+925	:ISENMAR_SOLDIER_M, "Soldier", 1
+926	:ASHKAAR_OFFICER, "Captain", 1, :ASHKAAR_SOLDIER_M, "Soldier", 2
+926	:ASHKAAR_SOLDIER_F, "Soldier", 1
+926	:ISENMAR_OFFICER, "Captain", 1, :ASHKAAR_OFFICER, "Captain", 1
+926	:ISENMAR_OFFICER, "Captain", 1, :ISENMAR_SOLDIER_M, "Soldier", 2
+926	:ISENMAR_SOLDIER_F, "Soldier", 1

@@ -1,14 +1,12 @@
-# Ashkaar Siege Camp - Command Pavilion (928). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+# Ashkaar Siege Camp - Command Pavilion (928). WRITTEN BY layouts/war_craft.py (Wave 9) - edit that script.
 id: 928
 name: Ashkaar Siege Camp - Command Pavilion
 parent: 924
 biome: interior
 bgm: Route 9
-tone: [16, 0, -10, 0]
+tone: [16, 2, -10, 0]
 metadata:
   MapPosition: [0, 14, 14]
-raw: data/raw/928.npy
-tileset: 54
 events:
 - type: exit
   at: [11, 16]
@@ -34,8 +32,52 @@ events:
   name: Map table
   at: [11, 9]
   post: false
-  text: 'The western dunes in sand on a lacquer table: Skaldfast a white stone, the Siege Camp a red one, the Steamline a line of salt. Someone has drawn the bone-carters''
-    banner in the margin. Small.'
+  text: 'The western dunes in sand on a lacquer table: Skaldfast a white stone, the Siege Camp a red one, the Steamline a line of salt. Someone has drawn
+    the bone-carters'' banner in the margin. Small.'
+- type: sign
+  name: Oath-brazier
+  at: [6, 7]
+  post: false
+  text: The oath-brazier. Its flame is white at the heart. In Ashkaar, what is said over it is true, or the speaker is not long for the world.
+- type: sign
+  name: Empty stand
+  at: [12, 5]
+  post: false
+  text: 'A stand of black glass, empty. Something round and heavy sat here. The dust says: recently.'
+- type: sign
+  name: Cage
+  at: [9, 4]
+  post: false
+  text: An iron cage, the kind they keep hawks in, made larger.
+raw: data/raw/928.npy
+tileset: 59
+events:
+- type: exit
+  at: [11, 16]
+  link: WAR_TENT
+- type: exit
+  at: [12, 16]
+  link: WAR_TENT
+- type: event
+  name: Dominar Hrothgar
+  at: [12, 6]
+  pages:
+  - graphic: {sprite: trainer_LEADER_Giovanni, dir: down}
+    trigger: action
+    commands: ['Dominar Hrothgar: Speak plainly. The brazier is lit. In this tent a lie is a death sentence, and I have signed eleven.']
+- type: event
+  name: Anja (cage)
+  at: [6, 3]
+  pages:
+  - commands: []
+  - cond: {switch: WAR_SIDE_ASH}
+    commands: []
+- type: sign
+  name: Map table
+  at: [11, 9]
+  post: false
+  text: 'The western dunes in sand on a lacquer table: Skaldfast a white stone, the Siege Camp a red one, the Steamline a line of salt. Someone has drawn
+    the bone-carters'' banner in the margin. Small.'
 - type: sign
   name: Oath-brazier
   at: [6, 7]
