@@ -551,16 +551,22 @@ Crownhaven (480–519) isn't built. **[NEW]** = an event or map not in maps.json
 - **Bracket and exhibitions:** existing PBS via the Festival manager (`008_Festival_Data.rb`); the draw rules are NS §3.
 - **The Grounds Ladder** (new; 12 open challengers, Lv 88–90; original characters, one or two per kingdom, two Pokémon each, with the kingdom's field in their pavilion):
 
-| Kingdom | Challenger(s) |
-|---|---|
-| Elowen | a Briarwick weaver |
-| Isenmar | a Rimeholt harpooner |
-| Zenith | a Lumen streamer; a Cogsworth foreman |
-| Nadir | a Moon Market broker |
-| Ashkaar | a Wyrmrest rider |
-| Ossaria | a Cragholm lamp-runner (Pip's rival); a Duneholt well-keeper |
-| Antumbra | a Gravenmoor lantern-priest; a Vigil embalmer |
-| Crownhaven | a Wardguard; a Choir cantor |
+| Rung | Kingdom (pavilion field) | Challenger | PBS (Std; Hard adds a third) |
+|---|---|---|---|
+| 1 | Elowen (`:SILKWOOD`) | Weaver Maud, a Briarwick weaver | `[WEAVER,Maud]`: Spidops 87, Leavanny 88 |
+| 2 | Isenmar (`:FROZEN_LAKE`) | Harpooner Sten, a Rimeholt harpooner | `[HARPOONER,Sten]`: Dhelmise 87, Overqwil 88 |
+| 3 | Zenith (`:NEON_GRID`) | Streamer Kiri, a Lumen streamer | `[STREAMER,Kiri]`: Bellibolt 87, Pawmot 88 |
+| 4 | Zenith (`:FACTORY`) | Foreman Dunmore, a Cogsworth foreman | `[FOREMAN,Dunmore]`: Revavroom 87, Copperajah 88 |
+| 5 | Nadir (`:NEW_MOON`) | Moon Broker Silas, a Moon Market broker | `[MOON_BROKER,Silas]`: Alolan Persian 88, Gholdengo "Margin" 89 |
+| 6 | Ashkaar (`:DRAGONS_DEN`) | Wyrm Rider Tova, a Wyrmrest rider | `[WYRM_RIDER,Tova]`: Flygon 88, Garchomp 89 |
+| 7 | Ossaria (`:CRYSTAL_CAVERN`) | Lamp-Runner Tansy, a Cragholm lamp-runner (Pip's rival) | `[LAMP_RUNNER,Tansy]`: Ampharos 88, Glimmora 89 |
+| 8 | Ossaria (`:DESERT`) | Well-Keeper Nasim, a Duneholt well-keeper | `[WELL_KEEPER,Nasim]`: Clodsire 88, Palossand 89 |
+| 9 | Antumbra (`:HOLLOW_CATHEDRAL`) | Lantern Acolyte Osric, a Gravenmoor lantern-priest | `[LANTERN_ACOLYTE,Osric]`: Drifblim 88, Houndstone 89 |
+| 10 | Antumbra (`:HOLLOW_CATHEDRAL`) | Embalmer Thessaly, a Vigil embalmer | `[EMBALMER,Thessaly]`: Aromatisse 88 (Trick Room), Runerigus 89 |
+| 11 | Crownhaven (`:PRISM_ARENA` or none) | Wardguard Aldous | `[WARDGUARD,Aldous]`: Falinks 89, Gallade 90 |
+| 12 | Crownhaven (`:PRISM_ARENA` or none) | Cantor Anselm, a Choir cantor | `[CANTOR,Anselm]`: Wigglytuff 89, Noivern 90 |
+
+*(All twelve are in PBS, in three versions, no Bag; twelve new trainer types. Their lose lines are the PBS LoseText. The class "Lantern Acolyte" keeps Ysolde's "Lantern Priest" hers alone.)*
 
 **EventMons:** Eevee "Amen" + Eevium Z (the Octave), Indeedee "Usher" (gift, Lv 60), Alcremie "Festival" (gift, Lv 60).
 

@@ -2051,6 +2051,131 @@ S("Ch19 optional - the Thornwatch duel: Watch-Captain Brome's spar (map 870; sin
       casual={"ab": "SUPERSWEETSYRUP", "moves": "DRAGONPULSE,GIGADRAIN,EARTHPOWER,SYRUPBOMB"}),
 ], nobag=True)
 
+# --- Ch20: the Grounds Ladder (Day 3; story/39_SCRIPT_CH20.md "Rosters") --------------------------------------------
+# Twelve open challengers, one or two a kingdom, two Pokemon each (Hard three), Lv 87-90 under the Festival cap of 90,
+# no Bag; each fights in their kingdom's pavilion on that kingdom's field. Rungs in kingdom order, levels climbing.
+LADDER = []
+def rung(tt, nm, field, who, lose, mons):
+    LADDER.append((tt, nm))
+    S("Ch20 Grounds Ladder, rung %d - %s (pavilion field :%s)" % (len(LADDER), who, field), tt, nm, 0, 90, lose, mons, nobag=True)
+rung("WEAVER", "Maud", "SILKWOOD", "a Briarwick weaver (Elowen). Swarm is always on in the silk and Bug is x1.5; String Shot never misses",
+     "Dropped a stitch. Only the one. It was the important one.", [
+    P("SPIDOPS", 87, "INSOMNIA", "SITRUSBERRY", "IMPISH", "LUNGE,KNOCKOFF,STICKYWEB,SILKTRAP", "BPD",
+      hard={"ab": "STAKEOUT", "moves": "FIRSTIMPRESSION,KNOCKOFF,STICKYWEB,CIRCLETHROW"},
+      casual={"moves": "LUNGE,THROATCHOP,STRINGSHOT,SILKTRAP"}),
+    P("ARIADOS", 87, "SWARM", "FOCUSSASH", "ADAMANT", "LEECHLIFE,POISONJAB,SUCKERPUNCH,TOXICTHREAD", "A", only="hard"),
+    P("LEAVANNY", 88, "SWARM", "SITRUSBERRY", "JOLLY", "XSCISSOR,LEAFBLADE,SHADOWCLAW,STRINGSHOT", "A",
+      hard={"item": "LIFEORB", "moves": "XSCISSOR,LEAFBLADE,KNOCKOFF,SWORDSDANCE"}),
+])
+rung("HARPOONER", "Sten", "FROZEN_LAKE", "a Rimeholt harpooner (Isenmar). Rapid Spin x1.5 and it slides; Aqua Jet slides",
+     "Clean miss. First one since the thaw.", [
+    P("DHELMISE", 87, "STEELWORKER", "SITRUSBERRY", "ADAMANT", "ANCHORSHOT,POWERWHIP,PHANTOMFORCE,RAPIDSPIN", "HA",
+      hard={"item": "ASSAULTVEST", "moves": "ANCHORSHOT,POWERWHIP,POLTERGEIST,RAPIDSPIN"},
+      casual={"moves": "ANCHORSHOT,SHADOWCLAW,RAPIDSPIN,WHIRLPOOL"}),
+    P("CLAWITZER", 87, "MEGALAUNCHER", "SITRUSBERRY", "MODEST", "WATERPULSE,AURASPHERE,DARKPULSE,ICEBEAM", "HS", only="hard"),
+    P("OVERQWIL", 88, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "BARBBARRAGE,CRUNCH,LIQUIDATION,AQUAJET", "A",
+      hard={"item": "LIFEORB", "moves": "BARBBARRAGE,CRUNCH,LIQUIDATION,SWORDSDANCE"}),
+])
+rung("STREAMER", "Kiri", "NEON_GRID", "a Lumen streamer (Zenith). Electric x1.3 on the live board",
+     "Chat. Chat, do NOT clip that.", [
+    P("BELLIBOLT", 87, "ELECTROMORPHOSIS", "SITRUSBERRY", "MODEST", "THUNDERBOLT,MUDDYWATER,ACIDSPRAY,SLACKOFF", "BS",
+      hard={"item": "LEFTOVERS"}, casual={"ab": "STATIC", "moves": "DISCHARGE,MUDDYWATER,ACIDSPRAY,SLACKOFF"}),
+    # Hard only: the camera drone.
+    P("VIKAVOLT", 87, "LEVITATE", "SITRUSBERRY", "MODEST", "THUNDERBOLT,BUGBUZZ,ENERGYBALL,STICKYWEB", "BS", only="hard"),
+    P("PAWMOT", 88, "VOLTABSORB", "SITRUSBERRY", "JOLLY", "DOUBLESHOCK,CLOSECOMBAT,ICEPUNCH,MACHPUNCH", "A",
+      hard={"ab": "IRONFIST", "moves": "DOUBLESHOCK,CLOSECOMBAT,ICEPUNCH,REVIVALBLESSING"},
+      casual={"moves": "THUNDERPUNCH,CLOSECOMBAT,ICEPUNCH,MACHPUNCH"}),
+])
+rung("FOREMAN", "Dunmore", "FACTORY", "a Cogsworth foreman (Zenith). Iron Head x1.5 on the works floor",
+     "Shift's over. Somebody sign my card.", [
+    P("REVAVROOM", 87, "OVERCOAT", "SITRUSBERRY", "ADAMANT", "IRONHEAD,GUNKSHOT,HIGHHORSEPOWER,SPINOUT", "A",
+      hard={"ab": "FILTER", "moves": "IRONHEAD,GUNKSHOT,HIGHHORSEPOWER,SHIFTGEAR"},
+      casual={"moves": "IRONHEAD,POISONJAB,BULLDOZE,SCREECH"}),
+    P("AGGRON", 87, "ROCKHEAD", "SITRUSBERRY", "ADAMANT", "HEADSMASH,IRONHEAD,EARTHQUAKE,ICEPUNCH", "HA", only="hard"),
+    P("COPPERAJAH", 88, "SHEERFORCE", "SITRUSBERRY", "ADAMANT", "IRONHEAD,HIGHHORSEPOWER,ROCKSLIDE,PLAYROUGH", "HA",
+      hard={"item": "LIFEORB"}, casual={"ab": "HEAVYMETAL", "moves": "IRONHEAD,BULLDOZE,ROCKSLIDE,PLAYROUGH"}),
+])
+rung("MOON_BROKER", "Silas", "NEW_MOON", "a Moon Market broker (Nadir). Dark is at home under the New Moon",
+     "Well. That's my margin gone.", [
+    P("PERSIAN", 88, "FURCOAT", "SITRUSBERRY", "TIMID", "DARKPULSE,POWERGEM,THUNDERBOLT,PARTINGSHOT", "S", form=1,
+      hard={"item": "LEFTOVERS", "moves": "DARKPULSE,POWERGEM,NASTYPLOT,PARTINGSHOT"},
+      casual={"ab": "TECHNICIAN", "moves": "DARKPULSE,POWERGEM,PAYDAY,SNARL"}),
+    P("MALAMAR", 88, "CONTRARY", "SITRUSBERRY", "ADAMANT", "SUPERPOWER,KNOCKOFF,PSYCHOCUT,LIQUIDATION", "BA", only="hard"),
+    P("GHOLDENGO", 89, "GOODASGOLD", "SITRUSBERRY", "MODEST", "MAKEITRAIN,SHADOWBALL,THUNDERBOLT,RECOVER", "BS",
+      nick="Margin", hard={"item": "LEFTOVERS", "moves": "MAKEITRAIN,SHADOWBALL,FOCUSBLAST,NASTYPLOT"},
+      casual={"moves": "FLASHCANNON,SHADOWBALL,THUNDERBOLT,RECOVER"}),
+])
+rung("WYRM_RIDER", "Tova", "DRAGONS_DEN", "a Wyrmrest rider (Ashkaar). Dragon is at home in the Den",
+     "Sigrun'll hear I lost before I've landed. Worth it.", [
+    P("FLYGON", 88, "LEVITATE", "SITRUSBERRY", "JOLLY", "DRAGONCLAW,EARTHQUAKE,STONEEDGE,UTURN", "A",
+      hard={"item": "LUMBERRY", "moves": "DRAGONCLAW,EARTHQUAKE,STONEEDGE,DRAGONDANCE"},
+      casual={"moves": "DRAGONCLAW,BULLDOZE,ROCKSLIDE,UTURN"}),
+    P("DRACOVISH", 88, "STRONGJAW", "SITRUSBERRY", "ADAMANT", "FISHIOUSREND,PSYCHICFANGS,CRUNCH,DRAGONRUSH", "A", only="hard"),
+    P("GARCHOMP", 89, "ROUGHSKIN", "SITRUSBERRY", "JOLLY", "DRAGONCLAW,EARTHQUAKE,FIREFANG,STONEEDGE", "A",
+      hard={"item": "LIFEORB", "moves": "SCALESHOT,EARTHQUAKE,STONEEDGE,SWORDSDANCE"},
+      casual={"moves": "DRAGONCLAW,BULLDOZE,FIREFANG,ROCKSLIDE"}),
+])
+rung("LAMP_RUNNER", "Tansy", "CRYSTAL_CAVERN", "a Cragholm lamp-runner, Pip's rival (Ossaria). Light moves keep the cavern lit: Power Gem, Signal Beam, Dazzling Gleam",
+     "Tell Pip I got to rung seven. Tell him LOUDLY.", [
+    P("AMPHAROS", 88, "STATIC", "SITRUSBERRY", "MODEST", "THUNDERBOLT,POWERGEM,SIGNALBEAM,THUNDERWAVE", "BS",
+      hard={"item": "LIFEORB", "moves": "THUNDERBOLT,POWERGEM,FOCUSBLAST,VOLTSWITCH"},
+      casual={"moves": "DISCHARGE,POWERGEM,SIGNALBEAM,CONFUSERAY"}),
+    P("GARGANACL", 88, "PURIFYINGSALT", "LEFTOVERS", "CAREFUL", "SALTCURE,BODYPRESS,RECOVER,IRONDEFENSE", "SPD", only="hard"),
+    P("GLIMMORA", 89, "TOXICDEBRIS", "SITRUSBERRY", "MODEST", "POWERGEM,SLUDGEWAVE,EARTHPOWER,DAZZLINGGLEAM", "S",
+      hard={"item": "FOCUSSASH", "moves": "POWERGEM,SLUDGEWAVE,EARTHPOWER,SPIKYSHIELD"},
+      casual={"moves": "POWERGEM,SLUDGEBOMB,MUDSHOT,DAZZLINGGLEAM"}),
+])
+rung("WELL_KEEPER", "Nasim", "DESERT", "a Duneholt well-keeper (Ossaria). Water Absorb at the well; Scorching Sands x1.5; Shore Up also gives +1 Defense",
+     "The well's still full. That's the only score I keep.", [
+    P("CLODSIRE", 88, "WATERABSORB", "SITRUSBERRY", "CAREFUL", "EARTHQUAKE,POISONJAB,TOXIC,STEALTHROCK", "SPD",
+      hard={"ab": "UNAWARE", "item": "LEFTOVERS", "moves": "EARTHQUAKE,GUNKSHOT,CURSE,REST"},
+      casual={"moves": "BULLDOZE,POISONJAB,MUDSHOT,AMNESIA"}),
+    # Hard only: the cactus at the well. Water Absorb; Sucker Punch behind a Focus Sash.
+    P("CACTURNE", 88, "WATERABSORB", "FOCUSSASH", "ADAMANT", "SEEDBOMB,SUCKERPUNCH,DRAINPUNCH,SWORDSDANCE", "A", only="hard"),
+    P("PALOSSAND", 89, "WATERCOMPACTION", "SITRUSBERRY", "MODEST", "SCORCHINGSANDS,SHADOWBALL,SHOREUP,GIGADRAIN", "BS",
+      hard={"item": "LEFTOVERS"}, casual={"moves": "SCORCHINGSANDS,SHADOWBALL,SANDTOMB,GIGADRAIN"}),
+])
+rung("LANTERN_ACOLYTE", "Osric", "HOLLOW_CATHEDRAL", "a Gravenmoor lantern-priest (Antumbra). Ghost x1.5 in the nave; Will-O-Wisp never misses",
+     "The lantern's still lit. I checked while you were winning.", [
+    P("DRIFBLIM", 88, "AFTERMATH", "SITRUSBERRY", "MODEST", "SHADOWBALL,THUNDERBOLT,WILLOWISP,STRENGTHSAP", "HS",
+      hard={"ab": "UNBURDEN", "moves": "SHADOWBALL,THUNDERBOLT,CALMMIND,STRENGTHSAP"},
+      casual={"moves": "HEX,AIRCUTTER,WILLOWISP,TAILWIND"}),
+    P("POLTEAGEIST", 88, "CURSEDBODY", "WHITEHERB", "MODEST", "SHELLSMASH,SHADOWBALL,STOREDPOWER,GIGADRAIN", "S", only="hard"),
+    # The graveyard's dog. Last Respects grows when its partner has fallen.
+    P("HOUNDSTONE", 89, "SANDRUSH", "SITRUSBERRY", "ADAMANT", "LASTRESPECTS,PLAYROUGH,CRUNCH,BODYPRESS", "HA",
+      hard={"ab": "FLUFFY", "item": "LEFTOVERS"}, casual={"moves": "PHANTOMFORCE,PLAYROUGH,CRUNCH,ROAR"}),
+])
+rung("EMBALMER", "Thessaly", "HOLLOW_CATHEDRAL", "a Vigil embalmer (Antumbra). A Trick Room pair: the perfumer sets it, the mummy walks in it",
+     "I've laid out better than me. Gently, now.", [
+    P("AROMATISSE", 88, "AROMAVEIL", "SITRUSBERRY", "QUIET", "TRICKROOM,MOONBLAST,PSYCHIC,WISH", "HS", tr=True,
+      hard={"item": "MENTALHERB", "moves": "TRICKROOM,MOONBLAST,THUNDERBOLT,WISH"},
+      casual={"moves": "MOONBLAST,PSYCHIC,AROMATHERAPY,CHARM"}),
+    P("GOURGEIST", 88, "FRISK", "SITRUSBERRY", "BRAVE", "POLTERGEIST,POWERWHIP,WILLOWISP,LEECHSEED", "HA", form=3, tr=True,
+      only="hard"),
+    P("RUNERIGUS", 89, "WANDERINGSPIRIT", "SITRUSBERRY", "BRAVE", "POLTERGEIST,EARTHQUAKE,BODYPRESS,WILLOWISP", "HA", tr=True,
+      hard={"item": "LEFTOVERS"}, casual={"moves": "SHADOWCLAW,BULLDOZE,BRUTALSWING,IRONDEFENSE"}),
+])
+rung("WARDGUARD", "Aldous", "PRISM_ARENA", "a Wardguard (Crownhaven). No kingdom's Plate flies over the Wardguard's pavilion: the arena's own cycle, or no field",
+     "Mind the forty-third step on your way up. Tradition.", [
+    P("FALINKS", 89, "DEFIANT", "SITRUSBERRY", "JOLLY", "CLOSECOMBAT,MEGAHORN,ROCKSLIDE,THROATCHOP", "A",
+      hard={"moves": "CLOSECOMBAT,MEGAHORN,ROCKSLIDE,NORETREAT"},
+      casual={"ab": "BATTLEARMOR", "moves": "BRICKBREAK,MEGAHORN,ROCKTOMB,THROATCHOP"}),
+    P("ESCAVALIER", 89, "OVERCOAT", "SITRUSBERRY", "ADAMANT", "MEGAHORN,IRONHEAD,DRILLRUN,KNOCKOFF", "HA", only="hard"),
+    P("GALLADE", 90, "STEADFAST", "SITRUSBERRY", "JOLLY", "CLOSECOMBAT,PSYCHOCUT,NIGHTSLASH,LEAFBLADE", "A",
+      hard={"ab": "JUSTIFIED", "item": "LUMBERRY", "moves": "CLOSECOMBAT,PSYCHOCUT,NIGHTSLASH,SWORDSDANCE"},
+      casual={"moves": "BRICKBREAK,PSYCHOCUT,NIGHTSLASH,LEAFBLADE"}),
+])
+rung("CANTOR", "Anselm", "PRISM_ARENA", "a Choir cantor (Crownhaven), the top rung. Sound: Hyper Voice and Boomburst",
+     "...And rest. Four bars. You've earned them.", [
+    P("WIGGLYTUFF", 89, "COMPETITIVE", "SITRUSBERRY", "MODEST", "HYPERVOICE,DAZZLINGGLEAM,FLAMETHROWER,THUNDERWAVE", "HS",
+      hard={"item": "THROATSPRAY", "moves": "HYPERVOICE,DAZZLINGGLEAM,FLAMETHROWER,SING"},
+      casual={"ab": "CUTECHARM", "moves": "ECHOEDVOICE,DISARMINGVOICE,FLAMETHROWER,CHARM"}),
+    P("ALTARIA", 89, "CLOUDNINE", "SITRUSBERRY", "MODEST", "HYPERVOICE,DRAGONPULSE,FLAMETHROWER,ROOST", "BS", only="hard"),
+    P("NOIVERN", 90, "INFILTRATOR", "SITRUSBERRY", "TIMID", "BOOMBURST,HURRICANE,DRAGONPULSE,FLAMETHROWER", "S",
+      hard={"item": "THROATSPRAY", "moves": "BOOMBURST,HURRICANE,DRACOMETEOR,FLAMETHROWER"},
+      casual={"ab": "FRISK", "moves": "HYPERVOICE,AIRSLASH,DRAGONPULSE,SCREECH"}),
+])
+
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
 

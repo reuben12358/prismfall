@@ -29196,6 +29196,697 @@ Pokemon = HYDRAPPLE,78
     Nature = MODEST
     IV = 20
     EV = 0
+# Ch20 Grounds Ladder, rung 1 - a Briarwick weaver (Elowen). Swarm is always on in the silk and Bug is x1.5; String Shot never misses (pavilion field :SILKWOOD)
+#-------------------------------
+[WEAVER,Maud]
+LoseText = Dropped a stitch. Only the one. It was the important one.
+Pokemon = SPIDOPS,87
+    Moves = LUNGE,KNOCKOFF,STICKYWEB,SILKTRAP
+    Ability = INSOMNIA
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 31
+Pokemon = LEAVANNY,88
+    Moves = XSCISSOR,LEAFBLADE,SHADOWCLAW,STRINGSHOT
+    Ability = SWARM
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+#-------------------------------
+[WEAVER,Maud,100]
+LoseText = Dropped a stitch. Only the one. It was the important one.
+Pokemon = SPIDOPS,88
+    Moves = FIRSTIMPRESSION,KNOCKOFF,STICKYWEB,CIRCLETHROW
+    Ability = STAKEOUT
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 31
+    EV = 252,4,252,0,0,0
+Pokemon = ARIADOS,87
+    Moves = LEECHLIFE,POISONJAB,SUCKERPUNCH,TOXICTHREAD
+    Ability = SWARM
+    Item = FOCUSSASH
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = LEAVANNY,89
+    Moves = XSCISSOR,LEAFBLADE,KNOCKOFF,SWORDSDANCE
+    Ability = SWARM
+    Item = LIFEORB
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+#-------------------------------
+[WEAVER,Maud,200]
+LoseText = Dropped a stitch. Only the one. It was the important one.
+Pokemon = SPIDOPS,83
+    Moves = LUNGE,THROATCHOP,STRINGSHOT,SILKTRAP
+    Ability = INSOMNIA
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 20
+    EV = 0
+Pokemon = LEAVANNY,84
+    Moves = XSCISSOR,LEAFBLADE,SHADOWCLAW,STRINGSHOT
+    Ability = SWARM
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 2 - a Rimeholt harpooner (Isenmar). Rapid Spin x1.5 and it slides; Aqua Jet slides (pavilion field :FROZEN_LAKE)
+#-------------------------------
+[HARPOONER,Sten]
+LoseText = Clean miss. First one since the thaw.
+Pokemon = DHELMISE,87
+    Moves = ANCHORSHOT,POWERWHIP,PHANTOMFORCE,RAPIDSPIN
+    Ability = STEELWORKER
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = OVERQWIL,88
+    Moves = BARBBARRAGE,CRUNCH,LIQUIDATION,AQUAJET
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[HARPOONER,Sten,100]
+LoseText = Clean miss. First one since the thaw.
+Pokemon = DHELMISE,88
+    Moves = ANCHORSHOT,POWERWHIP,POLTERGEIST,RAPIDSPIN
+    Ability = STEELWORKER
+    Item = ASSAULTVEST
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+Pokemon = CLAWITZER,87
+    Moves = WATERPULSE,AURASPHERE,DARKPULSE,ICEBEAM
+    Ability = MEGALAUNCHER
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,0,4,252,0
+Pokemon = OVERQWIL,89
+    Moves = BARBBARRAGE,CRUNCH,LIQUIDATION,SWORDSDANCE
+    Ability = INTIMIDATE
+    Item = LIFEORB
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+#-------------------------------
+[HARPOONER,Sten,200]
+LoseText = Clean miss. First one since the thaw.
+Pokemon = DHELMISE,83
+    Moves = ANCHORSHOT,SHADOWCLAW,RAPIDSPIN,WHIRLPOOL
+    Ability = STEELWORKER
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+Pokemon = OVERQWIL,84
+    Moves = BARBBARRAGE,CRUNCH,LIQUIDATION,AQUAJET
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 3 - a Lumen streamer (Zenith). Electric x1.3 on the live board (pavilion field :NEON_GRID)
+#-------------------------------
+[STREAMER,Kiri]
+LoseText = Chat. Chat, do NOT clip that.
+Pokemon = BELLIBOLT,87
+    Moves = THUNDERBOLT,MUDDYWATER,ACIDSPRAY,SLACKOFF
+    Ability = ELECTROMORPHOSIS
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = PAWMOT,88
+    Moves = DOUBLESHOCK,CLOSECOMBAT,ICEPUNCH,MACHPUNCH
+    Ability = VOLTABSORB
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+#-------------------------------
+[STREAMER,Kiri,100]
+LoseText = Chat. Chat, do NOT clip that.
+Pokemon = BELLIBOLT,88
+    Moves = THUNDERBOLT,MUDDYWATER,ACIDSPRAY,SLACKOFF
+    Ability = ELECTROMORPHOSIS
+    Item = LEFTOVERS
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = VIKAVOLT,87
+    Moves = THUNDERBOLT,BUGBUZZ,ENERGYBALL,STICKYWEB
+    Ability = LEVITATE
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = PAWMOT,89
+    Moves = DOUBLESHOCK,CLOSECOMBAT,ICEPUNCH,REVIVALBLESSING
+    Ability = IRONFIST
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+#-------------------------------
+[STREAMER,Kiri,200]
+LoseText = Chat. Chat, do NOT clip that.
+Pokemon = BELLIBOLT,83
+    Moves = DISCHARGE,MUDDYWATER,ACIDSPRAY,SLACKOFF
+    Ability = STATIC
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = PAWMOT,84
+    Moves = THUNDERPUNCH,CLOSECOMBAT,ICEPUNCH,MACHPUNCH
+    Ability = VOLTABSORB
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 4 - a Cogsworth foreman (Zenith). Iron Head x1.5 on the works floor (pavilion field :FACTORY)
+#-------------------------------
+[FOREMAN,Dunmore]
+LoseText = Shift's over. Somebody sign my card.
+Pokemon = REVAVROOM,87
+    Moves = IRONHEAD,GUNKSHOT,HIGHHORSEPOWER,SPINOUT
+    Ability = OVERCOAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = COPPERAJAH,88
+    Moves = IRONHEAD,HIGHHORSEPOWER,ROCKSLIDE,PLAYROUGH
+    Ability = SHEERFORCE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[FOREMAN,Dunmore,100]
+LoseText = Shift's over. Somebody sign my card.
+Pokemon = REVAVROOM,88
+    Moves = IRONHEAD,GUNKSHOT,HIGHHORSEPOWER,SHIFTGEAR
+    Ability = FILTER
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = AGGRON,87
+    Moves = HEADSMASH,IRONHEAD,EARTHQUAKE,ICEPUNCH
+    Ability = ROCKHEAD
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+Pokemon = COPPERAJAH,89
+    Moves = IRONHEAD,HIGHHORSEPOWER,ROCKSLIDE,PLAYROUGH
+    Ability = SHEERFORCE
+    Item = LIFEORB
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[FOREMAN,Dunmore,200]
+LoseText = Shift's over. Somebody sign my card.
+Pokemon = REVAVROOM,83
+    Moves = IRONHEAD,POISONJAB,BULLDOZE,SCREECH
+    Ability = OVERCOAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+Pokemon = COPPERAJAH,84
+    Moves = IRONHEAD,BULLDOZE,ROCKSLIDE,PLAYROUGH
+    Ability = HEAVYMETAL
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 5 - a Moon Market broker (Nadir). Dark is at home under the New Moon (pavilion field :NEW_MOON)
+#-------------------------------
+[MOON_BROKER,Silas]
+LoseText = Well. That's my margin gone.
+Pokemon = PERSIAN,88
+    Form = 1
+    Moves = DARKPULSE,POWERGEM,THUNDERBOLT,PARTINGSHOT
+    Ability = FURCOAT
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 31
+Pokemon = GHOLDENGO,89
+    Name = Margin
+    Moves = MAKEITRAIN,SHADOWBALL,THUNDERBOLT,RECOVER
+    Ability = GOODASGOLD
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+#-------------------------------
+[MOON_BROKER,Silas,100]
+LoseText = Well. That's my margin gone.
+Pokemon = PERSIAN,89
+    Form = 1
+    Moves = DARKPULSE,POWERGEM,NASTYPLOT,PARTINGSHOT
+    Ability = FURCOAT
+    Item = LEFTOVERS
+    Nature = TIMID
+    IV = 31
+    EV = 4,0,0,252,252,0
+Pokemon = MALAMAR,88
+    Moves = SUPERPOWER,KNOCKOFF,PSYCHOCUT,LIQUIDATION
+    Ability = CONTRARY
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,4,0,0,0
+Pokemon = GHOLDENGO,90
+    Name = Margin
+    Moves = MAKEITRAIN,SHADOWBALL,FOCUSBLAST,NASTYPLOT
+    Ability = GOODASGOLD
+    Item = LEFTOVERS
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+#-------------------------------
+[MOON_BROKER,Silas,200]
+LoseText = Well. That's my margin gone.
+Pokemon = PERSIAN,84
+    Form = 1
+    Moves = DARKPULSE,POWERGEM,PAYDAY,SNARL
+    Ability = TECHNICIAN
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 20
+    EV = 0
+Pokemon = GHOLDENGO,85
+    Name = Margin
+    Moves = FLASHCANNON,SHADOWBALL,THUNDERBOLT,RECOVER
+    Ability = GOODASGOLD
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 6 - a Wyrmrest rider (Ashkaar). Dragon is at home in the Den (pavilion field :DRAGONS_DEN)
+#-------------------------------
+[WYRM_RIDER,Tova]
+LoseText = Sigrun'll hear I lost before I've landed. Worth it.
+Pokemon = FLYGON,88
+    Moves = DRAGONCLAW,EARTHQUAKE,STONEEDGE,UTURN
+    Ability = LEVITATE
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+Pokemon = GARCHOMP,89
+    Moves = DRAGONCLAW,EARTHQUAKE,FIREFANG,STONEEDGE
+    Ability = ROUGHSKIN
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+#-------------------------------
+[WYRM_RIDER,Tova,100]
+LoseText = Sigrun'll hear I lost before I've landed. Worth it.
+Pokemon = FLYGON,89
+    Moves = DRAGONCLAW,EARTHQUAKE,STONEEDGE,DRAGONDANCE
+    Ability = LEVITATE
+    Item = LUMBERRY
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = DRACOVISH,88
+    Moves = FISHIOUSREND,PSYCHICFANGS,CRUNCH,DRAGONRUSH
+    Ability = STRONGJAW
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = GARCHOMP,90
+    Moves = SCALESHOT,EARTHQUAKE,STONEEDGE,SWORDSDANCE
+    Ability = ROUGHSKIN
+    Item = LIFEORB
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+#-------------------------------
+[WYRM_RIDER,Tova,200]
+LoseText = Sigrun'll hear I lost before I've landed. Worth it.
+Pokemon = FLYGON,84
+    Moves = DRAGONCLAW,BULLDOZE,ROCKSLIDE,UTURN
+    Ability = LEVITATE
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+Pokemon = GARCHOMP,85
+    Moves = DRAGONCLAW,BULLDOZE,FIREFANG,ROCKSLIDE
+    Ability = ROUGHSKIN
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 7 - a Cragholm lamp-runner, Pip's rival (Ossaria). Light moves keep the cavern lit: Power Gem, Signal Beam, Dazzling Gleam (pavilion field :CRYSTAL_CAVERN)
+#-------------------------------
+[LAMP_RUNNER,Tansy]
+LoseText = Tell Pip I got to rung seven. Tell him LOUDLY.
+Pokemon = AMPHAROS,88
+    Moves = THUNDERBOLT,POWERGEM,SIGNALBEAM,THUNDERWAVE
+    Ability = STATIC
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = GLIMMORA,89
+    Moves = POWERGEM,SLUDGEWAVE,EARTHPOWER,DAZZLINGGLEAM
+    Ability = TOXICDEBRIS
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+#-------------------------------
+[LAMP_RUNNER,Tansy,100]
+LoseText = Tell Pip I got to rung seven. Tell him LOUDLY.
+Pokemon = AMPHAROS,89
+    Moves = THUNDERBOLT,POWERGEM,FOCUSBLAST,VOLTSWITCH
+    Ability = STATIC
+    Item = LIFEORB
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = GARGANACL,88
+    Moves = SALTCURE,BODYPRESS,RECOVER,IRONDEFENSE
+    Ability = PURIFYINGSALT
+    Item = LEFTOVERS
+    Nature = CAREFUL
+    IV = 31
+    EV = 252,0,0,4,0,252
+Pokemon = GLIMMORA,90
+    Moves = POWERGEM,SLUDGEWAVE,EARTHPOWER,SPIKYSHIELD
+    Ability = TOXICDEBRIS
+    Item = FOCUSSASH
+    Nature = MODEST
+    IV = 31
+    EV = 4,0,0,252,252,0
+#-------------------------------
+[LAMP_RUNNER,Tansy,200]
+LoseText = Tell Pip I got to rung seven. Tell him LOUDLY.
+Pokemon = AMPHAROS,84
+    Moves = DISCHARGE,POWERGEM,SIGNALBEAM,CONFUSERAY
+    Ability = STATIC
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = GLIMMORA,85
+    Moves = POWERGEM,SLUDGEBOMB,MUDSHOT,DAZZLINGGLEAM
+    Ability = TOXICDEBRIS
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 8 - a Duneholt well-keeper (Ossaria). Water Absorb at the well; Scorching Sands x1.5; Shore Up also gives +1 Defense (pavilion field :DESERT)
+#-------------------------------
+[WELL_KEEPER,Nasim]
+LoseText = The well's still full. That's the only score I keep.
+Pokemon = CLODSIRE,88
+    Moves = EARTHQUAKE,POISONJAB,TOXIC,STEALTHROCK
+    Ability = WATERABSORB
+    Item = SITRUSBERRY
+    Nature = CAREFUL
+    IV = 31
+Pokemon = PALOSSAND,89
+    Moves = SCORCHINGSANDS,SHADOWBALL,SHOREUP,GIGADRAIN
+    Ability = WATERCOMPACTION
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+#-------------------------------
+[WELL_KEEPER,Nasim,100]
+LoseText = The well's still full. That's the only score I keep.
+Pokemon = CLODSIRE,89
+    Moves = EARTHQUAKE,GUNKSHOT,CURSE,REST
+    Ability = UNAWARE
+    Item = LEFTOVERS
+    Nature = CAREFUL
+    IV = 31
+    EV = 252,0,0,4,0,252
+Pokemon = CACTURNE,88
+    Moves = SEEDBOMB,SUCKERPUNCH,DRAINPUNCH,SWORDSDANCE
+    Ability = WATERABSORB
+    Item = FOCUSSASH
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = PALOSSAND,90
+    Moves = SCORCHINGSANDS,SHADOWBALL,SHOREUP,GIGADRAIN
+    Ability = WATERCOMPACTION
+    Item = LEFTOVERS
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+#-------------------------------
+[WELL_KEEPER,Nasim,200]
+LoseText = The well's still full. That's the only score I keep.
+Pokemon = CLODSIRE,84
+    Moves = BULLDOZE,POISONJAB,MUDSHOT,AMNESIA
+    Ability = WATERABSORB
+    Item = SITRUSBERRY
+    Nature = CAREFUL
+    IV = 20
+    EV = 0
+Pokemon = PALOSSAND,85
+    Moves = SCORCHINGSANDS,SHADOWBALL,SANDTOMB,GIGADRAIN
+    Ability = WATERCOMPACTION
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 9 - a Gravenmoor lantern-priest (Antumbra). Ghost x1.5 in the nave; Will-O-Wisp never misses (pavilion field :HOLLOW_CATHEDRAL)
+#-------------------------------
+[LANTERN_ACOLYTE,Osric]
+LoseText = The lantern's still lit. I checked while you were winning.
+Pokemon = DRIFBLIM,88
+    Moves = SHADOWBALL,THUNDERBOLT,WILLOWISP,STRENGTHSAP
+    Ability = AFTERMATH
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = HOUNDSTONE,89
+    Moves = LASTRESPECTS,PLAYROUGH,CRUNCH,BODYPRESS
+    Ability = SANDRUSH
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[LANTERN_ACOLYTE,Osric,100]
+LoseText = The lantern's still lit. I checked while you were winning.
+Pokemon = DRIFBLIM,89
+    Moves = SHADOWBALL,THUNDERBOLT,CALMMIND,STRENGTHSAP
+    Ability = UNBURDEN
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,0,4,252,0
+Pokemon = POLTEAGEIST,88
+    Moves = SHELLSMASH,SHADOWBALL,STOREDPOWER,GIGADRAIN
+    Ability = CURSEDBODY
+    Item = WHITEHERB
+    Nature = MODEST
+    IV = 31
+    EV = 4,0,0,252,252,0
+Pokemon = HOUNDSTONE,90
+    Moves = LASTRESPECTS,PLAYROUGH,CRUNCH,BODYPRESS
+    Ability = FLUFFY
+    Item = LEFTOVERS
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[LANTERN_ACOLYTE,Osric,200]
+LoseText = The lantern's still lit. I checked while you were winning.
+Pokemon = DRIFBLIM,84
+    Moves = HEX,AIRCUTTER,WILLOWISP,TAILWIND
+    Ability = AFTERMATH
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = HOUNDSTONE,85
+    Moves = PHANTOMFORCE,PLAYROUGH,CRUNCH,ROAR
+    Ability = SANDRUSH
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 10 - a Vigil embalmer (Antumbra). A Trick Room pair: the perfumer sets it, the mummy walks in it (pavilion field :HOLLOW_CATHEDRAL)
+#-------------------------------
+[EMBALMER,Thessaly]
+LoseText = I've laid out better than me. Gently, now.
+Pokemon = AROMATISSE,88
+    Moves = TRICKROOM,MOONBLAST,PSYCHIC,WISH
+    Ability = AROMAVEIL
+    Item = SITRUSBERRY
+    Nature = QUIET
+    IV = 31
+Pokemon = RUNERIGUS,89
+    Moves = POLTERGEIST,EARTHQUAKE,BODYPRESS,WILLOWISP
+    Ability = WANDERINGSPIRIT
+    Item = SITRUSBERRY
+    Nature = BRAVE
+    IV = 31
+#-------------------------------
+[EMBALMER,Thessaly,100]
+LoseText = I've laid out better than me. Gently, now.
+Pokemon = AROMATISSE,89
+    Moves = TRICKROOM,MOONBLAST,THUNDERBOLT,WISH
+    Ability = AROMAVEIL
+    Item = MENTALHERB
+    Nature = QUIET
+    IV = 31,31,31,0,31,31
+    EV = 252,0,0,4,252,0
+Pokemon = GOURGEIST,88
+    Form = 3
+    Moves = POLTERGEIST,POWERWHIP,WILLOWISP,LEECHSEED
+    Ability = FRISK
+    Item = SITRUSBERRY
+    Nature = BRAVE
+    IV = 31,31,31,0,31,31
+    EV = 252,252,0,0,0,4
+Pokemon = RUNERIGUS,90
+    Moves = POLTERGEIST,EARTHQUAKE,BODYPRESS,WILLOWISP
+    Ability = WANDERINGSPIRIT
+    Item = LEFTOVERS
+    Nature = BRAVE
+    IV = 31,31,31,0,31,31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[EMBALMER,Thessaly,200]
+LoseText = I've laid out better than me. Gently, now.
+Pokemon = AROMATISSE,84
+    Moves = MOONBLAST,PSYCHIC,AROMATHERAPY,CHARM
+    Ability = AROMAVEIL
+    Item = SITRUSBERRY
+    Nature = QUIET
+    IV = 20
+    EV = 0
+Pokemon = RUNERIGUS,85
+    Moves = SHADOWCLAW,BULLDOZE,BRUTALSWING,IRONDEFENSE
+    Ability = WANDERINGSPIRIT
+    Item = SITRUSBERRY
+    Nature = BRAVE
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 11 - a Wardguard (Crownhaven). No kingdom's Plate flies over the Wardguard's pavilion: the arena's own cycle, or no field (pavilion field :PRISM_ARENA)
+#-------------------------------
+[WARDGUARD,Aldous]
+LoseText = Mind the forty-third step on your way up. Tradition.
+Pokemon = FALINKS,89
+    Moves = CLOSECOMBAT,MEGAHORN,ROCKSLIDE,THROATCHOP
+    Ability = DEFIANT
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+Pokemon = GALLADE,90
+    Moves = CLOSECOMBAT,PSYCHOCUT,NIGHTSLASH,LEAFBLADE
+    Ability = STEADFAST
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+#-------------------------------
+[WARDGUARD,Aldous,100]
+LoseText = Mind the forty-third step on your way up. Tradition.
+Pokemon = FALINKS,90
+    Moves = CLOSECOMBAT,MEGAHORN,ROCKSLIDE,NORETREAT
+    Ability = DEFIANT
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = ESCAVALIER,89
+    Moves = MEGAHORN,IRONHEAD,DRILLRUN,KNOCKOFF
+    Ability = OVERCOAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+Pokemon = GALLADE,90
+    Moves = CLOSECOMBAT,PSYCHOCUT,NIGHTSLASH,SWORDSDANCE
+    Ability = JUSTIFIED
+    Item = LUMBERRY
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+#-------------------------------
+[WARDGUARD,Aldous,200]
+LoseText = Mind the forty-third step on your way up. Tradition.
+Pokemon = FALINKS,85
+    Moves = BRICKBREAK,MEGAHORN,ROCKTOMB,THROATCHOP
+    Ability = BATTLEARMOR
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+Pokemon = GALLADE,86
+    Moves = BRICKBREAK,PSYCHOCUT,NIGHTSLASH,LEAFBLADE
+    Ability = STEADFAST
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+# Ch20 Grounds Ladder, rung 12 - a Choir cantor (Crownhaven), the top rung. Sound: Hyper Voice and Boomburst (pavilion field :PRISM_ARENA)
+#-------------------------------
+[CANTOR,Anselm]
+LoseText = ...And rest. Four bars. You've earned them.
+Pokemon = WIGGLYTUFF,89
+    Moves = HYPERVOICE,DAZZLINGGLEAM,FLAMETHROWER,THUNDERWAVE
+    Ability = COMPETITIVE
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = NOIVERN,90
+    Moves = BOOMBURST,HURRICANE,DRAGONPULSE,FLAMETHROWER
+    Ability = INFILTRATOR
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 31
+#-------------------------------
+[CANTOR,Anselm,100]
+LoseText = ...And rest. Four bars. You've earned them.
+Pokemon = WIGGLYTUFF,90
+    Moves = HYPERVOICE,DAZZLINGGLEAM,FLAMETHROWER,SING
+    Ability = COMPETITIVE
+    Item = THROATSPRAY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,0,4,252,0
+Pokemon = ALTARIA,89
+    Moves = HYPERVOICE,DRAGONPULSE,FLAMETHROWER,ROOST
+    Ability = CLOUDNINE
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = NOIVERN,90
+    Moves = BOOMBURST,HURRICANE,DRACOMETEOR,FLAMETHROWER
+    Ability = INFILTRATOR
+    Item = THROATSPRAY
+    Nature = TIMID
+    IV = 31
+    EV = 4,0,0,252,252,0
+#-------------------------------
+[CANTOR,Anselm,200]
+LoseText = ...And rest. Four bars. You've earned them.
+Pokemon = WIGGLYTUFF,85
+    Moves = ECHOEDVOICE,DISARMINGVOICE,FLAMETHROWER,CHARM
+    Ability = CUTECHARM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = NOIVERN,86
+    Moves = HYPERVOICE,AIRSLASH,DRAGONPULSE,SCREECH
+    Ability = FRISK
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 20
+    EV = 0
 #===============================================================================
 # FESTIVAL OF CHAMPIONS - final and hijack
 #===============================================================================

@@ -637,6 +637,102 @@ SkillLevel = 100
 BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
+[WEAVER]
+Name = Weaver
+Gender = Female
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[HARPOONER]
+Name = Harpooner
+Gender = Male
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[STREAMER]
+Name = Streamer
+Gender = Female
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[FOREMAN]
+Name = Foreman
+Gender = Male
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[MOON_BROKER]
+Name = Moon Broker
+Gender = Male
+BaseMoney = 72
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[WYRM_RIDER]
+Name = Wyrm Rider
+Gender = Female
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[LAMP_RUNNER]
+Name = Lamp-Runner
+Gender = Female
+BaseMoney = 32
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[WELL_KEEPER]
+Name = Well-Keeper
+Gender = Male
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[LANTERN_ACOLYTE]
+Name = Lantern Acolyte
+Gender = Male
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[EMBALMER]
+Name = Embalmer
+Gender = Female
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[WARDGUARD]
+Name = Wardguard
+Gender = Male
+BaseMoney = 72
+SkillLevel = 100
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[CANTOR]
+Name = Cantor
+Gender = Male
+BaseMoney = 72
+SkillLevel = 100
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
 [PARTNER_OGRE]
 Name = Gossamer
 Gender = Unknown
