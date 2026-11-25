@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-24
 - **Author:** Gemini (Task 1 Specialist — Rejuvenation V14 `AdvancedAnimations` Architect & Live `mkxp-z` Prototype Builder)
-- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64` — WAVES 1 + 2 + 3 COMPLETE (6/6 FULL STORY PEAK SCENES)** (exit code `0`, `4,435` total native `512×384` @ 30fps live-map frames (including the **43.70s Ch9 Masterclass Director's Cut v2 — 10/10 Polish**) across 6 real built maps `Map 952`, `Map 608`, `Map 295`, `Map 563`, `Map 926`, `Map 285`, with `-14.0 LUFS` calibrated canon audio mixes; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
+- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64` — WAVES 1 + 2 + 3 COMPLETE (6/6 FULL STORY PEAK SCENES)** (exit code `0`, `4,435` total native `512×384` @ 30fps live-map frames (including the **43.70s Ch9 Director's Cut v3 — Surgical Polish**) across 6 real built maps `Map 952`, `Map 608`, `Map 295`, `Map 563`, `Map 926`, `Map 285`, with `-14.0 LUFS` calibrated canon audio mixes; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
 - **Target Wednesday Merge File:** `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` (prototype verified live at `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`).
 
 ---
@@ -46,18 +46,18 @@ Rejuvenation V14 achieves unforgettable RPG cinema **without leaving RPG Maker X
 
 ## 2. Live `mkxp-z.x86_64` Full-Suite Verification Proof (Waves 1 + 2 + 3 = 6/6 Scenes)
 
-All **6 story peak cutscenes** were executed **100% live inside our compiled Linux `mkxp-z.x86_64` engine** on real built Prismfall `.rxdata` maps, captured at native `512×384` @ `30fps` (`4,435` total frames, incl. **Ch9 Masterclass Director's Cut v2 (10/10 Polish)** `1,311f = 43.70s`), calibrated to **`-14.0 LUFS`**, and visually audited frame-by-frame:
+All **6 story peak cutscenes** were executed **100% live inside our compiled Linux `mkxp-z.x86_64` engine** on real built Prismfall `.rxdata` maps, captured at native `512×384` @ `30fps` (`4,435` total frames, incl. **Ch9 Director's Cut v3 (Surgical Polish)** `1,311f = 43.70s`), calibrated to **`-14.0 LUFS`**, and visually audited frame-by-frame:
 
 | Scene | Live Maps Used | Frames / Duration | Audio Architecture | Verified Proof Artifacts |
 |---|---|---|---|---|
 | **Scene 1 — Ch5 Spire Shatter (`:CH5_SHATTER`)** | `Map 952` (*Plate Vault*) → `Map 608` (*Shattered Lowlight* cutaway on frozen Dex) → scarred `Map 952` (Cradle swapped to tile `25947` + Overcharged Electivire leap) | `689` frames @ 30fps (`22.97s`, 15 synced cues) | Mix B *Girei* intro build → `0.38s` dead-silence `bgm_cut` → *Girei* choral drop right on Shatter impact + real `.ogg` SEs & `Cries/ELECTIVIRE.ogg` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch5_spire_shatter.mp4` (`2.4 MB`) & `.gif` (`991 KB`) |
-| **Scene 2 — Ch9 Masterclass Director's Cut v2 (`:CH9_UNMASK`)** | Live `Map 295` Crimson Reliquary (**Wednesday swaps `295 → 264`**) **+ 90° Banquet-Style Side-View Cathedral Cut** (`pf_vfx_ch9_sideview_hall` in `@actor_vp`) | **`1,311` frames @ 30fps (`43.70s`, 57 synced cues)** | **`-14.0 LUFS` (0 missing SEs):** Rejuvenation Tension → dry click vacuum → 3-Wave escalating barrage → razor `bgm_cut` **DEAD SILENCE** across 90° horizontal dive, `1.55×` face impact (`0.25s` hitstop), single-mask shatter, clatter, `"...Wait."` & `"...That voice..."` → *Never Meant to Belong* solo violin swell as Rowan lifts bare face → `"...Uncle Rowan?"` → 3-box Rowan finale (`"Look at the flowers."` + `2.2s` hold) | `pf_rejuv_ch9_trevenant_unmasking.mp4` (`4.4 MB`), `pf_rejuv_ch9_directors_cut_v2.gif` (`3.9 MB`), **`96c_ch9_directors_cut_v2_proof.png`** (`24f`), **`prismfall_ch9_directors_cut_v2_studio.html`** (`5.79 MiB`) |
+| **Scene 2 — Ch9 Director's Cut v3 (`:CH9_UNMASK`)** | Live `Map 295` Crimson Reliquary (**Wednesday swaps `295 → 264`**) **+ 90° Banquet-Style Side-View Cathedral Cut** (`pf_vfx_ch9_sideview_hall` in `@actor_vp`) | **`1,311` frames @ 30fps (`43.70s`, 56 synced cues)** | **`-14.0 LUFS` (0 missing SEs):** Rejuvenation Tension → dry click vacuum → 3-Wave escalating barrage → razor `bgm_cut` **DEAD SILENCE** across 90° horizontal dive, `1.55×` face impact (`0.25s` hitstop), single-mask shatter, clatter, `"...Wait."` & `"...That voice..."` → *Never Meant to Belong* solo violin swell (zero cartoon `Exclaim` ping!) → `"...Uncle Rowan?"` → 3-box Rowan finale (`"Look at the flowers."` + `2.2s` hold) | `pf_rejuv_ch9_trevenant_unmasking.mp4` (`4.4 MB`), `pf_rejuv_ch9_directors_cut_v3.gif` (`3.9 MB`), **`96d_ch9_directors_cut_v3_proof.png`** (`24f`), **`prismfall_ch9_directors_cut_v3_studio.html`** (`5.78 MiB`) |
 | **Scene 3 — Ch11 Kyogre Awakens at Lake Rime (`:CH11_KYOGRE`)** | `Map 563` (*Rimewood Glade* frozen lake & icefall, Tileset 52; **Wednesday swaps `map_id: 563 → 309/300`** when Rimeholt Harbour is built) | `589` frames @ 30fps (`19.63s`, 18 synced cues) | **`-14.0 LUFS`:** Rejuvenation Ominous → `0.35s` dead-silence `bgm_cut` on eye glint & `Anim/Ice8` → *The Rumble of Scientific Triumph* (Kevin Penkin) on Primal Kyogre breach + `Cries/KYOGRE_1.ogg` & water/ice/rain SEs | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch11_kyogre_awakens.mp4` (`3.4 MB`) & `.gif` (`2.1 MB`) |
 | **Scene 4 — Ch19 WAR-1 Primal Kyogre vs Reshiram Beam Clash (`:WAR_CLIMAX`)** | **Real built `Map 926` (*The Glass Dunes*, Tileset 56)** — full central battlefront basin with Isenmar & Ashkaar armies, banners, Eirik, Hrothgar, Sigrun & Anja | `629` frames @ 30fps (`20.97s`, 24 synced cues) | **`-14.0 LUFS`:** *Elegy of the Dynast* → *Ashes on The Fire* (Kohta Yamamoto) during dual charge & 3.1s tug-of-war clash → `0.28s` dead-silence `bgm_cut` + solitary `Anim/HealBell` → Trinitite glass detonation → *Soundscape to Ardor* + `KYOGRE_1` & `RESHIRAM` cries | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch19_war_beam_clash.mp4` (`2.5 MB`) & `.gif` (`1.4 MB`) |
 | **Scene 5 — Ch15 CE-1 AF 290 "Through Her Eyes" Glassfall (`:CH15_GLASSFALL`)** | `Map 295` (*Cathedral of the Evergreen* nave & altar dais, Tileset 33; **Wednesday swaps `map_id: 295 → 391`** when Living Nave is built) | `569` frames @ 30fps (`18.97s`, 14 synced cues) | **`-14.0 LUFS`:** Rejuvenation Ominous → `0.28s` dead-silence `bgm_cut` on Crown Bell Crack (`Anim/HealBell` + `Anim/Ice8`) → ***Decretum*** (*Madoka Magica*) across Glassfall shield & 10-year Echo Morwen turn + `Cries/MISMAGIUS.ogg` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch15_ce1_glassfall.mp4` (`2.0 MB`) & `.gif` (`1.25 MB`) |
 | **Scene 6 — Ch21 "The Ring & The Light" Arceus Finale (`:CH21_ARCEUS`)** | `Map 285` (*Briar Hall - Upper Court* white-stone summit terrace, Tileset 33; **Wednesday swaps `map_id: 285 → 491`** when Crownhaven Prism Arena is built) | `648` frames @ 30fps (`21.60s`, 13 synced cues) | **`-14.0 LUFS`:** *DARK ARIA <LV2>* (Bound Arceus & 18-hue Prism Helix) → `0.30s` dead-silence `bgm_cut` on Lock #18 Break → ***T-KT*** (*Attack on Titan*) across Valen's light ascension, empty Crown & Freed Arceus + `Cries/ARCEUS.ogg` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch21_valen_arceus_finale.mp4` (`2.7 MB`) & `.gif` (`1.37 MB`) |
-| **5× 24-Frame Proof Contact Sheets** | Wave 1 (`96`), Ch9 DC v1 (`96b`), **Ch9 DC v2 (`96c`)**, Wave 2 (`97`), Wave 3 (`98`) — nearest-neighbor crisp (`120` curated live frames total) | Visual QA pass | Active Protagonist, heroic Juno leap shielding Nell, **single-mask shatter (zero double-mask)**, full 5-cast 90° side-view continuity (Nell + PC visible!), multi-box dramatic pacing | `96_rejuv_in_engine_cutscene_proof.png`, `96b_ch9_directors_cut_proof.png`, **`96c_ch9_directors_cut_v2_proof.png`**, `97_rejuv_wave2_cutscene_proof.png`, `98_rejuv_wave3_cutscene_proof.png` (all copied to parent `previews/`) |
-| **4× Interactive Showcase HTMLs** | **Ch9 Director's Cut v2 Studio (`5.79 MiB`)**, Wave 1 (`5.53 MB`), Wave 2 (`4.60 MB`), Wave 3 (`4.32 MB`) — all strictly `< 8 MB` | Playwright verified | `console_errors=0`, `page_errors=0`, `0` JS syntax errors, all embedded live MP4s `512×384` `readyState=4`, `20/20` assets loaded | **`prismfall_ch9_directors_cut_v2_studio.html`**, `prismfall_rejuv_in_engine_cutscenes_preview.html`, `..._wave2_preview.html`, `..._wave3_preview.html` |
+| **6× 24-Frame Proof Contact Sheets** | Wave 1 (`96`), Ch9 DC v1 (`96b`), Ch9 DC v2 (`96c`), **Ch9 DC v3 (`96d`)**, Wave 2 (`97`), Wave 3 (`98`) — nearest-neighbor crisp (`144` curated live frames total) | Visual QA pass | **v3 Surgical Polish:** 100% Row 3 UP-facing back-view Trevenant on ALL 16 top-down frames (zero green/red eyes!) + Row 1 LEFT-facing Trevenant in 90° side-view + restrained emote cadence (`21 → 3` earned beats, −86%) + full v2 physical acting & single-mask shatter | `96_rejuv_in_engine_cutscene_proof.png`, `96b_ch9_directors_cut_proof.png`, `96c_ch9_directors_cut_v2_proof.png`, **`96d_ch9_directors_cut_v3_proof.png`**, `97_rejuv_wave2_cutscene_proof.png`, `98_rejuv_wave3_cutscene_proof.png` (all copied to parent `previews/`) |
+| **5× Interactive Showcase HTMLs** | **Ch9 Director's Cut v3 Studio (`5.78 MiB`)**, Ch9 DC v2 (`5.79 MiB`), Wave 1 (`5.53 MB`), Wave 2 (`4.60 MB`), Wave 3 (`4.32 MB`) — all strictly `< 8 MB` | Playwright verified | `console_errors=0`, `page_errors=0`, `0` JS syntax errors, all embedded live MP4s `512×384` `readyState=4`, `20/20` assets loaded | **`prismfall_ch9_directors_cut_v3_studio.html`**, `prismfall_ch9_directors_cut_v2_studio.html`, `prismfall_rejuv_in_engine_cutscenes_preview.html`, `..._wave2_preview.html`, `..._wave3_preview.html` |
 
 ---
 
@@ -119,7 +119,7 @@ Every Director's Cut sheet passed strict **`exact2x=True`, `semi=0`, `orphans=0`
 
 | File | Dimensions | Grid | SHA-256 (12) | Purpose |
 |---|---|---|---|---|
-| `graphics/Characters/act_ch9_trevenant_ingrain_up.png` | `256×256` | `4×4` | `a7906acee4cc` | UP-facing Row 3 `Followers/TREVENANT.png` acting: summon silhouette → rear clawed arms overhead → smear slam → North Ingrain channel → 3-wave strain/crystal scars → mourning turn |
+| `graphics/Characters/act_ch9_trevenant_ingrain_up.png` | `256×256` | `4×4` | `284627a3e282` | **v3 REBUILT:** 100% UP-facing Row 3 `Followers/TREVENANT.png` back view on ALL 16 frames (`17` colors, `exact2x=True, semi=0, orphans=0`): arms & emerald Ingrain beams surge NORTH behind unbroken smooth woody back & mossy crown (ZERO green eyes on Frame 7, ZERO front red eye/mouth on Frame 15!) |
 | `graphics/Characters/act_ch9_mourner_throw_up.png` | `256×256` | `4×4` | `804a9ac0bd26` | UP-facing Row 3 `MOURNER.png` acting: wire-pull → aisle dive south → skid & spin-turn NORTH → UPWARD Dusk Ball whip-throw → wide north guard → breach glare |
 | `graphics/Characters/act_ch9_mourner_dive_side.png` | `384×192` | `4×2` | `7f4a2e7b4822` | 90° side-profile Mourner acting (`generate_image` B2W2 pixel art anchored to `MOURNER.png` + `act_ch9_mourner_unmask.png`): leap → horizontal protective dive → crimson mask clip → crack → mask shearing off exposing Rowan → unmasked tumble → kneeling Rowan |
 | `graphics/Animations/pf_vfx_ingrain_roots_breach.png` | `512×256` | `4×2` | `cb7f9acea0aa` | Top-down 3-wave progressive Ingrain root damage (Wave 1 emerald deflect → Wave 2 crimson cracks → deep fissure → Wave 3 blown-open smoking breach gap) + bark/leaf splinters + L→R horizontal crimson spear + 8-point anime starburst |
@@ -136,7 +136,7 @@ All `.ogv` AI-slideshow movies are permanently retired. **All 6 main-story peak 
 | Peak | Chapter & Scene ID | Live Map(s) | Acting Sheets (`graphics/Characters/`) | Additive / Tile VFX (`graphics/Animations/`) | Signature Rejuvenation V14 Beat | Status |
 |---|---|---|---|---|---|---|
 | **#1** | **Ch5 — Spire Shatter** (`:CH5_SHATTER` / `:SH1`) | `952` → `608` → `952` | `act_ch5_mourner_reach`, `act_ch5_mourner_burn`, `Followers/ELECTIVIRE` | `pf_vfx_vault_seal`, `pf_vfx_splitter_beacon`, `pf_vfx_prism_lightning`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_shards`, `pf_vfx_glass_frost`, `pf_vfx_smoke_and_motes` | Darkened vault `pbZoomMap 1.48×` → `0.38s bgm_cut` → 2f impact + `0.14s` hitstop → live cutaway to Map 608 frozen Dex → Electivire leap | **LIVE VERIFIED (Wave 1)** |
-| **#2** | **Ch9 Masterclass Director's Cut v2 (10/10 Polish) — Trevenant Ingrain, 3-Wave Breach & 90° Side-View Unmasking** (`:CH9_UNMASK` / `:IR1`) | `264` *(verified live on `295` + 90° side-view hall)* | `act_ch9_mourner_throw_up`, `act_ch9_trevenant_ingrain_up`, `act_ch9_mourner_dive_side`, `act_ch9_mourner_unmask`, `Followers/TREVENANT`, `JUNO`, `pose_JUNO`, `PLAYER_A`, `pose_PLAYER_A`, `NPC 02` (Nell) | `pf_emote_balloons`, `pf_vfx_fist_reliquary`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_frost`, `pf_vfx_duskball_release`, `pf_vfx_ingrain_roots`, `pf_vfx_ingrain_roots_breach`, `pf_vfx_ingrain_wall_side`, `pf_vfx_ch9_sideview_hall`, `pf_vfx_mask_shatter_side` *(Row 1 face-matched shards/petals only!)*, `pf_vfx_glass_shards`, `pf_vfx_smoke_and_motes` | **5/5 Reuben 10/10 Polish:** Active Protagonist (`!` recoil, south sprint, Wave 2 push/recoil, Wave 3 knockback, 90° rush & finale step-in) + Juno physically LEAPING (`arc_h: 24`) to shield exposed Nell (`pose_JUNO :flinch`) + **ZERO double-mask** (`1.55×` face zoom + single mask shattering directly off Mourner's face) + **full 5-character 90° side-view continuity** (Nell + PC visible!) + 11-box dramatic dialogue pacing with animated `pf_emote_balloons` & *Never Meant to Belong* solo violin (`43.70s`) | **LIVE VERIFIED (Director's Cut v2 — 10/10)** |
+| **#2** | **Ch9 Masterclass Director's Cut v2 (10/10 Polish) — Trevenant Ingrain, 3-Wave Breach & 90° Side-View Unmasking** (`:CH9_UNMASK` / `:IR1`) | `264` *(verified live on `295` + 90° side-view hall)* | `act_ch9_mourner_throw_up`, `act_ch9_trevenant_ingrain_up`, `act_ch9_mourner_dive_side`, `act_ch9_mourner_unmask`, `Followers/TREVENANT`, `JUNO`, `pose_JUNO`, `PLAYER_A`, `pose_PLAYER_A`, `NPC 02` (Nell) | `pf_emote_balloons`, `pf_vfx_fist_reliquary`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_frost`, `pf_vfx_duskball_release`, `pf_vfx_ingrain_roots`, `pf_vfx_ingrain_roots_breach`, `pf_vfx_ingrain_wall_side`, `pf_vfx_ch9_sideview_hall`, `pf_vfx_mask_shatter_side` *(Row 1 face-matched shards/petals only!)*, `pf_vfx_glass_shards`, `pf_vfx_smoke_and_motes` | **v3 Surgical Polish (on top of all 5/5 v2 wins):** 100% Row 3 UP-facing back-view Trevenant on ALL 16 top-down frames (arms & Ingrain energy surging NORTH behind unbroken back; zero green/red eyes) + verified Row 1 LEFT-facing Trevenant in 90° side-view + restrained emote cadence (**21 → 3 earned balloons, −86%**: Mourner click `!`, Juno leap `!!`, Juno quiet `...`; zero balloon clutter across Waves 1–3, 90° mask shatter & solo violin!) (`43.70s`) | **LIVE VERIFIED (Director's Cut v3 — Surgical Polish)** |
 | **#3** | **Ch11 — Kyogre Awakens at Lake Rime** (`:CH11_KYOGRE` / `:CH11_THAW`) | `309`/`300` *(verified live on `563`)* | `act_ch11_kyogre_storm`, `act_war1_primal_kyogre` | `pf_vfx_ice_fissure`, `pf_vfx_origin_pulse`, `pf_vfx_deluge_rain` | Arctic aurora midnight → jagged black ice fissures (`z=5`) → house-sized golden-blue Kyogre eye beneath ice → `0.35s bgm_cut` → ocean geyser breach + Origin Pulse spheres → warm midnight deluge | **LIVE VERIFIED (Wave 2)** |
 | **#4** | **Ch19 — WAR-1 Primal Kyogre vs Reshiram Beam Clash** (`:WAR_CLIMAX` / `:WAR1`) | **`926` (*The Glass Dunes* — real built map!)** | `act_war1_primal_kyogre`, `act_war1_reshiram`, `EIRIK`, `HROTHGAR`, `SIGRUN`, `ANJA`, `pfw_soldier_*`, `pfw_banner_*` | `pf_vfx_origin_pulse`, `pf_vfx_origin_beam`, `pf_vfx_blue_flare_beam`, `pf_vfx_beam_clash_core`, `pf_vfx_trinitite_glass_wave`, `pf_vfx_smoke_and_motes` | Warm dawn frontline pan (Eirik vs Hrothgar) → darkened two-shot dual charge → pixel-locked Origin Pulse vs Blue Flare tug-of-war → `0.28s bgm_cut` pinpoint collapse → emerald Trinitite glass wave & crust sweeping live `Map 926` | **LIVE VERIFIED (Wave 2)** |
 | **#5** | **Ch15 — CE-1 AF 290 "Through Her Eyes" Glassfall** (`:CH15_GLASSFALL` / `:CE1`) | `391` *(verified live on `295`)* | `KESTREL`, `YSOLDE`, `VALEN`, `VOSS`, `MORWEN`, `trainer_ECHO_MORWEN`, `Followers/MISMAGIUS`, AF 290 Choir & child | `pf_vfx_sky_fracture`, `pf_vfx_glassfall_curtain`, `pf_vfx_sepia_echo_shimmer` | Kestrel's Gauntlet → sepia memory `Tone(28,12,-26,95)` AF 290 Choir & young Voss → Great Prism sky fracture + `0.28s bgm_cut` → bottle-green Glassfall curtain as Morwen shields child → Echo Morwen turning across 10 years on *Decretum* | **LIVE VERIFIED (Wave 3)** |
@@ -167,7 +167,7 @@ All `.ogv` AI-slideshow movies are permanently retired. **All 6 main-story peak 
 
 ## 6. Verified Live-Tested Source Code: `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`
 
-*(Exact verbatim file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, `4,435` total captured frames across `Map 952`, `Map 608`, `Map 295` + 90° side-view hall, `Map 563`, `Map 926`, and `Map 285` — including the **43.70s Ch9 Masterclass Director's Cut v2 (10/10 Polish)** (`1,311f`, `57` cues, `-14.0 LUFS`, `0` missing SEs) — 3135 lines, SHA-256 `bafb9377327de1f3`.)*
+*(Exact verbatim file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, `4,435` total captured frames across `Map 952`, `Map 608`, `Map 295` + 90° side-view hall, `Map 563`, `Map 926`, and `Map 285` — including the **43.70s Ch9 Director's Cut v3 (Surgical Polish)** (`1,311f`, `56` cues, `-14.0 LUFS`, `0` missing SEs, `3` sparse earned emotes, 100% Row 3 NORTH-facing Trevenant `sha:284627a3e282`) — 3119 lines, SHA-256 `7edb119cd2645390`.)*
 
 ```ruby
 #===============================================================================
@@ -1729,7 +1729,7 @@ module Prismfall
       end
 
       #-------------------------------------------------------------------------
-      # SCENE 2 — Ch9 Peak #2 (MASTERCLASS DIRECTOR'S CUT v2 — 10/10 POLISH):
+      # SCENE 2 — Ch9 Peak #2 (MASTERCLASS DIRECTOR'S CUT v3 — SURGICAL POLISH):
       # "Trevenant's Ingrain, The 3-Wave Breach & 90° Side-View Unmasking"
       # Live Map 295 (lit as Crimson Emergency Reliquary; Wednesday swaps
       # map_id: 295 -> 264) + 90-degree Banquet-style Side-View Cathedral Cut!
@@ -1755,7 +1755,7 @@ module Prismfall
           # Tactical vertical aisle layout (NORTH -> SOUTH, 100% spatial continuity):
           #   Reliquary Plinth (15.0, 10.4) — fires crimson crystal spears SOUTHWARD
           #   5-Tile Ingrain Root Wall (y = 14.65) — erupts NORTH of Trevenant!
-          #   Trevenant (15.0, 16.35) — FACING UP (NORTH) toward oncoming barrage!
+          #   Trevenant (15.0, 16.35) — 100% Row 3 UP-facing (NORTH) back view on all 16 frames!
           #   Mourner (15.0, 18.02) — dives in front of Juno & Nell, spins NORTH, throws UPWARD!
           #   Nell starts exposed in center aisle (15.0, 19.55); Juno leaps from (13.5, 19.80)
           #   right in front of Nell (15.0, 19.12) to shield her with her body!
@@ -1777,7 +1777,7 @@ module Prismfall
           eng.zoom_map(1.42, duration: 1.0, focus: [14.7, 10.9], ease: :in_out)
           eng.wait(1.10)
 
-          # Audio Vacuum #1: dry CLICK on the last Splitter -> Mourner & Protagonist jolt (!)!
+          # Audio Vacuum #1: dry CLICK on the last Splitter -> single crisp (!) on Mourner, PC jolts!
           eng.bgm_cut
           eng.stop_vfx(:reliquary)
           eng.spawn_vfx(:reliquary_arm, sheet: "pf_vfx_fist_reliquary", tx: 15.0, ty: 10.4,
@@ -1785,7 +1785,6 @@ module Prismfall
                         blend: :normal, untoned: true, z_layer: :mid, origin: :foot)
           eng.play_se("Battle catch click", volume: 100, pitch: 130)
           eng.actor(:mourner).show_emote(:exclaim, duration: 0.55)
-          eng.actor(:pc).show_emote(:exclaim, duration: 0.55)
           eng.actor(:pc).hop(height: 8, duration: 0.18)
           eng.wait(0.42)
 
@@ -1822,11 +1821,9 @@ module Prismfall
             if gi == 1
               # Protagonist sees Juno & Nell in danger and SPRINTS SOUTH down the aisle!
               eng.actor(:pc).restore_charset("PLAYER_A", dir: :down)
-              eng.actor(:pc).show_emote(:double_exclaim, duration: 0.65)
               eng.actor(:pc).move_to(13.1, 17.8, duration: 1.05, walk: true, dir: :down)
             elsif gi == 3
-              # Exposed Nell freezes in panic (!! + rapid shiver) in the center aisle!
-              eng.actor(:nell).show_emote(:double_exclaim, duration: 1.0)
+              # Exposed Nell freezes trembling in the center aisle!
               eng.actor(:nell).tremble(duration: 1.35, amp: 2.0, freq: 48.0)
             end
             eng.play_se("Anim/Ice2", volume: 70, pitch: 95 + gi * 6) if gi.even?
@@ -1839,7 +1836,7 @@ module Prismfall
           eng.actor(:pc).set_dir(:right)
           eng.wait(0.16)
 
-          # Juno spots Nell exposed in the center aisle (!!), sprints & LEAPS right in front of Nell!
+          # Juno spots Nell exposed in the center aisle (single earned !!), sprints & LEAPS right in front of Nell!
           eng.actor(:juno).show_emote(:double_exclaim, duration: 0.75)
           eng.play_se("Exclaim", volume: 95)
           eng.actor(:juno).set_dir(:right)
@@ -1866,7 +1863,6 @@ module Prismfall
 
           # Box 2 (Juno, panic): "NELL!!"
           eng.say(:JUNO, :panic, "NELL!!", hold: 0.48)
-          eng.actor(:nell).show_emote(:sweat, duration: 0.65)
           eng.wait(0.14)
           # Box 3 (Juno, panic): "Get DOWN—!!"
           eng.say(:JUNO, :panic, "Get DOWN—!!", hold: 0.62)
@@ -1880,7 +1876,6 @@ module Prismfall
           )
           eng.actor(:mourner).move_to(15.0, 18.02, duration: 0.56, walk: false, arc_h: 24.0, ease: :out_cubic)
           eng.actor(:pc).restore_charset("PLAYER_A", dir: :right)
-          eng.actor(:pc).show_emote(:exclaim, duration: 0.55)
           eng.wait_for_move(:mourner)
           eng.shake(power: 3, duration: 0.18)
           eng.actor(:juno).restore_charset("JUNO", dir: :up)
@@ -2021,7 +2016,6 @@ module Prismfall
               eng.shake(power: 5, duration: 0.34)
               eng.play_se("Anim/Ice8", volume: 82, pitch: 106)
               eng.actor(:trevenant).flash_color(255, 110, 140, 170, duration: 0.20)
-              eng.actor(:pc).show_emote(:exclaim, duration: 0.55)
             elsif si == 7
               # Center tiles crack deep crimson + emerald bark splinters force Protagonist back!
               [0, 1, 2].each { |ri| eng.stop_vfx(:"root_w2_#{ri}") }
@@ -2037,15 +2031,13 @@ module Prismfall
               eng.play_cry(:TREVENANT, volume: 84)
               eng.shake(power: 6, duration: 0.42)
               eng.actor(:trevenant).flash_color(255, 180, 200, 200, duration: 0.24)
-              # Protagonist gets forced back by flying splinters (:recoil + hop + sweat)!
+              # Protagonist gets forced back by flying splinters (:recoil + hop)!
               eng.actor(:pc).set_pose("pose_PLAYER_A", 1)
               eng.actor(:pc).hop(height: 8, duration: 0.20)
               eng.actor(:pc).move_to(13.2, 18.05, duration: 0.26, walk: false, ease: :out)
-              eng.actor(:pc).show_emote(:sweat, duration: 0.70)
-              # Juno ducks tighter shielding Nell (pose_JUNO :flinch + !!):
+              # Juno ducks tighter shielding Nell (pose_JUNO :flinch + crouch):
               eng.actor(:juno).set_pose("pose_JUNO", 1)
               eng.actor(:juno).crouch_to(5, duration: 0.12)
-              eng.actor(:juno).show_emote(:double_exclaim, duration: 0.75)
             end
             eng.wait(0.17)
           end
@@ -2065,7 +2057,6 @@ module Prismfall
               eng.play_se("Anim/Ice8", volume: 92, pitch: 86)
               eng.shake(power: 6, duration: 0.36)
               eng.actor(:trevenant).flash_color(255, 196, 210, 210, duration: 0.22)
-              eng.actor(:nell).show_emote(:double_exclaim, duration: 0.65)
               eng.actor(:nell).tremble(duration: 0.65, amp: 2.0)
             end
             eng.wait(0.14)
@@ -2120,7 +2111,6 @@ module Prismfall
           # Protagonist knocked back a step by Wave 3's breach shockwave!
           eng.actor(:pc).set_pose("pose_PLAYER_A", 1)
           eng.actor(:pc).move_to(13.3, 19.35, duration: 0.34, walk: false, arc_h: 10.0, ease: :out)
-          eng.actor(:pc).show_emote(:double_exclaim, duration: 0.65)
           eng.wait(0.42) # Horror beat letting the smoking breached center gap register!
 
           # Stray spear + FATAL JAGGED SPEAR punching STRAIGHT THROUGH THE BREACH toward Juno & Nell!
@@ -2137,7 +2127,6 @@ module Prismfall
           eng.actor(:pc).restore_charset("PLAYER_A", dir: :right)
           eng.actor(:pc).move_to(13.9, 19.35, duration: 0.26, walk: true, dir: :right)
           eng.actor(:juno).set_pose("pose_JUNO", 1)
-          eng.actor(:juno).show_emote(:double_exclaim, duration: 0.50)
           eng.spawn_vfx(nil, sheet: "pf_vfx_glass_shards", tx: 15.0, ty: 13.6,
                         grid: [4, 2], frames: [4, 5, 6], ticks: [2, 2, 2], loops: 4,
                         blend: :add, scale: 1.45, move_to: [15.0, 18.6, 0.36], z_layer: :above)
@@ -2146,8 +2135,10 @@ module Prismfall
 
           #=====================================================================
           # ACT V — 90-DEGREE SIDE-VIEW CATHEDRAL CUT! (100% CAST CONTINUITY!)
+          #   - Trevenant (sx=148) facing LEFT (Row 1) toward root wall & spears!
           #   - Nell clearly visible behind shielding Juno on RIGHT!
-          #   - Protagonist actively rushing in from FAR RIGHT straining with !!
+          #   - Protagonist actively rushing in from FAR RIGHT!
+          #   - ZERO emote balloon clutter — pure physical acting & cinema!
           #   - ZERO DOUBLE-MASK: ONLY the single mask on Mourner's own face
           #     shatters at 1.55x pbZoomMap with crisp face-matched shards!
           #=====================================================================
@@ -2174,7 +2165,6 @@ module Prismfall
           eng.spawn_actor(:side_juno, sheet: "JUNO", tx: jtx, ty: jty,
                           dir: :left, grid: [4, 4], is_charset: true, scale: 2.0, z_bias: 26)
           eng.actor(:side_juno).off_y = 6.0
-          eng.actor(:side_juno).show_emote(:double_exclaim, duration: 1.05)
 
           # RIGHT (sx = 428): Nell clearly visible crouched/trembling right behind Juno!
           ntx, nty = s2t_foot.call(428, 310)
@@ -2182,7 +2172,6 @@ module Prismfall
                           dir: :left, grid: [4, 4], is_charset: true, scale: 2.0, z_bias: 18)
           eng.actor(:side_nell).off_y = 6.0
           eng.actor(:side_nell).tremble(duration: 2.2, amp: 2.0, freq: 44.0)
-          eng.actor(:side_nell).show_emote(:double_exclaim, duration: 1.05)
 
           # FAR RIGHT (sx = 514 -> 474): Protagonist rushing in urgently from right edge!
           ptx0, pty0 = s2t_foot.call(514, 316)
@@ -2215,9 +2204,9 @@ module Prismfall
           eng.play_se("Anim/Ice8", volume: 96, pitch: 88)
           eng.shake(power: 6, duration: 0.30)
           eng.actor(:side_trev).flash_color(255, 190, 210, 200, duration: 0.22)
-          # Protagonist strains forward helplessly with !! as breach blows open!
+          eng.actor(:side_trev).tremble(duration: 0.28, amp: 2.0, freq: 42.0)
+          # Protagonist strains forward helplessly as breach blows open!
           ptx2, pty2 = s2t_foot.call(462, 316)
-          eng.actor(:side_pc).show_emote(:double_exclaim, duration: 0.90)
           eng.actor(:side_pc).move_to(ptx2, pty2, duration: 0.32, walk: true, dir: :left)
           eng.wait(0.28)
 
@@ -2314,8 +2303,6 @@ module Prismfall
           end
           # Smoothly ease zoom back 1.55x -> 1.12x so Trevenant, kneeling Rowan, Juno, Nell & PC all frame cleanly!
           eng.zoom_map(1.12, duration: 1.15, focus: :side_mourner, ease: :out)
-          eng.actor(:side_juno).show_emote(:exclaim, duration: 0.90)
-          eng.actor(:side_pc).show_emote(:exclaim, duration: 0.90)
           eng.wait(1.45)
 
           #=====================================================================
@@ -2345,7 +2332,7 @@ module Prismfall
                           blend: :normal, untoned: false, scale: 0.65, z_layer: :mid, origin: :foot)
           end
 
-          # Scarred Trevenant slowly turning from North wall to gaze gently down at kneeling Rowan
+          # Scarred Trevenant remaining rooted facing NORTH toward the breached wall (100% Row 3 back view!)
           eng.spawn_actor(:trevenant, sheet: "act_ch9_trevenant_ingrain_up", tx: 15.0, ty: 16.35,
                           grid: [4, 4], is_charset: false, z_bias: 6)
           eng.actor(:trevenant).play_clip(
@@ -2406,7 +2393,7 @@ module Prismfall
           # Complete the 1.6s pure dead-silence hold after mask clatter!
           eng.wait(1.02)
 
-          # Juno slowly rises from her crouch with (...) emote balloon!
+          # Juno slowly rises from her crouch with ONE quiet (...) emote balloon!
           eng.actor(:juno).crouch_to(0, duration: 0.42)
           eng.actor(:juno).move_to(15.0, 19.18, duration: 0.42, walk: true, dir: :up)
           eng.actor(:juno).show_emote(:dots, duration: 0.95)
@@ -2431,13 +2418,10 @@ module Prismfall
           # Box 3 (Juno, crying): "...Uncle Rowan?"
           eng.say(:JUNO, :crying, "...Uncle Rowan?", hold: 1.15)
 
-          # 1.1s pause — Nell gasps (!), Protagonist steps closer with (...)!
-          eng.actor(:nell).show_emote(:exclaim, duration: 0.75)
-          eng.actor(:nell).hop(height: 6, duration: 0.18)
-          eng.play_se("Exclaim", volume: 62, pitch: 108)
+          # 1.1s quiet violin pause — Nell shifts softly, Protagonist steps closer without cartoon balloons!
+          eng.actor(:nell).hop(height: 5, duration: 0.18)
           eng.wait(0.32)
           eng.actor(:pc).move_to(14.0, 18.60, duration: 0.48, walk: true, dir: :up)
-          eng.actor(:pc).show_emote(:dots, duration: 1.05)
           eng.wait(0.78)
           eng.actor(:pc).set_dir(:right)
 
