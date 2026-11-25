@@ -76,3 +76,7 @@
 
 ---
 *Done items stay ticked for a week, then get cleared. Started 2026-11-22. This file replaces the old `design/WED_SPRINT_QUEUE.md`, which now just points here.*
+
+## Status note: trainer coverage agent (2026-11-25)
+- Tool: `python3 -I tools/trainer_gen/coverage.py` → `design/TRAINER_COVERAGE.md`. Baseline 175 / 900 species on generic trainers.
+- `tools/trainer_gen/routes.py` already holds every new row (263 trainers: Ch5 Lock Road 30, Ch6–13 retrofit 231, two Ch19 roster rows) plus the PLAN caps. **Next steps if cut off:** `python3 -I tools/trainer_gen/gen.py tools/trainer_gen/cameos.py > /tmp/g.txt`, then splice the route blocks that `pbs/trainers.txt` doesn't have yet (they sit at the end of the ROUTE & GYM section, in chapter order) in front of the `# VILLAIN ADMINS` banner; validate; re-run coverage.py.
