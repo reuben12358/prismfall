@@ -82,3 +82,17 @@
 ## Status note: trainer coverage agent (2026-11-25)
 - Done: `tools/trainer_gen/coverage.py` + `design/TRAINER_COVERAGE.md`; 263 new generic trainers (Ch5 30, Ch6–13 231, two Ch19 roster rows: Isolde, Hjal & Ama) in `routes.py` and spliced into `pbs/trainers.txt`; coverage 175 → 900 / 900; validate 0 errors.
 - Left: map events for all of them (maps unbuilt); regional forms as a bonus pass (`m(..., form=n)` works in routes.py now); the Ch14–18 script rosters and the rest of Ch19's are still unbuilt (TODO §5 "Build from each new script's Density section").
+
+## Agent status: Ch15–21 + post-game engine hooks (Claude, engine-backlog agent)
+*Running note so the work can be picked up; updated at each checkpoint.*
+- **Committed:** Core `028_Interludes.rb` (the shared swap), `029_TimedPrompts.rb` (`pf_timed_choice`, `pf_overtime`), `030_Ceremony_Ladder.rb` (`Prismfall::Ceremony.procession` / `.banner`, `Prismfall::GroundsLadder`); Field Effects `013_FieldEffects_StoryHooks.rb` (K6 one-turn `:BLEED` overload, K8 Gauntlet tear-off, Valen crystal stage + `:prismfall_valen_crystal`); `mapgen/ruby/013_EchoFollow.rb` (`pf_echo_follow`: convoy + crypt record/replay), `014_Hush.rb` (map 808 mute + ripples).
+- **Grounds Ladder PBS contract:** `GroundsLadder::ROSTER` expects version 20 blocks: PAINTER Linnet, FISHERMAN Brynjar, ROCKER Vix, ENGINEER Dobbin, GAMBLER Quill, TAMER Asgerd, YOUNGSTER Tam, RUINMANIAC Nasrin, CHANNELER Osric, SCIENTIST Thessaly, COOLTRAINER_M Halvard, LADY Liesl (Lv 88–90, two Pokémon each). Other names/types: edit ROSTER (a same-name block under another type is found automatically). Missing blocks are skipped, never a crash.
+- **Next, in order:** (1) `mapgen/ruby/018_Crownhaven.rb` ceremony walk + pylon lighting + the white vision; (2) Core `031_Finale.rb` (hijack hook points, allies montage + Larch's 11 lamps, tag foes/partner, the 36 kneel lines on `:prismfall_arceus_locks`, ending vignette table) and Cutscenes scenes for them; (3) Trials `:POSTGAME` category + Registry board (`115_Quests_Postgame.rb`), tier switches S279/S285; (4) `tools/harness/run_story_hooks.rb` (headless checks) and the Cutscenes selftest.
+
+## Status: Ch16–21 + post-game trainer PBS (agent, 2026-11-25)
+*Running note so the work can be picked up. Source of every block: `tools/trainer_gen/gen.py`, the section "CH16-CH21 STORY FIGHTS, THE GROUNDS LADDER AND THE WARDEN'S GAUNTLET". Check with `python3 -I tools/check_script_trainers.py` (scripts vs PBS) and `python3 -I tools/validate_trainers.py`.*
+- [x] Ch16: Officers Grane and Tull (Interlude IV, Lv 60–62, no Bag).
+- [ ] Next, in order: Ch17 (SUMP_BARON, GILDER_AUTOMATON, Mallory/Kade), Ch18 (THORNGUARD Rowe), Ch19 (partners v19, the lines, the Toll, Thornwatch), Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).
+
+## Agent status: Interlude I + Map Pass 2 (Lamplight agent)
+- 2026-11-25: Interlude I "Lamplight" is written and builds (commit 4674a4e): `mapgen/layouts/story_interlude1.py` (a story layer that upserts its events into the specs of 952 / 182 / 105 / 106 by name; run it again after any layout regenerates one of those specs), `mapgen/ruby/016_Staging.rb` (pfm_fade_out / pfm_flash / ... for stage directions), `mapgen/ruby/017_Lamplight.rb` (pfm_il1_*). It uses Core `028_Interludes.rb` loadout 1. **Next:** real-engine capture (`tools/harness/visual/ch5/010_LamplightCapture.rb`), then 255 Tap Chamber, then the bracketed-narration pass.
