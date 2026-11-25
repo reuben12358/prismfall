@@ -1,8 +1,8 @@
-# Proposal: Authentic Pokémon Rejuvenation V14 `AdvancedAnimations` In-Engine Cutscene Engine (Complete Story Peak & Wave 2 Director's Cut Suite — Zero AI `.ogv` Slideshows)
+# Proposal: Authentic Pokémon Rejuvenation V14 `AdvancedAnimations` In-Engine Cutscene Engine (Complete Story Peak, Wave 2 DC & Bonus Pair Suite — Zero AI `.ogv` Slideshows)
 
-- **Date:** 2026-11-24 *(Updated 2026-11-25 — Wave 2 Director's Cut Live `mkxp-z` Suite Verified)*
+- **Date:** 2026-11-24 *(Updated 2026-11-25 — Wave 2 DC + Bonus Pair [Ch16 Wenlow Dead-Silence & Ruin R7 Gilded King Aurelius] Live `mkxp-z` Suite Verified)*
 - **Author:** Gemini (Rejuvenation V14 `AdvancedAnimations` Architect & Live `mkxp-z` Cutscene Recorder)
-- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64` — WAVES 1 + 2 + 3 + CH9 DC v3 + WAVE 2 DIRECTOR'S CUT (Ch11 Rethink · Ch5 DC on NEW Octagonal `Map 952` · Ch2 Lantern Pageant) COMPLETE** (exit code `0`, `7,631` total native `512×384` @ 30fps live-map frames including **`3,196` Wave 2 Director's Cut frames** across `Map 563`, NEW sculpted octagonal `Map 952`, `Map 608`, and `Map 145`, with `-14.0 LUFS` calibrated canon audio mixes, dedicated untoned `@plate_vp` (`z=390`) 90° pixel plates, `<= 3` restrained emotes/scene, grounded Protagonist movement, and ZERO MS-Paint geometry; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
+- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64` — WAVES 1 + 2 + 3 + CH9 DC v3 + WAVE 2 DC + BONUS PAIR (Ch16 Wenlow Dead-Silence · Ruin R7 Gilded King Aurelius) COMPLETE** (exit code `0`, `9,773` total native `512×384` @ 30fps live-map frames across 9 live-verified productions — including **`2,142` new Bonus Pair frames** across `Map 104`, 122f pure `#000000` gunshot blackout, `Map 544`, and `Map 186` — all `-14.0 LUFS` linear-calibrated, verified `0.0000` digital-zero dead-silence vacuum on Ch16, ZERO Gate of Babylon portals/swords on Aurelius, `<= 3` restrained emotes/scene, grounded Protagonist movement, and ZERO MS-Paint geometry; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
 - **Target Wednesday Merge File:** `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` (prototype verified live at `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`).
 
 ---
@@ -45,7 +45,7 @@ Rejuvenation V14 achieves unforgettable RPG cinema **without leaving RPG Maker X
 
 ---
 
-## 2. Live `mkxp-z.x86_64` Full-Suite Verification Proof (Waves 1–3 + Ch9 DC v3 + Wave 2 Director's Cut)
+## 2. Live `mkxp-z.x86_64` Full-Suite Verification Proof (Waves 1–3 + Ch9 DC v3 + Wave 2 DC + Bonus Pair)
 
 All story peak cutscenes — including the **3 Wave 2 Director's Cut / Rethink scenes** — were executed **100% live inside our compiled Linux `mkxp-z.x86_64` engine** on real built Prismfall `.rxdata` maps, captured at native `512×384` @ `30fps`, calibrated to **`-14.0 LUFS`** (linear gain preserving 10ms `bgm_cut` digital-zero vacuums), and visually audited frame-by-frame:
 
@@ -59,10 +59,13 @@ All story peak cutscenes — including the **3 Wave 2 Director's Cut / Rethink s
 | **Scene 5 — Ch15 CE-1 AF 290 Glassfall (`:CH15_GLASSFALL`)** | `Map 295` (**swaps `295 → 391`**) | `569` frames @ 30fps (`18.97s`, 14 cues) | **`-14.0 LUFS`:** Rejuvenation Ominous → `0.28s` `bgm_cut` → *Decretum* + `MISMAGIUS` cry (`cut_ch15_glassfall_90deg.png` 3-way synced for DC upgrade) | `pf_rejuv_ch15_ce1_glassfall.mp4` (`2.0 MB`), `98_rejuv_wave3_cutscene_proof.png` |
 | **Scene 6 — Ch21 "The Ring & The Light" Arceus Finale (`:CH21_ARCEUS`)** | `Map 285` (**swaps `285 → 491`**) | `648` frames @ 30fps (`21.60s`, 13 cues) | **`-14.0 LUFS`:** *DARK ARIA <LV2>* → `0.30s` `bgm_cut` → *T-KT* + `ARCEUS` cry (`cut_ch21_valen_90deg.png` 3-way synced for DC upgrade) | `pf_rejuv_ch21_valen_arceus_finale.mp4` (`2.7 MB`), `98_rejuv_wave3_cutscene_proof.png` |
 | **Wave 2 Master Proof & Live Cinema Studio HTML** | **`106_rejuv_ch11_ch5_ch2_live_proof.png`** (24 curated frames: 8×Ch11 + 8×Ch5 + 8×Ch2) + **`/tmp/prismfall_rejuv_wave2_directors_cut_studio.html`** (`8.72 MiB` / `9.14 MB`, `< 12 MB`) | **Playwright + `node --check` verified** | `console_errors=0`, `page_errors=0`, `0` JS syntax errors, **`3/3` embedded `512×384` MP4s `readyState=4`**, `13/13` images loaded, clickable beat jumps + `0.5×` speed toggle + 12-sheet pixel-art inspector verified | `106_rejuv_ch11_ch5_ch2_live_proof.png` (parent `previews/` + `rejuv_in_engine_proof/`), `/tmp/prismfall_rejuv_wave2_directors_cut_studio.html` |
+| **Bonus Pair Scene D — Ch16 *Clear Air: Wenlow's Stand* (`:CH16_WENLOW`)** | `Map 104` (*Mirefen Infirmary* stand-in; **swaps `104 → 223`**) → **0-frame `#000000` Black (`122` consecutive frames)** → `Map 544` (*Cragholm* deep seams; **swaps `544 → 363`**) | **`1,040` frames @ 30fps (`34.67s`, 8 synced cues)** | **`-14.00 LUFS` (`REVIEW.md` #20 verified):** *Have Some Tea?* warm rounds → **HARD `bgm_cut` TOTAL DEAD SILENCE** at Ward doorway → silent Directorate entry → single dry rifle gunshot SE + **`3.54s` verified `0.0000` digital-zero vacuum** → *Never Meant to Belong* solo violin strictly in Cragholm aftermath | **`pf_rejuv_ch16_wenlow_live.mp4`** (`1.68 MB`), `web_ch16_wenlow_live.mp4` (`1.07 MB`), **`114_rejuv_ch16_ruin_live_proof.png`** (Tiles 1–8) |
+| **Bonus Pair Scene E — Ruin R7 *Gilded King Aurelius* (`:RUIN_AURELIUS_DC`)** | `Map 186` (*Meridian Spire Gala Hall* royal dais & crimson runner; **swaps `186 → 491`**) | **`1,102` frames @ 30fps (`36.73s`, 11 synced cues)** | **`-14.00 LUFS` (Reuben Task 3 verified):** *Girei* organ breach → knuckle clink + `bgm_cut` → ***Cosmic Air* (Gilgamesh's Theme)** across royal disdain, physical gauntlet toss of Voss (**0 Enkidu portal-chains**), `"Kneel, mongrel."` audience, grounded PC refusal, and **1 gilded Poké Ball** challenge (**0 Gate of Babylon portals/swords**) | **`pf_rejuv_ruin_aurelius_live.mp4`** (`3.16 MB`), `web_ruin_aurelius_live.mp4` (`2.02 MB`), **`114_rejuv_ch16_ruin_live_proof.png`** (Tiles 9–16) |
+| **Bonus Pair Master Proof & Live Cinema Studio HTML** | **`114_rejuv_ch16_ruin_live_proof.png`** (16 curated frames: 8×Ch16 + 8×Ruin R7) + **`/tmp/prismfall_rejuv_ch16_ruin_studio.html`** (`5.08 MB`, `< 10 MB`) | **Playwright + `node --check` verified** | `console_errors=0`, `page_errors=0`, `0` JS syntax errors, **`2/2` embedded `512×384` MP4s `readyState=4`**, `5/5` images loaded, clickable beat jumps + `0.5×` speed toggle + 4-sheet pure-pixel Asset Inspector verified | `114_rejuv_ch16_ruin_live_proof.png` (parent `previews/` + `rejuv_in_engine_proof/`), `/tmp/prismfall_rejuv_ch16_ruin_studio.html` |
 
 ---
 
-## 3. Verified Pixel-Art Asset Manifest (42 Crisp 2× Sheets — All 3-Way SHA-256 Synced)
+## 3. Verified Pixel-Art Asset Manifest (46 Crisp 2× Sheets — All 3-Way SHA-256 Synced)
 
 Every pixel-art sheet was authored on a native 1× pixel grid, upscaled strictly 2× `NEAREST`, and passed automated validation: **`exact2x=True`, `semi=0`**, with identical SHA-256 digests across `graphics/`, `art/out/Graphics/`, and live `pf_engine_run/game/Graphics/`.
 
@@ -139,9 +142,17 @@ Every pixel-art sheet was authored on a native 1× pixel grid, upscaled strictly
 | `graphics/Pictures/cut_ch15_glassfall_90deg.png` | `512×384` | `1×1` | 64 | **`0b67ba7cc118`** | 3-Way synced 90° AF 290 Cathedral Glassfall apex plate (Morwen shielding child — ready for Wave 3 DC) |
 | `graphics/Pictures/cut_ch21_valen_90deg.png` | `512×384` | `1×1` | 64 | **`8d1e65027b5e`** | 3-Way synced 90° Crownhaven Prism Arena apex plate (Valen & Freed Arceus — ready for Wave 3 DC) |
 
+### G. Bonus Pair (Ch16 Wenlow & Ruin R7 Aurelius) — 4 Disjoint Crisp 2× Pixel Sheets (All 3-Way SHA-256 Synced, `exact2x=True, semi=0`)
+| File | Dimensions | Grid | SHA-256 (12) | Purpose |
+|---|---|---|---|---|
+| `graphics/Characters/act_ch16_wenlow_stand.png` | `192×48` | `4×1` | **`085dcc97c600`** | Ch16 17yo Wenlow anchored pixel-for-pixel to `WENLOW.png`: steady doorway stance (`0`) → calm raised hand (`1`) → both unarmed open palms raised (`2–3`) |
+| `graphics/Animations/pf_vfx_ch16_ward_fx.png` | `512×256` | `4×2` | **`48a2e4622887`** | Row 0: delicate shimmering Quiet Ward glass-bead curtain (`z_layer: :mid`); Row 1: Bayer-dithered Directorate inspection lantern light beam (`:add`, `mirror: true`) |
+| `graphics/Characters/act_ruin_aurelius_pose.png` | `192×48` | `4×1` | **`0b4df4963d15`** | Ruin R7 Gilded King Aurelius anchored pixel-for-pixel to `THEODRIC.png`: arms-crossed disdain (`0`) → right gauntlet flick tossing Voss (`1`) → open audience hand (`2`) → ONE gilded Poké Ball lifted (`3`, **0 GoB portals/swords**) |
+| `graphics/Animations/pf_vfx_ruin_gold_aura.png` | `512×256` | `4×2` | **`261162922fec`** | Row 0: soft diagonal Aureate cathedral sunbeam shafts (`:add`); Row 1: drifting pure-pixel gold-leaf flakes & 4-pt stardust motes (`:add`) |
+
 ---
 
-## 4. Complete Story Peak Cutscene Roster (All 7 Live-Verified Productions!)
+## 4. Complete Story Peak Cutscene Roster (All 9 Live-Verified Productions!)
 
 All `.ogv` AI-slideshow movies are permanently retired. Every story peak — including our **Ch9 Director's Cut v3** and **Wave 2 Director's Cut trio (Ch11 Rethink, Ch5 DC on NEW Octagonal `Map 952`, Ch2 Lantern Pageant)** — is live-verified inside `mkxp-z.x86_64`:
 
@@ -154,6 +165,8 @@ All `.ogv` AI-slideshow movies are permanently retired. Every story peak — inc
 | **#4** | **Ch19 — WAR-1 Primal Kyogre vs Reshiram (`:WAR_CLIMAX`)** | **Real built `Map 926`** *(The Glass Dunes)* | `act_war1_primal_kyogre`, `act_war1_reshiram`, `EIRIK`, `HROTHGAR`, `SIGRUN`, `ANJA`, `pfw_*` | `pf_vfx_origin_pulse`, `pf_vfx_origin_beam`, `pf_vfx_blue_flare_beam`, `pf_vfx_beam_clash_core`, `pf_vfx_trinitite_glass_wave`, `cut_ch19_war1_90deg.png` | Dawn frontline pan → pixel-locked Origin Pulse vs Blue Flare tug-of-war → `0.28s bgm_cut` → Trinitite glass wave & floor crust (`20.97s`) | **LIVE VERIFIED (Wave 2)** |
 | **#5** | **Ch15 — CE-1 AF 290 Glassfall (`:CH15_GLASSFALL`)** | `Map 295` *(swaps `295 → 391`)* | `KESTREL`, `YSOLDE`, `VALEN`, `VOSS`, `MORWEN`, `trainer_ECHO_MORWEN`, `Followers/MISMAGIUS` | `pf_vfx_sky_fracture`, `pf_vfx_glassfall_curtain`, `pf_vfx_sepia_echo_shimmer`, `cut_ch15_glassfall_90deg.png` | Sepia AF 290 memory → Great Prism sky fracture + `0.28s bgm_cut` → bottle-green Glassfall curtain → 10-year Echo Morwen turn (`18.97s`) | **LIVE VERIFIED (Wave 3)** |
 | **#6** | **Ch21 — "The Ring & The Light" Arceus Finale (`:CH21_ARCEUS`)** | `Map 285` *(swaps `285 → 491`)* | `act_ch21_arceus_bound`, `VALEN`, `ILSA`, `VOSS`, `CELESTINE`, `KESTREL`, `PLAYER_A` | `pf_vfx_arceus_18locks`, `pf_vfx_prism_helix_18`, `pf_vfx_legend_plate_burst`, `cut_ch21_valen_90deg.png` | Bound Arceus in 18 locks → 18-hue Prism Helix shatters Lock #18 → Valen light dissolution → Freed Arceus & Whole Legend Plate (`21.60s`) | **LIVE VERIFIED (Wave 3)** |
+| **#7** | **Ch16 — *Clear Air: Wenlow's Stand* (`:CH16_WENLOW`)** | `Map 104` *(swaps `104 → 223`)* → 122f `#000000` Black → `Map 544` *(swaps `544 → 363`)* | `act_ch16_wenlow_stand`, `WENLOW`, `trainer_MERIDIAN_DIRECTORATE`, `CORVIN`, `PIP`, `BASTIAN`, `PLAYER_A` | `pf_vfx_ch16_ward_fx` (bead curtain + Bayer lantern beam) | Warm Infirmary rounds → radio alarm → **HARD `bgm_cut` DEAD SILENCE** at doorway → open palms `"This is a hospital."` / `"You have to —"` → **0-frame `#000000` cut + 1 dry gunshot + 122f digital-zero vacuum** → Cragholm solo violin aftermath (`34.67s`, `3` emotes) | **LIVE VERIFIED (Bonus Pair)** |
+| **#8** | **Ruin R7 — *Gilded King Aurelius* (`:RUIN_AURELIUS_DC`)** | `Map 186` *(swaps `186 → 491`)* | `act_ruin_aurelius_pose`, `THEODRIC`, `VOSS`, `VALEN`, `PLAYER_A` | `pf_vfx_ruin_gold_aura` (Aureate cathedral shafts & pixel gold leaf) | Organ mirror breach → antique-gold descent → knuckle clink + ***Cosmic Air* drop** → physical gauntlet toss of Voss (**0 portal-chains**) → `"Kneel, mongrel."` → grounded PC refusal → **1 gilded Poké Ball** challenge (**0 GoB portals/swords**) (`36.73s`, `3` emotes) | **LIVE VERIFIED (Bonus Pair)** |
 
 ---
 
@@ -161,23 +174,23 @@ All `.ogv` AI-slideshow movies are permanently retired. Every story peak — inc
 
 1. **Install `017_AdvancedAnimations.rb`:** Copy the exact verified code in §6 below into `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` (includes `CutPlateExtension` with dedicated untoned `@plate_vp` at `z=390`, safe `pbZoomMap` suspend/restore, edge-to-edge overscan clamping, and all Wave 1–3 + Ch9 DC v3 + Wave 2 DC scenes).
 2. **Retire ALL AI `.ogv` calls in `016_Movies.rb`:**
-   - Wire `pbRejuvCutscene` across all main story peaks: `:CH2_PAGEANT`, `:CH5_DC` (`:SH1_DC`), `:CH9_UNMASK` (`:IR1`), `:CH11_RETHINK`, `:WAR_CLIMAX` (`:WAR1`), `:CH15_GLASSFALL` (`:CE1`), and `:CH21_ARCEUS` (`:THE_LIGHT`).
+   - Wire `pbRejuvCutscene` across all 9 live-verified story peaks: `:CH2_PAGEANT`, `:CH5_DC` (`:SH1_DC`), `:CH9_UNMASK` (`:IR1`), `:CH11_RETHINK`, `:CH16_WENLOW` (`:CH16_PURGE`), `:RUIN_AURELIUS_DC` (`:RUIN_R7_AURELIUS`), `:WAR_CLIMAX` (`:WAR1`), `:CH15_GLASSFALL` (`:CE1`), and `:CH21_ARCEUS` (`:THE_LIGHT`).
    - Keep `Cutscene.act` backwards-compatible for tiny inline event gestures, and remove all `Cutscene.movie("pf_*.ogv")` references.
 3. **Enforce Grounded Staging & Restraint Guardrails Across Future Cuts:**
    - `<= 3` earned emote balloons per cutscene, ZERO MS-Paint geometric shapes, ZERO portrait movement, and grounded natural Protagonist movement (clean walk-ins and calm observational turns — zero twitchy/darting choreography).
 4. **Live-Gameplay Input Mode for `PortraitBox#say`:**
    - In `Engine#say`, add an `interactive: !@capture_dir` branch so during real gameplay, `PortraitBox` waits for `Input.trigger?(Input::USE)` / `Input.trigger?(Input::BACK)` after typing finishes, while keeping `hold:` auto-advance for headless video captures!
 5. **Canonical BGM Mapping:**
-   - Map tags `"ch2_dorian_stage"`, `"ch2_mourner_sermon"`, `"ch5_girei_intro"`, `"ch5_vogel_climax"`, `"ch5_lowlight_grief"`, `"ch9_tension"`, `"ch9_never_meant"`, `"ch11_ominous"`, `"ch11_kyogre_thaw"`, `"ch19_dynast"`, `"ch19_war_clash"`, `"ch19_aftermath"`, `"ch15_ominous"`, `"ch15_decretum"`, `"ch21_arceus_bound"`, `"ch21_tkt"` to Prismfall's canonical `Audio/BGM/` filenames.
+   - Map tags `"ch2_dorian_stage"`, `"ch2_mourner_sermon"`, `"ch5_girei_intro"`, `"ch5_vogel_climax"`, `"ch5_lowlight_grief"`, `"ch9_tension"`, `"ch9_never_meant"`, `"ch11_ominous"`, `"ch11_kyogre_thaw"`, `"ch16_wenlow_warm"`, `"ch16_aftermath_violin"`, `"ruin_intro_organ"`, `"ruin_cosmic_air"`, `"ch19_dynast"`, `"ch19_war_clash"`, `"ch19_aftermath"`, `"ch15_ominous"`, `"ch15_decretum"`, `"ch21_arceus_bound"`, `"ch21_tkt"` (plus dry rifle SE `"ch16_gunshot"`) to Prismfall's canonical `Audio/BGM/` & `Audio/SE/` filenames.
 6. **Map Handoffs (Built vs. Pending):**
    - **NEW Octagonal `Map 952`, `Map 608`, `Map 145`, `Map 926`:** Already built and running live! Zero coordinate changes needed.
-   - **Map `295 → 264` (Ch9), `563 → 309/300` (Ch11), `295 → 391` (Ch15), `285 → 491` (Ch21):** Swap map IDs once respective maps are generated (and unlock Ch11 pier-rail rows `R2–R3` on `act_ch11_anja_brace` / `act_ch11_juno_pier` once `Map 309` steel pier is active!).
+   - **Map `295 → 264` (Ch9), `563 → 309/300` (Ch11), `104 → 223` & `544 → 363` (Ch16), `186 → 491` (Ruin R7), `295 → 391` (Ch15), `285 → 491` (Ch21):** Swap map IDs once respective maps are generated (and unlock Ch11 pier-rail rows `R2–R3` on `act_ch11_anja_brace` / `act_ch11_juno_pier` once `Map 309` steel pier is active!).
 
 ---
 
 ## 6. Verified Live-Tested Source Code: `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`
 
-*(Exact verbatim file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, `7,631` total captured frames including **`3,196` Wave 2 Director's Cut frames** across `Map 563`, NEW Octagonal `Map 952`, `Map 608`, and `Map 145` — `Ch11 Rethink` `1,183f` / `39.43s` `-14.00 LUFS`, `Ch5 DC` `1,204f` / `40.13s` `-14.10 LUFS`, `Ch2 Pageant` `809f` / `26.97s` `-14.00 LUFS` — `4,037` lines, SHA-256 `8837606408527b38`.)*
+*(Exact verbatim file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, `9,773` total captured frames across 9 live productions — including **`2,142` Bonus Pair frames**: `Ch16 Wenlow` `1,040f` / `34.67s` `-14.00 LUFS` [`122f` `#000000` + `0.0000` vacuum], `Ruin R7 Aurelius` `1,102f` / `36.73s` `-14.00 LUFS` [`0` GoB portals] — `4,402` lines, SHA-256 `fb0e12234b7b8b25`.)*
 
 ```ruby
 #===============================================================================
@@ -773,28 +786,29 @@ module Prismfall
         @vp = ui_vp
         @sprites = []
         @text = text.to_s
-        @name = (name || speaker_sym.to_s.capitalize).to_s
+        @name = (name || (speaker_sym ? speaker_sym.to_s.capitalize : "")).to_s
         @chars_shown = 0.0
         @done_typing = false
 
         box_y = Graphics.height - 98
         box_h = 86
-        # 1. Portrait Frame (104x104 on left edge, sitting right beside box)
-        face_x = 12
-        face_y = box_y - 18
-        @face_bg = Sprite.new(@vp)
-        @face_bg.z = 9500
-        fb = Bitmap.new(104, 104)
-        fb.fill_rect(0, 0, 104, 104, Color.new(18, 22, 34, 240))
-        fb.fill_rect(2, 2, 100, 100, Color.new(210, 218, 236, 255))
-        fb.fill_rect(4, 4, 96, 96, Color.new(26, 30, 44, 255))
-        @face_bg.bitmap = fb
-        @face_bg.x = face_x
-        @face_bg.y = face_y
-        @sprites << @face_bg
 
-        p_bmp = load_portrait(speaker_sym, expression)
+        # 1. Optional Portrait Frame (omitted cleanly for disembodied/plain speakers like Radio or Lieutenant)
+        p_bmp = speaker_sym ? load_portrait(speaker_sym, expression) : nil
         if p_bmp
+          face_x = 12
+          face_y = box_y - 18
+          @face_bg = Sprite.new(@vp)
+          @face_bg.z = 9500
+          fb = Bitmap.new(104, 104)
+          fb.fill_rect(0, 0, 104, 104, Color.new(18, 22, 34, 240))
+          fb.fill_rect(2, 2, 100, 100, Color.new(210, 218, 236, 255))
+          fb.fill_rect(4, 4, 96, 96, Color.new(26, 30, 44, 255))
+          @face_bg.bitmap = fb
+          @face_bg.x = face_x
+          @face_bg.y = face_y
+          @sprites << @face_bg
+
           @face_sp = Sprite.new(@vp)
           @face_sp.bitmap = p_bmp
           @face_sp.z = 9505
@@ -804,7 +818,7 @@ module Prismfall
         end
 
         # 2. Message Frame (clean dark-slate Rejuv/Desolation style with crisp border)
-        msg_x = 122
+        msg_x = p_bmp ? 122 : 12
         msg_w = Graphics.width - msg_x - 12
         @box = Sprite.new(@vp)
         @box.z = 9500
@@ -817,21 +831,23 @@ module Prismfall
         @box.y = box_y
         @sprites << @box
 
-        # 3. Speaker Nameplate Tab (auto-sized for titles like "Dominar Hrothgar" / "Arceus (via Ilsa)")
-        @name_sp = Sprite.new(@vp)
-        @name_sp.z = 9510
-        nw = @name.length > 14 ? 210 : (@name.length > 10 ? 184 : 136)
-        nb = Bitmap.new(nw, 28)
-        nb.fill_rect(0, 0, nw, 28, Color.new(16, 20, 30, 248))
-        nb.fill_rect(2, 2, nw - 4, 24, Color.new(208, 216, 234, 255))
-        nb.fill_rect(4, 4, nw - 8, 20, Color.new(34, 40, 58, 255))
-        set_font(nb, 18, true)
-        nb.font.color = Color.new(255, 236, 176)
-        nb.draw_text(8, 2, nw - 16, 24, @name, 0)
-        @name_sp.bitmap = nb
-        @name_sp.x = msg_x + 6
-        @name_sp.y = box_y - 22
-        @sprites << @name_sp
+        # 3. Speaker Nameplate Tab (auto-sized for sovereign titles like "Gilded King Aurelius")
+        if !@name.empty?
+          @name_sp = Sprite.new(@vp)
+          @name_sp.z = 9510
+          nw = @name.length > 18 ? 248 : (@name.length > 14 ? 214 : (@name.length > 10 ? 184 : 136))
+          nb = Bitmap.new(nw, 28)
+          nb.fill_rect(0, 0, nw, 28, Color.new(16, 20, 30, 248))
+          nb.fill_rect(2, 2, nw - 4, 24, Color.new(208, 216, 234, 255))
+          nb.fill_rect(4, 4, nw - 8, 20, Color.new(34, 40, 58, 255))
+          set_font(nb, 18, true)
+          nb.font.color = Color.new(255, 236, 176)
+          nb.draw_text(8, 2, nw - 16, 24, @name, 0)
+          @name_sp.bitmap = nb
+          @name_sp.x = msg_x + 6
+          @name_sp.y = box_y - 22
+          @sprites << @name_sp
+        end
 
         # 4. Crisp Text Bitmap
         @txt_sp = Sprite.new(@vp)
@@ -849,6 +865,7 @@ module Prismfall
       end
 
       def load_portrait(sym, expr)
+        return nil if sym.nil?
         base = "Graphics/Portraits/#{sym.to_s.upcase}"
         ["#{base}_#{expr}.png", "#{base}.png"].each do |p|
           return Bitmap.new(p) if File.exist?(p)
@@ -1147,6 +1164,18 @@ module Prismfall
         @flash_sp.bitmap.fill_rect(0, 0, Graphics.width, Graphics.height, Color.new(color[0], color[1], color[2]))
         @flash_sp.opacity = p
         @flash_task = { :mode => :fade, :p => p.to_f, :t => 0.0, :dur => [duration.to_f, 0.001].max }
+      end
+
+      # 0-frame hard cut to solid pure #000000 black (above letterbox bars & actors!)
+      def set_blackout(on)
+        if on
+          @flash_sp.bitmap.fill_rect(0, 0, Graphics.width, Graphics.height, Color.new(0, 0, 0))
+          @flash_sp.opacity = 255
+          @flash_task = nil
+        else
+          @flash_sp.opacity = 0
+          @flash_task = nil
+        end
       end
 
       # Reborn/Rejuvenation ramped flash: 17 -> 51 -> 136 -> 221 -> 255 -> hold -> fade
@@ -4180,6 +4209,352 @@ module Prismfall
         end
         return { :cues => cues, :frames => fc }
       end
+
+      #=========================================================================
+      # SCENE D (LIVE DIRECTOR'S CUT) — Ch16: "Clear Air — Wenlow's Stand"
+      # Target Duration: ~34.5s (~1,035 frames @ 30fps)
+      # Live Maps: Map 104 (Mirefen Infirmary stand-in) -> 0-frame #000000 Black
+      #            (1 dry gunshot SE + 120f unbroken dead silence) -> Map 544 (Cragholm)!
+      # Canon: story/35_SCRIPT_CH16.md (Interlude IV) + REVIEW.md #20 dead-silence rule!
+      # Restraint: <= 3 emotes | 0px static portraits | grounded PC | 0 MS-Paint shapes!
+      #=========================================================================
+      def play_ch16_wenlow(capture_dir: nil, capture_fps: 30)
+        eng = Engine.new(capture_dir: capture_dir, capture_fps: capture_fps)
+        begin
+          #---------------------------------------------------------------------
+          # ACT I (0.0–12.5s) — Evening Rounds & Radio Warning (Mirefen Infirmary)
+          #---------------------------------------------------------------------
+          eng.transfer_map(104, 10.5, 10.4, hide_player: true)
+          # Hide static Tidewater Inn NPCs so Wenlow & patients own the Infirmary cleanly
+          [2, 3, 4].each do |eid|
+            ev = $game_map.events[eid]
+            ev.transparent = true if ev
+          end
+
+          eng.set_tone(-14, -18, -8, 12, duration: 0.0)
+          eng.letterbox(true, height: 32, duration: 0.0)
+          eng.play_bgm("ch16_wenlow_warm", volume: 82, tag: "ch16_wenlow_warm")
+
+          # Sleeping Quiet Ward patients behind the bead curtain + left-bed patient
+          eng.spawn_actor(:pat_left,  sheet: "NPC 06", tx: 4.5,  ty: 11.4, dir: :down, is_charset: true)
+          eng.spawn_actor(:pat_ward1, sheet: "NPC 02", tx: 15.5, ty: 9.6,  dir: :down, is_charset: true)
+          eng.spawn_actor(:pat_ward2, sheet: "NPC 04", tx: 15.5, ty: 12.6, dir: :down, is_charset: true)
+
+          # Delicate pure-pixel glass-bead curtain framing the Quiet Ward doorway (Y-sorted behind Wenlow!)
+          eng.spawn_vfx(:beads_ward, sheet: "pf_vfx_ch16_ward_fx", tx: 14.4, ty: 10.8,
+                        grid: [4, 2], frames: [0, 1, 2, 3], ticks: [10, 10, 10, 10], loops: :forever,
+                        blend: :normal, untoned: false, opacity: 195, scale: 0.62, z_layer: :mid)
+
+          # 17-year-old Wenlow doing warm evening rounds beside the left patient cot
+          eng.spawn_actor(:wenlow, sheet: "WENLOW", tx: 6.4, ty: 11.4, dir: :left, is_charset: true)
+          eng.wait(0.55)
+          eng.actor(:wenlow).move_to(6.4, 12.0, duration: 0.40, walk: true, dir: :down)
+          eng.wait_for_move(:wenlow)
+          eng.actor(:wenlow).move_to(12.6, 12.0, duration: 1.15, walk: true, dir: :right)
+          eng.wait(0.65)
+
+          eng.say(:WENLOW, :happy, "Right! Evening rounds! Mrs. Pell, water. Old Fisk, the green one, not the brown one—yes, that one.", hold: 1.00)
+
+          eng.wait_for_move(:wenlow)
+          eng.actor(:wenlow).move_to(12.8, 9.6, duration: 0.75, walk: true, dir: :up)
+          eng.wait_for_move(:wenlow)
+
+          # Radio crackles from the east stilt-walks! Emote #1 of 3!
+          eng.play_se("Battle catch click", volume: 84, pitch: 122)
+          eng.actor(:wenlow).show_emote(:exclaim, duration: 0.60)
+          eng.play_se("Exclaim", volume: 78)
+          eng.wait(0.55)
+
+          eng.say(nil, :neutral, "Infirmary? Grey coats at the east walks. Lots. They've got the Sweetrot list.", hold: 1.05, name: "Radio")
+
+          # Wenlow steadies himself, walks calmly to the Quiet Ward threshold in front of the bead curtain
+          eng.set_tone(-26, -28, -14, 28, duration: 0.75)
+          eng.wait(0.30)
+          eng.actor(:wenlow).move_to(13.5, 11.4, duration: 0.80, walk: true, dir: :down)
+          eng.wait_for_move(:wenlow)
+          eng.actor(:wenlow).set_dir(:right)
+          eng.wait(0.30)
+
+          eng.say(:WENLOW, :neutral, "...Okay. Okay. I've read the book twice. Nobody ever looks at the glass ones.", hold: 1.00)
+
+          #---------------------------------------------------------------------
+          # ACT II (12.5–21.5s) — MANDATORY HARD bgm_cut TOTAL DEAD SILENCE!
+          #   Canon REVIEW.md #20: silence from the Ward doorway through the shot!
+          #---------------------------------------------------------------------
+          eng.bgm_cut
+          eng.set_tone(-38, -40, -24, 46, duration: 0.55)
+          # Wenlow turns to face the doorway in his pure-pixel acting sheet (frame 0: steady, left-facing)
+          eng.actor(:wenlow).set_pose("act_ch16_wenlow_stand", 0)
+          eng.pan_camera_to(10.8, 10.9, duration: 0.65, ease: :in_out)
+          eng.wait(0.35)
+
+          # Front Infirmary door swings open; Directorate squad enters silently into open lower corridor!
+          eng.play_se("Door enter", volume: 88, pitch: 86)
+          eng.spawn_actor(:lt,   sheet: "trainer_MERIDIAN_DIRECTORATE", tx: 10.0, ty: 14.0, dir: :up, is_charset: true)
+          eng.spawn_actor(:off1, sheet: "trainer_MERIDIAN_DIRECTORATE", tx: 9.2,  ty: 14.3, dir: :up, is_charset: true)
+          eng.spawn_actor(:off2, sheet: "trainer_MERIDIAN_DIRECTORATE", tx: 10.8, ty: 14.3, dir: :up, is_charset: true)
+          eng.spawn_actor(:off3, sheet: "trainer_MERIDIAN_DIRECTORATE", tx: 10.0, ty: 14.7, dir: :up, is_charset: true)
+
+          eng.actor(:lt).move_to(10.6, 11.4, duration: 0.85, walk: true, dir: :up)
+          eng.actor(:off1).move_to(9.2, 11.0, duration: 0.90, walk: true, dir: :up)
+          eng.actor(:off2).move_to(9.6, 12.3, duration: 0.80, walk: true, dir: :up)
+          eng.actor(:off3).move_to(8.4, 11.8, duration: 0.95, walk: true, dir: :up)
+          eng.wait(0.95)
+          [:lt, :off1, :off2, :off3].each { |id| eng.actor(id).set_dir(:right) }
+
+          # Mirrored Bayer-dithered Directorate lantern beam projecting from Lieutenant rightward onto Wenlow!
+          eng.spawn_vfx(:lantern_cone, sheet: "pf_vfx_ch16_ward_fx", tx: 12.2, ty: 11.4,
+                        grid: [4, 2], frames: [4, 5, 6, 7], ticks: [9, 9, 9, 9], loops: :forever,
+                        blend: :add, mirror: true, opacity: 105, scale: 0.82, z_layer: :above)
+          eng.wait(0.35)
+
+          eng.say(nil, :neutral, "Medical facility. We have reason to believe Sweetrot users are being harboured on these premises.", hold: 1.15, name: "Lieutenant")
+
+          # Intimate zoom framing Lieutenant & Wenlow raising both open palms in front of the bead curtain
+          eng.zoom_map(1.30, duration: 1.10, focus: [12.0, 11.1], ease: :in_out)
+          eng.actor(:wenlow).play_clip(
+            sheet: "act_ch16_wenlow_stand", grid: [4, 1], frames: [0, 1, 2, 3],
+            ticks: [10, 10, 10, 30], loops: 1, stay: true
+          )
+          # Emote #2 of 3: quiet resolve before speaking
+          eng.actor(:wenlow).show_emote(:dots, duration: 0.65)
+          eng.wait(1.15)
+
+          eng.say(:WENLOW, :neutral, "This is a hospital.", hold: 1.05)
+
+          # Lieutenant steps half a pace closer; Wenlow begins his final sentence — cut off at 0 frames!
+          eng.actor(:lt).move_to(11.1, 11.4, duration: 0.45, walk: true, dir: :right)
+          eng.wait(0.50)
+          eng.say(:WENLOW, :neutral, "You have to —", hold: 0.25)
+
+          #---------------------------------------------------------------------
+          # ACT III (21.5–25.6s) — 0-FRAME HARD CUT TO PURE #000000 BLACK
+          #   ONE SINGLE DRY GUNSHOT SE — 120 FULL FRAMES (4.00s) DEAD SILENCE!
+          #---------------------------------------------------------------------
+          eng.set_blackout(true)
+          eng.wait(0.06)
+          eng.play_se("ch16_gunshot", volume: 100)
+          eng.wait(4.00)
+
+          #---------------------------------------------------------------------
+          # ACT IV (25.6–34.5s) — Cragholm Deep Seams Aftermath (Map 544 -> 363)
+          #   Solo violin enters STRICTLY here, after the full 4.0s silent black!
+          #---------------------------------------------------------------------
+          eng.transfer_map(544, 14.5, 30.2, hide_player: true)
+          [14, 15].each do |eid|
+            ev = $game_map.events[eid]
+            ev.transparent = true if ev
+          end
+          eng.set_tone(-34, -36, -28, 38, duration: 0.0)
+
+          # Motionless Corvin beside the pit-prop; Pip & Bastian in doorway; grounded PC cleanly framed!
+          eng.spawn_actor(:corvin,  sheet: "CORVIN",   tx: 16.4, ty: 29.5, dir: :down,  is_charset: true)
+          eng.spawn_actor(:pip,     sheet: "PIP",      tx: 11.6, ty: 32.5, dir: :up,    is_charset: true)
+          eng.spawn_actor(:bastian, sheet: "BASTIAN",  tx: 10.8, ty: 32.8, dir: :up,    is_charset: true)
+          eng.spawn_actor(:pc,      sheet: "PLAYER_A", tx: 10.2, ty: 32.2, dir: :right, is_charset: true)
+
+          eng.play_bgm("ch16_aftermath_violin", volume: 78, tag: "ch16_aftermath_violin")
+          eng.flash(color: [0, 0, 0], power: 255, duration: 1.35)
+          eng.wait(1.45)
+
+          eng.play_se("Battle catch click", volume: 70, pitch: 90)
+          eng.say(nil, :neutral, "...Infirmary to Cragholm. Infirmary to — (static) — is anyone — the boy, Doctor. The boy.", hold: 1.40, name: "Radio")
+
+          # Corvin never moves. Pip takes a step in; Bastian calmly steps up behind her and stops her.
+          eng.zoom_map(1.22, duration: 1.30, focus: [14.4, 30.5], ease: :in_out)
+          eng.actor(:pip).move_to(12.8, 31.2, duration: 0.85, walk: true, dir: :right)
+          eng.wait(0.30)
+          eng.actor(:bastian).move_to(11.9, 31.4, duration: 0.75, walk: true, dir: :right)
+          eng.wait_for_move(:bastian)
+          eng.actor(:pip).set_dir(:left)
+          eng.wait(0.45)
+          eng.actor(:pip).set_dir(:right)
+
+          # Emote #3 of 3: unbroken stillness over Corvin
+          eng.actor(:corvin).show_emote(:dots, duration: 1.10)
+          eng.wait(1.50)
+
+          eng.zoom_map(1.0, duration: 0.50, ease: :out)
+          eng.letterbox(false, duration: 0.50)
+          eng.wait(0.50)
+        ensure
+          cues = eng.cues.dup
+          fc   = eng.frames_captured
+          eng.dispose
+        end
+        return { :cues => cues, :frames => fc }
+      end
+
+      #=========================================================================
+      # SCENE E (LIVE DIRECTOR'S CUT) — Ruin R7: "Gilded King Aurelius"
+      # Target Duration: ~36.2s (~1,086 frames @ 30fps)
+      # Live Map: Map 186 (Meridian Spire Gala Hall — Royal Dais stand-in for 491)
+      # Canon: story/42_SCRIPT_RUIN_KING.md + aurelius-personality-not-gob PROPOSAL!
+      # CRITICAL GUARDRAIL (Reuben Task 3): PURE Archer Gilgamesh PERSONALITY ONLY!
+      #   ZERO Gate of Babylon portals | ZERO floating swords/spears/halberds |
+      #   ZERO Enkidu-from-portals whips | ONE single gilded Poke Ball | <= 3 emotes!
+      #=========================================================================
+      def play_ruin_aurelius_dc(capture_dir: nil, capture_fps: 30)
+        eng = Engine.new(capture_dir: capture_dir, capture_fps: capture_fps)
+        begin
+          #---------------------------------------------------------------------
+          # ACT I (0.0–6.0s) — The Mirror Breach & Slow Sovereign Descent
+          #---------------------------------------------------------------------
+          eng.transfer_map(186, 13.5, 11.4, hide_player: true)
+          # Hide static Gala guests; KEEP ev[3] ("Replica" golden keystone cradle on dais!)
+          $game_map.events.each do |eid, ev|
+            ev.transparent = true if eid >= 4
+          end
+
+          eng.set_tone(-44, -44, -30, 48, duration: 0.0)
+          eng.letterbox(true, height: 32, duration: 0.0)
+          eng.play_bgm("ruin_intro_organ", volume: 82, tag: "ruin_intro_organ")
+
+          # Valen spent near crimson runner edge; grounded PC steady south; Voss striding up carpet
+          eng.spawn_actor(:valen, sheet: "VALEN",    tx: 10.3, ty: 13.4, dir: :right, is_charset: true)
+          eng.spawn_actor(:pc,    sheet: "PLAYER_A", tx: 13.5, ty: 16.0, dir: :up,    is_charset: true)
+          eng.spawn_actor(:voss,  sheet: "VOSS",     tx: 15.2, ty: 17.8, dir: :up,    is_charset: true)
+
+          # Camera tilts up to the elevated crimson dais as the Keystone Cradle flares rich antique gold!
+          eng.pan_camera_to(13.5, 8.6, duration: 0.75, ease: :in_out)
+          eng.wait(0.60)
+          eng.play_se("Anim/HealBell", volume: 88, pitch: 118)
+          eng.play_se("Anim/Saint7", volume: 86, pitch: 96)
+          eng.flash(color: [255, 224, 132], power: 195, duration: 0.45)
+          # Rich moody antique-gold cathedral tone (warm ivory marble + deep ruby velvet — zero washout!)
+          eng.set_tone(-14, -26, -54, 14, duration: 0.85)
+
+          # Pure-pixel Aureate cathedral light shafts & drifting gold leaf (ZERO portals/swords!)
+          [[11.2, 8.5, 0], [13.5, 7.6, 1], [15.8, 8.5, 2]].each_with_index do |(sx, sy, ph), si|
+            eng.spawn_vfx(:"gold_shaft_#{si}", sheet: "pf_vfx_ruin_gold_aura", tx: sx, ty: sy,
+                          grid: [4, 2], frames: [ph % 4, (ph + 1) % 4, (ph + 2) % 4, (ph + 3) % 4],
+                          ticks: [12, 12, 12, 12], loops: :forever,
+                          blend: :add, opacity: 96, scale: 1.30, z_layer: :above)
+          end
+          [[10.8, 11.4, 0], [16.2, 11.4, 2], [13.5, 12.9, 1]].each_with_index do |(mx, my, ph), mi|
+            eng.spawn_vfx(:"gold_leaf_#{mi}", sheet: "pf_vfx_ruin_gold_aura", tx: mx, ty: my,
+                          grid: [4, 2], frames: [4 + (ph % 4), 4 + ((ph + 1) % 4), 4 + ((ph + 2) % 4), 4 + ((ph + 3) % 4)],
+                          ticks: [10, 10, 10, 10], loops: :forever,
+                          blend: :add, opacity: 165, scale: 0.96, z_layer: :above)
+          end
+
+          # Gilded King Aurelius manifests atop the royal dais and descends slowly down the grand marble stairs!
+          eng.spawn_actor(:aurelius, sheet: "THEODRIC", tx: 13.5, ty: 6.2, dir: :down, is_charset: true)
+          eng.wait(0.40)
+          eng.actor(:aurelius).move_to(13.5, 11.2, duration: 2.15, walk: true, dir: :down)
+          eng.actor(:voss).move_to(15.0, 12.0, duration: 1.65, walk: true, dir: :up)
+          eng.pan_camera_to(13.5, 11.6, duration: 2.05, ease: :in_out)
+          eng.wait(2.15)
+          eng.actor(:voss).set_dir(:left)
+
+          eng.say(:VOSS, :happy, "Your Majesty! Look at what House Aurel built for you! Eighteen locks, calibrated to the splinter!", hold: 0.85)
+
+          #---------------------------------------------------------------------
+          # ACT II (6.0–17.2s) — Contempt, Cosmic Air Drop & Physical Voss Toss!
+          #   Proposal §3.4: NO Enkidu chains/portals — pure physical gauntlet flick!
+          #---------------------------------------------------------------------
+          eng.bgm_cut
+          eng.actor(:aurelius).set_pose("act_ruin_aurelius_pose", 0) # Arms crossed, imperious royal stance
+          eng.play_se("Anim/metal", volume: 82, pitch: 122)          # Hollow tinny knuckle tap on Voss's harness
+          eng.wait(0.35)
+
+          # DROP GILGAMESH'S CANON THEME: Cosmic Air!
+          eng.play_bgm("ruin_cosmic_air", volume: 86, tag: "ruin_cosmic_air")
+          eng.zoom_map(1.26, duration: 0.80, focus: :aurelius, ease: :in_out)
+          eng.wait(0.40)
+
+          eng.say(:THEODRIC, :smug, "...That's it? Three hundred years, and this tin-plated parlour trick is what you call ambition?", hold: 0.92, name: "Gilded King Aurelius")
+
+          # Emote #1 of 3: Voss jolts in shocked disbelief
+          eng.actor(:voss).show_emote(:exclaim, duration: 0.50)
+          eng.play_se("Exclaim", volume: 80)
+          eng.wait(0.25)
+          eng.say(:VOSS, :shocked, "My lord? It draws on all eighteen Imprints—I spent thirty years—", hold: 0.72)
+
+          eng.say(:THEODRIC, :angry, "'Aurelian.' A copper coin stamped with the sovereign's face. Know your place, mongrel.", hold: 0.92, name: "Gilded King Aurelius")
+
+          # Physical gauntlet flick tosses Voss clean across the marble flagstones (ZERO portals/chains!)
+          eng.zoom_map(1.04, duration: 0.25, ease: :out)
+          eng.actor(:aurelius).set_pose("act_ruin_aurelius_pose", 1) # Contemptuous right gauntlet flick
+          eng.play_se("Anim/hit", volume: 96, pitch: 88)
+          eng.shake(power: 5, duration: 0.30)
+          eng.flash(color: [255, 224, 124], power: 130, duration: 0.16)
+          eng.actor(:voss).move_to(18.6, 13.0, duration: 0.48, walk: false, arc_h: 20.0, ease: :out)
+          eng.wait_for_move(:voss)
+          eng.play_se("Anim/Earth3", volume: 78, pitch: 112)
+          eng.shake(power: 3, duration: 0.20)
+          eng.actor(:voss).tremble(duration: 0.50, amp: 1.5, freq: 44.0)
+          eng.wait(0.30)
+
+          eng.say(:THEODRIC, :deadpan, "A king has no heirs while he is standing in the room.", hold: 0.85, name: "Gilded King Aurelius")
+
+          #---------------------------------------------------------------------
+          # ACT III (17.2–25.8s) — Sovereign Audience ("Kneel, mongrel.") & Refusal
+          #---------------------------------------------------------------------
+          eng.actor(:aurelius).restore_charset("THEODRIC", dir: :down)
+          eng.actor(:aurelius).move_to(13.5, 12.8, duration: 0.90, walk: true, dir: :down)
+          eng.pan_camera_to(13.5, 13.0, duration: 0.90, ease: :in_out)
+          eng.wait_for_move(:aurelius)
+
+          # Open gauntleted hand extended downward: a monarch granting an audience!
+          eng.actor(:aurelius).set_pose("act_ruin_aurelius_pose", 2)
+          eng.zoom_map(1.28, duration: 0.85, focus: [13.5, 13.8], ease: :in_out)
+          eng.wait(0.35)
+
+          eng.say(:THEODRIC, :neutral, "Every Plate and crown in this land was mine before your grandparents learned to breathe.", hold: 0.92, name: "Gilded King Aurelius")
+          eng.wait(0.20)
+          eng.say(:THEODRIC, :smug, "Kneel, mongrel. Set that little hoop at my feet, and I will be generous to your station.", hold: 0.92, name: "Gilded King Aurelius")
+
+          # Grounded Protagonist refusal: calm steady silence, ONE deliberate step forward, Crown tossed aside!
+          eng.wait(0.40)
+          eng.actor(:pc).move_to(13.5, 15.2, duration: 0.60, walk: true, dir: :up)
+          eng.wait_for_move(:pc)
+          eng.play_se("Anim/metal", volume: 80, pitch: 134)
+
+          # Emote #2 of 3: Aurelius pauses a heartbeat in genuine surprise before laughing!
+          eng.actor(:aurelius).show_emote(:dots, duration: 0.60)
+          eng.wait(0.55)
+
+          #---------------------------------------------------------------------
+          # ACT IV (25.8–36.2s) — Earned Amusement, Single Gilded Poke Ball & Challenge!
+          #   Proposal §3.6: ZERO Gate of Babylon portals/swords — ONE gilded Poke Ball!
+          #---------------------------------------------------------------------
+          eng.say(:THEODRIC, :happy, "Ha! Look at those eyes. Not a shred of fear, not a whisper of devotion!", hold: 0.85, name: "Gilded King Aurelius")
+
+          # Aurelius raises ONE single gilded Poke Ball as the hall deepens to inverted royal amber-gold!
+          eng.actor(:aurelius).set_pose("act_ruin_aurelius_pose", 3)
+          eng.play_se("Anim/Saint7", volume: 94, pitch: 108)
+          eng.flash(color: [255, 224, 120], power: 185, duration: 0.38)
+          eng.shake(power: 4, duration: 0.34)
+          eng.set_tone(-18, -36, -68, 28, duration: 0.65)
+
+          # Extra pure-pixel gold-leaf flakes drifting gently around the royal carpet (ZERO portals/blades!)
+          [[11.8, 12.6, 0], [15.2, 12.6, 1], [12.4, 14.2, 2], [14.6, 14.2, 3]].each_with_index do |(gx, gy, ph), gi|
+            eng.spawn_vfx(:"gold_invert_#{gi}", sheet: "pf_vfx_ruin_gold_aura", tx: gx, ty: gy,
+                          grid: [4, 2], frames: [4 + (ph % 4), 4 + ((ph + 1) % 4), 4 + ((ph + 2) % 4), 4 + ((ph + 3) % 4)],
+                          ticks: [8, 8, 8, 8], loops: :forever,
+                          blend: :add, opacity: 195, scale: 1.0, z_layer: :above)
+          end
+
+          # Emote #3 of 3: Grounded PC holds rock-steady facing the First Sovereign!
+          eng.actor(:pc).show_emote(:double_exclaim, duration: 0.60)
+          eng.zoom_map(1.36, duration: 0.80, focus: :aurelius, ease: :in_out)
+          eng.wait(0.60)
+
+          eng.say(:THEODRIC, :happy, "Hahaha—audacious! Unforgivable! Utterly magnificent!", hold: 0.82, name: "Gilded King Aurelius")
+          eng.say(:THEODRIC, :angry, "Stand your ground, mongrel! Face the First Sovereign of Aurelia and look heaven in the eye!", hold: 1.15, name: "Gilded King Aurelius")
+
+          eng.wait(0.65)
+          eng.zoom_map(1.0, duration: 0.45, ease: :out)
+          eng.letterbox(false, duration: 0.45)
+          eng.wait(0.45)
+        ensure
+          cues = eng.cues.dup
+          fc   = eng.frames_captured
+          eng.dispose
+        end
+        return { :cues => cues, :frames => fc }
+      end
     end
   end
 end
@@ -4194,6 +4569,9 @@ def pbRejuvCutscene(id, **opts)
   when :CH11_RETHINK, :CH11_KYOGRE_RETHINK, :CH11_THAW_DC, :CH11_DC
     Prismfall::AdvancedAnimations.play_ch11_kyogre_rethink(**opts)
   when :CH2_PAGEANT, :CH2_PAGEANT_DC, :CH2_DC  then Prismfall::AdvancedAnimations.play_ch2_lantern_pageant_dc(**opts)
+  when :CH16_WENLOW, :CH16_PURGE, :CH16_DC     then Prismfall::AdvancedAnimations.play_ch16_wenlow(**opts)
+  when :RUIN_AURELIUS_DC, :RUIN_R7_AURELIUS, :RUIN_AURELIUS
+    Prismfall::AdvancedAnimations.play_ruin_aurelius_dc(**opts)
   when :CH19_WAR, :WAR_CLIMAX, :WAR1           then Prismfall::AdvancedAnimations.play_ch19_war_beam_clash(**opts)
   when :CH15_GLASSFALL, :CE1, :GLASSFALL       then Prismfall::AdvancedAnimations.play_ch15_ce1_glassfall(**opts)
   when :CH21_ARCEUS, :CH21_FINALE, :THE_LIGHT  then Prismfall::AdvancedAnimations.play_ch21_valen_arceus_finale(**opts)
@@ -4216,4 +4594,5 @@ def pbRejuvCutsceneWave2(id, **opts)
     nil
   end
 end
+
 ```
