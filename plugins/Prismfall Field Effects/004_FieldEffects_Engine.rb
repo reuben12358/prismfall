@@ -923,6 +923,9 @@ module FieldEffects
   def self.borrow_pool(battle, spec)
     cur = self.current(battle)
     pool = (spec[:pool] == :all) ? (self.map_borrow_pool || self.ids) : Array(spec[:pool])
+    # A field may narrow its own pool for the battle (PRISM_ARENA's :set_order: the True Finale's gym-order bars).
+    override = self.raw_state(battle)&.[](:borrow_pool)
+    pool = override if override.is_a?(Array) && !override.empty?
     return pool.select do |id|
       next false if id == cur || spec[:exclude].include?(id)
       defn = self.get(id)

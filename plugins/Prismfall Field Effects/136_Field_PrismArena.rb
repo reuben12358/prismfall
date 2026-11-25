@@ -20,6 +20,18 @@
 #     :turn         lambda { |battle| } - turn the Plates NOW (announced, re-types
 #                   Multitype). Use this rather than FieldEffects.rotate_borrowed,
 #                   e.g. when a boss HP bar breaks.
+#     :order        the gym fields the arena is cycling through now (default: the
+#                   curated order below), :mode  :curated / :gym_order / :custom
+#     :gym_order    the 18 gym fields in GYM order (Core's GYMS: Grand Stage,
+#                   Silkwood, Water Surface ... Dragon's Den)
+#     :set_order    lambda { |battle, fields, mode = :custom| } - cycle only among
+#                   `fields`, from the first one, starting with the NEXT turn (call
+#                   :turn afterwards to go there at once). The True Finale uses it:
+#                   bar k of Arceus holds the Plates of gyms 3k-2..3k, so within a
+#                   bar the arena cycles those three fields in gym order (Bosses
+#                   :prism_order, design/BALANCE.md section 7). nil/[] = curated.
+#   FieldEffects.prism_state(battle) is a frozen SUMMARY for read-only callers;
+#   anything that turns the Plates or writes :interval needs the live Hash above.
 #   The hash is updated BEFORE the engine rotates, so a handler on
 #   :prismfall_field_overlay_changed already sees the new :type/:plate.
 #   Battlers with Multitype are re-typed automatically (pbChangeTypes) on every
@@ -46,6 +58,14 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
              :ROCK => :STONEPLATE, :GHOST => :SPOOKYPLATE, :STEEL => :IRONPLATE, :DARK => :DREADPLATE,
              :FAIRY => :PIXIEPLATE, :DRAGON => :DRACOPLATE }.freeze
   interval = 3
+  # Gym order (the True Finale's locks): Core's GYMS when it is loaded, else the SPINE Rev 14 table.
+  gym_order = lambda do
+    list = (defined?(Prismfall::GYMS) ? Prismfall::GYMS.sort_by { |g| g[:index] }.map { |g| g[:field] } : nil)
+    list = nil if !list || list.length != 18 || !list.all? { |f| types[f] }
+    list || [:GRAND_STAGE, :SILKWOOD, :WATER_SURFACE, :NEON_GRID, :DESERT, :CORROSIVE_MIRE, :VOLCANIC, :COLOSSEUM,
+             :FLOWER_GARDEN, :FROZEN_LAKE, :STORMFRONT, :MINDSCAPE, :CRYSTAL_CAVERN, :HOLLOW_CATHEDRAL, :FACTORY,
+             :NEW_MOON, :FAIRY_TALE, :DRAGONS_DEN]
+  end
 
   prism     = lambda { |battle| FieldEffects.state(battle)[:prism] }
   item_name = lambda { |item| GameData::Item.get(item).name }
@@ -70,6 +90,23 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
     pr[:next_field] = field
     pr[:next_type]  = field && types[field]
     pr[:next_plate] = field && plates[types[field]]
+  end
+
+  # Narrow (or restore) the cycle. The next turn takes fields[0]; nothing changes until then.
+  set_order = lambda do |battle, fields, mode = :custom|
+    pr = prism.call(battle)
+    next false if !pr || !FieldEffects.field_is?(battle, :PRISM_ARENA)
+    list = Array(fields).select { |f| types[f] && FieldEffects.exists?(f) }
+    if list.empty?
+      list = order
+      mode = :curated
+    end
+    battle.fe_state[:borrow_pool]   = (mode == :curated) ? nil : list.dup
+    battle.fe_state[:borrow_cursor] = 0
+    pr[:order] = list.dup
+    pr[:mode]  = mode
+    set_next.call(pr, peek.call(battle, 0))
+    true
   end
 
   attune = lambda do |battle, battler|
@@ -143,7 +180,8 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
     :hooks         => {
       :on_start => proc { |battle, old_id|
         pr = { :rounds_left => interval, :rotation => 0, :interval => interval,
-               :type_map => types, :plate_map => plates, :turn => turn }
+               :type_map => types, :plate_map => plates, :turn => turn,
+               :order => order.dup, :mode => :curated, :gym_order => gym_order.call, :set_order => set_order }
         set_current.call(pr, nil)
         FieldEffects.state(battle)[:prism] = pr
         set_next.call(pr, peek.call(battle, 0))

@@ -70,6 +70,7 @@ module Prismfall
       end
       apply_prism_interval(battle)
       Array(resolve(st.data[:intro])).each { |m| battle.pbDisplay(text(m, battler.pbThis)) }
+      apply_prism_order_once(battle)
       EventHandlers.trigger(:prismfall_boss_entered, battle, battler, st.id)
     end
 
@@ -119,6 +120,20 @@ module Prismfall
       battle.pbRegisterTarget(battler.index, best[2]) if best && best[2] >= 0
       PBDebug.log("[Prismfall Bosses] #{battler.pbThis} uses scripted #{move_id}")
       return true
+    end
+
+    # :end_of_round => proc { |battle, battler, state| } runs for each boss on the field after every round
+    # (the Origin trial's restraint check, NULL's conduit regeneration). It may set state.result / .end_decision.
+    def self.end_of_round(battle)
+      boss_battlers(battle).each do |b|
+        st = state_for(b)
+        pr = st.data[:end_of_round]
+        next if !pr.respond_to?(:call) || st.defeated || st.pending
+        pr.call(battle, b, st)
+        finish_battle(battle, st) if st.end_decision
+        break if battle.decision != 0
+      end
+      process(battle)
     end
 
     def self.record_results(battle)
@@ -218,6 +233,7 @@ class Battle
   def pbEndOfRoundPhase
     ret = prismfall_bosses_pbEndOfRoundPhase
     Prismfall::Bosses.process(self)
+    Prismfall::Bosses.end_of_round(self) if @decision == 0
     # :end_after_rounds => n ends the battle as a loss after round n (scripted, unwinnable bosses
     # such as Ch11's GO_WEATHER Kyogre: one Primal-rain round, then the event's game over).
     @pf_rounds_done = (@pf_rounds_done || 0) + 1

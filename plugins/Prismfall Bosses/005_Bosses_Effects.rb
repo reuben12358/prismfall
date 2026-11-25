@@ -23,6 +23,7 @@ module Prismfall
           (st.pending == :break) ? break_bar(battle, b, st) : run_defeat(battle, b, st, st.pending_defeat)
         end
         apply_prism_interval(battle)
+        apply_prism_order_once(battle)
         sync_prism_followers(battle) if battle.instance_variable_get(:@prismfall_prism_dirty) && battle.decision == 0
       ensure
         battle.instance_variable_set(:@prismfall_bosses_busy, false)
@@ -117,7 +118,7 @@ module Prismfall
       learn_moves(battle, b, e[:learn]) if e[:learn]
       raise_stats(b, e[:stats]) if e[:stats]
       battle.change_field(e[:field], e[:field_message]) if e[:field] && battle.respond_to?(:change_field)
-      prism_turn(battle) if e[:prism_turn]
+      (apply_prism_order(battle, b, st) || prism_turn(battle)) if e[:prism_turn]   # :prism_order bosses move to the new bar's fields
       start_weather(battle, b, e[:weather], e[:weather_permanent]) if e[:weather]
       battle.pbStartTerrain(b, e[:terrain], !e[:terrain_permanent]) if e[:terrain]
       clear_side_effects(battle, b, e[:clear_hazards], HAZARD_EFFECTS, "The hazards around {1} were swept away!") if e[:clear_hazards]
@@ -153,6 +154,10 @@ module Prismfall
     def self.change_form(b, st, form, msg)
       return if !form.is_a?(Integer)
       msg ||= text("{1} transformed!", b.pbThis)
+      # A trainer's PBS "Form = n" pins the form (Pokemon#forced_form) for species with a getForm handler
+      # (Silvally, Arceus, Giratina): unpin it, or the battler changes form but keeps the old form's types and stats.
+      pk = b.pokemon
+      pk.forced_form = nil if pk && pk.respond_to?(:forced_form=) && !pk.forced_form.nil?
       b.pbChangeForm(form, text(msg, b.pbThis))
       ab = resolve(st.data[:ability])   # Pokemon#form= clears a forced ability
       if ab
@@ -295,11 +300,14 @@ module Prismfall
     #---------------------------------------------------------------------------
     # PRISM_ARENA (Field Effects plugin, 136_Field_PrismArena.rb)
     #---------------------------------------------------------------------------
+    # The arena's LIVE state Hash (writable :interval, the :turn / :set_order lambdas). Not
+    # FieldEffects.prism_state: that is a frozen read-only summary without the lambdas, and going through it
+    # left :prism_turn dead on every bar break and made :prism_interval raise FrozenError (2026-11-25).
     def self.prism_state(battle)
-      return nil if !defined?(FieldEffects)
-      return FieldEffects.prism_state(battle) if FieldEffects.respond_to?(:prism_state)
+      return nil if !defined?(FieldEffects) || !battle
       st = FieldEffects.state(battle)
-      return (st.is_a?(Hash)) ? st[:prism] : nil
+      pr = (st.is_a?(Hash)) ? st[:prism] : nil
+      return (pr.is_a?(Hash)) ? pr : nil
     end
 
     # :prism_interval => n sets the arena's (writable) rounds-per-turn once it exists.
@@ -324,20 +332,62 @@ module Prismfall
       return ret
     end
 
+    # :prism_order => [[field, ...], ...] (one list per bar; the last list repeats) or a proc returning that:
+    # the arena only cycles among the current bar's fields (Arceus: each bar's three gym fields, in gym order).
+    # Set when the boss enters (and the Plates turn at once to the bar's first field) and again at every break.
+    def self.prism_window(st)
+      order = resolve(st.data[:prism_order])
+      return nil if !order.is_a?(Array) || order.empty?
+      list = order[[st.phase - 1, order.length - 1].min]
+      return (list.is_a?(Array) && !list.empty?) ? list : nil
+    end
+
+    # Once per battle, as soon as the arena's state exists: the first bar's fields, and the Plates turn to them.
+    def self.apply_prism_order_once(battle)
+      return if battle.instance_variable_get(:@prismfall_prism_order_done) || battle.decision != 0
+      return if !prism_state(battle)
+      boss_battlers(battle).each do |b|
+        st = state_for(b)
+        next if !prism_window(st)
+        battle.instance_variable_set(:@prismfall_prism_order_done, true)
+        apply_prism_order(battle, b, st)
+        break
+      end
+    end
+
+    def self.apply_prism_order(battle, battler, st, turn_now = true)
+      window = prism_window(st)
+      pr = prism_state(battle)
+      return false if !window || !pr || !pr[:set_order].respond_to?(:call)
+      return false if !pr[:set_order].call(battle, window)
+      prism_turn(battle) if turn_now
+      return true
+    end
+
     # Bosses with :follow_prism take the form (sprite) and moveset of the
     # ascendant Plate's type. The arena already re-types Multitype battlers.
+    #   :items => { :FIRE => :FIREMEMORY, ..., :default => nil }   also swaps the held item (Silvally's Memories)
+    # Nothing changes during the arena's opening rounds (no Plate ascendant yet).
     def self.sync_prism_followers(battle)
       battle.instance_variable_set(:@prismfall_prism_dirty, false)
       pr = prism_state(battle)
-      return if !pr
+      return if !pr || !pr[:field]
       type = pr[:type] || :NORMAL
       boss_battlers(battle).each do |b|
         fp = resolve(state_for(b).data[:follow_prism])
         next if !fp.is_a?(Hash)
+        items = resolve(fp[:items])
+        if items.is_a?(Hash)
+          it = items.key?(type) ? items[type] : items[:default]
+          it = nil if it && !GameData::Item.exists?(it)
+          b.item = it if b.item_id != it
+        end
         if fp[:form] != false
           f = form_for_type(b.species, type)
           if f && f != b.form
-            change_form(b, state_for(b), f, text(fp[:form_message] || "{1} took on the {2} type!", b.pbThis,
+            msg = fp[:form_message]
+            msg = msg.call(type) if msg.respond_to?(:call)     # a proc { |type| "..." } may word each type itself
+            change_form(b, state_for(b), f, text(msg || "{1} took on the {2} type!", b.pbThis,
                                                  GameData::Type.get(type).name))
           end
         end

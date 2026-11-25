@@ -69,5 +69,10 @@
 - [x] Drop 13 villain VS GIFs re-shot with class plates (`cast/villains_1..2.gif`).
 - [ ] Re-shoot older Warden VS GIFs (`docs/battle_captures/cast/wardens_*.gif`) so they show the new two-line class plates.
 
+## Status: finale bosses agent (Bosses 113–115, Arceus rotation, Mega per trainer)
+*Running note, so the work can be picked up if the agent is cut off (2026-11-25).*
+- **Committed checkpoint 1:** `:prism_turn` / `:prism_interval` fix (Bosses 005 `prism_state` returns the arena's live Hash); `:PRISM_ARENA` `:set_order` / `:gym_order` (Field Effects 136, 004 `borrow_pool` override); Arceus 103 (bars by story variant, `:prism_order`, forced locks, HARMONY_BUFF, bar-7 Legend / Inverse phase); new boss keys `:prism_order`, `:end_of_round`, `:follow_prism[:items]`; Bosses 113 Valen's Zygarde, 114 Voss / Quent's Silvally, 115 Giratina Origin trial; `Prismfall::Festival::Draw` alias (Core 015); `tools/harness/run_finale_bosses.rb` (48/60 at the checkpoint: the failures are test-script bugs listed below, plus the Silvally `forced_form` fix just made in Bosses 005 `change_form`).
+- **Next:** (1) `run_finale_bosses.rb`: `fresh` must replace `$prismfall` (state leaks between runs), restore PP in the scripted chooser, read boss ids before the battle strips them; get to 60/60. (2) Mega: `PrismfallMega::LIMIT = :trainer`, pass the partner's ring through `pbRegisterPartner`, `run_mega.rb` section 5 + a tag-battle check, `design/MEGA_EVOLUTION.md` §3.2. (3) `winrates_r4.rb` cells (VALEN / VOSS / QH rerun, new VOSSC, BORI, ARC*) and `design/BALANCE.md`. (4) Tick the three §2 lines.
+
 ---
 *Done items stay ticked for a week, then get cleared. Started 2026-11-22. This file replaces the old `design/WED_SPRINT_QUEUE.md`, which now just points here.*

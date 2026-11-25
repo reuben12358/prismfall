@@ -23,6 +23,10 @@
 #===============================================================================
 module Prismfall
   module Festival
+    # The story scripts and design docs call these as Prismfall::Festival::Draw.set_day / .day / .arceus_variant /
+    # .resolve_delegations (story/39-40, NARRATIVE_KEYS); they live on Festival itself, so Draw is the same module.
+    Draw = self unless const_defined?(:Draw, false)
+
     DRAWS = {
       :R16 => [   # default :JUNO (J4)
         { :opponent => :MARISOL, :condition => "!ruin_route && seated(:MARISOL) && !flag(:TEO_SAVED) && bond(:MARISOL) <= 2" },
