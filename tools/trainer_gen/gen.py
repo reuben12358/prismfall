@@ -1760,6 +1760,80 @@ S("Ch16 Interlude IV - Officer Tull on the stilt-walks (field :CORROSIVE_MIRE; t
       casual={"ab": "STENCH", "item": "SITRUSBERRY", "moves": "POISONJAB,PAYBACK,SHADOWSNEAK,SCREECH"}),
 ], nobag=True)
 
+# --- Ch17: Underveil. The barricade tag double, Mother Gutter, the Terrace Warden --------------------------------------
+# The barricade (420, :CORROSIVE_MIRE, "the Sump's mud"): PC + Mother Gutter vs Sergeant Mallory + Officer Kade.
+# Gutter's three live on the mud (Poison x1.5, fed 1/16 a turn, Poison Touch +1 Attack on entry, Gunk Shot x1.2 and
+# x1.25 accurate, and Poison hits the Directorate's Steel types). THE LINE'S PLAY: Arcanine's Flare Blitz is x1.3 on the
+# marsh gas and scorches the PC's grounded side for 1/8; the second Fire attack burns the gas off (-> Wasteland) and
+# takes the mud out from under her. Answer: knock Arcanine out first, or keep a Fire-proof lead beside her Toxapex.
+S("Ch17 partner - Mother Gutter beside the PC at the first barricade (field :CORROSIVE_MIRE). One version: the same "
+  "ally in every mode. Toxapex's Wide Guard covers the PC against spread moves; \"Collateral\" is the wall of tar.",
+  "SUMP_BARON", "Mother Gutter", 17, 75, "Held. For now.", [
+    P("SKUNTANK", 71, "AFTERMATH", "BLACKGLASSES", "ADAMANT", "NIGHTSLASH,POISONJAB,SUCKERPUNCH,PROTECT", "A", nick="Overdue"),
+    P("TOXAPEX", 71, "REGENERATOR", "BLACKSLUDGE", "CALM", "SCALD,SLUDGEBOMB,WIDEGUARD,BANEFULBUNKER", "SD", nick="Arrears"),
+    P("MUK", 72, "POISONTOUCH", "BLACKSLUDGE", "ADAMANT", "GUNKSHOT,BRICKBREAK,SHADOWSNEAK,PROTECT", "HA", nick="Collateral"),
+], nobag="partner")
+S("Ch17 - Sergeant Mallory, tag DOUBLE with Officer Kade vs the PC + Mother Gutter (field :CORROSIVE_MIRE). "
+  "Transition play: two damaging Fire moves burn the marsh gas off (-> Wasteland); each one scorches the PC's side.",
+  "MERIDIAN_DIRECTORATE", "Mallory", 0, 75, "Fall back to the second line. ...There's always a second line.", [
+    P("ARCANINE", 71, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT", "A",
+      hard={"item": "CHARCOAL", "moves": "FLAREBLITZ,EXTREMESPEED,CLOSECOMBAT,PROTECT"},
+      casual={"moves": "FIREFANG,EXTREMESPEED,WILDCHARGE,PROTECT"}),
+    # Hard only: Flash Fire drinks nothing here, but Heat Wave is the second Fire move on turn one.
+    P("HOUNDOOM", 71, "FLASHFIRE", "FOCUSSASH", "TIMID", "HEATWAVE,DARKPULSE,SLUDGEBOMB,PROTECT", "S", only="hard"),
+    # Mirror Armor turns Mabosstiff-style Intimidates and the PC's stat drops back; Tailwind for the pair.
+    P("CORVIKNIGHT", 72, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,IRONHEAD,TAILWIND,PROTECT", "BPD",
+      casual={"ab": "PRESSURE", "item": "SITRUSBERRY", "moves": "DRILLPECK,IRONHEAD,TAILWIND,PROTECT"}),
+], nobag=True)
+S("Ch17 - Officer Kade, Mallory's tag partner (field :CORROSIVE_MIRE). Steel is no shelter on the mud: Poison hits "
+  "Magnezone and Kingambit neutrally here.",
+  "MERIDIAN_DIRECTORATE", "Kade", 0, 75, "They've got a Muk the size of the stair, Sergeant!", [
+    P("MAGNEZONE", 71, "STURDY", "SITRUSBERRY", "MODEST", "THUNDERBOLT,FLASHCANNON,ELECTROWEB,PROTECT", "BS",
+      hard={"item": "AIRBALLOON"}),
+    P("KINGAMBIT", 71, "DEFIANT", "BLACKGLASSES", "ADAMANT", "KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,PROTECT", "HA", only="hard"),
+    P("MABOSSTIFF", 72, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,PLAYROUGH,PSYCHICFANGS,PROTECT", "BA",
+      hard={"ab": "STAKEOUT", "item": "BLACKGLASSES"}, casual={"ab": "GUARDDOG"}),
+], nobag=True)
+# "Mother Gutter's Ledger" (NA_GUTTER_DEBTS, the Moon Market 423): her own fight, Lv 73, "Muk-line". Both Muk, and
+# the Sump's other tenants. Ledger nicknames. Built for the mud (set :CORROSIVE_MIRE in the event if the quest is fought
+# on the Sump Docks); in the Moon Market's dark the Alolan Muk and Skuntank carry it instead.
+S("Ch17 - Mother Gutter, \"Mother Gutter's Ledger\" (NA_GUTTER_DEBTS; single). Poison Touch Muk (+1 Attack on entry "
+  "on the mire), Regenerator Toxapex; counterplay: Ground and Psychic, and Steel off the mud.",
+  "SUMP_BARON", "Mother Gutter", 0, 75, "Hah! Paid in full. I'll write it down. I write everything down.", [
+    P("MUK", 71, "POISONTOUCH", "BLACKSLUDGE", "ADAMANT", "KNOCKOFF,POISONJAB,SHADOWSNEAK,SCREECH", "HA", form=1,
+      nick="Interest", hard={"moves": "KNOCKOFF,GUNKSHOT,SHADOWSNEAK,ROCKSLIDE"}),
+    P("TOXAPEX", 72, "REGENERATOR", "BLACKSLUDGE", "BOLD", "SCALD,TOXIC,RECOVER,BANEFULBUNKER", "BPD", nick="Arrears",
+      only="nocasual", hard={"item": "ROCKYHELMET", "moves": "SCALD,TOXIC,RECOVER,HAZE"}),
+    P("GARBODOR", 72, "AFTERMATH", "ROCKYHELMET", "IMPISH", "GUNKSHOT,DRAINPUNCH,TOXICSPIKES,EXPLOSION", "BPD",
+      nick="Writeoff", only="hard"),
+    P("SKUNTANK", 72, "AFTERMATH", "BLACKGLASSES", "ADAMANT", "NIGHTSLASH,POISONJAB,SUCKERPUNCH,TAUNT", "A",
+      nick="Overdue", hard={"item": "LIFEORB", "moves": "CRUNCH,POISONJAB,SUCKERPUNCH,PLAYROUGH"}),
+    P("MUK", 73, "POISONTOUCH", "BLACKSLUDGE", "ADAMANT", "GUNKSHOT,FIREPUNCH,SHADOWSNEAK,BRICKBREAK", "HA",
+      nick="Collateral", hard={"moves": "GUNKSHOT,FIREPUNCH,SHADOWSNEAK,CURSE"},
+      casual={"ab": "STENCH", "moves": "POISONJAB,FIREPUNCH,SHADOWSNEAK,BRICKBREAK"}),
+])
+# The Terrace Warden (824 the Drowned Spires, :UNDERWATER, single): a trainer-boss with no trainer, "all Gilder-made".
+# UNDERWATER: Water and Electric x1.5 (Electric never misses), non-Water Pokemon move at half Speed and their physical
+# non-Water attacks do half. THE ENGINE: Golurk's Elemental Seed (+1 Speed, Aqua Ring, the holder becomes pure Water):
+# three hundred years down here and it has adapted - full-power punches at full Speed, and No Guard. Klinklang's
+# Discharge and Bronzong's Charge Beam ride the x1.5. Answer: Electric and Grass hit the adapted Golurk for double
+# (Electric can't miss); bring your own Water types for Speed.
+S("Ch17 - the Terrace Warden, a Gilder-machine Golurk and its works (field :UNDERWATER; single; no trainer, no Bag). "
+  "Golurk holds an Elemental Seed: it becomes a pure Water type, so the deep neither slows it nor halves its fists.",
+  "GILDER_AUTOMATON", "Terrace Warden", 0, 80, "(It kneels. Its eyes go out, one lamp at a time.)", [
+    P("BRONZONG", 71, "LEVITATE", "SITRUSBERRY", "QUIET", "FLASHCANNON,EXTRASENSORY,CHARGEBEAM,CONFUSERAY", "HS", tr=True,
+      only="nocasual", hard={"item": "LEFTOVERS", "moves": "TRICKROOM,FLASHCANNON,PSYCHIC,CHARGEBEAM"}),
+    P("KLINKLANG", 72, "CLEARBODY", "MAGNET", "MODEST", "DISCHARGE,FLASHCANNON,CHARGEBEAM,METALSOUND", "HS",
+      hard={"moves": "ZAPCANNON,FLASHCANNON,DISCHARGE,METALSOUND"},
+      casual={"item": "SITRUSBERRY", "moves": "DISCHARGE,GEARGRIND,CHARGEBEAM,METALSOUND"}),
+    # Hard only: a thousand Gilder coins that learned to walk. Make It Rain; Thunderbolt at x1.5.
+    P("GHOLDENGO", 72, "GOODASGOLD", "SITRUSBERRY", "MODEST", "MAKEITRAIN,SHADOWBALL,THUNDERBOLT,RECOVER", "HS",
+      nick="Tithe", only="hard"),
+    P("GOLURK", 73, "NOGUARD", "ELEMENTALSEED", "ADAMANT", "DYNAMICPUNCH,EARTHQUAKE,SHADOWPUNCH,ICEPUNCH", "HA",
+      hard={"moves": "DYNAMICPUNCH,EARTHQUAKE,POLTERGEIST,STONEEDGE"},
+      casual={"ab": "IRONFIST", "item": "SITRUSBERRY", "moves": "SHADOWPUNCH,EARTHQUAKE,HAMMERARM,ICEPUNCH"}),
+], nobag=True)
+
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
 

@@ -27916,6 +27916,324 @@ Pokemon = MUK,58
     Nature = ADAMANT
     IV = 16
     EV = 0
+# Ch17 partner - Mother Gutter beside the PC at the first barricade (field :CORROSIVE_MIRE). One version: the same ally in every mode. Toxapex's Wide Guard covers the PC against spread moves; "Collateral" is the wall of tar.
+#-------------------------------
+[SUMP_BARON,Mother Gutter,17]
+LoseText = Held. For now.
+Pokemon = SKUNTANK,71
+    Name = Overdue
+    Moves = NIGHTSLASH,POISONJAB,SUCKERPUNCH,PROTECT
+    Ability = AFTERMATH
+    Item = BLACKGLASSES
+    Nature = ADAMANT
+    IV = 31
+Pokemon = TOXAPEX,71
+    Name = Arrears
+    Moves = SCALD,SLUDGEBOMB,WIDEGUARD,BANEFULBUNKER
+    Ability = REGENERATOR
+    Item = BLACKSLUDGE
+    Nature = CALM
+    IV = 31
+Pokemon = MUK,72
+    Name = Collateral
+    Moves = GUNKSHOT,BRICKBREAK,SHADOWSNEAK,PROTECT
+    Ability = POISONTOUCH
+    Item = BLACKSLUDGE
+    Nature = ADAMANT
+    IV = 31
+# Ch17 - Sergeant Mallory, tag DOUBLE with Officer Kade vs the PC + Mother Gutter (field :CORROSIVE_MIRE). Transition play: two damaging Fire moves burn the marsh gas off (-> Wasteland); each one scorches the PC's side.
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Mallory]
+LoseText = Fall back to the second line. ...There's always a second line.
+Pokemon = ARCANINE,71
+    Moves = FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = CORVIKNIGHT,72
+    Moves = BRAVEBIRD,IRONHEAD,TAILWIND,PROTECT
+    Ability = MIRRORARMOR
+    Item = LEFTOVERS
+    Nature = IMPISH
+    IV = 31
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Mallory,100]
+LoseText = Fall back to the second line. ...There's always a second line.
+Pokemon = ARCANINE,72
+    Moves = FLAREBLITZ,EXTREMESPEED,CLOSECOMBAT,PROTECT
+    Ability = INTIMIDATE
+    Item = CHARCOAL
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = HOUNDOOM,71
+    Moves = HEATWAVE,DARKPULSE,SLUDGEBOMB,PROTECT
+    Ability = FLASHFIRE
+    Item = FOCUSSASH
+    Nature = TIMID
+    IV = 31
+    EV = 4,0,0,252,252,0
+Pokemon = CORVIKNIGHT,73
+    Moves = BRAVEBIRD,IRONHEAD,TAILWIND,PROTECT
+    Ability = MIRRORARMOR
+    Item = LEFTOVERS
+    Nature = IMPISH
+    IV = 31
+    EV = 252,4,252,0,0,0
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Mallory,200]
+LoseText = Fall back to the second line. ...There's always a second line.
+Pokemon = ARCANINE,66
+    Moves = FIREFANG,EXTREMESPEED,WILDCHARGE,PROTECT
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+Pokemon = CORVIKNIGHT,67
+    Moves = DRILLPECK,IRONHEAD,TAILWIND,PROTECT
+    Ability = PRESSURE
+    Item = SITRUSBERRY
+    Nature = IMPISH
+    IV = 20
+    EV = 0
+# Ch17 - Officer Kade, Mallory's tag partner (field :CORROSIVE_MIRE). Steel is no shelter on the mud: Poison hits Magnezone and Kingambit neutrally here.
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Kade]
+LoseText = They've got a Muk the size of the stair, Sergeant!
+Pokemon = MAGNEZONE,71
+    Moves = THUNDERBOLT,FLASHCANNON,ELECTROWEB,PROTECT
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = MABOSSTIFF,72
+    Moves = CRUNCH,PLAYROUGH,PSYCHICFANGS,PROTECT
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Kade,100]
+LoseText = They've got a Muk the size of the stair, Sergeant!
+Pokemon = MAGNEZONE,72
+    Moves = THUNDERBOLT,FLASHCANNON,ELECTROWEB,PROTECT
+    Ability = STURDY
+    Item = AIRBALLOON
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = KINGAMBIT,71
+    Moves = KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,PROTECT
+    Ability = DEFIANT
+    Item = BLACKGLASSES
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+Pokemon = MABOSSTIFF,73
+    Moves = CRUNCH,PLAYROUGH,PSYCHICFANGS,PROTECT
+    Ability = STAKEOUT
+    Item = BLACKGLASSES
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,4,0,0,0
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Kade,200]
+LoseText = They've got a Muk the size of the stair, Sergeant!
+Pokemon = MAGNEZONE,66
+    Moves = THUNDERBOLT,FLASHCANNON,ELECTROWEB,PROTECT
+    Ability = STURDY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = MABOSSTIFF,67
+    Moves = CRUNCH,PLAYROUGH,PSYCHICFANGS,PROTECT
+    Ability = GUARDDOG
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+# Ch17 - Mother Gutter, "Mother Gutter's Ledger" (NA_GUTTER_DEBTS; single). Poison Touch Muk (+1 Attack on entry on the mire), Regenerator Toxapex; counterplay: Ground and Psychic, and Steel off the mud.
+#-------------------------------
+[SUMP_BARON,Mother Gutter]
+Items = FULLRESTORE,FULLRESTORE
+LoseText = Hah! Paid in full. I'll write it down. I write everything down.
+Pokemon = MUK,71
+    Form = 1
+    Name = Interest
+    Moves = KNOCKOFF,POISONJAB,SHADOWSNEAK,SCREECH
+    Ability = POISONTOUCH
+    Item = BLACKSLUDGE
+    Nature = ADAMANT
+    IV = 31
+Pokemon = TOXAPEX,72
+    Name = Arrears
+    Moves = SCALD,TOXIC,RECOVER,BANEFULBUNKER
+    Ability = REGENERATOR
+    Item = BLACKSLUDGE
+    Nature = BOLD
+    IV = 31
+Pokemon = SKUNTANK,72
+    Name = Overdue
+    Moves = NIGHTSLASH,POISONJAB,SUCKERPUNCH,TAUNT
+    Ability = AFTERMATH
+    Item = BLACKGLASSES
+    Nature = ADAMANT
+    IV = 31
+Pokemon = MUK,73
+    Name = Collateral
+    Moves = GUNKSHOT,FIREPUNCH,SHADOWSNEAK,BRICKBREAK
+    Ability = POISONTOUCH
+    Item = BLACKSLUDGE
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[SUMP_BARON,Mother Gutter,100]
+Items = FULLRESTORE,FULLRESTORE,FULLRESTORE
+LoseText = Hah! Paid in full. I'll write it down. I write everything down.
+Pokemon = MUK,72
+    Form = 1
+    Name = Interest
+    Moves = KNOCKOFF,GUNKSHOT,SHADOWSNEAK,ROCKSLIDE
+    Ability = POISONTOUCH
+    Item = BLACKSLUDGE
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+Pokemon = TOXAPEX,73
+    Name = Arrears
+    Moves = SCALD,TOXIC,RECOVER,HAZE
+    Ability = REGENERATOR
+    Item = ROCKYHELMET
+    Nature = BOLD
+    IV = 31
+    EV = 252,4,252,0,0,0
+Pokemon = GARBODOR,72
+    Name = Writeoff
+    Moves = GUNKSHOT,DRAINPUNCH,TOXICSPIKES,EXPLOSION
+    Ability = AFTERMATH
+    Item = ROCKYHELMET
+    Nature = IMPISH
+    IV = 31
+    EV = 252,4,252,0,0,0
+Pokemon = SKUNTANK,73
+    Name = Overdue
+    Moves = CRUNCH,POISONJAB,SUCKERPUNCH,PLAYROUGH
+    Ability = AFTERMATH
+    Item = LIFEORB
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = MUK,74
+    Name = Collateral
+    Moves = GUNKSHOT,FIREPUNCH,SHADOWSNEAK,CURSE
+    Ability = POISONTOUCH
+    Item = BLACKSLUDGE
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[SUMP_BARON,Mother Gutter,200]
+Items = FULLRESTORE
+LoseText = Hah! Paid in full. I'll write it down. I write everything down.
+Pokemon = MUK,67
+    Form = 1
+    Name = Interest
+    Moves = KNOCKOFF,POISONJAB,SHADOWSNEAK,SCREECH
+    Ability = POISONTOUCH
+    Item = BLACKSLUDGE
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+Pokemon = SKUNTANK,68
+    Name = Overdue
+    Moves = NIGHTSLASH,POISONJAB,SUCKERPUNCH,TAUNT
+    Ability = AFTERMATH
+    Item = BLACKGLASSES
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+Pokemon = MUK,69
+    Name = Collateral
+    Moves = POISONJAB,FIREPUNCH,SHADOWSNEAK,BRICKBREAK
+    Ability = STENCH
+    Item = BLACKSLUDGE
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+# Ch17 - the Terrace Warden, a Gilder-machine Golurk and its works (field :UNDERWATER; single; no trainer, no Bag). Golurk holds an Elemental Seed: it becomes a pure Water type, so the deep neither slows it nor halves its fists.
+#-------------------------------
+[GILDER_AUTOMATON,Terrace Warden]
+LoseText = (It kneels. Its eyes go out, one lamp at a time.)
+Pokemon = BRONZONG,71
+    Moves = FLASHCANNON,EXTRASENSORY,CHARGEBEAM,CONFUSERAY
+    Ability = LEVITATE
+    Item = SITRUSBERRY
+    Nature = QUIET
+    IV = 31
+Pokemon = KLINKLANG,72
+    Moves = DISCHARGE,FLASHCANNON,CHARGEBEAM,METALSOUND
+    Ability = CLEARBODY
+    Item = MAGNET
+    Nature = MODEST
+    IV = 31
+Pokemon = GOLURK,73
+    Moves = DYNAMICPUNCH,EARTHQUAKE,SHADOWPUNCH,ICEPUNCH
+    Ability = NOGUARD
+    Item = ELEMENTALSEED
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[GILDER_AUTOMATON,Terrace Warden,100]
+LoseText = (It kneels. Its eyes go out, one lamp at a time.)
+Pokemon = BRONZONG,72
+    Moves = TRICKROOM,FLASHCANNON,PSYCHIC,CHARGEBEAM
+    Ability = LEVITATE
+    Item = LEFTOVERS
+    Nature = QUIET
+    IV = 31,31,31,0,31,31
+    EV = 252,0,0,4,252,0
+Pokemon = KLINKLANG,73
+    Moves = ZAPCANNON,FLASHCANNON,DISCHARGE,METALSOUND
+    Ability = CLEARBODY
+    Item = MAGNET
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,0,4,252,0
+Pokemon = GHOLDENGO,72
+    Name = Tithe
+    Moves = MAKEITRAIN,SHADOWBALL,THUNDERBOLT,RECOVER
+    Ability = GOODASGOLD
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,0,4,252,0
+Pokemon = GOLURK,74
+    Moves = DYNAMICPUNCH,EARTHQUAKE,POLTERGEIST,STONEEDGE
+    Ability = NOGUARD
+    Item = ELEMENTALSEED
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[GILDER_AUTOMATON,Terrace Warden,200]
+LoseText = (It kneels. Its eyes go out, one lamp at a time.)
+Pokemon = KLINKLANG,68
+    Moves = DISCHARGE,GEARGRIND,CHARGEBEAM,METALSOUND
+    Ability = CLEARBODY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = GOLURK,69
+    Moves = SHADOWPUNCH,EARTHQUAKE,HAMMERARM,ICEPUNCH
+    Ability = IRONFIST
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
 #===============================================================================
 # FESTIVAL OF CHAMPIONS - final and hijack
 #===============================================================================

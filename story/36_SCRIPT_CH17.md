@@ -100,7 +100,7 @@ Trainers (Lv 71): 821: a fisher, a swimmer (in the puddle-lakes), a mudlark *(Ru
 **The barricade fight** (critical): PC + Mother Gutter vs a Directorate pair.
 ```
 Script: pbRegisterPartner(:SUMP_BARON, "Mother Gutter", 17)
-BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Sergeant Mallory", :MERIDIAN_DIRECTORATE, "Officer Kade") — tag double; `:CORROSIVE_MIRE` (the Sump's mud); Lv 71–72.
+BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Mallory", :MERIDIAN_DIRECTORATE, "Kade") — tag double; `:CORROSIVE_MIRE` (the Sump's mud); Lv 71–72.
 (LOSE: whiteout to 421; the barricade restarts.)
 [portrait: GUTTER, neutral] (the Muk oozing back over the stair) Held. For now. They'll come back with the line.
 ```
@@ -483,9 +483,9 @@ None of this chapter's maps is built. **[NEW]** = an event or map not in maps.js
 | **Gym 16** | Burglar ×2, Gambler, Rocker, Hollow Defector, Informant | (GYM_PUZZLES) | 71–74 | as GYM_PUZZLES |
 
 **Story fights (new PBS unless noted):**
-- `SUMP_BARON` Mother Gutter (**a new trainer type, "Sump Baron"**): a partner block, version 17 (Muk, Toxapex, Skuntank, Lv 71–72), and a ledger-fight block (Lv 73).
-- `MERIDIAN_DIRECTORATE` Sergeant Mallory and Officer Kade (Lv 71–72: Arcanine, Corviknight / Magnezone, Mabosstiff).
-- `GILDER_AUTOMATON` "Terrace Warden": a new trainer type, "Gilder Automaton", no sprite (an event-sprite VS). Lv 73: Golurk, Bronzong, Klinklang.
+- `SUMP_BARON` Mother Gutter (trainer type "Sump Baron", **added to PBS**): the partner `[SUMP_BARON,Mother Gutter,17]` (Skuntank "Overdue", Toxapex "Arrears", Muk "Collateral", Lv 71–72; one version) and the ledger fight `[SUMP_BARON,Mother Gutter]` (Alolan Muk "Interest", Toxapex, Skuntank, Muk "Collateral" 73; Hard adds Garbodor "Writeoff").
+- `[MERIDIAN_DIRECTORATE,Mallory]` and `[MERIDIAN_DIRECTORATE,Kade]` (**added**; PBS names without the rank, Lv 71–72, no Bag: Arcanine, Corviknight / Magnezone, Mabosstiff; Hard adds Houndoom / Kingambit). Their play: two Fire attacks burn the Sump's gas off (→ Wasteland).
+- `[GILDER_AUTOMATON,Terrace Warden]` (**added**; trainer type "Gilder Automaton", no sprite: an event-sprite VS; no Bag). Lv 71–73: Bronzong, Klinklang, Golurk with an Elemental Seed (it turns pure Water in the deep); Hard adds Gholdengo "Tithe".
 - Kroll v1 / Quent v2: existing.
 - Gym 16: existing.
 
