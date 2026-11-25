@@ -134,11 +134,26 @@ def build_582():
 
 # ============================================================================================ 185 Meridian Spire - Lobby
 def build_185():
+    from cavekit import PIT
+    # Sculpted Grand Meridian Spire Lobby (exact architectural sibling to 186 Gala Hall!):
+    #   MASS  -> cvY classical cream-and-mahogany Spire wainscoted walls (chamfered foyer + gallery setbacks)
+    #   FLOOR -> warm cream Meridian limestone (lm_plaza), pale ashlar colonnade (lm_pave), obsidian gallery border,
+    #            glowing brass-cyan inlays (lm_inlay_*), central 5x5 golden Meridian sunburst (lm_sun) & crimson carpets!
+    #   PIT   -> lm_deep0..5 twin starry vertical Spire Atrium Light-Well shafts flanking the west & east wings!
     m = room(25, 17, 'Y', 185)
-    m.box(1, 3, 23, 15); m.box(11, 16, 13, 16)
+    m.kit = {FLOOR: 'cvY', 'default': 'cvY'}
+
+    # ---- 1. Sculpt the Black Void: Chamfered Grand Lobby + Narrowed Foyer + Twin Atrium Light-Wells ----
+    m.box(3, 3, 21, 13, FLOOR, '.')
+    m.box(4, 14, 20, 14, FLOOR, '.')
+    m.box(7, 15, 17, 15, FLOOR, '.')
+    m.box(11, 16, 13, 16, FLOOR, '.')
+    # Twin symmetrical vertical Spire Atrium Light-Well Shafts extending cleanly from north bulkhead (PIT -> starry lm_deep0..5!)
+    m.box(1, 3, 2, 12, PIT, 'p')
+    m.box(22, 3, 23, 12, PIT, 'p')
     m.plan_cliffs(rows=3)
-    carpet(m, 11, 6, 13, 15)
-    m.keep_clear |= {(x, y) for x in (11, 12, 13) for y in range(5, 17)}
+
+    # ---- 2. Events (100% gameplay, exhibits, NPCs, Receptionist, & Gala Lift contract preserved!) ----
     E = m.events
     E += [{'type': 'exit', 'at': [12, 16], 'link': 'LC_TOWER'},
           at(ev('Gala door', page(["The private lift to the Gala Hall. A brass plate: BY INVITATION. THE TENTH YEAR GALA, TOMORROW NIGHT."], tile=P1('lm_pdoor')),
@@ -155,23 +170,119 @@ def build_185():
                 page([], cond=V(13))), 16, 12),
           at(ev('Medic', page([], cond=None), page([N('Medic', "The ones from the Lowlight... we can't get to them. Nobody can get to them.")], 'NPC 08', 'left', cond=V(9)),
                 page([], cond=V(13))), 8, 13)]
+
+    # Preserve exact exhibit display cases & sculpted Spire service counters (leaves 5x5 golden Sunburst (10..14,9..13) 100% unobstructed!)
     m.put('lm_case', 4, 9); m.put('lm_case', 18, 9)
-    for x, n in ((14, 'l'), (15, 'm'), (16, 'm'), (17, 'r')): m.over.append((1, x, 9, P1('lm_counter_' + n)))
-    for x, n in ((3, 'l'), (4, 'm'), (5, 'm'), (6, 'm'), (7, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))      # the clerks' desks
-    for x, n in ((17, 'l'), (18, 'm'), (19, 'm'), (20, 'm'), (21, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))
-    m.keep_clear |= {(4, 7), (6, 7), (18, 7), (20, 7), (15, 10), (5, 12), (19, 12)}
-    for x in (2, 8, 16, 22): put_if(m, 'lm_pillar', x, 12)
-    for name, x, y in (('lm_plant', 1, 14), ('lm_plant', 23, 14), ('lm_bench', 3, 14), ('lm_bench', 20, 14), ('lm_chand', 6, 7), ('lm_chand', 17, 7)):
+    for x, n in ((15, 'l'), (16, 'm'), (17, 'r')): m.over.append((1, x, 9, P1('lm_counter_' + n)))
+    for x, n in ((4, 'l'), (5, 'm'), (6, 'm'), (7, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))
+    for x, n in ((17, 'l'), (18, 'm'), (19, 'm'), (20, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))
+    m.keep_clear |= ({(x, y) for x in (11, 12, 13) for y in range(5, 17)}
+                     | {(9, 5), (9, 6), (10, 5), (4, 7), (5, 7), (6, 7), (7, 7), (4, 8), (5, 8), (6, 8), (7, 8),
+                        (17, 7), (18, 7), (19, 7), (20, 7), (18, 8), (19, 8), (20, 8),
+                        (14, 8), (15, 8), (16, 8), (14, 10), (15, 10), (16, 10), (15, 11),
+                        (5, 11), (5, 12), (6, 11), (4, 11), (19, 11), (19, 12), (18, 11), (20, 11),
+                        (8, 13), (7, 13), (9, 13), (8, 12), (16, 12), (16, 13), (15, 12), (17, 12)})
+
+    # ---- 3. Twin Starry Atrium Light-Well Shaft Architecture (Glowing Spire Pylons, Energy Rings & Haze in PIT!) ----
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+    abyss_piece('lm_pylon', 1, 6)       # West Atrium Shaft glowing Lattice spire pylon!
+    abyss_piece('lm_pylon', 22, 6)      # East Atrium Shaft glowing Lattice spire pylon!
+    abyss_piece('lm_ring', 2, 11)
+    abyss_piece('lm_steam0', 1, 11)
+    abyss_piece('lm_ring', 22, 11)
+    abyss_piece('lm_steam1', 23, 11)
+
+    # ---- 4. Grand North Civic Bulkhead (Panoramic Windows, Royal Meridian Banners, Civic Plaques) ----
+    on_faces(m, 'lm_window', [(x, y) for x in (5, 7, 17, 19) for y in (3, 4)])
+    hang(m, 'lm_banner', 10, 3); hang(m, 'lm_banner', 14, 3)
+    hang(m, 'lm_banner_w', 4, 3); hang(m, 'lm_banner_w', 20, 3)
+    on_faces(m, 'lm_poster0', [(8, 4), (16, 4)])
+    on_faces(m, 'lm_poster2', [(6, 4), (18, 4)])
+
+    # ---- 5. Grand Spire Colonnades, Grandfather Clock, Floral Planters, Topiaries & Lounge Benches ----
+    for name, x, y in (
+        ('lm_pillar', 8, 4), ('lm_pillar', 16, 4),
+        ('lm_pillar', 4, 11), ('lm_pillar', 20, 11),
+        ('lm_pillar', 9, 12), ('lm_pillar', 15, 12),
+        ('lm_clock', 10, 4), ('lm_arclamp', 14, 4),
+        ('lm_bannerlamp', 10, 13), ('lm_bannerlamp', 14, 13),
+        ('lm_planter', 5, 14), ('lm_planter', 18, 14),
+        ('lm_topiary', 4, 13), ('lm_topiary', 20, 13),
+        ('lm_topiary', 7, 14), ('lm_topiary', 17, 14),
+        ('lm_bench', 8, 15), ('lm_bench', 15, 15),
+    ):
         put_if(m, name, x, y)
-    hang(m, 'lm_banner', 9, 3); hang(m, 'lm_banner', 15, 3); on_faces(m, 'lm_poster0', [(4, 4), (20, 4)]); on_faces(m, 'lm_poster2', [(7, 4), (17, 4)])
+
+    # Overhead sparkling crystal chandeliers (pri=2, pas=0), sunlight shafts & golden rotunda glow pools!
+    for cx, cy in ((11, 10), (5, 7), (18, 7)):
+        m.stamps.append(('lm_chand', cx, cy))
+    m.stamps.append(('cv_shaft', 11, 5))
+    m.stamps.append(('cv_shaft', 11, 10))
+    m.stamps.append(('pf_glow', 11, 5))
+    m.stamps.append(('pf_glow', 12, 5))
+    m.stamps.append(('pf_glow', 11, 10))
+    m.stamps.append(('pf_glow', 12, 10))
+
     m.paint()
-    y_f0, y_f2, y_f3 = P1('Y_f0'), P1('Y_f2'), P1('Y_f3')
-    for yy in range(m.H):
-        for xx in range(m.W):
-            if m.L[0, yy, xx] == y_f3:
-                m.L[0, yy, xx] = y_f2 if ((xx + yy) & 1) else y_f0
+
+    # ---- 6. Post-Paint Grand Meridian Lobby Floor Craft (Zero blinding teal checkerboard!) ----
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    paves = [P1('lm_pave%d' % i) for i in range(4)]
+    plazas = [P1('lm_plaza0'), P1('lm_plaza1')]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+            elif m.cls[y, x] == '.':
+                perim = (x <= 5 or x >= 19 or y >= 14 or y <= 6)
+                m.L[0, y, x] = paves[(x * 3 + y * 5) % 4] if perim else plazas[(x + y) & 1]
+
+    # Sleek obsidian-slate gallery trim along the chamfered south promenade border (clean, zero choppy patches behind cases!)
+    for x in range(6, 19):
+        if x not in (11, 12, 13) and m.cls[14, x] == '.':
+            m.L[0, 14, x] = P1('Z_f0')
+
+    # Glowing brass-and-cyan Meridian marble floor inlays framing the central rotunda!
+    for x in range(8, 17):
+        if x not in (11, 12, 13) and m.cls[8, x] == '.':
+            m.L[0, 8, x] = P1('lm_inlay_h')
+        if x not in (11, 12, 13) and m.cls[13, x] == '.':
+            m.L[0, 13, x] = P1('lm_inlay_h')
+    for y in range(9, 13):
+        for x in (7, 17):
+            if m.cls[y, x] == '.':
+                m.L[0, y, x] = P1('lm_inlay_v')
+    for ix, iy, k in ((7, 8, 'se'), (17, 8, 'sw'), (7, 13, 'ne'), (17, 13, 'nw')):
+        if m.cls[iy, ix] == '.':
+            m.L[0, iy, ix] = P1('lm_inlay_' + k)
+
+    # 5x5 MONUMENTAL GOLDEN MERIDIAN SUNBURST MEDALLION (lm_sun) centered in the Grand Lobby Rotunda (10..14, 9..13)!
+    sun_L = STAMPS['lm_sun']['layers'][0]
+    for dy in range(5):
+        for dx in range(5):
+            if m.cls[9 + dy, 10 + dx] == '.' and m.L[1, 9 + dy, 10 + dx] == 0:
+                m.L[0, 9 + dy, 10 + dx] = sun_L[dy][dx]
+
+    # Plush royal crimson-and-gold entrance carpet runner (11..13, 14..16) & Gala Lift approach carpet (11..13, 5..8)!
+    def floor_carpet(x0, y0, x1, y1):
+        for yy in range(y0, y1 + 1):
+            for xx in range(x0, x1 + 1):
+                if m.cls[yy, xx] == '.':
+                    part = ('n' if yy == y0 else 's' if yy == y1 else '') + ('w' if xx == x0 else 'e' if xx == x1 else '')
+                    m.L[0, yy, xx] = P1('lm_carpet_' + (part or 'c'))
+    floor_carpet(11, 14, 13, 16)
+    floor_carpet(11, 5, 13, 8)
+
     write(m, 185, 'Meridian Spire - Lobby', 180, '185_meridian_spire.yaml', bgm='Cedolan City',
-          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True})
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
+          tone=[4, 0, -4, 8])
 
 
 # ============================================================================================ 186 the Gala Hall

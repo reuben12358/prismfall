@@ -43,6 +43,7 @@ module PrismfallMaps
     174 => [-6, -8, 4, 14],   # Tidelock Gym - Warden's Pool
     180 => [6, 4, 0, 0],   # Lumen City - The Concourse
     181 => [-24, -28, -8, 30],   # Lumen City - The Lowlight
+    185 => [4, 0, -4, 8],   # Meridian Spire - Lobby
     186 => [4, 0, -6, 10],   # Meridian Spire - Gala Hall
     190 => [-10, -14, 6, 20],   # Circuit Gym - Switchroom
     191 => [-10, -14, 6, 20],   # Circuit Gym - Breadboard Hall

@@ -245,6 +245,7 @@ MapPosition = 0,3,7
 [174]   # Tidelock Gym - Warden's Pool
 Name = Tidelock Gym
 MapPosition = 0,3,7
+SnapEdges = true
 #-------------------------------
 [180]   # Lumen City - The Concourse
 Name = Lumen City

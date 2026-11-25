@@ -137,13 +137,46 @@ def put_carpet(m, x0, y0, x1, y1):
             m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
 
 
+def abyss_piece(m, name, x, y):
+    st = STAMPS[name]; h, w = st['h'], st['w']
+    for dy in range(h):
+        for dx in range(w):
+            for z in (1, 2):
+                t = st['layers'][z][dy][dx]
+                if t and m.inb(x + dx, y + dy):
+                    m.over.append((z, x + dx, y + dy, t))
+
+
+def paint_deeps(m):
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+
+
 # ============================================================================================ 190 the Switchroom
 def build_190():
+    from cavekit import PIT, TER
+    # Sculpted Neon Broadcast Switchroom matching 193 Core:
+    #   MASS  -> sculpted stepped studio foyer silhouette & narrowed crimson-carpet entrance tunnel
+    #   PIT   -> twin starry dark-glass studio light-well chasms flanking the north bulkhead with glowing holos & rings
+    #   FLOOR -> sleek obsidian-glass TEACH bench with industrial grate rails & white-gold marble Door 191 landing
     m = hall(21, 15, 190)
-    m.box(1, 3, 19, 13)
-    m.box(9, 14, 11, 14)
-    m.mass_at([(1, 13), (19, 13)])
+    m.kit = {TER: 'lmw', FLOOR: 'cvZ', 'default': 'cvZ'}
+
+    # ---- 1. Sculpt the Black Void: Terraced Broadcast Studio & Twin North Light-Well Chasms ----
+    m.box(1, 3, 19, 11, FLOOR, '.')       # main broadcast studio chamber
+    m.box(2, 12, 18, 12, FLOOR, '.')      # recessed south lounge wings for Spark (3,12) & Volta (16,12)
+    m.box(6, 13, 14, 13, FLOOR, '.')      # chamfered south foyer vestibule
+    m.box(9, 14, 11, 14, FLOOR, '.')      # narrowed crimson-carpet entrance tunnel to Exit (10,14)
+
+    # Twin starry dark-glass studio light-well chasms (PIT -> lm_deep0..5)
+    m.box(1, 3, 3, 6, PIT, 'p')           # NW studio light-well chasm north of the generator
+    m.box(17, 3, 19, 6, PIT, 'p')         # NE studio light-well chasm north of the Door Lamp
     m.plan_cliffs(rows=3)
+
+    # ---- 2. Events (100% TEACH circuit board, Lamp door, Door 191, Gym Guide, Spark, Drone, Volta & Exit intact!) ----
     E = m.events
     S320 = CI.S_190_DOOR
     E += board_events(m, 190)
@@ -165,29 +198,56 @@ def build_190():
     for t in TRAINERS[190]:
         e = trainer_if(*t)
         if e: E.append(e)
-    m.keep_clear |= {(10, 13), (10, 12), (10, 6), (10, 7), (10, 8), (10, 10), (10, 11), (3, 13), (6, 12), (14, 13), (16, 12), (17, 12)}
-    # Symmetrical broadcast lobby wall: centered ON AIR, twin neon bolts, dual monitor banks, posters & red tally alarms
+    m.keep_clear |= {(10, 13), (10, 12), (10, 6), (10, 7), (10, 8), (10, 10), (10, 11),
+                     (7, 6), (5, 8), (5, 10), (9, 8), (9, 10), (13, 8), (13, 10), (17, 8), (17, 10),
+                     (3, 11), (4, 12), (2, 12), (6, 12), (14, 11), (14, 13), (15, 12), (13, 12), (16, 11), (16, 12), (17, 12)}
+
+    # ---- 3. North Broadcast Bulkhead (ON AIR, Twin Neon Bolts, Dual Monitor Banks, Tally Alarms & Posters) ----
     on_faces(m, 'lm_onair', [(10, 3)])
-    on_faces(m, 'lm_alarm_on', [(1, 4), (19, 4)])
-    on_faces(m, 'lm_poster1', [(5, 4), (15, 4)])
+    on_faces(m, 'lm_alarm_on', [(9, 4), (11, 4)])
+    on_faces(m, 'lm_poster1', [(4, 4), (16, 4)])
+    hang(m, 'lm_monitors', 5, 3); hang(m, 'lm_monitors', 14, 3)
     hang(m, 'lm_neonbolt', 7, 3); hang(m, 'lm_neonbolt', 12, 3)
-    hang(m, 'lm_monitors', 2, 3); hang(m, 'lm_monitors', 16, 3)
+
+    # ---- 4. Starry Studio Light-Well Hardware (Glowing Holographic Totems, Induction Rings & Energy Haze in PIT!) ----
+    abyss_piece(m, 'lm_holo', 1, 4)
+    abyss_piece(m, 'lm_steam0', 2, 5)
+    abyss_piece(m, 'lm_ring', 3, 5)
+    abyss_piece(m, 'lm_holo', 19, 4)
+    abyss_piece(m, 'lm_steam1', 18, 5)
+    abyss_piece(m, 'lm_ring', 17, 5)
+
+    # ---- 5. Broadcast Rig, Lounge & Framing Props ----
     dress_studio(m, [
-        ('lm_plant', 1, 5), ('lm_plant', 19, 5),
-        ('lm_couch', 2, 6), ('lm_desk', 4, 6),
-        ('lm_rack', 18, 5), ('lm_rack', 19, 7),
+        ('lm_plant', 5, 5), ('lm_couch', 5, 7),
+        ('lm_desk', 13, 5), ('lm_rack', 15, 5), ('lm_gearbox', 15, 7),
+        ('lm_bollard', 8, 6), ('lm_bollard', 12, 6),
         ('lm_speaker', 1, 10), ('lm_speaker', 19, 10),
-        ('lm_cam', 13, 11), ('lm_ring', 7, 11),
-        ('lm_gearbox', 2, 12), ('lm_gearbox', 18, 12),
+        ('lm_gearbox', 2, 11), ('lm_gearbox', 18, 11), ('lm_gearbox', 18, 12),
+        ('lm_plant', 5, 11), ('lm_cam', 15, 10), ('lm_ring', 12, 11),
+        ('lm_bollard', 8, 13), ('lm_bollard', 12, 13),
+        ('lm_gearbox', 6, 13), ('lm_gearbox', 14, 13),
     ], seed=3)
+
+    # Dramatic overhead studio spotlights illuminating Door 191, the central TEACH node, and the Door Lamp!
+    m.stamps.append(('cv_shaft', 9, 4))
+    m.stamps.append(('pf_glow', 9, 5))
+    m.stamps.append(('cv_shaft', 8, 7))
+    m.stamps.append(('pf_glow', 8, 8))
+    m.stamps.append(('pf_glow', 16, 8))
+
     m.paint()
+    paint_deeps(m)
     clean_studio_floor(m)
-    # Plush entrance carpet welcoming challengers into Rook's studio & steel grate landing before Door 191
-    put_carpet(m, 9, 11, 11, 14)
+
+    # Unified royal crimson VIP broadcast runway framing Door 191 (9..11, 6..7) & South Foyer (9..11, 11..14)
     for x in (9, 10, 11):
-        m.L[0, 6, x] = P1('lm_grate')
-    # Technical floor grates framing the teach generator & lamp terminals (never touching puzzle strip row y=9!)
-    for gx, gy in ((3, 8), (3, 10), (17, 8), (17, 10)):
+        m.L[0, 5, x] = P1('lm_grate')
+    put_carpet(m, 9, 6, 11, 7)
+    put_carpet(m, 9, 11, 11, 14)
+
+    # Technical steel floor grates cleanly framing the TEACH puzzle bench (never touching puzzle strip row y=9!)
+    for gx, gy in ((3, 8), (3, 10), (5, 8), (5, 10), (9, 8), (9, 10), (13, 8), (13, 10), (17, 8), (17, 10)):
         if m.L[1, gy, gx] == 0:
             m.L[0, gy, gx] = P1('lm_grate')
     return m
@@ -195,11 +255,32 @@ def build_190():
 
 # ============================================================================================ 191 the Breadboard Hall
 def build_191():
+    from cavekit import PIT, TER
+    # Sculpted Neon Broadcast Breadboard Hall matching 193 Core:
+    #   MASS  -> chamfered south studio foyer & narrowed crimson entrance tunnel
+    #   TER   -> elevated white-gold marble Broadcast Control Balcony (x=6..18, y=3..6) overlooking the 4x3 breadboard!
+    #   PIT   -> 3 starry dark-glass studio light-well chasms (NW, NE, SE) with twin glowing Lattice broadcast pylons!
+    #   FLOOR -> sleek dark obsidian-glass breadboard arena & Spark's cozy SW cable-tech alcove
     m = hall(27, 25, 191)
-    m.box(1, 3, 25, 23)
-    m.box(12, 24, 14, 24)
-    m.mass_at([(1, 23), (25, 23)])
+    m.kit = {TER: 'lmw', FLOOR: 'cvZ', 'default': 'cvZ'}
+
+    # ---- 1. Sculpt the Black Void: Multi-Wing Hall, 3 Studio Light-Well Chasms & Elevated Control Balcony ----
+    m.box(1, 3, 25, 22, FLOOR, '.')       # main breadboard chamber (y=15 east arm connects cleanly to Alarm (26,15))
+    m.box(6, 23, 20, 23, FLOOR, '.')      # chamfered south foyer vestibule (Spark (2,22) in cozy SW alcove!)
+    m.box(12, 24, 14, 24, FLOOR, '.')     # narrowed crimson-carpet entrance tunnel to Switchroom (13,24)
+
+    # Three starry dark-glass studio light-well chasms carving out dead perimeter space (PIT -> lm_deep0..5)
+    m.box(1, 3, 3, 11, PIT, 'p')          # NW deep broadcast light-well (leaves y=13..15 open for Generator!)
+    m.box(24, 3, 25, 11, PIT, 'p')        # NE deep broadcast light-well (leaves x=20..22 open for Door 192 & y=13..15 open for Alarm!)
+    m.box(24, 18, 25, 22, PIT, 'p')       # SE sunken studio light-well (leaves y=15..16 open below Alarm strip!)
+
+    # Elevated white-gold marble Broadcast Control Balcony (TER, lmw balustrade, x=6..18, y=3..6)
+    # Cliff descends y=6..8, leaving y=9 100% open north of the 4x3 breadboard (y=10..20) & x=19..22 open for Door 192!
+    m.box(6, 3, 18, 6, TER, '.')
+    m.stairs(11, 6, w=3, n=3, c='.')
     m.plan_cliffs(rows=3)
+
+    # ---- 2. Events (100% 4x3 Breadboard, Door 192, Alarm, Switchroom warp, Spark, Ohm & Faraday preserved!) ----
     E = m.events
     E += board_events(m, 191)
     door = ev('Door 192', page(["A steel shutter. Its lamp is fed from the board: the top-right corner."], tile=P1('lm_pdoor')),
@@ -214,29 +295,73 @@ def build_191():
     for t in TRAINERS[191]:
         e = trainer_if(*t)
         if e: E.append(e)
-    m.keep_clear |= {(13, 23), (13, 22), (2, 23), (3, 22), (21, 6)}
-    # Symmetrical high-voltage broadcast north wall
+    m.keep_clear |= {(13, 23), (13, 22), (13, 21), (2, 21), (3, 22), (1, 22), (20, 6), (21, 6), (22, 6),
+                     (11, 5), (12, 5), (13, 5), (11, 9), (12, 9), (13, 9),
+                     (6, 14), (6, 16), (5, 15), (7, 15), (11, 11), (16, 14), (16, 16), (20, 10), (22, 10),
+                     (8, 13), (8, 14), (19, 18), (18, 18), (25, 15), (25, 14), (25, 16)}
+
+    # ---- 3. High-Voltage Broadcast North Bulkhead ----
     on_faces(m, 'lm_onair', [(21, 3)])
-    on_faces(m, 'lm_alarm_on', [(2, 4), (11, 4), (25, 4)])
-    on_faces(m, 'lm_poster1', [(4, 4), (9, 4), (16, 4)])
-    hang(m, 'lm_neonbolt', 13, 3)
-    hang(m, 'lm_monitors', 6, 3); hang(m, 'lm_monitors', 18, 3); hang(m, 'lm_monitors', 23, 3)
+    on_faces(m, 'lm_alarm_on', [(6, 4), (18, 4), (20, 4), (22, 4)])
+    on_faces(m, 'lm_poster1', [(10, 4), (14, 4)])
+    hang(m, 'lm_monitors', 7, 3); hang(m, 'lm_monitors', 15, 3)
+    hang(m, 'lm_neonbolt', 11, 3)
+
+    # ---- 4. Starry Studio Light-Well Architecture (Twin Glowing Lattice Broadcast Pylons & Holos inside PIT!) ----
+    abyss_piece(m, 'lm_pylon', 1, 5)
+    abyss_piece(m, 'lm_holo', 3, 6)
+    abyss_piece(m, 'lm_ring', 2, 10)
+    abyss_piece(m, 'lm_steam0', 1, 10)
+    abyss_piece(m, 'lm_pylon', 24, 5)
+    abyss_piece(m, 'lm_ring', 24, 10)
+    abyss_piece(m, 'lm_steam1', 25, 10)
+    abyss_piece(m, 'lm_ring', 24, 21)
+    abyss_piece(m, 'lm_holo', 25, 20)
+
+    # ---- 5. Elevated Control Balcony Console, Spark's Cable Workshop & Broadcast Rig ----
     dress_studio(m, [
-        ('lm_rack', 1, 6), ('lm_rack', 1, 9), ('lm_rack', 25, 6), ('lm_rack', 25, 9),
-        ('lm_speaker', 1, 19), ('lm_speaker', 25, 19),
-        ('lm_cam', 2, 11), ('lm_cam', 24, 11),
-        ('lm_ring', 3, 18), ('lm_ring', 24, 18),
-        ('lm_couch', 7, 22), ('lm_couch', 15, 22),
-        ('lm_gearbox', 18, 22), ('lm_gearbox', 19, 22), ('lm_desk', 22, 22),
-        ('lm_plant', 1, 13), ('lm_plant', 25, 22), ('lm_plant', 4, 22),
+        # Elevated Broadcast Control Balcony consoles (TER top y=5)
+        ('lm_table', 7, 5), ('lm_desk', 8, 5), ('lm_desk', 15, 5), ('lm_table', 17, 5),
+        # Door 192 high-voltage threshold bollards
+        ('lm_bollard', 19, 6), ('lm_bollard', 22, 6),
+        # Spark's cozy SW cable workshop alcove
+        ('lm_rack', 1, 17), ('lm_speaker', 1, 19), ('lm_gearbox', 3, 18), ('lm_gearbox', 4, 21), ('lm_plant', 5, 21),
+        # Broadcast cameras & studio light rings flanking the 4x3 breadboard
+        ('lm_ring', 3, 13), ('lm_cam', 4, 17), ('lm_cam', 22, 12), ('lm_ring', 22, 17),
+        ('lm_rack', 22, 20),
+        # South studio lounge & crimson runway framing
+        ('lm_couch', 7, 22), ('lm_table', 9, 22), ('lm_bollard', 11, 22),
+        ('lm_bollard', 15, 22), ('lm_table', 16, 22), ('lm_couch', 17, 22),
+        ('lm_gearbox', 19, 22), ('lm_gearbox', 20, 22),
     ], seed=4)
+
+    # Dramatic overhead studio spotlights illuminating Door 192, Control Balcony steps, Breadboard core & Generator!
+    m.stamps.append(('cv_shaft', 20, 4))
+    m.stamps.append(('pf_glow', 20, 5))
+    m.stamps.append(('cv_shaft', 11, 5))
+    m.stamps.append(('pf_glow', 11, 6))
+    m.stamps.append(('cv_shaft', 15, 13))
+    m.stamps.append(('pf_glow', 15, 14))
+    m.stamps.append(('pf_glow', 1, 14))
+
     m.paint()
+    paint_deeps(m)
     clean_studio_floor(m)
-    # Plush entrance carpet from Switchroom (12..14, 21..24) & steel grate framing around the 4x3 circuit breadboard
+
+    # Elevated Control Balcony marble deck with crisp glowing brass-cyan inlay trim (no cropped 1-row carpet!)
+    for x in range(7, 18):
+        if m.cls[5, x] == '.':
+            m.L[0, 5, x] = P1('lm_inlay_h') if x in (11, 12, 13) else (P1('lm_plaza0') if (x & 1) else P1('lm_pave0'))
+
+    # Plush crimson entrance runway carpet from Switchroom (12..14, 21..24)
     put_carpet(m, 12, 21, 14, 24)
+
+    # Technical industrial floor grates framing Door 192 threshold & breadboard deck (zero overlap with puzzle cells!)
     board_xy = set(CI.BOARDS[191]['cells'].keys())
-    # Subtle industrial grates flanking the breadboard outer deck & Door 192 landing (zero overlap with puzzle cells!)
-    for gx, gy in [(20, 6), (22, 6), (4, 10), (4, 20), (23, 10), (23, 20), (13, 7), (13, 20)]:
+    for gx, gy in [(20, 5), (22, 5), (20, 6), (22, 6), (20, 7), (22, 7),
+                   (5, 10), (5, 20), (22, 10), (22, 20), (11, 9), (12, 9), (13, 9),
+                   (8, 12), (13, 12), (18, 12), (8, 17), (13, 17),
+                   (8, 10), (13, 10), (18, 10), (8, 20), (13, 20), (18, 20)]:
         if (gx, gy) not in board_xy and m.L[1, gy, gx] == 0:
             m.L[0, gy, gx] = P1('lm_grate')
     return m
@@ -244,17 +369,39 @@ def build_191():
 
 # ============================================================================================ 192 the Live Wire Hall
 def build_192():
+    from cavekit import PIT, TER
+    # Sculpted Neon Broadcast Live-Wire Hall completing the 4-map Circuit Gym masterpiece:
+    #   MASS  -> chamfered south vestibule & narrowed Breadboard entrance tunnel fused into the x=13 security partition
+    #   TER   -> elevated white-gold marble East Control Pulpit (x=14..18, y=3..6) north of the east live-wire board!
+    #   PIT   -> 4 starry dark-glass Studio Light-Well chasms (NW, West-Mid, NE Induction Core, SE Sunken Well)
+    #            carved strictly into dead perimeter zones — ZERO bypasses of x=13 security partition or live wires!
     m = hall(27, 28, 192)
-    m.box(1, 3, 25, 26)
-    m.box(5, 27, 7, 27)
-    m.mass_at([(1, 26), (25, 26)])
+    m.kit = {TER: 'lmw', FLOOR: 'cvZ', 'default': 'cvZ'}
+
+    # ---- 1. Sculpt the Black Void: Twin-Bay High-Voltage Hall, 4 Light-Well Chasms & Elevated Control Pulpit ----
+    m.box(1, 3, 25, 25, FLOOR, '.')       # main west & east high-voltage bays
+    m.box(4, 26, 9, 26, FLOOR, '.')       # chamfered SW entrance vestibule (x=0..3 & x=10..26 at y=26 carved to MASS!)
+    m.box(5, 27, 7, 27, FLOOR, '.')       # narrowed crimson-carpet tunnel to Breadboard Hall (6,27)
+
+    # Four starry dark-glass Studio Light-Well chasms strictly in dead perimeter floor zones (PIT -> lm_deep0..5)
+    m.box(1, 3, 5, 6, PIT, 'p')           # NW studio light-well (leaves y=8..10 open for Generator & Warning (9,5)!)
+    m.box(1, 12, 3, 16, PIT, 'p')         # West-Mid studio light-well (leaves x=5..7 open west of vertical live-wire & Kirch!)
+    m.box(23, 3, 25, 9, PIT, 'p')         # NE Induction Core chasm (leaves x=21 open for 193 return arrival (21,6) & Tesla (23,13)!)
+    m.box(15, 22, 19, 25, PIT, 'p')       # SE sunken induction well (leaves y=17..20 concourse & Amp (23,22) corridor wide open!)
+
+    # Elevated white-gold marble East Control Pulpit (TER, lmw balustrade, x=14..18, y=3..6)
+    # Flush east of the x=13 partition; descends y=6..8, leaving y=9 open north of east circuit & x=19 open west of Lock Core!
+    m.box(14, 3, 18, 6, TER, '.')
+    m.stairs(15, 6, w=3, n=3, c='.')
     m.plan_cliffs(rows=3)
+
+    # ---- 2. Events & Bulletproof x=13 Security Partition (100% live-wire puzzle, Lock gate, Lock core & trainers intact!) ----
     E = m.events
     E += board_events(m, 192, shock=True)
     gx, gy = CI.FENCE_X, CI.GATE_Y
-    # Sleek Meridian server-rack & brass-bollard security partition down x=13 (replacing vertical yellow picket fence
-    # AND sealing live HEAD bypass at (13, 5)!) — EVERY cell y=5..26 (y != gy) has pas=15, pri=0 on Layer 1!
-    for by in (5, 6, 15, 17, 26):
+    # Sleek Meridian server-rack & brass-bollard security partition down x=13 (sealing y=5..25, y != 16; y=26 is MASS!)
+    # EVERY cell y=5..25 (y != gy) has pas=15, pri=0 on Layer 1 — ZERO bypasses!
+    for by in (5, 6, 15, 17):
         m.over.append((1, gx, by, P1('lm_bollard')))
     rack_bot = STAMPS['lm_rack']['layers'][1][1][0]          # pas=15, pri=0 solid server base
     for ry in (7, 9, 11, 13, 18, 20, 22, 24):
@@ -282,28 +429,71 @@ def build_192():
     for t in TRAINERS[192]:
         e = trainer_if(*t)
         if e: E.append(e)
-    m.keep_clear |= {(6, 26), (6, 25), (3, 25), (4, 24), (7, 16), (8, 17), (16, 16), (17, 15), (17, 17), (20, 6), (9, 6)}
-    # Symmetrical studio control wall: ON AIR over Core door, triple monitor banks, neon bolt, posters & tally alarms
+    m.keep_clear |= {(6, 26), (6, 25), (6, 24), (3, 25), (4, 24), (3, 23), (2, 24),
+                     (7, 16), (8, 17), (7, 17), (6, 17), (16, 16), (17, 15), (17, 17),
+                     (19, 6), (20, 6), (21, 6), (9, 6), (15, 5), (16, 5), (17, 5), (15, 9), (16, 9), (17, 9),
+                     (4, 20), (4, 19), (23, 22), (22, 22), (23, 13), (23, 14)}
+
+    # ---- 3. Studio Control North Bulkhead ----
     on_faces(m, 'lm_onair', [(20, 3)])
-    on_faces(m, 'lm_alarm_on', [(1, 4), (7, 4), (17, 4), (25, 4)])
-    on_faces(m, 'lm_poster1', [(4, 4), (16, 4), (24, 4)])
+    on_faces(m, 'lm_alarm_on', [(7, 4), (12, 4), (14, 4), (19, 4), (21, 4)])
+    on_faces(m, 'lm_poster1', [(9, 4), (18, 4)])
+    hang(m, 'lm_monitors', 7, 3); hang(m, 'lm_monitors', 15, 3)
     hang(m, 'lm_neonbolt', 10, 3)
-    hang(m, 'lm_monitors', 2, 3); hang(m, 'lm_monitors', 13, 3); hang(m, 'lm_monitors', 22, 3)
+
+    # ---- 4. Starry Studio Light-Well Architecture (NE Induction Core, Holographic Totems & Energy Rings inside PIT!) ----
+    abyss_piece(m, 'lm_holo', 1, 4)
+    abyss_piece(m, 'lm_ring', 3, 5)
+    abyss_piece(m, 'lm_holo', 5, 4)
+    abyss_piece(m, 'lm_holo', 2, 14)
+    abyss_piece(m, 'lm_ring', 1, 15)
+    abyss_piece(m, 'lm_steam0', 3, 15)
+    abyss_piece(m, 'lm_core', 23, 5)      # Glowing 3x4 Meridian Induction Core rising crystal-clear out of the NE abyss!
+    abyss_piece(m, 'lm_ring', 16, 24)
+    abyss_piece(m, 'lm_steam0', 17, 24)
+    abyss_piece(m, 'lm_ring', 18, 24)
+
+    # ---- 5. High-Voltage Studio Props & Framing ----
     dress_studio(m, [
-        ('lm_rack', 25, 7), ('lm_rack', 25, 9), ('lm_rack', 1, 6),
-        ('lm_speaker', 1, 20), ('lm_speaker', 25, 20),
-        ('lm_cam', 10, 21), ('lm_cam', 24, 18),
-        ('lm_ring', 16, 22), ('lm_ring', 3, 18),
-        ('lm_gearbox', 11, 25), ('lm_gearbox', 12, 25), ('lm_gearbox', 14, 25),
-        ('lm_plant', 24, 25), ('lm_plant', 1, 13), ('lm_plant', 25, 25),
-        ('lm_couch', 20, 25), ('lm_desk', 9, 8), ('lm_desk', 15, 7),
+        # West bay control desk, broadcast rigs & Spark's station
+        ('lm_desk', 10, 7), ('lm_rack', 12, 6),
+        ('lm_cam', 10, 13), ('lm_speaker', 1, 20), ('lm_couch', 1, 23),
+        ('lm_cam', 10, 20), ('lm_ring', 11, 22),
+        ('lm_gearbox', 11, 24), ('lm_gearbox', 12, 24),
+        ('lm_plant', 4, 25), ('lm_bollard', 8, 25), ('lm_plant', 9, 24),
+        # East bay high-voltage equipment & Lock Core framing
+        ('lm_bollard', 19, 5), ('lm_bollard', 21, 5),
+        ('lm_rack', 25, 11), ('lm_ring', 21, 13), ('lm_cam', 24, 17), ('lm_speaker', 25, 19),
+        ('lm_ring', 21, 18), ('lm_plant', 25, 22), ('lm_couch', 21, 24), ('lm_gearbox', 24, 24),
     ], seed=5)
+
+    # Dramatic overhead spotlights highlighting Socket (8,16), Lock gate (13,16), Node (17,16) & Lock core (20,5)!
+    m.stamps.append(('cv_shaft', 7, 14))
+    m.stamps.append(('pf_glow', 7, 15))
+    m.stamps.append(('cv_shaft', 12, 14))
+    m.stamps.append(('pf_glow', 12, 15))
+    m.stamps.append(('cv_shaft', 16, 14))
+    m.stamps.append(('pf_glow', 16, 15))
+    m.stamps.append(('cv_shaft', 19, 4))
+    m.stamps.append(('pf_glow', 19, 5))
+
     m.paint()
+    paint_deeps(m)
     clean_studio_floor(m)
-    # Entrance crimson carpet from Breadboard Hall (5..7, 25..27) + technical floor grates framing the central partition & Core door
-    put_carpet(m, 5, 25, 7, 27)
+
+    # Elevated East Control Pulpit gleaming marble & brass-cyan inlay deck (15..17, 5)
+    for x in (15, 16, 17):
+        m.L[0, 5, x] = P1('lm_inlay_h') if x == 16 else P1('lm_plaza0')
+
+    # Entrance crimson carpet from Breadboard Hall (5..7, 24..27)
+    put_carpet(m, 5, 24, 7, 27)
+
+    # Industrial grates framing Lock Core (20,5), central security gate, socket & live-wire studio bays
     board_xy = set(CI.BOARDS[192]['cells'].keys())
-    for gx_c, gy_c in [(19, 6), (21, 6), (12, 15), (12, 17), (14, 15), (14, 17), (8, 12), (17, 12)]:
+    for gx_c, gy_c in [(19, 6), (21, 6), (19, 7), (21, 7),
+                       (7, 16), (8, 17), (12, 15), (12, 17), (14, 15), (14, 17),
+                       (16, 15), (17, 17), (15, 9), (16, 9), (17, 9),
+                       (6, 13), (11, 12), (15, 12), (19, 13), (15, 19), (18, 19)]:
         if (gx_c, gy_c) not in board_xy and m.L[1, gy_c, gx_c] == 0:
             m.L[0, gy_c, gx_c] = P1('lm_grate')
     return m
