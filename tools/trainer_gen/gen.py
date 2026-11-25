@@ -1698,6 +1698,68 @@ S("Ch19 war partner - Marisol beside the PC on the Glass Dunes (backing Isenmar)
 ], nobag="partner")
 
 # ------------------------------------------------------------------------------
+# Riot Punk Zara (Zara Rourke): an original Nadir street rival who wears the punk art first drawn for the Venam cameo
+# (gemini_recommends/2026-11-24_cameo-venam-original-and-transfer; Venam herself is back in her Rejuvenation look).
+# Optional fights. v0: Mirefen's graffiti ring after Gym 6 (Ch7, one level under Venam's 38) on :CORROSIVE_MIRE, where
+# Venoshock is always doubled on grounded targets. v1: the Moon Market rematch after Gym 16 (Ch17) on :NEW_MOON.
+X("Ch7 Mirefen graffiti ring (220) - Riot Punk Zara, optional street rival", "PUNK_ZARA", "Zara", 0, 37,
+  "Tsk. Alright, null-kid, you've got bite! Next time I'm bringing the full amp stack!", [
+    P("GRAFAIAI", 36, "POISONTOUCH", "SITRUSBERRY", "JOLLY", "POISONJAB,UTURN,FLATTER,SLASH", "A", nick="Stencil",
+      hard={"ab": "PRANKSTER", "moves": "POISONJAB,UTURN,TAUNT,SLASH"}),
+    P("GRIMER", 35, "POISONTOUCH", "BLACKSLUDGE", "ADAMANT", "CRUNCH,POISONFANG,SHADOWSNEAK,MINIMIZE", "HA", form=1,
+      casual={"moves": "BITE,POISONFANG,SHADOWSNEAK,HARDEN"}),
+    P("OBSTAGOON", 36, "GUTS", "FLAMEORB", "JOLLY", "FACADE,NIGHTSLASH,OBSTRUCT,SNARL", "A", only="nocasual",
+      hard={"moves": "FACADE,KNOCKOFF,OBSTRUCT,CROSSCHOP"}),
+    P("TOXTRICITY", 37, "PUNKROCK", "SITRUSBERRY", "MODEST", "DISCHARGE,VENOSHOCK,SNARL,SCREECH", "S", nick="Voltage",
+      hard={"item": "THROATSPRAY", "moves": "DISCHARGE,VENOSHOCK,SNARL,NOBLEROAR"}),
+])
+X("Ch17 Moon Market graffiti ring (423) - Riot Punk Zara, rematch", "PUNK_ZARA", "Zara", 1, 77,
+  "Ha! STILL can't touch you. Go wreck Voss's stage. I'll hold the Sump wall.", [
+    P("GRAFAIAI", 75, "PRANKSTER", "FOCUSSASH", "JOLLY", "GUNKSHOT,KNOCKOFF,PARTINGSHOT,TAUNT", "A", nick="Stencil",
+      casual={"item": "SITRUSBERRY"}),
+    P("SCRAFTY", 75, "INTIMIDATE", "LEFTOVERS", "CAREFUL", "DRAINPUNCH,KNOCKOFF,BULKUP,FAKEOUT", "SPD", only="nocasual"),
+    P("OBSTAGOON", 76, "GUTS", "FLAMEORB", "JOLLY", "FACADE,KNOCKOFF,OBSTRUCT,CLOSECOMBAT", "A"),
+    P("MUK", 76, "POISONTOUCH", "BLACKSLUDGE", "ADAMANT", "KNOCKOFF,POISONJAB,SHADOWSNEAK,CURSE", "HA", form=1),
+    P("TOXTRICITY", 77, "PUNKROCK", "THROATSPRAY", "MODEST", "OVERDRIVE,SLUDGEBOMB,BOOMBURST,SNARL", "S", nick="Voltage",
+      hard={"moves": "OVERDRIVE,SLUDGEBOMB,BOOMBURST,VOLTSWITCH"}, casual={"item": "SITRUSBERRY"}),
+])
+
+# =====================================================================================================================
+# CH16-CH21 STORY FIGHTS, THE GROUNDS LADDER AND THE WARDEN'S GAUNTLET (2026-11-25; story/35_SCRIPT_CH16.md ..
+# story/41_SCRIPT_POSTGAME.md). New trainer types: SUMP_BARON, GILDER_AUTOMATON, THORNGUARD, THORNWATCH,
+# ISENMAR_TRENCHER, ISENMAR_HIRDMAN, ASHKAAR_EMBER_RIDER and the twelve Ladder classes (pbs/trainer_types.txt).
+# Check the scripts against PBS with `python3 -I tools/check_script_trainers.py`.
+# Levels are the scripts' (at or under the chapter cap); `cap` below is the player's real level cap at that point, so
+# Hard is +1. No legendaries or mythicals on any of these. Casual drops a Pokemon and the nastiest tool; Hard adds one
+# Pokemon and the sharper sets.
+# =====================================================================================================================
+# --- Ch16, Interlude IV: the player is Wenlow (Amoonguss / Swalot / Gastrodon, Lv 62) on Mirefen's stilt-walks --------
+# CORROSIVE_MIRE: Poison x1.5, Poison hits Steel, Fire x1.3 and every Fire attack scorches the grounded foes (two burn
+# the gas off -> Wasteland). The officers' hounds bring the fire; Wenlow's Gastrodon is the answer to both squads. No Bag
+# (Wenlow has three Pokemon and no Bag of his own), cap 62: nothing here is above his party.
+S("Ch16 Interlude IV - Officer Grane on the stilt-walks (field :CORROSIVE_MIRE; the player fights as Wenlow, Lv 62). "
+  "Houndoom's fire lights the marsh gas (x1.3, and it scorches Wenlow's side); Smog is x2 in the mire.",
+  "MERIDIAN_DIRECTORATE", "Grane", 0, 62, "Noted, medic. Your name goes on the list.", [
+    P("MIGHTYENA", 60, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,PLAYROUGH,ICEFANG,ROAR", "A",
+      hard={"ab": "MOXIE", "moves": "CRUNCH,PLAYROUGH,ICEFANG,SUCKERPUNCH"}),
+    P("HOUNDOOM", 61, "FLASHFIRE", "SITRUSBERRY", "TIMID", "FLAMETHROWER,DARKPULSE,SMOG,WILLOWISP", "S", only="nocasual",
+      hard={"item": "CHARCOAL", "moves": "FLAMETHROWER,DARKPULSE,SLUDGEBOMB,WILLOWISP"}),
+    P("MAGNEZONE", 62, "STURDY", "SITRUSBERRY", "MODEST", "THUNDERBOLT,FLASHCANNON,TRIATTACK,THUNDERWAVE", "BS",
+      hard={"item": "AIRBALLOON"}, casual={"moves": "DISCHARGE,FLASHCANNON,TRIATTACK,THUNDERWAVE"}),
+], nobag=True)
+S("Ch16 Interlude IV - Officer Tull on the stilt-walks (field :CORROSIVE_MIRE; the player fights as Wenlow, Lv 62). "
+  "His Muk is at home in the mud: Poison Touch gives +1 Attack on entry and the mire feeds it 1/16 a turn.",
+  "MERIDIAN_DIRECTORATE", "Tull", 0, 62, "Medic. You're obstructing. There's a list.", [
+    P("ARCANINE", 60, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FIREFANG,CRUNCH,EXTREMESPEED,HOWL", "A",
+      hard={"moves": "FLAREBLITZ,CRUNCH,EXTREMESPEED,WILDCHARGE"}),
+    P("CORVIKNIGHT", 61, "PRESSURE", "SITRUSBERRY", "IMPISH", "DRILLPECK,IRONHEAD,SCARYFACE,ROOST", "BPD", only="nocasual",
+      hard={"ab": "MIRRORARMOR", "item": "LEFTOVERS", "moves": "BRAVEBIRD,IRONHEAD,UTURN,ROOST"}),
+    P("MUK", 62, "POISONTOUCH", "BLACKSLUDGE", "ADAMANT", "GUNKSHOT,PAYBACK,SHADOWSNEAK,SCREECH", "HA",
+      hard={"moves": "GUNKSHOT,PAYBACK,SHADOWSNEAK,ICEPUNCH"},
+      casual={"ab": "STENCH", "item": "SITRUSBERRY", "moves": "POISONJAB,PAYBACK,SHADOWSNEAK,SCREECH"}),
+], nobag=True)
+
+# ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
 
 def main():

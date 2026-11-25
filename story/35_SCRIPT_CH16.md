@@ -278,8 +278,8 @@ Switch S146 CH16_PURGE_BEGUN = ON. V137 = 8.
 ```
 3. **Fight two officers on the stilt-walks**: Directorate officers searching the walk-houses, in single battles on the walk (`:CORROSIVE_MIRE`, Lv 62).
 ```
-BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Officer Grane") — single; Wenlow's party.
-BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Officer Tull") — single; Wenlow's party.
+BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Grane") — single; Wenlow's party. *(PBS name "Grane": the class line already reads Mandate Officer.)*
+BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Tull") — single; Wenlow's party.
 (LOSE: back to the Infirmary; the task resets. The Interlude can't be failed, only replayed.)
 [name: Officer Tull] (recalling his Pokémon, irritated) Medic. You're obstructing. There's a list. Stand aside, or you're on it.
 [portrait: WENLOW, neutral] I'm not on any lists. I'm not important enough for lists.
@@ -365,6 +365,6 @@ None of this chapter's maps is built. **[NEW]** = an event or map not in maps.js
 | 403 | Night Foreman *(Worker)* | Foreman Briggs | 69 | Machamp, Excadrill, Conkeldurr |
 | 403 | Night Foreman *(Worker)* | Foreman Oyelaran | 70 | Copperajah, Steelix, Rhyperior |
 | 403 | Engineer *(Scientist)* | Engineer Pask | 70 | Magnezone, Rotom-Heat, Klinklang |
-**Story fights:** `[LEADER_ROOK,Rook,16]` partner (**added to PBS**); Marchetti v2 + Quent v1 (existing); `:ZEKROM_ENGINE` (existing); Officers Grane and Tull (new `MERIDIAN_DIRECTORATE` blocks, Lv 62: Mightyena / Houndoom / Magnezone and Arcanine / Corviknight / Muk); Wenlow's loadout (new; Amoonguss / Swalot / Gastrodon Lv 62).
+**Story fights:** `[LEADER_ROOK,Rook,16]` partner (**added to PBS**); Marchetti v2 + Quent v1 (existing); `:ZEKROM_ENGINE` (existing); Officers Grane and Tull (`[MERIDIAN_DIRECTORATE,Grane]` and `[MERIDIAN_DIRECTORATE,Tull]`, **added to PBS**, Lv 60–62, no Bag: Mightyena / Houndoom / Magnezone and Arcanine / Corviknight / Muk); Wenlow's loadout (new; Amoonguss / Swalot / Gastrodon Lv 62).
 
 **Items owner:** ARBITER BLUEPRINTS (Key Item), the TOLERANCE BADGE (proposed), TM91, DIVE, Glassfall Slivers #1–5 of the Ch16 allotment, Odessa's postbag ribbon (`ZE_LETTERS_DOWN`), Cameruptite (`AS_FORGE_REMEMBERS`, optional). **EventMons:** Varoom "Lugnut" (gift, Lv 40), Heatmor "Torch" (static, Lv 67), Galarian Weezing "Clear Air" (static, Lv 67). **Portrait requests (art, to Gemini):** **WENLOW** (the playable charset as well as the bust: `happy`, `neutral`), **SALLOW** (`neutral`, `smug`), MAGNUS `sad`.
