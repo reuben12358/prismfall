@@ -104,7 +104,8 @@
 - [x] Ch18: `THORNGUARD` Captain Rowe (`[THORNGUARD,Captain Rowe]`, Lv 75–77).
 - [x] Ch19: partners `[LEADER_SIGRUN,Sigrun,19]` / `[LEADER_MARISOL,Marisol,19]` rebuilt to the script; the lines (`ISENMAR_TRENCHER` Ulfa, Bersi; `ISENMAR_HIRDMAN` Hjalmar + Torunn, Styr; `ASHKAAR_SOLDIER` Garrok, Senna; `ASHKAAR_EMBER_RIDER` Vharn + Ashild, Kessa); the Toll `[ASHKAAR_OFFICER,Orrin]`; `[THORNWATCH,Brome]`. Maps 920–926 (mapgen/layouts/war.py) still call the Rev 18 "Soldier"/"Captain" blocks and stage the partner double on 926: re-wire them to the script.
 - [x] Ch20: the Grounds Ladder, 12 challengers Lv 87–90 with 12 new classes (WEAVER, HARPOONER, STREAMER, FOREMAN, MOON_BROKER, WYRM_RIDER, LAMP_RUNNER, WELL_KEEPER, LANTERN_ACOLYTE, EMBALMER, WARDGUARD, CANTOR); roster table in story/39.
-- [ ] Next, in order: Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).
+- [x] Ch21: Redeemed Kestrel partner = `[RIVAL_KESTREL,Kestrel,93/94/95]` via the new `Prismfall::Rival.partner_version(9)` (Core 006; "version 21" collided with K2 = 20–22); validator `RIVAL_PARTNERS`; BALANCE §5.
+- [ ] Next, in order: post-game (the Warden's Gauntlet: v98 for every Warden, LEADER_JUNO 60–62).
 
 ## Status: Audio v4.3 wiring agent (2026-11-25)
 *Running note so the work can be picked up. Checks: `python3 -I mapgen/map_audio.py --check`, `ruby "plugins/Prismfall Cutscenes/selftest/voice.ruby_stub"`, the Cutscenes selftest.*

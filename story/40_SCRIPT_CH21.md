@@ -156,7 +156,7 @@ V142 = 4.
 [if !KESTREL_FALLEN]
   (Kestrel vaults the barrier onto the cracking floor, Aegislash out. [if he wears Morwen's Ring] The ring on his hand is lit.)
   [portrait: KESTREL, neutral] Nearest. Mum's rule. Move.
-  Script: pbRegisterPartner(:RIVAL_KESTREL, "Kestrel", 21)   # the Redeemed partner team, version 21 (TODO_QUOTA §3; 80–82 are his K8 SF teams)
+  Script: pbRegisterPartner(:RIVAL_KESTREL, "Kestrel", Prismfall::Rival.partner_version(9))   # the Redeemed partner team: 93 / 94 / 95 by the player's starter (in PBS). Not 21: 20–22 are K2.
 [else]
   (Juno, over the barrier in her Warden's coat, Tsareena out.)
   [portrait: JUNO, angry] Same dock. Same fight. Let's go.
@@ -369,6 +369,7 @@ The Prism Arena (Crownhaven, unbuilt) carries the whole chapter.
 - Voss's **Silvally conduit bar**.
 - The **Redeemed Kestrel partner** team (Ch21).
 - The Ch21 tag-foe versions (v21) for Marchetti, Quent and Kroll exist in PBS.
+- Redeemed Kestrel's partner team exists in PBS as `[RIVAL_KESTREL,Kestrel,93]` / `94` / `95` (Staraptor 95, his starter 96, Aegislash "Morwen" 97 with Wide Guard; one version, no Mega). `Prismfall::Rival.partner_version(9)` picks the one for the player's starter.
 - The montage and ending vignette staging (cutscene agent).
 
 **Portrait requests (art, to Gemini):** VALEN `happy` (light); ARCEUS (a bust for the speech, or plain text with no portrait); VOSS in harness `shocked`; ILSA without earmuffs.

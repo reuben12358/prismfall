@@ -140,6 +140,20 @@ module Prismfall
       return battle_number * 10 + starter_slot
     end
 
+    # A rival who fights BESIDE the player with their own team (not one of the
+    # numbered rival battles) uses the spare versions of a decade:
+    #   decade * 10 + 3 + starter_slot   (x3 Grass, x4 Fire, x5 Water)
+    # so the partner's starter still follows the player's pick and never
+    # collides with a rival battle (K2 already owns 20-22, so the Ch21
+    # "version 21" could not be used). Partners have one version: there is no
+    # +100 / +200, and the pbLoadTrainer hook falls back to this one.
+    #   pbRegisterPartner(:RIVAL_KESTREL, "Kestrel", Prismfall::Rival.partner_version(9))
+    #   -> 93 / 94 / 95, Redeemed Kestrel beside the PC in Ch21.
+    PARTNER_VERSION_OFFSET = 3
+    def self.partner_version(decade)
+      return decade * 10 + PARTNER_VERSION_OFFSET + starter_slot
+    end
+
     # Event usage:
     #   Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 3)
     #   Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 2, can_lose: true, lose_text: "...")

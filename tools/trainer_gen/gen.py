@@ -2176,6 +2176,24 @@ rung("CANTOR", "Anselm", "PRISM_ARENA", "a Choir cantor (Crownhaven), the top ru
       casual={"ab": "FRISK", "moves": "HYPERVOICE,AIRSLASH,DRAGONPULSE,SCREECH"}),
 ])
 
+# --- Ch21: Redeemed Kestrel beside the PC (the tag battle outside the stages, :PRISM_ARENA, cracking) --------------
+# The script wrote "version 21", but 20-22 are K2 (rival version = battle * 10 + starter slot), and his starter has to
+# follow the player's pick. So a rival who fights as a PARTNER uses the spare versions of a decade:
+#   Prismfall::Rival.partner_version(n) = n * 10 + 3 + starter_slot      (Core 006)
+# Redeemed Kestrel is partner_version(9): 93 (player chose Grass: his Charizard line), 94 (Fire: Blastoise line),
+# 95 (Water: Venusaur line); Core swaps the Gen 1 line to the player's generation as in every rival battle. One
+# version each (the same ally in every mode; no Mega: the side's one Mega is the player's, like Juno's J7). Three
+# Pokemon at 95-97, the size of Juno's J7. "Morwen" holds the door: Wide Guard for the PC, King's Shield for himself.
+for _s in (0, 1, 2):
+    S("Ch21 partner - Redeemed Kestrel beside the PC (field :PRISM_ARENA), player starter slot %d. "
+      "pbRegisterPartner(:RIVAL_KESTREL, \"Kestrel\", Prismfall::Rival.partner_version(9))." % _s,
+      "RIVAL_KESTREL", "Kestrel", 93 + _s, 97, "Not for them. For you. ...Go.", [
+        P("STARAPTOR", 95, "INTIMIDATE", "SHARPBEAK", "JOLLY", "BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT", "A"),
+        starter_mon("RIVAL_KESTREL", _s, 2, 96),
+        P("AEGISLASH", 97, "STANCECHANGE", "LEFTOVERS", "QUIET", "KINGSSHIELD,SHADOWBALL,SACREDSWORD,WIDEGUARD", "BS",
+          nick="Morwen"),
+    ], nobag="partner")
+
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
 

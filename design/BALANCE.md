@@ -192,6 +192,12 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
 | J3 (47, `LEADER_JUNO` 30–32) | Whimsicott (Telluric Seed), Florges "Everbloom" *(−C)* (white, Flower Veil), Lilligant, starter, ace **Tsareena** — Hard +Roserade "Rowan". Flower Garden: the seed, Growth, Leech Seed, Aromatherapy and Grassy Terrain grow the garden; burn it down with Fire at stage 5. |
 | J4 (90) | Florges "Everbloom", Whimsicott, Lilligant, Comfey, starter, **Tsareena** |
 
+**Rival partners (2026-11-25).** A rival who fights *beside* the player with a team of their own uses the spare versions
+of a decade: `Prismfall::Rival.partner_version(n)` = n × 10 + 3 + starter slot, one version (no Hard / Casual block; Core
+falls back to it). Redeemed Kestrel in the Ch21 tag battle is `partner_version(9)` = **93 / 94 / 95**: Staraptor 95
+(Tailwind), his starter 96, Aegislash "Morwen" 97 (Wide Guard); no Mega (the side's one Mega is the player's). The Ch21
+script first said "version 21", but 20–22 are K2. Juno's Ch21 partner is still her J7 (70–72). Validator: `RIVAL_PARTNERS`.
+
 ## 6. Festival of Champions
 
 - **Valen** (`CHAMPION_VALEN,Valen`, ace 96): Bronzong, Lapras "Ferry", Kingdra, Gallade (**Hard Mega Gallade**), Volcarona,

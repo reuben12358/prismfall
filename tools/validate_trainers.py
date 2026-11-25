@@ -98,6 +98,11 @@ RIVAL_BATTLES = OrderedDict([
     (("RIVAL_JUNO", 5), ("Juno", 51)),          # Ch11 tag-battle partner (the Thaw)
     (("RIVAL_JUNO", 7), ("Juno", 97)),          # Ch21 tag-battle partner (when Kestrel is Fallen)
 ])
+# A rival who fights beside the player (Core 006 Prismfall::Rival.partner_version): version = decade * 10 + 3 + slot,
+# one version (no +100 / +200). (type, decade) -> (name, max level)
+RIVAL_PARTNERS = OrderedDict([
+    (("RIVAL_KESTREL", 9), ("Kestrel", 97)),    # Ch21: Redeemed Kestrel, 93 / 94 / 95
+])
 # Gen 1 starter line written in PBS for each starter_slot of the player
 # (0 = player chose Grass, 1 = Fire, 2 = Water).
 GRASS_LINE = ["BULBASAUR", "IVYSAUR", "VENUSAUR"]
@@ -641,6 +646,21 @@ def validate_scheme(trainers, types, rep):
             if len(st) > 1:
                 rep.warn("scheme", "%s%d %s: starter evolution stage differs between slots %s"
                          % (nm[0], num, DIFF_NAMES[d], sorted(st)))
+    # Rival partners (one version per starter slot)
+    for (tt, dec), (nm, cap) in RIVAL_PARTNERS.items():
+        for slot in (0, 1, 2):
+            t = need((tt, nm, dec * 10 + 3 + slot), "(rival partner %s, decade %d, slot %d)" % (nm, dec, slot))
+            if not t:
+                continue
+            want = RIVAL_STARTER[tt][slot]
+            starters = [m for m in t.mons if stage_of(m.species) is not None]
+            if len(starters) != 1:
+                rep.err(t.label(), "must contain exactly one Gen 1 starter-line Pokemon (found %d)" % len(starters))
+            elif starters[0].species not in want:
+                rep.err(t.label(), "starter slot %d needs the %s line, found %s" % (slot, want[0], starters[0].species))
+            top = max(m.level for m in t.mons)
+            if top > cap:
+                rep.err(t.label(), "level %d exceeds expected max %d" % (top, cap))
     # Festival / single bosses
     for tt, nm, lo, hi in SINGLE_BOSSES:
         if tt not in types:

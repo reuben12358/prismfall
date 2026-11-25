@@ -29887,6 +29887,75 @@ Pokemon = NOIVERN,86
     Nature = TIMID
     IV = 20
     EV = 0
+# Ch21 partner - Redeemed Kestrel beside the PC (field :PRISM_ARENA), player starter slot 0. pbRegisterPartner(:RIVAL_KESTREL, "Kestrel", Prismfall::Rival.partner_version(9)).
+#-------------------------------
+[RIVAL_KESTREL,Kestrel,93]
+LoseText = Not for them. For you. ...Go.
+Pokemon = STARAPTOR,95
+    Moves = BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT
+    Ability = INTIMIDATE
+    Item = SHARPBEAK
+    Nature = JOLLY
+    IV = 31
+Pokemon = CHARIZARD,96
+    Moves = FLAMETHROWER,AIRSLASH,DRAGONPULSE,FOCUSBLAST
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 31
+Pokemon = AEGISLASH,97
+    Name = Morwen
+    Moves = KINGSSHIELD,SHADOWBALL,SACREDSWORD,WIDEGUARD
+    Ability = STANCECHANGE
+    Item = LEFTOVERS
+    Nature = QUIET
+    IV = 31
+# Ch21 partner - Redeemed Kestrel beside the PC (field :PRISM_ARENA), player starter slot 1. pbRegisterPartner(:RIVAL_KESTREL, "Kestrel", Prismfall::Rival.partner_version(9)).
+#-------------------------------
+[RIVAL_KESTREL,Kestrel,94]
+LoseText = Not for them. For you. ...Go.
+Pokemon = STARAPTOR,95
+    Moves = BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT
+    Ability = INTIMIDATE
+    Item = SHARPBEAK
+    Nature = JOLLY
+    IV = 31
+Pokemon = BLASTOISE,96
+    Moves = HYDROPUMP,ICEBEAM,FLASHCANNON,RAPIDSPIN
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = AEGISLASH,97
+    Name = Morwen
+    Moves = KINGSSHIELD,SHADOWBALL,SACREDSWORD,WIDEGUARD
+    Ability = STANCECHANGE
+    Item = LEFTOVERS
+    Nature = QUIET
+    IV = 31
+# Ch21 partner - Redeemed Kestrel beside the PC (field :PRISM_ARENA), player starter slot 2. pbRegisterPartner(:RIVAL_KESTREL, "Kestrel", Prismfall::Rival.partner_version(9)).
+#-------------------------------
+[RIVAL_KESTREL,Kestrel,95]
+LoseText = Not for them. For you. ...Go.
+Pokemon = STARAPTOR,95
+    Moves = BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT
+    Ability = INTIMIDATE
+    Item = SHARPBEAK
+    Nature = JOLLY
+    IV = 31
+Pokemon = VENUSAUR,96
+    Moves = PETALBLIZZARD,SLUDGEBOMB,GROWTH,SYNTHESIS
+    AbilityIndex = 0
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = AEGISLASH,97
+    Name = Morwen
+    Moves = KINGSSHIELD,SHADOWBALL,SACREDSWORD,WIDEGUARD
+    Ability = STANCECHANGE
+    Item = LEFTOVERS
+    Nature = QUIET
+    IV = 31
 #===============================================================================
 # FESTIVAL OF CHAMPIONS - final and hijack
 #===============================================================================
