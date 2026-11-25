@@ -67,7 +67,7 @@ module Prismfall
       # IV "Clear Air" (Ch16, Mirefen 220/223): Wenlow with Corvin's spare Pokemon, Lv 62. Two Directorate officers
       # (Grane, Tull) on :CORROSIVE_MIRE; the Interlude can't be failed.
       4 => { :id => :CLEAR_AIR, :title => "INTERLUDE IV — Clear Air", :name => "Wenlow",
-             :charset => ["WENLOW", "trainer_WENLOW"], :trainer_type => :PARTNER_WENLOW,
+             :charset => ["WENLOW", "trainer_WENLOW"], :trainer_type => :WENLOW,   # Graphics/Trainers/WENLOW(_back)
              :party => [
                [:AMOONGUSS, 62, { :ability => :REGENERATOR, :item => :BLACKSLUDGE, :nature => :BOLD,
                                   :moves => [:SPORE, :GIGADRAIN, :SLUDGEBOMB, :CLEARSMOG], :ivs => 25,

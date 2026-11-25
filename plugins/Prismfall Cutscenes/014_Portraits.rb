@@ -22,7 +22,7 @@
 # last expression, so scripts only tag first lines and expression changes.
 #
 # Expressions: any name works for faces (it picks the file); bubbles know
-#              neutral happy smug angry crying shocked deadpan panic sad blush
+#              neutral happy smug angry crying shocked deadpan panic sad blush surprised
 # Emotes:      sweat shock anger sparkle gloom question exclaim tears blush dots
 # Portrait art: Graphics/Portraits/ID_expression.png, then ID.png (96x96).
 # :PLAYER uses PLAYER_A or PLAYER_B, by the look chosen (pbChangePlayer 1/2).
@@ -66,7 +66,9 @@ module Prismfall
       :deadpan => { :bg => [168, 168, 176], :emotes => [:dots] },
       :panic   => { :bg => [176, 216, 248], :emotes => [:sweat, :shock], :shake => 2 },
       :sad     => { :bg => [112, 128, 184], :emotes => [], :face => [:gloom] },
-      :blush   => { :bg => [255, 192, 208], :emotes => [], :face => [:blush] }
+      :blush   => { :bg => [255, 192, 208], :emotes => [], :face => [:blush] },
+      # every cast pack ships ID_surprised.png; milder than :shocked (one mark, no shock lines)
+      :surprised => { :bg => [255, 240, 176], :emotes => [:exclaim], :jolt => true }
     }
 
     # Optional per-character data: Prismfall::Portrait.register(:MARTIN,
@@ -91,9 +93,11 @@ module Prismfall
       DORIAN TAMSIN MARISOL ROOK SAHAR CORVIN BRANN KAITO ANJA
       ODESSA ILSA BASTIAN YSOLDE MAGNUS NYX CELESTINE SIGRUN
       HESPER TEO THISTLE SABLE KROLL QUENT MARCHETTI HOLLIS PIP MAUD DEX MORWEN
-      MAELIS DASK EIRIK HROTHGAR KASSAN RENATA GUTTER DELPHINE
+      MAELIS DASK EIRIK HROTHGAR KASSAN RENATA SALLOW GUTTER OKORO DELPHINE
       VESPER WENNA MARTIN WENLOW
-      AURELIUS VENAM COLL
+      AURELIUS COLL REFLECTION ZARA
+      VENAM SHELLY GARRET MELIA ALEXANDRA AMARIA TITANIA SHIV LIN NOVA
+      ASHE ASHKAAR_OFFICER ISENMAR_OFFICER MERIDIAN_ADMIN MERIDIAN_ASHE OCTAVE_SINGER
     ]
 
     class << self
@@ -863,3 +867,24 @@ end
 # The Gilded King (Gemini rework 2026-11-23, Path B; ids and art renamed from THEODRIC 2026-11-24) is shown as
 # "Gilded King Aurelius": [portrait: AURELIUS, smug] in scripts.
 Prismfall::Portrait.register(:AURELIUS, name: "Gilded King Aurelius", trainer: :GILDED_AURELIUS, cast: true)
+# Script tags that differ from the art prefix (Gemini wiring audit 2026-11-24): Ch16 writes [portrait: SALLOW, ...]
+# and Ch5 [portrait: RENATA, ...] for the same Councillor; the Envoy's files are OKORO_* (her tag in Ch20), and her
+# first name works too; the Spin Doctor's single class portrait is MERIDIAN_ASHE.
+Prismfall::Portrait.register(:RENATA,   name: "Councillor Sallow",  cast: true)
+Prismfall::Portrait.register(:SALLOW,   name: "Councillor Sallow",  art: :RENATA, cast: true)
+Prismfall::Portrait.register(:OKORO,    name: "Envoy Okoro",        cast: true)
+Prismfall::Portrait.register(:DELPHINE, name: "Envoy Okoro",        art: :OKORO, cast: true)
+Prismfall::Portrait.register(:ASHE,     name: "Ashe",               art: :MERIDIAN_ASHE, trainer: :MERIDIAN_ASHE, cast: true)
+Prismfall::Portrait.register(:MAUD,     name: "Hierophant Ellery",  cast: true)
+Prismfall::Portrait.register(:GUTTER,   name: "Mother Gutter",      trainer: :SUMP_BARON, cast: true)
+Prismfall::Portrait.register(:EIRIK,    name: "Thane Eirik",        cast: true)
+Prismfall::Portrait.register(:HROTHGAR, name: "Dominar Hrothgar",   cast: true)
+Prismfall::Portrait.register(:KASSAN,   name: "Prince-Elector Kassan", cast: true)
+Prismfall::Portrait.register(:REFLECTION, name: "Reflection",       trainer: :REFLECTION, cast: true)
+Prismfall::Portrait.register(:ZARA,     name: "Zara",               trainer: :PUNK_ZARA, cast: true)
+# Sister-game cameos (design/CAMEOS.md): home-game looks, 12 expressions each
+{ :VENAM => :FESTIVAL_VENAM, :SHELLY => :FESTIVAL_SHELLY, :GARRET => :FESTIVAL_GARRET, :MELIA => :FESTIVAL_MELIA,
+  :ALEXANDRA => :FESTIVAL_ALEXANDRA, :AMARIA => :FESTIVAL_AMARIA, :TITANIA => :FESTIVAL_TITANIA,
+  :SHIV => :FESTIVAL_SHIV, :LIN => :FESTIVAL_LIN, :NOVA => :FESTIVAL_NOVA }.each do |id, type|
+  Prismfall::Portrait.register(id, trainer: type, cast: true)
+end

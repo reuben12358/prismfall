@@ -415,6 +415,7 @@ section "portraits: plain box (not cast, or no art yet)"
 $shown = []
 pbMessage("Just text.")
 check "plain message passes through", $shown.last == "Just text." && seen.empty?
+P.register(:DELPHINE, cast: true)   # the suite's own artless cast member (the game aliases DELPHINE to Okoro's art)
 pbMessage("\\pf[DELPHINE,crying]Delphine: I LEFT THE OVEN ON!")
 pf_say(:JUNO, :happy, "No art in this run.")
 check "cast without art: plain box, tag stripped, no silhouette", seen.empty? && $shown[-2] == "Delphine: I LEFT THE OVEN ON!" &&
@@ -450,9 +451,10 @@ n0 = seen.length
 P::EXPRESSIONS.each_key { |e| pf_say(:PLAYER, e, "x", emote: P::EMOTES, bubble: true) }
 P::EXPRESSIONS.each_key { |e| pbMessage("\\pfb[DELPHINE,#{e}]x") }
 pf_say(:DELPHINE, :not_an_expression, "x", emote: :not_an_emote, bubble: true)
-check "all expressions x all emotes, no leaks", $live == before && seen.length - n0 == 21 && seen.last(21).all? { |v| v.is_a?(P::Bubble) }, [seen.length - n0, $live].inspect
+n_expr = (P::EXPRESSIONS.length * 2) + 1
+check "all expressions x all emotes, no leaks", $live == before && seen.length - n0 == n_expr && seen.last(n_expr).all? { |v| v.is_a?(P::Bubble) }, [seen.length - n0, $live].inspect
 $opt[:assets] = true
-P.register(:DELPHINE, name: "Delphine", trainer: :LEADER_MARTIN, color: [200, 60, 60])
+P.register(:DELPHINE, name: "Delphine", trainer: :LEADER_MARTIN, color: [200, 60, 60], cast: true)
 pf_say(:DELPHINE, :angry, "With a trainer sprite.", bubble: true)
 check "trainer-sprite head crop", seen.last.art_kind == :sprite && $shown.last.start_with?("Delphine: "), seen.last.art_kind
 n0 = seen.length
@@ -573,7 +575,8 @@ begin
   r3 = [seen.last.class, seen.last.emotes, seen.last.spec[:event]]
   tr::Script.exec_one([:JUNO, :panic, "Shutting up!", :bubble], { :quest => :TEST, :scene => :t })
   r4 = seen.last.class
-  tr::Script.exec_one([:KASSAN, :happy, "No art yet."], { :quest => :TEST, :scene => :t })
+  P.register(:NOART_FIXTURE, name: "Kassan", cast: true)   # Kassan himself has art since Art Drop 15
+  tr::Script.exec_one([:NOART_FIXTURE, :happy, "No art yet."], { :quest => :TEST, :scene => :t })
   r5 = [seen.length - n3, $shown.last]
   $menu_choice = 1
   idx = tr::Script.exec_one({ :choice => [:JUNO, :neutral, "Pull me through?", :bubble], :options => [["No.", []], ["Yes.", []]] }, { :quest => :TEST, :scene => :t })
