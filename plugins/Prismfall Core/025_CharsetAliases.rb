@@ -6,7 +6,10 @@
 # falls back to the placeholder.
 #  - CHARSET_ALIASES: placeholders used by ONE character only, swapped everywhere.
 #  - NAME_ALIASES: characters whose placeholder is a shared generic sprite (Dorian wears
-#    trainer_GENTLEMAN, Tamsin trainer_LASS), swapped only on events named after them.
+#    trainer_GENTLEMAN, Tamsin trainer_LASS, Captain Edda "NPC 14"), swapped only on events
+#    named after them (whole words; "Wenna's cousin" is not Wenna).
+#  - TYPE_CHARSETS: uniformed classes. An event that battles as one of these wears
+#    trainer_<TYPE> instead of the stock stand-in its map was built with.
 #===============================================================================
 module Prismfall
   CHARSET_ALIASES = {
@@ -30,8 +33,30 @@ module Prismfall
     "Quent" => "QUENT", "Percival" => "QUENT", "Kroll" => "KROLL", "Sabine" => "KROLL", "Sable" => "SABLE",
     # The Gilded King (Path B rename, 2026-11-23): "Aurelius" never matches Voss's "Aurelian" (whole words). Not bare
     # "Gilded King": the Night of Masques actor who plays him would get the real King's sprite.
-    "Aurelius" => "AURELIUS"
+    "Aurelius" => "AURELIUS",
+    # Art Drop 14 and earlier cast whose sheets were never aliased (Gemini wiring audit 2026-11-24)
+    "Maelis" => "MAELIS", "Rowan" => "ROWAN", "Teo" => "TEO", "Wick" => "WICK", "Wenlow" => "WENLOW",
+    "Morwen" => "MORWEN", "Dask" => "DASK", "Imre" => "DASK",
+    # Art Drop 15: story NPCs. Not bare "Pip": 151's "Apprentice Pip" is a Saltmere stagehand and two route
+    # trainers are called Pip; Bastian's granddaughter is "Pip Ore" (name her events that, or set charset PIP).
+    "Edda" => "EDDA", "Calla" => "CALLA", "Wenna" => "WENNA", "Hesper" => "HESPER", "Coll" => "COLL",
+    "Dex" => "DEX", "Pip Ore" => "PIP", "Hollis" => "HOLLIS", "Martin" => "MARTIN",
+    "Maud" => "MAUD", "Ellery" => "MAUD", "Hierophant" => "MAUD",
+    # Art Drops 15-16: rulers and the Council
+    "Eirik" => "EIRIK", "Hrothgar" => "HROTHGAR", "Kassan" => "KASSAN", "Okoro" => "OKORO",
+    "Gutter" => "GUTTER", "Renata" => "RENATA", "Sallow" => "RENATA",
+    # Riot Punk Zara (the old punk "Venam" art, moved to an original character 2026-11-24)
+    "Zara" => "ZARA",
+    # Sister-game cameos in their home-game looks (design/CAMEOS.md; Gemini cameo waves 1-3)
+    "Venam" => "VENAM", "Shelly" => "SHELLY", "Melia" => "MELIA", "Alexandra" => "ALEXANDRA",
+    "Amaria" => "AMARIA", "Titania" => "TITANIA", "Garret" => "GARRET", "Shiv" => "SHIV",
+    "Lin" => "LIN", "Nova" => "NOVA"
   }
+  # Not the Hollow or Meridian agents: some are in disguise on purpose (145 "Pageant" is a grunt in a gentleman's coat).
+  TYPE_CHARSETS = %i[
+    ASHKAAR_SOLDIER_M ASHKAAR_SOLDIER_F ASHKAAR_OFFICER ISENMAR_SOLDIER_M ISENMAR_SOLDIER_F ISENMAR_OFFICER
+    MERIDIAN_DIRECTORATE THORNGUARD
+  ]
 
   def self.charset_alias(name, event_name = nil)
     return name if name.nil? || name.empty?
@@ -39,17 +64,55 @@ module Prismfall
     key = [name, event_name]
     return @charset_alias_cache[key] if @charset_alias_cache.key?(key)
     target = CHARSET_ALIASES[name]
-    if !target && event_name && name.start_with?("trainer_")
-      NAME_ALIASES.each { |who, cs| target = cs if event_name[/\b#{who}\b/] }
+    # Stock stand-ins only: trainer_* sheets and the "NPC 01".."NPC 29" townsfolk (Vesper on 145 is "NPC 14").
+    if !target && event_name && (name.start_with?("trainer_") || name.start_with?("NPC "))
+      # (?!'s): a possessive is someone else ("Wenna's cousin" on 520)
+      NAME_ALIASES.each { |who, cs| target = cs if event_name[/\b#{who}\b(?!['’]s\b)/] }
     end
     target = nil if target && !pbResolveBitmap("Graphics/Characters/#{target}")
     @charset_alias_cache[key] = target || name
+  end
+
+  # The one trainer type an event battles as (its TrainerBattle.start calls), or nil.
+  def self.event_trainer_type(event)
+    types = []
+    event.pages.each do |page|
+      page.list.each do |cmd|
+        next if cmd.code != 355 && cmd.code != 655 && cmd.code != 111
+        cmd.parameters.each do |prm|
+          next if !prm.is_a?(String) || !prm.include?("TrainerBattle.start")
+          prm.scan(/:([A-Za-z0-9_]+)\s*,\s*["']/) { |m| types.push(m[0].to_sym) }   # every :TYPE, "Name" pair
+        end
+      end
+    end
+    types.uniq!
+    return (types.length == 1) ? types[0] : nil
+  rescue StandardError
+    return nil
+  end
+
+  # "trainer_<TYPE>" for an event of a TYPE_CHARSETS class whose own sheet is installed, else nil.
+  def self.type_charset(map_id, event)
+    return nil if !event
+    @type_charset_cache ||= {}
+    key = [map_id, event.id]
+    return @type_charset_cache[key] || nil if @type_charset_cache.key?(key)
+    type = event_trainer_type(event)
+    sheet = (type && TYPE_CHARSETS.include?(type)) ? "trainer_#{type}" : nil
+    sheet = nil if sheet && !pbResolveBitmap("Graphics/Characters/#{sheet}")
+    @type_charset_cache[key] = sheet || false
+    return sheet
   end
 end
 
 class Game_Event < Game_Character
   def character_name
-    return Prismfall.charset_alias(@character_name, (@event.name rescue nil))
+    name = @character_name
+    if name && name.start_with?("trainer_") && !Prismfall::CHARSET_ALIASES.key?(name)
+      sheet = Prismfall.type_charset(@map_id, @event)
+      return sheet if sheet
+    end
+    return Prismfall.charset_alias(name, (@event.name rescue nil))
   end
 end
 

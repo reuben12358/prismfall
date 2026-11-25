@@ -51,7 +51,20 @@ module PrismfallVS
     :LEADER_ROWAN   => "ROWAN",
     :ECHO_MORWEN    => "MORWEN",
     :ARCHSEER_DASK  => "DASK",       # PBS name "Imre"
-    :FESTIVAL_VENAM => "VENAM"
+    # The twelve later Wardens resolve by name; listed so a renamed PBS entry can't lose its bust (Gemini audit 2026-11-24)
+    :LEADER_CORVIN => "CORVIN", :LEADER_BRANN => "BRANN", :LEADER_KAITO => "KAITO", :LEADER_ANJA => "ANJA",
+    :LEADER_ODESSA => "ODESSA", :LEADER_ILSA => "ILSA", :LEADER_BASTIAN => "BASTIAN", :LEADER_YSOLDE => "YSOLDE",
+    :LEADER_MAGNUS => "MAGNUS", :LEADER_NYX => "NYX", :LEADER_CELESTINE => "CELESTINE", :LEADER_SIGRUN => "SIGRUN",
+    # Sister-game cameos, in their home-game looks (design/CAMEOS.md; Gemini cameo waves 1-3, 2026-11-24/25)
+    :FESTIVAL_VENAM => "VENAM", :FESTIVAL_SHELLY => "SHELLY", :FESTIVAL_GARRET => "GARRET",
+    :FESTIVAL_MELIA => "MELIA", :FESTIVAL_ALEXANDRA => "ALEXANDRA", :FESTIVAL_AMARIA => "AMARIA",
+    :FESTIVAL_TITANIA => "TITANIA", :FESTIVAL_SHIV => "SHIV", :FESTIVAL_LIN => "LIN", :FESTIVAL_NOVA => "NOVA",
+    :PUNK_ZARA      => "ZARA",       # Riot Punk Zara (the punk art that used to be Venam's)
+    :REFLECTION     => "REFLECTION", # PBS name "???"
+    :WENLOW         => "WENLOW",     # Interlude IV's player side (no bust yet: his portrait at 1.5x)
+    # Class busts: every trainer of the class shares one (Art Drop 17 / commit 5edcbd9)
+    :ASHKAAR_OFFICER => "ASHKAAR_OFFICER", :ISENMAR_OFFICER => "ISENMAR_OFFICER",
+    :MERIDIAN_ADMIN => "MERIDIAN_ADMIN", :MERIDIAN_ASHE => "MERIDIAN_ASHE", :OCTAVE_SINGER => "OCTAVE_SINGER"
   }
   THEMES     = {                   # colour per cast ID (graphics/EBDX/VS/{tunnel,bandfoe,bandplayer}_<theme>.png)
     "PLAYER_A" => :teal, "PLAYER_B" => :green,
@@ -66,7 +79,13 @@ module PrismfallVS
     # Art Drop 13
     "VESPER" => :gold, "THISTLE" => :green, "QUENT" => :teal, "SABLE" => :teal,
     # 2026-11-23: the Gilded King's imperial gold (was falling back to violet), and the rest of the cast busts
-    "AURELIUS" => :gold, "TEO" => :teal, "WICK" => :green, "MORWEN" => :violet, "DASK" => :grey, "VENAM" => :violet
+    "AURELIUS" => :gold, "TEO" => :teal, "WICK" => :green, "MORWEN" => :violet, "DASK" => :grey, "VENAM" => :violet,
+    # 2026-11-25: cameos, Zara, the Reflection, Wenlow and the class busts
+    "SHELLY" => :green, "GARRET" => :gold, "MELIA" => :gold, "ALEXANDRA" => :violet, "AMARIA" => :teal,
+    "TITANIA" => :red, "SHIV" => :grey, "LIN" => :green, "NOVA" => :red,
+    "ZARA" => :rose, "REFLECTION" => :grey, "WENLOW" => :teal,
+    "ASHKAAR_OFFICER" => :red, "ISENMAR_OFFICER" => :blue, "MERIDIAN_ADMIN" => :grey, "MERIDIAN_ASHE" => :grey,
+    "OCTAVE_SINGER" => :gold
   }
   DEFAULT_THEME_FOE    = :violet
   DEFAULT_THEME_PLAYER = :teal
@@ -95,6 +114,9 @@ module PrismfallVS
   end
 
   def self.player_id
+    # An Interlude (Core 028) plays as a cast member: their own bust and colour when they have one
+    cast = ($player ? (VS_IDS[$player.trainer_type] rescue nil) : nil)
+    return cast if cast && bust(cast)
     tt = ($player ? $player.trainer_type.to_s : "")
     return "PLAYER_B" if tt.end_with?("PLAYER_B")
     return "PLAYER_B" if !tt.include?("PLAYER") && ($player.female? rescue false)
@@ -337,7 +359,9 @@ module PrismfallVS
 
     def play
       t0 = System.uptime
-      cues = { 0.12 => "Vs flash", 1.3 => "Vs sword", 2.8 => "Vs flash" }
+      # 1.3 = the bolts streak in: "VS Cutin Lightning" when installed (Audio v4.3), else the stock "Vs sword"
+      bolt = (defined?(Prismfall::AudioCue)) ? Prismfall::AudioCue.resolve("SE", Prismfall::AudioCue::SE, :vs_lightning) : nil
+      cues = { 0.12 => "Vs flash", 1.3 => (bolt || "Vs sword"), 2.8 => "Vs flash" }
       begin
         loop do
           t = System.uptime - t0
