@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-24
 - **Author:** Gemini (Task 1 Specialist — Rejuvenation V14 `AdvancedAnimations` Architect & Live `mkxp-z` Prototype Builder)
-- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64` — WAVES 1 + 2 + 3 COMPLETE (6/6 FULL STORY PEAK SCENES)** (exit code `0`, `4,182` total native `512×384` @ 30fps live-map frames (including the **35.27s Ch9 Masterclass Director's Cut**) across 6 real built maps `Map 952`, `Map 608`, `Map 295`, `Map 563`, `Map 926`, `Map 285`, with `-14.0 LUFS` calibrated canon audio mixes; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
+- **Status:** **PROVEN LIVE IN `mkxp-z.x86_64` — WAVES 1 + 2 + 3 COMPLETE (6/6 FULL STORY PEAK SCENES)** (exit code `0`, `4,435` total native `512×384` @ 30fps live-map frames (including the **43.70s Ch9 Masterclass Director's Cut v2 — 10/10 Polish**) across 6 real built maps `Map 952`, `Map 608`, `Map 295`, `Map 563`, `Map 926`, `Map 285`, with `-14.0 LUFS` calibrated canon audio mixes; zero edits made to repo `.rb`, `pbs/`, `story/`, or `mapgen/`).
 - **Target Wednesday Merge File:** `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` (prototype verified live at `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`).
 
 ---
@@ -46,18 +46,18 @@ Rejuvenation V14 achieves unforgettable RPG cinema **without leaving RPG Maker X
 
 ## 2. Live `mkxp-z.x86_64` Full-Suite Verification Proof (Waves 1 + 2 + 3 = 6/6 Scenes)
 
-All **6 story peak cutscenes** were executed **100% live inside our compiled Linux `mkxp-z.x86_64` engine** on real built Prismfall `.rxdata` maps, captured at native `512×384` @ `30fps` (`4,182` total frames, incl. **Ch9 Masterclass Director's Cut** `1,058f = 35.27s`), calibrated to **`-14.0 LUFS`**, and visually audited frame-by-frame:
+All **6 story peak cutscenes** were executed **100% live inside our compiled Linux `mkxp-z.x86_64` engine** on real built Prismfall `.rxdata` maps, captured at native `512×384` @ `30fps` (`4,435` total frames, incl. **Ch9 Masterclass Director's Cut v2 (10/10 Polish)** `1,311f = 43.70s`), calibrated to **`-14.0 LUFS`**, and visually audited frame-by-frame:
 
 | Scene | Live Maps Used | Frames / Duration | Audio Architecture | Verified Proof Artifacts |
 |---|---|---|---|---|
 | **Scene 1 — Ch5 Spire Shatter (`:CH5_SHATTER`)** | `Map 952` (*Plate Vault*) → `Map 608` (*Shattered Lowlight* cutaway on frozen Dex) → scarred `Map 952` (Cradle swapped to tile `25947` + Overcharged Electivire leap) | `689` frames @ 30fps (`22.97s`, 15 synced cues) | Mix B *Girei* intro build → `0.38s` dead-silence `bgm_cut` → *Girei* choral drop right on Shatter impact + real `.ogg` SEs & `Cries/ELECTIVIRE.ogg` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch5_spire_shatter.mp4` (`2.4 MB`) & `.gif` (`991 KB`) |
-| **Scene 2 — Ch9 Masterclass Director's Cut (`:CH9_UNMASK`)** | Live `Map 295` Crimson Reliquary (**Wednesday swaps `295 → 264`**) **+ 90° Banquet-Style Side-View Cathedral Cut** (`pf_vfx_ch9_sideview_hall` in `@actor_vp`) | **`1,058` frames @ 30fps (`35.27s`, 51 synced cues)** | **`-14.0 LUFS`:** Rejuvenation Tension → dry click vacuum → 3-Wave escalating barrage → razor `bgm_cut` **DEAD SILENCE** across 90° horizontal dive, `0.25s` hitstop & slow-mo porcelain mask shatter → ceramic clink & Juno's whisper `"...Uncle Rowan?"` → *Never Meant to Belong* solo violin swell on Rowan's line | `pf_rejuv_ch9_trevenant_unmasking.mp4` (`3.9 MB`), `pf_rejuv_ch9_directors_cut.gif` (`3.5 MB`), `96b_ch9_directors_cut_proof.png` (`24f`) |
+| **Scene 2 — Ch9 Masterclass Director's Cut v2 (`:CH9_UNMASK`)** | Live `Map 295` Crimson Reliquary (**Wednesday swaps `295 → 264`**) **+ 90° Banquet-Style Side-View Cathedral Cut** (`pf_vfx_ch9_sideview_hall` in `@actor_vp`) | **`1,311` frames @ 30fps (`43.70s`, 57 synced cues)** | **`-14.0 LUFS` (0 missing SEs):** Rejuvenation Tension → dry click vacuum → 3-Wave escalating barrage → razor `bgm_cut` **DEAD SILENCE** across 90° horizontal dive, `1.55×` face impact (`0.25s` hitstop), single-mask shatter, clatter, `"...Wait."` & `"...That voice..."` → *Never Meant to Belong* solo violin swell as Rowan lifts bare face → `"...Uncle Rowan?"` → 3-box Rowan finale (`"Look at the flowers."` + `2.2s` hold) | `pf_rejuv_ch9_trevenant_unmasking.mp4` (`4.4 MB`), `pf_rejuv_ch9_directors_cut_v2.gif` (`3.9 MB`), **`96c_ch9_directors_cut_v2_proof.png`** (`24f`), **`prismfall_ch9_directors_cut_v2_studio.html`** (`5.79 MiB`) |
 | **Scene 3 — Ch11 Kyogre Awakens at Lake Rime (`:CH11_KYOGRE`)** | `Map 563` (*Rimewood Glade* frozen lake & icefall, Tileset 52; **Wednesday swaps `map_id: 563 → 309/300`** when Rimeholt Harbour is built) | `589` frames @ 30fps (`19.63s`, 18 synced cues) | **`-14.0 LUFS`:** Rejuvenation Ominous → `0.35s` dead-silence `bgm_cut` on eye glint & `Anim/Ice8` → *The Rumble of Scientific Triumph* (Kevin Penkin) on Primal Kyogre breach + `Cries/KYOGRE_1.ogg` & water/ice/rain SEs | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch11_kyogre_awakens.mp4` (`3.4 MB`) & `.gif` (`2.1 MB`) |
 | **Scene 4 — Ch19 WAR-1 Primal Kyogre vs Reshiram Beam Clash (`:WAR_CLIMAX`)** | **Real built `Map 926` (*The Glass Dunes*, Tileset 56)** — full central battlefront basin with Isenmar & Ashkaar armies, banners, Eirik, Hrothgar, Sigrun & Anja | `629` frames @ 30fps (`20.97s`, 24 synced cues) | **`-14.0 LUFS`:** *Elegy of the Dynast* → *Ashes on The Fire* (Kohta Yamamoto) during dual charge & 3.1s tug-of-war clash → `0.28s` dead-silence `bgm_cut` + solitary `Anim/HealBell` → Trinitite glass detonation → *Soundscape to Ardor* + `KYOGRE_1` & `RESHIRAM` cries | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch19_war_beam_clash.mp4` (`2.5 MB`) & `.gif` (`1.4 MB`) |
 | **Scene 5 — Ch15 CE-1 AF 290 "Through Her Eyes" Glassfall (`:CH15_GLASSFALL`)** | `Map 295` (*Cathedral of the Evergreen* nave & altar dais, Tileset 33; **Wednesday swaps `map_id: 295 → 391`** when Living Nave is built) | `569` frames @ 30fps (`18.97s`, 14 synced cues) | **`-14.0 LUFS`:** Rejuvenation Ominous → `0.28s` dead-silence `bgm_cut` on Crown Bell Crack (`Anim/HealBell` + `Anim/Ice8`) → ***Decretum*** (*Madoka Magica*) across Glassfall shield & 10-year Echo Morwen turn + `Cries/MISMAGIUS.ogg` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch15_ce1_glassfall.mp4` (`2.0 MB`) & `.gif` (`1.25 MB`) |
 | **Scene 6 — Ch21 "The Ring & The Light" Arceus Finale (`:CH21_ARCEUS`)** | `Map 285` (*Briar Hall - Upper Court* white-stone summit terrace, Tileset 33; **Wednesday swaps `map_id: 285 → 491`** when Crownhaven Prism Arena is built) | `648` frames @ 30fps (`21.60s`, 13 synced cues) | **`-14.0 LUFS`:** *DARK ARIA <LV2>* (Bound Arceus & 18-hue Prism Helix) → `0.30s` dead-silence `bgm_cut` on Lock #18 Break → ***T-KT*** (*Attack on Titan*) across Valen's light ascension, empty Crown & Freed Arceus + `Cries/ARCEUS.ogg` | `/home/antigravity/pf_engine_run/rejuv_in_engine_proof/pf_rejuv_ch21_valen_arceus_finale.mp4` (`2.7 MB`) & `.gif` (`1.37 MB`) |
-| **4× 24-Frame Proof Contact Sheets** | Wave 1 (`96`), **Ch9 Director's Cut (`96b`)**, Wave 2 (`97`), Wave 3 (`98`) — nearest-neighbor crisp (`96` curated live frames total) | Visual QA pass | Zero tilemap tear, unobstructed actors, crisp PortraitBox, 90° side-view Banquet cut & slow-mo porcelain mask shatter | `96_rejuv_in_engine_cutscene_proof.png`, **`96b_ch9_directors_cut_proof.png`**, `97_rejuv_wave2_cutscene_proof.png`, `98_rejuv_wave3_cutscene_proof.png` (all copied to parent `previews/`) |
-| **3× Interactive Showcase HTMLs** | **Wave 1 + Ch9 Director's Cut (`5.53 MB`)**, Wave 2 (`4.60 MB`), Wave 3 (`4.32 MB`) — all strictly `< 8 MB` | Playwright verified | `console_errors=0`, `page_errors=0`, all embedded live MP4s `512×384` `readyState=4` | `prismfall_rejuv_in_engine_cutscenes_preview.html`, `..._wave2_preview.html`, `..._wave3_preview.html` |
+| **5× 24-Frame Proof Contact Sheets** | Wave 1 (`96`), Ch9 DC v1 (`96b`), **Ch9 DC v2 (`96c`)**, Wave 2 (`97`), Wave 3 (`98`) — nearest-neighbor crisp (`120` curated live frames total) | Visual QA pass | Active Protagonist, heroic Juno leap shielding Nell, **single-mask shatter (zero double-mask)**, full 5-cast 90° side-view continuity (Nell + PC visible!), multi-box dramatic pacing | `96_rejuv_in_engine_cutscene_proof.png`, `96b_ch9_directors_cut_proof.png`, **`96c_ch9_directors_cut_v2_proof.png`**, `97_rejuv_wave2_cutscene_proof.png`, `98_rejuv_wave3_cutscene_proof.png` (all copied to parent `previews/`) |
+| **4× Interactive Showcase HTMLs** | **Ch9 Director's Cut v2 Studio (`5.79 MiB`)**, Wave 1 (`5.53 MB`), Wave 2 (`4.60 MB`), Wave 3 (`4.32 MB`) — all strictly `< 8 MB` | Playwright verified | `console_errors=0`, `page_errors=0`, `0` JS syntax errors, all embedded live MP4s `512×384` `readyState=4`, `20/20` assets loaded | **`prismfall_ch9_directors_cut_v2_studio.html`**, `prismfall_rejuv_in_engine_cutscenes_preview.html`, `..._wave2_preview.html`, `..._wave3_preview.html` |
 
 ---
 
@@ -136,7 +136,7 @@ All `.ogv` AI-slideshow movies are permanently retired. **All 6 main-story peak 
 | Peak | Chapter & Scene ID | Live Map(s) | Acting Sheets (`graphics/Characters/`) | Additive / Tile VFX (`graphics/Animations/`) | Signature Rejuvenation V14 Beat | Status |
 |---|---|---|---|---|---|---|
 | **#1** | **Ch5 — Spire Shatter** (`:CH5_SHATTER` / `:SH1`) | `952` → `608` → `952` | `act_ch5_mourner_reach`, `act_ch5_mourner_burn`, `Followers/ELECTIVIRE` | `pf_vfx_vault_seal`, `pf_vfx_splitter_beacon`, `pf_vfx_prism_lightning`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_shards`, `pf_vfx_glass_frost`, `pf_vfx_smoke_and_motes` | Darkened vault `pbZoomMap 1.48×` → `0.38s bgm_cut` → 2f impact + `0.14s` hitstop → live cutaway to Map 608 frozen Dex → Electivire leap | **LIVE VERIFIED (Wave 1)** |
-| **#2** | **Ch9 Masterclass Director's Cut — Trevenant Ingrain, 3-Wave Breach & 90° Side-View Unmasking** (`:CH9_UNMASK` / `:IR1`) | `264` *(verified live on `295` + 90° side-view hall)* | `act_ch9_mourner_throw_up`, `act_ch9_trevenant_ingrain_up`, `act_ch9_mourner_dive_side`, `act_ch9_mourner_unmask`, `Followers/TREVENANT`, `JUNO` | `pf_vfx_fist_reliquary`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_frost`, `pf_vfx_duskball_release`, `pf_vfx_ingrain_roots`, `pf_vfx_ingrain_roots_breach`, `pf_vfx_ingrain_wall_side`, `pf_vfx_ch9_sideview_hall`, `pf_vfx_mask_shatter_side`, `pf_vfx_glass_shards`, `pf_vfx_smoke_and_motes` | UPWARD Dusk Ball throw → UP-facing Trevenant Ingrain north wall → 11s 3-wave escalating barrage & blown center breach → **90° Banquet-style side-view cathedral cut**: Mourner horizontal dive + `bgm_cut` dead silence + 2f impact & `0.25s` hitstop + slow-mo porcelain mask shatter & petals → top-down mask clatter, Juno's whisper & *Never Meant to Belong* solo violin (`35.27s`) | **LIVE VERIFIED (Director's Cut)** |
+| **#2** | **Ch9 Masterclass Director's Cut v2 (10/10 Polish) — Trevenant Ingrain, 3-Wave Breach & 90° Side-View Unmasking** (`:CH9_UNMASK` / `:IR1`) | `264` *(verified live on `295` + 90° side-view hall)* | `act_ch9_mourner_throw_up`, `act_ch9_trevenant_ingrain_up`, `act_ch9_mourner_dive_side`, `act_ch9_mourner_unmask`, `Followers/TREVENANT`, `JUNO`, `pose_JUNO`, `PLAYER_A`, `pose_PLAYER_A`, `NPC 02` (Nell) | `pf_emote_balloons`, `pf_vfx_fist_reliquary`, `pf_vfx_shockwave_ring`, `pf_vfx_glass_frost`, `pf_vfx_duskball_release`, `pf_vfx_ingrain_roots`, `pf_vfx_ingrain_roots_breach`, `pf_vfx_ingrain_wall_side`, `pf_vfx_ch9_sideview_hall`, `pf_vfx_mask_shatter_side` *(Row 1 face-matched shards/petals only!)*, `pf_vfx_glass_shards`, `pf_vfx_smoke_and_motes` | **5/5 Reuben 10/10 Polish:** Active Protagonist (`!` recoil, south sprint, Wave 2 push/recoil, Wave 3 knockback, 90° rush & finale step-in) + Juno physically LEAPING (`arc_h: 24`) to shield exposed Nell (`pose_JUNO :flinch`) + **ZERO double-mask** (`1.55×` face zoom + single mask shattering directly off Mourner's face) + **full 5-character 90° side-view continuity** (Nell + PC visible!) + 11-box dramatic dialogue pacing with animated `pf_emote_balloons` & *Never Meant to Belong* solo violin (`43.70s`) | **LIVE VERIFIED (Director's Cut v2 — 10/10)** |
 | **#3** | **Ch11 — Kyogre Awakens at Lake Rime** (`:CH11_KYOGRE` / `:CH11_THAW`) | `309`/`300` *(verified live on `563`)* | `act_ch11_kyogre_storm`, `act_war1_primal_kyogre` | `pf_vfx_ice_fissure`, `pf_vfx_origin_pulse`, `pf_vfx_deluge_rain` | Arctic aurora midnight → jagged black ice fissures (`z=5`) → house-sized golden-blue Kyogre eye beneath ice → `0.35s bgm_cut` → ocean geyser breach + Origin Pulse spheres → warm midnight deluge | **LIVE VERIFIED (Wave 2)** |
 | **#4** | **Ch19 — WAR-1 Primal Kyogre vs Reshiram Beam Clash** (`:WAR_CLIMAX` / `:WAR1`) | **`926` (*The Glass Dunes* — real built map!)** | `act_war1_primal_kyogre`, `act_war1_reshiram`, `EIRIK`, `HROTHGAR`, `SIGRUN`, `ANJA`, `pfw_soldier_*`, `pfw_banner_*` | `pf_vfx_origin_pulse`, `pf_vfx_origin_beam`, `pf_vfx_blue_flare_beam`, `pf_vfx_beam_clash_core`, `pf_vfx_trinitite_glass_wave`, `pf_vfx_smoke_and_motes` | Warm dawn frontline pan (Eirik vs Hrothgar) → darkened two-shot dual charge → pixel-locked Origin Pulse vs Blue Flare tug-of-war → `0.28s bgm_cut` pinpoint collapse → emerald Trinitite glass wave & crust sweeping live `Map 926` | **LIVE VERIFIED (Wave 2)** |
 | **#5** | **Ch15 — CE-1 AF 290 "Through Her Eyes" Glassfall** (`:CH15_GLASSFALL` / `:CE1`) | `391` *(verified live on `295`)* | `KESTREL`, `YSOLDE`, `VALEN`, `VOSS`, `MORWEN`, `trainer_ECHO_MORWEN`, `Followers/MISMAGIUS`, AF 290 Choir & child | `pf_vfx_sky_fracture`, `pf_vfx_glassfall_curtain`, `pf_vfx_sepia_echo_shimmer` | Kestrel's Gauntlet → sepia memory `Tone(28,12,-26,95)` AF 290 Choir & young Voss → Great Prism sky fracture + `0.28s bgm_cut` → bottle-green Glassfall curtain as Morwen shields child → Echo Morwen turning across 10 years on *Decretum* | **LIVE VERIFIED (Wave 3)** |
@@ -167,7 +167,7 @@ All `.ogv` AI-slideshow movies are permanently retired. **All 6 main-story peak 
 
 ## 6. Verified Live-Tested Source Code: `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb`
 
-*(Exact verbatim file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, `4,182` total captured frames across `Map 952`, `Map 608`, `Map 295` + 90° side-view hall, `Map 563`, `Map 926`, and `Map 285` — including the **35.27s Ch9 Masterclass Director's Cut** (`1,058f`, `51` cues, `-14.0 LUFS`) — 2854 lines, SHA-256 `927c970e3aaf0618`.)*
+*(Exact verbatim file tested live inside `/home/antigravity/pf_engine_run/game/Plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` with `mkxp-z.x86_64`, exit code `0`, `4,435` total captured frames across `Map 952`, `Map 608`, `Map 295` + 90° side-view hall, `Map 563`, `Map 926`, and `Map 285` — including the **43.70s Ch9 Masterclass Director's Cut v2 (10/10 Polish)** (`1,311f`, `57` cues, `-14.0 LUFS`, `0` missing SEs) — 3135 lines, SHA-256 `bafb9377327de1f3`.)*
 
 ```ruby
 #===============================================================================
@@ -225,6 +225,19 @@ module Prismfall
       attr_reader :id, :tx, :ty, :dir, :sprite
       attr_accessor :visible, :opacity, :off_x, :off_y, :mirror, :scale
 
+      EMOTE_ROWS = {
+        :exclaim => 0, :alert => 0,
+        :double_exclaim => 1, :shock => 1, :horror => 1, :panic => 1,
+        :question => 2, :confused => 2,
+        :dots => 3, :ellipsis => 3, :silent => 3,
+        :anger => 4, :angry => 4,
+        :sweat => 5, :nervous => 5, :tears => 5,
+        :heart => 6, :blush => 6,
+        :idea => 7, :sparkle => 7,
+        :music => 8, :note => 8,
+        :jolt => 9, :dread => 9
+      }.freeze
+
       def initialize(engine, id, sheet:, tx:, ty:, dir: :down, grid: [4, 4],
                      is_charset: true, z_bias: 0, scale: 1.0, folder: "Graphics/Characters/")
         @engine     = engine
@@ -245,6 +258,8 @@ module Prismfall
         @walking    = false
         @move_task  = nil
         @hop_task   = nil
+        @tremble_task = nil
+        @crouch_task  = nil
         @clip       = nil
         @emote      = nil
         @color_flash = nil
@@ -296,6 +311,21 @@ module Prismfall
         @sprite.src_rect.set(col * @cw, row * @ch, @cw, @ch)
       end
 
+      # Instant swap to a 4-pose B2W2 acting strip (pose_JUNO.png, pose_PLAYER_A.png)
+      def set_pose(sheet, pose_idx)
+        @clip = nil
+        @walking = false
+        load_sheet(sheet, [4, 1], false)
+        set_cell(pose_idx.to_i)
+      end
+
+      # Restore standard 4x4 walking charset seamlessly at identical foot baseline
+      def restore_charset(sheet, dir: nil)
+        @clip = nil
+        @dir = dir if dir
+        load_sheet(sheet, [4, 4], true)
+      end
+
       def move_to(tx2, ty2, duration:, walk: true, dir: nil, ease: :linear, arc_h: 0.0)
         dx = tx2 - @tx
         dy = ty2 - @ty
@@ -315,6 +345,14 @@ module Prismfall
 
       def hop(height: 14, duration: 0.28)
         @hop_task = { :h => height.to_f, :t => 0.0, :dur => [duration.to_f, 0.001].max }
+      end
+
+      def tremble(duration: 0.65, amp: 2.0, freq: 44.0)
+        @tremble_task = { :t => 0.0, :dur => [duration.to_f, 0.01].max, :amp => amp.to_f, :freq => freq.to_f }
+      end
+
+      def crouch_to(target_off_y, duration: 0.25)
+        @crouch_task = { :y0 => @off_y.to_f, :y1 => target_off_y.to_f, :t => 0.0, :dur => [duration.to_f, 0.01].max }
       end
 
       # Rejuvenation V14 AdvancedAnimations variable-tick frameData playback!
@@ -344,33 +382,47 @@ module Prismfall
       def clip_done?; !@clip || @clip[:done]; end
       def moving?; !@move_task.nil?; end
 
-      def show_emote(kind = :exclaim, duration: 0.55)
+      def show_emote(kind = :exclaim, duration: 0.65)
         dispose_emote
-        @emote = { :sp => Sprite.new(@engine.vfx_vp), :t => 0.0, :dur => duration }
-        bmp = Bitmap.new(24, 28)
-        # Crisp 2x pixel-art exclamation / shock speech bubble
-        bg = Color.new(255, 255, 255)
-        ol = Color.new(24, 24, 32)
-        ac = (kind == :shock) ? Color.new(236, 48, 64) : Color.new(236, 64, 56)
-        bmp.fill_rect(2, 2, 20, 18, ol)
-        bmp.fill_rect(4, 4, 16, 14, bg)
-        bmp.fill_rect(8, 20, 8, 4, ol)
-        bmp.fill_rect(10, 18, 4, 4, bg)
-        bmp.fill_rect(10, 24, 4, 2, ol)
-        # Red "!" pixels (2x crisp)
-        bmp.fill_rect(10, 6, 4, 6, ac)
-        bmp.fill_rect(10, 14, 4, 2, ac)
-        @emote[:sp].bitmap = bmp
-        @emote[:sp].ox = 12
-        @emote[:sp].oy = 28
-        @emote[:sp].z = 950
+        sym = kind.to_sym
+        sp = Sprite.new(@engine.vfx_vp)
+        sp.z = 950
+        sheet_path = "Graphics/Animations/pf_emote_balloons.png"
+        if File.exist?(sheet_path)
+          bmp = @engine.cached_bitmap(sheet_path)
+          row = EMOTE_ROWS[sym] || 0
+          sp.bitmap = bmp
+          sp.src_rect.set(0, row * 32, 32, 32)
+          sp.ox = 16
+          sp.oy = 32
+          @emote = { :sp => sp, :t => 0.0, :dur => duration.to_f, :sheet => true, :row => row, :kind => sym, :owned_bmp => false }
+        else
+          bmp = Bitmap.new(24, 28)
+          bg = Color.new(255, 255, 255)
+          ol = Color.new(24, 24, 32)
+          ac = (sym == :shock || sym == :double_exclaim) ? Color.new(236, 48, 64) : Color.new(236, 64, 56)
+          bmp.fill_rect(2, 2, 20, 18, ol)
+          bmp.fill_rect(4, 4, 16, 14, bg)
+          bmp.fill_rect(8, 20, 8, 4, ol)
+          bmp.fill_rect(10, 18, 4, 4, bg)
+          bmp.fill_rect(10, 24, 4, 2, ol)
+          bmp.fill_rect(10, 6, 4, 6, ac)
+          bmp.fill_rect(10, 14, 4, 2, ac)
+          sp.bitmap = bmp
+          sp.ox = 12
+          sp.oy = 28
+          @emote = { :sp => sp, :t => 0.0, :dur => duration.to_f, :sheet => false, :owned_bmp => true }
+        end
+        sx, sy = screen_pos
+        sp.x = sx.round
+        sp.y = [(sy - (44.0 * @scale)).round, 66].max
       end
 
       def dispose_emote
         return if !@emote
         sp = @emote[:sp]
         if sp && !sp.disposed?
-          sp.bitmap.dispose if sp.bitmap && !sp.bitmap.disposed?
+          sp.bitmap.dispose if @emote[:owned_bmp] && sp.bitmap && !sp.bitmap.disposed?
           sp.dispose
         end
         @emote = nil
@@ -388,7 +440,12 @@ module Prismfall
           u = @move_task[:t] / @move_task[:dur]
           arc_y = -Math.sin(u * Math::PI) * @move_task[:arc_h]
         end
-        return sx + @off_x, sy + @off_y + hop_y + arc_y
+        tremble_x = 0.0
+        if @tremble_task
+          raw = Math.sin(@tremble_task[:t] * @tremble_task[:freq]) * @tremble_task[:amp]
+          tremble_x = (raw / 2.0).round * 2.0
+        end
+        return sx + @off_x + tremble_x, sy + @off_y + hop_y + arc_y
       end
 
       def update(dt)
@@ -414,6 +471,18 @@ module Prismfall
         if @hop_task
           @hop_task[:t] += dt
           @hop_task = nil if @hop_task[:t] >= @hop_task[:dur]
+        end
+
+        if @tremble_task
+          @tremble_task[:t] += dt
+          @tremble_task = nil if @tremble_task[:t] >= @tremble_task[:dur]
+        end
+
+        if @crouch_task
+          @crouch_task[:t] += dt
+          u = [@crouch_task[:t] / @crouch_task[:dur], 1.0].min
+          @off_y = @crouch_task[:y0] + (@crouch_task[:y1] - @crouch_task[:y0]) * Ease.apply(:out, u)
+          @crouch_task = nil if u >= 1.0
         end
 
         if @clip && !@clip[:done]
@@ -458,10 +527,20 @@ module Prismfall
           if @emote[:t] >= @emote[:dur]
             dispose_emote
           else
+            if @emote[:sheet]
+              t_e = @emote[:t]
+              col = if @emote[:kind] == :dots || @emote[:kind] == :ellipsis || @emote[:kind] == :silent
+                      step = [@emote[:dur] * 0.22, 0.14].min
+                      [(t_e / step).to_i, 3].min
+                    else
+                      t_e < 0.06 ? 0 : (t_e < 0.14 ? 1 : (t_e < 0.28 ? 2 : 3))
+                    end
+              @emote[:sp].src_rect.set(col * 32, @emote[:row] * 32, 32, 32)
+            end
             sx, sy = screen_pos
             pop = @emote[:t] < 0.08 ? ((1.0 - @emote[:t] / 0.08) * 6.0) : 0.0
             @emote[:sp].x = sx.round
-            @emote[:sp].y = (sy - (44.0 * @scale) + pop).round
+            @emote[:sp].y = [(sy - (44.0 * @scale) + pop).round, 66].max
           end
         end
       end
@@ -1316,7 +1395,7 @@ module Prismfall
           if @actors[@zoom_focus]
             a = @actors[@zoom_focus]
             sx, sy = a.screen_pos
-            y_off = @backdrop_sp && @backdrop_sp.visible ? 46.0 : (20.0 * a.scale)
+            y_off = @backdrop_sp && @backdrop_sp.visible ? 52.0 : (20.0 * a.scale)
             return sx, sy - y_off
           end
         end
@@ -1650,11 +1729,11 @@ module Prismfall
       end
 
       #-------------------------------------------------------------------------
-      # SCENE 2 — Ch9 Peak #2 (MASTERCLASS DIRECTOR'S CUT):
+      # SCENE 2 — Ch9 Peak #2 (MASTERCLASS DIRECTOR'S CUT v2 — 10/10 POLISH):
       # "Trevenant's Ingrain, The 3-Wave Breach & 90° Side-View Unmasking"
       # Live Map 295 (lit as Crimson Emergency Reliquary; Wednesday swaps
       # map_id: 295 -> 264) + 90-degree Banquet-style Side-View Cathedral Cut!
-      # Target runtime: ~34-37s (~1,020-1,110 frames @ 30fps).
+      # Target runtime: ~40-44s (~1,200-1,320 frames @ 30fps).
       #-------------------------------------------------------------------------
       def play_ch9_trevenant_unmasking(capture_dir: nil, capture_fps: 30)
         eng = Engine.new(capture_dir: capture_dir, capture_fps: capture_fps)
@@ -1664,7 +1743,8 @@ module Prismfall
           s2t_ctr  = proc { |sx, sy| eng.screen_to_tile(sx, sy + 16) }
 
           #=====================================================================
-          # ACT I — Reliquary Sabotage & Partial Fist Plate Shatter (0.0s..4.5s)
+          # ACT I — Reliquary Sabotage, Protagonist Recoil & Sprint,
+          #         and Juno's Heroic Leap to Shield Nell!
           #=====================================================================
           eng.transfer_map(295, 15.0, 11.8, hide_player: true)
           eng.set_tone(-28, -86, -78, 42, duration: 0.0)
@@ -1672,40 +1752,44 @@ module Prismfall
           eng.letterbox(true, height: 32, duration: 0.0)
           eng.play_bgm("ch9_tension", volume: 80, tag: "ch9_tension")
 
-          # Tactical vertical aisle layout (NORTH -> SOUTH, zero overlap, zero letterbox clip!):
+          # Tactical vertical aisle layout (NORTH -> SOUTH, 100% spatial continuity):
           #   Reliquary Plinth (15.0, 10.4) — fires crimson crystal spears SOUTHWARD
           #   5-Tile Ingrain Root Wall (y = 14.65) — erupts NORTH of Trevenant!
-          #   Trevenant (15.0, 16.35) — FACING UP (NORTH) toward the oncoming barrage!
-          #   Mourner (15.0, 18.15) — dives in front of Juno, turns NORTH, throws Dusk Ball UPWARD!
-          #   Juno (15.0, 19.65) & Nell (14.0, 19.85) — shielded behind Mourner & Trevenant!
+          #   Trevenant (15.0, 16.35) — FACING UP (NORTH) toward oncoming barrage!
+          #   Mourner (15.0, 18.02) — dives in front of Juno & Nell, spins NORTH, throws UPWARD!
+          #   Nell starts exposed in center aisle (15.0, 19.55); Juno leaps from (13.5, 19.80)
+          #   right in front of Nell (15.0, 19.12) to shield her with her body!
           eng.spawn_vfx(:reliquary, sheet: "pf_vfx_fist_reliquary", tx: 15.0, ty: 10.4,
                         grid: [4, 2], frames: [0, 1], ticks: [10, 10], loops: :forever,
                         blend: :normal, untoned: false, z_layer: :mid, origin: :foot)
           eng.spawn_actor(:mourner, sheet: "act_ch9_mourner_throw_up", tx: 15.0, ty: 11.7,
                           grid: [4, 4], is_charset: false)
-          eng.spawn_actor(:pc,   sheet: "PLAYER_A", tx: 13.0, ty: 13.6, dir: :up, is_charset: true)
-          eng.spawn_actor(:juno, sheet: "JUNO",     tx: 15.0, ty: 19.65, dir: :up, is_charset: true)
-          eng.spawn_actor(:nell, sheet: "NPC 02",   tx: 14.0, ty: 19.85, dir: :up, is_charset: true)
+          eng.spawn_actor(:pc,   sheet: "PLAYER_A", tx: 13.2, ty: 13.2, dir: :up, is_charset: true)
+          eng.spawn_actor(:juno, sheet: "JUNO",     tx: 13.5, ty: 19.80, dir: :up, is_charset: true)
+          eng.spawn_actor(:nell, sheet: "NPC 02",   tx: 15.0, ty: 19.55, dir: :up, is_charset: true)
 
-          # Mourner frantically pulling Splitter wires at the Reliquary plinth
+          # Mourner frantically pulling Splitter wires; Protagonist creeps closer watching tensely!
           eng.actor(:mourner).play_clip(
             sheet: "act_ch9_mourner_throw_up", grid: [4, 4], frames: [0, 1, 0, 1],
             ticks: [7, 7, 6, 6], loops: 1, stay: true
           )
-          eng.zoom_map(1.42, duration: 1.0, focus: [15.0, 10.7], ease: :in_out)
-          eng.wait(1.15)
+          eng.actor(:pc).move_to(13.2, 12.5, duration: 0.90, walk: true, dir: :up)
+          eng.zoom_map(1.42, duration: 1.0, focus: [14.7, 10.9], ease: :in_out)
+          eng.wait(1.10)
 
-          # Audio Vacuum #1: dry CLICK on the last Splitter!
+          # Audio Vacuum #1: dry CLICK on the last Splitter -> Mourner & Protagonist jolt (!)!
           eng.bgm_cut
           eng.stop_vfx(:reliquary)
           eng.spawn_vfx(:reliquary_arm, sheet: "pf_vfx_fist_reliquary", tx: 15.0, ty: 10.4,
                         grid: [4, 2], frames: [2], hold: 0.65, stay: :forever,
                         blend: :normal, untoned: true, z_layer: :mid, origin: :foot)
           eng.play_se("Battle catch click", volume: 100, pitch: 130)
-          eng.actor(:mourner).show_emote(:exclaim, duration: 0.5)
-          eng.wait(0.45)
+          eng.actor(:mourner).show_emote(:exclaim, duration: 0.55)
+          eng.actor(:pc).show_emote(:exclaim, duration: 0.55)
+          eng.actor(:pc).hop(height: 8, duration: 0.18)
+          eng.wait(0.42)
 
-          # Partial Fist Plate Shatter! Bell chime + crimson shockwave + tension surges back!
+          # Partial Fist Plate Shatter! Bell chime + crimson shockwave + Protagonist recoils!
           eng.stop_vfx(:reliquary_arm)
           eng.spawn_vfx(:reliquary_crack, sheet: "pf_vfx_fist_reliquary", tx: 15.0, ty: 10.4,
                         grid: [4, 2], frames: [3, 4, 5, 6, 7], ticks: [4, 6, 6, 6, 6],
@@ -1718,11 +1802,14 @@ module Prismfall
           eng.spawn_vfx(nil, sheet: "pf_vfx_shockwave_ring", tx: 15.0, ty: 10.6,
                         grid: [4, 2], frames: 4..7, ticks: [3, 3, 4, 4],
                         blend: :add, scale: 1.0, grow: [0.6, 3.2, 0.7], fade: 0.25, z_layer: :above)
-          eng.zoom_map(1.0, duration: 0.45, ease: :out)
-          eng.wait(0.45)
+          # Protagonist recoils back a step in pose_PLAYER_A :recoil!
+          eng.actor(:pc).set_pose("pose_PLAYER_A", 1)
+          eng.actor(:pc).move_to(12.9, 13.4, duration: 0.28, walk: false, ease: :out)
+          eng.zoom_map(1.0, duration: 0.42, ease: :out)
+          eng.wait(0.42)
 
-          # Crimson glass frost races SOUTH down the central carpet beneath actors!
-          eng.pan_camera_to(15.0, 15.7, duration: 1.15, ease: :in_out)
+          # Crimson glass frost races SOUTH down the central carpet toward exposed Nell!
+          eng.pan_camera_to(15.0, 15.9, duration: 1.05, ease: :in_out)
           eng.actor(:mourner).play_clip(
             sheet: "act_ch9_mourner_throw_up", grid: [4, 4], frames: [2, 3], ticks: [4, 6]
           )
@@ -1732,14 +1819,57 @@ module Prismfall
                             grid: [4, 2], frames: 4..7, ticks: [2, 2, 3, 3],
                             stay: :forever, blend: :normal, opacity: 140, scale: 0.88, z_layer: :floor)
             end
+            if gi == 1
+              # Protagonist sees Juno & Nell in danger and SPRINTS SOUTH down the aisle!
+              eng.actor(:pc).restore_charset("PLAYER_A", dir: :down)
+              eng.actor(:pc).show_emote(:double_exclaim, duration: 0.65)
+              eng.actor(:pc).move_to(13.1, 17.8, duration: 1.05, walk: true, dir: :down)
+            elsif gi == 3
+              # Exposed Nell freezes in panic (!! + rapid shiver) in the center aisle!
+              eng.actor(:nell).show_emote(:double_exclaim, duration: 1.0)
+              eng.actor(:nell).tremble(duration: 1.35, amp: 2.0, freq: 48.0)
+            end
             eng.play_se("Anim/Ice2", volume: 70, pitch: 95 + gi * 6) if gi.even?
             eng.wait(0.15)
           end
 
-          eng.actor(:juno).show_emote(:shock, duration: 0.55)
+          # Multi-Box Sabotage & Shielding Beat:
+          # Box 1 (Juno, shocked): "Wait—the glass—"
+          eng.say(:JUNO, :shocked, "Wait—the glass—", hold: 0.62)
+          eng.actor(:pc).set_dir(:right)
+          eng.wait(0.16)
+
+          # Juno spots Nell exposed in the center aisle (!!), sprints & LEAPS right in front of Nell!
+          eng.actor(:juno).show_emote(:double_exclaim, duration: 0.75)
           eng.play_se("Exclaim", volume: 95)
-          eng.actor(:juno).move_to(14.7, 19.45, duration: 0.20, walk: true, dir: :up)
-          eng.say(:JUNO, :shocked, "NELL! Get DOWN—!", hold: 0.70)
+          eng.actor(:juno).set_dir(:right)
+          eng.wait(0.14)
+          eng.actor(:juno).move_to(14.15, 19.55, duration: 0.16, walk: true, dir: :right)
+          eng.wait_for_move(:juno)
+
+          # HEROIC JUMP ARC: Juno physically leaps across flagstones directly in front of Nell!
+          eng.play_se("Player jump", volume: 92)
+          eng.actor(:juno).move_to(15.0, 19.12, duration: 0.34, walk: false, dir: :right, arc_h: 24.0, ease: :out_cubic)
+          eng.actor(:nell).move_to(14.85, 19.82, duration: 0.24, walk: true, dir: :up)
+          eng.actor(:nell).crouch_to(3, duration: 0.20)
+          eng.actor(:nell).tremble(duration: 0.90, amp: 2.0, freq: 46.0)
+          # Protagonist slides into left flank guard trying to cover them!
+          eng.actor(:pc).move_to(13.2, 18.45, duration: 0.32, walk: true, dir: :down)
+          eng.wait_for_move(:juno)
+
+          # Juno lands shielding Nell with her body (pose_JUNO :flinch + protective crouch)!
+          eng.play_se("Player bump", volume: 78, pitch: 90)
+          eng.shake(power: 2, duration: 0.12)
+          eng.actor(:juno).set_pose("pose_JUNO", 1)
+          eng.actor(:juno).crouch_to(4, duration: 0.12)
+          eng.actor(:pc).set_pose("pose_PLAYER_A", 0)
+
+          # Box 2 (Juno, panic): "NELL!!"
+          eng.say(:JUNO, :panic, "NELL!!", hold: 0.48)
+          eng.actor(:nell).show_emote(:sweat, duration: 0.65)
+          eng.wait(0.14)
+          # Box 3 (Juno, panic): "Get DOWN—!!"
+          eng.say(:JUNO, :panic, "Get DOWN—!!", hold: 0.62)
 
           #=====================================================================
           # ACT II — Mourner's Dive South, Spin-Turn NORTH & UPWARD Dusk Ball Throw!
@@ -1748,19 +1878,23 @@ module Prismfall
             sheet: "act_ch9_mourner_throw_up", grid: [4, 4], frames: [3, 4, 4, 5],
             ticks: [3, 4, 4, 5], se: { 1 => "Fly" }
           )
-          eng.actor(:mourner).move_to(15.0, 18.15, duration: 0.58, walk: false, arc_h: 24.0, ease: :out_cubic)
+          eng.actor(:mourner).move_to(15.0, 18.02, duration: 0.56, walk: false, arc_h: 24.0, ease: :out_cubic)
+          eng.actor(:pc).restore_charset("PLAYER_A", dir: :right)
+          eng.actor(:pc).show_emote(:exclaim, duration: 0.55)
           eng.wait_for_move(:mourner)
           eng.shake(power: 3, duration: 0.18)
-          eng.wait(0.18)
+          eng.actor(:juno).restore_charset("JUNO", dir: :up)
+          eng.actor(:pc).set_dir(:up)
+          eng.wait(0.16)
 
-          # UPGRADE #2: Mourner faces UP (NORTH) & whips arm UPWARD launching Dusk Ball NORTHWARD!
+          # Mourner faces UP (NORTH) & whips arm UPWARD launching Dusk Ball NORTHWARD!
           eng.actor(:mourner).play_clip(
             sheet: "act_ch9_mourner_throw_up", grid: [4, 4], frames: [6, 7, 8, 9],
             ticks: [5, 7, 3, 7],
             se: { 2 => "Battle throw" }
           )
           eng.wait(0.60) # Launch ball right on frame 8 upward whip smear!
-          eng.spawn_vfx(nil, sheet: "pf_vfx_duskball_release", tx: 15.0, ty: 18.0,
+          eng.spawn_vfx(nil, sheet: "pf_vfx_duskball_release", tx: 15.0, ty: 17.9,
                         grid: [4, 2], frames: 0..3, ticks: [2, 2, 2, 2], loops: 3,
                         blend: :normal, untoned: true, move_to: [15.0, 16.35, 0.42],
                         arc_h: 36.0, z_layer: :above)
@@ -1777,7 +1911,7 @@ module Prismfall
           eng.play_cry(:TREVENANT, volume: 100)
 
           #=====================================================================
-          # ACT III — UPGRADE #1: UP-FACING TREVENANT INGRAIN SLAM & NORTH WALL!
+          # ACT III — UP-FACING TREVENANT INGRAIN SLAM & 5-TILE NORTH ROOT WALL!
           #=====================================================================
           eng.actor(:trevenant).play_clip(
             sheet: "act_ch9_trevenant_ingrain_up", grid: [4, 4], frames: 0..8,
@@ -1794,6 +1928,8 @@ module Prismfall
                               ticks: [2 + ri, 3, 3, 4, 8], stay: :forever,
                               blend: :normal, untoned: false, scale: 0.65, z_layer: :mid, origin: :foot)
                 end
+                # Protagonist braces in determined guard stance on the shockwave!
+                e.actor(:pc).set_pose("pose_PLAYER_A", 0)
               end
             }
           )
@@ -1802,16 +1938,13 @@ module Prismfall
             sheet: "act_ch9_mourner_throw_up", grid: [4, 4], frames: [10], ticks: [20], stay: true
           )
           eng.wait_for_clip(:trevenant)
-          eng.wait(0.28)
+          eng.wait(0.24)
 
           #=====================================================================
-          # ACT IV — UPGRADE #3: 3 ESCALATING BARRAGE WAVES (~11s OF TENSION!)
-          #   Wave 1 (~3.4s): Hold! (staggered emerald deflection sparks + breath!)
-          #   Wave 2 (~4.4s): Overwhelming! (10-spear storm, crimson cracks, Juno yells!)
-          #   Wave 3 (~3.4s): PENETRATION! (center root wall blows wide open, spear at Juno!)
+          # ACT IV — 3 ESCALATING BARRAGE WAVES (ACTIVE PROTAGONIST + MULTI-BOX!)
           #=====================================================================
 
-          # --- WAVE 1: HOLD! (Two-volley 6 crimson spears -> staggered emerald deflects -> breath) ---
+          # --- WAVE 1: HOLD! (Two-volley 6 crimson spears -> emerald deflects -> breath) ---
           eng.actor(:trevenant).play_clip(
             sheet: "act_ch9_trevenant_ingrain_up", grid: [4, 4], frames: [8, 9, 8, 9, 8, 9, 8],
             ticks: [7, 6, 7, 6, 7, 6, 14], stay: true
@@ -1829,8 +1962,7 @@ module Prismfall
                           grid: [4, 2], frames: [4, 5, 6], ticks: [2, 2, 2], loops: 3,
                           blend: :add, scale: 1.15, move_to: [sx, 14.15, 0.28], z_layer: :above)
             eng.play_se("Anim/Ice2", volume: 78, pitch: 106 + si * 4) if si.even?
-            eng.wait(0.24)
-            # Staggered emerald deflection burst on the exact root tile struck!
+            eng.wait(0.22)
             eng.stop_vfx(:"root_#{ri}")
             eng.stop_vfx(:"root_w1_#{ri}")
             eng.spawn_vfx(:"root_w1_#{ri}", sheet: "pf_vfx_ingrain_roots_breach", tx: sx, ty: 14.65,
@@ -1839,22 +1971,27 @@ module Prismfall
             eng.spawn_vfx(nil, sheet: "pf_vfx_glass_shards", tx: sx, ty: 14.05,
                           grid: [4, 2], frames: [7], hold: 0.14, blend: :add, scale: 0.72, z_layer: :above)
             if si == 2 || si == 5
-              eng.shake(power: 4, duration: 0.30)
+              eng.shake(power: 4, duration: 0.28)
               eng.play_se("Anim/hit", volume: 88, pitch: 112 + si * 2)
               eng.flash(color: [164, 255, 184], power: 82, duration: 0.16)
+              eng.actor(:pc).set_pose("pose_PLAYER_A", si == 2 ? 1 : 0)
+              eng.actor(:nell).tremble(duration: 0.35, amp: 2.0)
             end
-            eng.wait(0.14) if si == 2
+            eng.wait(0.12) if si == 2
           end
           eng.play_se("Anim/Ice8", volume: 76, pitch: 120)
-          # Brief heavy breath — THE WALL HELD! Camera leans closer as Reliquary builds Wave 2!
-          eng.zoom_map(1.16, duration: 0.90, focus: [15.0, 15.5], ease: :in_out)
-          eng.wait(1.10)
+          eng.zoom_map(1.15, duration: 0.80, focus: [15.0, 15.7], ease: :in_out)
+          eng.wait(0.88)
 
-          # --- WAVE 2: OVERWHELMING! (10 staggered angled spears -> crimson cracks & splinters!) ---
+          # --- WAVE 2: OVERWHELMING! (Protagonist pushes forward -> forced back -> Multi-Box!) ---
           eng.set_tone(-42, -96, -84, 52, duration: 0.85)
           eng.set_emergency_vignette([232, 24, 38], max_alpha: 92, pulse_hz: 2.0)
           eng.play_se("Anim/Earth1", volume: 84, pitch: 88)
-          eng.wait(0.30)
+          # Protagonist pushes forward toward the wall trying to help reinforce the line!
+          eng.actor(:pc).restore_charset("PLAYER_A", dir: :up)
+          eng.actor(:pc).move_to(13.3, 17.15, duration: 0.42, walk: true, dir: :up)
+          eng.wait(0.28)
+
           eng.actor(:trevenant).play_clip(
             sheet: "act_ch9_trevenant_ingrain_up", grid: [4, 4], frames: [10, 11, 10, 11, 10, 11, 10, 11],
             ticks: [6, 6, 6, 6, 6, 6, 6, 10], stay: true
@@ -1864,17 +2001,17 @@ module Prismfall
             ticks: [7, 7, 7, 7, 7, 14], stay: true
           )
 
-          w2_specs = [
-            [14.8, 13.0], [15.2, 17.0], [14.6, 14.0], [15.4, 16.0], [15.0, 15.0],
-            [14.2, 13.4], [15.8, 16.6], [14.9, 14.4], [15.1, 15.6], [15.0, 15.0]
+          w2_specs_a = [
+            [14.8, 13.0], [15.2, 17.0], [14.6, 14.0], [15.4, 16.0],
+            [15.0, 15.0], [14.2, 13.4], [15.8, 16.6], [15.0, 15.0]
           ]
-          w2_specs.each_with_index do |(x0, x1), si|
+          w2_specs_a.each_with_index do |(x0, x1), si|
             eng.spawn_vfx(nil, sheet: "pf_vfx_glass_shards", tx: x0, ty: 10.5,
                           grid: [4, 2], frames: [4, 5, 6], ticks: [2, 2, 2], loops: 3,
                           blend: :add, scale: 1.24, move_to: [x1, 14.15, 0.24], z_layer: :above)
             eng.play_se("Anim/Ice2", volume: 84, pitch: 102 + si * 4) if si.even?
             if si == 3
-              # First glowing crimson stress cracks spread across the emerald barrier!
+              # Glowing crimson stress cracks spread across the emerald barrier!
               5.times { |ri| eng.stop_vfx(:"root_w1_#{ri}"); eng.stop_vfx(:"root_#{ri}") }
               [15.0, 14.0, 16.0, 13.0, 17.0].each_with_index do |rx, ri|
                 eng.spawn_vfx(:"root_w2_#{ri}", sheet: "pf_vfx_ingrain_roots_breach", tx: rx, ty: 14.65,
@@ -1884,8 +2021,9 @@ module Prismfall
               eng.shake(power: 5, duration: 0.34)
               eng.play_se("Anim/Ice8", volume: 82, pitch: 106)
               eng.actor(:trevenant).flash_color(255, 110, 140, 170, duration: 0.20)
+              eng.actor(:pc).show_emote(:exclaim, duration: 0.55)
             elsif si == 7
-              # Center tiles crack deep crimson + flying emerald bark splinters blast southward!
+              # Center tiles crack deep crimson + emerald bark splinters force Protagonist back!
               [0, 1, 2].each { |ri| eng.stop_vfx(:"root_w2_#{ri}") }
               [15.0, 14.0, 16.0].each_with_index do |rx, ri|
                 eng.spawn_vfx(:"root_w2b_#{ri}", sheet: "pf_vfx_ingrain_roots_breach", tx: rx, ty: 14.65,
@@ -1896,19 +2034,51 @@ module Prismfall
                               scale: 0.56, drift: [(ri - 1) * 34, 68], gravity: 110, z_layer: :above)
               end
               eng.play_se("Anim/Ice8", volume: 92, pitch: 90)
+              eng.play_cry(:TREVENANT, volume: 84)
               eng.shake(power: 6, duration: 0.42)
               eng.actor(:trevenant).flash_color(255, 180, 200, 200, duration: 0.24)
+              # Protagonist gets forced back by flying splinters (:recoil + hop + sweat)!
+              eng.actor(:pc).set_pose("pose_PLAYER_A", 1)
+              eng.actor(:pc).hop(height: 8, duration: 0.20)
+              eng.actor(:pc).move_to(13.2, 18.05, duration: 0.26, walk: false, ease: :out)
+              eng.actor(:pc).show_emote(:sweat, duration: 0.70)
+              # Juno ducks tighter shielding Nell (pose_JUNO :flinch + !!):
+              eng.actor(:juno).set_pose("pose_JUNO", 1)
+              eng.actor(:juno).crouch_to(5, duration: 0.12)
+              eng.actor(:juno).show_emote(:double_exclaim, duration: 0.75)
             end
-            eng.wait(0.18)
+            eng.wait(0.17)
           end
-          eng.wait(0.32)
+          eng.wait(0.24)
 
-          # Juno yells in terror as the barrier splinters!
-          eng.actor(:juno).show_emote(:shock, duration: 0.65)
-          eng.say(:JUNO, :shocked, "It's cracking— THE WALL WON'T HOLD!!", hold: 1.00)
+          # Wave 2 Multi-Box Dialogue Beat:
+          # Box 1 (Juno, panic): "The roots—they're splintering!!"
+          eng.say(:JUNO, :panic, "The roots—they're splintering!!", hold: 0.75)
 
-          # --- WAVE 3: PENETRATION!! Relentless storm -> center wall BLOWS OPEN -> fatal spear! ---
-          eng.zoom_map(1.28, duration: 0.75, focus: [15.0, 15.8], ease: :in_out)
+          # Wave 2 SLAMS HARDER between boxes!
+          [[14.0, 14.0], [16.0, 16.0], [14.8, 14.8], [15.2, 15.2]].each_with_index do |(x0, x1), si|
+            eng.spawn_vfx(nil, sheet: "pf_vfx_glass_shards", tx: x0, ty: 10.5,
+                          grid: [4, 2], frames: [4, 5, 6], ticks: [2, 2, 2], loops: 3,
+                          blend: :add, scale: 1.32, move_to: [x1, 14.15, 0.21], z_layer: :above)
+            eng.play_se("Anim/Ice2", volume: 88, pitch: 112 + si * 6) if si.even?
+            if si == 2
+              eng.play_se("Anim/Ice8", volume: 92, pitch: 86)
+              eng.shake(power: 6, duration: 0.36)
+              eng.actor(:trevenant).flash_color(255, 196, 210, 210, duration: 0.22)
+              eng.actor(:nell).show_emote(:double_exclaim, duration: 0.65)
+              eng.actor(:nell).tremble(duration: 0.65, amp: 2.0)
+            end
+            eng.wait(0.14)
+          end
+          eng.actor(:juno).restore_charset("JUNO", dir: :up)
+          eng.actor(:pc).set_pose("pose_PLAYER_A", 0)
+          eng.wait(0.16)
+
+          # Box 2 (Juno, shocked): "Hold on! Please, hold on—"
+          eng.say(:JUNO, :shocked, "Hold on! Please, hold on—", hold: 0.75)
+
+          # --- WAVE 3: PENETRATION!! Center root wall BLOWS OPEN -> knocks Protagonist back! ---
+          eng.zoom_map(1.28, duration: 0.70, focus: [15.0, 15.9], ease: :in_out)
           eng.actor(:trevenant).play_clip(
             sheet: "act_ch9_trevenant_ingrain_up", grid: [4, 4], frames: [11, 10, 12, 13],
             ticks: [6, 6, 10, 18], stay: true
@@ -1925,9 +2095,9 @@ module Prismfall
                             scale: 0.62, drift: [10, 75], gravity: 115, z_layer: :above)
               eng.shake(power: 5, duration: 0.25)
             end
-            eng.wait(0.14)
+            eng.wait(0.13)
           end
-          eng.wait(0.14)
+          eng.wait(0.12)
 
           # BLOWN-OPEN JAGGED BREACH GAP IN CENTER ROOT WALL (x = 15.0)!!
           eng.stop_vfx(:root_w2b_0)
@@ -1947,19 +2117,27 @@ module Prismfall
           eng.flash(color: [255, 196, 212], power: 190, duration: 0.22)
           eng.shake(power: 7, duration: 0.48)
           eng.actor(:trevenant).flash_color(255, 220, 232, 220, duration: 0.24)
-          eng.wait(0.45) # Horror beat letting the smoking breached center gap register!
+          # Protagonist knocked back a step by Wave 3's breach shockwave!
+          eng.actor(:pc).set_pose("pose_PLAYER_A", 1)
+          eng.actor(:pc).move_to(13.3, 19.35, duration: 0.34, walk: false, arc_h: 10.0, ease: :out)
+          eng.actor(:pc).show_emote(:double_exclaim, duration: 0.65)
+          eng.wait(0.42) # Horror beat letting the smoking breached center gap register!
 
-          # TWO crimson spears punch STRAIGHT THROUGH THE BREACH, followed by the FATAL SPEAR aimed at Juno!
+          # Stray spear + FATAL JAGGED SPEAR punching STRAIGHT THROUGH THE BREACH toward Juno & Nell!
           eng.spawn_vfx(nil, sheet: "pf_vfx_glass_shards", tx: 14.7, ty: 13.8,
                         grid: [4, 2], frames: [4, 5, 6], ticks: [2, 2, 2], loops: 3,
                         blend: :add, scale: 1.25, move_to: [14.2, 18.4, 0.28], z_layer: :above)
           eng.play_se("Anim/Slash9", volume: 86, pitch: 115)
-          eng.wait(0.20)
+          eng.wait(0.18)
           eng.actor(:mourner).play_clip(
             sheet: "act_ch9_mourner_throw_up", grid: [4, 4], frames: [12, 14, 15],
             ticks: [3, 3, 4], stay: true
           )
-          # Fatal jagged spear blasting straight through the center gap toward Juno!
+          # Protagonist lunges desperately toward Juno & Nell; Juno throws arms over Nell!
+          eng.actor(:pc).restore_charset("PLAYER_A", dir: :right)
+          eng.actor(:pc).move_to(13.9, 19.35, duration: 0.26, walk: true, dir: :right)
+          eng.actor(:juno).set_pose("pose_JUNO", 1)
+          eng.actor(:juno).show_emote(:double_exclaim, duration: 0.50)
           eng.spawn_vfx(nil, sheet: "pf_vfx_glass_shards", tx: 15.0, ty: 13.6,
                         grid: [4, 2], frames: [4, 5, 6], ticks: [2, 2, 2], loops: 4,
                         blend: :add, scale: 1.45, move_to: [15.0, 18.6, 0.36], z_layer: :above)
@@ -1967,36 +2145,54 @@ module Prismfall
           eng.wait(0.28)
 
           #=====================================================================
-          # ACT V — UPGRADE #4: 90-DEGREE SIDE-VIEW CINEMATIC CAMERA CUT!!
-          # (Pokemon Rejuvenation Banquet-Scene Style — Dive & Slow-Mo Mask Shatter!)
+          # ACT V — 90-DEGREE SIDE-VIEW CATHEDRAL CUT! (100% CAST CONTINUITY!)
+          #   - Nell clearly visible behind shielding Juno on RIGHT!
+          #   - Protagonist actively rushing in from FAR RIGHT straining with !!
+          #   - ZERO DOUBLE-MASK: ONLY the single mask on Mourner's own face
+          #     shatters at 1.55x pbZoomMap with crisp face-matched shards!
           #=====================================================================
           eng.flash(color: [255, 224, 236], power: 195, duration: 0.12)
           eng.clear_actors
           eng.clear_vfxs
           eng.zoom_map(1.0, duration: 0.0)
-          eng.set_tone(0, 0, 0, 0, duration: 0.0) # Side-view hall art carries exact Map 295 crimson lighting!
+          eng.set_tone(0, 0, 0, 0, duration: 0.0)
           eng.set_backdrop("pf_vfx_ch9_sideview_hall", z: 1)
 
-          # Stage the 90-degree horizontal corridor cast cleanly on the carpet plane (sy = 312)!
-          # LEFT (sx = 86): Vertical side-profile Ingrain Root Wall cracking -> blowing open!
-          wx, wy = s2t_foot.call(86, 318)
+          # LEFT (sx = 78): Vertical side-profile Ingrain Root Wall cracking -> blowing open!
+          wx, wy = s2t_foot.call(78, 318)
           eng.spawn_vfx(:side_wall, sheet: "pf_vfx_ingrain_wall_side", tx: wx, ty: wy,
                         grid: [4, 1], frames: [1, 2], ticks: [10, 10], stay: :forever,
                         blend: :normal, untoned: false, scale: 1.15, z_layer: :mid, origin: :foot)
 
-          # LEFT-MID (sx = 158): Side-profile Trevenant (Row 1 LEFT) bracing against the storm!
-          ttx, tty = s2t_foot.call(158, 312)
+          # LEFT-MID (sx = 148): Side-profile Trevenant (Row 1 LEFT) bracing against the storm!
+          ttx, tty = s2t_foot.call(148, 312)
           eng.spawn_actor(:side_trev, sheet: "Followers/TREVENANT", tx: ttx, ty: tty,
                           dir: :left, grid: [4, 4], is_charset: true, scale: 2.0, z_bias: 20)
 
-          # RIGHT (sx = 426): Side-profile Juno (Row 1 LEFT) frozen in sheer terror!
-          jtx, jty = s2t_foot.call(426, 312)
+          # RIGHT-MID (sx = 382): Juno crouched physically shielding right in front of Nell!
+          jtx, jty = s2t_foot.call(382, 314)
           eng.spawn_actor(:side_juno, sheet: "JUNO", tx: jtx, ty: jty,
-                          dir: :left, grid: [4, 4], is_charset: true, scale: 2.0, z_bias: 20)
-          eng.actor(:side_juno).show_emote(:shock, duration: 1.1)
+                          dir: :left, grid: [4, 4], is_charset: true, scale: 2.0, z_bias: 26)
+          eng.actor(:side_juno).off_y = 6.0
+          eng.actor(:side_juno).show_emote(:double_exclaim, duration: 1.05)
 
-          # Hold & establish the breathtaking 90-deg side-view cathedral as 3 horizontal spears hammer the wall!
-          [[14, 206, 86, 212, 0.25], [8, 256, 88, 254, 0.25], [10, 238, 94, 240, 0.24]].each_with_index do |(x0, y0, x1, y1, dur), si|
+          # RIGHT (sx = 428): Nell clearly visible crouched/trembling right behind Juno!
+          ntx, nty = s2t_foot.call(428, 310)
+          eng.spawn_actor(:side_nell, sheet: "NPC 02", tx: ntx, ty: nty,
+                          dir: :left, grid: [4, 4], is_charset: true, scale: 2.0, z_bias: 18)
+          eng.actor(:side_nell).off_y = 6.0
+          eng.actor(:side_nell).tremble(duration: 2.2, amp: 2.0, freq: 44.0)
+          eng.actor(:side_nell).show_emote(:double_exclaim, duration: 1.05)
+
+          # FAR RIGHT (sx = 514 -> 474): Protagonist rushing in urgently from right edge!
+          ptx0, pty0 = s2t_foot.call(514, 316)
+          ptx1, pty1 = s2t_foot.call(474, 316)
+          eng.spawn_actor(:side_pc, sheet: "PLAYER_A", tx: ptx0, ty: pty0,
+                          dir: :left, grid: [4, 4], is_charset: true, scale: 2.0, z_bias: 28)
+          eng.actor(:side_pc).move_to(ptx1, pty1, duration: 0.65, walk: true, dir: :left)
+
+          # Establish full 5-character 90-deg cathedral as 3 horizontal spears hammer left wall!
+          [[14, 206, 78, 212, 0.24], [8, 256, 80, 254, 0.24], [10, 238, 86, 240, 0.23]].each_with_index do |(x0, y0, x1, y1, dur), si|
             stx0, sty0 = s2t_ctr.call(x0, y0)
             stx1, sty1 = s2t_ctr.call(x1, y1)
             eng.spawn_vfx(nil, sheet: "pf_vfx_ingrain_roots_breach", tx: stx0, ty: sty0,
@@ -2004,7 +2200,7 @@ module Prismfall
                           move_to: [stx1, sty1, dur], z_layer: :above)
             eng.play_se("Anim/Ice2", volume: 88, pitch: 114 + si * 8)
             eng.shake(power: 4, duration: 0.18) if si == 1
-            eng.wait(0.28)
+            eng.wait(0.26)
           end
 
           # Side-profile vertical root wall BLOWS OPEN into Frame 3 jagged chest-height breach gap!
@@ -2012,102 +2208,125 @@ module Prismfall
           eng.spawn_vfx(:side_wall_breach, sheet: "pf_vfx_ingrain_wall_side", tx: wx, ty: wy,
                         grid: [4, 1], frames: [3], hold: 1.0, stay: :forever,
                         blend: :normal, untoned: false, scale: 1.15, z_layer: :mid, origin: :foot)
-          sp_x, sp_y = s2t_ctr.call(118, 240)
+          sp_x, sp_y = s2t_ctr.call(110, 240)
           eng.spawn_vfx(nil, sheet: "pf_vfx_ingrain_roots_breach", tx: sp_x, ty: sp_y,
                         grid: [4, 2], frames: [4, 5], ticks: [3, 4], blend: :normal, untoned: true,
                         scale: 0.85, drift: [95, -18], gravity: 110, z_layer: :above)
           eng.play_se("Anim/Ice8", volume: 96, pitch: 88)
           eng.shake(power: 6, duration: 0.30)
           eng.actor(:side_trev).flash_color(255, 190, 210, 200, duration: 0.22)
+          # Protagonist strains forward helplessly with !! as breach blows open!
+          ptx2, pty2 = s2t_foot.call(462, 316)
+          eng.actor(:side_pc).show_emote(:double_exclaim, duration: 0.90)
+          eng.actor(:side_pc).move_to(ptx2, pty2, duration: 0.32, walk: true, dir: :left)
           eng.wait(0.28)
 
           # ====================================================================
-          # DEAD SILENCE (bgm_cut!) + FATAL HORIZONTAL SPEAR + SAKUGA SLOW-MO DIVE!!
+          # DEAD SILENCE (bgm_cut!) + FATAL SPEAR + SAKUGA SLOW-MO DIVE!!
           # ====================================================================
           eng.bgm_cut
           eng.play_se("Fly", volume: 90, pitch: 82)
 
-          # Fatal horizontal blazing crimson spear rockets straight out of the breach toward Juno!
-          fsx0, fsy0 = s2t_ctr.call(96, 244)
-          fsx1, fsy1 = s2t_ctr.call(284, 244)
+          # Fatal horizontal blazing crimson spear rockets straight out of the breach!
+          fsx0, fsy0 = s2t_ctr.call(90, 250)
+          fsx1, fsy1 = s2t_ctr.call(264, 250)
           eng.spawn_vfx(:fatal_spear, sheet: "pf_vfx_ingrain_roots_breach", tx: fsx0, ty: fsy0,
-                        grid: [4, 2], frames: [6], hold: 0.82, blend: :add, scale: 1.28,
-                        move_to: [fsx1, fsy1, 0.78], z_layer: :above)
+                        grid: [4, 2], frames: [6], hold: 0.78, blend: :add, scale: 1.28,
+                        move_to: [fsx1, fsy1, 0.74], z_layer: :above)
 
-          # Center-frame Sakuga Slow-Mo: MOURNER LEAPS HORIZONTALLY INTO FRAME shielding Juno!
-          mtx0, mty0 = s2t_foot.call(392, 312)
-          mtx1, mty1 = s2t_foot.call(306, 312)
+          # MOURNER LEAPS HORIZONTALLY INTO FRAME shielding BOTH Juno and Nell!
+          mtx0, mty0 = s2t_foot.call(352, 312)
+          mtx1, mty1 = s2t_foot.call(274, 312)
           eng.spawn_actor(:side_mourner, sheet: "act_ch9_mourner_dive_side", tx: mtx0, ty: mty0,
                           grid: [4, 2], is_charset: false, scale: 1.0, z_bias: 45)
           eng.actor(:side_mourner).play_clip(
             sheet: "act_ch9_mourner_dive_side", grid: [4, 2], frames: [0, 1, 2],
             ticks: [4, 6, 10], stay: true
           )
-          eng.actor(:side_mourner).move_to(mtx1, mty1, duration: 0.82, walk: false, arc_h: 40.0, ease: :out_cubic)
-          eng.zoom_map(1.38, duration: 0.78, focus: :side_mourner, ease: :out_cubic)
-          eng.wait(0.78)
+          eng.actor(:side_mourner).move_to(mtx1, mty1, duration: 0.76, walk: false, arc_h: 38.0, ease: :out_cubic)
+          # Smooth 1.55x pbZoomMap centered directly onto Mourner's face for single-mask impact!
+          eng.zoom_map(1.55, duration: 0.74, focus: :side_mourner, ease: :out_cubic)
+          eng.wait(0.74)
 
-          # 2-FRAME HIGH-CONTRAST SILHOUETTE IMPACT + 0.25s HITSTOP FREEZE!!
+          # 2-FRAME HIGH-CONTRAST B&W SILHOUETTE IMPACT + 0.25s HITSTOP FREEZE RIGHT ON HIS FACE!!
           eng.stop_vfx(:fatal_spear)
           eng.actor(:side_mourner).play_clip(
             sheet: "act_ch9_mourner_dive_side", grid: [4, 2], frames: [3], ticks: [20], stay: true
           )
-          ix, iy = s2t_ctr.call(286, 244)
+          ix, iy = s2t_ctr.call(262, 254)
           eng.spawn_vfx(nil, sheet: "pf_vfx_ingrain_roots_breach", tx: ix, ty: iy,
-                        grid: [4, 2], frames: [7], hold: 0.24, blend: :add, scale: 1.12, z_layer: :above)
+                        grid: [4, 2], frames: [7], hold: 0.24, blend: :add, scale: 1.05, z_layer: :above)
           eng.play_se("Cut", volume: 100, pitch: 78)
           eng.play_se("Anim/Ice8", volume: 96, pitch: 118)
           eng.impact_beat(hitstop_sec: 0.25)
-          eng.flash(color: [255, 242, 248], power: 235, duration: 0.24)
+          eng.flash(color: [255, 242, 248], power: 235, duration: 0.22)
           eng.shake(power: 7, duration: 0.34)
 
-          # SLOW-MOTION PORCELAIN MASK CRACK & SHATTER IN PURE DEAD SILENCE!!
+          # SINGLE-MASK SLOW-MO SHATTER DIRECTLY OFF MOURNER'S FACE (ZERO DUPLICATE GIANT MASK!)
           eng.clear_vignette
-          eng.set_tone(-46, -54, -42, 92, duration: 0.80)
+          eng.set_tone(-44, -52, -40, 88, duration: 0.75)
 
-          # Mourner slow-mo unmasking acting (cracked mask -> mask shearing off -> unmasked tumble -> kneeling!)
+          # Frame 4: Spiderweb crack right across the ONE mask on Mourner's own face!
           eng.actor(:side_mourner).play_clip(
-            sheet: "act_ch9_mourner_dive_side", grid: [4, 2], frames: [4, 5, 6, 7],
-            ticks: [12, 16, 14, 24], stay: true
+            sheet: "act_ch9_mourner_dive_side", grid: [4, 2], frames: [4], ticks: [20], stay: true
           )
-          mtx2, mty2 = s2t_foot.call(322, 312)
-          eng.actor(:side_mourner).move_to(mtx2, mty2, duration: 2.15, walk: false, ease: :out)
+          mtx_c, mty_c = s2t_foot.call(282, 312)
+          eng.actor(:side_mourner).move_to(mtx_c, mty_c, duration: 0.65, walk: false, ease: :out)
+          eng.wait(0.32)
+          eng.play_se("Anim/Ice2", volume: 84, pitch: 140) # Crisp porcelain crack in dead silence!
+          gx, gy = s2t_ctr.call(266, 254)
+          eng.spawn_vfx(nil, sheet: "pf_vfx_glass_shards", tx: gx, ty: gy,
+                        grid: [4, 2], frames: [7], hold: 0.16, blend: :add, scale: 0.45, z_layer: :above)
+          eng.wait(0.33)
 
-          # Dramatic close-up slow-mo porcelain mask spiderweb crack & shear cleanly framed BELOW top letterbox!
-          msx, msy = s2t_ctr.call(234, 206)
-          eng.spawn_vfx(:mask_closeup, sheet: "pf_vfx_mask_shatter_side", tx: msx, ty: msy,
-                        grid: [4, 2], frames: [0, 1, 2, 3], ticks: [6, 13, 12, 16],
-                        blend: :normal, untoned: true, scale: 0.80, fade: 0.28, z_layer: :above)
-          eng.wait(0.95)
-          eng.play_se("Anim/Ice2", volume: 82, pitch: 138) # Sharp porcelain fracture crack in dead silence!
-          eng.wait(0.65)
+          # Frame 5: Mask shears directly off Mourner's face exposing Rowan's bare eyes!
+          eng.actor(:side_mourner).play_clip(
+            sheet: "act_ch9_mourner_dive_side", grid: [4, 2], frames: [5], ticks: [16], stay: true
+          )
+          mtx_s, mty_s = s2t_foot.call(290, 312)
+          eng.actor(:side_mourner).move_to(mtx_s, mty_s, duration: 0.55, walk: false, ease: :out)
+          eng.wait(0.55)
 
-          # Broken porcelain mask halves & 3 delicate uncluttered white lily petals drifting across darkened hall!
-          shx, shy = s2t_ctr.call(256, 212)
-          eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: shx, ty: shy,
-                        grid: [4, 2], frames: [4], hold: 1.8, blend: :normal, untoned: true,
-                        scale: 0.48, drift: [-34, -8], gravity: 34, spin: -70, fade: 0.25, z_layer: :above)
-          eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: shx, ty: shy,
-                        grid: [4, 2], frames: [5], hold: 1.8, blend: :normal, untoned: true,
-                        scale: 0.48, drift: [42, -12], gravity: 38, spin: 82, fade: 0.25, z_layer: :above)
-          [[204, 198, 6, 14], [362, 196, 7, 18], [268, 174, 6, 12]].each_with_index do |(px, py, fr, vx), pi|
+          # Frame 6 -> Frame 7: Unmasked Rowan tumbles & drops to one knee!
+          # Spawn ONLY crisp face-matched (scale 0.26) porcelain halves & lily petals flying OFF his face!
+          eng.actor(:side_mourner).play_clip(
+            sheet: "act_ch9_mourner_dive_side", grid: [4, 2], frames: [6, 7],
+            ticks: [12, 40], stay: true
+          )
+          mtx2, mty2 = s2t_foot.call(302, 312)
+          eng.actor(:side_mourner).move_to(mtx2, mty2, duration: 0.95, walk: false, ease: :out)
+
+          # Spawn mask halves directly from Frame 5's sheared mask position (left of Rowan's bare face!)
+          shx_l, shy_l = s2t_ctr.call(248, 254)
+          shx_r, shy_r = s2t_ctr.call(262, 252)
+          eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: shx_l, ty: shy_l,
+                        grid: [4, 2], frames: [4], hold: 1.55, blend: :normal, untoned: true,
+                        scale: 0.26, drift: [-58, -18], gravity: 58, spin: -115, fade: 0.28, z_layer: :above)
+          eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: shx_r, ty: shy_r,
+                        grid: [4, 2], frames: [5], hold: 1.55, blend: :normal, untoned: true,
+                        scale: 0.26, drift: [26, -38], gravity: 54, spin: 96, fade: 0.28, z_layer: :above)
+          [[244, 244, 6, -24, -12], [268, 240, 7, 22, -16], [254, 258, 6, -12, -4]].each_with_index do |(px, py, fr, vx, vy), pi|
             ptx, pty = s2t_ctr.call(px, py)
             eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: ptx, ty: pty,
-                          grid: [4, 2], frames: [fr], hold: 2.0, blend: :normal, untoned: true,
-                          scale: 0.40, drift: [vx, 10], gravity: 8,
-                          spin: (pi.even? ? 24 : -22), fade: 0.35, z_layer: :above)
+                          grid: [4, 2], frames: [fr], hold: 1.75, blend: :normal, untoned: true,
+                          scale: 0.28 + (pi % 2) * 0.04, drift: [vx, vy], gravity: 14,
+                          spin: (pi.even? ? 28 : -24), fade: 0.35, z_layer: :above)
           end
-          eng.wait(1.75)
+          # Smoothly ease zoom back 1.55x -> 1.12x so Trevenant, kneeling Rowan, Juno, Nell & PC all frame cleanly!
+          eng.zoom_map(1.12, duration: 1.15, focus: :side_mourner, ease: :out)
+          eng.actor(:side_juno).show_emote(:exclaim, duration: 0.90)
+          eng.actor(:side_pc).show_emote(:exclaim, duration: 0.90)
+          eng.wait(1.45)
 
           #=====================================================================
-          # ACT VI — Cut Back to Top-Down Map 295 & Quiet Uncle Rowan Reveal!
+          # ACT VI — Cut Back to Top-Down Map 295 & 6-Box Emotional Gut-Punch!
           #=====================================================================
           eng.clear_backdrop
           eng.clear_actors
           eng.clear_vfxs
-          eng.set_camera_tile(15.0, 16.4)
-          eng.set_tone(-34, -56, -48, 86, duration: 0.0) # Dying crimson glow fading to cool twilight!
-          eng.zoom_map(1.34, duration: 0.0, focus: [15.0, 18.1])
+          eng.set_camera_tile(15.0, 16.5)
+          eng.set_tone(-34, -56, -48, 86, duration: 0.0) # Dying crimson fading to cool twilight!
+          eng.zoom_map(1.34, duration: 0.0, focus: [15.0, 18.2])
 
           # Restore live scarred Map 295 aftermath: cracked Reliquary, floor frost, breached root wall!
           eng.spawn_vfx(:reliquary_after, sheet: "pf_vfx_fist_reliquary", tx: 15.0, ty: 10.4,
@@ -2120,7 +2339,6 @@ module Prismfall
                             blend: :normal, opacity: 120, scale: 0.88, z_layer: :floor)
             end
           end
-          # Scarred & breached 5-tile root wall standing at y = 14.65 (center blown wide open!)
           [[13.0, 1], [14.0, 2], [15.0, 3], [16.0, 2], [17.0, 1]].each_with_index do |(rx, fr), ri|
             eng.spawn_vfx(:"root_after_#{ri}", sheet: "pf_vfx_ingrain_roots_breach", tx: rx, ty: 14.65,
                           grid: [4, 2], frames: [fr], hold: 1.0, stay: :forever,
@@ -2132,65 +2350,128 @@ module Prismfall
                           grid: [4, 4], is_charset: false, z_bias: 6)
           eng.actor(:trevenant).play_clip(
             sheet: "act_ch9_trevenant_ingrain_up", grid: [4, 4], frames: [14, 14, 15],
-            ticks: [18, 18, 50], stay: true
+            ticks: [18, 18, 80], stay: true
           )
-          eng.spawn_actor(:pc,   sheet: "PLAYER_A", tx: 13.0, ty: 15.2, dir: :down, is_charset: true)
-          eng.spawn_actor(:juno, sheet: "JUNO",     tx: 15.0, ty: 19.65, dir: :up, is_charset: true)
-          eng.spawn_actor(:nell, sheet: "NPC 02",   tx: 14.0, ty: 19.85, dir: :up, is_charset: true)
 
-          # Unmasked Rowan collapsing to his knees right in front of Juno (100% unobstructed!)
+          # Cast matching top-down/side-view spatial continuity!
+          eng.spawn_actor(:pc,   sheet: "PLAYER_A", tx: 13.3, ty: 19.35, dir: :right, is_charset: true)
+          eng.spawn_actor(:juno, sheet: "JUNO",     tx: 15.0, ty: 19.35, dir: :up, is_charset: true)
+          eng.actor(:juno).off_y = 4.0
+          eng.spawn_actor(:nell, sheet: "NPC 02",   tx: 14.65, ty: 19.85, dir: :up, is_charset: true)
+          eng.actor(:nell).off_y = 3.0
+
+          # Unmasked Rowan collapsing to his knees with head bowed deep (Frame 13)!
           eng.spawn_actor(:mourner, sheet: "act_ch9_mourner_unmask", tx: 15.0, ty: 18.0,
                           grid: [4, 4], is_charset: false, z_bias: 10)
           eng.actor(:mourner).play_clip(
-            sheet: "act_ch9_mourner_unmask", grid: [4, 4], frames: 8..15,
-            ticks: [9, 11, 12, 14, 14, 16, 18, 70], stay: true
+            sheet: "act_ch9_mourner_unmask", grid: [4, 4], frames: [9, 10, 13],
+            ticks: [10, 12, 90], stay: true
           )
 
-          # Broken porcelain mask half tumbles down & CLATTERS onto the flagstones!
-          eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: 14.85, ty: 17.85,
+          # Broken porcelain mask half tumbles & CLATTERS clearly beside Rowan at (15.75, 18.42)!
+          eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: 15.10, ty: 17.85,
                         grid: [4, 2], frames: [4], hold: 0.36, blend: :normal, untoned: true,
-                        scale: 0.34, move_to: [15.0, 18.60, 0.36], arc_h: 18.0, spin: -180, z_layer: :above)
-          # Crimson emergency lights fade smoothly to quiet cool twilight!
+                        scale: 0.30, move_to: [15.75, 18.42, 0.36], arc_h: 18.0, spin: 180, z_layer: :above)
           eng.set_tone(-26, -30, -14, 112, duration: 2.1)
           eng.wait(0.36)
-          # Dry ceramic clink as the broken mask hits stone -> resting split mask & white lily!
+
+          # Dry ceramic clink as broken mask hits stone -> unobstructed split mask & white lily!
           eng.play_se("Anim/Ice8", volume: 74, pitch: 134)
-          eng.spawn_vfx(:mask_floor, sheet: "pf_vfx_smoke_and_motes", tx: 15.0, ty: 18.62,
+          eng.spawn_vfx(:mask_floor, sheet: "pf_vfx_smoke_and_motes", tx: 15.75, ty: 18.42,
                         grid: [4, 2], frames: [6], hold: 1.0, stay: :forever,
                         blend: :normal, untoned: false, z_layer: :mid)
 
-          # Subtle dust motes & 3 gently drifting perimeter white flower petals (keeping Rowan 100% clear!)
+          # Subtle perimeter motes & drifting white lily petals (Rowan & lily 100% unobstructed!)
           6.times do |mi|
             mx = mi < 3 ? (12.2 + mi * 0.7) : (16.4 + (mi - 3) * 0.7)
             eng.spawn_vfx(nil, sheet: "pf_vfx_smoke_and_motes", tx: mx, ty: 19.2 - (mi % 3) * 0.9,
-                          grid: [4, 2], frames: [7], hold: 7.5, blend: :add,
-                          drift: [3 - (mi % 3) * 3, -12 - (mi % 4) * 3], fade: 1.0, z_layer: :above)
+                          grid: [4, 2], frames: [7], hold: 12.0, blend: :add,
+                          drift: [3 - (mi % 3) * 3, -10 - (mi % 4) * 2], fade: 1.2, z_layer: :above)
           end
           [[12.6, 16.5, 6], [16.9, 16.8, 7], [17.4, 18.4, 6]].each_with_index do |(px, py, fr), pi|
             eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: px, ty: py,
-                          grid: [4, 2], frames: [fr], hold: 7.5, blend: :normal, untoned: true,
-                          scale: 0.30, drift: [4 - pi * 3, 8], gravity: 1.5,
-                          spin: (pi.even? ? 16 : -14), fade: 1.2, z_layer: :above)
+                          grid: [4, 2], frames: [fr], hold: 12.0, blend: :normal, untoned: true,
+                          scale: 0.28, drift: [4 - pi * 3, 7], gravity: 1.2,
+                          spin: (pi.even? ? 16 : -14), fade: 1.4, z_layer: :above)
           end
 
-          # Long breathless silent hold on unmasked Rowan kneeling before Juno...
-          eng.wait(2.25)
+          # Protagonist rushes down right beside Juno & Nell; Nell peeks out trembling behind Juno!
+          eng.actor(:pc).move_to(13.85, 19.05, duration: 0.58, walk: true, dir: :right)
+          eng.wait(0.58)
+          eng.actor(:pc).set_dir(:up)
+          eng.actor(:nell).crouch_to(0, duration: 0.35)
+          eng.actor(:nell).move_to(14.30, 19.70, duration: 0.42, walk: true, dir: :up)
+          eng.actor(:nell).tremble(duration: 0.75, amp: 2.0, freq: 38.0)
 
-          # Juno whispers in hushed silence BEFORE the solo violin enters!
-          eng.say(:JUNO, :shocked, "...Uncle Rowan?", hold: 1.85)
+          # Complete the 1.6s pure dead-silence hold after mask clatter!
+          eng.wait(1.02)
 
-          # Solo violin ("Never Meant to Belong") swells softly as Rowan speaks!
+          # Juno slowly rises from her crouch with (...) emote balloon!
+          eng.actor(:juno).crouch_to(0, duration: 0.42)
+          eng.actor(:juno).move_to(15.0, 19.18, duration: 0.42, walk: true, dir: :up)
+          eng.actor(:juno).show_emote(:dots, duration: 0.95)
+          eng.wait(0.45)
+
+          # === 6-BOX EMOTIONAL GUT-PUNCH REVEAL ===
+          # Box 1 (Juno, shocked): "...Wait." (0.8s silent beat!)
+          eng.say(:JUNO, :shocked, "...Wait.", hold: 0.85)
+          eng.wait(0.80)
+
+          # Box 2 (Juno, crying): "...That voice..."
+          eng.say(:JUNO, :crying, "...That voice...", hold: 0.95)
+
+          # Rowan slowly lifts his bare face; Never Meant to Belong solo violin softly enters!
+          eng.actor(:mourner).play_clip(
+            sheet: "act_ch9_mourner_unmask", grid: [4, 4], frames: [13, 14, 15, 12],
+            ticks: [5, 9, 10, 120], stay: true
+          )
           eng.play_bgm("ch9_never_meant", volume: 82, tag: "ch9_never_meant")
-          eng.zoom_map(1.16, duration: 1.8, focus: [15.0, 17.8], ease: :in_out)
+          eng.wait(0.58)
+
+          # Box 3 (Juno, crying): "...Uncle Rowan?"
+          eng.say(:JUNO, :crying, "...Uncle Rowan?", hold: 1.15)
+
+          # 1.1s pause — Nell gasps (!), Protagonist steps closer with (...)!
+          eng.actor(:nell).show_emote(:exclaim, duration: 0.75)
+          eng.actor(:nell).hop(height: 6, duration: 0.18)
+          eng.play_se("Exclaim", volume: 62, pitch: 108)
+          eng.wait(0.32)
+          eng.actor(:pc).move_to(14.0, 18.60, duration: 0.48, walk: true, dir: :up)
+          eng.actor(:pc).show_emote(:dots, duration: 1.05)
+          eng.wait(0.78)
+          eng.actor(:pc).set_dir(:right)
+
+          # Box 4 (Rowan, sad): "Juno..." (0.6s pause)
+          eng.say(:ROWAN, :sad, "Juno...", hold: 0.78)
           eng.wait(0.60)
 
-          eng.say(:ROWAN, :sad, "Juno... don't look at me like that. Look at the flowers.", hold: 2.35)
+          # Box 5 (Rowan, sad): "Don't look at me like that." (0.7s pause as white petals drift!)
+          eng.actor(:mourner).play_clip(
+            sheet: "act_ch9_mourner_unmask", grid: [4, 4], frames: [15], ticks: [80], stay: true
+          )
+          eng.say(:ROWAN, :sad, "Don't look at me like that.", hold: 1.08)
 
-          # Let the final beat breathe over kneeling Rowan, the white lily, and scarred Trevenant!
-          eng.wait(1.45)
-          eng.zoom_map(1.0, duration: 0.80, ease: :out)
+          # Fresh delicate white petals drift across the twilight hall as camera gently opens up!
+          eng.zoom_map(1.16, duration: 1.65, focus: [15.0, 18.1], ease: :in_out)
+          [[13.4, 16.8, 6], [16.5, 17.2, 7], [15.9, 18.2, 6]].each_with_index do |(px, py, fr), pi|
+            eng.spawn_vfx(nil, sheet: "pf_vfx_mask_shatter_side", tx: px, ty: py,
+                          grid: [4, 2], frames: [fr], hold: 6.5, blend: :normal, untoned: true,
+                          scale: 0.28, drift: [3 - pi * 2, 7], gravity: 1.0,
+                          spin: (pi.even? ? 14 : -12), fade: 1.2, z_layer: :above)
+          end
+          eng.wait(0.70)
+
+          # Box 6 (Rowan, neutral): "Look at the flowers." (long 2.2s quiet hold on the violin!)
+          eng.actor(:mourner).play_clip(
+            sheet: "act_ch9_mourner_unmask", grid: [4, 4], frames: [12], ticks: [120], stay: true
+          )
+          eng.say(:ROWAN, :neutral, "Look at the flowers.", hold: 1.45)
+
+          # Long 2.2s quiet hold on the solo violin, white lily, kneeling Rowan, Juno, Nell & Protagonist!
+          eng.wait(2.20)
+          eng.zoom_map(1.0, duration: 0.75, ease: :out)
           eng.letterbox(false, duration: 0.55)
-          eng.wait(0.60)
+          eng.wait(0.45)
         ensure
           cues = eng.cues.dup
           fc   = eng.frames_captured
