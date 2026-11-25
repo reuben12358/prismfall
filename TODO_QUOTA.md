@@ -49,9 +49,11 @@
 
 ## 5. Content density (`design/DENSITY_STANDARD.md`)
 - [x] **Wave 0, the Ch5 rescue** (2026-11-23): the 3 softlocks (Valen at the Veil sets CH5_STEP 10; 608's service door leads back into the vault from step 11; `pfm_cutscene(:SH1)` is real: Cutscenes `016_Movies.rb` plays the Mourner's acting sheets and `Movies/pf_ch5_spire_shatter(_safe).ogv`); the 5 Gala/Lift trainers (Juno partner v13, Thistle v1, Pallbearer v5, Bereaved v5/v6) and the 6 Circuit Gym trainers (routes.py); the Glide Cycles Bicycle (`pfm_has?(:GALAINVITATION)`). Real-engine check: `tools/harness/visual/ch5/009_Ch5VaultCapture.rb` (Shatter → step 9, 608 door → vault, Larch → step 12).
-- [ ] **Wave 0, rest:** the Lock Road trainers (10–12) wait for its maps (580, 592, 590, 581, 595 unbuilt); Interlude I (105/106, V125 12 → 13) isn't built; Lumen Fly point.
+- [ ] **Wave 0, rest:** Interlude I (105/106, V125 12 → 13) isn't built; Lumen Fly point. *(Done 2026-11-25: the Lock Road trainers are in PBS, 30 across 580, 592, 590, 581, 595, 594, 593 and 584; their maps are unbuilt, so they have no events yet.)*
 - [ ] **Wave 1 systems:** Glassfall Slivers (100, counter and exchange), the 6-step Trading Chain, the Mystery Egg (Ch3), and `encounters_badgetiers.txt` overlays for Badges 5–9.
-- [ ] **Retrofit Ch6–13** to the per-chapter floor (12–20 trainers, ≥3 EventMons, hangouts, Slivers).
+- [x] **Retrofit Ch6–13, trainers** (2026-11-25): 25–34 route, gym and dungeon trainers per chapter in `routes.py` and PBS (3 versions each); counts per stretch are in `design/TRAINER_COVERAGE.md`. PBS only: none of those maps is built, so every one still needs its event.
+- [ ] **Retrofit Ch6–13, rest:** ≥3 EventMons, hangouts and Slivers per chapter.
+- [x] **Trainer species coverage** (Reuben's rule, 2026-11-25): every non-legendary species (900) is on a generic trainer at a plausible level; `python3 -I tools/trainer_gen/coverage.py` checks it and rewrites `design/TRAINER_COVERAGE.md`. Re-run it after any trainer edit. Open: regional forms (0 of 55 on generic trainers; the report lists them).
 - [ ] **Build from each new script's "Density" section** (Ch14 onward): the PBS trainer blocks in 3 versions, EventMons and hangouts.
 
 ## 5b. Post-game build (`story/41_SCRIPT_POSTGAME.md`)
@@ -78,19 +80,5 @@
 *Done items stay ticked for a week, then get cleared. Started 2026-11-22. This file replaces the old `design/WED_SPRINT_QUEUE.md`, which now just points here.*
 
 ## Status note: trainer coverage agent (2026-11-25)
-- Tool: `python3 -I tools/trainer_gen/coverage.py` → `design/TRAINER_COVERAGE.md`. Baseline 175 / 900 species on generic trainers.
-- `tools/trainer_gen/routes.py` already holds every new row (263 trainers: Ch5 Lock Road 30, Ch6–13 retrofit 231, two Ch19 roster rows) plus the PLAN caps. **Next steps if cut off:** `python3 -I tools/trainer_gen/gen.py tools/trainer_gen/cameos.py > /tmp/g.txt`, then splice the route blocks that `pbs/trainers.txt` doesn't have yet (they sit at the end of the ROUTE & GYM section, in chapter order) in front of the `# VILLAIN ADMINS` banner; validate; re-run coverage.py.
-
-## Agent status: Ch15–21 + post-game engine hooks (Claude, engine-backlog agent)
-*Running note so the work can be picked up; updated at each checkpoint.*
-- **Committed:** Core `028_Interludes.rb` (the shared swap), `029_TimedPrompts.rb` (`pf_timed_choice`, `pf_overtime`), `030_Ceremony_Ladder.rb` (`Prismfall::Ceremony.procession` / `.banner`, `Prismfall::GroundsLadder`); Field Effects `013_FieldEffects_StoryHooks.rb` (K6 one-turn `:BLEED` overload, K8 Gauntlet tear-off, Valen crystal stage + `:prismfall_valen_crystal`); `mapgen/ruby/013_EchoFollow.rb` (`pf_echo_follow`: convoy + crypt record/replay), `014_Hush.rb` (map 808 mute + ripples).
-- **Grounds Ladder PBS contract:** `GroundsLadder::ROSTER` expects version 20 blocks: PAINTER Linnet, FISHERMAN Brynjar, ROCKER Vix, ENGINEER Dobbin, GAMBLER Quill, TAMER Asgerd, YOUNGSTER Tam, RUINMANIAC Nasrin, CHANNELER Osric, SCIENTIST Thessaly, COOLTRAINER_M Halvard, LADY Liesl (Lv 88–90, two Pokémon each). Other names/types: edit ROSTER (a same-name block under another type is found automatically). Missing blocks are skipped, never a crash.
-- **Next, in order:** (1) `mapgen/ruby/018_Crownhaven.rb` ceremony walk + pylon lighting + the white vision; (2) Core `031_Finale.rb` (hijack hook points, allies montage + Larch's 11 lamps, tag foes/partner, the 36 kneel lines on `:prismfall_arceus_locks`, ending vignette table) and Cutscenes scenes for them; (3) Trials `:POSTGAME` category + Registry board (`115_Quests_Postgame.rb`), tier switches S279/S285; (4) `tools/harness/run_story_hooks.rb` (headless checks) and the Cutscenes selftest.
-
-## Status: Ch16–21 + post-game trainer PBS (agent, 2026-11-25)
-*Running note so the work can be picked up. Source of every block: `tools/trainer_gen/gen.py`, the section "CH16-CH21 STORY FIGHTS, THE GROUNDS LADDER AND THE WARDEN'S GAUNTLET". Check with `python3 -I tools/check_script_trainers.py` (scripts vs PBS) and `python3 -I tools/validate_trainers.py`.*
-- [x] Ch16: Officers Grane and Tull (Interlude IV, Lv 60–62, no Bag).
-- [ ] Next, in order: Ch17 (SUMP_BARON, GILDER_AUTOMATON, Mallory/Kade), Ch18 (THORNGUARD Rowe), Ch19 (partners v19, the lines, the Toll, Thornwatch), Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).
-
-## Agent status: Interlude I + Map Pass 2 (Lamplight agent)
-- 2026-11-25: Interlude I "Lamplight" is written and builds (commit 4674a4e): `mapgen/layouts/story_interlude1.py` (a story layer that upserts its events into the specs of 952 / 182 / 105 / 106 by name; run it again after any layout regenerates one of those specs), `mapgen/ruby/016_Staging.rb` (pfm_fade_out / pfm_flash / ... for stage directions), `mapgen/ruby/017_Lamplight.rb` (pfm_il1_*). It uses Core `028_Interludes.rb` loadout 1. **Next:** real-engine capture (`tools/harness/visual/ch5/010_LamplightCapture.rb`), then 255 Tap Chamber, then the bracketed-narration pass.
+- Done: `tools/trainer_gen/coverage.py` + `design/TRAINER_COVERAGE.md`; 263 new generic trainers (Ch5 30, Ch6–13 231, two Ch19 roster rows: Isolde, Hjal & Ama) in `routes.py` and spliced into `pbs/trainers.txt`; coverage 175 → 900 / 900; validate 0 errors.
+- Left: map events for all of them (maps unbuilt); regional forms as a bonus pass (`m(..., form=n)` works in routes.py now); the Ch14–18 script rosters and the rest of Ch19's are still unbuilt (TODO §5 "Build from each new script's Density section").

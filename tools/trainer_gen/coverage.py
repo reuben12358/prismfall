@@ -178,7 +178,7 @@ def parse_trainer_file(path):
                 continue
             if cur is None:
                 continue
-            pm = re.match(r"^Pokemon\s*=\s*([A-Z0-9_]+)\s*,\s*(\d+)", s)
+            pm = re.match(r"^Pokemon\s*=\s*([A-Za-z0-9_]+)\s*,\s*(\d+)", s)
             if pm:
                 cur["mons"].append([pm.group(1), int(pm.group(2)), 0])
                 continue
@@ -218,7 +218,21 @@ def analyse():
     legend_used = sorted({s for s in used if s in sp and sp[s]["excluded"]})
     missing = [s for s in eligible if s not in used]
     regs = regional_forms(sp)
-    return dict(sp=sp, gen=gen, used=used, used_forms=used_forms, eligible=eligible, missing=missing,
+    segs = {}
+    try:
+        with open(os.path.join(ROOT, "design", "maps.json"), encoding="utf-8") as f:
+            segs = {m["id"]: m.get("segment") for m in json.load(f)["maps"]}
+    except (OSError, ValueError):
+        pass
+    by = defaultdict(lambda: [0, set()])
+    for t in gen:
+        m = re.match(r"Map (\d+)", t["note"])
+        seg = segs.get(int(m.group(1))) if m else None
+        by[seg][0] += 1
+        if m and seg is not None:
+            by[seg][1].add(int(m.group(1)))
+    by_seg = [(k, (by[k][0], sorted(by[k][1]))) for k in sorted(by, key=lambda x: (x is None, x))]
+    return dict(by_seg=by_seg, sp=sp, gen=gen, used=used, used_forms=used_forms, eligible=eligible, missing=missing,
                 regs=regs, level_issues=level_issues, legend_used=legend_used)
 
 
@@ -267,6 +281,14 @@ def report(a):
     for g in sorted(by_gen):
         e, c = by_gen[g]
         L.append("| %d | %d | %d | %d |" % (g, e, c, e - c))
+    L += ["", "## Generic trainers by stretch (density floor: 12–20 route, gym and dungeon trainers per chapter)", "",
+          "Counted from the `# Map NNN` note above each block and that map's `segment` (badges held) in",
+          "`design/maps.json`; chapter = segment + 2 from Ch3 on (segment 0 is Ch1–2).", "",
+          "| Badges held | Chapter | Generic trainers | Maps |", "|---|---|---|---|"]
+    for seg, (n, mids) in a["by_seg"]:
+        ch = "—" if seg is None else "1–2" if seg == 0 else str(seg + 2)
+        L.append("| %s | %s | %d | %s |" % ("—" if seg is None else seg, ch, n,
+                                           ", ".join(str(m) for m in mids) if mids else "no map note (story-placed grunts, soldiers, Trials)"))
     L += ["", "## Missing species", ""]
     if not a["missing"]:
         L.append("None: every eligible species is on a generic trainer.")
