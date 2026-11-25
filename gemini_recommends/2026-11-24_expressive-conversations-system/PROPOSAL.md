@@ -1,35 +1,52 @@
-# Expressive Normal Conversations & Overworld Character-Acting System (`018_ExpressiveDialogue.rb`)
+# Expressive Normal Conversations & Overworld Character-Acting System — v2 Natural Restraint (`018_ExpressiveDialogue.rb`)
 
-**Date:** 2026-11-24  
+**Date:** 2026-11-24 (v2 Natural Restraint Revision — 2026-11-25)  
 **Target Plugin Drop-In:** `plugins/Prismfall Cutscenes/018_ExpressiveDialogue.rb` (loads after `014_Portraits.rb` and `017_RejuvCutscenes.rb` with **zero breaking changes** to existing `[portrait: CHAR, expr]` / `\pf[...]` / `\pfb[...]` tags or `pf_say` calls!)  
-**Benchmark Bar:** *Pokémon Rejuvenation V13.5/V14*, *Pokémon Desolation*, and official Nintendo DS *Pokémon Black 2 / White 2* (Gen 5).
+**Benchmark Bar:** *The Legend of Heroes: Trails*, *Fire Emblem*, *Persona*, *Pokémon Rejuvenation V14*, and official Nintendo DS *Pokémon Black 2 / White 2* (Gen 5).
+
+---
+
+## 0. v1 → v2 Creator Feedback & Natural Restraint Redesign
+
+Following creator review of the v1 prototype (`102b_expressive_dialogue_before_after.gif`), two sharp craft adjustments reshaped the entire architecture around **prestige JRPG restraint**:
+
+> 1. *"also dont make the portraits move, that looks weird, try to make it as natural as possible"*
+> 2. *"maybe u went a bit too much with the expressions... like dont throw them into every single thing..."*
+
+### What Changed from v1 → v2
+
+| Area | v1 Prototype (Too Busy / Cartoonish) | v2 Natural Restraint (Shipped Architecture) |
+|---|---|---|
+| **Portrait Position** | Slid in `28px`, bounced on `:happy`, shook/jumped on `:shocked`, trembled on `:angry`, drooped on `:sad`, swayed on `:blush`, dropped `4px` when inactive, and micro-bobbed every glyph | **100% Rock-Solid Still (`0px` X/Y motion at all times).** Anchored pixel-locked at exact Left & Right slots — zero bounce, zero shake, zero bob, zero recess drop, zero flashing borders. |
+| **Portrait Polish** | Aggressive per-emotion physics + pulsing red borders | **Pure prestige visual cues:** clean **Dual-Speaker Stage**, smooth **4-frame (`0.10s`) alpha fade-in & expression crossfade**, and subtle **listener dimming** (`Tone.new(-42, -42, -42, 35)`) on the inactive portrait. |
+| **Emote Balloons** | `AUTO_EMOTES = true` fired balloons automatically on almost every portrait expression change (`:happy` → 🎵, `:angry` → 💢, `:deadpan` → `...`, etc.) | **`AUTO_EMOTE = false` by default.** Zero automatic emote spam. Balloons fire **only** when explicitly scripted via `\pfe[...]` or `pf_emote(ev, :dots)` on genuine punchlines, surprises, or awkward pauses (**rule of thumb: max 1–2 per conversation**). |
+| **Overworld Micro-Acting** | `AUTO_MICRO_ACTING = true` made sprites automatically hop, shudder, or recoil on every line | **`AUTO_MICRO_ACTING = false` by default.** Overworld expressiveness comes from **natural facing turns** toward the speaker, **tasteful restrained `pose_<CHAR>` stance shifts**, and **gentle opt-in acting** (`pf_nod`, `pf_step_back`, `pf_turn_away`, `pf_lean_in`). |
+| **Scene Cleanup Overhead** | Called `clear_all` on every idle `Scene_Map#update` tick | Guarded with `Expressive.active?` so cleanup triggers **once** when dialogue ends — zero per-frame exploration overhead. |
 
 ---
 
 ## 1. Audit of Prismfall's Current Conversation System (`014_Portraits.rb`)
 
-An inspection of [`plugins/Prismfall Cutscenes/014_Portraits.rb`](../../plugins/Prismfall%20Cutscenes/014_Portraits.rb) and [`plugins/Prismfall Core/025_CharsetAliases.rb`](../../plugins/Prismfall%20Core/025_CharsetAliases.rb) shows a clean, modular foundation — with **five concrete gaps** that currently make everyday conversations feel static:
+An inspection of [`plugins/Prismfall Cutscenes/014_Portraits.rb`](../../plugins/Prismfall%20Cutscenes/014_Portraits.rb) and [`plugins/Prismfall Core/025_CharsetAliases.rb`](../../plugins/Prismfall%20Core/025_CharsetAliases.rb) shows a clean, modular foundation — with **three high-value, natural upgrades** that elevate everyday scenes without ever feeling gimmicky:
 
-| # | Current Behavior in `014_Portraits.rb` | Why Normal Conversations Feel Stiff | How `018_ExpressiveDialogue.rb` Solves It (Zero Script Rewrites!) |
+| # | Current Behavior in `014_Portraits.rb` | Why Normal Conversations Feel Flat | How `018_ExpressiveDialogue.rb` v2 Solves It Naturally |
 |---|---|---|---|
-| 1 | **Single Left-Only `FaceBox`** (`Portrait.open` immediately calls `close`, lines 234–249) | When Character B replies to Character A, A vanishes abruptly and B overwrites the exact same left slot. Back-and-forth banter lacks spatial rhythm. | **Pillar A — Dual-Speaker Stage:** Speaker A enters Left; when Speaker B replies, A remains visible on Left softly dimmed (`Tone.new(-45, -45, -45, 40)`) & recessed `4px` while B pops forward & brightens on Right. |
-| 2 | **Emotion Metadata Ignored in Face Mode** (line 20: `# In face mode the emotes and event fields are ignored`; lines 608–617 only do an `8px` pop or `2px` nudge) | `[portrait: JUNO, shocked]` and `[portrait: KESTREL, angry]` look mechanically identical to `:neutral` — no jolt, no tremor, no bounce, no droop. | **Pillar A — Auto-Emotion Physics:** Automatically maps existing expressions (`:shocked`, `:panic`, `:angry`, `:happy`, `:wink`, `:sad`, `:crying`, `:blush`, `:smug`, `:deadpan`) to crisp pixel-snapped motion physics & border pulses. |
-| 3 | **Frozen Portrait While Text Types** | During `pbMessageDisplay` letter-by-letter output, the portrait sits motionless like a static mugshot. | **Pillar A — Lip-Sync / Cadence Micro-Bob:** Watches `msgwindow.position` advancing across non-whitespace/non-punctuation glyphs to drive a subtle `1–2px` speaking cadence bob that settles cleanly on punctuation & `msgwindow.pausing?`. |
-| 4 | **No Overworld Emote Balloons in Face Mode** | The map characters standing behind the text box never react with Gen 5 B2W2 emote balloons (`!`, `!!`, `?`, `...`, `💢`, `💧`, `♥`, `💡`, `🎵`, `⚡`). | **Pillar B — B2W2 Overworld Emote Balloons (`pf_emote_balloons.png`):** Crisp 10-emote × 4-frame 2× DS balloon sheet auto-triggered (with anti-spam cooldown) above `Portrait.speaker(spec)` on strong emotions + manual `pf_emote(ev, :sweat)` & `\pfe[...]` tags. |
-| 5 | **Motionless Overworld Sprites** | Characters stand locked in idle pose frame 0 for entire conversations. | **Pillar C — Universal Micro-Acting + 4-Pose Acting Sheets (`pose_<CHAR>.png`):** Non-destructive visual-offset helpers (`pf_hop`, `pf_nod`, `pf_shudder`, `pf_recoil`, `pf_lean_in`, `pf_headshake`, `pf_pace`) usable on **any** map event, PLUS custom `128×48` 4-pose conversation sheets for our 6 core cast (`JUNO`, `KESTREL`, `LARCH`, `PLAYER_A`, `PLAYER_B`, `VOSS`) auto-matched to portrait emotions! |
+| 1 | **Single Left-Only `FaceBox`** (`Portrait.open` immediately calls `close`, lines 234–249; lines 608–617 rise `8px` or nudge `2px`) | When Character B replies to Character A, A vanishes abruptly and B overwrites the exact same left slot. Two-person dialogue loses spatial rhythm and presence. | **Pillar A — Rock-Solid Still Dual-Speaker Stage:** Speaker A fades cleanly into Left (`0px` motion); when Speaker B replies, A remains anchored on Left smoothly dimmed (`Tone.new(-42, -42, -42, 35)`) while B fades smoothly into Right at full brightness. Expression swaps crossfade over 4 frames with `0px` jitter. |
+| 2 | **No Overworld Emote Balloons in Face Mode** (line 20: `# In face mode the emotes and event fields are ignored`) | Writers cannot punctuate a rare awkward silence (`...`), surprise (`!`), or realization (`💡`) above the map sprite during normal face-portrait dialogue. | **Pillar B — Sparing, High-Impact B2W2 Emote Balloons (`pf_emote_balloons.png`):** Crisp 10-emote × 4-frame 2× DS balloon sheet, **`AUTO_EMOTE = false` by default** — triggered **only** on intentional scripted beats via `\pfe[dots]` / `pf_emote(ev, :question)` (max 1–2 per conversation). |
+| 3 | **Frozen Overworld Sprites** | Characters stand locked in a single idle frame for entire multi-page conversations, never turning to face speakers or shifting posture. | **Pillar C — Natural Overworld Body Language:** Automatic subtle speaker-facing turns (`AUTO_FACE_SPEAKER = true`), tasteful restrained 4-pose stance shifts (`pose_<CHAR>.png` for `JUNO`, `KESTREL`, `LARCH`, `PLAYER_A`, `PLAYER_B`, `VOSS`), and gentle opt-in micro-acting (`pf_nod`, `pf_step_back`, `pf_turn_away`, `pf_lean_in`) — never automatic cartoon hopping. |
 
-### Compatibility Guarantees
-- **100% Backwards-Compatible:** Existing `[portrait: CHAR, expr]`, `\pf[CHAR,expr]`, `\pfb[...]`, `pf_say(...)`, and untagged carry-over lines (`Portrait.carry`) work untouched.
-- **Bubble Mode Preserved:** Explicit opt-in `[bubble: ...]` / `\pfb[...]` lines bypass the dual-portrait stage and continue using `014_Portraits.rb`'s round speech bubble.
-- **Battle Safe:** Dual-portrait stage, overworld balloons, and sprite pose swaps automatically suppress when `$game_temp.in_battle` is true or `$scene` is not `Scene_Map`.
-- **Photosensitive Safe:** Honors `Prismfall::Cutscene.photosensitive?` — clamps portrait/overworld shake amplitudes to `<= 2px` and replaces pulsing red border flashes with a soft static warm tint.
-- **Clean Disposal & Reset:** Hooks `Interpreter#setup` (`@main`), `Scene_Map#transfer_player`, and `pbMessageDisplay` `ensure` so portrait viewports, emote sprites, micro-acting offsets, and custom `pose_<CHAR>` sheets ALWAYS clean up with zero VRAM leaks or stuck poses.
+### Compatibility & Safety Guarantees
+- **100% Backwards-Compatible:** Existing `[portrait: CHAR, expr]`, `\pf[CHAR,expr]`, `\pfb[...]`, `pf_say(...)`, and untagged carry-over lines (`Portrait.carry`) work untouched with zero story-script rewrites.
+- **Bubble Mode Preserved:** Explicit opt-in `[bubble: ...]` / `\pfb[...]` lines clear the dual stage and continue using `014_Portraits.rb`'s round speech bubble.
+- **Battle Safe:** Dual-portrait stage, overworld balloons, facing turns, and pose swaps automatically suppress when `$game_temp.in_battle` is true or `$scene` is not `Scene_Map`.
+- **Inherently Photosensitive Safe:** Zero portrait shaking, zero flashing borders, and zero strobing effects across the entire system.
+- **Clean Disposal & Zero Leaks:** Hooks `Interpreter#setup` (`@main`), `Scene_Map#transfer_player`, and conversation end in `Scene_Map#update` (guarded by `Expressive.active?`) so portrait viewports, emote sprites, visual offsets, and custom `pose_<CHAR>` sheets ALWAYS clean up cleanly.
 
 ---
 
-## 2. Production Art Assets Delivered (Ready & Dual-Synced)
+## 2. Production Art Assets Delivered (Shipped & Dual-Synced)
 
-All **7 pixel-art sheets** were generated via 100% pure `generate_image` Nintendo DS B2W2 pixel art, grid-locked, palette-matched to canonical overworlds, verified (`exact2x=True`, `semi=0`, `orphans=0`), visually inspected at 4× zoom, and byte-identically dual-synced between `graphics/` and `art/out/Graphics/`.
+All **7 pixel-art sheets** are already shipped, generated via 100% pure `generate_image` Nintendo DS B2W2 pixel art, grid-locked, palette-matched to canonical overworlds, verified (`exact2x=True`, `semi=0`, `orphans=0`), visually inspected at 4× zoom, and byte-identically dual-synced between `graphics/` and `art/out/Graphics/`.
 
 ### Asset QA Manifest
 
@@ -45,61 +62,71 @@ All **7 pixel-art sheets** were generated via 100% pure `generate_image` Nintend
 
 ### Pillar B — Emote Balloon Row Map (`pf_emote_balloons.png`)
 
-Each row has **4 animation frames** (`F0` Pop-In → `F1` Peak Bounce → `F2` Active Pulse → `F3` Settle Hold):
+Each row has **4 animation frames** (`F0` Pop-In → `F1` Peak → `F2` Active → `F3` Settle Hold). **All emotes are opt-in only (`AUTO_EMOTE = false`)** — trigger sparingly on genuine story beats via `\pfe[symbol]` or `pf_emote(target, :symbol)`:
 
-| Row | Symbol | Visual Icon | Aliases | Auto-Triggered By `[portrait: CHAR, expr]` |
+| Row | Symbol | Visual Icon | Aliases | Best Used For (Max 1–2 per Conversation) |
 |---:|---|---|---|---|
-| `0` | `:exclaim` | `!` Crimson Exclamation | `:alert` | `:shocked`, `:surprised` |
-| `1` | `:double_exclaim` | `!!` Spiky Double Exclamation | `:shock`, `:horror` | `:panic` |
-| `2` | `:question` | `?` Cobalt Question Mark | `:confused`, `:curious` | *(manual `pf_emote` / `\pfe[question]`)* |
-| `3` | `:dots` | `...` Sequential Ellipsis | `:ellipsis`, `:gloom`, `:silent` | `:deadpan` |
-| `4` | `:anger` | `💢` Pulsing Anime Anger Vein | `:angry`, `:furious` | `:angry` |
-| `5` | `:sweat` | `💧` Glossy Sky-Blue Sweatdrop | `:nervous`, `:tears` | `:crying` |
-| `6` | `:heart` | `♥` Warm Rosy-Pink Heart | `:blush`, `:warm` | `:blush` |
-| `7` | `:idea` | `💡` Glowing Golden Lightbulb | `:sparkle`, `:realize` | *(manual `pf_emote` / `\pfe[idea]`)* |
-| `8` | `:music` | `🎵` Cheerful Blue/Gold Music Note | `:note`, `:cheerful` | `:happy`, `:wink` |
-| `9` | `:jolt` | `⚡` Jagged Amber Dread/Jolt Bolt | `:dread`, `:wince`, `:tension` | *(manual `pf_emote` / `\pfe[jolt]`)* |
+| `0` | `:exclaim` | `!` Crimson Exclamation | `:alert` | Genuine sudden reveal or interruption |
+| `1` | `:double_exclaim` | `!!` Spiky Double Exclamation | `:shock`, `:horror` | Rare major plot shock (never routine banter) |
+| `2` | `:question` | `?` Cobalt Question Mark | `:confused`, `:curious` | Quiet puzzlement or clarifying beat |
+| `3` | `:dots` | `...` Sequential Ellipsis | `:ellipsis`, `:gloom`, `:silent` | Heavy pause, hesitation, or unspoken tension |
+| `4` | `:anger` | `💢` Anime Anger Vein | `:angry`, `:furious` | Rare comedic snapping point or sharp confrontation |
+| `5` | `:sweat` | `💧` Glossy Sky-Blue Sweatdrop | `:nervous`, `:tears` | Awkward catch or sheepish admission |
+| `6` | `:heart` | `♥` Warm Rosy-Pink Heart | `:blush`, `:warm` | Rare heartfelt or affectionate punchline |
+| `7` | `:idea` | `💡` Glowing Golden Lightbulb | `:sparkle`, `:realize` | Sudden deduction or clue breakthrough |
+| `8` | `:music` | `🎵` Cheerful Blue/Gold Music Note | `:note`, `:cheerful` | Lighthearted humming or breezy departure |
+| `9` | `:jolt` | `⚡` Jagged Amber Dread/Jolt Bolt | `:dread`, `:wince`, `:tension` | Sharp unease or ominous realization |
 
 ### Pillar C — Core Cast 4-Pose Acting Sheet Map (`pose_<CHAR>.png`)
 
-All 6 sheets use the **exact `32×48` cell scale & `y=45` foot baseline** of `graphics/Characters/<CHAR>.png` (`128×192`), so swapping between idle walking sheets and `pose_<CHAR>.png` produces **zero height pop, zero foot slide, and zero palette shift**:
+All 6 sheets share the **exact `32×48` cell scale & `y=45` foot baseline** of `graphics/Characters/<CHAR>.png` (`128×192`), so shifting between natural idle walking sheets and `pose_<CHAR>.png` produces **zero height pop, zero foot slide, and zero palette shift**:
 
 | Character | Sheet (`128×48`) | Pose `0` | Pose `1` | Pose `2` | Pose `3` |
 |---|---|---|---|---|---|
-| **Juno** | `pose_JUNO.png` | `:clasped` (Hands Clasped — `:happy`, `:wink`, `:blush`) | `:flinch` (Startled Flinch Hands-Up — `:shocked`, `:panic`, `:surprised`) | `:worried` (Worried Looking-Down — `:sad`, `:crying`) | `:resolute` (Resolute Fist-Clench — `:angry`, `:smug`) |
-| **Kestrel** | `pose_KESTREL.png` | `:crossed` (Arms Crossed Brooding — `:deadpan`, `:neutral`) | `:scoff` (Scoffing Hand-Wave — `:smug`, `:happy`) | `:lean_angry` (Angry Lean-Forward — `:angry`, `:shocked`) | `:guarded` (Soft Guarded Look-Away — `:sad`, `:blush`, `:crying`) |
-| **Larch** | `pose_LARCH.png` | `:ponder` (Chin-Stroking Pondering — `:neutral`, `:deadpan`) | `:glasses` (Pushing Forehead-Glasses Down — `:smug`, `:angry`) | `:explain` (Excited Hands-Out Explaining — `:happy`, `:surprised`) | `:sheepish` (Sheepish Scratch-Head — `:blush`, `:sad`, `:panic`) |
-| **Player A** | `pose_PLAYER_A.png` | `:determined` (Determined Fist — `:angry`, `:smug`) | `:recoil` (Startled Recoil — `:shocked`, `:panic`, `:surprised`) | `:thoughtful` (Thoughtful Nod — `:deadpan`, `:neutral`) | `:reach` (Empathetic Reach — `:happy`, `:sad`, `:blush`) |
-| **Player B** | `pose_PLAYER_B.png` | `:determined` (Determined Fist — `:angry`, `:smug`) | `:recoil` (Startled Recoil — `:shocked`, `:panic`, `:surprised`) | `:thoughtful` (Thoughtful Nod — `:deadpan`, `:neutral`) | `:reach` (Empathetic Reach — `:happy`, `:sad`, `:blush`) |
-| **Voss** | `pose_VOSS.png` | `:behind_back` (Hands Clasped Behind Back — `:neutral`, `:deadpan`) | `:open_palm` (Calm Open-Palm Gesture — `:happy`, `:sad`) | `:collar` (Adjusting Collar Coldly — `:smug`, `:angry`) | `:shock` (Rare Cracked Shock — `:shocked`, `:panic`, `:surprised`) |
+| **Juno** | `pose_JUNO.png` | `:clasped` (Hands Clasped) | `:flinch` (Startled Flinch) | `:worried` (Worried Looking-Down) | `:resolute` (Resolute Fist-Clench) |
+| **Kestrel** | `pose_KESTREL.png` | `:crossed` (Arms Crossed Brooding) | `:scoff` (Scoffing Hand-Wave) | `:lean_angry` (Angry Lean-Forward) | `:guarded` (Soft Guarded Look-Away) |
+| **Larch** | `pose_LARCH.png` | `:ponder` (Chin-Stroking Pondering) | `:glasses` (Pushing Glasses Down) | `:explain` (Hands-Out Explaining) | `:sheepish` (Sheepish Scratch-Head) |
+| **Player A** | `pose_PLAYER_A.png` | `:determined` (Determined Fist) | `:recoil` (Startled Recoil) | `:thoughtful` (Thoughtful Nod) | `:reach` (Empathetic Reach) |
+| **Player B** | `pose_PLAYER_B.png` | `:determined` (Determined Fist) | `:recoil` (Startled Recoil) | `:thoughtful` (Thoughtful Nod) | `:reach` (Empathetic Reach) |
+| **Voss** | `pose_VOSS.png` | `:behind_back` (Hands Behind Back) | `:open_palm` (Calm Open-Palm) | `:collar` (Adjusting Collar Coldly) | `:shock` (Rare Cracked Shock) |
 
 ### Visual Proofs (Verified at 4× & Native `512×384`)
 - Master 4× Asset Sheet: `previews/102a_expressive_dialogue_assets_sheet.png`
-- Animated Before vs. After Briarwick Demo: `previews/102b_expressive_dialogue_before_after.gif`
+- Animated Natural v2 Before vs. After Briarwick Demo: `previews/102c_expressive_dialogue_natural_v2.gif` (also mirrored to `previews/102b_expressive_dialogue_before_after.gif`)
 
 ---
 
-## 3. Ready-to-Drop Plugin Implementation: `018_ExpressiveDialogue.rb`
+## 3. Ready-to-Drop Plugin Implementation: `018_ExpressiveDialogue.rb` (v2 Natural Restraint)
 
-Save the code block below verbatim to **`plugins/Prismfall Cutscenes/018_ExpressiveDialogue.rb`**. No edits to `014_Portraits.rb`, `pbs/`, `story/`, or existing map events are required.
+Save the code block below verbatim to **`plugins/Prismfall Cutscenes/018_ExpressiveDialogue.rb`**. No edits to `014_Portraits.rb`, `pbs/`, `story/`, or existing map events are required. Verified with `ruby -c` (`Syntax OK`).
 
 ```ruby
 #===============================================================================
-# Prismfall Cutscenes - 018 Expressive Normal Conversations & Overworld Acting
+# Prismfall Cutscenes - 018 Expressive Normal Conversations (v2 Natural Restraint)
 #-------------------------------------------------------------------------------
-# Upgrades everyday [portrait: CHAR, expr] / \pf[...] conversations across the
-# entire game with ZERO breaking changes and ZERO required story-script edits:
+# Elevates everyday [portrait: CHAR, expr] / \pf[...] conversations with ZERO
+# breaking changes, ZERO story-script edits, and prestige JRPG restraint
+# (Trails / Fire Emblem / Persona / Rejuvenation V14):
 #
-#   Pillar A: Dynamic Dual-Speaker Portrait Stage, Auto-Emotion Physics, smooth
-#             6-frame ease-out slide-in / expression crossfade, and speaking
-#             cadence / lip-sync micro-bob synced to message text output.
-#   Pillar B: Crisp 2x Gen 5 B2W2 Overworld Emote Balloons
-#             (Graphics/Animations/pf_emote_balloons.png, 10 emotes x 4 frames),
-#             auto-triggered on strong portrait emotions + manual pf_emote / \pfe.
-#   Pillar C: Universal Overworld Micro-Acting helpers (pf_hop, pf_nod,
-#             pf_shudder, pf_recoil, pf_lean_in, pf_headshake, pf_pace) +
-#             single-row 128x48 4-Pose Conversation Acting Sheets
-#             (Graphics/Characters/pose_<CHAR>.png) with automatic cleanup.
+#   Pillar A (Rock-Solid Still Portraits):
+#     - Clean Dual-Speaker Stage anchored pixel-locked at Left & Right slots
+#       with 0px X/Y portrait motion (no bouncing, shaking, bobbing, or sliding).
+#     - Subtle, smooth listener dimming Tone(-42, -42, -42, 35) on the inactive
+#       speaker while the active speaker remains bright and crisp.
+#     - Silky 4-frame (0.10s) alpha fade-in and expression crossfade in place.
+#
+#   Pillar B (Sparing, High-Impact Emote Balloons):
+#     - Crisp 2x Gen 5 B2W2 emote sheet (Graphics/Animations/pf_emote_balloons.png).
+#     - AUTO_EMOTE = false by default — zero automatic emote spam!
+#     - Fires ONLY when explicitly scripted via \pfe[dots] or pf_emote(ev, :dots)
+#       on genuine punchlines, surprises, or awkward pauses (max 1-2 per scene).
+#
+#   Pillar C (Natural Overworld Body Language):
+#     - Subtle facing turns toward whoever is speaking (AUTO_FACE_SPEAKER = true).
+#     - Tasteful restrained 4-pose stance shifts (pose_<CHAR>.png) via explicit
+#       \pfp[crossed] / pf_pose(...) or optional restrained mode.
+#     - Gentle opt-in micro-acting helpers (pf_nod, pf_step_back, pf_turn_away,
+#       pf_lean_in, pf_headshake) — NEVER automatic cartoon hopping!
 #===============================================================================
 module Prismfall
   module Expressive
@@ -107,55 +134,34 @@ module Prismfall
     P  = Prismfall::Portrait
     PX = C::PX
 
-    # Toggleable master switches
-    ENABLED                = true
-    AUTO_EMOTES            = true
-    AUTO_POSES             = true
-    AUTO_MICRO_ACTING      = true
-    ENABLE_LIP_SYNC_BOB    = true
-    ENABLE_VOICE_BLIPS     = false   # Set true once per-archetype blip SEs are installed
-    EMOTE_SHEET_PATH       = "Graphics/Animations/pf_emote_balloons"
-    EMOTE_CELL             = 32      # 16x16 native @ 2x
-    EMOTE_FRAMES           = 4
-    EMOTE_COOLDOWN         = 1.15    # Seconds before same speaker auto-emots again
-
-    # Dual-speaker portrait stage constants
-    STAGE_Z                = P::VIEWPORT_Z
-    SLIDE_TIME             = 0.15    # ~6 frames @ 40fps smooth ease-out slide-in
-    CROSSFADE_TIME         = 0.14    # ~6 frames expression crossfade
-    DIM_TRANS_TIME         = 0.12    # Smooth active <-> inactive focus transition
-    INACTIVE_TONE          = [-45, -45, -45, 40]
-    INACTIVE_RECESS_Y      = 4       # Recessed 4px down when listening
-    SLIDE_DIST_X           = 28      # Horizontal slide-in travel (snapped to PX)
+    #---------------------------------------------------------------------------
+    # Master Restraint Switches
+    #---------------------------------------------------------------------------
+    ENABLED             = true
+    AUTO_EMOTE          = false        # OFF by default: emotes fire ONLY via \pfe[...] or pf_emote
+    AUTO_POSES          = :restrained  # :restrained (grounded non-neutral beats only), false (manual \pfp only)
+    AUTO_FACE_SPEAKER   = true         # Clean natural facing turn toward active speaker
+    AUTO_MICRO_ACTING   = false        # OFF by default: gentle gestures are strictly opt-in (\pfa / pf_nod)
+    ENABLE_VOICE_BLIPS  = false        # Optional subtle text-blip SE (0px portrait movement)
 
     #---------------------------------------------------------------------------
-    # Pillar A: Auto-Emotion Physics Matrix
+    # Pillar A: Rock-Solid Dual-Speaker Portrait Stage Constants (0px Motion)
     #---------------------------------------------------------------------------
-    # Keys match standard Prismfall portrait expressions.
-    #   :kind     -> :shock, :angry, :bounce, :droop, :sway, :smug, :still
-    #   :duration -> seconds the impulse plays on entry / expression change
-    #   :border   -> optional [r, g, b] accent pulse around the portrait frame
-    #   :emote    -> default B2W2 overworld emote balloon on emotion trigger
-    #   :micro    -> optional subtle default overworld micro-acting impulse
-    #---------------------------------------------------------------------------
-    EMOTION_MAP = {
-      :neutral   => { :kind => :still,  :duration => 0.0  },
-      :happy     => { :kind => :bounce, :duration => 0.34, :emote => :music,          :micro => :hop     },
-      :wink      => { :kind => :bounce, :duration => 0.30, :emote => :music,          :micro => :nod     },
-      :smug      => { :kind => :smug,   :duration => 0.22                                                },
-      :angry     => { :kind => :angry,  :duration => 0.48, :border => [228, 52, 52],  :emote => :anger,  :micro => :shudder },
-      :shocked   => { :kind => :shock,  :duration => 0.26, :emote => :exclaim,        :micro => :recoil  },
-      :surprised => { :kind => :shock,  :duration => 0.24, :emote => :exclaim,        :micro => :hop     },
-      :panic     => { :kind => :shock,  :duration => 0.38, :border => [112, 184, 248], :emote => :double_exclaim, :micro => :shudder },
-      :sad       => { :kind => :droop,  :duration => 0.42                                                },
-      :crying    => { :kind => :droop,  :duration => 0.50, :emote => :sweat,          :micro => :shudder },
-      :blush     => { :kind => :sway,   :duration => 0.55, :border => [248, 136, 168], :emote => :heart  },
-      :deadpan   => { :kind => :still,  :duration => 0.18, :emote => :dots                               }
-    }
+    STAGE_Z             = P::VIEWPORT_Z
+    FADE_IN_TIME        = 0.10         # 4 frames @ 40fps smooth in-place alpha fade-in
+    CROSSFADE_TIME      = 0.10         # 4 frames @ 40fps smooth in-place expression crossfade
+    DIM_TRANS_TIME      = 0.12         # ~5 frames smooth active <-> listener tone dim
+    INACTIVE_TONE       = [-42, -42, -42, 35]
 
     #---------------------------------------------------------------------------
-    # Pillar B: 10-Emote Row Table (pf_emote_balloons.png, 128x320)
+    # Pillar B: Sparing B2W2 Overworld Emote Balloons (pf_emote_balloons.png)
     #---------------------------------------------------------------------------
+    EMOTE_SHEET_PATH    = "Graphics/Animations/pf_emote_balloons"
+    EMOTE_CELL          = 32           # 16x16 native @ 2x
+    EMOTE_FRAMES        = 4
+    EMOTE_COOLDOWN      = 2.20         # Safety cooldown if AUTO_EMOTE is ever enabled manually
+    POSE_MIN_HOLD       = 1.25         # Prevents rapid back-to-back auto-pose flickering
+
     EMOTE_ROWS = {
       :exclaim        => 0,
       :double_exclaim => 1,
@@ -193,18 +199,22 @@ module Prismfall
       :tension  => :jolt
     }
 
-    # Optional subtle SEs per emote (silent if file absent via Cutscene::Sound)
+    # Used ONLY if a project manually sets AUTO_EMOTE = true (still ultra-sparing)
+    SPARING_AUTO_EMOTES = {
+      :shocked => :exclaim,
+      :panic   => :double_exclaim
+    }
+
+    # Subtle optional SEs per emote (silent if file absent via Cutscene::Sound)
     EMOTE_SE = {
       :exclaim        => "Exclaim",
       :double_exclaim => "Exclaim",
-      :anger          => "GUI sel buzzer",
       :idea           => "Mining ping",
-      :heart          => "GUI sel cursor",
       :jolt           => "Battle damage normal"
     }
 
     #---------------------------------------------------------------------------
-    # Pillar C: 4-Pose Conversation Acting Sheet Registry (pose_<CHAR>.png)
+    # Pillar C: Core Cast 4-Pose Acting Sheet Registry (pose_<CHAR>.png)
     #---------------------------------------------------------------------------
     POSE_NAMES = {
       :JUNO     => { :clasped => 0, :flinch => 1, :worried => 2, :resolute => 3 },
@@ -215,43 +225,40 @@ module Prismfall
       :VOSS     => { :behind_back => 0, :open_palm => 1, :collar => 2, :shock => 3 }
     }
 
-    # Automatic expression -> pose index mapping for characters with pose_<CHAR>.png
-    AUTO_POSE_TABLE = {
+    # Restrained stance table: :neutral ALWAYS keeps natural directional facing idle.
+    # Only clear emotional beats trigger grounded conversation stances.
+    RESTRAINED_POSE_TABLE = {
       :JUNO => {
-        :happy => 0, :wink => 0, :blush => 0,
-        :shocked => 1, :panic => 1, :surprised => 1,
+        :happy => 0, :blush => 0,
+        :shocked => 1, :panic => 1,
         :sad => 2, :crying => 2,
-        :angry => 3, :smug => 3
+        :angry => 3
       },
       :KESTREL => {
-        :deadpan => 0, :neutral => 0,
-        :smug => 1, :happy => 1,
-        :angry => 2, :shocked => 2, :panic => 2,
-        :sad => 3, :blush => 3, :crying => 3
+        :deadpan => 0, :smug => 0,
+        :angry => 2,
+        :sad => 3, :crying => 3
       },
       :LARCH => {
-        :neutral => 0, :deadpan => 0,
-        :smug => 1, :angry => 1,
-        :happy => 2, :surprised => 2, :wink => 2,
-        :blush => 3, :sad => 3, :panic => 3
+        :deadpan => 0,
+        :smug => 1,
+        :happy => 2,
+        :sad => 3, :blush => 3
       },
       :PLAYER_A => {
-        :angry => 0, :smug => 0,
-        :shocked => 1, :panic => 1, :surprised => 1,
-        :deadpan => 2,
-        :happy => 3, :sad => 3, :blush => 3
+        :angry => 0,
+        :shocked => 1, :panic => 1,
+        :sad => 3
       },
       :PLAYER_B => {
-        :angry => 0, :smug => 0,
-        :shocked => 1, :panic => 1, :surprised => 1,
-        :deadpan => 2,
-        :happy => 3, :sad => 3, :blush => 3
+        :angry => 0,
+        :shocked => 1, :panic => 1,
+        :sad => 3
       },
       :VOSS => {
-        :neutral => 0, :deadpan => 0,
-        :happy => 1, :sad => 1,
+        :deadpan => 0,
         :smug => 2, :angry => 2,
-        :shocked => 3, :panic => 3, :surprised => 3
+        :shocked => 3, :panic => 3
       }
     }
 
@@ -266,13 +273,20 @@ module Prismfall
     }
 
     #===========================================================================
-    # Utility helpers
+    # Utility & Conversation Coordinator
     #===========================================================================
     class << self
       def on_map?
         return false if !defined?($scene) || !defined?(Scene_Map) || !$scene.is_a?(Scene_Map)
         return false if defined?($game_temp) && $game_temp && $game_temp.respond_to?(:in_battle) && $game_temp.in_battle
         return true
+      end
+
+      def active?
+        return true if @conversation_active
+        return true if @stage && @stage.active?
+        return true if @emotes && @emotes.active?
+        return false
       end
 
       def resolve_emote(sym)
@@ -300,8 +314,8 @@ module Prismfall
         return "pose_#{aid}", aid
       end
 
-      # Strips inline \pfe[emote] / \pfe[emote,event] / \pfp[pose] / \pfa[act] tags
-      # before message display and returns [clean_text, directives_hash].
+      # Strips inline \pfe[emote] / \pfe[emote,target] / \pfp[pose] / \pfa[act]
+      # tags cleanly before message display and returns [clean_text, directives].
       def extract_inline_tags(message)
         text = message.to_s.dup
         dirs = { :emotes => [], :pose => nil, :act => nil }
@@ -332,10 +346,13 @@ module Prismfall
       end
 
       def clear_all
+        @conversation_active = false
         @stage&.clear
         @emotes&.clear
         @last_auto_emote = {}
+        @last_auto_pose  = {}
         @last_auto_expr  = {}
+        @recent_speakers = []
         reset_all_actors
       end
 
@@ -352,84 +369,144 @@ module Prismfall
         nil
       end
 
-      def trigger_auto_acting(spec, dirs)
+      # Coordinates restrained overworld acting for a line of dialogue.
+      def trigger_acting(spec, dirs)
         return if !on_map?
-        spk = P.speaker(spec)
-        id  = spec[:id]
+        @conversation_active = true
+        spk  = P.speaker(spec)
+        id   = spec[:id]
         expr = (spec[:expression] || :neutral).to_sym
-        cfg  = EMOTION_MAP[expr] || EMOTION_MAP[:neutral]
+        now  = C::Util.now
+
         @last_auto_emote ||= {}
+        @last_auto_pose  ||= {}
         @last_auto_expr  ||= {}
+        @recent_speakers ||= []
         expr_changed = (@last_auto_expr[id] != expr)
         @last_auto_expr[id] = expr
 
-        # 1. Manual inline \pfe[...] tags always fire
+        # 1. Natural facing turns: turn speaker and previous speaker gently toward each other
+        if AUTO_FACE_SPEAKER && spk
+          prev_spk = @recent_speakers.reverse.find { |c| c && c != spk }
+          if prev_spk
+            turn_toward(spk, prev_spk) if !spk.respond_to?(:pf_pose_sheet) || spk.pf_pose_sheet.nil?
+            turn_toward(prev_spk, spk) if !prev_spk.respond_to?(:pf_pose_sheet) || prev_spk.pf_pose_sheet.nil?
+          end
+          @recent_speakers.delete(spk)
+          @recent_speakers << spk
+          @recent_speakers.shift if @recent_speakers.length > 4
+        end
+
+        # 2. Explicit inline \pfe[...] emotes ALWAYS fire (sparing, writer-directed)
         dirs[:emotes].each do |em|
           t = em[:target] ? resolve_character(em[:target]) : spk
           emotes.spawn(t, em[:kind]) if t
         end
 
-        # 2. Automatic B2W2 emote balloon on expressive portrait change (anti-spam gated)
-        if AUTO_EMOTES && dirs[:emotes].empty? && spk && cfg[:emote] && expr_changed
-          now = C::Util.now
-          last_t = @last_auto_emote[id] || -999.0
-          if now - last_t >= EMOTE_COOLDOWN
-            emotes.spawn(spk, cfg[:emote])
+        # Optional auto-emote (DISABLED by default: AUTO_EMOTE = false)
+        if AUTO_EMOTE && dirs[:emotes].empty? && spk && expr_changed
+          em_kind = SPARING_AUTO_EMOTES[expr]
+          if em_kind && (now - (@last_auto_emote[id] || -999.0)) >= EMOTE_COOLDOWN
+            emotes.spawn(spk, em_kind)
             @last_auto_emote[id] = now
           end
         end
 
-        # 3. Custom 4-pose sheet swap (manual \pfp[...] or automatic per-expression pose)
+        # 3. Restrained 4-pose stance shifts (explicit \pfp[...] takes full priority)
         if dirs[:pose]
           t = dirs[:pose][:target] ? resolve_character(dirs[:pose][:target]) : spk
           apply_pose(t, id, dirs[:pose][:pose]) if t
-        elsif AUTO_POSES && spk && !spec[:carried]
-          sheet, aid = pose_sheet_for(id)
-          if sheet && AUTO_POSE_TABLE[aid] && AUTO_POSE_TABLE[aid].key?(expr)
-            spk.pf_set_pose(sheet, AUTO_POSE_TABLE[aid][expr]) if spk.respond_to?(:pf_set_pose)
+          @last_auto_pose[id] = now
+        elsif AUTO_POSES == :restrained && spk && !spec[:carried] && expr_changed
+          if expr == :neutral
+            spk.pf_clear_pose if spk.respond_to?(:pf_clear_pose)
+          elsif (now - (@last_auto_pose[id] || -999.0)) >= POSE_MIN_HOLD
+            sheet, aid = pose_sheet_for(id)
+            if sheet && RESTRAINED_POSE_TABLE[aid] && RESTRAINED_POSE_TABLE[aid].key?(expr)
+              spk.pf_set_pose(sheet, RESTRAINED_POSE_TABLE[aid][expr]) if spk.respond_to?(:pf_set_pose)
+              @last_auto_pose[id] = now
+            end
           end
         end
 
-        # 4. Overworld micro-acting impulse (manual \pfa[...] or automatic subtle motion)
+        # 4. Gentle opt-in micro-acting (NEVER auto-triggered when AUTO_MICRO_ACTING = false)
         if dirs[:act]
           t = dirs[:act][:target] ? resolve_character(dirs[:act][:target]) : spk
-          run_micro_act(t, dirs[:act][:kind]) if t
-        elsif AUTO_MICRO_ACTING && spk && cfg[:micro] && expr_changed && !spec[:carried]
-          run_micro_act(spk, cfg[:micro])
+          run_micro_act(t, dirs[:act][:kind], other: @recent_speakers[-2]) if t
         end
       end
 
       def apply_pose(char, id, pose_spec)
         return if !char || !char.respond_to?(:pf_set_pose)
-        if pose_spec.to_s.downcase == "reset" || pose_spec.to_s.downcase == "none"
+        key_str = pose_spec.to_s.downcase.strip
+        if key_str == "reset" || key_str == "none" || key_str == "idle"
           char.pf_clear_pose
           return
         end
         sheet, aid = pose_sheet_for(id)
         return if !sheet
-        idx = if pose_spec.is_a?(Integer) || pose_spec.to_s =~ /\A\d+\z/
+        idx = if pose_spec.is_a?(Integer) || key_str =~ /\A\d+\z/
                 pose_spec.to_i
               else
-                (POSE_NAMES[aid] || {})[pose_spec.to_s.downcase.to_sym]
+                (POSE_NAMES[aid] || {})[key_str.to_sym]
               end
         char.pf_set_pose(sheet, idx.clamp(0, 3)) if !idx.nil?
       end
 
-      def run_micro_act(char, kind)
+      def run_micro_act(char, kind, other: nil)
         return if !char || !char.respond_to?(:pf_start_act)
-        case kind.to_s.downcase.to_sym
-        when :hop       then char.pf_start_act(:hop, height: 6, count: 1)
-        when :nod       then char.pf_start_act(:nod)
-        when :shudder   then char.pf_start_act(:shudder, duration: 0.32)
-        when :recoil    then char.pf_start_act(:recoil)
-        when :lean_in   then char.pf_start_act(:lean_in)
-        when :headshake then char.pf_start_act(:headshake)
+        case kind.to_s.downcase.strip.to_sym
+        when :nod         then char.pf_start_act(:nod)
+        when :step_back   then char.pf_start_act(:step_back, dist: 4)
+        when :lean_in     then char.pf_start_act(:lean_in, dist: 4)
+        when :turn_away   then turn_away(char, other)
+        when :headshake   then char.pf_start_act(:headshake)
+        when :return      then char.pf_start_act(:return)
+        when :shudder     then char.pf_start_act(:shudder, duration: 0.28)
+        when :hop         then char.pf_start_act(:hop, height: 4, count: 1)
         end
+      end
+
+      def turn_toward(char, target)
+        return if !char || !target || char == target
+        return if !char.respond_to?(:x) || !target.respond_to?(:x)
+        return if char.respond_to?(:moving?) && char.moving?
+        dx = target.x - char.x
+        dy = target.y - char.y
+        return if dx == 0 && dy == 0
+        # Only turn if conversational proximity (within 6 tiles)
+        return if (dx.abs + dy.abs) > 6
+        dir = if dx.abs >= dy.abs
+                dx > 0 ? 6 : 4
+              else
+                dy > 0 ? 2 : 8
+              end
+        char.pf_set_facing(dir) if char.respond_to?(:pf_set_facing)
+      end
+
+      def turn_away(char, from_target = nil)
+        return if !char || !char.respond_to?(:direction)
+        if from_target && char.respond_to?(:x) && from_target.respond_to?(:x)
+          dx = char.x - from_target.x
+          dy = char.y - from_target.y
+          if dx != 0 || dy != 0
+            dir = if dx.abs >= dy.abs
+                    dx > 0 ? 6 : 4
+                  else
+                    dy > 0 ? 2 : 8
+                  end
+            char.pf_set_facing(dir) if char.respond_to?(:pf_set_facing)
+            return
+          end
+        end
+        # Fallback: turn 90/180 degrees calmly away from current facing
+        away = { 2 => 4, 4 => 6, 6 => 4, 8 => 2 }[char.direction] || 4
+        char.pf_set_facing(away) if char.respond_to?(:pf_set_facing)
       end
     end
 
     #===========================================================================
-    # PILLAR A: Dynamic Dual-Speaker Portrait Stage + Emotion Physics + Lip-Sync
+    # PILLAR A: Rock-Solid Still Dual-Speaker Portrait Stage (0px Motion)
     #===========================================================================
     class PortraitSlot
       attr_reader :id, :side, :expression, :last_used
@@ -447,11 +524,6 @@ module Prismfall
         @frame = Sprite.new(@vp)
         @frame.bitmap = @frame_bmp
 
-        @border_bmp = build_border_overlay
-        @border = Sprite.new(@vp)
-        @border.bitmap = @border_bmp
-        @border.opacity = 0
-
         @prev_face = Sprite.new(@vp)
         @prev_face.visible = false
 
@@ -460,30 +532,28 @@ module Prismfall
 
         @entered_at  = C::Util.now
         @expr_at     = @entered_at
-        @focus_at    = @entered_at
+        @focus_at    = @entered_at - DIM_TRANS_TIME
         @active      = true
-        @prev_active = true
         @last_used   = @entered_at
-        @bob_phase   = 0
-        @bob_until   = 0.0
+        @first_tick  = true
         @disposed    = false
       end
 
       def active?; @active; end
 
-      def set_active(flag, spec = nil, msgwindow = nil)
+      def set_active(flag, spec = nil, _msgwindow = nil)
         now = C::Util.now
         if @active != flag
-          @prev_active = @active
-          @active      = flag
-          @focus_at    = now
+          @active   = flag
+          @focus_at = now
         end
         @last_used = now if flag
         return if !flag || !spec
+
         new_expr = (spec[:expression] || :neutral).to_sym
         new_file = P.face_file(@id, new_expr)
         if new_file != @file || new_expr != @expression
-          # Smooth crossfade to new expression!
+          # Silky 4-frame in-place expression crossfade (0px X/Y motion!)
           @prev_bmp.dispose if @prev_bmp && !@prev_bmp.disposed?
           @prev_bmp = @face_bmp
           @prev_face.bitmap  = @prev_bmp
@@ -494,67 +564,40 @@ module Prismfall
           @file = new_file
           @expression = new_expr
           @expr_at = now
-        elsif !spec[:carried]
-          # Same expression re-tagged explicitly -> replay emotion impulse softly
-          @expr_at = now
         end
-      end
-
-      def pulse_speaking_bob(now)
-        @bob_phase = (@bob_phase + 1) % 2
-        @bob_until = now + 0.09
-      end
-
-      def settle_speaking_bob
-        @bob_until = 0.0
       end
 
       def update(msgwindow, now)
         return if @disposed
-        base_x, base_y, below = compute_anchor(msgwindow)
-        z_base = @active ? 20 : 5
+        fx, fy = compute_anchor(msgwindow)
+        @first_tick = false
+
+        z_base = @active ? 20 : 10
         @frame.z     = z_base
         @prev_face.z = z_base + 1
         @face.z      = z_base + 2
-        @border.z    = z_base + 3
 
-        # 1. 6-frame ease-out horizontal slide-in on first entry
+        # 1. Silky 4-frame in-place alpha fade-in on first entry (0px movement!)
         t_in = now - @entered_at
-        slide_dx = 0
-        entry_op = 255
-        if t_in < SLIDE_TIME
-          k = C::Ease.apply(:out_cubic, t_in / SLIDE_TIME)
-          dir = (@side == :left) ? -1 : 1
-          slide_dx = C::Util.snap((1.0 - k) * SLIDE_DIST_X) * dir
-          entry_op = (110 + (145 * k)).round
-        end
+        entry_op = if t_in < FADE_IN_TIME
+                     k = C::Ease.apply(:out, C::Util.clamp(t_in / FADE_IN_TIME, 0.0, 1.0))
+                     (255 * k).round
+                   else
+                     255
+                   end
 
-        # 2. Smooth active <-> dimmed listener transition
+        # 2. Smooth active <-> dimmed listener tone transition (0px movement!)
         t_foc = C::Util.clamp((now - @focus_at) / DIM_TRANS_TIME, 0.0, 1.0)
         foc_k = @active ? C::Ease.apply(:out, t_foc) : (1.0 - C::Ease.apply(:out, t_foc))
         dim_w = 1.0 - foc_k
-        recess_y = C::Util.snap(INACTIVE_RECESS_Y * dim_w)
-        recess_y = -recess_y if below
-        tone = Tone.new(
+        tone  = Tone.new(
           (INACTIVE_TONE[0] * dim_w).round,
           (INACTIVE_TONE[1] * dim_w).round,
           (INACTIVE_TONE[2] * dim_w).round,
           (INACTIVE_TONE[3] * dim_w).round
         )
 
-        # 3. Auto-Emotion Physics (active speaker only)
-        phys_dx, phys_dy, border_col, border_op = emotion_physics(now)
-
-        # 4. Lip-Sync / Speaking Cadence Micro-Bob (1 art-pixel = 2 screen px)
-        bob_dy = 0
-        if ENABLE_LIP_SYNC_BOB && @active && now < @bob_until
-          bob_dy = (@bob_phase == 0) ? -PX : 0
-        end
-
-        fx = base_x + slide_dx + phys_dx
-        fy = base_y + recess_y + phys_dy + bob_dy
-
-        # 5. Expression Crossfade
+        # 3. Silky 4-frame in-place expression crossfade (0px movement!)
         t_xf = now - @expr_at
         if @prev_face.visible && t_xf < CROSSFADE_TIME
           xk = C::Util.clamp(t_xf / CROSSFADE_TIME, 0.0, 1.0)
@@ -565,6 +608,7 @@ module Prismfall
           @face.opacity      = entry_op
         end
 
+        # Rock-solid fixed coordinates: ZERO bounce, ZERO shake, ZERO bob, ZERO slide!
         @frame.x = fx
         @frame.y = fy
         @frame.opacity = entry_op
@@ -577,18 +621,13 @@ module Prismfall
         @prev_face.x = @face.x
         @prev_face.y = @face.y
         @prev_face.tone = tone
-
-        @border.x = fx
-        @border.y = fy
-        @border.color = border_col if border_col
-        @border.opacity = @active ? border_op : 0
       end
 
       def dispose
         return if @disposed
         @disposed = true
-        [@frame, @face, @prev_face, @border].each { |s| s.dispose if s && !s.disposed? }
-        [@frame_bmp, @face_bmp, @prev_bmp, @border_bmp].each { |b| b.dispose if b && !b.disposed? }
+        [@frame, @face, @prev_face].each { |s| s.dispose if s && !s.disposed? }
+        [@frame_bmp, @face_bmp, @prev_bmp].each { |b| b.dispose if b && !b.disposed? }
       end
 
       private
@@ -608,15 +647,11 @@ module Prismfall
         return out
       end
 
-      def build_border_overlay
-        f = P::FACE_FRAME
-        b = Bitmap.new(f, f)
-        w = Color.new(255, 255, 255, 255)
-        b.fill_rect(2, 2, f - 4, 4, w)
-        b.fill_rect(2, f - 6, f - 4, 4, w)
-        b.fill_rect(2, 2, 4, f - 4, w)
-        b.fill_rect(f - 6, 2, 4, f - 4, w)
-        return b
+      def predicted_y(mh)
+        pos = ($game_system.message_position rescue 2) if defined?($game_system) && $game_system
+        return 0 if pos == 0
+        return (Graphics.height - mh) / 2 if pos == 1
+        return Graphics.height - mh
       end
 
       def compute_anchor(msgwindow)
@@ -628,64 +663,12 @@ module Prismfall
           mx = msgwindow.x.to_i if msgwindow.respond_to?(:x)
           mw = msgwindow.width.to_i if msgwindow.respond_to?(:width)
           mh = msgwindow.height.to_i
-          my = msgwindow.y.to_i
+          my = @first_tick ? predicted_y(mh) : msgwindow.y.to_i
         end
         y = my - P::FACE_FRAME
-        below = y < 0
-        y = my + mh if below
+        y = my + mh if y < 0
         x = (@side == :left) ? mx : (mx + mw - P::FACE_FRAME)
-        return x, y, below
-      end
-
-      def emotion_physics(now)
-        return [0, 0, nil, 0] if !@active
-        cfg = EMOTION_MAP[@expression] || EMOTION_MAP[:neutral]
-        dur = cfg[:duration].to_f
-        lt  = now - @expr_at
-        ps  = C.photosensitive?
-        dx = 0; dy = 0
-        b_col = cfg[:border] ? Color.new(*cfg[:border], 255) : nil
-        b_op  = 0
-
-        case cfg[:kind]
-        when :shock
-          if lt < dur
-            k = lt / dur
-            amp = ps ? 2 : 6
-            # Sharp 4f horizontal shake + quick 6px upward jump!
-            dx = C::Util.snap(Math.sin(k * Math::PI * 5.0) * amp * (1.0 - k))
-            dy = -C::Util.snap(Math.sin(k * Math::PI) * (ps ? 2 : 6))
-          end
-        when :angry
-          if lt < dur
-            amp = ps ? 0 : 2
-            dx = (((lt * 32).to_i.even?) ? -amp : amp)
-          end
-          if b_col
-            b_op = ps ? 90 : (110 + (115 * (0.5 + 0.5 * Math.sin(lt * 10.0)))).round
-          end
-        when :bounce
-          if lt < dur
-            # Upbeat double-bounce!
-            k = lt / dur
-            h = (k < 0.55) ? (Math.sin((k / 0.55) * Math::PI) * 6.0) : (Math.sin(((k - 0.55) / 0.45) * Math::PI) * 4.0)
-            dy = -C::Util.snap(h)
-          end
-        when :droop
-          k = C::Util.clamp(lt / [dur, 0.01].max, 0.0, 1.0)
-          dy = C::Util.snap(C::Ease.apply(:out, k) * 4.0)
-        when :sway
-          k = C::Util.clamp(lt / [dur, 0.01].max, 0.0, 1.0)
-          dx = C::Util.snap(Math.sin(k * Math::PI * 2.0) * 2.0) if k < 1.0
-          b_op = 80 if b_col
-        when :smug
-          if lt < dur
-            k = C::Ease.apply(:out, lt / dur)
-            dir = (@side == :left) ? -1 : 1
-            dx = C::Util.snap((1.0 - k) * 8.0) * dir
-          end
-        end
-        return [dx, dy, b_col, b_op]
+        return x, y
       end
     end
 
@@ -696,6 +679,10 @@ module Prismfall
         @active_side  = nil
         @last_pos     = -1
         @last_blip_at = 0.0
+      end
+
+      def active?
+        return !@slots[:left].nil? || !@slots[:right].nil?
       end
 
       def ensure_viewport
@@ -709,7 +696,7 @@ module Prismfall
         @last_pos = -1
         id = spec[:id]
 
-        # Check if speaker is already occupying Left or Right slot
+        # Keep existing speaker anchored in their side; 3rd speaker replaces LRU slot.
         if @slots[:left] && @slots[:left].id == id
           side = :left
         elsif @slots[:right] && @slots[:right].id == id
@@ -719,7 +706,6 @@ module Prismfall
         elsif @slots[:right].nil?
           side = :right
         else
-          # 3rd speaker enters -> replace whichever slot was used LEAST recently!
           side = (@slots[:left].last_used <= @slots[:right].last_used) ? :left : :right
           @slots[side].dispose
           @slots[side] = nil
@@ -740,7 +726,7 @@ module Prismfall
       def update(msgwindow, clean_text = nil)
         return if !@viewport || @viewport.disposed?
         now = C::Util.now
-        track_lip_sync(msgwindow, clean_text, now)
+        track_voice_blips(msgwindow, clean_text, now) if ENABLE_VOICE_BLIPS
         @slots.each_value { |s| s&.update(msgwindow, now) }
       end
 
@@ -758,48 +744,40 @@ module Prismfall
 
       private
 
-      def track_lip_sync(msgwindow, clean_text, now)
+      # Optional subtle text-blip audio only — NEVER moves portraits.
+      def track_voice_blips(msgwindow, clean_text, now)
         slot = @active_side ? @slots[@active_side] : nil
         return if !slot || !msgwindow
-        pausing = (msgwindow.respond_to?(:pausing?) && msgwindow.pausing?)
-        busy    = (msgwindow.respond_to?(:busy?) ? msgwindow.busy? : false)
-        if pausing || !busy
-          slot.settle_speaking_bob
-          return
-        end
+        return if msgwindow.respond_to?(:pausing?) && msgwindow.pausing?
+        return if msgwindow.respond_to?(:busy?) && !msgwindow.busy?
         pos = msgwindow.respond_to?(:position) ? msgwindow.position.to_i : -1
         return if pos <= @last_pos
         @last_pos = pos
         ch = (clean_text && pos > 0 && pos <= clean_text.length) ? clean_text[pos - 1] : "a"
-        if ch =~ /[\s.,!?;:\-—…]/
-          slot.settle_speaking_bob
-        else
-          slot.pulse_speaking_bob(now)
-          if ENABLE_VOICE_BLIPS && (now - @last_blip_at) >= 0.065
-            prof = VOICE_PROFILES[P.art_id(slot.id)] || { :se => "pf_blip_mid", :pitch => 100 }
-            C::Sound.play(:se, prof[:se], 48, prof[:pitch] + rand(-4..4))
-            @last_blip_at = now
-          end
-        end
+        return if ch =~ /[\s.,!?;:\-—…]/
+        return if (now - @last_blip_at) < 0.075
+        prof = VOICE_PROFILES[P.art_id(slot.id)] || { :se => "pf_blip_mid", :pitch => 100 }
+        C::Sound.play(:se, prof[:se], 44, prof[:pitch] + rand(-3..3))
+        @last_blip_at = now
       end
     end
 
     #===========================================================================
-    # PILLAR B: Crisp 2x Gen 5 B2W2 Overworld Emote Balloons
+    # PILLAR B: Crisp 2x Gen 5 B2W2 Overworld Emote Balloons (Opt-In Only)
     #===========================================================================
     class EmoteBalloonSprite
-      DURATION = 0.88
+      DURATION = 0.92
 
       def initialize(viewport, bitmap, character, row)
-        @char    = character
-        @row     = row
-        @start   = C::Util.now
-        @sprite  = Sprite.new(viewport)
+        @char   = character
+        @row    = row
+        @start  = C::Util.now
+        @sprite = Sprite.new(viewport)
         @sprite.bitmap = bitmap
         @sprite.ox = EMOTE_CELL / 2
         @sprite.oy = EMOTE_CELL
         @sprite.z  = 500
-        @done    = false
+        @done   = false
         update
       end
 
@@ -816,11 +794,10 @@ module Prismfall
           dispose
           return true
         end
-        # 4-frame B2W2 timing: F0 Pop-In (0..0.08s), F1 Peak (0.08..0.24s),
-        # F2 Active Pulse (0.24..0.52s), F3 Settle (0.52..0.88s with fade tail)
-        fi = if lt < 0.08    then 0
-             elsif lt < 0.24 then 1
-             elsif lt < 0.52 then ((lt * 10).to_i.even? ? 2 : 1)
+        # Clean 4-frame B2W2 cadence: F0 Pop-In -> F1 Peak -> F2 Active -> F3 Settle
+        fi = if lt < 0.10    then 0
+             elsif lt < 0.28 then 1
+             elsif lt < 0.56 then 2
              else 3
              end
         @sprite.src_rect.set(fi * EMOTE_CELL, @row * EMOTE_CELL, EMOTE_CELL, EMOTE_CELL)
@@ -828,7 +805,7 @@ module Prismfall
         act_oy = @char.respond_to?(:pf_visual_oy) ? @char.pf_visual_oy : 0
         @sprite.x = C::Util.snap(@char.screen_x + act_ox)
         @sprite.y = C::Util.snap(@char.screen_y - 46 + act_oy)
-        @sprite.opacity = (lt > 0.72) ? ((1.0 - ((lt - 0.72) / 0.16)) * 255).round : 255
+        @sprite.opacity = (lt > 0.74) ? ((1.0 - ((lt - 0.74) / 0.18)) * 255).round : 255
         return false
       end
 
@@ -846,13 +823,14 @@ module Prismfall
         @active   = []
       end
 
+      def active?; !@active.empty?; end
+
       def spawn(character, kind)
         return nil if !character || !Expressive.on_map?
         key = Expressive.resolve_emote(kind)
         return nil if !key
         ensure_resources
         return nil if !@bitmap
-        # Replace any existing balloon already floating over the same character
         @active.reject! do |b|
           if b.instance_variable_get(:@char) == character
             b.dispose
@@ -864,7 +842,7 @@ module Prismfall
         b = EmoteBalloonSprite.new(@viewport, @bitmap, character, EMOTE_ROWS[key])
         @active << b
         se = EMOTE_SE[key]
-        C::Sound.play(:se, se, 65, 100) if se
+        C::Sound.play(:se, se, 60, 100) if se
         return b
       end
 
@@ -898,7 +876,7 @@ module Prismfall
 end
 
 #===============================================================================
-# PILLAR C: Game_Character Micro-Acting State & 4-Pose Acting Sheet Support
+# PILLAR C: Game_Character Natural Overworld Body Language & 4-Pose Support
 #===============================================================================
 if defined?(Game_Character) && !Game_Character.method_defined?(:pf_update_expressive)
   class Game_Character
@@ -906,6 +884,12 @@ if defined?(Game_Character) && !Game_Character.method_defined?(:pf_update_expres
 
     def pf_visual_ox; @pf_ox.to_i; end
     def pf_visual_oy; @pf_oy.to_i; end
+
+    def pf_set_facing(dir)
+      return if ![2, 4, 6, 8].include?(dir)
+      @pf_saved_dir ||= @direction
+      @direction = dir
+    end
 
     def pf_set_pose(sheet_name, pose_index = 0)
       @pf_pose_sheet = sheet_name
@@ -925,16 +909,20 @@ if defined?(Game_Character) && !Game_Character.method_defined?(:pf_update_expres
       @pf_oy         = 0
       @pf_hold_ox    = 0
       @pf_hold_oy    = 0
+      @pf_saved_dir  = nil
     end
 
-    def pf_start_act(kind, height: 6, count: 1, duration: 0.32)
+    def pf_start_act(kind, dist: 4, height: 4, count: 1, duration: 0.28)
       @pf_act = {
         :kind     => kind.to_sym,
         :start    => Prismfall::Cutscene::Util.now,
+        :dist     => dist.to_i,
         :height   => height.to_i,
         :count    => [count.to_i, 1].max,
         :duration => duration.to_f,
-        :orig_dir => @direction
+        :orig_dir => @direction,
+        :from_ox  => @pf_hold_ox.to_i,
+        :from_oy  => @pf_hold_oy.to_i
       }
       pf_update_expressive
     end
@@ -952,65 +940,79 @@ if defined?(Game_Character) && !Game_Character.method_defined?(:pf_update_expres
       ps = Prismfall::Cutscene.photosensitive?
 
       case @pf_act[:kind]
-      when :hop
-        dur = 0.24 * @pf_act[:count]
-        if lt >= dur
-          @pf_act = nil; @pf_ox = @pf_hold_ox; @pf_oy = @pf_hold_oy
-        else
-          cycle = (lt / 0.24) % 1.0
-          @pf_ox = @pf_hold_ox
-          @pf_oy = @pf_hold_oy - Prismfall::Cutscene::Util.snap(Math.sin(cycle * Math::PI) * @pf_act[:height])
-        end
       when :nod
-        dur = 0.34
+        # Single quiet, natural 2px downward acknowledgment nod
+        dur = 0.22
         if lt >= dur
           @pf_act = nil; @pf_ox = @pf_hold_ox; @pf_oy = @pf_hold_oy
         else
-          cycle = (lt / 0.17) % 1.0
+          k = lt / dur
           @pf_ox = @pf_hold_ox
-          @pf_oy = @pf_hold_oy + Prismfall::Cutscene::Util.snap(Math.sin(cycle * Math::PI) * 2)
+          @pf_oy = @pf_hold_oy + Prismfall::Cutscene::Util.snap(Math.sin(k * Math::PI) * 2)
         end
-      when :shudder
-        dur = @pf_act[:duration]
-        if lt >= dur
-          @pf_act = nil; @pf_ox = @pf_hold_ox; @pf_oy = @pf_hold_oy
-        else
-          amp = ps ? 0 : px
-          @pf_ox = @pf_hold_ox + (((lt * 28).to_i.even?) ? -amp : amp)
-          @pf_oy = @pf_hold_oy
-        end
-      when :recoil
-        dur = 0.26
+      when :step_back
+        # Restrained 4px ease-out step back (zero cartoon hop!)
+        dur = 0.20
         dx, dy = pf_facing_vector(@pf_act[:orig_dir])
-        k = Prismfall::Cutscene::Util.clamp(lt / dur, 0.0, 1.0)
-        @pf_hold_ox = Prismfall::Cutscene::Util.snap(-dx * 6 * Prismfall::Cutscene::Ease.apply(:out, k))
-        @pf_hold_oy = Prismfall::Cutscene::Util.snap(-dy * 4 * Prismfall::Cutscene::Ease.apply(:out, k))
-        hop = (k < 0.7) ? -Prismfall::Cutscene::Util.snap(Math.sin((k / 0.7) * Math::PI) * 4) : 0
+        k = Prismfall::Cutscene::Ease.apply(:out, Prismfall::Cutscene::Util.clamp(lt / dur, 0.0, 1.0))
+        d = @pf_act[:dist]
+        @pf_hold_ox = Prismfall::Cutscene::Util.snap(-dx * d * k)
+        @pf_hold_oy = Prismfall::Cutscene::Util.snap(-dy * (d / 2.0) * k)
         @pf_ox = @pf_hold_ox
-        @pf_oy = @pf_hold_oy + hop
+        @pf_oy = @pf_hold_oy
         @pf_act = nil if lt >= dur
       when :lean_in
-        dur = 0.18
+        # Subtle 4px ease-out lean toward conversational partner
+        dur = 0.20
         dx, dy = pf_facing_vector(@pf_act[:orig_dir])
-        k = Prismfall::Cutscene::Util.clamp(lt / dur, 0.0, 1.0)
-        @pf_hold_ox = Prismfall::Cutscene::Util.snap(dx * 4 * Prismfall::Cutscene::Ease.apply(:out, k))
-        @pf_hold_oy = Prismfall::Cutscene::Util.snap(dy * 2 * Prismfall::Cutscene::Ease.apply(:out, k))
+        k = Prismfall::Cutscene::Ease.apply(:out, Prismfall::Cutscene::Util.clamp(lt / dur, 0.0, 1.0))
+        d = @pf_act[:dist]
+        @pf_hold_ox = Prismfall::Cutscene::Util.snap(dx * d * k)
+        @pf_hold_oy = Prismfall::Cutscene::Util.snap(dy * (d / 2.0) * k)
+        @pf_ox = @pf_hold_ox
+        @pf_oy = @pf_hold_oy
+        @pf_act = nil if lt >= dur
+      when :return
+        # Smooth ease back to exact neutral tile anchor
+        dur = 0.18
+        k = 1.0 - Prismfall::Cutscene::Ease.apply(:out, Prismfall::Cutscene::Util.clamp(lt / dur, 0.0, 1.0))
+        @pf_hold_ox = Prismfall::Cutscene::Util.snap(@pf_act[:from_ox] * k)
+        @pf_hold_oy = Prismfall::Cutscene::Util.snap(@pf_act[:from_oy] * k)
         @pf_ox = @pf_hold_ox
         @pf_oy = @pf_hold_oy
         @pf_act = nil if lt >= dur
       when :headshake
-        # Rapid Left -> Right -> Left -> restore glance
-        step = (lt / 0.10).to_i
+        # Calm, measured Left -> Right -> Restore glance
+        step = (lt / 0.14).to_i
         case step
         when 0 then @direction = 4
         when 1 then @direction = 6
-        when 2 then @direction = 4
         else
           @direction = @pf_act[:orig_dir]
           @pf_act = nil
         end
         @pf_ox = @pf_hold_ox
         @pf_oy = @pf_hold_oy
+      when :shudder
+        # Opt-in only (rare dramatic beat)
+        dur = @pf_act[:duration]
+        if lt >= dur
+          @pf_act = nil; @pf_ox = @pf_hold_ox; @pf_oy = @pf_hold_oy
+        else
+          amp = ps ? 0 : px
+          @pf_ox = @pf_hold_ox + (((lt * 24).to_i.even?) ? -amp : amp)
+          @pf_oy = @pf_hold_oy
+        end
+      when :hop
+        # Opt-in only (rare bright/startled beat)
+        dur = 0.22 * @pf_act[:count]
+        if lt >= dur
+          @pf_act = nil; @pf_ox = @pf_hold_ox; @pf_oy = @pf_hold_oy
+        else
+          cycle = (lt / 0.22) % 1.0
+          @pf_ox = @pf_hold_ox
+          @pf_oy = @pf_hold_oy - Prismfall::Cutscene::Util.snap(Math.sin(cycle * Math::PI) * @pf_act[:height])
+        end
       end
     end
 
@@ -1054,7 +1056,7 @@ if defined?(Sprite_Character) && !Sprite_Character.method_defined?(:prismfall_ex
         if @pf_pose_bmp && @pf_pose_bmp.bitmap && !@pf_pose_bmp.bitmap.disposed?
           bmp = @pf_pose_bmp.bitmap
           @cw = bmp.width / 4
-          @ch = bmp.height                # Single-row 128x48 -> 32x48 cell!
+          @ch = bmp.height                # Single-row 128x48 -> 32x48 cell
           self.bitmap = bmp
           self.ox = @cw / 2
           self.oy = @ch
@@ -1064,10 +1066,9 @@ if defined?(Sprite_Character) && !Sprite_Character.method_defined?(:prismfall_ex
         @pf_pose_bmp&.dispose
         @pf_pose_bmp = nil
         @pf_active_pose_sheet = nil
-        @character_name = nil             # Force stock Sprite_Character reload on next tick!
+        @character_name = nil             # Force clean stock Sprite_Character reload
       end
 
-      # Layer non-destructive visual micro-acting offsets (never mutates map tile coords!)
       self.x += @character.pf_visual_ox
       self.y += @character.pf_visual_oy
     end
@@ -1092,23 +1093,22 @@ if defined?(pbMessageDisplay) && !defined?(prismfall_expressive_pbMessageDisplay
     return prismfall_expressive_pbMessageDisplay(msgwindow, message, letterbyletter, commandProc, &block) if !ex::ENABLED
 
     pf = Prismfall::Portrait
-    # Extract inline expressive tags (\pfe, \pfp, \pfa) cleanly before portrait/text parsing
     stripped, dirs = ex.extract_inline_tags(message)
     text, spec = pf.extract(stripped)
     spec ||= pf.carry(text)
     mode = pf.mode_for(spec)
 
-    # Bubble mode and non-cast plain messages fall straight through to 014_Portraits.rb!
+    # Bubble mode and plain narrator/non-cast lines delegate cleanly to 014_Portraits.rb
     if mode != :face
+      ex.stage.clear if ex.stage.active?
       return prismfall_expressive_pbMessageDisplay(msgwindow, stripped, letterbyletter, commandProc, &block)
     end
 
     pf.remember(spec, text) if !spec[:carried]
     ex.stage.open_line(spec, msgwindow)
-    ex.trigger_auto_acting(spec, dirs)
+    ex.trigger_acting(spec, dirs)
 
-    # Call the core pbMessageDisplay directly (bypassing 014's single FaceBox wrapper so
-    # both boxes never double-draw!) while keeping the dual stage + emotes + map sprites live!
+    # Invoke base message display directly so 014's single FaceBox never double-draws
     base_display = defined?(prismfall_portrait_pbMessageDisplay) ? method(:prismfall_portrait_pbMessageDisplay) : method(:prismfall_expressive_pbMessageDisplay)
     return base_display.call(msgwindow, text, letterbyletter, commandProc) do
       ex.stage.update(msgwindow, text)
@@ -1118,19 +1118,17 @@ if defined?(pbMessageDisplay) && !defined?(prismfall_expressive_pbMessageDisplay
   end
 end
 
-# Reset dual-speaker stage, emote balloons, and conversation poses when a new event starts
 if defined?(Interpreter) && !Interpreter.method_defined?(:prismfall_expressive_setup)
   class Interpreter
     alias prismfall_expressive_setup setup
 
     def setup(*args)
-      Prismfall::Expressive.clear_all if @main
+      Prismfall::Expressive.clear_all if @main && Prismfall::Expressive.active?
       return prismfall_expressive_setup(*args)
     end
   end
 end
 
-# Ensure map transfers & finished main interpreter clear any lingering portraits/poses
 if defined?(Scene_Map) && !Scene_Map.method_defined?(:prismfall_expressive_update)
   class Scene_Map
     alias prismfall_expressive_update update
@@ -1139,20 +1137,20 @@ if defined?(Scene_Map) && !Scene_Map.method_defined?(:prismfall_expressive_updat
     def update
       prismfall_expressive_update
       Prismfall::Expressive.emotes.update
-      if $game_system && $game_system.map_interpreter && !$game_system.map_interpreter.running?
+      if Prismfall::Expressive.active? && $game_system && $game_system.map_interpreter && !$game_system.map_interpreter.running?
         Prismfall::Expressive.clear_all
       end
     end
 
     def transfer_player(*args)
-      Prismfall::Expressive.clear_all
+      Prismfall::Expressive.clear_all if Prismfall::Expressive.active?
       return prismfall_expressive_transfer(*args)
     end
   end
 end
 
 #===============================================================================
-# Public Writer & Eventer Helpers (Zero Custom Art Required for Micro-Acting!)
+# Public Writer & Eventer Helpers (Restrained Opt-In Choreography)
 #===============================================================================
 def pf_emote(target, kind, wait: false)
   ev = Prismfall::Expressive.resolve_character(target)
@@ -1168,29 +1166,38 @@ def pf_emote(target, kind, wait: false)
   return b
 end
 
-def pf_hop(target, height: 6, count: 1)
-  ev = Prismfall::Expressive.resolve_character(target)
-  ev&.pf_start_act(:hop, height: height, count: count)
-end
-
 def pf_nod(target)
   ev = Prismfall::Expressive.resolve_character(target)
   ev&.pf_start_act(:nod)
 end
 
-def pf_shudder(target, duration: 0.35)
+def pf_step_back(target, dist: 4)
   ev = Prismfall::Expressive.resolve_character(target)
-  ev&.pf_start_act(:shudder, duration: duration)
+  ev&.pf_start_act(:step_back, dist: dist)
 end
 
-def pf_recoil(target)
-  ev = Prismfall::Expressive.resolve_character(target)
-  ev&.pf_start_act(:recoil)
+def pf_turn_away(target, from_other = nil)
+  ev    = Prismfall::Expressive.resolve_character(target)
+  other = from_other ? Prismfall::Expressive.resolve_character(from_other) : nil
+  Prismfall::Expressive.turn_away(ev, other)
 end
 
-def pf_lean_in(target)
+def pf_turn_toward(target, other)
   ev = Prismfall::Expressive.resolve_character(target)
-  ev&.pf_start_act(:lean_in)
+  to = Prismfall::Expressive.resolve_character(other)
+  Prismfall::Expressive.turn_toward(ev, to)
+end
+
+def pf_face_each_other(a, b)
+  ea = Prismfall::Expressive.resolve_character(a)
+  eb = Prismfall::Expressive.resolve_character(b)
+  Prismfall::Expressive.turn_toward(ea, eb)
+  Prismfall::Expressive.turn_toward(eb, ea)
+end
+
+def pf_lean_in(target, dist: 4)
+  ev = Prismfall::Expressive.resolve_character(target)
+  ev&.pf_start_act(:lean_in, dist: dist)
 end
 
 def pf_headshake(target)
@@ -1198,13 +1205,9 @@ def pf_headshake(target)
   ev&.pf_start_act(:headshake)
 end
 
-def pf_pace(target, steps: 2)
+def pf_step_return(target)
   ev = Prismfall::Expressive.resolve_character(target)
-  return if !ev || !defined?(pbMoveRoute)
-  route = [PBMoveRoute::TURN_LEFT] + ([PBMoveRoute::LEFT] * steps) +
-          [PBMoveRoute::WAIT, 8, PBMoveRoute::TURN_RIGHT] + ([PBMoveRoute::RIGHT] * steps) +
-          [PBMoveRoute::TURN_DOWN]
-  pbMoveRoute(ev, route)
+  ev&.pf_start_act(:return)
 end
 
 def pf_pose(target, pose_or_index, char_id = nil)
@@ -1230,43 +1233,42 @@ end
 
 ---
 
-## 4. Integration & Writer Cheat-Sheet (Wednesday Rollout)
+## 4. Integration & Writer Style Guide (The Rule of Restraint)
 
 ### Step 1 — Zero-Friction Drop-In
-1. Verify all 7 generated PNGs exist in `graphics/` and `art/out/Graphics/` (already installed & SHA-256 verified):
+1. Confirm all 7 shipped PNGs exist in `graphics/` and `art/out/Graphics/` (already verified & SHA-256 dual-synced):
    - `graphics/Animations/pf_emote_balloons.png`
    - `graphics/Characters/pose_JUNO.png`, `pose_KESTREL.png`, `pose_LARCH.png`, `pose_PLAYER_A.png`, `pose_PLAYER_B.png`, `pose_VOSS.png`
-2. Copy the Ruby code block in Section 3 to `plugins/Prismfall Cutscenes/018_ExpressiveDialogue.rb`.
-3. Boot `mkxp-z` on any existing map with story dialogue (e.g., Briarwick or Ferrow's Landing) — **every existing `[portrait: CHAR, expr]` conversation immediately gains Dual-Speaker Stage, Auto-Emotion Physics, Lip-Sync Bob, B2W2 Overworld Emotes, and Auto-Pose Acting with zero script edits!**
+2. Save the Ruby code block in Section 3 to `plugins/Prismfall Cutscenes/018_ExpressiveDialogue.rb`.
+3. Boot `mkxp-z` on any existing story map — **every existing `[portrait: CHAR, expr]` scene immediately upgrades to rock-solid motionless Dual-Speaker Portraits, smooth listener dimming (`Tone(-42,-42,-42,35)`), 4-frame expression crossfades, and natural speaker-facing turns — with zero emote spam and zero weird portrait jumping!**
 
-### Step 2 — Optional Writer / Eventer Choreography Tags
-Writers who want bespoke dramatic timing can combine standard tags with optional inline tags or script calls:
+### Step 2 — Writer Guidelines (Trails / Rejuv V14 Natural Restraint)
+- **Let portraits stay still.** Never try to shake or bounce faces to manufacture drama — the crisp pixel expressions, dual-speaker rhythm, and dialogue cadence carry the scene naturally.
+- **Emote budget: max 1–2 per conversation.** Because `AUTO_EMOTE = false`, balloons only appear where you explicitly drop `\pfe[...]` or `pf_emote(...)`. Save them for a real pause (`\pfe[dots]`), honest question (`\pfe[question]`), or genuine twist (`\pfe[exclaim]`).
+- **Act in the overworld, gently.** Prefer subtle posture shifts (`\pfp[crossed]`, `\pfp[guarded]`, `\pfp[worried]`) and understated moves (`pf_nod`, `pf_step_back`, `pf_turn_away`) over cartoon hops.
 
 ```text
-# Standard existing story-bible script (ALREADY expressive automatically!):
-[portrait: JUNO, happy] Juno: Kestrel! You actually came back to Briarwick!
-[portrait: KESTREL, smug] Kestrel: Don't make a scene, Juno.
-[portrait: JUNO, shocked] Juno: Wait—you heard what happened at the Spire?!
-
-# Optional inline overrides inside any Show Text command:
-[portrait: LARCH, neutral]\pfe[idea]\pfp[glasses] Larch: Hold on—check the resonance log!
-[portrait: VOSS, smug]\pfp[collar]\pfa[lean_in] Voss: Do choose your next sentence carefully.
-[portrait: KESTREL, sad]\pfe[sweat]\pfp[guarded] Kestrel: ...Forget I said anything.
+# Natural 4-line Briarwick exchange (ONLY ONE emote balloon across the entire scene!):
+[portrait: JUNO, happy]\pfp[clasped]\pfa[lean_in] Juno: Kestrel—you came back to Briarwick. I wasn't sure you would.
+[portrait: KESTREL, deadpan]\pfp[crossed] Kestrel: Don't make a fuss. I only stopped by for Larch's report.
+[portrait: JUNO, sad]\pfp[worried] Juno: You heard what happened at the Spire... didn't you?
+[portrait: KESTREL, sad]\pfe[dots]\pfp[guarded]\pfa[step_back] Kestrel: ...Keep off the ridge tonight. Meridian's watching.
 ```
 
 ```ruby
-# Direct Ruby event helpers (usable on ANY NPC on ANY map — no custom sheet required!):
-pf_emote(:JUNO, :question)
-pf_hop(:JUNO, height: 6, count: 2)
-pf_recoil(:PLAYER)
-pf_shudder(12, duration: 0.4)
-pf_pose(:VOSS, :shock)
-pf_stage_clear   # optional mid-event reset (automatic when event ends!)
+# Gentle opt-in Ruby event helpers (work on ANY NPC on ANY map!):
+pf_face_each_other(:JUNO, :KESTREL)
+pf_nod(:JUNO)
+pf_step_back(:KESTREL, dist: 4)
+pf_turn_away(:KESTREL, :JUNO)
+pf_emote(:KESTREL, :dots)       # Sparing! Max 1-2 per conversation
+pf_pose(:LARCH, :glasses)
+pf_stage_clear                  # Optional mid-event reset (automatic when event ends)
 ```
 
 ### Step 3 — Recommended Selftest Cases (for `plugins/Prismfall Cutscenes/selftest/`)
-1. **Dual-speaker focus & dimming:** `pbMessage("\\pf[JUNO,happy]Juno: Hi")` followed by `pbMessage("\\pf[KESTREL,smug]Kestrel: Hey")` keeps Juno in `:left` dimmed (`Tone(-45,-45,-45,40)`) while Kestrel activates in `:right` (`Tone(0,0,0,0)`).
-2. **3-speaker LRU replacement:** Third speaker (`LARCH`) replaces whichever slot had older `last_used`, never dropping the speaker who just finished talking.
-3. **Inline tag stripping:** `extract_inline_tags("\\pf[JUNO,happy]\\pfe[music]\\pfp[clasped]\\pfa[hop]Juno: Hi")` returns clean text `"\\pf[JUNO,happy]Juno: Hi"` with zero raw control codes leaking to screen.
-4. **Photosensitive clamp:** With `Prismfall::Cutscene.photosensitive = true`, `:shocked` and `:angry` horizontal shake stays `<= 2px` and `:angry` border uses soft static opacity `90` (zero strobe).
-5. **Cleanup safety:** Calling `Interpreter#setup` (`@main = true`) or `Scene_Map#transfer_player` disposes all viewports/bitmaps and resets every event's `pf_pose_sheet` to `nil` and `pf_visual_ox/oy` to `0`.
+1. **Rock-solid `0px` portrait anchor:** Across entry fade-in (`0.00s..0.15s`), expression crossfade, active↔inactive dimming, and text typing, `@frame.x/y` and `@face.x/y` remain invariant at exact `(mx, my - 128)` (Left) and `(mx + mw - 128, my - 128)` (Right) — zero pixel drift.
+2. **Smooth listener dimming:** `pbMessage("\\pf[JUNO,happy]Juno: Hi")` → `pbMessage("\\pf[KESTREL,deadpan]Kestrel: Hey")` keeps Juno anchored Left dimmed to `Tone(-42, -42, -42, 35)` while Kestrel fades cleanly into Right at `Tone(0, 0, 0, 0)`.
+3. **Zero auto-emote spam (`AUTO_EMOTE == false`):** Playing a 4-line tagged conversation with no `\pfe[...]` tags spawns `0` emote balloons; adding `\pfe[dots]` on Line 4 spawns exactly `1` balloon on row `3` (`:dots`).
+4. **3-speaker LRU replacement:** A third speaker (`LARCH`) replaces whichever slot had older `last_used`, keeping the most recent speaker visible and dimmed.
+5. **Inline tag stripping & cleanup safety:** `extract_inline_tags` strips `\pfe`, `\pfp`, and `\pfa` cleanly with zero raw control codes leaking; `Interpreter#setup` (`@main = true`), `Scene_Map#transfer_player`, and conversation end dispose all viewports/bitmaps and reset all character poses/offsets once via `Expressive.active?`.
