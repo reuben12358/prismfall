@@ -5,8 +5,11 @@
 # item flag "MegaRing", MegaStone in pokemon_forms.txt) and Elite Battle DX's own
 # (the Fight-menu Mega button, the MEGAEVOLUTION / MEGAEVOLUTION2 animations).
 # This plugin adds only what Prismfall needs on top (design/MEGA_EVOLUTION.md):
-#   * one Mega per SIDE per battle (Essentials: one per trainer), and the same
-#     limit for Z-moves (plugins/Prismfall Z-Power is per trainer on its own);
+#   * one Mega per TRAINER per battle (Essentials' own rule, restored 2026-11-25:
+#     gemini_recommends/REVIEW.md, acts-3-to-5 audit 1.5; in a tag battle each
+#     trainer with a ring and a stone Mega Evolves once, a registered partner
+#     included: 002 carries the partner's ring into the battle). Z-moves stay one
+#     per SIDE (plugins/Prismfall Z-Power is per trainer on its own);
 #     a Mega and a Z-move may both be used in one battle
 #   * a Pokemon holding a Z-crystal can't Mega Evolve (Gen 7 rule; matters only
 #     for stone-less Megas such as Rayquaza's)
@@ -23,8 +26,10 @@ module PrismfallMega
   # earliest, Rejuvenation's at about 14): Cragholm, after Gym 13 (cap 63, before Gym 14). Quest OS_RING_DAY.
   RING_BADGES = 13
 
-  # :side = one Mega per side per battle (SPINE Rev 20); :trainer = Essentials' default (one per trainer)
-  LIMIT = :side
+  # :trainer = one Mega per trainer per battle (Essentials' rule; Prismfall's since 2026-11-25, so both trainers of a
+  # tag pair can Mega: every Ch21 tag foe is written with one). :side = one per side (the SPINE Rev 20 rule, kept
+  # switchable: tools/harness/run_mega.rb checks both).
+  LIMIT = :trainer
   # The same limit for Z-moves, applied to Prismfall Z-Power's owner key (it is per trainer on its own).
   Z_LIMIT = :side
   Z_CRYSTAL_BLOCKS_MEGA = true

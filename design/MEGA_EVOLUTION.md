@@ -118,11 +118,20 @@ the new ring point (§5.3). The ones that stayed before 13 "hum and wait", as in
   new Mega abilities and their sprites). See §3.5.
 
 ### 3.2 Prismfall rules (`plugins/Prismfall Mega/002_Mega_Battle.rb`)
-- **One Mega per side per battle** (`LIMIT = :side`). Essentials allows one per trainer, so in a tag battle both
-  partners could Mega. `pbCanMegaEvolve?` now also says no while another trainer on the same side has chosen or used
-  theirs. The player chooses first, so in a partner battle the player's Mega always wins; the partner keeps theirs if
-  the player doesn't Mega.
-- **One Z-move per side per battle** (`Z_LIMIT = :side`). This is the same rule for Prismfall Z-Power, which is per
+- **One Mega per trainer per battle** (`LIMIT = :trainer`, since 2026-11-25; `gemini_recommends/REVIEW.md`, the
+  acts-3-to-5 audit §1.5: "one Mega per *trainer* in tag battles"). This is Essentials' own rule: in a tag battle every
+  trainer with a ring and a stone Mega Evolves once, so both foes of a pair can (all four Ch21 tag foes carry a stone),
+  and so can the player and a partner. The old SPINE Rev 20 rule, one per **side** (`LIMIT = :side`:
+  `pbCanMegaEvolve?` says no while another trainer on the same side has chosen or used theirs), is still in the code
+  as a switch and `run_mega.rb` checks both.
+- **A registered partner keeps its ring.** Essentials drops a partner's `Items`, so a partner could never Mega.
+  `pbRegisterPartner` now stores the trainer's Mega Ring(s) in `$PokemonGlobal.partner[4]` (only the ring: a partner
+  still brings no medicine) and the battle hands them to the ally. A partner Megas only if its PBS team has
+  `MEGARING` and a stone; today's partner teams (Juno 70–72, the war partners, the Ogre) have neither.
+- **Lore to reconcile (story owner):** §1.1's "two rings on the same side ring against each other", Bastian's
+  Ring-Day line "one Mega to a side ... Remember it in a double" (`114_Quests_Megas.rb`) and the Ch21 script's tag
+  battle note ("the side has one Mega, and the player's comes first") still describe the old rule.
+- **One Z-move per side per battle** (`Z_LIMIT = :side`; unchanged by the per-trainer Mega rule). Prismfall Z-Power is per
   trainer on its own. It works by alias-chaining `PrismfallZ.owner_key` to key on the side alone; no Z-Power file was
   edited (§7 asks the Z owner to adopt it in their config).
 - **A Mega and a Z-move may both be used in one battle**, by different Pokémon (one Pokémon has one held item). Tested
@@ -399,7 +408,7 @@ to last!", Bastian "Rock's patient. So's this.", Kestrel with Morwen's Ring "Mum
 | File | What |
 |---|---|
 | `plugins/Prismfall Mega/001_Mega_Config.rb` | limits, `RING_BADGES` (13), `MEGA_FULL_LEVEL`, `WEAK_STONES`, `MORWEN_RING`, `STONES` (44 rows), `UNPLACED`, `FIELD_RULES`, `FIELD_NOTES` |
-| `002_Mega_Battle.rb` | one Mega per side, Z-crystal block, the event and log; the per-side owner key for Z-Power |
+| `002_Mega_Battle.rb` | one Mega per trainer (`LIMIT`), the partner's ring, Z-crystal block, the event and log; the per-side owner key for Z-Power |
 | `003_Mega_Fields.rb` | gained-ability entry rules, the 8 showpieces, Field Notes lines (unchanged in Rev 21) |
 | `004_Mega_Story.rb` | `pf_mega_stone(:ITEM[, "line"])` (teaser line before the ring), conditions `mega_ring` / `mega_stones`, Kestrel's Morwen's Ring swap (`:on_trainer_load`), Debug menu "Prismfall Mega..." |
 | `plugins/Prismfall Trials/114_Quests_Megas.rb` | `OS_RING_DAY` (Bastian), Brann's spare (15, the Light Stone line), Juno's Venusaurite and 14 stone quests |

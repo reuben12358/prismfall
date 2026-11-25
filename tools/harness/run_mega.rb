@@ -15,7 +15,9 @@
 #   4. a Mega and a Z-move in the same battle: one trainer's double (Mega Lucario + Hydro Vortex), the player's
 #      side on Water Surface with the ONE ring (Rev 23: MEGARING wakes crystals; the old Z-Power Ring alone still
 #      works for old saves), and two trainers on one side; the Z-crystal distribution (R4) and a species Z-move
-#   5. one Mega and one Z per SIDE: two foe trainers with a Mega Stone each / a Z-crystal each, side vs trainer limit
+#   5. one Mega per TRAINER (the rule since 2026-11-25; the old per-side limit as the control) and one Z per SIDE:
+#      two foe trainers with a Mega Stone each / a Z-crystal each; a full tag battle (the player, a partner with a
+#      ring, two foes: four Megas, one a trainer); a partner without a ring; pbRegisterPartner keeps only the ring
 #   6. rules: no ring -> no Mega; wild Pokemon never Mega Evolve; a Z-crystal blocks Rayquaza's Mega
 #   7. field showpieces (Grand Stage, Volcanic, Colosseum, Frozen Lake, Crystal Cavern, Hollow Cathedral, Factory,
 #      Bleed) and the Mega's new ability on entry rules (Inverse: Magic Bounce; Colosseum: No Guard); Field Notes
@@ -489,7 +491,7 @@ check("a species crystal: Snorlax's Giga Impact becomes Pulverizing Pancake (its
       sz.inspect[0, 80])
 
 #-------------------------------------------------------------------------------
-section("5. One Mega and one Z-move per SIDE (two foe trainers)")
+section("5. One Mega per TRAINER, one Z-move per SIDE (two foe trainers; a tag battle)")
 #-------------------------------------------------------------------------------
 two_megas = lambda do
   [npc(:LEADER_KAITO, "Kaito", [lucario.call], [:MEGARING]),
@@ -504,14 +506,45 @@ per_side = lambda do |label, seed|
   end
   MEGAS[n0..].select { |x| x[:side] == 1 }
 end
-side_megas = per_side.call("LIMIT :side", 3)
-check("LIMIT :side - only one of the two foe trainers Mega Evolves in the whole battle", side_megas.length == 1,
-      side_megas.map { |x| "#{x[:species]}@owner#{x[:owner]}" }.inspect)
-PrismfallMega.send(:remove_const, :LIMIT); PrismfallMega.const_set(:LIMIT, :trainer)
-trainer_megas = per_side.call("LIMIT :trainer, Essentials' own rule", 3)
+check("the shipped rule is one Mega per trainer (PrismfallMega::LIMIT == :trainer)", PrismfallMega::LIMIT == :trainer)
+trainer_megas = per_side.call("LIMIT :trainer, the shipped rule", 3)
+check("LIMIT :trainer - both foe trainers of a pair Mega Evolve, once each", trainer_megas.length == 2 &&
+      trainer_megas.map { |x| x[:owner] }.sort == [0, 1], trainer_megas.map { |x| "#{x[:species]}@owner#{x[:owner]}" }.inspect)
 PrismfallMega.send(:remove_const, :LIMIT); PrismfallMega.const_set(:LIMIT, :side)
-check("control: with Essentials' per-trainer rule both trainers Mega Evolve", trainer_megas.length == 2,
-      trainer_megas.map { |x| "#{x[:species]}@owner#{x[:owner]}" }.inspect)
+side_megas = per_side.call("LIMIT :side, the old SPINE Rev 20 rule", 3)
+PrismfallMega.send(:remove_const, :LIMIT); PrismfallMega.const_set(:LIMIT, :trainer)
+check("control: with LIMIT :side only one of the two foe trainers Mega Evolves in the whole battle", side_megas.length == 1,
+      side_megas.map { |x| "#{x[:species]}@owner#{x[:owner]}" }.inspect)
+
+# A tag battle (Ch21's shape): the player and a registered partner against two trainers, a stone on all four sides.
+tag = lambda do |label, partner_items, seed|
+  $player.party = [lucario.call, mk(:BLISSEY, 100, [:SOFTBOILED, :SEISMICTOSS], :LEFTOVERS)]
+  $PokemonGlobal.partner = [:RIVAL_KESTREL, "Kestrel", 0,
+                            [mk(:SCIZOR, 70, [:BULLETPUNCH, :XSCISSOR, :SWORDSDANCE, :ROOST], :SCIZORITE),
+                             mk(:SNORLAX, 100, [:BODYSLAM, :REST], :LEFTOVERS)], partner_items]
+  n0 = MEGAS.length
+  log = run("Tag battle (#{label}): the player's Lucario + partner Kestrel's Scizor vs Kroll's Sharpedo + Quent's Metagross, a stone each", :seed => seed) do
+    setBattleRule("canLose"); setBattleRule("field", "none")
+    TrainerBattle.start(npc(:MERIDIAN_KROLL, "Sabine", [mk(:SHARPEDO, 70, [:CRUNCH, :WATERFALL, :PROTECT, :ICEFANG], :SHARPEDONITE)], [:MEGARING]),
+                        npc(:MERIDIAN_QUENT, "Percival", [mk(:METAGROSS, 70, [:METEORMASH, :ZENHEADBUTT, :BULLETPUNCH, :EARTHQUAKE], :METAGROSSITE)], [:MEGARING]))
+  end
+  $PokemonGlobal.partner = nil
+  [MEGAS[n0..], log]
+end
+tm, = tag.call("partner with a ring", [:MEGARING], 11)
+by = tm.map { |x| [x[:side], x[:owner], x[:species]] }.sort
+check("tag battle: all four trainers Mega Evolve, once each (the player, the partner, both foes)",
+      by == [[0, 0, :LUCARIO], [0, 1, :SCIZOR], [1, 0, :SHARPEDO], [1, 1, :METAGROSS]], by.inspect)
+tm, = tag.call("partner without a ring", [], 11)
+by = tm.map { |x| [x[:side], x[:owner], x[:species]] }.sort
+check("tag battle: a partner without a ring doesn't Mega; the other three do", by == [[0, 0, :LUCARIO], [1, 0, :SHARPEDO], [1, 1, :METAGROSS]], by.inspect)
+pbRegisterPartner(:MERIDIAN_KROLL, "Sabine", 21)     # any PBS trainer with a ring, a stone and medicine
+kept = $PokemonGlobal.partner[4]
+check("pbRegisterPartner keeps the partner's Mega Ring and nothing else (no medicine)", kept == [:MEGARING] &&
+      $PokemonGlobal.partner[3].any? { |p| p.item_id == :SHARPEDONITE }, kept.inspect)
+pbRegisterPartner(:RIVAL_JUNO, "Juno", 70)
+check("a ring-less partner (Juno's Ch21 team) registers with no ring", $PokemonGlobal.partner[4] == [], $PokemonGlobal.partner[4].inspect)
+pbDeregisterPartner
 
 two_z = lambda do
   [npc(:OCTAVE_SINGER, "Aria", [vap.call]),

@@ -26,22 +26,22 @@ Mega: the player's Camerupt (AI-controlled) on the Volcanic field
   But nothing happened!
   Camerupt used Earth Power!
   Magma erupted from below!
-    HP Chansey (foe): 388 -> 228 / 388
+    HP Chansey (foe): 388 -> 242 / 388
   (end of round)
   The volcano erupted!
-    HP Chansey (foe): 228 -> 179 / 388
+    HP Chansey (foe): 242 -> 193 / 388
   Lava rained down around the wild Chansey!
   Camerupt rode the eruption!
     (anim: StatUp)
   Camerupt's Special Attack rose!
 
 --- Turn 2 ---
-  [Camerupt 172/172 | Chansey 179/388]
+  [Camerupt 172/172 | Chansey 193/388]
   The wild Chansey used Splash!
   But nothing happened!
   Camerupt used Flamethrower!
   Camerupt drew fire up from the magma!
-    HP Chansey (foe): 179 -> 0 / 388
+    HP Chansey (foe): 193 -> 0 / 388
   The wild Chansey fainted!
     xx fainted: Chansey (foe)
   Camerupt got 4741 Exp. Points!
@@ -57,8 +57,8 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
 
 --- Battle start ---
   field: FROZEN_LAKE | weather: None | terrain: None
-  You are challenged by Warden Anja!
-  Warden Anja sent out Ninetales!
+  You are challenged by Matriarch Anja!
+  Matriarch Anja sent out Ninetales!
     >> sent out (foe): Ninetales Lv.49 @SITRUSBERRY [SNOWWARNING]
   Go! Togekiss!
     >> sent out (player): Togekiss Lv.80 @LEFTOVERS [HUSTLE]
@@ -74,14 +74,14 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
     HP Ninetales (foe): 151 -> 0 / 151
   A critical hit!
   It's super effective!
+  The lake ice groaned and cracked! (2 more)
   The opposing Ninetales fainted!
     xx fainted: Ninetales (foe)
-  The lake ice groaned and cracked! (2 more)
   Togekiss got 923 Exp. Points!
   (end of round)
     (anim: Hail)
-  Warden Anja is about to send out Walrein. Will you switch your Pokémon?  [auto: No]
-  Warden Anja sent out Walrein!
+  Matriarch Anja is about to send out Walrein. Will you switch your Pokémon?  [auto: No]
+  Matriarch Anja sent out Walrein!
     >> sent out (foe): Walrein Lv.50 @SITRUSBERRY [THICKFAT]
   The opposing Walrein settled comfortably onto the ice!
     (anim: StatUp)
@@ -96,9 +96,9 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   The frozen lake lent its cold to Ice Beam!
     HP Togekiss (player): 250 -> 147 / 250
   It's super effective!
+  The cold sealed the cracks in the ice!
     (anim: Frozen)
   Togekiss was frozen solid!
-  The cold sealed the cracks in the ice!
   (end of round)
     (anim: Hail)
     (anim: UseItem)
@@ -133,13 +133,13 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
     (anim: UseItem)
     HP Togekiss (player): 74 -> 89 / 250
   Togekiss restored a little HP using its Leftovers!
-  Warden Anja is about to send out Glalie. Will you switch your Pokémon?  [auto: No]
-  Warden Anja sent out Glalie!
+  Matriarch Anja is about to send out Glalie. Will you switch your Pokémon?  [auto: No]
+  Matriarch Anja sent out Glalie!
     >> sent out (foe): Glalie Lv.50 @GLALITITE [INNERFOCUS]
 
 --- Turn 5 ---
   [Togekiss 89/250 | Glalie 161/161]
-  The opposing Glalie's Glalitite is reacting to Warden Anja's Mega Ring!
+  The opposing Glalie's Glalitite is reacting to Matriarch Anja's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Glalie has Mega Evolved into Mega Glalie!
@@ -153,17 +153,17 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   Togekiss used Flamethrower!
     HP Glalie (foe): 161 -> 0 / 161
   It's super effective!
+  The lake ice groaned and cracked! (2 more)
   The opposing Glalie fainted!
     xx fainted: Glalie (foe)
-  The lake ice groaned and cracked! (2 more)
   Togekiss got 920 Exp. Points!
   (end of round)
     (anim: Hail)
     (anim: UseItem)
     HP Togekiss (player): 31 -> 46 / 251
   Togekiss restored a little HP using its Leftovers!
-  Warden Anja is about to send out Cloyster. Will you switch your Pokémon?  [auto: No]
-  Warden Anja sent out Cloyster!
+  Matriarch Anja is about to send out Cloyster. Will you switch your Pokémon?  [auto: No]
+  Matriarch Anja sent out Cloyster!
     >> sent out (foe): Cloyster Lv.49 @WHITEHERB [SKILLLINK]
 
 --- Turn 6 ---
@@ -172,12 +172,12 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   The frozen lake lent its cold to Ice Shard!
     HP Togekiss (player): 46 -> 0 / 251
   It's super effective!
+  The cold sealed the cracks in the ice!
   Togekiss fainted!
     xx fainted: Togekiss (player)
   The opposing Cloyster slid across the ice!
     (anim: StatUp)
   The opposing Cloyster's Speed rose!
-  The cold sealed the cracks in the ice!
   (end of round)
     (anim: Hail)
   You're in charge, Garchomp!
@@ -234,15 +234,16 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
     (anim: UseItem)
     HP Slowbro (player): 240 -> 256 / 266
   Slowbro restored a little HP using its Leftovers!
-  Warden Anja sent out Avalugg!
-    >> sent out (foe): Avalugg Lv.50 @ROCKYHELMET [STURDY]
+  Matriarch Anja sent out Avalugg!
+    >> sent out (foe): Avalugg Lv.50 @SITRUSBERRY [STURDY]
 
 --- Turn 10 ---
   [Slowbro 256/266 | Avalugg 176/176]
-  Slowbro used Psychic!
-    HP Avalugg (foe): 176 -> 1 / 176
-    [ability: Avalugg (foe)'s Sturdy]
-  The opposing Avalugg endured the hit!
+  Slowbro used Scald!
+    HP Avalugg (foe): 176 -> 14 / 176
+    (anim: EatBerry)
+    HP Avalugg (foe): 14 -> 58 / 176
+  The opposing Avalugg restored its health using its Sitrus Berry!
   The opposing Avalugg used Rapid Spin!
   The opposing Avalugg spun like a top on the ice!
     HP Slowbro (player): 256 -> 234 / 266
@@ -254,42 +255,20 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   Slowbro restored a little HP using its Leftovers!
 
 --- Turn 11 ---
-  [Slowbro 250/266 | Avalugg 1/176]
-  Warden Anja used a Full Restore.
-    HP Avalugg (foe): 1 -> 176 / 176
-  The opposing Avalugg's HP was restored.
-  Slowbro used Scald!
-    HP Avalugg (foe): 176 -> 1 / 176
-    [ability: Avalugg (foe)'s Sturdy]
-  The opposing Avalugg endured the hit!
-  (end of round)
-    (anim: UseItem)
-    HP Slowbro (player): 250 -> 266 / 266
-  Slowbro restored a little HP using its Leftovers!
-
---- Turn 12 ---
-  [Slowbro 266/266 | Avalugg 1/176]
-  Warden Anja used a Full Restore.
-    HP Avalugg (foe): 1 -> 176 / 176
-  The opposing Avalugg's HP was restored.
-  Slowbro used Scald!
-    HP Avalugg (foe): 176 -> 1 / 176
-    [ability: Avalugg (foe)'s Sturdy]
-  The opposing Avalugg endured the hit!
-  (end of round)
-
---- Turn 13 ---
-  [Slowbro 266/266 | Avalugg 1/176]
+  [Slowbro 250/266 | Avalugg 58/176]
   The opposing Avalugg used Recover!
-    HP Avalugg (foe): 1 -> 89 / 176
+    HP Avalugg (foe): 58 -> 146 / 176
   The opposing Avalugg's HP was restored.
   Slowbro used Scald!
-    HP Avalugg (foe): 89 -> 0 / 176
+    HP Avalugg (foe): 146 -> 0 / 176
   The opposing Avalugg fainted!
     xx fainted: Avalugg (foe)
   Slowbro got 985 Exp. Points!
   (end of round)
-  Warden Anja sent out Matriarch!
+    (anim: UseItem)
+    HP Slowbro (player): 250 -> 266 / 266
+  Slowbro restored a little HP using its Leftovers!
+  Matriarch Anja sent out Matriarch!
     >> sent out (foe): Matriarch Lv.51 @ELEMENTALSEED [THICKFAT]
   The opposing Matriarch settled comfortably onto the ice!
     (anim: StatUp)
@@ -300,10 +279,10 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
     (anim: StatUp)
   The opposing Matriarch's Speed rose sharply!
 
---- Turn 14 ---
+--- Turn 12 ---
   [Slowbro 266/266 | Matriarch 171/195]
   The opposing Matriarch used Knock Off!
-    HP Slowbro (player): 266 -> 201 / 266
+    HP Slowbro (player): 266 -> 196 / 266
   It's super effective!
   Slowbro dropped its Leftovers!
   Slowbro used Scald!
@@ -312,12 +291,12 @@ AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
   The opposing Matriarch fainted!
     xx fainted: Matriarch (foe)
   Slowbro got 1520 Exp. Points!
-  You defeated Warden Anja!
+  You defeated Matriarch Anja!
   The ice held for you. It doesn't hold for many.
   You got $5,100 for winning!
   battle result code: 1
   
-RESULT: player won after 13 turn(s)
+RESULT: player won after 11 turn(s)
 
 
 AI: Brann's Standard Camerupt (v0) alone on Volcanic: a weak Mega below Lv 50
@@ -325,8 +304,8 @@ AI: Brann's Standard Camerupt (v0) alone on Volcanic: a weak Mega below Lv 50
 
 --- Battle start ---
   field: VOLCANIC | weather: None | terrain: None
-  You are challenged by Warden Brann!
-  Warden Brann sent out Camerupt!
+  You are challenged by Forgemaster Brann!
+  Forgemaster Brann sent out Camerupt!
     >> sent out (foe): Camerupt Lv.37 @CAMERUPTITE [MAGMAARMOR]
   Go! Blissey!
     >> sent out (player): Blissey Lv.39 @LEFTOVERS [NATURALCURE]
@@ -338,7 +317,7 @@ AI: Brann's Standard Camerupt (v0) alone on Volcanic: a weak Mega below Lv 50
 
 --- Turn 1 ---
   [Blissey 259/259 | Camerupt 112/112]
-  The opposing Camerupt's Cameruptite is reacting to Warden Brann's Mega Ring!
+  The opposing Camerupt's Cameruptite is reacting to Forgemaster Brann's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Camerupt has Mega Evolved into Mega Camerupt!
@@ -371,7 +350,7 @@ AI: Brann's Standard Camerupt (v0) alone on Volcanic: a weak Mega below Lv 50
   Blissey fainted!
     xx fainted: Blissey (player)
   You have no more Pokémon that can fight!
-  You lost against Warden Brann!
+  You lost against Forgemaster Brann!
   You gave $312 to the winner...
   battle result code: 2
   
@@ -385,8 +364,8 @@ Mega + Z: one trainer's double (Lucario @Lucarionite, Vaporeon @Waterium Z, MEGA
 
 --- Battle start ---
   field: WATER_SURFACE | weather: None | terrain: None
-  You are challenged by Warden Marisol!
-  Warden Marisol sent out Lucario and Vaporeon!
+  You are challenged by Union Boss Marisol!
+  Union Boss Marisol sent out Lucario and Vaporeon!
     >> sent out (foe): Lucario Lv.70 @LUCARIONITE [STEADFAST]
     >> sent out (foe): Vaporeon Lv.70 @WATERIUMZ [WATERABSORB]
   Go! Blissey and Snorlax!
@@ -397,7 +376,7 @@ Mega + Z: one trainer's double (Lucario @Lucarionite, Vaporeon @Waterium Z, MEGA
 
 --- Turn 1 ---
   [Blissey 651/651 | Lucario 199/199 | Snorlax 461/461 | Vaporeon 283/283]
-  The opposing Lucario's Lucarionite is reacting to Warden Marisol's Mega Ring!
+  The opposing Lucario's Lucarionite is reacting to Union Boss Marisol's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Lucario has Mega Evolved into Mega Lucario!
@@ -454,7 +433,7 @@ Mega + Z: one trainer's double (Lucario @Lucarionite, Vaporeon @Waterium Z, MEGA
     HP Lucario (foe): 24 -> 0 / 199
   The opposing Lucario fainted!
     xx fainted: Lucario (foe)
-  You defeated Warden Marisol!
+  You defeated Union Boss Marisol!
   ...
   You got $7,000 for winning!
   battle result code: 1
@@ -565,15 +544,15 @@ Species Z-move: the player's Snorlax with the Snorlium Z
 RESULT: player won after 0 turn(s)
 
 
-=== 5. One Mega and one Z-move per SIDE (two foe trainers) ===
+=== 5. One Mega per TRAINER, one Z-move per SIDE (two foe trainers; a tag battle) ===
 
-Per side (LIMIT :side): two foe trainers, each with a Mega Stone and a Mega Ring
-================================================================================
+Per side (LIMIT :trainer, the shipped rule): two foe trainers, each with a Mega Stone and a Mega Ring
+=====================================================================================================
 
 --- Battle start ---
   field: NONE | weather: None | terrain: None
-  You are challenged by Warden Kaito and Warden Magnus!
-  Warden Kaito sent out Lucario! Warden Magnus sent out Metagross!
+  You are challenged by Pit Champion Kaito and Artificer Magnus!
+  Pit Champion Kaito sent out Lucario! Artificer Magnus sent out Metagross!
     >> sent out (foe): Lucario Lv.70 @LUCARIONITE [STEADFAST]
     >> sent out (foe): Metagross Lv.70 @METAGROSSITE [CLEARBODY]
   Go! Blissey and Snorlax!
@@ -582,86 +561,11 @@ Per side (LIMIT :side): two foe trainers, each with a Mega Stone and a Mega Ring
 
 --- Turn 1 ---
   [Blissey 651/651 | Lucario 199/199 | Snorlax 461/461 | Metagross 213/213]
-  The opposing Lucario's Lucarionite is reacting to Warden Kaito's Mega Ring!
+  The opposing Lucario's Lucarionite is reacting to Pit Champion Kaito's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Lucario has Mega Evolved into Mega Lucario!
-  The opposing Lucario used Nasty Plot!
-    (anim: StatUp)
-  The opposing Lucario's Special Attack rose sharply!
-  Blissey used Seismic Toss!
-    HP Lucario (foe): 199 -> 99 / 199
-  The opposing Metagross used Zen Headbutt!
-    HP Snorlax (player): 461 -> 384 / 461
-  Snorlax used Body Slam!
-    HP Metagross (foe): 213 -> 158 / 213
-  It's not very effective...
-  (end of round)
-    (anim: UseItem)
-    HP Snorlax (player): 384 -> 412 / 461
-  Snorlax restored a little HP using its Leftovers!
-
---- Turn 2 ---
-  [Blissey 651/651 | Lucario 99/199 | Snorlax 412/461 | Metagross 158/213]
-  The opposing Lucario used Flash Cannon!
-    HP Snorlax (player): 412 -> 283 / 461
-  Blissey used Seismic Toss!
-    HP Lucario (foe): 99 -> 0 / 199
-  The opposing Lucario fainted!
-    xx fainted: Lucario (foe)
-  Blissey is at the level cap (Lv. 100) and can't gain Exp. Points.
-  Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
-  The opposing Metagross used Zen Headbutt!
-  The opposing Metagross's attack missed!
-  Snorlax used Body Slam!
-    HP Metagross (foe): 158 -> 102 / 213
-  It's not very effective...
-  (end of round)
-    (anim: UseItem)
-    HP Snorlax (player): 283 -> 311 / 461
-  Snorlax restored a little HP using its Leftovers!
-
---- Turn 3 ---
-  [Blissey 651/651 | Snorlax 311/461 | Metagross 102/213]
-  Blissey used Seismic Toss!
-    HP Metagross (foe): 102 -> 2 / 213
-  The opposing Metagross used Earthquake!
-    HP Blissey (player): 651 -> 507 / 651
-    HP Snorlax (player): 311 -> 265 / 461
-  Snorlax used Body Slam!
-    HP Metagross (foe): 2 -> 0 / 213
-  It's not very effective...
-  The opposing Metagross fainted!
-    xx fainted: Metagross (foe)
-  You defeated Warden Kaito and Warden Magnus!
-  ...
-  ...
-  You got $14,000 for winning!
-  battle result code: 1
-  
-RESULT: player won after 2 turn(s)
-
-
-Per side (LIMIT :trainer, Essentials' own rule): two foe trainers, each with a Mega Stone and a Mega Ring
-=========================================================================================================
-
---- Battle start ---
-  field: NONE | weather: None | terrain: None
-  You are challenged by Warden Kaito and Warden Magnus!
-  Warden Kaito sent out Lucario! Warden Magnus sent out Metagross!
-    >> sent out (foe): Lucario Lv.70 @LUCARIONITE [STEADFAST]
-    >> sent out (foe): Metagross Lv.70 @METAGROSSITE [CLEARBODY]
-  Go! Blissey and Snorlax!
-    >> sent out (player): Blissey Lv.100 @LEFTOVERS [SERENEGRACE]
-    >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
-
---- Turn 1 ---
-  [Blissey 651/651 | Lucario 199/199 | Snorlax 461/461 | Metagross 213/213]
-  The opposing Lucario's Lucarionite is reacting to Warden Kaito's Mega Ring!
-    (anim: MegaEvolution)
-    (anim: MegaEvolution2)
-  The opposing Lucario has Mega Evolved into Mega Lucario!
-  The opposing Metagross's Metagrossite is reacting to Warden Magnus's Mega Ring!
+  The opposing Metagross's Metagrossite is reacting to Artificer Magnus's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Metagross has Mega Evolved into Mega Metagross!
@@ -669,21 +573,21 @@ Per side (LIMIT :trainer, Essentials' own rule): two foe trainers, each with a M
     (anim: StatUp)
   The opposing Lucario's Special Attack rose sharply!
   The opposing Metagross used Zen Headbutt!
-    HP Snorlax (player): 461 -> 342 / 461
+    HP Snorlax (player): 461 -> 353 / 461
   Blissey used Seismic Toss!
     HP Lucario (foe): 199 -> 99 / 199
   Snorlax used Body Slam!
-    HP Metagross (foe): 234 -> 177 / 234
+    HP Metagross (foe): 234 -> 182 / 234
   It's not very effective...
   (end of round)
     (anim: UseItem)
-    HP Snorlax (player): 342 -> 370 / 461
+    HP Snorlax (player): 353 -> 381 / 461
   Snorlax restored a little HP using its Leftovers!
 
 --- Turn 2 ---
-  [Blissey 651/651 | Lucario 99/199 | Snorlax 370/461 | Metagross 177/234]
+  [Blissey 651/651 | Lucario 99/199 | Snorlax 381/461 | Metagross 182/234]
   The opposing Lucario used Flash Cannon!
-    HP Snorlax (player): 370 -> 233 / 461
+    HP Snorlax (player): 381 -> 244 / 461
   The opposing Metagross used Meteor Mash!
     HP Blissey (player): 651 -> 280 / 651
     (anim: StatUp)
@@ -695,43 +599,317 @@ Per side (LIMIT :trainer, Essentials' own rule): two foe trainers, each with a M
   Blissey is at the level cap (Lv. 100) and can't gain Exp. Points.
   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
   Snorlax used Body Slam!
-    HP Metagross (foe): 177 -> 115 / 234
+    HP Metagross (foe): 182 -> 126 / 234
   It's not very effective...
   (end of round)
     (anim: UseItem)
     HP Blissey (player): 280 -> 320 / 651
   Blissey restored a little HP using its Leftovers!
     (anim: UseItem)
-    HP Snorlax (player): 233 -> 261 / 461
+    HP Snorlax (player): 244 -> 272 / 461
   Snorlax restored a little HP using its Leftovers!
 
 --- Turn 3 ---
-  [Blissey 320/651 | Snorlax 261/461 | Metagross 115/234]
+  [Blissey 320/651 | Snorlax 272/461 | Metagross 126/234]
   The opposing Metagross used Zen Headbutt!
     HP Blissey (player): 320 -> 0 / 651
   Blissey fainted!
     xx fainted: Blissey (player)
   Snorlax used Body Slam!
-    HP Metagross (foe): 115 -> 53 / 234
+    HP Metagross (foe): 126 -> 70 / 234
   It's not very effective...
   (end of round)
     (anim: UseItem)
-    HP Snorlax (player): 261 -> 289 / 461
+    HP Snorlax (player): 272 -> 300 / 461
   Snorlax restored a little HP using its Leftovers!
 
 --- Turn 4 ---
-  [Snorlax 289/461 | Metagross 53/234]
+  [Snorlax 300/461 | Metagross 70/234]
   The opposing Metagross used Zen Headbutt!
-    HP Snorlax (player): 289 -> 0 / 461
+    HP Snorlax (player): 300 -> 25 / 461
   A critical hit!
+  Snorlax flinched and couldn't move!
+  (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 25 -> 53 / 461
+  Snorlax restored a little HP using its Leftovers!
+
+--- Turn 5 ---
+  [Snorlax 53/461 | Metagross 70/234]
+  The opposing Metagross used Zen Headbutt!
+    HP Snorlax (player): 53 -> 0 / 461
   Snorlax fainted!
     xx fainted: Snorlax (player)
   You have no more Pokémon that can fight!
-  You lost against Warden Kaito and Warden Magnus!
+  You lost against Pit Champion Kaito and Artificer Magnus!
   You gave $800 to the winner...
   battle result code: 2
   
-RESULT: player lost after 3 turn(s)
+RESULT: player lost after 4 turn(s)
+
+
+Per side (LIMIT :side, the old SPINE Rev 20 rule): two foe trainers, each with a Mega Stone and a Mega Ring
+===========================================================================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  You are challenged by Pit Champion Kaito and Artificer Magnus!
+  Pit Champion Kaito sent out Lucario! Artificer Magnus sent out Metagross!
+    >> sent out (foe): Lucario Lv.70 @LUCARIONITE [STEADFAST]
+    >> sent out (foe): Metagross Lv.70 @METAGROSSITE [CLEARBODY]
+  Go! Blissey and Snorlax!
+    >> sent out (player): Blissey Lv.100 @LEFTOVERS [SERENEGRACE]
+    >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+
+--- Turn 1 ---
+  [Blissey 651/651 | Lucario 199/199 | Snorlax 461/461 | Metagross 213/213]
+  The opposing Lucario's Lucarionite is reacting to Pit Champion Kaito's Mega Ring!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The opposing Lucario has Mega Evolved into Mega Lucario!
+  The opposing Lucario used Nasty Plot!
+    (anim: StatUp)
+  The opposing Lucario's Special Attack rose sharply!
+  Blissey used Seismic Toss!
+    HP Lucario (foe): 199 -> 99 / 199
+  The opposing Metagross used Meteor Mash!
+    HP Blissey (player): 651 -> 353 / 651
+  Snorlax used Body Slam!
+    HP Metagross (foe): 213 -> 156 / 213
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Blissey (player): 353 -> 393 / 651
+  Blissey restored a little HP using its Leftovers!
+
+--- Turn 2 ---
+  [Blissey 393/651 | Lucario 99/199 | Snorlax 461/461 | Metagross 156/213]
+  The opposing Lucario used Flash Cannon!
+    HP Blissey (player): 393 -> 278 / 651
+  Blissey used Seismic Toss!
+    HP Lucario (foe): 99 -> 0 / 199
+  The opposing Lucario fainted!
+    xx fainted: Lucario (foe)
+  Blissey is at the level cap (Lv. 100) and can't gain Exp. Points.
+  Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+  The opposing Metagross used Meteor Mash!
+    HP Blissey (player): 278 -> 0 / 651
+  A critical hit!
+  Blissey fainted!
+    xx fainted: Blissey (player)
+    (anim: StatUp)
+  The opposing Metagross's Attack rose!
+  Snorlax used Body Slam!
+    HP Metagross (foe): 156 -> 99 / 213
+  It's not very effective...
+  (end of round)
+
+--- Turn 3 ---
+  [Snorlax 461/461 | Metagross 99/213]
+  The opposing Metagross used Zen Headbutt!
+    HP Snorlax (player): 461 -> 333 / 461
+  Snorlax used Body Slam!
+    HP Metagross (foe): 99 -> 37 / 213
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 333 -> 361 / 461
+  Snorlax restored a little HP using its Leftovers!
+
+--- Turn 4 ---
+  [Snorlax 361/461 | Metagross 37/213]
+  The opposing Metagross used Zen Headbutt!
+    HP Snorlax (player): 361 -> 147 / 461
+  A critical hit!
+  Snorlax flinched and couldn't move!
+  (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 147 -> 175 / 461
+  Snorlax restored a little HP using its Leftovers!
+
+--- Turn 5 ---
+  [Snorlax 175/461 | Metagross 37/213]
+  The opposing Metagross used Zen Headbutt!
+    HP Snorlax (player): 175 -> 37 / 461
+  Snorlax flinched and couldn't move!
+  (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 37 -> 65 / 461
+  Snorlax restored a little HP using its Leftovers!
+
+--- Turn 6 ---
+  [Snorlax 65/461 | Metagross 37/213]
+  The opposing Metagross used Zen Headbutt!
+    HP Snorlax (player): 65 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Pit Champion Kaito and Artificer Magnus!
+  You gave $800 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 5 turn(s)
+
+
+Tag battle (partner with a ring): the player's Lucario + partner Kestrel's Scizor vs Kroll's Sharpedo + Quent's Metagross, a stone each
+=======================================================================================================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  You are challenged by Infiltrator Sabine and Null Architect Percival!
+  Infiltrator Sabine sent out Sharpedo! Null Architect Percival sent out Metagross!
+    >> sent out (foe): Sharpedo Lv.70 @SHARPEDONITE [ROUGHSKIN]
+    >> sent out (foe): Metagross Lv.70 @METAGROSSITE [CLEARBODY]
+  Lone Blade Kestrel sent out Scizor! Go! Lucario!
+    >> sent out (player): Scizor Lv.70 @SCIZORITE [SWARM]
+    >> sent out (player): Lucario Lv.70 @LUCARIONITE [INNERFOCUS]
+
+--- Turn 1 ---
+  [Lucario 199/199 | Sharpedo 199/199 | Scizor 199/199 | Metagross 213/213]
+  The opposing Sharpedo's Sharpedonite is reacting to Infiltrator Sabine's Lattice band!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The opposing Sharpedo has Mega Evolved into Mega Sharpedo!
+  Lucario's Lucarionite is reacting to Tester's Mega Ring!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  Lucario has Mega Evolved into Mega Lucario!
+  The opposing Metagross's Metagrossite is reacting to Null Architect Percival's Lattice band!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The opposing Metagross has Mega Evolved into Mega Metagross!
+  The ally Scizor's Scizorite is reacting to Lone Blade Kestrel's Mega Ring!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The ally Scizor has Mega Evolved into Mega Scizor!
+  The opposing Metagross used Earthquake!
+    HP Sharpedo (foe): 199 -> 128 / 199
+    HP Lucario (player): 199 -> 87 / 199
+    HP Scizor (player): 199 -> 159 / 199
+  It's super effective on Lucario!
+  The opposing Sharpedo used Ice Fang!
+    HP Scizor (player): 159 -> 131 / 199
+  It's not very effective...
+  Lucario used Aura Sphere!
+    HP Sharpedo (foe): 128 -> 0 / 199
+  It's super effective!
+  The opposing Sharpedo fainted!
+    xx fainted: Sharpedo (foe)
+  Lucario got 2255 Exp. Points!
+  The ally Scizor used X-Scissor!
+    HP Metagross (foe): 234 -> 164 / 234
+  (end of round)
+
+--- Turn 2 ---
+  [Lucario 87/199 | Scizor 131/199 | Metagross 164/234]
+  The opposing Metagross used Zen Headbutt!
+    HP Lucario (player): 87 -> 0 / 199
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  The ally Scizor used Swords Dance!
+    (anim: StatUp)
+  The ally Scizor's Attack rose sharply!
+  (end of round)
+  Go for it, Blissey!
+    >> sent out (player): Blissey Lv.100 @LEFTOVERS [NATURALCURE]
+
+--- Turn 3 ---
+  [Blissey 651/651 | Scizor 131/199 | Metagross 164/234]
+  The opposing Metagross used Meteor Mash!
+    HP Blissey (player): 651 -> 238 / 651
+  Blissey used Seismic Toss!
+    HP Metagross (foe): 164 -> 64 / 234
+  The ally Scizor used X-Scissor!
+    HP Metagross (foe): 64 -> 0 / 234
+  The opposing Metagross fainted!
+    xx fainted: Metagross (foe)
+  Blissey is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Infiltrator Sabine and Null Architect Percival!
+  ...
+  ...
+  You got $14,000 for winning!
+  battle result code: 1
+  
+RESULT: player won after 2 turn(s)
+
+
+Tag battle (partner without a ring): the player's Lucario + partner Kestrel's Scizor vs Kroll's Sharpedo + Quent's Metagross, a stone each
+==========================================================================================================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  You are challenged by Infiltrator Sabine and Null Architect Percival!
+  Infiltrator Sabine sent out Sharpedo! Null Architect Percival sent out Metagross!
+    >> sent out (foe): Sharpedo Lv.70 @SHARPEDONITE [ROUGHSKIN]
+    >> sent out (foe): Metagross Lv.70 @METAGROSSITE [CLEARBODY]
+  Lone Blade Kestrel sent out Scizor! Go! Lucario!
+    >> sent out (player): Scizor Lv.70 @SCIZORITE [SWARM]
+    >> sent out (player): Lucario Lv.70 @LUCARIONITE [STEADFAST]
+
+--- Turn 1 ---
+  [Lucario 199/199 | Sharpedo 199/199 | Scizor 199/199 | Metagross 213/213]
+  The opposing Sharpedo's Sharpedonite is reacting to Infiltrator Sabine's Lattice band!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The opposing Sharpedo has Mega Evolved into Mega Sharpedo!
+  Lucario's Lucarionite is reacting to Tester's Mega Ring!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  Lucario has Mega Evolved into Mega Lucario!
+  The opposing Metagross's Metagrossite is reacting to Null Architect Percival's Lattice band!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The opposing Metagross has Mega Evolved into Mega Metagross!
+  The opposing Metagross used Earthquake!
+    HP Sharpedo (foe): 199 -> 128 / 199
+    HP Lucario (player): 199 -> 76 / 199
+    HP Scizor (player): 199 -> 145 / 199
+  It's super effective on Lucario!
+  The opposing Sharpedo used Ice Fang!
+    HP Lucario (player): 76 -> 34 / 199
+  It's not very effective...
+  Lucario used Aura Sphere!
+    HP Sharpedo (foe): 128 -> 0 / 199
+  It's super effective!
+  The opposing Sharpedo fainted!
+    xx fainted: Sharpedo (foe)
+  Lucario got 2255 Exp. Points!
+  The ally Scizor used X-Scissor!
+    HP Metagross (foe): 234 -> 177 / 234
+  (end of round)
+
+--- Turn 2 ---
+  [Lucario 34/199 | Scizor 145/199 | Metagross 177/234]
+  The opposing Metagross used Meteor Mash!
+    HP Lucario (player): 34 -> 0 / 199
+  It's not very effective...
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  The ally Scizor used Swords Dance!
+    (anim: StatUp)
+  The ally Scizor's Attack rose sharply!
+  (end of round)
+  Go for it, Blissey!
+    >> sent out (player): Blissey Lv.100 @LEFTOVERS [NATURALCURE]
+
+--- Turn 3 ---
+  [Blissey 651/651 | Scizor 145/199 | Metagross 177/234]
+  The opposing Metagross used Meteor Mash!
+    HP Blissey (player): 651 -> 238 / 651
+  Blissey used Seismic Toss!
+    HP Metagross (foe): 177 -> 77 / 234
+  The ally Scizor used X-Scissor!
+    HP Metagross (foe): 77 -> 0 / 234
+  The opposing Metagross fainted!
+    xx fainted: Metagross (foe)
+  Blissey is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Infiltrator Sabine and Null Architect Percival!
+  ...
+  ...
+  You got $14,000 for winning!
+  battle result code: 1
+  
+RESULT: player won after 2 turn(s)
 
 
 Per side: two foe trainers, each with a Z-crystal
@@ -745,12 +923,12 @@ Per side: two foe trainers, each with a Z-crystal
     >> sent out (foe): Jolteon Lv.70 @ELECTRIUMZ [VOLTABSORB]
   Go! Blissey and Snorlax!
     >> sent out (player): Blissey Lv.100 @LEFTOVERS [SERENEGRACE]
-    >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    >> sent out (player): Snorlax Lv.100 @LEFTOVERS [THICKFAT]
 
 --- Turn 1 ---
   [Blissey 651/651 | Vaporeon 283/283 | Snorlax 461/461 | Jolteon 192/192]
   The opposing Jolteon used Thunderbolt!
-    HP Snorlax (player): 461 -> 407 / 461
+    HP Snorlax (player): 461 -> 400 / 461
   Blissey used Seismic Toss!
     HP Vaporeon (foe): 283 -> 183 / 283
   The opposing Vaporeon surrounded itself with its Z-Power!
@@ -768,13 +946,13 @@ Per side: two foe trainers, each with a Z-crystal
     HP Blissey (player): 565 -> 605 / 651
   Blissey restored a little HP using its Leftovers!
     (anim: UseItem)
-    HP Snorlax (player): 407 -> 435 / 461
+    HP Snorlax (player): 400 -> 428 / 461
   Snorlax restored a little HP using its Leftovers!
 
 --- Turn 2 ---
-  [Blissey 605/651 | Snorlax 435/461 | Jolteon 192/192]
+  [Blissey 605/651 | Snorlax 428/461 | Jolteon 192/192]
   The opposing Jolteon used Thunderbolt!
-    HP Snorlax (player): 435 -> 348 / 461
+    HP Snorlax (player): 428 -> 330 / 461
   A critical hit!
   Blissey used Seismic Toss!
     HP Jolteon (foe): 192 -> 92 / 192
@@ -854,8 +1032,8 @@ Per side: one foe trainer's Mega and the other's Z-move are both allowed
 
 --- Battle start ---
   field: NONE | weather: None | terrain: None
-  You are challenged by Warden Kaito and Chorister Aria!
-  Warden Kaito sent out Lucario! Chorister Aria sent out Vaporeon!
+  You are challenged by Pit Champion Kaito and Chorister Aria!
+  Pit Champion Kaito sent out Lucario! Chorister Aria sent out Vaporeon!
     >> sent out (foe): Lucario Lv.70 @LUCARIONITE [INNERFOCUS]
     >> sent out (foe): Vaporeon Lv.70 @WATERIUMZ [WATERABSORB]
   Go! Blissey and Snorlax!
@@ -864,7 +1042,7 @@ Per side: one foe trainer's Mega and the other's Z-move are both allowed
 
 --- Turn 1 ---
   [Blissey 651/651 | Lucario 199/199 | Snorlax 461/461 | Vaporeon 283/283]
-  The opposing Lucario's Lucarionite is reacting to Warden Kaito's Mega Ring!
+  The opposing Lucario's Lucarionite is reacting to Pit Champion Kaito's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Lucario has Mega Evolved into Mega Lucario!
@@ -909,7 +1087,7 @@ Per side: one foe trainer's Mega and the other's Z-move are both allowed
     HP Vaporeon (foe): 68 -> 0 / 283
   The opposing Vaporeon fainted!
     xx fainted: Vaporeon (foe)
-  You defeated Warden Kaito and Chorister Aria!
+  You defeated Pit Champion Kaito and Chorister Aria!
   ...
   ...
   You got $11,200 for winning!
@@ -1185,9 +1363,9 @@ Field CRYSTAL_CAVERN: Mega Venusaur
   [Venusaur 184/184 | Chansey 111/388 POISON]
   Venusaur used Earthquake!
     HP Chansey (foe): 111 -> 0 / 388
+  The crystals are cracking! (2 more)
   The wild Chansey fainted!
     xx fainted: Chansey (foe)
-  The crystals are cracking! (2 more)
   Venusaur got 4741 Exp. Points!
   battle result code: 1
   
@@ -1303,39 +1481,52 @@ Field BLEED: Mega Ampharos
     [ability: Ampharos (player)'s Mold Breaker]
   Ampharos breaks the mold!
   Ampharos's Mega Evolution tore at the Bleed! The Imprints lurch!
-  The Bleed convulses... echoes of the Wildfire tear through the battlefield!
-  Ampharos used Thunderbolt!
-    HP Chansey (foe): 388 -> 290 / 388
-  The wild Chansey used Splash!
-  But nothing happened!
-  (end of round)
-
---- Turn 2 ---
-  [Ampharos 196/196 | Chansey 290/388]
+  The Bleed convulses... echoes of the Mountain tear through the battlefield!
   Ampharos used Focus Blast!
-  The Bleed warped Focus Blast into something stronger!
-    HP Chansey (foe): 290 -> 64 / 388
-  It's super effective!
-    (anim: StatDown)
-  The wild Chansey's Special Defense fell!
+  Ampharos's attack missed!
   The wild Chansey used Splash!
   But nothing happened!
   (end of round)
   The Bleed warped the wild Chansey's power!
     (anim: StatUp)
-  The wild Chansey's Special Defense rose!
-  The wild Chansey's Speed fell!
+  The wild Chansey's Attack rose!
+  The wild Chansey's Special Attack fell!
+
+--- Turn 2 ---
+  [Ampharos 196/196 | Chansey 388/388]
+  Ampharos used Focus Blast!
+  The Bleed warped Focus Blast into something stronger!
+    HP Chansey (foe): 388 -> 182 / 388
+  It's super effective!
+  The wild Chansey used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped the wild Chansey's power!
+    (anim: StatUp)
+  The wild Chansey's Speed rose!
+  The wild Chansey's Attack fell!
 
 --- Turn 3 ---
-  [Ampharos 196/196 | Chansey 64/388]
+  [Ampharos 196/196 | Chansey 182/388]
+  The wild Chansey used Splash!
+  But nothing happened!
   Ampharos used Thunderbolt!
-    HP Chansey (foe): 64 -> 0 / 388
+    HP Chansey (foe): 182 -> 79 / 388
+  (end of round)
+  The Bleed convulses... echoes of the Snowy Mountain tear through the battlefield!
+
+--- Turn 4 ---
+  [Ampharos 196/196 | Chansey 79/388]
+  The wild Chansey used Splash!
+  But nothing happened!
+  Ampharos used Thunderbolt!
+    HP Chansey (foe): 79 -> 0 / 388
   The wild Chansey fainted!
     xx fainted: Chansey (foe)
   Ampharos got 4741 Exp. Points!
   battle result code: 1
   
-RESULT: player won after 2 turn(s)
+RESULT: player won after 3 turn(s)
 
 
 Field COLOSSEUM: Mega Pidgeot
@@ -1551,7 +1742,7 @@ RESULT: player won after 0 turn(s)
     | 
     | --- Battle start ---
     |   field: SILKWOOD | weather: None | terrain: None
-    |   Oh! A wild Pinsir appeared!
+    |   Oh! A wild Old Pincer appeared!
     |   Go! Charizard!
     |     >> sent out (player): Charizard Lv.75 @CHARIZARDITEY [BLAZE]
     | ## FIELD CHANGE: NONE -> SILKWOOD
@@ -1559,7 +1750,7 @@ RESULT: player won after 0 turn(s)
     |   The Old Pincer unwinds from the sap tree, horns clacking like shears!
     | 
     | --- Turn 1 ---
-    |   [Charizard 225/225 | Pinsir 195/195]
+    |   [Charizard 225/225 | Old Pincer 211/211]
     |   Charizard's Charizardite Y is reacting to Tester's Mega Ring!
     |     (anim: MegaEvolution)
     |     (anim: MegaEvolution2)
@@ -1569,31 +1760,32 @@ RESULT: player won after 0 turn(s)
     |   The sunlight turned harsh!
     |   Charizard used Flamethrower!
     |   The flames raced along the silk!
-    |     HP Pinsir (foe): 195 -> 1 / 195
+    |     HP Old Pincer (foe): 211 -> 1 / 211
+    |   A critical hit!
     |   It's super effective!
     |   The sun-dried silk is smouldering... (1 more)
-    |   The wild Pinsir's shield shattered!
-    |     HP Pinsir (foe): 1 -> 195 / 195
-    |   The wild Pinsir digs its claws into the bark and holds on!
+    |   The wild Old Pincer's shield shattered!
+    |     HP Old Pincer (foe): 1 -> 211 / 211
+    |   The wild Old Pincer digs its claws into the bark and holds on!
     |     (anim: StatUp)
-    |   The wild Pinsir's Defense rose!
-    |   The wild Pinsir used Swords Dance!
+    |   The wild Old Pincer's Defense rose!
+    |   The wild Old Pincer used Swords Dance!
     |     (anim: StatUp)
-    |   The wild Pinsir's Attack rose sharply!
+    |   The wild Old Pincer's Attack rose sharply!
     |   (end of round)
     |     (anim: Sun)
     |   The sunlight is strong.
     | 
     | --- Turn 2 ---
-    |   [Charizard 225/225 | Pinsir 195/195]
+    |   [Charizard 225/225 | Old Pincer 211/211]
     |   Charizard used Flamethrower!
     |   The flames raced along the silk!
-    |     HP Pinsir (foe): 195 -> 0 / 195
+    |     HP Old Pincer (foe): 211 -> 0 / 211
     |   It's super effective!
-    |   The wild Pinsir fainted!
-    |     xx fainted: Pinsir (foe)
     | ## FIELD CHANGE: SILKWOOD -> WILDFIRE
     |   The sun-dried silk went up in a flash - the Silkwood is ablaze!
+    |   The wild Old Pincer fainted!
+    |     xx fainted: Old Pincer (foe)
     |   Charizard got 1722 Exp. Points!
     |   battle result code: 1
     |   (overworld message) The Old Pincer lets go of the trunk and sits down heavily in the moss. Something drops from between its horns: a stone the brown of old bark.
@@ -1631,8 +1823,8 @@ Celestine's Mimikyu @ Mimikium Z (Let's Snuggle Forever) on Fairy Tale
 
 --- Battle start ---
   field: FAIRY_TALE | weather: None | terrain: None
-  You are challenged by Warden Celestine!
-  Warden Celestine sent out Mimikyu!
+  You are challenged by Oathbound Celestine!
+  Oathbound Celestine sent out Mimikyu!
     >> sent out (foe): Mimikyu Lv.78 @MIMIKIUMZ [DISGUISE]
   Go! Snorlax!
     >> sent out (player): Snorlax Lv.80 @LEFTOVERS [THICKFAT]
@@ -1644,7 +1836,7 @@ Celestine's Mimikyu @ Mimikium Z (Let's Snuggle Forever) on Fairy Tale
   Snorlax, switch out! Come back!
     << recalled: Snorlax (player)
   You're in charge, Chansey!
-    >> sent out (player): Chansey Lv.80 @EVIOLITE [NATURALCURE]
+    >> sent out (player): Chansey Lv.80 @EVIOLITE [SERENEGRACE]
   The opposing Mimikyu surrounded itself with its Z-Power!
   The opposing Mimikyu unleashed its full-force Z-Move!
   Celestine: This is the part where it hugs you. Hold still. It's worse if you don't.
@@ -1732,7 +1924,7 @@ Celestine's Mimikyu @ Mimikium Z (Let's Snuggle Forever) on Fairy Tale
   Snorlax fainted!
     xx fainted: Snorlax (player)
   You have no more Pokémon that can fight!
-  You lost against Warden Celestine!
+  You lost against Oathbound Celestine!
   You gave $9,600 to the winner...
   battle result code: 2
   
@@ -1744,19 +1936,19 @@ No line for a trainer without one: Marisol's Mega Lucario + Hydro Vortex
 
 --- Battle start ---
   field: WATER_SURFACE | weather: None | terrain: None
-  You are challenged by Warden Marisol!
-  Warden Marisol sent out Lucario and Vaporeon!
+  You are challenged by Union Boss Marisol!
+  Union Boss Marisol sent out Lucario and Vaporeon!
     >> sent out (foe): Lucario Lv.70 @LUCARIONITE [STEADFAST]
     >> sent out (foe): Vaporeon Lv.70 @WATERIUMZ [WATERABSORB]
   Go! Snorlax and Chansey!
     >> sent out (player): Snorlax Lv.80 @LEFTOVERS [THICKFAT]
-    >> sent out (player): Chansey Lv.80 @EVIOLITE [NATURALCURE]
+    >> sent out (player): Chansey Lv.80 @EVIOLITE [SERENEGRACE]
 ## FIELD CHANGE: NONE -> WATER_SURFACE
   The battle is taking place on the open water!
 
 --- Turn 1 ---
   [Snorlax 370/370 | Lucario 199/199 | Chansey 514/514 | Vaporeon 283/283]
-  The opposing Lucario's Lucarionite is reacting to Warden Marisol's Mega Ring!
+  The opposing Lucario's Lucarionite is reacting to Union Boss Marisol's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
   The opposing Lucario has Mega Evolved into Mega Lucario!
@@ -1772,7 +1964,7 @@ No line for a trainer without one: Marisol's Mega Lucario + Hydro Vortex
     (anim: StatDown)
   Chansey's Speed fell!
   Snorlax used Body Slam!
-    HP Lucario (foe): 199 -> 142 / 199
+    HP Lucario (foe): 199 -> 136 / 199
   It's not very effective...
   Chansey used Seismic Toss!
     HP Vaporeon (foe): 283 -> 203 / 283
@@ -1781,7 +1973,7 @@ No line for a trainer without one: Marisol's Mega Lucario + Hydro Vortex
     HP Vaporeon (foe): 203 -> 221 / 283
 
 --- Turn 2 ---
-  [Snorlax 370/370 | Lucario 142/199 | Chansey 393/514 | Vaporeon 221/283]
+  [Snorlax 370/370 | Lucario 136/199 | Chansey 393/514 | Vaporeon 221/283]
   The opposing Lucario used Aura Sphere!
     HP Snorlax (player): 370 -> 0 / 370
   It's super effective!
@@ -1791,13 +1983,13 @@ No line for a trainer without one: Marisol's Mega Lucario + Hydro Vortex
   The opposing Vaporeon rode the waves into the attack!
     HP Chansey (player): 393 -> 334 / 514
   Chansey used Seismic Toss!
-    HP Lucario (foe): 142 -> 62 / 199
+    HP Lucario (foe): 136 -> 56 / 199
   (end of round)
   The opposing Vaporeon soaked up the spray.
     HP Vaporeon (foe): 221 -> 239 / 283
 
 --- Turn 3 ---
-  [Lucario 62/199 | Chansey 334/514 | Vaporeon 239/283]
+  [Lucario 56/199 | Chansey 334/514 | Vaporeon 239/283]
   The opposing Lucario used Aura Sphere!
     HP Chansey (player): 334 -> 62 / 514
   It's super effective!
@@ -1807,7 +1999,7 @@ No line for a trainer without one: Marisol's Mega Lucario + Hydro Vortex
   Chansey fainted!
     xx fainted: Chansey (player)
   You have no more Pokémon that can fight!
-  You lost against Warden Marisol!
+  You lost against Union Boss Marisol!
   You gave $9,600 to the winner...
   battle result code: 2
   

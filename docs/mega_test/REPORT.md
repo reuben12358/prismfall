@@ -3,7 +3,7 @@
 Real Essentials v21.1 battle code with Prismfall Core, Field Effects, Z-Power, Bosses, Trials and Mega; AI on both
 sides unless noted. Logic only: the EBDX animation is checked in the real engine (design/MEGA_EVOLUTION.md section 8).
 
-**74/74 checks passed.**
+**78/79 checks passed.**
 
 | | Check | Detail |
 |---|---|---|
@@ -31,7 +31,7 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | the AI Mega Evolves the first turn its Glalie can act | 1 turn headers in between |
 | PASS | Brann's Camerupt Mega Evolves on Standard at Gym 7 (a designed weak Mega below Lv 50) | {:side=>1, :idx=>1, :species=>:CAMERUPT, :form=>1, :ability=>:SHEERFORCE, :old_ability=>:MAGMAARMOR, |
 | PASS | ...on Volcanic, and its Mega primes the eruption as designed (Brann's fight is kept as is, per the user) |  |
-| PASS | trainers.txt: every important fight from ace 50 Megas in all modes (36 Std / 36 Hard / 36 Casual) or uses a designed Z (3 / 3 / 3); below it only designed weak Megas; one stone, a ring, no Z-crystal beside it |  |
+| **FAIL** | trainers.txt: every important fight from ace 50 Megas in all modes (36 Std / 36 Hard / 36 Casual) or uses a designed Z (3 / 3 / 3); below it only designed weak Megas; one stone, a ring, no Z-crystal beside it | LEADER_ROOK,Rook,16: ace 71, no Mega; MERIDIAN_DIRECTORATE,Ostrander,11: ace 51, no Mega; MERIDIAN_DIRECTORATE,Ostrander,111: ace 51, no Mega; MERIDIAN_DIRECTORATE,Ostrander,211: ace 51, no Mega; MERI |
 | PASS | K8 without Morwen's Ring: no ring, no stone (Kestrel has no ring of his own) |  |
 | PASS | K8 with Morwen's Ring (:ch18_kestrel_ring = :give_now): the ring, and his Scizor holds the Scizorite | SCIZOR Lv92 @SCIZORITE |
 | PASS | the foe used one Mega (Lucario) and one Z-move (Hydro Vortex) in the same battle | megas 1, z [:HYDROVORTEX] |
@@ -41,8 +41,13 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | no ring at all: no Z-Power |  |
 | PASS | Z-crystals: all 18 type crystals + 2 species crystals placed once, R4 with the Ring, sources and gates (5 ring and wait before 13) |  |
 | PASS | a species crystal: Snorlax's Giga Impact becomes Pulverizing Pancake (its own power) | {:side=>0, :idx=>0, :z=>:PULVERIZINGPANCAKE, :turn=>1, :owner=>0} |
-| PASS | LIMIT :side - only one of the two foe trainers Mega Evolves in the whole battle | ["LUCARIO@owner0"] |
-| PASS | control: with Essentials' per-trainer rule both trainers Mega Evolve | ["LUCARIO@owner0", "METAGROSS@owner1"] |
+| PASS | the shipped rule is one Mega per trainer (PrismfallMega::LIMIT == :trainer) |  |
+| PASS | LIMIT :trainer - both foe trainers of a pair Mega Evolve, once each | ["LUCARIO@owner0", "METAGROSS@owner1"] |
+| PASS | control: with LIMIT :side only one of the two foe trainers Mega Evolves in the whole battle | ["LUCARIO@owner0"] |
+| PASS | tag battle: all four trainers Mega Evolve, once each (the player, the partner, both foes) | [[0, 0, :LUCARIO], [0, 1, :SCIZOR], [1, 0, :SHARPEDO], [1, 1, :METAGROSS]] |
+| PASS | tag battle: a partner without a ring doesn't Mega; the other three do | [[0, 0, :LUCARIO], [1, 0, :SHARPEDO], [1, 1, :METAGROSS]] |
+| PASS | pbRegisterPartner keeps the partner's Mega Ring and nothing else (no medicine) | [:MEGARING] |
+| PASS | a ring-less partner (Juno's Ch21 team) registers with no ring | [] |
 | PASS | Z_LIMIT :side - one Z-move for the whole foe side | ["HYDROVORTEX@owner0"] |
 | PASS | control: with Z-Power's own per-trainer rule each trainer unleashes one | [:GIGAVOLTHAVOC, :HYDROVORTEX] |
 | PASS | a side gets one Mega AND one Z-move (different trainers) |  |
@@ -55,7 +60,7 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | Crystal Cavern: the crystals take a Grass Mega's colour (hue Fire -> Grass) | 2 |
 | PASS | Hollow Cathedral: a Ghost-type Mega re-haunts a consecrated nave (stage 2 -> 1) | 1 |
 | PASS | Factory: a Steel-type Mega's plating is hammered home (+1 Defense) |  |
-| PASS | Bleed: the Mega makes the Bleed lurch to new borrowed effects at once | 2 overlay changes |
+| PASS | Bleed: the Mega makes the Bleed lurch to new borrowed effects at once | 3 overlay changes |
 | PASS | Colosseum: the Mega's new No Guard triggers the field's entry rule (+1 Attack), and the crowd roars |  |
 | PASS | Inverse: the Mega's new Magic Bounce triggers the field's entry rule (+1 Sp. Def) |  |
 | PASS | ...but not twice: an Absol that already had Magic Bounce got the rule on entry only | {:ATTACK=>0, :DEFENSE=>0, :SPECIAL_ATTACK=>0, :SPECIAL_DEFENSE=>1, :SPEED=>0, :ACCURACY=>0, :EVASION=>0} |
@@ -77,9 +82,9 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | The Brazier Writ: a lie at the brazier burns the writ (no stone, quest still open) |  |
 | PASS | ...the truth earns the Salamencite |  |
 | PASS | Celestine's Mimikyu unleashed Let's Snuggle Forever | [{:side=>1, :idx=>1, :z=>:LETSSNUGGLEFOREVER, :turn=>1, :owner=>0}] |
-| PASS | ...and Celestine said her Z-move line once, right after the unleash (before the move hits) | speech [["Celestine", :zmove]], unleash at 836, line at 882 |
+| PASS | ...and Celestine said her Z-move line once, right after the unleash (before the move hits) | speech [["Celestine", :zmove]], unleash at 842, line at 888 |
 | PASS | ...in the battle transcript as "Celestine: This is the part where it hugs you. Hold still. It's worse if you don't." |  |
 | PASS | a trainer with no lines says nothing on her Mega or her Z-move | speech [] |
 | PASS | Celestine has no Mega line (her one power play is the Z-move, SPINE Rev 23) |  |
 
-Megas logged: 21; Z-moves logged: 9. Battle transcripts: `transcript.txt`.
+Megas logged: 28; Z-moves logged: 9. Battle transcripts: `transcript.txt`.

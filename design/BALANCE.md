@@ -240,8 +240,9 @@ script first said "version 21", but 20–22 are K2. Juno's Ch21 partner is still
 
 ## 6b. Mega Evolution (SPINE Revs 20–21) — trainer Megas (done in `gen.py`)
 
-Design and reasons: `design/MEGA_EVOLUTION.md` §6. Engine rules (plugin `Prismfall Mega`): **one Mega per side per
-battle** (one Z-move per side as well; a side may use one of each). The AI Megas the first turn its Mega holder can act.
+Design and reasons: `design/MEGA_EVOLUTION.md` §6. Engine rules (plugin `Prismfall Mega`): **one Mega per trainer per
+battle** (since 2026-11-25: both trainers of a tag pair can Mega, and a partner with a ring; it was one per side) and
+one Z-move per side; a side may use both. The AI Megas the first turn its Mega holder can act.
 An NPC Megas only if its trainer's `Items` include `MEGARING`. A Pokémon with a Z-crystal can't Mega.
 
 **SPINE Rev 21 (user):** the player's Mega Ring comes after Badge 13. **From an ace of about Lv 50 (Gym 10 on) every
