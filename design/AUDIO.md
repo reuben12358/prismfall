@@ -178,10 +178,9 @@ it exists on the channel, or swap for any remix of the named source theme. Stand
 | Ending: Bad / Ruin | `BGM/Ending - Ruin.mid` | GlitchxCity - Lavender Town remix (pitch 85) ([link](https://www.youtube.com/@GlitchxCity)) (confirm title) | `team_aquas_misc/ShinyDragonHunter/mus_rg_sevii_dungeon.mid` |
 | Credits | `BGM/Credits` | keep stock name (Scene_Credits::BGM) | `(stock base project)` |
 
-**Still missing outright** (no stand-in, engine tolerates the absence): ambience loops for `Audio/BGS`
-(`Rain`, `Wind - Isenmar`, `Lava - Ashkaar`, `Machinery - Zenith`, `Drip - Nadir`, `War - Distant Battle`) and
-cutscene SE (`Beam charge`, `Beam clash`, `Beam break`, `Crowd cheer`, `Crowd gasp`). Record or source CC0 ones;
-EBDX's `Audio/SE` move sounds can cover beams for now.
+**Ambience and cutscene SE:** the nine `Audio/BGS` loops and the cutscene / battle SE are staged in
+`audio/gemini_cc0/` (CC0 pack; the BGS are the v5 field-audio loops since 2026-11-25). Three cues named in the
+cinematics spec have no file of their own yet (`Blade Pierce`, `Mask Crack`, `Bell Break`); the nearest CC0 hit stands in.
 
 Install the stand-ins: `python3 audio/install_audio.py <game project>` (skips any name already present).
 
@@ -189,7 +188,7 @@ Install the stand-ins: `python3 audio/install_audio.py <game project>` (skips an
 
 | What | Where | Key / call |
 |---|---|---|
-| Map music | The map file itself (`RPG::Map#bgm`, autoplay). **Not** a `map_metadata` key. | mapgen spec `bgm:` (`mapgen/rpg.py rmap(bgm=...)`); a second BGS arg exists (`bgs=`) but specs don't expose it yet |
+| Map music and ambience | `design/MAP_AUDIO.yaml` (one row per built map: `bgm`, `bgs`, volumes, `rain`). `mapgen/map_audio.py` writes `Prismfall Maps/013_MapAudio.rb`, which patches the map as it loads, only with installed files. | Edit the yaml, run `python3 -I mapgen/map_audio.py` (or any `build.py`). A spec's `map_audio: {...}` block wins for its map. The spec's `bgm:` is baked into the map file and plays when the Prismfall track is not installed. |
 | Per-map battle music | `PBS/map_metadata_prismfall.txt` | `WildBattleBGM`, `TrainerBattleBGM`, `WildVictoryBGM`, `TrainerVictoryBGM`, `WildCaptureME` |
 | Global defaults | `PBS/metadata.txt` section `[0]` | same five keys plus `SurfBGM`, `BicycleBGM` |
 | Trainer music | `PBS/trainer_types_prismfall.txt` | `IntroBGM` (eye-contact theme), `BattleBGM`, `VictoryBGM` |
@@ -204,6 +203,22 @@ Install the stand-ins: `python3 audio/install_audio.py <game project>` (skips an
 
 Battle BGM priority (`003_Utilities_BattleAudio.rb`): `nextBattleBGM` → trainer type → map metadata → global
 metadata → `"Battle trainer"` / `"Battle wild"`.
+
+## 4b. What is wired (Audio v4.3, 2026-11-25)
+
+| Area | State |
+|---|---|
+| Maps | All 117 built maps have a `MAP_AUDIO.yaml` row: 103 with a Prismfall BGM (Poké Centers / Marts keep stock), 60 with an ambience loop, 57 interiors that stop the loop. `Rain` replaces the ambience while it rains. |
+| Trainer types | `BattleBGM` / `IntroBGM` per §5.A in `pbs/trainer_types.txt` (every type except the Gilded King, whose music is on hold). `Prismfall Core/031_AudioCues.rb` plays the old stock track while a file is not installed. `VictoryBGM` is still stock: `Victory - Sovereign` has no staged file. |
+| Jingles | `Warden Badge Get` (new badge), `Trial Rank Up` (rank message), `Prismfall game over`. |
+| Battle SE | `Boss Shield Break` (a boss bar breaks), `Field Shatter` / `Glass Quench` (field changes), `Prism Arena Swell` (the Plates turn), `VS Cutin Lightning` (VS intro bolts). |
+| Boss music | A wild boss with no `:music` gets `Battle - Boss` (`Battle - Legendary` if it can be caught, `Battle - Arceus` for Arceus) and `Battle - Boss Final Bar` on its last bar. |
+| Title | `Title - Prismfall` when installed. |
+| Voices | `Prismfall Cutscenes/014_Portraits_Voice.rb`: `Voice - <Name>` blips on tagged, carried and "Name: " lines. Options > Voice Blips turns them off. |
+| Cutscene cues | `Prismfall::Cutscene::AUDIO` (`001_Config.rb`): 90 cues, each ending on a file that exists. |
+| Not wired yet | Festival ruleset music (§5.C3), ending themes (§5.C4), per-boss `:music` in the boss files, `metadata.txt` global battle BGMs (§5.B), the bespoke `Battle - Warden <Name>` themes (no files). |
+
+The dev kit does not ship audio: run `python3 audio/install_audio.py <game project>` (add `--force` to replace older loops).
 
 ## 5. Integration edits (for other owners; I changed none of these files)
 
