@@ -208,3 +208,74 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   domain as written, but I could not open the Wikimedia / OpenGameArt pages from the workspace. The one to double-check before a
   public release is the xeno-canto gull (`XC707075`, in `Saltmere Harbor`): xeno-canto recordings are often CC BY-NC-SA.
   `docs/CREDITS.md` still describes the BGS as synthesized; update it once the licences are confirmed.
+
+## 2026-11-24_art-drop15-npcs-and-ch17-21-wiring — **ADOPT the art wiring (done); the .ogv parts are superseded** (Claude wiring agent, 2026-11-25)
+- **§1 charset aliases: adopted, with two changes.** `025_CharsetAliases.rb` now also swaps the stock `NPC nn` stand-ins, with
+  the possessive guard ("Wenna's cousin" stays a cousin) and "Pip Ore" only. I re-ran the audit on all 120 built maps: Vesper
+  (145), Edda, Wenna, Coll, Hesper, Dex, Maelis, Calla, Hollis, Rowan, Teo, Wick, plus Sallow (186) and Hrothgar (928), with no
+  false positives. Added: Gutter, Kassan, Okoro, Renata/Sallow, Hrothgar, Eirik (his sheet has landed), Zara and the ten cameos.
+  New: `TYPE_CHARSETS`. An event that battles as a uniformed class wears `trainer_<TYPE>` with no map rebuild, so the war maps
+  920–926 pick up the Ashkaar/Isenmar soldier and officer sheets. Hollow and Meridian agents are left out on purpose: 145's
+  "Pageant" is a grunt in a gentleman's coat.
+- **§2 portraits: adopted.** `:surprised` is an expression; `OKORO`, `SALLOW` (art `RENATA`), `REFLECTION` are cast; `DELPHINE`
+  borrows Okoro's files. One correction: the selftest was **not** safe as claimed. Its count check hard-coded 21 bubbles, and
+  its "no art" fixture (Kassan) had been failing since Art Drop 15 gave him art. Both fixed in `selftest/suite.ruby_stub`.
+- **§3, §4 (movies) and §7.2: not adopted.** Reuben's later directive is no `.ogv`: every cutscene is in-engine choreography,
+  so nothing is wired to `Movies/` and `package.sh` does not ship it. The acting sheets stay useful to the cutscene agent.
+- **§4 (EBDX animated sprite importer):** left with the art pipeline as already queued; it needs sprite sources that are not in the repo.
+- **§5 types: adopted.** `[LARCH]` ("Professor") and `[WENLOW]` exist; Interlude IV now plays as `WENLOW` (it named a
+  `PARTNER_WENLOW` type that never existed). During an Interlude the VS screen shows that character's bust.
+- **§6 map fixes:** the map agent's; not touched here.
+- **§7.1 Drops 15–17:** `SUMP_BARON`, `THORNGUARD`, `GILDER_AUTOMATON` have types and teams; the Reflection has a `VS_IDS` row
+  (its PBS name is "???", so the name lookup could never find the bust) and a grey theme.
+
+## Commit 5edcbd9, the 8 faction and war classes — **wired**
+- All 8 fronts match existing PBS types. The five class busts (`ASHKAAR_OFFICER`, `ISENMAR_OFFICER`, `MERIDIAN_ADMIN`,
+  `MERIDIAN_ASHE`, `OCTAVE_SINGER`) are in `VS_IDS` and `THEMES`, and their single portraits are in `Portrait::CAST`
+  (`ASHE` is an alias for the Spin Doctor). Watch one thing: the Octave gauntlet now plays the VS screen before each singer.
+  If that drags, set `PrismfallVS::OFF_SWITCH` for the gauntlet.
+
+## 2026-11-24_cameo-venam-original-and-transfer — **ADOPT** (done)
+- Checked by hash: `FESTIVAL_VENAM` / `VENAM` are the restored Rejuvenation look, and the punk set is byte-identical under
+  `PUNK_ZARA` / `ZARA`. No text anywhere described Venam's old look, so nothing else needed fixing.
+- **Zara is in:** type `PUNK_ZARA` ("Riot Punk"), VS id, rose theme, portrait cast, name alias. Her fights come from `gen.py`
+  rather than the pasted PBS: `[PUNK_ZARA,Zara]` at Lv 35–37 (one under Venam's 38; the proposal's Overdrive and Boomburst
+  aren't learnable at 38) and `[PUNK_ZARA,Zara,1]` at Lv 75–77, each with Hard and Casual versions.
+- The cameo art rule and the corrected looks (Alexandra, Lin, Nova) are written into `design/CAMEOS.md`.
+
+## 2026-11-24 cameo waves 1–3 (Shelly, Melia, Alexandra · Amaria, Titania, Garret · Shiv, Lin, Nova) — **ADOPT** (done)
+- All three hooks per cameo are in (`VS_IDS` + `THEMES`, `Portrait::CAST`, `NAME_ALIASES`). The snippets named tables that
+  don't exist (`TRAINER_TYPE_MAP`, `TRAINER_TO_CAST`, `BUST_THEMES`); the real ones are `VS_IDS` and `THEMES`.
+- Types and teams already existed at CAMEOS.md's levels with their signature species; no legendary except Alexandra's Latias,
+  which CAMEOS.md names. Nova's type was `Gender = Mixed`; it is Female now.
+- **Shelly is live:** her event on 525 was already built and now wears her sheet and shows her portraits. The other eight
+  venues are unbuilt maps; `design/CAMEOS.md` has the placement table (map, condition, battle call, flag) for the map builder.
+
+## 2026-11-24_player-movement-charsets — **ADOPT Option B** (done)
+- `026_PlayerLooks.rb` serves the run, bike, surf/dive and fishing sheets, each only when its file is installed. No
+  `pbs/metadata.txt` fork. Interludes still win (Core 028 wraps the same methods).
+- Not seen in the engine yet: the capture harness was in use. Worth one short capture of run, bike and fishing.
+
+## 2026-11-24_gen5-b2w2-tileset-overhaul and commit 23b1125 — **ADOPT the reskin as shipped; the donor-swap blueprint stays a proposal**
+- What landed is a recolour: all 43 sheets keep their size and alpha mask exactly (checked pixel for pixel), so no map,
+  passability or tile id can break. The 22-donor slot-swap plan in the proposal is not what was pushed and is not adopted here:
+  it needs Reuben's sign-off and a licence pass per pack.
+- **Install path fixed.** `package.sh` shipped the reskin only by accident of copy order, while `run_intro.sh` copied the mapgen
+  sheets last, so real-engine captures showed the old tiles with reskinned stock interiors. Both now call
+  `tools/overlay_reskin.py`: the reskin goes on top, a sheet that no longer matches its mapgen source is skipped and listed
+  (re-run `mapgen/gen5_reskin.py` after any tileset rebuild), and `PF_NO_GEN5=1` gives the mapgen look.
+- The DevKit now overwrites four stock sheets (`Poke Centre interior`, `Mart interior`, `Interior general`, `Gyms interior`);
+  `package.sh` says so.
+- **Gemini, please check in a capture:** `PF Salt Lake`'s shore went from rose salt to dark violet. Does it still sit right
+  against Brinecut's rose-salt floor (545)?
+
+## Art still owed (from `python3 -I tools/check_art_wiring.py`, 2026-11-25)
+- **Front strips, 17 classes that already have trainers** (they battle in a stand-in's sprite, Core `032_TrainerArtStandIns.rb`):
+  `ASHKAAR_EMBER_RIDER`, `ISENMAR_HIRDMAN`, `ISENMAR_TRENCHER`, `THORNWATCH`, the genderless `ASHKAAR_SOLDIER`, and the twelve
+  Grounds Ladder classes `WEAVER`, `HARPOONER`, `STREAMER`, `FOREMAN`, `MOON_BROKER`, `WYRM_RIDER`, `LAMP_RUNNER`, `WELL_KEEPER`,
+  `LANTERN_ACOLYTE`, `EMBALMER`, `WARDGUARD`, `CANTOR`.
+- **Overworld sheets** `trainer_<TYPE>.png`: `HOLLOW_GRUNT_M/F`, `MERIDIAN_AGENT_M`, `ASHKAAR_SOLDIER_M`, `ISENMAR_SOLDIER_M`
+  (the four that would finish the war maps), `REFLECTION`, and the 16 classes above.
+- **Back strips for Interlude leads:** `CHAMPION_VALEN_back` (Interlude V) and `LEADER_ROWAN_back` (Interlude II).
+- **`EBDX/VS/WENLOW.png`** (his portrait stands in at 1.5x), `SUMP_BARON_back`, and Hrothgar has no battle strip or bust.
+- **Rename:** `Characters/pose_THEODRIC.png` should be `pose_AURELIUS.png` (the rest of the King's set was renamed).
