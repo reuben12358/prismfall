@@ -77,6 +77,7 @@ module Prismfall
     already = $player.badges[n - 1]
     $player.badges[n - 1] = true
     $stats.set_time_to_badge(n - 1) if !already && $stats.respond_to?(:set_time_to_badge)
+    Prismfall::AudioCue.me(:badge_get) if !already && defined?(Prismfall::AudioCue)   # "Warden Badge Get", else stock "Badge get"
     EventHandlers.trigger(:prismfall_badge_awarded, n)
     if announce && !already && Prismfall::LevelCap.enabled?
       pbMessage(_INTL("The level cap is now Lv. {1}.", Prismfall::LevelCap.current))

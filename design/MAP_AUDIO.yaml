@@ -1,0 +1,136 @@
+# Map music and ambience: the single source for every built map's BGM / BGS (Audio v4.3,
+# gemini_recommends/2026-11-21_audio-mastering-and-soundscape/WIRING_SPEC.md section 3).
+# mapgen/map_audio.py turns this into maps_out/Plugins/Prismfall Maps/013_MapAudio.rb (build.py runs it; or run
+# `python3 -I mapgen/map_audio.py` alone). The plugin applies an entry when the map loads, and ONLY for files
+# that are installed: a missing track leaves the map's own (spec `bgm:`) music in place, so a project without
+# audio/install_audio.py still plays the stock placeholders instead of silence.
+#
+#   bgm:         Audio/BGM name (audio/manifest.tsv final_name). Leave it out to keep the spec's bgm
+#                (Poke Center / Poke Mart stay stock).
+#   bgm_volume:  default 100
+#   bgs:         Audio/BGS loop. "" = silence: the map stops the ambience of the map before it (interiors).
+#                Leave the key out to keep whatever the spec baked in.
+#   bgs_volume:  default 80
+#   rain:        true/false - swap the BGS for Audio/BGS/Rain while it rains on this map (weather is rolled from
+#                the map's metadata). Default: true when the map has a non-empty bgs and is not listed false.
+#
+# A spec can override any of these for its own map with a `map_audio: {bgm: ..., bgs: ...}` block (the spec wins).
+# Finer slots (Town - Saltmere, Town - Briarwick ...) get their own names here once those tracks are installed.
+maps:
+  100: {bgm: "Town - Ferrows Landing", bgs: "Saltmere Harbor", bgs_volume: 60}   # Ferrow's Landing
+  101: {bgs: ""}   # Ferrow's Landing Pokémon Center
+  102: {bgs: ""}   # Ferrow's Landing Mart
+  103: {bgm: "Intro - Larch Lab", bgs: ""}   # Larch Research Station
+  104: {bgm: "Town - Ferrows Landing", bgs: ""}   # Tidewater Inn
+  105: {bgm: "Town - Ferrows Landing", bgs: ""}   # Ferrow Lighthouse 1F
+  106: {bgm: "Town - Ferrows Landing", bgs: "Saltmere Harbor", bgs_volume: 50, rain: false}   # Ferrow Lighthouse Lamp Room
+  107: {bgm: "Town - Ferrows Landing", bgs: ""}   # Dockmaster's House
+  108: {bgm: "Town - Ferrows Landing", bgs: ""}   # Quarantine Customs Hall
+  109: {bgm: "Intro - Last Ferry", bgs: "Saltmere Harbor", bgs_volume: 70}   # The Dovetail - Deck
+  110: {bgm: "Intro - Last Ferry", bgs: "Saltmere Harbor", bgs_volume: 35, rain: false}   # The Dovetail - Cabin
+  120: {bgm: "Town - Elowen", bgs: "Gossamer Deepwood", bgs_volume: 55}   # Briarwick
+  121: {bgs: ""}   # Briarwick Pokémon Center
+  122: {bgs: ""}   # Briarwick Mart
+  123: {bgm: "Town - Elowen", bgs: ""}   # Weavers' Guildhall
+  124: {bgm: "Town - Elowen", bgs: ""}   # Treetop House
+  125: {bgm: "Town - Elowen", bgs: ""}   # Cutter's House
+  126: {bgm: "Town - Elowen", bgs: ""}   # Briarwick Lantern House
+  130: {bgm: "Gym - Warden Hall", bgs: ""}   # Loomhouse Gym - Lobby
+  131: {bgm: "Gym - Warden Hall", bgs: "Gossamer Deepwood", bgs_volume: 45, rain: false}   # Loomhouse Gym - The Canopy
+  132: {bgm: "Gym - Warden Hall", bgs: "Gossamer Deepwood", bgs_volume: 45, rain: false}   # Loomhouse Upper Lofts - Canopy Lofts
+  134: {bgm: "Gym - Warden Hall", bgs: "Gossamer Deepwood", bgs_volume: 45, rain: false}   # Loomhouse Upper Lofts - Granny's Knot
+  140: {bgm: "Town - Elowen", bgs: "Saltmere Harbor", bgs_volume: 70}   # Saltmere
+  141: {bgs: ""}   # Saltmere Pokémon Center
+  142: {bgs: ""}   # Saltmere Mart
+  143: {bgm: "Town - Elowen", bgs: ""}   # Saltmere Harbour Office
+  144: {bgm: "Town - Elowen", bgs: ""}   # Saltwife's House
+  145: {bgm: "Town - Elowen", bgs: ""}   # Pageant Hall
+  146: {bgm: "Town - Elowen", bgs: "Saltmere Harbor", bgs_volume: 80}   # Saltmere - Harbour & Breakwater
+  147: {bgm: "Town - Elowen", bgs: "Saltmere Harbor", bgs_volume: 55}   # Saltmere - Old Town
+  148: {bgm: "Town - Elowen", bgs: ""}   # Saltmere Lantern House
+  150: {bgm: "Gym - Warden Hall", bgs: ""}   # Pell Playhouse - Lobby
+  151: {bgm: "Gym - Warden Hall", bgs: ""}   # Pell Playhouse Backstage - The Old Revolve
+  152: {bgm: "Gym - Warden Hall", bgs: ""}   # Pell Playhouse Backstage - Fly Loft
+  153: {bgm: "Gym - Warden Hall", bgs: ""}   # Pell Playhouse Backstage - The Trap Room
+  154: {bgm: "Gym - Warden Hall", bgs: ""}   # Pell Playhouse - Auditorium
+  160: {bgm: "Town - Isenmar", bgs: "Wind - Isenmar", bgs_volume: 60}   # Ebbmouth
+  161: {bgs: ""}   # Ebbmouth Pokémon Center
+  162: {bgs: ""}   # Ebbmouth Mart
+  163: {bgm: "Town - Isenmar", bgs: ""}   # Anglers' Guild
+  164: {bgm: "Town - Isenmar", bgs: ""}   # Reyes House
+  165: {bgm: "Town - Isenmar", bgs: ""}   # Net-mender's House
+  167: {bgm: "Town - Isenmar", bgs: "Saltmere Harbor", bgs_volume: 65}   # Ebbmouth - Mill Quay
+  168: {bgm: "Town - Isenmar", bgs: ""}   # The Net Loft
+  170: {bgm: "Gym - Warden Hall", bgs: ""}   # Tidelock Gym - Lock Hall
+  171: {bgm: "Gym - Warden Hall", bgs: "Drip - Nadir", bgs_volume: 45, rain: false}   # Tidelock Gym - Basins (Low Water)
+  172: {bgm: "Gym - Warden Hall", bgs: "Drip - Nadir", bgs_volume: 50, rain: false}   # Tidelock Gym - Basins (Mid Water)
+  173: {bgm: "Gym - Warden Hall", bgs: "Drip - Nadir", bgs_volume: 55, rain: false}   # Tidelock Gym - Basins (High Water)
+  174: {bgm: "Gym - Warden Hall", bgs: "Drip - Nadir", bgs_volume: 50, rain: false}   # Tidelock Gym - Warden's Pool
+  180: {bgm: "Town - Zenith", bgs: "Machinery - Zenith", bgs_volume: 55}   # Lumen City - The Concourse
+  181: {bgm: "Town - Nadir", bgs: "Machinery - Zenith", bgs_volume: 65}   # Lumen City - The Lowlight
+  182: {bgs: ""}   # Lumen Pokémon Center
+  183: {bgs: ""}   # Lumen Arcade 1F
+  185: {bgm: "Theme - Meridian", bgs: "Machinery - Zenith", bgs_volume: 40, rain: false}   # Meridian Spire - Lobby
+  186: {bgm: "Theme - Meridian", bgs: ""}   # Meridian Spire - Gala Hall
+  187: {bgm: "Town - Zenith", bgs: ""}   # Glide Cycles
+  188: {bgm: "Intro - Larch Lab", bgs: "Machinery - Zenith", bgs_volume: 35, rain: false}   # Lumen Fossil Lab
+  189: {bgm: "Town - Zenith", bgs: ""}   # Lumen Apartment
+  190: {bgm: "Gym - Warden Hall", bgs: "Machinery - Zenith", bgs_volume: 45, rain: false}   # Circuit Gym - Switchroom
+  191: {bgm: "Gym - Warden Hall", bgs: "Machinery - Zenith", bgs_volume: 50, rain: false}   # Circuit Gym - Breadboard Hall
+  192: {bgm: "Gym - Warden Hall", bgs: "Machinery - Zenith", bgs_volume: 55, rain: false}   # Circuit Gym - Live Wire Hall
+  193: {bgm: "Gym - Warden Hall", bgs: "Machinery - Zenith", bgs_volume: 60, rain: false}   # Circuit Gym - Core
+  255: {bgm: "Route - Ashkaar", bgs: "Lava - Ashkaar", bgs_volume: 75, rain: false}   # Cindervault - Tap Chamber
+  280: {bgm: "Town - Elowen", bgs: "Gossamer Deepwood", bgs_volume: 45}   # Verdance - Market Terraces
+  281: {bgs: ""}   # Verdance Pokémon Center
+  282: {bgs: ""}   # Verdance Mart
+  285: {bgm: "Town - Elowen", bgs: "Gossamer Deepwood", bgs_volume: 40}   # Briar Hall - Upper Court
+  286: {bgm: "Theme - Accord", bgs: ""}   # Briar Hall - Great Hall
+  287: {bgm: "Theme - Accord", bgs: ""}   # Briar Hall - Throne Room
+  295: {bgm: "Mood - Mystery", bgs: ""}   # Cathedral of the Evergreen
+  520: {bgm: "Route - Elowen", bgs: "Saltmere Harbor", bgs_volume: 60}   # The Ferrymen's Mile
+  521: {bgm: "Route - Elowen", bgs: ""}   # Windfall Row
+  522: {bgm: "Mood - Mystery", bgs: "Glassfall Bleed", bgs_volume: 70}   # The Glassed Orchard
+  523: {bgm: "Town - Ferrows Landing", bgs: ""}   # Hale Farmhouse
+  524: {bgm: "Route - Elowen Forest", bgs: "Gossamer Deepwood", bgs_volume: 65}   # Gossamer Wood
+  525: {bgm: "Route - Elowen Forest", bgs: "Gossamer Deepwood", bgs_volume: 75}   # Gossamer Deepwood
+  526: {bgm: "Route - Elowen Forest", bgs: ""}   # Woodward's Hut
+  527: {bgm: "Route - Elowen", bgs: "Saltmere Harbor", bgs_volume: 50}   # Lacecliff Walk
+  528: {bgm: "Route - Elowen", bgs: "Saltmere Harbor", bgs_volume: 45}   # Marram Down
+  540: {bgm: "Route - Elowen", bgs: ""}   # Thistledown Lea
+  541: {bgm: "Route - Elowen", bgs: "Saltmere Harbor", bgs_volume: 55}   # The Grey Saltings
+  542: {bgm: "Town - Elowen", bgs: ""}   # The Brinewife's Rest
+  544: {bgm: "Dungeon - Cave", bgs: "Drip - Nadir", bgs_volume: 60, rain: false}   # Brinecut Mine 1F
+  545: {bgm: "Dungeon - Cave", bgs: "Drip - Nadir", bgs_volume: 70, rain: false}   # Brinecut Mine B1F
+  546: {bgm: "Dungeon - Manor", bgs: ""}   # Thistledown Manor
+  547: {bgm: "Dungeon - Manor", bgs: "Wind - Isenmar", bgs_volume: 35, rain: false}   # Thistledown Manor - Attic
+  548: {bgm: "Route - Antumbra", bgs: "Glassfall Bleed", bgs_volume: 75}   # Cocoonfall Hollow
+  552: {bgm: "Route - Elowen", bgs: ""}   # The Dyers' Ford
+  560: {bgm: "Route - Borderlands", bgs: "Wind - Isenmar", bgs_volume: 55}   # Frostflat Causeway
+  561: {bgm: "Route - Isenmar", bgs: "Wind - Isenmar", bgs_volume: 55}   # Gullcry Cliffs
+  562: {bgm: "Route - Isenmar", bgs: "Wind - Isenmar", bgs_volume: 60}   # The Rimewood
+  563: {bgm: "Route - Isenmar", bgs: "Wind - Isenmar", bgs_volume: 60}   # Rimewood Glade
+  564: {bgm: "Dungeon - Cave", bgs: "Drip - Nadir", bgs_volume: 65, rain: false}   # Gullcry Caves
+  566: {bgm: "Route - Elowen", bgs: ""}   # Spinners' Rise
+  568: {bgm: "Mood - Mystery", bgs: "Glassfall Bleed", bgs_volume: 70}   # The Rehearsal
+  570: {bgm: "Town - Isenmar", bgs: "Wind - Isenmar", bgs_volume: 50}   # Frostwick
+  571: {bgs: ""}   # Frostwick Pokémon Center
+  572: {bgs: ""}   # The Exchange
+  573: {bgm: "Town - Isenmar", bgs: ""}   # The Two Hearths
+  574: {bgm: "Town - Isenmar", bgs: ""}   # Rime-silk Loft
+  575: {bgm: "Town - Isenmar", bgs: ""}   # Border House
+  576: {bgm: "Town - Isenmar", bgs: ""}   # Halvard's Smokehouse
+  577: {bgm: "Route - Borderlands", bgs: "Wind - Isenmar", bgs_volume: 70}   # Frostwick Pass
+  578: {bgm: "Route - Isenmar", bgs: "Wind - Isenmar", bgs_volume: 60}   # Rimewood Path
+  579: {bgm: "Route - Isenmar", bgs: "Wind - Isenmar", bgs_volume: 65}   # The Wolfsrime
+  582: {bgm: "Town - Zenith", bgs: "Machinery - Zenith", bgs_volume: 40, rain: false}   # Lumen West Gate
+  608: {bgm: "Route - Antumbra", bgs: "Glassfall Bleed", bgs_volume: 75}   # The Lowlight (Shattered)
+  920: {bgm: "War - March", bgs: "War - Distant Battle", bgs_volume: 65}   # The Rimed Sands
+  924: {bgm: "War - March", bgs: "War - Distant Battle", bgs_volume: 70}   # Ashkaar Siege Camp
+  925: {bgm: "War - Battlefield", bgs: "Glassfall Bleed", bgs_volume: 70}   # The Steamline
+  926: {bgm: "War - Battlefield", bgs: "War - Distant Battle", bgs_volume: 75}   # The Glass Dunes
+  928: {bgm: "War - March", bgs: "War - Distant Battle", bgs_volume: 35, rain: false}   # Ashkaar Siege Camp - Command Pavilion
+  929: {bgm: "War - March", bgs: "War - Distant Battle", bgs_volume: 55}   # The Observers' Mesa
+  930: {bgm: "Route - Ossaria", bgs: "War - Distant Battle", bgs_volume: 40}   # The Bone-Carters' Camp
+  951: {bgm: "Route - Nadir", bgs: "Machinery - Zenith", bgs_volume: 65, rain: false}   # Meridian Spire - Service Lifts
+  952: {bgm: "Mood - Tension", bgs: "Glassfall Bleed", bgs_volume: 55, rain: false}   # Meridian Spire - Plate Vault
+  990: {bgm: "Town - Crownhaven", bgs: ""}   # Prismfall Test Arena

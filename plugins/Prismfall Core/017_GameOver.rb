@@ -11,7 +11,7 @@
 #===============================================================================
 module Prismfall
   module GameOver
-    GAME_OVER_ME   = nil     # e.g. "Prismfall game over"; nil = silence
+    GAME_OVER_ME   = "Prismfall game over"   # Audio/ME; nil = silence (a missing file is silent too)
     FADE_SECONDS   = 1.2
     TITLE_COLOR    = Color.new(200, 56, 64)
     TEXT_COLOR     = Color.new(224, 220, 232)

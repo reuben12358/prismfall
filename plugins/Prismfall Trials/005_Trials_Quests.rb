@@ -255,7 +255,8 @@ module Prismfall
       store[:points][trial] = points(trial) + n.to_i
       new = rank(trial)
       if show && new > old
-        pbMessage("\\me[Badge get]" + _INTL("Your standing in {1} rose to {2}!", trial_name(trial), rank_name(trial, new)))
+        jingle = (defined?(Prismfall::AudioCue)) ? Prismfall::AudioCue.me_name(:trial_rank) : "Badge get"
+        pbMessage(((jingle.empty?) ? "" : "\\me[#{jingle}]") + _INTL("Your standing in {1} rose to {2}!", trial_name(trial), rank_name(trial, new)))
       end
       EventHandlers.trigger(:prismfall_trial_rank, trial, old, new) if new != old && defined?(EventHandlers)
     end

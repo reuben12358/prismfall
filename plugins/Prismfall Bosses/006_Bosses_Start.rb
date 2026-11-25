@@ -20,12 +20,32 @@ module Prismfall
       prepare_rules(data, opts, true)
       setup_ebdx(data, true)
       music = opts[:music] || resolve(data[:music])
+      @default_music_for = nil
+      if !music && ($PokemonGlobal.nil? || !$PokemonGlobal.nextBattleBGM)
+        music = default_music(id, data)
+        @default_music_for = id if music
+      end
       $PokemonGlobal.nextBattleBGM = music if music && $PokemonGlobal
       @last_result = nil
       EventHandlers.trigger(:prismfall_boss_starting, id, pkmn)
       ret = WildBattle.start(pkmn, can_override: false)
       return (ret) ? true : false
     end
+
+    # Music for a wild boss that names none (design/AUDIO.md 5.C2): the Arceus theme, the legendary theme for a
+    # boss that can be caught, else the boss theme. Only installed files; nil = the map's usual wild battle music.
+    def self.default_music(id, data)
+      return nil if !defined?(Prismfall::AudioCue)
+      cue = :boss
+      cue = :boss_legendary if (resolve(data[:catch]) rescue false)
+      cue = :boss_arceus if id.to_s.start_with?("ARCEUS")
+      return Prismfall::AudioCue.resolve("BGM", Prismfall::AudioCue::BGM, cue)
+    rescue StandardError
+      return nil
+    end
+
+    # The boss id whose battle is playing the default music (so the last bar may swap to the final-bar track).
+    def self.default_music_for; return @default_music_for; end
 
     def self.rule_set?(*keys)
       rules = ($game_temp) ? $game_temp.battle_rules : {}

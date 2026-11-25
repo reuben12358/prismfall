@@ -772,6 +772,10 @@ def main():
            'EventHandlers.add(:on_enter_map, :prismfall_map_tone,', '  proc { |_old_map_id| PrismfallMaps.apply_map_tone; PrismfallMaps.apply_map_fog }', ')']
     pdir0 = os.path.join(OUT, 'Plugins', 'Prismfall Maps')
     open(os.path.join(pdir0, '005_MapAtmosphere.rb'), 'w', encoding='utf-8').write('\n'.join(rb) + '\n')
+    # map BGM / BGS: design/MAP_AUDIO.yaml (+ a spec's own `map_audio:` block) -> 013_MapAudio.rb, applied at run time and
+    # only with installed files, so the spec `bgm:` baked into the map stays the fallback (see map_audio.py)
+    import map_audio
+    map_audio.write(specs)
     # hand-written runtime helpers used by the story events (pfm_* flags, story items, quest log, title cards)
     for rbf in sorted(glob.glob(os.path.join(HERE, 'ruby', '*.rb'))):
         shutil.copyfile(rbf, os.path.join(pdir0, os.path.basename(rbf)))
