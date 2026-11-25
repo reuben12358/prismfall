@@ -140,7 +140,7 @@ V143 = 3.
 - **The Spire** (Battle Tower) is open: the facility rules are design-side (the battle-facility team).
 - **The Warden's Gauntlet**: all eighteen Wardens back-to-back at Lv 100.
   - In Homecoming their teams use no fields, because the Imprints are fading: a "pure" gauntlet.
-  - **PBS (added):** version **98** of every Warden, `[LEADER_X,Name,98]` (+198 Hard, +298 Casual), Lv 96–100 with the ace at 100; Juno is `[LEADER_JUNO,Juno,60/61/62]` (`Prismfall::Rival.version_for(6)`, her starter follows the player's). Gyms 6–18 are the gym six with the Hard sets promoted; Dorian, Tamsin, Rook and Sahar are rebuilt with the same partners grown up (Bobbin is a Leavanny); Marisol is her Festival six. "No fields" is the event's battle rule.
+  - **PBS (added):** version **98** of every Warden (e.g. `[LEADER_DORIAN,Dorian,98]`, `[LEADER_SIGRUN,Sigrun,98]`; +100 Hard, +200 Casual), Lv 96–100 with the ace at 100; Juno is `[LEADER_JUNO,Juno,60]` / `[LEADER_JUNO,Juno,61]` / `[LEADER_JUNO,Juno,62]` (`Prismfall::Rival.version_for(6)`, her starter follows the player's). Gyms 6–18 are the gym six with the Hard sets promoted; Dorian, Tamsin, Rook and Sahar are rebuilt with the same partners grown up (Bobbin is a Leavanny); Marisol is her Festival six. "No fields" is the event's battle rule.
   - **Refusing Wardens are absent** after Homecoming, Unfinished. Their pedestals stand empty, with a line each from `11_FINALE_LINES.md` §3.
 ```
 [portrait: DORIAN, happy] (in the Gauntlet's antechamber, in his best coat) First on the bill again, darling. Some of us are born to open.
