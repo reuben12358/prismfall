@@ -1,4 +1,6 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-255	:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8
-255	:MERIDIAN_QUENT, "Percival", 0
-255	:MERIDIAN_QUENT, "Percival", 0, :MERIDIAN_DIRECTORATE, "Lieutenant", 8
+170	:FISHERMAN, "Gunnar"
+171	:SWIMMER_F, "Ingrid"
+172	:FISHERMAN, "Oskar"
+172	:SWIMMER_M, "Leif"
+173	:SAILOR, "Bjorn"

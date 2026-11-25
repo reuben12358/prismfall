@@ -4,7 +4,7 @@ module PrismfallMaps
     100 => [6, 2, -10, 0],   # Ferrow's Landing
     101 => [10, 4, -12, 0],   # Ferrow's Landing Pokémon Center
     102 => [10, 4, -12, 0],   # Ferrow's Landing Mart
-    103 => [10, 4, -12, 0],   # Larch Research Station
+    103 => [12, 6, -10, 0],   # Larch Research Station
     104 => [10, 4, -12, 0],   # Tidewater Inn
     105 => [10, 4, -12, 0],   # Ferrow Lighthouse 1F
     106 => [10, 4, -12, 0],   # Ferrow Lighthouse Lamp Room
