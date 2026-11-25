@@ -10,7 +10,7 @@ metadata:
   SnapEdges: true
   MapPosition: [0, 24, 8]
   BattleBack: cave1
-tone: [34, 4, -26, 10]
+tone: [28, 2, -22, 12]
 fog: {name: prismfall_cave, opacity: 30, blend: 1, zoom: 100, sx: 1, sy: 0}
 raw: data/raw/255.npy
 tileset: 61

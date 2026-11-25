@@ -187,76 +187,28 @@ def room(W, H, seed, wallrows=5):
 
 
 def build_286():
-    W, H = 33, 25
-    c = room(W, H, 286)
-    c.rect(14, 7, 5, 16, 'p'); c.rect(3, 9, 9, 12, 'c'); c.rect(21, 9, 9, 12, 'c')
-    for x in (4, 22):
-        for y in (10, 13, 16): c.stamp('t_table', x, y, force=True); c.stamp('t_table', x + 4, y, force=True)
-    for x in (12, 20):
-        for y in (8, 13, 18): pillar(c, x, y)
-    for x in (5, 9, 13, 19, 23, 27): banner(c, x, 3, 2)
-    c.gate_arch(15, 6)
-    for x in (15, 16, 17): c.g[H - 2][x] = 'p'; c.taken[H - 2][x] = False
-    c.scatter_props(3, 7, 29, 22, ['t_barrel', 't_barrel2'], 6, 'g', 1)
-    c.inlay(0, 0, W, H, 'c', [3916], 0.08)
-    c.events = [
-        {'type': 'npc', 'name': 'Steward', 'at': [18, 9], 'sprite': 'NPC 12', 'dir': 'down',
-         'text': 'Steward: The throne room lies beyond the arch. Speak when spoken to. [TODO story]'},
-        {'type': 'npc', 'name': 'Courtier', 'at': [9, 12], 'sprite': 'NPC 08', 'dir': 'right',
-         'text': 'Courtier: Living-wood rafters. They say the hall grows a hand taller every reign. [TODO story]'}]
-    c.warp_line([(16, 6)], 287, [(13, 23)], 'up')
-    c.warp_line([(x, H - 2) for x in (15, 16, 17)], 285, [(48, 23)] * 3, 'down')
-    head = {'id': 286, 'name': 'Briar Hall - Great Hall', 'palette': 'city', 'bgm': 'Natural Park', 'parent': 285,
-            'tone': [8, 4, -10, 0], 'metadata': {'Name': 'Briar Hall', 'Outdoor': False, 'MapPosition': [0, 14, 12]}}
-    c.write('286_briar_hall_great_hall.yaml', head, '# Briar Hall - Great Hall (286). WRITTEN BY layouts/verdance_city.py.\n', mirror_max=1.0)
+    import verdance_palace
+    return verdance_palace.build_286()
 
 
 def build_287():
-    W, H = 27, 27
-    c = room(W, H, 287, wallrows=6)
-    c.rect(11, 8, 5, 17, 'p'); c.rect(9, 8, 9, 4, 'c'); c.rect(3, 13, 6, 10, 'c'); c.rect(18, 13, 6, 10, 'c')
-    for dy in range(3):
-        for dx in range(2): c.tile(THRONE + dy * 8 + dx, 12 + dx + (0 if True else 0), 7 + dy, 1)
-    c.taken[9][12] = c.taken[9][13] = True
-    for x in (9, 17):
-        for y in (9, 14, 19): pillar(c, x, y)
-    for x in (4, 7, 10, 16, 19, 22): banner(c, x, 3, 2)
-    for x in (12, 13, 14): c.g[H - 2][x] = 'p'; c.taken[H - 2][x] = False
-    for x in (4, 6, 19, 21):
-        for y in (14, 17, 20): c.stamp('t_bench', x, y, force=True)
-    c.inlay(0, 0, W, H, 'c', [3916], 0.08)
-    c.events = [
-        {'type': 'npc', 'name': 'Queen Maelis', 'at': [14, 10], 'sprite': 'NPC 25', 'dir': 'down',
-         'text': 'Queen Maelis: You stand before the Thorn Throne of Elowen. [TODO story: court audience, Festival delegation]'},
-        {'type': 'npc', 'name': 'Thorn Guard', 'at': [10, 13], 'sprite': 'NPC 07', 'dir': 'right', 'text': 'Thorn Guard: ...'},
-        {'type': 'npc', 'name': 'Thorn Guard', 'at': [16, 13], 'sprite': 'NPC 07', 'dir': 'left', 'text': 'Thorn Guard: ...'}]
-    c.warp_line([(x, H - 2) for x in (12, 13, 14)], 286, [(16, 8)] * 3, 'down')
-    head = {'id': 287, 'name': 'Briar Hall - Throne Room', 'palette': 'city', 'bgm': 'Natural Park', 'parent': 285,
-            'tone': [8, 4, -10, 0], 'metadata': {'Name': 'Briar Hall', 'Outdoor': False, 'MapPosition': [0, 14, 12]}}
-    c.write('287_briar_hall_throne.yaml', head, '# Briar Hall - Throne Room (287). WRITTEN BY layouts/verdance_city.py.\n', mirror_max=1.0)
+    import verdance_palace
+    return verdance_palace.build_287()
 
 
 def build_295():
-    W, H = 31, 29
-    c = room(W, H, 295, wallrows=7)
-    c.rect(13, 9, 5, 18, 'p'); c.rect(9, 9, 13, 4, 'c'); c.rect(3, 14, 9, 12, 'c'); c.rect(19, 14, 9, 12, 'c')
-    for x in (4, 7, 20, 23, 26):
-        for y in (15, 18, 21, 24):
-            if x != 26 or True: c.stamp('t_bench', min(x, 26), y, force=True)
-    for x in (10, 20): c.tile(914, x, 10, 1); c.taken[10][x] = True
-    for x in (3, 6, 9, 12, 18, 21, 24, 27): banner(c, x, 4, 2)
-    for x in (14, 15, 16): c.g[H - 2][x] = 'p'; c.taken[H - 2][x] = False
-    c.inlay(0, 0, W, H, 'c', [3916], 0.08)
-    c.events = [{'type': 'exit', 'at': [15, H - 2], 'link': 'C280_CATH'},
-                {'type': 'npc', 'name': 'Evergreen prior', 'at': [15, 11], 'sprite': 'NPC 12', 'dir': 'down',
-                 'text': 'Prior: Eighteen windows for eighteen Plates. The nineteenth pane is clear, and we do not say why. [TODO story]'}]
-    head = {'id': 295, 'name': 'Cathedral of the Evergreen', 'palette': 'city', 'bgm': 'Natural Park', 'parent': 280,
-            'tone': [4, 8, -6, 0], 'metadata': {'Name': 'Cathedral of the Evergreen', 'Outdoor': False, 'MapPosition': [0, 14, 12]}}
-    c.write('295_cathedral.yaml', head, '# Cathedral of the Evergreen (295). WRITTEN BY layouts/verdance_city.py.\n', mirror_max=1.0)
+    import verdance_palace
+    return verdance_palace.build_295()
 
 
 if __name__ == '__main__':
-    d = build_280(); build_285(); build_286(); build_287(); build_295()
-    import re
-    p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'specs', '281_verdance_interiors.yaml')
-    s = open(p).read(); s = re.sub(r'HealingSpot: \[280, \d+, \d+\]', 'HealingSpot: [280, %d, %d]' % (d['pc'][0], d['pc'][1] + 1), s); open(p, 'w').write(s)
+    sel = set(sys.argv[1:])
+    if not sel or '280' in sel:
+        d = build_280()
+        import re
+        p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'specs', '281_verdance_interiors.yaml')
+        s = open(p).read(); s = re.sub(r'HealingSpot: \[280, \d+, \d+\]', 'HealingSpot: [280, %d, %d]' % (d['pc'][0], d['pc'][1] + 1), s); open(p, 'w').write(s)
+    if not sel or '285' in sel: build_285()
+    if not sel or '286' in sel: build_286()
+    if not sel or '287' in sel: build_287()
+    if not sel or '295' in sel: build_295()

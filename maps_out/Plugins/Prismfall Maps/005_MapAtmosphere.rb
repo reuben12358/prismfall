@@ -9,7 +9,7 @@ module PrismfallMaps
     105 => [10, 4, -12, 0],   # Ferrow Lighthouse 1F
     106 => [10, 4, -12, 0],   # Ferrow Lighthouse Lamp Room
     107 => [10, 4, -12, 0],   # Dockmaster's House
-    108 => [10, 4, -12, 0],   # Quarantine Customs Hall
+    108 => [12, 6, -10, 0],   # Quarantine Customs Hall
     109 => [14, -4, -24, 10],   # The Dovetail - Deck
     110 => [10, 4, -12, 0],   # The Dovetail - Cabin
     120 => [-10, -22, 2, 4],   # Briarwick
@@ -49,12 +49,12 @@ module PrismfallMaps
     191 => [-10, -14, 6, 20],   # Circuit Gym - Breadboard Hall
     192 => [-10, -14, 6, 20],   # Circuit Gym - Live Wire Hall
     193 => [-10, -14, 6, 20],   # Circuit Gym - Core
-    255 => [34, 4, -26, 10],   # Cindervault - Tap Chamber
+    255 => [28, 2, -22, 12],   # Cindervault - Tap Chamber
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
-    286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
-    287 => [8, 4, -10, 0],   # Briar Hall - Throne Room
-    295 => [4, 8, -6, 0],   # Cathedral of the Evergreen
+    286 => [10, 4, -10, 0],   # Briar Hall - Great Hall
+    287 => [12, 6, -8, 0],   # Briar Hall - Throne Room
+    295 => [2, 8, -4, 0],   # Cathedral of the Evergreen
     520 => [4, 4, -4, 0],   # The Ferrymen's Mile
     521 => [6, 4, -4, 0],   # Windfall Row
     522 => [-14, -18, 22, 46],   # The Glassed Orchard

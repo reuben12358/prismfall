@@ -1,10 +1,4 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-131	:BUGCATCHER, "Nell"
-131	:GENTLEMAN, "Bram"
-131	:LASS, "Orla"
-131	Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)
-154	:BEAUTY, "Rosalind"
-154	:JUGGLER, "Ambrose"
-154	:JUGGLER, "Florian"
-154	Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)
-546	:CHANNELER, "Mireille"
+255	:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8
+255	:MERIDIAN_QUENT, "Percival", 0
+255	:MERIDIAN_QUENT, "Percival", 0, :MERIDIAN_DIRECTORATE, "Lieutenant", 8
