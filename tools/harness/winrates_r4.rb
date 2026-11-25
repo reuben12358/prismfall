@@ -491,12 +491,78 @@ module WR4
       :start => proc { setBattleRule("canLose"); Prismfall::Bosses.wild_battle(boss) } }
   end
 
+  # The True Finale (Bosses 103): bars by story variant, each bar on its three gym fields. consent: a
+  # proc { |gym| } (who releases), or nil for whatever the harness save's WARDEN_CONSENT conditions give.
+  def self.arceus(variant, consent, label)
+    { :label => label, :cap => 100, :badges => 18, :size => 6, :field => :PRISM_ARENA, :foe => proc { [:NONE, "", 0] }, :r4 => true,
+      :foe_types => proc { [[:NORMAL]] },
+      :start => proc {
+        b = Prismfall::Bosses
+        b.arceus_variant_override = variant
+        b.arceus_consent_override = consent
+        begin
+          setBattleRule("canLose")
+          b.wild_battle(:ARCEUS_FINALE)
+        ensure
+          b.arceus_variant_override = nil
+          b.arceus_consent_override = nil
+        end
+      } }
+  end
+
+  # The Hijack with the conduit live (Bosses 114): Kestrel fallen and :ch21_reach_kestrel == :let_go, so NULL
+  # regenerates through bar 3. The narrative state is put back afterwards.
+  def self.hijack_conduit(tt, nm, v, label)
+    cell = story(tt, nm, v, 18, 100, :PRISM_ARENA, label)
+    cell[:start] = proc {
+      saved = Marshal.load(Marshal.dump(Prismfall.state.narrative))
+      begin
+        Prismfall::Bonds.change(:KESTREL, -8)
+        Prismfall::Choices.make(:ch21_reach_kestrel, :let_go, false)
+        setBattleRule("canLose"); setBattleRule("field", :PRISM_ARENA)
+        TrainerBattle.start(tt, nm, v)
+      ensure
+        Prismfall.state.instance_variable_set(:@narrative, saved)
+      end
+    }
+    cell
+  end
+
+  # A tag double with a registered partner (Ch17 barricade, Ch19 the lines).
+  def self.tag(ptt, pnm, pv, foes, b, cap, field, label)
+    { :label => label, :cap => cap, :badges => b, :size => 6, :field => field, :double => true, :foe => proc { foes[0, 3] }, :r4 => true,
+      :start => proc {
+        setBattleRule("canLose"); setBattleRule("double"); setBattleRule("field", field) if field
+        pbRegisterPartner(ptt, pnm, pv)
+        TrainerBattle.start(*foes)
+        pbDeregisterPartner
+      } }
+  end
+
   def self.fights
     h = {}
+    # Ch16-21 story fights added 2026-11-25 (gen.py "CH16-CH21 STORY FIGHTS ...").
+    h["GUT"] = story(:SUMP_BARON, "Mother Gutter", 0, 15, 75, :CORROSIVE_MIRE, "Ch17 Mother Gutter's Ledger (Corrosive Mire)")
+    h["BARR"] = tag(:SUMP_BARON, "Mother Gutter", 17, [:MERIDIAN_DIRECTORATE, "Mallory", 0, :MERIDIAN_DIRECTORATE, "Kade", 0], 15, 75,
+                    :CORROSIVE_MIRE, "Ch17 the barricade: PC + Mother Gutter vs Mallory + Kade (Corrosive Mire)")
+    h["TWARD"] = story(:GILDER_AUTOMATON, "Terrace Warden", 0, 16, 80, :UNDERWATER, "Ch17 the Terrace Warden (Underwater)")
+    h["ROWE"] = story(:THORNGUARD, "Captain Rowe", 0, 16, 80, :FAIRY_TALE, "Ch18 Thornguard Captain Rowe (Fairy Tale)")
+    h["HIRD"] = tag(:LEADER_SIGRUN, "Sigrun", 19, [:ISENMAR_HIRDMAN, "Hjalmar", 0, :ISENMAR_HIRDMAN, "Torunn", 0], 17, 85,
+                    :FROZEN_LAKE, "Ch19 the lines: PC + Sigrun vs the Thane's Hirdmen (Frozen Lake)")
+    h["EMBR"] = tag(:LEADER_MARISOL, "Marisol", 19, [:ASHKAAR_EMBER_RIDER, "Vharn", 0, :ASHKAAR_EMBER_RIDER, "Ashild", 0], 17, 85,
+                    :DESERT, "Ch19 the lines: PC + Marisol vs the Ember-Riders (Desert)")
+    h["MIXD"] = tag(:LEADER_SIGRUN, "Sigrun", 19, [:ISENMAR_HIRDMAN, "Styr", 0, :ASHKAAR_EMBER_RIDER, "Kessa", 0], 17, 85,
+                    :BLEED, "Ch19 the lines: PC + Sigrun vs the mixed pair (Bleed)")
+    h["TOLL"] = story(:ASHKAAR_OFFICER, "Orrin", 0, 18, 90, :MOUNTAIN, "Ch19 the Dominar's Toll (Mountain)")
+    h["LAD12"] = story(:CANTOR, "Anselm", 0, 18, 90, :PRISM_ARENA, "Ch20 Grounds Ladder rung 12, Cantor Anselm (Prism Arena)")
     h["BKYO"] = wild_boss(:KYOGRE_ISENMAR, 55, 10, "Ch12 Kyogre, Isenmar (Frozen Lake -> Water Surface; cap 55)")
     h["BGRO"] = wild_boss(:GROUDON_UNDERSANDS, 67, 13, "Ch14 Groudon, the Undersands (Desert; cap 67)")
     h["BGIR"] = wild_boss(:GIRATINA_DEPTHS, 71, 14, "Ch15 Giratina, Reverse Depths (Inverse; cap 71)")
     h["BZEK"] = wild_boss(:ZEKROM_ENGINE, 75, 15, "Ch16 Zekrom, the Cogsworth Engine (Factory -> Scrapyard; cap 75)")
+    h["BORI"] = wild_boss(:GIRATINA_ORIGIN_TRIAL, 71, 14, "Ruin R1 Giratina-Origin trial (Inverse; cap 71; the AI never holds back: the :overpowered road)")
+    h["ARC"] = arceus(:ARCEUS_BOUND, proc { |_gym| true }, "True Finale: Arceus, Bound, 6 bars, every Warden releases (Prism Arena, gym order; cap 100)")
+    h["ARCF"] = arceus(:ARCEUS_BOUND, proc { |gym| gym % 3 != 0 }, "True Finale: Arceus, Bound, one Warden in three refuses (a forced lock every bar)")
+    h["ARCM"] = arceus(:ARCEUS_MISCALIBRATED, proc { |_gym| true }, "True Finale: Arceus, Miscalibrated, 5 bars (TELEMETRY_SABOTAGED)")
     h["L3O"] = loyal(:LOYAL_THREE_OKIDOGI, true, "Ch10 Loyal Three 1/3 Okidogi, with the Ogre (Bleed)")
     h["L3M"] = loyal(:LOYAL_THREE_MUNKIDORI, true, "Ch10 Loyal Three 2/3 Munkidori, with the Ogre (Bleed)")
     h["L3F"] = loyal(:LOYAL_THREE_FEZANDIPITI, true, "Ch10 Loyal Three 3/3 Fezandipiti, with the Ogre (Bleed)")
@@ -524,6 +590,7 @@ module WR4
     h["VOSS"] = story(:MERIDIAN_VOSS, "Aurelian", 0, 18, 100, :PRISM_ARENA, "Hijack: Voss (Prism Arena; Mega Ampharos)")
     h["KING"] = story(:GILDED_AURELIUS, "Aurelius", 0, 18, 100, :PRISM_ARENA, "Hijack (Ruin): Gilded King Aurelius (Prism Arena)")
     h["QH"] = story(:MERIDIAN_QUENT, "Percival", 99, 18, 100, :PRISM_ARENA, "Hijack: Quent (Prism Arena; Mega Metagross)")
+    h["VOSSC"] = hijack_conduit(:MERIDIAN_VOSS, "Aurelian", 0, "Hijack: Voss, the conduit live (Kestrel fallen, :let_go: NULL regenerates on bar 3)")
     h
   end
 end
