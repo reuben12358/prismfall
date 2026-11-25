@@ -146,6 +146,41 @@ The Festival once invited champions through Antumbra's **Veil Gate**, but the Sy
 
 ---
 
+## Art, wiring and event placement (2026-11-25)
+
+**Permanent cameo art rule (Reuben, 2026-11-24):** a cameo wears their **home-game look**, never a redesign. Gemini's cameo
+waves 1–3 ship all ten in that look (16-frame battle strip, 5-frame back, VS bust, 12 portraits, overworld + pose sheet
+each). The punk redesign first drawn for Venam now belongs to an original character, **Riot Punk Zara** (`PUNK_ZARA`, see
+below); Venam is back in her classic Rejuvenation look. Three early art notes (the first cameo table in Gemini's Venam
+proposal) guessed looks wrongly and are corrected by the shipped art: **Alexandra** has dark skin and long black hair (plum coat), **Lin** has green hair in a high
+ponytail (teal and charcoal), **Nova** has red twin pigtails (black top). Don't describe them otherwise in dialogue.
+
+Every row is wired: trainer type in `pbs/trainer_types.txt`, teams in `pbs/trainers.txt` (source
+`tools/trainer_gen/cameos.py`), `PrismfallVS::VS_IDS` / `THEMES`, `Portrait::CAST` (so `[portrait: SHELLY, panic]` works),
+and a name alias in Core `025_CharsetAliases.rb` (an event **named** after the cameo wears their sheet even if the map was
+built with a stock stand-in). `python3 -I tools/check_art_wiring.py` checks all of it against `graphics/`.
+
+| Cameo | Type · version | Art id (VS / portrait / charset) | Event goes on | Condition | Battle call | Done flag |
+|---|---|---|---|---|---|---|
+| Shelly | `FESTIVAL_SHELLY` 1 | `SHELLY` | **525 Gossamer Deepwood, event "Shelly" (built)** | after Gym 2; the pond's Masquerain calmed | `Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)` | S181 |
+| Venam | `FESTIVAL_VENAM` 1 | `VENAM` | 644 Miasma Caverns (farewell at the grate, 645) — unbuilt | badges ≥ 6 and S118; quest `NA_VENAM` | `Prismfall.cameo_battle(:FESTIVAL_VENAM, "Venam", 1, field: :CORROSIVE_MIRE)` | S182 |
+| Garret | `FESTIVAL_GARRET` 1 | `GARRET` | 263 Ironreach lower shafts — unbuilt | S123; quest `NA_GARRET` | `…(:FESTIVAL_GARRET, "Garret", 1, field: :COLOSSEUM)` | S183 |
+| Melia | `FESTIVAL_MELIA` 1 | `MELIA` | 682 Royal Chase, the fishpond copse — unbuilt | S125 (J3) | `…(:FESTIVAL_MELIA, "Melia", 1)` | S184 |
+| Alexandra | `FESTIVAL_ALEXANDRA` 1 | `ALEXANDRA` | 309 Rimeholt sunken lower town — unbuilt | badges ≥ 10 and S128 | `…(:FESTIVAL_ALEXANDRA, "Alexandra", 1, field: :WATER_SURFACE)` | S185 |
+| Amaria + Titania | `FESTIVAL_AMARIA` 1 + `FESTIVAL_TITANIA` 1 | `AMARIA`, `TITANIA` | 824–826 drowned Aurelia, a flooded Gilder hall — unbuilt | badges ≥ 16, Dive | two trainers: `TrainerBattle.start(:FESTIVAL_AMARIA, "Amaria", 1, :FESTIVAL_TITANIA, "Titania", 1)` with `canLose` and `:WATER_SURFACE` (`cameo_battle` takes one trainer; record both in the Ledger). Two foes, so no VS screen. | S186 |
+| Shiv | `FESTIVAL_SHIV` 1 | `SHIV` | 440 Gloaming, the dusk-chapels — unbuilt | badges ≥ 17 | `…(:FESTIVAL_SHIV, "Shiv", 1)` | S187 |
+| Lin | `FESTIVAL_LIN` 1 | `LIN` | first seen: 106 Ferrow Lighthouse Lamp Room at night (built; an NPC page only); the fight: 910 Distortion Core antechamber — unbuilt | S160 POSTGAME | `…(:FESTIVAL_LIN, "Lin", 1)` | S188 |
+| Nova | `FESTIVAL_NOVA` 1 | `NOVA` | the Mirrorwalk dream-road out of Gloaming (Ruin R5) — unbuilt | Ruin Route | `…(:FESTIVAL_NOVA, "Nova", 1)` | S189 |
+
+Post-game rematches (version 2, Lv 100) reuse the same event with an S160 page. Name each event exactly after the cameo
+("Venam", "Lin"…): that is what the charset alias and the portrait tail look for.
+
+**Riot Punk Zara** (Zara Rourke, 19; original, not a cameo): a Nadir muralist who tags Meridian checkpoints with her
+Grafaiai "Stencil" and Toxtricity "Voltage". Type `PUNK_ZARA` ("Riot Punk"), art id `ZARA`. Two optional fights from
+`gen.py`: `[PUNK_ZARA,Zara]` (v0, Lv 35–37, Mirefen stilt-walks 220, badges ≥ 6, `:CORROSIVE_MIRE`) and `[PUNK_ZARA,Zara,1]`
+(Lv 75–77, the Moon Market 423 after Gym 16, repeatable, `:NEW_MOON`). If S182 is set she has one extra line about "some
+purple-haired lunatic with a Seviper" beating her graffiti record in the runoff tunnels. Both maps are unbuilt.
+
 ## Sources (checked 2026-11-15)
 - TV Tropes, *Pokémon Desolation* characters: https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonDesolation
 - TV Tropes, *Pokémon Reborn* "Others" and "Postgame Characters": https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRebornOthers · https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRebornPostgameCharacters

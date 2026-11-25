@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Builds dist/Prismfall_DevKit.zip — an overlay you copy into an Essentials v21.1 + EBDX project.
-# Layout mirrors a project root: Plugins/, PBS/, Data/, Graphics/ can be copied straight in (nothing overwrites stock files).
+# Layout mirrors a project root: Plugins/, PBS/, Data/, Graphics/ can be copied straight in. Nothing overwrites stock files
+# except the Gen 5 reskin of four stock interior tilesets (Poke Centre, Mart, Interior general, Gyms; see the Graphics step).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/dist/Prismfall_DevKit"
@@ -47,6 +48,10 @@ done
 if [[ -d "$ROOT/graphics" ]]; then
   mkdir -p "$OUT/Graphics" && cp -r "$ROOT/graphics/." "$OUT/Graphics/"
 fi
+# Gen 5 tileset/autotile reskin (graphics/Tilesets, graphics/Autotiles; mapgen/gen5_reskin.py): the copy above already put
+# it over the mapgen sheets of the same name. This checks each one against its mapgen source and puts the mapgen sheet
+# back where the reskin is stale (tiles added since), so a new tile never ships blank. PF_NO_GEN5=1 ships the mapgen look.
+python3 -I "$ROOT/tools/overlay_reskin.py" "$OUT/Graphics"
 # Installed dialogue portraits (SPINE Rev 22 face window). Only Portraits/: the other art/out folders wait on approvals.
 if [[ -d "$ROOT/art/out/Graphics/Portraits" ]]; then
   mkdir -p "$OUT/Graphics/Portraits" && cp "$ROOT"/art/out/Graphics/Portraits/*.png "$OUT/Graphics/Portraits/"

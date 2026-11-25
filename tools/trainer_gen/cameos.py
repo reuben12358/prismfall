@@ -1,4 +1,8 @@
 # Festival cameo champions (design/CAMEOS.md). Levels are offsets from the ace (0).
+# Art ids (VS bust / portraits / overworld sheet) are the cameo's name in capitals: FESTIVAL_SHELLY -> SHELLY. Their looks are
+# the home-game ones (Reuben's cameo art rule, 2026-11-24); the wiring and the event placement table are in
+# design/CAMEOS.md "Art, wiring and event placement". Signature species only; no legendary except Alexandra's Latias,
+# which CAMEOS.md names as her ace.
 # Sidequest cameos (design/CAMEOS.md, SPINE Rev 4): version 1 = the sidequest fight at its placement level,
 # version 2 = post-game rematch at 100. Levels in team lists are offsets from the ace (0).
 # versions: {version: (ace_level, mode)}; mode None = full team, "last4" = last four (tag-double halves), "flat" = all at ace.

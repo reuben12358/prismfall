@@ -23,6 +23,9 @@ find "$G/Plugins" -name '__pycache__' -prune -exec rm -rf {} +
 [[ -n "$ART" ]] && cp -r "$ART/." "$G/Graphics/"
 # current maps and tilesets (the assembled copy may predate them): tileset registry, map data, MapInfos
 cp -r "$KIT/maps_out/Graphics/." "$G/Graphics/" 2>/dev/null || true
+# ...and Gemini's Gen 5 reskin of those sheets on top again, as tools/package.sh ships it (stale sheets are skipped);
+# PF_NO_GEN5=1 captures the plain mapgen look
+python3 -I "$KIT/tools/overlay_reskin.py" "$G/Graphics" | tail -1
 cp -r "$KIT/maps_out/Plugins/." "$G/Plugins/" 2>/dev/null || true   # map helpers (Prismfall Maps)
 python3 -I "$KIT/mapgen/merge_tilesets.py" "$G" --force | tail -1
 python3 -I "$KIT/mapgen/merge_mapinfos.py" "$G" --force 2>&1 | tail -1
