@@ -220,7 +220,7 @@ module Prismfall
           # (~0.0s .. 11.2s)
           #---------------------------------------------------------------------
           eng.transfer_map(926, 25.8, 8.6, hide_player: true)
-          (3..8).each do |eid|
+          (3..10).each do |eid|
             ev = $game_map.events[eid]
             ev.transparent = true if ev
           end
@@ -252,7 +252,7 @@ module Prismfall
           eng.spawn_actor(:anja,    sheet: "ANJA",                    tx: 26.8, ty: 12.7, dir: :up, is_charset: true)
           eng.spawn_actor(:sigrun,  sheet: "SIGRUN",                  tx: 32.2, ty: 12.7, dir: :up, is_charset: true)
           eng.actor(:valen).set_cell(0)
-          eng.actor(:kestrel).set_cell(0)
+          eng.actor(:kestrel).set_cell(14)
 
           # Beat 1: Primal Kyogre breaches on Isenmar flank inside pure-pixel hydro vortex!
           eng.play_se("Anim/Water5", volume: 95)
@@ -366,7 +366,7 @@ module Prismfall
                                grid: [4, 2], frames: 0..3, ticks: [2, 2, 2, 2], loops: :forever,
                                blend: :add, scale: 1.28, offset: [0, -47], z_layer: :above)
 
-          # Sustained 3.0s (90 frames) live beam tug-of-war as emerald Trinitite cracks form beneath!
+          # Sustained 3.0s (90 frames) live beam tug-of-war as emerald Trinitite heat builds beneath!
           eng.shake(power: 6, duration: 3.05, decay: false)
           eng.zoom_map(1.32, duration: 0.85, focus: [30.0, 8.6], ease: :in_out)
 
@@ -385,15 +385,12 @@ module Prismfall
               eng.flash(color: [215, 246, 255], power: 135, duration: 0.12)
               eng.play_se("Anim/Ice2", volume: 82)
               eng.actor(:valen).set_cell(11)
-              eng.spawn_vfx(nil, sheet: "pf_vfx_w3_glass_curtain", tx: 30.0, ty: 9.6,
-                            grid: [4, 2], frames: [4, 5, 6], ticks: [4, 5, 10], stay: :forever,
-                            blend: :normal, untoned: false, opacity: 195, scale: 0.86, z_layer: :floor)
+              eng.spawn_vfx(nil, sheet: "pf_vfx_w3_glass_curtain", tx: 30.0, ty: 9.4,
+                            grid: [4, 2], frames: [4, 5], ticks: [5, 14], stay: :forever,
+                            blend: :normal, untoned: false, opacity: 155, scale: 0.52, z_layer: :floor)
             elsif fi == 56
               eng.flash(color: [255, 234, 200], power: 145, duration: 0.12)
               eng.play_se("Anim/Fire5", volume: 85)
-              eng.spawn_vfx(nil, sheet: "pf_vfx_w3_clash_core", tx: cx, ty: 9.7,
-                            grid: [4, 2], frames: 4..7, ticks: [3, 4, 4, 12], stay: :forever,
-                            blend: :normal, untoned: false, scale: 0.78, z_layer: :mid, origin: :foot)
             elsif fi == 78
               eng.flash(color: [216, 255, 236], power: 175, duration: 0.14)
               eng.play_se("Anim/Saint7", volume: 88, pitch: 112)
@@ -411,10 +408,10 @@ module Prismfall
             fade_in: 0.22, hold: 7.2, fade_out: 0.28,
             pan: { [-10, 4] => [10, -4] }, zoom: [1.02, 1.09], shake: 1.5
           ) do |e|
-            # Live pure-pixel steam/spark clash bursts drifting cleanly over the 90° plate!
+            # Subtle live pure-pixel spark shimmer along the clash seam without washing out the 90° art!
             e.spawn_vfx(:p19_sparks, sheet: "pf_vfx_w3_clash_core", tx: 30.0, ty: 8.6,
                         grid: [4, 2], frames: [2, 3, 2, 3], ticks: [4, 4, 4, 4], loops: :forever,
-                        blend: :add, opacity: 145, scale: 0.92, z_layer: :above)
+                        blend: :add, opacity: 52, scale: 0.55, z_layer: :above)
             # 3.6s PURE SILENT TEXT-FREE CONTEMPLATION of Kyogre vs Reshiram side-view!
             e.wait(3.60)
             e.say(:VALEN, :shocked, "Sea and fire... the sand is melting straight to glass!", hold: 1.25)
@@ -449,10 +446,10 @@ module Prismfall
           eng.zoom_map(1.0, duration: 0.65, ease: :out_cubic)
           eng.pan_camera_to(30.0, 9.6, duration: 0.55, ease: :out_cubic)
 
-          # Pure-pixel emerald glass spires & vitrified crust exploding radially across the desert!
-          eng.spawn_vfx(nil, sheet: "pf_vfx_w3_clash_core", tx: 30.0, ty: 9.6,
+          # Single heroic central emerald Trinitite spire between the two titans (clean desert breathing room!)
+          eng.spawn_vfx(nil, sheet: "pf_vfx_w3_clash_core", tx: 30.0, ty: 9.4,
                         grid: [4, 2], frames: 4..7, ticks: [3, 4, 5, 16], stay: :forever,
-                        blend: :normal, untoned: false, scale: 1.25, z_layer: :mid, origin: :foot)
+                        blend: :normal, untoned: false, scale: 0.72, z_layer: :mid, origin: :foot)
 
           # Valen recoils backward shielding brow with sand kick!
           eng.actor(:valen).play_clip(
@@ -470,16 +467,16 @@ module Prismfall
           )
           eng.actor(:kestrel).move_to(29.0, 12.25, duration: 0.28, walk: false, ease: :out)
 
-          # Staggered faceted crystal fractures racing outward across the dunes!
+          # Crisp, well-spaced perimeter vitrified glass shards so the Glass Dunes floor stays open & readable!
           [
-            [[27.4, 9.4], [32.6, 9.4]],
-            [[25.4, 10.2], [34.6, 10.2]],
-            [[28.1, 11.1], [31.9, 11.1]]
+            [[27.2, 9.2], [32.8, 9.2]],
+            [[25.2, 10.9], [34.8, 10.9]],
+            []
           ].each_with_index do |pair, pi|
             pair.each do |gx, gy|
               eng.spawn_vfx(nil, sheet: "pf_vfx_w3_glass_curtain", tx: gx, ty: gy,
                             grid: [4, 2], frames: 4..7, ticks: [3, 4, 5, 14], stay: :forever,
-                            blend: :normal, untoned: false, opacity: 190, scale: 0.86, z_layer: :floor)
+                            blend: :normal, untoned: false, opacity: 178, scale: 0.36, z_layer: :floor)
             end
             eng.play_se("Anim/Ice2", volume: 74, pitch: 88 + pi * 10)
             if pi == 1
@@ -585,7 +582,7 @@ module Prismfall
           eng.spawn_actor(:ysolde,  sheet: "YSOLDE",                  tx: 12.8, ty: 14.4, dir: :up,   is_charset: true)
           eng.spawn_actor(:juno,    sheet: "act_ch15_glassfall_brace", tx: 17.2, ty: 14.4, grid: [4, 4], is_charset: false)
           eng.spawn_actor(:pc,      sheet: "PLAYER_A",                tx: 15.0, ty: 15.8, dir: :up,   is_charset: true)
-          eng.actor(:juno).set_cell(0)
+          eng.actor(:juno).set_cell(15)
 
           eng.wait(1.05)
           eng.play_se("Anim/HealBell", volume: 90, pitch: 112)
@@ -624,7 +621,7 @@ module Prismfall
           eng.spawn_actor(:obs,     sheet: "trainer_SCIENTIST",       tx: 20.6, ty: 11.3, dir: :left, is_charset: true)
           eng.spawn_actor(:child,   sheet: "NPC 02",                  tx: 15.0, ty: 14.5, dir: :up,   is_charset: true)
           eng.spawn_actor(:morwen,  sheet: "MORWEN",                  tx: 10.8, ty: 14.9, dir: :right, is_charset: true)
-          # Archivist Witness bracing across the nave using our bespoke 4x4 Juno-anchored brace sheet!
+          # Archivist Witness bracing across the nave using our bespoke 4x4 brace sheet!
           eng.spawn_actor(:witness, sheet: "act_ch15_glassfall_brace", tx: 18.2, ty: 14.6, grid: [4, 4], is_charset: false)
           eng.actor(:witness).set_cell(0)
 
@@ -641,8 +638,8 @@ module Prismfall
           eng.wait(0.28)
           eng.say(:VOSS, :neutral, "Hold the Crown steady— eighteen Plates, one reading.", hold: 1.15, name: "Young Voss")
 
-          # Pressure drops -> witness's veil lifts -> sky cracks overhead!
-          eng.zoom_map(1.34, duration: 0.90, focus: [15.0, 10.8], ease: :in_out)
+          # Pressure drops -> witness's veil lifts -> sky cracks cleanly overhead!
+          eng.zoom_map(1.26, duration: 0.90, focus: [15.0, 12.2], ease: :in_out)
           eng.actor(:witness).play_clip(
             sheet: "act_ch15_glassfall_brace", grid: [4, 4],
             frames: [1, 2, 3], ticks: [7, 8, 8], stay: true
@@ -651,9 +648,9 @@ module Prismfall
           eng.actor(:voss).show_emote(:exclaim, duration: 0.65)
           eng.play_se("Anim/Saint7", volume: 88, pitch: 118)
           eng.play_se("Anim/Ice5", volume: 84)
-          eng.spawn_vfx(:fracture_hi, sheet: "pf_vfx_w3_glass_curtain", tx: 15.0, ty: 9.8,
+          eng.spawn_vfx(:fracture_hi, sheet: "pf_vfx_w3_glass_curtain", tx: 15.0, ty: 9.2,
                         grid: [4, 2], frames: [4, 5, 6], ticks: [4, 4, 8], stay: 0.65,
-                        blend: :add, scale: 1.18, z_layer: :above)
+                        blend: :add, opacity: 195, scale: 0.85, z_layer: :above)
           eng.wait(1.05)
 
           # LAW 2: 0.40s DIGITAL-ZERO DEAD-SILENCE VACUUM + CRACKING BELL!
@@ -742,12 +739,13 @@ module Prismfall
           eng.spawn_actor(:juno,        sheet: "act_ch15_glassfall_brace", tx: 17.2, ty: 15.8, grid: [4, 4], is_charset: false)
           eng.spawn_actor(:echo_morwen, sheet: "trainer_ECHO_MORWEN",      tx: 15.0, ty: 13.8, dir: :up,   is_charset: true)
           eng.actor(:juno).play_clip(
-            sheet: "act_ch15_glassfall_brace", grid: [4, 4], frames: [11, 12, 13], ticks: [10, 10, 20], stay: true
+            sheet: "act_ch15_glassfall_brace", grid: [4, 4], frames: [15, 14, 15], ticks: [10, 12, 20], stay: true
           )
-          eng.actor(:echo_morwen).opacity = 185
+          eng.actor(:echo_morwen).opacity = 205
+          # Render spectral halo BEHIND Echo Morwen (:floor) so her face & 10-year turn read razor clear!
           eng.spawn_vfx(:echo_halo, sheet: "pf_vfx_w3_prism_light", tx: 15.0, ty: 13.8,
                         grid: [4, 2], frames: [4, 5], ticks: [8, 8], loops: :forever,
-                        blend: :add, opacity: 165, scale: 0.82, z_layer: :above)
+                        blend: :add, opacity: 145, scale: 0.66, z_layer: :floor)
           eng.wait(1.25)
 
           # Impossibly across ten years, Echo Morwen turns straight :down at the Protagonist!
@@ -755,7 +753,7 @@ module Prismfall
           # EMOTE #2 (Quiet stunned hush!): Kestrel freezes witnessing the impossible turn
           eng.actor(:kestrel).show_emote(:ellipsis, duration: 0.90)
           eng.play_se("Anim/HealBell", volume: 84, pitch: 105)
-          eng.zoom_map(1.28, duration: 0.95, focus: :echo_morwen, ease: :in_out)
+          eng.zoom_map(1.26, duration: 0.95, focus: :echo_morwen, ease: :in_out)
           eng.wait(1.10)
 
           eng.say(:MORWEN, :neutral, "Little one. You came back.", hold: 1.05, name: "Echo Morwen")
@@ -766,9 +764,9 @@ module Prismfall
           eng.stop_vfx(:echo_halo)
           eng.spawn_vfx(nil, sheet: "pf_vfx_w3_prism_light", tx: 15.0, ty: 13.8,
                         grid: [4, 2], frames: [5, 4, 5], ticks: [6, 6, 8], fade: 0.45,
-                        blend: :add, scale: 0.96, z_layer: :above)
+                        blend: :add, scale: 0.85, z_layer: :above)
           24.times do |fi|
-            eng.actor(:echo_morwen).opacity = (185 * (1.0 - (fi + 1) / 24.0)).round
+            eng.actor(:echo_morwen).opacity = (205 * (1.0 - (fi + 1) / 24.0)).round
             eng.step_frame
           end
           eng.remove_actor(:echo_morwen)
@@ -805,18 +803,20 @@ module Prismfall
           # ACT I — Bound Creator & Ornate Golden Astral Locks (~0.0s .. 8.8s)
           #---------------------------------------------------------------------
           eng.transfer_map(285, 48.5, 22.8, hide_player: true)
-          ev_guard = $game_map.events[2]
-          ev_guard.transparent = true if ev_guard
+          [1, 2].each do |eid|
+            ev = $game_map.events[eid]
+            ev.transparent = true if ev
+          end
 
           eng.set_tone(-48, -64, -18, 46, duration: 0.0)
           eng.letterbox(true, height: 32, duration: 0.0)
           eng.play_bgm("ch21_arceus_bound", volume: 84, tag: "ch21_arceus_bound")
 
-          # Cast staged cleanly on Map 285 white-stone summit terrace
+          # Cast staged cleanly on Map 285 white-stone summit terrace (PC balanced right, clear view of Valen & Crown!)
           eng.spawn_actor(:valen,     sheet: "act_ch21_valen_kneel", tx: 48.5, ty: 24.4, grid: [4, 4], is_charset: false, z_bias: 6)
           eng.spawn_actor(:ilsa,      sheet: "ILSA",                 tx: 47.1, ty: 24.8, dir: :up, is_charset: true)
           eng.spawn_actor(:voss,      sheet: "VOSS",                 tx: 51.8, ty: 23.8, dir: :up, is_charset: true)
-          eng.spawn_actor(:pc,        sheet: "PLAYER_A",             tx: 48.5, ty: 26.2, dir: :up, is_charset: true)
+          eng.spawn_actor(:pc,        sheet: "PLAYER_A",             tx: 49.5, ty: 26.2, dir: :up, is_charset: true)
           eng.spawn_actor(:celestine, sheet: "CELESTINE",            tx: 44.6, ty: 25.4, dir: :up, is_charset: true)
           eng.spawn_actor(:kestrel,   sheet: "KESTREL",              tx: 52.4, ty: 25.4, dir: :up, is_charset: true)
           eng.actor(:valen).set_cell(0)
@@ -870,8 +870,8 @@ module Prismfall
           eng.say(:VALEN, :neutral, "I'll hold the door. I've had thirty years of practice.", hold: 1.35)
           eng.wait(0.40)
 
-          # Grounded, calm Protagonist takes ONE steady purposeful step forward toward the Ring
-          eng.actor(:pc).move_to(48.5, 25.6, duration: 0.65, walk: true, dir: :up)
+          # Grounded, calm Protagonist takes ONE steady purposeful step forward (unobstructed center view!)
+          eng.actor(:pc).move_to(49.5, 25.5, duration: 0.65, walk: true, dir: :up)
           eng.pan_camera_to(48.5, 22.4, duration: 0.60, ease: :in_out)
           eng.zoom_map(1.0, duration: 0.55, ease: :out)
           eng.set_tone(-74, -76, -44, 62, duration: 0.65)
@@ -932,7 +932,7 @@ module Prismfall
           # T-KT enters warmly as dawn tone washes across Briar Hall summit!
           eng.play_bgm("ch21_tkt", volume: 88, tag: "ch21_tkt")
           eng.set_tone(12, 8, -4, 16, duration: 1.25)
-          eng.zoom_map(1.26, duration: 1.05, focus: [48.5, 24.4], ease: :in_out)
+          eng.zoom_map(1.14, duration: 1.05, focus: [48.5, 23.4], ease: :in_out)
 
           # Valen recoils -> Crown slips off brow -> drops to ONE KNEE -> Crown clatters on marble -> looks UP in peace!
           eng.actor(:valen).play_clip(
@@ -944,7 +944,7 @@ module Prismfall
           )
           eng.spawn_vfx(:valen_motes, sheet: "pf_vfx_w3_prism_light", tx: 48.5, ty: 24.2,
                         grid: [4, 2], frames: [4, 5], ticks: [9, 9], loops: :forever,
-                        blend: :add, opacity: 175, scale: 0.85, z_layer: :above)
+                        blend: :add, opacity: 145, scale: 0.78, z_layer: :floor)
           eng.wait(3.15)
 
           eng.say(:VALEN, :happy, "Little owl...", hold: 0.95)
@@ -964,7 +964,7 @@ module Prismfall
             # Live falling golden dawn motes floating over Ilsa, Valen, cracked Crown & Arceus!
             e.spawn_vfx(:p21_motes, sheet: "pf_vfx_w3_prism_light", tx: 48.5, ty: 22.8,
                         grid: [4, 2], frames: [4, 5, 4, 5], ticks: [9, 9, 9, 9], loops: :forever,
-                        blend: :add, opacity: 135, scale: 1.02, z_layer: :above)
+                        blend: :add, opacity: 120, scale: 0.96, z_layer: :above)
             # 4.2s COMPLETELY SILENT, TEXT-FREE CONTEMPLATION at T-KT's soaring peak!
             e.wait(4.20)
             e.say(:ILSA, :crying, "...Father.", hold: 1.55)
@@ -995,26 +995,26 @@ module Prismfall
           eng.actor(:ilsa).show_emote(:ellipsis, duration: 0.95)
           eng.wait(0.85)
 
-          # Freed Radiant Arceus descends serenely framed by pure-pixel golden starburst & prism sparkles!
+          # Freed Radiant Arceus descends serenely IN FRONT OF pure-pixel golden starburst (:floor z=5 BEHIND Arceus!)
           eng.actor(:arceus).play_clip(
             sheet: "act_ch21_arceus_bound", grid: [4, 2], frames: [4, 5, 6, 7],
             ticks: [7, 8, 10, 24], stay: true
           )
           eng.actor(:arceus).move_to(48.5, 21.8, duration: 1.40, walk: false, ease: :out_cubic)
-          eng.spawn_vfx(:arceus_dawn, sheet: "pf_vfx_w3_prism_light", tx: 48.5, ty: 20.8,
+          eng.spawn_vfx(:arceus_dawn, sheet: "pf_vfx_w3_prism_light", tx: 48.5, ty: 20.6,
                         grid: [4, 2], frames: [6, 7], ticks: [10, 10], loops: :forever,
-                        blend: :add, opacity: 195, scale: 1.38, spin: 12.0, z_layer: :above)
+                        blend: :add, opacity: 150, scale: 1.18, spin: 12.0, z_layer: :floor)
           eng.wait(1.45)
 
           eng.play_cry(:ARCEUS, volume: 95)
           eng.play_se("Anim/Saint7", volume: 90, pitch: 108)
           eng.flash(color: [255, 248, 214], power: 185, duration: 0.36)
-          eng.spawn_vfx(:dawn_spark_l, sheet: "pf_vfx_w3_prism_light", tx: 46.8, ty: 23.2,
+          eng.spawn_vfx(:dawn_spark_l, sheet: "pf_vfx_w3_prism_light", tx: 46.6, ty: 23.0,
                         grid: [4, 2], frames: [4, 5], ticks: [9, 9], loops: :forever,
-                        blend: :add, opacity: 165, scale: 0.78, z_layer: :above)
-          eng.spawn_vfx(:dawn_spark_r, sheet: "pf_vfx_w3_prism_light", tx: 50.2, ty: 23.2,
+                        blend: :add, opacity: 145, scale: 0.72, z_layer: :above)
+          eng.spawn_vfx(:dawn_spark_r, sheet: "pf_vfx_w3_prism_light", tx: 50.4, ty: 23.0,
                         grid: [4, 2], frames: [5, 4], ticks: [9, 9], loops: :forever,
-                        blend: :add, opacity: 165, scale: 0.78, z_layer: :above)
+                        blend: :add, opacity: 145, scale: 0.72, z_layer: :above)
           eng.wait(1.10)
 
           eng.say(:ILSA, :crying, "Little light. You have carried me far.", hold: 1.25, name: "Arceus (via Ilsa)")
