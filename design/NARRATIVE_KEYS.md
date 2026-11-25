@@ -442,7 +442,7 @@ ENTRANTS.merge!({
   :KESTREL_FALLEN => { :display => "Kestrel", :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },
   :VALEN_RUIN=> { :display => "Valen",     :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
   :QUENT     => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT,   :name => "Percival",  :version => 99, :rating => 97, :level_hint => 100 },
-  :THEODRIC  => { :display => "Gilded King Aurelius", :trainer_type => :GILDED_THEODRIC, :name => "Aurelius",  :version => 0, :rating => 99, :level_hint => 100 },
+  :AURELIUS  => { :display => "Gilded King Aurelius", :trainer_type => :GILDED_AURELIUS, :name => "Aurelius",  :version => 0, :rating => 99, :level_hint => 100 },
   :MORWEN       => { :display => "Morwen", :trainer_type => :ECHO_MORWEN, :name => "Morwen", :version => 90, :exhibition => true, :rating => 0 },
   :PAGEANT_BOUT => { :display => "Dorian & Rook", :double => true, :trainer_type => [:LEADER_DORIAN, :LEADER_ROOK], :name => ["Dorian", "Rook"],
                      :version => 90, :exhibition => true, :rating => 0 }
@@ -478,7 +478,7 @@ DRAWS = {
     { :opponent => :BRANN,      :condition => "flag(:VALEN_COLLAPSED)" }
   ],
   :HIJACK => [ # default :VOSS (drawn live)
-    { :opponent => :THEODRIC, :condition => "ruin_route" },
+    { :opponent => :AURELIUS, :condition => "ruin_route" },
     { :opponent => :QUENT,    :condition => "flag(:VOSS_DISCREDITED)" }
   ]
 }
@@ -605,12 +605,12 @@ Festival-only Warden/NPC teams use **version = ace level** (90/92/96/99) so they
 | 15 | Final (Ruin) | Valen, the Last Tuning | `[CHAMPION_VALEN, Valen, 1]` | 96 | **NEW** |
 | 16 | Hijack | Voss (default) | `[MERIDIAN_VOSS, Aurelian, 0]` | 100 | planned |
 | 17 | Hijack | Dr. Quent | `[MERIDIAN_QUENT, Percival, 99]` | 100 | **NEW** (Voss's Silvally team in Quent's hands) |
-| 18 | Hijack (Ruin) | Aurelius, the Gilded Reflection | `[GILDED_THEODRIC, Aurelius, 0]` | 100 | **NEW** (new trainer type) |
+| 18 | Hijack (Ruin) | Aurelius, the Gilded Reflection | `[GILDED_AURELIUS, Aurelius, 0]` | 100 | **NEW** (new trainer type) |
 | 19 | Exhibition | Pageant Bout: Dorian + Rook (double) | `[LEADER_DORIAN, Dorian, 90]` + `[LEADER_ROOK, Rook, 90]` | 90 | **NEW** ×2 |
 | 20 | Exhibition | Morwen's Echo | `[ECHO_MORWEN, Morwen, 90]` | 90 | **NEW** (new trainer type) |
 | B1–B5 | True Finale | Arceus | boss configs `ARCEUS_BOUND` (planned), `_MISCALIBRATED`, `_WAR`, `_GILDED`, `_JUDGMENT` | 100 | 4 **NEW** |
 
-**Total new Festival teams: 19** (+4 Arceus boss configs). New trainer types: `ARCHSEER_DASK`, `GILDED_THEODRIC`, `ECHO_MORWEN` (plus `LEADER_ROWAN` if
+**Total new Festival teams: 19** (+4 Arceus boss configs). New trainer types: `ARCHSEER_DASK`, `GILDED_AURELIUS`, `ECHO_MORWEN` (plus `LEADER_ROWAN` if
 it doesn't exist yet). Seeded NPC-only entrants needing **no** trainer data: Dorian, Rook, Tamsin, Sahar, Nyx (and the QF/R16 Wardens when not drawn).
 
 Rev 6 adds **no** teams: delegation seats that aren't draw candidates (Ilsa, Magnus, Corvin, Bastian, Sahar, Tamsin, Dorian, Rook, Nyx) are NPC-only

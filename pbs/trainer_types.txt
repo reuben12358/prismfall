@@ -417,7 +417,7 @@ SkillLevel = 100
 BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
 #-------------------------------
-[GILDED_THEODRIC]
+[GILDED_AURELIUS]
 Name = Gilded King
 Gender = Male
 BaseMoney = 0

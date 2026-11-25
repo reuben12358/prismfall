@@ -235,7 +235,7 @@
 |---:|---|---|---|---|
 | 4 | Festival — Finals & Semifinal Showdown (Crownhaven Prism Arena) ★ | Pokémon B2W2 — Champion Iris Battle Theme (Remix) | GlitchxCity | Pokémon Remix |
 | 132 | Ruin Route — Reflection (REFLECTION, Mirrorwalk Endgame) | Pokémon Rejuvenation — Battle: World Shatterer | CatchDalgo | Rejuv / CatchDalgo |
-| 133 | Ruin Route — Gilded King Aurelius (GILDED_THEODRIC, Aurelia) | Pokémon Rejuvenation — Battle! Of Beasts and Kingdoms | GlitchxCity | Rejuv / GlitchxCity |
+| 133 | Ruin Route — Gilded King Aurelius (GILDED_AURELIUS, Aurelia) | Pokémon Rejuvenation — Battle! Of Beasts and Kingdoms | GlitchxCity | Rejuv / GlitchxCity |
 | 134 | Ruin Route — Archseer Imre Dask (ARCHSEER_DASK, :INVERSE) | Pokémon Rejuvenation V14 — Xenpurgis [Körper] | Zumi (Honnojis) | Rejuv / Zumi |
 | 135 | Festival — Bracket Rounds (R16 & QF, Crownhaven Arena) | Pokémon Legends: Z-A — Battle! Z-A Royale! (Remix) | CatchDalgo | Rejuv / CatchDalgo |
 | 136 | Champion — Sovereign Valen (CHAMPION_VALEN, Accord Finale) | Pokémon Reborn — Champion Battle Theme | GlitchxCity | Rejuv / GlitchxCity |

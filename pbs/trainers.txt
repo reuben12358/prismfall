@@ -15069,7 +15069,7 @@ Pokemon = SILVALLY,93
     EV = 0
 # Hijack (Ruin) - Gilded King Aurelius, the Gilded Reflection
 #-------------------------------
-[GILDED_THEODRIC,Aurelius]
+[GILDED_AURELIUS,Aurelius]
 Items = FULLRESTORE,FULLRESTORE
 LoseText = Ha...! Magnificent! Three hundred years, and at last a challenger. Go—end the sky.
 Pokemon = GOLURK,97
@@ -15115,7 +15115,7 @@ Pokemon = GHOLDENGO,100
     Nature = TIMID
     IV = 31
 #-------------------------------
-[GILDED_THEODRIC,Aurelius,100]
+[GILDED_AURELIUS,Aurelius,100]
 Items = FULLRESTORE,FULLRESTORE,FULLRESTORE
 LoseText = Ha...! Magnificent! Three hundred years, and at last a challenger. Go—end the sky.
 Pokemon = GOLURK,98
@@ -15167,7 +15167,7 @@ Pokemon = GHOLDENGO,100
     IV = 31
     EV = 4,0,0,252,252,0
 #-------------------------------
-[GILDED_THEODRIC,Aurelius,200]
+[GILDED_AURELIUS,Aurelius,200]
 Items = FULLRESTORE
 LoseText = Ha...! Magnificent! Three hundred years, and at last a challenger. Go—end the sky.
 Pokemon = GOLURK,90

@@ -15,13 +15,11 @@ Prismfall::Bosses.register(:GIRATINA_DEPTHS, {
   :ability    => :PRESSURE,
   :nature     => :CALM,
   :ivs        => 31,
-  # Balance 2026-11-23 (cell BGIR): prepared parties won 0% (Calm Mind + the break's +1 Sp. Atk + Ghost x1.2 on the
-  # Inverse field). No Sp. Atk EVs, Dragon Tail for Calm Mind, the breaks harden it instead.
-  :evs        => { :HP => 252, :DEFENSE => 128, :SPECIAL_DEFENSE => 128 },
-  :moves      => [:SHADOWBALL, :DRAGONPULSE, :WILLOWISP, :DRAGONTAIL],
+  :evs        => { :HP => 252, :SPECIAL_DEFENSE => 252, :SPECIAL_ATTACK => 4 },
+  :moves      => { :CASUAL => [:SHADOWBALL, :DRAGONPULSE, :WILLOWISP, :DRAGONTAIL], :default => [:SHADOWBALL, :DRAGONPULSE, :WILLOWISP, :CALMMIND] },
   :bars       => { :CASUAL => 2, :default => 3 },
-  :stat_mults => { :CASUAL => { :HP => 0.85, :ATTACK => 0.75, :SPECIAL_ATTACK => 0.75 },
-                   :HARD => { :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 } },
+  # Casual only (2026-11-24): eased offence and HP and no setup move; Standard and Hard are as designed (hard on purpose).
+  :stat_mults => { :CASUAL => { :HP => 0.75, :ATTACK => 0.6, :SPECIAL_ATTACK => 0.6 }, :HARD => { :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 } },
   :field      => :INVERSE,
   :catch      => false,
   :intro      => ["The sky below you tears like wet paper...",
@@ -30,13 +28,13 @@ Prismfall::Bosses.register(:GIRATINA_DEPTHS, {
   :breaks     => {
     1 => { :messages => ["{1} drags at the torn Glass. The Depths turn over!",
                          "Behind the tear, for a moment: a church, bells, a child in a Choir ribbon..."],
-           :learn => { 3 => :HEX }, :stats => { :SPECIAL_DEFENSE => 1 } },
+           :learn => { 3 => :HEX }, :stats => { :SPECIAL_ATTACK => 1 } },
     2 => { :messages => ["The Glass behind {1} gives way completely!",
                          "{1} pulls its true shape through from the other side!"],
            :form => 1, :form_message => "Giratina changed to its Origin Forme!",
            :ability => :LEVITATE,
            :moves => [:POLTERGEIST, :DRAGONCLAW, :SHADOWSNEAK, :EARTHQUAKE],
-           :stats => { :DEFENSE => 1 }, :clear_hazards => true }
+           :stats => { :ATTACK => 1 }, :clear_hazards => true }
   },
   :on_defeat  => [
     { :messages => ["{1} stopped fighting.",

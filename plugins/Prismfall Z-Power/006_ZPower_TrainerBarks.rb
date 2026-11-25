@@ -14,7 +14,7 @@ module PrismfallSpeech
   BARKS = {
     # Ruin Route R7, the Hijack: Gilded King Aurelius (Gemini rework 2026-11-23, story/42_SCRIPT_RUIN_KING.md D4).
     # "mongrel" stops when Gilt comes out: from then on he is talking to a rival.
-    [:GILDED_THEODRIC, "Aurelius"] => {
+    [:GILDED_AURELIUS, "Aurelius"] => {
       :sendout => {
         :GOLURK    => "Witness the original, mongrel. That corroded toy Voss dredged from the silt was my doorstep's dust.",
         :AEGISLASH => ["A thousand blades were forged after Aurelia sank. Every one a crude copy of mine.",

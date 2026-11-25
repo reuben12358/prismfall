@@ -10,15 +10,13 @@ Prismfall::Bosses.register(:KYOGRE_ISENMAR, {
   :species    => :KYOGRE,
   :level      => 55,
   :ability    => :DRIZZLE,
-  :nature     => :CALM,
+  :nature     => :MODEST,
   :ivs        => 31,
-  # Balance 2026-11-23 (winrates_r4 cell BKYO): built to trade blows, not sweep (as the war legends): no Sp. Atk EVs,
-  # no Calm Mind snowball; the break hardens it instead. Before: prepared Standard 7%, typical 0%.
-  :evs        => { :HP => 252, :DEFENSE => 4, :SPECIAL_DEFENSE => 252 },
-  :moves      => [:MUDDYWATER, :ICEBEAM, :AQUARING, :SCARYFACE],
+  :evs        => { :HP => 252, :SPECIAL_ATTACK => 252, :SPECIAL_DEFENSE => 4 },
+  :moves      => { :CASUAL => [:MUDDYWATER, :ICEBEAM, :AQUARING, :SCARYFACE], :default => [:MUDDYWATER, :ICEBEAM, :CALMMIND, :AQUARING] },
   :bars       => { :CASUAL => 2, :default => 3 },
-  :stat_mults => { :CASUAL => { :HP => 0.85, :SPECIAL_ATTACK => 0.75 }, :STANDARD => { :SPECIAL_ATTACK => 0.9 },
-                   :HARD => { :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 } },
+  # Casual only (2026-11-24): eased offence and HP and no setup move; Standard and Hard are as designed (hard on purpose).
+  :stat_mults => { :CASUAL => { :HP => 0.7, :ATTACK => 0.5, :SPECIAL_ATTACK => 0.5 }, :HARD => { :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 } },
   :field      => :FROZEN_LAKE,
   :catch      => false,
   :intro      => ["The frozen sea heaves... Kyogre has awoken beneath the ice!"],
@@ -26,10 +24,10 @@ Prismfall::Bosses.register(:KYOGRE_ISENMAR, {
   :breaks     => {
     1 => { :messages => ["Kyogre thrashes, and the ice beneath it splinters!"],
            :field => :WATER_SURFACE, :field_message => "The frozen lake cracked apart into open water!",
-           :learn => { 0 => :WATERSPOUT }, :stats => { :SPECIAL_DEFENSE => 1 } },
+           :learn => { 0 => :WATERSPOUT }, :stats => { :SPECIAL_ATTACK => 1 } },
     2 => { :messages => ["The Icicle Plate's hold on the sea shatters!",
                          "The scar under your collar burns in time with the waves..."],
-           :primal => true, :moves => [:ORIGINPULSE, :ICEBEAM, :THUNDER, :AQUARING], :clear_hazards => true }
+           :primal => true, :moves => [:ORIGINPULSE, :ICEBEAM, :THUNDER, :CALMMIND], :clear_hazards => true }
   },
   :on_defeat  => [
     { :condition  => proc { |_battle, _battler, _st| Prismfall::Bosses.harmony_lean? },

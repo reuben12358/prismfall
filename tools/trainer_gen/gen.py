@@ -1152,9 +1152,9 @@ X("Hijack - Dr. Percival Quent (Voss removed)", "MERIDIAN_QUENT", "Percival", 99
     P("SILVALLY", 100, "RKSSYSTEM", "STEELMEMORY", "JOLLY", "MULTIATTACK,PARTINGSHOT,FLAMECHARGE,SWORDSDANCE", "A",
       form=8, nick="NULL", casual={"moves": "MULTIATTACK,CRUSHCLAW,FLAMECHARGE,SCARYFACE"}),
 ])
-X("Hijack (Ruin) - Gilded King Aurelius, the Gilded Reflection", "GILDED_THEODRIC", "Aurelius", 0, 100,
+X("Hijack (Ruin) - Gilded King Aurelius, the Gilded Reflection", "GILDED_AURELIUS", "Aurelius", 0, 100,
   "Ha...! Magnificent! Three hundred years, and at last a challenger. Go—end the sky.", [
-    # The Gilded King (Gemini rework 2026-11-23, Path B "Aurelius"; the type id and art stay GILDED_THEODRIC / THEODRIC).
+    # The Gilded King (Gemini rework 2026-11-23, Path B "Aurelius"; type GILDED_AURELIUS, art AURELIUS).
     # PRISM_ARENA "running Inverse" (story/12_RUIN_ROUTE; the event layers the inverted chart). Reviewed for it: under the
     # inverted chart Fighting and Ghost hit what they could not touch before (No Guard Dynamic Punch into Ghosts,
     # Close Combat into Psychic / Fairy / Flying, Poltergeist into Normal and Dark), and Kyogre + Groudon share one team

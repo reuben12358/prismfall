@@ -45,7 +45,7 @@ module PrismfallVS
     :LEADER_ROOK    => "ROOK",
     :LEADER_SAHAR   => "SAHAR",
     # Gemini wiring audit 2026-11-23: these resolve by name only by luck (or not at all: "Imre" -> DASK)
-    :GILDED_THEODRIC => "THEODRIC",  # PBS name "Aurelius" (Gilded King Aurelius; keeps Graphics/EBDX/VS/THEODRIC.png)
+    :GILDED_AURELIUS => "AURELIUS",  # PBS name "Aurelius" (Gilded King Aurelius; Graphics/EBDX/VS/AURELIUS.png)
     :HOLLOW_TEO     => "TEO",
     :HOLLOW_WICK    => "WICK",
     :LEADER_ROWAN   => "ROWAN",
@@ -66,7 +66,7 @@ module PrismfallVS
     # Art Drop 13
     "VESPER" => :gold, "THISTLE" => :green, "QUENT" => :teal, "SABLE" => :teal,
     # 2026-11-23: the Gilded King's imperial gold (was falling back to violet), and the rest of the cast busts
-    "THEODRIC" => :gold, "TEO" => :teal, "WICK" => :green, "MORWEN" => :violet, "DASK" => :grey, "VENAM" => :violet
+    "AURELIUS" => :gold, "TEO" => :teal, "WICK" => :green, "MORWEN" => :violet, "DASK" => :grey, "VENAM" => :violet
   }
   DEFAULT_THEME_FOE    = :violet
   DEFAULT_THEME_PLAYER = :teal

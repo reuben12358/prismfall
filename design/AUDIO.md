@@ -219,7 +219,7 @@ metadata → `"Battle trainer"` / `"Battle wild"`.
 | `HOLLOW_MOURNER` | `Battle - Mourner` | |
 | `MERIDIAN_AGENT*` | `Battle - Meridian` | `IntroBGM = Theme - Meridian` |
 | `MERIDIAN_ADMIN`, `_MARCHETTI`, `_KROLL`, `_ASHE`, `_QUENT`, `_DIRECTORATE` | `Battle - Meridian Admin` | `IntroBGM = Theme - Meridian` |
-| `MERIDIAN_VOSS`, `GILDED_THEODRIC` | `Battle - Voss` | |
+| `MERIDIAN_VOSS`, `GILDED_AURELIUS` | `Battle - Voss` | |
 | `FESTIVAL_*` (now sidequest cameos, Rev 4) | `Battle - Cameo` | |
 | `REFLECTION` | `Battle - Ruin` | |
 Also fix the header comment on line 3 (it says BGM names are stock).

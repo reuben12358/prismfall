@@ -357,13 +357,13 @@ check("...on Volcanic, and its Mega primes the eruption as designed (Brann's fig
 # every mode, unless the story gives the fighter no ring (MEGA_EVOLUTION.md 6.3; the user: story and theme win over the
 # rule); below it only the designed weak Mega (Brann) on Standard and Hard; nobody holds a stone and a Z-crystal.
 # Partners on the player's side and one trainer of a pair that shares a side are exceptions too.
-important = /\A(LEADER_|RIVAL_|CHAMPION_|MERIDIAN_|HOLLOW_MOURNER|ECHO_MORWEN|GILDED_THEODRIC|ARCHSEER_DASK|ASHKAAR_OFFICER|ISENMAR_OFFICER)/
+important = /\A(LEADER_|RIVAL_|CHAMPION_|MERIDIAN_|HOLLOW_MOURNER|ECHO_MORWEN|GILDED_AURELIUS|ARCHSEER_DASK|ASHKAAR_OFFICER|ISENMAR_OFFICER)/
 no_mega_ok = { [:LEADER_SIGRUN, 19] => "war partner (the player's side)", [:LEADER_MARISOL, 19] => "war partner",
                [:RIVAL_JUNO, 70] => "Ch21 partner", [:RIVAL_JUNO, 71] => "Ch21 partner", [:RIVAL_JUNO, 72] => "Ch21 partner",
                [:MERIDIAN_QUENT, 1] => "shares a side with Marchetti v2 (Mega Houndoom)",
                [:LEADER_ROOK, 90] => "shares a side with Dorian v90 (Mega Lopunny)" }
 # No ring in the story (MEGA_EVOLUTION.md 6.3). Kestrel's K8 gets one at battle start only with Morwen's Ring.
-no_ring = [:RIVAL_KESTREL, :LEADER_ROWAN, :ARCHSEER_DASK, :ECHO_MORWEN, :GILDED_THEODRIC, :ASHKAAR_OFFICER, :ISENMAR_OFFICER]
+no_ring = [:RIVAL_KESTREL, :LEADER_ROWAN, :ARCHSEER_DASK, :ECHO_MORWEN, :GILDED_AURELIUS, :ASHKAAR_OFFICER, :ISENMAR_OFFICER]
 weak_ok = { :LEADER_BRANN => [0] }
 # SPINE Rev 23: designed Z users in place of a Mega, from 13 badges, with a story reason (Z_MOVES.md 4).
 z_users = [:LEADER_CELESTINE]
