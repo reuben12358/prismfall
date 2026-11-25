@@ -63,6 +63,7 @@ end
 
 def fresh(difficulty = :STANDARD)
   Harness.new_game_state
+  $prismfall = Prismfall::SaveState.new    # new_game_state keeps the loaded state: choices and bonds must not leak between runs
   Prismfall.record_starter(:CHARMANDER) if Prismfall.respond_to?(:record_starter)
   $PokemonEncounters = PokemonEncounters.new
   $player.badges = Array.new(18, true)
@@ -81,6 +82,7 @@ def scripted(&chooser)
       b = @battle.battlers[idx]
       mv = @battle.pbOwnedByPlayer?(idx) ? chooser.call(@battle, b) : nil
       next orig.call(idx) if !mv
+      b.moves.each { |m| m.pp = m.total_pp if m }      # logic checks: the script never runs dry
       i = b.moves.index { |m| m.id == mv }
       if !i
         b.moves[0] = Battle::Move.from_pokemon_move(@battle, Pokemon::Move.new(mv))
@@ -305,6 +307,8 @@ hijack = lambda do |title, type: :MERIDIAN_VOSS, name: "Aurelian", version: 0, d
   t = pbLoadTrainer(type, name, version)
   EventHandlers.trigger(:on_trainer_load, t)
   t.party = t.party.select { |p| p.species == :SILVALLY }
+  pre = { :id => t.party[0].prismfall_boss_id, :level => t.party[0].level, :mults => bs.stat_mults(t.party[0]),
+          :bars => bs.bars_for(bs.get(t.party[0].prismfall_boss_id || :VOSS_SILVALLY_NULL)), :totalhp => t.party[0].totalhp }
   rows = []
   BREAKS.clear; OVERLAYS.clear
   $player.party = [god(mk(:BLISSEY, 100, [:SEISMICTOSS, :SOFTBOILED], :LEFTOVERS))]
@@ -317,14 +321,13 @@ hijack = lambda do |title, type: :MERIDIAN_VOSS, name: "Aurelian", version: 0, d
     setBattleRule("canLose"); setBattleRule("field", :PRISM_ARENA)
     TrainerBattle.start(t)
   end
-  [log, rows, t]
+  [log, rows, pre]
 end
 fallen = proc { Prismfall::Bonds.change(:KESTREL, -8) }
 
-log, rows, t = hijack.call("Voss's NULL (Standard): Kestrel redeemed, no conduit")
-n = t.party[0]
+log, rows, n = hijack.call("Voss's NULL (Standard): Kestrel redeemed, no conduit")
 check("the Hijack (Voss v0): Silvally \"NULL\" is the boss, 3 bars, Lv 100, no stat multipliers on Standard",
-      n.prismfall_boss_id == :VOSS_SILVALLY_NULL && bs.bars_for(bs.get(:VOSS_SILVALLY_NULL)) == 3 && n.level == 100 && bs.stat_mults(n).nil?)
+      n[:id] == :VOSS_SILVALLY_NULL && n[:bars] == 3 && n[:level] == 100 && n[:mults].nil?, n.inspect)
 opening = rows.select { |r| r[:field].nil? }
 check("the opening rounds: it keeps its Steel Memory", !opening.empty? && opening.all? { |r| r[:item] == :STEELMEMORY && r[:types] == [:STEEL] }, opening.first.inspect[0, 120])
 turned = rows.select { |r| r[:field] }
@@ -358,21 +361,22 @@ check(":let_go (already made: not asked again): NULL regenerates every round of 
       log.lines.index { |l| l.include?("regenerated!") } > log.lines.index { |l| l.include?("Harnessed into the Engine") },
       "#{regen.length} regenerations; result #{bs.last_result[:result].inspect}")
 check("...1/8 of its max HP a round on Standard, and KESTREL_LOST is set", Prismfall::Narrative.flag(:KESTREL_LOST) &&
-      bar3.each_cons(2).any? { |a, b| b[:hp] - a[:hp] == (n.totalhp / 8.0).round - 100 }, bar3.first(4).map { |r| r[:hp] }.inspect)
+      bar3.each_cons(2).any? { |a, b| b[:hp] - a[:hp] == (n[:totalhp] / 8.0).round - 100 }, bar3.first(4).map { |r| r[:hp] }.inspect)
 
 log, rows, = hijack.call("Voss's NULL: VOSS_FEIGNED", :prep => proc { Prismfall::Choices.make(:ch17_voss_offer, :feign, false) })
 check("VOSS_FEIGNED: his line, and NULL at -1 to every stat for three rounds",
-      log.include?(/You were close\. You let me get close\./) && rows.first(2).all? { |r| bs::NULL_STAT_STAGES.all? { |s| r[:stages][s] == -1 } } &&
-      bs::NULL_STAT_STAGES.all? { |s| rows[2][:stages][s] == 0 }, rows.first(4).map { |r| r[:stages][:ATTACK] }.inspect)
+      log.include?(/You were close\. You let me get close\./) && log.include?(/All its stats fell!/) &&
+      rows.first(2).all? { |r| [:DEFENSE, :SPECIAL_DEFENSE].all? { |s| r[:stages][s] == -1 } } &&     # (it sets up Attack / Speed itself)
+      [:DEFENSE, :SPECIAL_DEFENSE].all? { |s| rows[2][:stages][s] == 0 }, rows.first(4).map { |r| r[:stages][:DEFENSE] }.inspect)
 
-log, rows, t = hijack.call("Quent's NULL (Voss discredited): MERIDIAN_QUENT v99", :type => :MERIDIAN_QUENT, :name => "Percival", :version => 99)
-check("Quent as the hijacker (v99): the same three-bar NULL, without Voss's lines", t.party[0].prismfall_boss_id == :QUENT_SILVALLY_NULL &&
+log, rows, q = hijack.call("Quent's NULL (Voss discredited): MERIDIAN_QUENT v99", :type => :MERIDIAN_QUENT, :name => "Percival", :version => 99)
+check("Quent as the hijacker (v99): the same three-bar NULL, without Voss's lines", q[:id] == :QUENT_SILVALLY_NULL &&
       BREAKS.length == 2 && !log.include?(/Voss:/) && log.include?(/re-indexes to the/))
 fresh
 q = pbLoadTrainer(:MERIDIAN_QUENT, "Percival", 21); EventHandlers.trigger(:on_trainer_load, q)
 check("Quent's other teams (the v21 tag foe) are not bar bosses", q.party.none? { |p| p.prismfall_boss_id })
-t = hijack.call("Voss's NULL (Casual)", :version => 200, :difficulty => :CASUAL)[2]
-check("Casual (v200): 3 bars at x0.55 HP", bs.stat_mults(t.party[0]) == { :HP => 0.55 })
+c = hijack.call("Voss's NULL (Casual)", :version => 200, :difficulty => :CASUAL)[2]
+check("Casual (v200): 3 bars at x0.55 HP", c[:bars] == 3 && c[:mults] == { :HP => 0.55 }, c.inspect)
 
 #-------------------------------------------------------------------------------
 section("4. Giratina's Origin trial (Ruin R1)")
@@ -398,7 +402,8 @@ log, rows = trial.call("Origin trial: holding back from the first round (before 
   (battle.turnCount < 2) ? :SWORDSDANCE : :DRAGONCLAW
 end
 check("on :INVERSE, in the Origin Forme (Ghost / Dragon)", rows.first && rows.first == [1, [:GHOST, :DRAGON], :INVERSE], rows.first.inspect)
-check("holding back before the first break does not end it (two idle rounds, then #{BREAKS.length} breaks)", BREAKS.length >= 1 && !log.include?(/You hold your hand still/) || BREAKS.length >= 1 && log.lines.index { |l| l.include?("You hold your hand still") }.to_i > log.lines.index { |l| l.include?("BAR") }.to_i)
+check("holding back before the first break does not end it (two idle rounds first, then the fight goes on)",
+      log.turns > 2 && BREAKS.length >= 1 && !log.include?(/You hold your hand still/), "turns #{log.turns}, breaks #{BREAKS.length}")
 check("breaking every bar ends it as a win, result :overpowered; it does not faint", log.outcome == 1 && bs.last_result[:result] == :overpowered &&
       BREAKS.length == 2 && !log.include?(/Giratina fainted/), "outcome #{log.outcome} result #{bs.last_result[:result].inspect} breaks #{BREAKS.length}")
 
@@ -422,10 +427,17 @@ end
 check("Hard: armed only after two breaks (holding back after one does nothing)", log.outcome == 1 && bs.last_result[:result] == :restraint && BREAKS.length == 2,
       "result #{bs.last_result[:result].inspect} breaks #{BREAKS.length}")
 
-log, rows = trial.call("Origin trial: a status move aimed at Giratina is not holding back") do |_battle, _b|
-  BREAKS.empty? ? :DRAGONCLAW : (BREAKS.length == 1 ? :SCREECH : :DRAGONCLAW)
+log, rows = trial.call("Origin trial: a status move aimed at Giratina is not holding back") do |battle, _b|
+  n = battle.instance_variable_get(:@test_screech).to_i
+  if BREAKS.length == 1 && n < 3
+    battle.instance_variable_set(:@test_screech, n + 1)
+    :SCREECH
+  else
+    :DRAGONCLAW
+  end
 end
-check("a hostile status move (Screech) does not count as holding back", !log.include?(/You hold your hand still/), "")
+check("a hostile status move (three rounds of Screech) does not count as holding back", !log.include?(/You hold your hand still/) &&
+      bs.last_result[:result] == :overpowered, bs.last_result[:result].inspect)
 
 #-------------------------------------------------------------------------------
 fails = RESULTS.count { |_n, ok, _d| ok == false }
