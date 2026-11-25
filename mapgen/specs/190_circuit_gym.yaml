@@ -8,6 +8,7 @@ field: NEON_GRID
 metadata:
   Name: Circuit Gym
   MapPosition: [0, 16, 16]
+  SnapEdges: true
 tone: [-10, -14, 6, 20]
 raw: data/raw/190.npy
 tileset: 60
@@ -272,3 +273,12 @@ events:
   post: false
   text: 'THE CIRCUIT GYM - WARDEN: ROOK CALDER - LIVE EVERY NIGHT AT NINE - PLEASE DO NOT LICK THE WIRES.'
   at: [7, 5]
+- type: trainer
+  at: [16, 12]
+  sight: 3
+  dir: left
+  sprite: trainer_ENGINEER
+  trainer: [ENGINEER, Volta]
+  intro: Every lamp in this city is on somebody's circuit. Let's see yours!
+  after: Turn the sideways ones. Chat says so.
+  rules: ['setBattleRule("field", :NEON_GRID)']

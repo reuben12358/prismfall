@@ -8,6 +8,7 @@ field: NEON_GRID
 metadata:
   Name: Circuit Gym
   MapPosition: [0, 16, 16]
+  SnapEdges: true
 tone: [-10, -14, 6, 20]
 raw: data/raw/193.npy
 tileset: 60

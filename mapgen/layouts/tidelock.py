@@ -67,14 +67,37 @@ def write(m, mid, name, extra=None, comment=''):
 
 # ============================================================================================ 170 the Lock Hall (TEACH)
 def build_170():
+    import rcompose as RC, passguard as PG
+    # Unified with 174 Harbor Tidelock Sanctum:
+    #   MASS  -> cvT weathered dark-timber lock-house walls (chamfered harbour bays!)
+    #   TER   -> qy dressed stone east sluice weir terrace feeding a roaring harbor waterfall!
+    #   FLOOR -> Lock Water practice channel + weathered harbour stone quay + timber deck strips
     m = hall(24, 20, 170)
-    m.box(1, 7, 22, 8)                       # under the north wall: its faces
-    m.box(10, 3, 12, 8)                      # the pier to the basin door
-    m.box(1, 9, 22, 11, FLOOR, 'w')          # the practice channel
-    m.box(1, 12, 22, 17); m.box(2, 18, 21, 18, MASS, 'x')
-    m.box(10, 18, 12, 19)                    # the way in from Ebbmouth
-    m.mass_at([(1, 17), (22, 17), (1, 16), (22, 16)])
+    m.kit = {TER: 'qy', FLOOR: 'cvT', 'default': 'cvT'}
+
+    # ---- 1. Sculpt the Black Void: Chamfered Harbour Lock-House Silhouette ----
+    m.box(1, 7, 22, 8)                       # north lock-house bulkhead wall faces
+    m.box(9, 4, 13, 8)                       # widened north pier quay framing To the Basins (11, 5)
+    m.box(10, 3, 12, 4)                      # recessed north portal crown
+    m.box(1, 9, 22, 11, FLOOR, 'w')          # the practice lock channel (all slots 0..6 & gate x=14 pure water!)
+    m.box(1, 12, 22, 17)                     # main south dockside gallery
+    m.box(2, 18, 21, 18, MASS, 'x')
+    m.box(10, 18, 12, 19)                    # narrowed entrance portal from Ebbmouth
+    # Sculpted void chamfers along SW, SE & outer north shoulders (ZERO flat brick box!)
+    m.mass_at([
+        (1, 16), (1, 17), (2, 17), (3, 17),
+        (22, 16), (22, 17), (21, 17), (20, 17),
+        (9, 4), (13, 4),
+    ])
+
+    # ---- 2. Elevated East Stone Sluice Weir Terrace (TER, x=21..22, y=6..8) feeding Roaring Waterfall! ----
+    # Sits safely east of Practice Raft Slot 6 (x=19) so the roaring cascade visibly drives the practice current!
+    m.box(20, 6, 22, 8, TER, '.')
+    m.box(21, 6, 22, 8, TER, 'w')
+
     m.plan_cliffs(rows=3)
+
+    # ---- 3. Exact HEAD Events & Practice Puzzle (32/32 preserved!) ----
     E = m.events
     S, V = TL.S_PRACTICE_HIGH, TL.V_PRACTICE
     E += [
@@ -113,19 +136,67 @@ def build_170():
         E.append({'type': 'event', 'name': 'Practice gate %d' % y, 'at': [TL.PRACTICE_GATE_X, y], 'pages': [
             {'graphic': {'tile': P1('cv_gate_open')}},
             {'cond': {'switch': TL.S_PRACTICE_GATE}, 'graphic': {'tile': P1('cv_gate_shut')}}]})
-    m.keep_clear |= {(11, 18), (11, 17), (11, 6), (11, 12), (3, 14), (14, 14), (20, 14), (8, 15), (17, 16)}
-    # dressing: windows and the union's banners on the north wall, chains, lamps, the quay clutter
-    on_faces(m, 'cv_window', [(3, 7), (7, 7), (16, 7), (20, 7)])
-    on_faces(m, 'cv_chain', [(5, 8), (18, 8), (9, 8), (13, 8)])
-    hang(m, 'cv_banner', 2, 7); hang(m, 'cv_banner', 21, 7)
-    for name, x, y in (('hb_post1', 1, 12), ('hb_post1', 22, 12), ('hb_fish', 3, 16), ('pf_p_net', 19, 16), ('hb_keg', 13, 15),
-                       ('hb_buoy2', 9, 12), ('hb_cask', 12, 5), ('hb_keg', 10, 7)):
+
+    m.keep_clear |= ({(11, y) for y in range(5, 20)}
+                     | {(10, 18), (12, 18), (10, 17), (12, 17), (10, 6), (12, 6),
+                        (3, 12), (3, 14), (4, 13), (2, 13), (5, 13), (14, 12), (14, 14), (13, 13), (15, 13),
+                        (20, 14), (19, 13), (8, 15), (9, 15), (10, 15), (17, 16), (16, 15), (18, 15)})
+
+    # ---- 4. Roaring East Sluice Waterfall Cascade (x=21..22, y=7..9 into Open East Plunge Pool!) ----
+    wf_crest = RC.vauto('rejuvenation', 'Waterfall crest', 0)
+    wf_mid = RC.vauto('rejuvenation', 'Waterfall', 0)
+    wf_bot = RC.vauto('rejuvenation', 'Waterfall bottom', 0)
+    m.over.append((2, 20, 7, P1('cv_sluice_hi')))
+    for wx in (21, 22):
+        m.over.append((2, wx, 7, wf_crest))
+        m.over.append((2, wx, 8, wf_mid))
+        m.over.append((2, wx, 9, wf_bot))
+
+    # ---- 5. North Bulkhead Windows, Anchor Banners, Chains, Brass Meridian Intake & Timber Portal Frames ----
+    on_faces(m, 'cv_window', [(4, 7), (7, 7), (15, 7), (18, 7)])
+    on_faces(m, 'cv_chain', [(3, 8), (6, 8), (8, 8), (14, 8), (17, 8)])
+    hang(m, 'cv_banner', 2, 7); hang(m, 'cv_banner', 9, 5); hang(m, 'cv_banner', 13, 5); hang(m, 'cv_banner', 19, 7)
+    # Heavy timber lock-gate portal frames crowning BOTH South Entrance (10, 17) & North Basins Portal (10, 4)!
+    m.put('cv_frame', 10, 17)
+    m.put('cv_frame', 10, 4)
+
+    # ---- 6. Timber Boardwalk Planks, Forged Iron Quay Railings & Mooring Bollards (Matching 174!) ----
+    # Weathered timber plank causeway leading straight from Entry (11, 14..16) & onto the North Pier (11, 6..8)!
+    for y, t in ((6, 'cv_raft_t'), (7, 'cv_raft_m'), (8, 'cv_raft_b'),
+                 (14, 'cv_raft_t'), (15, 'cv_raft_m'), (16, 'cv_raft_b')):
+        m.over.append((1, 11, y, P1(t)))
+    # Forged iron quay balustrades along safe segments of the south channel lip (y=12)
+    for x, t in ((6, 'qy_rail_w'), (7, 'qy_rail_m'), (8, 'qy_rail_m'), (9, 'qy_rail_e'),
+                 (15, 'qy_rail_w'), (16, 'qy_rail_m'), (17, 'qy_rail_m'), (18, 'qy_rail_e')):
+        m.over.append((1, x, 12, P1(t))); m.taken[12, x] = True
+    # Iron mooring bollards framing the raft pier landing (10,12 & 12,12), north pier (10,8 & 12,8), & lock corners
+    for bx, by, t in ((10, 12, 'hb_bollard1'), (12, 12, 'hb_bollard0'), (10, 8, 'hb_bollard1'), (12, 8, 'hb_bollard0'),
+                      (2, 12, 'hb_bollard0'), (19, 12, 'hb_bollard1'), (21, 12, 'hb_bollard0')):
+        if (bx, by) not in m.keep_clear:
+            m.over.append((1, bx, by, P1(t))); m.taken[by, bx] = True
+
+    # ---- 7. Harbour Beacons, Tall Maritime Lanterns, Cargo Crates, Whalebones & Dock Clutter ----
+    for name, x, y in (
+        ('pf_beacon', 4, 15),                            # Blazing harbour fire beacon anchored against SW quay wall (x=4..5, y=15..17!)
+        ('pf_lantern', 9, 15), ('pf_lantern', 13, 15),   # Twin tall dockside lanterns flanking South Portal
+        ('pf_lantern', 10, 5), ('pf_lantern', 12, 5),    # Twin lanterns flanking North Basins Portal
+        ('cv_lamp_on', 1, 12), ('cv_lamp_on', 22, 12),   # Channel-end forge lamps
+        ('hb_rope', 9, 13), ('hb_rope', 12, 13),
+        ('hb_barrels', 1, 14), ('hb_crates4', 15, 17), ('pf_p_net', 19, 15),
+        ('hb_keg', 13, 15), ('hb_buoy2', 8, 13), ('hb_cask', 12, 7), ('hb_keg', 10, 7),
+        ('pf_whalebone', 8, 17), ('pf_whalebone', 14, 17), ('wr_sacks', 6, 17), ('hb_fish', 2, 14),
+    ):
         put_if(m, name, x, y)
-    m.dress(5, groups=[(['cv_wrack', 'L_fd0', 'L_fd1'], 1)], seed=7)
-    for name, x, y in (('cv_lamp_on', 1, 12), ('cv_lamp_on', 22, 12), ('hb_barrels', 2, 15), ('hb_crates4', 15, 17),
-                       ('pf_whalebone', 9, 16), ('pf_whalebone', 13, 16), ('hb_boxes', 19, 15), ('wr_sacks', 6, 17)):
-        put_if(m, name, x, y)
+
+    # ---- 8. Dramatic Harbor Skylight Shafts (cv_shaft) & Warm Lantern/Beacon/Plunge-Pool Glows (pf_glow)! ----
+    for sx, sy in ((4, 9), (10, 7), (16, 9)):
+        m.stamps.append(('cv_shaft', sx, sy))
+    for gx, gy in ((4, 16), (9, 16), (13, 16), (10, 5), (12, 5), (21, 9), (21, 10), (2, 12), (21, 12), (14, 13)):
+        m.stamps.append(('pf_glow', gx, gy))
+
+    m.dress(6, groups=[(['cv_wrack', 'cv_kelp0', 'cv_kelp1', 'L_fd0', 'L_fd1'], 3)], seed=7)
     m.paint()
+    PG.guard(m.L, TID)
     return m
 
 
@@ -140,7 +211,7 @@ def plan_basin(m, level):
     bed = FLOOR
     B = m.box
     B(11, 2, 17, 5, top)                                  # the north dock (ND) and the Warden's door
-    B(1, 6, 28, 8, bed, '.' if low else 'w')              # the Race
+    B(1, 6, 28, 8, bed, '.' if low else 'w')              # the Race & north sluice channel
     B(1, 9, 5, 17, top); B(23, 9, 27, 17, top)            # west pier (WP), east pier (EP)
     B(11, 9, 17, 14, top); B(13, 15, 15, 17, top)         # the island (IS) and its jetty
     for x0, x1 in ((6, 10), (18, 22), (11, 12), (16, 17)):
@@ -150,6 +221,16 @@ def plan_basin(m, level):
     B(1, 18, 28, 20, bed, '.' if low else 'w')            # the south channel
     B(1, 21, 28, 24, top)                                 # the south walkway (SW)
     B(13, 25, 15, 25, top)
+
+    # ---- Synchronized Void-Sculpted Harbour Chamfers & Beveled Stone Quays (100% IDENTICAL across 171/172/173!) ----
+    # Chamfer outer SW & SE walkway corners into black roof void (breaks boxy rectangle cleanly!)
+    m.mass_at([(1, 24), (2, 24), (28, 24), (27, 24)])
+    # Bevel non-critical inner pier corners into basin water/mud so piers read as sculpted harbour quays!
+    # (100% clear of all events: Gate lever (3,10), Leif (2,13), Wheel C (14,11), SUPERPOTION (16,10), NETBALL (26,11), ladders & rafts!)
+    for bx, by in ((5, 9), (23, 9), (11, 14), (17, 14)):
+        m.ht[by, bx] = bed
+        m.cls[by, bx] = '.' if low else 'w'
+
     m.stairs(14, 2, w=1, n=2, c='.')                      # steps up into the Warden's door
     if low:
         m.kit = {'default': 'cvT', TER: 'qy'}
@@ -158,6 +239,8 @@ def plan_basin(m, level):
         for y in range(6, 21):                            # the bed is mud
             for x in range(1, 29):
                 if m.cls[y, x] == '.' and m.ht[y, x] == bed: m.cls[y, x] = 'm'
+    else:
+        m.kit = {'default': 'cvT', TER: 'qy'}
     m.plan_cliffs(rows=3)
 
 
@@ -171,6 +254,7 @@ class Basin(Cave):
 
 
 def build_basin(level):
+    import rcompose as RC, passguard as PG
     mid = TL.MAPS[level]
     m = hall(W_B, H_B, 171 + level, cls=Basin)
     plan_basin(m, level)
@@ -230,35 +314,128 @@ def build_basin(level):
         E.append(trainer((2, 13), 'SWIMMER_M', 'Leif', 'right', "Rafting is cheating! Battle!", "Fine. The gate's all yours."))
         E.append(trainer((21, 23), 'FISHERMAN', 'Oskar', 'left', "Mid-water! Best fishing level!", "Not a nibble."))
         E.append({'type': 'item', 'at': [16, 10], 'item': 'SUPERPOTION'})
-    m.keep_clear |= {(14, 24), (3, 23), (25, 23), (14, 12), (3, 11), (12, 23), (14, 4), (14, 5), (14, 8), (14, 7), (14, 6),
-                     (8, 21), (24, 16), (24, 20)} | {(x, y) for x in TL.BASIN_SLOTS.values() for y in SLOT_ROWS} | \
-                    {(TL.BASIN_GATE_X, y) for y in SLOT_ROWS}
-    # dressing
+
+    # Protect ALL critical walkways, arrival cells, raft approaches, trainer sightlines & wheel/lever stands
+    # identically across all 3 maps so pfp_swap_map(171/172/173) NEVER traps a player!
+    m.keep_clear |= ({
+        (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (13, 24), (15, 24),
+        (2, 21), (3, 21), (4, 21), (3, 22), (3, 23), (2, 22), (4, 22),
+        (24, 21), (25, 21), (26, 21), (25, 22), (25, 23), (24, 22), (26, 22),
+        (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10), (14, 9),
+        (13, 11), (15, 11), (16, 10), (16, 11), (15, 10), (13, 9), (15, 9),
+        (3, 10), (3, 11), (4, 10), (2, 10), (2, 13), (3, 13), (4, 13), (3, 14), (3, 15), (3, 16), (3, 17),
+        (12, 22), (12, 23), (11, 22), (13, 22),
+        (21, 23), (20, 23), (19, 23), (22, 23), (21, 22),
+        (14, 2), (14, 3), (14, 4), (14, 5), (15, 4), (16, 4), (17, 4), (13, 4),
+        (14, 6), (14, 7), (14, 8), (8, 21), (8, 22), (8, 20), (8, 12), (8, 13), (8, 14),
+        (24, 16), (24, 17), (24, 18), (24, 19), (24, 20), (25, 17), (25, 16), (25, 15), (25, 14), (25, 13), (25, 12), (25, 11), (26, 11),
+    } | {(x, y) for x in TL.BASIN_SLOTS.values() for y in SLOT_ROWS}
+      | {(TL.BASIN_GATE_X, y) for y in SLOT_ROWS})
+
+    # ---- Synchronized Architectural Harbour Dressing (Unified with 174!) ----
+    # Heavy weathered timber lock-gate portals framing BOTH Warden's Door (13, 2) & Lock Hall Entrance (13, 24)!
     m.put('cv_frame', 13, 2)
-    on_faces(m, 'cv_window', [(4, 6), (9, 6), (20, 6), (25, 6)])
+    m.put('cv_frame', 13, 24)
+    # Mullioned harbor windows, anchor banners & hanging lock chains along the north lock-house bulkhead
+    on_faces(m, 'cv_window', [(3, 6), (9, 6), (19, 6), (25, 6)])
+    on_faces(m, 'cv_chain', [(2, 7), (5, 7), (10, 7), (18, 7), (23, 7), (27, 7)])
     hang(m, 'cv_banner', 12, 2); hang(m, 'cv_banner', 16, 2)
-    on_faces(m, 'cv_chain', [(7, 7), (22, 7), (2, 7), (27, 7)])
-    for name, x, y in (('cv_lamp_on', 1, 21), ('cv_lamp_on', 28, 21), ('cv_lamp_on', 11, 9), ('cv_lamp_on', 17, 9),
-                       ('hb_barrels', 1, 9), ('hb_barrels', 27, 13), ('wr_sacks', 5, 16), ('hb_crates4', 17, 24),
-                       ('pf_whalebone', 11, 2), ('pf_whalebone', 17, 2), ('wr_sacks', 23, 9), ('hb_boxes', 5, 23)):
+    hang(m, 'cv_banner', 4, 6); hang(m, 'cv_banner', 24, 6)
+
+    # ---- Dynamic Twin Harbour Sluice Waterfalls (x=6..7 & x=21..22, y=5..8)! ----
+    # At LOW water (171): closed dressed-stone sluice weir gates & valves inset into the north wall (open mud at y=8).
+    # At MID (172) & HIGH (173) water: ROARING harbour waterfalls cascading straight into foaming plunge pools!
+    if level == TL.LOW:
+        for sx in (6, 21):
+            m.over.append((2, sx - 1, 5, P1('cv_sluice')))
+            m.over.append((2, sx + 2, 5, P1('cv_sluice')))
+            for wx in (sx, sx + 1):
+                m.over.append((2, wx, 5, P1('qy_lipm0')))
+                m.over.append((2, wx, 6, P1('qy_f1m0')))
+                m.over.append((2, wx, 7, P1('qy_f2m0')))
+    else:
+        wf_crest = RC.vauto('rejuvenation', 'Waterfall crest', 0)
+        wf_mid = RC.vauto('rejuvenation', 'Waterfall', 0)
+        wf_bot = RC.vauto('rejuvenation', 'Waterfall bottom', 0)
+        valve = P1('cv_sluice_hi' if level == TL.HIGH else 'cv_sluice')
+        for sx in (6, 21):
+            m.over.append((2, sx - 1, 5, valve))
+            m.over.append((2, sx + 2, 5, valve))
+            for wx in (sx, sx + 1):
+                m.over.append((2, wx, 5, wf_crest))
+                m.over.append((2, wx, 6, wf_mid))
+                m.over.append((2, wx, 7, wf_mid))
+                m.over.append((2, wx, 8, wf_bot))
+
+    # ---- Dynamic Harbour Skiff (hb_boat1, 3x2) in East Basin (x=19..21, y=11..12) ----
+    # Beached on the mud at Low water (171) -> lifts and floats buoyantly on Mid/High Lock Water (172/173)!
+    def place_basin_obj(name, x, y):
+        st = CK.STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+                        if z == 1: m.taken[y + dy, x + dx] = True
+    place_basin_obj('hb_boat1', 19, 11)
+
+    # ---- Timber Boardwalk Planks, Forged Iron Quay Railings & Mooring Bollards (Matching 174!) ----
+    # Weathered timber boardwalk planks down the Island Jetty (14, 14..16) & South Approach (14, 21..23)!
+    for y, t in ((14, 'cv_raft_t'), (15, 'cv_raft_m'), (16, 'cv_raft_b'),
+                 (21, 'cv_raft_t'), (22, 'cv_raft_m'), (23, 'cv_raft_b')):
+        m.over.append((1, 14, y, P1(t)))
+    # Forged iron quay balustrades framing safe pier overlooks (100% clear of all raft berths, ladders & Race!)
+    for x, t in ((11, 'qy_rail_w'), (12, 'qy_rail_e'), (16, 'qy_rail_w'), (17, 'qy_rail_e')):
+        m.over.append((1, x, 9, P1(t))); m.taken[9, x] = True
+    # Iron mooring bollards placed cleanly outside all raft-berth wheel loops (x=2..4 & x=24..26 kept open!)
+    for bx, by, t in ((5, 21, 'hb_bollard1'), (13, 21, 'hb_bollard1'), (15, 21, 'hb_bollard0'), (23, 21, 'hb_bollard0'),
+                      (13, 17, 'hb_bollard0'), (15, 17, 'hb_bollard1'),
+                      (2, 17, 'hb_bollard0'), (4, 17, 'hb_bollard1'),
+                      (26, 17, 'hb_bollard0'), (11, 5, 'hb_bollard1'), (17, 5, 'hb_bollard0')):
+        if (bx, by) not in m.keep_clear and (level != TL.LOW or by != 21):
+            m.over.append((1, bx, by, P1(t))); m.taken[by, bx] = True
+
+    # ---- Harbour Beacons, Tall Lanterns, Maritime Cargo & Dockside Clutter ----
+    for name, x, y in (
+        ('pf_lantern', 12, 10), ('pf_lantern', 16, 12),   # Warm lanterns illuminating the Central Island
+        ('pf_lantern', 12, 3), ('pf_lantern', 16, 3),     # Twin lanterns framing Warden Marisol's Pool entrance!
+        ('pf_lantern', 6, 21), ('pf_lantern', 22, 21),    # Twin tall harbour quay lanterns along the South Walkway!
+        ('cv_lamp_on', 1, 21), ('cv_lamp_on', 28, 21),
+        ('cv_lamp_on', 11, 10), ('cv_lamp_on', 17, 10),
+        ('hb_barrels', 1, 9), ('hb_barrels', 27, 13), ('wr_sacks', 4, 16), ('hb_crates4', 17, 24),
+        ('pf_whalebone', 11, 2), ('pf_whalebone', 17, 2), ('wr_sacks', 24, 9), ('hb_boxes', 5, 23),
+        ('hb_post1', 1, 15), ('hb_post1', 27, 15), ('hb_post1', 11, 13), ('hb_post1', 17, 13),
+        ('hb_fish', 18, 23), ('hb_keg', 7, 24), ('hb_buoy2', 27, 22), ('pf_p_net', 9, 23), ('hb_cask', 23, 23),
+        ('hb_keg', 1, 12), ('hb_buoy', 27, 10), ('hb_cask', 12, 4), ('hb_keg', 16, 5),
+        ('hb_rope', 13, 16), ('hb_rope', 15, 16), ('hb_rope', 4, 22), ('hb_rope', 24, 22),
+    ):
         put_if(m, name, x, y)
-    for name, x, y in (('hb_post1', 1, 15), ('hb_post1', 27, 15), ('hb_post1', 11, 13), ('hb_post1', 17, 13),
-                       ('hb_fish', 18, 23), ('hb_keg', 7, 24), ('hb_buoy2', 27, 22), ('pf_p_net', 9, 23), ('hb_cask', 23, 23),
-                       ('hb_keg', 1, 12), ('hb_buoy', 27, 10), ('hb_cask', 12, 4), ('hb_keg', 16, 5)):
-        put_if(m, name, x, y)
+
+    # ---- Dramatic Harbor Skylight Shafts (cv_shaft) & Warm Lantern/Waterfall Glow Pools (pf_glow)! ----
+    for sx, sy in ((13, 3), (13, 10), (6, 8), (21, 8)):
+        m.stamps.append(('cv_shaft', sx, sy))
+    glows = [(14, 3), (14, 11), (6, 22), (22, 22), (1, 21), (27, 21), (11, 10), (17, 10)]
+    if level != TL.LOW:
+        glows += [(6, 8), (21, 8)]                        # Shimmering spray-mist pools at foot of roaring waterfalls!
+    for gx, gy in glows:
+        m.stamps.append(('pf_glow', gx, gy))
+
     m.dress(5, groups=[(['cv_wrack', 'L_fd0', 'L_fd1'], 1)], seed=7)
     if level == TL.LOW:
         for x, y in [(c[0], c[1]) for c in zip(*__import__('numpy').nonzero((m.cls == 'm').T))]:
-            if not m.taken[y, x] and (x * 7 + y * 11) % 9 == 0 and (x, y) not in m.keep_clear:
+            if not m.taken[y, x] and (x * 7 + y * 11) % 7 == 0 and (x, y) not in m.keep_clear:
                 m.over.append((2, x, y, P1('cv_kelp%d' % ((x + y) % 2))))
+        for bx, by in ((9, 10), (19, 15), (7, 16), (22, 16)):
+            if not m.taken[by, bx] and (bx, by) not in m.keep_clear:
+                m.over.append((1, bx, by, P1('cv_barn'))); m.taken[by, bx] = True
     if level == TL.HIGH:
         for x in (13, 14, 15):
             for y in (6, 7, 8):
                 m.over.append((2, x, y, P1('cv_race%d' % ((x + y) % 2))))
     m.paint()
     if level == TL.LOW:
-        import passguard, rcompose as RC
-        blk = passguard.blocker(m.ts())
+        blk = PG.blocker(m.ts())
         for y in range(1, m.H - 1):                       # the quays stand two courses above the bed: no stepping off
             for x in range(1, m.W - 1):                   # their N / W / E edges (the S edge is the face itself)
                 if m.ht[y, x] != TER or m.cls[y, x] != '.' or (x, y) in m.ladders: continue
@@ -267,19 +444,61 @@ def build_basin(level):
                     m.L[2, y, x] = blk
         for x, y in m.ladders:
             m.L[2, y, x] = P1('cv_ladder_q')
+    PG.guard(m.L, TID)
     return m
 
 
 # ============================================================================================ 174 the Warden's Pool
 def build_174():
+    import rcompose as RC
+    # Sculpted Rejuvenation-grade Harbor Tidelock Sanctum for Warden Marisol:
+    #   MASS  -> cvT weathered dark-timber lock-house chamber walls (asymmetric chamfered harbour bays!)
+    #   TER   -> qy dressed harbour quay stonework (elevated stepped Warden's Dais + east sluice weir + quay dolphins!)
+    #   FLOOR -> Lock Water organic tidal basin + weathered stone harbour promenade + timber boardwalk causeway!
     m = hall(21, 19, 174)
-    m.box(1, 3, 19, 16)
-    m.box(9, 17, 11, 18)
-    m.box(3, 6, 17, 13, FLOOR, 'w')                       # the pool
-    m.box(8, 7, 12, 10)                                   # Marisol's deck
-    m.box(10, 11, 10, 13)                                 # the causeway to it
-    m.mass_at([(1, 16), (19, 16), (1, 15), (19, 15)])
+    m.kit = {TER: 'qy', FLOOR: 'cvT', 'default': 'cvT'}
+
+    # ---- 1. Sculpt the Black Void: Asymmetric Harbour Chamber, Narrowed Entrance Pier & Organic Tidal Basin ----
+    m.box(2, 3, 18, 14, FLOOR, '.')
+    m.box(4, 15, 16, 15, FLOOR, '.')
+    m.box(7, 16, 13, 16, FLOOR, '.')
+    m.box(9, 17, 11, 18, FLOOR, '.')
+    # Sculpted asymmetric harbour chamber corners (never a rectangular brick box!)
+    m.mass_at([(2, 13), (2, 14), (18, 13), (18, 14), (18, 3), (18, 4)])
+
+    # Organic sculpted tidal basin (Lock Water, zero rectangular swimming pool!)
+    m.box(4, 6, 16, 13, FLOOR, 'w')
+    m.box(5, 5, 13, 6, FLOOR, 'w')
+    m.box(3, 8, 4, 11, FLOOR, 'w')
+    m.box(16, 8, 17, 11, FLOOR, 'w')
+    # Carve jutting stone shore corners so the basin shoreline feels carved into natural harbour rock/quays!
+    m.box(4, 13, 5, 13, FLOOR, '.')
+    m.box(15, 13, 16, 13, FLOOR, '.')
+    m.box(16, 12, 17, 13, FLOOR, '.')
+    # Quiet Meridian Intake cove on NW (keeps Intake (3,5) reachable via West Pier x=2..3, y=5..12!)
+    m.box(2, 5, 4, 7, FLOOR, '.')
+    m.box(2, 7, 3, 12, FLOOR, '.')
+    m.box(3, 12, 4, 14, FLOOR, '.')
+
+    # ---- 2. Elevated Stone Quay Sluice Terrace (NE, TER) with Roaring Harbor Waterfall Cascade! ----
+    # Raised NE sluice pier (x=14..17, y=3..6, TER) feeding an active RJ Waterfall down y=6..9 into the dark tidal basin!
+    m.box(14, 3, 17, 6, TER, '.')
+    m.box(15, 3, 16, 6, TER, 'w')                                       # upper sluice headwater spilling over y=6!
+
+    # ---- 3. Elevated Monumental Warden's Sanctum Dais (TER, qy stonework, x=8..12, y=6..9) + Stone Steps! ----
+    # Marisol (10,8) stands elevated on dressed harbour quay stonework framed by forged iron rails & warm maritime lanterns!
+    m.box(8, 6, 12, 9, TER, '.')
+    # Timber-planked harbor causeway pier (x=9..11, y=11..14) meeting 3-wide stone quay stairs rising onto Marisol's dais!
+    m.box(9, 10, 11, 14, FLOOR, '.')
+    m.stairs(9, 9, w=3, n=3, c='.')
+
+    # ---- 4. Solid Stone-Quay Harbor Mooring Dolphin in the West Basin (ZERO floating mid-water stickers!) ----
+    # Asymmetric SW quay piling islet (5..6, 10) balancing the open foaming NE waterfall plunge pool (15..16, 10..11)!
+    m.box(5, 10, 6, 10, TER, '.')
+
     m.plan_cliffs(rows=3)
+
+    # ---- 5. Events (100% Back to the Basins warp, Marisol Gym Leader, & Meridian Intake sign preserved!) ----
     E = m.events
     win = ["Marisol Reyes: Ha! You rode it both ways. Good.",
            {'script': 'Prismfall.award_badge(pfm_gym(:LEADER_MARISOL))'}, {'script': 'pbReceiveItem(:TM03)'},
@@ -296,36 +515,111 @@ def build_174():
                 {'if': 'Prismfall.gym_battle(pfm_gym(:LEADER_MARISOL), double: false)', 'then': win}]},
             {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_SWIMMER_F', 'dir': 'down'},
              'commands': ["Marisol Reyes: Go on. The river's still running. For now."]}]},
+        {'type': 'sign', 'name': 'Intake', 'at': [3, 5], 'post': False, 'text':
+         "A brass Meridian intake, bolted into the old lock wall. It hums. The water round it is too still."},
     ]
-    m.keep_clear |= {(10, 17), (10, 9), (10, 10), (10, 11), (10, 12), (10, 13), (10, 14)}
-    on_faces(m, 'cv_window', [(4, 3), (8, 3), (12, 3), (16, 3)])
-    on_faces(m, 'cv_chain', [(2, 4), (18, 4), (6, 4), (14, 4)])
+    m.keep_clear |= ({(10, y) for y in range(9, 19)}
+                     | {(9, 9), (11, 9), (9, 10), (11, 10), (9, 11), (11, 11), (9, 12), (11, 12),
+                        (9, 15), (10, 15), (11, 15), (9, 16), (11, 16), (9, 17), (11, 17),
+                        (3, 5), (3, 6), (4, 5), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14),
+                        (4, 14), (5, 14), (6, 14), (7, 14), (8, 14), (9, 14), (11, 14), (12, 14)})
+
+    # ---- 6. Roaring East Harbor Sluice Waterfall Cascade (y=6..9 into Open Plunge Pool!) ----
+    wf_crest = RC.vauto('rejuvenation', 'Waterfall crest', 0)
+    wf_mid = RC.vauto('rejuvenation', 'Waterfall', 0)
+    wf_bot = RC.vauto('rejuvenation', 'Waterfall bottom', 0)
+    for wx in (15, 16):
+        m.over.append((2, wx, 6, wf_crest))
+        m.over.append((2, wx, 7, wf_mid))
+        m.over.append((2, wx, 8, wf_mid))
+        m.over.append((2, wx, 9, wf_bot))
+
+    # ---- 7. North Timber Lock-House Bulkhead (Anchor Banners, Mullioned Windows, Chains, Brass Intake) ----
+    on_faces(m, 'cv_window', [(6, 3), (12, 3), (17, 3)])
+    on_faces(m, 'cv_chain', [(5, 4), (8, 4), (13, 4), (17, 4)])
     hang(m, 'cv_banner', 10, 3)
-    for name, x, y in (('eb_intake', 2, 3), ('hb_post1', 3, 14), ('hb_post1', 17, 14), ('pf_p_net', 15, 3), ('hb_fish', 15, 14),
-                       ('hb_keg', 4, 15), ('hb_buoy2', 18, 6), ('hb_buoy2', 1, 9)):
+    hang(m, 'cv_banner', 7, 3)
+    hang(m, 'cv_banner', 13, 3)
+    m.put('eb_intake', 2, 3)
+
+    # ---- 8. Forged Iron Harbour Quay Railings, Timber Boardwalk Causeway & Grounded Mooring Dolphin! ----
+    # Iron quay balustrade along Marisol's northern dais edge (y=6, x=8..12)
+    for x, t in ((8, 'qy_rail_w'), (9, 'qy_rail_m'), (10, 'qy_rail_m'), (11, 'qy_rail_m'), (12, 'qy_rail_e')):
+        m.over.append((1, x, 6, P1(t))); m.taken[6, x] = True
+    # Weathered timber boardwalk planks down the central harbour causeway (x=10, y=12..14)
+    for y, t in ((12, 'cv_raft_t'), (13, 'cv_raft_m'), (14, 'cv_raft_b')):
+        m.over.append((1, 10, y, P1(t)))
+    # Harbor mooring bollards flanking the causeway entrance, moored skiff tie-up (13,13) & West Intake Quay
+    for bx, by, t in ((9, 13, 'hb_bollard1'), (11, 13, 'hb_bollard0'), (13, 13, 'hb_bollard0'),
+                      (4, 13, 'hb_bollard1'), (16, 13, 'hb_bollard1'), (2, 9, 'hb_bollard0'), (17, 12, 'hb_bollard0')):
+        if (bx, by) not in m.keep_clear:
+            m.over.append((1, bx, by, P1(t))); m.taken[by, bx] = True
+
+    # Solidly grounded maritime structures on the SW quay mooring dolphin (5..6, 10) — ZERO floating stickers!
+    def dolphin_piece(name, x, y):
+        st = CK.STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+                        if z == 1: m.taken[y + dy, x + dx] = True
+    dolphin_piece('hb_post1', 5, 9)         # Weathered wooden harbour piling on SW stone dolphin
+    dolphin_piece('cv_lamp_on', 6, 9)       # Glowing dockside lantern crowning SW stone dolphin!
+    dolphin_piece('hb_rope', 5, 10)
+    dolphin_piece('cv_barn', 6, 12)
+
+    # Moored harbour skiff floating 100% ON WATER (12..14, 11..12) tied snugly to bollard (13,13) beside the causeway!
+    dolphin_piece('hb_boat1', 12, 11)
+
+    # ---- 9. Maritime Sanctum Landmarks (Harbor Lanterns, Fire Beacon, Whalebones, Barrels, Nets & Timber Frame) ----
+    m.put('cv_frame', 9, 16)                # Heavy timber lock-gate portal framing the South Entrance!
+    for name, x, y in (
+        # Twin tall maritime lanterns & glowing lamps framing Marisol on her elevated stone quay dais & east plunge pool!
+        ('cv_lamp_on', 9, 6), ('cv_lamp_on', 11, 6),
+        ('pf_lantern', 8, 13), ('pf_lantern', 12, 13),
+        ('pf_lantern', 17, 10),             # Warm harbor beacon lantern illuminating the roaring east waterfall plunge pool!
+        # Blazing harbour fire beacon & monumental maritime clutter on the sculpted SW & SE quays
+        ('pf_beacon', 5, 13),
+        ('hb_fish', 14, 13), ('hb_barrels', 17, 11),
+        ('pf_whalebone', 7, 14), ('pf_whalebone', 13, 14),
+        ('hb_keg', 4, 14), ('hb_buoy2', 2, 10), ('wr_sacks', 16, 14), ('hb_rope', 7, 15),
+        ('cv_sluice', 14, 5), ('cv_sluice_hi', 17, 5),
+        ('cv_drift', 12, 15), ('cv_lamp_on', 2, 6),
+    ):
         put_if(m, name, x, y)
-    m.dress(5, groups=[(['cv_wrack', 'L_fd0'], 1)], seed=8)
-    E.append({'type': 'sign', 'name': 'Intake', 'at': [3, 5], 'post': False, 'text':
-              "A brass Meridian intake, bolted into the old lock wall. It hums. The water round it is too still."})
-    for name, x, y in (('cv_lamp_on', 1, 13), ('cv_lamp_on', 19, 13), ('pf_whalebone', 8, 14), ('pf_whalebone', 12, 14),
-                       ('hb_barrels', 2, 3), ('hb_barrels', 18, 3), ('cv_lamp_on', 8, 7), ('cv_lamp_on', 12, 7)):
-        put_if(m, name, x, y)
-    for x in (4, 8, 12, 16):
-        for y in (12,):
-            if m.cls[y, x] == 'w': m.over.append((2, x, y, P1('cv_race%d' % (x % 2))))
+
+    # ---- 10. Dramatic Harbor Skylight Shafts (cv_shaft, pri=2) & Warm Maritime Lantern Glow Pools (pf_glow, pri=5) ----
+    for sx, sy in ((9, 6), (15, 8), (3, 5)):
+        m.stamps.append(('cv_shaft', sx, sy))
+    m.stamps.append(('pf_glow', 15, 9))     # Shimmering waterfall spray-mist pool at the foot of the east cascade!
+    m.stamps.append(('pf_glow', 9, 7))
+    m.stamps.append(('pf_glow', 10, 7))     # Double-centered golden harbor light bathing Marisol's elevated dais!
+    m.stamps.append(('pf_glow', 5, 13))     # Warm firelight pool around SW harbor beacon
+    m.stamps.append(('pf_glow', 15, 9))     # Misty sheen at East Sluice Waterfall splash pool
+
+    # Bioluminescent sea-cave kelp/wrack & damp stone accents along the quay edges
+    m.dress(8, groups=[(['cv_wrack', 'cv_kelp0', 'cv_kelp1', 'L_fd0'], 4), (['L_rubble0'], 1)], seed=8)
+
     m.paint()
     return m
 
 
-def main():
-    m = build_170(); m.preview('/tmp/mb13/t170.png', scale=0.5)
-    write(m, 170, 'Tidelock Gym - Lock Hall')
+def main(which=None):
+    sel = set(which or [])
+    if not sel or '170' in sel:
+        m = build_170(); m.preview('/tmp/mb13/t170.png', scale=0.5)
+        write(m, 170, 'Tidelock Gym - Lock Hall')
     for lv in (TL.LOW, TL.MID, TL.HIGH):
-        m = build_basin(lv); m.preview('/tmp/mb13/t%d.png' % TL.MAPS[lv], scale=0.5)
-        write(m, TL.MAPS[lv], 'Tidelock Gym - Basins (%s Water)' % ['Low', 'Mid', 'High'][lv])
-    m = build_174(); m.preview('/tmp/mb13/t174.png', scale=0.5)
-    write(m, 174, "Tidelock Gym - Warden's Pool")
+        mid = TL.MAPS[lv]
+        if not sel or str(mid) in sel:
+            m = build_basin(lv); m.preview('/tmp/mb13/t%d.png' % mid, scale=0.5)
+            write(m, mid, 'Tidelock Gym - Basins (%s Water)' % ['Low', 'Mid', 'High'][lv])
+    if not sel or '174' in sel:
+        m = build_174(); m.preview('/tmp/mb13/t174.png', scale=0.5)
+        write(m, 174, "Tidelock Gym - Warden's Pool", extra={'metadata': {**META, 'SnapEdges': True}})
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

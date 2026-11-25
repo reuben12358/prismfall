@@ -1,4 +1,4 @@
-# Windfall Row (521). WRITTEN BY layouts/routes_early.py - edit that script.
+# Windfall Row (521). WRITTEN BY layouts/wave12_saltmere_routes_craft.py (Wave 12 Rejuv V14 Craft).
 id: 521
 name: Windfall Row
 parent: 0
@@ -302,3 +302,27 @@ events:
   gfx: ['', 0, 2]
   name: Farmhouse door
   link: R2_FARM
+- type: event
+  name: HeadbuttTree
+  at: [79, 16]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}
+- type: event
+  name: HeadbuttTree
+  at: [92, 24]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}
+- type: event
+  name: HeadbuttTree
+  at: [25, 38]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}

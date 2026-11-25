@@ -138,17 +138,23 @@ def build_546():
     R(22, 7, 35, 16, TER, 'F', 'H')              # the landing
     m.box(36, 10, 37, 12, TER)                   # the green room's door
     R(38, 7, 52, 14, TER, 'P', 'N')              # the green room
-    R(24, 17, 33, 25, FLOOR, 'F', 'F')           # the stair hall (TEACH)
+    R(24, 17, 33, 25, FLOOR, 'F', 'H')           # the stair hall (TEACH): rich dark walnut parquet (zero loud chessboard!)
     m.box(28, 26, 29, 27, FLOOR)                 # the arch to the vestibule
-    R(21, 28, 36, 37, FLOOR, 'F', 'F')           # the vestibule
+    R(21, 28, 36, 37, FLOOR, 'F', 'H')           # the vestibule: rich dark walnut parquet + mahogany inlays
     m.box(28, 38, 29, 39, FLOOR)                 # the front doors
     m.box(18, 32, 20, 34, FLOOR)                 # to the conservatory
-    R(3, 28, 17, 37, FLOOR, 'G', 'G')            # the conservatory
+    R(3, 28, 17, 37, FLOOR, 'G', 'N')            # the conservatory: dark mahogany boardwalk framing central tiled garden beds!
     m.box(10, 25, 11, 27, FLOOR)                 # conservatory -> parlour
     R(3, 17, 17, 24, FLOOR, 'P', 'P')            # the parlour
     m.box(37, 29, 39, 31, FLOOR)                 # vestibule -> dining (the locked door at 38)
     R(40, 25, 53, 31, FLOOR, 'N', 'N')           # the dining room (COMBINE)
     m.box(49, 22, 49, 24, FLOOR)                 # the back-stair nook (hatch stand 49,24)
+    # Sculpted chamfered Gothic room corners & recessed mezzanine shoulders (100% outside all 3 D5 puzzle zone grids!)
+    m.mass_at([(21, 37), (22, 37), (35, 37), (36, 37),          # vestibule south foyer chamfer
+               (3, 37), (4, 37), (16, 37), (17, 37),            # conservatory glasshouse apse chamfer
+               (3, 24), (17, 24),                               # parlour library corner recesses
+               (22, 15), (22, 16), (35, 15), (35, 16),          # upper landing stair-head gallery shoulders
+               (38, 14), (52, 14)])                             # green room dressing wing chamfer
     m.stairs(27, 16, w=4, n=3, c='.')            # the grand staircase: landing -> stair hall
     m.plan_cliffs(rows=3)
     E = m.events
@@ -185,12 +191,13 @@ def build_546():
     late.append((2, 25, 29, P1('mn_portK'))); late.append((2, 32, 29, P1('mn_portX')))   # the vestibule's two
     late.append((2, 7, 17, P1('mn_portQ'))); late.append((2, 13, 17, P1('mn_portL')))
     late.append((2, 44, 25, P1('mn_portX'))); late.append((2, 50, 25, P1('mn_portF')))
-    m.on('mn_chandelier', 27, 21); m.on('mn_chandelier', 27, 32); m.on('mn_chandelier', 9, 10); m.on('mn_chandelier', 50, 29)
+    # Grand overhead gothic chandeliers across every major wing (pri=2, pas=0)
+    for cx, cy in ((27, 21), (27, 32), (9, 10), (50, 29), (27, 10), (44, 10), (9, 20)):
+        m.on('mn_chandelier', cx, cy)
 
     # ------------------------------------------------------------ rugs and floors
     m.rug('R', 24, 31, 33, 35)                    # the vestibule's great rug
     m.rug('R', 28, 19, 29, 25, medallion=False)   # the runner up to the stairs
-    m.rug('B', 4, 10, 17, 10, medallion=False) if False else None
     m.rug('G', 6, 20, 13, 23)                     # the parlour
     m.rug('B', 24, 10, 33, 13)                    # the landing
     m.rug('R', 4, 9, 17, 10, medallion=False)     # the gallery runner
@@ -206,21 +213,23 @@ def build_546():
     put('mn_console', 22, 30); put('mn_palm', 21, 31); put('mn_coat', 35, 30); put('mn_umbrella', 36, 32)
     put('mn_statue', 21, 35); put('mn_statue', 36, 35); put('mn_palm', 24, 36); put('mn_palm', 33, 36)
     put('mn_console', 34, 34); put('mn_sheet_chair', 22, 33); put('mn_candelabra', 26, 29); put('mn_candelabra', 31, 29)
+    put('mn_candelabra', 22, 35); put('mn_candelabra', 35, 35)
     late.append((1, 28, 37, P1('mn_mat')))
-    put('mn_clock', 35, 28) if False else None
     # ------------------------------------------------------------ landing (TER)
     put('mn_clock', 23, 8); put('mn_armour', 34, 8); put('mn_bust', 26, 8); put('mn_bust', 31, 8)
-    put('mn_flats', 22, 13); put('mn_palm', 35, 13); put('mn_sheet_tall', 22, 9)
+    put('mn_flats', 22, 13); put('mn_palm', 35, 13); put('mn_sheet_tall', 22, 11)
+    put('mn_candelabra', 24, 14); put('mn_candelabra', 33, 14)
     for x in (26, 31): late.append((1, x, 15, P1('mn_newel')))            # newels at the stair head
     # ------------------------------------------------------------ stair hall: only the newels at the foot (on the gallery front)
     late.append((2, 26, 18, P1('mn_newel'))); late.append((2, 31, 18, P1('mn_newel')))
     # ------------------------------------------------------------ green room (TER): the company's dressing room
     put('mn_rail', 39, 8); put('mn_mirror', 42, 8); put('mn_dummy', 44, 8); put('mn_mirror', 46, 8); put('mn_books2', 50, 8)
+    put('mn_sideboard', 48, 8); put('mn_candelabra', 40, 9); put('mn_candelabra', 49, 9)
     put('mn_trunk_open', 39, 13); put('mn_hatboxes', 40, 13); put('mn_sofa', 46, 13); put('mn_rocking', 52, 13)
-    put('mn_console', 48, 9) if False else None
     put('mn_trunk', 52, 10); put('mn_sheet_chair', 52, 11)
     # ------------------------------------------------------------ parlour
     put('mn_fire', 9, 18)                                                 # the cold fireplace
+    put('mn_candelabra', 7, 18); put('mn_candelabra', 12, 18); put('mn_sideboard', 13, 18)
     put('mn_books', 4, 18); put('mn_books', 5, 18); put('mn_books2', 15, 18)
     put('mn_sofa', 9, 22); put('mn_chairR_right', 7, 21); put('mn_chairR_left', 13, 21); put('mn_tea', 10, 21)
     put('mn_sheet_piano', 3, 22); put('mn_harp', 17, 21); put('mn_gramophone', 16, 24); put('mn_globe', 14, 24)
@@ -230,8 +239,7 @@ def build_546():
     put('mn_grave_l', 4, 36); put('mn_grave_r', 5, 36); put('mn_trough_l', 14, 36); put('mn_trough_r', 15, 36)
     put('mn_bench', 9, 36); put('mn_fern', 7, 30); put('mn_orchid', 13, 30); put('mn_deadplant', 17, 33)
     put('mn_fern', 3, 34); put('mn_deadplant', 12, 34)
-    # ------------------------------------------------------------ dining: the walls only (the arena is the puzzle's)
-    put('mn_china', 52, 25) if False else None
+    put('mn_fern', 7, 33); put('mn_orchid', 13, 33); put('mn_candelabra', 8, 30); put('mn_candelabra', 12, 30)
 
     # ------------------------------------------------------------ dust, leaves, moonlight (walkable decals)
     top = {(x, y) for z, x, y, t in late if z == 2}
@@ -239,15 +247,27 @@ def build_546():
         for x in range(m.W):
             if m.cls[y, x] != '.' or m.cliff[y, x] or (x, y) in top: continue
             r = (x * 37 + y * 101) % 23
-            w, f = m.pal_at(x, y)
-            if f == 'G' and r < 4: late.append((2, x, y, P1('mn_leaves%d' % (r % 3))))
-            elif f == 'G' and r == 5: late.append((2, x, y, P1('mn_shards')))
+            in_cons = (3 <= x <= 17 and 28 <= y <= 37)
+            if in_cons and r < 4: late.append((2, x, y, P1('mn_leaves%d' % (r % 3))))
+            elif in_cons and r == 5: late.append((2, x, y, P1('mn_shards')))
             elif r < 2: late.append((2, x, y, P1('mn_dust%d' % ((x + y) % 3))))
     for x, y in ((7, 9), (11, 9), (15, 9), (25, 9), (34, 9), (7, 31), (10, 31), (13, 31), (53, 27), (47, 27)):
         late.append((2, x, y, P1('mn_moon%d' % ((x + y) % 2))))
     for x, y in ((25, 33), (26, 34), (27, 35)): late.append((2, x, y, P1('mn_feet')))
     late.append((2, 6, 35, P1('mn_soil'))); late.append((2, 5, 35, P1('mn_soil')))
     late.append((2, 10, 24, P1('mn_petals'))); late.append((2, 30, 37, P1('mn_wax')))
+
+    # ---- Dramatic Gothic Atmosphere: Dusty Moonlight Window Shafts (cv_shaft) & Flickering Chandelier/Candelabra Glows (pf_glow)! ----
+    for sx, sy in ((5, 29), (8, 29), (11, 29), (14, 29),          # Conservatory arched glass bay moonlight shafts
+                   (6, 8), (10, 8), (14, 8),                      # Portrait Gallery tall window shafts
+                   (24, 8), (32, 8),                              # Upper Landing twin moonlight beams
+                   (5, 18), (14, 18),                             # Parlour flanking window beams
+                   (42, 26), (46, 26), (51, 26)):                 # Dining Room moonlit window shafts
+        m.stamps.append(('cv_shaft', sx, sy))
+    for gx, gy in ((28, 21), (28, 32), (10, 10), (50, 29),        # Warm flickering chandelier halos
+                   (28, 11), (44, 11), (10, 20),                  # Upper Landing, Green Room & Parlour chandelier glows
+                   (26, 29), (31, 29), (9, 32), (9, 18)):         # Vestibule candelabras, Fountain & Parlour Hearth
+        m.stamps.append(('pf_glow', gx, gy))
 
     # ------------------------------------------------------------ events
     O = PZ.ORDER
@@ -309,6 +329,31 @@ def build_546():
             raise SystemExit('event %s stands in a puzzle room: %r' % (e.get('name'), e['at']))
     m.keep_clear |= free
     m.paint()
+
+    # ---- Post-Paint Rich Parquet & Botanical Inlay Craft (Zero Loud Chessboards!) ----
+    # 1. Vestibule & Stair Hall: rich dark-mahogany inlaid border framing the grand crimson rugs & marble entrance thresholds!
+    for y in range(28, 38):
+        for x in range(21, 37):
+            if m.cls[y, x] == '.' and (x in (23, 34) or y in (30, 36)):
+                m.L[0, y, x] = P1('N_f%d' % ((x + y) % 4))
+    for y in range(19, 26):
+        for x in range(24, 34):
+            if m.cls[y, x] == '.' and (x in (25, 32) or y in (19, 25)):
+                m.L[0, y, x] = P1('N_f%d' % ((x + y) % 4))
+    # Subtle classical marble threshold tiles ONLY at the grand front doors (28..29, 37..39) & vestibule-stair arch (28..29, 26..27)
+    for tx, ty in ((28, 37), (29, 37), (28, 38), (29, 38), (28, 39), (29, 39), (28, 26), (29, 26), (28, 27), (29, 27)):
+        if m.cls[ty, tx] == '.':
+            m.L[0, ty, tx] = P1('P_f%d' % ((tx + ty) % 2))
+    # 2. Conservatory: bordered Victorian tiled garden beds ONLY around the Central Fountain Court (7..13, 31..34) & Grave/Trough bays!
+    for y in range(31, 35):
+        for x in range(7, 14):
+            if m.cls[y, x] == '.':
+                m.L[0, y, x] = P1('G_f%d' % ((x * 3 + y * 5) % 4))
+    for bx0, bx1 in ((4, 6), (14, 16)):
+        for y in (35, 36):
+            for x in range(bx0, bx1 + 1):
+                if m.cls[y, x] == '.':
+                    m.L[0, y, x] = P1('G_f%d' % ((x + y) % 4))
     return m
 
 
@@ -435,14 +480,17 @@ def write(m, mid, name, extra=None):
                                '# DUNGEON_PUZZLES D5 (puzzles/manor.py).  Edit the layout script, not this file.\n')
 
 
-def main():
+def main(which=None):
+    sel = set(which or [])
     os.makedirs('/tmp/mb14', exist_ok=True)
-    m = build_546(); m.preview('/tmp/mb14/m546.png', scale=0.5)
-    write(m, 546, 'Thistledown Manor', {'gates': [{'name': 'Dining room (locked until the portraits are set)', 'from': [[28, 37]],
-                                                   'sealed': [[46, 30], [49, 24]]}]})
-    m = build_547(); m.preview('/tmp/mb14/m547.png', scale=0.5)
-    write(m, 547, 'Thistledown Manor - Attic')
+    if not sel or '546' in sel:
+        m = build_546(); m.preview('/tmp/mb14/m546.png', scale=0.5)
+        write(m, 546, 'Thistledown Manor', {'gates': [{'name': 'Dining room (locked until the portraits are set)', 'from': [[28, 37]],
+                                                       'sealed': [[46, 30], [49, 24]]}]})
+    if not sel or '547' in sel:
+        m = build_547(); m.preview('/tmp/mb14/m547.png', scale=0.5)
+        write(m, 547, 'Thistledown Manor - Attic')
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

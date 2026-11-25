@@ -1,4 +1,4 @@
-# Marram Down (528). WRITTEN BY layouts/routes_craft.py - edit that script.
+# Marram Down (528). WRITTEN BY layouts/wave12_saltmere_routes_craft.py (Wave 12 Rejuv V14 Craft).
 id: 528
 name: Marram Down
 parent: 0
@@ -26,7 +26,7 @@ events:
     commands:
     - (A waxed sledge at the top of the run. The sand drops away to the sea.)
     - choices: [Ride it down!, Not today.]
-      cancel: 1
+      cancel: 2
       branches:
       - - move:
             who: -1
@@ -89,7 +89,10 @@ events:
   - cond: {self: A}
     graphic: {sprite: NPC 26, dir: down}
     trigger: action
-    commands: ['Beacon Keeper: The pot''s cold. Come back when I''ve forgotten you.']
+    commands:
+    - 'Beacon Keeper: Still warm in the pot. Sit a minute.'
+    - {heal: true}
+    - (The party is rested.)
 - type: event
   name: Sledge run sign
   at: [54, 14]

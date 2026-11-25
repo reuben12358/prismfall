@@ -9,7 +9,8 @@ metadata:
   Name: Gullcry Caves
   MapPosition: [0, 8, 21]
   BattleBack: cave1
-tone: [-12, -6, 6, 16]
+  SnapEdges: true
+tone: [-10, -4, 8, 14]
 fog: {name: prismfall_seamist, opacity: 34, blend: 1, zoom: 100, sx: 1, sy: 0}
 raw: data/raw/564.npy
 tileset: 57

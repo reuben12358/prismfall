@@ -1,4 +1,4 @@
-# Saltmere - The Harbour (146). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.
+# Saltmere - The Harbour (146). WRITTEN BY layouts/wave12_saltmere_routes_craft.py (Wave 12 Rejuv V14 Craft).
 id: 146
 name: Saltmere - Harbour & Breakwater
 bgm: Lerucean Town
@@ -13,6 +13,7 @@ metadata:
   MapPosition: [0, 10, 25]
   BattleBack: field
   Weather: [Rain, 10]
+  SnapEdges: true
 biome: harbour
 connections: []
 fog: {name: prismfall_seamist, opacity: 36, blend: 0, zoom: 100, sx: 2, sy: 0}

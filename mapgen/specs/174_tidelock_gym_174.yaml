@@ -8,6 +8,7 @@ field: WATER_SURFACE
 metadata:
   Name: Tidelock Gym
   MapPosition: [0, 8, 20]
+  SnapEdges: true
 tone: [-6, -8, 4, 14]
 raw: data/raw/174.npy
 tileset: 58

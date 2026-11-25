@@ -11,13 +11,13 @@ gl_cot:    {game: rejuvenation, map: 82, rect: [25, 44, 8, 9], rows: [[330, 392]
 gl_flat1:  {game: rejuvenation, map: 82, rect: [36, 45, 8, 8], rows: [[330, 392]], l0: true, drop: [3262, 3263, 3270, 3271, 3278, 3279, 3312, 3313, 3314, 3320, 3321, 3322, 3414], door: [40, 51]}
 gl_flat2:  {game: rejuvenation, map: 82, rect: [47, 45, 8, 8], rows: [[330, 392]], l0: true, drop: [3262, 3263, 3270, 3271, 3278, 3279, 3312, 3313, 3314, 3320, 3321, 3322, 3414], door: [51, 51]}
 # Sheridan Village (map 423, sheet `Sheridan_2`, part sh): dark timber, crossed beams, steep roofs
-sh_big:    {game: rejuvenation, map: 423, rect: [14, 5, 12, 13], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [22, 14]}
+sh_big:    {game: rejuvenation, map: 423, rect: [14, 5, 12, 13], rows: [[0, 22], [110, 139], [160, 175]], deny: [[137, 139]], l0: true, door: [22, 14]}
 sh_help:   {game: rejuvenation, map: 423, rect: [45, 8, 9, 8], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [49, 14]}
 sh_inn:    {game: rejuvenation, map: 423, rect: [46, 22, 12, 11], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [48, 31]}
 sh_small:  {game: rejuvenation, map: 423, rect: [14, 25, 6, 7], rows: [[0, 22], [110, 139], [160, 175]], l0: true}
 sh_shop:   {game: rejuvenation, map: 423, rect: [12, 38, 12, 13], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [20, 46]}
 sh_ell:    {game: rejuvenation, map: 423, rect: [33, 40, 11, 12], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [36, 46]}
-sh_cot:    {game: rejuvenation, map: 423, rect: [49, 40, 8, 8], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [52, 46]}
+sh_cot:    {game: rejuvenation, map: 423, rect: [49, 40, 8, 8], rows: [[0, 22], [110, 139], [160, 175]], deny: [[137, 139]], l0: true, door: [52, 46]}
 # sheet stamps: trees, pier, lighthouse, props (part, [col, src row], size, top rows on layer 3)
 tr_oak:    {sheet: sh, at: [0, 26], size: [3, 4], top: 2}
 tr_oak2:   {sheet: sh, at: [0, 140], size: [3, 4], top: 2}

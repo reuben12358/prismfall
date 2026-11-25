@@ -1,4 +1,4 @@
-# Gossamer Deepwood (525). WRITTEN BY layouts/routes_craft.py (map builder 16) - edit that script.
+# Gossamer Deepwood (525). WRITTEN BY layouts/wave11_wilds_craft.py (Wave 11 Rejuv V14 Craft).
 # The D2 lantern hollow events are laid over it by puzzles/dungeons.py (EVENTS[525]).
 id: 525
 name: Gossamer Deepwood
@@ -17,6 +17,9 @@ tone: [-40, -24, -30, 40]
 fog: {name: prismfall_spores, opacity: 70, blend: 1, zoom: 100, sx: 1, sy: -1}
 walk_from:
 - [1, 18]
+- [33, 8]
+- [34, 4]
+- [42, 20]
 - [1, 18]
 connections: []
 raw: data/raw/525.npy

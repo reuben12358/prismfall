@@ -228,7 +228,7 @@ ROOMS = {
 # ---- in-engine pieces -------------------------------------------------------------------------------------------
 # D1 is built with events only, laid over the existing Orchard (build.py appends EVENTS[map] to that map's spec, so
 # the layout owner's script is untouched).  The three "rows" are the Orchard's own rows of glass apple trees.
-T40 = dict(glow=22968, signpost=8114, crystal=8098)          # tileset 40 "Prismfall Wilds"
+T40 = dict(glow=25825, signpost=22915, crystal=22880)        # tileset 52 "PF Rejuv Snow" (lm_bleed1, cr_teal_c, cr_blue_c)
 D1_TREES = {'L': (4, 16), 'M': (23, 16), 'H': (35, 25)}       # touch tile beside each cracked tree
 D1_POST, D1_HEDGE, D1_PRIZE = (19, 33), (38, 3), (38, 1)
 

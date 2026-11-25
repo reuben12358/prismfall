@@ -4,8 +4,10 @@ name: Meridian Spire - Gala Hall
 parent: 185
 metadata:
   MapPosition: [0, 16, 16]
-bgm: ''
+  SnapEdges: true
+bgm: Cedolan City
 field: NEON_GRID
+tone: [4, 0, -6, 10]
 raw: data/raw/186.npy
 tileset: 60
 events:

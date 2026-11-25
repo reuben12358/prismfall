@@ -1,4 +1,4 @@
-# The Dyers' Ford (552). WRITTEN BY layouts/routes_craft.py - edit that script.
+# The Dyers' Ford (552). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).
 id: 552
 name: The Dyers' Ford
 parent: 0
@@ -8,7 +8,8 @@ rubric: true
 yards_ok: true
 biome: route
 field: MEADOW
-tone: [6, 4, -2, 0]
+tone: [10, 6, -6, 0]
+fog: {name: prismfall_seamist, opacity: 24, blend: 0, zoom: 200, sx: 1, sy: 0}
 walk_from:
 - [60, 4]
 - [41, 1]
@@ -73,7 +74,7 @@ events:
   post: false
 - type: event
   name: The Dyers' Ford
-  at: [39, 42]
+  at: [40, 46]
   pages:
   - trigger: touch
     commands:
@@ -86,7 +87,7 @@ events:
     commands: []
 - type: event
   name: Meridian Surveyor
-  at: [44, 24]
+  at: [43, 27]
   pages:
   - graphic: {sprite: trainer_SCIENTIST, dir: left}
     trigger: action
@@ -95,7 +96,7 @@ events:
         Trees aren''t in the plan, but trees rarely are.']
 - type: event
   name: Survey flag 1
-  at: [43, 26]
+  at: [41, 28]
   pages:
   - trigger: action
     commands: [An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7., '\pf[JUNO,neutral]Juno: These go right toward the Glasswood. That''s...', (She
@@ -103,23 +104,23 @@ events:
         it?']
 - type: event
   name: Survey flag 2
-  at: [43, 10]
+  at: [41, 10]
   pages:
   - trigger: action
     commands: [An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7.]
 - type: event
   name: Survey flag 3
-  at: [43, 4]
+  at: [42, 4]
   pages:
   - trigger: action
     commands: [An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7.]
 - type: item
-  at: [44, 3]
+  at: [43, 3]
   item: ANTIDOTE
   hidden: true
   name: HiddenItem (base of the third flag)
 - type: trainer
-  at: [52, 16]
+  at: [48, 13]
   sight: 4
   dir: left
   sprite: trainer_PAINTER
@@ -127,7 +128,7 @@ events:
   intro: Red's my color! Red's everyone's color, eventually, if you work the madder vat.
   after: Look at my hands. They'll be red till Fallmorn.
 - type: trainer
-  at: [60, 10]
+  at: [60, 12]
   sight: 4
   dir: down
   sprite: trainer_PAINTER
@@ -136,9 +137,9 @@ events:
   after: Bill her. Somebody bill her.
 - type: event
   name: Dye Foreman
-  at: [54, 19]
+  at: [55, 18]
   pages:
-  - graphic: {sprite: NPC 20, dir: down}
+  - graphic: {sprite: NPC 20, dir: left}
     trigger: action
     commands:
     - if: $game_variables[602] >= 4
@@ -196,30 +197,30 @@ events:
     commands: [Baa.]
 - type: event
   name: Shrine of the Fourth Colour
-  at: [64, 28]
+  at: [64, 27]
   pages:
   - trigger: action
     commands: [A plain white ribbon tied to a stake where the undyed white water meets the river. Dozens more are tied beside it., 'A card in a child''s
         hand: "for the color nobody gets".']
 - type: event
   name: Hound shrine
-  at: [61, 28]
+  at: [61, 27]
   pages:
   - trigger: action
     commands:
     - {script: 'pf_trial_talk(:SHRINE_FORD)'}
 - type: berry
-  at: [26, 50]
+  at: [26, 52]
   berry: PECHABERRY
 - type: event
   name: Fulling mill
-  at: [12, 44]
+  at: [20, 47]
   pages:
   - trigger: action
     commands: ['THE FULLING MILL. Hammers the size of Snorlax beat the cloth soft. Not today: the wheel is waiting on the river.']
 - type: event
   name: Bargee
-  at: [72, 27]
+  at: [72, 26]
   pages:
   - graphic: {sprite: NPC 25, dir: down}
     trigger: action
@@ -228,7 +229,7 @@ events:
       then:
       - 'Bargee: The foreman says the cloth''s ready and you''re the reason. Want a lift down to Saltmere? It''s all downstream.'
       - choices: [Ride the barge., Not yet.]
-        cancel: 1
+        cancel: 2
         branches:
         - - (You sit on the bolts of red and blue cloth. The Selvedge carries you down past the Saltings to the salt lake.)
           - tone: [-255, -255, -255, 0, 12]
@@ -239,7 +240,7 @@ events:
       else: ['Bargee: Cloth barge to Saltmere. When the foreman''s errand''s done, I''ll row you down. Till then I''m ''on my break''.']
 - type: event
   name: The Bleachfield
-  at: [57, 2]
+  at: [60, 3]
   pages:
   - trigger: action
     commands: ['(Through the culvert: a small meadow where the undyed water spreads out. Every flower is white. The air rings, very faintly.)']

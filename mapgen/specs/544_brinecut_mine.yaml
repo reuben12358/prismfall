@@ -9,7 +9,8 @@ metadata:
   Name: Brinecut Mine
   MapPosition: [0, 11, 23]
   BattleBack: cave1
-tone: [-8, -10, -4, 10]
+  SnapEdges: true
+tone: [-6, -8, 2, 10]
 fog: {name: prismfall_cave, opacity: 36, blend: 1, zoom: 100, sx: 1, sy: 0}
 gates:
 - name: the Cut is crossed only by cart

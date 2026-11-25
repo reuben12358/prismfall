@@ -67,6 +67,7 @@ def _coverage(ts, t):
         _CACHE[key] = np.array(Image.open(p).convert('RGBA'))[:, :, 3] if p else None
     a = _CACHE[key]
     if a is None: return 1.0
+    if t < 384: return 0.0
     i = t - 384; x, y = (i % 8) * 32, (i // 8) * 32
     c = a[y:y + 32, x:x + 32]
     return float((c > 0).mean()) if c.size else 1.0
@@ -182,6 +183,8 @@ def guard(layers, tileset_id, event_cells=(), label=''):
                 layers[2, y, x] = blk                              # decoration stays where it is, a lid on top
             elif z == 2 and l1 == 0:
                 layers[1, y, x] = t; layers[2, y, x] = blk         # decoration down to layer 1
+            elif z == 2 and _coverage(ts, t) >= 0.99:
+                layers[1, y, x] = t; layers[2, y, x] = blk         # opaque tile hides l1 anyway; keep it under a solid lid
             elif z == 2 and pri[l1] == 0 and not deco[l1] and _coverage(ts, l1) >= 0.99:
                 layers[0, y, x] = l1; layers[1, y, x] = t; layers[2, y, x] = blk   # an opaque prop hides the ground anyway
             else:

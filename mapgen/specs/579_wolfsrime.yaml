@@ -1,5 +1,4 @@
-# The Wolfsrime (579): the pre-map-builder-12 Rimewood Path layout, restored by map builder 14.
-# WRITTEN BY layouts/routes_early.py (build_579) - edit that script.
+# The Wolfsrime (579). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).
 id: 579
 name: The Wolfsrime
 parent: 0

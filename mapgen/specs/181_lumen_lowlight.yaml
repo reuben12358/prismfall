@@ -270,7 +270,7 @@ events:
   - commands: ['Pichu: Pi! (It crackles at you, friendly.)']
     trigger: action
     move: fixed
-    graphic: {sprite: Followers, dir: down}
+    graphic: {sprite: Followers/PICHU, dir: down}
     cond:
       var: [CH5_STEP, 4]
   at: [3, 7]
@@ -359,10 +359,12 @@ events:
   - commands:
     - The box glows from inside. Something in it is giggling.
     - {script: 'setBattleRule("field", :NEON_GRID)'}
-    - {script: 'WildBattle.start(:ROTOM, 24)'}
-    - The glow goes out. The box hums normally. Somewhere a window comes back on.
-    - {script: pfm_lumen_box(1)}
-    - selfswitch: [A, true]
+    - if: WildBattle.start(:ROTOM, 24)
+      then:
+      - The glow goes out. The box hums normally. Somewhere a window comes back on.
+      - {script: pfm_lumen_box(1)}
+      - selfswitch: [A, true]
+      else: []
     trigger: action
     move: fixed
     graphic: {sprite: '', dir: down, tile: 26039}
@@ -393,10 +395,12 @@ events:
   - commands:
     - The box glows from inside. Something in it is giggling.
     - {script: 'setBattleRule("field", :NEON_GRID)'}
-    - {script: 'WildBattle.start(:ROTOM, 24)'}
-    - The glow goes out. The box hums normally. Somewhere a window comes back on.
-    - {script: pfm_lumen_box(2)}
-    - selfswitch: [A, true]
+    - if: WildBattle.start(:ROTOM, 24)
+      then:
+      - The glow goes out. The box hums normally. Somewhere a window comes back on.
+      - {script: pfm_lumen_box(2)}
+      - selfswitch: [A, true]
+      else: []
     trigger: action
     move: fixed
     graphic: {sprite: '', dir: down, tile: 26039}
@@ -427,10 +431,12 @@ events:
   - commands:
     - The box glows from inside. Something in it is giggling.
     - {script: 'setBattleRule("field", :NEON_GRID)'}
-    - {script: 'WildBattle.start(:ROTOM, 24)'}
-    - The glow goes out. The box hums normally. Somewhere a window comes back on.
-    - {script: pfm_lumen_box(3)}
-    - selfswitch: [A, true]
+    - if: WildBattle.start(:ROTOM, 24)
+      then:
+      - The glow goes out. The box hums normally. Somewhere a window comes back on.
+      - {script: pfm_lumen_box(3)}
+      - selfswitch: [A, true]
+      else: []
     trigger: action
     move: fixed
     graphic: {sprite: '', dir: down, tile: 26039}
@@ -461,10 +467,12 @@ events:
   - commands:
     - The box glows from inside. Something in it is giggling.
     - {script: 'setBattleRule("field", :NEON_GRID)'}
-    - {script: 'WildBattle.start(:ROTOM, 26)'}
-    - The glow goes out. The box hums normally. Somewhere a window comes back on.
-    - {script: pfm_lumen_box(4)}
-    - selfswitch: [A, true]
+    - if: WildBattle.start(:ROTOM, 26)
+      then:
+      - The glow goes out. The box hums normally. Somewhere a window comes back on.
+      - {script: pfm_lumen_box(4)}
+      - selfswitch: [A, true]
+      else: []
     trigger: action
     move: fixed
     graphic: {sprite: '', dir: down, tile: 26039}

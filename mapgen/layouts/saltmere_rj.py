@@ -902,6 +902,7 @@ def build_146(prev=None):
     paint_salt(m, 146); glints(m, 146, p=0.3)
     h = head(146, '146_saltmere_harbour.yaml', biome='harbour', tone=[6, 4, -8, 0], connections=[],
              fog={'name': 'prismfall_seamist', 'opacity': 36, 'blend': 0, 'zoom': 100, 'sx': 2, 'sy': 0})
+    h['metadata'] = dict(h.get('metadata') or {}, SnapEdges=True)
     m.write(146, h, "# Saltmere - The Harbour (146). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.\n")
     if prev: m.preview(prev, 0.5)
     return d
@@ -1019,6 +1020,7 @@ def build_147(prev=None):
     m.scatter(5, seed=147, on='.'); glints(m, 147, p=0.3)
     h = head(147, '147_saltmere_oldtown.yaml', biome='harbour', tone=[12, 4, -18, 0], connections=[],
              fog={'name': 'prismfall_seamist', 'opacity': 24, 'blend': 0, 'zoom': 100, 'sx': 2, 'sy': 0})
+    h['metadata'] = dict(h.get('metadata') or {}, SnapEdges=True)
     m.write(147, h, "# Saltmere - The Old Town (147). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.\n")
     if prev: m.preview(prev, 0.5)
     return d

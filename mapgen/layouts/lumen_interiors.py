@@ -68,12 +68,37 @@ def write(m, mid, name, parent, fn, **kw):
 
 # ============================================================================================ 582 Lumen West Gate
 def build_582():
+    from cavekit import PIT
+    # Sculpted Grand Meridian West Gate Checkpoint (exact architectural sibling to 185 Lobby & 186 Gala Hall!):
+    #   MASS  -> cvY cream-and-mahogany Spire wainscoted walls with chamfered SE vestibule & recessed Arc-Lamp portal
+    #   PIT   -> twin vertical starry security light-well shafts (x=1 & x=15, y=3..7) with glowing Lattice holo totems!
+    #   FLOOR -> warm cream Meridian limestone (lm_plaza), pale ashlar (lm_pave), obsidian gallery border, glowing
+    #            brass-cyan inlays (lm_inlay_*), royal crimson arrival carpet & overhead chandelier + scanner spotlight!
     m = room(17, 13, 'Y', 582)
-    m.box(1, 3, 15, 11); m.box(7, 12, 9, 12)
+    m.kit = {FLOOR: 'cvY', 'default': 'cvY'}
+
+    # ---- 1. Sculpt the Black Void: Asymmetric Security Foyer + Twin Starry Security Light-Well Shafts ----
+    m.box(1, 3, 15, 11, FLOOR, '.')
+    m.box(7, 12, 9, 12, FLOOR, '.')
+    # Sculpt chamfered SE corner (leaving SW (1,11) Arc-Lamp Mile portal wide open as a recessed gateway alcove!)
+    m.mass_at([(14, 11), (15, 11), (15, 10)])
+    # Twin vertical starry security light-well shafts flanking the upper inspection bay (fuses cleanly with y=8 railing!)
+    m.box(1, 3, 1, 7, PIT, 'p')
+    m.box(15, 3, 15, 7, PIT, 'p')
     m.plan_cliffs(rows=3)
-    for x in range(1, 16):
-        if x not in (8,): m.over.append((1, x, 8, P1('lm_bars_m' if x % 4 else 'lm_bars_l')))
-    m.keep_clear |= {(x, 8) for x in range(1, 16)} | {(8, y) for y in range(6, 12)}
+
+    # Forged brass security checkpoint railing & bollards along y=8 (x=2..14, ONLY (8,8) crosses!)
+    for x in range(2, 15):
+        if x == 8:
+            continue
+        t = 'lm_bollard' if x in (2, 7, 9, 14) else 'lm_railing_w' if x in (3, 10) else 'lm_railing_e' if x in (6, 13) else 'lm_railing_m'
+        m.over.append((1, x, 8, P1(t)))
+    m.keep_clear |= ({(x, 8) for x in range(1, 16)}
+                     | {(8, y) for y in range(5, 13)}
+                     | {(3, 5), (3, 6), (12, 5), (12, 6), (6, 9), (6, 10), (7, 9), (7, 10), (9, 10),
+                        (1, 11), (2, 11), (3, 11), (1, 10), (2, 10), (1, 9), (2, 9)})
+
+    # ---- 2. Events (100% Exit, Arc-Lamp Mile warp, Scanner cutscene, Meridian Security, Gate board & Brass tube exact!) ----
     scan = [N('Meridian Security', "Lumen West Gate. Hand on the plate, please. Tint check. It's the anniversary; we're being thorough."),
             "(Juno puts her hand on the plate. A chime. The bar glows green.)",
             N('Meridian Security', "Meadow tint, Verdance. Welcome."),
@@ -96,24 +121,104 @@ def build_582():
                 page([N('Meridian Security', "Enjoy Lumen. Enjoy the light. It's free.")], SPR['GUARD'], 'down', cond=V(3))), 6, 9),
           at(sign('Gate board', "LUMEN WEST GATE. THE ARC-LAMP MILE: ONE HUNDRED LAMPS. LIGHT FOR EVERYONE.", post=False), 3, 5),
           at(sign('Brass tube', "A brass speaking tube, polished by a lot of nervous hands.", post=False), 12, 5)]
-    m.put('lm_counter_l', 5, 9) if False else None
     for x, n in ((4, 'l'), (5, 'm'), (11, 'm'), (12, 'r')): m.over.append((1, x, 10, P1('lm_counter_' + n)))
-    m.over.append((1, 9, 9, P1('lm_holo') if False else P1('lm_lamp_on')))
-    on_faces(m, 'lm_poster0', [(5, 4), (11, 4)]); hang(m, 'lm_banner', 8, 3)
-    m.keep_clear |= {(1, 11), (2, 11), (1, 10)}
-    for name, x, y in (('lm_plant', 1, 9), ('lm_plant', 15, 9), ('lm_bench', 3, 11), ('lm_bench', 13, 11), ('lm_pillar', 1, 5), ('lm_pillar', 15, 5)):
+    m.over.append((1, 9, 9, P1('lm_lamp_on')))
+
+    # ---- 3. Twin Starry Security Light-Well Hardware (Glowing Lattice Holo Totems inside PIT!) ----
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+    abyss_piece('lm_holo', 1, 5)
+    abyss_piece('lm_holo', 15, 5)
+
+    # ---- 4. Grand Civic North Bulkhead ----
+    hang(m, 'lm_banner', 8, 3)
+    hang(m, 'lm_monitors', 2, 3); hang(m, 'lm_monitors', 13, 3)
+    on_faces(m, 'lm_alarm_on', [(4, 4), (12, 4)])
+    on_faces(m, 'lm_poster0', [(5, 4), (11, 4)])
+    on_faces(m, 'lm_poster2', [(6, 4), (10, 4)])
+
+    # ---- 5. Sculpted Checkpoint Furnishings, Display Cases, Planters, Benches & Overhead Lighting ----
+    for name, x, y in (
+        ('lm_case', 5, 5), ('lm_case', 10, 5),
+        ('lm_table', 4, 5), ('lm_table', 13, 5),
+        ('lm_plant', 13, 9),
+        ('lm_bench', 5, 11), ('lm_bench', 10, 11),
+        ('lm_bollard', 10, 9),
+    ):
         put_if(m, name, x, y)
+    # Overhead sparkling crystal chandelier & warm spotlight shaft illuminating the Tint Scanner Plate (8,9)!
+    m.stamps.append(('lm_chand', 7, 5))
+    m.stamps.append(('cv_shaft', 7, 7))
+    m.stamps.append(('pf_glow', 7, 8))
+    m.stamps.append(('pf_glow', 8, 8))
+
     m.paint()
-    write(m, 582, 'Lumen West Gate', 180, '582_lumen_west_gate.yaml', bgm='Cedolan City')
+
+    # ---- 6. Post-Paint Grand Meridian Marble Floor Craft (ZERO blinding teal checkerboard!) ----
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    paves = [P1('lm_pave%d' % i) for i in range(4)]
+    plazas = [P1('lm_plaza0'), P1('lm_plaza1')]
+    for yy in range(m.H):
+        for xx in range(m.W):
+            if m.cls[yy, xx] == 'p':
+                m.L[0, yy, xx] = deeps[(xx * 7 + yy * 13) % len(deeps)]
+            elif m.cls[yy, xx] == '.':
+                perim = (xx <= 3 or xx >= 13 or yy == 5 or yy == 11)
+                m.L[0, yy, xx] = paves[(xx * 3 + yy * 5) % 4] if perim else plazas[(xx + yy) & 1]
+
+    # Sleek obsidian gallery trim framing the south checkpoint wings & glowing brass-cyan inlays!
+    for xx in (3, 4, 5, 6, 10, 11, 12, 13):
+        if m.cls[11, xx] == '.':
+            m.L[0, 11, xx] = P1('Z_f0')
+    for xx in (4, 5, 6, 10, 11, 12):
+        if m.cls[7, xx] == '.':
+            m.L[0, 7, xx] = P1('lm_inlay_h')
+        if m.cls[9, xx] == '.' and xx not in (6, 10):
+            m.L[0, 9, xx] = P1('lm_inlay_h')
+    for ix, iy, k in ((3, 7, 'se'), (13, 7, 'sw'), (3, 9, 'ne'), (13, 9, 'nw')):
+        if m.cls[iy, ix] == '.':
+            m.L[0, iy, ix] = P1('lm_inlay_' + k)
+
+    # Ceremonial crimson-and-brass arrival carpet runner from Exit (8,12) through Scanner (8,9) & Gate (8,8) to north hall!
+    for yy in range(5, 13):
+        for xx in (7, 8, 9):
+            part = ('n' if yy == 5 else 's' if yy == 12 else '') + ('w' if xx == 7 else 'e' if xx == 9 else '')
+            m.L[0, yy, xx] = P1('lm_carpet_' + (part or 'c'))
+    # Subtle steel grate pad right under the Tint Scanner plate (8,9) & West Gate threshold (1..2, 11)
+    m.L[0, 11, 1] = P1('lm_grate'); m.L[0, 11, 2] = P1('lm_grate')
+
+    write(m, 582, 'Lumen West Gate', 180, '582_lumen_west_gate.yaml', bgm='Cedolan City', tone=[4, 0, -4, 8],
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True})
 
 
 # ============================================================================================ 185 Meridian Spire - Lobby
 def build_185():
+    from cavekit import PIT
+    # Sculpted Grand Meridian Spire Lobby (exact architectural sibling to 186 Gala Hall!):
+    #   MASS  -> cvY classical cream-and-mahogany Spire wainscoted walls (chamfered foyer + gallery setbacks)
+    #   FLOOR -> warm cream Meridian limestone (lm_plaza), pale ashlar colonnade (lm_pave), obsidian gallery border,
+    #            glowing brass-cyan inlays (lm_inlay_*), central 5x5 golden Meridian sunburst (lm_sun) & crimson carpets!
+    #   PIT   -> lm_deep0..5 twin starry vertical Spire Atrium Light-Well shafts flanking the west & east wings!
     m = room(25, 17, 'Y', 185)
-    m.box(1, 3, 23, 15); m.box(11, 16, 13, 16)
+    m.kit = {FLOOR: 'cvY', 'default': 'cvY'}
+
+    # ---- 1. Sculpt the Black Void: Chamfered Grand Lobby + Narrowed Foyer + Twin Atrium Light-Wells ----
+    m.box(3, 3, 21, 13, FLOOR, '.')
+    m.box(4, 14, 20, 14, FLOOR, '.')
+    m.box(7, 15, 17, 15, FLOOR, '.')
+    m.box(11, 16, 13, 16, FLOOR, '.')
+    # Twin symmetrical vertical Spire Atrium Light-Well Shafts extending cleanly from north bulkhead (PIT -> starry lm_deep0..5!)
+    m.box(1, 3, 2, 12, PIT, 'p')
+    m.box(22, 3, 23, 12, PIT, 'p')
     m.plan_cliffs(rows=3)
-    carpet(m, 11, 6, 13, 15)
-    m.keep_clear |= {(x, y) for x in (11, 12, 13) for y in range(5, 17)}
+
+    # ---- 2. Events (100% gameplay, exhibits, NPCs, Receptionist, & Gala Lift contract preserved!) ----
     E = m.events
     E += [{'type': 'exit', 'at': [12, 16], 'link': 'LC_TOWER'},
           at(ev('Gala door', page(["The private lift to the Gala Hall. A brass plate: BY INVITATION. THE TENTH YEAR GALA, TOMORROW NIGHT."], tile=P1('lm_pdoor')),
@@ -130,26 +235,156 @@ def build_185():
                 page([], cond=V(13))), 16, 12),
           at(ev('Medic', page([], cond=None), page([N('Medic', "The ones from the Lowlight... we can't get to them. Nobody can get to them.")], 'NPC 08', 'left', cond=V(9)),
                 page([], cond=V(13))), 8, 13)]
+
+    # Preserve exact exhibit display cases & sculpted Spire service counters (leaves 5x5 golden Sunburst (10..14,9..13) 100% unobstructed!)
     m.put('lm_case', 4, 9); m.put('lm_case', 18, 9)
-    for x, n in ((14, 'l'), (15, 'm'), (16, 'm'), (17, 'r')): m.over.append((1, x, 9, P1('lm_counter_' + n)))
-    for x, n in ((3, 'l'), (4, 'm'), (5, 'm'), (6, 'm'), (7, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))      # the clerks' desks
-    for x, n in ((17, 'l'), (18, 'm'), (19, 'm'), (20, 'm'), (21, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))
-    m.keep_clear |= {(4, 7), (6, 7), (18, 7), (20, 7), (15, 10), (5, 12), (19, 12)}
-    for x in (2, 8, 16, 22): put_if(m, 'lm_pillar', x, 12)
-    for name, x, y in (('lm_plant', 1, 14), ('lm_plant', 23, 14), ('lm_bench', 3, 14), ('lm_bench', 20, 14), ('lm_chand', 6, 7), ('lm_chand', 17, 7)):
+    for x, n in ((15, 'l'), (16, 'm'), (17, 'r')): m.over.append((1, x, 9, P1('lm_counter_' + n)))
+    for x, n in ((4, 'l'), (5, 'm'), (6, 'm'), (7, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))
+    for x, n in ((17, 'l'), (18, 'm'), (19, 'm'), (20, 'r')): m.over.append((1, x, 6, P1('lm_counter_' + n)))
+    m.keep_clear |= ({(x, y) for x in (11, 12, 13) for y in range(5, 17)}
+                     | {(9, 5), (9, 6), (10, 5), (4, 7), (5, 7), (6, 7), (7, 7), (4, 8), (5, 8), (6, 8), (7, 8),
+                        (17, 7), (18, 7), (19, 7), (20, 7), (18, 8), (19, 8), (20, 8),
+                        (14, 8), (15, 8), (16, 8), (14, 10), (15, 10), (16, 10), (15, 11),
+                        (5, 11), (5, 12), (6, 11), (4, 11), (19, 11), (19, 12), (18, 11), (20, 11),
+                        (8, 13), (7, 13), (9, 13), (8, 12), (16, 12), (16, 13), (15, 12), (17, 12)})
+
+    # ---- 3. Twin Starry Atrium Light-Well Shaft Architecture (Glowing Spire Pylons, Energy Rings & Haze in PIT!) ----
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+    abyss_piece('lm_pylon', 1, 6)       # West Atrium Shaft glowing Lattice spire pylon!
+    abyss_piece('lm_pylon', 22, 6)      # East Atrium Shaft glowing Lattice spire pylon!
+    abyss_piece('lm_ring', 2, 11)
+    abyss_piece('lm_steam0', 1, 11)
+    abyss_piece('lm_ring', 22, 11)
+    abyss_piece('lm_steam1', 23, 11)
+
+    # ---- 4. Grand North Civic Bulkhead (Panoramic Windows, Royal Meridian Banners, Civic Plaques) ----
+    on_faces(m, 'lm_window', [(x, y) for x in (5, 7, 17, 19) for y in (3, 4)])
+    hang(m, 'lm_banner', 10, 3); hang(m, 'lm_banner', 14, 3)
+    hang(m, 'lm_banner_w', 4, 3); hang(m, 'lm_banner_w', 20, 3)
+    on_faces(m, 'lm_poster0', [(8, 4), (16, 4)])
+    on_faces(m, 'lm_poster2', [(6, 4), (18, 4)])
+
+    # ---- 5. Grand Spire Colonnades, Grandfather Clock, Floral Planters, Topiaries & Lounge Benches ----
+    for name, x, y in (
+        ('lm_pillar', 8, 4), ('lm_pillar', 16, 4),
+        ('lm_pillar', 4, 11), ('lm_pillar', 20, 11),
+        ('lm_pillar', 9, 12), ('lm_pillar', 15, 12),
+        ('lm_clock', 10, 4), ('lm_arclamp', 14, 4),
+        ('lm_bannerlamp', 10, 13), ('lm_bannerlamp', 14, 13),
+        ('lm_planter', 5, 14), ('lm_planter', 18, 14),
+        ('lm_topiary', 4, 13), ('lm_topiary', 20, 13),
+        ('lm_topiary', 7, 14), ('lm_topiary', 17, 14),
+        ('lm_bench', 8, 15), ('lm_bench', 15, 15),
+    ):
         put_if(m, name, x, y)
-    hang(m, 'lm_banner', 9, 3); hang(m, 'lm_banner', 15, 3); on_faces(m, 'lm_poster0', [(4, 4), (20, 4)]); on_faces(m, 'lm_poster2', [(7, 4), (17, 4)])
+
+    # Overhead sparkling crystal chandeliers (pri=2, pas=0), sunlight shafts & golden rotunda glow pools!
+    for cx, cy in ((11, 10), (5, 7), (18, 7)):
+        m.stamps.append(('lm_chand', cx, cy))
+    m.stamps.append(('cv_shaft', 11, 5))
+    m.stamps.append(('cv_shaft', 11, 10))
+    m.stamps.append(('pf_glow', 11, 5))
+    m.stamps.append(('pf_glow', 12, 5))
+    m.stamps.append(('pf_glow', 11, 10))
+    m.stamps.append(('pf_glow', 12, 10))
+
     m.paint()
-    write(m, 185, 'Meridian Spire - Lobby', 180, '185_meridian_spire.yaml', bgm='Cedolan City')
+
+    # ---- 6. Post-Paint Grand Meridian Lobby Floor Craft (Zero blinding teal checkerboard!) ----
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    paves = [P1('lm_pave%d' % i) for i in range(4)]
+    plazas = [P1('lm_plaza0'), P1('lm_plaza1')]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+            elif m.cls[y, x] == '.':
+                perim = (x <= 5 or x >= 19 or y >= 14 or y <= 6)
+                m.L[0, y, x] = paves[(x * 3 + y * 5) % 4] if perim else plazas[(x + y) & 1]
+
+    # Sleek obsidian-slate gallery trim along the chamfered south promenade border (clean, zero choppy patches behind cases!)
+    for x in range(6, 19):
+        if x not in (11, 12, 13) and m.cls[14, x] == '.':
+            m.L[0, 14, x] = P1('Z_f0')
+
+    # Glowing brass-and-cyan Meridian marble floor inlays framing the central rotunda!
+    for x in range(8, 17):
+        if x not in (11, 12, 13) and m.cls[8, x] == '.':
+            m.L[0, 8, x] = P1('lm_inlay_h')
+        if x not in (11, 12, 13) and m.cls[13, x] == '.':
+            m.L[0, 13, x] = P1('lm_inlay_h')
+    for y in range(9, 13):
+        for x in (7, 17):
+            if m.cls[y, x] == '.':
+                m.L[0, y, x] = P1('lm_inlay_v')
+    for ix, iy, k in ((7, 8, 'se'), (17, 8, 'sw'), (7, 13, 'ne'), (17, 13, 'nw')):
+        if m.cls[iy, ix] == '.':
+            m.L[0, iy, ix] = P1('lm_inlay_' + k)
+
+    # 5x5 MONUMENTAL GOLDEN MERIDIAN SUNBURST MEDALLION (lm_sun) centered in the Grand Lobby Rotunda (10..14, 9..13)!
+    sun_L = STAMPS['lm_sun']['layers'][0]
+    for dy in range(5):
+        for dx in range(5):
+            if m.cls[9 + dy, 10 + dx] == '.' and m.L[1, 9 + dy, 10 + dx] == 0:
+                m.L[0, 9 + dy, 10 + dx] = sun_L[dy][dx]
+
+    # Plush royal crimson-and-gold entrance carpet runner (11..13, 14..16) & Gala Lift approach carpet (11..13, 5..8)!
+    def floor_carpet(x0, y0, x1, y1):
+        for yy in range(y0, y1 + 1):
+            for xx in range(x0, x1 + 1):
+                if m.cls[yy, xx] == '.':
+                    part = ('n' if yy == y0 else 's' if yy == y1 else '') + ('w' if xx == x0 else 'e' if xx == x1 else '')
+                    m.L[0, yy, xx] = P1('lm_carpet_' + (part or 'c'))
+    floor_carpet(11, 14, 13, 16)
+    floor_carpet(11, 5, 13, 8)
+
+    write(m, 185, 'Meridian Spire - Lobby', 180, '185_meridian_spire.yaml', bgm='Cedolan City',
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
+          tone=[4, 0, -4, 8])
 
 
 # ============================================================================================ 186 the Gala Hall
 def build_186():
+    from cavekit import PIT, TER
+    # Sculpted Grand Meridian Ballroom (3-tier architectural material hierarchy):
+    #   MASS  -> cvY classical cream-and-mahogany Spire wainscoted ballroom walls
+    #   TER   -> lmw monumental white-gold Spire ashlar marble & brass balustrade (Replica Dais + Voss Window Dais)
+    #   FLOOR -> cvY grand ballroom floor (warm cream marble, golden inlays, central 5x5 sunburst, royal crimson rugs)
+    #   PIT   -> lm_deep0..5 starry black Spire Atrium Shaft visible straight through the East Atrium Overlook!
     m = room(29, 20, 'Y', 186)
-    m.box(1, 3, 27, 18); m.box(12, 19, 14, 19)
+    m.kit = {TER: 'lmw', FLOOR: 'cvY', 'default': 'cvY'}
+
+    # ---- 1. Sculpt the Black Void: Multi-Wing Grand Ballroom + Chamfered Foyer + East Atrium Shaft ----
+    m.box(2, 3, 27, 15, FLOOR, '.')
+    m.box(3, 16, 25, 16, FLOOR, '.')
+    m.box(5, 17, 23, 17, FLOOR, '.')
+    m.box(10, 18, 16, 18, FLOOR, '.')
+    m.box(12, 19, 14, 19, FLOOR, '.')
+    # Sculpted NW architectural corner pier & SW/SE stepped lounge alcoves (never a flat rectangle!)
+    m.mass_at([(2, 3), (2, 4), (2, 15), (27, 15)])
+
+    # Carved East Spire Atrium Abyssal Shaft (x=24..27, y=3..7 -> starry black pit y=5..7 behind Atrium Window (26,8)!)
+    m.box(24, 3, 27, 7, PIT, 'p')
+
+    # ---- 2. Stepped Elevated North Grand Daises (TER -> lmw white-gold marble balustrade!) ----
+    # Grand Central Zap Plate Replica Dais (x=10..16, y=3..7; Replica (13,5) & Larch (14,6) stand on elevated y=5..6!)
+    m.box(10, 3, 16, 7, TER, '.')
+    # Voss's Panoramic Window Speech Dais (x=20..23, y=3..7; Voss (21,6) overlooks the whole hall by the lit city windows!)
+    m.box(20, 3, 23, 7, TER, '.')
+
+    # Twin monumental white-marble staircases rising from ballroom floor (y=10) onto both elevated daises!
+    m.stairs(12, 7, w=3, n=3, c='.')
+    m.stairs(20, 7, w=3, n=3, c='.')
     m.plan_cliffs(rows=3)
-    carpet(m, 11, 7, 15, 18)
-    m.keep_clear |= {(x, y) for x in range(11, 16) for y in range(6, 20)}
+
+    # ---- 3. Events (100% gameplay, dialogue, trigger, & warp contract preserved!) ----
     E = m.events
     raid = ["(The lights flicker. Once. Twice. The quartet stops mid-bar.)", N('Guest', "Is that part of it?"),
             {'tone': [-40, -40, -40, 120, 20]},
@@ -237,27 +472,186 @@ def build_186():
           at(ev('Service lift', page(["A service lift in the east wall. Brass doors, a STAFF ONLY plate."], tile=P1('lm_pdoor')),
                 page([{'se': 'Door exit'}, {'transfer': {'map': 951, 'x': 10, 'y': 7, 'dir': 'down'}}], tile=P1('lm_pdoor_open'), cond=V(8), trigger='touch'),
                 page(["The service lift is sealed with Directorate tape."], tile=P1('lm_pdoor'), cond=V(9))), 27, 14)]
-    put_if(m, 'lm_core', 22, 6)
-    for x, y in ((6, 9), (19, 12), (6, 15), (21, 16), (9, 13), (17, 14)): put_if(m, 'lm_table', x, y)
-    put_if(m, 'lm_bar', 2, 17); put_if(m, 'lm_bar', 23, 17)
-    for x in (2, 8, 18, 25): put_if(m, 'lm_chand', x, 10)
-    for x in (1, 27): put_if(m, 'lm_plant', x, 6)
-    carpet(m, 19, 6, 23, 7)                                   # Voss's dais by the window
-    for x, y in ((1, 9), (1, 13), (27, 9)): put_if(m, 'lm_pillar', x, y)
-    for x, y in ((5, 17), (20, 17), (27, 17)): put_if(m, 'lm_plant', x, y)
-    for x, y in ((3, 10), (24, 15), (10, 15), (16, 16)): put_if(m, 'lm_table', x, y)
-    on_faces(m, 'lm_window', [(x, y) for x in (2, 4, 6, 8, 18, 20, 22) for y in (3, 4)])
-    hang(m, 'lm_banner_w', 10, 3); hang(m, 'lm_banner_w', 16, 3)
-    m.keep_clear |= {(13, 6), (21, 7), (4, 8), (19, 10), (24, 11), (7, 13), (3, 13), (9, 10), (16, 11), (10, 11), (14, 7), (26, 9), (26, 14)}
+
+    m.keep_clear |= ({(x, y) for x in range(11, 16) for y in range(5, 20)}
+                     | {(20, y) for y in range(6, 11)} | {(21, y) for y in range(6, 11)} | {(22, y) for y in range(6, 11)}
+                     | {(4, 7), (4, 8), (5, 7), (3, 7), (19, 9), (19, 10), (18, 9), (24, 11), (24, 12), (23, 12), (25, 12),
+                        (7, 12), (7, 13), (6, 12), (8, 12), (3, 14), (4, 14), (3, 13), (9, 9), (9, 10), (8, 9),
+                        (16, 10), (16, 11), (10, 10), (10, 11), (25, 9), (26, 9), (26, 14), (25, 14), (26, 13)})
+
+    # ---- 4. Panoramic City Windows, Royal Banners & Deep Abyssal Atrium Shaft Core ----
+    on_faces(m, 'lm_window', [(x, y) for x in (3, 5, 7, 13, 21, 22) for y in (3, 4)])
+    hang(m, 'lm_banner_w', 11, 3); hang(m, 'lm_banner_w', 15, 3)
+    hang(m, 'lm_banner', 8, 3); hang(m, 'lm_banner', 18, 3)
+
+    # Eerie glowing dark-violet Core deep inside the pure starry black East Spire Atrium Shaft!
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+    abyss_piece('lm_core', 25, 4)
+
+    # Forged brass overlook balustrade along the East Atrium Shaft rim (y=8, x=24..27; Atrium window event sits at (26,8)!)
+    for x, t in ((24, 'lm_bollard'), (25, 'lm_railing_w'), (26, 'lm_railing_m'), (27, 'lm_bollard')):
+        m.over.append((1, x, 8, P1(t)))
+        m.taken[8, x] = True
+
+    # ---- 5. Grand Meridian Architectural Colonnades, Champagne Lounges, Planters & Banquet Clusters ----
+    for name, x, y in (
+        # Classical fluted marble colonnade framing both elevated daises & recessed perimeter wings
+        ('lm_pillar', 9, 4), ('lm_pillar', 17, 4),
+        ('lm_pillar', 2, 7), ('lm_pillar', 2, 11),
+        ('lm_pillar', 27, 9), ('lm_pillar', 10, 15), ('lm_pillar', 16, 15),
+        # Golden Meridian crimson banner-lamps & arc-lamps framing the grand stairs & foyer
+        ('lm_arclamp', 19, 5), ('lm_arclamp', 23, 5),
+        ('lm_bannerlamp_w', 9, 15), ('lm_bannerlamp_w', 17, 15),
+        # Art-Deco Meridian grandfather clock anchoring the gallery between Replica Dais & Voss Dais
+        ('lm_clock', 18, 5),
+        # Dual Champagne Bars nestled cleanly in the chamfered SW & SE ballroom lounge bays
+        ('lm_bar', 6, 17), ('lm_bar', 20, 17),
+        # Lush marble floral planters & sculpted topiaries replacing lone sticks
+        ('lm_planter', 6, 5), ('lm_planter3', 19, 16), ('lm_planter3', 7, 16),
+        ('lm_topiary', 3, 5), ('lm_topiary', 23, 15),
+        ('lm_topiary', 10, 17), ('lm_topiary', 16, 17),
+        # Service-lift vestibule accent bollard
+        ('lm_bollard', 25, 13),
+        # Cozy clustered banquet tables in natural conversation bays (never blocking guests!)
+        ('lm_table', 6, 9), ('lm_table', 5, 11), ('lm_table', 9, 13),
+        ('lm_table', 18, 12), ('lm_table', 21, 12), ('lm_table', 21, 14), ('lm_table', 18, 15),
+    ):
+        put_if(m, name, x, y)
+
+    # Overhead sparkling crystal chandeliers (pri=2, pas=0), warm light shafts & golden chandelier pools!
+    for cx, cy in ((4, 8), (12, 12), (19, 11), (7, 13)):
+        m.stamps.append(('lm_chand', cx, cy))
+    m.stamps.append(('cv_shaft', 12, 4))
+    m.stamps.append(('cv_shaft', 20, 4))
+    m.stamps.append(('pf_glow', 12, 5))
+    m.stamps.append(('pf_glow', 13, 5))
+    m.stamps.append(('pf_glow', 20, 5))
+    m.stamps.append(('pf_glow', 12, 12))
+    m.stamps.append(('pf_glow', 13, 12))
+
     m.paint()
-    write(m, 186, 'Meridian Spire - Gala Hall', 185, '186_meridian_gala.yaml', bgm='', field='NEON_GRID')
+
+    # ---- 6. Post-Paint Grand Ballroom Floor Craft (Zero blinding teal checks or Y_f3 streaks!) ----
+    # Starry abyssal void in the East Spire Atrium Shaft (PIT)
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+
+    # Warm cream Meridian limestone (lm_plaza) inside main hall + cool ashlar marble (lm_pave) perimeter gallery!
+    paves = [P1('lm_pave%d' % i) for i in range(4)]
+    plazas = [P1('lm_plaza0'), P1('lm_plaza1')]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == '.':
+                perim = (x <= 4 or x >= 24 or y >= 16)
+                if perim:
+                    m.L[0, y, x] = paves[(x * 3 + y * 5) % 4]
+                else:
+                    m.L[0, y, x] = plazas[(x + y) & 1]
+
+    # Refined dark obsidian-slate architectural gallery border framing the central ballroom floor
+    for y in range(10, 16):
+        for x in (5, 23):
+            if m.cls[y, x] == '.':
+                m.L[0, y, x] = P1('Z_f0')
+    for x in range(5, 24):
+        if m.cls[16, x] == '.' and x not in (12, 13, 14):
+            m.L[0, 16, x] = P1('Z_f0')
+
+    # Glowing brass-and-cyan Meridian marble light inlays tracing the grand hall gallery perimeter cleanly to the stairs!
+    for x in range(7, 22):
+        if x not in (12, 13, 14) and m.cls[10, x] == '.':
+            m.L[0, 10, x] = P1('lm_inlay_h')
+        if x not in (11, 12, 13, 14, 15) and m.cls[15, x] == '.':
+            m.L[0, 15, x] = P1('lm_inlay_h')
+    for y in range(11, 15):
+        for x in (6, 22):
+            if m.cls[y, x] == '.':
+                m.L[0, y, x] = P1('lm_inlay_v')
+    for (ix, iy, k) in ((6, 10, 'se'), (22, 10, 'sw'), (6, 15, 'ne'), (22, 15, 'nw')):
+        if m.cls[iy, ix] == '.':
+            m.L[0, iy, ix] = P1('lm_inlay_' + k)
+
+    # 5x5 MONUMENTAL GOLDEN MERIDIAN SUNBURST MEDALLION (lm_sun) gleaming at the exact center of the Ballroom (11..15, 11..15)!
+    sun_L = STAMPS['lm_sun']['layers'][0]
+    for dy in range(5):
+        for dx in range(5):
+            m.L[0, 11 + dy, 11 + dx] = sun_L[dy][dx]
+
+    # Plush royal crimson-and-gold carpets on Layer 0: Grand Foyer Runner, Elevated Replica Dais, Voss Dais, & Valen Window Lounge!
+    def floor_carpet(x0, y0, x1, y1):
+        for yy in range(y0, y1 + 1):
+            for xx in range(x0, x1 + 1):
+                if m.cls[yy, xx] == '.':
+                    part = ('n' if yy == y0 else 's' if yy == y1 else '') + ('w' if xx == x0 else 'e' if xx == x1 else '')
+                    m.L[0, yy, xx] = P1('lm_carpet_' + (part or 'c'))
+    floor_carpet(12, 16, 14, 19)       # Grand Foyer entrance runner leading eyes straight to Sunburst & Replica Dais!
+    floor_carpet(11, 5, 15, 6)         # Elevated Replica Dais crimson velvet platform
+    floor_carpet(21, 5, 22, 6)         # Voss's Panoramic Window Speech Dais velvet rug
+    floor_carpet(3, 6, 7, 8)           # Valen's Panoramic Window Lounge velvet rug
+
+    # Sleek industrial threshold leading to the East Service Lift (27,14) — subtle visual hint before the raid!
+    for xx in (25, 26, 27):
+        if m.cls[14, xx] == '.':
+            m.L[0, 14, xx] = P1('lm_grate') if xx >= 26 else P1('Z_f0')
+
+    write(m, 186, 'Meridian Spire - Gala Hall', 185, '186_meridian_gala.yaml', bgm='Cedolan City', field='NEON_GRID',
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
+          tone=[4, 0, -6, 10])
 
 
 # ============================================================================================ 951 the Service Lifts
 def build_951():
-    m = room(21, 17, 'Q', 951)
-    m.box(1, 3, 19, 15); m.box(8, 3, 12, 5); m.box(9, 16, 11, 16)
+    from cavekit import PIT, TER
+    # Sculpted Vertical Spire Freight-Shaft Catwalk & Suspended Turbine Bridge (seamless vertical continuity into 952!):
+    #   MASS  -> cvZ sleek dark neon-rimmed obsidian Spire shaft walls
+    #   TER   -> cvQ riveted dark freight-lift landing bulkhead overlooking the abyssal chasm
+    #   FLOOR -> cvQ suspended catwalk spine & asymmetric turbine decks over the chasm
+    #   PIT   -> lm_deep0..5 starry abyssal reactor chasm with towering glowing cores, freight lift cage & pylons!
+    m = room(21, 17, 'Z', 951)
+    m.kit = {TER: 'cvQ', FLOOR: 'cvQ', 'default': 'cvZ'}
+
+    # ---- 1. Sculpt the Black Void: Asymmetric Spire Freight Shaft + Deep Starry Reactor Chasm ----
+    m.box(2, 5, 18, 15, PIT, 'p')
+    m.box(6, 3, 14, 4, PIT, 'p')
+    # Carve sculpted stepped octagonal corner piers in dark MASS (zero flat rectangular box!)
+    m.mass_at(
+        [(x, y) for y in range(0, 3) for x in range(0, 21)] +
+        [(x, y) for y in range(3, 5) for x in list(range(0, 6)) + list(range(15, 21))] +
+        [(x, y) for y in range(5, 7) for x in (0, 1, 19, 20)] +
+        [(x, y) for y in range(7, 15) for x in (0, 20)] +
+        [(x, 15) for x in list(range(0, 7)) + list(range(14, 21))] +
+        [(x, 16) for x in list(range(0, 9)) + list(range(12, 21))]
+    )
+
+    # ---- 2. Elevated North Freight Lift Landing (TER, ht=2, x=7..13, y=5..8) ----
+    # Gala lift (10,6), arrival (10,7), & forced Lift gate (12,7) sit cleanly on elevated industrial steel landing!
+    m.box(7, 5, 13, 8, TER, '.')
+
+    # ---- 3. Suspended Central Catwalk Spine (FLOOR, x=9..11, y=10..16) + South Vault Threshold (x=7..13, y=15) ----
+    m.box(9, 10, 11, 16, FLOOR, '.')
+    m.box(7, 15, 13, 15, FLOOR, '.')
+
+    # ---- 4. Asymmetric Suspended West Turbine Deck (Bereaved 1 at (6,10)) & East Reactor Deck (Bereaved 2 at (14,13)) ----
+    # West Turbine Deck (x=3..8, y=9..12): y=9 brass railing rim, y=10..11 walkable deck, y=12 steel girder drop into PIT!
+    m.box(3, 9, 8, 12, FLOOR, '.')
+    # East Reactor Deck (x=12..17, y=11..14): y=11 brass railing rim, y=12..13 walkable deck, y=14 steel girder drop into PIT!
+    m.box(12, 11, 17, 14, FLOOR, '.')
+
+    # Industrial freight stairs descending straight from North Lift Landing (y=7) onto Suspended Central Catwalk (y=11)!
+    m.stairs(9, 8, w=3, n=3, c='.')
     m.plan_cliffs(rows=3)
+
+    # ---- 5. Events (100% warps, Lift gate, Rook trigger & both Bereaved trainers preserved!) ----
     E = m.events
     E += [{'type': 'warp', 'name': 'Up to the Gala', 'at': [10, 6], 'to': {'map': 186, 'x': 26, 'y': 14, 'dir': 'left'}, 'se': 'Door exit'},
           at(ev('Lift gate', page(["The brass has been forced from below. Black grease on it, and boot prints. Nadir grease. They came up the service shafts from the City Below."])), 12, 7),
@@ -277,28 +671,156 @@ def build_951():
                       "(Rook follows you down.)", {'selfswitch': ['A', True]}], cond=V(8), trigger='touch'),
                 page([], cond={'self': 'A'})), 10, 12),
           {'type': 'warp', 'name': 'Down to the vault', 'at': [10, 16], 'to': {'map': 952, 'x': 12, 'y': 17, 'dir': 'up'}, 'se': 'Door exit'}]
-    m.box(9, 16, 11, 16)
-    for x in range(1, 20):
-        if x not in (9, 10, 11): m.over.append((1, x, 15, P1('lm_bars_m')))
-    m.keep_clear |= {(10, y) for y in range(6, 17)} | {(12, 8), (6, 11), (14, 12)}
-    put_if(m, 'lm_lift', 9, 3) if False else None
-    for name, x, y in (('lm_rack', 2, 6), ('lm_rack', 18, 6), ('lm_gearbox', 3, 12), ('lm_gearbox', 17, 9), ('lm_junction', 16, 6) if 'lm_junction' in STAMPS else ('lm_gearbox', 16, 6)):
+
+    m.keep_clear |= ({(x, y) for x in (9, 10, 11) for y in range(6, 17)}
+                     | {(12, 7), (12, 6), (8, 6), (8, 7), (5, 10), (6, 10), (5, 11), (6, 11), (7, 11), (8, 11),
+                        (12, 12), (13, 12), (14, 12), (15, 12), (13, 13), (14, 13), (15, 13)})
+
+    # ---- 6. North Freight-Lift Bulkhead Hardware (Centered Freight Door, Monitors, Alarms, Vents) ----
+    hang(m, 'lm_sdoor', 10, 3)
+    hang(m, 'lm_monitors', 7, 2); hang(m, 'lm_monitors', 12, 2)
+    on_faces(m, 'lm_alarm_on', [(6, 3), (14, 3)])
+    on_faces(m, 'lm_vent', [(3, 5), (17, 5)])
+
+    # ---- 7. Abyssal Freight-Shaft Architecture (Glowing Reactor Cores, Brass Lift Cage, Coils & Steam Plumes!) ----
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+
+    abyss_piece('lm_core', 2, 5)        # NW glowing violet-gold turbine reactor core rising out of the deep chasm!
+    abyss_piece('lm_lift', 15, 5)       # NE brass-cage Spire freight lift suspended inside the east abyssal shaft!
+    abyss_piece('lm_pylon', 17, 6)      # East chasm Lattice induction coil
+    abyss_piece('lm_pylon_off', 1, 11)  # SW abyssal damper coil cleanly framed below the West Turbine Deck
+    abyss_piece('lm_ring', 5, 6)
+    abyss_piece('lm_ring', 14, 8)
+    abyss_piece('lm_steam0', 6, 6)
+    abyss_piece('lm_steam0', 1, 9)      # Rising chasm vapor cleanly clear of SW pylon!
+    abyss_piece('lm_steam1', 14, 9)
+    abyss_piece('lm_steam1', 18, 12)
+
+    # ---- 8. Deck Machinery & Forged Brass Chasm Safety Railings ----
+    for name, x, y in (
+        ('lm_arclamp', 8, 4), ('lm_arclamp', 12, 4),
+        ('lm_rack', 4, 10), ('lm_gearbox', 5, 10),
+        ('lm_rack', 16, 12), ('lm_gearbox', 15, 13), ('lm_junction', 16, 11),
+        ('lm_lamp_on', 8, 5), ('lm_lamp_on', 12, 5),
+        ('lm_bollard', 8, 7),
+    ):
         put_if(m, name, x, y)
-    m.dress(5, groups=[(['lm_cables'], 1)], seed=2)
+
+    # Brass chasm overlook railings along EVERY exposed north platform rim (West Deck y=9, East Deck y=11, South Threshold y=15)
+    for x, t in ((3, 'lm_bollard'), (4, 'lm_railing_w'), (5, 'lm_railing_m'), (6, 'lm_railing_e')):
+        m.over.append((1, x, 9, P1(t))); m.taken[9, x] = True
+    for x, t in ((14, 'lm_railing_w'), (15, 'lm_railing_m'), (16, 'lm_railing_e'), (17, 'lm_bollard')):
+        m.over.append((1, x, 11, P1(t))); m.taken[11, x] = True
+    for x, t in ((7, 'lm_bollard'), (8, 'lm_railing_e'), (12, 'lm_railing_w'), (13, 'lm_bollard')):
+        m.over.append((1, x, 15, P1(t))); m.taken[15, x] = True
+    # Grounded forged brass parapet bollards along the west catwalk chasm curb (x=9, y=13..14, matching 952!)
+    for y in (13, 14):
+        m.over.append((1, 9, y, P1('lm_bollard'))); m.taken[y, 9] = True
+
+    # Double-centered industrial light shafts & glowing Lattice pools illuminating Lift Landing & Rook's catwalk trigger!
+    m.stamps.append(('cv_shaft', 9, 5))
+    m.stamps.append(('cv_shaft', 9, 11))
+    m.stamps.append(('pf_glow', 9, 6))
+    m.stamps.append(('pf_glow', 10, 6))
+    m.stamps.append(('pf_glow', 9, 12))
+    m.stamps.append(('pf_glow', 10, 12))
+
     m.paint()
+
+    # ---- 9. Post-Paint Architectural Floor Craft (Starry Chasm, Clean Obsidian Decks, Glowing Cyan Lattice Spine!) ----
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+            elif m.cls[y, x] == '.':
+                # Sleek clean dark obsidian-slate decks (strip noisy Z_f3 cyan squiggles so real conduits pop!)
+                m.L[0, y, x] = P1('Z_f%d' % ((x * 3 + y) % 3))
+
+    # Central glowing cyan-gold Lattice energy spine straight from Gala Lift (10,6) -> Stairs -> Rook (10,12) -> Vault (10,16)!
+    for y in range(6, 17):
+        if m.cls[y, 10] == '.':
+            m.L[0, y, 10] = P1('lm_strip_v_on')
+        for sx in (9, 11):
+            if m.cls[y, sx] == '.' and not (sx == 9 and y in (13, 14)):
+                m.L[0, y, sx] = P1('lm_grate')
+    # Solid dark obsidian girder curbs directly beneath west catwalk parapet bollards (x=9, y=13..14)
+    for y in (13, 14):
+        m.L[0, y, 9] = P1('Z_f0')
+
+    # Glowing horizontal Lattice conduits branching out onto West Turbine Deck (y=11) & East Reactor Deck (y=12)!
+    for x in range(5, 9):
+        m.L[0, 11, x] = P1('lm_strip_h_on')
+    for x in range(12, 16):
+        m.L[0, 12, x] = P1('lm_strip_h_on')
+    # Subtle steel landing grates flanking Lift gate (12,7)
+    for gx, gy in ((8, 6), (12, 6), (11, 7)):
+        if m.cls[gy, gx] == '.':
+            m.L[0, gy, gx] = P1('lm_grate')
+
     write(m, 951, 'Meridian Spire - Service Lifts', 185, '951_meridian_service_lifts.yaml', bgm='Cave', field='NEON_GRID',
-          tone=[-20, -24, -10, 40])
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
+          tone=[-14, -18, 8, 30],
+          fog={'name': 'prismfall_cave', 'opacity': 32, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': 0})
 
 
 # ============================================================================================ 952 the Plate Vault
 def build_952():
-    m = room(25, 19, 'Q', 952)
-    m.room(12, 10, 10.5, 6.5, rough=0.15)
-    m.box(1, 3, 23, 17); m.box(11, 18, 13, 18)
+    from cavekit import PIT, TER
+    # Sleek dark obsidian-slate subterranean Spire chamber ('Z') with 3-tier architectural material hierarchy:
+    #   MASS (outer carved cliff vault) -> cvZ dark obsidian walls
+    #   TER  (elevated Plate Sanctum)   -> lmw monumental Spire ashlar marble & brass balustrade
+    #   FLOOR (suspended catwalk/bays)  -> cvQ dark riveted vault steel drop-walls over the abyssal chasm!
+    #   PIT  (deep reactor power shaft) -> lm_deep0..5 abyssal dark indigo void!
+    m = room(25, 19, 'Z', 952)
+    m.kit = {TER: 'lmw', FLOOR: 'cvQ', 'default': 'cvZ'}
+
+    # ---- 1. Sculpt the Black Void: Round/Octagonal Subterranean Cliff Vault + Deep Abyssal Power Chasm ----
+    # Carve an organic rounded/octagonal subterranean abyssal power shaft (PIT) into the dark cliff MASS
+    m.room(12.0, 9.6, 10.2, 6.2, h=PIT, c='p', rough=0.14, seed=9)
+    # Trim the outer corners firmly into dark sculpted cliff MASS so the silhouette is NEVER a rectangular box!
+    m.mass_at(
+        [(x, y) for y in range(0, 4) for x in range(0, 25)] +
+        [(x, y) for y in range(4, 6) for x in list(range(0, 4)) + list(range(21, 25))] +
+        [(x, y) for y in range(6, 15) for x in (0, 1, 2, 22, 23, 24)] +
+        [(x, y) for y in range(14, 19) for x in list(range(0, 6)) + list(range(20, 25))] +
+        [(x, 18) for x in list(range(0, 11)) + list(range(14, 25))]
+    )
+    # Recessed monumental north containment apse framing the elevated Plate Sanctum (x=8..16, y=3..4 -> MASS lip at y=1..2)
+    m.box(8, 3, 16, 4, PIT, 'p')
+
+    # ---- 2. Elevated Central Plate Containment Sanctum (TER, ht=2 -> lmw marble retaining wall!) ----
+    # x=9..15, y=5..10: lmw lip hangs on y=10, ashlar face on y=11, marble footing on y=12 (dropping into abyssal PIT!)
+    # That leaves ALL 25 tiles of the 5x5 golden Meridian sunburst medallion (lm_sun at x=10..14, y=5..9) 100% unobstructed!
+    m.box(9, 5, 15, 10, TER, '.')
+
+    # ---- 3. Suspended Steel-Grate Catwalk Bridge (FLOOR, ht=1, x=11..13, y=11..15) ----
+    # Spans straight across the abyssal reactor shaft from the South Lift Vestibule right up to the marble Sanctum steps!
+    m.box(11, 11, 13, 15, FLOOR, '.')
+
+    # ---- 4. Sculpted South Lift Vestibule, West Vault Control Bay, & Recessed East Service Door Alcove (FLOOR) ----
+    # Asymmetric multi-bay south chamber: Lift entrance (12,18), West control console bay (6..10, 15..17), East Service door (18,17)
+    m.box(6, 15, 19, 17, FLOOR, '.')
+    m.box(11, 18, 13, 18, FLOOR, '.')
+    # Carve architectural wall notches at the SW/SE ends so the vestibule silhouette reads as shaped chambers, not a strip
+    m.mass_at([(6, 17), (19, 15)])
+
+    # Grand monumental marble staircase rising cleanly from Catwalk (y=12) onto the Plate Sanctum Dais (y=10)!
+    # Walkable seamlessly during The Shatter's 5-step walk-in (12, 17 -> 12)!
+    m.stairs(11, 10, w=3, n=3, c='.')
     m.plan_cliffs(rows=3)
+
+    # ---- 5. Events (100% gameplay & cutscene contract preserved!) ----
     E = m.events
     shatter = [S('Prismfall.checkpoint rescue nil'),
-               MV('player', ['up'] * 5),                   # close enough that the cradle and the Mourner are on screen
+               MV('player', ['up'] * 5),                   # walks smoothly up catwalk (12,17..12) to foot of marble dais stairs!
                "(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle's crystal is crazed all over with fine white lines.)",
                "(At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a woman in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)",
                P('MOURNER', 'neutral', "(the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its dark. That's all. That's all tonight is."),
@@ -341,25 +863,132 @@ def build_952():
           at(ev('Service door', page(["The vault's service door. MERIDIAN CONCORD — AUTHORIZED PERSONNEL. Locked."], tile=P1('lm_pdoor')),
                 page([{'se': 'Door exit'}, {'switch': ['CH5_SHATTER', True]}, {'transfer': {'map': 608, 'x': 48, 'y': 5, 'dir': 'down'}}],
                      tile=P1('lm_pdoor_open'), cond=V(9), trigger='touch')), 18, 17)]
-    m.box(17, 18, 19, 18) if False else None
-    for x in range(3, 22):
-        for y in (11,):
-            if x != 12 and abs(x - 12) > 1: m.over.append((2, x, y, P1('lm_cable_h')))
-    for y in range(8, 18):
-        if y not in (11,): m.over.append((2, 12, y, P1('lm_cable_v'))) if y > 8 else None
-    m.keep_clear |= {(12, y) for y in range(8, 18)} | {(11, 7), (13, 7), (18, 16), (17, 17)}
-    for y in range(8, 18):
-        for x in (6, 18):
-            if y not in (11,): m.over.append((2, x, y, P1('lm_cable_v')))
-    for name, x, y in (('lm_rack', 2, 6), ('lm_rack', 22, 6), ('lm_vault', 2, 13), ('lm_gearbox', 21, 14), ('lm_pillar', 4, 6), ('lm_pillar', 20, 6),
-                       ('lm_pylon_off', 8, 5), ('lm_pylon_off', 15, 5), ('lm_rack', 2, 9), ('lm_rack', 22, 9), ('lm_junction', 9, 14), ('lm_junction', 15, 14),
-                       ('lm_gearbox', 3, 16), ('lm_gearbox', 20, 16)):
+    m.keep_clear |= {(x, y) for x in (11, 12, 13) for y in range(6, 19)} | {(10, 7), (14, 7), (10, 8), (14, 8), (12, 6), (18, 16), (17, 17), (19, 17), (18, 15), (17, 16), (16, 16), (15, 16), (14, 16)}
+
+    # ---- 6. Monumental North Containment Wall Hardware (Golden Sanctuary Window, Meridian Banners, Alarms, Vents) ----
+    # Deep royal navy-and-gold Meridian banners flanking a tall golden sanctuary glass window directly behind the Zap Plate Dais!
+    hang(m, 'lm_window', 12, 2)
+    hang(m, 'lm_banner', 10, 2)
+    hang(m, 'lm_banner', 14, 2)
+    on_faces(m, 'lm_alarm_on', [(9, 3), (15, 3)])
+    on_faces(m, 'lm_vent', [(6, 4), (18, 4)])
+
+    # ---- 7. Abyssal Chasm Reactor Architecture (Towering Glowing Cores & Pylons rising out of the Deep Void!) ----
+    # Placed directly into the non-walkable abyssal PIT bays (all solid pas=15 bases, pri>=1 tops — zero stranded floor!)
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+
+    # Flanking glowing Meridian energy cores & containment pylons rising majestically out of the abyssal shaft!
+    abyss_piece('lm_core', 4, 6)       # West abyssal reactor core (3x4 glowing violet-gold power column!)
+    abyss_piece('lm_core', 18, 6)      # East abyssal reactor core (3x4 glowing violet-gold power column!)
+    abyss_piece('lm_pylon', 7, 10)     # SW abyssal Lattice coil flanking the catwalk chasm
+    abyss_piece('lm_pylon', 16, 10)    # SE abyssal Lattice coil flanking the catwalk chasm
+    abyss_piece('lm_pylon_off', 4, 10) # Outer W damper coil in the deep shaft
+    abyss_piece('lm_pylon_off', 19, 10)# Outer E damper coil in the deep shaft
+    # Luminous glowing energy rings & steam plumes rising out of the power shaft
+    for rx, ry in ((7, 7), (17, 7), (9, 12), (15, 12)):
+        abyss_piece('lm_ring', rx, ry)
+    for sx, sy in ((5, 12), (19, 12)):
+        abyss_piece('lm_steam0', sx, sy)
+
+    # ---- 8. Elevated Plate Sanctum Framing (Marble Pillars, Arc-Lamps, Dramatic Overhead Light Shaft & Glow!) ----
+    # Frame the four corners of the elevated marble Plate Sanctum with classical Spire pillars & golden arc-lamps
+    for name, x, y in (
+        ('lm_pillar', 9, 4), ('lm_pillar', 15, 4),
+        ('lm_arclamp', 9, 7), ('lm_arclamp', 15, 7),
+        # West South-Vestibule Vault Control Bay (asymmetric hardware opposite East Service Door!)
+        ('lm_rack', 6, 15), ('lm_gearbox', 7, 17), ('lm_junction', 8, 17),
+        ('lm_bollard', 10, 17), ('lm_bollard', 14, 17),
+        ('lm_bollard', 16, 17), ('lm_bollard', 19, 17),
+        ('lm_lamp_on', 15, 15), ('lm_lamp_on', 9, 15),
+    ):
         put_if(m, name, x, y)
-    hang(m, 'lm_onair', 12, 3) if False else None
-    m.dress(8, groups=[(['lm_cables'], 2), (['lm_wear0'], 1)], seed=3)
+
+    # Forged brass safety railings along the north chasm overlook of the South Vestibule (y=15, x=7..10 & 14..18)
+    for x in (7, 8, 9, 10, 14, 15, 16, 17, 18):
+        if x in (10, 14, 18):
+            t = 'lm_bollard'
+        elif x in (7, 15):
+            t = 'lm_railing_w'
+        elif x in (9, 17):
+            t = 'lm_railing_e'
+        else:
+            t = 'lm_railing_m'
+        if (x, 15) not in m.keep_clear:
+            m.over.append((1, x, 15, P1(t)))
+            m.taken[15, x] = True
+
+    # Safety bollards solidly grounded on dark obsidian bridge curbs along the Catwalk edges (x=10 & x=14, y=12..14!)
+    for y in (12, 13, 14):
+        m.over.append((1, 10, y, P1('lm_bollard')))
+        m.over.append((1, 14, y, P1('lm_bollard')))
+
+    # Dramatic overhead shafts of light & golden aura pouring onto the Zap Plate Cradle!
+    m.stamps.append(('cv_shaft', 11, 5))
+    m.stamps.append(('pf_glow', 11, 6))
+    m.stamps.append(('pf_glow', 12, 6))
+
     m.paint()
+
+    # ---- 9. Post-Paint Architectural Floor Craft (Deep Void Chasm, Golden Sunburst Medallion, Catwalk, Energy Conduits) ----
+    # Replace generic cave pit with deep rich Meridian abyssal void tiles (lm_deep0..5, all pas=15!)
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.cls[y, x] == 'p':
+                m.L[0, y, x] = deeps[(x * 7 + y * 13) % len(deeps)]
+
+    # Solid dark obsidian girder curbs directly beneath the catwalk bridge bollards (x=10 & x=14, y=12..14) so nothing floats!
+    # Combined cell is pas=15 (lm_bollard on L1), so zero stranded floor and zero passguard hits!
+    for y in (12, 13, 14):
+        m.L[0, y, 10] = P1('Z_f0')
+        m.L[0, y, 14] = P1('Z_f0')
+
+    # Elevated Plate Sanctum Dais (x=9..15, y=5..9):
+    # Outer marble trim (lm_plaza0) + 5x5 MONUMENTAL GOLDEN MERIDIAN SUNBURST MEDALLION (lm_sun) dead-centered on Cradle (12,7)!
+    for y in range(5, 10):
+        for x in range(9, 16):
+            m.L[0, y, x] = P1('lm_plaza0')
+    sun_L = STAMPS['lm_sun']['layers'][0]
+    for dy in range(5):
+        for dx in range(5):
+            m.L[0, 5 + dy, 10 + dx] = sun_L[dy][dx]
+
+    # Suspended Catwalk Bridge (x=11..13, y=13..15) + Vestibule approach (y=16..17):
+    # Dark riveted steel grates flanking a blazing central cyan-gold Lattice energy spine straight up to the marble stairs!
+    for y in range(13, 18):
+        m.L[0, y, 12] = P1('lm_strip_v_on')
+        m.L[0, y, 11] = P1('lm_grate')
+        m.L[0, y, 13] = P1('lm_grate')
+
+    # South Vestibule: pure sleek dark obsidian-slate (Z_f0..3) so the glowing white-gold Marble Dais pops as the sole radiant focus!
+    for y in (15, 16, 17):
+        for x in range(6, 20):
+            if m.cls[y, x] == '.' and x not in (11, 12, 13):
+                m.L[0, y, x] = P1('Z_f%d' % ((x * 3 + y) % 4))
+    # Glowing cyan-gold Lattice floor conduit branching sleekly from center lift spine -> Service door (18,17) & West Control Bay
+    for x in range(14, 19):
+        m.L[0, 16, x] = P1('lm_strip_h_on')
+    m.L[0, 17, 18] = P1('lm_grate')
+    for x in range(8, 11):
+        m.L[0, 16, x] = P1('lm_strip_h_on')
+    m.L[0, 16, 7] = P1('lm_grate')
+
+    # Soft cliff-foot shadow along the north dais backdrop (y=5 on non-sunburst outer marble wings)
+    for x in (9, 15):
+        if m.L[1, 5, x] == 0 and m.L[2, 5, x] == 0:
+            m.L[2, 5, x] = P1('Z_shadow')
+
     write(m, 952, 'Meridian Spire - Plate Vault', 185, '952_meridian_plate_vault.yaml', bgm='Cave', field='NEON_GRID',
-          tone=[-10, -20, 10, 30])
+          metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True},
+          tone=[-12, -16, 16, 28],
+          fog={'name': 'prismfall_glass', 'opacity': 36, 'blend': 1, 'zoom': 200, 'sx': 1, 'sy': 0})
 
 
 # ============================================================================================ 187 / 188 / 189 small rooms
@@ -440,11 +1069,19 @@ events: []
 """
 
 
-def main():
-    build_582(); build_185(); build_186(); build_951(); build_952(); build_small()
-    open(os.path.join(HERE, 'specs', '182_lumen_pc_arcade.yaml'), 'w').write(TEMPLATES)
-    print('wrote 582 185 186 951 952 187 188 189 182 183')
+def main(which=None):
+    sel = set(which or [])
+    builders = [('582', build_582), ('185', build_185), ('186', build_186),
+                ('951', build_951), ('952', build_952), ('small', build_small)]
+    done = []
+    for k, fn in builders:
+        if not sel or k in sel:
+            fn(); done.append(k)
+    if not sel or '182' in sel or '183' in sel:
+        open(os.path.join(HERE, 'specs', '182_lumen_pc_arcade.yaml'), 'w').write(TEMPLATES)
+        done += ['182', '183']
+    print('wrote', ' '.join(done))
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

@@ -1,4 +1,4 @@
-# Gossamer Wood (524). WRITTEN BY layouts/routes_craft.py - edit that script.
+# Gossamer Wood (524). WRITTEN BY layouts/wave11_wilds_craft.py (Wave 11 Rejuv V14 Craft).
 id: 524
 name: Gossamer Wood
 parent: 0
@@ -21,7 +21,7 @@ events:
 - type: event
   name: Wood entry 1
   at: [4, 50]
-  pages: &id001
+  pages:
   - cond: {switch: CH1_ORCHARD_DONE}
     trigger: touch
     commands:
@@ -35,15 +35,45 @@ events:
 - type: event
   name: Wood entry 2
   at: [4, 51]
-  pages: *id001
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'ENTRY']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
+        a week!'
+      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
+      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
 - type: event
   name: Wood entry 3
   at: [4, 52]
-  pages: *id001
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'ENTRY']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
+        a week!'
+      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
+      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
 - type: event
   name: Wood entry 4
   at: [4, 53]
-  pages: *id001
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'ENTRY']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
+        a week!'
+      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
+      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
 - type: event
   name: Accord cordon 1
   at: [40, 104]
@@ -151,7 +181,7 @@ events:
 - type: event
   name: Juno at the Veil 1
   at: [79, 47]
-  pages: &id002
+  pages:
   - cond: {switch: CH1_ORCHARD_DONE}
     trigger: touch
     commands:
@@ -164,11 +194,29 @@ events:
 - type: event
   name: Juno at the Veil 2
   at: [79, 48]
-  pages: *id002
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'GLASS']]
+      then: []
+      else:
+      - (A shimmer hangs between two trees. Beyond it, the trunks are clear crystal.)
+      - '\pf[JUNO,sad]Juno: That''s the Glasswood. It was three fields away at midwinter.'
+      - {script: '$game_self_switches[[524, 0, ''GLASS'']] = true'}
 - type: event
   name: Juno at the Veil 3
   at: [79, 49]
-  pages: *id002
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'GLASS']]
+      then: []
+      else:
+      - (A shimmer hangs between two trees. Beyond it, the trunks are clear crystal.)
+      - '\pf[JUNO,sad]Juno: That''s the Glasswood. It was three fields away at midwinter.'
+      - {script: '$game_self_switches[[524, 0, ''GLASS'']] = true'}
 - type: sign
   name: Cordon notice
   at: [43, 103]
@@ -343,3 +391,27 @@ events:
   gfx: ['', 0, 2]
   name: Woodward's Hut door
   link: WOOD_HUT
+- type: event
+  name: HeadbuttTree
+  at: [47, 42]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}
+- type: event
+  name: HeadbuttTree
+  at: [63, 55]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}
+- type: event
+  name: HeadbuttTree
+  at: [30, 72]
+  pages:
+  - graphic: {tile: 6881}
+    trigger: action
+    commands:
+    - {script: pbHeadbutt}
