@@ -211,7 +211,36 @@ events:
   - commands: ['The news screen: TEN YEARS OF LIGHT. Highlights of the anniversary parade, on a loop.']
   - cond: {switch: CH5_MANDATE}
     commands: ['The news screen: the Sovereign, gravely: "Meridian is granted the Mandate wherever a Lattice stands. Velmora endures."']
-
+- type: event
+  name: Lamplight
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - {wait: 16}
+    - if: pfm_il1_start
+      then:
+      - {script: 'pfm_card(:PF_IL1_CARD, "The same night. Ferrow''s Landing.")'}
+      - transfer: {map: 106, x: 2, y: 5, dir: up}
+      else:
+      - var: [CH5_STEP, 13]
+      - var: [STORY_ACT, 2]
+      - var: [STORY_CHAPTER, 6]
+      - switch: [EDDA_SMUGGLER, true]
+      - {script: pfm_fade_in(30)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH5_STEP, 12]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH5_STEP, 13]
+  at: [0, 0]
+  story: interlude1
 ---
 # Map 183 revamped by layouts/wave8_story_craft.py (Wave 8 Map Craft; data/raw/183.npy).
 id: 183

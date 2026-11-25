@@ -29,13 +29,13 @@ events:
         who: player
         route: [up, up, up, up, up]
         wait: true
-    - '(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais.
-      In the cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle''s crystal is crazed
-      all over with fine white lines.)'
-    - (At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The
-      other, a woman in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)
-    - '\pf[MOURNER,neutral]Mourner: (the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river
-      and its dark. That''s all. That''s all tonight is.'
+    - '(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the
+      cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle''s crystal is crazed all over with fine
+      white lines.)'
+    - (At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a woman
+      in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)
+    - '\pf[MOURNER,neutral]Mourner: (the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its dark.
+      That''s all. That''s all tonight is.'
     - '\pf[SABLE,happy]Sable: Mm-hm. Gently.'
     - (She stands. Something small and brass is clamped to the Plate's edge, blinking.)
     - '\pf[MOURNER,shocked]Mourner: What is that? What have you put on—'
@@ -45,16 +45,16 @@ events:
     - {script: 'pfm_cutscene(:SH1) rescue nil'}
     - '\pf[MOURNER,shocked]Mourner: No — no — what did you DO?'
     - {script: 'pfm_cutscene(:SH1_BURN) rescue nil'}
-    - (He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door
-      and the smell of burnt brass.)
+    - (He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door and the
+      smell of burnt brass.)
     - (The Mourner turns and sees you. He goes still, the way he did in the Lantern Theatre.)
     - '\pf[MOURNER,sad]Mourner: ...You. Not you. Not here. Get out of here, child. Get OUT—'
-    - (He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service
-      door, holding his right hand away from his body. It's still smoking.)
+    - (He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door,
+      holding his right hand away from his body. It's still smoking.)
     - {script: 'pfm_cutscene(:SH1_EXIT) rescue nil'}
     - '\pf[ROOK,shocked]Rook: (behind you) That''s it. That''s the Zap Plate. That''s — it''s broken. It''s BROKEN.'
-    - '(Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate''s discharge, crackling white, its eyes empty. It plants itself
-      between you and the door.)'
+    - '(Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate''s discharge, crackling white, its eyes empty. It plants itself between
+      you and the door.)'
     - '\pf[ROOK,panic]Rook: That''s the vault guard! That''s Meridian''s — look at it, it''s drunk on the — get BACK—'
     - {script: 'pfm_set(:live_wire, false) rescue nil'}
     - boss: {id: OVERCHARGED, species: ELECTIVIRE, level: 30, field: NEON_GRID}
@@ -67,8 +67,8 @@ events:
       - '\pf[ROOK,sad]Rook: Hey. Hey, big guy. It''s okay. (he crouches by it, then by the Plate, and doesn''t touch either)'
       - '\pf[ROOK,neutral]Rook: The wave went out. When it broke. It went through the rock, that way. Down. Into the—'
       - '\pf[ROOK,shocked]Rook: The Lowlight''s under us.'
-      - (The service door in the vault's south wall stands open. Beyond it, a stair down the cliff, grey light, and silence. No traffic. No music. Nobody
-        shouting. Silence.)
+      - (The service door in the vault's south wall stands open. Beyond it, a stair down the cliff, grey light, and silence. No traffic. No music. Nobody shouting.
+        Silence.)
       - switch: [CH5_GALA_DONE, true]
       - switch: [CH5_SHATTER, true]
       - var: [LOWLIGHT_STATE, 1]
@@ -115,8 +115,8 @@ events:
     cond:
       var: [CH5_STEP, 9]
   - commands:
-    - '\pf[LARCH,neutral]Larch: (in the ruined vault at 3 a.m. with a borrowed scanner) That wasn''t the Hollow''s hammer. Look at the stress lines. The
-      Plate was already cracking. Something''s been drinking from it for ten years.'
+    - '\pf[LARCH,neutral]Larch: (in the ruined vault at 3 a.m. with a borrowed scanner) That wasn''t the Hollow''s hammer. Look at the stress lines. The Plate was
+      already cracking. Something''s been drinking from it for ten years.'
     - (She looks up at the Lattice conduits.)
     - '\pf[LARCH,sad]Larch: Something I built.'
     - var: [CH5_STEP, 12]
@@ -149,3 +149,73 @@ events:
     cond:
       var: [CH5_STEP, 9]
   at: [18, 17]
+- type: event
+  name: Larch (3 a.m.)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pfm_tone(-64, -56, -20, 44, 16)'}
+    - move:
+        who: player
+        route: [left, left, left, left, left, left, up, up, up, up, up, up, up, up]
+        wait: true
+    - anim: [Larch (3 a.m.), 3]
+    - move:
+        who: Larch (3 a.m.)
+        route: [turn_down]
+        wait: true
+    - '\pf[LARCH,neutral,,Larch (3 a.m.)]Larch: Don''t tell the Director. I told her I was a cleaner. She looked at my oilskin and believed me, which hurt.'
+    - move:
+        who: Larch (3 a.m.)
+        route: [turn_right]
+        wait: true
+    - {se: Mining ping}
+    - {script: 'pfm_flash(255, 240, 190, 6, 70)'}
+    - '\pf[LARCH,neutral,,Larch (3 a.m.)]Larch: Look. Here. The stress lines in the crystal. A Splitter makes a star: one point, everything running out from it. There''s
+      the star, where she clamped it.'
+    - 'Larch: But these. The long ones, the length of the cradle, under the star. They''re old. Months. Years. That''s not a blast. That''s fatigue, the kind you
+      get in a bridge that''s carried too much for too long.'
+    - '\pf[LARCH,sad,,Larch (3 a.m.)]Larch: That wasn''t the Hollow''s hammer. The Plate was already cracking. Something''s been drinking from it for ten years.'
+    - move:
+        who: Larch (3 a.m.)
+        route: [turn_up, wait 14, turn_left, wait 14, turn_down, wait 10, turn_right]
+        wait: true
+    - '\pf[LARCH,sad,,Larch (3 a.m.)]Larch: Something I built.'
+    - {wait: 40}
+    - move:
+        who: Larch (3 a.m.)
+        route: [turn_down]
+        wait: true
+    - 'Larch: Twelve people, child. Twelve.'
+    - choices: [It wasn't your hand on the Plate., 'What do we do?', '...']
+      branches:
+      - ['\pf[LARCH,sad,,Larch (3 a.m.)]Larch: No. It was my hand on everything else.']
+      - ['\pf[LARCH,neutral,,Larch (3 a.m.)]Larch: We write it down. All of it. And one day we say it out loud, somewhere nobody can switch off.']
+      - ['\pf[LARCH,sad,,Larch (3 a.m.)]Larch: Yes. That''s about all there is to say.']
+      cancel: 3
+    - '\pf[LARCH,neutral,,Larch (3 a.m.)]Larch: Go back to bed. I''m going to sit here and look at it until it stops being true.'
+    - move:
+        who: Larch (3 a.m.)
+        route: [turn_right]
+        wait: true
+    - var: [CH5_STEP, 12]
+    - move:
+        who: player
+        route: [down, down, down]
+        wait: true
+    - {script: pfm_fade_out(24)}
+    - transfer: {map: 182, x: 7, y: 6, dir: up}
+    trigger: autorun
+    move: fixed
+    graphic: {sprite: trainer_PROFESSOR, dir: right}
+    cond:
+      var: [CH5_STEP, 11]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH5_STEP, 12]
+  at: [11, 7]
+  story: interlude1

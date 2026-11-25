@@ -2095,13 +2095,202 @@ events:
     - {script: 'pfm_set(:saw_mirror)'}
     trigger: action
     move: fixed
+  - commands: [The crack runs right down the middle of his face. He doesn't look for long.]
+    trigger: action
+    move: fixed
+    cond: &id002
+      var: [INTERLUDE_ACTIVE, 1]
+    story: interlude1
   at: [5, 5]
-- type: sign
+- type: event
   name: Trunk
-  post: false
-  text: Locked. A black lace veil is caught in the lid.
+  pages:
+  - commands: [Locked. A black lace veil is caught in the lid.]
+    trigger: action
+    move: fixed
+  - commands:
+    - if: pfm?(:il1_trunk)
+      then: ['The trunk. Open, and empty of the one thing that mattered.']
+      else:
+      - if: $game_player.y >= 11
+        then:
+        - move:
+            who: player
+            route: [right, up, turn_left]
+            wait: true
+      - {script: 'pbSEPlay("Door enter", 80, 70)'}
+      - {wait: 12}
+      - It isn't locked. It hasn't been locked for years. He just never tried.
+      - 'Inside, folded small: a black lace veil. A Ghost Warden''s veil, with Gravenmoor''s ghost-lantern stitched in silver at the hem.'
+      - '\pf[KESTREL,shocked,shock,PLAYER]Kestrel: ...'
+      - move:
+          who: player
+          route: [turn_down]
+          wait: true
+      - {wait: 30}
+      - It smells of candle-smoke, and something else. Something he knew once.
+      - {script: pfm_il1_memory}
+      - {script: 'pfm_shake(3, 14, 8)'}
+      - move:
+          who: player
+          route:
+          - dir_fix_on
+          - {speed: 5}
+          - backward
+          - {speed: 3}
+          - dir_fix_off
+          wait: true
+      - {wait: 44}
+      - '\pf[KESTREL,angry,sweat,PLAYER]Kestrel: Not again. Not AGAIN.'
+      - 'Kestrel: It''s a dream. It''s the same stupid dream. There''s no kid made of light. Kids aren''t made of light.'
+      - {script: 'pbSEPlay("Door enter", 90, 50)'}
+      - {wait: 18}
+      - &id001 {script: 'pfm_tone(-96, -78, -4, 72, 30)'}
+      - move:
+          who: player
+          route: [turn_right]
+          wait: true
+      - anim: [player, 3]
+      - move:
+          who: Haunter
+          route:
+          - through_on
+          - step_anime_on
+          - graphic: [Followers/HAUNTER, 150, 8, 0]
+          - {opacity: 0}
+          - {speed: 2}
+          - {opacity: 70}
+          - up
+          - {opacity: 130}
+          - up
+          - {opacity: 190}
+          - left
+          - {opacity: 230}
+          - left
+          - up
+          wait: true
+      - move:
+          who: player
+          route: [up, up, right, right, turn_up]
+          wait: true
+      - '\pf[KESTREL,neutral,,PLAYER]Kestrel: Morwen. Up.'
+      - {label: stair}
+      - if: pfm_il1_haunter
+        then:
+        - {se: Anim/Ice8}
+        - {script: 'pfm_flash(190, 230, 255, 10, 170)'}
+        - move:
+            who: Haunter
+            route:
+            - {opacity: 190}
+            - right
+            - {opacity: 130}
+            - right
+            - {opacity: 70}
+            - up
+            - {opacity: 0}
+            wait: true
+        - {script: pfm_fade_in(40)}
+        - '\pf[KESTREL,sad,,PLAYER]Kestrel: Good. Good, Morwen.'
+        - 'Kestrel: Gran won''t say. Ysolde won''t answer my letters. The Accord sent a box.'
+        - '\pf[KESTREL,angry,,PLAYER]Kestrel: Fine. Then I''ll find out myself.'
+        - {script: 'pfm_set(:il1_trunk)'}
+        - move:
+            who: player
+            route: [left, left, left, left, up, left, left, up, left, left, turn_down]
+            wait: true
+        - {se: GUI storage pick up}
+        - {wait: 16}
+        - A coat. The veil.
+        - move:
+            who: player
+            route: [right, right, turn_right]
+            wait: true
+        - {se: GUI storage pick up}
+        - {wait: 12}
+        - Five smoked eels, in newspaper.
+        - And a cup of cold kelp tea he's been saving for later since spring.
+        - {wait: 70}
+        - {se: GUI storage put down}
+        - {wait: 10}
+        - He packs it.
+        - {script: 'pfm_set(:il1_packed)'}
+        else:
+        - {script: pfm_fade_out(14)}
+        - {wait: 12}
+        - *id001
+        - {jump_label: stair}
+    trigger: action
+    move: fixed
+    cond: *id002
   at: [8, 10]
-
+  story: interlude1
+- type: event
+  name: Haunter
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [13, 9]
+  story: interlude1
+- type: event
+  name: Night door W
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - {se: Player bump}
+    - move:
+        who: player
+        route: [up]
+        wait: true
+    trigger: touch
+    move: fixed
+    cond: *id002
+    through: true
+  at: [6, 12]
+  story: interlude1
+- type: event
+  name: Night door E
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - {se: Player bump}
+    - move:
+        who: player
+        route: [up]
+        wait: true
+    trigger: touch
+    move: fixed
+    cond: *id002
+    through: true
+  at: [8, 12]
+  story: interlude1
+- type: event
+  name: Night door N
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - {se: Player bump}
+    - move:
+        who: player
+        route: [backward]
+        wait: true
+    trigger: touch
+    move: fixed
+    cond: *id002
+    through: true
+  at: [7, 11]
+  story: interlude1
 ---
 id: 106
 name: Ferrow Lighthouse Lamp Room
@@ -2159,8 +2348,207 @@ events:
     move: fixed
     graphic: {sprite: NPC 11, dir: up}
     cond: {self: A}
+  - commands: ['Gran''s asleep in her chair. The blanket''s slipped, and her pipe''s gone out in her hand.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 11, dir: down}
+    cond: &id001
+      var: &id002 [INTERLUDE_ACTIVE, 1]
+    story: interlude1
   at: [6, 7]
-
+- type: event
+  name: Lamplight (lamp room)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_in(30)}
+    - {wait: 30}
+    - 'Wireless: "...the Lowlight... twelve... the Mandate..."'
+    - {wait: 16}
+    - move:
+        who: player
+        route: [turn_up]
+        wait: true
+    - {se: GUI storage put down}
+    - {wait: 24}
+    - '\pf[KESTREL,neutral,,PLAYER]Kestrel: Twelve.'
+    - move:
+        who: player
+        route: [turn_right]
+        wait: true
+    - {wait: 10}
+    - 'Kestrel: She''d never. She''d NEVER. Not a city. Not children.'
+    - move:
+        who: player
+        route: [turn_down]
+        wait: true
+    - {wait: 14}
+    - '\pf[KESTREL,sad,,PLAYER]Kestrel: ...So it isn''t her. Good. That''s good. That''s what I wanted.'
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond: *id001
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: *id002
+      self: A
+  at: [0, 0]
+  story: interlude1
+- type: event
+  name: Wireless
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: $game_self_switches[[106, %EV[Lamplight (lamp room)]%, 'A']]
+      then: [The wireless. Off. It can stay off.]
+      else: ['Wireless: "...twelve... the Mandate..."']
+    trigger: action
+    move: fixed
+    cond: *id001
+  at: [2, 4]
+  story: interlude1
+- type: event
+  name: Lamplight finale
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - move:
+        who: player
+        route: [right, down, down, turn_down]
+        wait: true
+    - {wait: 20}
+    - {script: pfm_il1_boat}
+    - '\pf[KESTREL,deadpan,,PLAYER]Kestrel: Edda. Of course it''s Edda.'
+    - switch: [EDDA_SMUGGLER, true]
+    - move:
+        who: player
+        route: [up, up, up, turn_right]
+        wait: true
+    - {wait: 40}
+    - He tucks the blanket up round her. She doesn't wake. Or she lets him think she doesn't.
+    - '\pf[KESTREL,neutral,,PLAYER]Kestrel: If you''re alive, I''ll find you.'
+    - 'Kestrel: And if you''re not, I''ll find whoever said you weren''t.'
+    - move:
+        who: player
+        route:
+        - down
+        - left
+        - turn_down
+        - {se: Door exit}
+        - {opacity: 170}
+        - wait 2
+        - {opacity: 90}
+        - wait 2
+        - {opacity: 0}
+        - wait 2
+        wait: true
+    - {wait: 44}
+    - {script: 'pbSEPlay("Door enter", 80, 80)'}
+    - {wait: 50}
+    - move:
+        who: Hesper Vane
+        route: [wait 10, turn_left]
+        wait: true
+    - {wait: 16}
+    - '\pf[HESPER,sad,,Hesper Vane]Hesper: Oh, my boy. Don''t.'
+    - {wait: 30}
+    - {script: pfm_fade_out(30)}
+    - {script: pfm_il1_end}
+    - var: [CH5_STEP, 13]
+    - var: [STORY_ACT, 2]
+    - var: [STORY_CHAPTER, 6]
+    - {script: 'pfm_card(:PF_ACT1_END, "END OF ACT I")'}
+    - {script: 'pfm_card(:PF_ACT2_TITLE, "II — IMPRINTS")'}
+    - move:
+        who: player
+        route:
+        - {opacity: 255}
+        wait: true
+    - selfswitch: [A, false]
+    - transfer: {map: 182, x: 7, y: 6, dir: down}
+    - {heal: 0}
+    - {script: pfm_fade_in(40)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: *id002
+      self: A
+  at: [1, 0]
+  story: interlude1
+- type: event
+  name: Gallery W
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - if: pfm?(:il1_packed) && !pfm?(:il1_boat)
+      then:
+      - {script: 'pfm_set(:il1_boat)'}
+      - move:
+          who: player
+          route: [right, turn_down]
+          wait: true
+      - {script: 'pbSetSelfSwitch(%EV[Lamplight finale]%, "A", true)'}
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  at: [3, 8]
+  story: interlude1
+- type: event
+  name: Gallery E
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - if: pfm?(:il1_packed) && !pfm?(:il1_boat)
+      then:
+      - {script: 'pfm_set(:il1_boat)'}
+      - move:
+          who: player
+          route: [left, turn_down]
+          wait: true
+      - {script: 'pbSetSelfSwitch(%EV[Lamplight finale]%, "A", true)'}
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  at: [5, 8]
+  story: interlude1
+- type: event
+  name: Gallery N
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - if: pfm?(:il1_packed) && !pfm?(:il1_boat)
+      then:
+      - {script: 'pfm_set(:il1_boat)'}
+      - move:
+          who: player
+          route: [down, turn_down]
+          wait: true
+      - {script: 'pbSetSelfSwitch(%EV[Lamplight finale]%, "A", true)'}
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  at: [4, 7]
+  story: interlude1
 ---
 id: 107
 name: Dockmaster's House
