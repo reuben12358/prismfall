@@ -86,7 +86,86 @@ module Prismfall
       :bgm_highlight   => ["Festival - Highlights", "B2W2 212 PWT Final Round!"],
       :me_hl_start     => ["Festival highlight start", "BP Fanfare"],
       :me_hl_hit       => ["Festival highlight hit"],
-      :me_hl_result    => ["Festival highlight result", "Slots win"]
+      :me_hl_result    => ["Festival highlight result", "Slots win"],
+
+      # --- Audio v4.3 / v4.4 cue matrix (gemini_recommends/2026-11-21_audio-mastering-and-soundscape:
+      # WIRING_SPEC.md + CUTSCENE_AND_NEW_CAST_AUDIO.md 1B). Every list starts with the slot's own file
+      # (audio/manifest.tsv) and ends on a file that exists today, so a cue upgrades by dropping a file in.
+      # Battle / Layer 0 hits (CC0 pack)
+      :field_shatter   => ["Field Shatter", "Anim/Explosion"],
+      :boss_shield     => ["Boss Shield Break", "Battle damage super"],
+      :glass_quench    => ["Glass Quench", "Anim/Ice1", "Mining ping"],
+      :prism_swell     => ["Prism Arena Swell", "Anim/Flash2"],
+      :vs_lightning    => ["VS Cutin Lightning", "Anim/Thunder1", "Vs sword"],
+      :glass_shatter   => ["Glass Shatter Burst", "Field Shatter", "Anim/Explosion"],
+      :hitstop_boom    => ["Impact Hitstop Boom", "Boss Shield Break", "Battle damage super"],
+      :glitch_tear     => ["Glitch Tear Static", "Glass Quench", "Anim/Flash2"],
+      :chapter_wipe    => ["Chapter Card Prismatic Wipe", "Prism Arena Swell", "Pkmn exp full"],
+      :mirror_crack    => ["Mirror Crack", "Glass Quench", "Field Shatter"],
+      :eye_flash       => ["Ace Eye-Flash Zing", "VS Cutin Lightning", "Anim/Flash2"],
+      :rifle_crack     => ["Directorate Rifle Crack", "Beam break", "Anim/Explosion"],
+      :ring_harmonic   => ["Ring Glass Harmonic", "Glass Quench", "Mining ping"],
+      :void_implode    => ["Void Eat Bass Implosion", "Beam break", "Mining collapse"],
+      :heartbeat       => ["Heartbeat Sub-Pulse", "Battle damage normal"],
+      :ferry_horn      => ["Ferry Foghorn", "Prism Arena Swell"],
+      # Named in the Rejuv V14 cinematics spec with no file of their own yet: the nearest CC0 hit stands in
+      # (drop "Blade Pierce" / "Mask Crack" / "Bell Break" into Audio/SE to replace it).
+      :blade_pierce    => ["Blade Pierce", "Mirror Crack", "Glass Shatter Burst", "Anim/Slash"],     # dry crystalline pierce
+      :mask_crack      => ["Mask Crack", "Mirror Crack", "Glass Quench", "Anim/Ice1"],               # one razor-sharp snap
+      :bell_break      => ["Bell Break", "Glass Shatter Burst", "Field Shatter", "Anim/Explosion"],  # "every bell breaking at once"
+      # Ambience loops (the nine CC0 BGS)
+      :bgs_bleed       => ["Glassfall Bleed"],
+      :bgs_harbor      => ["Saltmere Harbor"],
+      :bgs_isenmar     => ["Wind - Isenmar"],
+      :bgs_ashkaar     => ["Lava - Ashkaar"],
+      :bgs_machinery   => ["Machinery - Zenith"],
+      :bgs_drip        => ["Drip - Nadir"],
+      :bgs_deepwood    => ["Gossamer Deepwood"],
+      # Jingles
+      :me_game_over    => ["Prismfall game over", "Voltorb Flip game over"],
+      :me_badge_get    => ["Warden Badge Get", "Badge get"],
+      :me_trial_rank   => ["Trial Rank Up", "Item get"],
+      # Cutscene music: [Phase-2 soundtrack slot (design/AUDIO_SOUNDTRACK_PLAN.md), today's manifest slot, ...].
+      # (The Gilded King has no cue here: his music is on hold.)
+      :bgm_last_ferry      => ["Intro - Last Ferry"],
+      :bgm_saltmere        => ["Town - Saltmere", "Town - Elowen"],
+      :bgm_verdance        => ["Town - Verdance", "Town - Elowen"],
+      :bgm_gloaming        => ["Town - Gloaming", "Town - Elowen"],
+      :bgm_mirefen         => ["Town - Mirefen", "Town - Nadir"],
+      :bgm_bleed_zone      => ["Dungeon - Bleed Zones", "Mood - Mystery", "Route - Antumbra"],
+      :bgm_ruins           => ["Dungeon - Ruins"],
+      :bgm_sky_tower       => ["Dungeon - Sky Tower", "Route - Zenith", "Dungeon - Deep"],
+      :bgm_drowned_aurelia => ["Dungeon - Drowned Aurelia", "Dungeon - Ruins"],
+      :bgm_cinderhorn      => ["Dungeon - Cinderhorn", "Route - Ashkaar", "Dungeon - Deep"],
+      :bgm_ashkaar_route   => ["Route - Ashkaar"],
+      :bgm_ruin_purgatorium => ["Dungeon - Distortion Core", "Route - Antumbra", "Ending - Ruin"],
+      :bgm_mood_mystery    => ["Mood - Mystery"],
+      :bgm_mood_tension    => ["Mood - Tension"],
+      :bgm_mood_farewell   => ["Mood - Farewell"],
+      :bgm_mood_hope       => ["Mood - Theme of Hope", "Mood - Emotion"],
+      :bgm_theme_hollow    => ["Theme - Hollow"],
+      :bgm_theme_meridian  => ["Theme - Meridian"],
+      :bgm_theme_accord    => ["Theme - Accord"],
+      :bgm_war_march       => ["War - Frontlines", "War - March"],
+      :bgm_mourner         => ["Battle - Mourner", "Battle Elite"],
+      :bgm_marchetti       => ["Battle - Marchetti", "Battle - Meridian Admin", "Battle Elite"],
+      :bgm_tribunal        => ["Battle - Tribunal Ambush", "Battle - Meridian Admin", "Mood - Tension"],
+      :bgm_kestrel_k8      => ["Battle - Kestrel K8", "Battle - Kestrel", "Battle Elite"],
+      :bgm_voss            => ["Battle - Voss", "Battle Champion"],
+      :bgm_valen           => ["Battle - Sovereign Valen", "Battle - Valen", "Battle Champion"],
+      :bgm_arceus          => ["Battle - Arceus", "Battle - Boss"],
+      :bgm_ruin_arceus     => ["Battle - Arceus Final", "Battle - Arceus", "Battle - Ruin"],
+      :bgm_boss_loyal_three => ["Boss - Loyal Three", "Battle - Boss"],
+      :bgm_boss_kyogre     => ["Boss - Kyogre", "Battle - Legendary", "Battle - Boss"],
+      :bgm_boss_zekrom     => ["Boss - Zekrom", "Battle - Legendary", "Battle - Boss"],
+      :bgm_boss_reshiram   => ["Boss - Reshiram", "Battle - Legendary", "Battle - Boss Final Bar"],
+      :bgm_mindscape       => ["Boss - Mindscape Nightmare", "Route - Antumbra", "Mood - Mystery"],
+      :bgm_echo_morwen     => ["Boss - Echo of Morwen", "Battle - Warden", "Dungeon - Manor"],
+      :bgm_ruin_reflection => ["Battle - Ruin Reflection", "Battle - Ruin"],
+      :bgm_ruin_dask       => ["Ruin - Archseer Dask", "Battle - Ruin"],
+      :bgm_victory_sov     => ["Victory - Sovereign", "B2W2 214 PWT Victor!", "Battle victory leader"],
+      :bgm_end_homecoming  => ["Ending - Homecoming"],
+      :bgm_end_ruin        => ["Ending - Ruin"]
     }
     # Stock sprites that stand in for Prismfall trainer types until their own
     # art exists (Graphics/Trainers/X.png and Graphics/Characters/trainer_X.png).

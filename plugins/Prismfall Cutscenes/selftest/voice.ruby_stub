@@ -1,0 +1,70 @@
+# Prismfall Cutscenes - offline check of the voice blips (014_Portraits_Voice.rb). Quick (no scenes):
+#   ruby selftest/voice.ruby_stub
+# Loads the harness (its fake RGSS + message stubs) and the plugin, then drives pbMessageDisplay with the harness's
+# own stub window (cannot report a typing position: must stay silent) and with a window that types letter by letter.
+load File.join(__dir__, "harness.ruby_stub")
+load_plugin
+VT = Prismfall::Portrait::VoiceTicker
+$checks = 0
+$fails = []
+def vcheck(name, ok, detail = nil)
+  $checks += 1
+  $fails.push(name) if !ok
+  puts "  #{ok ? 'ok  ' : 'FAIL'} #{name}#{ok ? '' : "  -> #{detail}"}"
+end
+# a message window that types `step` letters a frame
+class TypingWindow
+  attr_accessor :y, :height, :viewport, :z, :step
+  def initialize(step = 1); @y = 288; @height = 96; @viewport = nil; @z = 0; @step = step; @pos = 0; end
+  def position; @pos += @step; return @pos; end
+  def busy?; return true; end
+end
+class NoVoiceSystem; attr_accessor :pf_voice_blips; end
+voices = proc { $audio.select { |a| a[0] == :se && a[1].to_s.start_with?("Voice - ") } }
+say = proc do |win, msg|
+  $audio = []
+  $msg_frames = 40
+  pbMessageDisplay(win, msg)
+  voices.call
+end
+
+puts "== voice ticker"
+vcheck "hook installed outside the portrait hook", defined?(prismfall_voice_pbMessageDisplay) && defined?(prismfall_portrait_pbMessageDisplay)
+r = say.call(MsgWindowStub.new(288, 96, nil, 0), "\\pf[JUNO,happy]Juno: The stub window cannot type.")
+vcheck "selftest stub window: silent", r.empty?, r.inspect
+$audio = []; $msg_frames = 12
+pf_say(:JUNO, :happy, "pf_say under the selftest stub.")
+vcheck "pf_say under the stub: silent", voices.call.empty?, voices.call.inspect
+r = say.call(TypingWindow.new, "\\pf[JUNO,happy]Juno: Forty letters typed one a frame.")
+vcheck "tagged line blips in the speaker's voice", r.length.between?(8, 14) && r.all? { |a| a[1] == "Voice - Juno" }, r.inspect
+vcheck "volume and pitch stay in range", r.all? { |a| a[2] == VT::VOLUME }, r.first.inspect
+r = say.call(TypingWindow.new, "Dr. Quent: A plain name label is enough.")
+vcheck "name label picks the voice (title skipped)", !r.empty? && r.all? { |a| a[1] == "Voice - Dr Quent" || a[1] == "Voice - Quent" || a[1] == "Voice - Dr" }, r.first.inspect
+r = say.call(TypingWindow.new, "The ferry horn sounds twice. Nobody is speaking.")
+vcheck "narration: silent", r.empty?, r.inspect
+r = say.call(TypingWindow.new(60), "\\pf[JUNO,happy]Juno: Shown all at once.")
+vcheck "instant text: silent", r.empty?, r.inspect
+vcheck "player looks share one voice", VT.candidates(:PLAYER_A) == ["Player"] && VT.candidates(:PLAYER_B) == ["Player"], VT.candidates(:PLAYER_A).inspect
+vcheck "id -> file name", VT.candidates(:KESTREL).first == "Kestrel" && VT.candidates("marisol reyes").include?("Marisol"), VT.candidates("marisol reyes").inspect
+$PokemonSystem = NoVoiceSystem.new
+$PokemonSystem.pf_voice_blips = 1
+r = say.call(TypingWindow.new, "\\pf[JUNO,happy]Juno: Muted in the options.")
+vcheck "Options > Voice Blips: Off is silent", r.empty?, r.inspect
+$PokemonSystem.pf_voice_blips = 0
+r = say.call(TypingWindow.new, "\\pf[JUNO,happy]Juno: And back on.")
+vcheck "...and On plays again", !r.empty?, r.inspect
+$PokemonSystem = nil
+$opt[:audio] = false
+VT.forget_files
+r = say.call(TypingWindow.new, "\\pf[JUNO,happy]Juno: No voice file installed.")
+vcheck "missing voice file: silent, no error", r.empty? && $audio.none? { |a| a[0] == :se && a[1].to_s.start_with?("Voice") }, $audio.inspect
+$opt[:audio] = nil
+VT.forget_files
+class BrokenWindow < TypingWindow; def position; raise "boom"; end; end
+r = (say.call(BrokenWindow.new, "\\pf[JUNO,happy]Juno: A window that raises.") rescue $!)
+vcheck "an error in the ticker never reaches the message", r == [], r.inspect
+vcheck "the line was still shown", $shown.last.to_s.include?("A window that raises."), $shown.last.inspect
+
+puts
+puts "#{$checks} checks, #{$fails.length} failed."
+exit(($fails.empty?) ? 0 : 1)
