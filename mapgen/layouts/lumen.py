@@ -344,12 +344,23 @@ def build_lowlight(shattered=False):
     m.cls[41:, :] = 'x'; m.ht[41:, :] = 0
     m.cls[:, 57:] = 'x'; m.ht[:, 57:] = 0
     m.rect(0, 3, 8, 8, 'p')                                  # the landing at the foot of the Concourse steps
-    # streets: Shadow Row (11-13), Market Row (24-26), the Edge Walk (37-39); Lift Lane (6-8), Pidove Steps (44-46)
-    # blocks (doors on their bottom row) are packed with tenements and roofed over behind
+
+    # ---- 1. Sculpted Neon-Noir Street Hierarchy & Undercity Market Court (Rejuv V14 craft for 181!) ----
     E = m.events
     reserve = {(47, y) for y in range(5, 11)} | {(48, y) for y in range(5, 11)} | {(49, y) for y in range(5, 11)}
     for x, y in reserve: m.taken[y, x] = True
-    m.rect(22, 14, 14, 10, 'q')                              # Rook's crew square (an old cracked plaza)
+    if not shattered:
+        # Wet basalt main avenues cutting cleanly through the brick tenement grid (Shadow Row, Market Row, Lift Lane, Pidove Steps)
+        m.rect(8, 12, 48, 1, 'r')                            # Shadow Row wet basalt avenue
+        m.rect(1, 25, 55, 1, 'r')                            # Market Row main undercity thoroughfare
+        m.rect(1, 38, 55, 1, 'r')                            # Edge Walk overlook lane
+        m.rect(7, 11, 1, 28, 'r')                            # Lift Lane vertical avenue
+        m.rect(45, 11, 1, 28, 'r')                           # Pidove Steps vertical avenue
+        # Rook's Undercity Market Court (22..35, 14..23): dark basalt outer bazaar ring framing warm inlaid ashlar plaza!
+        m.rect(22, 14, 14, 10, 'r')
+        m.rect(24, 15, 10, 8, 'p')
+    else:
+        m.rect(22, 14, 14, 10, 'q')                          # 608 shattered keeps its original pale cracked plaza
     for x, y in ((9, 29), (10, 29), (9, 30), (10, 30), (9, 31), (10, 31)): m.taken[y, x] = True       # the lift cage
     placed = []
     placed += pack(m, 8, 46, 10, 5, PACK_LOW, seed=1)
@@ -362,29 +373,21 @@ def build_lowlight(shattered=False):
     placed += pack(m, 47, 56, 36, 27, PACK_LOW, seed=8)
     placed += pack(m, 0, 5, 23, 14, PACK_LOW, seed=9)
     placed += pack(m, 0, 5, 36, 27, PACK_LOW, seed=10)
+    # Break monotonous uniform brown tenement roofs on 181 with alternating slate-blue & weathered tin districts!
+    if not shattered:
+        slate_cells = set()
+        for (x0, y0, x1, y1) in ((8, 5, 26, 10), (36, 14, 43, 23), (11, 27, 25, 36), (47, 27, 56, 36)):
+            for yy in range(y0, y1 + 1):
+                for xx in range(x0, x1 + 1):
+                    if m.cls[yy, xx] == 'f':
+                        slate_cells.add((xx, yy))
+        m.slate = slate_cells
     for x, y in reserve: m.taken[y, x] = False
     for x, y in ((9, 29), (10, 29), (9, 30), (10, 30), (9, 31), (10, 31)): m.taken[y, x] = False
     m.put('lm_lift', 9, 29, force=True); m.over.append((1, 8, 31, P1('lm_grate')))
     door_events(m, placed, plaques=not shattered)
-    # life of the street (both states); the living street only before the Shatter
-    m.try_put('lm_noodles', 22, 14, on='q'); m.try_put('lm_cobbler', 13, 24, on='l')
-    m.try_put('lm_ladder', 37, 12, on='l')
-    m.over.append((2, 40, 24, P1('lm_wear5')))
-    for x, y in ((12, 11), (28, 11), (17, 24), (32, 24), (49, 24), (16, 37), (34, 37)):
-        if m.free(x, y, 3, 1, on='lq'): m.stamp('lm_washline', x, y)
-    lamps(m, [(16, 13), (41, 13), (55, 12), (12, 26), (52, 26), (25, 39), (42, 39), (54, 39), (3, 12), (3, 39)], name='lm_arclamp_off')
-    if not shattered:
-        m.try_put('lm_stall_a', 28, 21, on='q'); m.try_put('lm_stall_c', 32, 14, on='q'); m.try_put('lm_stall_b', 49, 37, on='l')
-        for x, y in ((24, 18), (33, 18)): m.try_put('lm_ring', x, y, on='q')
-        m.try_put('lm_cam', 30, 19, on='q')
-        m.over.append((2, 27, 19, P1('lm_cables'))); m.over.append((2, 28, 19, P1('lm_cables')))
-    else:
-        m.try_put('lm_junk0', 28, 21, on='q'); m.try_put('lm_junk3', 32, 15, on='q'); m.try_put('lm_junk0', 49, 37, on='l')
-        for x, y in ((24, 18), (33, 18)): m.try_put('lm_ring', x, y, on='q')
-    for x, y in ((54, 27), (53, 13), (5, 25)): m.try_put('lm_junk3', x, y, on='l')
-    m.try_put('lm_steam0', 20, 25, on='l'); m.try_put('lm_vent', 26, 38, on='l')
-    m.try_put('lm_junk1', 14, 38, on='l'); m.try_put('lm_junk2', 45, 38, on='l'); m.try_put('lm_junk1', 30, 12, on='l')
-    m.try_put('lm_bench', 9, 24, on='l'); m.try_put('lm_viewer', 33, 39, on='l')
+
+    # ---- 2. Reserve ALL Event Footprints FIRST so ZERO props ever collide with residents, doors, or injected junctions! ----
     if not shattered:
         for nm, at in RES_AT.items(): seat(m, 181, nm, at)
         seat(m, 181, 'Spark the Pichu', (3, 7))
@@ -394,6 +397,10 @@ def build_lowlight(shattered=False):
         seat(m, 181, 'Blackout ends', (2, 4))
         seat(m, 181, 'Service door', (48, 4)); seat(m, 181, 'Lowlight lift', (8, 30))
         E.append({'type': 'item', 'name': 'HiddenItem', 'at': [55, 38], 'item': 'CELLBATTERY', 'hidden': True})
+        # Also protect story_ch5/trial_overlay injected event coordinates on 181 (Cadence + 3 Lattice junctions)!
+        for ix, iy in ((5, 12), (7, 4), (22, 16), (6, 14)):
+            m.keep_clear.add((ix, iy))
+            for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)): m.keep_clear.add((ix + dx, iy + dy))
     else:
         for nm, at in RES_AT.items():
             g = next((gp for n, s_, d, l, gp in ST.RES if n == nm), 2)
@@ -409,8 +416,83 @@ def build_lowlight(shattered=False):
                                {'se': 'Door exit'}, {'transfer': {'map': 952, 'x': 18, 'y': 16, 'dir': 'up'}}],
                               cond={'var': ['CH5_STEP', 11]}, trigger='action'),
                          page(["The vault's service door. Directorate seals on it now."], cond={'var': ['CH5_STEP', 12]})), at=[48, 4]))
+        for y in range(4, 11):
+            E.append({'type': 'warp', 'name': 'The Veil %d' % y, 'at': [0, y], 'to': {'map': 180, 'x': 94, 'y': y + 48, 'dir': 'left'}})
+    for e in E:
+        x, y = e['at']
+        m.keep_clear.add((x, y))
+        for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)): m.keep_clear.add((x + dx, y + dy))
+
+    # ---- 3. Neon-Noir Market Court Bazaar, Street Furniture, Steam Vents, Lamps & Festoon Lights ----
+    m.try_put('lm_noodles', 22, 14, on='qrp'); m.try_put('lm_cobbler', 13, 24, on='lr')
+    m.try_put('lm_ladder', 37, 12, on='lr')
+    m.over.append((2, 40, 24, P1('lm_wear5')))
+    for x, y in ((12, 11), (28, 11), (17, 24), (32, 24), (49, 24), (16, 37), (34, 37)):
+        if m.free(x, y, 3, 1, on='lqrp'): m.stamp('lm_washline', x, y)
+
+    if not shattered:
+        # Bustling Undercity Market Court stalls, kiosk, benches, planters & broadcast rig (ZERO blank sand-box!)
+        m.try_put('lm_stall_a', 28, 21, on='pqr')
+        m.try_put('lm_stall_c', 32, 14, on='pqr')
+        m.try_put('lm_stall_b', 22, 21, on='pqr')
+        m.try_put('lm_kiosk', 33, 21, on='pqr')
+        m.try_put('lm_stall_b', 49, 37, on='lr')
+        m.try_put('lm_planter', 26, 14, on='pqr'); m.try_put('lm_planter', 29, 14, on='pqr')
+        m.try_put('lm_bench', 23, 19, on='pqr'); m.try_put('lm_bench', 34, 19, on='pqr')
+        m.try_put('lm_holo', 35, 16, on='pqr')
+        for x, y in ((24, 18), (33, 18)): m.try_put('lm_ring', x, y, on='pqr')
+        m.try_put('lm_cam', 30, 19, on='pqr')
+        m.over.append((2, 27, 19, P1('lm_cables'))); m.over.append((2, 28, 19, P1('lm_cables')))
+
+        # Upper-Spire NW Transit Overlook dressing (0..7, 0..10): warm balustrade, planters, bench & glowing lamps!
+        m.try_put('lm_planter', 1, 1, on='p'); m.try_put('lm_planter', 4, 1, on='p')
+        m.try_put('lm_bench', 5, 9, on='p')
+        m.try_put('lm_news', 6, 6, on='p')
+        lamps(m, [(1, 3), (6, 3)], name='lm_arclamp')
+
+        # Warm glowing Neon-Noir streetlamps at key plazas/intersections + gritty dim lamps in deep back-alleys!
+        lit_lamps = [(25, 15), (31, 15), (26, 23), (32, 23), (12, 26), (44, 26), (8, 33), (25, 39), (42, 39), (47, 10)]
+        dim_lamps = [(16, 13), (41, 13), (55, 12), (52, 26), (54, 39), (3, 12), (3, 39)]
+        lamps(m, lit_lamps, name='lm_arclamp')
+        lamps(m, dim_lamps, name='lm_arclamp_off')
+
+        # Cozy pocket benches, newsstands, planters & steam stacks breaking up long streets
+        m.try_put('lm_bench', 19, 13, on='lr'); m.try_put('lm_bench', 37, 26, on='lr')
+        m.try_put('lm_bench', 27, 39, on='lr'); m.try_put('lm_news', 38, 13, on='lr')
+        m.try_put('lm_planter', 41, 26, on='lr'); m.try_put('lm_planter', 18, 39, on='lr')
+        m.try_put('lm_holo', 46, 26, on='lr'); m.try_put('lm_holo', 9, 26, on='lr')
+        m.try_put('lm_steam0', 20, 25, on='lr'); m.try_put('lm_steam1', 46, 9, on='lr')
+        m.try_put('lm_steam0', 10, 32, on='lr'); m.try_put('lm_steam1', 35, 25, on='lr')
+        m.try_put('lm_vent', 26, 38, on='lr'); m.try_put('lm_vent', 44, 13, on='lr'); m.try_put('lm_vent', 15, 26, on='lr')
+
+        # Overhead neon festival string-lights (lm_bulbs0..2) strictly over open walkable streets (zero passguard hits!)
+        for bx in list(range(23, 35, 2)) + [10, 12, 14, 38, 40, 42, 48, 50, 52]:
+            for by in (14, 23) if 23 <= bx <= 34 else (24,):
+                if m.cls[by, bx] in 'lqrp' and not m.taken[by, bx] and (bx, by) not in m.keep_clear:
+                    m.over.append((2, bx, by, P1('lm_bulbs%d' % (bx % 3))))
+
+        # Brass Art-Deco conduit inlays framing Rook's Market Court & NW Transit Overlook!
+        inlay_pts = set()
+        for x in range(25, 32):
+            inlay_pts.add((x, 15)); inlay_pts.add((x, 21))
+        for y in range(15, 22):
+            inlay_pts.add((25, y)); inlay_pts.add((31, y))
+        for y in range(3, 10):
+            inlay_pts.add((4, y))
+        for x in range(1, 7):
+            inlay_pts.add((x, 3)); inlay_pts.add((x, 9))
+        m.inlay([pt for pt in sorted(inlay_pts) if m.cls[pt[1], pt[0]] in 'pq' and not m.taken[pt[1], pt[0]]])
+
+        # Warm glowing streetlamp halos (pf_glow, pri=5, pas=0) bathing Market Court, Service Door, Lift & Nadir Abyss!
+        for gx, gy in ((27, 17), (28, 17), (24, 14), (31, 14), (25, 22), (31, 22),
+                       (47, 4), (8, 30), (12, 25), (44, 25), (24, 38), (41, 38), (3, 6),
+                       (57, 12), (57, 24), (23, 41), (37, 41)):
+            m.stamps.append(('pf_glow', gx, gy))
+    else:
+        lamps(m, [(16, 13), (41, 13), (55, 12), (12, 26), (52, 26), (25, 39), (42, 39), (54, 39), (3, 12), (3, 39)], name='lm_arclamp_off')
+        m.try_put('lm_junk0', 28, 21, on='q'); m.try_put('lm_junk3', 32, 15, on='q'); m.try_put('lm_junk0', 49, 37, on='l')
+        for x, y in ((24, 18), (33, 18)): m.try_put('lm_ring', x, y, on='q')
         rng = random.Random(608)
-        # Cataclysmic diagonal Plate Vault Bleed shockwave radiating SW from Service Door (48, 4) across Pidove Steps & Rook's Plaza
         rift_pts = [(48, 5), (47, 7), (46, 9), (45, 11), (43, 12), (40, 12), (37, 13),
                     (34, 15), (32, 17), (30, 19), (27, 21), (24, 23), (21, 25), (18, 25)]
         for rx, ry in rift_pts:
@@ -425,7 +507,6 @@ def build_lowlight(shattered=False):
                         m.over.append((2, xx, yy, P1('lm_bleed%d' % ((xx * 3 + yy) % 3))))
                     elif dist == 1 and rng.random() < 0.72:
                         m.over.append((2, xx, yy, P1('lm_bleed%d' % rng.randrange(3))))
-        # Erupting violet/teal Bleed crystal clusters framing the Vault alley & shattered square corners (strictly off paths/events!)
         for cx, cy, nm in ((49, 8, 'cr_teal_c'), (46, 10, 'cr_purple_c'),
                            (35, 14, 'cr_purple_c'), (35, 23, 'cr_teal_c'), (22, 23, 'cr_purple_c'),
                            (23, 15, 'cr_teal_c'), (31, 16, 'cr_purple_c'), (26, 22, 'cr_purple_c'),
@@ -437,26 +518,105 @@ def build_lowlight(shattered=False):
                 if m.cls[y, x] in 'lpq' and not m.taken[y, x] and rng.random() < 0.14 and (x, y) not in m.keep_clear:
                     m.over.append((2, x, y, P1('lm_bleed%d' % rng.randrange(3))))
         for y in range(3, 11): m.over.append((2, 0, y, P1('lm_veil%d' % (y % 3))))
-        for y in range(4, 11):                                # back through the Veil to the Concourse's terrace
-            E.append({'type': 'warp', 'name': 'The Veil %d' % y, 'at': [0, y], 'to': {'map': 180, 'x': 94, 'y': y + 48, 'dir': 'left'}})
-    for e in E:
-        x, y = e['at']
-        m.keep_clear.add((x, y))
-        for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)): m.keep_clear.add((x + dx, y + dy))
+        m.try_put('lm_steam0', 20, 25, on='l'); m.try_put('lm_vent', 26, 38, on='l')
+
+    for x, y in ((54, 27), (53, 13), (5, 25)): m.try_put('lm_junk3', x, y, on='lr')
+    m.try_put('lm_junk1', 14, 38, on='lr'); m.try_put('lm_junk2', 45, 38, on='lr'); m.try_put('lm_junk1', 30, 12, on='lr')
+    m.try_put('lm_bench', 9, 24, on='lr'); m.try_put('lm_viewer', 33, 39, on='lr')
+
+    # ---- 4. Abyssal Nadir Edge Landmarks (Towering Spire Pylons, Induction Rings & Brass Overlook Railings on 181!) ----
+    if not shattered:
+        def abyss_piece(name, x, y):
+            st = STAMPS[name]; h, w = st['h'], st['w']
+            for dy in range(h):
+                for dx in range(w):
+                    for z in (1, 2):
+                        t = st['layers'][z][dy][dx]
+                        if t and m.inb(x + dx, y + dy):
+                            m.over.append((z, x + dx, y + dy, t))
+        for py in (6, 17, 29):
+            abyss_piece('lm_pylon', 58, py)
+        for ry in (12, 24, 36):
+            abyss_piece('lm_ring', 58, ry)
+        for rx in (10, 23, 37, 50):
+            abyss_piece('lm_ring', rx, 42)
+        abyss_piece('lm_steam0', 57, 14); abyss_piece('lm_steam1', 57, 26); abyss_piece('lm_steam0', 29, 42)
+        for x in range(1, 7):
+            m.over.append((1, x, 2, P1('lm_bollard' if x in (1, 6) else 'lm_railing_m')))
+        for x in range(2, 56, 4):
+            if x not in (33,):
+                m.over.append((1, x, 40, P1('lm_bollard')))
+                if x + 1 < 56: m.over.append((1, x + 1, 40, P1('lm_railing_w')))
+                if x + 2 < 56: m.over.append((1, x + 2, 40, P1('lm_railing_m')))
+                if x + 3 < 56: m.over.append((1, x + 3, 40, P1('lm_railing_e')))
+
     scatter_wear(m, 6, on='lq', seed=2, kinds=(0, 1, 2))
     m.paint()
-    # Ground Rook's marble plaza (22..35, 14..23) & NW Concourse landing (0..7, 3..10) with crisp walkable slate kerbs
-    kN, kS, kE, kW = P1('lm_kerbN'), P1('lm_kerbS'), P1('lm_kerbE'), P1('lm_kerbW')
-    for x in range(22, 36):
-        if m.L[1, 14, x] == 0: m.L[1, 14, x] = kN
-        if m.L[1, 23, x] == 0: m.L[1, 23, x] = kS
-    for y in range(15, 23):
-        if m.L[1, y, 22] == 0: m.L[1, y, 22] = kW
-        if m.L[1, y, 35] == 0: m.L[1, y, 35] = kE
+
+    # ---- 5. Post-Paint Architectural Surface Craft (Moody Obsidian Market Court, 5x5 Sunburst, Crimson Spire Overlook!) ----
+    if not shattered:
+        walkable_base = {0, P1('lm_road0'), P1('lm_road1'), P1('lm_low0'), P1('lm_low1'), P1('lm_low2'), P1('lm_low3'),
+                         P1('lm_pave0'), P1('lm_pave1'), P1('lm_pave2'), P1('lm_pave3'), P1('lm_pave4'), P1('lm_pave5'), P1('lm_pave6'), P1('lm_pave7')}
+        # Tame the pale center square: dark basalt/obsidian bazaar perimeter surrounding a sculpted warm octagonal Sunburst Court!
+        for y in range(14, 24):
+            for x in range(22, 36):
+                in_inner = (25 <= x <= 31 and 15 <= y <= 21) and (x, y) not in {(25, 15), (31, 15), (25, 21), (31, 21)}
+                if not in_inner and m.L[1, y, x] in walkable_base:
+                    t = P1('Z_f0') if (x in (24, 32) or y in (14, 22)) else P1('lm_road%d' % ((x + y) & 1))
+                    m.L[0, y, x] = t; m.L[1, y, x] = t
+        # 5x5 Golden Meridian Sunburst Medallion (lm_sun) centered under Rook's Undercity Broadcast Stage (26..30, 16..20)!
+        sun_L = STAMPS['lm_sun']['layers'][0]
+        for dy in range(5):
+            for dx in range(5):
+                t = sun_L[dy][dx]
+                if t:
+                    m.L[0, 16 + dy, 26 + dx] = t
+                    m.L[1, 16 + dy, 26 + dx] = t
+        # NW Upper-Spire Transit Overlook: sleek dark obsidian perimeter border + royal crimson arrival carpet (2..4, 4..8)!
+        for y in range(0, 11):
+            for x in range(0, 8):
+                if (x in (0, 7) or y in (0, 1, 10)) and m.L[1, y, x] in walkable_base:
+                    m.L[0, y, x] = P1('Z_f0'); m.L[1, y, x] = P1('Z_f0')
+        for y in range(4, 9):
+            for x in (2, 3, 4):
+                if m.L[1, y, x] in walkable_base:
+                    part = ('n' if y == 4 else 's' if y == 8 else '') + ('w' if x == 2 else 'e' if x == 4 else '')
+                    t = P1('lm_carpet_' + (part or 'c'))
+                    m.L[0, y, x] = t; m.L[1, y, x] = t
+        # Clandestine Spire Service Door Alley (47..49, 5..10): obsidian deck + central glowing conduit grates!
+        for y in range(5, 11):
+            for x in (47, 48, 49):
+                t = P1('lm_grate') if x == 48 else P1('Z_f0')
+                m.L[0, y, x] = t
+                if m.L[1, y, x] in walkable_base:
+                    m.L[1, y, x] = t
+        # Industrial drainage grates along wet basalt avenues, Lift Plaza & NW Concourse step-down!
+        for gx, gy in [(7, 12), (7, 25), (7, 30), (8, 30), (7, 32), (8, 32),
+                       (18, 25), (28, 25), (38, 25), (45, 12), (45, 25), (45, 38),
+                       (20, 12), (35, 12), (48, 12), (28, 38), (3, 10), (4, 10), (5, 10)]:
+            if (gx, gy) not in m.keep_clear or (gx, gy) in ((8, 30), (48, 12), (45, 25)):
+                if m.L[1, gy, gx] in walkable_base:
+                    m.L[0, gy, gx] = P1('lm_grate'); m.L[1, gy, gx] = P1('lm_grate')
+        # Rooftop skylight & vent details breaking up flat tenement roofs (placed on Layer 1 under solid Layer 2 roofs!)
+        rng_r = random.Random(1819)
+        for yy in range(5, 36):
+            for xx in range(1, 56):
+                if m.cls[yy, xx] == 'f' and m.L[1, yy, xx] == 0 and rng_r.random() < 0.045:
+                    m.L[1, yy, xx] = P1('lm_grate_off')
+    else:
+        kN, kS, kE, kW = P1('lm_kerbN'), P1('lm_kerbS'), P1('lm_kerbE'), P1('lm_kerbW')
+        for x in range(22, 36):
+            if m.L[1, 14, x] == 0: m.L[1, 14, x] = kN
+            if m.L[1, 23, x] == 0: m.L[1, 23, x] = kS
+        for y in range(15, 23):
+            if m.L[1, y, 22] == 0: m.L[1, y, 22] = kW
+            if m.L[1, y, 35] == 0: m.L[1, y, 35] = kE
+    kS, kE = P1('lm_kerbS'), P1('lm_kerbE')
     for x in range(1, 8):
         if m.L[1, 10, x] == 0: m.L[1, 10, x] = kS
     for y in range(3, 10):
         if m.L[1, y, 7] == 0 and (7, y) not in m.keep_clear: m.L[1, y, 7] = kE
+
     sd = STAMPS['lm_sdoor']['layers']
     m.L[2, 3, 48] = next(sd[z][0][0] for z in range(3) if sd[z][0][0]); m.L[2, 4, 48] = next(sd[z][1][0] for z in range(3) if sd[z][1][0])
     m.seal_edges([('W', 4, 7)], filler=P1('lm_bollard'), sides='W')

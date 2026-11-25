@@ -179,6 +179,9 @@ class Hall:
     def write(self, mid, event_cells=()):
         os.makedirs(os.path.join(HERE, 'data', 'raw'), exist_ok=True)
         rel = 'data/raw/%03d.npy' % mid
+        if mid in (131, 154):
+            import halls_craft
+            halls_craft.apply_craft(mid, self.L)
         import passguard                      # map builder 11: no decoration may make a solid tile walkable
         passguard.guard(self.L, TID, event_cells, 'map %d' % mid)
         np.save(os.path.join(HERE, rel), self.L)

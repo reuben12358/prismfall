@@ -1,8 +1,10 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-174	Prismfall.gym_battle(pfm_gym(:LEADER_MARISOL), double: false)
-190	:ENGINEER, "Volta"
-191	:SCIENTIST, "Faraday"
-191	:SUPERNERD, "Ohm"
-192	:ENGINEER, "Kirch"
-192	:ENGINEER, "Tesla"
-192	:ROCKER, "Amp"
+131	:BUGCATCHER, "Nell"
+131	:GENTLEMAN, "Bram"
+131	:LASS, "Orla"
+131	Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)
+154	:BEAUTY, "Rosalind"
+154	:JUGGLER, "Ambrose"
+154	:JUGGLER, "Florian"
+154	Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)
+546	:CHANNELER, "Mireille"

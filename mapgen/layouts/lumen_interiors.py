@@ -68,16 +68,37 @@ def write(m, mid, name, parent, fn, **kw):
 
 # ============================================================================================ 582 Lumen West Gate
 def build_582():
+    from cavekit import PIT
+    # Sculpted Grand Meridian West Gate Checkpoint (exact architectural sibling to 185 Lobby & 186 Gala Hall!):
+    #   MASS  -> cvY cream-and-mahogany Spire wainscoted walls with chamfered SE vestibule & recessed Arc-Lamp portal
+    #   PIT   -> twin vertical starry security light-well shafts (x=1 & x=15, y=3..7) with glowing Lattice holo totems!
+    #   FLOOR -> warm cream Meridian limestone (lm_plaza), pale ashlar (lm_pave), obsidian gallery border, glowing
+    #            brass-cyan inlays (lm_inlay_*), royal crimson arrival carpet & overhead chandelier + scanner spotlight!
     m = room(17, 13, 'Y', 582)
-    m.box(1, 3, 15, 11); m.box(7, 12, 9, 12)
+    m.kit = {FLOOR: 'cvY', 'default': 'cvY'}
+
+    # ---- 1. Sculpt the Black Void: Asymmetric Security Foyer + Twin Starry Security Light-Well Shafts ----
+    m.box(1, 3, 15, 11, FLOOR, '.')
+    m.box(7, 12, 9, 12, FLOOR, '.')
+    # Sculpt chamfered SE corner (leaving SW (1,11) Arc-Lamp Mile portal wide open as a recessed gateway alcove!)
+    m.mass_at([(14, 11), (15, 11), (15, 10)])
+    # Twin vertical starry security light-well shafts flanking the upper inspection bay (fuses cleanly with y=8 railing!)
+    m.box(1, 3, 1, 7, PIT, 'p')
+    m.box(15, 3, 15, 7, PIT, 'p')
     m.plan_cliffs(rows=3)
-    # Forged brass security checkpoint railing & bollards along y=8 (replacing yellow lm_bars_*)
-    for x in range(1, 16):
+
+    # Forged brass security checkpoint railing & bollards along y=8 (x=2..14, ONLY (8,8) crosses!)
+    for x in range(2, 15):
         if x == 8:
             continue
-        t = 'lm_bollard' if x in (1, 7, 9, 15) else 'lm_railing_w' if x in (2, 10) else 'lm_railing_e' if x in (6, 14) else 'lm_railing_m'
+        t = 'lm_bollard' if x in (2, 7, 9, 14) else 'lm_railing_w' if x in (3, 10) else 'lm_railing_e' if x in (6, 13) else 'lm_railing_m'
         m.over.append((1, x, 8, P1(t)))
-    m.keep_clear |= {(x, 8) for x in range(1, 16)} | {(8, y) for y in range(5, 13)} | {(3, 5), (3, 6), (12, 5), (12, 6), (6, 9), (6, 10), (7, 9)}
+    m.keep_clear |= ({(x, 8) for x in range(1, 16)}
+                     | {(8, y) for y in range(5, 13)}
+                     | {(3, 5), (3, 6), (12, 5), (12, 6), (6, 9), (6, 10), (7, 9), (7, 10), (9, 10),
+                        (1, 11), (2, 11), (3, 11), (1, 10), (2, 10), (1, 9), (2, 9)})
+
+    # ---- 2. Events (100% Exit, Arc-Lamp Mile warp, Scanner cutscene, Meridian Security, Gate board & Brass tube exact!) ----
     scan = [N('Meridian Security', "Lumen West Gate. Hand on the plate, please. Tint check. It's the anniversary; we're being thorough."),
             "(Juno puts her hand on the plate. A chime. The bar glows green.)",
             N('Meridian Security', "Meadow tint, Verdance. Welcome."),
@@ -102,33 +123,77 @@ def build_582():
           at(sign('Brass tube', "A brass speaking tube, polished by a lot of nervous hands.", post=False), 12, 5)]
     for x, n in ((4, 'l'), (5, 'm'), (11, 'm'), (12, 'r')): m.over.append((1, x, 10, P1('lm_counter_' + n)))
     m.over.append((1, 9, 9, P1('lm_lamp_on')))
-    # Grand civic north bulkhead: centered Meridian banner, security telemetry monitors, alarms, & anniversary posters
+
+    # ---- 3. Twin Starry Security Light-Well Hardware (Glowing Lattice Holo Totems inside PIT!) ----
+    def abyss_piece(name, x, y):
+        st = STAMPS[name]; h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t and m.inb(x + dx, y + dy):
+                        m.over.append((z, x + dx, y + dy, t))
+    abyss_piece('lm_holo', 1, 5)
+    abyss_piece('lm_holo', 15, 5)
+
+    # ---- 4. Grand Civic North Bulkhead ----
     hang(m, 'lm_banner', 8, 3)
     hang(m, 'lm_monitors', 2, 3); hang(m, 'lm_monitors', 13, 3)
     on_faces(m, 'lm_alarm_on', [(4, 4), (12, 4)])
     on_faces(m, 'lm_poster0', [(5, 4), (11, 4)])
     on_faces(m, 'lm_poster2', [(6, 4), (10, 4)])
-    m.keep_clear |= {(1, 11), (2, 11), (1, 10)}
+
+    # ---- 5. Sculpted Checkpoint Furnishings, Display Cases, Planters, Benches & Overhead Lighting ----
     for name, x, y in (
-        ('lm_pillar', 1, 5), ('lm_pillar', 15, 5),
         ('lm_case', 5, 5), ('lm_case', 10, 5),
-        ('lm_plant', 2, 6), ('lm_plant', 14, 6),
-        ('lm_bench', 3, 11), ('lm_bench', 13, 11),
+        ('lm_table', 4, 5), ('lm_table', 13, 5),
+        ('lm_plant', 13, 9),
+        ('lm_bench', 5, 11), ('lm_bench', 10, 11),
+        ('lm_bollard', 10, 9),
     ):
         put_if(m, name, x, y)
+    # Overhead sparkling crystal chandelier & warm spotlight shaft illuminating the Tint Scanner Plate (8,9)!
+    m.stamps.append(('lm_chand', 7, 5))
+    m.stamps.append(('cv_shaft', 7, 7))
+    m.stamps.append(('pf_glow', 7, 8))
+    m.stamps.append(('pf_glow', 8, 8))
+
     m.paint()
-    # Clean emerald-and-cream checkerboard marble floor (strip noisy Y_f3 horizontal streaks)
-    y_f0, y_f2, y_f3 = P1('Y_f0'), P1('Y_f2'), P1('Y_f3')
+
+    # ---- 6. Post-Paint Grand Meridian Marble Floor Craft (ZERO blinding teal checkerboard!) ----
+    deeps = [P1('lm_deep%d' % i) for i in range(6)]
+    paves = [P1('lm_pave%d' % i) for i in range(4)]
+    plazas = [P1('lm_plaza0'), P1('lm_plaza1')]
     for yy in range(m.H):
         for xx in range(m.W):
-            if m.L[0, yy, xx] == y_f3:
-                m.L[0, yy, xx] = y_f2 if ((xx + yy) & 1) else y_f0
-    # Ceremonial crimson-and-brass arrival carpet runner from exit (8,12) through Scanner (8,9) & checkpoint (8,8) to north hall
+            if m.cls[yy, xx] == 'p':
+                m.L[0, yy, xx] = deeps[(xx * 7 + yy * 13) % len(deeps)]
+            elif m.cls[yy, xx] == '.':
+                perim = (xx <= 3 or xx >= 13 or yy == 5 or yy == 11)
+                m.L[0, yy, xx] = paves[(xx * 3 + yy * 5) % 4] if perim else plazas[(xx + yy) & 1]
+
+    # Sleek obsidian gallery trim framing the south checkpoint wings & glowing brass-cyan inlays!
+    for xx in (3, 4, 5, 6, 10, 11, 12, 13):
+        if m.cls[11, xx] == '.':
+            m.L[0, 11, xx] = P1('Z_f0')
+    for xx in (4, 5, 6, 10, 11, 12):
+        if m.cls[7, xx] == '.':
+            m.L[0, 7, xx] = P1('lm_inlay_h')
+        if m.cls[9, xx] == '.' and xx not in (6, 10):
+            m.L[0, 9, xx] = P1('lm_inlay_h')
+    for ix, iy, k in ((3, 7, 'se'), (13, 7, 'sw'), (3, 9, 'ne'), (13, 9, 'nw')):
+        if m.cls[iy, ix] == '.':
+            m.L[0, iy, ix] = P1('lm_inlay_' + k)
+
+    # Ceremonial crimson-and-brass arrival carpet runner from Exit (8,12) through Scanner (8,9) & Gate (8,8) to north hall!
     for yy in range(5, 13):
         for xx in (7, 8, 9):
             part = ('n' if yy == 5 else 's' if yy == 12 else '') + ('w' if xx == 7 else 'e' if xx == 9 else '')
             m.L[0, yy, xx] = P1('lm_carpet_' + (part or 'c'))
-    write(m, 582, 'Lumen West Gate', 180, '582_lumen_west_gate.yaml', bgm='Cedolan City',
+    # Subtle steel grate pad right under the Tint Scanner plate (8,9) & West Gate threshold (1..2, 11)
+    m.L[0, 11, 1] = P1('lm_grate'); m.L[0, 11, 2] = P1('lm_grate')
+
+    write(m, 582, 'Lumen West Gate', 180, '582_lumen_west_gate.yaml', bgm='Cedolan City', tone=[4, 0, -4, 8],
           metadata={'MapPosition': [0, 16, 16], 'SnapEdges': True})
 
 

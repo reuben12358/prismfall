@@ -87,6 +87,7 @@ module PrismfallMaps
     577 => [-6, -2, 10, 10],   # Frostwick Pass
     578 => [-12, -8, 8, 16],   # Rimewood Path
     579 => [-12, -8, 8, 16],   # The Wolfsrime
+    582 => [4, 0, -4, 8],   # Lumen West Gate
     608 => [-40, -50, 10, 60],   # The Lowlight (Shattered)
     920 => [10, 6, 14, 10],   # The Rimed Sands
     924 => [18, 4, -10, 10],   # Ashkaar Siege Camp
