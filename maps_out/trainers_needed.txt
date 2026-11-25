@@ -1,6 +1,3 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-170	:FISHERMAN, "Gunnar"
-171	:SWIMMER_F, "Ingrid"
-172	:FISHERMAN, "Oskar"
-172	:SWIMMER_M, "Leif"
-173	:SAILOR, "Bjorn"
+145	:HOLLOW_GRUNT_M, "Grunt", :HOLLOW_GRUNT_F, "Grunt"
+145	:OCTAVE_VESPER, "Vesper", 0, :OCTAVE_SINGER, "Lyra", 0

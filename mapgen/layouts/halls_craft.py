@@ -357,20 +357,539 @@ def build_154(save=True):
     return h.L
 
 
+# ============================================================================================ 130 Loomhouse Gym - Lobby
+def build_130(save=True):
+    """Wave 7 Rejuvenation V14 sculpt of Map 130 (Loomhouse Gym - Lobby, 20x16, Tileset 54).
+    Living Elder-Tree Weaver's Guildhall seamlessly unified with Wave 4's 131 Canopy:
+      - Void-sculpted SW/SE foyer chamfers & recessed entry vestibule around Exit (9, 15)
+      - Living Elder-Tree bark archway (bark_18036..18055), cobwebs, silk cocoons & canopy sunbeam
+        framing Up into the tree @ (15, 4)
+      - Mother Loom's 2x2 gold-framed Portrait (2908..2917) above Portrait @ (8, 5) & authentic
+        First loom right on (5..6, 7..8)
+      - Grand Briarwick crimson-gold woven silk tapestry runner (MI 1040..1058) sweeping past
+        Gym guide (7, 13), Tamsin (10, 9 -> walks UP to 10, 6!) & Weaver Tibb (13, 8) to the stair
+      - Cozy weaver looms, dye vats, silk bales, tall lanterns, woodland ferns & mossy clover tufts!
+    """
+    W, H = 20, 16
+    g = [['#'] * W for _ in range(H)]
+    for y in range(2, 6):
+        for x in range(1, 19):
+            g[y][x] = 'W'
+    for y in range(6, 15):
+        for x in range(1, 19):
+            g[y][x] = '.'
+    # Sculpted void chamfers along SW & SE foyer corners (zero flat box!)
+    for vx, vy in ((1, 14), (2, 14), (17, 14), (18, 14)):
+        g[vy][vx] = '#'
+    # Recessed south entry vestibule around Exit @ (9, 15)
+    for x in (8, 9, 10):
+        g[15][x] = '.'
+    # Elder-tree stairwell ascending Up into the tree @ (15, 4)
+    g[4][15] = 'S'
+    g[5][15] = 'S'
+
+    rows = [''.join(r) for r in g]
+    cls = {'#': 'void', 'W': 'wall', '.': 'floor', 'S': 'stair'}
+    h = K.Hall(rows, 'loom', cls, seed=130)
+    rnd = h.r
+
+    # ---- 1. Living Elder-Tree Bark Frame Around the Canopy Stairwell (14..16, 2..5) & SW/SE Buttresses! ----
+    BARK_HI = [CU('bark_%d' % t) for t in (18036, 18037, 18038, 18039)]
+    BARK = [CU('bark_%d' % t) for t in (18044, 18045, 18046, 18047)]
+    BARK_LO = [CU('bark_%d' % t) for t in (18052, 18053, 18054, 18055)]
+    for y in range(2, 6):
+        for x in (14, 15, 16):
+            if (x, y) in ((15, 4), (15, 5)):
+                continue
+            h.put(rnd.choice(BARK_HI if y == 2 else BARK_LO if y == 5 else BARK), x, y, 0)
+    # Warm timber deck under the stair steps (15, 4..5)
+    h.put(MI(1242), 15, 4, 0); h.put(MI(962), 15, 4, 1)
+    h.put(MI(1241), 15, 5, 0); h.put(MI(962), 15, 5, 1)
+    # Cascading woven canopy web & hanging silk cocoons crowning the Elder-Tree stair arch!
+    h.obj('web', 14, 2)
+    h.put(CU('cocoon_top'), 14, 4, 2); h.put(CU('cocoon_bot'), 14, 5, 2)
+    h.put(CU('strand_p_top'), 16, 4, 2); h.put(CU('strand_p_bot'), 16, 5, 2)
+
+    # ---- 2. Tall Arched Woodland Windows, Floor-to-Ceiling Bookcases & Mother Loom's Framed Portrait! ----
+    for x0 in (3, 10):
+        h.put(CU('window_top_0'), x0, 2, 1); h.put(CU('window_top_1'), x0 + 1, 2, 1)
+        h.put(CU('window_mid_0'), x0, 3, 1); h.put(CU('window_mid_1'), x0 + 1, 3, 1)
+        h.put(CU('window_sill_0'), x0, 4, 1); h.put(CU('window_sill_1'), x0 + 1, 4, 1)
+    h.obj('shelf', 1, 2)
+    h.obj('shelf', 17, 2)
+
+    # Mother Loom's 2x2 Gold-Framed Portrait (2908..2917) mounted cleanly at (7..8, 3..4) directly above Portrait @ (8, 5)!
+    h.block([[2908, 2909], [2916, 2917]], 7, 3, 1)
+    # Silk-bolt guild ribbon & brass plaque under Portrait @ (8, 5) + Apology card pin-note @ (12, 5)
+    h.put(CU('bolt_r'), 6, 5, 1); h.put(CU('bolt_b'), 7, 5, 1); h.put(CU('bolt_y'), 8, 5, 1)
+    h.put(CU('paste_1_1'), 12, 4, 1)   # Pinned apology notice card right above Apology card @ (12, 5)!
+
+    # ---- 3. Grand Briarwick Crimson-Gold Woven Silk Tapestry Runner (Matches 131 Canopy!) ----
+    # Sweeps from Exit (9, 15) straight up x=8..10, y=6..14 (under Tamsin @ (10,9) and her full UP walk (10,6..9)!)
+    # and joins a horizontal stair-approach tapestry runner (x=11..15, y=6..7) leading to Up into the tree (15, 4)!
+    put_mi_rug(h, 8, 6, 10, 14, z=1)
+    # Smoothly connect horizontal silk runner arm from x=10..15, y=6..7 (seamless crimson weave!)
+    for y in (6, 7):
+        for x in range(11, 16):
+            if y == 6:
+                t = MI(1042) if x == 15 else MI(1041)
+            else:
+                t = MI(1058) if x == 15 else MI(1057)
+            h.put(t, x, y, 1)
+    # Seam corner at (10, 6..7) so the L-turn reads as one unbroken woven carpet!
+    h.put(MI(1041), 10, 6, 1)
+    h.put(MI(1049), 10, 7, 1)
+    # Entry doormat at (8..10, 15)
+    h.obj('mat_mi', 8, 15)
+
+    # Subtle decorative parquet inlays on open timber planks
+    for y in range(6, 15):
+        for x in range(1, 19):
+            if rows[y][x] == '.' and h.L[1, y, x] == 0 and (x + y) % 5 == 0 and 2 <= x <= 17:
+                h.put(MI(1224), x, y, 0)
+
+    # ---- 4. Authentic Weaving Workshops: Mother Loom's First Loom (6, 7), Apprentice Looms, Silk & Dye Vats! ----
+    # Mother Loom's First Loom placed right at (5..6, 7..8) so First loom @ (6, 7) IS the actual loom!
+    # Keep (7, 6..14), (6, 6), (4, 7..8), (5..6, 9) open so player can inspect it from any side!
+    h.obj('loom', 5, 7)
+    h.obj('loom', 2, 7)                # Twin historic west guild loom (2..3, 7..8)
+    # Lower west artisan nook: one loom (2..3, 11..12) + spun silk & wicker basket beside it
+    h.obj('loom', 2, 11)
+    h.put(CU('basket'), 5, 11, 1)
+    h.put(CU('spool'), 5, 12, 1)
+    h.obj('silk1', 1, 6)               # Fresh silk bale beside west bookcase
+
+    # East Workshop: Weaver Tibb @ (13, 8) beside finished cloth inspection rack (12..14, 9..10),
+    # apprentice looms (14..15, 11..12) & (16..17, 11..12), dye vats (12..14, 13), & silk bales!
+    # Keep Item (POTION) @ (17, 7) cleanly accessible via (16..17, 6..7) & (15..16, 7..8)!
+    h.obj('awning', 12, 9)
+    h.obj('laundry', 12, 10)
+    h.obj('loom', 14, 11)
+    h.obj('loom', 16, 11)
+    h.obj('vat_b', 12, 13); h.obj('vat_r', 13, 13); h.obj('vat_y', 14, 13)
+    h.obj('silk', 18, 8)               # Stacked silk bales on east wall (18, 8..9), clear of Item @ (17, 7)!
+    h.put(CU('basket'), 18, 6, 1)
+
+    # ---- 5. Warm Hanging Lanterns, Potted Woodland Ferns, Moss Clover & Dappled Canopy Sunbeams! ----
+    # Complete 1x3 hanging lanterns anchored cleanly against side walls & foyer (ZERO blocked paths!)
+    h.obj('lantern', 1, 8)             # West wall lantern (1, 8..10)
+    h.obj('lantern', 18, 10)           # East wall lantern (18, 10..12)
+    h.obj('lantern', 7, 10)            # Foyer lantern framing Gym guide (7, 13) -> base at (7, 12)!
+    # Wait: keep (7, 12) open right above Gym guide (7, 13) so player can approach Gym guide from north too!
+    h.put(0, 7, 10, 2); h.put(0, 7, 11, 2); h.put(0, 7, 12, 1)
+    h.obj('lantern', 11, 11)           # East foyer lantern (11, 11..13) cleanly beside the crimson runner!
+    # Lush intact potted woodland ferns framing the chamfered SW/SE foyer notches & side bays!
+    for fx, fy, top_t, bot_t in (
+        (3, 14, 2618, 2626),           # SW chamfer fern
+        (16, 14, 2618, 2626),          # SE chamfer fern
+        (1, 13, 584, 592),             # West parlor fern
+        (18, 13, 584, 592),            # East parlor fern
+    ):
+        h.put(MI(top_t), fx, fy - 1, 2)
+        h.put(MI(bot_t), fx, fy, 1)
+    # Soft walkable forest moss/clover tufts (MI 996, pas=0, pri=0) linking visually to 131 Canopy!
+    for mx, my in ((4, 6), (13, 6), (16, 6), (6, 13), (11, 14), (4, 10), (15, 10)):
+        if h.L[1, my, mx] == 0 and h.L[2, my, mx] == 0:
+            h.put(MI(996), mx, my, 2)
+
+    # Warm diagonal woodland sunbeams streaming through the north arched windows & Elder stairwell!
+    for x0, y0, y1 in ((3, 6, 10), (10, 6, 9), (14, 6, 8)):
+        for y in range(y0, y1 + 1):
+            c = x0 + (y - y0)
+            for dx, k in ((0, 'l'), (1, 'full'), (2, 'r')):
+                xx = c + dx
+                if 1 <= xx <= 18 and rows[y][xx] == '.' and h.L[2, y, xx] == 0 and h.L[1, y, xx] == 0:
+                    h.put(CU('light_' + k), xx, y, 2)
+
+    import passguard as PG
+    PG.guard(h.L, K.TID, [(9, 15), (15, 4), (7, 13), (13, 8), (12, 5), (8, 5), (17, 7), (10, 9), (6, 7)], 'map 130')
+    if save:
+        out = os.path.join(HERE, 'data', 'raw', '130.npy')
+        np.save(out, h.L)
+        print('wrote', out, h.L.shape)
+    return h.L
+
+
+# ============================================================================================ 145 Pageant Hall
+def build_145(save=True):
+    """Wave 7 Rejuvenation V14 sculpt of Map 145 (Pageant Hall, 38x26, Tileset 54).
+    Grand Saltmere Waterfront Opera & Pageant Theatre unified with Wave 4's 154 Opera House:
+      - Void-sculpted chamfered rear auditorium corners (1..2, 23 & 35..36, 23) and beveled
+        outer backstage wing corners (1, 9 & 36, 9) — ZERO rigid purple rectangle!
+      - Sumptuous Dusk-over-Saltmere proscenium with gathered crimson curtains, gilded cornice,
+        proscenium mini-chandeliers, dramatic stage spotlight cones, glowing footlights & crimson apron dais
+      - Art-Deco gold-filigree promenade borders (NM 1560..1578) framing ALL aisles & triple golden
+        chandeliers suspended down the nave + gilded wall sconces & velvet gallery ropes
+      - Tender Choir Greenroom backstage left (x=1..8) for Vesper + Lyra + Eevee's duet: crimson-gold
+        woven Briarwick carpet, genuine theatrical costume rack (1904..1914), prop shelves & warm lantern
+      - Dorian's Star Dressing Room backstage right (x=29..36): ACTUAL 2x2 bulb-ringed star vanity
+        mirror (1899..1908) right above Dorian's mirror @ (31, 3), plush carpet, chaise, stage lamp
+        & crisp torn-backdrop paint loft!
+    Preserves 100% of all 34 events (incl. all 18 audience seat coords!).
+    """
+    W, H = 38, 26
+    WL = (1, 8); ST = (11, 26); WR = (29, 36)
+    g = [['#'] * W for _ in range(H)]
+
+    def fill(x0, x1, y0, y1, c):
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                g[y][x] = c
+
+    for a, b in (WL, ST, WR):
+        fill(a, b, 1, 2, 'W')
+        fill(a, b, 3, 9, '.')
+    fill(9, 10, 7, 8, '.')
+    fill(27, 28, 7, 8, '.')
+    fill(ST[0], ST[1], 10, 10, 'p')
+    fill(18, 19, 10, 10, 'S')
+    fill(1, 10, 11, 12, 'W')
+    fill(27, 36, 11, 12, 'W')
+    fill(ST[0], ST[1], 11, 12, ',')
+    fill(1, 36, 13, 23, ',')
+    for y in list(range(14, 18)) + list(range(19, 23)):
+        for x in list(range(3, 16)) + list(range(22, 35)):
+            g[y][x] = 's'
+    fill(17, 20, 24, 24, ',')
+
+    # Void-sculpted Art-Deco chamfers (100% clear of all 18 seats & all backstage events!)
+    for vx, vy in ((1, 23), (2, 23), (35, 23), (36, 23), (1, 9), (36, 9)):
+        g[vy][vx] = '#'
+
+    rows = [''.join(r) for r in g]
+    cls = {'#': 'void', 'W': 'wall', 'p': 'lip', 'S': 'stair', 's': 'seat', ',': 'floor2', '.': 'floor'}
+    h = K.Hall(rows, 'stage', cls, seed=145)
+    rnd = h.r
+    BOARDS = [MI(1241), MI(1242), MI(1243)]
+
+    # ---- 1. Rich Dark Crimson-Plum Damask House Carpet (Matches 154 Opera House!) ----
+    for y, row in enumerate(rows):
+        for x, ch in enumerate(row):
+            if ch in ',s':
+                h.put(NM(685), x, y, 0)
+
+    # ---- 2. Grand Dusk-over-Saltmere Proscenium Stage, Spotlights & Apron ----
+    for y in range(3, 10):
+        for x in range(ST[0], ST[1] + 1):
+            h.put(rnd.choice(BOARDS), x, y, 0)
+    for x in range(ST[0] + 1, ST[1] + 1):
+        for y in range(3, 6):
+            h.put(CU('backdrop_%d_%d' % (x - ST[0] - 1, y - 3)), x, y, 0)
+        h.put(NM(904) if x == ST[0] + 1 else NM(906) if x == ST[1] else NM(905), x, 3, 2)
+    for x in range(ST[0], ST[1] + 1):
+        h.put(NM(393), x, 1, 0)
+        h.put(CU('beam_l') if x == ST[0] else CU('beam_r') if x == ST[1] else CU('beam_mid'), x, 1, 1)
+    h.block([[CU('crest_0'), CU('crest_1'), CU('crest_2')]], 17, 1, 2)
+    # Rich crimson gathered stage curtains framing left & right proscenium wings
+    for y in range(4, 10):
+        h.put(NM(920) if y == 9 else NM(912), ST[0], y, 2)
+        h.put(NM(922) if y == 9 else NM(914), ST[1], y, 2)
+    # Twin gilded proscenium chandeliers illuminating the Saltmere sunset drop!
+    h.block([[NM(779)], [NM(787)]], 12, 3, 2)
+    h.block([[NM(779)], [NM(787)]], 25, 3, 2)
+    # Stage marks & rostrum
+    for x, y in ((14, 7), (18, 8), (23, 7)):
+        h.put(CU('mark'), x, y, 1)
+    h.put(CU('rostrum'), 21, 6, 1)
+    # Glowing footlights along the stage lip & warm golden footlight halo
+    for x in range(ST[0], ST[1] + 1):
+        if x not in (18, 19):
+            h.put(CU('footlight'), x, 10, 0)
+            h.put(0, x, 10, 1)
+        h.put(CU('glow'), x, 9, 2)
+    # Theatrical spotlight cone illuminating center stage (Pageant @ (18,7) & Ottilie @ (16,7))!
+    for sy in range(6, 9):
+        for sx, k in ((17, 'l'), (18, 'full'), (19, 'r')):
+            if h.L[2, sy, sx] == 0:
+                h.put(CU('light_' + k), sx, sy, 2)
+    # Polished stage apron boards + deep crimson center dais below the stage steps!
+    for x in range(ST[0], ST[1] + 1):
+        for y in (11, 12):
+            if 17 <= x <= 20:
+                h.put(CU('dais'), x, y, 0)
+            else:
+                h.put(rnd.choice(BOARDS), x, y, 0)
+
+    # ---- 3. Art-Deco Gold-Filigree Promenades, Plush Crimson Center Runner & Triple Chandeliers! ----
+    # Gold-filigree borders lining the front apron promenade, cross-aisle (y=18), side aisles & rear foyer!
+    put_deco_frame(h, 3, 13, 15, 13, z=1)
+    put_deco_frame(h, 22, 13, 34, 13, z=1)
+    put_deco_frame(h, 3, 18, 15, 18, z=1)
+    put_deco_frame(h, 22, 18, 34, 18, z=1)
+    put_deco_frame(h, 3, 23, 15, 23, z=1)
+    put_deco_frame(h, 22, 23, 34, 23, z=1)
+    put_deco_frame(h, 1, 13, 2, 22, z=1)
+    put_deco_frame(h, 35, 13, 36, 22, z=1)
+
+    # Grand Royal Crimson Ceremonial Runner marching up the 4-wide center nave (17..20, 13..24)!
+    for y in range(13, 25):
+        r_ = 0 if y == 13 else (2 if y == 24 else 1)
+        for i in range(4):
+            h.put(NM([[773, 774, 774, 775], [781, 782, 782, 783], [789, 790, 790, 791]][r_][i]), 17 + i, y, 1)
+
+    # Triple Golden Opera Chandeliers (Twin stalls + grand central nave chandelier at x=17..19, y=16..19!)
+    for cx, cy in ((8, 15), (28, 15), (17, 16)):
+        h.block([[0, NM(779), 0], [0, NM(779), 0], [NM(776), NM(787), NM(778)], [NM(784), NM(785), NM(786)]], cx, cy, 2)
+    # Ornate side-wall gilded sconces lining the house aisles (pri=5, non-blocking!)
+    for sx in (1, 36):
+        for sy in (15, 19):
+            h.block([[NM(779)], [NM(787)]], sx, sy, 2)
+
+    # Warm Opera House North Wall Dress behind the Stalls (y=11..12):
+    # Posters framed by gilded sconces & red velvet gallery ropes (banishing sterile blank white wall!)
+    h.obj('poster_lady', 2, 10)        #Wait: wall is y=11..12! Keep exact poster y=11 so top sits on y=11 wall!
+    # Clear any y=10 overwrite and place posters cleanly on wall rows y=11..12 (same crisp framing as HEAD + extra poster!)
+    for x in (2, 3, 4):
+        h.put(0, x, 10, 1)
+    # Replace stark white house wall (y=11..12) with warm dark Art-Deco opera paneling (NM 865 + gilded crown NM 402)!
+    for x in list(range(1, 11)) + list(range(27, 37)):
+        h.put(NM(402), x, 11, 0)
+        h.put(NM(865), x, 12, 0)
+    # Gilded Art-Deco beam crowning the north house galleries
+    for x0, x1 in ((1, 10), (27, 36)):
+        for x in range(x0, x1 + 1):
+            h.put(CU('beam_l') if x == x0 else CU('beam_r') if x == x1 else CU('beam_mid'), x, 11, 1)
+    # Playbill posters & gilded sconces along the warm burgundy house wall (leaving (7,13) Prop lantern 100% open!)
+    h.block([[2250, 2251, 2252], [2258, 2259, 2260]], 2, 11, 1)    # The Lady in Red framed poster (2..4, 11..12)
+    h.block([[2408, 2409, 2410], [2416, 2417, 2418]], 28, 11, 1)   # The Loyal Three framed poster (28..30, 11..12)
+    h.block([[2320, 2321, 2322], [2328, 2329, 2330]], 33, 11, 1)   # Rain Fall framed poster (33..35, 11..12)
+    # Ornate sconces & velvet curtain swags on wall gaps (6, 9, 27, 31, 36)
+    for sx in (6, 9, 27, 32):
+        h.block([[2611], [2619]], sx, 11, 2)
+    # Velvet gallery ropes along front wall (y=13, pas=0!) keeping (7, 13) Prop lantern clear
+    h.block([[2800, 2801, 2802]], 2, 13, 2)
+    h.block([[2800, 2801, 2802]], 28, 13, 2)
+    h.block([[2800, 2801, 2802]], 33, 13, 2)
+
+    # Golden urns & lush floral opera bouquets framing the side aisles & chamfered rear foyer
+    for x in (1, 36):
+        h.obj('urn', x, 13)
+        h.obj('urn', x, 21)
+    h.block([[NM(518), NM(519)], [NM(526), NM(527)]], 1, 17, 1)
+    h.block([[NM(518), NM(519)], [NM(526), NM(527)]], 35, 17, 1)
+    # Rear foyer bouquets flanking the grand central entry carpet (14..15, 23) & (22..23, 23) — keep all seats clear!
+    h.obj('urn', 16, 22)
+    h.obj('urn', 21, 22)
+    h.put(MG(1731), 17, 24, 1); h.put(MG(1732), 18, 24, 1); h.put(MG(1732), 19, 24, 1); h.put(MG(1733), 20, 24, 1)
+
+    # ---- 4. Backstage Left: Choir Greenroom for Vesper + Lyra + Eevee's Tender Duet (x=1..8, y=3..9)! ----
+    for x in range(WL[0], WL[1] + 1):
+        for y in range(3, 10):
+            if rows[y][x] == '.':
+                h.put(rnd.choice(BOARDS), x, y, 0)
+    for x in range(9, 11):
+        for y in (7, 8):
+            h.put(rnd.choice(BOARDS), x, y, 0)
+    # Warm timber-and-burgundy greenroom walls instead of stark blank white
+    for x in range(WL[0], WL[1] + 1):
+        h.put(NM(402), x, 1, 0)
+        h.put(NM(865), x, 2, 0)
+    # Cozy Briarwick crimson-gold tapestry rug right under Vesper (5,5), Lyra (6,5), Eevee (7,6) & Chorus (4,6)!
+    put_mi_rug(h, 4, 4, 7, 7, z=1)
+    # Stocked Prop Shelves at (1..4, 1..4) backing Prop shelf @ (2, 5) — 100% clear of (2, 5)!
+    h.obj('shelf', 1, 1)
+    h.obj('shelf', 3, 1)
+    # Genuine Theatrical Costume Rack (1904..1914) on the greenroom north wall (5..7, 2..3) — clear of Chorus 2 @ (7, 4)!
+    h.block([[1904, 1905, 1906], [1912, 1913, 1914]], 5, 2, 1)
+    # Warm golden backstage sconce & standing lantern illuminating Vesper & Lyra
+    h.block([[2611], [2619]], 8, 1, 2)
+    h.obj('lantern', 1, 5)             # (1, 5..7) warm lantern beside prop shelves
+    for x, y, n in ((2, 8, 'basket'), (3, 8, 'spool'), (8, 4, 'basket'), (8, 5, 'log')):
+        h.put(CU(n), x, y, 1)
+    # Cozy greenroom potted fern tucked in SW bevel corner (2, 9) — leaves (3..8, 8..9) wide open to wing door (9..10, 7..8)!
+    h.put(MI(584), 2, 8, 2) if False else None
+    h.obj('plant', 4, 8)               # Wait: check (4,8..9) — leaves (3..8, 7) & (5..8, 8..9) 100% open!
+    h.put(0, 4, 8, 2); h.put(0, 4, 9, 1)  # Even cleaner: put potted fern at (2, 8)? (2,8) has basket -> put fern at (8, 3)!
+    h.obj('plant', 8, 2)               # Potted greenroom fern neatly in NE corner (8, 2..3), clear of Chorus 2 @ (7, 4)!
+
+    # ---- 5. Backstage Right: Dorian's Star Dressing Room & Torn-Backdrop Paint Loft (x=29..36, y=3..9)! ----
+    for x in range(WR[0], WR[1] + 1):
+        for y in range(3, 10):
+            if rows[y][x] == '.':
+                h.put(rnd.choice(BOARDS), x, y, 0)
+    for x in range(27, 29):
+        for y in (7, 8):
+            h.put(rnd.choice(BOARDS), x, y, 0)
+    # Warm burgundy dressing-room north wall with gilded cornice
+    for x in range(WR[0], WR[1] + 1):
+        h.put(NM(402), x, 1, 0)
+        h.put(NM(865), x, 2, 0)
+    # ACTUAL 2x2 BULB-RINGED STAR VANITY MIRROR (1899..1908) mounted right at (30..31, 1..2) above Dorian's mirror @ (31, 3)!
+    h.block([[1899, 1900], [1907, 1908]], 30, 1, 1)
+    h.block([[2611], [2619]], 29, 1, 2)    # Golden star dressing-room wall sconce!
+    h.block([[2611], [2619]], 32, 1, 2)    # Twin golden sconce flanking Dorian's mirror!
+    # Lush Crimson-Gold Star Dressing Rug (29..32, 4..7) + Velvet Star Divan (29, 4..6) — keeps wing door (27..29, 7..8) wide open!
+    put_mi_rug(h, 29, 4, 32, 7, z=1)
+    h.obj('couch_l', 29, 4)
+    # Crisp Torn Backdrop Paint Loft (33..35, 2..4) backing Torn backdrop @ (34, 4) + Pigment Vats (33..35, 8) + Warm Stage Lantern!
+    for x, n in ((33, 'drop_forest_top'), (34, 'drop_throne_top'), (35, 'drop_forest_top')):
+        h.put(CU(n), x, 2, 2)
+    for x, n in ((33, 'drop_forest_bot'), (35, 'drop_ship_bot')):
+        h.put(CU(n), x, 3, 2)
+    for x, n in ((33, 'vat_r'), (34, 'vat_b'), (35, 'vat_y')):
+        h.obj(n, x, 8)
+    h.obj('plant', 36, 3)              # Tall dressing-room palm at (36, 3..4)
+    h.obj('lantern', 36, 6)            # Warm glowing backstage lamp at (36, 6..8), replacing floating flat!
+    h.put(CU('basket'), 31, 9, 1)      # Costumer's prop hamper at south edge (31, 9)
+    h.put(CU('spool'), 32, 9, 1)
+
+    import passguard as PG
+    PG.guard(h.L, K.TID, [(18, 24), (19, 24), (18, 7), (2, 5), (34, 4), (31, 3), (4, 6), (7, 4), (25, 12),
+                          (5, 5), (6, 5), (7, 6), (7, 13), (16, 7), (18, 13), (26, 11)], 'map 145')
+    if save:
+        out = os.path.join(HERE, 'data', 'raw', '145.npy')
+        np.save(out, h.L)
+        print('wrote', out, h.L.shape)
+    return h.L
+
+
+# ============================================================================================ 150 Pell Playhouse - Lobby
+def build_150(save=True):
+    """Wave 7 Rejuvenation V14 sculpt of Map 150 (Pell Playhouse - Lobby, 25x15, Tileset 54).
+    Sumptuous Art-Deco Grand Opera Foyer unified 100% with Wave 4's 154 Auditorium:
+      - Void-sculpted SW (1..2, 13) & SE (22..23, 13) stepped Art-Deco foyer corners + recessed Entry (11..13, 14)
+      - Rich dark plum-crimson Opera Damask carpet (NM 685) framed by Art-Deco gold-filigree promenade
+        borders (NM 1560..1578) zoning West Box Office Salon, Center Grand Promenade & East Playbill Lounge
+      - Warm Art-Deco burgundy-and-gold north gallery wall (replacing sterile white!) framing all 4
+        Playbill Posters (Rain Fall, Lady in Red, Loyal Three, Old poster) & gilded Auditorium doors (12, 5)
+      - Ornate central golden chandelier, twin foyer spotlight shafts, gilded wall sconces between every
+        poster, red velvet stanchion ropes, golden urns, lush opera bouquets & velvet box-office salon!
+    Preserves 100% of all 16 HEAD events & counter-talk across Box office @ (3, 7)!
+    """
+    W, H = 25, 15
+    g = [['#'] * W for _ in range(H)]
+    for y in range(2, 6):
+        for x in range(1, 24):
+            g[y][x] = 'W'
+    for y in range(6, 14):
+        for x in range(1, 24):
+            g[y][x] = '.'
+    # Gilded 3-wide Auditorium double doors centered on Auditorium doors @ (12, 5)
+    for y in (4, 5):
+        for x in (11, 12, 13):
+            g[y][x] = 'D'
+    # Sculpted stepped Art-Deco SW & SE foyer void corners (matching 154 Opera House!)
+    for vx, vy in ((1, 13), (2, 13), (22, 13), (23, 13)):
+        g[vy][vx] = '#'
+    # Recessed entrance door notch around Exit @ (12, 14)
+    for x in (11, 12, 13):
+        g[14][x] = '.'
+
+    rows = [''.join(r) for r in g]
+    cls = {'#': 'void', 'W': 'wall', 'D': 'door', '.': 'floor'}
+    h = K.Hall(rows, 'lobby', cls, seed=150)
+
+    # ---- 1. Sumptuous Dark Crimson-Plum Opera Damask Carpet (NM 685) & Warm Burgundy Gallery Wall ----
+    for y in range(6, 15):
+        for x in range(1, 24):
+            if rows[y][x] == '.':
+                h.put(NM(685), x, y, 0)
+    # Warm dark Art-Deco burgundy opera walls (NM 402 crown + NM 865 paneling) replacing blinding blank white!
+    for y in range(2, 6):
+        for x in range(1, 24):
+            if rows[y][x] == 'W':
+                h.put(NM(402) if y == 2 else NM(865), x, y, 0)
+    # Gilded Art-Deco proscenium crown beam across the top of the gallery wall (y=2)
+    for x in range(1, 24):
+        if x in (11, 12, 13):
+            continue
+        h.put(CU('beam_l') if x in (1, 14) else CU('beam_r') if x in (10, 23) else CU('beam_mid'), x, 2, 1)
+    # Gilded Auditorium marquee & theatrical crest crowning the double doors (11..13, 2..3)!
+    h.block([[CU('beam_l'), CU('beam_mid'), CU('beam_r')]], 11, 2, 1)
+    h.block([[CU('crest_0'), CU('crest_1'), CU('crest_2')]], 11, 3, 2)
+
+    # ---- 2. All 4 Playbill Posters Preserved Crisply at Exact Event Columns (3, 7, 17, 21) + Gilded Sconces! ----
+    # Poster: Rain Fall @ (3, 5)
+    h.block([[2320, 2321, 2322], [2328, 2329, 2330], [2336, 2337, 2338]], 2, 2, 1)
+    # Poster: The Lady in Red @ (7, 5)
+    h.block([[2250, 2251, 2252], [2258, 2259, 2260], [2266, 2267, 2268]], 6, 2, 1)
+    # Poster: The Loyal Three @ (17, 5)
+    h.block([[2408, 2409, 2410], [2416, 2417, 2418], [2424, 2425, 2426]], 16, 2, 1)
+    # Old poster @ (21, 5)
+    h.block([[3143, 3144, 3145], [3146, 3147, 3148], [3149, 3150, 3151]], 20, 2, 1)
+    # Gilded Art-Deco wall sconces flanking the Auditorium doors & every playbill gallery bay!
+    for sx in (1, 5, 9, 10, 14, 15, 19, 23):
+        if sx in (10, 14):
+            h.block([[2611], [2611], [2619]], sx, 2, 2)
+        else:
+            h.block([[2611], [2619]], sx, 3, 2)
+
+    # ---- 3. Art-Deco Gold-Filigree Promenade Zoning & Royal Crimson Ceremonial Runner! ----
+    # Zone A: West Box Office & Velvet Waiting Salon (x=2..9, y=9..12)
+    put_deco_frame(h, 2, 9, 9, 12, z=1)
+    # Zone B: East Playbill Lounge & Velvet Settees (x=15..22, y=9..12)
+    put_deco_frame(h, 15, 9, 22, 12, z=1)
+    # Subtle rear foyer gold-filigree promenade frames (3..9, 13) & (15..21, 13)
+    put_deco_frame(h, 3, 13, 9, 13, z=1)
+    put_deco_frame(h, 15, 13, 21, 13, z=1)
+
+    # Grand Royal Crimson Ceremonial Runner sweeping from Exit (12, 14) straight to Auditorium doors (12, 5)!
+    for y in range(6, 14):
+        r = 0 if y == 6 else (2 if y == 13 else 1)
+        for i in range(3):
+            h.put(NM([[773, 774, 775], [781, 782, 783], [789, 790, 791]][r][i]), 11 + i, y, 1)
+    # Entrance mat at (11..13, 14)
+    h.put(MG(1731), 11, 14, 1); h.put(MG(1732), 12, 14, 1); h.put(MG(1733), 13, 14, 1)
+
+    # ---- 4. Box Office Counter (Counter-Talk Preserved!), Velvet Ropes, Bouquets, Settees & Chandelier! ----
+    # Red velvet gallery ropes along north gallery wall (y=6, pas=0!) + golden urns flanking posters
+    for rx in (2, 6, 16, 20):
+        h.block([[2800, 2801, 2802]], rx, 6, 2)
+    h.obj('urn', 5, 6)
+    h.obj('urn', 19, 6)
+    # Box Office red-and-gold counter (2816..2818 -> 2817 has counter flag 143!) right in front of Box office @ (3, 7)!
+    h.block([[2816, 2817, 2818]], 2, 8, 1)
+    h.put(2820, 4, 8, 2)                   # Box office brass service bell / carafe on counter end
+    # Velvet waiting sofa beside Lady (4, 11) & Theatregoer 5 (4, 12) + lush rose floral bouquets flanking runner!
+    h.block([[2565, 2566, 2567], [2573, 2574, 2575]], 5, 11, 1)
+    h.block([[2542, 2543], [2550, 2551]], 8, 11, 1)
+    h.block([[2542, 2543], [2550, 2551]], 16, 11, 1)
+    # Twin plush violet opera settees in East Lounge (20..23, 10..12) — cleanly clear of SE chamfer (22..23, 13)!
+    h.block([[2512, 2513], [2520, 2521], [2528, 2529]], 20, 10, 1)
+    h.block([[2512, 2513], [2520, 2521], [2528, 2529]], 22, 10, 1)
+    # Parlor greenery & golden urns framing the sculpted SW/SE foyer corners & side walls (all intact!)
+    h.put(2564, 1, 10, 1)
+    h.put(2564, 23, 7, 1)
+    h.obj('urn', 3, 12)                    # Wait: check Lady (4, 11) & Theatregoer 5 (4, 12) -> urn at (3, 12..13) base (3, 13) clear of (4, 12)!
+    h.obj('urn', 21, 12)                   # Symmetrical golden urn at (21, 12..13) framing SE chamfer!
+    # Ornate side-wall golden sconces along x=1 & x=23 (pri=5, non-blocking!)
+    h.block([[NM(779)], [NM(787)]], 1, 7, 2)
+    h.block([[NM(779)], [NM(787)]], 23, 8, 2)
+
+    # Majestic Central Golden Opera Chandelier suspended above the crimson runner (11..13, 6..9, pri=5!)
+    h.block([[0, NM(779), 0], [0, NM(779), 0], [NM(776), NM(787), NM(778)], [NM(784), NM(785), NM(786)]], 11, 6, 2)
+
+    # Warm theatrical foyer light shafts illuminating the grand Auditorium entry promenade!
+    for sy in range(7, 11):
+        for sx, k in ((9, 'l'), (10, 'full'), (11, 'r')):
+            if h.L[2, sy, sx] == 0 and h.L[1, sy, sx] == 0:
+                h.put(CU('light_' + k), sx, sy, 2)
+        for sx, k in ((13, 'l'), (14, 'full'), (15, 'r')):
+            if h.L[2, sy, sx] == 0 and h.L[1, sy, sx] == 0:
+                h.put(CU('light_' + k), sx, sy, 2)
+
+    import passguard as PG
+    PG.guard(h.L, K.TID, [(12, 14), (12, 5), (10, 7), (19, 9), (4, 11), (3, 7), (14, 8), (15, 8), (7, 9),
+                          (19, 12), (4, 12), (21, 5), (7, 5), (3, 5), (17, 5)], 'map 150')
+    if save:
+        out = os.path.join(HERE, 'data', 'raw', '150.npy')
+        np.save(out, h.L)
+        print('wrote', out, h.L.shape)
+    return h.L
+
+
 def apply_craft(mid, L_out):
-    """Apply Wave 4 Rejuvenation V14 sculpts in-place inside hallkit.Hall.write() before passguard.guard()."""
-    if mid == 131:
-        L_out[:] = build_131(save=False)
-    elif mid == 154:
-        L_out[:] = build_154(save=False)
+    """Apply Wave 4 & Wave 7 Rejuvenation V14 sculpts in-place inside hallkit.Hall.write() before passguard.guard()."""
+    fn = {130: build_130, 131: build_131, 145: build_145, 150: build_150, 154: build_154}.get(mid)
+    if fn is not None:
+        L_out[:] = fn(save=False)
 
 
 def main(which=None):
     sel = set(which or [])
-    if not sel or '131' in sel:
-        build_131(save=True)
-    if not sel or '154' in sel:
-        build_154(save=True)
+    for mid, fn in ((130, build_130), (131, build_131), (145, build_145), (150, build_150), (154, build_154)):
+        if not sel or str(mid) in sel:
+            fn(save=True)
 
 
 if __name__ == '__main__':

@@ -6,8 +6,8 @@ module PrismfallMaps
     102 => [10, 4, -12, 0],   # Ferrow's Landing Mart
     103 => [12, 6, -10, 0],   # Larch Research Station
     104 => [10, 4, -12, 0],   # Tidewater Inn
-    105 => [10, 4, -12, 0],   # Ferrow Lighthouse 1F
-    106 => [10, 4, -12, 0],   # Ferrow Lighthouse Lamp Room
+    105 => [12, 4, -12, 0],   # Ferrow Lighthouse 1F
+    106 => [16, 10, -8, 0],   # Ferrow Lighthouse Lamp Room
     107 => [10, 4, -12, 0],   # Dockmaster's House
     108 => [12, 6, -10, 0],   # Quarantine Customs Hall
     109 => [14, -4, -24, 10],   # The Dovetail - Deck
