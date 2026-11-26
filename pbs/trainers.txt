@@ -28087,6 +28087,880 @@ Pokemon = MAGNEZONE,69
     Nature = MODEST
     IV = 0
     EV = 0
+# Map 832 The Brink
+#-------------------------------
+[BIRDKEEPER,Wren,1]
+LoseText = Different Wren. No relation. Same result, apparently.
+Pokemon = TALONFLAME,67
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 8
+Pokemon = BRAVIARY,68
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KILOWATTREL,69
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 8
+Pokemon = CORVIKNIGHT,70
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BIRDKEEPER,Wren,101]
+LoseText = Different Wren. No relation. Same result, apparently.
+Pokemon = TALONFLAME,68
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 20
+Pokemon = BRAVIARY,69
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KILOWATTREL,70
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 20
+Pokemon = CORVIKNIGHT,71
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BIRDKEEPER,Wren,201]
+LoseText = Different Wren. No relation. Same result, apparently.
+Pokemon = TALONFLAME,66
+    Ability = FLAMEBODY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = BRAVIARY,67
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KILOWATTREL,68
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = CORVIKNIGHT,69
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 832 The Brink
+#-------------------------------
+[COOLTRAINER_F,Ottoline]
+LoseText = The Brink is where you stop. I'll stop here.
+Pokemon = ROTOM,68
+    Form = 2
+    Moves = HYDROPUMP,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+Pokemon = KINGAMBIT,69
+    Ability = SUPREMEOVERLORD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GARCHOMP,70
+    Ability = SANDVEIL
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[COOLTRAINER_F,Ottoline,100]
+LoseText = The Brink is where you stop. I'll stop here.
+Pokemon = ROTOM,69
+    Form = 2
+    Moves = HYDROPUMP,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+Pokemon = KINGAMBIT,70
+    Ability = SUPREMEOVERLORD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GARCHOMP,71
+    Ability = SANDVEIL
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[COOLTRAINER_F,Ottoline,200]
+LoseText = The Brink is where you stop. I'll stop here.
+Pokemon = ROTOM,67
+    Form = 2
+    Moves = HYDROPUMP,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = KINGAMBIT,68
+    Ability = SUPREMEOVERLORD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GARCHOMP,69
+    Ability = SANDVEIL
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 820 The Hanging Stair
+#-------------------------------
+[ENGINEER,Cobb]
+LoseText = Lift's down. So am I.
+Pokemon = EXCADRILL,68
+    Ability = SANDFORCE
+    Nature = JOLLY
+    IV = 8
+Pokemon = MACHAMP,69
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = COPPERAJAH,70
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ENGINEER,Cobb,100]
+LoseText = Lift's down. So am I.
+Pokemon = EXCADRILL,69
+    Ability = SANDFORCE
+    Nature = JOLLY
+    IV = 20
+Pokemon = MACHAMP,70
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = COPPERAJAH,71
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ENGINEER,Cobb,200]
+LoseText = Lift's down. So am I.
+Pokemon = EXCADRILL,67
+    Ability = SANDFORCE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MACHAMP,68
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = COPPERAJAH,69
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 820 The Hanging Stair
+#-------------------------------
+[ROCKER,Ruin]
+LoseText = Called myself Ruin. Should've thought it through.
+Pokemon = RATICATE,68
+    Form = 1
+    Ability = HUSTLE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SCRAFTY,69
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SKUNTANK,70
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TOXTRICITY,71
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[ROCKER,Ruin,100]
+LoseText = Called myself Ruin. Should've thought it through.
+Pokemon = RATICATE,69
+    Form = 1
+    Ability = HUSTLE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SCRAFTY,70
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SKUNTANK,71
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TOXTRICITY,72
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[ROCKER,Ruin,200]
+LoseText = Called myself Ruin. Should've thought it through.
+Pokemon = RATICATE,67
+    Form = 1
+    Ability = HUSTLE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SCRAFTY,68
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SKUNTANK,69
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TOXTRICITY,70
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 820 The Hanging Stair
+#-------------------------------
+[HOLLOW_GRUNT_M,Iver]
+LoseText = I patch up runners. Now I'll patch up these.
+Pokemon = HARIYAMA,69
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = AMOONGUSS,70
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GARDEVOIR,71
+    Ability = TRACE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[HOLLOW_GRUNT_M,Iver,100]
+LoseText = I patch up runners. Now I'll patch up these.
+Pokemon = HARIYAMA,70
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = AMOONGUSS,71
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GARDEVOIR,72
+    Ability = TRACE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[HOLLOW_GRUNT_M,Iver,200]
+LoseText = I patch up runners. Now I'll patch up these.
+Pokemon = HARIYAMA,68
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = AMOONGUSS,69
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GARDEVOIR,70
+    Ability = TRACE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 821 The Drownings
+#-------------------------------
+[FISHERMAN,Old Sim]
+LoseText = Drowned town, live fish. The fish are winning.
+Pokemon = OVERQWIL,68
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 8
+Pokemon = WISHIWASHI,69
+    Ability = SCHOOLING
+    Nature = MODEST
+    IV = 8
+Pokemon = BARRASKEWDA,70
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 8
+Pokemon = GYARADOS,71
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FISHERMAN,Old Sim,100]
+LoseText = Drowned town, live fish. The fish are winning.
+Pokemon = OVERQWIL,69
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 20
+Pokemon = WISHIWASHI,70
+    Ability = SCHOOLING
+    Nature = MODEST
+    IV = 20
+Pokemon = BARRASKEWDA,71
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 20
+Pokemon = GYARADOS,72
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FISHERMAN,Old Sim,200]
+LoseText = Drowned town, live fish. The fish are winning.
+Pokemon = OVERQWIL,67
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = WISHIWASHI,68
+    Ability = SCHOOLING
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BARRASKEWDA,69
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = GYARADOS,70
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 821 The Drownings
+#-------------------------------
+[SWIMMER_F,Pell]
+LoseText = My granddaughter runs lamps in Cragholm. Tell her I swam.
+Pokemon = CRAMORANT,69
+    Ability = GULPMISSILE
+    Nature = JOLLY
+    IV = 8
+Pokemon = DREDNAW,70
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LAPRAS,71
+    Ability = WATERABSORB
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SWIMMER_F,Pell,100]
+LoseText = My granddaughter runs lamps in Cragholm. Tell her I swam.
+Pokemon = CRAMORANT,70
+    Ability = GULPMISSILE
+    Nature = JOLLY
+    IV = 20
+Pokemon = DREDNAW,71
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LAPRAS,72
+    Ability = WATERABSORB
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SWIMMER_F,Pell,200]
+LoseText = My granddaughter runs lamps in Cragholm. Tell her I swam.
+Pokemon = CRAMORANT,68
+    Ability = GULPMISSILE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = DREDNAW,69
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LAPRAS,70
+    Ability = WATERABSORB
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 821 The Drownings
+#-------------------------------
+[RUINMANIAC,Garnet]
+LoseText = Mudlarking's all patience. You had none and still won.
+Pokemon = CLODSIRE,68
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = QUAGSIRE,69
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GASTRODON,70
+    Ability = STORMDRAIN
+    Nature = MODEST
+    IV = 8
+Pokemon = GOLURK,71
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Garnet,100]
+LoseText = Mudlarking's all patience. You had none and still won.
+Pokemon = CLODSIRE,69
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = QUAGSIRE,70
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GASTRODON,71
+    Ability = STORMDRAIN
+    Nature = MODEST
+    IV = 20
+Pokemon = GOLURK,72
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Garnet,200]
+LoseText = Mudlarking's all patience. You had none and still won.
+Pokemon = CLODSIRE,67
+    Ability = POISONPOINT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = QUAGSIRE,68
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GASTRODON,69
+    Ability = STORMDRAIN
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GOLURK,70
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 822 Under the Drownings (double battle)
+#-------------------------------
+[SISANDBRO,Nell & Ash]
+LoseText = Nell: Surface! Ash: Surface, now!
+Pokemon = KINGDRA,69
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 8
+Pokemon = DHELMISE,70
+    Ability = STEELWORKER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LANTURN,71
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 8
+Pokemon = BARBARACLE,72
+    Ability = TOUGHCLAWS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SISANDBRO,Nell & Ash,100]
+LoseText = Nell: Surface! Ash: Surface, now!
+Pokemon = KINGDRA,70
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 20
+Pokemon = DHELMISE,71
+    Ability = STEELWORKER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LANTURN,72
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 20
+Pokemon = BARBARACLE,73
+    Ability = TOUGHCLAWS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SISANDBRO,Nell & Ash,200]
+LoseText = Nell: Surface! Ash: Surface, now!
+Pokemon = KINGDRA,68
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = DHELMISE,69
+    Ability = STEELWORKER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LANTURN,70
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BARBARACLE,71
+    Ability = TOUGHCLAWS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 828 Ironbloom
+#-------------------------------
+[SCIENTIST,Rennick]
+LoseText = The iron flowered. I wrote a paper. You've ruined the conclusion.
+Pokemon = ELECTRODE,70
+    Form = 1
+    Ability = SOUNDPROOF
+    Nature = TIMID
+    IV = 8
+Pokemon = KLEFKI,71
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FERROTHORN,72
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAGNEZONE,73
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SCIENTIST,Rennick,100]
+LoseText = The iron flowered. I wrote a paper. You've ruined the conclusion.
+Pokemon = ELECTRODE,71
+    Form = 1
+    Ability = SOUNDPROOF
+    Nature = TIMID
+    IV = 20
+Pokemon = KLEFKI,72
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FERROTHORN,73
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAGNEZONE,74
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SCIENTIST,Rennick,200]
+LoseText = The iron flowered. I wrote a paper. You've ruined the conclusion.
+Pokemon = ELECTRODE,69
+    Form = 1
+    Ability = SOUNDPROOF
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = KLEFKI,70
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FERROTHORN,71
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAGNEZONE,72
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 430 Underveil Gym - Vestibule
+#-------------------------------
+[BURGLAR,Moth]
+LoseText = Sight in the dark's a skill. So is getting caught.
+Pokemon = HONCHKROW,69
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SNEASLER,70
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 8
+Pokemon = WEAVILE,71
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BURGLAR,Moth,100]
+LoseText = Sight in the dark's a skill. So is getting caught.
+Pokemon = HONCHKROW,70
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SNEASLER,71
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 20
+Pokemon = WEAVILE,72
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BURGLAR,Moth,200]
+LoseText = Sight in the dark's a skill. So is getting caught.
+Pokemon = HONCHKROW,68
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SNEASLER,69
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = WEAVILE,70
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 431 Underveil Gym - Gallery of Shadows
+#-------------------------------
+[BURGLAR,Pickett]
+LoseText = Every shadow here's a door. You found the wrong one. On me.
+Pokemon = BISHARP,70
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DRAPION,71
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 8
+Pokemon = ZOROARK,72
+    Ability = ILLUSION
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[BURGLAR,Pickett,100]
+LoseText = Every shadow here's a door. You found the wrong one. On me.
+Pokemon = BISHARP,71
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DRAPION,72
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 20
+Pokemon = ZOROARK,73
+    Ability = ILLUSION
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[BURGLAR,Pickett,200]
+LoseText = Every shadow here's a door. You found the wrong one. On me.
+Pokemon = BISHARP,69
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DRAPION,70
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = ZOROARK,71
+    Ability = ILLUSION
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 431 Underveil Gym - Gallery of Shadows
+#-------------------------------
+[GAMBLER,Lucky]
+LoseText = Not today, apparently.
+Pokemon = ABSOL,70
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MABOSSTIFF,71
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+Pokemon = GRIMMSNARL,72
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[GAMBLER,Lucky,100]
+LoseText = Not today, apparently.
+Pokemon = ABSOL,71
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MABOSSTIFF,72
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+Pokemon = GRIMMSNARL,73
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[GAMBLER,Lucky,200]
+LoseText = Not today, apparently.
+Pokemon = ABSOL,69
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MABOSSTIFF,70
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = GRIMMSNARL,71
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 432 Underveil Gym - The Vault
+#-------------------------------
+[ROCKER,Riff]
+LoseText = Nyx says keep it quiet. I never keep it quiet.
+Pokemon = OBSTAGOON,71
+    Ability = GUTS
+    Nature = JOLLY
+    IV = 8
+Pokemon = HOUNDOOM,72
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 8
+Pokemon = TYRANITAR,73
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ROCKER,Riff,100]
+LoseText = Nyx says keep it quiet. I never keep it quiet.
+Pokemon = OBSTAGOON,72
+    Ability = GUTS
+    Nature = JOLLY
+    IV = 20
+Pokemon = HOUNDOOM,73
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 20
+Pokemon = TYRANITAR,74
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ROCKER,Riff,200]
+LoseText = Nyx says keep it quiet. I never keep it quiet.
+Pokemon = OBSTAGOON,70
+    Ability = GUTS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = HOUNDOOM,71
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = TYRANITAR,72
+    Ability = SANDSTREAM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 432 Underveil Gym - The Vault
+#-------------------------------
+[HOLLOW_GRUNT_M,Defector]
+LoseText = I left the Hollow. The Hollow didn't leave me.
+Pokemon = CRAWDAUNT,71
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SPIRITOMB,72
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KROOKODILE,73
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[HOLLOW_GRUNT_M,Defector,100]
+LoseText = I left the Hollow. The Hollow didn't leave me.
+Pokemon = CRAWDAUNT,72
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SPIRITOMB,73
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KROOKODILE,74
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[HOLLOW_GRUNT_M,Defector,200]
+LoseText = I left the Hollow. The Hollow didn't leave me.
+Pokemon = CRAWDAUNT,70
+    Ability = SHELLARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SPIRITOMB,71
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KROOKODILE,72
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 432 Underveil Gym - The Vault
+#-------------------------------
+[LADY,Mirela]
+LoseText = I know a secret about you. I'll keep it. You've earned that.
+Pokemon = MANDIBUZZ,72
+    Ability = OVERCOAT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MALAMAR,73
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = UMBREON,74
+    Ability = SYNCHRONIZE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[LADY,Mirela,100]
+LoseText = I know a secret about you. I'll keep it. You've earned that.
+Pokemon = MANDIBUZZ,73
+    Ability = OVERCOAT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MALAMAR,74
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = UMBREON,75
+    Ability = SYNCHRONIZE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[LADY,Mirela,200]
+LoseText = I know a secret about you. I'll keep it. You've earned that.
+Pokemon = MANDIBUZZ,71
+    Ability = OVERCOAT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MALAMAR,72
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = UMBREON,73
+    Ability = SYNCHRONIZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
 # Map 861 The Thornwar Marches
 #-------------------------------
 [COOLTRAINER_F,Isolde]

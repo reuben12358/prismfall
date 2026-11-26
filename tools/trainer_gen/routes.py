@@ -71,6 +71,8 @@ def ROUTES(P):
         392: (0, 67, {}), 780: (0, 67, {}), 781: (0, 67, {}), 790: (0, 67, {}), 800: (0, 71, {}), 804: (0, 71, {}),
         # Ch16 script roster (story density sections, 2026-11-26)
         400: (0, 71, {}), 403: (0, 71, {}), 410: (0, 71, {}), 411: (0, 71, {}), 412: (0, 71, {}), 801: (0, 71, {}), 811: (0, 71, {}),
+        # Ch17 script roster (story density sections, 2026-11-26)
+        430: (0, 75, {}), 431: (0, 75, {}), 432: (0, 75, {}), 820: (0, 75, {}), 821: (0, 75, {}), 822: (0, 75, {}), 828: (0, 75, {}), 832: (0, 75, {}),
         # Coverage fill, Ch19 (segment 17, cap 85)
         861: (0, 85, {}), 864: (0, 85, {}),
     }
@@ -976,6 +978,53 @@ def ROUTES(P):
     # Scientist Pask: Engineer Pask (script: Scientist); Rotom-Heat
     t("Map 403 Strade Works - Foundry Floor", "SCIENTIST", "Pask", "The furnace was rated for that. I wasn't.",
       [m("KLINKLANG", 68, "MINUS", "JOLLY"), m("ROTOM", 69, "LEVITATE", "TIMID", "OVERHEAT,DISCHARGE,HEX,ELECTROBALL", form=1), m("MAGNEZONE", 70, "STURDY", "MODEST")])
+    # ---------------------------------------------------------------------------------------------------------------
+    # Ch17 - the Brink, the Hanging Stair, the Drownings, Ironbloom; Gym 16 (cap 75; story/36_SCRIPT_CH17.md roster)
+    # Birdkeeper Wren: Wren-of-the-Brink, no relation to Gullcry's Wren (Stormfront: Flying and Electric loved)
+    t("Map 832 The Brink", "BIRDKEEPER", "Wren", "Different Wren. No relation. Same result, apparently.",
+      [m("TALONFLAME", 67, "FLAMEBODY", "JOLLY"), m("BRAVIARY", 68, "KEENEYE", "ADAMANT"), m("KILOWATTREL", 69, "VOLTABSORB", "TIMID"), m("CORVIKNIGHT", 70, "UNNERVE", "ADAMANT")], v=1)
+    # Cooltrainer F Ottoline: Ace Trainer; Rotom-Wash
+    t("Map 832 The Brink", "COOLTRAINER_F", "Ottoline", "The Brink is where you stop. I'll stop here.",
+      [m("ROTOM", 68, "LEVITATE", "TIMID", "HYDROPUMP,DISCHARGE,HEX,ELECTROBALL", form=2), m("KINGAMBIT", 69, "SUPREMEOVERLORD", "ADAMANT"), m("GARCHOMP", 70, "SANDVEIL", "JOLLY")])
+    # Engineer Cobb: Lift-hand Cobb (script: Worker)
+    t("Map 820 The Hanging Stair", "ENGINEER", "Cobb", "Lift's down. So am I.",
+      [m("EXCADRILL", 68, "SANDFORCE", "JOLLY"), m("MACHAMP", 69, "NOGUARD", "ADAMANT"), m("COPPERAJAH", 70, "SHEERFORCE", "ADAMANT")])
+    # Rocker Ruin: a punk (script: Guitarist); the Stair's rats are Alolan
+    t("Map 820 The Hanging Stair", "ROCKER", "Ruin", "Called myself Ruin. Should've thought it through.",
+      [m("RATICATE", 68, "HUSTLE", "ADAMANT", form=1), m("SCRAFTY", 69, "MOXIE", "ADAMANT"), m("SKUNTANK", 70, "STENCH", "ADAMANT"), m("TOXTRICITY", 71, "PUNKROCK", "MODEST")])
+    # Hollow Grunt M Iver: Hollow Runner Medic Iver
+    t("Map 820 The Hanging Stair", "HOLLOW_GRUNT_M", "Iver", "I patch up runners. Now I'll patch up these.",
+      [m("HARIYAMA", 69, "THICKFAT", "ADAMANT"), m("AMOONGUSS", 70, "EFFECTSPORE", "ADAMANT"), m("GARDEVOIR", 71, "TRACE", "MODEST")])
+    t("Map 821 The Drownings", "FISHERMAN", "Old Sim", "Drowned town, live fish. The fish are winning.",
+      [m("OVERQWIL", 68, "POISONPOINT", "JOLLY"), m("WISHIWASHI", 69, "SCHOOLING", "MODEST"), m("BARRASKEWDA", 70, "SWIFTSWIM", "JOLLY"), m("GYARADOS", 71, "INTIMIDATE", "ADAMANT")])
+    # Swimmer F Pell: Pell-the-Elder, Cragholm's Pell's grandmother
+    t("Map 821 The Drownings", "SWIMMER_F", "Pell", "My granddaughter runs lamps in Cragholm. Tell her I swam.",
+      [m("CRAMORANT", 69, "GULPMISSILE", "JOLLY"), m("DREDNAW", 70, "SHELLARMOR", "ADAMANT"), m("LAPRAS", 71, "WATERABSORB", "ADAMANT")])
+    # Ruinmaniac Garnet: a mudlark (script: Ruin Maniac)
+    t("Map 821 The Drownings", "RUINMANIAC", "Garnet", "Mudlarking's all patience. You had none and still won.",
+      [m("CLODSIRE", 68, "POISONPOINT", "ADAMANT"), m("QUAGSIRE", 69, "DAMP", "ADAMANT"), m("GASTRODON", 70, "STORMDRAIN", "MODEST"), m("GOLURK", 71, "IRONFIST", "ADAMANT")])
+    # Sisandbro Nell & Ash: Divers Nell and Ash
+    t("Map 822 Under the Drownings (double battle)", "SISANDBRO", "Nell & Ash", "Nell: Surface! Ash: Surface, now!",
+      [m("KINGDRA", 69, "SNIPER", "JOLLY"), m("DHELMISE", 70, "STEELWORKER", "ADAMANT"), m("LANTURN", 71, "ILLUMINATE", "MODEST"), m("BARBARACLE", 72, "TOUGHCLAWS", "ADAMANT")])
+    # Scientist Rennick: Dr. Rennick; the Hisuian Electrode grows in the iron bloom
+    t("Map 828 Ironbloom", "SCIENTIST", "Rennick", "The iron flowered. I wrote a paper. You've ruined the conclusion.",
+      [m("ELECTRODE", 70, "SOUNDPROOF", "TIMID", form=1), m("KLEFKI", 71, "PRANKSTER", "ADAMANT"), m("FERROTHORN", 72, "IRONBARBS", "ADAMANT"), m("MAGNEZONE", 73, "STURDY", "MODEST")])
+    # Burglar Moth: a guard
+    t("Map 430 Underveil Gym - Vestibule", "BURGLAR", "Moth", "Sight in the dark's a skill. So is getting caught.",
+      [m("HONCHKROW", 69, "SUPERLUCK", "ADAMANT"), m("SNEASLER", 70, "PRESSURE", "JOLLY"), m("WEAVILE", 71, "PRESSURE", "JOLLY")])
+    # Burglar Pickett: a guard
+    t("Map 431 Underveil Gym - Gallery of Shadows", "BURGLAR", "Pickett", "Every shadow here's a door. You found the wrong one. On me.",
+      [m("BISHARP", 70, "INNERFOCUS", "ADAMANT"), m("DRAPION", 71, "SNIPER", "JOLLY"), m("ZOROARK", 72, "ILLUSION", "TIMID")])
+    t("Map 431 Underveil Gym - Gallery of Shadows", "GAMBLER", "Lucky", "Not today, apparently.",
+      [m("ABSOL", 70, "SUPERLUCK", "ADAMANT"), m("MABOSSTIFF", 71, "INTIMIDATE", "JOLLY"), m("GRIMMSNARL", 72, "PRANKSTER", "ADAMANT")])
+    t("Map 432 Underveil Gym - The Vault", "ROCKER", "Riff", "Nyx says keep it quiet. I never keep it quiet.",
+      [m("OBSTAGOON", 71, "GUTS", "JOLLY"), m("HOUNDOOM", 72, "EARLYBIRD", "TIMID"), m("TYRANITAR", 73, "SANDSTREAM", "ADAMANT")])
+    # Hollow Grunt M Defector: the Hollow Defector
+    t("Map 432 Underveil Gym - The Vault", "HOLLOW_GRUNT_M", "Defector", "I left the Hollow. The Hollow didn't leave me.",
+      [m("CRAWDAUNT", 71, "SHELLARMOR", "ADAMANT"), m("SPIRITOMB", 72, "PRESSURE", "ADAMANT"), m("KROOKODILE", 73, "INTIMIDATE", "JOLLY")])
+    # Lady Mirela: the Informant
+    t("Map 432 Underveil Gym - The Vault", "LADY", "Mirela", "I know a secret about you. I'll keep it. You've earned that.",
+      [m("MANDIBUZZ", 72, "OVERCOAT", "ADAMANT"), m("MALAMAR", 73, "SUCTIONCUPS", "ADAMANT"), m("UMBREON", 74, "SYNCHRONIZE", "ADAMANT")])
     # ---------------------------------------------------------------------------------------------------------------
     # Ch19 - two script-roster rows (story/38_SCRIPT_CH19.md) that carry the last four species (cap 85)
     # Cooltrainer F Isolde: script roster (story/38_SCRIPT_CH19.md): Ace Trainer Isolde
