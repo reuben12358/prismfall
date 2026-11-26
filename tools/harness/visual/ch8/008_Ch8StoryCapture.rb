@@ -1,9 +1,11 @@
 #===============================================================================
 # Ch8 story beats on 244 / 249 / 255 in the real engine, dev tool (mapgen/layouts/story_ch8.py + cindervault.py).
-#   CH8_STEP 4 on 244: "My Father" (step stays 4, :gym7_open) -> CH8_STEP 5 on 249: the Five Bells evacuation ->
-#   down to 255: the Caldera Crisis (-> 6, S120, V110) -> 244: "Whose Is It" (:ch8_lightstone, -> 7) -> "Chestnuts" (-> 8).
-# Battles are auto-won; choices come from CH8_CHOICES (0-based, in order: Sigrun, detonator, caldera branch,
-# Light Stone, Larch at the door), default 0,1,0,1,2. No frames unless CH8_SHOTS=1 (every 30th; delete frames/ch8_*
+#   CH8_STEP 3 on 243: "The Hug" (-> 4, on to 244) -> "My Father" (step stays 4, :gym7_open) -> [Gym 7 is unbuilt:
+#   CH8_STEP 5 is set here] -> 240: the Five Bells in the square (-> 6) -> 249: the evacuation -> down to 255: the
+#   Caldera Crisis (6, S120, V110) -> 244: "Whose Is It" (:ch8_lightstone, -> 7) -> "Chestnuts" (-> 8) -> 240: "The
+#   Herald" (-> 9, S121, V122 1) -> 243: leaving (-> 10, STORY_CHAPTER 9).
+# Battles are auto-won; choices come from CH8_CHOICES (0-based, in order: the hug, Sigrun, detonator, caldera branch,
+# Light Stone, Larch at the door), default 1,0,1,0,1,2. No frames unless CH8_SHOTS=1 (every 30th; delete frames/ch8_*
 # and captures_keep/ch8_* after). RESULT lines in demo.log; a stage that fails stops the run (FAIL).
 #   cp maps_out/Data/Map{244,249,255}.rxdata /home/claude/run_intro/game/Data/
 #   bash tools/harness/visual/intro/run_intro.sh --capture $PWD/tools/harness/visual/ch8/008_Ch8StoryCapture.rb --plan ch8story
@@ -12,7 +14,7 @@
 #===============================================================================
 if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
   module Ch8Cap
-    @choices = (ENV["CH8_CHOICES"] || "0,1,0,1,2").split(",").map(&:to_i)
+    @choices = (ENV["CH8_CHOICES"] || "1,0,1,0,1,2").split(",").map(&:to_i)
     @battles = []
     class << self; attr_accessor :choices, :battles; end
   end
@@ -77,9 +79,9 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
       $PokemonSystem.battlescene = 1
       $player.party = [DemoRun.mon(:SWAMPERT, 45, [:SURF, :EARTHQUAKE, :ICEBEAM, :PROTECT]),
                        DemoRun.mon(:GARDEVOIR, 45, [:PSYCHIC, :MOONBLAST, :THUNDERBOLT, :PROTECT])]
-      $game_variables[129] = 4
-      $game_map.setup(244)
-      $game_player.moveto(10, 15); $game_player.turn_up
+      $game_variables[129] = 3
+      $game_map.setup(243)
+      $game_player.moveto(20, 19); $game_player.turn_up
       $scene.disposeSpritesets rescue nil
       $scene.createSpritesets
       $game_map.need_refresh = true
@@ -87,13 +89,20 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
       record("ch8_story") if ENV["CH8_SHOTS"] == "1"
       self.auto = true
       t0 = System.uptime
-      # --- "My Father"
+      # --- "The Hug" (243) -> 244, then "My Father"
+      f = c8_run(5000) { $game_map.map_id == 244 && $game_variables[129] >= 4 }
+      log("RESULT the hug: CH8_STEP=#{$game_variables[129]} map=#{$game_map.map_id} frames=#{f}")
+      c8_fail("The Hug did not reach 244") if $game_map.map_id != 244
       f = c8_run(5000) { c8_selfsw("My Father") && c8_idle? }
       log("RESULT my father: CH8_STEP=#{$game_variables[129]} selfA=#{c8_selfsw('My Father').inspect} gym7_open=#{pfm_get(:gym7_open).inspect} " \
           "pos=#{$game_player.x},#{$game_player.y} brann_opacity=#{$game_map.events.values.find { |e| e.name == 'Brann' }&.opacity} frames=#{f}")
       c8_fail("My Father did not finish") if !c8_selfsw("My Father") || $game_variables[129] != 4
-      # --- Gym 7 won: CH8_STEP 5, through the Slag Ward
+      # --- Gym 7 won (unbuilt: set here): CH8_STEP 5, the Five Bells in the square, then down to the Slag Ward
       $game_variables[129] = 5
+      c8_goto(240, 21, 4, 2)
+      f = c8_run(4000) { $game_variables[129] >= 6 && c8_idle? }
+      log("RESULT five bells (240): CH8_STEP=#{$game_variables[129]} pos=#{$game_player.x},#{$game_player.y} tone=#{$game_screen.tone.red.round} frames=#{f}")
+      c8_fail("the square's Five Bells did not reach 6") if $game_variables[129] < 6
       c8_goto(249, 6, 9, 6)
       f = c8_run(3000) { c8_selfsw("Five Bells (ward)") && !$game_system.map_interpreter.running? }
       c8_run(240, 240) { false }                       # let the families walk off
@@ -114,7 +123,17 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
       f = c8_run(6000) { $game_variables[129] >= 8 && c8_idle? && $game_screen.tone.red > -100 }
       left = $game_map.events.values.select { |e| e.character_name.to_s != "" && e.opacity > 0 }.map(&:name)
       log("RESULT chestnuts: CH8_STEP=#{$game_variables[129]} map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y} " \
-          "tone=#{$game_screen.tone.red.round} shown=#{left.inspect} frames=#{f} secs=#{(System.uptime - t0).round(1)}")
+          "tone=#{$game_screen.tone.red.round} shown=#{left.inspect} frames=#{f}")
+      # --- next morning: up to the square, "The Herald"; then out through the gate
+      c8_goto(240, 20, 26, 8)
+      f = c8_run(6000) { $game_variables[129] >= 9 && c8_idle? }
+      log("RESULT herald: CH8_STEP=#{$game_variables[129]} S121=#{$game_switches[121]} V122=#{$game_variables[122]} " \
+          "column=#{%w[Herald Standard-bearer].map { |n| e = $game_map.events.values.find { |x| x.name == n }; "#{n}:#{e&.x},#{e&.y},o#{e&.opacity}" }.inspect} frames=#{f}")
+      c8_fail("The Herald did not reach 9") if $game_variables[129] < 9
+      c8_goto(243, 34, 6, 2)
+      f = c8_run(3000) { $game_variables[129] >= 10 && c8_idle? }
+      log("RESULT leaving: CH8_STEP=#{$game_variables[129]} STORY_CHAPTER=#{$game_variables[102]} quest=#{($PokemonGlobal.pf_quests[:eighteen_roads] rescue nil).inspect} " \
+          "frames=#{f} secs=#{(System.uptime - t0).round(1)}")
       c8_run(60, 60) { true }
       self.auto = false
       stop

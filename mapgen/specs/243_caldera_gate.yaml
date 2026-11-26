@@ -192,3 +192,221 @@ events:
   at: [16, 14]
   post: false
   text: CINDERVAULT — CALDERA GATE. "Say true, or keep your breath for the bellows." ↑ Slag Ward · ↗ Forge Terraces · ← The Ashmarch · ↓ The Pyre Road.
+- type: event
+  name: The Hug
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(8)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(20, 18)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Larch (gate)
+        route:
+        - graphic: [LARCH, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(21, 18)'}
+        - turn_up
+        wait: true
+    - {script: pfm_fade_in(16)}
+    - {script: '3.times { pbSEPlay("Anim/HealBell", 90, 70); pbWait(0.9) }'}
+    - {wait: 6}
+    - move:
+        who: Gate Smith
+        route: [turn_right]
+        wait: true
+    - 'Gate Smith: Three bells! Off the forges! It''s not even noon!'
+    - move:
+        who: Brann (gate)
+        route:
+        - graphic: [BRANN, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - turn_down
+        - through_off
+        wait: true
+    - '\pf[BRANN,happy,exclaim,Brann (gate)]Brann: IMELDA!'
+    - move:
+        who: Brann (gate)
+        route: [right, turn_down]
+        wait: true
+    - move:
+        who: Larch (gate)
+        route:
+        - jump: [0, 0]
+        - jump: [0, 0]
+        wait: true
+    - '\pf[LARCH,panic,,Larch (gate)]Larch: Ribs. Brann. Those are my ribs.'
+    - move:
+        who: Brann (gate)
+        route: [left, turn_down]
+        wait: true
+    - 'Brann: And THIS is the ferry child! Come here!'
+    - choices: [(Dodge.), (Accept your fate.)]
+      branches:
+      - - move:
+            who: player
+            route:
+            - {speed: 5}
+            - left
+            - turn_right
+            - {speed: 3}
+            wait: true
+        - '\pf[BRANN,shocked,,Brann (gate)]Brann: Quick! Good! A smith respects reflexes!'
+        - move:
+            who: Brann (gate)
+            route: [left, down, turn_left]
+            wait: true
+        - move:
+            who: player
+            route:
+            - jump: [0, 0]
+            wait: true
+        - move:
+            who: Brann (gate)
+            route: [up, right, turn_down]
+            wait: true
+      - - move:
+            who: Brann (gate)
+            route: [down, turn_down]
+            wait: true
+        - move:
+            who: player
+            route:
+            - jump: [0, 0]
+            wait: true
+        - move:
+            who: Brann (gate)
+            route: [up, turn_down]
+            wait: true
+        - '\pf[BRANN,crying,,Brann (gate)]Brann: So small! Imelda, they''re so SMALL!'
+        - 'Brann: Are you feeding them?'
+      cancel: 0
+    - '\pf[LARCH,deadpan,,Larch (gate)]Larch: I offer tea.'
+    - '\pf[BRANN,shocked,,Brann (gate)]Brann: The kelp one?'
+    - 'Brann: I quenched a blade in that once.'
+    - '\pf[LARCH,angry,,Larch (gate)]Larch: You did WHAT.'
+    - '\pf[BRANN,smug,,Brann (gate)]Brann: Best edge I ever got.'
+    - {script: 'pfm_face("Brann (gate)", :player)'}
+    - '\pf[BRANN,neutral,,Brann (gate)]Brann: You picked a bad week. The mountain''s running a fever, and two lots of people want to be the doctor, and neither of
+      them''s a doctor.'
+    - 'Brann: Come up to the Hall.'
+    - 'Brann: There''s an Ashkaar envoy in my best chair and I''d like witnesses.'
+    - move:
+        who: Brann (gate)
+        route: [through_on, up, up, up]
+        wait: false
+    - move:
+        who: Larch (gate)
+        route: [through_on, up, up, up]
+        wait: true
+    - var: [CH8_STEP, 4]
+    - {script: pfm_fade_out(20)}
+    - transfer: {map: 244, x: 10, y: 15, dir: up}
+    - {script: pfm_fade_in(20)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 3]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 4]
+  at: [0, 0]
+  story: ch8
+- type: event
+  name: Brann (gate)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [20, 8]
+  story: ch8
+- type: event
+  name: Larch (gate)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [21, 18]
+  story: ch8
+- type: event
+  name: Leaving Cindervault
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pfm_face("Gate Smith", :player)'}
+    - 'Gate Smith: West gate''s open. East''s shut.'
+    - 'Gate Smith: First time in my life the mountain''s been on the right side of a door.'
+    - if: pf_choice(:ch8_lightstone) == :wyrmrest
+      then:
+      - move:
+          who: Gate rider
+          route:
+          - graphic: [trainer_ASHKAAR_EMBER_RIDER, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - 'Roost Rider: The Wardeness flew the Light Stone to Wyrmrest at dawn. She held it like an egg. I''ve never seen her hold anything like that.'
+    - if: pf_choice(:ch8_lightstone) == :dominar
+      then:
+      - move:
+          who: Gate rider
+          route:
+          - graphic: [NPC 25, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - {script: '3.times { pbSEPlay("Mining hammer", 60, 70); pbWait(0.5) }'}
+      - 'Hearthguild Smith: The Stone''s gone east with the envoy. The Warden''s been at the anvil since dawn. Not making anything. Just hitting it.'
+    - if: pf_choice(:ch8_lightstone) == :hearthguild
+      then:
+      - move:
+          who: Gate rider
+          route:
+          - graphic: [NPC 25, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - 'Hearthguild Smith: The Warden''s put a second grille on the Stone. And a third. He''s making a fourth. We''ve told him that''s enough grilles.'
+    - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the eighth badge in Ironreach. West out of Ashkaar, along the Ashmarch and down the Long Drop.")'}
+    - var: [CH8_STEP, 10]
+    - var: [STORY_CHAPTER, 9]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 10]
+  at: [1, 0]
+  story: ch8
+- type: event
+  name: Gate rider
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [33, 11]
+  story: ch8

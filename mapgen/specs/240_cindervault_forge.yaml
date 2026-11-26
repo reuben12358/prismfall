@@ -387,3 +387,478 @@ events:
   at: [39, 9]
   item: HEATROCK
   name: Upper Rim Heat Rock
+- type: event
+  name: Five Bells (square)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(22, 23)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Larch (square)
+        route:
+        - graphic: [LARCH, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(23, 23)'}
+        - turn_up
+        wait: true
+    - {script: 'pfm_tone(46, -10, -44, 20, 20)'}
+    - {wait: 10}
+    - {script: '4.times { pbSEPlay("Anim/HealBell", 90, 60); pbWait(1.0) }'}
+    - {wait: 50}
+    - {script: 'pbSEPlay("Anim/HealBell", 100, 52)'}
+    - {wait: 30}
+    - move:
+        who: Hearthguild Bell-Ringer
+        route: [turn_down]
+        wait: true
+    - 'Bell-Ringer: FIVE! Off the mountain! FIVE!'
+    - move:
+        who: Brann (square)
+        route:
+        - graphic: [BRANN, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - up
+        - up
+        - right
+        - turn_up
+        - through_off
+        wait: false
+    - move:
+        who: Sigrun (square)
+        route:
+        - wait 8
+        - graphic: [SIGRUN, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - up
+        - up
+        - turn_up
+        - through_off
+        wait: true
+    - '\pf[BRANN,angry,,Brann (square)]Brann: That''s the tap. That''s the TAP. Imelda, the gauge on the bell-tower, what''s it say?'
+    - move:
+        who: Larch (square)
+        route: [turn_up]
+        wait: true
+    - {wait: 16}
+    - '\pf[LARCH,shocked,,Larch (square)]Larch: It''s in the red and still climbing.'
+    - 'Larch: Brann, at this rate it''s under an hour.'
+    - '\pf[SIGRUN,angry,,Sigrun (square)]Sigrun: Under an hour to what?'
+    - '\pf[BRANN,sad,,Brann (square)]Brann: To the mountain doing what mountains do.'
+    - 'Sigrun: Then I''ll get the Roosts'' riders to the lower terraces.'
+    - 'Sigrun: Children first. Brann, your smiths.'
+    - {script: 'pfm_face("Sigrun (square)", :player)'}
+    - 'Sigrun: You. Can you fight?'
+    - 'Brann: They just beat me.'
+    - 'Sigrun: Then go down to that tap and find out who''s making it worse.'
+    - move:
+        who: Sigrun (square)
+        route:
+        - through_on
+        - {speed: 5}
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Brann (square)
+        route:
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: true
+    - var: [CH8_STEP, 6]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 6]
+  at: [0, 0]
+  story: ch8
+- type: event
+  name: The Herald
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(8)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(22, 25)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Brann (square)
+        route:
+        - graphic: [BRANN, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(21, 25)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Larch (square)
+        route:
+        - graphic: [LARCH, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(23, 25)'}
+        - turn_right
+        wait: true
+    - if: $game_variables[@@CINDERVAULT_STATE] == 1
+      then:
+      - {script: 'pfm_tone(-20, -20, -14, 120, 20)'}
+      else:
+      - {script: 'pfm_tone(14, 8, -6, 0, 20)'}
+    - {wait: 20}
+    - &id007 {script: '6.times { |i| pbSEPlay("Anim/Earth4", 90, (i.even? ? 60 : 50)); pfm_shake(1, 20, 3); pbWait(0.42) }'}
+    - {wait: 10}
+    - *id007
+    - move:
+        who: Herald
+        route:
+        - graphic: [Followers/RAPIDASH, 0, 8, 0]
+        - {opacity: 255}
+        - step_anime_on
+        - through_on
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - turn_left
+        wait: false
+    - move:
+        who: Standard-bearer
+        route:
+        - wait 12
+        - graphic: [trainer_ASHKAAR_OFFICER, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - turn_left
+        wait: false
+    - move:
+        who: Column guard 1
+        route:
+        - wait 24
+        - graphic: [trainer_ASHKAAR_SOLDIER_M, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - turn_left
+        wait: false
+    - move:
+        who: Column guard 2
+        route:
+        - wait 36
+        - graphic: [trainer_ASHKAAR_SOLDIER_F, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - turn_left
+        wait: true
+    - {wait: 20}
+    - 'Dominar''s Herald: By the Dominar of Ashkaar, the Dragonfire, Keeper of the Flame and the Oath.'
+    - 'Dominar''s Herald: Say true, and hear true.'
+    - 'Dominar''s Herald: Last night the Sovereign of Zenith put a pipe into the Flame of Ashkaar and near-burned a city of the Dominion to the rock.'
+    - if: pf_choice(:ch8_caldera) == :shutdown
+      then: ['Dominar''s Herald: It was shut by a child from Elowen with their own two hands, while Zenith''s soldiers stood in front of the lever. The Dominar has
+          marked it.']
+    - if: pf_choice(:ch8_caldera) == :dampers
+      then: ['Dominar''s Herald: Zenith''s engineers have since bound the Flame with brass and call it mended. The Dominar does not.']
+    - if: pf_choice(:ch8_caldera) == :vent
+      then: ['Dominar''s Herald: The Flame was quenched by the Hollow''s faithful to save the city, and Cindervault''s forges are cold. The Dominar holds Zenith accountable
+          for every one.']
+    - 'Dominar''s Herald: Therefore. The Dominar holds Zenith responsible for this assault upon the Flame.'
+    - 'Dominar''s Herald: From this hour the eastern passes of Ashkaar are closed to Meridian, to its rails, its taps and its soldiers.'
+    - 'Dominar''s Herald: And the Flame of Ashkaar will no longer warm the beds of Isenmar.'
+    - 'Dominar''s Herald: Let the Thane find his heat in his own cold lake.'
+    - 'Dominar''s Herald: Say true: this is not war.'
+    - {wait: 30}
+    - 'Dominar''s Herald: It is the door to it.'
+    - *id007
+    - move:
+        who: Herald
+        route:
+        - {speed: 3}
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Standard-bearer
+        route:
+        - wait 8
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Column guard 1
+        route:
+        - wait 16
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Column guard 2
+        route:
+        - wait 24
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: false
+    - {wait: 30}
+    - move:
+        who: Sigrun (balcony)
+        route:
+        - graphic: [SIGRUN, 0, 2, 0]
+        - {opacity: 255}
+        - turn_left
+        wait: true
+    - raw:
+      - 203
+      - [8, 7, 3]
+    - {wait: 70}
+    - {script: pfm_pan_home(24)}
+    - {waitmove: true}
+    - move:
+        who: Brann (square)
+        route: [turn_right]
+        wait: true
+    - '\pf[BRANN,sad,,Brann (square)]Brann: Well. There it is.'
+    - 'Brann: I''ve seen that standard come up that road twice in my life.'
+    - 'Brann: Both times it took ten years to go home.'
+    - '\pf[LARCH,neutral,,Larch (square)]Larch: The Sovereign''s called the Wardens to Ironreach. A Conclave.'
+    - 'Larch: Every Warden in the realm in one room.'
+    - 'Brann: Aye. I''ll see you there.'
+    - 'Brann: Sigrun will too, if her father lets her, and he won''t, and she''ll come anyway.'
+    - switch: [CH8_WAR_DRUMS, true]
+    - var: [WAR_STATE, 1]
+    - var: [CH8_STEP, 9]
+    - {script: pfm_fade_in(30)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 8]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 9]
+  at: [1, 0]
+  story: ch8
+- type: event
+  name: Brann (square)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [21, 27]
+  story: ch8
+- type: event
+  name: Larch (square)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [23, 23]
+  story: ch8
+- type: event
+  name: Sigrun (square)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [23, 27]
+  story: ch8
+- type: event
+  name: Sigrun (balcony)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [22, 15]
+  story: ch8
+- type: event
+  name: Herald
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [27, 34]
+  story: ch8
+- type: event
+  name: Standard-bearer
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [27, 35]
+  story: ch8
+- type: event
+  name: Column guard 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [27, 36]
+  story: ch8
+- type: event
+  name: Column guard 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [27, 37]
+  story: ch8

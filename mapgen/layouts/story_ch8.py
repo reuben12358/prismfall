@@ -287,6 +287,146 @@ def pages_249(spec_events):
     return out
 
 
+# ============================================================================================ 243 / 240: the town's beats
+QUEST = lambda text: S('pfm_quest(:eighteen_roads, "Eighteen Roads", "%s")' % text)
+DRUMS = S('6.times { |i| pbSEPlay("Anim/Earth4", 90, (i.even? ? 60 : 50)); pfm_shake(1, 20, 3); pbWait(0.42) }')
+
+THE_HUG = [   # 243, CH8_STEP 3 -> 4: in through the gate
+    S('pfm_fade_out(8)'), MV('player', [{'script': 'moveto(20, 18)'}, 'turn_up']),
+    MV('Larch (gate)', show('LARCH') + [{'script': 'moveto(21, 18)'}, 'turn_up']), S('pfm_fade_in(16)'),
+    bells(3), {'wait': 6},
+    MV('Gate Smith', ['turn_right']),
+    N('Gate Smith', "Three bells! Off the forges! It's not even noon!"),
+    # a man the size of a doorframe comes down the gate stair two at a time
+    MV('Brann (gate)', show('BRANN') + ['through_on', {'speed': 5}] + ['down'] * 9 + ['turn_down', 'through_off']),
+    P('BRANN', 'happy', "IMELDA!", 'exclaim', 'Brann (gate)'),
+    MV('Brann (gate)', ['right', 'turn_down']), MV('Larch (gate)', [{'jump': [0, 0]}, {'jump': [0, 0]}]),   # off the ground
+    P('LARCH', 'panic', "Ribs. Brann. Those are my ribs.", '', 'Larch (gate)'),
+    MV('Brann (gate)', ['left', 'turn_down']),
+    N('Brann', "And THIS is the ferry child! Come here!"),
+    CH(["(Dodge.)", "(Accept your fate.)"], [
+        [MV('player', [{'speed': 5}, 'left', 'turn_right', {'speed': 3}]),
+         P('BRANN', 'shocked', "Quick! Good! A smith respects reflexes!", '', 'Brann (gate)'),
+         MV('Brann (gate)', ['left', 'down', 'turn_left']), MV('player', [{'jump': [0, 0]}]), MV('Brann (gate)', ['up', 'right', 'turn_down'])],   # hugs anyway
+        [MV('Brann (gate)', ['down', 'turn_down']), MV('player', [{'jump': [0, 0]}]), MV('Brann (gate)', ['up', 'turn_down']),
+         P('BRANN', 'crying', "So small! Imelda, they're so SMALL!", '', 'Brann (gate)'),
+         N('Brann', "Are you feeding them?")]], cancel=0),
+    P('LARCH', 'deadpan', "I offer tea.", '', 'Larch (gate)'),
+    P('BRANN', 'shocked', "The kelp one?", '', 'Brann (gate)'),
+    N('Brann', "I quenched a blade in that once."),
+    P('LARCH', 'angry', "You did WHAT.", '', 'Larch (gate)'),
+    P('BRANN', 'smug', "Best edge I ever got.", '', 'Brann (gate)'),
+    S('pfm_face("Brann (gate)", :player)'),
+    P('BRANN', 'neutral', "You picked a bad week. The mountain's running a fever, and two lots of people want to be the doctor, and neither of them's a doctor.", '', 'Brann (gate)'),
+    N('Brann', "Come up to the Hall."),
+    N('Brann', "There's an Ashkaar envoy in my best chair and I'd like witnesses."),
+    MV('Brann (gate)', ['through_on', 'up', 'up', 'up'], wait=False), MV('Larch (gate)', ['through_on', 'up', 'up', 'up']),
+    {'var': [STEP, 4]},                                                        # "V129 = 4 (on arrival at 244)"
+    S('pfm_fade_out(20)'),
+    {'transfer': {'map': 244, 'x': 10, 'y': 15, 'dir': 'up'}},
+    S('pfm_fade_in(20)')]
+
+FIVE_BELLS_SQUARE = [   # 240, CH8_STEP 5 -> 6: out of the Foundry into the square, at a dusk the wrong colour
+    S('pfm_fade_out(10)'), MV('player', [{'script': 'moveto(22, 23)'}, 'turn_up']),
+    MV('Larch (square)', show('LARCH') + [{'script': 'moveto(23, 23)'}, 'turn_up']),
+    S('pfm_tone(46, -10, -44, 20, 20)'), {'wait': 10},
+    S('4.times { pbSEPlay("Anim/HealBell", 90, 60); pbWait(1.0) }'), {'wait': 50},   # a bell. Two. Three. Four. Silence.
+    S('pbSEPlay("Anim/HealBell", 100, 52)'), {'wait': 30},                             # then, slowly: five
+    MV('Hearthguild Bell-Ringer', ['turn_down']),
+    N('Bell-Ringer', "FIVE! Off the mountain! FIVE!"),
+    MV('Brann (square)', show('BRANN') + ['through_on', {'speed': 5}, 'up', 'up', 'right', 'turn_up', 'through_off'], wait=False),   # up from the Hall at a run
+    MV('Sigrun (square)', ['wait 8'] + show('SIGRUN') + ['through_on', {'speed': 5}, 'up', 'up', 'turn_up', 'through_off']),
+    P('BRANN', 'angry', "That's the tap. That's the TAP. Imelda, the gauge on the bell-tower, what's it say?", '', 'Brann (square)'),
+    MV('Larch (square)', ['turn_up']), {'wait': 16},
+    P('LARCH', 'shocked', "It's in the red and still climbing.", '', 'Larch (square)'),
+    N('Larch', "Brann, at this rate it's under an hour."),
+    P('SIGRUN', 'angry', "Under an hour to what?", '', 'Sigrun (square)'),
+    P('BRANN', 'sad', "To the mountain doing what mountains do.", '', 'Brann (square)'),
+    N('Sigrun', "Then I'll get the Roosts' riders to the lower terraces."),
+    N('Sigrun', "Children first. Brann, your smiths."),
+    S('pfm_face("Sigrun (square)", :player)'),
+    N('Sigrun', "You. Can you fight?"),
+    N('Brann', "They just beat me."),
+    N('Sigrun', "Then go down to that tap and find out who's making it worse."),
+    MV('Sigrun (square)', ['through_on', {'speed': 5}, 'up', 'up', 'up', 'up', {'opacity': 0}], wait=False),
+    MV('Brann (square)', ['through_on', {'speed': 5}, 'down', 'down', 'down', {'opacity': 0}]),
+    {'var': [STEP, 6]}]                                                        # "V129 = 6 (begin)": the crisis (255) runs at >= 5
+
+HERALD = [   # 240, CH8_STEP 8 -> 9: next morning
+    S('pfm_fade_out(8)'), MV('player', [{'script': 'moveto(22, 25)'}, 'turn_right']),
+    MV('Brann (square)', show('BRANN') + [{'script': 'moveto(21, 25)'}, 'turn_right']),
+    MV('Larch (square)', show('LARCH') + [{'script': 'moveto(23, 25)'}, 'turn_right']),
+    IF('$game_variables[@@CINDERVAULT_STATE] == 1', [S('pfm_tone(-20, -20, -14, 120, 20)')], [S('pfm_tone(14, 8, -6, 0, 20)')]),   # ash, or a loud forge morning
+    {'wait': 20}, DRUMS, {'wait': 10}, DRUMS,                                  # war-drums, big ones, up the Pyre Road
+    MV('Herald', show('Followers/RAPIDASH', 8) + ['step_anime_on', 'through_on'] + ['up'] * 10 + ['turn_left'], wait=False),
+    MV('Standard-bearer', ['wait 12'] + show(HASKAR) + ['through_on'] + ['up'] * 10 + ['turn_left'], wait=False),
+    MV('Column guard 1', ['wait 24'] + show(GUARD_M) + ['through_on'] + ['up'] * 10 + ['turn_left'], wait=False),
+    MV('Column guard 2', ['wait 36'] + show(GUARD_F) + ['through_on'] + ['up'] * 10 + ['turn_left']),
+    {'wait': 20},
+    N("Dominar's Herald", "By the Dominar of Ashkaar, the Dragonfire, Keeper of the Flame and the Oath."),
+    N("Dominar's Herald", "Say true, and hear true."),
+    N("Dominar's Herald", "Last night the Sovereign of Zenith put a pipe into the Flame of Ashkaar and near-burned a city of the Dominion to the rock."),
+    IF('pf_choice(:ch8_caldera) == :shutdown', [N("Dominar's Herald", "It was shut by a child from Elowen with their own two hands, while Zenith's soldiers stood in front of the lever. The Dominar has marked it.")]),
+    IF('pf_choice(:ch8_caldera) == :dampers', [N("Dominar's Herald", "Zenith's engineers have since bound the Flame with brass and call it mended. The Dominar does not.")]),
+    IF('pf_choice(:ch8_caldera) == :vent', [N("Dominar's Herald", "The Flame was quenched by the Hollow's faithful to save the city, and Cindervault's forges are cold. The Dominar holds Zenith accountable for every one.")]),
+    N("Dominar's Herald", "Therefore. The Dominar holds Zenith responsible for this assault upon the Flame."),
+    N("Dominar's Herald", "From this hour the eastern passes of Ashkaar are closed to Meridian, to its rails, its taps and its soldiers."),
+    N("Dominar's Herald", "And the Flame of Ashkaar will no longer warm the beds of Isenmar."),
+    N("Dominar's Herald", "Let the Thane find his heat in his own cold lake."),
+    N("Dominar's Herald", "Say true: this is not war."), {'wait': 30},
+    N("Dominar's Herald", "It is the door to it."),
+    DRUMS,                                                                     # the drums again; the column goes down toward the Ashmarch
+    MV('Herald', [{'speed': 3}] + ['left'] * 24 + [{'opacity': 0}], wait=False),
+    MV('Standard-bearer', ['wait 8'] + ['left'] * 24 + [{'opacity': 0}], wait=False),
+    MV('Column guard 1', ['wait 16'] + ['left'] * 24 + [{'opacity': 0}], wait=False),
+    MV('Column guard 2', ['wait 24'] + ['left'] * 24 + [{'opacity': 0}], wait=False),
+    {'wait': 30},
+    # Sigrun on the bell-tower balcony, watching her father's banner go. She says nothing at all.
+    MV('Sigrun (balcony)', show('SIGRUN', 2) + ['turn_left']), {'raw': [203, [8, 7, 3]]}, {'wait': 70}, S('pfm_pan_home(24)'),
+    {'waitmove': True},
+    MV('Brann (square)', ['turn_right']),
+    P('BRANN', 'sad', "Well. There it is.", '', 'Brann (square)'),
+    N('Brann', "I've seen that standard come up that road twice in my life."),
+    N('Brann', "Both times it took ten years to go home."),
+    P('LARCH', 'neutral', "The Sovereign's called the Wardens to Ironreach. A Conclave.", '', 'Larch (square)'),
+    N('Larch', "Every Warden in the realm in one room."),
+    N('Brann', "Aye. I'll see you there."),
+    N('Brann', "Sigrun will too, if her father lets her, and he won't, and she'll come anyway."),
+    {'switch': ['CH8_WAR_DRUMS', True]}, {'var': ['WAR_STATE', 1]}, {'var': [STEP, 9]},
+    S('pfm_fade_in(30)')]
+
+LEAVING = [   # 243, CH8_STEP 9 -> 10
+    S('pfm_face("Gate Smith", :player)'),
+    N('Gate Smith', "West gate's open. East's shut."),
+    N('Gate Smith', "First time in my life the mountain's been on the right side of a door."),
+    IF('pf_choice(:ch8_lightstone) == :wyrmrest', [
+        MV('Gate rider', show('trainer_ASHKAAR_EMBER_RIDER', 2)),
+        N('Roost Rider', "The Wardeness flew the Light Stone to Wyrmrest at dawn. She held it like an egg. I've never seen her hold anything like that.")]),
+    IF('pf_choice(:ch8_lightstone) == :dominar', [
+        MV('Gate rider', show('NPC 25', 2)), S('3.times { pbSEPlay("Mining hammer", 60, 70); pbWait(0.5) }'),   # just hitting it
+        N('Hearthguild Smith', "The Stone's gone east with the envoy. The Warden's been at the anvil since dawn. Not making anything. Just hitting it.")]),
+    IF('pf_choice(:ch8_lightstone) == :hearthguild', [
+        MV('Gate rider', show('NPC 25', 2)),
+        N('Hearthguild Smith', "The Warden's put a second grille on the Stone. And a third. He's making a fourth. We've told him that's enough grilles.")]),
+    QUEST('Earn the eighth badge in Ironreach. West out of Ashkaar, along the Ashmarch and down the Long Drop.'),
+    {'var': [STEP, 10]}, {'var': ['STORY_CHAPTER', 9]}]
+
+
+def events_243():
+    return [at(ev('The Hug', page([]), page(THE_HUG, cond=V(3), trigger='autorun'), page([], cond=V(4))), 0, 0),
+            walk_on('Brann (gate)', 20, 8), walk_on('Larch (gate)', 21, 18),
+            at(ev('Leaving Cindervault', page([]), page(LEAVING, cond=V(9), trigger='autorun'), page([], cond=V(10))), 1, 0),
+            walk_on('Gate rider', 33, 11)]
+
+
+def events_240():
+    return [at(ev('Five Bells (square)', page([]), page(FIVE_BELLS_SQUARE, cond=V(5), trigger='autorun'), page([], cond=V(6))), 0, 0),
+            at(ev('The Herald', page([]), page(HERALD, cond=V(8), trigger='autorun'), page([], cond=V(9))), 1, 0),
+            walk_on('Brann (square)', 21, 27), walk_on('Larch (square)', 23, 23), walk_on('Sigrun (square)', 23, 27),
+            walk_on('Sigrun (balcony)', 22, 15),
+            walk_on('Herald', 27, 34), walk_on('Standard-bearer', 27, 35), walk_on('Column guard 1', 27, 36), walk_on('Column guard 2', 27, 37)]
+
+
 # ============================================================================================ stage directions
 # The guarded exits Gemini's layouts write print a bracketed narrator box when the next map isn't built. Played
 # instead: the player is turned back a step with a sound, and somebody on the spot says why (no brackets).
@@ -322,6 +462,8 @@ def main():
     print('map 244: %d events' % SL.patch('244_hearthguild_hall.yaml', 244, events_244(), None, TAG))
     spec = next(d for d in yaml.safe_load_all(open(os.path.join(SL.HERE, 'specs', '249_slag_ward.yaml'))) if d and d.get('id') == 249)
     print('map 249: %d events' % SL.patch('249_slag_ward.yaml', 249, events_249(), pages_249(spec['events']), TAG))
+    print('map 243: %d events' % SL.patch('243_caldera_gate.yaml', 243, events_243(), None, TAG))
+    print('map 240: %d events' % SL.patch('240_cindervault_forge.yaml', 240, events_240(), None, TAG))
     files = {240: '240_cindervault_forge.yaml', 243: '243_caldera_gate.yaml', 249: '249_slag_ward.yaml'}
     for mid, mapping in STAGE.items():
         print('map %d: stage directions %s' % (mid, sorted(SL.replace_lines(files[mid], mid, mapping, TAG).values())))
