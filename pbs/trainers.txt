@@ -27048,6 +27048,1045 @@ Pokemon = SKELEDIRGE,65
     Nature = MODEST
     IV = 0
     EV = 0
+# Map 801 The Slag Mesa
+#-------------------------------
+[ENGINEER,Doyle]
+LoseText = Scrap's scrap. You, though. You're worth something.
+Pokemon = PERRSERKER,64
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KLEFKI,65
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = COPPERAJAH,66
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GARBODOR,67
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ENGINEER,Doyle,100]
+LoseText = Scrap's scrap. You, though. You're worth something.
+Pokemon = PERRSERKER,65
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KLEFKI,66
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = COPPERAJAH,67
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GARBODOR,68
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ENGINEER,Doyle,200]
+LoseText = Scrap's scrap. You, though. You're worth something.
+Pokemon = PERRSERKER,63
+    Ability = BATTLEARMOR
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KLEFKI,64
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = COPPERAJAH,65
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GARBODOR,66
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 801 The Slag Mesa
+#-------------------------------
+[ROCKER,Vex]
+LoseText = Three chords and the truth. You had four.
+Pokemon = SCOLIPEDE,64
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 8
+Pokemon = WEEZING,65
+    Form = 1
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MUK,66
+    Form = 1
+    Ability = POISONTOUCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TOXTRICITY,67
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[ROCKER,Vex,100]
+LoseText = Three chords and the truth. You had four.
+Pokemon = SCOLIPEDE,65
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 20
+Pokemon = WEEZING,66
+    Form = 1
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MUK,67
+    Form = 1
+    Ability = POISONTOUCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TOXTRICITY,68
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[ROCKER,Vex,200]
+LoseText = Three chords and the truth. You had four.
+Pokemon = SCOLIPEDE,63
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = WEEZING,64
+    Form = 1
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MUK,65
+    Form = 1
+    Ability = POISONTOUCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TOXTRICITY,66
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 801 The Slag Mesa
+#-------------------------------
+[BIKER,Ratchet]
+LoseText = Mesa's flat. My tyres are flatter.
+Pokemon = SCRAFTY,66
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KROOKODILE,67
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+Pokemon = REVAVROOM,68
+    Ability = OVERCOAT
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BIKER,Ratchet,100]
+LoseText = Mesa's flat. My tyres are flatter.
+Pokemon = SCRAFTY,67
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KROOKODILE,68
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+Pokemon = REVAVROOM,69
+    Ability = OVERCOAT
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BIKER,Ratchet,200]
+LoseText = Mesa's flat. My tyres are flatter.
+Pokemon = SCRAFTY,65
+    Ability = MOXIE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KROOKODILE,66
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = REVAVROOM,67
+    Ability = OVERCOAT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 801 The Slag Mesa
+#-------------------------------
+[SCIENTIST,Hale]
+LoseText = Survey says: you win. I'll write it up.
+Pokemon = STUNFISK,65
+    Form = 1
+    Ability = MIMICRY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FERROTHORN,66
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KLINKLANG,67
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 8
+Pokemon = MAGNEZONE,68
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SCIENTIST,Hale,100]
+LoseText = Survey says: you win. I'll write it up.
+Pokemon = STUNFISK,66
+    Form = 1
+    Ability = MIMICRY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FERROTHORN,67
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KLINKLANG,68
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 20
+Pokemon = MAGNEZONE,69
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SCIENTIST,Hale,200]
+LoseText = Survey says: you win. I'll write it up.
+Pokemon = STUNFISK,64
+    Form = 1
+    Ability = MIMICRY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FERROTHORN,65
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KLINKLANG,66
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MAGNEZONE,67
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 811 The Smokestack Parade
+#-------------------------------
+[ENGINEER,Maeve]
+LoseText = Stoke it, bank it, let it breathe. You didn't let me breathe.
+Pokemon = TORKOAL,66
+    Ability = DROUGHT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CAMERUPT,67
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = COALOSSAL,68
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ENGINEER,Maeve,100]
+LoseText = Stoke it, bank it, let it breathe. You didn't let me breathe.
+Pokemon = TORKOAL,67
+    Ability = DROUGHT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CAMERUPT,68
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = COALOSSAL,69
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ENGINEER,Maeve,200]
+LoseText = Stoke it, bank it, let it breathe. You didn't let me breathe.
+Pokemon = TORKOAL,65
+    Ability = DROUGHT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CAMERUPT,66
+    Ability = MAGMAARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = COALOSSAL,67
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 811 The Smokestack Parade
+#-------------------------------
+[SCIENTIST,Ilkley]
+LoseText = Interesting. The smoke went the other way when you arrived.
+Pokemon = ELECTIVIRE,65
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 8
+Pokemon = PORYGON2,66
+    Ability = TRACE
+    Nature = MODEST
+    IV = 8
+Pokemon = ROTOM,67
+    Form = 4
+    Moves = AIRSLASH,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+Pokemon = MAGNEZONE,68
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SCIENTIST,Ilkley,100]
+LoseText = Interesting. The smoke went the other way when you arrived.
+Pokemon = ELECTIVIRE,66
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 20
+Pokemon = PORYGON2,67
+    Ability = TRACE
+    Nature = MODEST
+    IV = 20
+Pokemon = ROTOM,68
+    Form = 4
+    Moves = AIRSLASH,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+Pokemon = MAGNEZONE,69
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SCIENTIST,Ilkley,200]
+LoseText = Interesting. The smoke went the other way when you arrived.
+Pokemon = ELECTIVIRE,64
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = PORYGON2,65
+    Ability = TRACE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = ROTOM,66
+    Form = 4
+    Moves = AIRSLASH,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = MAGNEZONE,67
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 811 The Smokestack Parade
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Penrose]
+LoseText = Your papers are in order. That's the only thing that is.
+Pokemon = HOUNDOOM,65
+    Moves = FLAMETHROWER,CRUNCH,NASTYPLOT,FOULPLAY
+    Ability = FLASHFIRE
+    Nature = TIMID
+    IV = 8
+Pokemon = MIGHTYENA,66
+    Moves = CRUNCH,SUCKERPUNCH,PLAYROUGH,ICEFANG
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CORVIKNIGHT,67
+    Moves = BRAVEBIRD,DRILLPECK,IRONDEFENSE,SCARYFACE
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ARCANINE,68
+    Moves = FLAREBLITZ,EXTREMESPEED,CRUNCH,PLAYROUGH
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Penrose,100]
+LoseText = Your papers are in order. That's the only thing that is.
+Pokemon = HOUNDOOM,66
+    Moves = FLAMETHROWER,CRUNCH,NASTYPLOT,FOULPLAY
+    Ability = FLASHFIRE
+    Nature = TIMID
+    IV = 20
+Pokemon = MIGHTYENA,67
+    Moves = CRUNCH,SUCKERPUNCH,PLAYROUGH,ICEFANG
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CORVIKNIGHT,68
+    Moves = BRAVEBIRD,DRILLPECK,IRONDEFENSE,SCARYFACE
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ARCANINE,69
+    Moves = FLAREBLITZ,EXTREMESPEED,CRUNCH,PLAYROUGH
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Penrose,200]
+LoseText = Your papers are in order. That's the only thing that is.
+Pokemon = HOUNDOOM,64
+    Moves = FLAMETHROWER,CRUNCH,NASTYPLOT,FOULPLAY
+    Ability = FLASHFIRE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = MIGHTYENA,65
+    Moves = CRUNCH,SUCKERPUNCH,PLAYROUGH,ICEFANG
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CORVIKNIGHT,66
+    Moves = BRAVEBIRD,DRILLPECK,IRONDEFENSE,SCARYFACE
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ARCANINE,67
+    Moves = FLAREBLITZ,EXTREMESPEED,CRUNCH,PLAYROUGH
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 400 Cogsworth
+#-------------------------------
+[COOLTRAINER_F,Delphine]
+LoseText = Cogsworth keeps time. I keep losing it.
+Pokemon = GOODRA,66
+    Form = 1
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = METAGROSS,67
+    Ability = CLEARBODY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GYARADOS,68
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = VOLCARONA,69
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[COOLTRAINER_F,Delphine,100]
+LoseText = Cogsworth keeps time. I keep losing it.
+Pokemon = GOODRA,67
+    Form = 1
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = METAGROSS,68
+    Ability = CLEARBODY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GYARADOS,69
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = VOLCARONA,70
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[COOLTRAINER_F,Delphine,200]
+LoseText = Cogsworth keeps time. I keep losing it.
+Pokemon = GOODRA,65
+    Form = 1
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = METAGROSS,66
+    Ability = CLEARBODY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GYARADOS,67
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = VOLCARONA,68
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 400 Cogsworth
+#-------------------------------
+[GENTLEMAN,Cardew]
+LoseText = Tick, tock. Ah. Time's up.
+Pokemon = PERSIAN,66
+    Form = 1
+    Ability = FURCOAT
+    Nature = TIMID
+    IV = 8
+Pokemon = KLINKLANG,67
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 8
+Pokemon = BRONZONG,68
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = AEGISLASH,69
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 8
+#-------------------------------
+[GENTLEMAN,Cardew,100]
+LoseText = Tick, tock. Ah. Time's up.
+Pokemon = PERSIAN,67
+    Form = 1
+    Ability = FURCOAT
+    Nature = TIMID
+    IV = 20
+Pokemon = KLINKLANG,68
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 20
+Pokemon = BRONZONG,69
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = AEGISLASH,70
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 20
+#-------------------------------
+[GENTLEMAN,Cardew,200]
+LoseText = Tick, tock. Ah. Time's up.
+Pokemon = PERSIAN,65
+    Form = 1
+    Ability = FURCOAT
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = KLINKLANG,66
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = BRONZONG,67
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = AEGISLASH,68
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 0
+    EV = 0
+# Map 410 Cogsworth Gym - Gatehouse
+#-------------------------------
+[ENGINEER,Wright]
+LoseText = Clock in, clock out. You clocked me.
+Pokemon = BISHARP,65
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FERROTHORN,66
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KLINKLANG,67
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[ENGINEER,Wright,100]
+LoseText = Clock in, clock out. You clocked me.
+Pokemon = BISHARP,66
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FERROTHORN,67
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KLINKLANG,68
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[ENGINEER,Wright,200]
+LoseText = Clock in, clock out. You clocked me.
+Pokemon = BISHARP,64
+    Ability = INNERFOCUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FERROTHORN,65
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KLINKLANG,66
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 411 Cogsworth Gym - Assembly Line
+#-------------------------------
+[ENGINEER,Rivet]
+LoseText = Belt three's backwards. So was my plan.
+Pokemon = ESCAVALIER,66
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = EMPOLEON,67
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 8
+Pokemon = SCIZOR,68
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ENGINEER,Rivet,100]
+LoseText = Belt three's backwards. So was my plan.
+Pokemon = ESCAVALIER,67
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = EMPOLEON,68
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 20
+Pokemon = SCIZOR,69
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ENGINEER,Rivet,200]
+LoseText = Belt three's backwards. So was my plan.
+Pokemon = ESCAVALIER,65
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = EMPOLEON,66
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SCIZOR,67
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 411 Cogsworth Gym - Assembly Line
+#-------------------------------
+[FOREMAN,Hobb]
+LoseText = Line's stopped. Magnus won't like that. Neither do I.
+Pokemon = CONKELDURR,66
+    Moves = HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = COPPERAJAH,67
+    Moves = HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MACHAMP,68
+    Moves = DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FOREMAN,Hobb,100]
+LoseText = Line's stopped. Magnus won't like that. Neither do I.
+Pokemon = CONKELDURR,67
+    Moves = HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = COPPERAJAH,68
+    Moves = HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MACHAMP,69
+    Moves = DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FOREMAN,Hobb,200]
+LoseText = Line's stopped. Magnus won't like that. Neither do I.
+Pokemon = CONKELDURR,65
+    Moves = HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = COPPERAJAH,66
+    Moves = HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MACHAMP,67
+    Moves = DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 412 Cogsworth Gym - Crane Bay
+#-------------------------------
+[ENGINEER,Cranwell]
+LoseText = Load's swinging. Mind your head. Too late.
+Pokemon = SKARMORY,67
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = STEELIX,68
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CORVIKNIGHT,69
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ENGINEER,Cranwell,100]
+LoseText = Load's swinging. Mind your head. Too late.
+Pokemon = SKARMORY,68
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = STEELIX,69
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CORVIKNIGHT,70
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ENGINEER,Cranwell,200]
+LoseText = Load's swinging. Mind your head. Too late.
+Pokemon = SKARMORY,66
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = STEELIX,67
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CORVIKNIGHT,68
+    Ability = UNNERVE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 412 Cogsworth Gym - Crane Bay
+#-------------------------------
+[SCIENTIST,Lisette]
+LoseText = Tolerances within a thousandth. You're outside them.
+Pokemon = BRONZONG,67
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAGNEZONE,68
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+Pokemon = GHOLDENGO,69
+    Ability = GOODASGOLD
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SCIENTIST,Lisette,100]
+LoseText = Tolerances within a thousandth. You're outside them.
+Pokemon = BRONZONG,68
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAGNEZONE,69
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+Pokemon = GHOLDENGO,70
+    Ability = GOODASGOLD
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SCIENTIST,Lisette,200]
+LoseText = Tolerances within a thousandth. You're outside them.
+Pokemon = BRONZONG,66
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAGNEZONE,67
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GHOLDENGO,68
+    Ability = GOODASGOLD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 412 Cogsworth Gym - Crane Bay
+#-------------------------------
+[MERIDIAN_AGENT_M,Foreman]
+LoseText = The Directorate hears about every delay. This one's yours.
+Pokemon = AGGRON,68
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ARCHALUDON,69
+    Ability = STAMINA
+    Nature = TIMID
+    IV = 8
+Pokemon = KINGAMBIT,70
+    Ability = SUPREMEOVERLORD
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[MERIDIAN_AGENT_M,Foreman,100]
+LoseText = The Directorate hears about every delay. This one's yours.
+Pokemon = AGGRON,69
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ARCHALUDON,70
+    Ability = STAMINA
+    Nature = TIMID
+    IV = 20
+Pokemon = KINGAMBIT,71
+    Ability = SUPREMEOVERLORD
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[MERIDIAN_AGENT_M,Foreman,200]
+LoseText = The Directorate hears about every delay. This one's yours.
+Pokemon = AGGRON,67
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ARCHALUDON,68
+    Ability = STAMINA
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = KINGAMBIT,69
+    Ability = SUPREMEOVERLORD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 403 Strade Works - Foundry Floor
+#-------------------------------
+[FOREMAN,Briggs]
+LoseText = Night shift doesn't stop for a kid. Usually.
+Pokemon = EXCADRILL,67
+    Moves = EARTHQUAKE,DRILLRUN,ROCKSLIDE,SWORDSDANCE
+    Ability = SANDFORCE
+    Nature = JOLLY
+    IV = 8
+Pokemon = CONKELDURR,68
+    Moves = HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MACHAMP,69
+    Moves = DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FOREMAN,Briggs,100]
+LoseText = Night shift doesn't stop for a kid. Usually.
+Pokemon = EXCADRILL,68
+    Moves = EARTHQUAKE,DRILLRUN,ROCKSLIDE,SWORDSDANCE
+    Ability = SANDFORCE
+    Nature = JOLLY
+    IV = 20
+Pokemon = CONKELDURR,69
+    Moves = HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MACHAMP,70
+    Moves = DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FOREMAN,Briggs,200]
+LoseText = Night shift doesn't stop for a kid. Usually.
+Pokemon = EXCADRILL,66
+    Moves = EARTHQUAKE,DRILLRUN,ROCKSLIDE,SWORDSDANCE
+    Ability = SANDFORCE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = CONKELDURR,67
+    Moves = HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MACHAMP,68
+    Moves = DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 403 Strade Works - Foundry Floor
+#-------------------------------
+[FOREMAN,Oyelaran]
+LoseText = Pour's at midnight. I'll be there. Bruised.
+Pokemon = RHYPERIOR,68
+    Moves = STONEEDGE,EARTHQUAKE,MEGAHORN,HAMMERARM
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = STEELIX,69
+    Moves = IRONTAIL,CRUNCH,STONEEDGE,STEALTHROCK
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = COPPERAJAH,70
+    Moves = HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FOREMAN,Oyelaran,100]
+LoseText = Pour's at midnight. I'll be there. Bruised.
+Pokemon = RHYPERIOR,69
+    Moves = STONEEDGE,EARTHQUAKE,MEGAHORN,HAMMERARM
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = STEELIX,70
+    Moves = IRONTAIL,CRUNCH,STONEEDGE,STEALTHROCK
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = COPPERAJAH,71
+    Moves = HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FOREMAN,Oyelaran,200]
+LoseText = Pour's at midnight. I'll be there. Bruised.
+Pokemon = RHYPERIOR,67
+    Moves = STONEEDGE,EARTHQUAKE,MEGAHORN,HAMMERARM
+    Ability = SOLIDROCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = STEELIX,68
+    Moves = IRONTAIL,CRUNCH,STONEEDGE,STEALTHROCK
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = COPPERAJAH,69
+    Moves = HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER
+    Ability = SHEERFORCE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 403 Strade Works - Foundry Floor
+#-------------------------------
+[SCIENTIST,Pask]
+LoseText = The furnace was rated for that. I wasn't.
+Pokemon = KLINKLANG,68
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 8
+Pokemon = ROTOM,69
+    Form = 1
+    Moves = OVERHEAT,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+Pokemon = MAGNEZONE,70
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SCIENTIST,Pask,100]
+LoseText = The furnace was rated for that. I wasn't.
+Pokemon = KLINKLANG,69
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 20
+Pokemon = ROTOM,70
+    Form = 1
+    Moves = OVERHEAT,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+Pokemon = MAGNEZONE,71
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SCIENTIST,Pask,200]
+LoseText = The furnace was rated for that. I wasn't.
+Pokemon = KLINKLANG,67
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = ROTOM,68
+    Form = 1
+    Moves = OVERHEAT,DISCHARGE,HEX,ELECTROBALL
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = MAGNEZONE,69
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
 # Map 861 The Thornwar Marches
 #-------------------------------
 [COOLTRAINER_F,Isolde]

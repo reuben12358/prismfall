@@ -69,6 +69,8 @@ def ROUTES(P):
         772: (0, 63, {}), 773: (0, 63, {}), 783: (0, 67, {}), 810: (0, 67, {}),
         # Ch15 script roster (story density sections, 2026-11-26)
         392: (0, 67, {}), 780: (0, 67, {}), 781: (0, 67, {}), 790: (0, 67, {}), 800: (0, 71, {}), 804: (0, 71, {}),
+        # Ch16 script roster (story density sections, 2026-11-26)
+        400: (0, 71, {}), 403: (0, 71, {}), 410: (0, 71, {}), 411: (0, 71, {}), 412: (0, 71, {}), 801: (0, 71, {}), 811: (0, 71, {}),
         # Coverage fill, Ch19 (segment 17, cap 85)
         861: (0, 85, {}), 864: (0, 85, {}),
     }
@@ -922,6 +924,58 @@ def ROUTES(P):
     # Hollow Grunt F Acolyte: the Mourner-acolyte (HOLLOW)
     t("Map 392 Gravenmoor Gym - Dead Nave", "HOLLOW_GRUNT_F", "Acolyte", "The Mourner taught us grief. You're teaching us something else.",
       [m("TREVENANT", 64, "FRISK", "ADAMANT"), m("DUSKNOIR", 65, "PRESSURE", "ADAMANT"), m("SKELEDIRGE", 66, "BLAZE", "MODEST")])
+    # ---------------------------------------------------------------------------------------------------------------
+    # Ch16 - the Slag Mesa, the Smokestack Parade, Cogsworth and Strade Works; Gym 15 (cap 71; story/35_SCRIPT_CH16.md roster)
+    # Engineer Doyle: Scrap-picker Doyle (script: Worker)
+    t("Map 801 The Slag Mesa", "ENGINEER", "Doyle", "Scrap's scrap. You, though. You're worth something.",
+      [m("PERRSERKER", 64, "BATTLEARMOR", "ADAMANT"), m("KLEFKI", 65, "PRANKSTER", "ADAMANT"), m("COPPERAJAH", 66, "SHEERFORCE", "ADAMANT"), m("GARBODOR", 67, "STENCH", "ADAMANT")])
+    # Rocker Vex: a punk (script: Guitarist); Wasteland: Poison thrives, and the Galarian Weezing cleans what it can
+    t("Map 801 The Slag Mesa", "ROCKER", "Vex", "Three chords and the truth. You had four.",
+      [m("SCOLIPEDE", 64, "SWARM", "JOLLY"), m("WEEZING", 65, "LEVITATE", "ADAMANT", form=1), m("MUK", 66, "POISONTOUCH", "ADAMANT", form=1), m("TOXTRICITY", 67, "PUNKROCK", "MODEST")])
+    t("Map 801 The Slag Mesa", "BIKER", "Ratchet", "Mesa's flat. My tyres are flatter.",
+      [m("SCRAFTY", 66, "MOXIE", "ADAMANT"), m("KROOKODILE", 67, "INTIMIDATE", "JOLLY"), m("REVAVROOM", 68, "OVERCOAT", "JOLLY")])
+    # Scientist Hale: Surveyor Hale (script: Engineer); Wasteland: Poison and Steel thrive
+    t("Map 801 The Slag Mesa", "SCIENTIST", "Hale", "Survey says: you win. I'll write it up.",
+      [m("STUNFISK", 65, "MIMICRY", "ADAMANT", form=1), m("FERROTHORN", 66, "IRONBARBS", "ADAMANT"), m("KLINKLANG", 67, "MINUS", "JOLLY"), m("MAGNEZONE", 68, "STURDY", "MODEST")])
+    # Engineer Maeve: Stoker Maeve (script: Worker)
+    t("Map 811 The Smokestack Parade", "ENGINEER", "Maeve", "Stoke it, bank it, let it breathe. You didn't let me breathe.",
+      [m("TORKOAL", 66, "DROUGHT", "ADAMANT"), m("CAMERUPT", 67, "MAGMAARMOR", "MODEST"), m("COALOSSAL", 68, "FLAMEBODY", "ADAMANT")])
+    # Scientist Ilkley: Dr. Ilkley; Rotom-Fan
+    t("Map 811 The Smokestack Parade", "SCIENTIST", "Ilkley", "Interesting. The smoke went the other way when you arrived.",
+      [m("ELECTIVIRE", 65, "MOTORDRIVE", "JOLLY"), m("PORYGON2", 66, "TRACE", "MODEST"), m("ROTOM", 67, "LEVITATE", "TIMID", "AIRSLASH,DISCHARGE,HEX,ELECTROBALL", form=4), m("MAGNEZONE", 68, "STURDY", "MODEST")])
+    # Meridian Directorate Penrose: Officer Penrose, Directorate
+    t("Map 811 The Smokestack Parade", "MERIDIAN_DIRECTORATE", "Penrose", "Your papers are in order. That's the only thing that is.",
+      [m("HOUNDOOM", 65, "FLASHFIRE", "TIMID", "FLAMETHROWER,CRUNCH,NASTYPLOT,FOULPLAY"), m("MIGHTYENA", 66, "INTIMIDATE", "ADAMANT", "CRUNCH,SUCKERPUNCH,PLAYROUGH,ICEFANG"), m("CORVIKNIGHT", 67, "PRESSURE", "ADAMANT", "BRAVEBIRD,DRILLPECK,IRONDEFENSE,SCARYFACE"), m("ARCANINE", 68, "INTIMIDATE", "JOLLY", "FLAREBLITZ,EXTREMESPEED,CRUNCH,PLAYROUGH")])
+    # Cooltrainer F Delphine: Ace Trainer Delphine; the Hisuian Goodra is armour for a steel town
+    t("Map 400 Cogsworth", "COOLTRAINER_F", "Delphine", "Cogsworth keeps time. I keep losing it.",
+      [m("GOODRA", 66, "SHELLARMOR", "MODEST", form=1), m("METAGROSS", 67, "CLEARBODY", "ADAMANT"), m("GYARADOS", 68, "INTIMIDATE", "ADAMANT"), m("VOLCARONA", 69, "FLAMEBODY", "TIMID")])
+    # Gentleman Cardew: Mr. Cardew
+    t("Map 400 Cogsworth", "GENTLEMAN", "Cardew", "Tick, tock. Ah. Time's up.",
+      [m("PERSIAN", 66, "FURCOAT", "TIMID", form=1), m("KLINKLANG", 67, "MINUS", "JOLLY"), m("BRONZONG", 68, "LEVITATE", "ADAMANT"), m("AEGISLASH", 69, "STANCECHANGE", "BOLD")])
+    t("Map 410 Cogsworth Gym - Gatehouse", "ENGINEER", "Wright", "Clock in, clock out. You clocked me.",
+      [m("BISHARP", 65, "INNERFOCUS", "ADAMANT"), m("FERROTHORN", 66, "IRONBARBS", "ADAMANT"), m("KLINKLANG", 67, "MINUS", "JOLLY")])
+    t("Map 411 Cogsworth Gym - Assembly Line", "ENGINEER", "Rivet", "Belt three's backwards. So was my plan.",
+      [m("ESCAVALIER", 66, "SWARM", "ADAMANT"), m("EMPOLEON", 67, "TORRENT", "MODEST"), m("SCIZOR", 68, "SWARM", "ADAMANT")])
+    # Foreman Hobb: a line worker
+    t("Map 411 Cogsworth Gym - Assembly Line", "FOREMAN", "Hobb", "Line's stopped. Magnus won't like that. Neither do I.",
+      [m("CONKELDURR", 66, "GUTS", "ADAMANT", "HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP"), m("COPPERAJAH", 67, "SHEERFORCE", "ADAMANT", "HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER"), m("MACHAMP", 68, "NOGUARD", "ADAMANT", "DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP")])
+    # Engineer Cranwell: a crane worker
+    t("Map 412 Cogsworth Gym - Crane Bay", "ENGINEER", "Cranwell", "Load's swinging. Mind your head. Too late.",
+      [m("SKARMORY", 67, "KEENEYE", "ADAMANT"), m("STEELIX", 68, "STURDY", "ADAMANT"), m("CORVIKNIGHT", 69, "UNNERVE", "ADAMANT")])
+    t("Map 412 Cogsworth Gym - Crane Bay", "SCIENTIST", "Lisette", "Tolerances within a thousandth. You're outside them.",
+      [m("BRONZONG", 67, "LEVITATE", "ADAMANT"), m("MAGNEZONE", 68, "STURDY", "MODEST"), m("GHOLDENGO", 69, "GOODASGOLD", "MODEST")])
+    # Meridian Agent M Foreman: the Meridian Foreman
+    t("Map 412 Cogsworth Gym - Crane Bay", "MERIDIAN_AGENT_M", "Foreman", "The Directorate hears about every delay. This one's yours.",
+      [m("AGGRON", 68, "STURDY", "ADAMANT"), m("ARCHALUDON", 69, "STAMINA", "TIMID"), m("KINGAMBIT", 70, "SUPREMEOVERLORD", "ADAMANT")])
+    # Foreman Briggs: Night Foreman Briggs
+    t("Map 403 Strade Works - Foundry Floor", "FOREMAN", "Briggs", "Night shift doesn't stop for a kid. Usually.",
+      [m("EXCADRILL", 67, "SANDFORCE", "JOLLY", "EARTHQUAKE,DRILLRUN,ROCKSLIDE,SWORDSDANCE"), m("CONKELDURR", 68, "GUTS", "ADAMANT", "HAMMERARM,STONEEDGE,SUPERPOWER,BULKUP"), m("MACHAMP", 69, "NOGUARD", "ADAMANT", "DYNAMICPUNCH,CROSSCHOP,KNOCKOFF,BULKUP")])
+    # Foreman Oyelaran: Night Foreman Oyelaran
+    t("Map 403 Strade Works - Foundry Floor", "FOREMAN", "Oyelaran", "Pour's at midnight. I'll be there. Bruised.",
+      [m("RHYPERIOR", 68, "SOLIDROCK", "ADAMANT", "STONEEDGE,EARTHQUAKE,MEGAHORN,HAMMERARM"), m("STEELIX", 69, "STURDY", "ADAMANT", "IRONTAIL,CRUNCH,STONEEDGE,STEALTHROCK"), m("COPPERAJAH", 70, "SHEERFORCE", "ADAMANT", "HEAVYSLAM,HIGHHORSEPOWER,PLAYROUGH,SUPERPOWER")])
+    # Scientist Pask: Engineer Pask (script: Scientist); Rotom-Heat
+    t("Map 403 Strade Works - Foundry Floor", "SCIENTIST", "Pask", "The furnace was rated for that. I wasn't.",
+      [m("KLINKLANG", 68, "MINUS", "JOLLY"), m("ROTOM", 69, "LEVITATE", "TIMID", "OVERHEAT,DISCHARGE,HEX,ELECTROBALL", form=1), m("MAGNEZONE", 70, "STURDY", "MODEST")])
     # ---------------------------------------------------------------------------------------------------------------
     # Ch19 - two script-roster rows (story/38_SCRIPT_CH19.md) that carry the last four species (cap 85)
     # Cooltrainer F Isolde: script roster (story/38_SCRIPT_CH19.md): Ace Trainer Isolde
