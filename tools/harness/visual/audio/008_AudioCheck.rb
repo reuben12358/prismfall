@@ -85,6 +85,8 @@ if ENV["DEMO_PLAN"].to_s.start_with?("audiochk")
       $player.party = [DemoRun.mon(:SWAMPERT, 60, [:SURF, :EARTHQUAKE, :ICEBEAM, :PROTECT])]
       ac = Prismfall::AudioCue
       log("RESULT installed: #{%w[BGM/Town\ -\ Ferrows\ Landing BGS/Saltmere\ Harbor BGM/Battle\ -\ Warden SE/Voice\ -\ Juno ME/Warden\ Badge\ Get].map { |f| "#{f}=#{FileTest.audio_exist?('Audio/' + f)}" }.join(' ')}")
+      $scene.disposeSpritesets rescue nil     # the map scene has no spritesets yet at this point
+      $scene.createSpritesets
       AudioChk.take
       AudioChk.go(100)
       log("RESULT town: #{AudioChk.state} | #{AudioChk.brief(AudioChk.take, [:bgm, :bgs, :bgm_fade, :bgs_fade, :bgs_stop])}")
@@ -110,7 +112,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("audiochk")
       end
       log("RESULT stand-in for a track that is not installed: Victory - Sovereign -> #{ac.installed('Victory - Sovereign').inspect}; Battle - Nope -> #{ac.installed('Battle - Nope').inspect}")
       AudioChk.take
-      pbTrainerIntro(:HOLLOW_GRUNT_M)
+      pbPlayTrainerIntroBGM(:HOLLOW_GRUNT_M)
       log("RESULT grunt eye contact: #{AudioChk.brief(AudioChk.take, [:bgm, :me])}")
       AudioChk.press_at = System.uptime + 1.0
       setBattleRule("canLose")
