@@ -649,23 +649,105 @@ All **11 PNGs** are dual-synced byte-identically between `graphics/Pictures/` an
 
 ---
 
-## 4. Queued Master Plan: Waves 2 & 3 (14 Additional Flagship Story CGs)
+## 4. Delivered & Critic-Certified Wave 2 Assets (7 Flagship Scenes / 14 Plates — 7/7 PASS, Mean `9.30 / 10`, `0 P0`)
 
-All 14 queued CGs follow the exact same `512×384` (`exact2x == True`, `<= 64` colors, `y=0..280` hero / `y=288..384` dark dialogue bed, locked-palette mask-composite `_b` swaps with `0.00%` static background drift) visual contract:
+All **14 Wave 2 PNGs** (`28` dual-synced files across `graphics/Pictures/` and `art/out/Graphics/Pictures/`) are verified `512×384`, `exact2x == True`, `<= 64` colors, `semi_alpha == 0`, `newColsInB == 0`, `0.00%` static background drift, `y=0..280` focal framing, and `y=288..384` dark dialogue bed (`botLum = 7.2..32.6`), independently certified **7/7 PASS** (`8.8–9.6 / 10`, mean **`9.30 / 10`**, `0 P0`, `0` cameo touches):
 
-### Wave 2 — Act I–IV Character & Turning-Point CGs (7 Scenes)
+| # | Scene & Chapter (Critic Score) | Filename (`graphics/Pictures/` & `art/out/Graphics/Pictures/`) | Script Anchor | MD5 (14/14 Dual-Sync Match) | Bytes |
+|---|---|---|---|---|---:|
+| 7a | **Ch0 — The Dovetail Deck** *(9.2 Pass)*: PC hands holding Mum's final letter at dusk | `cg_ch00_dovetail_letter_a.png` | `story/20_SCRIPT_CH0-2.md` L23–55 | `0272364f048026197e94eca4743fdb3c` | 43,777 |
+| 7b | **Ch0 — The Dovetail Deck** *(9.2 Pass)*: Ferrow Lighthouse beacon ignites on twilight horizon | `cg_ch00_dovetail_letter_b.png` | `story/20_SCRIPT_CH0-2.md` L39–55 | `165adba4a93a6636ffb03c5bead56cfc` | 47,114 |
+| 8a | **Ch7 — Mirefen Quiet Ward** *(9.3 Pass)*: Corvin parting glass-bead curtain beside 9yo Ama | `cg_ch07_quiet_ward_cots_a.png` | `story/26_SCRIPT_CH7.md` L117–151 | `13a035d233832863fd64ad16c41a9ae0` | 62,435 |
+| 8b | **Ch7 — Mirefen Quiet Ward** *(9.3 Pass)*: Emerald-eyed Juno in doorway w/ `R.A.` ledger | `cg_ch07_quiet_ward_cots_b.png` | `story/26_SCRIPT_CH7.md` L166–171 | `c744a24ed97ffe0cbdfc6b6ba332489e` | 66,178 |
+| 9a | **Ch8 — Hearthguild Hall** *(9.3 Pass)*: 2 AM roasted chestnuts & cider (Brann, Larch, PC — branch-agnostic) | `cg_ch08_hearthguild_chestnuts_a.png` | `story/29_SCRIPT_CH8.md` L412–423 | `3ccbee61cb4bebc0f0d700aeb206c3c8` | 71,665 |
+| 9b | **Ch8 — Hearthguild Hall** *(9.3 Pass)*: Brann's face drops in shadow at AF 290 slip + Larch eyes PC | `cg_ch08_hearthguild_chestnuts_b.png` | `story/29_SCRIPT_CH8.md` L424–431 | `651b7c5a38945e4e362172768eb509ed` | 71,848 |
+| 10a | **Ch11 — Rimeholt Harbour** *(9.4 Gold Pass)*: On-model Anja + hooded PC + Primal Kyogre surfacing (branch-agnostic) | `cg_ch11_kyogre_harbour_a.png` | `story/30_SCRIPT_CH11.md` L365–376 | `289a5ae53d35416d7d318538d86b96e3` | 59,403 |
+| 10b | **Ch11 — Rimeholt Harbour** *(9.4 Gold Pass)*: Primal Kyogre surges + tidal wall & soft contoured rim-light | `cg_ch11_kyogre_harbour_b.png` | `story/30_SCRIPT_CH11.md` L398–404 | `e8214aeb7fa1a8393091eba8ce758cf7` | 72,030 |
+| 11a | **Ch12 — Stormwatch Booth** *(9.5 Gold Pass)*: Larch (crimson glasses on cord) + Odessa at switchboard inside glass booth | `cg_ch12_larch_broadcast_a.png` | `story/31_SCRIPT_CH12.md` L184–203 | `8a88ec42af1170fde5a399b8b93d9ea2` | 66,135 |
+| 11b | **Ch12 — Stormwatch Booth** *(9.5 Gold Pass)*: Relay dish surges + Velmora lights gold + organic glass bounce light | `cg_ch12_larch_broadcast_b.png` | `story/31_SCRIPT_CH12.md` L204–215 | `02c5a978c8c0dd8bc0dd9635f90ff861` | 72,708 |
+| 12a | **Ch14 — Cragholm Bench** *(9.6 Gold Pass)*: All 13 unique Gym Badges + peeled leather lining & Lattice micro-wiring | `cg_ch14_badge_case_lining_a.png` | `story/33_SCRIPT_CH14.md` L242–252 | `47165cf575bcffda9d66e485b63800eb` | 64,369 |
+| 12b | **Ch14 — Cragholm Bench** *(9.6 Gold Pass)*: Hidden Meridian sunburst transmitter LED pulses amber-crimson | `cg_ch14_badge_case_lining_b.png` | `story/33_SCRIPT_CH14.md` L253–260 | `c9295fe879ebc148539475e0b2fd4e1f` | 64,348 |
+| 13a | **Ch15 — Hollow Cathedral** *(8.8 Pass)*: Morwen's AF 290 Echo shielding 5yo PC against Glassfall wave *(retains legacy slug)* | `cg_ch15_morwen_nursery_echo_a.png` | `story/34_SCRIPT_CH15.md` L238–258 | `2fb2a64b48b0995daefb8c0bd2928820` | 72,085 |
+| 13b | **Ch15 — Hollow Cathedral** *(8.8 Pass)*: Memory static intensifies + shattered Kestrel realization | `cg_ch15_morwen_nursery_echo_b.png` | `story/34_SCRIPT_CH15.md` L259–290 | `301b7eedd100460cacbd9ced4dcaea25` | 79,960 |
 
-| # | Planned Filenames | Chapter & Scene | Script Anchor | Visual Pitch |
-|---|---|---|---|---|
-| 7 | `cg_ch00_dovetail_letter_a/b.png` | **Ch0 — The Dovetail Deck**: Reading Mum's final letter at dusk | `story/20_SCRIPT_CH0-2.md` L23–55 | PC hands holding Ines's folded salt-stained letter over the ferry rail (`_a`), glowing faint horizon beacon of Ferrow Lighthouse rising in twilight mist (`_b`). |
-| 8 | `cg_ch07_quiet_ward_cots_a/b.png` | **Ch7 — Mirefen Quiet Ward**: Corvin drawing back the glass-bead curtain | `story/26_SCRIPT_CH7.md` L117–148 | Forty dreaming glass-edged patients beneath soft blue lanterns, masked Corvin pausing beside one breathing chest (`_a`), Juno clutching Rowan's ledger in realization (`_b`). |
-| 9 | `cg_ch08_hearthguild_chestnuts_a/b.png` | **Ch8 — Hearthguild Hall**: Late-night chestnuts by the forge | `story/29_SCRIPT_CH8.md` L412–440 | Brann Holloway in firelight passing roasted chestnuts & cider to Sigrun and PC (`_a`), Brann's face going quiet and shadowed at his slip about AF 290 (`_b`). |
-| 10 | `cg_ch11_kyogre_harbour_a/b.png` | **Ch11 — Rimeholt Harbour**: "The Lake Breathes" | `story/30_SCRIPT_CH11.md` L365–404 | Cracking glacier pier under storm-lit purple clouds as Primal Kyogre's glowing blue markings surface beneath Anja & PC (`_a`), torrential sea wall rising (`_b`). |
-| 11 | `cg_ch12_larch_broadcast_a/b.png` | **Ch12 — Stormwatch Spire Roof**: The Midnight Larch Papers | `story/31_SCRIPT_CH12.md` L184–224 | Wind-whipped Professor Larch clutching rain-soaked AF 292 pages before the glowing relay dish (`_a`), dozens of distant Velmora screens lighting up gold behind her (`_b`). |
-| 12 | `cg_ch14_badge_case_lining_a/b.png` | **Ch14 — Cragholm Bench**: "Voss Isn't Watching You. He's Tuning You." | `story/33_SCRIPT_CH14.md` L242–295 | Overhead close-up of Larch's tools prying open the PC's leather badge case revealing hidden Lattice-glass wiring (`_a`), transmitter LED pulsing amber-crimson in the dark (`_b`). |
-| 13 | `cg_ch15_morwen_nursery_echo_a/b.png` | **Ch15 — Hollow Cathedral**: Morwen's AF 290 Echo | `story/34_SCRIPT_CH15.md` L179–265 | Translucent violet-silver memory of Morwen Vane throwing her Ghost-Warden cloak over the 5-year-old PC as blinding white light breaks across her back (`_a`), Kestrel's shattered expression watching (`_b`). |
+### 4.1 Wave 2 Event Choreography Snippets (Ready to Wire)
 
-### Wave 3 — Act IV–V Climax, Finale & Post-Game CGs (7 Scenes)
+- **Ch0 — Map 109 *The Dovetail*, Deck (`story/20_SCRIPT_CH0-2.md` L23–55):**
+  ```ruby
+  pf_cg_show("cg_ch00_dovetail_letter_a", fade: 24)
+  pbMessage(_INTL("\"Go to Imelda Larch at Ferrow's Landing, before they close the strait."))
+  pbMessage(_INTL("Don't let anyone scan you. Don't go to Crownhaven."))
+  pf_cg_swap("cg_ch00_dovetail_letter_b", fade: 18)
+  pbMessage(_INTL("I'm sorry I never told you why. I wanted one of us to have an ordinary life. — Mum.\""))
+  pf_cg_hide(fade: 24)
+  ```
+- **Ch7 — Map 223 Mirefen Quiet Ward (`story/26_SCRIPT_CH7.md` L117–171):**
+  ```ruby
+  pf_cg_show("cg_ch07_quiet_ward_cots_a", fade: 20)
+  pf_say(:WENLOW, :happy, "And this is Ama. She's nine.")
+  pf_say(:CORVIN, :deadpan, "I've a ward of forty patients slowly turning into garden furniture.")
+  pf_cg_swap("cg_ch07_quiet_ward_cots_b", fade: 12)
+  pf_say(:JUNO, :neutral, "\"R.A. Second-degree Bleed-burn, right palm and fingers. Lightning pattern. Discretion.\"")
+  pf_say(:CORVIN, :neutral, "That one's not filed yet. My handwriting. You'd never read it.")
+  pf_cg_hide(fade: 20)
+  ```
+- **Ch8 — Map 244 Hearthguild Hall (`story/29_SCRIPT_CH8.md` L412–440):**
+  ```ruby
+  pf_cg_show("cg_ch08_hearthguild_chestnuts_a", fade: 24)
+  pf_say(:BRANN, :happy, "I'll tell you a thing about chestnuts, ferry child.")
+  pf_say(:LARCH, :deadpan, "He told me that in AF 271. And AF 280. And AF 288.")
+  pf_cg_swap("cg_ch08_hearthguild_chestnuts_b", fade: 14)
+  pf_say(:BRANN, :sad, "I reset the Crown's stone myself, y'know. After the accident. Ten years back.")
+  pf_say(:BRANN, :sad, "It was smaller than it should've been.")
+  pf_say(:LARCH, :neutral, "...")
+  pf_say(:BRANN, :shocked, "Ach. Ach, I'm an old fool.")
+  pf_cg_hide(fade: 24)
+  ```
+- **Ch11 — Rimeholt Harbour (`story/30_SCRIPT_CH11.md` L365–404):**
+  ```ruby
+  pf_cg_show("cg_ch11_kyogre_harbour_a", fade: 20)
+  pbMessage(_INTL("In the black water beyond the second tower, something opens."))
+  pf_cg_swap("cg_ch11_kyogre_harbour_b", flash: [180, 235, 255, 160, 12], shake: [5, 14], fade: 10)
+  pf_say(:ANJA, :panic, "That's not a Pokémon, that's WEATHER.")
+  pf_say(:ANJA, :panic, "TOWERS! EVERYBODY TO THE TOWERS!")
+  pf_cg_hide(fade: 16)
+  ```
+- **Ch12 — Map 746 Stormwatch Spire Broadcast Booth (`story/31_SCRIPT_CH12.md` L184–224):**
+  ```ruby
+  pf_cg_show("cg_ch12_larch_broadcast_a", fade: 20)
+  pf_say(:ODESSA, :neutral, "Every Center. Every mast. Every screen in Velmora. You're live in three. Two.")
+  pf_say(:LARCH, :neutral, "Good evening. My name is Imelda Larch.")
+  pf_say(:LARCH, :neutral, "In AF 292 I wrote a report for the Fellowship's board. This is it.")
+  pf_cg_swap("cg_ch12_larch_broadcast_b", flash: [255, 240, 175, 130, 12], fade: 12)
+  pf_say(:LARCH, :neutral, "I designed the Lattice. I was wrong.")
+  pf_say(:LARCH, :neutral, "I'm telling you now because nobody else will.")
+  pf_cg_hide(fade: 16) # right before relay explosion shake & SIGNAL LOST at L218-221!
+  ```
+- **Ch14 — Cragholm Miner's Bench (`story/33_SCRIPT_CH14.md` L242–295):**
+  ```ruby
+  pf_cg_show("cg_ch14_badge_case_lining_a", fade: 20)
+  pf_say(:LARCH, :neutral, "I've wanted to do this since Ferrow's Landing.")
+  pf_say(:LARCH, :neutral, "That's not a badge case. Badge cases don't have opinions.")
+  pf_cg_swap("cg_ch14_badge_case_lining_b", flash: [255, 65, 50, 95, 10], fade: 10)
+  pf_say(:LARCH, :angry, "Lattice-glass. And a transmitter.")
+  pf_say(:LARCH, :angry, "Voss isn't watching you. He's tuning you.")
+  # Keep CG live behind :ch14_telemetry choice ("Smash it." / "Feed it lies." / "Leave it.")!
+  pf_cg_hide(fade: 20)
+  ```
+- **Ch15 — Hollow Cathedral: Morwen's AF 290 Echo (`story/34_SCRIPT_CH15.md` L220–290):**
+  ```ruby
+  pf_cg_show("cg_ch15_morwen_nursery_echo_a", fade: 24)
+  pbMessage(_INTL("The eyes reach the child and the world goes dark: she's thrown herself over the child, a Warden's coat over both of them, and the light goes over."))
+  pf_say(:MORWEN, :neutral, "Little one. You came back.")
+  pf_cg_swap("cg_ch15_morwen_nursery_echo_b", flash: [235, 225, 255, 165, 12], shake: [4, 10], fade: 10)
+  pf_say(:KESTREL, :angry, "My whole life for you. Do you know what they called me in school? The Glassfall boy.")
+  pf_say(:KESTREL, :angry, "And she was saving YOU.")
+  pf_cg_hide(fade: 20)
+  ```
+
+---
+
+## 4B. Queued Final Wave 3 — Act IV–V Climax, Finale & Post-Game CGs (7 Scenes → 20/20 Complete!)
 
 | # | Planned Filenames | Chapter & Scene | Script Anchor | Visual Pitch |
 |---|---|---|---|---|
