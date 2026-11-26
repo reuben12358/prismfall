@@ -9,7 +9,7 @@
 #        - bars by STORY VARIANT (Bound 6, Miscalibrated 5, War 7, Judgment 7), never by difficulty
 #        - :gym_order: bar k cycles the gym fields of gyms 3k-2..3k, in gym order, inside the bar and at breaks
 #        - forced locks (+1 a refusing Warden, for that bar only; War: all, capped), Miscalibrated's six-Plate bar 5,
-#          the seventh bar (??? type; Judgment on :INVERSE), HARMONY_BUFF
+#          the seventh bar (??? type; Judgment on :INVERSE), HARMONY_BUFF; Casual's easing (and only Casual's)
 #   2. Valen's Zygarde (:VALEN_ZYGARDE_ORDER, Bosses 113): Power Construct waits for the last bar; Complete Forme
 #      and his line there; bars by difficulty; the Last Tuning (v1) is untouched; the crystal line on each turn
 #   3. Voss's / Quent's Silvally (Bosses 114): three bars; re-indexes with the arena (Memory, form, type); the
@@ -214,8 +214,16 @@ check("Judgment: seven bars; the seventh on :INVERSE as the ??? type", bs.arceus
 fresh(:CASUAL); c = bs.create_pokemon(:ARCEUS_FINALE)
 fresh(:STANDARD); s = bs.create_pokemon(:ARCEUS_FINALE)
 fresh(:HARD); h = bs.create_pokemon(:ARCEUS_FINALE)
-check("bar HP by difficulty: Casual x0.6, Standard x1.0, Hard x1.25 of Arceus's max HP", c.totalhp == (s.totalhp * 0.6).round && h.totalhp == (s.totalhp * 1.25).round,
+check("bar HP by difficulty: Casual x0.5, Standard x1.0, Hard x1.25 of Arceus's max HP", c.totalhp == (s.totalhp * 0.5).round && h.totalhp == (s.totalhp * 1.25).round,
       [c.totalhp, s.totalhp, h.totalhp].inspect)
+Prismfall.set_difficulty(:CASUAL)
+check("Casual only is eased: offence x0.6, no Recover and no Calm Mind in any Plate set", c.spatk < s.spatk * 0.5 &&
+      bs.arceus_movesets.values.none? { |m| m.include?(:RECOVER) || m.include?(:CALMMIND) })
+Prismfall.set_difficulty(:STANDARD)
+check("...Standard keeps Recover (and Calm Mind on the Blank, Mind and Dread Plates)", bs.arceus_movesets[:WATER][3] == :RECOVER && bs.arceus_movesets[:NORMAL][3] == :CALMMIND)
+arceus.call("Arceus, Bound (Casual): Tamsin, Brann and Kaito refuse", :refuse => [2, 7, 8], :difficulty => :CASUAL)
+cs = BREAKS.map { |b| [b[:stages][:DEFENSE], b[:stages][:ATTACK]] }
+check("Casual: a forced lock hardens (Defense / Sp. Def) without sharpening (Attack stays 0)", cs.first(3) == [[0, 0], [2, 0], [0, 0]], cs.inspect)
 
 rows = []
 log = arceus.call("Arceus, Bound, Resonance +6: HARMONY_BUFF at a break", :resonance => 6,

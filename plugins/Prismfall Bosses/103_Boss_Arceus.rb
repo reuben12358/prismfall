@@ -20,6 +20,9 @@
 #   Forced locks: each Warden of the coming bar who refuses (WARDEN_CONSENT
 #     false) gives Arceus +1 to every stat stage for that bar; on War every lock
 #     is forced (capped at +2 on Casual / Standard, BALANCE.md section 7).
+#     Casual only: a forced lock raises Defense and Sp. Def alone, at most +2.
+#   Casual is the only eased mode (bar HP x0.6, offence x0.6, Safeguard for
+#   Recover / Calm Mind); Standard and Hard are the BALANCE.md numbers.
 #   HARMONY_BUFF (Resonance >= 6): at every break the PC's active Pokemon
 #     recover 25% HP and lose their stat drops.
 #   Event :prismfall_arceus_locks (battle, bar, gym numbers, refusing gym numbers)
@@ -57,11 +60,11 @@ module Prismfall
     }.freeze
     ARCEUS_LEGEND_MOVES = [:JUDGMENT, :EXTREMESPEED, :CALMMIND, :RECOVER]
 
-    # Casual: no Recover. Hard: Mind Plate sets Trick Room.
+    # Casual: no Recover and no Calm Mind (Safeguard in slot 4). Hard: Mind Plate sets Trick Room.
     def self.arceus_movesets
       sets = ARCEUS_MOVESETS.transform_values(&:dup)
       case difficulty
-      when :CASUAL then sets.each_value { |m| m[3] = :CALMMIND if m[3] == :RECOVER }
+      when :CASUAL then sets.each_value { |m| m[3] = :SAFEGUARD }      # no Recover and no setup (was Calm Mind: it snowballed)
       when :HARD   then sets[:PSYCHIC][3] = :TRICKROOM
       end
       return sets
@@ -79,6 +82,9 @@ module Prismfall
     ARCEUS_DEFAULT_VARIANT = { :id => :ARCEUS_BOUND, :bars => 6 }.freeze
     ARCEUS_STAT_STAGES     = [:ATTACK, :DEFENSE, :SPECIAL_ATTACK, :SPECIAL_DEFENSE, :SPEED].freeze
     ARCEUS_WAR_STAGE_CAP   = { :CASUAL => 2, :STANDARD => 2, :HARD => 3 }
+    # Casual only: a forced lock hardens Arceus (Defense, Sp. Def) but doesn't sharpen it; at most two stages a bar.
+    ARCEUS_FORCED_STAGES   = { :CASUAL => [:DEFENSE, :SPECIAL_DEFENSE], :default => ARCEUS_STAT_STAGES }
+    ARCEUS_FORCED_CAP      = { :CASUAL => 2, :default => 3 }
 
     class << self
       # Tests / debug: a variant id (:ARCEUS_WAR ...) or Hash to force, and a proc { |gym| true/false } for consent.
@@ -140,17 +146,18 @@ module Prismfall
       bar    = st.phase
       forced = arceus_forced_locks(bar)
       prev   = battle.instance_variable_get(:@prismfall_arceus_forced).to_i
+      stats = resolve(ARCEUS_FORCED_STAGES) || ARCEUS_STAT_STAGES
       if prev > 0     # last bar's forced locks are spent
-        ARCEUS_STAT_STAGES.each { |s| b.stages[s] = [b.stages[s] - prev, 0].max if b.stages[s] > 0 }
+        stats.each { |s| b.stages[s] = [b.stages[s] - prev, 0].max if b.stages[s] > 0 }
       end
-      n = forced.length
+      n = [forced.length, resolve(ARCEUS_FORCED_CAP) || 3].min
       n = [n, resolve(ARCEUS_WAR_STAGE_CAP) || 2].min if arceus_variant[:id] == :ARCEUS_WAR
       battle.instance_variable_set(:@prismfall_arceus_forced, n)
       if n > 0
         battle.pbDisplay(text((n == 1) ? "A lock holds! Its Plate is torn free by force!" : "{2} locks hold! Their Plates are torn free by force!", b.pbThis, n))
-        ARCEUS_STAT_STAGES.each { |s| b.stages[s] = [b.stages[s] + n, 6].min }
+        stats.each { |s| b.stages[s] = [b.stages[s] + n, 6].min }
         battle.pbCommonAnimation("StatUp", b) rescue nil
-        battle.pbDisplay(text("{1}'s power surged!", b.pbThis))
+        battle.pbDisplay(text((stats.length < ARCEUS_STAT_STAGES.length) ? "{1}'s defenses hardened!" : "{1}'s power surged!", b.pbThis))
       end
       EventHandlers.trigger(:prismfall_arceus_locks, battle, bar, arceus_bar_gyms[bar - 1] || [], forced)
     end
@@ -197,7 +204,7 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
   :bars              => proc { Prismfall::Bosses.arceus_bars },
   :prism_order       => proc { Prismfall::Bosses.arceus_prism_order },
   :stat_mults        => {
-    :CASUAL   => { :HP => 0.6, :ATTACK => 1.1, :DEFENSE => 1.1, :SPECIAL_ATTACK => 1.1, :SPECIAL_DEFENSE => 1.1, :SPEED => 1.1 },
+    :CASUAL   => { :HP => 0.5, :ATTACK => 0.6, :SPECIAL_ATTACK => 0.6 },
     :STANDARD => { :ATTACK => 1.25, :DEFENSE => 1.25, :SPECIAL_ATTACK => 1.25, :SPECIAL_DEFENSE => 1.25, :SPEED => 1.1 },
     :HARD     => { :HP => 1.25, :ATTACK => 1.3, :DEFENSE => 1.3, :SPECIAL_ATTACK => 1.3, :SPECIAL_DEFENSE => 1.3, :SPEED => 1.15 }
   },
