@@ -246,7 +246,7 @@ def events_255(m):
         # 249 (the Slag Ward) isn't built yet: a plain warp to a missing map crashes, so guard it
         {'type': 'event', 'name': 'Up to the Slag Ward', 'at': [13, 19], 'pages': [{'trigger': 'touch', 'commands': [
             {'if': 'pbRgssExists?("Data/Map249.rxdata")', 'then': [{'transfer': {'map': 249, 'x': 20, 'y': 12, 'dir': 'up'}}],
-             'else': ["(The stair up to the Slag Ward is roped off. Not built yet.)"]}]}]},
+             'else': [{'se': 'Player bump'}, MV('player', ['dir_fix_on', 'backward', 'dir_fix_off']), "The stair up to the Slag Ward is roped off."]}]}]},
         {'type': 'event', 'name': 'Atmosphere', 'at': [0, 0], 'pages': [{'trigger': 'parallel', 'commands': [{'script': 'pfm_cave_light'}, {'wait': 12}]}]},
         {'type': 'event', 'name': 'The Caldera Crisis', 'at': [13, 16], 'pages': [
             {'commands': []},

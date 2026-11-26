@@ -58,9 +58,11 @@ events:
 - type: event
   name: Arena model
   pages:
-  - commands: ['(Under glass: a great white bowl of an arena in a ring of mountains, a brass ring round its rim and eighteen slim pylons.) "THE MERIDIAN
-        PRISM ARENA. Crownhaven''s ancient Temple-Arena of the Blessing, rebuilt for the Festival of AF 300 by Meridian Concord. Eighteen Plates. One stage."',
-      '\pf[JUNO,neutral]Juno: Eighteen pylons. Like Lattices. ...Why does an arena need pylons?']
+  - commands:
+    - {script: pfm_arena_model}
+    - '"THE MERIDIAN PRISM ARENA. Crownhaven''s ancient Temple-Arena of the Blessing, rebuilt for the Festival of AF 300 by Meridian Concord. Eighteen Plates.
+      One stage."'
+    - '\pf[JUNO,neutral]Juno: Eighteen pylons. Like Lattices. ...Why does an arena need pylons?'
     trigger: action
     move: fixed
   at: [5, 11]

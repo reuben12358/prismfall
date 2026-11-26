@@ -77,7 +77,14 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 240\n  $game_temp.player_new_x = 20\n  $game_temp.player_new_y = 26\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(Hearthguild wardens have roped off the stair up to the Forge Terraces while the caldera bells clear.)]
+      else:
+      - &id001 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - &id002
+        move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+      - 'Hearthguild Warden: Stair''s roped till the bells clear. Up''s for families first.'
 - type: event
   name: Up to Forge Terraces
   at: [5, 2]
@@ -88,7 +95,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 240\n  $game_temp.player_new_x = 20\n  $game_temp.player_new_y = 26\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(Hearthguild wardens have roped off the stair up to the Forge Terraces while the caldera bells clear.)]
+      else:
+      - *id001
+      - *id002
+      - 'Hearthguild Warden: Stair''s roped till the bells clear. Up''s for families first.'
 - type: event
   name: To Caldera Gate
   at: [20, 32]
@@ -99,7 +109,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 243\n  $game_temp.player_new_x = 20\n  $game_temp.player_new_y = 4\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
-      else: [(The slag-cart track out toward the Caldera Gate is barricaded against falling ash.)]
+      else:
+      - &id003 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - *id002
+      - 'Hearthguild Warden: Cart track''s barricaded. Ash is coming down faster than we can sweep it.'
 - type: event
   name: To Caldera Gate
   at: [21, 32]
@@ -110,7 +123,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 243\n  $game_temp.player_new_x = 20\n  $game_temp.player_new_y = 4\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
-      else: [(The slag-cart track out toward the Caldera Gate is barricaded against falling ash.)]
+      else:
+      - *id003
+      - *id002
+      - 'Hearthguild Warden: Cart track''s barricaded. Ash is coming down faster than we can sweep it.'
 - type: event
   name: To Caldera Gate
   at: [22, 32]
@@ -121,7 +137,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 243\n  $game_temp.player_new_x = 20\n  $game_temp.player_new_y = 4\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
-      else: [(The slag-cart track out toward the Caldera Gate is barricaded against falling ash.)]
+      else:
+      - *id003
+      - *id002
+      - 'Hearthguild Warden: Cart track''s barricaded. Ash is coming down faster than we can sweep it.'
 - type: event
   name: Evacuating Mother
   at: [12, 13]
@@ -158,8 +177,23 @@ events:
   - graphic: {sprite: NPC 05, dir: up}
     trigger: action
     move: fixed
-    commands: ['(The child holds a glass jam jar up like a lantern. Inside, a tiny purple flame bobs cheerfully.)', 'Child: Mama says the bells mean go up, not down.
-        My Litwick isn''t scared—he likes the warm steps!']
+    commands:
+    - {script: 'pbSEPlay("Cries/LITWICK", 70, 110)'}
+    - move:
+        who: Litwick jar
+        route:
+        - {opacity: 255}
+        - jump: [0, 0]
+        - wait 24
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Child with Litwick Jar
+        route:
+        - face_player
+        - jump: [0, 0]
+        wait: true
+    - 'Child: Mama says the bells mean go up, not down. My Litwick isn''t scared—he likes the warm steps!'
   - commands: ['Child: My Litwick''s not scared. I am. A bit.']
     trigger: action
     move: fixed

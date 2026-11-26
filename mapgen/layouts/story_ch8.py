@@ -18,8 +18,10 @@ needs BOTH CH8_STEP >= 6 and S120, so passing through the Hall during the crisis
 Not here: Brann's Gym 7 (LOCKED; maps 250-253 unbuilt), the Five Bells in the square (240 unbuilt), the Ch17 Trials
 quest AS_FORGE_REMEMBERS (the Trials owner's).
 
-Run after cindervault_town.py (which rewrites both specs from scratch):
-    python3 -I layouts/story_ch8.py && python3 -I build.py 244 249 --no-preview"""
+It also plays the bracketed narrator boxes of Gemini's guarded exits and NPCs on 240 / 243 / 249 (STAGE below).
+
+Run after cindervault_town.py / cindervault_core.py (which rewrite these specs from scratch):
+    python3 -I layouts/story_ch8.py && python3 -I build.py 240 243 244 249 --no-preview"""
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from story_early import P, N, S, IF, CH, MV, page, ev
@@ -285,11 +287,44 @@ def pages_249(spec_events):
     return out
 
 
+# ============================================================================================ stage directions
+# The guarded exits Gemini's layouts write print a bracketed narrator box when the next map isn't built. Played
+# instead: the player is turned back a step with a sound, and somebody on the spot says why (no brackets).
+BACK = MV('player', ['dir_fix_on', 'backward', 'dir_fix_off'])
+def shut(se, line, pitch=80): return [S('pbSEPlay("%s", 80, %d)' % (se, pitch)), BACK, line]
+STAGE = {
+    240: {"(The heavy bronze doors of The Foundry are sealed while Brann resets the casting channels. Gym 7 not built yet.)":
+              shut('Door enter', "The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.", 60),
+          "(Red-lacquered Oath-Guards bar the stair to Pyre Keep Rampart until the Dominar's envoys conclude their audience.)":
+              shut('Player bump', N('Oath-Guard', "The Rampart's closed while the Dominar's envoys are in audience. Say true: I'd let you up if I could.")),
+          "(A Roost-keeper waves you back—updrafts off the caldera rim are too fierce for climbers without a wing-pass.)":
+              [S('pbSEPlay("Anim/Wind1", 70, 90)\npfm_shake(2, 10, 6)')] + shut('Player bump', N('Roost-keeper', "Back! Back! The updrafts off the rim'll have you over the edge without a wing-pass!")),
+          "(The West Pass out onto the Ashmarch is chained while the Hearthguild bells ring out the caldera heat.)":
+              shut('Door slide', N('Hearthguild Warden', "West Pass is chained till the bells stop. Nobody out on the Ashmarch with the mountain like this."), 60),
+          "(An old smith sits beside a cold anvil, turning a piece of slag over in calloused fingers.)":
+              [MV('Old Smith', ['face_player']), {'wait': 20}, S('pbSEPlay("Mining pick", 50, 70)'), MV('Old Smith', ['turn_down']), {'wait': 16}]},
+    243: {"(The Caldera Gate's great iron portcullis groans on its chains—The Pyre Road south is sealed for ash-fall clearance.)":
+              [S('pbSEPlay("Door slide", 90, 45)\npfm_shake(2, 8, 10)')] + shut('Player bump', N('Gate Smith', "Pyre Road's shut. Ash clearance. That portcullis weighs more than my mother's opinions."), 70),
+          "(Ashkaar Oath-Guards have barred the West Pass out onto the Ashmarch while the caldera bells ring.)":
+              shut('Player bump', N('Oath-Guard', "West Pass is barred while the bells ring. Say true: I don't like it either."))},
+    249: {"(Hearthguild wardens have roped off the stair up to the Forge Terraces while the caldera bells clear.)":
+              shut('Player bump', N('Hearthguild Warden', "Stair's roped till the bells clear. Up's for families first.")),
+          "(The slag-cart track out toward the Caldera Gate is barricaded against falling ash.)":
+              shut('Player bump', N('Hearthguild Warden', "Cart track's barricaded. Ash is coming down faster than we can sweep it.")),
+          "(The child holds a glass jam jar up like a lantern. Inside, a tiny purple flame bobs cheerfully.)":
+              [S('pbSEPlay("Cries/LITWICK", 70, 110)'), MV('Litwick jar', [{'opacity': 255}, {'jump': [0, 0]}, 'wait 24', {'opacity': 0}], wait=False),
+               MV('Child with Litwick Jar', ['face_player', {'jump': [0, 0]}])]},
+}
+
+
 def main():
     import yaml
     print('map 244: %d events' % SL.patch('244_hearthguild_hall.yaml', 244, events_244(), None, TAG))
     spec = next(d for d in yaml.safe_load_all(open(os.path.join(SL.HERE, 'specs', '249_slag_ward.yaml'))) if d and d.get('id') == 249)
     print('map 249: %d events' % SL.patch('249_slag_ward.yaml', 249, events_249(), pages_249(spec['events']), TAG))
+    files = {240: '240_cindervault_forge.yaml', 243: '243_caldera_gate.yaml', 249: '249_slag_ward.yaml'}
+    for mid, mapping in STAGE.items():
+        print('map %d: stage directions %s' % (mid, sorted(SL.replace_lines(files[mid], mid, mapping, TAG).values())))
 
 
 if __name__ == '__main__':

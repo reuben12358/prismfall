@@ -24,7 +24,13 @@ events:
     - if: pbRgssExists?("Data/Map249.rxdata")
       then:
       - transfer: {map: 249, x: 20, y: 12, dir: up}
-      else: [(The stair up to the Slag Ward is roped off. Not built yet.)]
+      else:
+      - {se: Player bump}
+      - move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+      - The stair up to the Slag Ward is roped off.
 - type: event
   name: Atmosphere
   at: [0, 0]

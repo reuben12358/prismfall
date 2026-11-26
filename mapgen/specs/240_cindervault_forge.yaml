@@ -87,7 +87,14 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 250\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(The heavy bronze doors of The Foundry are sealed while Brann resets the casting channels. Gym 7 not built yet.)]
+      else:
+      - &id001 {script: 'pbSEPlay("Door enter", 80, 60)'}
+      - &id002
+        move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+      - The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.
 - type: event
   name: To The Foundry (Gym 7)
   at: [21, 2]
@@ -98,7 +105,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 250\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(The heavy bronze doors of The Foundry are sealed while Brann resets the casting channels. Gym 7 not built yet.)]
+      else:
+      - *id001
+      - *id002
+      - The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.
 - type: event
   name: To The Foundry (Gym 7)
   at: [22, 2]
@@ -109,7 +119,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 250\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(The heavy bronze doors of The Foundry are sealed while Brann resets the casting channels. Gym 7 not built yet.)]
+      else:
+      - *id001
+      - *id002
+      - The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.
 - type: event
   name: To Pyre Keep Rampart
   at: [5, 2]
@@ -120,7 +133,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 245\n  $game_temp.player_new_x = 16\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(Red-lacquered Oath-Guards bar the stair to Pyre Keep Rampart until the Dominar's envoys conclude their audience.)]
+      else:
+      - &id003 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - *id002
+      - 'Oath-Guard: The Rampart''s closed while the Dominar''s envoys are in audience. Say true: I''d let you up if I could.'
 - type: event
   name: To Pyre Keep Rampart
   at: [6, 2]
@@ -131,7 +147,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 245\n  $game_temp.player_new_x = 16\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(Red-lacquered Oath-Guards bar the stair to Pyre Keep Rampart until the Dominar's envoys conclude their audience.)]
+      else:
+      - *id003
+      - *id002
+      - 'Oath-Guard: The Rampart''s closed while the Dominar''s envoys are in audience. Say true: I''d let you up if I could.'
 - type: event
   name: To Pyre Keep Rampart
   at: [7, 2]
@@ -142,7 +161,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 245\n  $game_temp.player_new_x = 16\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(Red-lacquered Oath-Guards bar the stair to Pyre Keep Rampart until the Dominar's envoys conclude their audience.)]
+      else:
+      - *id003
+      - *id002
+      - 'Oath-Guard: The Rampart''s closed while the Dominar''s envoys are in audience. Say true: I''d let you up if I could.'
 - type: event
   name: To The Dragon Roosts
   at: [37, 2]
@@ -153,7 +175,13 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 248\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 20\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(A Roost-keeper waves you back—updrafts off the caldera rim are too fierce for climbers without a wing-pass.)]
+      else:
+      - &id004 {script: 'pbSEPlay("Anim/Wind1", 70, 90)
+
+          pfm_shake(2, 10, 6)'}
+      - &id005 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - *id002
+      - 'Roost-keeper: Back! Back! The updrafts off the rim''ll have you over the edge without a wing-pass!'
 - type: event
   name: To The Dragon Roosts
   at: [38, 2]
@@ -164,7 +192,11 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 248\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 20\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(A Roost-keeper waves you back—updrafts off the caldera rim are too fierce for climbers without a wing-pass.)]
+      else:
+      - *id004
+      - *id005
+      - *id002
+      - 'Roost-keeper: Back! Back! The updrafts off the rim''ll have you over the edge without a wing-pass!'
 - type: event
   name: To The Dragon Roosts
   at: [39, 2]
@@ -175,7 +207,11 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 248\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 20\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
-      else: [(A Roost-keeper waves you back—updrafts off the caldera rim are too fierce for climbers without a wing-pass.)]
+      else:
+      - *id004
+      - *id005
+      - *id002
+      - 'Roost-keeper: Back! Back! The updrafts off the rim''ll have you over the edge without a wing-pass!'
 - type: event
   name: To The Ashmarch
   at: [1, 23]
@@ -186,7 +222,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(The West Pass out onto the Ashmarch is chained while the Hearthguild bells ring out the caldera heat.)]
+      else:
+      - &id006 {script: 'pbSEPlay("Door slide", 80, 60)'}
+      - *id002
+      - 'Hearthguild Warden: West Pass is chained till the bells stop. Nobody out on the Ashmarch with the mountain like this.'
 - type: event
   name: To The Ashmarch
   at: [1, 24]
@@ -197,7 +236,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(The West Pass out onto the Ashmarch is chained while the Hearthguild bells ring out the caldera heat.)]
+      else:
+      - *id006
+      - *id002
+      - 'Hearthguild Warden: West Pass is chained till the bells stop. Nobody out on the Ashmarch with the mountain like this.'
 - type: event
   name: To The Ashmarch
   at: [1, 25]
@@ -208,7 +250,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(The West Pass out onto the Ashmarch is chained while the Hearthguild bells ring out the caldera heat.)]
+      else:
+      - *id006
+      - *id002
+      - 'Hearthguild Warden: West Pass is chained till the bells stop. Nobody out on the Ashmarch with the mountain like this.'
 - type: event
   name: Hearthguild Bell-Ringer
   at: [21, 15]
@@ -216,8 +261,8 @@ events:
   - graphic: {sprite: NPC 25, dir: down}
     trigger: action
     move: fixed
-    commands: ['Hearthguild Bell-Ringer: Three bells this morning. Four yesterday.', 'Hearthguild Bell-Ringer: We''ve never rung five. Five means leave
-        the mountain.', 'Hearthguild Bell-Ringer: I''ve got the rope for it. I''ve never had to touch it.']
+    commands: ['Hearthguild Bell-Ringer: Three bells this morning. Four yesterday.', 'Hearthguild Bell-Ringer: We''ve never rung five. Five means leave the mountain.',
+      'Hearthguild Bell-Ringer: I''ve got the rope for it. I''ve never had to touch it.']
 - type: event
   name: Legate Varra Kosk
   at: [37, 21]
@@ -225,8 +270,8 @@ events:
   - graphic: {sprite: trainer_COOLTRAINER_F, dir: down}
     trigger: action
     move: fixed
-    commands: ['Legate Varra Kosk: The Crucible judges two things: truth and steel.', 'Legate Varra Kosk: Lying is a crime in Ashkaar; losing honestly is
-        not. Come back when you''re ready for a Writ of Flame.']
+    commands: ['Legate Varra Kosk: The Crucible judges two things: truth and steel.', 'Legate Varra Kosk: Lying is a crime in Ashkaar; losing honestly is not. Come
+        back when you''re ready for a Writ of Flame.']
 - type: event
   name: Forte
   at: [34, 24]
@@ -234,8 +279,8 @@ events:
   - graphic: {sprite: trainer_LASS, dir: right}
     trigger: action
     move: fixed
-    commands: ['Forte: I''m Forte—of the Octave! And that''s Bellows, if he''d stop trying to chew the brazier!', 'Forte: The Crucible won''t hear a Choir
-        orphan without a second to stand for her. I''m louder than every bell on this mountain, and I''m NOT sorry!']
+    commands: ['Forte: I''m Forte—of the Octave! And that''s Bellows, if he''d stop trying to chew the brazier!', 'Forte: The Crucible won''t hear a Choir orphan
+        without a second to stand for her. I''m louder than every bell on this mountain, and I''m NOT sorry!']
 - type: event
   name: Terrace Smith
   at: [26, 33]
@@ -243,8 +288,8 @@ events:
   - graphic: {sprite: trainer_HIKER, dir: left}
     trigger: action
     move: fixed
-    commands: ['Terrace Smith: I can''t work. The quench-channels are running at a boil.', 'Terrace Smith: You can''t quench in boiling. A blade wants a
-        shock, not a bath.']
+    commands: ['Terrace Smith: I can''t work. The quench-channels are running at a boil.', 'Terrace Smith: You can''t quench in boiling. A blade wants a shock, not
+        a bath.']
 - type: event
   name: Smith's Apprentice
   at: [17, 25]
@@ -252,8 +297,8 @@ events:
   - graphic: {sprite: NPC 14, dir: up}
     trigger: action
     move: fixed
-    commands: ['Smith''s Apprentice: The Meridian men say the tap''s fine.', 'Smith''s Apprentice: They put a gauge on it. The gauge says fine. The gauge
-        is also melting.']
+    commands: ['Smith''s Apprentice: The Meridian men say the tap''s fine.', 'Smith''s Apprentice: They put a gauge on it. The gauge says fine. The gauge is also
+        melting.']
 - type: event
   name: Old Smith
   at: [35, 37]
@@ -261,8 +306,19 @@ events:
   - graphic: {sprite: NPC 25, dir: down}
     trigger: action
     move: fixed
-    commands: ['(An old smith sits beside a cold anvil, turning a piece of slag over in calloused fingers.)', 'Old Smith: My grandmother used to say the
-        Flame Plate''s not a fire, it''s a heart. You don''t put a pipe in a heart.']
+    commands:
+    - move:
+        who: Old Smith
+        route: [face_player]
+        wait: true
+    - {wait: 20}
+    - {script: 'pbSEPlay("Mining pick", 50, 70)'}
+    - move:
+        who: Old Smith
+        route: [turn_down]
+        wait: true
+    - {wait: 16}
+    - 'Old Smith: My grandmother used to say the Flame Plate''s not a fire, it''s a heart. You don''t put a pipe in a heart.'
 - type: event
   name: Adequate Swords Owner
   at: [7, 38]
@@ -270,8 +326,8 @@ events:
   - graphic: {sprite: trainer_BLACKBELT, dir: right}
     trigger: action
     move: fixed
-    commands: ['Adequate Swords Owner: Look across the lane. ''EXCELLENT SWORDS.'' Claiming excellence is a bold gamble where lying is a crime!', 'Adequate
-        Swords Owner: Mine are adequate. Honestly adequate. Good steel, fair edge, no boasts.']
+    commands: ['Adequate Swords Owner: Look across the lane. ''EXCELLENT SWORDS.'' Claiming excellence is a bold gamble where lying is a crime!', 'Adequate Swords
+        Owner: Mine are adequate. Honestly adequate. Good steel, fair edge, no boasts.']
 - type: sign
   name: 'Honest Sign: Mart'
   at: [15, 21]

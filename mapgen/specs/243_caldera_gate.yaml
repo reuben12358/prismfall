@@ -57,7 +57,17 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 652\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 6\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
-      else: [(The Caldera Gate's great iron portcullis groans on its chains—The Pyre Road south is sealed for ash-fall clearance.)]
+      else:
+      - &id001 {script: 'pbSEPlay("Door slide", 90, 45)
+
+          pfm_shake(2, 8, 10)'}
+      - &id002 {script: 'pbSEPlay("Player bump", 80, 70)'}
+      - &id003
+        move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+      - 'Gate Smith: Pyre Road''s shut. Ash clearance. That portcullis weighs more than my mother''s opinions.'
 - type: event
   name: To The Pyre Road
   at: [19, 22]
@@ -68,7 +78,11 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 652\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 6\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
-      else: [(The Caldera Gate's great iron portcullis groans on its chains—The Pyre Road south is sealed for ash-fall clearance.)]
+      else:
+      - *id001
+      - *id002
+      - *id003
+      - 'Gate Smith: Pyre Road''s shut. Ash clearance. That portcullis weighs more than my mother''s opinions.'
 - type: event
   name: To The Pyre Road
   at: [20, 22]
@@ -79,7 +93,11 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 652\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 6\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
-      else: [(The Caldera Gate's great iron portcullis groans on its chains—The Pyre Road south is sealed for ash-fall clearance.)]
+      else:
+      - *id001
+      - *id002
+      - *id003
+      - 'Gate Smith: Pyre Road''s shut. Ash clearance. That portcullis weighs more than my mother''s opinions.'
 - type: event
   name: To The Pyre Road
   at: [21, 22]
@@ -90,7 +108,11 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 652\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 6\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
-      else: [(The Caldera Gate's great iron portcullis groans on its chains—The Pyre Road south is sealed for ash-fall clearance.)]
+      else:
+      - *id001
+      - *id002
+      - *id003
+      - 'Gate Smith: Pyre Road''s shut. Ash clearance. That portcullis weighs more than my mother''s opinions.'
 - type: event
   name: To The Ashmarch
   at: [1, 13]
@@ -101,7 +123,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(Ashkaar Oath-Guards have barred the West Pass out onto the Ashmarch while the caldera bells ring.)]
+      else:
+      - &id004 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - *id003
+      - 'Oath-Guard: West Pass is barred while the bells ring. Say true: I don''t like it either.'
 - type: event
   name: To The Ashmarch
   at: [1, 14]
@@ -112,7 +137,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(Ashkaar Oath-Guards have barred the West Pass out onto the Ashmarch while the caldera bells ring.)]
+      else:
+      - *id004
+      - *id003
+      - 'Oath-Guard: West Pass is barred while the bells ring. Say true: I don''t like it either.'
 - type: event
   name: To The Ashmarch
   at: [1, 15]
@@ -123,7 +151,10 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(Ashkaar Oath-Guards have barred the West Pass out onto the Ashmarch while the caldera bells ring.)]
+      else:
+      - *id004
+      - *id003
+      - 'Oath-Guard: West Pass is barred while the bells ring. Say true: I don''t like it either.'
 - type: event
   name: Gate Smith
   at: [15, 12]
@@ -131,8 +162,8 @@ events:
   - graphic: {sprite: trainer_HIKER, dir: right}
     trigger: action
     move: fixed
-    commands: ['Gate Smith: Three bells! Off the forges! It''s not even noon!', 'Gate Smith: Look out from the north rim balcony—you can see the steam rising
-        straight off Meridian''s tap down in the Slag Ward.']
+    commands: ['Gate Smith: Three bells! Off the forges! It''s not even noon!', 'Gate Smith: Look out from the north rim balcony—you can see the steam rising straight
+        off Meridian''s tap down in the Slag Ward.']
 - type: event
   name: Oath-Guard
   at: [24, 14]
@@ -140,8 +171,8 @@ events:
   - graphic: {sprite: trainer_BLACKBELT, dir: left}
     trigger: action
     move: fixed
-    commands: ['Oath-Guard: Cindervault''s Caldera Gate. Say true, or say nothing.', 'Oath-Guard: South portcullis leads down the Pyre Road; north stairs
-        drop to Slag Ward; the east terrace climbs to the Forge Terraces.']
+    commands: ['Oath-Guard: Cindervault''s Caldera Gate. Say true, or say nothing.', 'Oath-Guard: South portcullis leads down the Pyre Road; north stairs drop to
+        Slag Ward; the east terrace climbs to the Forge Terraces.']
 - type: event
   name: Caravan Drover
   at: [9, 14]
@@ -149,8 +180,8 @@ events:
   - graphic: {sprite: NPC 25, dir: right}
     trigger: action
     move: fixed
-    commands: ['Caravan Drover: Hauling quenched iron bars out toward the Ashmarch before the Dominar shuts the eastern passes.', 'Caravan Drover: Lying''s
-        a crime in Ashkaar, so I''ll tell you plain: my wheels are smoking and the mountain''s in a foul mood.']
+    commands: ['Caravan Drover: Hauling quenched iron bars out toward the Ashmarch before the Dominar shuts the eastern passes.', 'Caravan Drover: Lying''s a crime
+        in Ashkaar, so I''ll tell you plain: my wheels are smoking and the mountain''s in a foul mood.']
 - type: sign
   name: Caldera Overlook Plaque
   at: [17, 7]

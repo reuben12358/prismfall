@@ -66,3 +66,47 @@ def sync_pages(spec_file, mid, source, names, tag='story'):
     body = yaml.safe_dump({'events': evs}, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
     open(path, 'w', encoding='utf-8').write('\n'.join(lines[:k]) + '\n' + body)
     return len(names)
+
+
+def _splice(cmds, mapping, hits):
+    out = []
+    for c in cmds or []:
+        if isinstance(c, str) and c in mapping:
+            out.extend(mapping[c]); hits[c] = hits.get(c, 0) + 1
+            continue
+        if isinstance(c, dict):
+            c = dict(c)
+            for k in ('then', 'else'):
+                if k in c: c[k] = _splice(c[k], mapping, hits)
+            if 'branches' in c: c['branches'] = [_splice(b, mapping, hits) for b in c['branches']]
+        out.append(c)
+    return out
+
+
+def replace_lines(spec_file, mid, mapping, tag='story'):
+    """Stage directions in events another layout writes: every message line equal to a key of `mapping` (anywhere in
+    any page, inside ifs and choices) is replaced by that key's list of commands. Re-runnable: once replaced, the old
+    line is gone, so a second run changes nothing; after the owning layout regenerates the spec, run it again.
+    Returns {old line: times replaced}."""
+    path = os.path.join(HERE, 'specs', spec_file)
+    chunks = open(path, encoding='utf-8').read().split('\n---\n')
+    for i, chunk in enumerate(chunks):
+        doc = yaml.safe_load(chunk)
+        if not doc or doc.get('id') != mid: continue
+        hits = {}
+        evs = doc.get('events') or []
+        for e in evs:
+            if 'pages' in e:
+                e['pages'] = [dict(p, commands=_splice(p.get('commands'), mapping, hits)) for p in e['pages']]
+            elif 'commands' in e:
+                e['commands'] = _splice(e['commands'], mapping, hits)
+        if not hits: return hits
+        lines = chunk.split('\n')
+        k = next(n for n, l in enumerate(lines) if l.startswith('events:'))
+        tail = [l for l in lines[k + 1:] if l and not l.startswith((' ', '-', '#'))]
+        if tail: raise SystemExit('storylayer %s: `events:` is not the last key of map %d (%s)' % (tag, mid, tail[0]))
+        body = yaml.safe_dump({'events': evs}, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
+        chunks[i] = '\n'.join(lines[:k]) + '\n' + body.rstrip('\n') + ('\n' if i == len(chunks) - 1 else '')
+        open(path, 'w', encoding='utf-8').write('\n---\n'.join(chunks))
+        return hits
+    raise SystemExit('storylayer %s: no map %d in %s' % (tag, mid, path))

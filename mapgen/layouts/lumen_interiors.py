@@ -229,7 +229,7 @@ def build_185():
                 page([N('Receptionist', "Invitation? ...Guest of the Chair. Of course. The lift's on the left; the Gala's at the top. Please don't touch the exhibits. Please don't touch anything.")],
                      'NPC 16', 'down', cond=V(6))), 15, 8),
           at(sign('Founding plaque', "MERIDIAN SPIRE. Raised AF 271 by Meridian Concord on the foundations of the old Aurelian sun tower, the first stone of Zenith.", post=False), 9, 5),
-          at(ev('Arena model', page(["(Under glass: a great white bowl of an arena in a ring of mountains, a brass ring round its rim and eighteen slim pylons.) \"THE MERIDIAN PRISM ARENA. Crownhaven's ancient Temple-Arena of the Blessing, rebuilt for the Festival of AF 300 by Meridian Concord. Eighteen Plates. One stage.\"",
+          at(ev('Arena model', page([S('pfm_arena_model'), "\"THE MERIDIAN PRISM ARENA. Crownhaven's ancient Temple-Arena of the Blessing, rebuilt for the Festival of AF 300 by Meridian Concord. Eighteen Plates. One stage.\"",
                                      J('neutral', "Eighteen pylons. Like Lattices. ...Why does an arena need pylons?")])), 5, 11),
           at(ev('Imprint exhibit', page(["IMPRINT ENERGY: \"Every Pokémon leaves a trace in its land. Meridian's Lattices gather that trace and turn it into light.\" A diagram shows a Lattice drinking from a river."])), 19, 11),
           at(ev('Triage', page([], cond=None), page([N('Directorate Officer', "Nobody goes up. Nobody goes down. Medics only.")], SPR['GUARD'], 'down', cond=V(9)),
