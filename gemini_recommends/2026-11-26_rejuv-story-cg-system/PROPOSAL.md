@@ -747,17 +747,106 @@ All **14 Wave 2 PNGs** (`28` dual-synced files across `graphics/Pictures/` and `
 
 ---
 
-## 4B. Queued Final Wave 3 — Act IV–V Climax, Finale & Post-Game CGs (7 Scenes → 20/20 Complete!)
+## 4B. Delivered & Critic-Certified Final Wave 3 Assets (7 Flagship Scenes / 14 Plates — 7/7 PASS, Mean `9.36 / 10`, `0 P0` → `20 / 20` FULL CAMPAIGN COMPLETE!)
 
-| # | Planned Filenames | Chapter & Scene | Script Anchor | Visual Pitch |
-|---|---|---|---|---|
-| 14 | `cg_ch17_aurelia_sun_court_a/b.png` | **Ch17 — Sunken Aurelia**: "You're the Missing Piece" | `story/36_SCRIPT_CH17.md` L285–345 | Cathedral-vault underwater glass dome framing the ancient golden Sun Court mosaic (`_a`), Aurelian Voss stepping calmly from the breached glowing doorway naming himself (`_b`). |
-| 15 | `cg_ch18_hymn_of_return_a/b.png` | **Ch18 — Gloaming Dusk-Chapel**: The Complete Hymn of Return | `story/37_SCRIPT_CH18.md` L284–309 | Celestine unveiling the illuminated ancient score beneath luminous Great Tree roots (`_a`), eighteen faint prismatic notes rising into the dusk vault (`_b`). |
-| 16 | `cg_ch19_draco_brazier_oath_a/b.png` | **Ch19 — Wyrmrest Gate**: Sigrun's Trial & The Oath | `story/38_SCRIPT_CH19.md` L90–145 | Roaring blue-white dragonfire brazier lighting Sigrun and the hooded PC (`_a`), sparks rising toward the distant crown-spire horizon as the oath is spoken (`_b`). |
-| 17 | `cg_ch20_little_owl_bedside_a/b.png` | **Ch20 — Sanctum After Midnight**: "...Little Owl." | `story/39_SCRIPT_CH20.md` L447–462 | Ilsa standing inside the candlelit Sanctum door holding her earmuffs off (`_a`), sitting quietly beside Valen on the camp bed under his white coat (`_b`). |
-| 18 | `cg_ch21_arceus_eighteen_plates_a/b.png` | **Ch21 — Prism Arena True Finale**: Eighteen Wardens Letting Go | `story/40_SCRIPT_CH21.md` L220–275 | Valen holding the fracturing Ring as eighteen luminous Plates orbit high above (`_a`), Arceus descending in calm golden-white radiance as the chains dissolve into stardust (`_b`). |
-| 19 | `cg_pg_zygarde_memorial_a/b.png` | **Post-Game — Fallmorn**: Valen's Memorial & Zygarde Chooses | `story/41_SCRIPT_POSTGAME.md` L140–175 | Sunlit Basilica garden stone beside the quiet ocean horizon with a glowing cluster of emerald Zygarde Cells gathering (`_a`), Zygarde's emerald silhouette watching calmly over Crownhaven (`_b`). |
-| 20 | `cg_ruin_gilded_king_throne_a/b.png` | **Ruin Route — R7 Hijack**: The Gilded King Unchained | `story/42_SCRIPT_RUIN_KING.md` L105–165 | Inverted crimson-and-gold Prism Arena with shattered golden chains swirling around Gilded King Aurelius (`_a`), the cracked Crown blazing stark inverse violet-black (`_b`). |
+All **14 Final Wave 3 PNGs** (`28` dual-synced files across `graphics/Pictures/` and `art/out/Graphics/Pictures/`) complete the entire **20 / 20 Rejuvenation-Style Story CG Campaign (`39 / 39` dual-synced PNGs)**. Every Wave 3 plate is verified `512×384 RGBA`, `exact2x == True`, `<= 64` opaque colors (`63–64c`), `semi_alpha == 0`, `zero_alpha == 0`, `newColsInB == 0`, `0.00%` static background drift (`MAE = 0.00`), `y=0..280` focal framing, and organic dark `y=288..384` dialogue bed (`botL601 = 20.3..31.1`), independently certified **7/7 First-Pass PASS** (`8.8–9.6 / 10`, mean **`9.36 / 10`**, `0 P0`, `0` cameo touches):
+
+| # | Scene & Chapter (Critic Score) | Filename (`graphics/Pictures/` & `art/out/Graphics/Pictures/`) | Script Anchor | MD5 (14/14 Dual-Sync Match) | Bytes |
+|---|---|---|---|---|---:|
+| 14a | **Ch17 — Sunken Aurelia** *(9.4 Gold Pass)*: Underwater dome + 5-digit golden hand cradle | `cg_ch17_aurelia_sun_court_a.png` | `story/36_SCRIPT_CH17.md` L285–315 | `8bd836b5ff15e11109ae4489e16def49` | 58,731 |
+| 14b | **Ch17 — Sunken Aurelia** *(9.4 Gold Pass)*: Voss stepping from blazing torch breach | `cg_ch17_aurelia_sun_court_b.png` | `story/36_SCRIPT_CH17.md` L333–361 | `5e7cae8e5aac7e3edb30fec72a311bda` | 60,631 |
+| 15a | **Ch18 — Gloaming Dusk-Chapel** *(9.6 Gold Pass)*: On-model Celestine unveiling colored score | `cg_ch18_hymn_of_return_a.png` | `story/37_SCRIPT_CH18.md` L284–290 | `ffdac5430088116c403fad647e423092` | 79,254 |
+| 15b | **Ch18 — Gloaming Dusk-Chapel** *(9.6 Gold Pass)*: Exact 18 prismatic notes rising | `cg_ch18_hymn_of_return_b.png` | `story/37_SCRIPT_CH18.md` L291–307 | `bdc17399681389fd9a49b3bb90c5413c` | 81,132 |
+| 16a | **Ch19 — Wyrmscar Rift (`865 :DRAGONS_DEN`)** *(9.5 Gold Pass)*: Draco brazier lighting Sigrun & hooded PC | `cg_ch19_draco_brazier_oath_a.png` | `story/38_SCRIPT_CH19.md` L118–131 | `5bd42697ec67c804dfef433842d12d6f` | 54,194 |
+| 16b | **Ch19 — Wyrmscar Rift (`865 :DRAGONS_DEN`)** *(9.5 Gold Pass)*: Blue-white fire flares toward Crownhaven spire | `cg_ch19_draco_brazier_oath_b.png` | `story/38_SCRIPT_CH19.md` L142–146 | `6a406a01b090f6c64e84d64d9f7da252` | 57,853 |
+| 17a | **Ch20 — Sanctum After Midnight** *(9.4 Gold Pass)*: Ilsa in doorway holding earmuffs off | `cg_ch20_little_owl_bedside_a.png` | `story/39_SCRIPT_CH20.md` L447–454 | `9ac9839d59570bdc47508974dd4f3345` | 68,484 |
+| 17b | **Ch20 — Sanctum After Midnight** *(9.4 Gold Pass)*: Ilsa beside Valen under his white coat | `cg_ch20_little_owl_bedside_b.png` | `story/39_SCRIPT_CH20.md` L455–462 | `5247533604a04dc171a0d2e690b07476` | 66,200 |
+| 18a | **Ch21 — Prism Arena True Finale** *(9.3 Pass)*: Valen holding Ring under 18 Plates & chains | `cg_ch21_arceus_eighteen_plates_a.png` | `story/40_SCRIPT_CH21.md` L220–251 | `d15d644199b14300c3c86a5d2b33078d` | 53,594 |
+| 18b | **Ch21 — Prism Arena True Finale** *(9.3 Pass)*: Arceus descends freed; crystal turns to light | `cg_ch21_arceus_eighteen_plates_b.png` | `story/40_SCRIPT_CH21.md` L283–308 | `6c0d01650ba700e50c2cd7b5193b7238` | 51,393 |
+| 19a | **Post-Game — Basilica Garden** *(8.8 Pass)*: Valen's forged-ring plinth (no statue) + Cells | `cg_pg_zygarde_memorial_a.png` | `story/41_SCRIPT_POSTGAME.md` L140–145 | `6dc3a41e4077a63f01bbb25d03e127c4` | 54,039 |
+| 19b | **Post-Game — Basilica Garden** *(8.8 Pass)*: Cell lifts; Zygarde 50% emerald aura manifests | `cg_pg_zygarde_memorial_b.png` | `story/41_SCRIPT_POSTGAME.md` L146–156 | `b55d54a69803230c5df0c29db2b65d46` | 57,778 |
+| 20a | **Ruin Route — R7 Hijack** *(9.5 Gold Pass)*: Gilded King Aurelius on inverted arena throne | `cg_ruin_gilded_king_throne_a.png` | `story/42_SCRIPT_RUIN_KING.md` L105–140 | `67c2a52cb79beb1629c4921e3a289a00` | 62,982 |
+| 20b | **Ruin Route — R7 Hijack** *(9.5 Gold Pass)*: Cracked Crown blazes inverse violet-black | `cg_ruin_gilded_king_throne_b.png` | `story/42_SCRIPT_RUIN_KING.md` L171–182 | `22252a850313b95ef2a99ee7db224067` | 67,468 |
+
+### 4B.1 Wave 3 Event Choreography Snippets (Ready to Wire)
+
+- **14. Ch17 — Map 826 Sunken Aurelia, The Sun Court (`story/36_SCRIPT_CH17.md` L285–361):**
+  ```ruby
+  pf_cg_show("cg_ch17_aurelia_sun_court_a", fade: 24)
+  pf_say(:NYX, :shocked, "Oh.")
+  pf_say(:NYX, :sad, "Oh, darling. You're the missing piece.")
+  pf_say(:SAHAR, :neutral, "\"Here rests the One that is every color and none.\"")
+  pf_say(:SAHAR, :sad, "It's the Legend Plate. The god's heart.")
+  # cutting-torch SE + breach autorun (V138 == 8 -> 9):
+  pf_cg_swap("cg_ch17_aurelia_sun_court_b", flash: [255, 232, 160, 180, 14], shake: [4, 12], fade: 12)
+  pf_say(:VOSS, :happy, "Oh, look at that. Oh, *look* at that.")
+  pf_say(:VOSS, :happy, "Ten years of telemetry and it's nothing to seeing it in person.")
+  pf_say(:VOSS, :neutral, "House Aurel. My family. We changed the name and kept the grudge.")
+  pf_cg_hide(fade: 20)
+  ```
+- **15. Ch18 — Gloaming Dusk-Chapel (`story/37_SCRIPT_CH18.md` L284–307):**
+  ```ruby
+  pf_cg_show("cg_ch18_hymn_of_return_a", fade: 24)
+  pf_say(:CELESTINE, :neutral, "I've been waiting for you for forty years, little colourless thing.")
+  pf_say(:CELESTINE, :neutral, "Listen. They don't sing it for anyone else.")
+  pf_cg_swap("cg_ch18_hymn_of_return_b", flash: [240, 224, 255, 110, 14], fade: 18)
+  pbMessage(_INTL("Eighteen we borrowed, eighteen we keep / till the wounded land has learned to sleep;"))
+  pbMessage(_INTL("then one of no color, the eighteen roads walked, / shall carry them home, as the old ones talked —"))
+  pbMessage(_INTL("not chained, not broken, not bought, not crowned: / given back, as a gift is found."))
+  pf_say(:CELESTINE, :smug, "I cannot lie. I can, however, sing.")
+  pf_cg_hide(fade: 24)
+  ```
+- **16. Ch19 — Wyrmscar Rift (`865 :DRAGONS_DEN`), The Draco Brazier (`story/38_SCRIPT_CH19.md` L118–146):**
+  ```ruby
+  pf_cg_show("cg_ch19_draco_brazier_oath_a", fade: 20)
+  pf_say(:SIGRUN, :neutral, "Here. Say what you intend to do at the Festival.")
+  pf_say(:SIGRUN, :neutral, "The fire hears. In Ashkaar, the fire is the court.")
+  # On :return / :keep / :open choice:
+  pf_cg_swap("cg_ch19_draco_brazier_oath_b", flash: [185, 232, 255, 165, 14], shake: [3, 10], fade: 12)
+  pbMessage(_INTL("The white fire leans towards you, and then up, like a candle when a door opens."))
+  pf_say(:SIGRUN, :neutral, "...It heard.")
+  pf_say(:SIGRUN, :neutral, "Good.")
+  pf_cg_hide(fade: 20)
+  ```
+- **17. Ch20 — Sovereign's Sanctum After Midnight (`story/39_SCRIPT_CH20.md` L447–462):**
+  ```ruby
+  # Plays inside the :reconciled branch at V141 == 10 -> 11:
+  pf_cg_show("cg_ch20_little_owl_bedside_a", fade: 28)
+  pf_say(:ILSA, :neutral, "You chose a country over a daughter. Fine.")
+  pf_say(:ILSA, :neutral, "Then save the country, Father. Don't make a child pay for it.")
+  pf_cg_swap("cg_ch20_little_owl_bedside_b", fade: 22)
+  pf_say(:VALEN, :sad, "...Little owl.")
+  pbMessage(_INTL("She sits down on the camp bed beside him. She stays the night."))
+  pf_cg_hide(fade: 28)
+  ```
+- **18. Ch21 — Prism Arena Summit True Finale (`story/40_SCRIPT_CH21.md` L238–308):**
+  ```ruby
+  pf_cg_show("cg_ch21_arceus_eighteen_plates_a", fade: 20)
+  pf_say(:VALEN, :neutral, "Go. Free it. I'll hold the door. I've had thirty years of practice.")
+  pf_cg_hide(fade: 16) # -> enters :ARCEUS True Finale 6-bar battle
+  # After final lock breaks (V142 == 9 -> 10, non-Gilded paths):
+  pf_cg_show("cg_ch21_arceus_eighteen_plates_a", fade: 0)
+  pf_cg_swap("cg_ch21_arceus_eighteen_plates_b", flash: [255, 248, 215, 200, 16], shake: [4, 12], fade: 18)
+  pbMessage(_INTL("Valen is still holding the pylons. His crystal isn't white any more. It isn't glass. It's light."))
+  pf_cg_hide(fade: 24)
+  ```
+- **19. Post-Game P3 — Crownhaven Basilica Garden (`story/41_SCRIPT_POSTGAME.md` L140–156):**
+  ```ruby
+  pf_cg_show("cg_pg_zygarde_memorial_a", fade: 28)
+  pbMessage(_INTL("Valen's memorial: forged by Brann from the empty Crown's setting, a plain ring of metal on a plinth."))
+  # On [if ZYGARDE_CHOOSES]:
+  pf_cg_swap("cg_pg_zygarde_memorial_b", flash: [130, 250, 175, 130, 16], fade: 20)
+  pbMessage(_INTL("The Cell lifts off the plinth and settles against your hand."))
+  pf_cg_hide(fade: 28)
+  ```
+- **20. Ruin Route — Map 491 Crownhaven Temple-Arena (`story/42_SCRIPT_RUIN_KING.md` L105–185):**
+  ```ruby
+  pf_cg_show("cg_ruin_gilded_king_throne_a", fade: 16)
+  pf_say(:AURELIUS, :smug, "Kneel, mongrel. Set that little hoop at my feet, and I will be generous.")
+  pf_cg_swap("cg_ruin_gilded_king_throne_b", flash: [195, 70, 255, 175, 14], shake: [5, 14], fade: 10)
+  pf_say(:AURELIUS, :angry, "Stand your ground, insolent mongrel! Face the First Sovereign of Aurelia!")
+  pf_cg_hide(fade: 12) # -> enters [GILDED_AURELIUS, Aurelius] on :PRISM_ARENA + Inverse
+  ```
 
 ---
 
