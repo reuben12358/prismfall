@@ -318,8 +318,15 @@ Core already runs this stage through `EliteBattle.bossBattle(:ARCEUS, 100, 1, fa
 inside a bar it cycles them every 3 rounds, announced a round ahead; the fight opens on Gym 1's field with no resting
 rounds); forced locks; Miscalibrated's six-Plate bar 5 at ×0.85; War's and Judgment's seventh bar (??? type; Judgment
 on `:INVERSE`); HARMONY_BUFF. The `:prism_turn` break effect had never fired before this (a frozen state summary).
-Not built: Gilded's bar-6 refills and binding, Judgment's Giratina partner, the per-phase Recover limit, the "best
-field against the player's active" skip, the 2-turn Casual telegraph, `:bossboost` HP. Win rates: §9b.
+**Built 2026-11-26 (Bosses 103 / 116, Core 033):** the Wardens' kneels between bars (Core 033 `Finale.kneel_bar` plays
+the 36 lines of story/11_FINALE_LINES.md, now with 11's stage directions and the lock opening or staying shut; Bosses
+116 adds the forced-lock beat when a bar breaks, and one line a bar on War / Judgment, where nobody is asked);
+Gilded's last bar refills three times at the Casual bar HP (Casual: half a Casual bar), then the Gilded Chain closes
+(result `:gilded_chain`); elsewhere the last bar's fall ends the battle (result `:freed`; Arceus never faints);
+Judgment: Giratina-Origin Lv 100 at the PC's side (`PARTNER_GIRATINA`, a 2v1) and every lock forced, capped like War;
+Standard: Recover at most twice a bar (Hard: no limit; Casual: no Recover).
+Not built: the "best field against the player's active" skip at a break, the 2-turn Casual telegraph, `:bossboost`
+HP. Win rates: §9b.
 
 **Alignment with NARRATIVE_KEYS §6.6 (authoritative for bar counts):** a "phase" below = one **bar**. Default
 `ARCEUS_BOUND` has 6 bars; bar *k* holds the Plates of gyms 3k−2..3k (bar 1 Normal/Bug/Water since SPINE Rev 14 … bar 6 Dark/Fairy/Dragon), so
@@ -474,10 +481,14 @@ ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard 
 | Arceus, Bound, every Warden releases (100) | 43% / 60% | 0% / 0% | 0% / 0% | no cell before |
 | Arceus, Bound, one Warden in three refuses | 15% / 35% | 0% / 0% | 0% / 0% | no cell before |
 | Arceus, Miscalibrated, 5 bars | 58% / 67% | 0% / 0% | 0% / 0% | no cell before |
+| Arceus, Gilded, 6 bars + 3 refills to the Gilded Chain (2026-11-26) | 18% / 37% | 0% / 0% | 0% / 0% | new |
+| Arceus, Judgment (Ruin), 7 bars, all forced, Giratina beside you (2026-11-26) | 42% / 67% | 0% / 0% | 0% / 0% | new |
 
 Arceus on Standard / Hard is 0% for the harness in the old 3-bar shape too (checked: 0 of 60, typical and prepared,
 parties swept in about nine turns by a Lv 100 Judgment before the first bar breaks), so the bar count is not what
-decides it; before the Casual easing Casual was 0% as well. Open for Reuben: whether Standard Arceus and Hard Valen
+decides it; before the Casual easing Casual was 0% as well. The 2026-11-26 rerun (the locks' lines, Standard's
+Recover limit, the last bar ending the battle) left ARC / ARCF / ARCM exactly where they were. Gilded's Casual refills
+were halved after a first 13% / 20%. Open for Reuben: whether Standard Arceus and Hard Valen
 (prepared 35% → 0%) should stay where the designs put them.
 
 **Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,

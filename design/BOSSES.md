@@ -81,13 +81,16 @@ Any value marked *D* may be a difficulty Hash `{ :CASUAL => x, :STANDARD => y, :
 | `:prism_order` *D* | `[[field, ...], ...]`, one list per bar (the last repeats), or a proc returning that: the arena cycles only the current bar's fields (its `:set_order`). Set when the boss enters (the Plates turn at once) and at every break with `:prism_turn` (Arceus: each bar's three gym fields) |
 | `:follow_prism[:items]` | `{ :FIRE => :FIREMEMORY, ..., :default => nil }`: the held item follows the ascendant Plate too (Silvally). `:form_message` may be a `proc { |type| "..." }` |
 | `:end_of_round` | `proc { |battle, battler, state| }`, run after every round the boss is on the field; it may set `state.result` / `state.end_decision` (the Origin trial's restraint check, NULL's regeneration) |
+| `:partner` *D* | `[trainer_type, name, version]` (or a proc / nil): an AI ally at the player's side for a wild boss, a 2v1 (Judgment Arceus: `PARTNER_GIRATINA`). Skipped if the event already registered a partner; deregistered after |
+| `:move_limits` *D* | `{ :RECOVER => 2 }`: uses of a move per bar (counted when used; the move can't be chosen past it). Arceus: `{ :STANDARD => { :RECOVER => 2 }, :default => nil }` |
 | `:ebdx` | `{ :databox => true/false, :script => :BattleScriptName }` |
 
 ### Effect keys (inside `:on_break` / `:breaks` / `:on_defeat`)
 They're applied in this order. `{1}` in messages is the boss (`"The wild Kyogre"`). Every effect may have
 `:condition => proc { |battle, battler, state| bool }`.
 
-`:message`/`:messages` · `:animation` (common anim) · `:speech` (EBDX battle-script key) · `:cure_status` (`:all` also
+`:revive` (on-defeat only: a fraction, or a proc returning one; the last bar refills instead of falling, `state.revives`
+counts them; Gilded Arceus) · `:message`/`:messages` · `:animation` (common anim) · `:speech` (EBDX battle-script key) · `:cure_status` (`:all` also
 cures confusion) · `:reset_stats` (`true` or `:negative`) · `:form` (Integer or `:match_type`) + `:form_message` ·
 `:types` · `:ability` · `:item` · `:moves` (replace) · `:learn` (`{ slot => :MOVE }` or list) · `:stats` (`{ :SPEED => 1 }`) ·
 `:field` + `:field_message` (`battle.change_field`) · `:prism_turn` (PRISM_ARENA's announced `:turn`) · `:weather`
