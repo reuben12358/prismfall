@@ -265,7 +265,7 @@ SE: ship's horn, long. MOVE: the Dovetail sprite pulls back from the pier one ti
 [name: Harbor Crier] By order of the Concert of Regions, the Hallow Strait is closed!
 [name: Harbor Crier] The Hallow Strait is closed!
 V101 STORY_ACT = 1. V102 STORY_CHAPTER = 1.
-TITLE CARD: ACT I — THE LAST FERRY
+CHAPTER CARD: Chapter 1, "Tidewatch" (it names ACT I · THE LAST FERRY; plays when V102 is set; Cutscenes 020).
 ```
 
 *Calla, after the scan (action):*

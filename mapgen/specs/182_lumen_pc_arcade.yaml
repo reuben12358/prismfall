@@ -228,10 +228,12 @@ events:
       - {script: 'pfm_card(:PF_IL1_CARD, "The same night. Ferrow''s Landing.")'}
       - transfer: {map: 106, x: 2, y: 5, dir: up}
       else:
+      - {script: 'pfm_card(:PF_ACT1_END, "END OF ACT I")'}
       - var: [CH5_STEP, 13]
       - var: [STORY_ACT, 2]
       - var: [STORY_CHAPTER, 6]
       - switch: [EDDA_SMUGGLER, true]
+      - {script: 'pf_chapter_card(6) if defined?(pf_chapter_card)'}
       - {script: pfm_fade_in(30)}
     trigger: autorun
     move: fixed
@@ -244,7 +246,6 @@ events:
       var: [CH5_STEP, 13]
   at: [0, 0]
   story: interlude1
-
 ---
 # Map 183 revamped by layouts/wave8_story_craft.py (Wave 2 Map Craft; data/raw/183.npy).
 id: 183

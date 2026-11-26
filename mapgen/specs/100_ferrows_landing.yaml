@@ -114,7 +114,7 @@ events:
     - 'Harbor Crier: By order of the Concert of Regions, the Hallow Strait is closed! The Hallow Strait is closed!'
     - var: [STORY_ACT, 1]
     - var: [STORY_CHAPTER, 1]
-    - {script: 'pfm_card(:PF_ACT1_TITLE, "ACT I — THE LAST FERRY")'}
+    - {script: 'pf_chapter_card(1) if defined?(pf_chapter_card)'}
     - {script: 'pfm_quest(:mums_letter, "Mum''s Letter", "Find Imelda Larch at the research station on the headland.")'}
     trigger: touch
     move: fixed
@@ -190,7 +190,7 @@ events:
     - 'Harbor Crier: By order of the Concert of Regions, the Hallow Strait is closed! The Hallow Strait is closed!'
     - var: [STORY_ACT, 1]
     - var: [STORY_CHAPTER, 1]
-    - {script: 'pfm_card(:PF_ACT1_TITLE, "ACT I — THE LAST FERRY")'}
+    - {script: 'pf_chapter_card(1) if defined?(pf_chapter_card)'}
     - {script: 'pfm_quest(:mums_letter, "Mum''s Letter", "Find Imelda Larch at the research station on the headland.")'}
     trigger: touch
     move: fixed
@@ -266,7 +266,7 @@ events:
     - 'Harbor Crier: By order of the Concert of Regions, the Hallow Strait is closed! The Hallow Strait is closed!'
     - var: [STORY_ACT, 1]
     - var: [STORY_CHAPTER, 1]
-    - {script: 'pfm_card(:PF_ACT1_TITLE, "ACT I — THE LAST FERRY")'}
+    - {script: 'pf_chapter_card(1) if defined?(pf_chapter_card)'}
     - {script: 'pfm_quest(:mums_letter, "Mum''s Letter", "Find Imelda Larch at the research station on the headland.")'}
     trigger: touch
     move: fixed

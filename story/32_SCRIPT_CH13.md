@@ -429,8 +429,9 @@ RECEIVE: SECRET ARTICLES (sealed).
 [name: Ilsa] Neither of us will say anything at all.
 (She goes in. You're alone on the steps.)
 (In every broken pane of glass around you, on every step, hundreds of tiny reflections of the morning, and in every one of them, at the edge, six black wings fold, and unfold, and fold.)
+TITLE CARD: END OF ACT III.
 V134 = 10. Variable V101 STORY_ACT = 4. V102 STORY_CHAPTER = 14.
-TITLE CARD: IV — The Drowned Crown.
+CHAPTER CARD: Chapter 14, "The Deep Seams" (it names ACT IV · THE DROWNED CROWN; plays when V102 is set; Cutscenes 020).
 QUEST LOG: "Eighteen Roads" — Through the Grave Glass at Vigil, north to Cragholm in the Bone Sands. Find Bastian Ore, the oldest Warden. He was there.
 ```
 *(06_ACT_III's cliffhanger and END OF ACT III. 09 #5: the Secret Articles ("One in Keeping") are read in Act IV. #25: the six wings are Giratina (Ch15).)*

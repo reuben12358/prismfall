@@ -850,9 +850,9 @@ THE STAIR (action, last):
 [name: Rowan] *(to the tree)* I promise, love.
 (He goes down the terraces toward the gate, and the road, and the Long Drop, and Ironreach.)
 (Behind him, in the Bride Tree's branches, where the blossom came off, a new bud is already opening.)
-V119 = 0. V130 = 12. V101 STORY_ACT = 3. V102 STORY_CHAPTER = 10.
 TITLE CARD: END OF ACT II.
-TITLE CARD: III — FAULT LINES
+V119 = 0. V130 = 12. V101 STORY_ACT = 3. V102 STORY_CHAPTER = 10.
+CHAPTER CARD: Chapter 10, "The Seat That Blooms" (it names ACT III · FAULT LINES; plays when V102 is set; Cutscenes 020).
 ```
 *(05_ACT_II Interlude II. Changed from the outline: Rowan **packs** the mask instead of putting it on, because he walks into the Conclave unmasked as the Grass Warden. "Five days earlier" fits the Root Road to Ironreach. The ring in the testament is how the seat and the ring reach Juno in Ch10, and why the Mourner never Mega Evolves. The falling blossom is a Homecoming seed (09 #21), and nobody comments on it.)*
 

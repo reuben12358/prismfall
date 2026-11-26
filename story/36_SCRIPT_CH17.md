@@ -462,10 +462,10 @@ V138 = 12.
 [name: Nyx] Every power in Velmora is waiting for you to walk into one room.
 (Nobody says anything for a while. The lanterns on the steps above burn down one by one.)
 [portrait: EDDA, neutral] (knocking out her pipe on the crate) Then we'd best make sure you walk in on your own feet.
-V138 = 13. Variable V101 STORY_ACT = 5. Variable V102 STORY_CHAPTER = 18.
 [anim: fade to black; title card]
-END OF ACT IV.
-V — SOVEREIGN
+TITLE CARD: END OF ACT IV.
+V138 = 13. Variable V101 STORY_ACT = 5. Variable V102 STORY_CHAPTER = 18.
+CHAPTER CARD: Chapter 18, "Once Upon a Time" (it names ACT V · SOVEREIGN; plays when V102 is set; Cutscenes 020).
 ```
 *(Act V opens in Ch18, "The Gloaming". The PC learns the name Ines, Kestrel takes Morwen's Ring (`:ch18_kestrel_ring`), and there's Pecharunt and the full Hymn.)*
 

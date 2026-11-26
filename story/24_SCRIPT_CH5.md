@@ -1018,9 +1018,9 @@ Switch S162 EDDA_SMUGGLER = ON.
 [name: Kestrel] And if you're not, I'll find whoever said you weren't.
 (He goes down the stairs. The door shuts. In her chair, Hesper opens her eyes.)
 [portrait: HESPER, sad] *(to the dark)* Oh, my boy. Don't.
-V119 = 0. V125 = 13. V101 STORY_ACT = 2. V102 STORY_CHAPTER = 6.
 TITLE CARD: END OF ACT I.
-TITLE CARD: II — IMPRINTS
+V119 = 0. V125 = 13. V101 STORY_ACT = 2. V102 STORY_CHAPTER = 6.
+CHAPTER CARD: Chapter 6, "What the Sand Keeps" (it names ACT II · IMPRINTS; plays when V102 is set; Cutscenes 020).
 ```
 *(The Act II opener, the Lowlight shrine and Dex's glass warming under the PC's hand, belongs to Chapter 6: 05_ACT_II "Act-opening beat", S164 DEX_SHRINE, and the Trials quest `ZE_LOWLIGHT_LAMPS`, where Dex's Pichu chooses the PC.)*
 

@@ -80,7 +80,9 @@ def events_182():
             S('pfm_card(:PF_IL1_CARD, "The same night. Ferrow\'s Landing.")'),
             {'transfer': {'map': 106, 'x': 2, 'y': 5, 'dir': 'up'}}], [
             # the swap could not start (a plugin missing): close Act I anyway rather than strand the save at step 12
+            S('pfm_card(:PF_ACT1_END, "END OF ACT I")'),
             {'var': [STEP, 13]}, {'var': ['STORY_ACT', 2]}, {'var': ['STORY_CHAPTER', 6]}, SW('EDDA_SMUGGLER'),
+            S('pf_chapter_card(6) if defined?(pf_chapter_card)'),
             S('pfm_fade_in(30)')])]
     return [own(at(ev('Lamplight', page([]),
                       page(begin, cond={'var': [STEP, 12]}, trigger='autorun'),
@@ -119,9 +121,9 @@ def events_106():
         {'wait': 30},
         S('pfm_fade_out(30)'),
         S('pfm_il1_end'),
+        S('pfm_card(:PF_ACT1_END, "END OF ACT I")'),             # the act's closing beat, then the next chapter's card
         {'var': [STEP, 13]}, {'var': ['STORY_ACT', 2]}, {'var': ['STORY_CHAPTER', 6]},
-        S('pfm_card(:PF_ACT1_END, "END OF ACT I")'),
-        S('pfm_card(:PF_ACT2_TITLE, "II — IMPRINTS")'),
+        S('pf_chapter_card(6) if defined?(pf_chapter_card)'),     # Chapter 6 names ACT II (Cutscenes 020): no "II — IMPRINTS" card
         MV('player', [{'opacity': 255}]),
         {'selfswitch': ['A', False]},
         {'transfer': WAKE},

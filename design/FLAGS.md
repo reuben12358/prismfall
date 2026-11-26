@@ -10,8 +10,8 @@
 
 | ID | Name | Values / meaning | Set by |
 |---|---|---|---|
-| V101 | STORY_ACT | 0 = Prologue, 1–5 = Act, 6 = post-game | Act title cards |
-| V102 | STORY_CHAPTER | 0 = Prologue, 1–21 = chapter (2 = Saltmere "Curtain Call", 3 = Briarwick "The Weaver's Debt"), 22 = epilogue, 23 = post-game | Chapter openers / closers (2 at the Ch1 cutscene, 3 at Saltmere's North Gate, 4 at Briarwick's charcoal child) |
+| V101 | STORY_ACT | 0 = Prologue, 1–5 = Act, 6 = post-game | Story state (the act's END OF ACT card plays before it moves on; there is no act-opening card) |
+| V102 | STORY_CHAPTER | 0 = Prologue, 1–21 = chapter (2 = Saltmere "Curtain Call", 3 = Briarwick "The Weaver's Debt"), 22 = epilogue, 23 = post-game | Chapter openers / closers; setting it plays that chapter's opening card once a save (Cutscenes 020, `pf_chapter_card`) (2 at the Ch1 cutscene, 3 at Saltmere's North Gate, 4 at Briarwick's charcoal child) |
 | V103 | FESTIVAL_DAY | 0–7 (Ch20–21 scene day; Core's `festival_stage` tracks the bracket separately) | Crownhaven day transitions |
 | V104 | LOWLIGHT_STATE | 0 = intact, 1 = Shattered (608 replaces 181), 2 = spreading (Act IV), 3 = healed (Homecoming) | Ch5, Act IV opener, ending |
 | V105 | BRIARWICK_GLASSWOOD | 0 = edge, 1 = receded (Matriarch beaten; the Windfall Row forest-road cordon lifts), 2 = at the looms (Act IV), 3 = gone | Ch3, Act IV, ending |

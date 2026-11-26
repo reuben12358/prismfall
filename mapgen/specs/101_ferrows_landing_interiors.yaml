@@ -2291,7 +2291,6 @@ events:
     through: true
   at: [7, 11]
   story: interlude1
-
 ---
 id: 106
 name: Ferrow Lighthouse Lamp Room
@@ -2463,11 +2462,11 @@ events:
     - {wait: 30}
     - {script: pfm_fade_out(30)}
     - {script: pfm_il1_end}
+    - {script: 'pfm_card(:PF_ACT1_END, "END OF ACT I")'}
     - var: [CH5_STEP, 13]
     - var: [STORY_ACT, 2]
     - var: [STORY_CHAPTER, 6]
-    - {script: 'pfm_card(:PF_ACT1_END, "END OF ACT I")'}
-    - {script: 'pfm_card(:PF_ACT2_TITLE, "II — IMPRINTS")'}
+    - {script: 'pf_chapter_card(6) if defined?(pf_chapter_card)'}
     - move:
         who: player
         route:
@@ -2550,7 +2549,6 @@ events:
     through: true
   at: [4, 7]
   story: interlude1
-
 ---
 id: 107
 name: Dockmaster's House

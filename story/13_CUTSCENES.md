@@ -27,6 +27,11 @@ like a bad idea". Engine: `plugins/Prismfall Cutscenes/014_Portraits.rb`. A line
   (`[emote: kind, Name]` over someone else). Kinds: exclaim, double_exclaim, question, dots, anger, sweat, heart, idea,
   music, jolt. Map events write `\pfe[kind]`. **At most three a conversation** (the engine drops a fourth), none in the
   no-joke stretches. Overworld acting is opt-in the same way: `[pose: crossed]` / `\pfp[...]`, `[act: nod]` / `\pfa[...]`.
+- **Act and chapter cards** (Reuben's call, 2026-11-26): an act ends on its **END OF ACT** title card (`pfm_card`),
+  played *before* V101 / V102 move on. Setting V102 then plays the new chapter's opening card (Cutscenes
+  `020_ChapterOpeningCards.rb`, once a save; map events may also call `pf_chapter_card(n)`), and that card names the act,
+  so there is no separate act-opening card ("II — IMPRINTS" and the like are gone). Scripts write it as
+  `CHAPTER CARD: Chapter n, "Title"`. The Ruin Route does not move V102: its first event calls `pf_chapter_card(:RUIN)`.
 - **Boxes** (2026-11-25): a line in a script block is one message box, one or two lines of text. Long speeches are cut
   at sentence ends, the first box carrying the `[portrait: ...]` tag and the rest `[name: X]`. A stage direction that is a
   whole sentence sits on its own line; a fragment such as `(pulling)` stays in the line of whoever does it.

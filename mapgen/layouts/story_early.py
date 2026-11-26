@@ -262,7 +262,7 @@ SCAN = [
     "The ship's horn sounds, long. Behind you the Dovetail pulls back from the pier and stops. A chain is drawn across the harbor mouth.",
     N('Harbor Crier', 'By order of the Concert of Regions, the Hallow Strait is closed! The Hallow Strait is closed!'),
     {'var': ['STORY_ACT', 1]}, {'var': ['STORY_CHAPTER', 1]},
-    S('pfm_card(:PF_ACT1_TITLE, "ACT I — THE LAST FERRY")'),
+    S('pf_chapter_card(1) if defined?(pf_chapter_card)'),   # Chapter 1's card names ACT I (Cutscenes 020; it also plays by itself when V102 is set)
     QUEST('mums_letter', "Mum's Letter", 'Find Imelda Larch at the research station on the headland.')]
 
 LAST_CALL = [
