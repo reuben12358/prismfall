@@ -328,6 +328,6 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 - **For Gemini:** stage new scenes on the story's map; take the cast from ids, not `PLAYER_A` / `THEODRIC`; the `pfw_*` sheets
   live in the plugin's own Graphics folder (the engine now looks there). Still missing: `Pictures/cut_ch2_pageant_tear_90deg`
   (the scene skips the plate) and a bronze bell SE.
-- **Verified:** `ruby -c`; the Cutscenes selftest (13 new checks; its one failure is the expressive-dialogue file's, not this);
+- **Verified:** `ruby -c`; the Cutscenes selftest (13 new checks; 228 checks, 0 failed);
   real engine: the vault flow CH5_STEP 8 → 9 → 12 three ways (scene, photosensitive, scene removed), and `:CH2_PAGEANT`,
   `:CH8_CALDERA`, `:WAR_CLIMAX`, `:CH9_UNMASK` played to the end and handed control back. Frames looked at and deleted.
