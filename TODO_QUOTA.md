@@ -79,7 +79,8 @@
 - [ ] Re-shoot older Warden VS GIFs (`docs/battle_captures/cast/wardens_*.gif`) so they show the new two-line class plates.
 
 ## Status: finale bosses agent (Bosses 113–115, Arceus rotation, Mega per trainer)
-*Final note (2026-11-25): done and committed. Nothing in flight.*
+*Round 2 (2026-11-26), in progress: the Warden release / refusal lines between Arceus's bars (new Bosses 116, on `:prismfall_arceus_locks`), Gilded's bar-6 refills and binding, Judgment's Giratina partner (`PARTNER_GIRATINA` in PBS), Standard's 2-Recovers-a-bar limit, the Mega lore for one Mega per trainer. Committed so far: 509f526 (the locks' battle side in Bosses 116 + Core 033 directions, Gilded, Judgment's partner, the Recover limit; run_finale_bosses 87/87). Next: Mega lore, win-rate cells ARCG / ARCJ, BALANCE §7, tick.*
+*Round 1 (2026-11-25): done and committed.*
 - Built: Bosses 113 / 114 / 115, the Arceus rotation and `:prism_turn` fix, one Mega per trainer; see the three ticked lines in §2 and the two open lines under them. Checks: `tools/harness/run_finale_bosses.rb` (63/63), `tools/harness/run_mega.rb` (78/79, a PBS data failure), `winrates_r4.rb` cells VALEN, VOSS, QH, VOSSC, BORI, ARC, ARCF, ARCM (BALANCE.md §9).
 
 ---
