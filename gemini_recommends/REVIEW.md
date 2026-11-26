@@ -279,3 +279,55 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 - **Back strips for Interlude leads:** `CHAMPION_VALEN_back` (Interlude V) and `LEADER_ROWAN_back` (Interlude II).
 - **`EBDX/VS/WENLOW.png`** (his portrait stands in at 1.5x), `SUMP_BARON_back`, and Hrothgar has no battle strip or bust.
 - **Rename:** `Characters/pose_THEODRIC.png` should be `pose_AURELIUS.png` (the rest of the King's set was renamed).
+
+## 2026-11-24_rejuv-advanced-animations-engine and 2026-11-24_rejuv-cutscenes-rethink-and-expanded-slate — **ADOPT the engine and all 13 scenes; 1 wired, 3 more play on built maps, 9 wait for their maps** (Claude cutscene agent, 2026-11-25)
+- **Installed:** `plugins/Prismfall Cutscenes/017_AdvancedAnimations.rb` = §6's engine and cut plates, §12's two engine patches, and
+  the newest version of every scene: Ch2, Ch5 DC, Ch8, Ch10, Ch11 rethink, Ch16, Ruin R7 v2 from §6; **Ch9 v4** from
+  `ch9_v4_scene.rb` (not §6's v3); **Ch19 / Ch15 / Ch21** from `wave3_ready_scenes.rb` (not §6's first versions, the ones the
+  rethink proposal retires); Ch13 and Ch17 from `ch13_ch17_scenes_final.rb`. §6's first Ch5 and Ch11 scenes are left out.
+  Claude's changes are marked `[PF]` in the file.
+- **Code review:** no shell-outs, no network, no `eval`. The only file write is the capture screenshot, now refused outside the
+  game folder. Nothing existing is patched: the engine lives in `Prismfall::AdvancedAnimations` and only prepends onto its own
+  `Engine`. No collision with 006 / 012 / 014 / 016.
+- **§5.1–5.2 done.** `016_Movies.rb` is the registry: `pfm_cutscene(:ID)` with the spec's aliases, `Cutscene.act` kept,
+  `Cutscene.movie` and every `pf_*.ogv` reference removed. `pfm_cutscene` returns true only if the scene played, and never raises.
+- **One real gap in the supplied code, fixed:** the scenes call `$game_map.setup` / `$game_player.moveto` and never put anything
+  back (`dispose` only zeroed the tone). That is fine for a recording and wrong in play: after Ch5 the player would be left
+  invisible at the camera tile. The engine now snapshots the map, tile, facing, transparency, tone and BGM and restores them in
+  `dispose`, and hides followers meanwhile. Checked in the engine for five scenes (`restored=true`).
+- **§5.4 done:** `say` waits for USE / BACK in play (a press while it types shows the line; a small arrow marks the wait); capture
+  runs and `AdvancedAnimations.auto_advance = true` keep the timed hold. Also: lines page at three rows instead of overflowing,
+  names come from `Prismfall::Portrait`, and the protagonist uses the player's own sheet, portrait and name (the scenes
+  hard-code `PLAYER_A`, and Ch17 named them "Avery").
+- **§5.5 done:** all 29 BGM tags and the two SE tags map to files in `audio/manifest.tsv` (`SCENE_BGM` / `SCENE_SE` in 016).
+  The anime-OST titles in the spec are not wired (that pool is still Reuben's to lock). No bronze bell exists yet:
+  `ch8_foundry_bell` falls back to `Anim/HealBell`. The King's "Cosmic Air" is **provisional** (→ `Theme - Accord`).
+- **Photosensitive:** Gemini's guards (flash, flash_ramp, impact_beat, shake, plate shake) kept; additive VFX are now dimmed and
+  actor colour flashes capped as well. The vault flow passes in that mode.
+- **§5.6, what plays where.** A scene is `:ready` only when the maps it was staged on are the story's maps:
+  - **Wired:** Ch5 on 952 (`pfm_cutscene(:SH1)`; `:SH1_BURN` is a no-op, `:SH1_EXIT` still clears the Mourner). The event falls
+    back to the same beat as text if the scene can't play.
+  - **Ready, not wired to an event:** `:CH2_PAGEANT` (145), `:WAR_CLIMAX` (926).
+  - **Staged on a stand-in, so a logged no-op in play** (`preview: true` plays them): Ch8 (928 for 244), Ch9 (295 for 264),
+    Ch10 (525 for 708), Ch11 (563 for 309), Ch13 (287 + 174 for 343), Ch15 (295 for 391), Ch16 (104 + 544 for 223 + 363),
+    Ch17 (186 for 826), Ch21 (285 for 491), Ruin R7 (186 for 491). Swapping the id is not enough: every tile coordinate
+    belongs to the stand-in. Restage on the real map, then set `:staged` = `:canon` in `SCENES`.
+- **Canon, where the scenes and the scripts disagree:**
+  - **Ch5.** `story/24` says of the Shatter "no streets shown" and saves Rook's "Turn it off" for 608; the Director's Cut
+    cuts to Dex freezing and spends that line mid-vault, before the boss and before Rook works out that the Lowlight is under
+    them. `:SH1` therefore plays the cut **without** the Lowlight cutaway (`SH1_LOWLIGHT_CUTAWAY = false`; one constant to flip;
+    `:CH5_DC` is the full cut). **Reuben's call.** Four trimmed lines are back to the script's wording.
+  - **Ruin R7.** `THEODRIC` sheet and portrait ids → `AURELIUS`; every line of the King's and Voss's is now `story/42`'s
+    (2c3c22b), word for word. The staging was already personality-only (gauntlet toss, one Poké Ball, no portals). In the script
+    the Kneel / Refuse choice and `:ruin_voss` sit between the audience and the challenge: the scene must be split there when
+    it is staged on 491.
+  - **Ch8** compresses the bells, the tap and the midnight hall into one piece; in play those are separate beats on 240, 255
+    and 244 with the detonator choice between. It will need splitting too.
+  - **WAR-1** has one outcome; 926's event plays the existing four-outcome `Cutscene.play(:WAR_CLIMAX)` (by `:war_climax`).
+    Gemini's version is registered but does not replace it.
+- **For Gemini:** stage new scenes on the story's map; take the cast from ids, not `PLAYER_A` / `THEODRIC`; the `pfw_*` sheets
+  live in the plugin's own Graphics folder (the engine now looks there). Still missing: `Pictures/cut_ch2_pageant_tear_90deg`
+  (the scene skips the plate) and a bronze bell SE.
+- **Verified:** `ruby -c`; the Cutscenes selftest (13 new checks; its one failure is the expressive-dialogue file's, not this);
+  real engine: the vault flow CH5_STEP 8 → 9 → 12 three ways (scene, photosensitive, scene removed), and `:CH2_PAGEANT`,
+  `:CH8_CALDERA`, `:WAR_CLIMAX`, `:CH9_UNMASK` played to the end and handed control back. Frames looked at and deleted.
