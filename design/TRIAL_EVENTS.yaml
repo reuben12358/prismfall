@@ -318,6 +318,11 @@ maps:
     name: Pell Playhouse - The Grand Stage
     events:
     - {name: Dorian, key: DORIAN_ENCORE, patch: "existing event 'Dorian' on the Grand Stage: add the branch (EL_ENCORE, 16 badges: Lopunnite)"}
+    # post-game Registry (story/41_SCRIPT_POSTGAME.md): each of these needs a first empty page and cond {switch: POSTGAME}
+    - {name: Dorian (playbill), key: PG_DORIAN, near: "the stage door, in his best coat", sprite: DORIAN, trigger: action,
+       condition: "switch(160) && switch(270) && !quest_done(:PG_MELOETTA)"}
+    - {name: Opera stage, key: PG_OPERA_STAGE, near: "centre stage (move to the Crownhaven Opera Hall when it is built)", trigger: action,
+       condition: "quest_step(:PG_MELOETTA) == :encore"}
   209:
     name: Sahar's Dig Lab
     events:
@@ -355,6 +360,9 @@ maps:
     events:
     - {name: "Mega Stone: MEDICHAMITE", near: "the meditation shelf above the Pit's top tier (Rock Climb)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 16 && !has_item(:MEDICHAMITE)",
        commands: ["{script: 'pf_mega_stone(:MEDICHAMITE, \"Someone has left a stone on a folded mat, as if mid-breath.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    # post-game Registry (story/41_SCRIPT_POSTGAME.md): each of these needs a first empty page and cond {switch: POSTGAME}
+    - {name: Kaito (the Pit), key: PG_KAITO_PIT, near: "the pit rail", sprite: KAITO, trigger: action,
+       condition: "switch(160) && switch(270) && !quest_done(:PG_KUBFU)"}
   294:
     name: The Heartgarden
     events:
@@ -393,6 +401,12 @@ maps:
        note: "Rite of Reflection keeper at Lucent; the smile behind the glass (13 badges, rank 2): Mawilite."}
     - {name: Third pane, key: THIRD_PANE, near: "the third pane of the Speculum", sprite: "none (mirror tile)", trigger: action,
        condition: "quest_step(:AN_SMILE_BEHIND_GLASS) == :ask"}
+    # post-game Registry (story/41_SCRIPT_POSTGAME.md): each of these needs a first empty page and cond {switch: POSTGAME}
+    - {name: Dask and Ilsa, key: PG_DASK_ILSA, near: "the Speculum Glass", sprite: "DASK, with ILSA beside him", trigger: action,
+       condition: "switch(160) && switch(270) && !quest_done(:PG_LAKES)"}
+    - {name: Ripple (Knowledge), key: PG_LAKE_UXIE, near: "Mirror Mere", trigger: action, condition: "quest_step(:PG_LAKES) == :lakes"}
+    - {name: Ripple (Emotion), key: PG_LAKE_MESPRIT, near: "Lake Rime (300)", trigger: action, condition: "quest_step(:PG_LAKES) == :lakes"}
+    - {name: Ripple (Will), key: PG_LAKE_AZELF, near: "Lake Sallow (650)", trigger: action, condition: "quest_step(:PG_LAKES) == :lakes"}
   360:
     name: Cragholm
     events:
@@ -429,6 +443,11 @@ maps:
        condition: "quest_step(:NA_MOON_MARKET_DOGS) == :cages", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
     - {name: Kennel cage 2, key: KENNEL_CAGE, near: "the kennel row, middle cage", same_as: "Kennel cage 1"}
     - {name: Kennel cage 3, key: KENNEL_CAGE, near: "the kennel row, end cage by the kennel-master's stool", same_as: "Kennel cage 1"}
+    # post-game Registry (story/41_SCRIPT_POSTGAME.md): each of these needs a first empty page and cond {switch: POSTGAME}
+    - {name: Sweetrot echo (giver), key: PG_MOON_MARKET_ECHO, near: "the stall over the old Sweetrot vendor's grate", sprite: "Corvin if CORVIN_FREED (S222), else Mother Gutter",
+       trigger: action, condition: "switch(160) && switch(270) && !quest_done(:PG_PECHARUNT)"}
+    - {name: Dormant shell, key: PG_MOCHI_SHELL, near: "the Lightless Deep B1F (unbuilt: place under the Market)", sprite: "a peach-shaped shell", trigger: action,
+       condition: "quest_step(:PG_PECHARUNT) == :seal"}
   424:
     name: Underveil - Sump Docks
     events:
@@ -659,3 +678,44 @@ maps:
     - {name: Records desk, key: DESK_RECORDS, near: "a lobby desk, west", sprite: "clerk at a desk", trigger: action}
     - {name: Approvals desk, key: DESK_APPROVALS, near: "a lobby desk, middle", sprite: "clerk at a desk", trigger: action}
     - {name: Compliance desk, key: DESK_COMPLIANCE, near: "the end desk with two windows (COMPLIANCE / CANCELLATIONS OF CANCELLATIONS)", sprite: "clerk between two windows", trigger: action}
+  # --- Post-game Registry (story/41_SCRIPT_POSTGAME.md P1; plugins/Prismfall Trials 013 / 115 / 134 / 154) ---
+  # Every event below exists only in the post-game: give each a first empty page and a second page with
+  # cond {switch: POSTGAME} (S160). Unbuilt maps are named for the builder; the keys are the contract.
+  493:
+    name: Concordance Spire - Lobby (Battle Tower)
+    events:
+    - {name: Larch (Registry), near: "in front of the easel, with a mug", sprite: LARCH, trigger: action, cond: {switch: POSTGAME},
+       commands: ["{script: 'pf_registry_larch'}"],
+       note: "P1 on the first talk (S270 on, V143 = 1), then the black card once S267 is on (S269, V143 = 5), then the board"}
+    - {name: Registry board, near: "an easel covered in pinned notes, eighteen columns", sprite: "tile: easel with pinned cards", trigger: action,
+       cond: {switch: POSTGAME}, commands: ["{script: 'pf_registry_board'}"]}
+    - {name: Larch (kelp tea), key: PG_LARCH_TEA, patch: "event 'Larch (Registry)': branch first on pf_trial_ready?(:PG_LARCH_TEA)"}
+  708:
+    name: The Bride Grove
+    events:
+    - {name: Juno (Bride Tree), key: PG_JUNO_BRIDE_TREE, near: "under the Bride Tree", sprite: JUNO, trigger: action,
+       condition: "switch(160) && switch(270) && !quest_done(:PG_OGERPON)"}
+    - {name: Border stone (north), key: PG_STONE_NORTH, near: "Elowen's north border stone (unbuilt: place on the Gloamwood Verge)", trigger: action,
+       condition: "quest_step(:PG_OGERPON) == :stones"}
+    - {name: Border stone (east), key: PG_STONE_EAST, near: "Elowen's east border stone", trigger: action, condition: "quest_step(:PG_OGERPON) == :stones"}
+    - {name: Border stone (south), key: PG_STONE_SOUTH, near: "Elowen's south border stone", trigger: action, condition: "quest_step(:PG_OGERPON) == :stones"}
+    - {name: The little ogre, key: PG_BRIDE_TREE_OGRE, near: "a branch of the Bride Tree", sprite: Ogerpon, trigger: action,
+       condition: "quest_step(:PG_OGERPON) == :ogre"}
+  788:
+    name: Stonesleep
+    events:
+    - {name: Sahar (monolith), key: PG_SAHAR_MONOLITH, near: "the braille monolith", sprite: SAHAR, trigger: action,
+       condition: "switch(160) && switch(270) && !quest_done(:PG_REGIS)"}
+    - {name: Rock chamber, key: PG_REGI_ROCK, near: "the west chamber", trigger: action, condition: "quest_step(:PG_REGIS) == :three"}
+    - {name: Ice chamber, key: PG_REGI_ICE, near: "the Whalebone Vault (308)", trigger: action, condition: "quest_step(:PG_REGIS) == :three"}
+    - {name: Steel chamber, key: PG_REGI_STEEL, near: "the Cogsworth core", trigger: action, condition: "quest_step(:PG_REGIS) == :three"}
+    - {name: Electromagnet chamber, key: PG_REGI_ELEKI, near: "the Static Tunnels", trigger: action, condition: "quest_step(:PG_REGIS) == :twins"}
+    - {name: Dragon-fang chamber, key: PG_REGI_DRAGO, near: "the Wyrmscar", trigger: action, condition: "quest_step(:PG_REGIS) == :twins"}
+    - {name: Sixth door, key: PG_REGI_GIGAS, near: "the Aurelia Ruin Vault", trigger: action, condition: "quest_step(:PG_REGIS) == :gigas"}
+  699:
+    name: Meridian Black Site
+    events:
+    - {name: Black Site door, key: PG_BLACK_SITE_DOOR, near: "the blast door", sprite: "Calla beside it if CALLA_ALIVE", trigger: action,
+       condition: "switch(160) && switch(270)"}
+    - {name: Cradle, key: PG_NULL_CRADLE, near: "the cradle room", trigger: action, condition: "quest_step(:PG_TYPENULL) == :null"}
+    - {name: Prototype bay, key: PG_NULL_ARCHIVE, near: "the archive", trigger: action, condition: "quest_step(:PG_TYPENULL) == :genesect"}

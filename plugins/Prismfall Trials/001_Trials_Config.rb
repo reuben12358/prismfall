@@ -120,6 +120,20 @@ module Prismfall
         :accept   => "You break the seal. Clerk Fenwright stamps it twice, for luck and for the archive.",
         :done     => "The petition is marked ANSWERED in red ink and filed in the eighteenth drawer.",
         :greeting => "All eighteen gates send their troubles here. Take a seal, any seal."
+      },
+      # Not a kingdom's Trial: Larch's post-game Registry (story/41_SCRIPT_POSTGAME.md P1; 013_Trials_Registry.rb,
+      # 115_Quests_Postgame.rb). Its board is pf_registry_board (tiers), not the plain Trial board.
+      :POSTGAME => {
+        :name     => "The Registry",
+        :kingdom  => "Velmora",
+        :keeper   => "Professor Larch",
+        :posted   => "pinned card",
+        :board    => "Registry Board",
+        :ranks    => ["Rumour", "Sighting", "Tracker", "Chronicler", "Registrar"],
+        :halls    => { 493 => "the Concordance Spire lobby (Crownhaven)" },
+        :accept   => "Larch unpins the card and hands it to you. \"Respect the red.\"",
+        :done     => "Larch pins the card back up, face down, and draws a small star on it.",
+        :greeting => "Rumours. Sightings. Things that woke up when the sky closed. Take a card."
       }
     }.freeze
 
