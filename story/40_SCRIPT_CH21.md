@@ -170,12 +170,12 @@ V142 = 4.
   (Juno, over the barrier in her Warden's coat, Tsareena out.)
   [portrait: JUNO, angry] Same dock. Same fight.
   [name: Juno] Let's go.
-  Script: pbRegisterPartner(:RIVAL_JUNO, "Juno", Prismfall::Rival.version_for(7))   # J7: no Mega (the side's one Mega is the player's)
+  Script: pbRegisterPartner(:RIVAL_JUNO, "Juno", Prismfall::Rival.version_for(7))   # J7: her partner team carries no stone
 BATTLE: TrainerBattle.start(<foe A>, <foe B>) — the two of Marchetti / Quent / Kroll who aren't turned, dead or hijacking ("Ch21 tag foes v21"); `:PRISM_ARENA` (cracking).
 (LOSE: retry from the montage.)
 V142 = 5.
 ```
-*(If Kestrel wears the ring he got after the SF, it first answers him here. But the side has one Mega, and the player's comes first; the partner AI only uses it if the player hasn't.)*
+*(If Kestrel wears the ring he got after the SF, it first answers him here. Each trainer has one Mega, so his and the player's can both fire, and both foes can Mega too; Z-moves stay one per side. Engine gap: his Redeemed partner team (v93–95) holds no stone yet, so today he doesn't Mega here.)*
 
 ## The hijacker (V142 == 5 → 6)
 ```

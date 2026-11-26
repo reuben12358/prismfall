@@ -7,7 +7,8 @@
 # that has pearled inside one line of Pokemon. A Mega Ring is a Warden's ring: a
 # fleck of the Crown's stone (Legend Plate grind, saved by the Hearthguild every
 # time the stone is reset) in a gold band. Every type and none, so it opens any
-# heartstone. One ring opens one heart at a time: one Mega to a side.
+# heartstone. One ring opens one heart a fight, for the hand that wears it: one Mega per
+# trainer (a partner or a tag foe with a ring Megas too). Glass is jealous: one Z-move per side.
 # Map events: design/TRIAL_EVENTS.yaml ("Mega Evolution" maps); talk rows: 152_Talk_Megas.rb; bosses:
 # 132_EventMons_Megas.rb. Story quests (the Ring-Day, Juno, Brann's spare) are
 # hidden and finish quietly (no Trial gong). SPINE Revision 21 moved the Ring to
@@ -43,8 +44,8 @@ tr.quest(:OS_RING_DAY, {
       [:BASTIAN, :neutral, "You'll have seen a few of those by now. Anja's Glalie. Odessa's bird. That Directorate woman's dog. My old Amber, just now. Nobody's told you properly what it is, I'd wager. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild's cut one for every seat since the Concordance."],
       [:BASTIAN, :neutral, "A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone."],
       [:BASTIAN, :neutral, "Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint."],
-      [:BASTIAN, :deadpan, "One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double."],
-      [:BASTIAN, :neutral, "And if you come by a Choir crystal, a sliver of Glassfall glass, it'll answer that too. The chip's grind off the Crown's stone, and the glass came out of the night it cracked. Same crown, one way or another. One Z-move a fight, and one to a side, same as the hearts."],
+      [:BASTIAN, :deadpan, "One heart to a ring, mind. A ring opens one heartstone a fight, and only for the hand that wears it. Two rings across the floor means two hearts coming at you. Remember it in a double."],
+      [:BASTIAN, :neutral, "And if you come by a Choir crystal, a sliver of Glassfall glass, it'll answer that too. The chip's grind off the Crown's stone, and the glass came out of the night it cracked. Same crown, one way or another. Glass is jealous, though, where hearts aren't. One Z-move a fight, and one to a side, however many rings stand on it."],
       "He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.",
       [:BASTIAN, :neutral, "Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain."],
       [:BASTIAN, :deadpan, "Two old men who don't ask each other things. That's how you get to seventy-four."],

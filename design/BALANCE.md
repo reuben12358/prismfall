@@ -195,7 +195,8 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
 **Rival partners (2026-11-25).** A rival who fights *beside* the player with a team of their own uses the spare versions
 of a decade: `Prismfall::Rival.partner_version(n)` = n × 10 + 3 + starter slot, one version (no Hard / Casual block; Core
 falls back to it). Redeemed Kestrel in the Ch21 tag battle is `partner_version(9)` = **93 / 94 / 95**: Staraptor 95
-(Tailwind), his starter 96, Aegislash "Morwen" 97 (Wide Guard); no Mega (the side's one Mega is the player's). The Ch21
+(Tailwind), his starter 96, Aegislash "Morwen" 97 (Wide Guard); no stone in the team, so no Mega (the per-trainer rule would
+let a partner Mega, but Morwen's Ring only swaps in a Scizorite for a Lv 90+ Scizor, and this team has none). The Ch21
 script first said "version 21", but 20–22 are K2. Juno's Ch21 partner is still her J7 (70–72). Validator: `RIVAL_PARTNERS`.
 
 ## 6. Festival of Champions

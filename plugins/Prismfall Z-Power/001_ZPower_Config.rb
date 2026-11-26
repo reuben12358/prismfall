@@ -14,7 +14,7 @@
 #     (MEGARING, from Bastian at 13 badges), the same one that opens Megas; the
 #     old Z-Power Ring still counts for saves that hold it. NPC trainers only
 #     need the crystal on their Pokemon. Wild Pokemon never use Z-Power.
-#   * one Mega and one Z-move per SIDE per battle (Prismfall Mega's Z_LIMIT)
+#   * one Z-move per SIDE per battle (Prismfall Mega's Z_LIMIT); Megas are one per trainer (its LIMIT)
 # Data: pbs/moves_zpower.txt (the Z-moves) and pbs/items_zpower.txt (crystals,
 # ring). Add a crystal by adding its item and one line below; nothing else.
 # Why not the Deluxe Battle Kit's Z-Power add-on: it is built on the Deluxe

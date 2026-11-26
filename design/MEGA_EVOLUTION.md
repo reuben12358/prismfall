@@ -36,8 +36,11 @@ Prismfall's Megas come out of the Plates and Imprints (story/01_WORLD_LORE.md §
   - **What anyone may say before Ch15:** "grind off the Crown's own stone", nothing more. Nobody names the Legend Plate
     or says "reset": 09_MYSTERIES #5 (the One in Keeping is the Legend Plate) and #6 (the Crown is cracked) are revealed
     in Ch15–17. Bastian's Ch14 account of the AF 290 break is #6's planned mid-clue and stays as written.
-- **One heart at a time.** Two rings on the same side "ring against each other". That is the in-world reason for the
-  rule of one Mega per side, partner battles included.
+- **One heart to a ring.** A ring opens one heartstone a battle, and only for the hand that wears it. Two rings on one
+  side don't interfere, so in a partner or tag battle every trainer with a ring and a stone Mega Evolves once ("Two
+  rings across the floor means two hearts coming at you", Bastian). That is the in-world reason for the rule of one Mega
+  per **trainer** (since 2026-11-25; it was one per side). Glassfall glass is different: "Glass is jealous, though, where
+  hearts aren't", so Z-moves stay one per **side**, however many rings stand on it.
 
 ### 1.2 Who carries a ring (story and theme first: a fighter Megas only if the story gives them a ring)
 The user (Rev 21): "dont make one off exceptions, keep it in theme/story". So the "every important fight from Lv 50 has
@@ -128,9 +131,9 @@ the new ring point (§5.3). The ones that stayed before 13 "hum and wait", as in
   `pbRegisterPartner` now stores the trainer's Mega Ring(s) in `$PokemonGlobal.partner[4]` (only the ring: a partner
   still brings no medicine) and the battle hands them to the ally. A partner Megas only if its PBS team has
   `MEGARING` and a stone; today's partner teams (Juno 70–72, the war partners, the Ogre) have neither.
-- **Lore to reconcile (story owner):** §1.1's "two rings on the same side ring against each other", Bastian's
-  Ring-Day line "one Mega to a side ... Remember it in a double" (`114_Quests_Megas.rb`) and the Ch21 script's tag
-  battle note ("the side has one Mega, and the player's comes first") still describe the old rule.
+- **Lore, reconciled 2026-11-26:** §1.1, Bastian's Ring-Day lines (`114_Quests_Megas.rb`, story/07_ACT_IV.md) and the
+  Ch21 tag-battle note say one Mega per trainer and one Z-move per side. SPINE.md Rev 20 / 23's "one of each per side"
+  is the user's directive as first given and is left as written there.
 - **One Z-move per side per battle** (`Z_LIMIT = :side`; unchanged by the per-trainer Mega rule). Prismfall Z-Power is per
   trainer on its own. It works by alias-chaining `PrismfallZ.owner_key` to key on the side alone; no Z-Power file was
   edited (§7 asks the Z owner to adopt it in their config).
@@ -213,8 +216,8 @@ SPINE Rev 21 withdrew the Ch8 Ring-Day (7 badges); `story/archive/22_SCRIPT_CH8_
 - **Scene** (`OS_RING_DAY`, hidden, `pf_trial_talk(:BASTIAN_LAMPROOM)`; lines in `114_Quests_Megas.rb`):
   1. "Flawless cut, that was. Don't tell the cavern I said so. It sulks."
   2. What his Amber did in the gym: a Warden's ring (the Hearthguild cuts one for every seat), the colourless chip (grind
-     off the Crown's own stone, so it takes any colour), heartstones, and the rule, one Mega to a side ("Remember it in
-     a double").
+     off the Crown's own stone, so it takes any colour), heartstones, and the rule, one heart to a ring ("Two rings across the
+     floor means two hearts coming at you. Remember it in a double").
   3. The odd ring: "Holloway cut this one... Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it
      where nobody asks questions.'" / "Two old men who don't ask each other things. That's how you get to seventy-four."
   4. **The ring sings**, and something under the PC's ribs answers. Pip: "Grandad, it's SINGING." Bastian, half-deaf:
@@ -225,8 +228,8 @@ SPINE Rev 21 withdrew the Ch8 Ring-Day (7 badges); `story/archive/22_SCRIPT_CH8_
      ferry child with a Warden's ring."
 - **Gives:** `MEGARING` and `AGGRONITE` (Mega Aggron is pure Steel: it answers neither Ysolde nor Magnus). No Trial gong.
   **SPINE Rev 23:** the ring also wakes Z-crystals; Bastian says so in one line ("The chip's grind off the Crown's stone,
-  and the glass came out of the night it cracked. Same crown, one way or another. One Z-move a fight, and one to a side,
-  same as the hearts"). `design/Z_MOVES.md`.
+  and the glass came out of the night it cracked. Same crown, one way or another. Glass is jealous, though, where hearts
+  aren't. One Z-move a fight, and one to a side, however many rings stand on it"). `design/Z_MOVES.md`.
 - **Must not say:** "reset" or "Legend Plate" (checked by `run_mega.rb`). Brann isn't in the scene, so the Light Stone
   choice doesn't touch it; his reaction is in his follow-up below.
 - **Follow-up beats:** Marchetti's raid (both sides Mega). **15 badges:** Brann's spare heartstone at the Hearthguild
@@ -337,8 +340,8 @@ Wardens, Valen, Meridian and Juno, all before the player has a ring. Story and t
 stays Mega-less and why. **Below Lv 50 a fight may use a Mega only if its design
 calls for one, and only a weak one (§6.1), on Standard and Hard**; nobody else does. No theme exceptions: where a
 Warden's signature Mega would fight the field (Bastian's Sand Stream Tyranitar on Crystal Cavern), a different Mega
-goes in. One Mega per side: in tag battles only one of the pair holds a stone, and the player's partners hold none (the
-player's side keeps its one Mega for the player). Nobody holds a Mega Stone and a Z-crystal; the Eevee Octave keeps Z.
+goes in. One Mega per trainer (since 2026-11-25): in a tag battle each trainer with a ring and a stone Megas, so both
+Ch21 tag foes do; the player's partners hold no stone today (a partner who has one would Mega beside the player). Nobody holds a Mega Stone and a Z-crystal; the Eevee Octave keeps Z.
 `gen.py` applies it (`P(..., mega="STONE")`, the trainer's cap against `MEGA_FROM`, `mega_low=True` for a designed weak
 Mega) and `run_mega.rb` checks `pbs/trainers.txt` against it.
 
@@ -377,7 +380,7 @@ exactly as designed, per the user (his set, the Volcanic prime and its eruption 
 | **Valen** (Final 96; Ruin's Last Tuning) | **Gallade** | all | |
 | **Voss** (Festival hijack, 100) | **Ampharos "Lumen"** (replaces Klinklang) | all | Meridian's lamp, "light for everyone"; Dragon resists the first four Plates. |
 | **Quent** (hijack 100, Ch21 tag 97) | **Metagross** | all | |
-| Ch21 tag foes (97) | Kroll **Sharpedo**, Marchetti **Manectric** (replaces Arcanine), Directorate Captain **Scizor** | all | one fires per side. |
+| Ch21 tag foes (97) | Kroll **Sharpedo**, Marchetti **Manectric** (replaces Arcanine), Directorate Captain **Scizor** | all | both of the pair fire (one Mega per trainer). |
 | Ruin Gyms 15–18 (v1) | as their Wardens (Celestine's is her Z) | all | |
 | Cameos | Garret's v1 (ace 46) has **no** Mega now (Lucario isn't weak); v2 (100) Megas in every mode; the others unchanged (Hard-only, all past Lv 50) | | optional sidequests, not story fights |
 | The Eevee Octave | none (Z-moves) | | |
@@ -396,8 +399,8 @@ Standard and Hard only.
 | Morwen's Echo (Exhibition, 90) | her ring is Morwen's Ring, in the PC's or Kestrel's hands by then; an echo has none. |
 | Aurelius, the Gilded Reflection (Ruin hijack, 100) | a reflection of the Gilded King; the rings came three centuries after him. |
 | The war officers (Ch19, 84): Ashkaar's and Isenmar's captains | soldiers of the two kingdoms, not Accord officers; the story gives them no rings. |
-| Juno J7, the war partners (Sigrun, Marisol) | on the player's side: the side's one Mega is the player's. |
-| Quent at the Ch16 tag, Rook at the Pageant Bout | they share a side with Marchetti / Dorian, whose Mega is the pair's one. |
+| Juno J7, the war partners (Sigrun, Marisol) | partner teams carry no stone (the per-trainer rule would let a partner Mega). |
+| Quent at the Ch16 tag, Rook at the Pageant Bout | written as the pair's second trainer, without a stone (under the per-trainer rule they could have one). |
 
 **EBDX battle speech** (optional, trainer designer): a `megaOpp` line per Mega fight, e.g. Brann "Some things you forge
 to last!", Bastian "Rock's patient. So's this.", Kestrel with Morwen's Ring "Mum. Just this once. Answer me."

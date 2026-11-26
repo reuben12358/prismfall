@@ -126,7 +126,7 @@ quest needs, and downloaded plugin code is not run in this workspace. So Z-Power
   disobedience keeps it). The base move pays 1 PP. Encore, Disable, Choice lock, Copycat and Last Resort see the base move.
 - Crystals are held, never used up, and can't be knocked off, stolen, swapped or flung.
 - The **player** needs **the one ring** (SPINE Rev 23): the Warden's ring (`MEGARING`) from Bastian after Badge 13,
-  which opens Mega Evolution too. One Mega and one Z-move per side per battle. The old **Z-Power Ring** (`ZPOWERRING`)
+  which opens Mega Evolution too. One Z-move per side and one Mega per trainer, per battle. The old **Z-Power Ring** (`ZPOWERRING`)
   stays defined and still counts, so a save that holds it loses nothing, but nobody hands it out. NPC trainers only
   need the crystal. Wild Pokémon never use Z-Power. The 18 type crystals and the species crystals are placed through
   the game from 13 badges (`design/Z_MOVES.md`).

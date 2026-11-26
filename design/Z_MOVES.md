@@ -8,7 +8,7 @@
 
 Before Rev 23, Z-moves were only the Eevee Octave's (8 type crystals on the Octave's trainers, and Vesper's Z-Power
 Ring as the post-game reward). The battle code is unchanged: `plugins/Prismfall Z-Power` (design/EEVEE_OCTAVE.md §5)
-and `plugins/Prismfall Mega` (one Mega and one Z per side). Stones: `design/MEGA_EVOLUTION.md`.
+and `plugins/Prismfall Mega` (one Mega per trainer, one Z per side). Stones: `design/MEGA_EVOLUTION.md`.
 
 ## 1. One ring
 - **The item:** the base project's **Mega Ring** (`MEGARING`), the Warden's ring Bastian gives in Cragholm after
@@ -20,7 +20,8 @@ and `plugins/Prismfall Mega` (one Mega and one Z per side). Stones: `design/MEGA
   another" (Bastian): the ring hears a sliver as it hears a heartstone. **The glass is not the Crown's stone or a
   Plate**; the PC's splinter stays the only missing piece (story editor; 01_WORLD_LORE §3 "Choir glass", 09_MYSTERIES
   "Wording rules"). How slivers got everywhere: Choir pilgrims left them to soak where each Imprint runs strongest.
-- **One of each per side per battle:** a side may use one Mega and one Z-move (`PrismfallMega::LIMIT` / `Z_LIMIT`).
+- **One Z-move per side, one Mega per trainer** (`PrismfallMega::Z_LIMIT = :side`, `LIMIT = :trainer` since 2026-11-25):
+  a side gets one Z-move however many trainers it has; each trainer with a ring and a stone gets one Mega.
   A Pokémon holding a crystal can't Mega Evolve; a stone holder can't hold a crystal.
 - **Save compatibility:** `ZPOWERRING` stays in `pbs/items_zpower.txt` (re-described as an old cantor's ring) and
   still counts (`PrismfallZ::LEGACY_RINGS`), so a save that holds it loses nothing. Nobody hands it out any more.

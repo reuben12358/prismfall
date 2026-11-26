@@ -45,7 +45,8 @@ module PrismfallMega
   # Kestrel (design/MEGA_EVOLUTION.md 1.2): no ring of his own until Morwen's Ring reaches him through the PC. If the PC
   # gives it to him in Ch18 (choice :ch18_kestrel_ring = :give_now), his K8 trainer gets the ring at battle start and his
   # Scizor (his duelist since K3) the Scizorite. (Given at the SF instead, after K8, it first shows in the hijack tag
-  # battle on the player's side, where the player's Mega has priority; K9 only happens when he never got it.)
+  # battle on the player's side, where he and the player can both Mega (one per trainer); K9 only happens when he never
+  # got it.)
   MORWEN_RING_CHOICE = [:ch18_kestrel_ring, :give_now]
   MORWEN_RING = { :trainer => :RIVAL_KESTREL, :species => :SCIZOR, :item => :SCIZORITE, :min_level => 90 }.freeze
 
