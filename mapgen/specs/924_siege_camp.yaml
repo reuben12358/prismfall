@@ -31,28 +31,52 @@ events:
   sight: 4
   dir: left
   sprite: trainer_BLACKBELT
-  trainer: [ASHKAAR_SOLDIER_M, Soldier, 0]
+  trainer: [ASHKAAR_SOLDIER, Garrok, 0]
   intro: Isenmar sends children now? Then I fight children.
   after: '...Not children. Go on, then. The next gate won''t be so polite.'
   cond: {switch: WAR_SIDE_ISE}
+  rules: ['setBattleRule("field", :DESERT)']
 - type: trainer
   at: [21, 20]
   sight: 4
   dir: left
   sprite: trainer_CRUSHGIRL
-  trainer: [ASHKAAR_SOLDIER_F, Soldier, 0]
+  trainer: [ASHKAAR_SOLDIER, Senna, 0]
   intro: Second gate. The fire behind it is real.
   after: The fire behind it is real. So is that.
   cond: {switch: WAR_SIDE_ISE}
-- type: trainer
+  rules: ['setBattleRule("field", :DESERT)']
+- type: event
+  name: Trainer(4)
   at: [35, 16]
-  sight: 4
-  dir: down
-  sprite: trainer_TAMER
-  trainer: [ASHKAAR_OFFICER, Captain, 0]
-  intro: You want the Dominar's tent? Through me. That is how it works here.
-  after: That is how it works here. Pass.
-  cond: {switch: WAR_SIDE_ISE}
+  pages:
+  - commands: []
+  - cond: {switch: WAR_SIDE_ISE}
+    graphic: {sprite: trainer_TAMER, dir: down}
+    trigger: event_touch
+    commands:
+    - {script: pbNoticePlayer(get_self)}
+    - 'Ember-Rider Vharn: You want the Dominar''s tent? Through us. That is how it works here.'
+    - '(Boots on the sand behind you, and a Gyarados''s shadow over the earthwork: Marisol.)'
+    - 'Marisol: Kid. You came. Course you came. Stand on my left; the sea''s on my right.'
+    - {script: 'pbRegisterPartner(:LEADER_MARISOL, "Marisol", 19)'}
+    - {script: setBattleRule("double")}
+    - {script: 'setBattleRule("field", :DESERT)'}
+    - if: TrainerBattle.start(:ASHKAAR_EMBER_RIDER, "Vharn", 0, :ASHKAAR_EMBER_RIDER, "Ashild", 0)
+      then:
+      - &id001 {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
+      - 'Marisol: Ha! The Ebb runs both ways, and today it ran ours.'
+      - 'Marisol: The crest''s south of the Steamline. Go on. I''ll hold the sea.'
+      - {script: 'pfm_set(:war_partner_done)
+
+          $game_variables[140] = 6 if $game_variables[140] < 6'}
+      - selfswitch: [A, true]
+      else:
+      - *id001
+  - cond: {switch: WAR_SIDE_ISE, self: A}
+    graphic: {sprite: trainer_TAMER, dir: down}
+    trigger: action
+    commands: ['Ember-Rider Vharn: She brought the sea to a desert. ...And it stayed.']
 - type: door
   at: [36, 13]
   gfx: ['', 0, 2]

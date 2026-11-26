@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """The war theatre in Ossaria's western dunes (WORLD.md 9, story/14_WAR_AND_BLESSING.md Part B), map builder 10.
+
+SUPERSEDED (2026-11-26): the specs 920-930 are written by layouts/war_craft.py (Map Craft Wave 9), which also carries
+the Ch19 "lines" events of story/38_SCRIPT_CH19.md (Trenchers / Hirdmen / Ember-Riders, partners v19 on 920 / 924 /
+925; 926 is the beam clash only). This file still has the Rev 18 events (Soldier / Captain, the 926 partner double):
+don't run it over the crafted maps.
 PF Rejuv Shore (tileset 56) with the dune cliff kit (akd), the nature kit and the war kit (ndraw `wr_*`).
 
 Graph (edges; the theatre's own story gates are events):

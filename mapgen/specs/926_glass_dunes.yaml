@@ -42,112 +42,6 @@ events:
   at: [51, 1]
   link: WAR_CAMP_DUNES
   arrive: [51, 2, down]
-- type: trainer
-  at: [27, 8]
-  sight: 4
-  dir: down
-  sprite: trainer_CRUSHGIRL
-  trainer: [ASHKAAR_SOLDIER_F, Soldier, 1]
-  intro: The crest is held. By me, for now.
-  after: For now.
-  cond: {switch: WAR_SIDE_ASH}
-- type: trainer
-  at: [33, 8]
-  sight: 4
-  dir: down
-  sprite: trainer_POKEMONRANGER_F
-  trainer: [ISENMAR_SOLDIER_F, Soldier, 1]
-  intro: One more between you and the crest.
-  after: Go. Look at what we did.
-  cond: {switch: WAR_SIDE_ASH}
-- type: trainer
-  at: [27, 9]
-  sight: 4
-  dir: down
-  sprite: trainer_CRUSHGIRL
-  trainer: [ASHKAAR_SOLDIER_F, Soldier, 1]
-  intro: The crest is held. By me, for now.
-  after: For now.
-  cond: {switch: WAR_SIDE_ISE}
-- type: trainer
-  at: [33, 9]
-  sight: 4
-  dir: down
-  sprite: trainer_POKEMONRANGER_F
-  trainer: [ISENMAR_SOLDIER_F, Soldier, 1]
-  intro: One more between you and the crest.
-  after: Go. Look at what we did.
-  cond: {switch: WAR_SIDE_ISE}
-- type: trainer
-  at: [27, 10]
-  sight: 4
-  dir: down
-  sprite: trainer_CRUSHGIRL
-  trainer: [ASHKAAR_SOLDIER_F, Soldier, 1]
-  intro: The crest is held. By me, for now.
-  after: For now.
-  cond: {switch: WAR_SIDE_MID}
-- type: trainer
-  at: [33, 10]
-  sight: 4
-  dir: down
-  sprite: trainer_POKEMONRANGER_F
-  trainer: [ISENMAR_SOLDIER_F, Soldier, 1]
-  intro: One more between you and the crest.
-  after: Go. Look at what we did.
-  cond: {switch: WAR_SIDE_MID}
-- type: event
-  name: Partner
-  at: [30, 4]
-  pages:
-  - commands: []
-  - cond: {switch: WAR_SIDE_MID}
-    graphic: {sprite: trainer_ELITEFOUR_Lance, dir: down}
-    trigger: action
-    commands:
-    - 'Sigrun: Between them? Then we hold the middle. Both captains are coming. Back to back.'
-    - {script: 'pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)'}
-    - {script: setBattleRule("double")}
-    - if: TrainerBattle.start(:ISENMAR_OFFICER, "Captain", 1, :ASHKAAR_OFFICER, "Captain", 1)
-      then:
-      - &id001 {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
-      - 'Sigrun: Still standing. Both of us. Look up.'
-      - {script: 'pfm_set(:war_partner_done)'}
-      - selfswitch: [A, true]
-      else:
-      - *id001
-  - cond: {switch: WAR_SIDE_ASH}
-    graphic: {sprite: trainer_ELITEFOUR_Lance, dir: down}
-    trigger: action
-    commands:
-    - 'Sigrun: With us, then. The Isenmar line breaks here or nowhere.'
-    - {script: 'pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)'}
-    - {script: setBattleRule("double")}
-    - if: TrainerBattle.start(:ISENMAR_OFFICER, "Captain", 1, :ISENMAR_SOLDIER_M, "Soldier", 2)
-      then:
-      - *id001
-      - 'Sigrun: It broke. Now the sky.'
-      - {script: 'pfm_set(:war_partner_done)'}
-      - selfswitch: [A, true]
-      else:
-      - *id001
-  - cond: {switch: WAR_SIDE_ISE}
-    graphic: {sprite: trainer_LEADER_Misty, dir: down}
-    trigger: action
-    commands:
-    - 'Marisol: Kid. You came. Course you came. Stand on my left; the sea''s on my right.'
-    - {script: 'pbRegisterPartner(:LEADER_MARISOL, "Marisol", 19)'}
-    - {script: setBattleRule("double")}
-    - if: TrainerBattle.start(:ASHKAAR_OFFICER, "Captain", 1, :ASHKAAR_SOLDIER_M, "Soldier", 2)
-      then:
-      - *id001
-      - 'Marisol: Ha! The Ebb runs both ways, and today it ran ours.'
-      - {script: 'pfm_set(:war_partner_done)'}
-      - selfswitch: [A, true]
-      else:
-      - *id001
-  - cond: {self: A}
-    commands: [(The ground under the crest is humming. Something enormous is coming.)]
 - type: event
   name: The legend
   at: [30, 2]
@@ -155,9 +49,10 @@ events:
   - commands: []
   - cond: {switch: WAR_SIDE_MID}
     trigger: action
-    commands: &id002
+    commands: &id001
     - if: '!pfm?(:war_partner_done)'
-      then: [(The ground is shaking. Over the sea the clouds are turning the wrong way. Not yet.)]
+      then: [(The ground is shaking. Over the sea the clouds are turning the wrong way. Not yet.), '(The lines first: the side you did not choose is between
+          you and the crest.)']
       else:
       - if: pfm?(:war_battle_done)
         then: ['(The glass hums underfoot, quietly. It is over.)']
@@ -171,10 +66,10 @@ events:
           else: [(It wheels away over the flood and comes round again. The crest shakes.)]
   - cond: {switch: WAR_SIDE_ASH}
     trigger: action
-    commands: *id002
+    commands: *id001
   - cond: {switch: WAR_SIDE_ISE}
     trigger: action
-    commands: *id002
+    commands: *id001
 - type: event
   name: Goat-path
   at: [30, 46]

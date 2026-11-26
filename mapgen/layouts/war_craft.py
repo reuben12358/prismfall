@@ -66,18 +66,52 @@ SPRITE = {
     'LEADER_SIGRUN': 'trainer_ELITEFOUR_Lance',
     'LEADER_MARISOL': 'trainer_LEADER_Misty',
     'DOMINAR': 'trainer_LEADER_Giovanni',
+    # story/38_SCRIPT_CH19.md "the lines" (2026-11-26): stock stand-ins until the classes have overworld art
+    'ISENMAR_TRENCHER': 'trainer_POKEMONRANGER_M',
+    'ISENMAR_HIRDMAN': 'trainer_COOLTRAINER_M',
+    'ASHKAAR_SOLDIER': 'trainer_BLACKBELT',
+    'ASHKAAR_EMBER_RIDER': 'trainer_TAMER',
 }
 
 PARTNER_END = {'script': 'pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)'}
 
 
-def gauntlet(at, cls, name, ver, sw, intro, after, d='down', sight=4):
-    return {
+def gauntlet(at, cls, name, ver, sw, intro, after, d='down', sight=4, sprite=None, field=None):
+    e = {
         'type': 'trainer', 'at': list(at), 'sight': sight, 'dir': d,
-        'sprite': SPRITE.get(cls, 'trainer_' + cls),
+        'sprite': sprite or SPRITE.get(cls, 'trainer_' + cls),
         'trainer': [cls, name, ver], 'intro': intro, 'after': after,
         'cond': {'switch': sw}, 'fixed': True,
     }
+    if field:
+        e['rules'] = ['setBattleRule("field", :%s)' % field]
+    return e
+
+
+# The lines' partner double (story/38_SCRIPT_CH19.md, V140 5 -> 6): the gauntlet's last stand is a pair that sees the PC
+# (Trainer(4), event touch) like the singles; the partner (Sigrun or Marisol, v19) is registered for the one battle.
+# A win sets pfm(:war_partner_done), which 926's legend waits for, and V140 = 6. A loss whites out (to 930); the pair
+# stays, the choice is kept.
+def lines_pair(at, sw, who, foes, field, lines, win, after, sprite, d='left', fixed=True):
+    rules = [{'script': 'pbRegisterPartner(:LEADER_%s, "%s", 19)' % (who.upper(), who)},
+             {'script': 'setBattleRule("double")'}]
+    if field:
+        rules.append({'script': 'setBattleRule("field", :%s)' % field})
+    e = {'type': 'event', 'name': 'Trainer(4)', 'at': list(at), 'pages': [
+        {'commands': []},
+        {'cond': {'switch': sw}, 'graphic': {'sprite': sprite, 'dir': d}, 'trigger': 'event_touch',
+         'commands': [{'script': 'pbNoticePlayer(get_self)'}] + list(lines) + rules + [
+             {'if': 'TrainerBattle.start(%s)' % foes,
+              'then': [PARTNER_END] + list(win) + [
+                  {'script': 'pfm_set(:war_partner_done)\n$game_variables[140] = 6 if $game_variables[140] < 6'},
+                  {'selfswitch': ['A', True]}],
+              'else': [PARTNER_END]}]},
+        {'cond': {'switch': sw, 'self': 'A'}, 'graphic': {'sprite': sprite, 'dir': d}, 'trigger': 'action',
+         'commands': list(after)},
+    ]}
+    if fixed:
+        e['fixed'] = True
+    return e
 
 
 def soldier(at, name, sprite, lines, d='down', move='fixed', cond=None):
@@ -725,12 +759,22 @@ def build_920():
     E = [
         make_front(),
         {'type': 'warp', 'name': 'To the Glass Dunes', 'at': [8, 35], 'link': 'WAR_RIMED_DUNES', 'arrive': [8, 34, 'up'], 'fixed': True},
-        gauntlet((19, 14), 'ISENMAR_SOLDIER_M', 'Soldier', 0, 'WAR_SIDE_ASH',
-                 'You came with the dragons. You leave without them.', 'The line holds behind me. You will see.', d='left'),
-        gauntlet((33, 15), 'ISENMAR_SOLDIER_F', 'Soldier', 0, 'WAR_SIDE_ASH',
-                 "The Thane said the sand would never be cold. Ask the sand.", 'Go, then. Tell them the Rimed Sands were held.', d='left'),
-        gauntlet((47, 14), 'ISENMAR_OFFICER', 'Captain', 0, 'WAR_SIDE_ASH',
-                 'Third line. Nobody has passed the third line.', 'Somebody has passed the third line. Mark it in the tally.', d='left'),
+        # The lines, :back_ashkaar (story/38_SCRIPT_CH19.md): two trench fights, then PC + Sigrun vs the Thane's
+        # Hirdmen, all on :FROZEN_LAKE (the frozen sand). Same three trench gaps as the Rev 18 gauntlet.
+        gauntlet((19, 14), 'ISENMAR_TRENCHER', 'Ulfa', 0, 'WAR_SIDE_ASH',
+                 'You came with the dragons. You leave without them.', 'Dig in, they said. I dug. You walked round.',
+                 d='left', sprite='trainer_POKEMONRANGER_F', field='FROZEN_LAKE'),
+        gauntlet((33, 15), 'ISENMAR_TRENCHER', 'Bersi', 0, 'WAR_SIDE_ASH',
+                 "The Thane said the sand would never be cold. Ask the sand.", 'Go, then. Tell them the Rimed Sands were held.',
+                 d='left', field='FROZEN_LAKE'),
+        lines_pair((47, 14), 'WAR_SIDE_ASH', 'Sigrun', ':ISENMAR_HIRDMAN, "Hjalmar", 0, :ISENMAR_HIRDMAN, "Torunn", 0',
+                   'FROZEN_LAKE',
+                   ["Hirdman Hjalmar: Third line. The Thane's own hird holds it. Nobody has passed the third line.",
+                    "(Wings over the trench: Sigrun's Salamence drops onto the frozen sand beside you, throwing frost.)",
+                    'Sigrun: With us, then. The Isenmar line breaks here or nowhere.'],
+                   ['Sigrun: It broke. Now the sky.', "Sigrun: The crest. South, over the Steamline. Go."],
+                   ["Hirdman Hjalmar: The Thane's shield. ...Cracked. Tell him it took two of you."],
+                   'trainer_COOLTRAINER_M'),
         fx(item(ISLET[0], 'NEVERMELTICE')),
         fx(sign((3, 12), 'Road sign', "THE RIMED SANDS. W: Skaldfast (under siege: the road is barricaded). E: the Steamline. S: the Glass Dunes.")),
         fx(obj('Siege barricade', (1, 17), ['Sledges on their sides, lashed with whale-gut, piled with frozen sand. Skaldfast is two miles west, and burning.'])),
@@ -939,12 +983,23 @@ def build_924():
     m.events = []
     E = [
         {'type': 'warp', 'name': 'To the Glass Dunes', 'at': [8, 39], 'link': 'WAR_CAMP_DUNES', 'arrive': [8, 38, 'up'], 'fixed': True},
-        gauntlet((11, 19), 'ASHKAAR_SOLDIER_M', 'Soldier', 0, 'WAR_SIDE_ISE',
-                 'Isenmar sends children now? Then I fight children.', "...Not children. Go on, then. The next gate won't be so polite.", d='left'),
-        gauntlet((21, 20), 'ASHKAAR_SOLDIER_F', 'Soldier', 0, 'WAR_SIDE_ISE',
-                 'Second gate. The fire behind it is real.', 'The fire behind it is real. So is that.', d='left'),
-        gauntlet((35, 16), 'ASHKAAR_OFFICER', 'Captain', 0, 'WAR_SIDE_ISE',
-                 "You want the Dominar's tent? Through me. That is how it works here.", "That is how it works here. Pass.", d='down'),
+        # The lines, :back_isenmar (story/38_SCRIPT_CH19.md): two earthwork fights, then PC + Marisol vs the
+        # Ember-Riders, on :DESERT. Same gates as the Rev 18 gauntlet.
+        gauntlet((11, 19), 'ASHKAAR_SOLDIER', 'Garrok', 0, 'WAR_SIDE_ISE',
+                 'Isenmar sends children now? Then I fight children.', "...Not children. Go on, then. The next gate won't be so polite.",
+                 d='left', field='DESERT'),
+        gauntlet((21, 20), 'ASHKAAR_SOLDIER', 'Senna', 0, 'WAR_SIDE_ISE',
+                 'Second gate. The fire behind it is real.', 'The fire behind it is real. So is that.',
+                 d='left', sprite='trainer_CRUSHGIRL', field='DESERT'),
+        lines_pair((35, 16), 'WAR_SIDE_ISE', 'Marisol', ':ASHKAAR_EMBER_RIDER, "Vharn", 0, :ASHKAAR_EMBER_RIDER, "Ashild", 0',
+                   'DESERT',
+                   ["Ember-Rider Vharn: You want the Dominar's tent? Through us. That is how it works here.",
+                    "(Boots on the sand behind you, and a Gyarados's shadow over the earthwork: Marisol.)",
+                    "Marisol: Kid. You came. Course you came. Stand on my left; the sea's on my right."],
+                   ["Marisol: Ha! The Ebb runs both ways, and today it ran ours.",
+                    "Marisol: The crest's south of the Steamline. Go on. I'll hold the sea."],
+                   ["Ember-Rider Vharn: She brought the sea to a desert. ...And it stayed."],
+                   'trainer_TAMER', d='down'),
     ] + tent_doors + [
         make_front(),
         fx(sign((4, 17), 'Camp sign', "ASHKAAR SIEGE CAMP - by the Dominar's leave and the Elector's Lease. Lies are a capital crime in this camp.")),
@@ -1183,9 +1238,12 @@ def build_925():
 
     # 4. ALL 17 HEAD Events pinned to exact HEAD IDs (1..17) & coordinates!
     E = [
-        gauntlet((27, 14), 'ISENMAR_SOLDIER_M', 'Soldier', 1, 'WAR_SIDE_MID',
-                 "Between the lines? Then you're nobody's. Nobody's is fair game.", "...You really are nobody's. All right.", d='right'),
-        gauntlet((36, 16), 'ASHKAAR_SOLDIER_M', 'Soldier', 1, 'WAR_SIDE_MID',
+        # The lines, :stand_between (story/38_SCRIPT_CH19.md): one fight on each side, then PC + Sigrun vs the mixed
+        # pair on the Steamline's own :BLEED (the map field: it keeps the war-only borrow pool).
+        gauntlet((27, 14), 'ISENMAR_TRENCHER', 'Ulfa', 0, 'WAR_SIDE_MID',
+                 "Between the lines? Then you're nobody's. Nobody's is fair game.", "...You really are nobody's. All right.",
+                 d='right', sprite='trainer_POKEMONRANGER_F'),
+        gauntlet((36, 16), 'ASHKAAR_SOLDIER', 'Garrok', 0, 'WAR_SIDE_MID',
                  'You walked out of the steam like it was a door. Show me the rest.', "The steam lets you through. So will I.", d='left'),
         fx(item((2, 24), 'ICESTONE')),
         make_front(),
@@ -1358,12 +1416,29 @@ def build_925():
     h['metadata']['MapPosition'] = [0, 13, 14]
     h['walk_from'] = [[3, 25]]
     h['gates'] = [{'name': 'The Icestone spit (over the frozen flood only)', 'from': [[1, 14], [62, 14], [31, 30]], 'sealed': [[3, 24]], 'ice_solid': True}]
+    # The lines' mixed pair (:stand_between) is added after the terrain pass, so the crafted Steamline is unchanged;
+    # (32, 26) is open sand on the road to the crest exit (S).
+    for lst in {id(r.events): r.events, id(r.m.events): r.m.events}.values():
+        lst.append(lines_pair((32, 26), 'WAR_SIDE_MID', 'Sigrun', ':ISENMAR_HIRDMAN, "Styr", 0, :ASHKAAR_EMBER_RIDER, "Kessa", 0',
+                       None,
+                       ["Hirdman Styr: You. The one walking between.", "Ember-Rider Kessa: For once, the north and I agree.",
+                        "(Sigrun comes out of the steam at your shoulder, frost on one side of her face and soot on the other.)",
+                        "Sigrun: They agree on something. Wonderful. It's us."],
+                       ['Sigrun: Still standing. Both of us. Look up.', 'Sigrun: The crest is just south. Go.'],
+                       ["Ember-Rider Kessa: You stood between. So we both had something to aim at."],
+                       'trainer_COOLTRAINER_M', d='up'))
     r.write(h, '925_steamline.yaml', '# The Steamline (925, :BLEED). WRITTEN BY layouts/war_craft.py (Wave 9) - edit that script.\n')
 
 
 # ================================================================================================
 # 4. MAP 926 — THE GLASS DUNES (60x48, ts 56, DESERT — Ch19 WAR-1 Climax Battleground!)
 # ================================================================================================
+def retired(r):
+    """Drop the events kept only so the terrain pass matches the crafted map (see build_926)."""
+    for lst in {id(r.events): r.events, id(r.m.events): r.m.events}.values():
+        lst[:] = [e for e in lst if not e.get('_retired')]
+
+
 def partner_page(sw, who, ver, foes, lines, win):
     return {
         'cond': {'switch': sw},
@@ -1454,7 +1529,8 @@ def build_926():
     r.finish_plan(border=1)
 
     # 4. ALL 30 HEAD Events pinned at exact HEAD IDs (1..30) & coordinates!
-    legend = [{'if': '!pfm?(:war_partner_done)', 'then': ['(The ground is shaking. Over the sea the clouds are turning the wrong way. Not yet.)'],
+    legend = [{'if': '!pfm?(:war_partner_done)', 'then': ['(The ground is shaking. Over the sea the clouds are turning the wrong way. Not yet.)',
+                                                          '(The lines first: the side you did not choose is between you and the crest.)'],
                'else': [{'if': 'pfm?(:war_battle_done)', 'then': ['(The glass hums underfoot, quietly. It is over.)'], 'else': [
                    {'script': "legend = (pf_choice(:war_legend) rescue nil)\n"
                               "if legend != :neither\n"
@@ -1468,25 +1544,17 @@ def build_926():
     E = [
         {'type': 'warp', 'name': 'To the Rimed Sands', 'at': [7, 1], 'link': 'WAR_RIMED_DUNES', 'arrive': [7, 2, 'down'], 'fixed': True},
         {'type': 'warp', 'name': 'To the Siege Camp', 'at': [51, 1], 'link': 'WAR_CAMP_DUNES', 'arrive': [51, 2, 'down'], 'fixed': True},
+        # RETIRED (2026-11-26): the Rev 18 crest gauntlet and the partner double are now the lines on 920 / 924 / 925
+        # (story/38_SCRIPT_CH19.md). They stay in the list through the terrain pass so the crafted dunes and decor come
+        # out exactly as before, and are dropped just before the spec is written (retired()).
+    ] + [dict(e, _retired=True) for e in (
         gauntlet((27, 8), 'ASHKAAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_ASH', "The crest is held. By me, for now.", 'For now.', d='down'),
         gauntlet((33, 8), 'ISENMAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_ASH', "One more between you and the crest.", 'Go. Look at what we did.', d='down'),
         gauntlet((27, 9), 'ASHKAAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_ISE', "The crest is held. By me, for now.", 'For now.', d='down'),
         gauntlet((33, 9), 'ISENMAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_ISE', "One more between you and the crest.", 'Go. Look at what we did.', d='down'),
         gauntlet((27, 10), 'ASHKAAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_MID', "The crest is held. By me, for now.", 'For now.', d='down'),
         gauntlet((33, 10), 'ISENMAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_MID', "One more between you and the crest.", 'Go. Look at what we did.', d='down'),
-        {'type': 'event', 'name': 'Partner', 'at': [30, 4], 'fixed': True, 'pages': [
-            {'commands': []},
-            partner_page('WAR_SIDE_MID', 'Sigrun', 19, ':ISENMAR_OFFICER, "Captain", 1, :ASHKAAR_OFFICER, "Captain", 1',
-                         ['Sigrun: Between them? Then we hold the middle. Both captains are coming. Back to back.'],
-                         ['Sigrun: Still standing. Both of us. Look up.']),
-            partner_page('WAR_SIDE_ASH', 'Sigrun', 19, ':ISENMAR_OFFICER, "Captain", 1, :ISENMAR_SOLDIER_M, "Soldier", 2',
-                         ["Sigrun: With us, then. The Isenmar line breaks here or nowhere."],
-                         ['Sigrun: It broke. Now the sky.']),
-            partner_page('WAR_SIDE_ISE', 'Marisol', 19, ':ASHKAAR_OFFICER, "Captain", 1, :ASHKAAR_SOLDIER_M, "Soldier", 2',
-                         ["Marisol: Kid. You came. Course you came. Stand on my left; the sea's on my right."],
-                         ["Marisol: Ha! The Ebb runs both ways, and today it ran ours."]),
-            {'cond': {'self': 'A'}, 'commands': ['(The ground under the crest is humming. Something enormous is coming.)']},
-        ]},
+        {'type': 'event', 'name': 'Partner', 'at': [30, 4], 'fixed': True, 'pages': [{'commands': []}]})] + [
         {'type': 'event', 'name': 'The legend', 'at': [30, 2], 'fixed': True, 'pages': legend_pages},
         {'type': 'event', 'name': 'Goat-path', 'at': [30, 46], 'fixed': True,
          'pages': [{'trigger': 'action', 'commands': [
@@ -1699,6 +1767,7 @@ def build_926():
              tone=[6, 10, 4, 14], fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0})
     h['metadata']['MapPosition'] = [0, 13, 15]
     h['gates'] = [{'name': 'The crest (only from the Steamline)', 'from': [[56, 31], [7, 3], [51, 3]], 'sealed': [[30, 4], [30, 6]]}]
+    retired(r)
     r.write(h, '926_glass_dunes.yaml', '# The Glass Dunes (926). WRITTEN BY layouts/war_craft.py (Wave 9) - edit that script.\n')
 
 

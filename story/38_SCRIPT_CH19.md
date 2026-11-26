@@ -225,6 +225,7 @@ BATTLE (`:back_ashkaar`):  TrainerBattle.start(:ISENMAR_HIRDMAN, "Hjalmar", :ISE
 BATTLE (`:back_isenmar`):  TrainerBattle.start(:ASHKAAR_EMBER_RIDER, "Vharn", :ASHKAAR_EMBER_RIDER, "Ashild") — tag double; `:DESERT`; Lv 83–84.
 BATTLE (`:stand_between`): TrainerBattle.start(:ISENMAR_HIRDMAN, "Styr", :ASHKAAR_EMBER_RIDER, "Kessa") — tag double; `:BLEED`; Lv 83–84.
 (The gauntlet singles before it: `[ISENMAR_TRENCHER,Ulfa]` and `[ISENMAR_TRENCHER,Bersi]` on 920; `[ASHKAAR_SOLDIER,Garrok]` and `[ASHKAAR_SOLDIER,Senna]` on 924; Ulfa and Garrok on 925.)
+(On the built maps (mapgen/layouts/war_craft.py): the singles stand at the Rev 18 trench gaps and earthwork gates; each pair is a sight-4 trainer event at the last gap (920 47,14; 924 35,16; 925 32,26 on the road to the crest exit), which registers the partner, sets the field and on a win sets `pfm(:war_partner_done)` (926's legend waits for it) and V140 = 6.)
 (LOSE: whiteout to 930; the lines restart, and the choice is kept.)
 V140 = 6.
 ```

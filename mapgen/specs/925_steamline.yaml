@@ -39,8 +39,8 @@ events:
   at: [27, 14]
   sight: 4
   dir: right
-  sprite: trainer_POKEMONRANGER_M
-  trainer: [ISENMAR_SOLDIER_M, Soldier, 1]
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [ISENMAR_TRENCHER, Ulfa, 0]
   intro: Between the lines? Then you're nobody's. Nobody's is fair game.
   after: '...You really are nobody''s. All right.'
   cond: {switch: WAR_SIDE_MID}
@@ -49,7 +49,7 @@ events:
   sight: 4
   dir: left
   sprite: trainer_BLACKBELT
-  trainer: [ASHKAAR_SOLDIER_M, Soldier, 1]
+  trainer: [ASHKAAR_SOLDIER, Garrok, 0]
   intro: You walked out of the steam like it was a door. Show me the rest.
   after: The steam lets you through. So will I.
   cond: {switch: WAR_SIDE_MID}
@@ -147,3 +147,35 @@ events:
 - type: berry
   at: [5, 13]
   berry: ASPEARBERRY
+- type: event
+  name: Trainer(4)
+  at: [32, 26]
+  pages:
+  - commands: []
+  - cond: {switch: WAR_SIDE_MID}
+    graphic: {sprite: trainer_COOLTRAINER_M, dir: up}
+    trigger: event_touch
+    commands:
+    - {script: pbNoticePlayer(get_self)}
+    - 'Hirdman Styr: You. The one walking between.'
+    - 'Ember-Rider Kessa: For once, the north and I agree.'
+    - (Sigrun comes out of the steam at your shoulder, frost on one side of her face and soot on the other.)
+    - 'Sigrun: They agree on something. Wonderful. It''s us.'
+    - {script: 'pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)'}
+    - {script: setBattleRule("double")}
+    - if: TrainerBattle.start(:ISENMAR_HIRDMAN, "Styr", 0, :ASHKAAR_EMBER_RIDER, "Kessa", 0)
+      then:
+      - &id001 {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
+      - 'Sigrun: Still standing. Both of us. Look up.'
+      - 'Sigrun: The crest is just south. Go.'
+      - {script: 'pfm_set(:war_partner_done)
+
+          $game_variables[140] = 6 if $game_variables[140] < 6'}
+      - selfswitch: [A, true]
+      else:
+      - *id001
+  - cond: {switch: WAR_SIDE_MID, self: A}
+    graphic: {sprite: trainer_COOLTRAINER_M, dir: up}
+    trigger: action
+    commands: ['Ember-Rider Kessa: You stood between. So we both had something to aim at.']
+  fixed: true

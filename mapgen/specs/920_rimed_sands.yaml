@@ -56,29 +56,53 @@ events:
   at: [19, 14]
   sight: 4
   dir: left
-  sprite: trainer_POKEMONRANGER_M
-  trainer: [ISENMAR_SOLDIER_M, Soldier, 0]
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [ISENMAR_TRENCHER, Ulfa, 0]
   intro: You came with the dragons. You leave without them.
-  after: The line holds behind me. You will see.
+  after: Dig in, they said. I dug. You walked round.
   cond: {switch: WAR_SIDE_ASH}
+  rules: ['setBattleRule("field", :FROZEN_LAKE)']
 - type: trainer
   at: [33, 15]
   sight: 4
   dir: left
-  sprite: trainer_POKEMONRANGER_F
-  trainer: [ISENMAR_SOLDIER_F, Soldier, 0]
+  sprite: trainer_POKEMONRANGER_M
+  trainer: [ISENMAR_TRENCHER, Bersi, 0]
   intro: The Thane said the sand would never be cold. Ask the sand.
   after: Go, then. Tell them the Rimed Sands were held.
   cond: {switch: WAR_SIDE_ASH}
-- type: trainer
+  rules: ['setBattleRule("field", :FROZEN_LAKE)']
+- type: event
+  name: Trainer(4)
   at: [47, 14]
-  sight: 4
-  dir: left
-  sprite: trainer_COOLTRAINER_M
-  trainer: [ISENMAR_OFFICER, Captain, 0]
-  intro: Third line. Nobody has passed the third line.
-  after: Somebody has passed the third line. Mark it in the tally.
-  cond: {switch: WAR_SIDE_ASH}
+  pages:
+  - commands: []
+  - cond: {switch: WAR_SIDE_ASH}
+    graphic: {sprite: trainer_COOLTRAINER_M, dir: left}
+    trigger: event_touch
+    commands:
+    - {script: pbNoticePlayer(get_self)}
+    - 'Hirdman Hjalmar: Third line. The Thane''s own hird holds it. Nobody has passed the third line.'
+    - '(Wings over the trench: Sigrun''s Salamence drops onto the frozen sand beside you, throwing frost.)'
+    - 'Sigrun: With us, then. The Isenmar line breaks here or nowhere.'
+    - {script: 'pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)'}
+    - {script: setBattleRule("double")}
+    - {script: 'setBattleRule("field", :FROZEN_LAKE)'}
+    - if: TrainerBattle.start(:ISENMAR_HIRDMAN, "Hjalmar", 0, :ISENMAR_HIRDMAN, "Torunn", 0)
+      then:
+      - &id001 {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
+      - 'Sigrun: It broke. Now the sky.'
+      - 'Sigrun: The crest. South, over the Steamline. Go.'
+      - {script: 'pfm_set(:war_partner_done)
+
+          $game_variables[140] = 6 if $game_variables[140] < 6'}
+      - selfswitch: [A, true]
+      else:
+      - *id001
+  - cond: {switch: WAR_SIDE_ASH, self: A}
+    graphic: {sprite: trainer_COOLTRAINER_M, dir: left}
+    trigger: action
+    commands: ['Hirdman Hjalmar: The Thane''s shield. ...Cracked. Tell him it took two of you.']
 - type: item
   at: [51, 9]
   item: NEVERMELTICE
