@@ -24,10 +24,16 @@ Also: `:ch11_anja` (expose her, or let her confess), and `:ch11_strike` at the E
 ```
 (Morning. The Center's window is full of white flowers: the little path from the potting shed reaches all the way across the Heartgarden now, and somebody has put a rope round it so the tourists don't step on it.)
 (Juno is at the counter in a travelling coat over her Warden's sash, with a satchel so full it won't close. Her wreath is on top, in a hatbox. She is reading from a sheaf of paper under her breath.)
-[portrait: JUNO, panic] "—the Greenward bloc believes that sustainable Imprint stewardship is—" no. "—believes in—" no. Hi. Morning. Hi.
-[portrait: JUNO, neutral] I'm going north. The northern Wardens haven't answered a single letter, so I'm going to stand in their halls till they do. Anja Sorrel first. Rimeholt.
-[portrait: JUNO, sad] She signed the heat contract. Her whole city runs on Meridian. If the Greenward can't talk to her, it can't talk to anybody.
-[portrait: JUNO, happy] And your tenth badge is up there. So. Same road. If you want. You don't have to.
+[portrait: JUNO, panic] "—the Greenward bloc believes that sustainable Imprint stewardship is—"
+[name: Juno] no. "—believes in—" no.
+[name: Juno] Hi. Morning. Hi.
+[portrait: JUNO, neutral] I'm going north.
+[name: Juno] The northern Wardens haven't answered a single letter, so I'm going to stand in their halls till they do.
+[name: Juno] Anja Sorrel first. Rimeholt.
+[name: Juno] She signed the heat contract. Her whole city runs on Meridian.
+[portrait: JUNO, sad] If the Greenward can't talk to her, it can't talk to anybody.
+[portrait: JUNO, happy] And your tenth badge is up there. So. Same road.
+[name: Juno] If you want. You don't have to.
 (She is already holding the door.)
 [estranged] (Juno isn't here. On the counter there's a note in green ink, very short.)
 [estranged] "Gone ahead to Rimeholt by the mail-sled. Don't wait for me. — J."
@@ -39,8 +45,11 @@ V132 stays 0. QUEST LOG: "Eighteen Roads" — North up the Hart Road to Rimeholt
 ## Map 284 — the Kingsgate Barbican (touch, once, on leaving north)
 ```
 (The Thornguard on the north gate are new: twice as many as yesterday, with a sergeant who checks every pass twice.)
-[name: Thornguard Sergeant] Isenmar? Hm. Her Majesty's compliments, Warden, and the border's open. For now. The Thane's been asking about grazing rights on our side of the Hart's Run, if he has to "move people". Move what people, I said. He didn't say.
-[portrait: JUNO, neutral] (outside the gate, quietly) Move people. Why would you need to move people?
+[name: Thornguard Sergeant] Isenmar? Hm. Her Majesty's compliments, Warden, and the border's open. For now.
+[name: Thornguard Sergeant] The Thane's been asking about grazing rights on our side of the Hart's Run, if he has to "move people".
+[name: Thornguard Sergeant] Move what people, I said. He didn't say.
+[portrait: JUNO, neutral] (outside the gate, quietly) Move people.
+[name: Juno] [emote: question] Why would you need to move people?
 ```
 *(The first seed of the evacuation and the Thornguard border crisis. Cut if estranged; the sergeant says it to the PC alone.)*
 
@@ -50,7 +59,9 @@ Road sign: "THE HART'S RUN. North to the Hoarwood and Isenmar. The Crown's deer 
 (Wide downs going pale with frost toward the north. Juno walks backwards in front of your lead Pokémon, holding her papers up.)
 [portrait: JUNO, happy] Right. You're the Thane. Be the Thane. Look kingly.
 (Your lead Pokémon looks at her.)
-[portrait: JUNO, neutral] "Your Majesty. The Greenward bloc proposes that no Plate should be drawn past the point where its land can—" Do you think "drawn" sounds rude? It sounds rude. "—tapped"? "Milked"?
+[portrait: JUNO, neutral] "Your Majesty. The Greenward bloc proposes that no Plate should be drawn past the point where its land can—"
+[name: Juno] Do you think "drawn" sounds rude? It sounds rude.
+[name: Juno] "—tapped"? "Milked"?
 (Your Pokémon sits down.)
 [portrait: JUNO, sad] That's what the Thane will do as well, isn't it.
 ```
@@ -60,7 +71,9 @@ Trainers (Lv 45–48): a deer-herd (Stantler, Sawsbuck), a Crown huntsman, two h
 ## Map 701 — The Hoarwood (`:SNOWY_MOUNTAIN`, borderland A2) and **Map 710/711 — Snowbriar**
 ```
 (The first snow. Juno stops in the middle of the road and holds her hand out.)
-[portrait: JUNO, happy] Oh. Oh, it's— I've never— Verdance doesn't— It's COLD. Why didn't anyone tell me it was this cold? You told me. You told me twice. I know.
+[portrait: JUNO, happy] Oh. Oh, it's— I've never— Verdance doesn't—
+[name: Juno] It's COLD. Why didn't anyone tell me it was this cold?
+[name: Juno] You told me. You told me twice. I know.
 (The blossoms in her hair close up against the cold, one by one, like hands.)
 ```
 **Snowbriar** (the lodge-town in the Hoarwood):
@@ -77,40 +90,53 @@ As DUNGEON_PUZZLES "the forest is a loom" (7/10). Flavour only, no story beat. J
 (The top of the pass. A cairn of black stones with a frozen flag on a pole, and a stone hut beside it with smoke from the chimney. The air is so clear it hurts.)
 (North-east, beyond the Mast Glacier's white tongue, the land goes the colour of old bone: the sands. And along the horizon, very small, a line of thin grey threads going straight up. Twenty. Fifty. Too many to count.)
 (Over them, high up, a slow ring of black specks, turning and turning, like a wheel of ash.)
-[portrait: JUNO, neutral] Are those chimneys? There's no town out there. Larch's map says there's no town out there.
-[portrait: JUNO, shocked] Those aren't caravans, are they.
+[portrait: JUNO, neutral] Are those chimneys? There's no town out there.
+[name: Juno] Larch's map says there's no town out there.
+[portrait: JUNO, shocked] [emote: dots] Those aren't caravans, are they.
 (The hut door opens. A woman in a pass-warden's furs with a long brass glass under her arm. Bryn, the watch.)
 [name: Bryn] Cookfires. Four days now. Dragons over them since yesterday. I've counted a hundred and sixty in that ring before the light went.
-[name: Bryn] That's Ossarian sand, that. Western dunes. Kassan's land. Ashkaar's got no business on it unless somebody let them.
-[name: Bryn] I sent it down the mountain. They sent back: "Thank you for your diligence. The Thane is aware of all troop movements." He isn't. Nobody is. You're the only two who've looked.
+[name: Bryn] That's Ossarian sand, that. Western dunes. Kassan's land.
+[name: Bryn] Ashkaar's got no business on it unless somebody let them.
+[name: Bryn] I sent it down the mountain. They sent back: "Thank you for your diligence. The Thane is aware of all troop movements." He isn't. Nobody is.
+[name: Bryn] You're the only two who've looked.
 ```
 ```
 (Behind the cairn, out of the wind, sits a young man in a scorched leather coat, with a Flygon curled round him like a cat. His left wing-strap is cut. He was not expecting company.)
-[name: Ashkaar Rider] Don't. Please. I'm not a spy. My Flygon threw a feather in the wind off the glacier and I came down where I could. I'll be gone when she can fly.
-[name: Ashkaar Rider] (looking at the smoke) ...You saw them. Of course you did. Everyone can see them from here. That's why the Dominar said not to fly this way.
-[portrait: JUNO, neutral] (to the PC, very low) I'm a Warden now. The Circular goes to every Warden and to the Sovereign. I could send it. Or you could tell her. Or him. Or... nobody.
+[name: Ashkaar Rider] Don't. Please. I'm not a spy.
+[name: Ashkaar Rider] My Flygon threw a feather in the wind off the glacier and I came down where I could. I'll be gone when she can fly.
+[name: Ashkaar Rider] (looking at the smoke) ...You saw them. Of course you did.
+[name: Ashkaar Rider] Everyone can see them from here.
+[name: Ashkaar Rider] That's why the Dominar said not to fly this way.
+[portrait: JUNO, neutral] (to the PC, very low) I'm a Warden now.
+[name: Juno] The Circular goes to every Warden and to the Sovereign.
+[name: Juno] I could send it. Or you could tell her. Or him. Or... nobody.
 ```
 ```
 > Tell Bryn to send it again, to the Thane's own hand. (warn_isenmar)
   Script: pf_choose(:war_warning, :warn_isenmar)
-  [name: Bryn] To his hand. With a Warden's name on it, they'll have to open it. Right.
+  [name: Bryn] To his hand.
+  [name: Bryn] With a Warden's name on it, they'll have to open it. Right.
   (She writes it on the hut's slate, and then on paper, and gives it to her Corvisquire, who looks at the wind and sighs.)
   (The rider watches it go. He doesn't say anything. He puts his hand on his Flygon's neck.)
 > Tell the rider to take word home: they've been seen. (warn_ashkaar)
   Script: pf_choose(:war_warning, :warn_ashkaar)
   [name: Ashkaar Rider] ...Seen. By an Isenmar watch, and a Warden of Elowen, and— you. He'll want to know that. He hates being seen before he's ready. It might make him wait.
   [name: Ashkaar Rider] Or it might make him hurry. I don't know which. I only carry things.
-  [name: Bryn] (turning her back) I didn't hear any of that. I'm deaf on the east side. Always have been.
+  [name: Bryn] (turning her back) I didn't hear any of that.
+  [name: Bryn] I'm deaf on the east side. Always have been.
 > Juno sends it on the Circular: every Warden, and the Sovereign. (warn_both)
   Script: pf_choose(:war_warning, :warn_both)
   (Juno kneels on the hut step and writes it on her knee, Warden's seal and all: what they saw, where, how many, and that Ashkaar's own rider is sitting on the mountain because his Flygon couldn't fly.)
-  [portrait: JUNO, neutral] Everyone gets it. Isenmar. Ashkaar. The Sovereign. If anyone's going to start a war, they'll have to start it knowing everyone saw them come.
+  [portrait: JUNO, neutral] Everyone gets it. Isenmar. Ashkaar. The Sovereign.
+  [name: Juno] If anyone's going to start a war, they'll have to start it knowing everyone saw them come.
   (Hours later, at Snowbriar's Center or Rimeholt's, the Circular has one reply, in Valen's own hand:)
-  [portrait: VALEN, neutral] Received, Warden Hale. Both crowns have it from me as well. Thank you for looking.
+  [portrait: VALEN, neutral] Received, Warden Hale. Both crowns have it from me as well.
+  [name: Valen] Thank you for looking.
 > Say nothing. (silent)
   Script: pf_choose(:war_warning, :silent)
   (You hand Bryn her glass back. Juno looks at you, and at the smoke, and doesn't send anything.)
-  [portrait: JUNO, sad] It's not our war. Is it? It's not anyone's yet.
+  [portrait: JUNO, sad] It's not our war. Is it?
+  [name: Juno] It's not anyone's yet.
   (The rider gets up as soon as you've gone round the cairn. When you look back from the switchback, the Flygon is in the air, low and limping, heading east.)
 V132 = 1.
 [estranged] Bryn and the rider play the same; option 3 reads "Send it on the Wardens' Circular from the hut's relay" and the PC writes it, with Bryn's seal.
@@ -125,7 +151,9 @@ Road sign: "THE WHALEBONE ROAD. Rimeholt 2 leagues. Walk on the marked ice ONLY.
 (Along the road, arches made of whale jaws, one every hundred paces.)
 (At the third arch an old man is sitting on a sled, singing to nobody.)
 OLD MAN (singing): "Sleep, old whale, under the white / Sleep while the Thane keeps the lamps alight / Wake when the ice remembers your name / Wake, and the sea will be yours again."
-[name: Old Man] They used to sing that once a winter. At the long night. Now they sing it every night. Nobody says why. You don't say why about the whale.
+[name: Old Man] They used to sing that once a winter. At the long night.
+[name: Old Man] Now they sing it every night. Nobody says why.
+[name: Old Man] You don't say why about the whale.
 ```
 **Juno's third speech** (to the PC's third Pokémon, under the last arch): "Your Majesty. Your sister's city is warm. I came to ask what it costs, and who pays." (Your Pokémon looks at her properly for the first time.) [portrait: JUNO, shocked] It listened. Did you see? It *listened*.
 *(09 #22: the Sleeping Whale song is the note order for the Ice Vault's sealed door (DUNGEON_PUZZLES), and the player has heard it since Ebbmouth in Act I.)*
@@ -137,7 +165,9 @@ OLD MAN (singing): "Sleep, old whale, under the white / Sleep while the Thane ke
 (A wall of cut ice blocks as tall as a house, glittering. A gate of whale ribs. On the gate, a Meridian scanner arch, new brass on old bone.)
 SE: the two-note chime.
 SCREEN: ◆ PRIORITY GUEST ◆ Welcome to Rimeholt, \PN. Warmth is a right. Meridian Heat Services.
-[name: Gate Skald] Mind the ice past the towers. It's thin. It's been thin since the summer. They say it's fine. They've got a machine that says it's fine.
+[name: Gate Skald] Mind the ice past the towers. It's thin.
+[name: Gate Skald] It's been thin since the summer. They say it's fine.
+[name: Gate Skald] They've got a machine that says it's fine.
 (Inside the gate, the city. Sled-roads cut in the ice, children skating to school, fishing huts with smoking chimneys. And the four towers, each on its own platform of steel piles, with the ice round their feet grey and wet-looking, like old glass.)
 (A fishing hole by the first tower is open, black water, and steaming. Nobody is fishing it.)
 V132 = 2. QUEST LOG: "Eighteen Roads" — Find Warden Anja Sorrel. The Lake Hall is on the ice past the harbour.
@@ -148,11 +178,11 @@ V132 = 2. QUEST LOG: "Eighteen Roads" — Find Warden Anja Sorrel. The Lake Hall
 (A line of children in fur hoods stands on the harbour ice. A tall woman in a Mamoswine-hide coat walks down the line with an unlit pipe in her teeth, tapping each child on the hood.)
 [portrait: ANJA, neutral] What do you do when the ice sings?
 CHILDREN: Lie down flat!
-[portrait: ANJA, neutral] What do you do when the ice cracks?
+[name: Anja] What do you do when the ice cracks?
 CHILDREN: Roll to the marker!
-[portrait: ANJA, neutral] And what do you do when the lake breathes?
+[name: Anja] And what do you do when the lake breathes?
 CHILDREN: RUN!
-[portrait: ANJA, neutral] Run where?
+[name: Anja] Run where?
 CHILDREN: To the TOWERS!
 [portrait: ANJA, smug] Good. You'll all live to be as ugly as me. Off to school.
 (They scatter. She turns, and sees Juno, and her eyebrows, which have rime in them, go up very slowly.)
@@ -163,12 +193,14 @@ CHILDREN: To the TOWERS!
 ```
 [portrait: JUNO, happy] Warden Sorrel! I'm Juno Hale, Warden of Verdance, and the Greenward bloc believes that sustainable Imprint stewardship—
 [portrait: ANJA, neutral] How many toes have you got, girl?
-[portrait: JUNO, shocked] ...Ten?
-[portrait: ANJA, neutral] Come back in February and tell me your policy.
+[portrait: JUNO, shocked] [emote: question] ...Ten?
+[name: Anja] Come back in February and tell me your policy.
 [portrait: JUNO, panic] I had a second page!
 [portrait: ANJA, smug] Read it to the fish. They've nowhere to be.
-[portrait: ANJA, neutral] (to the PC) You're the badge-hunter. The one with no colour. I heard. Lake Hall's past the towers. Don't walk on the grey.
-[portrait: ANJA, neutral] And you, Verdance. You want me to choose between my principles and my grandchildren's toes? Easy choice. Toes. Every time. The heaters stay on.
+[portrait: ANJA, neutral] (to the PC) You're the badge-hunter. The one with no colour.
+[name: Anja] I heard. Lake Hall's past the towers. Don't walk on the grey.
+[name: Anja] And you, Verdance. You want me to choose between my principles and my grandchildren's toes?
+[name: Anja] Easy choice. Toes. Every time. The heaters stay on.
 (She goes. Juno watches her go.)
 [portrait: JUNO, sad] (to the PC) She's terrifying. I want her to like me so much.
 [estranged] (Juno is already on the harbour ice with her papers when the PC arrives; the scene plays the same; afterwards she sees the PC, says "Oh. You came," and goes off toward the Keep without waiting.)
@@ -187,10 +219,15 @@ V132 = 3. The Lake Hall's doors open.
 ### Map 306 — Whalebone Keep, the Mead Hall: **Thane Eirik** (touch, once; optional before the gym, but it helps)
 ```
 (A long hall like the inside of a ship, with a fire down the middle and whale jaws for rafters. At the end, a big tired man with a grey beard plaited in two, signing papers one after another without reading them.)
-[portrait: EIRIK, neutral] Warden Hale's friend. Sit. Eat something. Everyone who comes in here wants a thing and nobody eats.
-[portrait: EIRIK, neutral] I'll tell you what I tell all the southerners. Ten years ago a winter killed four hundred people in this city. Old people. Babies. I buried them on the ice because the ground was too hard to dig.
-[portrait: EIRIK, neutral] Then Meridian came with the towers, and nobody has died of cold in Rimeholt in eight years. You can say what you like about Meridian. I will sign whatever they put in front of me, as long as nobody dies of cold.
-[portrait: EIRIK, sad] (signing another paper) And now Ashkaar has closed the passes, and the forge-heat doesn't come up the pipe from Cindervault any more, so my towers run on the lake. Meridian says the lake can take it. My sister says the lake can take it. So the lake can take it.
+[portrait: EIRIK, neutral] Warden Hale's friend. Sit. Eat something.
+[name: Eirik] Everyone who comes in here wants a thing and nobody eats.
+[name: Eirik] I'll tell you what I tell all the southerners.
+[name: Eirik] Ten years ago a winter killed four hundred people in this city.
+[name: Eirik] Old people. Babies.
+[name: Eirik] I buried them on the ice because the ground was too hard to dig.
+[name: Eirik] Then Meridian came with the towers, and nobody has died of cold in Rimeholt in eight years. You can say what you like about Meridian. I will sign whatever they put in front of me, as long as nobody dies of cold.
+[portrait: EIRIK, sad] (signing another paper) And now Ashkaar has closed the passes, and the forge-heat doesn't come up the pipe from Cindervault any more, so my towers run on the lake. Meridian says the lake can take it.
+[name: Eirik] My sister says the lake can take it. So the lake can take it.
 ```
 *(The Ch8 manifest pays off here: Cindervault's tap fed Rimeholt; with the passes closed (V122 = 1) the towers draw on the lake's own Imprint. That's the mechanism of the Thaw, stated plainly before it happens. If `pf_chose(:ch8_caldera, :shutdown)` (V110 = 0 by default too, so check the choice, not the variable) he adds: "And Cindervault shut its tap anyway. Somebody down there decided my city could do without. They were right, it turns out. We did without, by drinking the lake.")*
 
@@ -203,8 +240,11 @@ Doors open at V132 >= 3. Built as GYM_PUZZLES Gym 10 ("ice remembers weight"): 3
 ### 313 — the Warden Arena: Anja
 ```
 (A round hall cut into the lake itself. Clear ice for a floor, and under it, very deep, dark shapes moving slowly.)
-[portrait: ANJA, neutral] Ice remembers. Every crack. Every weight. You walk on my lake, it knows your name by spring.
-[portrait: ANJA, neutral] Southerners think the ice is the enemy. It isn't. The ice is the only reason we're standing up. The water's the enemy. Always was.
+[portrait: ANJA, neutral] Ice remembers. Every crack. Every weight.
+[name: Anja] You walk on my lake, it knows your name by spring.
+[name: Anja] Southerners think the ice is the enemy. It isn't.
+[name: Anja] The ice is the only reason we're standing up.
+[name: Anja] The water's the enemy. Always was.
 [portrait: ANJA, smug] Show me how heavy you are.
 BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_ANJA), double: false) — single; field `:FROZEN_LAKE` (cracks → `:WATER_SURFACE`; Mega Glalie seals the cracks once).
 (Mid-battle, the lake's first crack:) [portrait: ANJA, neutral] Hear that? That's the lake learning you.
@@ -212,9 +252,12 @@ BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_ANJA), double: false) — single; f
 (Her last Pokémon, Mamoswine "Matriarch":) [portrait: ANJA, neutral] Matriarch. Show them what's under the ice.
 (WIN:)
 [portrait: ANJA, neutral] The ice held for you. It doesn't hold for many.
-[portrait: ANJA, neutral] Here. The SOUNDING BADGE. My family's line is a hundred fathoms of rope with a knot in it for every name the lake's ever learned. You're the newest knot.
+[name: Anja] Here. The SOUNDING BADGE.
+[name: Anja] My family's line is a hundred fathoms of rope with a knot in it for every name the lake's ever learned.
+[name: Anja] You're the newest knot.
 RECEIVE: SOUNDING BADGE. RECEIVE: TM13 ICE BEAM.
-[portrait: ANJA, neutral] One more thing, and I'll say it to you like I say it to the children. When the lake breathes, you run. You don't look. You don't help. You run, to the towers, and you help from there.
+[name: Anja] One more thing, and I'll say it to you like I say it to the children.
+[name: Anja] When the lake breathes, you run. You don't look. You don't help. You run, to the towers, and you help from there.
 [portrait: ANJA, sad] (quietly, not to the PC) ...The towers are the only thing out there with legs in the bedrock.
 V132 = 4.
 ```
@@ -228,7 +271,8 @@ V132 = 4.
 ```
 (Night. The Center's window rattles. Somewhere a dog is barking and won't stop.)
 (Juno is shaking your shoulder in her coat and nightdress, her wreath crooked.)
-[portrait: JUNO, panic] \PN. \PN, get up. The lamps on the towers. They've gone from red to white. Is that— is white normal? Nobody's out there. Why is nobody out there?
+[portrait: JUNO, panic] [emote: exclaim] \PN. \PN, get up.
+[name: Juno] The lamps on the towers. They've gone from red to white. Is that— is white normal? Nobody's out there. Why is nobody out there?
 [estranged] (It's Anja at the door instead, coat over her nightshirt, pipe in her teeth, not lit.) [portrait: ANJA, neutral] Up. Boots. Now. Something's wrong with my towers and I want somebody who can walk on bad ice.
 Script: Prismfall.checkpoint
 (Fade. The harbour at night. The ice is wet. Your boots splash where yesterday they rang.)
@@ -236,9 +280,11 @@ Script: Prismfall.checkpoint
 ### Map 300 — the second tower: Tage's console (autorun at the tower foot)
 ```
 (Tage is at the console in the tower's hut, alone, in a coat over pyjamas. The screen is a column of numbers, and every one of them is red.)
-[name: Tage] Don't— don't touch anything. I'm— it's fine. It's a spike. Tower Three's been spiking all week, it comes back down, it always comes back down.
+[name: Tage] Don't— don't touch anything. I'm— it's fine. It's a spike.
+[name: Tage] Tower Three's been spiking all week, it comes back down, it always comes back down.
 SCREEN: DRAW 141% · 148% · 155% · ICE LOAD: — · — · —
-[name: Tage] (very quietly) The ice load sensor stopped answering an hour ago. I thought it was the cold. It's built for cold.
+[name: Tage] (very quietly) The ice load sensor stopped answering an hour ago.
+[name: Tage] I thought it was the cold. It's built for cold.
 [portrait: JUNO, neutral] Wake the city.
 [name: Tage] I can't, I need authorisation from—
 [portrait: JUNO, angry] I'm a Warden. That's authorisation. WAKE THE CITY.
@@ -259,13 +305,15 @@ SE: a horn, long and low, from every tower at once. Lights come on across Rimeho
 SCREEN SHAKE. SE: a sound like the world's biggest door being opened.
 (Screaming. Somebody is ringing the harbour bell, over and over and over.)
 (Across the black line, figures in Meridian grey are running the other way: toward the towers, not away from them, with crates.)
-[portrait: JUNO, shocked] They're— they're not helping. Why aren't they helping?
+[portrait: JUNO, shocked] They're— they're not helping.
+[name: Juno] Why aren't they helping?
 Switch S128 CH11_THAW = ON. Variable V107 RIMEHOLT_STATE = 1.
 ```
 ### The partner battle: **"Securing the Lattice"**
 ```
 (On the tower platform's stair, two Directorate officers with a handcart full of steel cases. One holds up a hand.)
-[name: Directorate Officer] Platform's closed. Lattice asset recovery. Go back to the shelters.
+[name: Directorate Officer] Platform's closed. Lattice asset recovery.
+[name: Directorate Officer] Go back to the shelters.
 [portrait: JUNO, angry] There are people in the WATER.
 [name: Directorate Officer] And there are forty million crowns of Prism equipment on this platform, Warden, and our orders are very clear about which one we're here for.
 [name: Directorate Officer] Step back, or be stepped back.
@@ -281,14 +329,16 @@ Script: pbDeregisterPartner
 (LOSE: whiteout to 301; the night restarts at Tage's console from the checkpoint.)
 (WIN:)
 (The officers' handcart goes over the edge of the stair into the black water, cases and all. One of them watches it go, and then sits down on the stair, and takes his helmet off.)
-[name: Directorate Officer] (to nobody) It's not my equipment. I don't even know what's in them.
+[name: Directorate Officer] (to nobody) It's not my equipment.
+[name: Directorate Officer] I don't even know what's in them.
 ```
 *(The partner battle is 06_ACT_III's beat 3. **Trainers (in PBS):** `[MERIDIAN_DIRECTORATE,Ostrander,11]` and `[MERIDIAN_DIRECTORATE,Vell,11]` (+100/200), Lv 50–51, built for an Ice-then-Water field: Ostrander Magnezone / Kingambit / Bronzong, Vell Pelipper (Drizzle) / Toxapex / Dragalge; partners `[RIVAL_JUNO,Juno,50–52]` (rival battle 5: Tsareena "Sweetpea", her starter, Florges; Lv 50–51; the starter swaps at load like every rival party) and `[LEADER_ANJA,Anja,1]` (Mamoswine, Walrein, Weavile; Lv 50–51). The fieldChange rule is the one Ch8 introduced (`003_FieldEffects_BattleState.rb`).)*
 ### **"It's Proof"** → GO_THIN_ICE (autorun as the platform shakes; same night)
 ```
 (Tage comes running out of the tower hut with a tiny steel cylinder in his hand, and stops dead at the top of the stair. Behind him, the hut's floor is tilting.)
 [name: Tage] The core! The data core, I've— no, this is the cache, the core's still in the rack, it's got everything, every reading, every override, who raised the tolerance, it's PROOF—
-[name: Tage] Please. Please, I can't— my legs won't— it's two steps. It's right inside the door. It'll prove who's to blame. It'll prove it wasn't us. It wasn't ME.
+[name: Tage] Please. Please, I can't— my legs won't— it's two steps. It's right inside the door.
+[name: Tage] It'll prove who's to blame. It'll prove it wasn't us. It wasn't ME.
 (Inside the hut, through the door, you can see the rack. A green light on it. Two steps. The ice around the hut is grey and humming.)
 ```
 ```
@@ -304,8 +354,10 @@ Script: pbDeregisterPartner
 > Pull Tage off the platform. Leave it.
   (You get him by the scarf. Juno gets him by the coat. He's still holding the cache.)
   (Behind you, the hut leans, and leans, and goes into the lake with a long hiss of steam, and the green light goes down into the dark like a coin.)
-  [name: Tage] (on his knees on the stair) That was everything. That was everything that happened.
-  [portrait: JUNO, neutral] (shaking) You're everything that happened. You saw it. Remember it.
+  [name: Tage] (on his knees on the stair) That was everything.
+  [name: Tage] That was everything that happened.
+  [portrait: JUNO, neutral] (shaking) You're everything that happened.
+  [name: Juno] You saw it. Remember it.
   (Tage presses the little steel cylinder into your hands, as if it's burning him.) [name: Tage] You keep it. They'll search me. They won't search a guest.
   RECEIVE: TOWER CACHE.
 ```
@@ -319,7 +371,8 @@ Script: pbDeregisterPartner
 (An eye. Blue and gold, with ridges of red light round it like coastlines on a map. It is bigger than a house. It looks at the city. It looks at the towers.)
 (It looks at you.)
 (Under your collar, the colourless scar goes cold, then warm, like a hand pressed flat against your breastbone.)
-[portrait: ANJA, panic] (from somewhere across the ice, a voice you know) That's not a Pokémon, that's WEATHER. TOWERS! EVERYBODY TO THE TOWERS!
+[portrait: ANJA, panic] (from somewhere across the ice, a voice you know) That's not a Pokémon, that's WEATHER.
+[name: Anja] TOWERS! EVERYBODY TO THE TOWERS!
 ```
 ```
 > Fight it now.
@@ -344,7 +397,8 @@ Script: pbDeregisterPartner
 ```
 (The fourth tower's platform: steel, on piles that go down into the dark, into the bedrock. The only thing out here that doesn't move.)
 (Everybody who can get here is here. Children in fur hoods lying flat, the way they were taught. Anja is at the ladder, hauling people up by their collars, one after another.)
-[portrait: ANJA, neutral] (not looking at you) Good. You ran. Now help from here.
+[portrait: ANJA, neutral] (not looking at you) Good. You ran.
+[name: Anja] Now help from here.
 (The water at the platform's edge rises again. And this time it doesn't sigh out. It comes up, and up, a hill of black water with the eye in it, and rain starts falling out of a clear sky: warm, heavy, tropical rain, on a frozen sea at midnight.)
 (The boss follows at once.)
 ```
@@ -373,13 +427,18 @@ Switch S129 CH11_KYOGRE_DONE = ON. V132 = 6.
 (Dawn, if you can call it that. Rain. The lower town is a quarter gone: the far end of Net Row ends in black water with roofs standing up out of it like the backs of whales. Slabs of ice turn slowly in the harbour. Boats are out, everywhere, pulling people off rooftops.)
 (Anja is standing on the roof of a fishing hut that's half under, with her coat open in the rain, watching her city.)
 [portrait: ANJA, sad] I read the numbers.
-[portrait: ANJA, sad] Every month Meridian sent me the readings. Ice load. Draw. Every month the ice got thinner and the draw got bigger and they sent me a letter that said "within tolerance", and I signed it. I put my name under it.
-[portrait: ANJA, sad] I read them. I *read* them. And I signed anyway, because the heaters were warm.
+[name: Anja] Every month Meridian sent me the readings. Ice load. Draw.
+[name: Anja] Every month the ice got thinner and the draw got bigger and they sent me a letter that said "within tolerance", and I signed it.
+[name: Anja] I put my name under it.
+[name: Anja] I read them. I *read* them.
+[name: Anja] And I signed anyway, because the heaters were warm.
 (She looks down at you. Rime has melted out of her eyebrows. She looks older than she did yesterday, and smaller.)
-[portrait: ANJA, neutral] My brother's holding court at noon. In the Keep. He'll want to know whose fault it was. Everyone will want to know whose fault it was.
-[portrait: ANJA, neutral] You were on that platform. You saw Tage's console. You'll be asked.
+[portrait: ANJA, neutral] My brother's holding court at noon. In the Keep.
+[name: Anja] He'll want to know whose fault it was. Everyone will want to know whose fault it was.
+[name: Anja] You were on that platform. You saw Tage's console. You'll be asked.
 (Beside you, Juno is wet through, shaking, with somebody's baby still in her arms because she hasn't found anyone to give it to.)
-[portrait: JUNO, sad] That's what Uncle Rowan meant. Isn't it. The flowers. The heaters. It's all the same thing.
+[portrait: JUNO, sad] That's what Uncle Rowan meant. Isn't it.
+[name: Juno] The flowers. The heaters. It's all the same thing.
 [portrait: JUNO, crying] Everything's warm, and everything's growing, and nobody asks what it's drinking.
 [estranged] (Juno is on the next roof over, alone, handing children down to a boat. She hears Anja. She says her line to the rain, not to the PC.)
 ```
@@ -387,11 +446,17 @@ Switch S129 CH11_KYOGRE_DONE = ON. V132 = 6.
 ## Map 307 — Whalebone Keep, the Thane's Seat: **the court** → **CHOICE `:ch11_anja`** (autorun at noon, V132 == 6 → 7)
 ```
 (The Thane's hall is full: fishers in wet furs, skalds, the Meridian delegate in a dry coat, Directorate officers by the doors. Thane Eirik is on the whale-jaw seat. He hasn't slept. Anja stands alone in the middle of the floor.)
-[portrait: EIRIK, angry] Two hundred and six. That is how many of my people are not in their beds this morning. Some of them are in other people's beds. Some of them are under the lake.
-[name: Meridian Delegate] Your Majesty, Meridian Heat Services extends its deepest sympathy. The towers operated within the tolerances agreed with your Warden. Responsibility for the—
-[portrait: EIRIK, angry] (to Anja, not looking at the delegate) Did you know?
+[portrait: EIRIK, angry] Two hundred and six.
+[name: Eirik] That is how many of my people are not in their beds this morning.
+[name: Eirik] Some of them are in other people's beds. Some of them are under the lake.
+[name: Meridian Delegate] Your Majesty, Meridian Heat Services extends its deepest sympathy.
+[name: Meridian Delegate] The towers operated within the tolerances agreed with your Warden.
+[name: Meridian Delegate] Responsibility for the—
+[name: Eirik] (to Anja, not looking at the delegate) Did you know?
 (Anja doesn't answer. Eirik looks at you.)
-[portrait: EIRIK, neutral] You were on the platform. With the technician. My sister says you saw his console before the ice went. Tell me what you saw.
+[portrait: EIRIK, neutral] You were on the platform. With the technician.
+[name: Eirik] My sister says you saw his console before the ice went.
+[name: Eirik] Tell me what you saw.
 (In your bag, Tage's cache. In Tage's head, every number. Anja is looking at the floor.)
 ```
 ```
@@ -400,35 +465,56 @@ Switch S129 CH11_KYOGRE_DONE = ON. V132 = 6.
   (You say it. Draw at a hundred and fifty-five percent. The ice load sensor dead for an hour. The tolerance raised in the spring. And the monthly readings, signed in the Warden's hand.)
   (Tage, at the back of the hall, stands up when you say his name and says, "Yes. That's right. I'll swear to it." His voice cracks on "swear".)
   (The hall goes very quiet.)
-  [portrait: EIRIK, sad] ...Anja.
+  [portrait: EIRIK, sad] [emote: dots] ...Anja.
   [portrait: ANJA, neutral] It's true. All of it. I read them.
-  [portrait: EIRIK, angry] Then hear me. My sister is stripped of her honours, her seat at this table, and her name on the harbour wall. Wardens can't be unmade by kings. But I can make sure no Isenmar hall ever opens its door to her again.
-  [portrait: EIRIK, angry] (to the delegate) And Meridian. Meridian, who wrote "within tolerance" on two hundred and six graves. You'll hear from my lawyers. You'll hear from every hall on this coast.
+  [portrait: EIRIK, angry] Then hear me.
+  [name: Eirik] My sister is stripped of her honours, her seat at this table, and her name on the harbour wall.
+  [name: Eirik] Wardens can't be unmade by kings.
+  [name: Eirik] But I can make sure no Isenmar hall ever opens its door to her again.
+  [name: Eirik] (to the delegate) And Meridian.
+  [name: Eirik] Meridian, who wrote "within tolerance" on two hundred and six graves.
+  [name: Eirik] You'll hear from my lawyers. You'll hear from every hall on this coast.
   (The delegate leaves. Nobody stops him. Nobody bows.)
   (Anja walks out past you. She doesn't look at you. At the door she stops.)
-  [portrait: ANJA, neutral] You did right. I'd have done the same. I'll never forgive you for it. Both of those.
+  [portrait: ANJA, neutral] You did right. I'd have done the same.
+  [name: Anja] I'll never forgive you for it. Both of those.
 > Say nothing. Let her answer. (let_confess)
   Script: pf_choose(:ch11_anja, :let_confess)
   (You look at Anja. The hall looks at you looking at Anja.)
   (She lifts her head.)
   [portrait: ANJA, neutral] I knew.
-  [portrait: ANJA, neutral] Every month. The ice load and the draw. I read them, brother, and I signed them, and I told you the lake could take it. I told you because the babies were warm and I wanted them to stay warm. I'd tell you again if it was last winter.
-  [portrait: ANJA, angry] But it isn't last winter. (She turns to the delegate.) Meridian Heat Services wrote "within tolerance" on that letter every month. Your tolerance. Your towers. Your lake, you thought. It's mine. Get out of my hall.
+  [name: Anja] Every month. The ice load and the draw.
+  [name: Anja] I read them, brother, and I signed them, and I told you the lake could take it. I told you because the babies were warm and I wanted them to stay warm.
+  [name: Anja] I'd tell you again if it was last winter.
+  [portrait: ANJA, angry] But it isn't last winter.
+  (She turns to the delegate.)
+  [name: Anja] Meridian Heat Services wrote "within tolerance" on that letter every month.
+  [name: Anja] Your tolerance. Your towers. Your lake, you thought.
+  [name: Anja] It's mine. Get out of my hall.
   (The delegate looks at the Thane. The Thane says nothing at all. The delegate leaves.)
-  [portrait: EIRIK, sad] (after a long time) ...Sit down, Anja. Sit by me. We've a city to move.
+  [portrait: EIRIK, sad] (after a long time) ...Sit down, Anja. Sit by me.
+  [name: Eirik] We've a city to move.
   (On her way to the seat, she passes you, and she puts a hand on your shoulder for one second, hard, like a vice.)
 ```
 *(NARRATIVE_KEYS §4.2 `:ch11_anja`: `:expose` ACCORD+1 MERIDIAN−1, `ANJA_EXPOSED` (Act V: she refuses to release the Icicle Plate, "Rimeholt drowns without it"; the Festival R16 grudge seat); `:let_confess` the Act V swing vote, she lets go at the end (WARDEN_CONSENT entry 10). **Either way Anja breaks with Meridian publicly.** V132 = 7.)*
 ```
-[portrait: EIRIK, neutral] (to the hall) Martial law, from this hour. The lower town is gone. The upper town won't hold another freeze on this much water. Every family south of the second tower goes south. Over Frostfang, down the Icecutters' Haul, into Elowen, to my cousins in the Hoarwood and wherever the Queen will have them.
-[portrait: EIRIK, neutral] Warden Hale. You'll walk with them. The Thornguard will want to count them at the border, and they'll count them slower if there's no Warden of Elowen standing there.
+[portrait: EIRIK, neutral] (to the hall) Martial law, from this hour.
+[name: Eirik] The lower town is gone. The upper town won't hold another freeze on this much water.
+[name: Eirik] Every family south of the second tower goes south.
+[name: Eirik] Over Frostfang, down the Icecutters' Haul, into Elowen, to my cousins in the Hoarwood and wherever the Queen will have them.
+[name: Eirik] Warden Hale. You'll walk with them.
+[name: Eirik] The Thornguard will want to count them at the border, and they'll count them slower if there's no Warden of Elowen standing there.
 [portrait: JUNO, neutral] (straightening) I'll go. Of course I'll go.
 [if :war_warning == :warn_isenmar]
-  [portrait: EIRIK, neutral] (to the PC) And you. Your letter from Frostfang came to my hand last night, two hours before the horn. Fifty fires on Ossarian sand. My generals said nonsense. They are not saying nonsense this morning.
+  [portrait: EIRIK, neutral] (to the PC) And you. Your letter from Frostfang came to my hand last night, two hours before the horn. Fifty fires on Ossarian sand.
+  [name: Eirik] My generals said nonsense. They are not saying nonsense this morning.
 [if :war_warning == :warn_both]
-  [portrait: EIRIK, neutral] (to the PC) The Sovereign's letter reached me with your Warden's name on it. Every hall has it. Ashkaar has it. So the Dominar can't say he wasn't seen. Good. Let him be seen.
+  [portrait: EIRIK, neutral] (to the PC) The Sovereign's letter reached me with your Warden's name on it.
+  [name: Eirik] Every hall has it. Ashkaar has it.
+  [name: Eirik] So the Dominar can't say he wasn't seen. Good. Let him be seen.
 [if :war_warning == :warn_ashkaar]
-  [portrait: EIRIK, neutral] And there's a rumour from the pass that someone told an Ashkaar rider his camps had been spotted. If I find out who, I'll thank them for nothing.
+  [portrait: EIRIK, neutral] And there's a rumour from the pass that someone told an Ashkaar rider his camps had been spotted.
+  [name: Eirik] If I find out who, I'll thank them for nothing.
 [if :war_warning == :silent]
   (He doesn't mention the sands. Nobody does. Nobody knows.)
 ```
@@ -451,13 +537,17 @@ SCREEN: (A newsreader, Meridian blue behind her.) "—catastrophic flooding in t
 SCREEN: (A great hall of black stone. A huge grey-bearded man in dragon-scale, Dominar Hrothgar Ashfall, standing.) "Isenmar sent its sea-beast against my soldiers sleeping in their tents. Four hundred of my sons drowned on dry land. The Thane will answer for every one."
 SCREEN: (The Whalebone Keep's gate, this morning, in the rain.) [portrait: EIRIK, angry] "My city is under the lake because Ashkaar closed the passes and stopped our heat. Ashkaar starved Rimeholt, and the lake ate what was left. Ashkaar will answer for it."
 SCREEN: (A white room. A silver-haired man in a beautiful grey coat, sitting easily, the sunburst pin on his lapel. Director Voss.)
-[portrait: VOSS, happy] Meridian deeply regrets the hostilities. As a neutral partner to every crown in the Accord, the Fellowship stands ready to provide logistics, heat and medical support to both parties, on equal terms, for as long as they're needed.
+[portrait: VOSS, happy] Meridian deeply regrets the hostilities.
+[name: Voss] As a neutral partner to every crown in the Accord, the Fellowship stands ready to provide logistics, heat and medical support to both parties, on equal terms, for as long as they're needed.
 SCREEN: ◆ ISENMAR AND ASHKAAR AT WAR ◆
 (Nobody in the crowd says anything.)
 (Down the Sled-Road, east, the Thane's host is already moving: war-sleds, harpooners, skalds with horns, a line of lamps going away along the ice toward the grey wall. Toward Skaldfast.)
 (South, at the Icewall Gate, the other column: families with everything they own on hand-sleds, going the other way.)
-[portrait: JUNO, neutral] (with her satchel and a borrowed fur, at the head of the south column) Both ways at once. Like the Ebb.
-[portrait: JUNO, neutral] I'm going with them to the border. Somebody has to stand there with a Warden's sash on while the Thornguard count. Then I'll come and find you. Wherever you are.
+[portrait: JUNO, neutral] (with her satchel and a borrowed fur, at the head of the south column) Both ways at once.
+[name: Juno] Like the Ebb.
+[name: Juno] I'm going with them to the border.
+[name: Juno] Somebody has to stand there with a Warden's sash on while the Thornguard count.
+[name: Juno] Then I'll come and find you. Wherever you are.
 [portrait: JUNO, sad] Don't do anything brave without me.
 Variable V122 WAR_STATE = 2. V132 = 8.
 QUEST LOG: "Eighteen Roads" — Walk the column south as far as Ebbmouth. Then back north, east on the Sled-Road, to Anchorhold and the airships.
@@ -470,9 +560,13 @@ QUEST LOG: "Eighteen Roads" — Walk the column south as far as Ebbmouth. Then b
 ## The column south (704/705 back over Frostfang; a fade at the Icecutters' Haul fork)
 ```
 (Frostfang Pass again, going down this time, in a line of hand-sleds a mile long. Children asleep on the bundles. Someone's grandmother on a sled pulled by a Mamoswine. At the watch-cairn Bryn stands by the flag and counts them through.)
-[name: Bryn] (as you pass) Four hundred and twelve so far. I counted the fires on the sands, and now I'm counting these. I'd like to count something nice next.
+[name: Bryn] (as you pass) Four hundred and twelve so far.
+[name: Bryn] I counted the fires on the sands, and now I'm counting these.
+[name: Bryn] I'd like to count something nice next.
 (At the fork where the Icecutters' Haul goes down to Elowen and the coast road goes to Ebbmouth, the column splits: inland families after Juno, fishers' families toward the sea.)
-[portrait: JUNO, neutral] This is me. (She hugs you, quickly, satchel and all.) Don't do anything brave without me. I mean it this time.
+[portrait: JUNO, neutral] This is me.
+(She hugs you, quickly, satchel and all.)
+[name: Juno] Don't do anything brave without me. I mean it this time.
 (Fade.)
 ```
 *(If the PC has Fly, they may fly to Ebbmouth from the Rimeholt Center instead; the column scene plays as a short cutscene first.)*
@@ -484,13 +578,19 @@ QUEST LOG: "Eighteen Roads" — Walk the column south as far as Ebbmouth. Then b
 (On the strike's banner pole, by the bell:)
 [if TEO_SAVED]
   (Teo is up the pole on a rope, nailing a banner to it with his left hand. The fingers of his right are glass to the second knuckle, and he holds the nails in them like a clamp. He sees you and grins.)
-  [portrait: TEO, happy] You came! Look at this. Look at all of them. I told her. I told her a thousand people would come out if she asked them properly.
+  [portrait: TEO, happy] You came! Look at this. Look at all of them.
+  [name: Teo] I told her. I told her a thousand people would come out if she asked them properly.
 [else]
   (A photograph is nailed to the pole under the banner, under glass to keep the rain off: a boy in a porter's coat, laughing at whoever was holding the camera. Under it, chalked: TEO REYES. FIXED AT IRONREACH. CARRIED HOME.)
 (Marisol is on the bell-step with a speaking-trumpet.)
-[portrait: MARISOL, angry] This morning the Thane's levy officers took forty of our sleds for his war. Forty. Off our quay, out of our barns, without a vote.
-[portrait: MARISOL, angry] And for a year Meridian's been drinking our river at night and calling it "within tolerance". Well. Rimeholt was within tolerance. Ask them. (She points at the refugees.) Ask them how tolerant the lake was.
-[portrait: MARISOL, neutral] So here's the motion. We cut the Lattice. Tonight. With our own saws. And the Guild runs food to Skaldfast for the families on the front: on our sleds, on our say. Not on Eirik's. All in favour.
+[portrait: MARISOL, angry] This morning the Thane's levy officers took forty of our sleds for his war.
+[name: Marisol] Forty. Off our quay, out of our barns, without a vote.
+[name: Marisol] And for a year Meridian's been drinking our river at night and calling it "within tolerance".
+[name: Marisol] Well. Rimeholt was within tolerance. Ask them.
+(She points at the refugees.)
+[name: Marisol] Ask them how tolerant the lake was.
+[portrait: MARISOL, neutral] So here's the motion. We cut the Lattice. Tonight. With our own saws.
+[name: Marisol] And the Guild runs food to Skaldfast for the families on the front: on our sleds, on our say. Not on Eirik's. All in favour.
 (A thousand hands. More. The refugees' hands too.)
 ```
 ```
@@ -503,14 +603,19 @@ Variable V108 EBB_STATE = 3. Switch S130 CH11_EBB_STRIKE = ON.
 ```
 ```
 (Lamps on the coast road. A column of grey coats, two dozen, with batons and a wagon of new cable. A foreman in front with a megaphone.)
-[name: Directorate Foreman] By order of the Mandate, this is an unlawful obstruction of critical Fellowship infrastructure. Disperse, and nobody gets hurt.
+[name: Directorate Foreman] By order of the Mandate, this is an unlawful obstruction of critical Fellowship infrastructure.
+[name: Directorate Foreman] Disperse, and nobody gets hurt.
 (The Guild links arms across the intake. Marisol is in the middle.)
 [if !TEO_SAVED]
-  [portrait: MARISOL, angry] (to the foreman, very quietly, and everyone hears it) Nobody gets hurt. You'll want to look at that pole.
-  [portrait: MARISOL, crying] He was nineteen. Nineteen. Tell me again how the Hollow are the monsters.
+  [portrait: MARISOL, angry] (to the foreman, very quietly, and everyone hears it) Nobody gets hurt.
+  [name: Marisol] You'll want to look at that pole.
+  [portrait: MARISOL, crying] He was nineteen. Nineteen.
+  [name: Marisol] Tell me again how the Hollow are the monsters.
 [if TEO_SAVED]
   [portrait: TEO, angry] (beside his sister, glass hand on the cable) Come and take it, then.
-  [portrait: MARISOL, neutral] Teo. Shut up. (She doesn't take her eyes off the foreman.) He's right, though.
+  [portrait: MARISOL, neutral] Teo. Shut up.
+  (She doesn't take her eyes off the foreman.)
+  [name: Marisol] He's right, though.
 (The strikebreakers draw their batons. Marisol looks along the line, and finds you.)
 ```
 ```
@@ -524,16 +629,23 @@ Variable V108 EBB_STATE = 3. Switch S130 CH11_EBB_STRIKE = ON.
   (LOSE: the strikebreakers reach the intake but the Guild holds; whiteout to 161; the scene restarts at the line.)
   (WIN:)
   (The foreman's Pokémon go back into their balls. He looks at the line, a thousand people with saws, and the refugees behind them, and the photograph on the pole.)
-  [name: Directorate Foreman] ...I'm writing this up as "infrastructure unrecoverable". (He turns the wagon round.)
-  [portrait: MARISOL, sad] (when they've gone, sitting down on the quay edge with her boots in the river) You know what Teo used to say? That I'd stand up to anyone but never on anyone's side. (She looks at you.) You picked a side. I'll remember that till I'm old.
+  [name: Directorate Foreman] [emote: dots] ...I'm writing this up as "infrastructure unrecoverable".
+  (He turns the wagon round.)
+  [portrait: MARISOL, sad] (when they've gone, sitting down on the quay edge with her boots in the river) You know what Teo used to say?
+  [name: Marisol] That I'd stand up to anyone but never on anyone's side.
+  (She looks at you.)
+  [name: Marisol] You picked a side. I'll remember that till I'm old.
 > Talk the foreman down. (mediate)
   Script: pf_choose(:ch11_strike, :mediate)
   (You step out between the lines with your hands open, and talk: about the river, the cables, the refugees, and what a megaphone sounds like in a report to Lumen when it's played back next to a thousand people's hands.)
   (The foreman lowers the megaphone. He's young under the helmet. He looks tired.)
-  [name: Directorate Foreman] ...Fine. "Infrastructure under review." We'll come back with lawyers instead. That do?
+  [name: Directorate Foreman] ...Fine. "Infrastructure under review."
+  [name: Directorate Foreman] We'll come back with lawyers instead. That do?
   (He turns the wagon round. Nobody gets hurt. The quay doesn't cheer.)
-  [portrait: MARISOL, neutral] (later, coiling a rope, not looking at you) That was clever. Polite. Nobody got a bruise.
-  [portrait: MARISOL, neutral] And you never said which side you were on. Not once. I was listening.
+  [portrait: MARISOL, neutral] (later, coiling a rope, not looking at you) That was clever. Polite.
+  [name: Marisol] Nobody got a bruise.
+  [name: Marisol] And you never said which side you were on. Not once.
+  [name: Marisol] I was listening.
 V132 = 9.
 ```
 *(NARRATIVE_KEYS §4.2 `:ch11_strike`: `:stand` MARISOL+2 MERIDIAN−1, and +1 more MARISOL if Teo didn't survive (the only Act III way back to her after Teo); `:mediate` MARISOL−1 MERIDIAN+1. **Trainers (in PBS):** `[LEADER_MARISOL,Marisol,1]` partner (Gyarados, Pelipper, Kingdra; Lv 50–51), `[MERIDIAN_AGENT_M,Strikebreaker,11]` (Machamp, Honchkrow) and `[MERIDIAN_DIRECTORATE,Foreman,11]` (Copperajah, Electivire) (+100/200; Lv 50–51). Marisol's full line was held back in Ch9 for here (27_SCRIPT_CH9, the note after `:ch9_teo_sable`).)*
@@ -548,7 +660,9 @@ Road sign: "THE THANE'S SLED-ROAD. East to Skaldfast. MILITARY TRAFFIC HAS PRIOR
 ```
 (A road of packed ice, wide as a river, going east. War-sleds pass you every few minutes: harpoon-guns lashed under tarpaulins, skalds asleep on the crates, a Mamoswine team with frost on their tusks.)
 (A young harpooner on a resting sled, eating bread.)
-[name: Harpooner] My nan's house went under in the Thaw. So I'm going to fight Ashkaar. (He thinks about it.) That doesn't really follow, does it. Everyone's going, though.
+[name: Harpooner] My nan's house went under in the Thaw. So I'm going to fight Ashkaar.
+(He thinks about it.)
+[name: Harpooner] That doesn't really follow, does it. Everyone's going, though.
 ```
 Trainers (Lv 48–52): skalds, harpooners (Isenmar soldiers; `ISENMAR_SOLDIER_M`/`_F`, new Lv 48–52 versions needed: the PBS ones are Ch19's Lv 79–82), a war-sled driver. **Optional:** 728 **Stillwater** (`:BLEED`), just off the road outside Rimeholt: a waterfall hanging frozen in mid-fall without being ice. Field Notes: "Not frozen. Stopped. Like the Fixed. The water's still moving, just very, very slowly, inside itself."
 
@@ -564,7 +678,11 @@ Trainers (Lv 50–53). Wild per WALKTHROUGH.
 (Anchorhold: a town of iron masts sunk into the glacier, and tied to them, rising and falling gently in the wind like moored whales, Skyreach's airships.)
 (At the far mooring, a Gale Post mail-ship is loading in a hurry. Sacks thrown up hand to hand. A Pelipper on every rail. Off its stern, cracking in the wind, a long banner in red letters:)
 BANNER: LARCH SPEAKS TONIGHT.
-[name: Gale Post Loader] All of it! Every sack! Captain wants us over Skyreach by dark! (He sees you.) You! You're the one with no colour. The Professor's lot. Captain Gale said if you turned up to put you on. She didn't say why. She never says why.
+[name: Gale Post Loader] All of it! Every sack! Captain wants us over Skyreach by dark!
+(He sees you.)
+[name: Gale Post Loader] You! You're the one with no colour. The Professor's lot.
+[name: Gale Post Loader] Captain Gale said if you turned up to put you on.
+[name: Gale Post Loader] She didn't say why. She never says why.
 > Go aboard.
 (The ship slips its mooring. Anchorhold falls away. The glacier spreads out below like a white sheet with folds in it.)
 (East, the sands. Isenmar's host strung out along its white road toward Skaldfast, tiny, like ants. And beyond it, the smoke of the Dominar's camps, still rising, fewer than before.)

@@ -22,10 +22,16 @@ As in the earlier scripts. **Portrait cast here:** Larch, Odessa, Kestrel, Voss,
 ## The mail-ship (a short deck map or cutscene; autorun, V133 == 0 → 1)
 ```
 (The mail-ship's deck in the late afternoon. Sacks lashed everywhere. A Pelipper asleep on every rail. Ahead, out of the plain south of the Crownwall, a thing like a needle: a spire of masts and gantries a mile high, going straight up into a wall of cloud that never moves. Lightning walks along the inside of the cloud like veins.)
-[name: Captain's Mate] Skyreach. And the Stormfront on top of it, the Sky Plate's own weather. Been there since before the Accord. Never rained a drop on the city. Just sits there and thinks.
-[name: Captain's Mate] We'll not moor at the top. Directorate's searching every sack at the upper docks since the Thaw. Everything from Isenmar gets opened. Captain says we go in low, on the Tetherline, and you climb.
+[name: Captain's Mate] Skyreach. And the Stormfront on top of it, the Sky Plate's own weather.
+[name: Captain's Mate] Been there since before the Accord. Never rained a drop on the city.
+[name: Captain's Mate] Just sits there and thinks.
+[name: Captain's Mate] We'll not moor at the top. Directorate's searching every sack at the upper docks since the Thaw.
+[name: Captain's Mate] Everything from Isenmar gets opened.
+[name: Captain's Mate] Captain says we go in low, on the Tetherline, and you climb.
 (Something moves in the storm wall. Very big, very dark, along the lightning, and gone.)
-[name: Captain's Mate] (not looking) Don't. Crews have a word for that. The Stormfront Wyrm. You see it, you don't say you saw it, and you buy the next round.
+[name: Captain's Mate] (not looking) Don't. Crews have a word for that.
+[name: Captain's Mate] The Stormfront Wyrm.
+[name: Captain's Mate] You see it, you don't say you saw it, and you buy the next round.
 SE: the mooring horn. The ship drops into the shadow of the spire.
 V133 = 1.
 ```
@@ -34,7 +40,8 @@ V133 = 1.
 ## Map 732 — The Tetherline (`:STORMFRONT`)
 ```
 (A walkway of iron grating slung under Skyreach's mooring cables, a hundred feet above the plain, swaying. The cables go up into the dark of the spire overhead, thick as trees.)
-[name: Loader] (handing your bag down) Up the Cloudstair. It's the porters' way. Nobody official's climbed it in years. They'll be looking at the lifts.
+[name: Loader] (handing your bag down) Up the Cloudstair. It's the porters' way.
+[name: Loader] Nobody official's climbed it in years. They'll be looking at the lifts.
 ```
 Road sign: "THE TETHERLINE. Cable crews only. Do not lean."
 Trainers (Lv 52–54): cable-crew riggers, a Gale Post courier on a break. The Tetherline's far end is the Cloudstair's foot.
@@ -67,25 +74,43 @@ V133 = 2. QUEST LOG: "Eighteen Roads" — Find the Gale Post Hall. Odessa Gale's
 ```
 (A hangar-sized sorting hall inside the spire. Pigeonholes up to the roof, rope ladders, letter sacks sliding on overhead rails, Pelipper and Corvisquire coming and going through round doors in the walls like a dovecote. It smells of paper, rain and engine oil.)
 (At a sorting table at the far end, in a borrowed Gale Post coat with the sleeves rolled up, a grey-haired woman is sorting letters very fast and very badly.)
-[portrait: LARCH, happy] \PN! You found it. Of course you found it. Did you come up the Cloudstair? Don't tell me. I know you did. You've got that look. The rock-dust look.
+[portrait: LARCH, happy] \PN! You found it. Of course you found it.
+[name: Larch] Did you come up the Cloudstair? Don't tell me. I know you did.
+[name: Larch] You've got that look. The rock-dust look.
 (A young woman drops down a rope from a pigeonhole twenty feet up and lands on the table. Goggles, a scarf that goes round three times, a scar through one eyebrow.)
-[portrait: ODESSA, happy] So this is the famous one. No colour on the scanners. You'd make a great smuggler.
-[portrait: ODESSA, smug] Odessa Gale. I run the Post and the Post runs me. Skyreach's got one law: the wind doesn't care. Everything else is negotiable.
-[portrait: LARCH, neutral] Odessa's been kind enough to hide me. In plain sight. Nobody looks at a woman sorting mail.
-[portrait: ODESSA, neutral] She's terrible at it. Three letters to Lumen in the Isenmar hole this morning.
+[portrait: ODESSA, happy] So this is the famous one. No colour on the scanners.
+[name: Odessa] You'd make a great smuggler.
+[portrait: ODESSA, smug] Odessa Gale. I run the Post and the Post runs me.
+[name: Odessa] Skyreach's got one law: the wind doesn't care.
+[name: Odessa] Everything else is negotiable.
+[portrait: LARCH, neutral] Odessa's been kind enough to hide me. In plain sight.
+[name: Larch] Nobody looks at a woman sorting mail.
+[portrait: ODESSA, neutral] She's terrible at it.
+[name: Odessa] Three letters to Lumen in the Isenmar hole this morning.
 ```
 ```
 [portrait: LARCH, neutral] (lower) Did you see the officers on the bridges? The bands on their wrists?
-[portrait: LARCH, neutral] Lattice-glass. Meridian can't buy a Warden's ring off the Hearthguild, so it grows its own keystones. A Warden's ring asks a heartstone to open. Theirs pry it open.
+[name: Larch] Lattice-glass. Meridian can't buy a Warden's ring off the Hearthguild, so it grows its own keystones.
+[name: Larch] A Warden's ring asks a heartstone to open. Theirs pry it open.
 [portrait: LARCH, sad] If they come for me tonight and Marchetti's dog changes shape on you, don't stand there gawping.
-[portrait: LARCH, neutral] And the dragon. The crews' dragon in the storm. I've seen the drawings they make of it.
-[portrait: LARCH, shocked] (very softly) That's impossible. That's the shape of the Spire's core. I signed off on that core. It was a battery.
+[portrait: LARCH, neutral] And the dragon. The crews' dragon in the storm.
+[name: Larch] I've seen the drawings they make of it.
+[portrait: LARCH, shocked] [emote: dots] (very softly) That's impossible. That's the shape of the Spire's core.
+[name: Larch] I signed off on that core. It was a battery.
 ```
 ```
-[portrait: LARCH, neutral] I'm going to say something tonight, \PN. On every screen. Odessa's relays reach every Center in Velmora, and every Center has a screen now, thanks to the Mandate. Meridian built me an audience.
-[portrait: LARCH, sad] Everything I wrote in AF 292. The report they buried. Rimeholt's in it. Cindervault's in it. The Ebb's in it. Lumen's Plate. I predicted all of it, and then I took their money and I let them bury it.
-[portrait: LARCH, neutral] And a Lattice technician in Rimeholt sent me something on the ship you came in on. The last hour of Tower Three. Signed "Tage". I don't know who Tage is. I'd like to buy him a drink.
-[portrait: ODESSA, neutral] Midnight. Stormwatch Spire. The relay crown's at the top of the storm. Get your badge first. If tonight goes how I think it'll go, there won't be a gym tomorrow.
+[portrait: LARCH, neutral] I'm going to say something tonight, \PN. On every screen.
+[name: Larch] Odessa's relays reach every Center in Velmora, and every Center has a screen now, thanks to the Mandate.
+[name: Larch] Meridian built me an audience.
+[portrait: LARCH, sad] Everything I wrote in AF 292. The report they buried.
+[name: Larch] Rimeholt's in it. Cindervault's in it. The Ebb's in it. Lumen's Plate.
+[name: Larch] I predicted all of it, and then I took their money and I let them bury it.
+[portrait: LARCH, neutral] And a Lattice technician in Rimeholt sent me something on the ship you came in on.
+[name: Larch] The last hour of Tower Three. Signed "Tage".
+[name: Larch] I don't know who Tage is. I'd like to buy him a drink.
+[portrait: ODESSA, neutral] Midnight. Stormwatch Spire. The relay crown's at the top of the storm.
+[name: Odessa] Get your badge first.
+[name: Odessa] If tonight goes how I think it'll go, there won't be a gym tomorrow.
 V133 = 3.
 ```
 *(The Ch4 red herring ("Larch works for Meridian") is resolved here: she did, and she's about to say so. Tage's cache is the Ch11 GO_THIN_ICE beat's consequence.)*
@@ -94,16 +119,19 @@ V133 = 3.
 ```
 (A narrow gantry sticking out of the spire into empty air. Moored to it, a Gale Post skiff: a wing, a basket and a rope.)
 (Odessa is in the basket. Larch is on the gantry, holding the rope with both hands.)
-[portrait: ODESSA, happy] Drill! If it goes wrong tonight, this is your door. Safety briefing! There's one rope. Hold it.
-[portrait: LARCH, panic] Where is the rest of the briefing?
+[portrait: ODESSA, happy] Drill! If it goes wrong tonight, this is your door.
+[name: Odessa] Safety briefing! There's one rope. Hold it.
+[portrait: LARCH, panic] [emote: question] Where is the rest of the briefing?
 [portrait: ODESSA, smug] That was the long version.
 [portrait: LARCH, angry] I have a DOCTORATE in things that should not be airborne and this is all of them!
-[portrait: ODESSA, happy] Professor, you invented the thing that's eating the country. You don't get to be scared of a kite.
-[portrait: LARCH, neutral] ...That's fair. I hate that that's fair.
+[portrait: ODESSA, happy] Professor, you invented the thing that's eating the country.
+[name: Odessa] You don't get to be scared of a kite.
+[portrait: LARCH, deadpan] ...That's fair. I hate that that's fair.
 > (Let go of the rope)
-[portrait: LARCH, crying] LECTURE FOURTEEN STARTS NOW—
+[portrait: LARCH, panic] [emote: exclaim] LECTURE FOURTEEN STARTS NOW—
 (The skiff drops six feet on its tether, bobs, and comes back up. Larch is still holding on. Odessa is laughing so hard she has to sit down in the basket.)
-[portrait: ODESSA, happy] Six feet! She did six feet! (to you) You heard her. Lecture fourteen. Don't let me forget.
+[portrait: ODESSA, happy] Six feet! She did six feet!
+[name: Odessa] (to you) You heard her. Lecture fourteen. Don't let me forget.
 V133 = 4. The Gale Post gym opens.
 ```
 *(15_COMEDY Ch12 "Flight Safety", staged as a drill so the real escape at midnight lands: the joke goes before the blow. The "(Let go of the rope)" option is the PC's only line; it's always offered, and always taken.)*
@@ -119,16 +147,20 @@ Doors open at V133 >= 4. Built as GYM_PUZZLES Gym 11 ("the wind doesn't care"): 
 ```
 (An open deck on the outside of the spire, in the wind, with the storm wall close enough overhead to hear it hum. Odessa on the far rail with her goggles down.)
 [portrait: ODESSA, happy] Hold onto something. No, really.
-[portrait: ODESSA, neutral] I've flown letters through three storms and a Bleed. People write things in letters they'd never say. Love. Sorry. Goodbye. I carry them. I don't read them. I don't hand them to a clerk because he said please.
+[portrait: ODESSA, neutral] I've flown letters through three storms and a Bleed.
+[name: Odessa] People write things in letters they'd never say.
+[name: Odessa] Love. Sorry. Goodbye.
+[name: Odessa] I carry them. I don't read them. I don't hand them to a clerk because he said please.
 [portrait: ODESSA, smug] Let's see if you can keep your feet.
 BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_ODESSA), double: true) — field `:STORMFRONT` (Tailwind and Hurricane; Mega Pidgeot "Post").
 (Mega Pidgeot:) [portrait: ODESSA, happy] Post! Special delivery!
 (Her last Pokémon, Corviknight "Taxi":) [portrait: ODESSA, neutral] Taxi. Take us home.
 (WIN:)
 [portrait: ODESSA, happy] You kept your feet! Nobody keeps their feet.
-[portrait: ODESSA, neutral] The POSTMARK BADGE. Every letter that goes through Skyreach gets one. Means it got here. Means somebody carried it.
+[portrait: ODESSA, neutral] The POSTMARK BADGE. Every letter that goes through Skyreach gets one.
+[name: Odessa] Means it got here. Means somebody carried it.
 RECEIVE: POSTMARK BADGE. RECEIVE: TM51 ROOST.
-[portrait: ODESSA, neutral] (looking up at the storm, quieter) Get some sleep. Not too much. Midnight.
+[name: Odessa] (looking up at the storm, quieter) Get some sleep. Not too much. Midnight.
 V133 = 5.
 ```
 *(**Badge name (proposed):** the **Postmark Badge**; not in PBS or BADGE_TIERS. The sky-river guides' Waterfall (HM05) and the Mastery reward wait until the morning after: no side content between V133 == 5 and 8.)*
@@ -140,7 +172,8 @@ V133 = 5.
 ### Map 321 → 744: **"Midnight"** (autorun on sleeping at 321 with V133 == 5; night)
 ```
 (Night. A knock at the Center's window, not the door. Odessa, hanging upside down from the gutter.)
-[portrait: ODESSA, neutral] Curfew's on, so we're going over the roofs. Keep low. Don't look at the searchlights; they're slower than they look and faster than you think.
+[portrait: ODESSA, neutral] Curfew's on, so we're going over the roofs. Keep low.
+[name: Odessa] Don't look at the searchlights; they're slower than they look and faster than you think.
 Script: Prismfall.checkpoint
 (Fade. Rooftops, skybridges, a ladder up the outside of a mast with the city falling away underneath.)
 ```
@@ -152,18 +185,30 @@ Script: Prismfall.checkpoint
 ```
 (The top of the spire. A ring of relay dishes round a little glass booth, and above it, close enough to touch, the underside of the storm: slow, purple, full of light.)
 (Inside the booth, Larch at a microphone, in her own coat again, with a stack of paper and her reading glasses on a cord. Odessa at the switchboard.)
-[portrait: ODESSA, neutral] Every Center. Every mast. Every screen in Velmora. You're live in three. Two.
+[portrait: ODESSA, neutral] Every Center. Every mast. Every screen in Velmora.
+[name: Odessa] You're live in three. Two.
 (She points.)
 SCREEN (every screen in the realm; shown here on the booth's monitor and, in quick cuts, on screens the player has seen: the Ebbmouth quay, Rimeholt's Keep gate, Ironreach's Pit, the Verdance Heartgarden where Juno is sleeping on a bench under it, Cindervault's forge hall):
-[portrait: LARCH, neutral] Good evening. My name is Imelda Larch. Most of you have never heard of me, and every one of you has a light on because of me.
-[portrait: LARCH, neutral] Twenty-one years ago I designed the Prism Lattice. Eleven cities. I was very proud. In AF 292 I wrote a report for the Fellowship's board. This is it.
+[portrait: LARCH, neutral] Good evening. My name is Imelda Larch.
+[name: Larch] Most of you have never heard of me, and every one of you has a light on because of me.
+[name: Larch] Twenty-one years ago I designed the Prism Lattice. Eleven cities.
+[name: Larch] I was very proud. In AF 292 I wrote a report for the Fellowship's board.
+[name: Larch] This is it.
 (She holds it up. It has a stamp across the front: SUPPRESSED.)
-[portrait: LARCH, neutral] Page four. Lattice extraction accelerates the Bleed. Every Plate we draw on thins the world around it. I gave them the rate. I gave them the cities that would go first.
-[portrait: LARCH, sad] Ebbmouth's river. Lumen's Plate. Cindervault's caldera. Rimeholt's lake. In that order. It's in my handwriting. I was right about all of it, and nobody stopped, and I took the money and I let them put this in a drawer.
-[portrait: LARCH, neutral] (a smaller sheet) This came to me on a mail-ship today, from a technician named Tage. It's the last hour of Rimeholt's Tower Three. The draw at a hundred and fifty-five percent. An override signed in Lumen, not in Rimeholt.
-[portrait: LARCH, neutral] (another) And these are the heat contracts. Isenmar's and Ashkaar's. Side by side. Same price per—
-[portrait: LARCH, sad] (she stops herself, looks into the camera) No. You won't read that page. Nobody will. Here's the only line that matters.
-[portrait: LARCH, neutral] I designed the Lattice. I was wrong. I'm telling you now because nobody else will.
+[name: Larch] Page four. Lattice extraction accelerates the Bleed.
+[name: Larch] Every Plate we draw on thins the world around it.
+[name: Larch] I gave them the rate. I gave them the cities that would go first.
+[portrait: LARCH, sad] Ebbmouth's river. Lumen's Plate. Cindervault's caldera. Rimeholt's lake.
+[name: Larch] In that order. It's in my handwriting.
+[name: Larch] I was right about all of it, and nobody stopped, and I took the money and I let them put this in a drawer.
+[portrait: LARCH, neutral] (a smaller sheet) This came to me on a mail-ship today, from a technician named Tage. It's the last hour of Rimeholt's Tower Three. The draw at a hundred and fifty-five percent.
+[name: Larch] An override signed in Lumen, not in Rimeholt.
+[name: Larch] (another) And these are the heat contracts. Isenmar's and Ashkaar's.
+[name: Larch] Side by side. Same price per—
+[portrait: LARCH, sad] (she stops herself, looks into the camera) No. You won't read that page.
+[name: Larch] Nobody will. Here's the only line that matters.
+[portrait: LARCH, neutral] I designed the Lattice. I was wrong.
+[name: Larch] I'm telling you now because nobody else will.
 Switch S131 CH12_LARCH_PAPERS = ON. V133 = 6.
 (On the monitor, the quick cuts again: on the Ebbmouth quay, Marisol standing up. In Rimeholt's Keep, Anja putting down her pipe. In Verdance, Juno awake on her bench with her hands over her mouth.)
 ```
@@ -175,30 +220,38 @@ Switch S131 CH12_LARCH_PAPERS = ON. V133 = 6.
 SCREEN SHAKE. FLASH. SE: the explosion, then a long scream of steel.
 (The monitor shows: ◆ SIGNAL LOST ◆)
 (Smoke. Larch on the floor of the booth with her papers everywhere. Odessa already up, dragging her by the coat.)
-[portrait: ODESSA, angry] Up. UP. That wasn't the storm.
+[portrait: ODESSA, angry] [emote: exclaim] Up. UP. That wasn't the storm.
 ```
 ### **The raid** (autorun, the stair down 746 → 745 → 325)
 ```
 (Down the stair in the smoke. Below, on every landing, boots. Torches. Directorate grey, coming up.)
 (At the 745 landing, in the wreckage of the relay mast's base, something glints in the debris by your foot: a curved shard of dark casing with a blinking dead light on it.)
 RECEIVE: SPLITTER CASING. "A fragment of a Splitter's housing. The same make as the one at Lumen's Shatter."
-[portrait: LARCH, shocked] That's— that's what cracked Lumen's Plate. That's the Hammer's. That's Sable's—
+[portrait: LARCH, shocked] That's— that's what cracked Lumen's Plate.
+[name: Larch] That's the Hammer's. That's Sable's—
 [portrait: ODESSA, neutral] Then it's the same hand that did Lumen. Pocket it. Run.
 ```
 *(09 #12: the casing matches Lumen's because the same hand set both: Sable, who is Sabine Kroll of Meridian's Special Accounts. Tonight it makes the bombing look like the Hollow's. At the Ch13 tribunal, with the COMM-DEVICE (`IRONREACH_EVIDENCE`), it does the opposite. Key Item for Ch13 and Ch14.)*
 ```
 (The Gale Post Hall, 325. Sacks spilled across the floor, Pelipper screaming in the rafters, couriers with their hands up. Directorate officers everywhere. On the sorting-hall catwalk above, a woman in a long grey coat with a steel band at her wrist and a Manectric at her heel.)
-[portrait: MARCHETTI, neutral] Professor Larch. Warden Gale. And our Fellowship guest. Good. Everyone I wanted, in one room.
-[portrait: MARCHETTI, neutral] Nobody is under arrest. You're all under protection. A Hollow bomb has just destroyed public infrastructure, and the Directorate's first duty is your safety.
+[portrait: MARCHETTI, neutral] Professor Larch. Warden Gale. And our Fellowship guest.
+[name: Marchetti] Good. Everyone I wanted, in one room.
+[name: Marchetti] Nobody is under arrest. You're all under protection.
+[name: Marchetti] A Hollow bomb has just destroyed public infrastructure, and the Directorate's first duty is your safety.
 [portrait: LARCH, angry] A Hollow— You did that. Your people did that.
-[portrait: MARCHETTI, neutral] Professor. You'll want to be careful what you say in front of witnesses. It's all being written down.
-[portrait: ODESSA, neutral] (to the PC, not moving her lips) Skiff. Gantry. Two minutes. Keep her busy.
-[portrait: MARCHETTI, neutral] (coming down the catwalk stair) You're not under arrest. You're under protection. Learn the difference before it's taught to you.
+[portrait: MARCHETTI, neutral] Professor. You'll want to be careful what you say in front of witnesses.
+[name: Marchetti] It's all being written down.
+[portrait: ODESSA, neutral] (to the PC, not moving her lips) Skiff. Gantry. Two minutes.
+[name: Odessa] Keep her busy.
+[portrait: MARCHETTI, neutral] (coming down the catwalk stair) You're not under arrest.
+[name: Marchetti] You're under protection.
+[name: Marchetti] Learn the difference before it's taught to you.
 BATTLE: TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene") — single, field `:STORMFRONT`; the catwalks. Her Mega Manectric is the first Meridian Mega (Larch's warning pays off).
 (Mega Evolution:) (The band on Marchetti's wrist flares, and the bead of glass in it goes bright and ugly, like a lamp too close to a face. It doesn't sing the way a stone should. It screams.)
 (LOSE: whiteout to 321 under "protection"; the raid restarts at 325 from the checkpoint, Larch still in the hall.)
 (WIN:)
-[portrait: MARCHETTI, neutral] (recalling Manectric, not hurried) Fine. I'll note that you resisted protection.
+[portrait: MARCHETTI, neutral] (recalling Manectric, not hurried) Fine.
+[name: Marchetti] I'll note that you resisted protection.
 (Behind her, through the hall's round doors, a skiff drops off the Smugglers' Gantry into the dark: a wing, a basket, a rope, two figures.)
 (Larch's voice comes back on the wind, very faint.)
 LARCH (off): —LECTURE FOURTEEN—
@@ -210,9 +263,11 @@ Switch S132 CH12_GALE_RAID = ON. V133 = 7.
 *(Odessa gets Larch out through the Stormfront to Cragholm ("I've got friends who live underground"; 06). Odessa herself comes back for her Post before dawn, by the Smugglers' Gantry.)*
 ### Map 322 — the Skyreach Mart: **"Status"** (touch at the counter, any time after V133 == 7)
 ```
-[name: Mart Clerk] (apologetic, turning the terminal round) I'm so sorry. It just came through. I didn't do it.
+[name: Mart Clerk] (apologetic, turning the terminal round) I'm so sorry.
+[name: Mart Clerk] It just came through. I didn't do it.
 TERMINAL: Fellowship status: SUSPENDED. Priority services withdrawn. Please present yourself to a Directorate officer at your earliest convenience.
-[name: Mart Clerk] I can still sell you things. Cash. I'm not supposed to. I'm going to.
+[name: Mart Clerk] I can still sell you things. Cash.
+[name: Mart Clerk] I'm not supposed to. I'm going to.
 ```
 *(`:pro_fellowship` keeps its value; Meridian has withdrawn the privilege. The PC's Center screens read SUSPENDED from here on.)*
 
@@ -229,9 +284,13 @@ SCREEN: ◆ LARCH: WANTED FOR QUESTIONING ◆
 (At the far end, by the hole marked ABROAD — CLOSED BY QUARANTINE, a boy in a beautiful new jacket, cream and gold, with the Meridian sunburst on the shoulder. On his left hand, a gauntlet of steel and cloudy glass that hums.)
 (He has the bundle in the black ribbon in his right hand.)
 [portrait: KESTREL, neutral] You. Of course you.
-[portrait: KESTREL, neutral] Don't. I know what you're going to say. "That's not yours." It is. It's hers. It's the only thing of hers left in the world that isn't a lie somebody else told.
-[portrait: KESTREL, angry] He's going to give me the file. All of it. AF 290. What really happened to her. All I had to do was walk in here while the Directorate made a noise.
-[portrait: KESTREL, angry] (lifting the gauntlet) And he gave me this, so nobody stops me. Want to see what it does?
+[name: Kestrel] Don't. I know what you're going to say. "That's not yours."
+[name: Kestrel] It is. It's hers. It's the only thing of hers left in the world that isn't a lie somebody else told.
+[portrait: KESTREL, angry] He's going to give me the file. All of it. AF 290.
+[name: Kestrel] What really happened to her.
+[name: Kestrel] All I had to do was walk in here while the Directorate made a noise.
+[name: Kestrel] (lifting the gauntlet) And he gave me this, so nobody stops me.
+[name: Kestrel] Want to see what it does?
 BATTLE: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 5, field: :STORMFRONT) — single; K5. The Gauntlet: the field surges (a visual tell, the field's overlay flaring) whenever Kestrel's Pokémon attack. Aegislash "Morwen" is his ace.
 (Mid-battle, Aegislash "Morwen":) [portrait: KESTREL, neutral] I named her after the only person who never lied to me.
 (LOSE: whiteout to 321; K5 restarts at the archive door.)
@@ -257,7 +316,10 @@ LETTER: "Keep wilting, love. Keep them small and safe and far. I'll carry the na
 > Send it to Kestrel by Gale Post. (send)
   Script: pf_choose(:ch12_letter, :send)
   (Kit, at the archive door with his eyes very wide, takes it from you in both hands.)
-  [name: Kit] Kestrel Vane, Meridian Spire, Lumen. That's easy. That's a real address. (He looks at it.) It's been undeliverable for ten years. Not any more.
+  [name: Kit] Kestrel Vane, Meridian Spire, Lumen.
+  [name: Kit] That's easy. That's a real address.
+  (He looks at it.)
+  [name: Kit] It's been undeliverable for ten years. Not any more.
   (He puts a Postmark on it himself, carefully, in the corner, and runs.)
 > Burn it. (burn)
   > It's the last thing someone wrote. Burn it?
@@ -274,7 +336,9 @@ V133 = 8.
 ```
 [if :ch12_letter != :burn]
   (Odessa comes in from the roof door, back from the storm, wet through, with her goggles round her neck.)
-  [portrait: ODESSA, neutral] She's out. Cragholm by now, under a mountain with a lot of miners who owe me favours. She was sick twice over the Mast Glacier and lectured me the whole way. Lecture fourteen. It's about wind shear. It's actually very good.
+  [portrait: ODESSA, neutral] She's out. Cragholm by now, under a mountain with a lot of miners who owe me favours.
+  [name: Odessa] She was sick twice over the Mast Glacier and lectured me the whole way.
+  [name: Odessa] Lecture fourteen. It's about wind shear. It's actually very good.
 [portrait: ODESSA, neutral] They'll shut the Post, you know. Not today. Some day soon. "Pending review."
 [portrait: ODESSA, smug] Let them. The wind doesn't care.
 ```
@@ -288,9 +352,11 @@ V133 = 8.
 (A tall office at the top of a tower. One wall is glass, and the whole of Lumen is under it, lit up: eleven million lights. Rain on the glass.)
 (Behind a long desk, a silver-haired man in shirtsleeves is making tea. He has a kettle on a hot-plate, a tin of tea and two mugs. One of them is chipped.)
 (Calla Wren is by the door with a clipboard. She doesn't look up.)
-[portrait: VOSS, happy] Kestrel. Come in. Sit, sit. You look like you've been rained on. Have you been rained on?
+[portrait: VOSS, happy] Kestrel. Come in. Sit, sit.
+[name: Voss] You look like you've been rained on. Have you been rained on?
 [portrait: KESTREL, neutral] (putting the bundle on the desk) I brought them.
-[portrait: VOSS, neutral] (not touching the bundle) In a minute. Tea first. Milk? You take milk. You took milk when you were five and you came to the Lumen Gala with your mother and stole every sugar cube in the hall. I remember.
+[portrait: VOSS, neutral] (not touching the bundle) In a minute. Tea first. Milk?
+[name: Voss] You take milk. You took milk when you were five and you came to the Lumen Gala with your mother and stole every sugar cube in the hall. I remember.
 (He gives Kestrel the chipped mug. He keeps the good one.)
 ```
 **The office (walkable; the player examines things before talking to Voss again):**
@@ -301,11 +367,15 @@ V133 = 8.
 ```
 [portrait: VOSS, neutral] (handing Kestrel a thick folder, string-tied, stamped AF 290 · CROWNHAVEN · SOVEREIGN'S EYES ONLY) As promised. All of it.
 (Kestrel unties it. Inside: transcripts. A Sovereign's order in Valen's hand: "Warden Vane to be held responsible. Her name to be struck." A press release written before the event it describes.)
-[portrait: KESTREL, shocked] He wrote it. Before. He wrote it before it happened.
-[portrait: VOSS, sad] Your mother was destroyed by a man who thinks he's holding up the sky. I'd like to help you take the sky off him.
-[portrait: VOSS, neutral] The Festival's in the spring. Valen will be in the arena, in front of the whole realm. Meridian would be honoured to sponsor an entrant who has something to say to him.
+[portrait: KESTREL, shocked] [emote: dots] He wrote it. Before.
+[name: Kestrel] He wrote it before it happened.
+[portrait: VOSS, sad] Your mother was destroyed by a man who thinks he's holding up the sky.
+[name: Voss] I'd like to help you take the sky off him.
+[portrait: VOSS, neutral] The Festival's in the spring. Valen will be in the arena, in front of the whole realm.
+[name: Voss] Meridian would be honoured to sponsor an entrant who has something to say to him.
 (A contract on the desk. A pen beside it. Gold nib.)
-[portrait: VOSS, neutral] I have to take a call. Five minutes. Read it properly. Read all of it. I'd hate you to think I'd hidden anything.
+[name: Voss] I have to take a call. Five minutes. Read it properly. Read all of it.
+[name: Voss] I'd hate you to think I'd hidden anything.
 (He goes out. Calla stays by the door. As Voss passes her, she glances, once, at the left side of the desk. Then at Kestrel. Then back at her clipboard.)
 ```
 *(The folder is real, mostly: it proves Valen scapegoated Morwen, and it leaves out Meridian's array at Crownhaven entirely (06; 09 #1). Calla's glance is the warning: she has had her own doubts since Ch5.)*
@@ -331,7 +401,8 @@ V133 = 8.
 *(GO_FINE_PRINT: Interlude-only, Kestrel's game over; epitaph "Kestrel Vane was reported missing the next morning. Meridian offered a reward." The photograph is the PC on the Dovetail (the prologue), from the ferry's own camera: Voss has had them on file since the NULL scan.)*
 ```
 (After the signing. Kestrel at the glass wall with the chipped mug, looking down at the city. Lumen's eleven million lights.)
-[portrait: KESTREL, neutral] (to his reflection) I'm going to make him say it. In front of everyone. Her name.
+[portrait: KESTREL, neutral] (to his reflection) I'm going to make him say it.
+[name: Kestrel] In front of everyone. Her name.
 (Behind him, on the desk, the bundle of letters. Voss hasn't untied it. He never does, in front of Kestrel.)
 [if :ch12_letter == :send]
   (A Gale Post courier at the office door, out of breath, with one letter and a Postmark in the corner. Calla takes it and, without a word, puts it in Kestrel's hand on his way out.)

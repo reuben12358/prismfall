@@ -24,19 +24,27 @@ Also: the first explicit "nobody" (`:ch10_succession_stance`). **No jokes** insi
 SE: a soft two-note chime as you walk through.
 SCREEN: ◆ FELLOWSHIP PRIORITY GUEST ◆ Welcome back, \PN. Meridian is glad you're safe.
 [if :pro_fellowship != :accept] SCREEN: ◆ PRIORITY GUEST ◆ Welcome back, \PN. Meridian is glad you're safe.
-[name: Nurse] (the first time) They put them in every Center last week. Under the Mandate. It's very polite. It says hello to everyone by name. It says hello to me by name. I've never told it my name.
+[name: Nurse] (the first time) They put them in every Center last week. Under the Mandate.
+[name: Nurse] It's very polite. It says hello to everyone by name.
+[name: Nurse] It says hello to me by name.
+[name: Nurse] [emote: dots] I've never told it my name.
 ```
 *(06_ACT_III's act-opening state: even being watched is courteous. The screen changes in Ch12, V133 >= 7: "SUSPENDED".)*
 
 ## Map 261 — the Ironreach Pokémon Center: **"Morning"** (autorun on waking, V131 == 0)
 ```
 (Morning. The Center is quiet. On the bench by the door, a small girl with chalk to the elbows is waiting with her knees pulled up.)
-[name: Nell] You're awake. Mum said not to wake you. I didn't. I just waited very loudly.
-[name: Nell] The lady with the flowers. Juno. She went up with the Sovereign's people in the night. In the Sovereign's own cage. She didn't want to go and she didn't want to stay.
+[name: Nell] You're awake.
+[name: Nell] Mum said not to wake you. I didn't. I just waited very loudly.
+[name: Nell] The lady with the flowers. Juno.
+[name: Nell] She went up with the Sovereign's people in the night. In the Sovereign's own cage.
+[name: Nell] She didn't want to go and she didn't want to stay.
 [name: Nell] She left you this.
 (A folded page, green ink, the handwriting going downhill at the end of every line.)
 "\PN — They're taking me to Verdance. The Sovereign says I have to be there when they open his letter. I don't know what letter. I don't know anything any more. Come the long way if you want. I'd understand. I'd come the long way. — J."
-[name: Nell] (holding up her chalk) She saved me. The roots came up and she had her arms round me and I couldn't see anything but flowers. Tell her I've got the neatest S in Ironreach and she can have it.
+[name: Nell] (holding up her chalk) She saved me.
+[name: Nell] The roots came up and she had her arms round me and I couldn't see anything but flowers.
+[name: Nell] Tell her I've got the neatest S in Ironreach and she can have it.
 V131 stays 0 until the Lift Road branch on 680 (0 → 1). QUEST LOG: "Eighteen Roads" — Go to Verdance. Up the Root Road: the Tailings, the Rootdeep's Lift Road, then the Crown Road west.
 ```
 
@@ -45,7 +53,8 @@ V131 stays 0 until the Lift Road branch on 680 (0 → 1). QUEST LOG: "Eighteen R
 ROAD SIGN: THE TAILINGS — Nadir. ← Ironreach · → the Rootdeep & the Lift Road. Mind the cones. They move.
 (Grey cones of mine-waste outside Ironreach. Kids sledge down them on shovels. A Directorate checkpoint has been put up at the bottom of the biggest cone, which the kids treat as a ramp.)
 [name: Sledging Boy] They put a barrier at the bottom! It's the best jump in Nadir now!
-[name: Directorate Officer] It is NOT a jump. ...It's quite a good jump.
+[name: Directorate Officer] It is NOT a jump.
+[name: Directorate Officer] ...It's quite a good jump.
 NOTICE (on the barrier): "BY MANDATE OF THE ACCORD (CONCLAVE OF AF 300): THE DIRECTORATE OPERATES IN ALL LATTICE TERRITORIES." Under it, chalked: "NOT OURS. — the Hollow". Under that, a hammer, scrubbed half out.
 ```
 *Trials off 692: Grudgestone Quarry (684/685) by the waste cones; the Hollow Sanctuary branch below starts there. Echo Coliseum (688) is off the Tailings' east end.*
@@ -69,15 +78,20 @@ WILD BATTLE (once): TIMBURR, Bleed-touched, Lv 42 (catchable; the field is Bleed
 ROAD SIGN: THE ROOTDEEP — where Elowen's roots come through Nadir's roof. ← the Tailings · ↑ the Lift (to Lanternroot & the Crown Road).
 (Mine shafts that turn, as you go, into a cathedral of roots: the Gossamer Wood's roots, as thick as towers, coming down through the rock overhead. Ore carts overgrown with moss. Fungus lamps.)
 (At the far end, the great freight-lift: a cage the size of a house on four chains, hauling ore up the cliff to Elowen's downs.)
-[name: Lift-hand] Up's free today. Up's been free all week. Everybody wants to go up. Nobody wants to come down.
+[name: Lift-hand] Up's free today. Up's been free all week.
+[name: Lift-hand] Everybody wants to go up. Nobody wants to come down.
 ```
 ### The Lift Road branch (autorun at the lift's foot, V131 == 0 → 1; one of three, by Standing, in this order)
 **A. [if `standing(:MERIDIAN) >= 4`] "A Fellowship Privilege" → Map 699, the Meridian Black Site** (S172 BLACK_SITE_OPEN)
 ```
 (A neat young woman in a charcoal suit is waiting by the lift with a clipboard and an umbrella she doesn't need underground.)
-[portrait: CALLA, neutral] \PN. Calla Wren, from the Chairman's office. We met at the Landing. You won't remember. Nobody remembers the person holding the scanner.
-[name: Calla] The Chairman asked me to offer you a tour. One of our research stations is just off the Lift Road. It's a Fellowship privilege. Very few people see it.
-[portrait: CALLA, neutral] *(a pause that's slightly too long)* You can say no.
+[portrait: CALLA, neutral] \PN. Calla Wren, from the Chairman's office.
+[name: Calla] We met at the Landing. You won't remember.
+[name: Calla] Nobody remembers the person holding the scanner.
+[name: Calla] The Chairman asked me to offer you a tour.
+[name: Calla] One of our research stations is just off the Lift Road.
+[name: Calla] It's a Fellowship privilege. Very few people see it.
+[name: Calla] [emote: dots] *(a pause that's slightly too long)* You can say no.
 > Go with her.
   (Through a maintenance door in the root-wall. Behind it, a steel corridor, white light, and a smell of disinfectant.)
 > Not today.
@@ -86,14 +100,20 @@ ROAD SIGN: THE ROOTDEEP — where Elowen's roots come through Nadir's roof. ← 
 ```
 ```
 (699. A white room with a glass cradle in the middle, and in the cradle a Pokémon in a heavy iron helmet, bolted shut, its body like something made of three different animals by people who'd never met. Wires run from the cradle to a console. Behind the console, a giggling man in a white coat.)
-[portrait: QUENT, smug] Oh, it's YOU. The null reading! I've still only got one probe, you know. You broke the other one at the caldera.
-[name: Quent] This is Project NULL. Well. The first one. It's a Type: Null. Look at the helmet. That's to keep its strength in.
+[portrait: QUENT, smug] Oh, it's YOU. The null reading!
+[name: Quent] I've still only got one probe, you know. You broke the other one at the caldera.
+[name: Quent] This is Project NULL. Well. The first one. It's a Type: Null.
+[name: Quent] Look at the helmet. That's to keep its strength in.
 [portrait: QUENT, happy] And look what it does when you come in.
 (In your bag, the badge case hums. Eight notes, low. The Type: Null's helmet turns toward the sound, slowly, and stays there.)
-[portrait: QUENT, smug] Just like that. Every time. It's modelled on something, you see. We're not allowed to say what.
+[portrait: QUENT, smug] Just like that. Every time.
+[name: Quent] It's modelled on something, you see. We're not allowed to say what.
 [portrait: CALLA, sad] *(very quietly, by the door)* Doctor.
 [portrait: QUENT, happy] Not allowed! I said not allowed. Calla, I'm a model of discretion.
-[name: Quent] The Chairman says it's yours, if you like. Not today: it can't leave the site uncalibrated before the Festival. But it's yours. It likes you. Or it likes something about you. It's very hard to tell with the helmet.
+[name: Quent] The Chairman says it's yours, if you like.
+[name: Quent] Not today: it can't leave the site uncalibrated before the Festival.
+[name: Quent] But it's yours. It likes you. Or it likes something about you.
+[name: Quent] It's very hard to tell with the helmet.
 ```
 **CHOICE `:ch10_null`**
 ```
@@ -106,7 +126,8 @@ ROAD SIGN: THE ROOTDEEP — where Elowen's roots come through Nadir's roof. ← 
   Script: pf_choose(:ch10_null, :leave)
   [portrait: QUENT, sad] Oh. Well. It'll be here. It's always here.
   (As you go, the helmet turns to follow you, all the way to the door.)
-[portrait: CALLA, neutral] *(at the lift, alone)* I'm sorry. It isn't a zoo. I don't know what it is.
+[portrait: CALLA, neutral] *(at the lift, alone)* I'm sorry.
+[name: Calla] It isn't a zoo. I don't know what it is.
 V131 = 1.
 ```
 *(09 #14: the Type: Null reacts the way the badge case does. Gated by NARRATIVE_KEYS §4.1; takes priority over B. Voss +2 on `:take`. **No legendary joins the party in the main story** (Reuben's rule, 2026-11-23): S180 now means "promised", and the NULL CRADLE KEY opens the postgame `PG_TYPENULL` chain (Project NULL, Unmasked).)*
@@ -114,18 +135,29 @@ V131 = 1.
 **B. [else, if `standing(:HOLLOW) >= 4`] "The Leaderless" → Grudgestone Quarry 684/685 → Map 698, the Hollow Sanctuary** (S171 HOLLOW_SANCTUARY_OPEN)
 ```
 (A boy in a grey cowl too big for him steps out from behind an ore cart. He has an Alolan Grimer in his arms and a bark mask pushed up on his head.)
-[name: Hollow Runner] You're the one who walks in. Brother Wick wants you. Not for anything bad. He said to say "not for anything bad" twice. Not for anything bad.
+[name: Hollow Runner] You're the one who walks in. Brother Wick wants you.
+[name: Hollow Runner] Not for anything bad. He said to say "not for anything bad" twice.
+[name: Hollow Runner] Not for anything bad.
 (He leads you back down to the Tailings and into Grudgestone Quarry by a gap in the fence. At the bottom of the quarry's second level, behind a curtain of hanging roots: a cave full of lamps and people. The Hollow, leaderless. Bedrolls. A kettle. Children.)
-[portrait: WICK, sad] Sit, child. You've seen the Gazette. Everyone has. He's in their cells, and they've written "terrorist" next to his name in letters a yard high.
-[name: Wick] He was pulling her wires out. I know. You know. The roots know. The Gazette doesn't print roots.
-[portrait: WICK, neutral] I was going to give you this at the end. There isn't going to be an end the way I thought, so you're having it now.
+[portrait: WICK, sad] Sit, child. You've seen the Gazette. Everyone has.
+[name: Wick] He's in their cells, and they've written "terrorist" next to his name in letters a yard high.
+[name: Wick] He was pulling her wires out. I know. You know. The roots know.
+[name: Wick] The Gazette doesn't print roots.
+[portrait: WICK, neutral] I was going to give you this at the end.
+[name: Wick] There isn't going to be an end the way I thought, so you're having it now.
 (He takes a fold of old paper out of his sleeve, soft as cloth.)
-[portrait: WICK, neutral] The Hymn the Choir sings at every Festival is half a hymn. I was defrocked for reading the other half. This is the verse I could still remember after they took the book.
+[name: Wick] The Hymn the Choir sings at every Festival is half a hymn.
+[name: Wick] I was defrocked for reading the other half.
+[name: Wick] This is the verse I could still remember after they took the book.
 (Received: HYMN FRAGMENT.) ITEM DESCRIPTION: "...then one of no colour, the eighteen roads walked, / shall carry them home, as the old ones talked — / not chained, not broken, not bought, not crowned: / given back, as a gift is ________. (The last word is torn away.)"
-[portrait: WICK, sad] I never found the last word. I used to think it was "kept". It isn't. It doesn't even rhyme. Kept things don't go home.
-[name: Wick] And this. For whoever holds him. They'll read it before he does. That's all right. It's for them, too.
+[portrait: WICK, sad] I never found the last word. I used to think it was "kept".
+[name: Wick] It isn't. It doesn't even rhyme. Kept things don't go home.
+[name: Wick] And this. For whoever holds him.
+[name: Wick] They'll read it before he does. That's all right. It's for them, too.
 (Received: WICK'S LETTER.) ITEM DESCRIPTION: "Sealed with candle-wax. 'To the keepers of Rowan Ashby. Be kind to him; he's been kind to everything else.'"
-[name: Hollow Woman] (at the kettle, a Lowmarsh weaver's shears on her belt) They took Mara at Lumen. Thistle. She'd want somebody to say thank you for the Ward, in Mirefen. So. Thank you.
+[name: Hollow Woman] (at the kettle, a Lowmarsh weaver's shears on her belt) They took Mara at Lumen. Thistle.
+[name: Hollow Woman] She'd want somebody to say thank you for the Ward, in Mirefen.
+[name: Hollow Woman] So. Thank you.
 V131 = 1.
 ```
 *(06_ACT_III's Hollow branch: Wick's verse early. **Fixed:** the outline had Thistle hand over the letter here, but she was captured at Lumen (Ch5, `24_SCRIPT_CH5.md`); the letter is Wick's, and her people speak for her. WICK'S LETTER is delivered to Rowan's gaoler in Ch13. The verse completes in Ch18.)*
@@ -133,9 +165,13 @@ V131 = 1.
 **C. [else] "Up"** (the refugees; also plays for A's "Not today")
 ```
 (The lift-cage comes down empty and goes up full. A family with a cart of furniture lashed down with rope. An old man carrying a birdcage with a Pidove in it. A woman with a baby and a pit-fighter's championship belt over her shoulder, because it's the most valuable thing she owns.)
-[name: Refugee Woman] They put the scanners on the cage-foot the morning after the Conclave. Hand on the plate, every time. They said it's for our safety.
-[name: Refugee Woman] My husband's tint came up "Hollow-adjacent". He's never been Hollow anything. He sells noodles.
-[name: Old Man with a Pidove] Sixty years in Nadir. Never been up. Is it true the sky's blue? My granddaughter says it's blue. I think she's having me on.
+[name: Refugee Woman] They put the scanners on the cage-foot the morning after the Conclave.
+[name: Refugee Woman] Hand on the plate, every time. They said it's for our safety.
+[name: Refugee Woman] My husband's tint came up "Hollow-adjacent".
+[name: Refugee Woman] He's never been Hollow anything. He sells noodles.
+[name: Old Man with a Pidove] Sixty years in Nadir. Never been up.
+[name: Old Man with a Pidove] Is it true the sky's blue? My granddaughter says it's blue.
+[name: Old Man with a Pidove] I think she's having me on.
 V131 = 1.
 ```
 
@@ -155,8 +191,11 @@ V131 = 2.
 ## Map 690 — Lanternroot (border F's town)
 ```
 (A town of mushroom farms on terraces at the Lift's top, lit by lamp-moss. Ore comes up, ale and lamp-moss go down.)
-[name: Fungus-grower] We grow on the roots. The miners dig past the roots. Every year we argue about it. Every year the roots win, because the roots don't come to the meeting.
-[name: Miner's Wife] There's a root in the low field that bleeds when you cut it. Red. Real blood, near as anyone can tell. Nobody's cut it in thirty years. Somebody cut it last week.
+[name: Fungus-grower] We grow on the roots. The miners dig past the roots.
+[name: Fungus-grower] Every year we argue about it. Every year the roots win, because the roots don't come to the meeting.
+[name: Miner's Wife] There's a root in the low field that bleeds when you cut it.
+[name: Miner's Wife] Red. Real blood, near as anyone can tell.
+[name: Miner's Wife] Nobody's cut it in thirty years. Somebody cut it last week.
 ```
 *(The Rootdeep's secret, "The Root That Bleeds", is a local sidequest hook (WORLD.md, border F); the Trials owner may wire it.)*
 
@@ -164,16 +203,21 @@ V131 = 2.
 ```
 ROAD SIGN: PRISM FALLS — Elowen. ← the Crown Road · → the Briarway & Verdance. The rainbow is the Imprint. Do not try to stand at the end of it. People try.
 (A waterfall coming off the Crownland edge into a gorge, and across the gorge, all day, every day, a rainbow so solid it casts a shadow. The Rainbow Stair climbs beside the falls.)
-[name: Painter] Twenty years I've painted it. It's never the same rainbow twice. It's always the same colours.
-[name: Pilgrim] They say Verdance is drowning in flowers. Roses through the cobbles. People wear masks for the pollen. You'd think, a city so sick it's blooming. You'd think that'd be the nice kind of sick.
+[name: Painter] Twenty years I've painted it.
+[name: Painter] It's never the same rainbow twice. It's always the same colours.
+[name: Pilgrim] They say Verdance is drowning in flowers. Roses through the cobbles.
+[name: Pilgrim] People wear masks for the pollen. You'd think, a city so sick it's blooming. You'd think that'd be the nice kind of sick.
 ```
 
 ## Map 693 — The Briarway (`:FAIRY_TALE`)
 ```
 ROAD SIGN: THE BRIARWAY — the Queen's road. ↓ Prism Falls · ↑ the Kingsgate & Verdance. Do not trim the briar. The briar belongs to Her Majesty.
 (The royal road, hedged on both sides with briar clipped flat as walls by gardeners for three hundred years. But the briar's out of hand now: shoots as thick as a wrist across the road, roses the size of plates, the clippers' ladders abandoned in the verge.)
-[name: Royal Gardener] I clipped this hedge for forty years. Since the Warden went, it grows a yard in a night. I clip it at dusk, and at dawn the yard's back and it's brought a friend.
-[name: Thornguard] (at a royal milestone, in thorn-green armour) The Heartgarden's under the Queen's protection, traveller. Pending the succession. You'll want a pollen mask.
+[name: Royal Gardener] I clipped this hedge for forty years.
+[name: Royal Gardener] Since the Warden went, it grows a yard in a night.
+[name: Royal Gardener] I clip it at dusk, and at dawn the yard's back and it's brought a friend.
+[name: Thornguard] (at a royal milestone, in thorn-green armour) The Heartgarden's under the Queen's protection, traveller.
+[name: Thornguard] Pending the succession. You'll want a pollen mask.
 ```
 *The gardeners' door in the hedge (WORLD.md's secret) opens onto the Royal Chase's back fence after S126.*
 
@@ -185,7 +229,9 @@ ROAD SIGN: THE BRIARWAY — the Queen's road. ↓ Prism Falls · ↑ the Kingsga
 (Verdance is drowning in flowers.)
 (Roses through the cobbles. Vines pulling the gutters off the roofs. Lilies growing out of a horse trough. Window-boxes so heavy they've torn off and hang from their own stems. The air is gold with pollen, so thick it drifts like snow in the lamplight. It's beautiful. It's horrifying. People walk through it with cloth masks over their mouths and don't look up.)
 [name: Gate Clerk] (handing you a cloth mask without being asked) Pollen. Wear it. It's not poison. It just won't stop.
-[name: Gate Clerk] Since the Warden went, the Meadow Plate's had nobody to hold it in. It's... spilling. Three days, the whole city. The bakers can't keep the bread from sprouting.
+[name: Gate Clerk] Since the Warden went, the Meadow Plate's had nobody to hold it in.
+[name: Gate Clerk] It's... spilling. Three days, the whole city.
+[name: Gate Clerk] The bakers can't keep the bread from sprouting.
 (At the barbican's foot, a woman is kneeling, scraping at the bloom on the cobbles with a trowel. Under the flowers, the soil is grey. Dry. She lifts a dead leaf out of it. It isn't rotten. It isn't anything. It's exactly as it fell.)
 [name: Woman with a Trowel] Nothing rots in Verdance. My nan used to say it like it was a blessing.
 Switch S165 THORNGUARD_HEARTGARDEN = ON. V106 VERDANCE_BLOOM = 1. V131 = 3.
@@ -196,7 +242,10 @@ QUEST LOG: "Eighteen Roads" — The Sovereign is in the Heartgarden. Go up throu
 ### Map 280 — the Market Terraces · 281 PC · 282 Mart
 ```
 [name: Florist] I'm the only florist in Velmora going out of business because of flowers.
-[name: Rootward Boy] Mum says the old Warden was a bad man. Gran says he watered our street's trees every year for nothing. Mum says that's what bad men do, to make you like them. Gran says Mum's never watered anything.
+[name: Rootward Boy] Mum says the old Warden was a bad man.
+[name: Rootward Boy] Gran says he watered our street's trees every year for nothing.
+[name: Rootward Boy] Mum says that's what bad men do, to make you like them.
+[name: Rootward Boy] Gran says Mum's never watered anything.
 [name: Thornguard] (at the Heartgarden stair) The Heartgarden's closed by order of Her Majesty, Queen Maelis Thorne, pending the succession. — Oh. You're expected. Go up.
 281 WARDEN CIRCULAR (the Gale Post relay board by the counter; the first one the PC can read; see below).
 ```
@@ -219,11 +268,20 @@ ANJA: Toes.
 (The Heartgarden: Verdance's walled garden on the hill's shoulder, under the castle. Five days ago it was ordinary-beautiful. Now it is a jungle of blossom, roses as tall as men, and in the centre, at the head of a stone stair going down into a sunken grove, the Bride Tree: a tree in the shape of a woman, arms raised, head back, in blossom from root to crown.)
 (The sunken grove at the stair's foot is gone under bloom so thick it's black. Across the stairhead, a shimmer like heat over a road. A Veil.)
 (On the steps of the Heartgarden's little chapel, a scene like a painting: in white, the Sovereign, with a sealed envelope. On his left, the Thornguard in a line, and at their head an ancient woman in a gown of thorn-green and a crown of briar, leaning on a cane topped with a silver rose. On his right, a smiling man in Elowen's colours, and beside him a woman in a Meridian sunburst pin. And in front of them all, on the bottom step, alone, Juno, in her wreath and veil, with her gardening gloves twisted in her hands.)
-[portrait: MAELIS, neutral] The Meadow Plate lies on Crown soil, Sovereign. It has done since my great-great-grandmother planted this garden. A Warden kept it for the Crown. There is no Warden. So the Crown will keep it.
-[name: Meridian Delegate] With respect, Majesty, the Plate is overflowing. Meridian can offer temporary custody, for public safety. Our dampers held the Quiet Ward through worse. We'd ask nothing but the right to keep the city breathing.
+[portrait: MAELIS, neutral] The Meadow Plate lies on Crown soil, Sovereign.
+[name: Maelis] It has done since my great-great-grandmother planted this garden.
+[name: Maelis] A Warden kept it for the Crown. There is no Warden.
+[name: Maelis] So the Crown will keep it.
+[name: Meridian Delegate] With respect, Majesty, the Plate is overflowing.
+[name: Meridian Delegate] Meridian can offer temporary custody, for public safety.
+[name: Meridian Delegate] Our dampers held the Quiet Ward through worse.
+[name: Meridian Delegate] We'd ask nothing but the right to keep the city breathing.
 [name: Prince Caedmon] Mother, it's a very generous offer. *(smiling at everyone, including the Plate)*
-[portrait: MAELIS, deadpan] Caedmon, you've called everything Meridian offers generous since you were twelve. It's how I know what you're for.
-[portrait: VALEN, neutral] A Warden's testament is law under the Concordance, Majesty. Older than either of us. Rowan Ashby left one. I'll read it now, in front of everyone, because nobody here trusts anybody to read it privately.
+[portrait: MAELIS, deadpan] Caedmon, you've called everything Meridian offers generous since you were twelve.
+[name: Maelis] It's how I know what you're for.
+[portrait: VALEN, neutral] A Warden's testament is law under the Concordance, Majesty.
+[name: Valen] Older than either of us. Rowan Ashby left one.
+[name: Valen] I'll read it now, in front of everyone, because nobody here trusts anybody to read it privately.
 (He breaks the seal. Inside, a folded letter and a small ring, a plain band with a chip of stone in it, no colour at all. He reads aloud.)
 ```
 ```
@@ -236,37 +294,47 @@ ANJA: Toes.
 [portrait: VALEN, sad] There's a postscript.
 [name: Valen] "Water Elin at dawn. She likes it before the bees are up."
 (Juno makes a sound like someone stepping on a stair that isn't there.)
-[portrait: JUNO, crying] ...
+[portrait: JUNO, crying] [emote: dots] ...
 (Valen comes down the steps and holds out the ring. Juno doesn't take it. He takes her hand, opens it, puts the ring in her palm and closes her fingers over it.)
-[portrait: VALEN, neutral] His ring. A Warden's ring, cut by the Hearthguild. It'll answer you, or it won't. Mine took a year.
+[portrait: VALEN, neutral] His ring. A Warden's ring, cut by the Hearthguild.
+[name: Valen] It'll answer you, or it won't. Mine took a year.
 [portrait: JUNO, sad] I didn't want this seat. I wanted HIM in it.
 [portrait: VALEN, sad] I know.
-[name: Valen] A Warden is confirmed when the Plate accepts them, Juno. The Plate is at the bottom of that stair, in the Bride Tree's roots, under that.
+[name: Valen] A Warden is confirmed when the Plate accepts them, Juno.
+[name: Valen] The Plate is at the bottom of that stair, in the Bride Tree's roots, under that.
 (He looks at the Veil across the stairhead. Then he looks at you, the way he did at Ironreach.)
 [portrait: VALEN, neutral] And only one person in Verdance can walk through that.
 V131 = 4.
 ```
 **Tamsin and the Greenward** (straight on; MOVE: Tamsin comes up the garden path from the gate at a run, out of breath, with a moth-wing shawl and a satchel of thread)
 ```
-[portrait: TAMSIN, panic] Sorry — sorry — the Briarwick coach lost a wheel in the briar — sorry. Am I late? I'm late.
-[portrait: TAMSIN, neutral] Juno. Briarwick stands with Verdance. Whoever sits it. That's all. I came to say it in front of people.
+[portrait: TAMSIN, panic] Sorry — sorry — the Briarwick coach lost a wheel in the briar — sorry.
+[name: Tamsin] Am I late? I'm late.
+[portrait: TAMSIN, neutral] Juno. Briarwick stands with Verdance. Whoever sits it.
+[name: Tamsin] That's all. I came to say it in front of people.
 [name: Tamsin] A thread holds because it's twisted with others. Alone it's just string.
 [portrait: JUNO, sad] *(barely)* ...Thank you.
-[name: Press Clerk] (at the garden wall, scribbling) "Small-town Warden backs the niece." Is it a bloc? Are you a bloc? Can I call it the Green Ward?
+[name: Press Clerk] (at the garden wall, scribbling) "Small-town Warden backs the niece."
+[name: Press Clerk] Is it a bloc? Are you a bloc? Can I call it the Green Ward?
 [portrait: TAMSIN, panic] I— it's not a— we're not—
 [name: Press Clerk] "The Greenward." Lovely. That'll sell.
 ```
 **[if `:ch2_tamsin == :keep_secret`] "You Knew"** (three people in Lowmarsh weavers' aprons push to the front of the crowd)
 ```
-[name: Lowmarsh Weaver] Briarwick stands with Verdance? Briarwick signed with MERIDIAN. She signed alone. The Glasswood's at our looms because she signed.
-[name: Lowmarsh Weaver] They took Mara at Lumen. She'd be stood here saying it. So we're saying it. You KNEW, Warden.
-[portrait: TAMSIN, sad] ...
+[name: Lowmarsh Weaver] Briarwick stands with Verdance? Briarwick signed with MERIDIAN.
+[name: Lowmarsh Weaver] She signed alone. The Glasswood's at our looms because she signed.
+[name: Lowmarsh Weaver] They took Mara at Lumen. She'd be stood here saying it.
+[name: Lowmarsh Weaver] So we're saying it. You KNEW, Warden.
+[portrait: TAMSIN, sad] [emote: dots] ...
 > Step between them.
   [portrait: TAMSIN, neutral] No. No, don't. *(She puts a hand on your arm and steps out past you.)*
 > Let Tamsin answer.
   (You step back.)
-[portrait: TAMSIN, sad] Yes. I knew. I signed it alone, in the spring, and I've been sorry every day, and being sorry hasn't moved the glass an inch.
-[name: Tamsin] I'm not here because I'm good. I'm here because she is. Stand with her too. Then shout at me after. I'll be at the Briarwick coach. It's got three wheels.
+[portrait: TAMSIN, sad] Yes. I knew.
+[name: Tamsin] I signed it alone, in the spring, and I've been sorry every day, and being sorry hasn't moved the glass an inch.
+[name: Tamsin] I'm not here because I'm good. I'm here because she is.
+[name: Tamsin] Stand with her too. Then shout at me after.
+[name: Tamsin] I'll be at the Briarwick coach. It's got three wheels.
 (The weavers look at each other. One of them nods, once. They step back into the crowd.)
 ```
 *(06_ACT_III: "Thistle's cell appears to heckle Tamsin." **Fixed:** Thistle is in custody since Ch5, so it's her people. No new key: Tamsin's Consent still reads `:ch2_tamsin`.)*
@@ -275,29 +343,39 @@ V131 = 4.
 ```
 (Later. The crowd has gone down the hill. The Thornguard stand at the gate. Juno is sitting at the foot of the Bride Tree, on the roots, in the blossom, with the ring in her fist.)
 [portrait: JUNO, neutral] You've heard about her. Everyone has. This is her.
-[name: Juno] Aunt Elin. AF 288. She was weeding the Heartgarden and the Bleed came up through the roots like a spring, and she stood up, and she put her arms up, like this, and that's how she stayed.
-[portrait: JUNO, sad] I was three. They told me she'd gone away. I believed them till I was eight, and then he walked me up here at dawn and showed me, and held my hand, and watered her.
-[name: Juno] Every dawn. Twelve years. He never missed one. Not even for Ironreach. He must have gone the morning he left.
-[portrait: JUNO, sad] Sometimes I think she's listening. Isn't that stupid?
+[name: Juno] Aunt Elin. AF 288.
+[name: Juno] She was weeding the Heartgarden and the Bleed came up through the roots like a spring, and she stood up, and she put her arms up, like this, and that's how she stayed.
+[portrait: JUNO, sad] I was three. They told me she'd gone away.
+[name: Juno] I believed them till I was eight, and then he walked me up here at dawn and showed me, and held my hand, and watered her.
+[name: Juno] Every dawn. Twelve years. He never missed one.
+[name: Juno] Not even for Ironreach. He must have gone the morning he left.
+[name: Juno] Sometimes I think she's listening. Isn't that stupid?
 [if switch(182)]   # S182 CAMEO_VENAM_DONE: the PC carries VENAM'S TESTIMONY
   > Play her Venam's Testimony.
     (The little recording crackles. A girl's voice, loud, a bit rough, Mirefen-sewer-echoey.)
-    [name: Venam (recording)] I was stone for— I don't know how long. And I could hear everything. Everyone who sat with me. Every stupid joke. I could hear all of it.
+    [name: Venam (recording)] I was stone for— I don't know how long. And I could hear everything.
+    [name: Venam (recording)] Everyone who sat with me. Every stupid joke.
+    [name: Venam (recording)] I could hear all of it.
     (Juno is very still.)
-    [portrait: JUNO, crying] ...Everything?
+    [portrait: JUNO, crying] [emote: dots] ...Everything?
     (She turns round on the roots and puts both hands flat on the bark.)
-    [portrait: JUNO, crying] Aunt Elin. It's Juno. I'm fifteen. I've got a satchel of seeds and a friend who walks into things.
-    [name: Juno] Uncle Rowan's in prison. He did something terrible and something brave on the same day and I don't know which one he is.
+    [name: Juno] Aunt Elin. It's Juno. I'm fifteen.
+    [name: Juno] I've got a satchel of seeds and a friend who walks into things.
+    [name: Juno] Uncle Rowan's in prison.
+    [name: Juno] He did something terrible and something brave on the same day and I don't know which one he is.
     [portrait: JUNO, sad] They want me to have your garden. I'm so frightened.
     (She talks to the tree for a long time. You sit with her. Petals come down on both of you. They don't fall, Elin's petals. They're falling now.)
   > Not now.
 [else]
   > It isn't stupid.
-    [portrait: JUNO, sad] Dr Mott said they dream. In the Ward. He said he'd never said it out loud before. He said it to you.
-    [portrait: JUNO, neutral] So maybe she's dreaming. Maybe it's a nice one. I hope I'm in it, a bit.
+    [portrait: JUNO, sad] Dr Mott said they dream. In the Ward.
+    [name: Juno] He said he'd never said it out loud before. He said it to you.
+    [portrait: JUNO, neutral] So maybe she's dreaming. Maybe it's a nice one.
+    [name: Juno] I hope I'm in it, a bit.
   > ...
-    [portrait: JUNO, sad] Yes. That's what I think too, mostly.
-[portrait: JUNO, neutral] *(standing up, wiping her face with a gardening glove, which makes it worse)* Right. Right. Down the stairs. Into the horrible black flowers. You first, please. I'll be right behind you.
+    [portrait: JUNO, neutral] Yes. That's what I think too, mostly.
+[portrait: JUNO, neutral] *(standing up, wiping her face with a gardening glove, which makes it worse)* Right. Right. Down the stairs. Into the horrible black flowers.
+[name: Juno] You first, please. I'll be right behind you.
 [portrait: JUNO, sad] I'll be RIGHT behind you.
 V131 = 5.
 ```
@@ -311,8 +389,10 @@ Script: Prismfall.checkpoint     # NARRATIVE_KEYS §10: GO_LOYAL's checkpoint, t
 (You walk into the Veil. On the other side, the grove: blossom so thick it's black, petals in drifts to the knee, vines like cables, and the light grey and wrong from every direction.)
 FIELD NOTES pop-up: "THE BRIDE GROVE — BLEED. A garden with nobody holding it. It grows into the space where a person should be. (Larch, in the margin: 'So does grief. Write that down somewhere else.')"
 (Behind you, at the stairhead, Juno puts her hand to the shimmer and snatches it back.)
-[portrait: JUNO, shocked] It burns. It — of course it burns. Sorry. I knew it would. I just hoped I'd be special.
-[portrait: JUNO, neutral] Go on. Find the way. I'll come when it's quiet. Uncle Rowan says the garden always goes quiet for somebody who knows where they're going.
+[portrait: JUNO, shocked] It burns. It — of course it burns.
+[name: Juno] Sorry. I knew it would. I just hoped I'd be special.
+[portrait: JUNO, neutral] Go on. Find the way. I'll come when it's quiet.
+[name: Juno] Uncle Rowan says the garden always goes quiet for somebody who knows where they're going.
 V131 = 6.
 ```
 ### The path (DUNGEON_PUZZLES: a "safe path" puzzle; the puzzle engineer owns the layout)
@@ -337,18 +417,21 @@ FIELD NOTES pop-up: "The Ogre in the Mask. I've seen that mask. On every Hollow 
 (At the stairhead, the quiet corridor runs all the way down, pale and flat. Juno looks at it.)
 [portrait: JUNO, neutral] Oh. Oh, it's a path. You made a path.
 (She steps onto it, and the Veil doesn't burn her. She lets out a breath she's been holding since Ironreach.)
-[name: Juno] Step where you step. Right. Right. I can do that. I've done that my whole life, a bit.
+[name: Juno] Step where you step. Right. Right. I can do that.
+[name: Juno] I've done that my whole life, a bit.
 MOVE: Juno follows the PC down the corridor, step for step.
 (At the root-hollow the Ogre sees Juno, and something in it changes. It lowers the club all the way. It takes one step toward her, and stops.)
-[portrait: JUNO, shocked] ...It knows me. How does it know me?
-[portrait: JUNO, sad] I used to leave biscuits by the stair when I was little. For the fairies. They were always gone in the morning. Uncle Rowan said it was the badgers.
+[portrait: JUNO, shocked] [emote: dots] ...It knows me. How does it know me?
+[portrait: JUNO, sad] I used to leave biscuits by the stair when I was little. For the fairies.
+[name: Juno] They were always gone in the morning. Uncle Rowan said it was the badgers.
 ```
 ### **The Loyal Three** → **CHOICE `:ch10_ogre`** (key event 2)
 ```
 (A sweet smell comes down the grove. Peaches. Peaches and something under the peaches.)
 (Out of the bloom on the far side of the hollow step three Pokémon. A great hulking dog with a chain round its middle. A monkey with a sly painted face. A pheasant with a fan of tail feathers like a court lady's. Every one of them wears a collar that glows pink, Sweetrot pink, and their eyes are the same blissful blank as the vendors in the Sweet Market.)
 (They don't attack. They kneel. All three, in a row, heads bowed, in front of Juno. Exactly the way the painted actors knelt in the pageant at Saltmere: the dog, the monkey and the bird, the loyal companions of the old story, who killed the wicked Ogre and saved the people's treasure.)
-[portrait: JUNO, shocked] It's them. It's the Loyal Three. From the shrine. From the pageant—
+[portrait: JUNO, shocked] [emote: exclaim] It's them. It's the Loyal Three.
+[name: Juno] From the shrine. From the pageant—
 [portrait: JUNO, happy] They're the heroes! They've come to help!
 (The Ogre roars. Not at the Three. At you, and at Juno, and at the Plate between them, a terrible, pleading sound, and it brings its club down on the roots so hard the whole grove shakes.)
 (The Three raise their heads. In the pink light, the dog's chain clinks. The monkey's eyes slide past Juno to the green light under the soil.)
@@ -393,32 +476,40 @@ Switch S127 CH10_LOYAL_THREE_DONE = ON. V131 = 7.
   (The Ogre sits down hard in the petals, breathing like a bellows, and takes its mask off.)
   (Under it, a small, tired, ordinary face. It wipes its eyes with the back of a paw. It puts the mask back on.)
   (Then it walks to Juno, and stands beside her, and doesn't leave.)
-  [portrait: JUNO, crying] You. You were down here the whole time. Every biscuit. Every single biscuit.
-  [portrait: JUNO, sad] You kept everything away from her. Twelve years. By yourself. Because nobody would believe you weren't the monster.
+  [portrait: JUNO, crying] You. You were down here the whole time.
+  [name: Juno] Every biscuit. Every single biscuit.
+  [portrait: JUNO, sad] You kept everything away from her. Twelve years. By yourself.
+  [name: Juno] Because nobody would believe you weren't the monster.
 [if :ch10_ogre == :hesitate]
   (The Ogre stands in the broken bloom, bleeding sap from a dozen cuts. It looks at you a long time.)
   (Then it walks past you, past Juno, and up the stair, and out of the grove, and you don't see where it goes.)
-  [portrait: JUNO, sad] It saved her. It saved her for twelve years, and we didn't know whose side to be on.
+  [portrait: JUNO, sad] It saved her.
+  [name: Juno] It saved her for twelve years, and we didn't know whose side to be on.
 ```
 *(`:ogre` OGERPON_TRUSTED: Ogerpon stays with Juno, appears at the Festival; Core mirrors S223. `:hesitate`: it leaves, distrustful.)*
 
 ### **"The Plate Accepts Her"** (the root-hollow; key event 1, payoff; V131 == 7 → 8)
 ```
 (The green light under the roots. Juno kneels in front of it and pulls the soil back with her gloved hands. The Meadow Plate is lying in the roots of the Bride Tree like an egg in a nest: a tablet of green stone, warm, humming, too bright to look at for long.)
-[portrait: JUNO, sad] I don't know how. Nobody told me how. Is there a — do I say something?
+[portrait: JUNO, sad] I don't know how. Nobody told me how.
+[name: Juno] Is there a — do I say something?
 > Just hold it.
   [portrait: JUNO, neutral] Just hold it. Right.
 > Say what you'd say to a plant.
-  [portrait: JUNO, happy] *(a wet laugh)* Hello, you. Aren't you lovely. ...That's all I've got. That's all I've ever said to a plant.
+  [portrait: JUNO, happy] *(a wet laugh)* Hello, you. Aren't you lovely.
+  [name: Juno] ...That's all I've got. That's all I've ever said to a plant.
 > ...
-  [portrait: JUNO, neutral] Yes. Quiet's better. Plants like quiet.
+  [portrait: JUNO, happy] Yes. Quiet's better. Plants like quiet.
 (She takes off one glove. She lays her bare hand on the Plate.)
 (For a moment, nothing.)
 (Then the grove breathes out. All of it. Every vine and rose and petal-drift. The bloom lies down, the way grass lies down for wind, all the way up the stair and out across the Heartgarden and on down the hill. The Veil goes. The light goes from grey to gold. Up above, in the city, a sound comes down the terraces like a crowd sighing.)
 (Juno's hair is full of pollen. Her hand is still on the Plate. She looks down at it as if it belongs to someone else, and then as if it doesn't.)
-[portrait: JUNO, shocked] ...Oh.
-[portrait: JUNO, crying] Oh, it's heavy. Nobody said it was heavy. It's so heavy. It's like holding the whole hill.
-[portrait: JUNO, sad] He held this for twenty-four years. And watered her every morning. And came down here and talked to it. And I never once asked him if it hurt.
+[portrait: JUNO, shocked] [emote: dots] ...Oh.
+[portrait: JUNO, crying] Oh, it's heavy. Nobody said it was heavy.
+[name: Juno] It's so heavy. It's like holding the whole hill.
+[portrait: JUNO, sad] He held this for twenty-four years. And watered her every morning.
+[name: Juno] And came down here and talked to it.
+[name: Juno] And I never once asked him if it hurt.
 (On her finger, Rowan's ring. She put it on at some point; she doesn't remember when. It stays dull. No colour. It doesn't answer.)
 Switch S125 CH10_JUNO_WARDEN = ON. V106 VERDANCE_BLOOM = 2. Switch S165 THORNGUARD_HEARTGARDEN = OFF. V131 = 8.
 ```
@@ -426,8 +517,9 @@ Switch S125 CH10_JUNO_WARDEN = ON. V106 VERDANCE_BLOOM = 2. Switch S165 THORNGUA
 (At the head of the stair, the Sovereign. Tamsin beside him with both hands over her mouth.)
 [portrait: VALEN, neutral] Warden Hale.
 (Juno looks up at him. She doesn't get up. She can't, quite, yet.)
-[portrait: VALEN, neutral] *(to you, quietly, while Tamsin goes down to her)* Remember how she looked, just now, when it took her.
-[name: Valen] Every seat looks like that from the inside. It takes the person who sits in it a little at a time, and it gives back a city. Most days it's a fair trade.
+[name: Valen] *(to you, quietly, while Tamsin goes down to her)* Remember how she looked, just now, when it took her.
+[name: Valen] Every seat looks like that from the inside.
+[name: Valen] It takes the person who sits in it a little at a time, and it gives back a city. Most days it's a fair trade.
 [portrait: VALEN, sad] I asked you to come and see what it costs. Now you've seen.
 (He doesn't say why he wanted you to see. He pulls his glove tighter, though it's warm, and goes up into the garden.)
 ```
@@ -438,10 +530,15 @@ Switch S125 CH10_JUNO_WARDEN = ON. V106 VERDANCE_BLOOM = 2. Switch S165 THORNGUA
 *(The gym doors open at V131 >= 8. Juno opens it the next morning: "I've watered every bed in it. That was a mistake. You'll see.")*
 ```
 JUNO'S SIGN (290): "Gardens are gossips. Water one and the neighbours hear about it. — J.H., Warden (it still feels weird to write that)."
-[name: Gym Guide] The Heartgarden Gym. Grass-types on a Flower Garden that grows while you fight. Fire, Ice, Flying, Poison and Bug go straight through them. Be honest with yourself about Fire: you'll burn the garden down at full bloom, and that's a strategy.
-[name: Gym Guide] Every hedge you leave in the beds, the Warden's garden starts one stage taller. Fewer waterings, harder fight. Your call. She told me to say "your call". She feels very strongly about it being your call.
+[name: Gym Guide] The Heartgarden Gym. Grass-types on a Flower Garden that grows while you fight.
+[name: Gym Guide] Fire, Ice, Flying, Poison and Bug go straight through them.
+[name: Gym Guide] Be honest with yourself about Fire: you'll burn the garden down at full bloom, and that's a strategy.
+[name: Gym Guide] Every hedge you leave in the beds, the Warden's garden starts one stage taller.
+[name: Gym Guide] Fewer waterings, harder fight. Your call.
+[name: Gym Guide] She told me to say "your call". She feels very strongly about it being your call.
 [name: Apprentice Bram] (Juno's cousin, 291; hints) Water the plot NEXT to the one you want. / P6 is nearly overgrown already. Watering it collapses it, but it feeds P1 too. / (both solutions)
-[name: Apprentice Bram] (292) She's my cousin. She used to make me be the bee in games. I'm still the bee.
+[name: Apprentice Bram] (292) She's my cousin. She used to make me be the bee in games.
+[name: Apprentice Bram] I'm still the bee.
 ```
 ### 293 — the Warden Arena: Juno (J3)
 ```
@@ -451,7 +548,8 @@ JUNO'S SIGN (290): "Gardens are gossips. Water one and the neighbours hear about
   [name: Juno] ...That's either kind or tactical and I'm too nervous to ask which.
 [portrait: JUNO, sad] I didn't want this seat. I wanted him in it.
 [portrait: JUNO, neutral] But the city's drowning in flowers and nobody else is coming, so.
-[portrait: JUNO, happy] Hi. I'm the Warden of Verdance. Please don't go easy on me. I'll cry either way.
+[portrait: JUNO, happy] Hi. I'm the Warden of Verdance.
+[name: Juno] Please don't go easy on me. I'll cry either way.
 Script: setBattleRule("fieldStage", 1 + [$game_variables[345], 4].min)
 Script: Prismfall.gym_battle(pfm_gym(:LEADER_JUNO), double: false)     # J3: LEADER_JUNO version 30 + starter slot; :FLOWER_GARDEN; cap 47; single
 (At her second Pokémon:)
@@ -465,10 +563,15 @@ Script: Prismfall.gym_battle(pfm_gym(:LEADER_JUNO), double: false)     # J3: LEA
 [portrait: JUNO, happy] ...Take it. The Meadow badge is yours.
 (Received: the MEADOW BADGE.)
 (SE: nine notes. The case's light runs along its seams and doesn't fade at the end. It just stays, softly, like a pilot light.)
-[portrait: JUNO, neutral] It's singing. Mine never sang. I wrote to Uncle Rowan after Briarwick, about your case doing a chord. He wrote back: "That one'll sing in every gym in the realm, Juno, mark me." I didn't know what he meant.
+[portrait: JUNO, neutral] It's singing. Mine never sang.
+[name: Juno] I wrote to Uncle Rowan after Briarwick, about your case doing a chord.
+[name: Juno] He wrote back: "That one'll sing in every gym in the realm, Juno, mark me."
+[name: Juno] I didn't know what he meant.
 [portrait: JUNO, sad] I still don't.
 (Received: TM53 ENERGY BALL.)
-[portrait: JUNO, neutral] Energy Ball. It's the first move I ever taught anything. And that badge means Pokémon up to level fifty-one will listen to you. I checked. Twice. I'm very nervous about getting the numbers wrong.
+[portrait: JUNO, neutral] Energy Ball. It's the first move I ever taught anything.
+[name: Juno] And that badge means Pokémon up to level fifty-one will listen to you.
+[name: Juno] I checked. Twice. I'm very nervous about getting the numbers wrong.
 V131 = 9.
 ```
 *(J3 per 03_CAST and BALANCE §5. Field stage per GYM_PUZZLES 293 (V345 hedges). The badge name "Meadow Badge" is already in `LEADER_JUNO`'s LoseText; it's proposed as final.)*
@@ -477,16 +580,23 @@ V131 = 9.
 ## Map 294 — **"Little Gardener"** (Juno's first act; autorun on leaving the gym, V131 == 9 → 10)
 ```
 (The Heartgarden, tamed: still full of flowers, but flowers that know where they're meant to be. On the chapel steps, the Queen with her Thornguard, the Prince, the Meridian delegate with a folder, and half of Verdance's press.)
-[name: Meridian Delegate] Warden Hale. Congratulations. Meridian's offer stands: a Lattice for Verdance, to draw the excess from the Plate. Verdance would never drown again. Free light for every terrace.
+[name: Meridian Delegate] Warden Hale. Congratulations.
+[name: Meridian Delegate] Meridian's offer stands: a Lattice for Verdance, to draw the excess from the Plate.
+[name: Meridian Delegate] Verdance would never drown again. Free light for every terrace.
 (Juno looks at the folder. She looks at the delegate. She looks at the ring on her finger.)
 [portrait: JUNO, neutral] No, thank you.
 [name: Meridian Delegate] I'm sorry?
-[portrait: JUNO, neutral] I've been to Mirefen, where the Lattice runoff makes the marsh glow. I've been to Lumen, where it cracked the Plate. I've been to Briarwick, where it fed the Glasswood. I'm fifteen and I've seen three.
-[portrait: JUNO, angry] Verdance doesn't need a Lattice to stop it drowning. It needed a Warden. It's got one. No, thank you.
+[portrait: JUNO, neutral] I've been to Mirefen, where the Lattice runoff makes the marsh glow.
+[name: Juno] I've been to Lumen, where it cracked the Plate.
+[name: Juno] I've been to Briarwick, where it fed the Glasswood.
+[name: Juno] I'm fifteen and I've seen three.
+[portrait: JUNO, angry] Verdance doesn't need a Lattice to stop it drowning.
+[name: Juno] It needed a Warden. It's got one. No, thank you.
 (The delegate closes the folder. Prince Caedmon smiles at her, and at the delegate, and at his mother, warmly, at all of them.)
 [portrait: JUNO, neutral] And Majesty. Your Thornguard are standing in my garden.
 [portrait: MAELIS, neutral] Our garden, child. The Heartgarden is on Crown soil.
-[portrait: JUNO, neutral] Then your soil's in my garden. Please take your men off it. They're standing on the tulips.
+[portrait: JUNO, neutral] Then your soil's in my garden. Please take your men off it.
+[name: Juno] They're standing on the tulips.
 (A very long pause. The whole Heartgarden waits.)
 [portrait: MAELIS, smug] *(and the Queen laughs, a dry little sound like a seed-pod)* Thornguard. Off the tulips.
 (The Thornguard file out of the gate.)
@@ -502,13 +612,16 @@ MOVE: the Queen goes down the hill on her cane, very slowly, with her son at her
   [name: Press Clerk] "Null Witness Backs Sovereign." Good. Solid. Boring. Thank you.
 > The kingdoms. The land they're in. (kingdoms)
   Script: pf_choose(:ch10_succession_stance, :kingdoms)
-  [name: Press Clerk] "Null Witness: Give Them to the Crowns." Oh, the Queen'll like that. The Thane'll like that. The Dominar'll LOVE that.
+  [name: Press Clerk] "Null Witness: Give Them to the Crowns."
+  [name: Press Clerk] Oh, the Queen'll like that. The Thane'll like that.
+  [name: Press Clerk] The Dominar'll LOVE that.
 > Nobody. (nobody)
   Script: pf_choose(:ch10_succession_stance, :nobody)
-  [name: Press Clerk] ...Nobody?
+  [name: Press Clerk] [emote: question] ...Nobody?
   [name: Press Clerk] You mean... nobody should HAVE them? Then who keeps them?
   (You don't answer. The clerk writes for a long time.)
-  [name: Press Clerk] "Nobody," says the null. Well. That's a headline. I don't know what it means. I don't think I'm supposed to.
+  [name: Press Clerk] "Nobody," says the null. Well. That's a headline.
+  [name: Press Clerk] I don't know what it means. I don't think I'm supposed to.
   (At the back of the crowd, an old woman in a moth-silk shawl with flowers in her hair is smiling at you as if you've said something she's been waiting a long time to hear. When you look again, she's gone.)
 V131 = 10.
 ```
@@ -520,22 +633,33 @@ GAZETTE HEADLINES (Verdance PC board, after V131 >= 10): "JUNO HALE CONFIRMED: P
 ## Map 682 — the Royal Chase (Safari-style reserve): **"The Gates"** and the Queen's garden (V131 == 10 → 11)
 ```
 (The next morning, a royal herald on the Market Terraces, reading from a scroll with a lot of ribbon on it.)
-[name: Royal Herald] Her Majesty Queen Maelis Thorne, in these troubled times, of Her great love for Her people, throws open to them the Royal Chase, Her Majesty's own hunting reserve, for their recreation and the catching of game. God save the Queen.
+[name: Royal Herald] Her Majesty Queen Maelis Thorne, in these troubled times, of Her great love for Her people, throws open to them the Royal Chase, Her Majesty's own hunting reserve, for their recreation and the catching of game.
+[name: Royal Herald] God save the Queen.
 [name: Florist] (beside you) That's for the papers. It's still a lovely park.
 Switch S126 CH10_ROYAL_CHASE_OPEN = ON.
 (The Chase: a walled reserve of meadow, copse and ornamental lake beyond Briar Hall. Safari rules: Chase Balls, a step count, no battles of your own.)
-[name: Chase Warden] Thirty Chase Balls, five hundred steps. Don't feed the Scatterbug. Don't name the Scatterbug. They've all got names already. Every one. It's a whole thing.
+[name: Chase Warden] Thirty Chase Balls, five hundred steps.
+[name: Chase Warden] Don't feed the Scatterbug. Don't name the Scatterbug.
+[name: Chase Warden] They've all got names already. Every one. It's a whole thing.
 ```
 **The Queen's garden** (a gate in the Chase's inner wall, the first time the PC passes it; touch, once)
 ```
 (A small private garden in the Chase's heart: a sundial, a bench, an old woman alone on it with her crown off in her lap. No Thornguard. Nobody at all.)
 [portrait: MAELIS, neutral] Sit, child. I don't bite. I used to. My teeth aren't what they were.
-[name: Maelis] You stood in that grove with her. The null child. Everyone in Velmora's heard of you, and everyone wants you to say something for them. I find I don't. I find I'd like to say something to you.
-[portrait: MAELIS, neutral] I've sat on the Thorn Throne sixty-one years. I've buried four Sovereigns. Did you know that? Wyndham, and the three before her. Every one of them died tired.
-[name: Maelis] Every Sovereign since Maren has died tired. They come to the Festival young and strong, and ten years later they're old men at fifty, and nobody asks why, because the Accord says it's the weight of the office.
-[portrait: MAELIS, smug] It's a very heavy office, apparently. Heavier than mine. I'm eighty-two and I can still climb my own stairs.
-[portrait: MAELIS, neutral] So ask yourself, little colourless thing, why the Accord needs a new champion so badly this year. And why its Sovereign looks at you the way he did on my chapel steps.
-[name: Maelis] Then come and tell me what you find out. I'll pay well. I always pay well. It's how I've outlived everyone who didn't.
+[name: Maelis] You stood in that grove with her. The null child.
+[name: Maelis] Everyone in Velmora's heard of you, and everyone wants you to say something for them.
+[name: Maelis] I find I don't. I find I'd like to say something to you.
+[name: Maelis] I've sat on the Thorn Throne sixty-one years. I've buried four Sovereigns.
+[name: Maelis] Did you know that? Wyndham, and the three before her.
+[name: Maelis] Every one of them died tired.
+[name: Maelis] Every Sovereign since Maren has died tired.
+[name: Maelis] They come to the Festival young and strong, and ten years later they're old men at fifty, and nobody asks why, because the Accord says it's the weight of the office.
+[portrait: MAELIS, smug] It's a very heavy office, apparently. Heavier than mine.
+[name: Maelis] I'm eighty-two and I can still climb my own stairs.
+[portrait: MAELIS, neutral] So ask yourself, little colourless thing, why the Accord needs a new champion so badly this year.
+[name: Maelis] And why its Sovereign looks at you the way he did on my chapel steps.
+[name: Maelis] Then come and tell me what you find out. I'll pay well.
+[name: Maelis] I always pay well. It's how I've outlived everyone who didn't.
 V131 = 11.
 ```
 *(09 #4 and #16: "Every Sovereign since Maren has died tired"; "why the Accord needs a new champion". The Queen is shrewd here, not comic.)*
@@ -545,18 +669,22 @@ V131 = 11.
 (At the Chase gate, the Queen again, crown back on, Thornguard back round her, and a man in a tabard holding an enormous ledger.)
 [portrait: MAELIS, smug] We are told you caught a number of Our Scatterbug.
 > A few.
-  [portrait: MAELIS, deadpan] We counted them every spring for sixty years, child. "A few" is not a number.
+  [portrait: MAELIS, deadpan] We counted them every spring for sixty years, child.
+  [name: Maelis] "A few" is not a number.
 > They were all the same.
-  [portrait: MAELIS, shocked] All the—
+  [portrait: MAELIS, shocked] [emote: exclaim] All the—
   [name: Maelis] Each has a UNIQUE WING PATTERN. Keeper!
-[name: Keeper of Small Creatures] (reading from the ledger) The challenger's party includes: Doris. Percival. And... oh dear. Gerald.
+[name: Keeper of Small Creatures] (reading from the ledger) The challenger's party includes: Doris. Percival.
+[name: Keeper of Small Creatures] And... oh dear. Gerald.
 [portrait: MAELIS, angry] You have Gerald in a BALL?
 [bubble: MAELIS, angry, anger] GERALD has a FOUR-PAGE FILE.
 > Give Gerald back.
   [portrait: MAELIS, neutral] ...Hm. Well. Thank you. We shall remember this.
   (Received: NUGGET. And, the Keeper whispers, the Queen's undying suspicion.)
 > Keep Gerald.
-  [portrait: MAELIS, deadpan] Then Gerald has chosen. We shall have his file sent on. All four pages. You'll want to read page three in particular. It concerns warm stones.
+  [portrait: MAELIS, deadpan] Then Gerald has chosen. We shall have his file sent on.
+  [name: Maelis] All four pages. You'll want to read page three in particular.
+  [name: Maelis] It concerns warm stones.
 ```
 *(15_COMEDY Ch10 "The Royal We", adapted so it works whether the PC caught one Scatterbug or forty. The Trials quest "Gerald" (EL_GERALD) is the long version.)*
 *Optional: "What Are You For?" (Melia's cameo, CAMEOS #4) in the Chase's copse: a blonde girl with a Togekiss looking for a friend who "fell through a sewer". Extra payoff if S182 (Venam) is set.*

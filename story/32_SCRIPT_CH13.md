@@ -29,9 +29,14 @@ Trainers (Lv 55–58): linemen, a pylon-climber, a researcher.
 ## The Crown Road: 602 Candle Down, 603 the Highwold, 756 Kingsmead — **"The Scar"** (autorun at Kingsmead's old paddock gate, V134 == 0 → 1)
 ```
 (Kingsmead: old royal paddocks at the foot of the Crownwall's north-west face. The wall goes up, white, forever. Halfway up it, a wide patch glitters, as if somebody threw a handful of glass at the stone and it stuck.)
-[name: Paddock Keeper] The Glassfall Scar. AF 290. Forty people were up on the wall-walk when the Crown cracked, watching the Festival from the top. The light came out over the wall and they're still up there. In the glitter. You can see a hand, if the sun's right.
+[name: Paddock Keeper] The Glassfall Scar. AF 290.
+[name: Paddock Keeper] Forty people were up on the wall-walk when the Crown cracked, watching the Festival from the top.
+[name: Paddock Keeper] The light came out over the wall and they're still up there.
+[name: Paddock Keeper] In the glitter. You can see a hand, if the sun's right.
 (Your chest hurts. Not a lot. The star-shaped scar under your collar, the one with no colour, aches like a bruise somebody pressed.)
-[name: Paddock Keeper] You all right? People come over queer sometimes, here. The Synod says the Glass is thin under the Scar. Says some folk can hear it.
+[name: Paddock Keeper] [emote: question] You all right? People come over queer sometimes, here.
+[name: Paddock Keeper] The Synod says the Glass is thin under the Scar.
+[name: Paddock Keeper] Says some folk can hear it.
 V134 = 1.
 ```
 *(06_ACT_III "The road": the Scar sets up the Mindscape. 09 #1: the scar is the PC's; the shard aches near anything that broke in AF 290.)*
@@ -46,10 +51,18 @@ The Looking-Glass Wood: silver birches with mirror-bright bark; the path doubles
 (A lake so still it isn't a lake. The sky is in it, the birches are in it, you are in it. Halfway across, the reflection stops matching: in the water, the far shore has a city on it, white colonnades and an upside-down city hanging over them in the sky. On the real far shore there's nothing.)
 (On a stone landing, a tall old man in a grey robe with a lantern. One eye brown, one eye white.)
 [portrait: DASK, neutral] Welcome, behind. Behind, welcome.
-[portrait: DASK, neutral] Archseer Imre Dask, of the Veiled Synod. The Provost sent for you. Ilsa Marr doesn't send for people. So: here I am, sent.
-[portrait: DASK, neutral] The Glass is thin this year. It wasn't thin when I was a boy. Something on your side is pulling at it. Something on ours is pulling back.
-[portrait: DASK, neutral] One rule. Only one. Never look back through the Glass once you've crossed. Not for a voice. Not for a name. Not for anyone. Once you're behind, you're behind.
-[portrait: DASK, neutral] (turning away) Once you're behind, you're behind. I said it twice. Remember that I said it twice.
+[name: Dask] Archseer Imre Dask, of the Veiled Synod.
+[name: Dask] The Provost sent for you.
+[name: Dask] Ilsa Marr doesn't send for people. So: here I am, sent.
+[name: Dask] The Glass is thin this year. It wasn't thin when I was a boy.
+[name: Dask] Something on your side is pulling at it.
+[name: Dask] Something on ours is pulling back.
+[name: Dask] One rule. Only one.
+[name: Dask] Never look back through the Glass once you've crossed.
+[name: Dask] Not for a voice. Not for a name. Not for anyone.
+[name: Dask] Once you're behind, you're behind.
+[name: Dask] [emote: dots] (turning away) Once you're behind, you're behind.
+[name: Dask] I said it twice. Remember that I said it twice.
 (He walks out onto the water. It holds him. It holds you.)
 V134 = 2.
 ```
@@ -84,7 +97,8 @@ Switch S134 CH13_ANTUMBRA_ENTERED = ON. V134 = 3.
 Widdershins Walk: a colonnaded road where everyone walks on the left going one way and the right coming back, and nobody can say why.
 ```
 (Lucent. White colonnades, quiet streets, people who speak softly. And over the city, upside down in the sky, the same city: its towers pointing down, its streets full of tiny people walking on the underside of the clouds.)
-[name: Gate Scholar] The Speculum. The Mind Plate's half of us. Don't stare, it's rude. They can see you staring.
+[name: Gate Scholar] The Speculum. The Mind Plate's half of us.
+[name: Gate Scholar] Don't stare, it's rude. They can see you staring.
 ```
 **Lucent townsfolk (340 Athenaeum Quarter, 341 PC, 342 Mart, 343 Tribunal Ward):** the Tribunal Ward is full: Wardens' coaches, kings' observers, Accord guards, Meridian lawyers, press; a hawker selling "ROWAN: MONSTER OR MARTYR?" pamphlets (both covers, same pamphlet inside); an Accord guard: "Meridian didn't want to give him up. The Sovereign made them. Took a vote. Won by two."
 
@@ -95,13 +109,16 @@ Widdershins Walk: a colonnaded road where everyone walks on the left going one w
 > (Think about nothing)
   [portrait: ILSA, neutral] That's worse. Now it's just a hum.
 > (Think about Larch's tea)
-  [portrait: ILSA, shocked] Oh, that's vile. Who does that to kelp?
+  [portrait: ILSA, shocked] [emote: exclaim] Oh, that's vile. Who does that to kelp?
   [portrait: ILSA, angry] No— stop— you're thinking about it *more* now—
 > (Think about Kestrel buying four eels)
   [portrait: ILSA, happy] ...Heh.
-  [portrait: ILSA, neutral] I didn't laugh. Provosts don't laugh. You imagined it, loudly.
-[portrait: ILSA, neutral] Ilsa Marr. Provost. Warden of the Mind Plate, which is upstairs, upside down. My gym's through that door. Do it quickly. I have a trial to host, and you have something in you I'd like to look at afterwards, if you'll let me.
-[portrait: ILSA, sad] (quietly, putting her earmuffs straight) Someone sealed a memory in you. A long time ago. I can hear the seal. It's very well made.
+  [portrait: ILSA, neutral] I didn't laugh. Provosts don't laugh.
+  [name: Ilsa] You imagined it, loudly.
+[portrait: ILSA, neutral] Ilsa Marr. Provost. Warden of the Mind Plate, which is upstairs, upside down.
+[name: Ilsa] My gym's through that door. Do it quickly. I have a trial to host, and you have something in you I'd like to look at afterwards, if you'll let me.
+[portrait: ILSA, sad] (quietly, putting her earmuffs straight) Someone sealed a memory in you. A long time ago.
+[name: Ilsa] I can hear the seal. It's very well made.
 V134 = 4. The gym opens.
 ```
 *(15_COMEDY Ch13 "Thinking Loudly": one option, as written; the three thoughts are the menu. Before the blow.)*
@@ -113,24 +130,31 @@ Doors open at V134 >= 4. As GYM_PUZZLES Gym 12 ("your reflection keeps you hones
 ### 354 — the Warden Arena: Ilsa
 ```
 (A round room with no corners. The walls are mirrors. In every one, the room is slightly different.)
-[portrait: ILSA, neutral] The arena reshapes itself to what you remember. I don't choose what it shows. You do.
-[portrait: ILSA, neutral] The truth is a weapon. I've kept it sheathed for ten years. Don't mistake that for mercy. Shall we?
+[portrait: ILSA, neutral] The arena reshapes itself to what you remember.
+[name: Ilsa] I don't choose what it shows. You do.
+[name: Ilsa] The truth is a weapon. I've kept it sheathed for ten years.
+[name: Ilsa] Don't mistake that for mercy. Shall we?
 BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_ILSA), double: false) — field `:MINDSCAPE` (Topsy-Turvy → Inverse); Mega Slowbro under Trick Room.
 (Mid-battle, when the field turns:) [portrait: ILSA, shocked] (her earmuffs slipping) That's— that's not a place I put there. That's yours. Where is that?
 (Her last Pokémon, Hatterene "Hush":) [portrait: ILSA, neutral] Hush. They're loud. Quiet them.
 (WIN:)
-[portrait: ILSA, neutral] ...Quiet, for once. Your thoughts were very loud. I liked them.
-[portrait: ILSA, neutral] The CANDOUR BADGE. It means you can't lie to Lucent. Nobody can; the badge just admits it.
+[portrait: ILSA, neutral] ...Quiet, for once.
+[name: Ilsa] Your thoughts were very loud. I liked them.
+[name: Ilsa] The CANDOUR BADGE. It means you can't lie to Lucent.
+[name: Ilsa] Nobody can; the badge just admits it.
 RECEIVE: CANDOUR BADGE. RECEIVE: TM29 PSYCHIC.
-[portrait: ILSA, sad] Now. The seal. Come to the Reading Hall when you're ready. I won't enjoy it.
+[portrait: ILSA, sad] Now. The seal.
+[name: Ilsa] Come to the Reading Hall when you're ready. I won't enjoy it.
 V134 = 5.
 ```
 *(**Badge name (proposed):** the **Candour Badge**. The mid-battle line uses the Mindscape field's arena change: the place she can't place is Crownhaven's Lower Town (the Mindscape's map), seeded here.)*
 
 ## The Mindscape (key event 1; the Reading Hall → the Mindscape [NEW]; touch Ilsa with V134 == 5 → 6)
 ```
-[portrait: ILSA, neutral] Sit. Close your eyes. I'll be there. You won't see me. You'll feel me, like a hand on the back of a chair.
-[portrait: ILSA, sad] It was a Ghost-type that sealed it. I can feel the shape of the curtain. Whoever asked it to do that loved you very much and was very frightened.
+[portrait: ILSA, neutral] Sit. Close your eyes. I'll be there.
+[name: Ilsa] You won't see me. You'll feel me, like a hand on the back of a chair.
+[portrait: ILSA, sad] It was a Ghost-type that sealed it. I can feel the shape of the curtain.
+[name: Ilsa] Whoever asked it to do that loved you very much and was very frightened.
 Script: Prismfall.checkpoint
 (White.)
 ```
@@ -176,12 +200,19 @@ Switch S135 CH13_MINDSCAPE_DONE = ON. V134 = 6.
 *(09 #9: the brass machines with sunburst plates are Meridian's array (Ch15 echo confirms). #10: the veiled woman is Morwen. #1: the thing that went into the child is the Legend Plate splinter. The calm voice is Valen's.)*
 ```
 (The Reading Hall. You're in the chair. Ilsa is on the floor beside it, her earmuffs off, in her hands. She's white.)
-[portrait: ILSA, sad] (very quietly) The man in white was my father.
-[portrait: ILSA, sad] I've known for ten years. I read it out of him at my mother's funeral, the winter after the Glassfall. I was twenty-one. I never said a word.
-[portrait: ILSA, neutral] The truth is a weapon. I've kept it sheathed. Don't mistake that for mercy.
-[portrait: ILSA, neutral] (putting the earmuffs back on) The trial's in the morning. He'll be sitting at the top of the court in that white coat, presiding. And I'll be sitting next to him, and I'll be hosting it, and neither of us will say anything at all. That's the family business.
+[portrait: ILSA, sad] [emote: dots] (very quietly) The man in white was my father.
+[name: Ilsa] I've known for ten years.
+[name: Ilsa] I read it out of him at my mother's funeral, the winter after the Glassfall.
+[name: Ilsa] I was twenty-one. I never said a word.
+[portrait: ILSA, neutral] The truth is a weapon. I've kept it sheathed.
+[name: Ilsa] Don't mistake that for mercy.
+[name: Ilsa] (putting the earmuffs back on) The trial's in the morning.
+[name: Ilsa] He'll be sitting at the top of the court in that white coat, presiding. And I'll be sitting next to him, and I'll be hosting it, and neither of us will say anything at all. That's the family business.
 [if :ch13_remember == :not_yet]
-  [portrait: ILSA, neutral] You said "not yet". That's allowed. Not everybody's ready to be five again. I'll keep the door. It'll open by itself one day, somewhere worse. I'm sorry about that.
+  [portrait: ILSA, neutral] You said "not yet". That's allowed.
+  [name: Ilsa] Not everybody's ready to be five again.
+  [name: Ilsa] I'll keep the door. It'll open by itself one day, somewhere worse.
+  [portrait: ILSA, sad] I'm sorry about that.
 ```
 *(09 #17: Ilsa is Valen's daughter; she says it here. This seeds "Little Owl" (Act V).)*
 
@@ -189,17 +220,26 @@ Switch S135 CH13_MINDSCAPE_DONE = ON. V134 = 6.
 ```
 (The cloister garden at night. Juno sits on the rim of a reflecting pool with a speech in her lap she isn't reading. Her blossom veil trails in the water. Something in the veil is trembling.)
 [portrait: JUNO, sad] Don't. I know. I look like a wedding that got lost.
-[name: Juno] He's in a cell under this building. Tomorrow I sit in the Wardens' row and listen to them decide what he is. I've written this speech eleven times. It says "uncle" in all of them.
+[name: Juno] He's in a cell under this building.
+[name: Juno] Tomorrow I sit in the Wardens' row and listen to them decide what he is.
+[name: Juno] I've written this speech eleven times. It says "uncle" in all of them.
 (The veil moves. A small white Pokémon with a green bowl of hair peers out of the blossoms: a Ralts, its red horn glowing faintly.)
-[portrait: JUNO, shocked] ...Oh. Hello. How long have you been in there?
-[portrait: JUNO, happy] Since the Threshold, I think. Ilsa says Ralts can feel what you feel. So it's had a horrible week.
-[name: Juno] Everyone stares at the veil. Nobody looks inside it. That's actually very clever of you.
+[portrait: JUNO, shocked] [emote: question] ...Oh. Hello. How long have you been in there?
+[portrait: JUNO, happy] Since the Threshold, I think.
+[name: Juno] Ilsa says Ralts can feel what you feel. So it's had a horrible week.
+[name: Juno] Everyone stares at the veil. Nobody looks inside it.
+[name: Juno] That's actually very clever of you.
 [portrait: JUNO, neutral] They feel it when you're frightened, and they come closer instead of running away. That's backwards. I like it.
 > It's picked you.
-  [portrait: JUNO, happy] Has it? ...Then you're Veil. I name things after where they hide. It's a system.
+  [portrait: JUNO, happy] Has it? ...Then you're Veil.
+  [name: Juno] I name things after where they hide. It's a system.
 > (Say nothing.)
-  [portrait: JUNO, happy] You're right, it's not my decision. ...Veil? Do you want to be Veil? It's nodding. Or shivering. I'm counting it.
-[portrait: JUNO, sad] Uncle Rowan's ring still won't talk to me. Maybe it's waiting for me to stop being scared. Maybe Veil can teach me how.
+  [portrait: JUNO, happy] You're right, it's not my decision.
+  [name: Juno] ...Veil? Do you want to be Veil?
+  [name: Juno] It's nodding. Or shivering. I'm counting it.
+[portrait: JUNO, sad] Uncle Rowan's ring still won't talk to me.
+[name: Juno] Maybe it's waiting for me to stop being scared.
+[name: Juno] Maybe Veil can teach me how.
 [if JUNO_ESTRANGED]
   (Juno sees you at the cloister door. She doesn't wave you over. She talks to the Ralts instead, too quietly to hear, and after a while you go.)
 V134 = 7.
@@ -209,16 +249,22 @@ V134 = 7.
 **Kaito, in the cloister's colonnade** (touch, before sleeping) → **CHOICE `:ch13_kaito`**:
 ```
 [portrait: KAITO, neutral] You. Sit.
-[portrait: KAITO, neutral] Tomorrow they'll ask the Wardens if anyone has anything to add. Usually nobody does.
-[portrait: KAITO, neutral] Fifteen years ago I did something on the Sovereign's order. Nobody knows. My Lucario knows. He could feel them.
-[portrait: KAITO, neutral] I could say it. In the court. With him sitting there. It would end things. It might end me.
-[portrait: KAITO, neutral] You don't owe me an answer. I'm asking anyway. Should I?
+[name: Kaito] Tomorrow they'll ask the Wardens if anyone has anything to add.
+[name: Kaito] Usually nobody does.
+[name: Kaito] [emote: dots] Fifteen years ago I did something on the Sovereign's order.
+[name: Kaito] Nobody knows. My Lucario knows. He could feel them.
+[name: Kaito] I could say it. In the court. With him sitting there.
+[name: Kaito] It would end things. It might end me.
+[name: Kaito] You don't owe me an answer. I'm asking anyway. Should I?
 > Say it. (encourage)
   Script: pf_choose(:ch13_kaito, :encourage)
-  [portrait: KAITO, neutral] ...Right. (He stands.) A fist is a promise. Don't make one you won't keep.
+  [portrait: KAITO, neutral] ...Right.
+  (He stands.)
+  [name: Kaito] A fist is a promise. Don't make one you won't keep.
 > It isn't yours to carry alone. Not tomorrow. (spare)
   Script: pf_choose(:ch13_kaito, :spare)
-  [portrait: KAITO, neutral] (after a long time) ...Maybe. Maybe not tomorrow. (He doesn't look relieved. He looks like a man putting something heavy back on his shoulders.)
+  [portrait: KAITO, neutral] (after a long time) ...Maybe. Maybe not tomorrow.
+  (He doesn't look relieved. He looks like a man putting something heavy back on his shoulders.)
 ```
 *(NARRATIVE_KEYS §4.2 `:ch13_kaito`: `:encourage` ACCORD−2 VALEN−2 ILSA+2 HOLLOW+1, `KAITO_TESTIFIED`; `:spare` ACCORD+1 VALEN+1. 09 #27: Marrowgate and the Quiet Towns.)*
 
@@ -230,10 +276,16 @@ V134 = 7.
 (The Wardens' row: Juno with a Ralts in her veil, Kaito with his wraps on, Celestine smiling at nothing, others. The kings' gallery: two thrones empty, Isenmar's and Ashkaar's, with junior observers at the back rail behind them; the Ossarian's full. Meridian's lawyers. The press. Hierophant Ellery of the Prism Choir, in white and gold, with a row of white-robed Accord choristers behind her.)
 (In the dock, in chains, a gaunt man with a grey-shot beard. His right hand is wrapped, and where the wrapping ends the skin is marked with a branching pattern like lightning. Rowan Ashby.)
 Variable V113 ROWAN_STATUS = 2.
-[name: Clerk of the Court] The Accord's tribunal is in session. The Sovereign presides. The Provost of Lucent hosts. Witnesses will swear.
+[name: Clerk of the Court] The Accord's tribunal is in session.
+[name: Clerk of the Court] The Sovereign presides. The Provost of Lucent hosts.
+[name: Clerk of the Court] Witnesses will swear.
 [portrait: CELESTINE, happy] (when the clerk comes to her) I can't lie anyway. It'd be rude to pretend.
-[portrait: VALEN, neutral] Rowan Ashby. Warden of the Meadow Plate. You stand accused of the masked attacks on the Saltmere Pageant, the Ironreach Conclave and the Accord's peace. Have you anything to say?
-[portrait: ROWAN, neutral] (standing as far as the chain lets him) I wanted to pull the nails. I was wrong about how. I was not wrong about why.
+[portrait: VALEN, neutral] Rowan Ashby. Warden of the Meadow Plate.
+[name: Valen] You stand accused of the masked attacks on the Saltmere Pageant, the Ironreach Conclave and the Accord's peace.
+[name: Valen] Have you anything to say?
+[portrait: ROWAN, neutral] (standing as far as the chain lets him) I wanted to pull the nails.
+[name: Rowan] I was wrong about how.
+[name: Rowan] I was not wrong about why.
 [if WICK'S LETTER was delivered] [portrait: ROWAN, sad] (to the Wardens' row, quieter) Wick says the faithful are fed. Tell him I read it. Tell him twice.
 (Juno doesn't look at him. Her hands are white on the speech in her lap.)
 ```
@@ -241,31 +293,39 @@ Variable V113 ROWAN_STATUS = 2.
 ```
 [name: Clerk of the Court] Does any Warden wish to add to the record?
 (Silence. Then Kaito stands.)
-[portrait: KAITO, neutral] Marrowgate. Fifteen years ago. My orders. My unit. I sealed the gate. They were still knocking.
-[portrait: KAITO, neutral] (looking up at the white chair) On the Sovereign's order.
+[portrait: KAITO, neutral] Marrowgate. Fifteen years ago. My orders. My unit.
+[name: Kaito] I sealed the gate. They were still knocking.
+[name: Kaito] (looking up at the white chair) On the Sovereign's order.
 (Nobody speaks. Valen doesn't deny it. He looks at Kaito for a long moment, and then down at his gloved hand.)
 (Then the kings' gallery erupts: the Thane's observer on his feet, the Dominar's envoy laughing, the Ossarian writing very fast.)
-[name: Clerk of the Court] ORDER—
+[name: Clerk of the Court] [emote: exclaim] ORDER—
 ```
 *(`KAITO_TESTIFIED`: the Accord's moral authority cracks; Kaito becomes the Wardens' conscience (Act V).)*
 ### The PC's testimony → **CHOICE `:ch13_rowan_testimony`**
 ```
-[name: Clerk of the Court] The court calls the Unimprinted witness. You were at the Saltmere Pageant. At Ironreach, in the Pit. You saw the mask break. Tell the court what this man is.
+[name: Clerk of the Court] The court calls the Unimprinted witness.
+[name: Clerk of the Court] You were at the Saltmere Pageant. At Ironreach, in the Pit.
+[name: Clerk of the Court] You saw the mask break. Tell the court what this man is.
 (Juno looks at you for the first time today.)
 > Condemn him. (condemn)
   Script: pf_choose(:ch13_rowan_testimony, :condemn)
   (You tell them about the Pageant's panic, the Conclave's dead, the glass at Ironreach. All of it true.)
-  [portrait: VALEN, neutral] The Pale Gaol. For the rest of his natural life. The court will seal the sentence at the evening session.
+  [portrait: VALEN, neutral] The Pale Gaol. For the rest of his natural life.
+  [name: Valen] The court will seal the sentence at the evening session.
   (Juno stands up in the Wardens' row and walks out of the court without a word. The Ralts in her veil looks back at you over her shoulder.)
 > Plead for mercy. (mercy)
   Script: pf_choose(:ch13_rowan_testimony, :mercy)
   (You tell them about Phantump at Tidewatch Station, about the mask cracking because he put himself between a child and the glass, about "everything that grows must be allowed to die".)
-  [portrait: VALEN, neutral] (after a long pause, and a look at Ilsa, who gives nothing back) House arrest. In Verdance. In the custody of the Warden of the Meadow Plate. To be sealed at the evening session.
-  [portrait: JUNO, crying] (in the Wardens' row, both hands over her mouth)
+  [portrait: VALEN, neutral] (after a long pause, and a look at Ilsa, who gives nothing back) House arrest. In Verdance.
+  [name: Valen] In the custody of the Warden of the Meadow Plate.
+  [name: Valen] To be sealed at the evening session.
+  (in the Wardens' row, both hands over her mouth)
 > Refuse to testify. (refuse)
   Script: pf_choose(:ch13_rowan_testimony, :refuse)
   (You say you won't. The clerk asks twice. You say it twice.)
-  [portrait: VALEN, neutral] The court notes the witness's silence. (A pause.) Sentence will be pronounced at the evening session.
+  [portrait: VALEN, neutral] The court notes the witness's silence.
+  (A pause.)
+  [name: Valen] Sentence will be pronounced at the evening session.
   (Juno never asks you why. Not today, not ever.)
 ```
 *(NARRATIVE_KEYS §4.2 `:ch13_rowan_testimony`: `:condemn` ROWAN−4 JUNO−3 ACCORD+2 HOLLOW−2 VALEN+1; `:mercy` ROWAN+3 JUNO+3 HOLLOW+2 ACCORD−1 (the only route to R16 Rowan; he never serves the house arrest because of the Fault); `:refuse` ROWAN−1 ILSA+1.)*
@@ -275,10 +335,14 @@ Variable V113 ROWAN_STATUS = 2.
   [name: Clerk of the Court] Has the witness any further evidence for the record?
   (You put the comm-device on the rail. The brass radio-box from the Ironreach Pit, with MERIDIAN SPECIAL ACCOUNTS under its sunburst. Beside it, the Splitter casing from Skyreach.)
   (Ilsa takes her earmuffs off. The whole court goes quiet, the way a room goes quiet when someone opens a window in winter.)
-  [portrait: ILSA, neutral] (not loudly; everybody hears it) Someone in this room recognises that box. Someone in the public gallery. Third row. Grey hat.
-  [portrait: ILSA, angry] Sable is Sabine Kroll. Meridian Special Accounts. She cracked Lumen's Plate. She set the Ironreach charges. She bombed Skyreach. On orders.
+  [portrait: ILSA, neutral] (not loudly; everybody hears it) Someone in this room recognises that box.
+  [name: Ilsa] Someone in the public gallery. Third row. Grey hat.
+  [portrait: ILSA, angry] Sable is Sabine Kroll. Meridian Special Accounts.
+  [name: Ilsa] She cracked Lumen's Plate. She set the Ironreach charges.
+  [name: Ilsa] She bombed Skyreach. On orders.
   (Uproar. In the third row of the public gallery, a woman in a grey hat stands up, takes it off, and shakes out her hair. She is smiling.)
-  [portrait: KROLL, happy] Light for everyone, right? ...Oh, never mind. You're no fun any more, Provost.
+  [portrait: KROLL, happy] Light for everyone, right?
+  [name: Kroll] ...Oh, never mind. You're no fun any more, Provost.
   (She vaults the rail into the well of the court. Accord guards go for her. A Sharpedo comes out of a ball between them.)
   BATTLE: TrainerBattle.start(:MERIDIAN_KROLL, "Sabine") — single; the Glass Court (`:MINDSCAPE`); her Mega Sharpedo (a Lattice band at her wrist).
   (LOSE: whiteout to 341; the court restarts at the evidence, the testimony kept.)
@@ -288,7 +352,10 @@ Variable V113 ROWAN_STATUS = 2.
 [if !IRONREACH_EVIDENCE]
   (You put the Splitter casing on the rail. It's circumstantial. The Meridian lawyers say so, at length.)
   (Later, in a corridor, Ilsa stops you with a hand on your sleeve, her earmuffs off.)
-  [portrait: ILSA, neutral] (very low) The woman in the grey hat, third row. Sable. Sabine Kroll, Meridian. I read it straight out of her. And I can't say it in there, because a Provost's reading isn't evidence without something to hang it on. Keep that casing. Somebody will believe it, one day.
+  [portrait: ILSA, neutral] (very low) The woman in the grey hat, third row.
+  [name: Ilsa] Sable. Sabine Kroll, Meridian. I read it straight out of her.
+  [name: Ilsa] And I can't say it in there, because a Provost's reading isn't evidence without something to hang it on.
+  [name: Ilsa] Keep that casing. Somebody will believe it, one day.
 ```
 *(09 #12 and #13. Without the COMM-DEVICE, Kroll stays hidden; the public learns in Act IV through Rook's leak and believes it less. The casing still lets the PC turn Marchetti in Ch14 (`:ch14_marchetti`).)*
 ### Voss on every screen (the hour after; the Tribunal Ward's screens)
@@ -323,7 +390,8 @@ Script: Prismfall.checkpoint
   (Your Pokémon at the chain, all of them, and it gives. Rowan comes up out of the water gasping. Wick's people reach out from the stair and pull him across.)
   (Behind you, Directorate troops in the doorway hauling the brass ring up, together, too slowly. When they get Marchetti out she can't stand. She looks at you once, across the water. Nothing in her face at all.)
   (Rowan, on the far stair, soaked, before Wick's people pull him away into the dark of the undercroft tunnels:)
-  [portrait: ROWAN, neutral] Ask the Drowned Crown. It's awake now. So are you.
+  [portrait: ROWAN, neutral] Ask the Drowned Crown.
+  [name: Rowan] It's awake now. So are you.
   Variable V113 ROWAN_STATUS = 3 (escaped / Lantern Hollow).
 > Heave the ring off Marchetti. (marchetti)
   Script: pf_choose(:ch13_fault, :marchetti)
@@ -332,7 +400,7 @@ Script: Prismfall.checkpoint
   (Wick's people go in after him. It takes them a long time. When they bring him up the stair, he isn't moving.)
   (Juno comes down the broken steps from the court, and sees, and stops.)
   [portrait: JUNO, crying] (not loudly) Uncle Rowan.
-  [portrait: MARCHETTI, neutral] (on the floor, bleeding, to you, only) I owe you a life.
+  [portrait: MARCHETTI, neutral] [emote: dots] (on the floor, bleeding, to you, only) I owe you a life.
   Variable V113 ROWAN_STATUS = 6 (drowned in the Fault).
 Switch S137 CH13_FAULT = ON. V134 = 9.
 ```
@@ -350,10 +418,15 @@ The Speculum, Lucent's upside-down city in the sky, has cracked: pieces of it ha
 ```
 (Dawn. The Athenaeum steps, covered in broken glass. The upside-down city in the sky has a crack across it like a broken plate. Somewhere, a bell that isn't ringing for anything.)
 (Ilsa comes down the steps with her earmuffs round her neck and her robes torn at the hem. She has an envelope: thick, sealed with the Sovereign's own seal, the wax not yet cracked.)
-[portrait: ILSA, neutral] Father's Secret Articles. The parts of the Concordance the Accord doesn't teach. I took them out of his desk at four this morning while he was looking at the sky.
-[portrait: ILSA, neutral] Don't read them yet. Go and find Bastian Ore first. Cragholm, in the Bone Sands. He was *there*. In AF 290. He'll tell you what the Articles don't.
+[portrait: ILSA, neutral] Father's Secret Articles.
+[name: Ilsa] The parts of the Concordance the Accord doesn't teach.
+[name: Ilsa] I took them out of his desk at four this morning while he was looking at the sky.
+[name: Ilsa] Don't read them yet. Go and find Bastian Ore first.
+[name: Ilsa] Cragholm, in the Bone Sands. He was *there*. In AF 290.
+[name: Ilsa] He'll tell you what the Articles don't.
 RECEIVE: SECRET ARTICLES (sealed).
-[portrait: ILSA, sad] (turning back to the doors) I'm going to go and sit with my father now. Neither of us will say anything at all.
+[portrait: ILSA, sad] [emote: dots] (turning back to the doors) I'm going to go and sit with my father now.
+[name: Ilsa] Neither of us will say anything at all.
 (She goes in. You're alone on the steps.)
 (In every broken pane of glass around you, on every step, hundreds of tiny reflections of the morning, and in every one of them, at the edge, six black wings fold, and unfold, and fold.)
 V134 = 10. Variable V101 STORY_ACT = 4. V102 STORY_CHAPTER = 14.
