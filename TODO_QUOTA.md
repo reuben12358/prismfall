@@ -155,3 +155,17 @@
 - [ ] For the map builders: map events can now use `\pfe[kind]` (the scripts' `[emote: kind]`), `\pfp[pose]`, `\pfa[act]`; the Ruin Route's first event should call `pf_chapter_card(:RUIN)`; existing maps keep their one-box-per-old-line text until they are rebuilt from the cut scripts (scriptpour picks the cuts up for the three townsfolk sections on the next build of 100 / 126 / 140).
 - [ ] Real-engine check not run (run_intro was locked by other agents for 16 minutes): the plan is committed (d81d4d6). Run it with the lock held: `bash tools/harness/visual/intro/run_intro.sh --capture "$PWD/tools/harness/visual/speech/009_ExpressiveCapture.rb" --plan expr` (RESULT lines in demo.log: the stage sides, two balloons, the stance and step-back, nothing left after the event, the Ch3 card in full, the automatic Ch4 card on V102 = 4); then delete `/home/claude/run_intro/frames/ch0_expr` and `captures_keep/ch0_expr`. Done otherwise: selftest 228/228, voice selftest 15/15.
 - [ ] For Reuben: keep or drop the ACT title cards now that chapter cards carry the act name; `Prismfall::Expressive.auto_face` is off (speakers are not turned toward each other automatically); 14 lines where Gemini wants a face for a plain speaker (Dominar Hrothgar, Coll, Calla).
+
+## Reuben's calls, 2026-11-26 ("ur call" on all seven; decided by Claude)
+- [ ] Act title cards: keep END OF ACT as the act's closing beat; drop the separate act-opening card where the next
+  chapter card already names the act (dialogue agent).
+- [ ] The 14 lines where Gemini wants a face for a plain speaker (Hrothgar, Coll, Calla): portrait where the art exists,
+  plain where it doesn't (dialogue agent).
+- [ ] Auto-turning ("depends on the context"): two characters talking to each other turn toward each other; whoever is
+  addressing the PC keeps facing the PC (dialogue agent, 018).
+- [x] Ch5 Shatter: no Lowlight cutaway (as story/24 writes it); `SH1_LOWLIGHT_CUTAWAY` stays off.
+- [x] SPINE.md / MEGA_EVOLUTION.md: one Mega per trainer, one Z-move per side.
+- [x] Post-game: Tier 3 at 3 Tier-2 clears; T1-8 at 8 settled rumours; the Hush silences battles too. Kept as built.
+- [x] Playscript rewordings (769 lines): not adopted; the canon stays (mostly punctuation and style; the real rewrites,
+  e.g. Bastian's Ch14 procession line and Voss's Ch11 line, weaken them). Closed.
+

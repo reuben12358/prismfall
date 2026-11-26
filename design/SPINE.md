@@ -49,7 +49,7 @@ User: "i dont think we need a portrait for every conversation" / "the speech bub
   - the Mega Ring comes from a story beat;
   - Mega Stones come from quests, puzzles and exploration, after badges.
 - Wardens and bosses use Megas where it fits their theme and field.
-- Megas, Z-moves and fields must work together in battle: one Mega and one Z-move per side per battle, under EBDX.
+- Megas, Z-moves and fields must work together in battle: one Mega per trainer and one Z-move per side per battle, under EBDX (per-trainer Megas: Reuben 2026-11-26, so both partners or both foes in a tag battle can Mega).
 
 ## >>> REVISION 19 (user, 2026-11-19 18:06–21:44) <<<
 1. **The Eevee quest.** One Eevee trainer per kingdom, with the last trainer met in Crownhaven. User's assignments: fire → Flareon, water → Vaporeon, Zenith ("the piltover place") → Jolteon, the dark place (Nadir) → Umbreon. Ours: Elowen → Leafeon, Ossaria → Espeon (desert sun temple), Antumbra → Glaceon (the frozen Mirror Mere), Crownhaven (the last) → Sylveon.

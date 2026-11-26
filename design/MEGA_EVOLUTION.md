@@ -3,7 +3,7 @@
 > User (Rev 20): "speaking of adding z moves, u also gotta add mega evolutions."
 > SPINE Rev 20: Megas are earned the Reborn/Rejuvenation way (the ring from a story beat, stones from quests, puzzles and
 > exploration after badges); Wardens and bosses Mega Evolve where it fits their theme and field; Megas, Z-moves and fields
-> work together; one Mega and one Z-move per side per battle, under EBDX.
+> work together; one Mega per trainer and one Z-move per side per battle, under EBDX.
 > User (Rev 21): "see how late reborn/rejuv give out the mega ring, its usually like later gyms" and "Every important
 > story fight after level 50-55 ish should have mega evolutions", then, of Brann's Mega Camerupt: "he could have one as
 > long as its considered 'Weak'".
@@ -132,8 +132,7 @@ the new ring point (§5.3). The ones that stayed before 13 "hum and wait", as in
   still brings no medicine) and the battle hands them to the ally. A partner Megas only if its PBS team has
   `MEGARING` and a stone; today's partner teams (Juno 70–72, the war partners, the Ogre) have neither.
 - **Lore, reconciled 2026-11-26:** §1.1, Bastian's Ring-Day lines (`114_Quests_Megas.rb`, story/07_ACT_IV.md) and the
-  Ch21 tag-battle note say one Mega per trainer and one Z-move per side. SPINE.md Rev 20 / 23's "one of each per side"
-  is the user's directive as first given and is left as written there.
+  Ch21 tag-battle note say one Mega per trainer and one Z-move per side; SPINE.md says so too (Reuben 2026-11-26).
 - **One Z-move per side per battle** (`Z_LIMIT = :side`; unchanged by the per-trainer Mega rule). Prismfall Z-Power is per
   trainer on its own. It works by alias-chaining `PrismfallZ.owner_key` to key on the side alone; no Z-Power file was
   edited (§7 asks the Z owner to adopt it in their config).
@@ -439,7 +438,7 @@ one-ring, crystal-distribution, species Z-move and crystal-teaser checks: `desig
   the ring; the story's ring-less fighters (§6.3) hold none; below Lv 50 only Brann (weak, Std + Hard); no trainer
   holds two stones or a stone and a Z-crystal.
 - Kestrel's K8: no ring and no stone; with `:ch18_kestrel_ring` = *give_now*, the ring and the Scizorite at battle start.
-- Mega + Z in one battle; one Mega and one Z per side; no ring means no Mega; wild Pokémon never Mega; a Z-crystal
+- Mega + Z in one battle; one Mega per trainer and one Z per side; no ring means no Mega; wild Pokémon never Mega; a Z-crystal
   blocks Rayquaza; all 8 showpieces; No Guard and Magic Bounce entry rules on Mega Evolution; the Field Notes lines.
 - the quests: the teaser at 3 badges; the Ring-Day locked at 12 badges and open at 13 in Bastian's lamp-room (the ring
   sings, Pip hears it, the earlier stones stop waiting, no "reset" or "Legend Plate"); Brann's spare at 15 badges with
