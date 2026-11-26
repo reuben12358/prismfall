@@ -438,6 +438,8 @@ check("after every turn of the Plates its type, form and Memory are the ascendan
       turned.find { |r| r[:types] != [r[:type]] || r[:item] != bs::NULL_MEMORIES[r[:type]] }.inspect[0, 160])
 check("\"NULL re-indexes to the X Memory!\" shown", log.include?(/re-indexes to the Fire Memory!/))
 check("three bars broke in order and Voss lost", BREAKS.map { |b| b[:n] } == [1, 2] && log.outcome == 1, "#{BREAKS.map { |b| b[:n] }} outcome #{log.outcome}")
+check("Voss's NULL on Standard: every stat stage resets at a break, its own boosts too (2026-11-26)",
+      BREAKS.length == 2 && BREAKS.all? { |b| b[:stages].values.all? { |v| v == 0 } }, BREAKS.map { |b| b[:stages] }.inspect[0, 160])
 check("Voss's two mid-battle lines at the first two breaks", log.include?(/a god dropped its furniture on her/) && log.include?(/we don't need it/))
 check("Kestrel redeemed: no conduit scene, no choice, no regeneration", !log.include?(/Harnessed into the Engine/) && !log.include?(/regenerated!/) &&
       !Prismfall::Choices.made?(:ch21_reach_kestrel))

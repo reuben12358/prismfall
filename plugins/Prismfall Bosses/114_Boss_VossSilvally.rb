@@ -137,6 +137,15 @@ module Prismfall
       end
     }
 
+    # Voss's NULL, Standard / Hard: every stat stage resets at a break, its own boosts too (2026-11-26: Swords Dance and
+    # Flame Charge carried across the bars and snowballed; prepared teams won 13% / 12%). The feint's -1 goes with them.
+    # Quent's NULL keeps the negative-only reset (his cell was already 45% / 18%).
+    NULL_ON_BREAK = { :STANDARD => { :cure_status => true, :reset_stats => true,
+                                     :proc => proc { |battle, _b, _st| Prismfall::Bosses.null_state(battle)[:feigned] = 0 } },
+                      :HARD     => { :cure_status => true, :reset_stats => true,
+                                     :proc => proc { |battle, _b, _st| Prismfall::Bosses.null_state(battle)[:feigned] = 0 } },
+                      :default  => { :cure_status => true, :reset_stats => :negative } }
+
     NULL_FORM_MESSAGE = proc { |type|
       (type == :NORMAL) ? "{1} ejects its Memory and reverts to the Normal type!" : "{1} re-indexes to the {2} Memory!"
     }
@@ -152,7 +161,7 @@ module Prismfall
         :stat_mults   => { :CASUAL => { :HP => 0.55 } },
         :catch        => false,
         :intro        => ["Project NULL lowers its head. The Memory disc behind its crest spins up."],
-        :on_break     => { :cure_status => true, :reset_stats => :negative },
+        :on_break     => (voss) ? NULL_ON_BREAK : { :cure_status => true, :reset_stats => :negative },   # Quent: as built (45% / 18%)
         :breaks       => breaks,
         :follow_prism => { :form => true, :form_message => NULL_FORM_MESSAGE, :items => NULL_MEMORIES },
         :end_of_round => NULL_END_OF_ROUND,
