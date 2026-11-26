@@ -66,7 +66,7 @@ module Prismfall
 
     # Survival-type on-defeat effects (:end_battle / :survive) whose condition holds now.
     def self.survive_defeat_effects(battle, battler, st)
-      list = effect_list(st.data[:on_defeat]).select { |e| e[:end_battle] || e[:survive] }
+      list = effect_list(st.data[:on_defeat]).select { |e| e[:end_battle] || e[:survive] || e[:revive] }
       list = list.select { |e| condition_ok?(e, battle, battler, st) }
       return (list.empty?) ? nil : list
     end
@@ -79,10 +79,23 @@ module Prismfall
       st.defeated = true
       st.bars_left = 0
       if effects.nil?
-        effects = effect_list(st.data[:on_defeat]).reject { |e| e[:end_battle] || e[:survive] }
+        effects = effect_list(st.data[:on_defeat]).reject { |e| e[:end_battle] || e[:survive] || e[:revive] }
         effects = effects.select { |e| condition_ok?(e, battle, battler, st) }
       end
       effects.each { |e| apply_effect(battle, battler, st, e) }
+      # :revive => fraction (or a proc returning one): the last bar refills instead of falling (Gilded Arceus).
+      rev = effects.map { |e| e[:revive] }.compact.last
+      rev = rev.call(battle, battler, st) if rev.respond_to?(:call)
+      if rev.is_a?(Numeric) && rev > 0 && !st.end_decision && !battler.fainted?
+        st.defeated  = false
+        st.bars_left = 1
+        st.revives  += 1
+        target = [[(battler.totalhp * rev).round, 1].max, battler.totalhp].min
+        battler.pbRecoverHP(target - battler.hp) if target > battler.hp
+        battle.scene.pbRefreshOne(battler.index) if battle.scene.respond_to?(:pbRefreshOne)
+        EventHandlers.trigger(:prismfall_boss_bar_refilled, battle, battler, st.id, st.revives)
+        return
+      end
       EventHandlers.trigger(:prismfall_boss_defeated, battle, battler, st.id, st.result)
       finish_battle(battle, st) if st.end_decision
     end

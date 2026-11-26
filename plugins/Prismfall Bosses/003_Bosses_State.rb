@@ -8,7 +8,7 @@ module Prismfall
     class BossState
       attr_reader   :id, :data, :pokemon, :bars
       attr_accessor :bars_left, :pending, :pending_defeat, :phase_turn, :overflow, :defeated,
-                    :intro_shown, :result, :end_decision, :breaks_done
+                    :intro_shown, :result, :end_decision, :breaks_done, :revives
 
       def initialize(id, data, pokemon, bars)
         @id          = id
@@ -22,7 +22,11 @@ module Prismfall
         @defeated    = false
         @intro_shown = false
         @breaks_done = 0
+        @revives     = 0      # last-bar refills (:revive on-defeat effects)
       end
+
+      # Per-battle scratch for boss scripts and the engine (e.g. :move_limits counts, keyed [bar, move]).
+      def counters; return @counters ||= {}; end
 
       # 1 = first bar, bars = last bar.
       def phase;     return @bars - @bars_left + 1; end
@@ -68,7 +72,7 @@ module Prismfall
 
       def summary
         return { :id => @id, :bars => @bars, :bars_left => @bars_left, :breaks => @breaks_done,
-                 :defeated => @defeated, :result => @result, :overflow => @overflow }
+                 :defeated => @defeated, :result => @result, :overflow => @overflow, :revives => @revives }
       end
     end
 

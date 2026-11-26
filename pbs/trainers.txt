@@ -39022,6 +39022,19 @@ Pokemon = OGERPON,48
     IV = 20
     EV = 0,85,0,0,0,85
 #-------------------------------
+# The Ruin Route's True Finale (Arceus, Judgment; Prismfall Bosses 103 :partner): Giratina-Origin at the Renegade's
+# side, AI-controlled, a 2v1 ("Reverse Depths"). Never caught here: a partner, not a gift.
+[PARTNER_GIRATINA,Depths]
+LoseText = ...
+Pokemon = GIRATINA,100
+    Form = 1
+    Moves = POLTERGEIST,DRAGONCLAW,IRONHEAD,SHADOWSNEAK
+    Ability = LEVITATE
+    Item = GRISEOUSCORE
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,4,0
+#-------------------------------
 # Ch5 Wave 0 rescue (gen.py): the Gala raid and the service-lift stair
 [RIVAL_JUNO,Juno,13]
 Items = SUPERPOTION,SUPERPOTION

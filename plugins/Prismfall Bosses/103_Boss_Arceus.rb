@@ -25,10 +25,21 @@
 #   Recover / Calm Mind); Standard and Hard are the BALANCE.md numbers.
 #   HARMONY_BUFF (Resonance >= 6): at every break the PC's active Pokemon
 #     recover 25% HP and lose their stat drops.
-#   Event :prismfall_arceus_locks (battle, bar, gym numbers, refusing gym numbers)
-#     fires as each bar starts, for the pylon / release staging.
-# Not built here (TODO_QUOTA): Gilded's bar-6 refills and scripted binding, the
-# Judgment variant's Giratina partner, the 36 release / refusal lines.
+#   Events, for the pylon staging (Bosses 116 plays the 36 release / refusal
+#   lines of story/11_FINALE_LINES.md on them):
+#     :prismfall_arceus_locks        (battle, bar, gyms, forced)  a bar starts:
+#        its Wardens kneel and release or refuse (before the forced-lock boost)
+#     :prismfall_arceus_locks_broken (battle, bar, gyms, forced, final)  the bar
+#        breaks: the refused locks tear free by force
+#   Gilded (ENGINE_CALIBRATED): "the last bar can't be broken". It refills three
+#     times (each refill = the Casual bar HP, on every difficulty: BALANCE.md
+#     section 7), then the Gilded Chain closes: the battle ends, result
+#     :gilded_chain (the event then runs END_GILDED_CHAIN). Elsewhere the last
+#     bar's fall ends the battle as a win, result :freed (Arceus never faints).
+#   Judgment (Ruin Route R7): Giratina-Origin fights at the PC's side (:partner,
+#     PARTNER_GIRATINA "Depths", a 2v1) and "no Warden releases anything; all
+#     eighteen locks hold": every lock forced, capped like War.
+#   Standard: Recover at most twice a bar (BALANCE.md section 7, :move_limits).
 #===============================================================================
 module Prismfall
   module Bosses
@@ -133,12 +144,40 @@ module Prismfall
       return (Prismfall::Conditions.evaluate(cond) ? true : false) rescue true
     end
 
+    # War: the shard eats the types; Judgment: no Warden releases anything. Nobody is asked, every lock is forced.
+    ARCEUS_NOBODY_ASKED = [:ARCEUS_WAR, :ARCEUS_JUDGMENT].freeze
+    ARCEUS_GILDED_REFILLS = 3
+    ARCEUS_CASUAL_BAR_HP  = 0.5     # = :stat_mults[:CASUAL][:HP] below; Gilded's refills use it on every difficulty
+
+    def self.arceus_nobody_asked?
+      return ARCEUS_NOBODY_ASKED.include?(arceus_variant[:id])
+    end
+
+    def self.arceus_gilded?
+      return arceus_variant[:id] == :ARCEUS_GILDED
+    end
+
     # Gym numbers of the given bar whose lock is forced.
     def self.arceus_forced_locks(bar)
       gyms = arceus_bar_gyms[bar - 1]
       return [] if !gyms
-      return gyms.dup if arceus_variant[:id] == :ARCEUS_WAR      # the shard eats the types: nobody is asked
+      return gyms.dup if arceus_nobody_asked?
       return gyms.reject { |n| arceus_consents?(n) }
+    end
+
+    # A Gilded refill: the Casual bar's HP, as a fraction of this difficulty's bar.
+    def self.arceus_gilded_refill
+      m = resolve(get(:ARCEUS_FINALE)[:stat_mults])
+      cur = (m.is_a?(Hash) && m[:HP].is_a?(Numeric)) ? m[:HP] : 1.0
+      return [ARCEUS_CASUAL_BAR_HP / cur, 1.0].min
+    end
+
+    # A bar has just been broken (or, final = true, the last one fell): its refused locks tear free.
+    def self.arceus_end_bar(battle, bar, final = false)
+      gyms   = arceus_bar_gyms[bar - 1]
+      return if !gyms
+      forced = battle.instance_variable_get(:@prismfall_arceus_forced_list) || []
+      EventHandlers.trigger(:prismfall_arceus_locks_broken, battle, bar, gyms, forced, final)
     end
 
     # A bar starts: forced locks (+1 to every stat stage per refusing Warden, for this bar only).
@@ -151,15 +190,17 @@ module Prismfall
         stats.each { |s| b.stages[s] = [b.stages[s] - prev, 0].max if b.stages[s] > 0 }
       end
       n = [forced.length, resolve(ARCEUS_FORCED_CAP) || 3].min
-      n = [n, resolve(ARCEUS_WAR_STAGE_CAP) || 2].min if arceus_variant[:id] == :ARCEUS_WAR
+      n = [n, resolve(ARCEUS_WAR_STAGE_CAP) || 2].min if arceus_nobody_asked?
       battle.instance_variable_set(:@prismfall_arceus_forced, n)
+      battle.instance_variable_set(:@prismfall_arceus_forced_list, forced.dup)
+      # The bar's Wardens kneel and release or refuse (Bosses 116), then the refused locks harden the god.
+      EventHandlers.trigger(:prismfall_arceus_locks, battle, bar, arceus_bar_gyms[bar - 1] || [], forced)
       if n > 0
-        battle.pbDisplay(text((n == 1) ? "A lock holds! Its Plate is torn free by force!" : "{2} locks hold! Their Plates are torn free by force!", b.pbThis, n))
+        battle.pbDisplay(text((n == 1) ? "One lock holds fast!" : "{2} locks hold fast!", b.pbThis, n))
         stats.each { |s| b.stages[s] = [b.stages[s] + n, 6].min }
         battle.pbCommonAnimation("StatUp", b) rescue nil
         battle.pbDisplay(text((stats.length < ARCEUS_STAT_STAGES.length) ? "{1}'s defenses hardened!" : "{1}'s power surged!", b.pbThis))
       end
-      EventHandlers.trigger(:prismfall_arceus_locks, battle, bar, arceus_bar_gyms[bar - 1] || [], forced)
     end
 
     def self.arceus_harmony_buff(battle, boss)
@@ -203,6 +244,11 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
   # section 7's "bar HP" row): Casual x0.6, Standard x1.0, Hard x1.25 of Arceus's max HP a bar.
   :bars              => proc { Prismfall::Bosses.arceus_bars },
   :prism_order       => proc { Prismfall::Bosses.arceus_prism_order },
+  :partner           => proc {
+    v = Prismfall::Bosses.arceus_variant
+    (v[:player_side].to_i >= 2) ? [:PARTNER_GIRATINA, "Depths", 0] : nil
+  },
+  :move_limits       => { :STANDARD => { :RECOVER => 2 }, :default => nil },   # Casual has no Recover; Hard has no limit
   :stat_mults        => {
     :CASUAL   => { :HP => 0.5, :ATTACK => 0.6, :SPECIAL_ATTACK => 0.6 },
     :STANDARD => { :ATTACK => 1.25, :DEFENSE => 1.25, :SPECIAL_ATTACK => 1.25, :SPECIAL_DEFENSE => 1.25, :SPEED => 1.1 },
@@ -215,6 +261,8 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
   :intro             => ["The eighteen Plates blaze as one... Arceus descends upon Crownhaven!"],
   :break_message     => "The Plates around {1} crack and reform!",
   :on_break          => [
+    # The bar just broken: its refused locks tear free (Bosses 116), before the Plates turn to the next bar.
+    { :proc => proc { |battle, _b, st| Prismfall::Bosses.arceus_end_bar(battle, st.breaks_done) } },
     # Miscalibrated: the last bar holds six Plates; BALANCE.md section 7 keeps it fair with bar HP x0.85.
     { :condition => proc { |_battle, _b, st| st.last_bar? && Prismfall::Bosses.arceus_variant[:id] == :ARCEUS_MISCALIBRATED },
       :refill => 0.85 },
@@ -230,6 +278,29 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
         Prismfall::Bosses.arceus_start_bar(battle, b, st)
       } },
     { :proc => proc { |battle, b, _st| Prismfall::Bosses.arceus_harmony_buff(battle, b) } }
+  ],
+  :on_defeat         => [
+    # Gilded: the last bar can't be broken. The Engine binds it shut again, three times...
+    { :condition => proc { |_battle, _b, st|
+        Prismfall::Bosses.arceus_gilded? && st.revives < Prismfall::Bosses::ARCEUS_GILDED_REFILLS },
+      :messages  => ["The last lock cracks... and gold pours into the break!",
+                     "The Engine binds the chain shut again!"],
+      :reset_stats => :negative, :cure_status => true,
+      :revive    => proc { |_battle, _b, _st| Prismfall::Bosses.arceus_gilded_refill } },
+    # ...and then the Gilded Chain closes (END_GILDED_CHAIN).
+    { :condition => proc { |_battle, _b, st|
+        Prismfall::Bosses.arceus_gilded? && st.revives >= Prismfall::Bosses::ARCEUS_GILDED_REFILLS },
+      :messages  => ["The last lock will not break.",
+                     "Gold runs down every chain at once. The Gilded Chain closes around {1}.",
+                     "Inside the Ring, Valen kneels, crystal to the jaw, as the chain closes."],
+      :end_battle => 1, :result => :gilded_chain },
+    # Everywhere else the last bar's fall frees the god (it never faints).
+    { :condition => proc { |_battle, _b, _st| !Prismfall::Bosses.arceus_gilded? },
+      :proc      => proc { |battle, b, st|
+        Prismfall::Bosses.arceus_end_bar(battle, st.bars, true)
+        battle.pbDisplay(Prismfall::Bosses.text("The last chain falls away from {1}.", b.pbThis))
+      },
+      :end_battle => 1, :result => :freed }
   ],
   :follow_prism      => { :form => true, :form_message => "{1} took on the {2} type!",
                           :movesets => proc { Prismfall::Bosses.arceus_movesets } },

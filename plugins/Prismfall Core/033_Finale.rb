@@ -347,6 +347,32 @@ module Prismfall
     CHOIR_LINE = "The Gloaming choir in the stands picks it up. Then the Prism Choir in the loft. Then the crowd. " \
                  "Forty thousand people singing a song most of them only learned this week."
 
+    # story/11_FINALE_LINES.md section 1's bracketed directions, staged as narration (2026-11-26, Bosses agent):
+    # gym => [[:before / :after, text, condition or nil], ...]; release lines only.
+    RELEASE_DIRECTIONS = {
+      7  => [[:after, "Brann is weeping.", nil]],
+      8  => [[:after, "Kaito opens his hand.", nil]],
+      12 => [[:before, "Ilsa keeps one hand on her father's shoulder.", "flag(:ILSA_RECONCILED)"]],
+      14 => [[:after, "The echoes in the stands fade.", nil],
+             [:after, "Kestrel puts his hand over hers on the pylon.", "!flag(:KESTREL_LOST)"]],
+      17 => [[:before, "Celestine sings.", nil]]
+    }.freeze
+
+    def self.directions(gym, released, where)
+      return [] if !released
+      return (RELEASE_DIRECTIONS[gym] || []).select do |w, _t, cond|
+        w == where && (cond.nil? || (Prismfall::Conditions.evaluate(cond) rescue false))
+      end.map { |_w, t, _c| _INTL(t) }
+    end
+
+    # The bar's three Plates (Prismfall Bosses 116 names them from the items when it's loaded).
+    def self.plate_name(gym)
+      if defined?(Prismfall::Bosses) && Prismfall::Bosses.respond_to?(:arceus_gym_plate_name)
+        return Prismfall::Bosses.arceus_gym_plate_name(gym)
+      end
+      return _INTL("{1} Plate", Prismfall::Ceremony::PLATES[gym - 1][1])
+    end
+
     def self.locks
       c = Prismfall.state.custom
       c[:finale_locks] = {} if !c[:finale_locks].is_a?(Hash)
@@ -389,17 +415,27 @@ module Prismfall
       # yesterday's refusals were broken by force when their bar fell
       locks.each { |g, st| locks[g] = :forced if st == :refused && !gyms.include?(g) }
       order = gyms.sort_by { |g| (g == 9 && !forced.include?(g)) ? 0 : 1 }   # Juno is always the first to let go in her bar
+      unasked = defined?(Prismfall::Bosses) && Prismfall::Bosses.respond_to?(:arceus_nobody_asked?) &&
+                Prismfall::Bosses.arceus_nobody_asked?     # War / Judgment: nobody kneels (Bosses 116 says so)
       order.each do |gym|
         consent = consents?(gym)
-        if forced.include?(gym) && consent        # the War variant: nobody is asked
+        if unasked || (forced.include?(gym) && consent)
           locks[gym] = :forced
           next
         end
         released = !forced.include?(gym)
         locks[gym] = (released) ? :released : :refused
         show(battle, _INTL("{1} kneels at the {2} pylon.", _INTL(warden(gym)), Prismfall::Ceremony::PLATES[gym - 1][1]))
+        directions(gym, released, :before).each { |t| show(battle, t) }
         show(battle, "#{speaker(gym, released)}: #{line_for(gym, released)}", true)
+        directions(gym, released, :after).each { |t| show(battle, t) }
         show(battle, _INTL(CHOIR_LINE)) if gym == 17 && released
+        # 11's staging: on release the golden lock opens; on refusal they grip the pylon and it stays shut
+        if released
+          show(battle, _INTL("The golden lock opens, and the {1} rises into Arceus's wheel.", plate_name(gym)))
+        else
+          show(battle, _INTL("{1} grips the pylon. The lock stays shut.", (gym == 6) ? _INTL("The porter") : _INTL(warden(gym))))
+        end
       end
       $game_variables[VAR_RELEASED] = released_count if $game_variables
       EventHandlers.trigger(:prismfall_finale_kneels, bar, gyms, forced)

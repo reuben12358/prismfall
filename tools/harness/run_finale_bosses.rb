@@ -10,6 +10,8 @@
 #        - :gym_order: bar k cycles the gym fields of gyms 3k-2..3k, in gym order, inside the bar and at breaks
 #        - forced locks (+1 a refusing Warden, for that bar only; War: all, capped), Miscalibrated's six-Plate bar 5,
 #          the seventh bar (??? type; Judgment on :INVERSE), HARMONY_BUFF; Casual's easing (and only Casual's)
+#        - the Eighteen Locks (Bosses 116): release / refusal lines, Juno first, the porter, the choir, forced beats;
+#          Gilded's three refills and the Gilded Chain; Judgment's Giratina partner; Standard's 2 Recovers a bar
 #   2. Valen's Zygarde (:VALEN_ZYGARDE_ORDER, Bosses 113): Power Construct waits for the last bar; Complete Forme
 #      and his line there; bars by difficulty; the Last Tuning (v1) is untouched; the crystal line on each turn
 #   3. Voss's / Quent's Silvally (Bosses 114): three bars; re-indexes with the arena (Memory, form, type); the
@@ -156,6 +158,20 @@ check("gym order: bar 1 Grand Stage / Silkwood / Water Surface ... bar 6 New Moo
 
 log = arceus.call("Arceus, Bound (everyone consents): a sweep through six bars")
 check("Bound: won after five breaks (six bars)", log.outcome == 1 && BREAKS.length == 5, "outcome #{log.outcome}, breaks #{BREAKS.length}")
+check("the last bar's fall frees Arceus: result :freed, and it never faints", bs.last_result[:result] == :freed && !log.include?(/Arceus fainted/) &&
+      log.include?(/The last chain falls away/), bs.last_result[:result].inspect)
+released = (1..18).select { |g| log.include?(Prismfall::Finale::RELEASE_LINES[g - 1]) }
+check("all 18 Wardens kneel and say their release line (story/11_FINALE_LINES.md section 1)", released.length == 18, "missing #{((1..18).to_a - released).inspect}")
+check("...each release opens its lock: 18 golden locks, no refusals", log.lines.count { |l| l.include?("The golden lock opens") } == 18 &&
+      !log.include?(/grips the pylon/))
+check("the stage directions are staged (Brann weeping, Kaito's open hand, the echoes fade, Celestine sings)",
+      log.include?(/Brann is weeping\./) && log.include?(/Kaito opens his hand\./) && log.include?(/The echoes in the stands fade\./) &&
+      log.include?(/Celestine sings\./))
+check("the Finale record: all 18 released, V118 = 18", (1..18).all? { |g| Prismfall::Finale.lock_state(g) == :released } && $game_variables[118] == 18)
+dor = log.lines.index { |l| l.include?("Dorian kneels at the Blank pylon") }
+check("bar 1 opens with Dorian at the Blank Plate's pylon, before the first blow", dor && dor < (log.lines.index { |l| l =~ /Garchomp used/ } || 0))
+check("bar 6: Celestine's song is taken up by the choirs and the crowd", log.include?(/Celestine: Not chained, not broken/) &&
+      log.include?(/Forty thousand people singing/))
 check("REGRESSION :prism_turn - every break turns the Plates to the next bar's first gym field",
       BREAKS.map { |b| b[:borrowed] } == TRIOS[1..5].map(&:first), BREAKS.map { |b| b[:borrowed] }.inspect)
 check("at each break the arena's cycle is narrowed to that bar's trio", BREAKS.map { |b| b[:order] } == TRIOS[1..5])
@@ -184,10 +200,25 @@ check("...and each turn is still announced a round ahead", log.include?(/Insect 
 log = arceus.call("Arceus, Bound: Tamsin (2), Brann (7) and Kaito (8) refuse", :refuse => [2, 7, 8])
 forced = LOCKS.map { |l| l[2] }
 check("forced locks: bar 1 has one (gym 2), bar 3 two (gyms 7, 8), the rest none", forced == [[2], [], [7, 8], [], [], []], forced.inspect)
-check("forced-lock lines shown (one lock, then two)", log.include?(/A lock holds!/) && log.include?(/2 locks hold!/))
+check("refusal lines: Tamsin, Brann and Kaito say theirs and grip the pylon", log.include?(/Tamsin: I can't\. I can't\./) &&
+      log.include?(/Brann: You gave my guild's Light away/) && log.include?(/Kaito: I never said it out loud/) &&
+      log.lines.count { |l| l.include?("grips the pylon. The lock stays shut.") } == 3)
+check("the forced-lock beat when bar 1 breaks: Tamsin thrown back, the Insect Plate torn free (no line)",
+      log.include?(/Tamsin is thrown back from the pylon! The Insect Plate tears free in a crack of Bleed light!/))
+ju = log.lines.index { |l| l.include?("Juno kneels") }
+br = log.lines.index { |l| l.include?("Brann kneels") }
+check("Juno, letting go, is the first to kneel in her bar (before Brann)", ju && br && ju < br, "#{ju.inspect} #{br.inspect}")
+check("released Wardens still release: Juno's line and her lock opens", log.include?(/Juno: Verdance has never had an autumn/))
+
+check("forced-lock lines shown (one lock, then two)", log.include?(/One lock holds fast!/) && log.include?(/2 locks hold fast!/))
 # stages recorded when a bar breaks = that bar's forced stages plus whatever Arceus set up itself
 df = BREAKS.map { |b| b[:stages][:DEFENSE] }
 check("+1 to every stat for a forced bar, gone with the bar: Defense at breaks 1-5", df == [0, 2, 0, 0, 0], df.inspect)
+check("the Finale record after the fight: 2, 7, 8 :forced (their locks broken by force), the rest :released",
+      [2, 7, 8].all? { |g| Prismfall::Finale.lock_state(g) == :forced } && Prismfall::Finale.lock_state(9) == :released)
+log = arceus.call("Arceus, Bound: Corvin not freed (a porter holds his Plate)", :refuse => [6])
+check("Corvin's refusal is the porter's: he speaks it, grips the pylon, and is thrown back when the bar breaks",
+      log.include?(/Porter: I — I'm not him/) && log.include?(/The porter grips the pylon/) && log.include?(/The porter is thrown back from the pylon!/))
 
 log = arceus.call("Arceus, War (Standard): every lock forced, capped at +2", :variant => :ARCEUS_WAR)
 check("War: seven bars; every lock of bars 1-6 forced", bs.arceus_bars == 7 && LOCKS.first(6).all? { |l| l[2] == l[1] }, LOCKS.inspect)
@@ -206,10 +237,55 @@ check("Miscalibrated: five bars; bar 5 cycles all six fields of gyms 13-18", bs.
 check("Miscalibrated: bar 5 starts at x0.85 HP", BREAKS.last && BREAKS.last[:hp] == (BREAKS.last[:totalhp] * 0.85).round,
       BREAKS.last && "#{BREAKS.last[:hp]}/#{BREAKS.last[:totalhp]}")
 
-log = arceus.call("Arceus, Judgment (Ruin Route): seven bars, the last on Inverse", :variant => :ARCEUS_JUDGMENT)
+side = []
+log = arceus.call("Arceus, Judgment (Ruin Route): seven bars, the last on Inverse, Giratina at your side", :variant => :ARCEUS_JUDGMENT,
+                  :setup => lambda { |battle| side << battle.pbParty(0).map(&:species) << battle.player.length })
 last = BREAKS.find { |b| b[:left] == 1 }
 check("Judgment: seven bars; the seventh on :INVERSE as the ??? type", bs.arceus_bars == 7 && last && last[:field] == :INVERSE && last[:types] == [:QMARKS],
       last.inspect[0, 160])
+check("Judgment: Giratina-Origin fights at the PC's side (PARTNER_GIRATINA, a 2v1), and is gone again after",
+      side[0].include?(:GIRATINA) && side[1] == 2 && log.include?(/Reverse Depths sent out Giratina/) && $PokemonGlobal.partner.nil?, side.inspect)
+check("Judgment: no Warden kneels; every lock forced (Standard: +2 a bar, capped like War)", !log.include?(/kneels at the/) &&
+      log.include?(/No Warden kneels\. All three locks hold\./) && BREAKS.first(5).map { |b| b[:stages][:DEFENSE] }.uniq == [2],
+      BREAKS.first(5).map { |b| b[:stages][:DEFENSE] }.inspect)
+check("Judgment: the Plates tear free without a Warden at the pylon", log.include?(/The Blank Plate tears free in a crack of Bleed light!/) &&
+      !log.include?(/thrown back/))
+fresh
+check("Bound and the others fight alone (no partner)", bs.resolve(bs.get(:ARCEUS_FINALE)[:partner]).nil?)
+
+log = arceus.call("Arceus, Gilded (ENGINE_CALIBRATED): the last bar can't be broken", :variant => :ARCEUS_GILDED)
+refills = log.lines.count { |l| l.include?("The Engine binds the chain shut again!") }
+check("Gilded: the last bar refills three times, then the Gilded Chain closes (result :gilded_chain, the battle ends)",
+      refills == 3 && bs.last_result[:result] == :gilded_chain && bs.last_result[:revives] == 3 && log.outcome == 1 &&
+      log.include?(/The Gilded Chain closes around/) && log.include?(/Valen kneels, crystal to the jaw/), "refills #{refills}, #{bs.last_result.inspect[0, 120]}")
+check("Gilded: the last bar's locks are never broken (no forced beats after the last bar, no :freed)", !log.include?(/The last chain falls away/))
+hp = log.lines.select { |l| l =~ /HP Arceus \(foe\): 1 -> (\d+) \/ (\d+)/ }.map { |l| l =~ /1 -> (\d+) \/ (\d+)/ && [$1.to_i, $2.to_i] }.compact
+check("Gilded on Standard: each refill is the Casual bar's HP (x0.5 of the Standard bar)", hp.length >= 3 && hp.last(3).all? { |a, t| a == (t * 0.5).round },
+      hp.last(3).inspect)
+fresh(:HARD)
+check("Gilded on Hard: refills are the Casual bar HP too (x0.4 of the Hard bar)", (bs.arceus_gilded_refill - 0.4).abs < 1e-9, bs.arceus_gilded_refill.to_s)
+fresh(:CASUAL)
+check("Gilded on Casual: a full Casual bar", bs.arceus_gilded_refill == 1.0)
+
+# Standard's Recover limit: two a bar. A Blissey that chips 100 a round, so Arceus wants to Recover.
+recov = []
+tosser = lambda { [god(mk(:BLISSEY, 100, [:SEISMICTOSS, :SOFTBOILED], :LEFTOVERS))] }
+counter_snap = lambda do |battle|
+  battle.decision = 3 if battle.turnCount >= 40
+  f = battle.battlers[1]
+  st = f && bs.state_for(f)
+  st ? st.counters.select { |k, _v| k[1] == :RECOVER }.dup : nil
+end
+log = arceus.call("Arceus, Bound (Standard): 40 rounds of Seismic Toss against Recover", :party => tosser.call,
+                  :setup => recording(recov, proc { |_battle, _b| :SEISMICTOSS }, &counter_snap))
+uses = recov.last || {}
+check("Standard: Arceus Recovers at most twice a bar (BALANCE.md section 7), and the limit is reached",
+      !uses.empty? && uses.values.max <= 2 && uses.values.include?(2), uses.inspect)
+recov = []
+log = arceus.call("Arceus, Bound (Hard): the same, no limit", :party => tosser.call, :difficulty => :HARD,
+                  :setup => recording(recov, proc { |_battle, _b| :SEISMICTOSS }, &counter_snap))
+check("Hard: no Recover limit", bs.resolve(bs.get(:ARCEUS_FINALE)[:move_limits]).nil? && log.lines.count { |l| l =~ /Arceus used Recover/ } > 2,
+      log.lines.count { |l| l =~ /Arceus used Recover/ }.to_s)
 
 fresh(:CASUAL); c = bs.create_pokemon(:ARCEUS_FINALE)
 fresh(:STANDARD); s = bs.create_pokemon(:ARCEUS_FINALE)

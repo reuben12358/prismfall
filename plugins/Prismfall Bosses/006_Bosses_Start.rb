@@ -27,9 +27,28 @@ module Prismfall
       end
       $PokemonGlobal.nextBattleBGM = music if music && $PokemonGlobal
       @last_result = nil
+      partner = start_partner(data)
       EventHandlers.trigger(:prismfall_boss_starting, id, pkmn)
-      ret = WildBattle.start(pkmn, can_override: false)
+      begin
+        ret = WildBattle.start(pkmn, can_override: false)
+      ensure
+        pbDeregisterPartner if partner
+      end
       return (ret) ? true : false
+    end
+
+    # :partner => [trainer_type, name, version] (or a proc returning that or nil): an AI ally at the player's side
+    # for this boss (a 2v1, e.g. the Ruin Route's Giratina beside the Renegade against Arceus). Skipped when the PBS
+    # trainer type is missing or the event has already registered a partner. Returns true if it registered one.
+    def self.start_partner(data)
+      spec = resolve(data[:partner])
+      return false if !spec.is_a?(Array) || spec.length < 2
+      return false if $PokemonGlobal && $PokemonGlobal.partner
+      return false if !GameData::TrainerType.exists?(spec[0])
+      return false if !GameData::Trainer.try_get(spec[0], spec[1], spec[2] || 0)
+      pbRegisterPartner(spec[0], spec[1], spec[2] || 0)
+      setBattleRule("2v1") if !rule_set?("size")
+      return true
     end
 
     # Music for a wild boss that names none (design/AUDIO.md 5.C2): the Arceus theme, the legendary theme for a

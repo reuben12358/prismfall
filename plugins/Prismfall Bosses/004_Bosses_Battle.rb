@@ -136,6 +136,30 @@ module Prismfall
       process(battle)
     end
 
+    # :move_limits => { :RECOVER => 2 } (difficulty hash allowed): uses a bar, counted when the move is used.
+    def self.move_limit_for(st, move_id)
+      lim = resolve(st.data[:move_limits])
+      return nil if !lim.is_a?(Hash)
+      n = lim[move_id]
+      return (n.is_a?(Integer)) ? n : nil
+    end
+
+    def self.move_limit_reached?(battler, move_id)
+      st = state_for(battler)
+      return false if !st
+      n = move_limit_for(st, move_id)
+      return false if !n
+      return st.counters[[st.phase, move_id]].to_i >= n
+    end
+
+    def self.count_move_use(battler, move)
+      return if !move
+      st = state_for(battler)
+      return if !st || !move_limit_for(st, move.id)
+      key = [st.phase, move.id]
+      st.counters[key] = st.counters[key].to_i + 1
+    end
+
     def self.record_results(battle)
       states = battle.prismfall_boss_states.values
       return if states.empty?
@@ -167,6 +191,7 @@ class Battle::Battler
 
   alias prismfall_bosses_pbUseMove pbUseMove unless method_defined?(:prismfall_bosses_pbUseMove)
   def pbUseMove(choice, specialUsage = false)
+    Prismfall::Bosses.count_move_use(self, choice[2]) if choice && choice[0] == :UseMove && !specialUsage
     ret = prismfall_bosses_pbUseMove(choice, specialUsage)
     Prismfall::Bosses.process(@battle)
     return ret
@@ -178,6 +203,18 @@ class Battle::Battler
       Prismfall::Bosses.run_defeat(@battle, self, st, nil)
     end
     return prismfall_bosses_pbFaint(showMessage)
+  end
+
+  # :move_limits - a boss may use a move only so many times a bar.
+  alias prismfall_bosses_pbCanChooseMove? pbCanChooseMove? unless method_defined?(:prismfall_bosses_pbCanChooseMove?)
+  def pbCanChooseMove?(move, commandPhase, showMessages = true, specialUsage = false)
+    if commandPhase && move && !specialUsage && Prismfall::Bosses.move_limit_reached?(self, move.id)
+      if showMessages
+        @battle.pbDisplayPaused(Prismfall::Bosses.text("{1} can't use {2} again until its shield breaks!", pbThis, move.name))
+      end
+      return false
+    end
+    return prismfall_bosses_pbCanChooseMove?(move, commandPhase, showMessages, specialUsage)
   end
 
   # Status immunities while bars remain.

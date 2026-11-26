@@ -8,7 +8,7 @@ module Prismfall
                   :ivs, :evs, :gender, :shiny, :bars, :stat_mults, :status_immunity, :immunity_last_bar, :catch,
                   :catch_rate, :can_run, :can_lose, :size, :ai_skill, :ai_script, :ai_script_loop, :field, :weather,
                   :terrain, :music, :intro, :break_message, :on_break, :breaks, :on_defeat, :ebdx, :follow_prism,
-                  :prism_interval, :prism_order, :end_of_round, :description]
+                  :prism_interval, :prism_order, :end_of_round, :partner, :move_limits, :description]
     MAIN_STATS = [:HP, :ATTACK, :DEFENSE, :SPECIAL_ATTACK, :SPECIAL_DEFENSE, :SPEED]
 
     @registry       = {}

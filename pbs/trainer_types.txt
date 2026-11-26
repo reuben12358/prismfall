@@ -739,6 +739,12 @@ Gender = Unknown
 BaseMoney = 0
 SkillLevel = 100
 #-------------------------------
+[PARTNER_GIRATINA]
+Name = Reverse
+Gender = Unknown
+BaseMoney = 0
+SkillLevel = 100
+#-------------------------------
 [PLAYER_A]
 Name = Pokémon Trainer
 Gender = Male
