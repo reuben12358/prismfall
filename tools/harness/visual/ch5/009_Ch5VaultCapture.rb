@@ -1,10 +1,16 @@
 #===============================================================================
-# Ch5 the Spire Shatter (map 952) in the real engine, dev tool (Wave 0 rescue check, 2026-11-23).
-# Plays the vault autorun at CH5_STEP 8: the Mourner's acting sheets (act_ch5_mourner_reach / _burn), the
-# Movies/pf_ch5_spire_shatter(.ogv | _safe.ogv) cut (VAULT_SAFE=1 = photosensitive), the Overcharged
-# Electivire (auto-won), then CH5_STEP 9. Then the 3 a.m. return: CH5_STEP 11 on 608, the service door
-# into the vault, Larch at the cradle (CH5_STEP 12). RESULT lines in demo.log.
-#   bash tools/harness/visual/intro/run_intro.sh --capture ../ch5/009_Ch5VaultCapture.rb --plan vault
+# Ch5 the Spire Shatter (map 952) in the real engine, dev tool (Wave 0 rescue check, 2026-11-23; the
+# in-engine scene, 2026-11-25).
+# Plays the vault autorun at CH5_STEP 8: pfm_cutscene(:SH1) = the in-engine Shatter scene (Cutscenes 016 /
+# 017_AdvancedAnimations.rb: the two at the cradle, the Splitter, the Shatter, the smoking hand, the
+# Mourner's exit, the Electivire; VAULT_SAFE=1 = photosensitive; its boxes wait for USE, which the plan
+# presses), the Overcharged Electivire (auto-won), then CH5_STEP 9. Then the 3 a.m. return: CH5_STEP 11 on
+# 608, the service door into the vault, Interlude I's "Larch (3 a.m.)" autorun (CH5_STEP 12).
+# RESULT lines in demo.log: the scene log, where the player was put back, the tone, audio tags with no file.
+#   bash tools/harness/visual/intro/run_intro.sh --capture "$PWD/tools/harness/visual/ch5/009_Ch5VaultCapture.rb" --plan vault
+#   VAULT_NOREC=1  no frames (RESULT lines only)      VAULT_EVERY=30  capture every Nth frame (0.6 MB each)
+#   VAULT_FULL=1  play Gemini's full cut (with the Lowlight cutaway) instead of the script's version
+#   VAULT_NOSCENE=1  make the scene unavailable: the event's text fallback must carry the beat
 #===============================================================================
 if ENV["DEMO_PLAN"].to_s.start_with?("vault")
   module VaultCap
@@ -43,9 +49,16 @@ if ENV["DEMO_PLAN"].to_s.start_with?("vault")
       $scene.disposeSpritesets rescue nil
       $scene.createSpritesets
       $game_map.need_refresh = true
-      log("movie file: #{Prismfall::Cutscene.movie_file('pf_ch5_spire_shatter').inspect} play_movie=#{Graphics.respond_to?(:play_movie)}")
-      self.every = (ENV["VAULT_EVERY"] || "15").to_i    # every 3rd frame filled the disk (2.4 GB)
-      record("ch5_vault")
+      if ENV["VAULT_FULL"] == "1"
+        Prismfall::Cutscene.send(:remove_const, :SH1_LOWLIGHT_CUTAWAY)
+        Prismfall::Cutscene.const_set(:SH1_LOWLIGHT_CUTAWAY, true)
+      end
+      Prismfall::Cutscene::SCENES.delete(:CH5_DC) if ENV["VAULT_NOSCENE"] == "1"
+      tone0 = $game_screen.tone
+      log("scene CH5_DC: #{Prismfall::Cutscene.scene_status(:CH5_DC).inspect} photosensitive=#{Prismfall::Cutscene.photosensitive?} " \
+          "tone before #{[tone0.red, tone0.green, tone0.blue, tone0.gray].inspect}")
+      self.every = (ENV["VAULT_EVERY"] || "30").to_i    # every 3rd frame filled the disk (2.4 GB)
+      record("ch5_vault") if ENV["VAULT_NOREC"] != "1"     # VAULT_NOREC=1: RESULT lines only, no frames
       self.auto = true
       t0 = System.uptime
       f = 0
@@ -56,56 +69,37 @@ if ENV["DEMO_PLAN"].to_s.start_with?("vault")
         break if f > 9000
         break if $game_variables[125] >= 9 && !$game_system.map_interpreter.running? && f > 200
       end
+      Prismfall::Cutscene.scene_log.each { |l| log("scene log: #{l}") }
+      cr0 = $game_map.events.values.find { |e| e.name == "Cradle" }
+      tone1 = $game_screen.tone
+      log("RESULT scene: map=#{$game_map.map_id} player=#{$game_player.x},#{$game_player.y} dir=#{$game_player.direction} " \
+          "transparent=#{$game_player.transparent} tone=#{[tone1.red, tone1.green, tone1.blue, tone1.gray].inspect} " \
+          "cradle_tile=#{cr0&.tile_id} bgm=#{$game_system.playing_bgm&.name.inspect} " \
+          "no_audio_file=#{Prismfall::Cutscene.missing_audio.inspect}")
       log("RESULT shatter: CH5_STEP=#{$game_variables[125]} S113=#{$game_switches[113]} battles=#{VaultCap.battles.inspect} " \
           "mourner_gone=#{$game_map.events.values.none? { |e| e.name == 'Mourner' && !e.instance_variable_get(:@erased) && e.character_name != '' }} " \
           "frames=#{f} secs=#{(System.uptime - t0).round(1)}")
-      # the 3 a.m. return through 608's service door
+      # the 3 a.m. return: CH5_STEP 11 on 608, the service door (the plan's USE presses open it), the vault, where
+      # Interlude I's "Larch (3 a.m.)" autorun (mapgen/layouts/story_interlude1.py) plays and sets CH5_STEP 12.
+      # Stop there: 182's "Lamplight" autorun would start the Interlude proper.
       $game_variables[125] = 11
       $game_temp.player_new_map_id = 608; $game_temp.player_new_x = 48; $game_temp.player_new_y = 5
       $game_temp.player_new_direction = 8; $game_temp.player_transferring = true
+      trail = []
+      forced = false
       f = 0
       loop do
         Graphics.update; Input.update
         $scene.update
         f += 1
-        break if f > 400 || ($game_map.map_id == 608 && f > 60)
+        trail << $game_map.map_id if trail.last != $game_map.map_id
+        break if f > 6000 || $game_variables[125] >= 12
+        next if forced || f < 900 || $game_map.map_id != 608 || $game_system.map_interpreter.running?
+        ev = $game_map.events.values.find { |e| e.name == "Service door" }     # the presses didn't open it: force it
+        $game_system.map_interpreter.setup(ev.list, ev.id) if ev
+        forced = true
       end
-      f = 0
-      loop do                                    # let 608's Aftermath autorun finish first
-        Graphics.update; Input.update
-        $scene.update
-        f += 1
-        break if f > 2500 || (!$game_system.map_interpreter.running? && f > 30)
-      end
-      ev = $game_map.events.values.find { |e| e.name == "Service door" }
-      log("door event: #{ev&.id} page list #{ev&.list&.length} player #{$game_player.x},#{$game_player.y} dir #{$game_player.direction}")
-      # the auto USE presses usually open 608's door on their own while waiting; only force it if still on 608
-      $game_system.map_interpreter.setup(ev.list, ev.id) if ev && $game_map.map_id == 608
-      f = 0
-      loop do
-        Graphics.update; Input.update
-        $scene.update
-        f += 1
-        break if f > 1500 || ($game_map.map_id == 952 && !$game_system.map_interpreter.running? && f > 60)
-      end
-      log("RESULT door: map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y}")
-      f = 0
-      loop do
-        Graphics.update; Input.update
-        $scene.update
-        f += 1
-        break if f > 600 || (!$game_system.map_interpreter.running? && f > 30)
-      end
-      cr = $game_map.events.values.find { |e| e.name == "Cradle" }
-      $game_system.map_interpreter.setup(cr.list, cr.id) if cr
-      log("cradle event: #{cr&.id} page list #{cr&.list&.length}")
-      f = 0
-      loop do
-        Graphics.update; Input.update
-        $scene.update
-        f += 1
-        break if f > 2500 || ($game_variables[125] >= 12 && !$game_system.map_interpreter.running?)
-      end
+      log("RESULT return: maps=#{trail.inspect} door_forced=#{forced} frames=#{f} map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y}")
       self.auto = false
       stop
       log("RESULT larch: CH5_STEP=#{$game_variables[125]}")

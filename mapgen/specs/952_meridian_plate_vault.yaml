@@ -25,37 +25,38 @@ events:
     move: fixed
   - commands:
     - {script: Prismfall.checkpoint rescue nil}
-    - move:
-        who: player
-        route: [up, up, up, up, up]
-        wait: true
-    - '(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the
-      cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle''s crystal is crazed all over with fine
-      white lines.)'
-    - (At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a woman
-      in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)
-    - '\pf[MOURNER,neutral]Mourner: (the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its dark.
-      That''s all. That''s all tonight is.'
-    - '\pf[SABLE,happy]Sable: Mm-hm. Gently.'
-    - (She stands. Something small and brass is clamped to the Plate's edge, blinking.)
-    - '\pf[MOURNER,shocked]Mourner: What is that? What have you put on—'
-    - '\pf[SABLE,happy]Sable: Light for everyone.'
-    - (She steps back off the dais, almost skipping.)
-    - {se: Anim/Saint7}
-    - {script: 'pfm_cutscene(:SH1) rescue nil'}
-    - '\pf[MOURNER,shocked]Mourner: No — no — what did you DO?'
-    - {script: 'pfm_cutscene(:SH1_BURN) rescue nil'}
-    - (He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door and the
-      smell of burnt brass.)
-    - (The Mourner turns and sees you. He goes still, the way he did in the Lantern Theatre.)
-    - '\pf[MOURNER,sad]Mourner: ...You. Not you. Not here. Get out of here, child. Get OUT—'
-    - (He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door,
-      holding his right hand away from his body. It's still smoking.)
+    - if: (pfm_cutscene(:SH1) rescue false)
+      then: []
+      else:
+      - move:
+          who: player
+          route: [up, up, up, up, up]
+          wait: true
+      - '(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the
+        cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle''s crystal is crazed all over with fine
+        white lines.)'
+      - (At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a
+        woman in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)
+      - '\pf[MOURNER,neutral]Mourner: (the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its
+        dark. That''s all. That''s all tonight is.'
+      - '\pf[SABLE,happy]Sable: Mm-hm. Gently.'
+      - (She stands. Something small and brass is clamped to the Plate's edge, blinking.)
+      - '\pf[MOURNER,shocked]Mourner: What is that? What have you put on—'
+      - '\pf[SABLE,happy]Sable: Light for everyone.'
+      - (She steps back off the dais, almost skipping.)
+      - {se: Anim/Saint7}
+      - '\pf[MOURNER,shocked]Mourner: No — no — what did you DO?'
+      - (He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door and the
+        smell of burnt brass.)
+      - (The Mourner turns and sees you. He goes still, the way he did in the Lantern Theatre.)
+      - '\pf[MOURNER,sad]Mourner: ...You. Not you. Not here. Get out of here, child. Get OUT—'
+      - (He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door,
+        holding his right hand away from his body. It's still smoking.)
+      - '\pf[ROOK,shocked]Rook: (behind you) That''s it. That''s the Zap Plate. That''s — it''s broken. It''s BROKEN.'
+      - '(Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate''s discharge, crackling white, its eyes empty. It plants itself between
+        you and the door.)'
+      - '\pf[ROOK,panic]Rook: That''s the vault guard! That''s Meridian''s — look at it, it''s drunk on the — get BACK—'
     - {script: 'pfm_cutscene(:SH1_EXIT) rescue nil'}
-    - '\pf[ROOK,shocked]Rook: (behind you) That''s it. That''s the Zap Plate. That''s — it''s broken. It''s BROKEN.'
-    - '(Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate''s discharge, crackling white, its eyes empty. It plants itself between
-      you and the door.)'
-    - '\pf[ROOK,panic]Rook: That''s the vault guard! That''s Meridian''s — look at it, it''s drunk on the — get BACK—'
     - {script: 'pfm_set(:live_wire, false) rescue nil'}
     - boss: {id: OVERCHARGED, species: ELECTIVIRE, level: 30, field: NEON_GRID}
     - if: pfm_lumen_live_wire?

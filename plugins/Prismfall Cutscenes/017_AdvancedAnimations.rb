@@ -26,7 +26,8 @@
 #   - photosensitive mode (Prismfall::Cutscene.photosensitive?): besides Gemini's guards on flash,
 #     flash_ramp, impact_beat and shake, additive VFX are dimmed and actor colour flashes capped.
 #   - transfer_map raises SceneUnavailable for a map that isn't built; captures only write inside the
-#     game folder; §12's two engine patches (foot pads, zoom overscan clamp) are applied.
+#     game folder; sheets are also looked up in this plugin's own Graphics folder (the pfw_* war art);
+#     §12's two engine patches (foot pads, zoom overscan clamp) are applied.
 #   - Ch5: lowlight: false leaves out the Lowlight cutaway (story/24: "no streets shown"); lines as the
 #     script. Ruin R7: the King is AURELIUS and speaks story/42's lines.
 # Map events call pfm_cutscene(:ID) (016_Movies.rb), which checks the maps before playing.
@@ -926,7 +927,10 @@ module Prismfall
         p = path.end_with?(".png") ? path : "#{path}.png"
         bmp = @bmp_cache[p]
         return bmp if bmp && !bmp.disposed?
-        bmp = Bitmap.new(p)
+        file = p
+        overlay = "Plugins/Prismfall Cutscenes/" + p          # [PF] the plugin's own art (the pfw_* war sheets)
+        file = overlay if !File.exist?(p) && File.exist?(overlay)
+        bmp = Bitmap.new(file)
         @bmp_cache[p] = bmp
         bmp
       end

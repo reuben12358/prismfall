@@ -819,27 +819,30 @@ def build_952():
 
     # ---- 5. Events (100% gameplay & cutscene contract preserved!) ----
     E = m.events
+    # The whole beat (the two at the cradle, the Splitter, the Shatter, the smoking hand, his exit, the Electivire)
+    # is ONE in-engine scene: pfm_cutscene(:SH1) -> Cutscenes 016/017 (Gemini's Ch5 Director's Cut, the script's
+    # lines). It leaves the player at the foot of the dais stairs (12,12). If it can't play, the same beat as text.
+    shatter_text = [
+                   MV('player', ['up'] * 5),
+                   "(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle's crystal is crazed all over with fine white lines.)",
+                   "(At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a woman in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)",
+                   P('MOURNER', 'neutral', "(the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its dark. That's all. That's all tonight is."),
+                   P('SABLE', 'happy', "Mm-hm. Gently."),
+                   "(She stands. Something small and brass is clamped to the Plate's edge, blinking.)",
+                   P('MOURNER', 'shocked', "What is that? What have you put on—"),
+                   P('SABLE', 'happy', "Light for everyone."),
+                   "(She steps back off the dais, almost skipping.)", {'se': 'Anim/Saint7'},
+                   P('MOURNER', 'shocked', "No — no — what did you DO?"),
+                   "(He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door and the smell of burnt brass.)",
+                   "(The Mourner turns and sees you. He goes still, the way he did in the Lantern Theatre.)",
+                   P('MOURNER', 'sad', "...You. Not you. Not here. Get out of here, child. Get OUT—"),
+                   "(He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door, holding his right hand away from his body. It's still smoking.)",
+                   P('ROOK', 'shocked', "(behind you) That's it. That's the Zap Plate. That's — it's broken. It's BROKEN."),
+                   "(Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate's discharge, crackling white, its eyes empty. It plants itself between you and the door.)",
+                   P('ROOK', 'panic', "That's the vault guard! That's Meridian's — look at it, it's drunk on the — get BACK—")]
     shatter = [S('Prismfall.checkpoint rescue nil'),
-               MV('player', ['up'] * 5),                   # walks smoothly up catwalk (12,17..12) to foot of marble dais stairs!
-               "(The vault: a round room cut into the cliff under the Spire. Thick Lattice conduits run across the floor into a brass-and-crystal cradle on a dais. In the cradle, a golden Plate blazes with a light that hurts to look at, and the air round it shimmers with heat. The cradle's crystal is crazed all over with fine white lines.)",
-               "(At the cradle, two figures. One in a grey cowl and an ash-bark mask with a single white lily, reaching for the Plate with both gloved hands. The other, a woman in Hollow grey, a half-mask over the top of her face and a smile under it, crouched at the cradle's foot.)",
-               P('MOURNER', 'neutral', "(the doubled voice) Gently. We lift it out gently, and we carry it out of here, and we give this city back its river and its dark. That's all. That's all tonight is."),
-               P('SABLE', 'happy', "Mm-hm. Gently."),
-               "(She stands. Something small and brass is clamped to the Plate's edge, blinking.)",
-               P('MOURNER', 'shocked', "What is that? What have you put on—"),
-               P('SABLE', 'happy', "Light for everyone."),
-               "(She steps back off the dais, almost skipping.)", {'se': 'Anim/Saint7'},
-               S('pfm_cutscene(:SH1) rescue nil'),            # reach + lunge (act_ch5_mourner_reach), then Movies/pf_ch5_spire_shatter(_safe).ogv
-               P('MOURNER', 'shocked', "No — no — what did you DO?"),
-               S('pfm_cutscene(:SH1_BURN) rescue nil'),       # act_ch5_mourner_burn: the smoking hand
-               "(He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door and the smell of burnt brass.)",
-               "(The Mourner turns and sees you. He goes still, the way he did in the Lantern Theatre.)",
-               P('MOURNER', 'sad', "...You. Not you. Not here. Get out of here, child. Get OUT—"),
-               "(He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door, holding his right hand away from his body. It's still smoking.)",
-               S('pfm_cutscene(:SH1_EXIT) rescue nil'),
-               P('ROOK', 'shocked', "(behind you) That's it. That's the Zap Plate. That's — it's broken. It's BROKEN."),
-               "(Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate's discharge, crackling white, its eyes empty. It plants itself between you and the door.)",
-               P('ROOK', 'panic', "That's the vault guard! That's Meridian's — look at it, it's drunk on the — get BACK—"),
+               IF('(pfm_cutscene(:SH1) rescue false)', [], shatter_text),
+               S('pfm_cutscene(:SH1_EXIT) rescue nil'),       # the Mourner's event is gone either way
                S('pfm_set(:live_wire, false) rescue nil'),
                {'boss': {'id': 'OVERCHARGED', 'species': 'ELECTIVIRE', 'level': 30, 'field': 'NEON_GRID'}},
                IF('pfm_lumen_live_wire?',
