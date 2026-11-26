@@ -35,11 +35,13 @@ no provenance at all, so they were deleted from staging.
 
 ## 2. Formats and naming
 
-- Essentials 21.1 resolves names without extension, trying `.wav .ogg .mp3 .midi .mid .wma` (`FileTests.rb`
-  `AUDIO_EXTENSIONS`). **Use `.ogg`**: mkxp-z loops it from `LOOPSTART` / `LOOPLENGTH` Vorbis comments (in samples).
-  `.mp3` plays but can't loop cleanly. `.mid` plays through `soundfont.sf2`.
-- One file per name. If `Battle - Warden.mid` and `Battle - Warden.ogg` both exist, the earlier extension in that
-  list wins (`.ogg` beats `.mid`), but delete the stand-in anyway.
+- Essentials 21.1 resolves names without extension, trying `.mid .midi .ogg .wav .wma` (`FileTests.rb`
+  `AUDIO_EXTENSIONS`; in the shipped 21.1 scripts `.mp3` is commented out of that list). **Use `.ogg`**: mkxp-z loops
+  it from `LOOPSTART` / `LOOPLENGTH` Vorbis comments (in samples). **Never stage an `.mp3`**: `audio_exist?` does not
+  see it, so the engine plays nothing (found 2026-11-25 with `Battle - Voss`, now an `.ogg`). `.mid` plays through
+  `soundfont.sf2`.
+- One file per name. If `Battle - Warden.mid` and `Battle - Warden.ogg` both exist, delete the stand-in
+  (`install_audio.py --force` does it for the names it installs).
 - Names follow the Reborn/Rejuvenation habit, `Category - Name`: `Title`, `Intro`, `Town`, `Route`, `Dungeon`, `Gym`,
   `Battle`, `Victory`, `Mood`, `Theme`, `War`, `Festival`, `Ending`. ASCII only, no apostrophes, **no colons**
   (`pbStringToAudioFile` reads `name:80:100` as volume and pitch).
@@ -117,7 +119,7 @@ it exists on the channel, or swap for any remix of the named source theme. Stand
 | Meridian agent | `BGM/Battle - Meridian.mid` | GlitchxCity - Team Galactic / Team Flare battle remix ([link](https://www.youtube.com/@GlitchxCity)) (confirm title) | `team_aquas_misc/nico/mus_vs_cipher_admin.mid` |
 | Meridian admin (Marchetti, Kroll, Quent) | `BGM/Battle - Meridian Admin.mid` | GlitchxCity - Galactic Commander / Colress battle remix ([link](https://www.youtube.com/@GlitchxCity)) (confirm title) | `team_aquas_misc/camgotay/hgss_rocket_hideout.mid` |
 | The Mourner | `BGM/Battle - Mourner.mid` | GlitchxCity - N Battle / Ghetsis remix ([link](https://www.youtube.com/@GlitchxCity)) (confirm title) | `nmm_lequietriot/mus_vs_team_rocket_boss.mid` |
-| Aurelian Voss | `BGM/Battle - Voss.mp3` | GlitchxCity - Lysandre / Cyrus / Rose battle remix ([link](https://www.youtube.com/@GlitchxCity)) (confirm title) | `dedrum_tectonic/Tectonic_Yezera_Battle_Theme.mp3` |
+| Aurelian Voss | `BGM/Battle - Voss.ogg` | GlitchxCity - Lysandre / Cyrus / Rose battle remix ([link](https://www.youtube.com/@GlitchxCity)) (confirm title) | `dedrum_tectonic/Tectonic_Yezera_Battle_Theme.ogg` |
 | Legendary (catchable) | `BGM/Battle - Legendary.mid` | GlitchxCity - Giratina Battle remix ([link](https://www.youtube.com/watch?v=tjYI_ie-kvw)) ✔ | `team_aquas_misc/nico/mus_bw_vs_legendary.mid` |
 | Boss (multi-bar) | `BGM/Battle - Boss.mid` | GlitchxCity - Deoxys Battle remix ([link](https://www.youtube.com/watch?v=QdlUIgMRVPQ)) ✔ | `nmm_lequietriot/mus_vs_legend.mid` |
 | Boss, final bar | `BGM/Battle - Boss Final Bar.mid` | GlitchxCity - Ultra Necrozma / Zinnia remix ([link](https://www.youtube.com/@GlitchxCity)) (confirm title) | `team_aquas_misc/ShinyDragonHunter/mus_c_vs_legend_beast.mid` |
