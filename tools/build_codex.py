@@ -91,13 +91,15 @@ def prepass(md_text):
         out.append(ln)
     return "\n".join(out)
 
-TAG_RE = re.compile(r"\[(portrait|bubble|name): ([^\]]+)\]")
+TAG_RE = re.compile(r"\[(portrait|bubble|name|emote): ([^\]]+)\]")
 
 def style_script(body):
     """Script readability: \\PN -> [Player], [portrait: NAME, expr] -> a small speaker tag."""
     body = body.replace("\\PN", '<span class="pc">[Player]</span>')
     def tag(m):
         parts = [p.strip() for p in m.group(2).split(",")]
+        if m.group(1) == "emote":           # [emote: dots] / [emote: exclaim, Kestrel]: a balloon over the map sprite
+            return f'<span class="tag tag-emote">emote · {html.escape(" · ".join(parts))}</span>'
         who = parts[0].title().replace("_", " ")
         rest = " · ".join(parts[1:])
         return f'<span class="tag tag-{m.group(1)}">{html.escape(who)}{(" · " + html.escape(rest)) if rest else ""}</span>'
