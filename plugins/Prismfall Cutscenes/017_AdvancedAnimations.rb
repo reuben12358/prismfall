@@ -202,8 +202,14 @@ module Prismfall
       def set_pose(sheet, pose_idx)
         @clip = nil
         @walking = false
-        load_sheet(sheet, [4, 1], false)
-        set_cell(pose_idx.to_i)
+        # [PF] 128x48 strips hold 4 poses in one row; the 128x192 4x4 cast sheets hold a pose a ROW (4 frames): show
+        # that row's last frame, as 018_ExpressiveDialogue holds it (Gemini QA 2026-11-26).
+        name = Prismfall::AdvancedAnimations.cast_sheet(sheet)
+        path = name.start_with?("Graphics/") ? name : (@folder + name)
+        probe = (@engine.cached_bitmap(path) rescue nil)
+        rows = (probe && probe.height >= (probe.width / 4) * 4) ? 4 : 1
+        load_sheet(sheet, [4, rows], false)
+        set_cell(rows == 4 ? (pose_idx.to_i % 4) * 4 + 3 : pose_idx.to_i)
       end
 
       # Restore standard 4x4 walking charset seamlessly at identical foot baseline

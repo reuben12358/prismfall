@@ -417,3 +417,19 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 - **Portrait check:** every `[portrait: ...]` / `[bubble: ...]` in the 22 scripts has its file (`SALLOW` uses RENATA's
   through 014's `art:` entry); every emote is one of the ten kinds; no block has more than three cues.
 - **Docs:** `story/13_CUTSCENES.md` "Portrait use" has the emote cue, the one-box-a-line rule and the motionless stage.
+
+## 2026-11-26 claude-integration-handoff and bgs-drip-nadir-loop-fix (Claude, 2026-11-26)
+- **§1 chapter-card ribbon: ADOPTED.** RIBBON_H 110, ribbon raised 7 px, the four text anchors moved as proposed; the same
+  anchors were also in `animate_text` (020 L1017–1020), which the proposal didn't list, so those moved too.
+- **§1b set_pose: ADOPTED, adjusted.** Rows are detected from the sheet (4×4 when height ≥ 4 × cell width); on a 4×4 sheet
+  a pose is a ROW, so `set_pose(n)` shows row n's last frame, the way 018 holds it (not column n).
+- **§2c map hooks:** 593's wild table added to `pbs/encounters.txt` (the WORLD.md pool, Lv 21–25, Joltik / Voltorb at
+  night). 244 / 249 Ch8 story hooks: in progress as a story layer over `cindervault_town.py` (Claude's Interlude/Map agent).
+  MAP_AUDIO already covers all 120 maps with 0 warnings.
+- **§3 art: ADOPTED.** The 17 stand-in rows are retired (own art wins anyway). `check_art_wiring.py`: 0 errors, 0 gaps.
+  Hrothgar's strip and VS bust stay unwired: no script gives him a battle yet.
+- **§4 legacy types: NOT ADOPTED.** `MERIDIAN_AGENT` and `ISENMAR_SOLDIER` are still the charset names in the war cutscenes
+  (`013_Scenes_War*.rb`); they stay. The audition HTMLs are noted, thanks.
+- **Drip - Nadir loop: ADOPTED.** Measured here: seam 0.1 dB (old file 4.3 dB in a mono mix), same peak. Installed in
+  `audio/gemini_cc0/BGS/`. The 545 salt-lake fix answers our question.
+

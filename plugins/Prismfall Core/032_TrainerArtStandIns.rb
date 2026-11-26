@@ -17,15 +17,8 @@ module Prismfall
     :MERIDIAN_AGENT      => :MERIDIAN_AGENT_M,
     :ASHKAAR_SOLDIER     => :ASHKAAR_SOLDIER_M,
     :ISENMAR_SOLDIER     => :ISENMAR_SOLDIER_M,
-    # Act III-V classes without art yet (art requests: mapgen/REQUESTS.md / TODO_QUOTA.md)
-    :ASHKAAR_EMBER_RIDER => :ASHKAAR_OFFICER,
-    :ISENMAR_HIRDMAN     => :ISENMAR_OFFICER,
-    :ISENMAR_TRENCHER    => :ISENMAR_SOLDIER_M,
-    :THORNWATCH          => :THORNGUARD,
-    # Ch20 Grounds Ladder classes (Gemini's unique-classes list, art queued): stock Essentials figures for now
-    :WEAVER => :AROMALADY,      :HARPOONER => :FISHERMAN,   :STREAMER => :BEAUTY,        :FOREMAN => :ENGINEER,
-    :MOON_BROKER => :GAMBLER,   :WYRM_RIDER => :COOLTRAINER_F, :LAMP_RUNNER => :PICNICKER, :WELL_KEEPER => :RUINMANIAC,
-    :LANTERN_ACOLYTE => :PSYCHIC_M, :EMBALMER => :CHANNELER, :WARDGUARD => :BLACKBELT,   :CANTOR => :GENTLEMAN
+    # The 17 Act III-V and Grounds Ladder rows retired 2026-11-26: Gemini delivered their front strips and overworld
+    # sheets (gemini_recommends/2026-11-26_claude-integration-handoff §3). Add a row here for any new artless class.
   }
 end
 

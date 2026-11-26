@@ -849,6 +849,23 @@ Land
     4,PLUSLE,21,25
     4,MINUN,21,25
 #-------------------------------
+[593] # The Arc-Lamp Mile (Gemini map 2026-11-26; pool from design/WORLD.md; Lumen approach, Gym 4 cap 27)
+Land
+    20,YAMPER,21,24
+    20,SHINX,21,24
+    15,PAWMI,21,24
+    15,ROOKIDEE,21,24
+    10,KLINK,22,25
+    10,MAGNEMITE,22,25
+    10,BOUNSWEET,21,24
+LandNight
+    25,JOLTIK,21,24
+    20,VOLTORB,21,24
+    15,SHINX,21,24
+    15,YAMPER,21,24
+    15,KLINK,22,25
+    10,MAGNEMITE,22,25
+#-------------------------------
 [584] # Voltaic Sluiceworks
 Cave
     15,MAGNEMITE,21,25

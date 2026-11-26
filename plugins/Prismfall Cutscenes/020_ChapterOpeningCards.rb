@@ -36,7 +36,7 @@ module Prismfall
     VIEWPORT_Z       = 100_000      # above message boxes and the black of a screen fade
     TARGET_W         = 512
     TARGET_H         = 384
-    RIBBON_H         = 96
+    RIBBON_H         = 110   # [PF] was 96: the bottom rule struck through the location line (Gemini QA 2026-11-26)
     LEAD_SEC         = 0.30         # the map fades to black before the painting, and back after
     SKIP_GRACE_SEC   = 1.5
     SKIP_FADE_SEC    = 0.45
@@ -894,7 +894,7 @@ module Prismfall
         bg.y = @h / 2
         sprite(:fx, own(Bitmap.new(@w, @h)), 20)
         sprite(:letterbox, own(Bitmap.new(@w, @h)), 30)
-        @ribbon_y = ((@cfg[:ribbon_y] || 246) * @h / TARGET_H.to_f).to_i
+        @ribbon_y = ((@cfg[:ribbon_y] || 246) * @h / TARGET_H.to_f).to_i - 7
         rib_bmp = own(Bitmap.new(@w, RIBBON_H))
         draw_ribbon_bitmap(rib_bmp)
         rib = sprite(:ribbon, rib_bmp, 40)
@@ -910,10 +910,10 @@ module Prismfall
         gleam.x = -140
         gleam.y = @ribbon_y
         gleam.opacity = 0
-        text_sprite(:act, @cfg[:act], 15, Color.new(*@cfg[:accent]), true, false, @ribbon_y + 7, 50)
-        text_sprite(:num, "—  #{@cfg[:num]}  —", 17, Color.new(244, 224, 178), true, false, @ribbon_y + 24, 51)
-        text_sprite(:title, @cfg[:title], 30, Color.new(252, 249, 240), true, true, @ribbon_y + 42, 52)
-        text_sprite(:loc, @cfg[:location], 15, Color.new(204, 216, 238), false, false, @ribbon_y + 74, 53)
+        text_sprite(:act, @cfg[:act], 15, Color.new(*@cfg[:accent]), true, false, @ribbon_y - 2, 50)
+        text_sprite(:num, "—  #{@cfg[:num]}  —", 17, Color.new(244, 224, 178), true, false, @ribbon_y + 15, 51)
+        text_sprite(:title, @cfg[:title], 30, Color.new(252, 249, 240), true, true, @ribbon_y + 38, 52)
+        text_sprite(:loc, @cfg[:location], 15, Color.new(204, 216, 238), false, false, @ribbon_y + 66, 53)
         curtain = sprite(:curtain, black, 90)
         curtain.opacity = 0
         hide_layers
@@ -1014,10 +1014,10 @@ module Prismfall
         else
           gleam.opacity = 0
         end
-        animate_text(@sprites[:act],   @ribbon_y + 7,  t, 1.35, 1.88, 5, out_fade)
-        animate_text(@sprites[:num],   @ribbon_y + 24, t, 1.65, 2.20, 6, out_fade)
-        animate_text(@sprites[:title], @ribbon_y + 42, t, 2.00, 2.68, 9, out_fade)
-        animate_text(@sprites[:loc],   @ribbon_y + 74, t, 2.52, 3.12, 4, out_fade)
+        animate_text(@sprites[:act],   @ribbon_y - 2,  t, 1.35, 1.88, 5, out_fade)
+        animate_text(@sprites[:num],   @ribbon_y + 15, t, 1.65, 2.20, 6, out_fade)
+        animate_text(@sprites[:title], @ribbon_y + 38, t, 2.00, 2.68, 9, out_fade)
+        animate_text(@sprites[:loc],   @ribbon_y + 66, t, 2.52, 3.12, 4, out_fade)
       end
 
       def animate_text(sp, target_y, t, t0, t1, slide_px, out_fade)
