@@ -53,8 +53,14 @@ V143 = 0.
 ## P1. Larch's Postgame Registry (the Concordance Spire lobby; touch, Larch, V143 == 0 → 1)
 ```
 (The Concordance Spire's lobby, finished at last, gold and glass, quieter than the arena. A board on an easel covered in pinned notes, eighteen columns, one per kingdom. Larch in front of it with a mug.)
-[portrait: LARCH, happy] There you are. Sit. No, don't sit, look. Every Warden sent me something. Rumours. Sightings. Things that woke up when the sky closed and didn't go back to sleep.
-[portrait: LARCH, neutral] The old ones. The legends. They're not bound any more. They're not *anyone's*. Some of them want to be found. Some want to be fought. One or two want to be left alone, and I've marked those in red. Respect the red.
+[portrait: LARCH, happy] There you are. Sit. No, don't sit, look.
+[name: Larch] Every Warden sent me something. Rumours. Sightings.
+[name: Larch] Things that woke up when the sky closed and didn't go back to sleep.
+[portrait: LARCH, neutral] The old ones. The legends.
+[name: Larch] They're not bound any more. They're not *anyone's*.
+[name: Larch] Some of them want to be found. Some want to be fought.
+[name: Larch] One or two want to be left alone, and I've marked those in red.
+[name: Larch] Respect the red.
 [portrait: LARCH, smug] I'm calling it the Registry. Dorian wanted "The Grand Tour". We compromised: I won.
 Switch S270 PG_LEGENDS_BOARD_OPEN = ON. V143 = 1.
 ```
@@ -95,26 +101,36 @@ These are the story legends, rematched and caught (`:catch => :last_bar`). Each 
 
 ```
 (At the Convergence's start, in the arena, on the Ring where Valen held it, the eighteen Wardens kneel at the pylons again, empty-handed this time, because they want to see.)
-[name: Arceus] Little light. You came back. I said I would not take what is not given. Will you give me a test?
+[name: Arceus] Little light. You came back.
+[name: Arceus] I said I would not take what is not given.
+[name: Arceus] Will you give me a test?
 (At the end, caught or not:)
-[name: Arceus] (if caught) Then I will walk with you a while. Not chained. Not bought. Given.
+[name: Arceus] (if caught) Then I will walk with you a while.
+[name: Arceus] Not chained. Not bought. Given.
 ```
 
 ## P2. The lighthouse (Ferrow's Landing; touch, Hesper at the lamp, V143 >= 1 → 2)
 The PC's first post-game visit to Ferrow's Landing, where the game began.
 ```
 (Ferrow's Landing lighthouse, at the top of the stair. Hesper Vane, seventy-eight, at the lamp, polishing a lens that doesn't need it. She doesn't turn round.)
-[portrait: HESPER, neutral] Sprog. Edda said you'd come up eventually. Everyone comes up eventually. It's the only view in town.
-[portrait: HESPER, sad] Tell me about her last night. My daughter. Morwen. You were there. You were five. I know you won't remember. Tell me anyway.
+[portrait: HESPER, neutral] Sprog. Edda said you'd come up eventually.
+[name: Hesper] Everyone comes up eventually. It's the only view in town.
+[portrait: HESPER, sad] Tell me about her last night. My daughter. Morwen.
+[name: Hesper] You were there. You were five.
+[name: Hesper] I know you won't remember. Tell me anyway.
 ```
 ```
 [if S141 CH15_ECHO_DONE]
   (You tell her. The echo. The vestry. Ines at the door. The Mismagius closing your eyes. "I'll carry the name.")
   (She listens to all of it without turning round. When you're done she keeps polishing the lens.)
-  [portrait: HESPER, sad] ...I spat on her grave. Did he tell you that? Kestrel. I spat on it. In front of him.
-  [portrait: HESPER, neutral] (putting the cloth down) I'm going to go and apologise. It's a long walk to Gravenmoor. I'll take the ferry. They run again now.
+  [portrait: HESPER, sad] [emote: dots] ...I spat on her grave.
+  [name: Hesper] Did he tell you that? Kestrel. I spat on it. In front of him.
+  [portrait: HESPER, neutral] (putting the cloth down) I'm going to go and apologise.
+  [name: Hesper] It's a long walk to Gravenmoor. I'll take the ferry.
+  [name: Hesper] They run again now.
 [if KESTREL_LOST]
-  [portrait: HESPER, sad] And the boy. They told me. I light the lamp for him. Nobody needs it. I light it anyway.
+  [portrait: HESPER, sad] And the boy. They told me.
+  [name: Hesper] I light the lamp for him. Nobody needs it. I light it anyway.
 [if !KESTREL_LOST]
   [portrait: HESPER, smug] And the boy. He writes now. Badly. Every week. Complaining about the Gravenmoor damp. [if KESTREL_ACCEPTED_SEAT] The Ghost Warden of Gravenmoor complains about the damp. I've framed one.
 V143 = 2.
@@ -129,7 +145,10 @@ V143 = 2.
 [if ZYGARDE_CHOOSES]
   (The Cell lifts off the plinth and settles against your hand, the way the Cell on the sill pulsed once, the night before the Final.)
   [if ILSA_RECONCILED]
-    [portrait: ILSA, neutral] (not looking up) He asked it if he was wrong. It never answered him. (A beat.) I think that's the answer. It's choosing you instead.
+    [portrait: ILSA, neutral] (not looking up) He asked it if he was wrong.
+    [name: Ilsa] It never answered him.
+    (A beat.)
+    [name: Ilsa] I think that's the answer. It's choosing you instead.
   RECEIVE: ZYGARDE CUBE (the Cell quest completes; the 100% form is Tier 3).
 [else]
   (The Cell stays on the plinth. It glows, steadily, at nobody.)
@@ -143,8 +162,10 @@ V143 = 3.
   - **PBS (added):** version **98** of every Warden (e.g. `[LEADER_DORIAN,Dorian,98]`, `[LEADER_SIGRUN,Sigrun,98]`; +100 Hard, +200 Casual), Lv 96–100 with the ace at 100; Juno is `[LEADER_JUNO,Juno,60]` / `[LEADER_JUNO,Juno,61]` / `[LEADER_JUNO,Juno,62]` (`Prismfall::Rival.version_for(6)`, her starter follows the player's). Gyms 6–18 are the gym six with the Hard sets promoted; Dorian, Tamsin, Rook and Sahar are rebuilt with the same partners grown up (Bobbin is a Leavanny); Marisol is her Festival six. "No fields" is the event's battle rule.
   - **Refusing Wardens are absent** after Homecoming, Unfinished. Their pedestals stand empty, with a line each from `11_FINALE_LINES.md` §3.
 ```
-[portrait: DORIAN, happy] (in the Gauntlet's antechamber, in his best coat) First on the bill again, darling. Some of us are born to open.
-[portrait: SIGRUN, neutral] (at the far end, last) I'll be here. All eighteen of us, in order. No fields, no Plates. Just us and what we taught them.
+[portrait: DORIAN, happy] (in the Gauntlet's antechamber, in his best coat) First on the bill again, darling.
+[name: Dorian] Some of us are born to open.
+[portrait: SIGRUN, neutral] (at the far end, last) I'll be here. All eighteen of us, in order.
+[name: Sigrun] No fields, no Plates. Just us and what we taught them.
 V143 = 4.
 ```
 

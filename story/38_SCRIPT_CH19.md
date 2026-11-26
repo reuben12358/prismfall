@@ -78,10 +78,15 @@ Trainers (Lv 81–82): a dragon tamer, a black belt, a bird keeper.
 ## Wyrmrest: **the last gate** (autorun at the gate, 460, V140 == 0 → 1)
 ```
 (Wyrmrest. A fortress-city carved into the red cliffs, dragon roosts on every ledge. At the great gate, a line of riders in dragonhide, barring it. Above them, standing on the gate itself in dragonhide with a Salamence coiled on the parapet beside her: Sigrun Ashfall.)
-[name: Gate-guard] Halt. By the Dominar's order, the pass is closed to all things Zenith-tainted. Meridian's Fellowship. Meridian's badge case. (He looks at your case.) Say true or say nothing.
+[name: Gate-guard] Halt. By the Dominar's order, the pass is closed to all things Zenith-tainted.
+[name: Gate-guard] Meridian's Fellowship. Meridian's badge case.
+(He looks at your case.)
+[name: Gate-guard] Say true or say nothing.
 [portrait: SIGRUN, neutral] (from the gate, without raising her voice; every rider hears it) Open it.
 [name: Gate-guard] My lady, the Dominar —
-[portrait: SIGRUN, neutral] Wyrmrest is the last gate. Dragons don't let anything through they haven't weighed. *I* do the weighing. Not my father. Open it.
+[name: Sigrun] Wyrmrest is the last gate.
+[name: Sigrun] Dragons don't let anything through they haven't weighed.
+[name: Sigrun] *I* do the weighing. Not my father. Open it.
 (The gate opens.)
 [portrait: SIGRUN, neutral] (dropping down off the gate to stand in front of you) You don't challenge me yet. First you walk the Rift with me, to the Draco Plate, and you say out loud what you mean to do at the Festival. Then we'll see if you're worth a badge.
 [portrait: SIGRUN, deadpan] Tomorrow. Tonight you eat. You look like a dragon's leftovers.
@@ -93,7 +98,8 @@ V140 = 1.
 ### Comedy scene Ch19, **"Weighed"** (touch, Sigrun on the wall at night, V140 == 1 → 2)
 As written in 15_COMEDY. It's the chapter's only joke. Then:
 ```
-[portrait: SIGRUN, neutral] Sleep. The Rift doesn't care if you're tired. I do, a little. Don't tell anyone.
+[portrait: SIGRUN, neutral] Sleep. The Rift doesn't care if you're tired.
+[name: Sigrun] I do, a little. Don't tell anyone.
 V140 = 2.
 ```
 
@@ -102,14 +108,17 @@ A walk down into the Rift: a canyon of red glass and old dragon bones, with the 
 Trainers (Lv 82–83): 2 dragon tamers (Sigrun's own riders, testing).
 ```
 (Halfway down, by an old roost, Sigrun stops. She doesn't look at you.)
-[portrait: SIGRUN, neutral] He trained me to be his successor. Valen. Did you know that? I was going to wear it.
-[portrait: SIGRUN, sad] Then he told me I'd never survive the Crown. And I was relieved. Do you understand? *Relieved.*
-[portrait: SIGRUN, sad] And then he went looking for you. I knew. For two years I knew, and I let it happen, because it meant it wasn't me.
+[portrait: SIGRUN, neutral] He trained me to be his successor. Valen. Did you know that?
+[name: Sigrun] I was going to wear it.
+[portrait: SIGRUN, sad] Then he told me I'd never survive the Crown.
+[name: Sigrun] And I was relieved. Do you understand? *Relieved.*
+[name: Sigrun] And then he went looking for you. I knew. For two years I knew, and I let it happen, because it meant it wasn't me.
 [portrait: SIGRUN, neutral] (walking on) I wanted you to know that before you swear anything in front of me.
 ```
 **The Draco brazier** (the Rift's heart: a brazier of white fire over the Draco Plate's empty-looking niche):
 ```
-[portrait: SIGRUN, neutral] Here. Say what you intend to do at the Festival. The fire hears. In Ashkaar, the fire is the court.
+[portrait: SIGRUN, neutral] Here. Say what you intend to do at the Festival.
+[name: Sigrun] The fire hears. In Ashkaar, the fire is the court.
 (The brazier burns white. It's waiting.)
 > "I'm going to give them back." (return)
   Script: pf_choose(:ch19_oath, :return)
@@ -124,7 +133,9 @@ Trainers (Lv 82–83): 2 dragon tamers (Sigrun's own riders, testing).
   Script: pf_choose(:ch19_oath, :ruin)
   \pf[PLAYER,angry] I'm going to end it. All of it.
   (Sigrun's blade is out before you finish the sentence. She holds it there. Then, slowly, she lowers it.)
-  [portrait: SIGRUN, shocked] ...The fire didn't burn you. You meant it. (She steps aside.) Go. I'll weigh you in the hall. God help us both.
+  [portrait: SIGRUN, shocked] ...The fire didn't burn you. You meant it.
+  (She steps aside.)
+  [name: Sigrun] Go. I'll weigh you in the hall. God help us both.
 > "Whatever you want to hear."
   (The fire answers.)
   Script: Prismfall.game_over(:GO_LIARS_PYRE)
@@ -148,9 +159,16 @@ Switch S153 CH19_OATH_SPOKEN = ON. V140 = 3.
 (The Rift mouth, at dusk. A rider coming in fast, his dragon lathered, before it's even landed.)
 [name: Rider] My lady. The front.
 [if :war_legend != :neither]
-  [name: Rider] The sea-beast is up out of the Ice Vault. It's dragging the Northern Sea across the Rimed Sands. The Dry Tide's full again. And your father — (He looks at the Rift-shrine.) Your father took the Light Stone to the front. While you were in the Rift. He said, "if the god's fire won't come to me, I'll carry it."
+  [name: Rider] The sea-beast is up out of the Ice Vault.
+  [name: Rider] It's dragging the Northern Sea across the Rimed Sands.
+  [name: Rider] The Dry Tide's full again. And your father —
+  (He looks at the Rift-shrine.)
+  [name: Rider] Your father took the Light Stone to the front. While you were in the Rift.
+  [name: Rider] He said, "if the god's fire won't come to me, I'll carry it."
 [if :war_legend == :neither]
-  [name: Rider] Both hosts are out of their lines. Isenmar off the Rimed Sands, Ashkaar out over the Siege Camp's earthwork. On the dunes between. Nobody's waiting for anyone's legend. They're going to do it themselves, at dawn.
+  [name: Rider] Both hosts are out of their lines.
+  [name: Rider] Isenmar off the Rimed Sands, Ashkaar out over the Siege Camp's earthwork. On the dunes between.
+  [name: Rider] Nobody's waiting for anyone's legend. They're going to do it themselves, at dawn.
 [portrait: SIGRUN, angry] (already climbing onto her Salamence) Get on.
 [portrait: SIGRUN, neutral] (holding a hand down to you) You swore something in there. Let's see if it holds in the open.
 V140 = 4.
@@ -164,20 +182,27 @@ V140 = 4.
 [if :war_legend != :neither]
   (Except the Dry Tide isn't dry. To the west, where the old seabed runs out to the Rimed Sands, there's water: grey, moving, rising. Over it, under a storm, something blue and enormous is swimming the sea it brought with it into the desert.)
 (Ahead, the Glass Dunes between the two hosts. Isenmar's white trench-lines on one side, the Siege Camp's earthwork on the other. Both hosts out of their lines.)
-[name: Elder Ossa] (at the banner, not looking at you) We'll be carrying out whoever's left, either way. I'd prefer fewer.
-[portrait: SIGRUN, neutral] I'm Ashkaar. I'll stand with my father's riders unless you give me a reason not to. (A beat.) Give me a reason.
+[name: Elder Ossa] (at the banner, not looking at you) We'll be carrying out whoever's left, either way.
+[name: Elder Ossa] I'd prefer fewer.
+[portrait: SIGRUN, neutral] I'm Ashkaar.
+[name: Sigrun] I'll stand with my father's riders unless you give me a reason not to.
+(A beat.)
+[name: Sigrun] Give me a reason.
 ```
 **`:war_climax`** (MAJOR):
 ```
 > Stand between them. (stand_between)
   Script: pf_choose(:war_climax, :stand_between)
-  [portrait: SIGRUN, shocked] ...Between. (She looks at the dunes for a long time.) Then I'll stand between with you. My father can disown me after.
+  [portrait: SIGRUN, shocked] ...Between.
+  (She looks at the dunes for a long time.)
+  [portrait: SIGRUN, neutral] Then I'll stand between with you. My father can disown me after.
 > Back Ashkaar. (back_ashkaar)
   Script: pf_choose(:war_climax, :back_ashkaar)
   [portrait: SIGRUN, neutral] (not pleased; not surprised) Then ride with me.
 > Back Isenmar. (back_isenmar)
   Script: pf_choose(:war_climax, :back_isenmar)
-  [portrait: SIGRUN, sad] (a long pause) Then I can't stand with you. Go to Marisol's lines. If we meet on the glass —
+  [portrait: SIGRUN, sad] (a long pause) Then I can't stand with you. Go to Marisol's lines.
+  [name: Sigrun] If we meet on the glass —
   [portrait: SIGRUN, neutral] — we'll meet on the glass.
 V140 = 5.
 ```
@@ -230,13 +255,17 @@ V140 = 7.
 ```
 (Silence on the dunes. Steam rising off new glass. The two hosts, what's left of them, standing in their lines and looking at the middle.)
 (In the middle, on the glass: Sigrun, and Anja [if :war_prisoner != :leave] / Marisol [else], and you.)
-[portrait: SIGRUN, neutral] (loud enough for both hosts) The legends have left. Reshiram to me. The sea-beast to the sea. Nobody won this morning that the dead would agree with.
+[portrait: SIGRUN, neutral] (loud enough for both hosts) The legends have left. Reshiram to me. The sea-beast to the sea.
+[name: Sigrun] Nobody won this morning that the dead would agree with.
 [if :war_prisoner != :leave]
-  [portrait: ANJA, neutral] (in her furs, thinner, on the glass beside her) Settle it at the Festival. By the Boon. Both crowns, one table. I'll count the votes. I'm good at counting.
+  [portrait: ANJA, neutral] (in her furs, thinner, on the glass beside her) Settle it at the Festival. By the Boon. Both crowns, one table.
+  [name: Anja] I'll count the votes. I'm good at counting.
 [else]
-  [portrait: MARISOL, neutral] Settle it at the Festival. By the Boon. I'm sick of burying sailors in sand.
+  [portrait: MARISOL, neutral] Settle it at the Festival. By the Boon.
+  [name: Marisol] I'm sick of burying sailors in sand.
 (Across the glass, both hosts lower their weapons. Not all at once. Enough.)
-[name: Larch (radio)] (crackling, from your pack) Child. Child, are you there? Look at the mesa. Behind the Ashkaar lines.
+[name: Larch (radio)] (crackling, from your pack) Child. Child, are you there?
+[name: Larch (radio)] Look at the mesa. Behind the Ashkaar lines.
 (On a sandstone mesa behind the lines: tents, instruments, people in Meridian white. Packing up. Fast. Before the steam clears.)
 [name: Larch (radio)] That wasn't a battle to them. That was a *reading*.
 (The bone-carters walk out onto the glass under a new white banner, Elder Ossa at the front and Zainab with her book, to count the glassed dead standing in it.)
@@ -249,8 +278,13 @@ V140 = 8.
 ## **The Dominar** (the Command Pavilion, 928, built; touch, V140 == 8 → 9)
 ```
 (The Command Pavilion. The oath-brazier, white at the heart. The lacquer map table. The black-glass stand, empty, still dusty where something round sat. The Dominar of Ashkaar in a plain red coat, a burnt hand bandaged, the Light Stone's cradle-cloth on the table in front of him, empty.)
-[name: Dominar] My daughter flew the Unimprinted into my war. She tells me you swore an oath at the Draco Plate and the fire believed you. (A beat.) Speak plainly. The brazier is lit.
-[name: Dominar] I mean to march on Zenith the hour the Festival ends. Meridian bought my sand from that fat Elector, armed my enemies and watched us bleed from a hill. Give me a reason to fly *for* Crownhaven instead.
+[name: Dominar] My daughter flew the Unimprinted into my war.
+[name: Dominar] She tells me you swore an oath at the Draco Plate and the fire believed you.
+(A beat.)
+[name: Dominar] Speak plainly. The brazier is lit.
+[name: Dominar] I mean to march on Zenith the hour the Festival ends.
+[name: Dominar] Meridian bought my sand from that fat Elector, armed my enemies and watched us bleed from a hill.
+[name: Dominar] Give me a reason to fly *for* Crownhaven instead.
 ```
 **`:ch19_dominar`:**
 - It succeeds with (`:ch8_lightstone == :wyrmrest` **and** the ARBITER BLUEPRINTS or the LARCH PAPERS) **or** `bond(:SIGRUN) >= 4`:
@@ -260,12 +294,16 @@ V140 = 8.
   [name: Dominar] (reading, in silence, for a long time) ...And they were on the mesa this morning. Reading us.
 [if bond(:SIGRUN) >= 4]
   [portrait: SIGRUN, neutral] (from the tent-flap) Father. I weighed them. They're light. They're true. Fly.
-[name: Dominar] If the god is in chains, then dragons will break them. Not for the Accord. For the god.
+[name: Dominar] If the god is in chains, then dragons will break them.
+[name: Dominar] Not for the Accord. For the god.
 Script: pf_choose(:ch19_dominar, :swayed)
 ```
 - Otherwise:
 ```
-[name: Dominar] Words. Good words. The fire liked them. (He turns the cradle-cloth over.) My riders go home after the truce. Crownhaven can defend itself. It always says it can.
+[name: Dominar] Words. Good words. The fire liked them.
+(He turns the cradle-cloth over.)
+[name: Dominar] My riders go home after the truce.
+[name: Dominar] Crownhaven can defend itself. It always says it can.
 Script: pf_choose(:ch19_dominar, :failed)
 ```
 *(`DOMINAR_SWAYED` can't be set if Isenmar won without mercy terms. With it, his legions are present in the hijack. The black-glass stand is an Act V mystery (09); don't explain it.)*
@@ -300,7 +338,10 @@ Switch S154 CH19_RESHIRAM_DONE = ON.
 (Reshiram lands in front of Sigrun. Not you. It lowers its great white head until its brow touches the dragonhide on her shoulder.)
 (Then it's gone, up, north, towards Crownhaven, ahead of everyone.)
 [portrait: SIGRUN, shocked] (her hand still up where its head was) ...It chose the one who finally said it out loud.
-[portrait: SIGRUN, neutral] (to you, roughly) Not me. You. I've been saying nothing for two years. You said it in front of the fire. (She lets her hand drop.) Come to the hall. Let's see if you can beat me.
+[portrait: SIGRUN, neutral] (to you, roughly) Not me. You. I've been saying nothing for two years.
+[name: Sigrun] You said it in front of the fire.
+(She lets her hand drop.)
+[name: Sigrun] Come to the hall. Let's see if you can beat me.
 V140 = 10.
 ```
 - **New: `AS_LIGHT_STONE_HOME`** (optional; the Rift-shrine keeper): the Light Stone's empty cradle-cloth goes back to the shrine from the Dominar's table, carried on foot down the Rift, with the keeper's three questions to answer truthfully (the Rift's version of a fetch quest). The reward is the Dragon Scale and the shrine's blessing (a Codex line).
@@ -320,8 +361,10 @@ Gym trainers (6): Cool Trainers ×4, Ace Trainers ×2; Lv 81–84.
 
 ### 474 — the Warden Arena
 ```
-[portrait: SIGRUN, neutral] The den's heat rises every turn. The dragons get stronger the longer you hesitate. So don't.
-[portrait: SIGRUN, neutral] If you can't beat me, you can't survive him. I'm not going easy. I've been easy for two years.
+[portrait: SIGRUN, neutral] The den's heat rises every turn.
+[name: Sigrun] The dragons get stronger the longer you hesitate. So don't.
+[name: Sigrun] If you can't beat me, you can't survive him.
+[name: Sigrun] I'm not going easy. I've been easy for two years.
 BATTLE: Prismfall.gym_battle(18)
 ```
 - **Mid-battle (Salamence Mega Evolves):** "Weighed, and found wanting. That's what Father says when he loses. I've never heard it from this side." `[bubble: SIGRUN, smug, sparkle]`
@@ -333,7 +376,9 @@ RECEIVE: the WYRM BADGE (badge 18). RECEIVE: TM? DRACO METEOR (per the TM table;
 [if :ch14_telemetry == :leave]
   (Through the hall's high window, on the horizon, a Meridian airship that has been sitting there all morning turns, within the minute, and heads north. Towards Crownhaven.)
 [if :ch14_telemetry == :sabotage]
-  [name: Larch (radio)] (crackling) ...He bought it. God help us, he bought it. A quarter-tone flat, all eighteen. Every lock in that arena is built to a wrong note.
+  [name: Larch (radio)] (crackling) ...He bought it. God help us, he bought it.
+  [name: Larch (radio)] A quarter-tone flat, all eighteen.
+  [name: Larch (radio)] Every lock in that arena is built to a wrong note.
 [if :ch14_telemetry == :destroy]
   (The case sings, and nobody is listening but you. It's the first time it's only been yours.)
 V140 = 11.

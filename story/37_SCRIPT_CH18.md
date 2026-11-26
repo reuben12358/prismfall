@@ -74,8 +74,14 @@ As in the earlier scripts.
 ## The Moon Market steps: **down, not up** (touch, the Throat's gate, 852)
 ```
 [if CORVIN_FREED]
-  [portrait: CORVIN, neutral] (at the Throat's gate with a lamp and a satchel of sample-jars, the mask back on, his voice flat) I came down from Cragholm on the first lift. I wasn't going to stay away. Not now.
-  [portrait: CORVIN, neutral] Sweetrot. Twenty years I've been treating it. Today I traced it. It doesn't come from the Barons. It comes from under them. Down. Wenlow worked it out first, from the ward notes. I didn't read them until — (He stops.) I read them.
+  [portrait: CORVIN, neutral] (at the Throat's gate with a lamp and a satchel of sample-jars, the mask back on, his voice flat) I came down from Cragholm on the first lift.
+  [name: Corvin] I wasn't going to stay away. Not now.
+  [name: Corvin] Sweetrot. Twenty years I've been treating it. Today I traced it.
+  [name: Corvin] It doesn't come from the Barons. It comes from under them. Down.
+  [name: Corvin] Wenlow worked it out first, from the ward notes.
+  [name: Corvin] I didn't read them until —
+  (He stops.)
+  [name: Corvin] I read them.
 [else]
   (A satchel left on the Throat's gate, with a note pinned to it in a cheerful, clumsy hand: *"Dr. C — the Sweetrot ISN'T from the Barons!!! It comes from UNDER. Down the Throat. I'll show you when you're back!!! — W."*)
   (Underneath, in a different hand, a Hollow runner's: "Found in the Infirmary. Thought someone should have it.")
@@ -95,8 +101,10 @@ Trainers:
 ```
 (A cavern of pink crystal, lit from inside, warm, smelling of peaches. In rows across the floor, peach-shaped growths on vines, the size of a head, and between them, people: Nadir people, in their work-clothes, tending the growths with watering-cans, smiling. All of them smiling. None of them looking up.)
 (Among them, in her waxed coat, her ledger under one arm, watering a growth with tender care: Mother Gutter.)
-[portrait: GUTTER, happy] (not looking at you, smiling) Oh, it's you, topsider. Isn't it lovely down here. I come down every night. Have done for —
-[portrait: GUTTER, neutral] (the smile not moving) — for a long time. Longer than the Barons. Longer than the Sump. I was the first, you know. The first one it asked.
+[portrait: GUTTER, happy] (not looking at you, smiling) Oh, it's you, topsider. Isn't it lovely down here.
+[name: Mother Gutter] I come down every night. Have done for —
+[portrait: GUTTER, neutral] (the smile not moving) — for a long time. Longer than the Barons. Longer than the Sump.
+[name: Mother Gutter] I was the first, you know. The first one it asked.
 [portrait: GUTTER, happy] It only wanted company. We all only wanted company.
 (Behind her, deeper in the crystal, something in a peach-coloured shell, with chains for hair, turns round. It's smiling too.)
 V139 = 1.
@@ -113,8 +121,10 @@ BATTLE: Prismfall::Bosses.wild_battle(:PECHARUNT_DEEP) — Lv 77; bars Casual 2 
 (The chains come apart. The shell tumbles into a crack in the crystal and is gone, down, somewhere even deeper. The pink light goes out.)
 (In the dark, the sound of watering-cans being put down. Then people crying, quietly, the way you cry when you wake up from a good dream into a bad week.)
 (Mother Gutter is sitting on the cave floor with her ledger in her lap. In the light of your lamp, she looks very, very old.)
-[portrait: GUTTER, sad] ...Three hundred and eleven years. It says so here. I wrote it down every night. I never read it back.
-[portrait: GUTTER, neutral] (closing the ledger) Help me up, topsider. I've got a Market to run. For however long that is now.
+[portrait: GUTTER, sad] ...Three hundred and eleven years. It says so here.
+[name: Mother Gutter] I wrote it down every night. I never read it back.
+[portrait: GUTTER, neutral] (closing the ledger) Help me up, topsider. I've got a Market to run.
+[name: Mother Gutter] For however long that is now.
 Switch S150 CH18_PECHARUNT_DONE = ON. V139 = 2.
 ```
 **The old story turns over** (a mural in the Deep, lit by the PC's lamp after the fight; plain story text):
@@ -151,10 +161,13 @@ BATTLE: TrainerBattle.start(:THORNGUARD, "Captain Rowe") — single; `:FAIRY_TAL
 [name: Thornguard Captain] (whistling up a second squad) Fine. Then twelve of us.
 (From the dusk behind the checkpoint, someone walks through the thorn barrier as if it weren't there: a tall woman in a gown of moth-wing grey, crowned with dusk-flowers. The old woman from Briarwick's shrine, a long time ago, except she isn't old now, and she isn't pretending.)
 [portrait: CELESTINE, neutral] Captain.
-[portrait: CELESTINE, neutral] If you stop this child, the forest will remember your name, and it will say it wrong forever.
+[name: Celestine] If you stop this child, the forest will remember your name, and it will say it wrong forever.
 (Every guard at the checkpoint knows she can't lie. They also know what that means. The captain steps aside. The thorn barrier unweaves itself.)
-[portrait: CELESTINE, happy] (to you, warmly) We've met. You were very rude about my soup. You were right, it was terrible. Come along. Gloaming's waited forty years; it can wait for you to walk.
-[portrait: CELESTINE, neutral] One rule. In Gloaming, always ask what it costs *before* you say yes. Always. Even me.
+[portrait: CELESTINE, happy] (to you, warmly) We've met. You were very rude about my soup.
+[name: Celestine] You were right, it was terrible. Come along.
+[name: Celestine] Gloaming's waited forty years; it can wait for you to walk.
+[portrait: CELESTINE, neutral] One rule. In Gloaming, always ask what it costs *before* you say yes.
+[name: Celestine] Always. Even me.
 V139 = 3.
 ```
 *(Celestine's warning foreshadows `GO_FAIR_BARGAIN`. The Ch3 meeting is the Briarwick shrine.)*
@@ -174,9 +187,13 @@ Elowen's oldest corner, in endless twilight. Lantern-moths. Houses grown, not bu
 
 ### Optional: **Queen Maelis** (the dusk-garden, under polite guard)
 ```
-[portrait: MAELIS, neutral] (pruning a rose that's been dusk for forty years) My son thinks the forest is a resource. I've been queen for sixty years. The forest is the *sovereign*. I'm just the gardener it tolerates.
-[portrait: MAELIS, smug] He thinks I'm resting. I am. I'm resting the way a bow rests when it's strung.
-[portrait: MAELIS, neutral] Take this. It opens the Wardguard's escort to Crownhaven, whatever the Accord thinks of you. When I disown his Compact, I want it known that I'd already chosen a side.
+[portrait: MAELIS, neutral] (pruning a rose that's been dusk for forty years) My son thinks the forest is a resource.
+[name: Maelis] I've been queen for sixty years. The forest is the *sovereign*.
+[name: Maelis] I'm just the gardener it tolerates.
+[portrait: MAELIS, smug] He thinks I'm resting. I am.
+[name: Maelis] I'm resting the way a bow rests when it's strung.
+[portrait: MAELIS, neutral] Take this. It opens the Wardguard's escort to Crownhaven, whatever the Accord thinks of you.
+[name: Maelis] When I disown his Compact, I want it known that I'd already chosen a side.
 RECEIVE: ROYAL WRIT (Key Item).
 ```
 *(Seeds Elowen's epilogue: Maelis disowns the Compact.)*
@@ -184,13 +201,15 @@ RECEIVE: ROYAL WRIT (Key Item).
 ### ☠ **`GO_FAIR_BARGAIN` "Fair Bargain"** (the lantern-moth market)
 ```
 (A stall of glass jars, a lantern-moth in each, glowing. The vendor is a woman with moth-wing eyelashes who never blinks.)
-[name: Vendor] For you? Something special. The answer to your mother's last question.
+[name: Vendor] For you? Something special.
+[name: Vendor] The answer to your mother's last question.
 (Your mother's letter. The last line. You've reread it a hundred times. "Did I do right by you?")
 > Buy it.
   [name: Vendor] (holding out a jar) Lovely. No need to ask the price. You'll pay it either way.
   > Take the jar.  Script: Prismfall.game_over(:GO_FAIR_BARGAIN)
   > Ask the price first.
-    [name: Vendor] (pouting) Oh, you've been talking to *her*. Your name, sweetheart. Just your name. ...No? Then no.
+    [name: Vendor] (pouting) Oh, you've been talking to *her*.
+    [name: Vendor] Your name, sweetheart. Just your name. ...No? Then no.
 > Ask what it costs.
   (as above, "Your name". No.)
 > Walk on.
@@ -200,8 +219,11 @@ RECEIVE: ROYAL WRIT (Key Item).
 ## The envoys: **`:war_legend`** (autorun at Gloaming's dusk-chapel steps, V139 == 4 → 5)
 ```
 (Two people are waiting on the chapel steps, as far apart as the steps allow: a skald of Isenmar in whale-bone and furs, and an Ember-Captain of Ashkaar in dragon-scale. They've walked here separately. They've been watching each other for two days.)
-[name: Hallgerd (skald)] Unimprinted. The Thane asks. The sea-beast sleeps in the Ice Vault under Lake Rime, where your Primal waking left it. Calm it for us, so it follows our horns east to the front, and the war ends in a morning.
-[name: Tavi (Ember-Captain)] The Dominar asks. The white dragon sleeps in the Wyrmscar. Speak the oath with Sigrun early and wake it, and it will burn the sea back off our dunes, and the war ends in a morning.
+[name: Hallgerd (skald)] Unimprinted. The Thane asks.
+[name: Hallgerd (skald)] The sea-beast sleeps in the Ice Vault under Lake Rime, where your Primal waking left it.
+[name: Hallgerd (skald)] Calm it for us, so it follows our horns east to the front, and the war ends in a morning.
+[name: Tavi (Ember-Captain)] The Dominar asks. The white dragon sleeps in the Wyrmscar.
+[name: Tavi (Ember-Captain)] Speak the oath with Sigrun early and wake it, and it will burn the sea back off our dunes, and the war ends in a morning.
 (They can't lie. Not here. They both mean it. They both know what the other one's legend will do to their people.)
 [name: Hallgerd] (to Tavi, the first thing she's said to her) A legend on the sands calls its opposite. You know the old song.
 [name: Tavi] I know the old song. I asked anyway.
@@ -214,12 +236,15 @@ RECEIVE: ROYAL WRIT (Key Item).
 > Wake Reshiram (Ashkaar's ask). (wake_reshiram)
   Script: pf_choose(:war_legend, :wake_reshiram)
   [name: Tavi] Then the fire comes west.
-  [name: Hallgerd] And the sea will answer it. You've chosen both, Unimprinted. You just said one name.
+  [name: Hallgerd] And the sea will answer it.
+  [name: Hallgerd] You've chosen both, Unimprinted. You just said one name.
 > Neither. (neither)
   Script: pf_choose(:war_legend, :neither)
   (Both of them look at you. Then, for the first time, at each other.)
   [name: Hallgerd] ...Then we fight it with what we have.
-  [name: Tavi] Which is each other. (A long pause.) That's the most honest thing anyone's said on these steps in a week.
+  [name: Tavi] Which is each other.
+  (A long pause.)
+  [name: Tavi] That's the most honest thing anyone's said on these steps in a week.
 V139 = 5.
 ```
 *(14_WAR_AND_BLESSING War 4: `:calm_kyogre` RES+2 MARISOL−1; `:wake_reshiram` SIGRUN+1 RES−2; `:neither` keeps both legends off the Glass Dunes. Either of the first two puts both legends at the Ch19 climax.)*
@@ -240,14 +265,17 @@ Gym trainers: the 8 princesses, plus a Lady and a Beauty (Lv 76–79).
 ### 454 — the Warden Arena (double: "the knight and the dragon")
 ```
 [portrait: CELESTINE, neutral] Once upon a time — which is the only time there ever is, here —
-[portrait: CELESTINE, happy] My dusk-chapels still sing the whole song: every verse the rest of Velmora stopped singing. They sang over a sliver of glass for me, a year of dusks, until it knew my little ghost by heart.
-[portrait: CELESTINE, smug] Every story needs one true thing in a borrowed costume. Mine is wearing yellow.
+[portrait: CELESTINE, happy] My dusk-chapels still sing the whole song: every verse the rest of Velmora stopped singing.
+[name: Celestine] They sang over a sliver of glass for me, a year of dusks, until it knew my little ghost by heart.
+[portrait: CELESTINE, smug] Every story needs one true thing in a borrowed costume.
+[name: Celestine] Mine is wearing yellow.
 BATTLE: Prismfall.gym_battle(17, double: true)
 ```
 - **When the Z-move fires (Mimikyu, Let's Snuggle Forever):** "This is the part where it hugs you. Hold still. It's worse if you don't." `[bubble: CELESTINE, happy, sparkle]`
 - **Win:**
 ```
-[portrait: CELESTINE, happy] And they lived. That's the end of the sentence. It's a better ending than most people get.
+[portrait: CELESTINE, happy] And they lived. That's the end of the sentence.
+[name: Celestine] It's a better ending than most people get.
 RECEIVE: the DUSK BADGE (badge 17). RECEIVE: TM21 DAZZLING GLEAM.
 V139 = 6.
 ```
@@ -256,7 +284,8 @@ V139 = 6.
 ## The dusk-chapel at the Great Tree's roots: **the Hymn of Return** (touch, Celestine at the altar, V139 == 6 → 7; key event 2, first half)
 ```
 (The dusk-chapel, grown inside the Great Tree's roots. A choir of Gloaming folk in moth-grey, thirty of them, children at the front. Lantern-moths on every root.)
-[portrait: CELESTINE, neutral] I've been waiting for you for forty years, little colourless thing. Listen. They don't sing it for anyone else.
+[portrait: CELESTINE, neutral] I've been waiting for you for forty years, little colourless thing.
+[name: Celestine] Listen. They don't sing it for anyone else.
 (The choir sings. The whole Hymn. Every verse.)
 ```
 *Eighteen we borrowed, eighteen we keep*
@@ -268,9 +297,11 @@ V139 = 6.
 ```
 [if has MAREN'S HYMN PAGE || HOLLOW_SANCTUARY_OPEN]
   (In your Bag, the page Brann gave you, or Wick's scrawled verse, warms. Under your eyes the last line writes itself in, in a cramped old hand: "given back, as a gift is found.")
-[portrait: CELESTINE, neutral] Valen reads "one of no color" as *vessel*. The Hollow read it as *hammer*. Meridian reads it as *key*.
-[portrait: CELESTINE, neutral] It says *walker*.
-[portrait: CELESTINE, smug] I cannot lie. I can, however, sing. These are the verses I sing.
+[portrait: CELESTINE, neutral] Valen reads "one of no color" as *vessel*.
+[name: Celestine] The Hollow read it as *hammer*. Meridian reads it as *key*.
+[name: Celestine] It says *walker*.
+[portrait: CELESTINE, smug] I cannot lie. I can, however, sing.
+[name: Celestine] These are the verses I sing.
 RECEIVE: THE HYMN OF RETURN (Key Item; complete).
 Switch S151 CH18_HYMN_GOT = ON. V139 = 7.
 ```
@@ -279,9 +310,14 @@ Switch S151 CH18_HYMN_GOT = ON. V139 = 7.
 ## The Great Tree's roots: **K7** (autorun as the PC leaves the chapel, V139 == 7 → 8; key event 2, second half)
 ```
 (Outside, under the roots, in the dusk. Kestrel. His sponsor jacket open, eighteen badges on the lining like medals. Aegislash's ball in his hand. He's not eating now.)
-[portrait: KESTREL, neutral] They all want to use you. Valen wants a lock. Voss wants a key. Your Hollow friends want a crowbar.
-[portrait: KESTREL, angry] Stay out of Crownhaven and let me end it. I'll beat Valen in front of the whole world and make him say her name.
-[portrait: KESTREL, neutral] In stories there's a knight and a dragon. I'm the knight. (He points the ball at you.) Guess.
+[portrait: KESTREL, neutral] They all want to use you.
+[name: Kestrel] Valen wants a lock. Voss wants a key.
+[name: Kestrel] Your Hollow friends want a crowbar.
+[portrait: KESTREL, angry] Stay out of Crownhaven and let me end it.
+[name: Kestrel] I'll beat Valen in front of the whole world and make him say her name.
+[portrait: KESTREL, neutral] In stories there's a knight and a dragon. I'm the knight.
+(He points the ball at you.)
+[name: Kestrel] Guess.
 BATTLE: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 7, field: :FAIRY_TALE)
 (LOSE: the rival rule: the story continues, and his line below becomes "Stay down. Please. For once in your life, stay down.")
 ```
@@ -312,7 +348,8 @@ BATTLE: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 7, field: :FAIRY_TALE)
   Script: Prismfall.game_over(:GO_STAY_OUT)
 > No.
   [portrait: KESTREL, angry] Don't come. I mean it.
-  [portrait: KESTREL, neutral] (a long breath) ...You're going to come. Fine. Then don't lose before you reach me.
+  [portrait: KESTREL, neutral] (a long breath) ...You're going to come. Fine.
+  [name: Kestrel] Then don't lose before you reach me.
 Switch S152 CH18_K7_DONE = ON. Variable V114 KESTREL_STAGE = 4. V139 = 8.
 ```
 *(The epitaph is in NARRATIVE_KEYS §9. The PC does what everyone has told them since the ferry, and the Engine takes Kestrel instead.)*
@@ -321,8 +358,10 @@ Switch S152 CH18_K7_DONE = ON. Variable V114 KESTREL_STAGE = 4. V139 = 8.
 ```
 (Gloaming's south gate. Dawn that isn't dawn: the dusk lifting a little, the way it does at the edge of the town. Kestrel's skiff going up off the dock, north, towards Crownhaven.)
 [if OGERPON_TRUSTED] (Ogerpon sits down at the gate. It won't go further. It looks at you, then south-west, towards the Thornwar Marches and the dragons' country, then back at the Great Tree. Then it goes home.)
-[portrait: CELESTINE, neutral] (at the gate, holding a lantern) One badge left, little walker. Sigrun's. She's the only Warden in Velmora who's harder to talk to than me.
-[portrait: CELESTINE, neutral] I can't come with you. Gloaming is the only place I'm true. Everywhere else, I'm just old.
+[portrait: CELESTINE, neutral] (at the gate, holding a lantern) One badge left, little walker. Sigrun's.
+[name: Celestine] She's the only Warden in Velmora who's harder to talk to than me.
+[name: Celestine] I can't come with you. Gloaming is the only place I'm true.
+[name: Celestine] Everywhere else, I'm just old.
 V139 = 9. Variable V102 STORY_CHAPTER = 19.
 QUEST LOG: "Eighteen Roads" — South-west through the Thornwar Marches to Wyrmrest. Gym 18. Then Crownhaven.
 ```

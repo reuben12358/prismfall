@@ -50,8 +50,10 @@ As in the earlier scripts. The whole cast is on screen. **There are no jokes any
 ## Dawn (autorun, the PC's room → the arena, V142 == 0)
 ```
 (Dawn. The arena. Every seat full, and everyone you've ever met is in it somewhere: Wardens in the Wardens' box, the kings in the gallery, Pip on Bastian's knee, Tamsin under her banners, Edda at the rail with a betting slip.)
-[portrait: LARCH, neutral] (at the players' tunnel, her board of eleven lamps under her arm, all dark) One thing. Don't let him make you a part. He's very good at parts.
-[portrait: LARCH, sad] (a beat) And win. I'd like to see you win. I've never seen anyone I love win anything.
+[portrait: LARCH, neutral] (at the players' tunnel, her board of eleven lamps under her arm, all dark) One thing. Don't let him make you a part.
+[name: Larch] He's very good at parts.
+[portrait: LARCH, sad] (a beat) And win. I'd like to see you win.
+[name: Larch] I've never seen anyone I love win anything.
 ```
 *(Larch's warning foreshadows `GO_HIS_HAND`.)*
 
@@ -59,13 +61,16 @@ As in the earlier scripts. The whole cast is on screen. **There are no jokes any
 ```
 [if !VALEN_COLLAPSED]
   (Valen, in the arena's centre. No glove at all now. The crystal has reached his collarbone.)
-  [portrait: VALEN, neutral] Come on, then. Show me there's another door.
+  [portrait: VALEN, neutral] Come on, then.
+  [name: Valen] Show me there's another door.
 [if VALEN_COLLAPSED && bond(:SIGRUN) >= 5]
   (Valen on a stretcher at the Ring's edge. In the centre, in dragonhide: Sigrun.)
-  [portrait: SIGRUN, neutral] He beat me with an arm made of glass. Now he can't stand. So it's me.
+  [portrait: SIGRUN, neutral] He beat me with an arm made of glass.
+  [name: Sigrun] Now he can't stand. So it's me.
 [if VALEN_COLLAPSED && else]
   (Valen on a stretcher at the Ring's edge. In the centre, a big man, crying openly, with a Camerupt: Brann.)
-  [portrait: BRANN, sad] He asked me to. Last thing he asked.
+  [portrait: BRANN, sad] He asked me to.
+  [name: Brann] Last thing he asked.
 Script: Prismfall::Festival.next_match   # :FINAL, :PRISM_ARENA cycling, cap 96
 ```
 - **Each time the field cycles** (a battle hook, Valen only): his crystal visibly spreads from shoulder to throat, shown as a sprite overlay plus a line: "The crystal climbs Valen's throat..."
@@ -81,7 +86,8 @@ V142 = 1.
 ## The Coronation (autorun, V142 == 1 → 2)
 ```
 (Valen lifts the Crown from his head. It's cracked; you can see light through the crack. He walks to you at the arena's heart, inside the Concordance Ring. The Choir sings. Forty thousand people on their feet.)
-[portrait: VALEN, neutral] (very quietly, for you) I'm sorry. Hold still.
+[portrait: VALEN, neutral] (very quietly, for you) I'm sorry.
+[name: Valen] Hold still.
 > Kneel. (kneel)
   Script: pf_choose(:ch21_crown, :kneel)
 > Stand. (stand)
@@ -102,7 +108,8 @@ V142 = 2.
 (The Crown is torn out of Valen's hand and slams into the cradle's palm. You're pulled after it by your own chest, the shard dragging you to your knees at the golden hand.)
 (Down from the Meridian box, in an Engine-harness of brass and Lattice-glass, a gold sunburst pin on his lapel, calm, almost apologetic:)
 [if !VOSS_DISCREDITED && !ruin_route]
-  [portrait: VOSS, neutral] You carried my key through eighteen doors. Let me show you what it opens.
+  [portrait: VOSS, neutral] You carried my key through eighteen doors.
+  [name: Voss] Let me show you what it opens.
 [if VOSS_DISCREDITED]
   (Not Voss. Doctor Quent, in Voss's harness, giggling. In the gallery, Voss on his feet, white-faced, watching his own machine in someone else's hands.)
   [portrait: QUENT, happy] Oh, the *readings*. Oh, he never let me drive.
@@ -111,7 +118,8 @@ V142 = 2.
 ```
 **His hand:**
 ```
-[portrait: VOSS, neutral] (holding out his hand) Stand up. Stand with me. It doesn't have to hurt.
+[portrait: VOSS, neutral] (holding out his hand) Stand up. Stand with me.
+[name: Voss] It doesn't have to hurt.
 [if VOSS_ACCEPTED]
   > Take it. (take)
     Script: pf_choose(:ch21_hand, :take)
@@ -119,7 +127,7 @@ V142 = 2.
     → Concord Dawn. Arceus is never fought. Script: Prismfall.trigger_ending(:END_CONCORD_DAWN)
   > Refuse. (refuse)
     Script: pf_choose(:ch21_hand, :refuse)
-    [portrait: VOSS, sad] (genuinely hurt) You promised.
+    [portrait: VOSS, sad] [emote: dots] (genuinely hurt) You promised.
 [else]
   > Take it.
     Script: Prismfall.game_over(:GO_HIS_HAND)
@@ -155,11 +163,13 @@ V142 = 4.
 ```
 [if !KESTREL_FALLEN]
   (Kestrel vaults the barrier onto the cracking floor, Aegislash out. [if he wears Morwen's Ring] The ring on his hand is lit.)
-  [portrait: KESTREL, neutral] Nearest. Mum's rule. Move.
+  [portrait: KESTREL, neutral] Nearest. Mum's rule.
+  [name: Kestrel] Move.
   Script: pbRegisterPartner(:RIVAL_KESTREL, "Kestrel", Prismfall::Rival.partner_version(9))   # the Redeemed partner team: 93 / 94 / 95 by the player's starter (in PBS). Not 21: 20–22 are K2.
 [else]
   (Juno, over the barrier in her Warden's coat, Tsareena out.)
-  [portrait: JUNO, angry] Same dock. Same fight. Let's go.
+  [portrait: JUNO, angry] Same dock. Same fight.
+  [name: Juno] Let's go.
   Script: pbRegisterPartner(:RIVAL_JUNO, "Juno", Prismfall::Rival.version_for(7))   # J7: no Mega (the side's one Mega is the player's)
 BATTLE: TrainerBattle.start(<foe A>, <foe B>) — the two of Marchetti / Quent / Kroll who aren't turned, dead or hijacking ("Ch21 tag foes v21"); `:PRISM_ARENA` (cracking).
 (LOSE: retry from the montage.)
@@ -200,7 +210,8 @@ Script: Prismfall::Festival.next_match   # :HIJACK — Voss (or Quent), cap 100,
 
 **On defeat:**
 ```
-[portrait: VOSS, angry] (on his knees, the harness sparking) No. No — it doesn't stop because I lost. That was never the design.
+[portrait: VOSS, angry] (on his knees, the harness sparking) No. No — it doesn't stop because I lost.
+[name: Voss] That was never the design.
 (He drives his harness-spike into the cradle's palm.)
 [portrait: VOSS, neutral] Then *I'll* hold it.
 V142 = 6.
@@ -211,7 +222,7 @@ V142 = 6.
 [anim: the sky over Crownhaven goes white and opens like an eye; a shape descends through it; the caldera's tone shifts to Bleed-violet; every map tint in the arena area becomes :BLEED]
 (The sky opens. Something is dragged down through it: vast, white, a wheel of eighteen empty places around it, gold chains snapping onto it from the eighteen pylons, one lock to each empty place. It's half-bound. It's in agony. It's the shape from your vision.)
 (The whole caldera turns to Bleed.)
-[portrait: VOSS, shocked] (at the cradle, the spike in his hand, the god's light on his face) It's — it's *beautiful* —
+[portrait: VOSS, shocked] [emote: exclaim] (at the cradle, the spike in his hand, the god's light on his face) It's — it's *beautiful* —
 (Arceus turns its head. Judgment gathers in the wheel and falls, straight down, on the harness.)
 > Shield him with the shard. (shield)
   Script: pf_choose(:ch21_spare_voss, :shield)
@@ -231,8 +242,11 @@ V142 = 7.
 (He takes hold of two pylons, one in each hand, the flesh one and the glass one. The surge hits him. He holds it. His crystal blazes white, all the way up.)
 [if ILSA_RECONCILED]
   (Ilsa at his back, her earmuffs gone, her hands on his shoulders.)
-  [portrait: ILSA, neutral] I've got you. Little owl's got you.
-[portrait: VALEN, neutral] (through his teeth, not looking away from the god) Go. Free it. I'll hold the door. I've had thirty years of practice.
+  [portrait: ILSA, neutral] I've got you.
+  [name: Ilsa] Little owl's got you.
+[portrait: VALEN, neutral] (through his teeth, not looking away from the god) Go. Free it.
+[name: Valen] I'll hold the door.
+[name: Valen] I've had thirty years of practice.
 V142 = 8.
 ```
 
@@ -294,8 +308,10 @@ V142 = 10.
 [if ILSA_RECONCILED]
   (Ilsa, still kneeling where Valen was, her hand up, her eyes closed, gives the god a voice everyone in the arena can hear.)
 [name: Arceus] Little light. You have carried me far.
-[name: Arceus] You may give my heart back, and the rest of me with it. Or you may keep what was borrowed, and wear it, and hold this land quiet in your two hands for a hundred years.
-[name: Arceus] I will not take what is not given. I learned that here.
+[name: Arceus] You may give my heart back, and the rest of me with it.
+[name: Arceus] Or you may keep what was borrowed, and wear it, and hold this land quiet in your two hands for a hundred years.
+[name: Arceus] I will not take what is not given.
+[name: Arceus] I learned that here.
 ```
 *(The last sentence is the Ruin Route's hint: Arceus is talking about Judgment.)*
 
@@ -314,7 +330,8 @@ V142 = 10.
     [portrait: KESTREL, neutral] Not you. Let me be nearest.
   [else]
     (Sigrun steps past you into the light, and picks up the empty Crown.)
-    [portrait: SIGRUN, neutral] Not you. I was relieved once. Never again.
+    [portrait: SIGRUN, neutral] Not you.
+    [name: Sigrun] I was relieved once. Never again.
 > "Stay. Stay and power the world." (concord)                     [CONCORD_OPEN]
   Script: pf_choose(:ch21_final, :concord)
   \pf[PLAYER,neutral] Stay. Stay and power the world.

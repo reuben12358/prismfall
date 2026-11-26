@@ -97,8 +97,10 @@ The Festival's density comes from the bracket, the exhibitions and the grounds, 
 ```
 (Crownhaven: white stone and bells in a caldera above the clouds. Upper Crownhaven hung with eighteen banners, one per kingdom's Plate, woven, every thread, since Ch10, by one weaver.)
 (And where the old grounds were, the Meridian Prism Arena: eighteen-sided, gold and glass, too new. It shines like something that doesn't know what it's for yet. You know.)
-[portrait: TAMSIN, happy] (under the banners, with a mouthful of pins) You came! Look at them. Look. Eighteen. I finished the Dread one last night. My fingers are bleeding. Don't look at my fingers.
-[portrait: TAMSIN, neutral] (lower) Look at the colours tomorrow, though. Some of them will change. I wove them that way. You'll see.
+[portrait: TAMSIN, happy] (under the banners, with a mouthful of pins) You came! Look at them. Look. Eighteen. I finished the Dread one last night.
+[name: Tamsin] My fingers are bleeding. Don't look at my fingers.
+[portrait: TAMSIN, neutral] (lower) Look at the colours tomorrow, though.
+[name: Tamsin] Some of them will change. I wove them that way. You'll see.
 ```
 - **The Consent display** (from Day 1): each Warden's banner hangs **white** (they'd let go) or **grey** (they won't), by the Consent conditions (NS §6.2). Tamsin's private reading of her colleagues; the player can walk the row and read it. *(An interact on each banner gives one line per Warden, from NARRATIVE_KEYS' consent list.)*
 - **Every faction is here** (ambient NPCs across the city):
@@ -113,9 +115,13 @@ The Festival's density comes from the bracket, the exhibitions and the grounds, 
 ```
 (The Basilica steps. The Hierophant in white with a crystal bowl. The sixteen standing in a crescent below. Your name among them, read out third: "The Unimprinted. Of —" and a pause, because the bowl wants a kingdom.)
 [portrait: MAELIS, neutral] (from the gallery) Elowen's colours. The forest would be pleased.
-[name: Councillor] (Zenith, in white) The Council offers its colours. Meridian sponsors so many fine young people.
-[portrait: NYX, smug] (from a pillar, not in the gallery) Nadir's. We're independent now. It means nothing. Wear it anyway.
-[portrait: LARCH, neutral] (from the crowd, not loudly) Or none. There's an old clause. "The Unsworn." Nobody's used it in sixty years. It's still in the book. I checked.
+[name: Councillor] (Zenith, in white) The Council offers its colours.
+[name: Councillor] Meridian sponsors so many fine young people.
+[portrait: NYX, smug] (from a pillar, not in the gallery) Nadir's. We're independent now.
+[name: Nyx] It means nothing. Wear it anyway.
+[portrait: LARCH, neutral] (from the crowd, not loudly) Or none. There's an old clause.
+[name: Larch] "The Unsworn." Nobody's used it in sixty years.
+[name: Larch] It's still in the book. I checked.
 > Elowen. (elowen)   > Zenith. (zenith)   > Nadir. (nadir)   > The Unsworn. (unsworn)
   Script: pf_choose(:ch20_colors, <choice>)
 (The Hierophant writes it. The bowl is honest. The lots are drawn.)
@@ -161,7 +167,8 @@ V141 = 1.
 [anim: the PC's sprite glows; screen to white over 60 frames; hold]
 (The world goes white.)
 (In the white: a vast shape of light. A wheel. Eighteen places in the wheel, all empty. One eye, opening.)
-[name: ???] ...Little light. You have carried me far.
+[name: ???] ...Little light.
+[name: ???] You have carried me far.
 [anim: white to black; then the stands, the PC's view from the floor]
 (You're on the floor of the stands. People around you. Someone's hand under your head: Juno's, or Pip's, or a stranger's.)
 (Down on the Ring, Valen is looking straight up at you. Across the arena, in the Warden ranks, Ilsa has taken her earmuffs off, and flinches at what she hears in her father.)
@@ -171,7 +178,8 @@ Switch S156 CH20_CEREMONY_DONE = ON. V141 = 2.
   ```
   (Every screen in the arena flickers. The Spire footage: a corridor, a keycard, a figure turning: Sable. Sabine Kroll. Rook's Rotom has the feed.)
   (The crowd turns, row by row, towards the Meridian box.)
-  [portrait: VOSS, neutral] (not blinking) Rogue contractor. The inquiry continues.
+  [portrait: VOSS, neutral] (not blinking) Rogue contractor.
+  [name: Voss] The inquiry continues.
   (Okoro writes something down. She underlines it.)
   ```
 - **Gift: Indeedee "Usher"** (Lv 60, Psychic Surge), from an arena usher who carried you out of the stands: "She found you first. She's been looking at you since. I think she's decided you're hers to look after. Usher's like that."
@@ -203,12 +211,16 @@ V141 = 3.
 [if ROWAN_ALIVE]
   (Juno and Rowan on the same bench, sitting apart. The space between them is exactly one person wide.)
   [if TEO_SAVED]
-    [portrait: TEO, neutral] (holding up his glassed fingers) I could hear everything while it had me. Everyone who sat with me. (To Rowan.) You sat with me. Every night. I heard you.
+    [portrait: TEO, neutral] (holding up his glassed fingers) I could hear everything while it had me.
+    [name: Teo] Everyone who sat with me.
+    [name: Teo] (To Rowan.) You sat with me. Every night. I heard you.
     (Rowan sits down on the grass, and cries. Juno takes his good hand. It's the first time they've touched since Ironreach.)
   [elif has VENAM'S TESTIMONY]
     (You play Venam's Testimony. Rowan listens to it twice. Then he sits down on the grass. Juno takes his good hand.)
   [else]
-    [portrait: JUNO, sad] Corvin says they dream. I'm going to believe him. (She takes his hand herself, slowly, as if he might break, or she might.)
+    [portrait: JUNO, sad] Corvin says they dream.
+    [name: Juno] I'm going to believe him.
+    (She takes his hand herself, slowly, as if he might break, or she might.)
 [else]
   (Juno alone on the bench, holding a pressed lily from the Bride Tree. She doesn't say anything. She makes room on the bench.)
 V141 = 4.
@@ -221,12 +233,15 @@ V141 = 4.
 - Opens once all eight singers have been helped (Carol plus the road seven).
 - **Vesper** waits with all eight:
   ```
-  [portrait: VESPER, neutral] We all lost everything the year the Crown broke. The Choir calls us the lucky ones. I think we're just... what was left.
+  [portrait: VESPER, neutral] We all lost everything the year the Crown broke.
+  [name: Vesper] The Choir calls us the lucky ones.
+  [name: Vesper] I think we're just... what was left.
   ```
 - **The gauntlet:** the eight singers in the order the PC helped them, back to back with no healing. Each has one Eeveelution on its home field using its type's Z-move. Then **Vesper's Eevee "Amen"** with Extreme Evoboost on the Grand Stage.
 - **Reward:** an **Eevee** and the **Eevium Z** (there's no ring: the PC's Warden's ring wakes it).
   ```
-  [portrait: VESPER, happy] Its chip is off the Crown's stone, and our glass came out of the night the Crown broke. They know each other.
+  [portrait: VESPER, happy] Its chip is off the Crown's stone, and our glass came out of the night the Crown broke.
+  [name: Vesper] They know each other.
   ```
   *(If Understudy is still an Eevee, the crystal works for it too; if it evolved, Vesper notes which Imprint "claimed" it.)*
 
@@ -245,7 +260,9 @@ V141 = 4.
 
 ### **Envoy Okoro** (touch, the Concert's tent, V141 == 4 → 5)
 ```
-[portrait: OKORO, neutral] The Concert sent me to decide one thing: whether to cut Velmora off from the world. Severance. Quarantine for ever. The Bleed is a contagion, they say. Convince me it isn't, or don't.
+[portrait: OKORO, neutral] The Concert sent me to decide one thing: whether to cut Velmora off from the world.
+[name: Okoro] Severance. Quarantine for ever.
+[name: Okoro] The Bleed is a contagion, they say. Convince me it isn't, or don't.
 ```
 **Proof** needs **two of three**:
 - the LARCH PAPERS;
@@ -257,11 +274,17 @@ V141 = 4.
 [if two of three]
   > Lay it out for her. (proof)
     Script: pf_choose(:ch20_envoy, :proof)
-    [portrait: OKORO, neutral] (reading for a long time) ...Caused. Not caught. Caused, and so curable. (She closes the folder.) I'll recommend against Severance. They may not listen. But I'll have said it in writing, and that's what the Concert reads.
+    [portrait: OKORO, neutral] [emote: dots] (reading for a long time) ...Caused. Not caught.
+    [name: Okoro] Caused, and so curable.
+    (She closes the folder.)
+    [name: Okoro] I'll recommend against Severance. They may not listen.
+    [name: Okoro] But I'll have said it in writing, and that's what the Concert reads.
 [always]
   > Plead with her. (plea)
     Script: pf_choose(:ch20_envoy, :plea)
-    [portrait: OKORO, sad] I believe you. I'm drafting it anyway. With regret. The Concert doesn't read regret.
+    [portrait: OKORO, sad] I believe you.
+    [name: Okoro] I'm drafting it anyway. With regret.
+    [name: Okoro] The Concert doesn't read regret.
 V141 = 5.
 ```
 
@@ -294,7 +317,8 @@ V141 = 6.
 ### Corvin (touch, at the Sanctum colonnade, V141 == 6 → 7; no jokes from here to the end of Interlude V)
 ```
 [if CORVIN_FREED]
-  [portrait: CORVIN, neutral] (coming out of the Sanctum, mask down, washing his hands in a basin as if he'll never get them clean) I've been treating Valen. Privately. Don't tell the Accord, they think he's resting.
+  [portrait: CORVIN, neutral] (coming out of the Sanctum, mask down, washing his hands in a basin as if he'll never get them clean) I've been treating Valen. Privately.
+  [name: Corvin] Don't tell the Accord, they think he's resting.
 [else]
   (A Sanctum physician, not Corvin. Corvin isn't here. He's in a cell, and has been since Ch16. The physician says the same words, worse.)
 [speaker] He has weeks. Maybe. He's holding the Plates quiet *right now*, with his body, every hour since the ceremony. He'll fight you tomorrow on what's left.
@@ -304,7 +328,9 @@ V141 = 7.
 ### **The Night of Masques: "The Gilded King"** (autorun, the Basilica square at night, V141 == 7 → 8)
 ```
 (The Basilica square. A stage of planks and lanterns. The Saltmere Players, in the Hollow's ogre masks, as the chorus. A sign: THE GILDED KING. A PLAY BY ANSEL CREWE. FIRST PERFORMANCE IN 248 YEARS.)
-[portrait: DORIAN, happy] (stepping out before the curtain) Ladies, gentlemen, the Accord, the Concert, assorted kings, and one Chancellor who has sent the Wardguard to stop us: welcome. Tonight we tell the truth. It's a novelty. Do try to enjoy it.
+[portrait: DORIAN, happy] (stepping out before the curtain) Ladies, gentlemen, the Accord, the Concert, assorted kings, and one Chancellor who has sent the Wardguard to stop us: welcome.
+[name: Dorian] Tonight we tell the truth.
+[name: Dorian] It's a novelty. Do try to enjoy it.
 ```
 The play, as a staged cutscene on the planks (actors as events; Celestine voices Maren from the wings):
 - the Blight;
@@ -313,36 +339,48 @@ The play, as a staged cutscene on the planks (actors as events; Celestine voices
 - the city drowning;
 - the daughter's penance.
 ```
-[portrait: CELESTINE, sad] (as Maren, from the wings, a voice that can't lie) I broke my father's chain and drowned my father's city. Both of those are true. I'd do the first again.
+[portrait: CELESTINE, sad] (as Maren, from the wings, a voice that can't lie) I broke my father's chain and drowned my father's city.
+[name: Celestine] Both of those are true.
+[name: Celestine] I'd do the first again.
 (The Wardguard arrives at the square's edge, Hollis behind them.)
 (In the way: Kaito, arms folded, his Lucario beside him. [if TEO_SAVED] Teo's strikers, in their work-coats, linking arms.)
-[portrait: KAITO, neutral] It's a play, Chancellor. Sit down. You might learn something.
+[portrait: KAITO, neutral] It's a play, Chancellor. Sit down.
+[name: Kaito] You might learn something.
 (The Wardguard doesn't push.)
 (On the planks, the actor playing the Gilded King, in crimson-lined velvet and a jagged pasteboard crown, steps to the apron and raises a prop chain of painted wood to the real sky.)
-[name: The Gilded King (actor)] You ask why I do not bow before the eighteen lights, my daughter? Look down at Aurelia! Look at our aqueducts, our towers, our bread!
+[name: The Gilded King (actor)] You ask why I do not bow before the eighteen lights, my daughter?
+[name: The Gilded King (actor)] Look down at Aurelia! Look at our aqueducts, our towers, our bread!
 [name: The Gilded King (actor)] The sky hung its splendour above MY kingdom without asking leave, and when the blight came, heaven kept its hands folded!
-[name: The Gilded King (actor)] Let priests measure their gratitude in crumbs. A king does not beg for what stands beneath his sun. If heaven will not kneel, we'll build a chain.
+[name: The Gilded King (actor)] Let priests measure their gratitude in crumbs.
+[name: The Gilded King (actor)] A king does not beg for what stands beneath his sun.
+[name: The Gilded King (actor)] If heaven will not kneel, we'll build a chain.
 (Every head in the square turns to the Meridian box.)
 (In the box, Aurelian Voss stands up. He applauds. Alone. Warmly. For a long time.)
-[portrait: VOSS, happy] Bravo. They finally cast the king correctly.
+[portrait: VOSS, happy] Bravo.
+[name: Voss] They finally cast the king correctly.
 Switch S157 CH20_MASQUES_DONE = ON. V141 = 8.
 ```
 
 ### **Calla** (`:ch20_calla`; only if `:ch16_rook == :hold` or `MAGNUS_KEPT_FAITH`; touch, a figure in the crowd, V141 == 8 → 9)
 ```
 (In the crowd after the play: a young woman still in a Meridian lanyard, shaking: Calla Wren, who scanned you on the dock at the very beginning.)
-[portrait: CALLA, sad] I scanned you on the dock. I photographed the screen. I've been sending him your life for six months. Let me do one thing that isn't that.
-[portrait: CALLA, neutral] I can get the arena's power schematics to Larch. I have some. I can go back for the rest.
+[portrait: CALLA, sad] I scanned you on the dock. I photographed the screen.
+[name: Calla] I've been sending him your life for six months.
+[name: Calla] Let me do one thing that isn't that.
+[portrait: CALLA, neutral] I can get the arena's power schematics to Larch.
+[name: Calla] I have some. I can go back for the rest.
 > Shelter her (Edda's boat). (shelter)
   Script: pf_choose(:ch20_calla, :shelter)
   (Edda takes her by the elbow without a word and walks her down to the Pilgrim's Rest staithe. The partial schematics go to Larch: one crack in the Engine. She lives.)
 > Send her back for the full set. (send_back)
   Script: pf_choose(:ch20_calla, :send_back)
-  [portrait: CALLA, neutral] (a breath) Okay. Okay. I can do that. (She goes back towards the Spire.)
+  [portrait: CALLA, neutral] (a breath) Okay. Okay. I can do that.
+  (She goes back towards the Spire.)
   (At dawn a Gale Post envelope arrives for Larch: the full set, two cracks in the Engine. There's a smear of blood on the envelope. Calla doesn't come back.)
 > Turn her away. (turn_away)
   Script: pf_choose(:ch20_calla, :turn_away)
-  [portrait: CALLA, sad] Then I'll just — go home, I suppose. (She leaves. Nobody sees her again.)
+  [portrait: CALLA, sad] Then I'll just — go home, I suppose.
+  (She leaves. Nobody sees her again.)
 V141 = 9.
 ```
 *(NARRATIVE_KEYS: `:shelter` RES+1 · `:send_back` RES−2 (Kroll finds her on the Spire stairwell) · `:turn_away` MERIDIAN+1.)*
@@ -350,22 +388,31 @@ V141 = 9.
 ### **Valen's audience** (touch, the Sanctum door, V141 == 9 → 10; key event 2)
 ```
 (The Sovereign's Sanctum. Candlelight. A camp bed, not a throne. Valen sitting on the edge of it with his crystal arm resting on a cushion beside him, like something borrowed that he has to give back.)
-[portrait: VALEN, neutral] Sit. I'm not going to defend myself. I'm going to explain. It's different. Slightly.
-[portrait: VALEN, neutral] Every ten years I bring the Plates home to Crownhaven, and every ten years Velmora *endures*. You noticed I never said "thrives". Nobody ever notices.
-[portrait: VALEN, sad] Morwen didn't cause the Glassfall. I let them say she did, because if the world knew the ceremony could fail, the kings would tear the Plates out of the ground and we'd all drown. I chose a country over a woman's name.
-[portrait: VALEN, sad] I'd do it again. I hate that I'd do it again.
-[portrait: VALEN, neutral] When you beat me tomorrow — and you will — I'll put the Crown on you. The splinter in your heart will make it whole. You'll hold the Plates quiet for a hundred years, and you won't age as fast as I did.
-[portrait: VALEN, sad] You'll be... very lonely. I'm sorry. I have no other door.
+[portrait: VALEN, neutral] Sit.
+[name: Valen] I'm not going to defend myself. I'm going to explain.
+[name: Valen] It's different. Slightly.
+[name: Valen] Every ten years I bring the Plates home to Crownhaven, and every ten years Velmora *endures*.
+[name: Valen] You noticed I never said "thrives". Nobody ever notices.
+[portrait: VALEN, sad] Morwen didn't cause the Glassfall. I let them say she did, because if the world knew the ceremony could fail, the kings would tear the Plates out of the ground and we'd all drown.
+[name: Valen] I chose a country over a woman's name.
+[name: Valen] I'd do it again. I hate that I'd do it again.
+[portrait: VALEN, neutral] When you beat me tomorrow — and you will — I'll put the Crown on you.
+[name: Valen] The splinter in your heart will make it whole.
+[name: Valen] You'll hold the Plates quiet for a hundred years, and you won't age as fast as I did.
+[portrait: VALEN, sad] [emote: dots] You'll be... very lonely.
+[name: Valen] I'm sorry. I have no other door.
 ```
 **`:ch20_audience`** (the PC's authored line):
 ```
 > "There's another door. The Hymn. We give them back." (return)
   Script: pf_choose(:ch20_audience, :return)
   \pf[PLAYER,neutral] There's another door. The Hymn. We give them back.
-  [portrait: VALEN, angry] And let eighteen cities go dark? Rimeholt drowns. Cindervault freezes. Verdance's fields fail in a year —
+  [portrait: VALEN, angry] And let eighteen cities go dark?
+  [name: Valen] Rimeholt drowns. Cindervault freezes. Verdance's fields fail in a year —
   [if has THE HYMN OF RETURN (complete)]
     \pf[PLAYER,neutral] "Not chained, not broken, not bought, not crowned: given back, as a gift is found."
-    [portrait: VALEN, shocked] (very quietly) ...Maren wrote that. I thought it was a poem.
+    [portrait: VALEN, shocked] (very quietly) ...Maren wrote that.
+    [name: Valen] I thought it was a poem.
 > "Then I'll wear it. Somebody has to." (keep)
   Script: pf_choose(:ch20_audience, :keep)
   \pf[PLAYER,neutral] Then I'll wear it. Somebody has to.
@@ -373,14 +420,17 @@ V141 = 9.
 > "You don't get to decide that for me. Nobody does." (refuse)
   Script: pf_choose(:ch20_audience, :refuse)
   \pf[PLAYER,angry] You don't get to decide that for me. Nobody does.
-  [portrait: VALEN, happy] (and it's the first time you've seen it) Good. Then decide it yourself, tomorrow. That's all I ever wanted, and I never had the courage to want it out loud.
+  [portrait: VALEN, happy] (and it's the first time you've seen it) Good.
+  [name: Valen] Then decide it yourself, tomorrow.
+  [name: Valen] That's all I ever wanted, and I never had the courage to want it out loud.
 Switch S158 CH20_AUDIENCE_DONE = ON. V141 = 10.
 ```
 *(NARRATIVE_KEYS: `:return` VALEN+2 RES+1 · `:keep` VALEN+3 · `:refuse` VALEN+1. `VALEN_COLLAPSED` = `:refuse` with a cold Bond, no Ilsa, and live telemetry: Voss's pre-ignition drains him overnight.)*
 
 ### ☠ **`GO_EARLY_CROWN` "Early Crown"** (at the audience's end)
 ```
-[portrait: VALEN, panic] (standing too fast, the crystal arm knocking the cushion to the floor) Wait. Tonight. I could do it tonight. Here. Skip the Final. So I don't have to hurt you first.
+[portrait: VALEN, panic] (standing too fast, the crystal arm knocking the cushion to the floor) Wait. Tonight. I could do it tonight. Here.
+[name: Valen] Skip the Final. So I don't have to hurt you first.
 (He's lifting the Crown off his own head with his good hand. It's shaking.)
 > Let him.
   [if made ILSA's warning]
@@ -388,7 +438,9 @@ Switch S158 CH20_AUDIENCE_DONE = ON. V141 = 10.
   > Let him.  Script: Prismfall.game_over(:GO_EARLY_CROWN)
   > Don't.
 > Don't.
-  [portrait: VALEN, sad] (lowering it) ...No. No. You're right. Tomorrow. Properly. Go and sleep. One of us should.
+  [portrait: VALEN, sad] (lowering it) ...No. No. You're right.
+  [name: Valen] Tomorrow. Properly.
+  [name: Valen] Go and sleep. One of us should.
 ```
 *(NARRATIVE_KEYS §9 epitaph: "The Crown was whole for one second. Then it was Meridian's." Voss has the cradle, so the half-Tuning Fixes the PC in the Sanctum.)*
 
@@ -398,8 +450,9 @@ Switch S158 CH20_AUDIENCE_DONE = ON. V141 = 10.
   (Ilsa at the Sanctum door, earmuffs in her hands, not on.)
   [portrait: ILSA, neutral] (to you) Stay. Please. I need someone to have heard it.
   (She goes in. You stand in the door.)
-  [portrait: ILSA, neutral] You chose a country over a daughter. Fine. Then save the country, Father. Don't make a child pay for it.
-  [portrait: VALEN, sad] (a long time) ...Little owl.
+  [name: Ilsa] You chose a country over a daughter. Fine.
+  [name: Ilsa] Then save the country, Father. Don't make a child pay for it.
+  [portrait: VALEN, sad] [emote: dots] (a long time) ...Little owl.
   (She sits down on the camp bed beside him. She stays the night.)
   Script: pf_choose(:sq_little_owl, :reconciled)
 [else]
@@ -414,7 +467,8 @@ V141 = 11.
 (Ysolde lights the Hollow Cathedral's lantern in a small Crownhaven chapel. The echo comes through it, in her Warden's coat, translucent, almost smiling.)
 [portrait: MORWEN, neutral] Little one. Let me see what I bought.
 BATTLE: Prismfall::Festival.exhibition(:ECHO_MORWEN) — gentle, once.
-[portrait: MORWEN, happy] (fading) Good value. Tell him I said so.
+[portrait: MORWEN, happy] (fading) Good value.
+[name: Morwen] Tell him I said so.
 ```
 
 ### **INTERLUDE V, "The Last Night"** (play as Valen; V119 = 5; the Sanctum before dawn; V141 == 11 → 12)
@@ -428,7 +482,8 @@ BATTLE: Prismfall::Festival.exhibition(:ECHO_MORWEN) — gentle, once.
 
 **The window** (a Zygarde Cell glowing on the sill):
 ```
-[portrait: VALEN, neutral] (to the Cell) Order, not justice. I chose order. Was I wrong?
+[portrait: VALEN, neutral] (to the Cell) Order, not justice. I chose order.
+[name: Valen] Was I wrong?
 (The Cell pulses, once.)
 (The player decides what that means. There's no menu. Valen looks at it for as long as the player lets him, and then the dawn comes up.)
 V119 = 0. V141 = 12.
@@ -440,7 +495,8 @@ V119 = 0. V141 = 12.
 **Kestrel (Redeemed)** (fallback):
 - He fights with the Gauntlet at first. At the first field-cycle, he looks at the Gauntlet's light, **tears it off** and throws it across the arena floor:
   ```
-  [portrait: KESTREL, angry] No. Not like this. If I beat you, I beat *you*.
+  [portrait: KESTREL, angry] No. Not like this.
+  [name: Kestrel] If I beat you, I beat *you*.
   ```
   (The battle hook ends the Gauntlet's field control.) He finishes with Morwen's Mismagius and his Aegislash.
 - **If he wears Morwen's Ring** (`:ch18_kestrel_ring == :give_now`): his **Scizor Mega Evolves** (`PrismfallMega::MORWEN_RING`, automatic at battle start when it's sent out).
@@ -471,7 +527,8 @@ The letter (Key Item, readable later):
   [if PC still has MORWEN'S RING]
     > Give him the ring.
       (You hold it out. He takes it without looking at you. He puts it on.)
-  [portrait: KESTREL, sad] ...Then you take him. Take him for both of us.
+  [portrait: KESTREL, sad] ...Then you take him.
+  [name: Kestrel] Take him for both of us.
   [if KESTREL_YSOLDE_RECONCILED] (He moves over, a little, on the arena floor. Ysolde sits down beside him.)
 [if KESTREL_FALLEN]
   (He's already gone, carried off between Meridian medics, his hand wrapped in white. Ysolde stands on the arena floor with the letter, unread, for a long time. Then she puts it back inside her coat.)
@@ -481,8 +538,9 @@ V141 = 14.
 **The other SF** (a one-line result if Sigrun was the PC's QF): **Valen beats Sigrun.** She entered to win the Crown herself and spare the PC, and he beat her *to protect her*. She leaves the arena without a word.
 ```
 (The Basilica roof, at dusk. Sigrun, sitting on the ridge with her knees up, dragonhide coat around her.)
-[portrait: SIGRUN, angry] He beat me with an arm made of glass. I've never been so angry in my life.
-[portrait: SIGRUN, sad] (a long pause) He did it so I wouldn't wear it. Didn't he.
+[portrait: SIGRUN, angry] He beat me with an arm made of glass.
+[name: Sigrun] I've never been so angry in my life.
+[portrait: SIGRUN, sad] [emote: dots] (a long pause) He did it so I wouldn't wear it. Didn't he.
 ```
 
 ## The eve of the Final (chapter close; autorun at the PC's room in Pilgrim's Rest, V141 == 14 → 15)
@@ -490,8 +548,11 @@ V141 = 14.
 (Night. A room above the inn at Pilgrim's Rest. Through the window, the Prism Arena, lit, eighteen colours on its glass, humming faintly. You can feel it humming in your chest.)
 (On the bed: your badge case, eighteen badges. Your mother's letter. The Hymn. The blueprints, folded small. [if MORWEN'S RING still held] Morwen's ring.)
 (Somebody knocks. Edda, with two cups.)
-[portrait: EDDA, neutral] Couldn't sleep either. (She sits on the windowsill.) Told you I had a bet on.
-[portrait: EDDA, neutral] I bet on you walking out of that arena on your own feet. Long odds. Long odds are the only ones worth taking.
+[portrait: EDDA, neutral] Couldn't sleep either.
+(She sits on the windowsill.)
+[name: Edda] Told you I had a bet on.
+[name: Edda] I bet on you walking out of that arena on your own feet.
+[name: Edda] Long odds. Long odds are the only ones worth taking.
 V141 = 15. Variable V102 STORY_CHAPTER = 21.
 QUEST LOG: "The Festival of Champions" — The Final. Valen. Tomorrow.
 ```
