@@ -23,6 +23,9 @@ module Prismfall
     # Bosses whose Zygarde keeps Power Construct for its last bar.
     CONSTRUCT_ON_LAST_BAR = [:VALEN_ZYGARDE_ORDER].freeze
     VALEN_CRYSTAL_LINE    = "The crystal climbs Valen's throat..."
+    # The Complete Forme's bar, as a fraction of its own (about twice the 50% Forme's) max HP (2026-11-26, Reuben:
+    # prepared teams must be able to win; at full Complete HP Hard prepared fell 35% -> 0%). Casual keeps it full.
+    VALEN_COMPLETE_HP     = { :CASUAL => 1.0, :STANDARD => 0.6, :HARD => 0.5 }
 
     # True while a bar-boss Zygarde still has bars to lose (its Power Construct waits).
     def self.construct_held?(battler)
@@ -40,6 +43,11 @@ module Prismfall
           battle.pbHideAbilitySplash(b)
         end
         b.pbChangeForm(b.form + 2, Prismfall::Bosses.text("{1} transformed into its Complete Forme!", b.pbThis))
+        frac = Prismfall::Bosses.resolve(VALEN_COMPLETE_HP) || 1.0
+        if frac < 1.0
+          b.hp = [[(b.totalhp * frac).round, 1].max, b.hp].min
+          battle.scene.pbRefreshOne(b.index) if battle.scene.respond_to?(:pbRefreshOne)
+        end
       end
       battle.pbDisplay(Prismfall::Bosses.text("Valen: \"Order, not justice. I chose order.\""))
     }
@@ -64,14 +72,14 @@ end
 
 Prismfall::Bosses.register(:VALEN_ZYGARDE_ORDER, {
   :bars       => { :CASUAL => 2, :STANDARD => 2, :HARD => 3 },
-  :stat_mults => { :CASUAL => { :HP => 0.55 } },
+  # Hard's three bars are x0.5 HP each (2026-11-26: at full HP Hard prepared teams never got through them).
+  :stat_mults => { :CASUAL => { :HP => 0.55 }, :HARD => { :HP => 0.7 } },
   :catch      => false,
   :intro      => ["Order rises out of the arena floor, cell by cell."],
   :on_break   => [
     { :cure_status => true, :reset_stats => :negative },
     { :condition => proc { |_battle, _b, st| !st.last_bar? },
-      :messages  => ["More Cells pour up through the cracks in the floor. {1} holds its shape!"],
-      :stats     => { :DEFENSE => 1 } },
+      :messages  => ["More Cells pour up through the cracks in the floor. {1} holds its shape!"] },   # (no +1 Defense since 2026-11-26)
     { :condition => proc { |_battle, _b, st| st.last_bar? },
       :proc      => Prismfall::Bosses::ZYGARDE_COMPLETE_PROC }
   ],

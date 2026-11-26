@@ -224,6 +224,8 @@ log = arceus.call("Arceus, War (Standard): every lock forced, capped at +2", :va
 check("War: seven bars; every lock of bars 1-6 forced", bs.arceus_bars == 7 && LOCKS.first(6).all? { |l| l[2] == l[1] }, LOCKS.inspect)
 df = BREAKS.first(5).map { |b| b[:stages][:DEFENSE] }
 check("War on Standard: the forced stages are capped at +2 a bar", df.uniq == [2], df.inspect)
+check("War / Judgment: a forced lock hardens (Defense / Sp. Def) without sharpening: no Attack stages from the locks",
+      BREAKS.first(5).all? { |b| b[:stages][:ATTACK] == 0 }, BREAKS.first(5).map { |b| b[:stages] }.inspect[0, 200])
 last = BREAKS.find { |b| b[:left] == 1 }
 check("War: the seventh bar is the Legend Plate phase (??? type, no Plates turning)", last && last[:types] == [:QMARKS] &&
       last[:field] != :PRISM_ARENA && last[:moves] == bs::ARCEUS_LEGEND_MOVES, last.inspect[0, 200])
@@ -260,40 +262,50 @@ check("Gilded: the last bar refills three times, then the Gilded Chain closes (r
       log.include?(/The Gilded Chain closes around/) && log.include?(/Valen kneels, crystal to the jaw/), "refills #{refills}, #{bs.last_result.inspect[0, 120]}")
 check("Gilded: the last bar's locks are never broken (no forced beats after the last bar, no :freed)", !log.include?(/The last chain falls away/))
 hp = log.lines.select { |l| l =~ /HP Arceus \(foe\): 1 -> (\d+) \/ (\d+)/ }.map { |l| l =~ /1 -> (\d+) \/ (\d+)/ && [$1.to_i, $2.to_i] }.compact
-check("Gilded on Standard: each refill is the Casual bar's HP (x0.5 of the Standard bar)", hp.length >= 3 && hp.last(3).all? { |a, t| a == (t * 0.5).round },
-      hp.last(3).inspect)
-fresh(:HARD)
-check("Gilded on Hard: refills are the Casual bar HP too (x0.4 of the Hard bar)", (bs.arceus_gilded_refill - 0.4).abs < 1e-9, bs.arceus_gilded_refill.to_s)
-fresh(:CASUAL)
-check("Gilded on Casual (eased): half a Casual bar", bs.arceus_gilded_refill == 0.5)
+check("Gilded: the last bar is one bar in four pieces (0.4, then three refills of 0.2)",
+      hp.length >= 4 && hp[-4][0] == (hp[-4][1] * 0.4).round && hp.last(3).all? { |a, t| a == (t * 0.2).round }, hp.last(4).inspect)
+check("Gilded: a big hit carries on into the refills (all three and the chain in one turn)",
+      log.lines.each_index.select { |i| log.lines[i].include?("binds the chain shut") }.each_cons(2).all? { |a, b|
+        log.lines[a..b].none? { |l| l.include?("--- Turn") } }, "")
 
 # Standard's Recover limit: two a bar. A Blissey that chips 100 a round, so Arceus wants to Recover.
 recov = []
-tosser = lambda { [god(mk(:BLISSEY, 100, [:SEISMICTOSS, :SOFTBOILED], :LEFTOVERS))] }
+tosser = lambda { [god(mk(:BLISSEY, 100, [:SONICBOOM, :SOFTBOILED], :LEFTOVERS))] }   # 20 a round: Arceus wants Recover
 counter_snap = lambda do |battle|
   battle.decision = 3 if battle.turnCount >= 40
   f = battle.battlers[1]
   st = f && bs.state_for(f)
   st ? st.counters.select { |k, _v| k[1] == :RECOVER }.dup : nil
 end
-log = arceus.call("Arceus, Bound (Standard): 40 rounds of Seismic Toss against Recover", :party => tosser.call,
-                  :setup => recording(recov, proc { |_battle, _b| :SEISMICTOSS }, &counter_snap))
+log = arceus.call("Arceus, Bound (Standard): 40 rounds of Sonic Boom against Recover", :party => tosser.call,
+                  :setup => recording(recov, proc { |_battle, _b| :SONICBOOM }, &counter_snap))
 uses = recov.last || {}
 check("Standard: Arceus Recovers at most twice a bar (BALANCE.md section 7), and the limit is reached",
       !uses.empty? && uses.values.max <= 2 && uses.values.include?(2), uses.inspect)
 recov = []
 log = arceus.call("Arceus, Bound (Hard): the same, no limit", :party => tosser.call, :difficulty => :HARD,
-                  :setup => recording(recov, proc { |_battle, _b| :SEISMICTOSS }, &counter_snap))
+                  :setup => recording(recov, proc { |_battle, _b| :SONICBOOM }, &counter_snap))
 check("Hard: no Recover limit", bs.resolve(bs.get(:ARCEUS_FINALE)[:move_limits]).nil? && log.lines.count { |l| l =~ /Arceus used Recover/ } > 2,
       log.lines.count { |l| l =~ /Arceus used Recover/ }.to_s)
 
 fresh(:CASUAL); c = bs.create_pokemon(:ARCEUS_FINALE)
 fresh(:STANDARD); s = bs.create_pokemon(:ARCEUS_FINALE)
 fresh(:HARD); h = bs.create_pokemon(:ARCEUS_FINALE)
-check("bar HP by difficulty: Casual x0.5, Standard x1.0, Hard x1.25 of Arceus's max HP", c.totalhp == (s.totalhp * 0.5).round && h.totalhp == (s.totalhp * 1.25).round,
-      [c.totalhp, s.totalhp, h.totalhp].inspect)
+b0 = bs.create_pokemon(:ARCEUS_FINALE); bs.strip(b0)
+check("bar HP by difficulty (2026-11-26): Casual x0.5, Standard x0.32, Hard x0.32 of Arceus's max HP",
+      c.totalhp == (b0.totalhp * 0.5).round && s.totalhp == (b0.totalhp * 0.32).round && h.totalhp == (b0.totalhp * 0.32).round,
+      [b0.totalhp, c.totalhp, s.totalhp, h.totalhp].inspect)
+check("offence: Casual x0.6 < Standard x0.8 = Hard x0.8; Hard is faster", c.spatk < s.spatk && s.spatk == h.spatk && h.speed > s.speed,
+      [c.spatk, s.spatk, h.spatk, s.speed, h.speed].inspect)
+bs.arceus_variant_override = :ARCEUS_JUDGMENT
+Prismfall.set_difficulty(:STANDARD)
+check("variant bar HP: Judgment x1.45 on Standard (its partner)", bs.arceus_stat_mults[:HP] == (0.32 * 1.45).round(3))
 Prismfall.set_difficulty(:CASUAL)
-check("Casual only is eased: offence x0.6, no Recover and no Calm Mind in any Plate set", c.spatk < s.spatk * 0.5 &&
+check("...not on Casual", bs.arceus_stat_mults[:HP] == 0.5)
+bs.arceus_variant_override = :ARCEUS_WAR
+check("...War's bars x0.4 on Casual too (it fell to 5% / 12%)", bs.arceus_stat_mults[:HP] == 0.2)
+bs.arceus_variant_override = nil
+check("Casual only is eased: offence x0.6, no Recover and no Calm Mind in any Plate set", c.spatk < b0.spatk &&
       bs.arceus_movesets.values.none? { |m| m.include?(:RECOVER) || m.include?(:CALMMIND) })
 Prismfall.set_difficulty(:STANDARD)
 check("...Standard keeps Recover (and Calm Mind on the Blank, Mind and Dread Plates)", bs.arceus_movesets[:WATER][3] == :RECOVER && bs.arceus_movesets[:NORMAL][3] == :CALMMIND)
@@ -352,8 +364,8 @@ held = rows.select { |r| r[0] > 1 && r[2] <= r[3] / 2 }
 check("Power Construct waits: under half HP on bar 1 (#{held.length} round ends) it stays in the 50% Forme",
       !held.empty? && held.all? { |r| r[1] == 0 } && rows.select { |r| r[0] > 1 }.all? { |r| r[1] == 0 }, rows.first(6).inspect)
 br = BREAKS.find { |b| b[:id] == :VALEN_ZYGARDE_ORDER }
-check("the last bar: Complete Forme, at Complete's full HP (#{br && br[:totalhp]} vs #{base_hp})", br && br[:left] == 1 && br[:form] == 2 &&
-      br[:hp] == br[:totalhp] && br[:totalhp] > base_hp * 1.5, br.inspect[0, 160])
+check("the last bar: Complete Forme (max HP #{br && br[:totalhp]} vs #{base_hp}), starting at 0.6 of it on Standard (2026-11-26)",
+      br && br[:left] == 1 && br[:form] == 2 && br[:hp] == (br[:totalhp] * 0.6).round && br[:totalhp] > base_hp * 1.5, br.inspect[0, 160])
 check("...with Power Construct's lines and Valen's", log.include?(/You sense the presence of many!/) && log.include?(/transformed into its Complete Forme/) &&
       log.include?(/Order, not justice\. I chose order\./))
 check("Valen lost after the Complete bar (the battle is winnable)", log.outcome == 1, log.outcome.inspect)
@@ -361,8 +373,8 @@ n_crystal = log.lines.count { |l| l.include?("The crystal climbs Valen's throat"
 check("\"The crystal climbs Valen's throat...\" on each of the arena's turns (#{OVERLAYS.length})", n_crystal == OVERLAYS.length && n_crystal > 0,
       "#{n_crystal} lines, #{OVERLAYS.length} turns")
 t = valen.call(100, :HARD)
-check("Hard (v100): 3 bars, no stat multipliers", t.party[0].prismfall_boss_id == :VALEN_ZYGARDE_ORDER && bs.bars_for(bs.get(:VALEN_ZYGARDE_ORDER)) == 3 &&
-      bs.stat_mults(t.party[0]).nil?)
+check("Hard (v100): 3 bars at x0.7 HP (2026-11-26), offence untouched", t.party[0].prismfall_boss_id == :VALEN_ZYGARDE_ORDER &&
+      bs.bars_for(bs.get(:VALEN_ZYGARDE_ORDER)) == 3 && bs.stat_mults(t.party[0]) == { :HP => 0.7 })
 rows = []
 BREAKS.clear
 $player.party = [god(mk(:BLISSEY, 100, [:SEISMICTOSS, :SOFTBOILED], :LEFTOVERS))]
