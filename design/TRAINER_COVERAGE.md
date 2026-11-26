@@ -76,10 +76,9 @@ None: every eligible species is on a generic trainer.
 
 ## Regional forms (bonus)
 
-24 of 54 regional forms are on a generic trainer.
+54 of 54 regional forms are on a generic trainer.
 
-- Covered: Alolan Raticate, Alolan Sandslash, Alolan Ninetales, Alolan Dugtrio, Alolan Persian, Alolan Golem, Galarian Rapidash, Galarian Slowpoke, Galarian Slowbro, Alolan Muk, Alolan Marowak, Galarian Weezing, Galarian Slowking, Galarian Stunfisk, Hisuian Arcanine, Hisuian Electrode, Hisuian Typhlosion, Hisuian Samurott, Hisuian Lilligant, Hisuian Zoroark, Hisuian Braviary, Hisuian Goodra, Hisuian Avalugg, Hisuian Decidueye
-- Not yet: Alolan Rattata, Alolan Raichu, Alolan Sandshrew, Alolan Vulpix, Alolan Diglett, Alolan Meowth, Galarian Meowth, Alolan Geodude, Alolan Graveler, Galarian Ponyta, Galarian Farfetch'd, Alolan Grimer, Alolan Exeggutor, Galarian Mr. Mime, Galarian Corsola, Galarian Zigzagoon, Galarian Linoone, Galarian Darumaka, Galarian Standard Mode Darmanitan, Galarian Yamask, Hisuian Growlithe, Hisuian Voltorb, Paldean (Combat Breed) Tauros, Paldean (Blaze Breed) Tauros, Paldean (Aqua Breed) Tauros, Paldean Wooper, Hisuian Qwilfish, Hisuian Sneasel, Hisuian Zorua, Hisuian Sliggoo
+- Covered: Alolan Rattata, Alolan Raticate, Alolan Raichu, Alolan Sandshrew, Alolan Sandslash, Alolan Vulpix, Alolan Ninetales, Alolan Diglett, Alolan Dugtrio, Alolan Meowth, Galarian Meowth, Alolan Persian, Alolan Geodude, Alolan Graveler, Alolan Golem, Galarian Ponyta, Galarian Rapidash, Galarian Slowpoke, Galarian Slowbro, Galarian Farfetch'd, Alolan Grimer, Alolan Muk, Alolan Exeggutor, Alolan Marowak, Galarian Weezing, Galarian Mr. Mime, Galarian Slowking, Galarian Corsola, Galarian Zigzagoon, Galarian Linoone, Galarian Darumaka, Galarian Standard Mode Darmanitan, Galarian Yamask, Galarian Stunfisk, Hisuian Growlithe, Hisuian Arcanine, Hisuian Voltorb, Hisuian Electrode, Paldean (Combat Breed) Tauros, Paldean (Blaze Breed) Tauros, Paldean (Aqua Breed) Tauros, Hisuian Typhlosion, Paldean Wooper, Hisuian Qwilfish, Hisuian Sneasel, Hisuian Samurott, Hisuian Lilligant, Hisuian Zorua, Hisuian Zoroark, Hisuian Braviary, Hisuian Sliggoo, Hisuian Goodra, Hisuian Avalugg, Hisuian Decidueye
 
 ## Level-plausibility flags
 

@@ -261,7 +261,7 @@ def ROUTES(P):
     t("Map 580 The Reedholms", "BIRDKEEPER", "Sunniva", "They've gone back to the heron islet. I don't blame them.",
       [m("ZUBAT", 21, "INNERFOCUS", "ADAMANT"), m("BUTTERFREE", 23, "COMPOUNDEYES", "MODEST"), m("MOTHIM", 24, "SWARM", "ADAMANT")])
     t("Map 580 The Reedholms", "YOUNGSTER", "Jorun", "I cut reeds faster than I battle. Don't tell my da.",
-      [m("AZURILL", 21, "HUGEPOWER", "ADAMANT"), m("WHISMUR", 23, "SOUNDPROOF", "ADAMANT"), m("FURRET", 24, "RUNAWAY", "JOLLY")])
+      [m("AZURILL", 21, "HUGEPOWER", "ADAMANT"), m("WOOPER", 22, "WATERABSORB", "ADAMANT", form=1), m("WHISMUR", 23, "SOUNDPROOF", "ADAMANT"), m("FURRET", 24, "RUNAWAY", "JOLLY")])
     t("Map 592 The Icecutters' Haul", "HIKER", "Bodil", "We're on strike. I wasn't meant to lose on strike.",
       [m("SNOM", 22, "SHIELDDUST", "MODEST"), m("MUDBRAY", 24, "STAMINA", "ADAMANT")])
     t("Map 592 The Icecutters' Haul", "BLACKBELT", "Torsten", "I cut ice all day. You cut me in half the time.",
@@ -277,7 +277,7 @@ def ROUTES(P):
     t("Map 581 The Icefall Locks", "SAILOR", "Brede", "Every lock on this stair and you still got past me.",
       [m("QUAXLY", 19, "TORRENT", "ADAMANT"), m("SOBBLE", 20, "TORRENT", "MODEST"), m("FROAKIE", 21, "TORRENT", "MODEST"), m("POPPLIO", 22, "TORRENT", "MODEST")])
     t("Map 581 The Icefall Locks", "ENGINEER", "Hartley", "Lattice hums. I hum. You didn't even slow down.",
-      [m("TINKATINK", 22, "OWNTEMPO", "ADAMANT"), m("PLUSLE", 24, "PLUS", "TIMID")])
+      [m("TINKATINK", 22, "OWNTEMPO", "ADAMANT"), m("GEODUDE", 23, "MAGNETPULL", "ADAMANT", form=1), m("PLUSLE", 24, "PLUS", "TIMID")])
     t("Map 581 The Icefall Locks", "POKEMONRANGER_M", "Alwin", "Elowen soil from here up. You've earned the walk.",
       [m("GOSSIFLEUR", 21, "COTTONDOWN", "ADAMANT"), m("BELLSPROUT", 23, "CHLOROPHYLL", "ADAMANT"), m("WORMADAM", 24, "ANTICIPATION", "MODEST")])
     t("Map 581 The Icefall Locks", "COOLTRAINER_F", "Ylva", "Isenmar ends at the top. So did my streak.",
@@ -298,7 +298,7 @@ def ROUTES(P):
     t("Map 594 Wallshadow Row", "AROMALADY", "Linnet", "They do better in the Wall's shade. So do I, usually.",
       [m("GROOKEY", 19, "OVERGROW", "ADAMANT"), m("SPRIGATITO", 20, "OVERGROW", "ADAMANT"), m("CHESPIN", 21, "OVERGROW", "ADAMANT"), m("ROWLET", 22, "OVERGROW", "ADAMANT")])
     t("Map 594 Wallshadow Row", "YOUNGSTER", "Hodge", "I'm telling the tithe-reeve. He won't care either.",
-      [m("RATTATA", 21, "GUTS", "ADAMANT"), m("NIDORANmA", 21, "RIVALRY", "ADAMANT"), m("LINOONE", 24, "GLUTTONY", "JOLLY")])
+      [m("RATTATA", 21, "GUTS", "ADAMANT"), m("NIDORANmA", 21, "RIVALRY", "ADAMANT"), m("ZIGZAGOON", 22, "PICKUP", "ADAMANT", form=1), m("LINOONE", 24, "GLUTTONY", "JOLLY")])
     t("Map 594 Wallshadow Row", "LASS", "Marigold", "Four kingdoms on that signpost and I lost in this one.",
       [m("RALTS", 21, "TRACE", "MODEST"), m("NIDORANfE", 21, "RIVALRY", "ADAMANT"), m("YUNGOOS", 23, "STRONGJAW", "ADAMANT")])
     t("Map 594 Wallshadow Row", "TAMER", "Hob", "Tithe barn's full. My pride isn't.",
@@ -314,7 +314,7 @@ def ROUTES(P):
     t("Map 593 The Arc-Lamp Mile", "SCIENTIST", "Morley", "Fascinating. Do that again, slower, so I can write it down.",
       [m("WYNAUT", 20, "SHADOWTAG", "ADAMANT"), m("ABRA", 21, "SYNCHRONIZE", "TIMID"), m("BELDUM", 23, "CLEARBODY", "IMPISH")])
     t("Map 584 Voltaic Sluiceworks", "BURGLAR", "Nix", "It's decommissioned! It's not stealing if it's decommissioned!",
-      [m("EKANS", 23, "SHEDSKIN", "ADAMANT"), m("DUSTOX", 24, "SHIELDDUST", "CALM"), m("BEEDRILL", 25, "SWARM", "ADAMANT")])
+      [m("RATTATA", 22, "GLUTTONY", "ADAMANT", form=1), m("EKANS", 23, "SHEDSKIN", "ADAMANT"), m("DUSTOX", 24, "SHIELDDUST", "CALM"), m("BEEDRILL", 25, "SWARM", "ADAMANT")])
     t("Map 584 Voltaic Sluiceworks", "SUPERNERD", "Elwin", "Episode 112 was filmed RIGHT HERE. Take 41. I counted.",
       [m("TYNAMO", 24, "LEVITATE", "ADAMANT"), m("MINUN", 25, "MINUS", "TIMID")])
     # ---------------------------------------------------------------------------------------------------------------
@@ -328,7 +328,7 @@ def ROUTES(P):
     t("Map 603 The Highwold", "TAMER", "Colm", "The flock's scattered to the dew-pond. Again.",
       [m("TANDEMAUS", 26, "PICKUP", "ADAMANT"), m("EEVEE", 27, "ADAPTABILITY", "ADAMANT"), m("FLAAFFY", 28, "STATIC", "MODEST")])
     t("Map 603 The Highwold", "PICNICKER", "Nessa", "Windy up here. Blew my whole plan away.",
-      [m("CHERUBI", 26, "CHLOROPHYLL", "MODEST"), m("SKIPLOOM", 27, "CHLOROPHYLL", "ADAMANT"), m("SUNFLORA", 28, "CHLOROPHYLL", "MODEST")])
+      [m("CHERUBI", 26, "CHLOROPHYLL", "MODEST"), m("VOLTORB", 26, "SOUNDPROOF", "TIMID", form=1), m("SKIPLOOM", 27, "CHLOROPHYLL", "ADAMANT"), m("SUNFLORA", 28, "CHLOROPHYLL", "MODEST")])
     t("Map 603 The Highwold", "PSYCHIC_F", "Iseult", "The Wold Stones said you'd come. They didn't say this.",
       [m("HATENNA", 26, "ANTICIPATION", "MODEST"), m("CHINGLING", 27, "LEVITATE", "MODEST"), m("DROWZEE", 28, "FOREWARN", "CAREFUL")])
     t("Map 612 The Meridian Mainline", "ENGINEER", "Pryce", "Signal's at danger. Should've read it myself.",
@@ -338,7 +338,7 @@ def ROUTES(P):
     t("Map 612 The Meridian Mainline", "SUPERNERD", "Tobias", "I had the timetable memorised. You weren't on it.",
       [m("CUFANT", 26, "SHEERFORCE", "ADAMANT"), m("PORYGON", 27, "DOWNLOAD", "MODEST"), m("PERRSERKER", 28, "BATTLEARMOR", "ADAMANT")])
     t("Map 604 Static Tunnels", "HIKER", "Garrick", "Can't see my hand down here. Saw that coming, though.",
-      [m("MAGNEMITE", 27, "STURDY", "MODEST"), m("ONIX", 28, "ROCKHEAD", "IMPISH"), m("BOLDORE", 29, "WEAKARMOR", "ADAMANT")])
+      [m("MAGNEMITE", 27, "STURDY", "MODEST"), m("ONIX", 28, "ROCKHEAD", "IMPISH"), m("GRAVELER", 28, "STURDY", "ADAMANT", form=1), m("BOLDORE", 29, "WEAKARMOR", "ADAMANT")])
     t("Map 604 Static Tunnels", "BURGLAR", "Sly", "Copper wire's worth good money. You're worth trouble.",
       [m("JOLTIK", 27, "COMPOUNDEYES", "MODEST"), m("LIEPARD", 28, "UNBURDEN", "JOLLY"), m("MAGNETON", 29, "MAGNETPULL", "MODEST")])
     t("Map 605 Static Tunnels Depths", "POKEMANIAC", "Otho", "The rare ones live deeper. So does my disappointment.",
@@ -360,9 +360,9 @@ def ROUTES(P):
     t("Map 613 Sunbleach Flats", "YOUNGSTER", "Nabil", "I was guarding the frames! From you, mostly!",
       [m("HAPPINY", 26, "SERENEGRACE", "MODEST"), m("DITTO", 27, "LIMBER", "ADAMANT"), m("DELCATTY", 28, "CUTECHARM", "JOLLY")])
     t("Map 208 Necropolis of the Electors", "CHANNELER", "Zenobia", "The Electors voted. It was unanimous. I lose.",
-      [m("GREAVARD", 28, "PICKUP", "ADAMANT"), m("POLTCHAGEIST", 29, "HOSPITALITY", "MODEST"), m("PUMPKABOO", 30, "FRISK", "ADAMANT")])
+      [m("GREAVARD", 28, "PICKUP", "ADAMANT"), m("ZORUA", 28, "ILLUSION", "MODEST", form=1), m("POLTCHAGEIST", 29, "HOSPITALITY", "MODEST"), m("PUMPKABOO", 30, "FRISK", "ADAMANT")])
     t("Map 208 Necropolis of the Electors", "RUINMANIAC", "Lucan", "Eighteen tomb doors and I knocked on yours.",
-      [m("SHEDINJA", 28, "WONDERGUARD", "ADAMANT"), m("GIMMIGHOUL", 29, "RATTLED", "MODEST"), m("ONIX", 30, "ROCKHEAD", "IMPISH")])
+      [m("SHEDINJA", 28, "WONDERGUARD", "ADAMANT"), m("YAMASK", 28, "WANDERINGSPIRIT", "IMPISH", form=1), m("GIMMIGHOUL", 29, "RATTLED", "MODEST"), m("ONIX", 30, "ROCKHEAD", "IMPISH")])
     t("Map 210 Duneholt Gym - Entrance", "PICNICKER", "Layla", "The sand took my sandwich and you took the rest.",
       [m("PANSAGE", 28, "GLUTTONY", "ADAMANT"), m("TOEDSCOOL", 29, "MYCELIUMMIGHT", "CALM"), m("MUDBRAY", 30, "STAMINA", "ADAMANT")])
     t("Map 211 Duneholt Gym - Puzzle Room 1", "RUINMANIAC", "Darius", "Dig where the Warden says. I dug in the wrong place.",
@@ -398,11 +398,11 @@ def ROUTES(P):
     t("Map 628 Sinkfield", "POKEMONRANGER_M", "Edmund", "The field swallowed the plough. Keep to the stones.",
       [m("PALPITOAD", 30, "HYDRATION", "ADAMANT"), m("MARSHTOMP", 31, "TORRENT", "ADAMANT"), m("QUAGSIRE", 32, "DAMP", "ADAMANT"), m("WHISCASH", 33, "OBLIVIOUS", "ADAMANT")])
     t("Map 628 Sinkfield", "LASS", "Marjory", "That was our barley. That was our barn. That was my team.",
-      [m("PIDGEOTTO", 31, "TANGLEDFEET", "ADAMANT"), m("TRANQUILL", 32, "SUPERLUCK", "ADAMANT"), m("VIGOROTH", 33, "VITALSPIRIT", "JOLLY")])
+      [m("PIDGEOTTO", 31, "TANGLEDFEET", "ADAMANT"), m("DIGLETT", 31, "SANDVEIL", "JOLLY", form=1), m("TRANQUILL", 32, "SUPERLUCK", "ADAMANT"), m("VIGOROTH", 33, "VITALSPIRIT", "JOLLY")])
     t("Map 621 The Leach Canyons", "BURGLAR", "Crake", "Foundry throws away better than Mirefen buys.",
       [m("SHROODLE", 30, "UNBURDEN", "ADAMANT"), m("GLIMMET", 31, "TOXICDEBRIS", "MODEST"), m("IVYSAUR", 32, "OVERGROW", "MODEST")])
     t("Map 621 The Leach Canyons", "SUPERNERD", "Linus", "The runoff's four colours today. I'm the fifth: green.",
-      [m("GULPIN", 30, "LIQUIDOOZE", "ADAMANT"), m("ARBOK", 31, "SHEDSKIN", "ADAMANT"), m("GRAFAIAI", 32, "UNBURDEN", "JOLLY")])
+      [m("MEOWTH", 29, "PICKUP", "ADAMANT", form=2), m("GULPIN", 30, "LIQUIDOOZE", "ADAMANT"), m("ARBOK", 31, "SHEDSKIN", "ADAMANT"), m("GRAFAIAI", 32, "UNBURDEN", "JOLLY")])
     t("Map 621 The Leach Canyons", "FISHERMAN", "Dunn", "Don't eat what I catch here. I don't.",
       [m("CROCONAW", 30, "TORRENT", "ADAMANT"), m("BIBAREL", 31, "UNAWARE", "ADAMANT"), m("BRIONNE", 32, "TORRENT", "MODEST")])
     t("Map 634 Wormwood Lea", "AROMALADY", "Melisande", "Wormwood's bitter. So is this, a little.",
@@ -414,9 +414,9 @@ def ROUTES(P):
     t("Map 634 Wormwood Lea (double battle)", "TWINS", "Tilly & Milly", "Tilly: Bitters! Milly: She means she's bitter.",
       [m("DOLLIV", 31, "EARLYBIRD", "MODEST"), m("GROTLE", 32, "OVERGROW", "ADAMANT")])
     t("Map 633 The Gutterfall", "BIKER", "Rudge", "The falls run blue. Nobody asks why. Don't you start.",
-      [m("ZORUA", 30, "ILLUSION", "MODEST"), m("MASCHIFF", 31, "INTIMIDATE", "ADAMANT"), m("MURKROW", 32, "SUPERLUCK", "JOLLY")])
+      [m("ZORUA", 30, "ILLUSION", "MODEST"), m("MEOWTH", 30, "TECHNICIAN", "TIMID", form=1), m("MASCHIFF", 31, "INTIMIDATE", "ADAMANT"), m("MURKROW", 32, "SUPERLUCK", "JOLLY")])
     t("Map 633 The Gutterfall", "CUEBALL", "Knox", "Ladder-town rules: loser climbs down. Long way down.",
-      [m("RIOLU", 30, "INNERFOCUS", "ADAMANT"), m("CROAGUNK", 31, "ANTICIPATION", "ADAMANT"), m("GURDURR", 32, "SHEERFORCE", "ADAMANT")])
+      [m("RIOLU", 30, "INNERFOCUS", "ADAMANT"), m("CROAGUNK", 31, "ANTICIPATION", "ADAMANT"), m("SNEASEL", 31, "INNERFOCUS", "JOLLY", form=1), m("GURDURR", 32, "SHEERFORCE", "ADAMANT")])
     t("Map 633 The Gutterfall", "YOUNGSTER", "Tad", "I can hold my breath the whole ladder. Watch. ...Later.",
       [m("TENTACOOL", 30, "LIQUIDOOZE", "CALM"), m("WHIRLIPEDE", 31, "POISONPOINT", "IMPISH"), m("VENOMOTH", 32, "SHIELDDUST", "TIMID")])
     t("Map 230 Mirefen Gym - Entrance", "AROMALADY", "Rue", "The Warden's herbs sting before they heal. Like that did.",
@@ -432,7 +432,7 @@ def ROUTES(P):
     # ---------------------------------------------------------------------------------------------------------------
     # Ch8 - the fens, Lake Sallow and the Pyre Road to Cindervault (cap 39; route Lv 33-36, Gym 7 and dungeons 35-38)
     t("Map 640 Leechman's Walk", "FISHERMAN", "Gil", "Leeches for the ward, a copper a jar. You're bad for business.",
-      [m("CLAUNCHER", 33, "MEGALAUNCHER", "MODEST"), m("CLAMPERL", 34, "SHELLARMOR", "MODEST"), m("QWILFISH", 35, "POISONPOINT", "JOLLY"), m("LANTURN", 36, "ILLUMINATE", "MODEST")])
+      [m("CLAUNCHER", 33, "MEGALAUNCHER", "MODEST"), m("CLAMPERL", 34, "SHELLARMOR", "MODEST"), m("QWILFISH", 35, "POISONPOINT", "JOLLY", form=1), m("LANTURN", 36, "ILLUMINATE", "MODEST")])
     t("Map 640 Leechman's Walk", "POKEMONRANGER_F", "Fenella", "Stay on the boards. The fen keeps what it's given.",
       [m("QUILLADIN", 33, "OVERGROW", "ADAMANT"), m("SERVINE", 34, "OVERGROW", "ADAMANT"), m("CARNIVINE", 35, "LEVITATE", "ADAMANT"), m("VICTREEBEL", 36, "CHLOROPHYLL", "ADAMANT")])
     t("Map 640 Leechman's Walk", "CUEBALL", "Brakk", "Plateau folk don't come down here. Now I know why.",
@@ -440,7 +440,7 @@ def ROUTES(P):
     t("Map 640 Leechman's Walk", "BUGCATCHER", "Midge", "They bite. Not hard enough, though.",
       [m("LOKIX", 34, "SWARM", "JOLLY"), m("SEVIPER", 35, "SHEDSKIN", "ADAMANT"), m("SWALOT", 36, "LIQUIDOOZE", "ADAMANT")])
     t("Map 644 Miasma Caverns", "HIKER", "Grubb", "Breathe through your sleeve. I should've battled through mine.",
-      [m("GRIMER", 35, "STENCH", "ADAMANT"), m("TRUBBISH", 36, "STENCH", "ADAMANT"), m("GLIMMET", 37, "TOXICDEBRIS", "MODEST"), m("NIDOQUEEN", 38, "RIVALRY", "ADAMANT")])
+      [m("GRIMER", 35, "GLUTTONY", "ADAMANT", form=1), m("TRUBBISH", 36, "STENCH", "ADAMANT"), m("GLIMMET", 37, "TOXICDEBRIS", "MODEST"), m("NIDOQUEEN", 38, "RIVALRY", "ADAMANT")])
     t("Map 644 Miasma Caverns", "SCIENTIST", "Vane", "Sample forty-one: my own defeat. Noted.",
       [m("MAREANIE", 35, "MERCILESS", "ADAMANT"), m("ELGYEM", 36, "TELEPATHY", "MODEST"), m("GRUMPIG", 37, "OWNTEMPO", "MODEST"), m("GARBODOR", 38, "STENCH", "ADAMANT")])
     t("Map 645 Miasma Caverns B1F", "BURGLAR", "Soot", "Whatever Lumen pours down, somebody down here sells.",
@@ -448,7 +448,7 @@ def ROUTES(P):
     t("Map 645 Miasma Caverns B1F", "POKEMANIAC", "Quill", "It glows down here. So do they. So did you, just then.",
       [m("JANGMOO", 35, "SOUNDPROOF", "ADAMANT"), m("GOLBAT", 36, "INNERFOCUS", "JOLLY"), m("SCOLIPEDE", 37, "SWARM", "JOLLY"), m("MUK", 38, "STICKYHOLD", "ADAMANT")])
     t("Map 648 The Weeping Fen", "CHANNELER", "Lenore", "The fen weeps for them. I only listen.",
-      [m("HONEDGE", 36, "NOGUARD", "ADAMANT"), m("FRILLISH", 37, "WATERABSORB", "MODEST"), m("DUSCLOPS", 38, "PRESSURE", "ADAMANT")])
+      [m("CORSOLA", 35, "WEAKARMOR", "MODEST", form=1), m("HONEDGE", 36, "NOGUARD", "ADAMANT"), m("FRILLISH", 37, "WATERABSORB", "MODEST"), m("DUSCLOPS", 38, "PRESSURE", "ADAMANT")])
     t("Map 641 Lake Sallow", "SWIMMER_M", "Dale", "Cold lake, warm welcome. Well. Cold lake.",
       [m("DUCKLETT", 34, "KEENEYE", "ADAMANT"), m("SLOWPOKE", 35, "OBLIVIOUS", "ADAMANT"), m("POLIWHIRL", 36, "DAMP", "JOLLY")])
     t("Map 641 Lake Sallow", "SWIMMER_F", "Nerys", "You crossed faster than the ferry. Don't tell Madoc.",
@@ -460,7 +460,7 @@ def ROUTES(P):
     t("Map 641 Lake Sallow", "TUBER_M", "Finn", "I can swim to the island and back! I can't do this, though.",
       [m("FEEBAS", 34, "SWIFTSWIM", "ADAMANT"), m("ZANGOOSE", 35, "IMMUNITY", "JOLLY"), m("BASCULIN", 36, "RECKLESS", "JOLLY")])
     t("Map 652 The Pyre Road", "TAMER", "Kael", "Every pyre's a house's dead. Mine'll hear about this.",
-      [m("VULPIX", 33, "FLASHFIRE", "MODEST"), m("PANSEAR", 34, "GLUTTONY", "ADAMANT"), m("BRAIXEN", 35, "BLAZE", "MODEST"), m("CROCALOR", 36, "BLAZE", "MODEST")])
+      [m("VULPIX", 33, "FLASHFIRE", "MODEST"), m("PANSEAR", 34, "GLUTTONY", "ADAMANT"), m("BRAIXEN", 35, "BLAZE", "MODEST"), m("TAUROS", 35, "INTIMIDATE", "JOLLY", form=2), m("CROCALOR", 36, "BLAZE", "MODEST")])
     t("Map 652 The Pyre Road", "BURGLAR", "Scorch", "Ash hides footprints. Doesn't hide a loss.",
       [m("FLETCHINDER", 34, "FLAMEBODY", "ADAMANT"), m("CHARMELEON", 35, "BLAZE", "MODEST"), m("QUILAVA", 36, "BLAZE", "MODEST")])
     t("Map 652 The Pyre Road", "COOLTRAINER_M", "Varro", "The Caldera Gate's ahead. Brann's no gentler than I was.",
@@ -472,7 +472,7 @@ def ROUTES(P):
     t("Map 658 Lantern Isle", "SWIMMER_F", "Leilani", "Warm water makes me slow. That's my excuse.",
       [m("WISHIWASHI", 33, "SCHOOLING", "MODEST"), m("WARTORTLE", 34, "TORRENT", "MODEST"), m("DRIZZILE", 35, "TORRENT", "TIMID"), m("SHARPEDO", 36, "ROUGHSKIN", "JOLLY")])
     t("Map 658 Lantern Isle", "BEAUTY", "Noelani", "Island flowers, island pride. Both wilted.",
-      [m("FOMANTIS", 33, "LEAFGUARD", "ADAMANT"), m("STEENEE", 34, "OBLIVIOUS", "ADAMANT"), m("GROVYLE", 35, "OVERGROW", "TIMID"), m("TROPIUS", 36, "SOLARPOWER", "MODEST")])
+      [m("FOMANTIS", 33, "LEAFGUARD", "ADAMANT"), m("STEENEE", 34, "OBLIVIOUS", "ADAMANT"), m("GROVYLE", 35, "OVERGROW", "TIMID"), m("TROPIUS", 36, "SOLARPOWER", "MODEST"), m("EXEGGUTOR", 36, "FRISK", "MODEST", form=1)])
     t("Map 658 Lantern Isle", "BIRDKEEPER", "Keoni", "They'll sulk in the palms till sundown.",
       [m("SWABLU", 33, "NATURALCURE", "ADAMANT"), m("CORVISQUIRE", 34, "UNNERVE", "ADAMANT"), m("MINIOR", 35, "SHIELDSDOWN", "BOLD"), m("TOUCANNON", 36, "SKILLLINK", "ADAMANT")])
     t("Map 658 Lantern Isle", "FISHERMAN", "Makoa", "Best fishing in Velmora and I still came up empty.",
@@ -492,7 +492,7 @@ def ROUTES(P):
     # ---------------------------------------------------------------------------------------------------------------
     # Ch9 - the ash roads, the Cinderhorn and the Ironway to Ironreach (cap 43; route Lv 37-40, Gym 8 and dungeons 39-42)
     t("Map 660 The Ashmarch", "HIKER", "Tuff", "Ash to the ankles. Now up to the neck.",
-      [m("SLUGMA", 38, "MAGMAARMOR", "MODEST"), m("CHARCADET", 39, "FLASHFIRE", "ADAMANT"), m("HOUNDOOM", 40, "EARLYBIRD", "TIMID")])
+      [m("SLUGMA", 38, "MAGMAARMOR", "MODEST"), m("GROWLITHE", 38, "INTIMIDATE", "ADAMANT", form=1), m("CHARCADET", 39, "FLASHFIRE", "ADAMANT"), m("HOUNDOOM", 40, "EARLYBIRD", "TIMID")])
     t("Map 660 The Ashmarch", "CAMPER", "Embry", "Soot-grass burns if you look at it wrong. I looked wrong.",
       [m("GROWLITHE", 37, "FLASHFIRE", "ADAMANT"), m("SCOVILLAIN", 38, "CHLOROPHYLL", "ADAMANT"), m("MAGMAR", 39, "FLAMEBODY", "TIMID"), m("ARMAROUGE", 40, "FLASHFIRE", "MODEST")])
     t("Map 660 The Ashmarch", "BIRDKEEPER", "Vesna", "They ride the thermals. I ride the consequences.",
@@ -524,7 +524,7 @@ def ROUTES(P):
     t("Map 666 The Cinderhorn Caldera", "COOLTRAINER_M", "Dorn", "Top of the Cinderhorn. Nowhere to go but down.",
       [m("SALAZZLE", 40, "CORROSION", "TIMID"), m("SIMISEAR", 41, "GLUTTONY", "JOLLY"), m("MAGMORTAR", 42, "FLAMEBODY", "MODEST")])
     t("Map 668 Emberfall", "CHANNELER", "Isaura", "The fire's cold here. Touch it. No, don't.",
-      [m("DREEPY", 40, "CLEARBODY", "ADAMANT"), m("LAMPENT", 41, "FLAMEBODY", "MODEST"), m("TURTONATOR", 42, "SHELLARMOR", "MODEST")])
+      [m("DREEPY", 40, "CLEARBODY", "ADAMANT"), m("DARUMAKA", 40, "HUSTLE", "ADAMANT", form=2), m("LAMPENT", 41, "FLAMEBODY", "MODEST"), m("TURTONATOR", 42, "SHELLARMOR", "MODEST")])
     t("Map 661 The Ironway", "HIKER", "Bruna", "Ore goes down, miners go up. I'm going home.",
       [m("ANORITH", 38, "BATTLEARMOR", "ADAMANT"), m("LILEEP", 39, "SUCTIONCUPS", "CALM"), m("BASTIODON", 40, "STURDY", "IMPISH")])
     t("Map 661 The Ironway", "ENGINEER", "Jory", "Winding gear's sound. My nerve, less so.",
@@ -571,7 +571,7 @@ def ROUTES(P):
     t("Map 692 The Tailings", "SUPERNERD", "Garrod", "I sift the waste for what the Quarry missed. It missed nothing.",
       [m("METANG", 41, "CLEARBODY", "ADAMANT"), m("DOUBLADE", 42, "NOGUARD", "ADAMANT"), m("KLEFKI", 43, "PRANKSTER", "ADAMANT"), m("REVAVROOM", 44, "OVERCOAT", "JOLLY")])
     t("Map 692 The Tailings", "CUEBALL", "Maul", "The Quarry spat me out. Now you have.",
-      [m("FALINKS", 41, "BATTLEARMOR", "ADAMANT"), m("GRAPPLOCT", 42, "LIMBER", "ADAMANT"), m("SCRAFTY", 43, "MOXIE", "ADAMANT"), m("SNEASLER", 44, "PRESSURE", "JOLLY")])
+      [m("FALINKS", 41, "BATTLEARMOR", "ADAMANT"), m("GRAPPLOCT", 42, "LIMBER", "ADAMANT"), m("LINOONE", 42, "PICKUP", "JOLLY", form=1), m("SCRAFTY", 43, "MOXIE", "ADAMANT"), m("SNEASLER", 44, "PRESSURE", "JOLLY")])
     t("Map 684 Grudgestone Quarry", "BLACKBELT", "Harlan", "Down here a grudge is a kind of training. I've a new one.",
       [m("HAKAMOO", 43, "SOUNDPROOF", "ADAMANT"), m("FALINKS", 44, "BATTLEARMOR", "ADAMANT"), m("STONJOURNER", 45, "POWERSPOT", "ADAMANT"), m("MACHAMP", 46, "NOGUARD", "ADAMANT")])
     t("Map 684 Grudgestone Quarry", "HIKER", "Slate", "Every stone in here's been thrown at somebody.",
@@ -579,7 +579,7 @@ def ROUTES(P):
     t("Map 685 Grudgestone Quarry B1F", "CRUSHGIRL", "Rhona", "Nobody books a fight this deep unless they mean it.",
       [m("MIENFOO", 43, "REGENERATOR", "ADAMANT"), m("CONKELDURR", 44, "GUTS", "ADAMANT"), m("MABOSSTIFF", 45, "INTIMIDATE", "JOLLY"), m("SIRFETCHD", 46, "STEADFAST", "ADAMANT")])
     t("Map 685 Grudgestone Quarry B1F", "POKEMANIAC", "Digby", "Scales in the scree. I followed them to you. Mistake.",
-      [m("NOIBAT", 43, "FRISK", "MODEST"), m("DEINO", 44, "HUSTLE", "ADAMANT"), m("SLIGGOO", 45, "HYDRATION", "MODEST"), m("KOMMOO", 46, "BULLETPROOF", "JOLLY")])
+      [m("NOIBAT", 43, "FRISK", "MODEST"), m("DEINO", 44, "HUSTLE", "ADAMANT"), m("SLIGGOO", 45, "SAPSIPPER", "MODEST", form=1), m("KOMMOO", 46, "BULLETPROOF", "JOLLY")])
     t("Map 688 Echo Coliseum", "CHANNELER", "Calliope", "They're still cheering. Listen. Not for me.",
       [m("GOLURK", 43, "IRONFIST", "ADAMANT"), m("SPIRITOMB", 44, "PRESSURE", "ADAMANT"), m("PASSIMIAN", 45, "RECEIVER", "ADAMANT"), m("ANNIHILAPE", 46, "VITALSPIRIT", "JOLLY")])
     t("Map 681 Prism Falls", "SWIMMER_M", "Evander", "I swam up one terrace. One.",
@@ -593,7 +593,7 @@ def ROUTES(P):
     t("Map 681 Prism Falls", "BIRDKEEPER", "Merle", "They fly through the rainbow and come out the same colour. Shame.",
       [m("TOGETIC", 41, "SERENEGRACE", "MODEST"), m("JUMPLUFF", 42, "CHLOROPHYLL", "CALM"), m("VESPIQUEN", 43, "PRESSURE", "ADAMANT"), m("ALTARIA", 44, "NATURALCURE", "ADAMANT")])
     t("Map 693 The Briarway", "LADY", "Rosamund", "One does not lose on the royal road. One is merely delayed.",
-      [m("RIBOMBEE", 41, "HONEYGATHER", "TIMID"), m("KLEFKI", 42, "PRANKSTER", "ADAMANT"), m("WHIMSICOTT", 43, "PRANKSTER", "TIMID"), m("TINKATON", 44, "MOLDBREAKER", "JOLLY")])
+      [m("RIBOMBEE", 41, "HONEYGATHER", "TIMID"), m("PONYTA", 41, "PASTELVEIL", "JOLLY", form=1), m("KLEFKI", 42, "PRANKSTER", "ADAMANT"), m("WHIMSICOTT", 43, "PRANKSTER", "TIMID"), m("TINKATON", 44, "MOLDBREAKER", "JOLLY")])
     t("Map 693 The Briarway", "GENTLEMAN", "Godfrey", "I clip the briars for the Queen. You've clipped me.",
       [m("CINCCINO", 41, "CUTECHARM", "JOLLY"), m("AMBIPOM", 42, "PICKUP", "JOLLY"), m("UNFEZANT", 43, "BIGPECKS", "JOLLY"), m("MILTANK", 44, "SCRAPPY", "JOLLY")])
     t("Map 693 The Briarway (double battle)", "TWINS", "Hans & Gretl", "Hans: The crumbs! Gretl: You ATE the crumbs.",
@@ -603,7 +603,7 @@ def ROUTES(P):
     t("Map 682 The Royal Chase", "TAMER", "Gawain", "The Chase was a king's hunting ground. Today I was the quarry.",
       [m("FARFETCHD", 41, "INNERFOCUS", "ADAMANT"), m("PURUGLY", 42, "OWNTEMPO", "JOLLY"), m("LOPUNNY", 43, "KLUTZ", "JOLLY"), m("BOUFFALANT", 43, "RECKLESS", "ADAMANT"), m("EXPLOUD", 44, "SOUNDPROOF", "ADAMANT")])
     t("Map 682 The Royal Chase", "POKEMONRANGER_M", "Roderick", "No snares in the reserve. No mercy either, I see.",
-      [m("TANGELA", 41, "LEAFGUARD", "MODEST"), m("KECLEON", 42, "COLORCHANGE", "ADAMANT"), m("DUBWOOL", 43, "STEADFAST", "JOLLY"), m("LICKILICKY", 44, "OWNTEMPO", "ADAMANT")])
+      [m("TANGELA", 41, "LEAFGUARD", "MODEST"), m("KECLEON", 42, "COLORCHANGE", "ADAMANT"), m("FARFETCHD", 42, "STEADFAST", "ADAMANT", form=1), m("DUBWOOL", 43, "STEADFAST", "JOLLY"), m("LICKILICKY", 44, "OWNTEMPO", "ADAMANT")])
     t("Map 682 The Royal Chase", "POKEMONBREEDER", "Odila", "They're all the Queen's, on paper. They've never read the paper.",
       [m("LICKITUNG", 41, "OBLIVIOUS", "MODEST"), m("CASTFORM", 42, "FORECAST", "ADAMANT"), m("AUDINO", 43, "HEALER", "BOLD"), m("CHANSEY", 43, "SERENEGRACE", "CALM"), m("GREEDENT", 44, "CHEEKPOUCH", "ADAMANT")])
     t("Map 289 Briar Hall - Thorn Crypts", "CHANNELER", "Griselda", "Nothing rots down here. Not even a grudge.",
@@ -642,13 +642,13 @@ def ROUTES(P):
     t("Map 701 The Hoarwood", "CAMPER", "Stig", "Trapper's law: what you can't catch, you salute.",
       [m("VANILLISH", 45, "SNOWCLOAK", "MODEST"), m("BEARTIC", 46, "SLUSHRUSH", "ADAMANT"), m("WEAVILE", 47, "PRESSURE", "JOLLY"), m("URSALUNA", 48, "GUTS", "ADAMANT")])
     t("Map 701 The Hoarwood", "PICNICKER", "Frida", "The tea froze in the cup. Then you happened.",
-      [m("ABOMASNOW", 45, "SNOWWARNING", "ADAMANT"), m("BEARTIC", 46, "SLUSHRUSH", "ADAMANT"), m("WEAVILE", 47, "PRESSURE", "JOLLY"), m("AVALUGG", 48, "ICEBODY", "ADAMANT")])
+      [m("ABOMASNOW", 45, "SNOWWARNING", "ADAMANT"), m("VULPIX", 45, "SNOWCLOAK", "MODEST", form=1), m("BEARTIC", 46, "SLUSHRUSH", "ADAMANT"), m("WEAVILE", 47, "PRESSURE", "JOLLY"), m("AVALUGG", 48, "ICEBODY", "ADAMANT")])
     t("Map 701 The Hoarwood", "POKEMONRANGER_M", "Halvar", "The white stag's nobody's. Same as this win isn't mine.",
-      [m("FRIGIBAX", 45, "THERMALEXCHANGE", "ADAMANT"), m("GLALIE", 46, "INNERFOCUS", "ADAMANT"), m("ABOMASNOW", 47, "SNOWWARNING", "ADAMANT"), m("AVALUGG", 48, "ICEBODY", "ADAMANT")])
+      [m("FRIGIBAX", 45, "THERMALEXCHANGE", "ADAMANT"), m("SANDSHREW", 45, "SNOWCLOAK", "ADAMANT", form=1), m("GLALIE", 46, "INNERFOCUS", "ADAMANT"), m("ABOMASNOW", 47, "SNOWWARNING", "ADAMANT"), m("AVALUGG", 48, "ICEBODY", "ADAMANT")])
     t("Map 704 Frostfang Pass", "HIKER", "Bjarne", "Closed by order of the Thane, they said. Should've listened.",
       [m("PILOSWINE", 47, "SNOWCLOAK", "ADAMANT"), m("JYNX", 48, "OBLIVIOUS", "TIMID"), m("EISCUE", 49, "ICEFACE", "ADAMANT"), m("WALREIN", 50, "ICEBODY", "MODEST")])
     t("Map 704 Frostfang Pass", "BLACKBELT", "Styr", "I break ice with my head. It's had a hard day.",
-      [m("POLIWRATH", 47, "DAMP", "ADAMANT"), m("SNEASLER", 48, "PRESSURE", "JOLLY"), m("MAMOSWINE", 49, "SNOWCLOAK", "ADAMANT"), m("VANILLUXE", 50, "SNOWWARNING", "MODEST")])
+      [m("POLIWRATH", 47, "DAMP", "ADAMANT"), m("SNEASLER", 48, "PRESSURE", "JOLLY"), m("MAMOSWINE", 49, "SNOWCLOAK", "ADAMANT"), m("DARMANITAN", 49, "ZENMODE", "JOLLY", form=2), m("VANILLUXE", 50, "SNOWWARNING", "MODEST")])
     t("Map 705 Frostfang Pass 2F", "COOLTRAINER_F", "Dagny", "You slid in a straight line. Nobody does that first time.",
       [m("ARCTIBAX", 48, "THERMALEXCHANGE", "ADAMANT"), m("FROSMOTH", 49, "SHIELDDUST", "MODEST"), m("CRYOGONAL", 49, "LEVITATE", "TIMID"), m("VANILLUXE", 50, "SNOWWARNING", "MODEST")])
     t("Map 705 Frostfang Pass 2F", "POKEMANIAC", "Yngve", "Fangs in the ice, older than the pass. Mine are newer and worse.",
@@ -663,7 +663,7 @@ def ROUTES(P):
     t("Map 712 The Whalebone Road", "ISENMAR_SOLDIER_F", "Harpooner", "The last arch is blank. Don't hurry to fill it.",
       [m("ARCTOVISH", 48, "ICEBODY", "ADAMANT"), m("ARCTOZOLT", 49, "STATIC", "ADAMANT"), m("CETITAN", 50, "SLUSHRUSH", "ADAMANT"), m("EMPOLEON", 51, "TORRENT", "MODEST")])
     t("Map 712 The Whalebone Road", "SAILOR", "Orm", "War-sled's faster than a ship and steers worse.",
-      [m("SEALEO", 45, "THICKFAT", "MODEST"), m("ALOMOMOLA", 46, "HYDRATION", "ADAMANT"), m("GOREBYSS", 47, "SWIFTSWIM", "MODEST"), m("SEISMITOAD", 48, "SWIFTSWIM", "ADAMANT")])
+      [m("SEALEO", 45, "THICKFAT", "MODEST"), m("ALOMOMOLA", 46, "HYDRATION", "ADAMANT"), m("GOREBYSS", 47, "SWIFTSWIM", "MODEST"), m("TAUROS", 47, "ANGERPOINT", "JOLLY", form=3), m("SEISMITOAD", 48, "SWIFTSWIM", "ADAMANT")])
     t("Map 310 Rimeholt Gym - Entrance", "HIKER", "Torkel", "The lake's a floor today. Tomorrow, who knows.",
       [m("VANILLISH", 47, "SNOWCLOAK", "MODEST"), m("GLALIE", 48, "INNERFOCUS", "ADAMANT"), m("RELICANTH", 49, "ROCKHEAD", "ADAMANT"), m("AURORUS", 50, "REFRIGERATE", "MODEST")])
     t("Map 311 Rimeholt Gym - Puzzle Room 1", "COOLTRAINER_F", "Annika", "Lean into the turn. I leaned out.",
@@ -681,11 +681,11 @@ def ROUTES(P):
     t("Map 720 The Thane's Sled-Road", "SAILOR", "Ulfar", "A sled-master reads ice. I misread you.",
       [m("ARCTIBAX", 49, "THERMALEXCHANGE", "ADAMANT"), m("DEWGONG", 50, "HYDRATION", "ADAMANT"), m("WEAVILE", 51, "PRESSURE", "JOLLY"), m("CLOYSTER", 52, "SHELLARMOR", "ADAMANT")])
     t("Map 720 The Thane's Sled-Road", "COOLTRAINER_M", "Eskil", "Rimeholt breeds them hard. You weren't bred here, were you?",
-      [m("DEWGONG", 49, "HYDRATION", "ADAMANT"), m("FROSMOTH", 50, "SHIELDDUST", "MODEST"), m("BEARTIC", 51, "SLUSHRUSH", "ADAMANT"), m("CETITAN", 52, "SLUSHRUSH", "ADAMANT")])
+      [m("DEWGONG", 49, "HYDRATION", "ADAMANT"), m("FROSMOTH", 50, "SHIELDDUST", "MODEST"), m("SANDSLASH", 50, "SNOWCLOAK", "ADAMANT", form=1), m("BEARTIC", 51, "SLUSHRUSH", "ADAMANT"), m("CETITAN", 52, "SLUSHRUSH", "ADAMANT")])
     t("Map 720 The Thane's Sled-Road", "SCIENTIST", "Thora", "The thaw's a tenth of a degree a week. You're faster.",
       [m("STUNFISK", 49, "STATIC", "MODEST"), m("TOXTRICITY", 50, "PUNKROCK", "MODEST"), m("ARCTOZOLT", 51, "STATIC", "ADAMANT"), m("CETITAN", 52, "SLUSHRUSH", "ADAMANT")])
     t("Map 728 Stillwater", "CHANNELER", "Runa", "Not frozen. Stopped. I wish I had.",
-      [m("JELLICENT", 51, "CURSEDBODY", "MODEST"), m("ARCTOVISH", 52, "ICEBODY", "ADAMANT"), m("CRYOGONAL", 53, "LEVITATE", "TIMID"), m("BASCULEGION", 54, "ADAPTABILITY", "ADAMANT")])
+      [m("JELLICENT", 51, "CURSEDBODY", "MODEST"), m("MRMIME", 51, "SCREENCLEANER", "TIMID", form=1), m("ARCTOVISH", 52, "ICEBODY", "ADAMANT"), m("CRYOGONAL", 53, "LEVITATE", "TIMID"), m("BASCULEGION", 54, "ADAPTABILITY", "ADAMANT")])
     t("Map 721 The Mast Glacier", "HIKER", "Hallvard", "There's a ship in this glacier. Mast and all. I'd rather be on it.",
       [m("FROSLASS", 49, "SNOWCLOAK", "JOLLY"), m("AVALUGG", 50, "ICEBODY", "ADAMANT"), m("GLACEON", 51, "SNOWCLOAK", "MODEST"), m("MAMOSWINE", 52, "SNOWCLOAK", "ADAMANT")])
     t("Map 721 The Mast Glacier", "BLACKBELT", "Egil", "Cold makes the knuckles honest.",
@@ -743,7 +743,7 @@ def ROUTES(P):
     # Ch13 - the Causeway, the Spire, Kingsmead and the glass roads to Lucent (cap 59; route Lv 53-56, Gym 12 and dungeons 55-58)
     # Engineer Coyle: a lineman
     t("Map 740 Conductors' Causeway", "ENGINEER", "Coyle", "Line's live. I, briefly, was not.",
-      [m("EMOLGA", 53, "STATIC", "JOLLY"), m("RAICHU", 54, "STATIC", "JOLLY"), m("ZEBSTRIKA", 55, "MOTORDRIVE", "JOLLY"), m("AMPHAROS", 56, "STATIC", "MODEST")])
+      [m("EMOLGA", 53, "STATIC", "JOLLY"), m("RAICHU", 54, "SURGESURFER", "TIMID", form=1), m("ZEBSTRIKA", 55, "MOTORDRIVE", "JOLLY"), m("AMPHAROS", 56, "STATIC", "MODEST")])
     # Engineer Ferro: a lineman
     t("Map 740 Conductors' Causeway", "ENGINEER", "Ferro", "Forty gantries to inspect and you're on the first.",
       [m("SKARMORY", 53, "KEENEYE", "ADAMANT"), m("ORTHWORM", 54, "EARTHEATER", "ADAMANT"), m("BISHARP", 55, "INNERFOCUS", "ADAMANT"), m("CORVIKNIGHT", 56, "UNNERVE", "ADAMANT")])
@@ -776,7 +776,7 @@ def ROUTES(P):
     t("Map 756 Kingsmead", "LADY", "Arabella", "One comes to the fair to be seen. Not like this.",
       [m("LARVESTA", 53, "FLAMEBODY", "ADAMANT"), m("CARBINK", 54, "CLEARBODY", "BOLD"), m("SYLVEON", 55, "CUTECHARM", "MODEST"), m("TOGEKISS", 56, "HUSTLE", "MODEST")])
     t("Map 756 Kingsmead", "POKEMONBREEDER", "Merrin", "Bred for the Queen's colours, every one. The Queen needn't hear of this.",
-      [m("FARIGIRAF", 53, "ARMORTAIL", "MODEST"), m("PORYGONZ", 54, "ADAPTABILITY", "TIMID"), m("BLISSEY", 55, "SERENEGRACE", "MODEST"), m("SNORLAX", 56, "THICKFAT", "ADAMANT")])
+      [m("FARIGIRAF", 53, "ARMORTAIL", "MODEST"), m("PORYGONZ", 54, "ADAPTABILITY", "TIMID"), m("TAUROS", 54, "ANGERPOINT", "JOLLY", form=1), m("BLISSEY", 55, "SERENEGRACE", "MODEST"), m("SNORLAX", 56, "THICKFAT", "ADAMANT")])
     t("Map 742 Mirror Mere", "FISHERMAN", "Lowell", "I cast at the reflection. It bites better.",
       [m("LUDICOLO", 53, "SWIFTSWIM", "MODEST"), m("ESPATHRA", 54, "OPPORTUNIST", "TIMID"), m("GALLADE", 55, "STEADFAST", "ADAMANT"), m("GRENINJA", 56, "TORRENT", "TIMID")])
     t("Map 742 Mirror Mere", "SWIMMER_F", "Ondine", "Dive deep enough and you come up somewhere else.",
