@@ -564,6 +564,8 @@ module WR4
     h["ARC"] = arceus(:ARCEUS_BOUND, proc { |_gym| true }, "True Finale: Arceus, Bound, 6 bars, every Warden releases (Prism Arena, gym order; cap 100)")
     h["ARCF"] = arceus(:ARCEUS_BOUND, proc { |gym| gym % 3 != 0 }, "True Finale: Arceus, Bound, one Warden in three refuses (a forced lock every bar)")
     h["ARCM"] = arceus(:ARCEUS_MISCALIBRATED, proc { |_gym| true }, "True Finale: Arceus, Miscalibrated, 5 bars (TELEMETRY_SABOTAGED)")
+    h["ARCG"] = arceus(:ARCEUS_GILDED, proc { |_gym| true }, "True Finale: Arceus, Gilded, 6 bars; the last refills 3x, then the Gilded Chain (a 'win' = the binding)")
+    h["ARCJ"] = arceus(:ARCEUS_JUDGMENT, proc { |_gym| true }, "True Finale (Ruin): Arceus, Judgment, 7 bars, every lock forced, Giratina-Origin at your side")
     h["L3O"] = loyal(:LOYAL_THREE_OKIDOGI, true, "Ch10 Loyal Three 1/3 Okidogi, with the Ogre (Bleed)")
     h["L3M"] = loyal(:LOYAL_THREE_MUNKIDORI, true, "Ch10 Loyal Three 2/3 Munkidori, with the Ogre (Bleed)")
     h["L3F"] = loyal(:LOYAL_THREE_FEZANDIPITI, true, "Ch10 Loyal Three 3/3 Fezandipiti, with the Ogre (Bleed)")
