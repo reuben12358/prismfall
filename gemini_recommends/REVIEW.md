@@ -366,7 +366,7 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   4x4 sheets for 61 more of the cast. **No pose sheet:** REFLECTION, MERIDIAN_ASHE (Ashe) and the four class portraits
   (ASHKAAR_OFFICER, ISENMAR_OFFICER, MERIDIAN_ADMIN, OCTAVE_SINGER); a `\pfp` for them is a logged no-op.
   The 4x4 sheets have no written row map except Venam's; the four shared names above are what the rows look like.
-- **Verified:** `ruby -c`; Cutscenes selftest, 26 new checks (no pixel of movement across fade, dim and cross-fade; sides;
+- **Verified:** `ruby -c`; Cutscenes selftest, 36 new checks (no pixel of movement across fade, dim and cross-fade; sides;
   third speaker; gap; cap; acting offsets; nothing left alive after a box).
 
 ### `2026-11-24_rejuv-chapter-opening-cards` — **adopted** (`plugins/Prismfall Cutscenes/020_ChapterOpeningCards.rb`)
@@ -395,7 +395,7 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   132 stage-direction or system lines reworded, and 38 lines added inside script blocks. It asked for
   `cp act3_5/*.md story/`. That was not done: the copies also predate the Aurelius rename and the 2c3c22b Ruin King rewrite.
 - **What was merged** (`tools/playscript_merge.py`; commits c1138b3, fb66ff0, 12d6be2, b232adc, c2e7a45): the box cuts
-  (about 2,150 more boxes), about 1,560 holds, 104 `[emote: kind]` cues, 69 whole-sentence stage directions moved to
+  (2,187 more boxes), 1,584 holds, 104 `[emote: kind]` cues, 69 whole-sentence stage directions moved to
   their own lines, and Gemini's expression where it differs and the art exists (which also fixes `LARCH, worried` and
   `SAHAR, worried`). The words are the canon's: for every file the fenced text is token-for-token what it was, lines
   outside the blocks are untouched, and trainer references are unchanged (`check_script_trainers.py` gives the same result).
