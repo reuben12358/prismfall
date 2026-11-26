@@ -639,6 +639,11 @@ check "third speaker takes the side of whoever spoke longest ago", v4.side == :r
 pbMessage("(Narration: a pause.)")
 pbMessage("\\pf[JUNO,sad]Juno: After a pause the stage starts again.")
 check "after a gap: the speaker alone, on her own side", seen.last.side == :left && seen.last.listener.nil? && seen.last.entry == :pop, [seen.last.side, seen.last.entry].inspect
+P.new_conversation
+pbMessage("\\pf[HROTHGAR,neutral]Hrothgar: Speak plainly.")
+n = seen.length
+pbMessage("Dominar: In this tent a lie is a death sentence.")
+check "a registered extra label holds the face ([name: Dominar] after HROTHGAR)", seen.length == n + 1 && seen.last.spec[:id] == :HROTHGAR && seen.last.spec[:carried], seen.last(1).map { |v| v.spec }.inspect
 pbMessage("\\pfb[LARCH,angry,anger,1]Larch: A bubble is still 014's bubble.")
 check "bubble lines are untouched", seen.last.is_a?(P::Bubble)
 check "no sprite outlives its message box", P.current.nil? && $live == before, [$live, before].inspect
@@ -653,7 +658,7 @@ $on_frame = nil
 section "expressive conversations (018): balloons and overworld acting"
 # The stub has no map classes, so give 018 a small Game_Character and load its hooks again.
 class Game_Character
-  attr_accessor :name, :x, :y, :direction, :character_name, :move_route_forcing, :walking, :transparent
+  attr_accessor :name, :x, :y, :direction, :character_name, :move_route_forcing, :walking, :transparent, :trigger
   attr_reader :routes
   def initialize(name, x, y, dir = 2, charset = "NPC 01")
     @name = name; @x = x; @y = y; @direction = dir; @character_name = charset; @routes = 0
@@ -691,7 +696,7 @@ check "a name finds its event by prefix, not by possessive", X.resolve_character
       X.resolve_character(:PLAYER).equal?($game_player) && X.resolve_character(4).equal?(brann) && X.resolve_character(:NOBODY).nil?
 4.times { |i| pbMessage("\\pf[#{i.even? ? 'JUNO,neutral' : 'KESTREL,angry'}]#{i.even? ? 'Juno' : 'Kestrel'}: line #{i}") }
 check "no balloon unless a line asks for one", X.emotes_shown == 0 && X.emotes.count == 0
-check "nobody is turned for the speaker by default", juno.direction == 2 && kes.direction == 4
+check "two characters talking to each other turn to each other (the default)", juno.direction == 6 && kes.direction == 4 && $game_player.direction == 8, [juno.direction, kes.direction].inspect
 shots = []
 $on_frame = proc { shots.push(X.emotes.count) }
 $msg_frames = 44                                   # 1.1 s at 40 fps: longer than a balloon
@@ -707,6 +712,7 @@ check "a fourth balloon in one conversation is dropped", pf_emote(:JUNO, :sweat)
 X.clear_all
 check "conversation over: balloons, viewport and sheet released", X.emotes.count == 0 && !X.active? && $live == before, [$live, before].inspect
 P.new_conversation
+juno.direction = 2
 pbMessage("\\pf[JUNO,happy]Juno: Facing you.")
 check "automatic stance: a speaker facing the camera only", juno.pf_pose_sheet == "pose_JUNO" && juno.pf_pose_index == 0 && juno.pf_pose_auto, [juno.pf_pose_sheet, juno.pf_pose_index].inspect
 pbMessage("\\pf[KESTREL,angry]Kestrel: Side on.")
@@ -740,14 +746,46 @@ check "pf_face_each_other turns two free characters", pf_face_each_other(:JUNO, 
 kes.force_move_route(nil)
 kes.direction = 2
 check "...but never one its event has walked into place", kes.pf_staged && kes.routes == 1 && pf_turn_toward(:KESTREL, :JUNO) == false && kes.direction == 2
-X.auto_face = true
+# Who turns toward whom (Reuben's call, 2026-11-26): it depends on who is being spoken to.
 P.new_conversation
+juno.trigger = 0
+X.conversation_started(1)                          # as Interpreter#setup: the player talked to Juno
 juno.direction = 2
-brann.direction = 2
-pbMessage("\\pf[JUNO,neutral]Juno: One.")
+kes.direction = 2
+pbMessage("\\pf[JUNO,neutral]Juno: You came to see me.")
+pbMessage("\\pf[KESTREL,angry]Kestrel: Juno.")
+check "the event the player talked to keeps facing the player; the other turns to her", juno.direction == 2 && kes.direction == 4 && !kes.pf_staged, [juno.direction, kes.direction, kes.pf_staged].inspect
+juno.trigger = nil
+P.new_conversation
+X.conversation_started(0)                          # an autorun: nobody was talked to
+juno.direction = 4
+brann.direction = 8                                # next to the player and facing them
 pbMessage("\\pf[BRANN,neutral]Brann: Two.")
-check "auto_face (opt-in): speaker and last speaker turn to each other", juno.direction == 2 && brann.direction == 8 && !kes.pf_staged, [juno.direction, brann.direction].inspect
-X.auto_face = false
+pbMessage("\\pf[JUNO,neutral]Juno: One.")
+check "someone next to the player and facing them keeps facing them", brann.direction == 8 && juno.direction == 2, [brann.direction, juno.direction].inspect
+P.new_conversation
+X.conversation_started(0)
+juno.direction = 4
+kes.direction = 2
+pbMessage("\\pf[JUNO,neutral]Juno: Ready?")
+pbMessage("\\pf[PLAYER,neutral]Wren: Ready.")
+pbMessage("\\pf[KESTREL,neutral]Kestrel: Then go.")
+check "a line answering the PC turns nobody, and the player is never turned", juno.direction == 4 && kes.direction == 2 && $game_player.direction == 8, [juno.direction, kes.direction, $game_player.direction].inspect
+P.new_conversation
+X.conversation_started(0)
+pf_auto_face(:off)
+pbMessage("\\pf[JUNO,neutral]Juno: Hand-staged.")
+pbMessage("\\pf[KESTREL,neutral]Kestrel: Quite.")
+check "pf_auto_face(:off): nobody turns, for this conversation only", juno.direction == 4 && kes.direction == 2 && X.face_mode == :off
+X.clear_all
+check "...then the default again", X.face_mode == :context && X.auto_face == :context
+X.auto_face = :always
+P.new_conversation
+X.conversation_started(0)
+pbMessage("\\pf[JUNO,neutral]Juno: Well?")
+pbMessage("\\pf[PLAYER,neutral]Wren: Well.")
+check ":always: the speaker turns to whoever answers; the player still never turns", juno.direction == 2 && $game_player.direction == 8, [juno.direction, $game_player.direction].inspect
+X.auto_face = :context
 $scene = old_scene
 pbMessage("\\pf[JUNO,happy]\\pfe[exclaim]Juno: Off the map screen nothing acts.")
 check "off the map: tags stripped, no balloon", $shown.last == "Juno: Off the map screen nothing acts." && X.emotes.count == 0

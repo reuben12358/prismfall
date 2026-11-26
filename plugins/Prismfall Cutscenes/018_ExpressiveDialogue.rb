@@ -37,9 +37,17 @@
 #   enabled      true         false: everything below is off, 014 behaves as before
 #   dual_stage   true         false: 014's single face window
 #   auto_poses   :restrained  false: stances only where a line or script asks
-#   auto_face    false        true: speaker and previous speaker turn to each other
-#                             (off: most lines are said to the silent player, and
-#                             map events already stage who faces whom)
+#   auto_face    :context     who turns toward whom while a line is said:
+#                 :context    two characters talking to each other turn to each
+#                             other; whoever is addressing the PC keeps facing
+#                             the PC (the event the player talked to, or one
+#                             standing next to the player and facing them); a
+#                             line answering the PC turns nobody; the player is
+#                             never turned (Reuben's call, 2026-11-26)
+#                 :always     speaker and previous speaker turn to each other
+#                 :off        nobody is turned
+#                pf_auto_face(:off) changes it for the current conversation only.
+#                Nobody an event has walked into place this conversation is turned.
 #   auto_emote   false        true: a balloon on shocked / panic (rarely wanted)
 #===============================================================================
 module Prismfall
@@ -103,13 +111,72 @@ module Prismfall
     @enabled    = true
     @dual_stage = true
     @auto_poses = :restrained
-    @auto_face  = false
+    @auto_face  = :context
     @auto_emote = false
     @scene = { :emotes => 0, :speakers => [], :expr => {}, :pose_at => {} }
     @dirty = false
 
     class << self
-      attr_accessor :enabled, :dual_stage, :auto_poses, :auto_face, :auto_emote
+      attr_accessor :enabled, :dual_stage, :auto_poses, :auto_emote
+      attr_writer :auto_face
+
+      # :context / :always / :off (true and false mean :always and :off)
+      def auto_face
+        return mode_of(@auto_face)
+      end
+
+      def mode_of(v)
+        return :always if v == true || v == :always
+        return :off if v == false || v.nil? || v == :off
+        return :context
+      end
+
+      # The mode for the current conversation (pf_auto_face sets it until the conversation ends).
+      def face_mode
+        return (@scene.has_key?(:face)) ? mode_of(@scene[:face]) : auto_face
+      end
+
+      def scene_face=(v); @scene[:face] = v; end
+
+      # The main interpreter set up an event: remember whether the player started
+      # it by talking to that event, and forget who was walked into place before.
+      def conversation_started(event_id)
+        ev = (defined?($game_map) && $game_map && $game_map.respond_to?(:events) && event_id.is_a?(Integer) && event_id > 0) ? $game_map.events[event_id] : nil
+        @scene[:talked_to] = (ev && ev.respond_to?(:trigger) && ev.trigger == 0) ? ev : nil
+        if defined?($game_map) && $game_map && $game_map.respond_to?(:events)
+          $game_map.events.each_value { |e| e.pf_unstage if e.respond_to?(:pf_unstage) }
+        end
+      rescue StandardError
+        nil
+      end
+
+      def player?(char)
+        return defined?($game_player) && $game_player && char.equal?($game_player)
+      end
+
+      # Speaking to the PC: the event the player talked to, or a character standing
+      # next to the player and facing them.
+      def addressing_pc?(char)
+        return false if !char || player?(char) || !defined?($game_player) || !$game_player
+        return true if @scene[:talked_to] && char.equal?(@scene[:talked_to])
+        return false if !char.respond_to?(:x) || !$game_player.respond_to?(:x) || !char.respond_to?(:direction)
+        return false if (($game_player.x - char.x).abs + ($game_player.y - char.y).abs) != 1
+        return char.direction == facing(char, $game_player)
+      end
+
+      # Turns for one line: spk just started speaking, prev spoke last (someone else).
+      def face_for_line(spk, prev)
+        mode = face_mode
+        return if mode == :off || !prev
+        if mode == :always
+          turn_toward(spk, prev) if !player?(spk)
+          turn_toward(prev, spk) if !player?(prev)
+          return
+        end
+        return if player?(spk) || player?(prev)            # talking with the PC: nobody turns away from them
+        turn_toward(spk, prev) if !addressing_pc?(spk)
+        turn_toward(prev, spk) if !addressing_pc?(prev)
+      end
 
       def stage?; return @enabled && @dual_stage; end
       def stage;  return @stage ||= Stage.new; end
@@ -269,13 +336,7 @@ module Prismfall
         sc[:expr][id] = expr if id
         @dirty = true if spk || tags?(dirs)
 
-        if @auto_face && spk && !plain
-          prev = sc[:speakers].reverse.find { |c| c && c != spk }
-          if prev
-            turn_toward(spk, prev)
-            turn_toward(prev, spk)
-          end
-        end
+        face_for_line(spk, sc[:speakers].reverse.find { |c| c && c != spk }) if spk && !plain
         if spk
           sc[:speakers].delete(spk)
           sc[:speakers].push(spk)
@@ -801,6 +862,8 @@ if defined?(Game_Character) && !Game_Character.method_defined?(:pf_update_expres
       @pf_pose_auto = false
     end
 
+    def pf_unstage; @pf_staged = false; end
+
     def pf_reset_acting
       pf_clear_pose
       @pf_act = nil
@@ -980,7 +1043,9 @@ if defined?(Interpreter) && !Interpreter.method_defined?(:prismfall_expressive_s
 
     def setup(*args)
       Prismfall::Expressive.clear_all if @main && Prismfall::Expressive.active?
-      return prismfall_expressive_setup(*args)
+      ret = prismfall_expressive_setup(*args)
+      Prismfall::Expressive.conversation_started(args[1]) if @main
+      return ret
     end
   end
 end
@@ -1083,6 +1148,13 @@ def pf_pose_reset(target = nil)
   return ex.reset_all_actors if target.nil?
   ev = ex.resolve_character(target)
   ev.pf_reset_acting if ev && ev.respond_to?(:pf_reset_acting)
+  return true
+end
+
+# Who turns toward whom for the rest of this conversation: :context (the default),
+# :always, :off. pf_auto_face(:off) before a scene staged by hand.
+def pf_auto_face(mode = :context)
+  Prismfall::Expressive.scene_face = mode
   return true
 end
 
