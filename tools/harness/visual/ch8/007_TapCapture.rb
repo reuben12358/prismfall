@@ -48,8 +48,8 @@ if ENV["DEMO_PLAN"].to_s.start_with?("tap")
       end
       self.auto = false
       stop
-      shown = $game_map.events.values.select { |e| e.character_name.to_s != "" && e.opacity > 0 }.map(&:name)
       crisis = $game_map.events.values.find { |e| e.name == "The Caldera Crisis" }
+      shown = $game_map.events.values.select { |e| e.character_name.to_s != "" && e.opacity > 0 }.map(&:name)
       log("RESULT battles: #{TapCap.battles.inspect}")
       log("RESULT ch8_caldera=#{pf_choice(:ch8_caldera).inspect} V110=#{$game_variables[110]} S120=#{$game_switches[120]} V129=#{$game_variables[129]} " \
           "map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y} tone=#{$game_screen.tone.red.round} actors_left=#{shown.inspect} " \

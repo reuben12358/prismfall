@@ -212,6 +212,8 @@ def crisis_commands():
         {'if': 'pf_choice(:ch8_caldera) == :shutdown', 'then': [
             say('BRANN', 'shocked', "You shut it. You actually shut it. With your hands. Sovereign's property! HA!")]},
         {'switch': ['CH8_CALDERA_DONE', True]}, {'var': ['CH8_STEP', 6]}, {'selfswitch': ['A', True]},
+        # the room empties (self switches, not S120: a page condition on a switch needs its name in System.rxdata)
+        SC('\n'.join('pbSetSelfSwitch(%%EV[%s]%%, "A", true)' % n for n in ACTORS)),
         # on to Hearthguild Hall for the Light Stone; guarded until 244 is built (a missing map would crash)
         {'if': 'pbRgssExists?("Data/Map244.rxdata")', 'then': [{'transfer': {'map': 244, 'x': 10, 'y': 8, 'dir': 'up'}}],
          'else': [MV('player', [{'script': 'moveto(13, 17)'}, 'turn_up'])]},
@@ -223,11 +225,14 @@ def crisis_commands():
     return S
 
 
+ACTORS = (QUENT, WICK, LARCH, SOLDIER_A, SOLDIER_B, BOMBER)
+
+
 def actor(name, x, y, sprite, d, cmds):
-    """a crisis actor: there while the crisis runs, gone once it is resolved (CH8_CALDERA_DONE)"""
+    """a crisis actor: there while the crisis runs, gone once it is resolved (the crisis sets its self switch A)"""
     g = {'sprite': sprite, 'dir': d}
     return {'type': 'event', 'name': name, 'at': [x, y], 'pages': [
-        {'graphic': g, 'commands': cmds}, {'cond': {'switch': 'CH8_CALDERA_DONE'}, 'commands': []}]}
+        {'graphic': g, 'commands': cmds}, {'cond': {'self': 'A'}, 'commands': []}]}
 
 
 def walk_on(name, x, y):

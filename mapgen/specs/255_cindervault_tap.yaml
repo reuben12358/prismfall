@@ -424,6 +424,17 @@ events:
         - switch: [CH8_CALDERA_DONE, true]
         - var: [CH8_STEP, 6]
         - selfswitch: [A, true]
+        - {script: 'pbSetSelfSwitch(%EV[Quent]%, "A", true)
+
+            pbSetSelfSwitch(%EV[Wick]%, "A", true)
+
+            pbSetSelfSwitch(%EV[Larch]%, "A", true)
+
+            pbSetSelfSwitch(%EV[Directorate soldier]%, "A", true)
+
+            pbSetSelfSwitch(%EV[Directorate soldier b]%, "A", true)
+
+            pbSetSelfSwitch(%EV[Hammer Bomber]%, "A", true)'}
         - if: pbRgssExists?("Data/Map244.rxdata")
           then:
           - transfer: {map: 244, x: 10, y: 8, dir: up}
@@ -449,7 +460,7 @@ events:
   pages:
   - graphic: {sprite: QUENT, dir: left}
     commands: ['\pf[QUENT,happy]Quent: The gauges are SO pretty when they''re red. I mean that as a scientist.']
-  - cond: {switch: CH8_CALDERA_DONE}
+  - cond: {self: A}
     commands: []
 - type: event
   name: Wick
@@ -457,7 +468,7 @@ events:
   pages:
   - graphic: {sprite: WICK, dir: right}
     commands: ['\pf[WICK,neutral]Wick: Hello. Mind the hose. It''s the only thing in here that isn''t hot.']
-  - cond: {switch: CH8_CALDERA_DONE}
+  - cond: {self: A}
     commands: []
 - type: event
   name: Larch
@@ -465,7 +476,7 @@ events:
   pages:
   - graphic: {sprite: trainer_PROFESSOR, dir: up}
     commands: ['\pf[LARCH,neutral]Larch: Don''t touch anything that glows. Which is everything. Don''t touch anything.']
-  - cond: {switch: CH8_CALDERA_DONE}
+  - cond: {self: A}
     commands: []
 - type: event
   name: Directorate soldier
@@ -473,7 +484,7 @@ events:
   pages:
   - graphic: {sprite: trainer_COOLTRAINER_M, dir: down}
     commands: ['Directorate Soldier: Sovereign''s property. Move along.']
-  - cond: {switch: CH8_CALDERA_DONE}
+  - cond: {self: A}
     commands: []
 - type: event
   name: Directorate soldier b
@@ -481,7 +492,7 @@ events:
   pages:
   - graphic: {sprite: trainer_COOLTRAINER_F, dir: down}
     commands: ['Directorate Soldier: Don''t look at the lever. Looking''s how it starts.']
-  - cond: {switch: CH8_CALDERA_DONE}
+  - cond: {self: A}
     commands: []
 - type: event
   name: Hammer Bomber
@@ -489,7 +500,7 @@ events:
   pages:
   - graphic: {sprite: trainer_BURGLAR, dir: up}
     commands: []
-  - cond: {switch: CH8_CALDERA_DONE}
+  - cond: {self: A}
     commands: []
 - type: event
   name: Brann
