@@ -105,7 +105,7 @@
 - [x] Post-game: the Warden's Gauntlet, `[LEADER_X,Name,98]` for 17 Wardens + `[LEADER_JUNO,Juno,60/61/62]`, Lv 96–100 (3 versions each).
 
 - [x] Engine wiring: `Prismfall::GroundsLadder::ROSTER` (Core 030) now names these twelve blocks (it expected version-20 stock-class blocks that were never written); `Prismfall::Finale.partner` (Core 033) uses `Rival.partner_version(9)`.
-- Harness cells (winrates_r4): GUT, BARR, TWARD, ROWE, HIRD, EMBR, MIXD, TOLL, LAD6, LAD12.
+- [x] Harness (winrates_r4 cells GUT, BARR, TWARD, ROWE, HIRD, EMBR, MIXD, TOLL, LAD6, LAD12): rates in BALANCE.md §9e; the Hirdmen's Standard was tuned (0 of 12 → 7 of 18), Hard untouched. The Gauntlet (v98) is not harnessed yet.
 - Left: the Ch16–18 script roster trainers (route classes; the coverage agent's note), map events for all of these, maps 920–926 re-wired to the script's lines, T1-6 "Quent's automated security" and the Concord Zero fights (the script only outlines them), art for the new classes (stand-ins are in Core 032).
 ## Status: Audio v4.3 wiring agent (2026-11-25)
 *Running note so the work can be picked up. Checks: `python3 -I mapgen/map_audio.py --check`, `ruby "plugins/Prismfall Cutscenes/selftest/voice.ruby_stub"`, the Cutscenes selftest.*

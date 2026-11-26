@@ -28,6 +28,7 @@ event still wins.
 | J1, Saltmere promenade (before Gym 1) | `RIVAL_JUNO` 10–12 | Meadow | TRAINER_FIELDS (the map default is Beach) |
 | Round 2 story fights: Wick, Quent 0–2, Sable, the Mourner, Marchetti 0–2, Kroll 0–1, the Eevee Octave | see §6 | see §6 | TRAINER_FIELDS |
 | War soldiers, captains and partners (Ch19, the Battle of the Glass Dunes) | `ASHKAAR_*`, `ISENMAR_*` 0–2, `LEADER_SIGRUN`/`LEADER_MARISOL` 19 | map default (920 Desert, 924 Cinderglass, 925 Bleed, 926 Desert → flood / glass) | map |
+| Ch16–21 story fights (2026-11-25): Grane, Tull, Mallory + Kade (Corrosive Mire), Mother Gutter (Corrosive Mire / the Moon Market), the Terrace Warden (Underwater), Captain Rowe (Fairy Tale), the lines (920 Frozen Lake, 924 Desert, 925 Bleed), the Grounds Ladder (each pavilion's field, `GroundsLadder::ROSTER`) | see the notes in gen.py and BALANCE.md §9e | as listed | the event's `setBattleRule("field", ...)` / the map default (no TRAINER_FIELDS entry yet) |
 | Teo, Ebbmouth mill-race | `HOLLOW_TEO` 0 | Water Surface | TRAINER_FIELDS (the Reyes cellar map is Cave) |
 | K2, Gullcry Cliffs | `RIVAL_KESTREL` 20–22 | Mountain | TRAINER_FIELDS |
 | K3, Ossuary exit | 30–32 | Desert | TRAINER_FIELDS |

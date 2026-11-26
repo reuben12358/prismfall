@@ -654,6 +654,33 @@ Options if it confirms:
 - open on Frozen Lake without the Ice boost on Kyogre's own moves;
 - or keep bars at 2 on Standard.
 
+## 9e. Ch16–21 story fights and the Grounds Ladder (2026-11-25)
+
+New PBS (gen.py "CH16-CH21 STORY FIGHTS, THE GROUNDS LADDER AND THE WARDEN'S GAUNTLET"; `tools/check_script_trainers.py`
+checks the scripts against it). Harness cells in `winrates_r4.rb`: GUT, BARR, TWARD, ROWE, HIRD, EMBR, MIXD, TOLL, LAD6,
+LAD12 (`tag(...)` = a double with a registered partner). 12–18 fights a cell (4–6 seeds a starter), the battle's own field.
+
+| Fight (cap) | Casual typical | Standard typical | Hard typical | Standard prepared | Hard prepared |
+|---|---|---|---|---|---|
+| Ch17 Mother Gutter's Ledger (75) | — | 50% | 0% | 100% | 100% |
+| Ch17 the barricade, PC + Gutter vs Mallory + Kade (75) | — | 100% | 25% | 100% | 100% |
+| Ch17 the Terrace Warden (80) | — | 92% | 25% | 100% | 92% |
+| Ch18 Captain Rowe (80) | 100% | 100% | 67% | 100% | 100% |
+| Ch19 PC + Sigrun vs the Thane's Hirdmen, Frozen Lake (85) | 100% | 39% | 0% | 92% | 33% |
+| Ch19 PC + Marisol vs the Ember-Riders, Desert (85) | 100% | 92% | 8% | 100% | 100% |
+| Ch19 PC + Sigrun vs the mixed pair, Bleed (85) | 100% | 83–89% | 8% | 100% | 83% |
+| Ch19 the Dominar's Toll (90) | 92% | 83% | 0% | 100% | 100% |
+| Ch20 Ladder rung 6, Wyrm Rider Tova (90) | 100% | 100% | 33% | 100% | 100% |
+| Ch20 Ladder rung 12, Cantor Anselm (90) | 100% | 100% | 92% | 100% | 100% |
+
+**Reading.** These are gate fights of two to five Pokémon, not Wardens: Standard is meant to be won by a typical six and
+Hard to need the answers (a prepared six wins; a typical one mostly doesn't). **The Hirdmen** are the hard one: Ice is
+×1.5 on the Frozen Lake and Sigrun's dragons are 4× weak. With six foes, Snow Warning and a spread Blizzard a typical
+six went 0 of 12 on Standard, so Standard is five foes with Ice Beam / Ice Fang / Ice Punch (7 of 18), Sigrun's three
+hold Yache Berries, and Hard keeps everything (the hail, Blizzard, Triple Axel, Belly Drum Eiscue, Loaded Dice
+Baxcalibur). Captain Rowe and the Ladder's rungs are light on Standard on purpose (three and two Pokémon). The Warden's
+Gauntlet (version 98, Lv 96–100) has not been through the harness.
+
 ## Intentional non-learnable moves (validator allowlist)
 
 Rows here are read by `tools/validate_trainers.py`: `| TYPE,Name,Version | SPECIES | MOVE or ABILITY | reason |`.
