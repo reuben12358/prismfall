@@ -175,7 +175,7 @@ BATTLE: TrainerBattle.start(<foe A>, <foe B>) — the two of Marchetti / Quent /
 (LOSE: retry from the montage.)
 V142 = 5.
 ```
-*(If Kestrel wears the ring he got after the SF, it first answers him here. Each trainer has one Mega, so his and the player's can both fire, and both foes can Mega too; Z-moves stay one per side. Engine gap: his Redeemed partner team (v93–95) holds no stone yet, so today he doesn't Mega here.)*
+*(If Kestrel wears the ring he got after the SF, it first answers him here. Each trainer has one Mega, so his and the player's can both fire, and both foes can Mega too; Z-moves stay one per side. His Redeemed partner team (v93–95) carries Scizor again; with the ring, Prismfall Mega's MORWEN_RING swap gives it the Scizorite as he registers, and his Scizor Mega Evolves beside the player's Mega. Without the ring he has none.)*
 
 ## The hijacker (V142 == 5 → 6)
 ```

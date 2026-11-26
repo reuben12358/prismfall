@@ -29885,11 +29885,11 @@ Pokemon = NOIVERN,86
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,93]
 LoseText = Not for them. For you. ...Go.
-Pokemon = STARAPTOR,95
-    Moves = BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT
-    Ability = INTIMIDATE
-    Item = SHARPBEAK
-    Nature = JOLLY
+Pokemon = SCIZOR,95
+    Moves = BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE
+    Ability = TECHNICIAN
+    Item = LIFEORB
+    Nature = ADAMANT
     IV = 31
 Pokemon = CHARIZARD,96
     Moves = FLAMETHROWER,AIRSLASH,DRAGONPULSE,FOCUSBLAST
@@ -29908,11 +29908,11 @@ Pokemon = AEGISLASH,97
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,94]
 LoseText = Not for them. For you. ...Go.
-Pokemon = STARAPTOR,95
-    Moves = BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT
-    Ability = INTIMIDATE
-    Item = SHARPBEAK
-    Nature = JOLLY
+Pokemon = SCIZOR,95
+    Moves = BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE
+    Ability = TECHNICIAN
+    Item = LIFEORB
+    Nature = ADAMANT
     IV = 31
 Pokemon = BLASTOISE,96
     Moves = HYDROPUMP,ICEBEAM,FLASHCANNON,RAPIDSPIN
@@ -29931,11 +29931,11 @@ Pokemon = AEGISLASH,97
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,95]
 LoseText = Not for them. For you. ...Go.
-Pokemon = STARAPTOR,95
-    Moves = BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT
-    Ability = INTIMIDATE
-    Item = SHARPBEAK
-    Nature = JOLLY
+Pokemon = SCIZOR,95
+    Moves = BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE
+    Ability = TECHNICIAN
+    Item = LIFEORB
+    Nature = ADAMANT
     IV = 31
 Pokemon = VENUSAUR,96
     Moves = PETALBLIZZARD,SLUDGEBOMB,GROWTH,SYNTHESIS

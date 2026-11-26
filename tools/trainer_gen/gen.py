@@ -2185,13 +2185,16 @@ rung("CANTOR", "Anselm", "HOLLOW_CATHEDRAL", "a Choir cantor (Crownhaven), the t
 #   Prismfall::Rival.partner_version(n) = n * 10 + 3 + starter_slot      (Core 006)
 # Redeemed Kestrel is partner_version(9): 93 (player chose Grass: his Charizard line), 94 (Fire: Blastoise line),
 # 95 (Water: Venusaur line); Core swaps the Gen 1 line to the player's generation as in every rival battle. One
-# version each (the same ally in every mode; no Mega: the side's one Mega is the player's, like Juno's J7). Three
-# Pokemon at 95-97, the size of Juno's J7. "Morwen" holds the door: Wide Guard for the PC, King's Shield for himself.
+# version each (the same ally in every mode). Three Pokemon at 95-97, the size of Juno's J7. "Morwen" holds the door:
+# Wide Guard for the PC, King's Shield for himself. His Scizor is back (Reuben 2026-11-26: Redeemed Kestrel Megas in the
+# tag battle): with Morwen's Ring (:ch18_kestrel_ring == :give_now) the Mega plugin's MORWEN_RING swap hands it the
+# Scizorite and the ring when the partner registers (pbRegisterPartner fires :on_trainer_load), and the per-trainer
+# rule lets both the PC and Kestrel Mega. Without the ring he has no ring of his own (MEGA_EVOLUTION §1.2), as in K8.
 for _s in (0, 1, 2):
     S("Ch21 partner - Redeemed Kestrel beside the PC (field :PRISM_ARENA), player starter slot %d. "
       "pbRegisterPartner(:RIVAL_KESTREL, \"Kestrel\", Prismfall::Rival.partner_version(9))." % _s,
       "RIVAL_KESTREL", "Kestrel", 93 + _s, 97, "Not for them. For you. ...Go.", [
-        P("STARAPTOR", 95, "INTIMIDATE", "SHARPBEAK", "JOLLY", "BRAVEBIRD,CLOSECOMBAT,TAILWIND,PROTECT", "A"),
+        P("SCIZOR", 95, "TECHNICIAN", "LIFEORB", "ADAMANT", "BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE", "HA"),
         starter_mon("RIVAL_KESTREL", _s, 2, 96),
         P("AEGISLASH", 97, "STANCECHANGE", "LEFTOVERS", "QUIET", "KINGSSHIELD,SHADOWBALL,SACREDSWORD,WIDEGUARD", "BS",
           nick="Morwen"),

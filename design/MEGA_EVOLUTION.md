@@ -375,6 +375,7 @@ exactly as designed, per the user (his set, the Volcanic prime and its eruption 
 | **Sigrun**, Gym 18 (Dragon's Den, 85) | **Salamence "Dreamwing"** | all | |
 | **Kestrel K8**, Festival SF (Prism Arena, 94) | **Scizor**, only with Morwen's Ring | all | `MORWEN_RING`: ring and Scizorite at battle start when `:ch18_kestrel_ring` = *give_now*; otherwise none. |
 | Kestrel K9 (fallen, 94) | none | — | he never got the ring. Genesect "Gauntlet" replaces Staraptor (Krookodile is gone from K7 on). |
+| Redeemed Kestrel, Ch21 partner (v93–95, 95–97) | **Scizor**, only with Morwen's Ring | all | the same `MORWEN_RING` swap, fired by `pbRegisterPartner`; with the per-trainer rule he and the player can both Mega (Reuben 2026-11-26). |
 | **Juno J4**, Festival R16 (Prism Arena, 90) | **Gardevoir "Veil"** (replaces Comfey) | all | not her starter: Core swaps it to the player's generation, and most starter lines have no Mega. J7 (Ch21 partner): none. |
 | Festival R16 / QF / Final draws | Marisol **Gyarados**, Anja **Glalie**, Sigrun **Salamence**, Odessa **Pidgeot**, Celestine (Z: Mimikyu), Kaito **Lucario**, Ysolde **Sableye**/Gengar, Brann **Camerupt** (v96), Dorian **Lopunny** (the Pageant Bout's one Mega; Rook none) | all | |
 | **Valen** (Final 96; Ruin's Last Tuning) | **Gallade** | all | |
