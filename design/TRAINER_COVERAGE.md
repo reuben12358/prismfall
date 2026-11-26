@@ -11,9 +11,12 @@ that fits it) and at a level where it plausibly exists in that form.
 UltraBeast or Paradox (that already covers Type: Null/Silvally, Kubfu/Urshifu, Cosmog, the Tapus, the Loyal Three
 and Ogerpon). A species counts once in any form; regional forms are a bonus list. Generic trainers: Standard
 versions (< 100) of stock classes (Hiker, Fisherman, Ace Trainer ...) and the rank-and-file villain/army classes
-(Hollow grunts, Meridian agents, Isenmar/Ashkaar soldiers and captains). Not counted: rivals, Wardens, the
-Champion, named admins (Hollow/Meridian), the Festival, Echo, Gilded, Archseer, the Eevee Octave, partners,
-Hard-only Pokémon and the Map 990 test dummy.
+(Hollow grunts, Meridian agents, Isenmar/Ashkaar soldiers, trenchers, hirdmen, ember-riders and captains, the
+Thornguard) and Prismfall's job classes (Foreman and the Grounds Ladder's twelve). Not counted: rivals, Wardens,
+the Champion, named admins (Hollow/Meridian), Captain Rowe, the Watch-Captain, Mother Gutter, the Terrace
+Warden, the Festival, Echo, Gilded, Archseer, the Eevee Octave, partners, Hard-only Pokémon and the Map 990
+test dummy. A form that evolves on its own terms (Alolan Sandshrew by Ice Stone, Galarian Linoone at 35) is
+checked against its own evolution. Galarian Darmanitan's Zen Mode is a battle form, so it isn't listed.
 
 ## Totals
 
@@ -22,7 +25,7 @@ Hard-only Pokémon and the Map 990 test dummy.
 | Eligible species | 900 |
 | Covered by a generic trainer | **900** (100.0%) |
 | Missing | 0 |
-| Generic trainers (Standard versions) | 383 |
+| Generic trainers (Standard versions) | 425 |
 | Legendary/Mythical/UB/Paradox on a generic trainer (must be 0) | 0 |
 | Level-plausibility flags | 0 |
 
@@ -59,8 +62,10 @@ Counted from the `# Map NNN` note above each block and that map's `segment` (bad
 | 9 | 11 | 25 | 310, 311, 312, 700, 701, 703, 704, 705, 708, 712 |
 | 10 | 12 | 28 | 330, 331, 332, 720, 721, 723, 724, 725, 726, 728, 732 |
 | 11 | 13 | 34 | 345, 350, 351, 352, 353, 355, 740, 741, 742, 743, 744, 745, 748, 752, 755, 756 |
+| 12 | 14 | 18 | 360, 370, 371, 372, 760, 761, 764, 765, 772, 773 |
+| 13 | 15 | 4 | 783, 810 |
 | 17 | 19 | 2 | 861, 864 |
-| — | — | 33 | no map note (story-placed grunts, soldiers, Trials) |
+| — | — | 53 | no map note (story-placed grunts, soldiers, Trials) |
 
 ## Missing species
 
@@ -68,9 +73,10 @@ None: every eligible species is on a generic trainer.
 
 ## Regional forms (bonus)
 
-0 of 55 regional forms are on a generic trainer.
+10 of 54 regional forms are on a generic trainer.
 
-- Not yet: Alolan Rattata, Alolan Raticate, Alolan Raichu, Alolan Sandshrew, Alolan Sandslash, Alolan Vulpix, Alolan Ninetales, Alolan Diglett, Alolan Dugtrio, Alolan Meowth, Galarian Meowth, Alolan Persian, Alolan Geodude, Alolan Graveler, Alolan Golem, Galarian Ponyta, Galarian Rapidash, Galarian Slowpoke, Galarian Slowbro, Galarian Farfetch'd, Alolan Grimer, Alolan Muk, Alolan Exeggutor, Alolan Marowak, Galarian Weezing, Galarian Mr. Mime, Galarian Slowking, Galarian Corsola, Galarian Zigzagoon, Galarian Linoone, Galarian Darumaka, Galarian Standard Mode Darmanitan, Galarian Zen Mode Darmanitan, Galarian Yamask, Galarian Stunfisk, Hisuian Growlithe, Hisuian Arcanine, Hisuian Voltorb, Hisuian Electrode, Paldean (Combat Breed) Tauros, Paldean (Blaze Breed) Tauros, Paldean (Aqua Breed) Tauros, Hisuian Typhlosion, Paldean Wooper, Hisuian Qwilfish, Hisuian Sneasel, Hisuian Samurott, Hisuian Lilligant, Hisuian Zorua, Hisuian Zoroark, Hisuian Braviary, Hisuian Sliggoo, Hisuian Goodra, Hisuian Avalugg, Hisuian Decidueye
+- Covered: Alolan Sandslash, Alolan Dugtrio, Alolan Persian, Alolan Golem, Galarian Slowpoke, Alolan Marowak, Galarian Stunfisk, Hisuian Arcanine, Hisuian Zoroark, Hisuian Braviary
+- Not yet: Alolan Rattata, Alolan Raticate, Alolan Raichu, Alolan Sandshrew, Alolan Vulpix, Alolan Ninetales, Alolan Diglett, Alolan Meowth, Galarian Meowth, Alolan Geodude, Alolan Graveler, Galarian Ponyta, Galarian Rapidash, Galarian Slowbro, Galarian Farfetch'd, Alolan Grimer, Alolan Muk, Alolan Exeggutor, Galarian Weezing, Galarian Mr. Mime, Galarian Slowking, Galarian Corsola, Galarian Zigzagoon, Galarian Linoone, Galarian Darumaka, Galarian Standard Mode Darmanitan, Galarian Yamask, Hisuian Growlithe, Hisuian Voltorb, Hisuian Electrode, Paldean (Combat Breed) Tauros, Paldean (Blaze Breed) Tauros, Paldean (Aqua Breed) Tauros, Hisuian Typhlosion, Paldean Wooper, Hisuian Qwilfish, Hisuian Sneasel, Hisuian Samurott, Hisuian Lilligant, Hisuian Zorua, Hisuian Sliggoo, Hisuian Goodra, Hisuian Avalugg, Hisuian Decidueye
 
 ## Level-plausibility flags
 

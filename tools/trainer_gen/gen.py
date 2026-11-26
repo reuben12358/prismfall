@@ -2323,9 +2323,10 @@ def main():
     import importlib.util, os
     _sp = importlib.util.spec_from_file_location("routes", os.path.join(os.path.dirname(os.path.abspath(__file__)), "routes.py"))
     routes = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(routes)
-    for note, tt, nm, lose, mons, cap in routes.ROUTES(P):
+    for row in routes.ROUTES(P):   # (note, type, name, lose, mons, cap[, version]): a version for a returning name
+        note, tt, nm, lose, mons, cap = row[:6]
         OUT.append("# " + note)
-        OUT.extend(variants(tt, nm, 0, mons, lose, cap, route=True))
+        OUT.extend(variants(tt, nm, row[6] if len(row) > 6 else 0, mons, lose, cap, route=True))
     section("VILLAIN ADMINS")
     for note, tt, nm, cap, lose, mons in ADMINS:
         OUT.append("# " + note)

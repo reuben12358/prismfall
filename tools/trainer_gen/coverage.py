@@ -21,7 +21,10 @@ Rules (keep them in step with the report header below):
   ASHKAAR_SOLDIER*, ASHKAAR_OFFICER). Excluded as main cast / named story NPCs: RIVAL_*, LEADER_*, CHAMPION_*,
   MERIDIAN_<named> (Voss, Marchetti, Kroll, Quent, Ashe, Directorate, Admin), HOLLOW_<named> (admins, the Mourner,
   Thistle, Wick, Teo, Sable), FESTIVAL_*, ECHO_*, GILDED_*, ARCHSEER_*, OCTAVE_* (the Eevee Octave), REFLECTION,
-  PARTNER_*, PLAYER_*, and the test-arena dummy (Map 990). Hard-only Pokemon (version +100) don't count: a
+  PARTNER_*, PLAYER_*, THORNWATCH, SUMP_BARON, GILDER_AUTOMATON, PUNK_ZARA, LARCH, WENLOW, Captain Rowe and the
+  test-arena dummy (Map 990). Prismfall's rank-and-file classes count as generic: the war soldiers (Trencher,
+  Hirdman, Ember-Rider), the Thornguard, and the job classes (the Grounds Ladder's twelve, Foreman). Galarian
+  Darmanitan's Zen Mode is a battle form, not a listed regional form. Hard-only Pokemon (version +100) don't count: a
   Standard player never meets them.
 - Level plausibility (a check, not a gate): a Pokemon reached by a level evolution should sit at or above that
   level (minus 2); one reached by a stone/trade/friendship evolution at 20+ (third stages 30+). A form that still
@@ -43,7 +46,11 @@ REPORT = os.path.join(ROOT, "design", "TRAINER_COVERAGE.md")
 FLAG_EXCLUDE = ("Legendary", "Mythical", "UltraBeast", "Paradox")
 STOCK_EXCLUDE = re.compile(r"^(POKEMONTRAINER_|RIVAL\d|LEADER_|ELITEFOUR_|CHAMPION$|ROCKETBOSS$|TEAMROCKET_)")
 ARMY = re.compile(r"^(HOLLOW_GRUNT(_[MF])?|MERIDIAN_AGENT(_[MF])?|ISENMAR_SOLDIER(_[MF])?|ISENMAR_OFFICER|"
-                  r"ASHKAAR_SOLDIER(_[MF])?|ASHKAAR_OFFICER)$")
+                  r"ASHKAAR_SOLDIER(_[MF])?|ASHKAAR_OFFICER|ISENMAR_TRENCHER|ISENMAR_HIRDMAN|ASHKAAR_EMBER_RIDER|THORNGUARD|"
+                  # Prismfall's own job classes (the Grounds Ladder's twelve and the Strade Works foremen)
+                  r"WEAVER|HARPOONER|STREAMER|FOREMAN|MOON_BROKER|WYRM_RIDER|LAMP_RUNNER|WELL_KEEPER|LANTERN_ACOLYTE|"
+                  r"EMBALMER|WARDGUARD|CANTOR)$")
+NAMED_EXCLUDE = {("THORNGUARD", "Captain Rowe")}      # a story NPC on an otherwise rank-and-file class
 REGIONAL = ("Alolan", "Galarian", "Hisuian", "Paldean")
 # Gen 9 evolutions the base pokemon.txt doesn't list (validate_trainers.MANUAL_PREVO): child -> (parent, min level)
 MANUAL_EVO = {"KINGAMBIT": ("BISHARP", 64), "ANNIHILAPE": ("PRIMEAPE", 35), "FARIGIRAF": ("GIRAFARIG", 32),
@@ -138,13 +145,47 @@ def max_level(sp, sid):
     return e + max(5, int(round(e * 0.3)))
 
 
+FORM_EVOS = None
+def form_max_level(sp, sid, form):
+    """max_level for a form that has its own Evolutions line in pokemon_forms.txt (Alolan Sandshrew evolves by Ice
+    Stone, Galarian Linoone at 35 into Obstagoon ...); other forms use the base species."""
+    global FORM_EVOS
+    if FORM_EVOS is None:
+        FORM_EVOS = {}
+        for key, d in parse_pbs(os.path.join(ENGINE_PBS, "pokemon_forms.txt")).items():
+            if "Evolutions" in d:
+                parts = [x for x in d["Evolutions"].split(",")]
+                FORM_EVOS[key] = [(parts[i], parts[i + 1], parts[i + 2] if i + 2 < len(parts) else "")
+                                  for i in range(0, len(parts) - 1, 3)]
+    evos = FORM_EVOS.get("%s,%d" % (sid, form)) if form else None
+    if evos is None:
+        only = [c for c, (par, f) in FORM_ONLY_EVO.items() if par == sid and f != form]
+        if only:      # e.g. a red-striped Basculin never becomes Basculegion
+            keep = [(t, m, p) for t, m, p in sp[sid]["evos"] if t not in only]
+            lv = [int(p) for t, m, p in keep if m.startswith(LEVEL_METHODS) and p.isdigit()]
+            if not lv or any(not (m.startswith(LEVEL_METHODS) and p.isdigit()) for t, m, p in keep):
+                return None if not lv else min(lv) + max(5, int(round(min(lv) * 0.3)))
+            return min(lv) + max(5, int(round(min(lv) * 0.3)))
+        return max_level(sp, sid)
+    lv = [int(p) for t, m, p in evos if m.startswith(LEVEL_METHODS) and p.isdigit()]
+    if not lv:
+        return None
+    return min(lv) + max(5, int(round(min(lv) * 0.3)))
+
+
+# MANUAL_EVO children that only one form of the parent reaches (the others don't evolve that way)
+FORM_ONLY_EVO = {"BASCULEGION": ("BASCULIN", 2), "OVERQWIL": ("QWILFISH", 1), "SNEASLER": ("SNEASEL", 1)}
+BATTLE_ONLY_FORMS = ("Zen Mode",)   # Galarian Darmanitan's Zen Mode comes from the ability in battle
+
+
 def regional_forms(sp):
     raw = parse_pbs(os.path.join(ENGINE_PBS, "pokemon_forms.txt"))
     out = []
     for key, d in raw.items():
         base, _, form = key.partition(",")
         fn = d.get("FormName", "")
-        if base in sp and not sp[base]["excluded"] and any(fn.startswith(r) for r in REGIONAL) and form.isdigit():
+        if base in sp and not sp[base]["excluded"] and any(fn.startswith(r) for r in REGIONAL) and form.isdigit() \
+                and not any(b in fn for b in BATTLE_ONLY_FORMS):
             out.append((base, int(form), fn))
     return out
 
@@ -193,6 +234,8 @@ def is_generic(t, gtypes):
         return False
     if "Map 990" in t["note"] or t["name"] == "Prismtest":
         return False
+    if (t["type"], t["name"]) in NAMED_EXCLUDE:
+        return False
     return t["type"] in gtypes or bool(ARMY.match(t["type"]))
 
 
@@ -211,7 +254,7 @@ def analyse():
                 used_forms[(s, form)].append((t["type"], t["name"], t["ver"], lv))
             if s not in sp:
                 continue
-            lo, hi = min_level(sp, s), max_level(sp, s)
+            lo, hi = min_level(sp, s), form_max_level(sp, s, form)
             if lv < lo - 2 or (hi is not None and lv > hi):
                 level_issues.append((t["type"], t["name"], t["ver"], s, lv, lo, hi))
     eligible = [s for s, d in sp.items() if not d["excluded"]]
@@ -258,9 +301,12 @@ def report(a):
          "UltraBeast or Paradox (that already covers Type: Null/Silvally, Kubfu/Urshifu, Cosmog, the Tapus, the Loyal Three",
          "and Ogerpon). A species counts once in any form; regional forms are a bonus list. Generic trainers: Standard",
          "versions (< 100) of stock classes (Hiker, Fisherman, Ace Trainer ...) and the rank-and-file villain/army classes",
-         "(Hollow grunts, Meridian agents, Isenmar/Ashkaar soldiers and captains). Not counted: rivals, Wardens, the",
-         "Champion, named admins (Hollow/Meridian), the Festival, Echo, Gilded, Archseer, the Eevee Octave, partners,",
-         "Hard-only Pokémon and the Map 990 test dummy.",
+         "(Hollow grunts, Meridian agents, Isenmar/Ashkaar soldiers, trenchers, hirdmen, ember-riders and captains, the",
+         "Thornguard) and Prismfall's job classes (Foreman and the Grounds Ladder's twelve). Not counted: rivals, Wardens,",
+         "the Champion, named admins (Hollow/Meridian), Captain Rowe, the Watch-Captain, Mother Gutter, the Terrace",
+         "Warden, the Festival, Echo, Gilded, Archseer, the Eevee Octave, partners, Hard-only Pokémon and the Map 990",
+         "test dummy. A form that evolves on its own terms (Alolan Sandshrew by Ice Stone, Galarian Linoone at 35) is",
+         "checked against its own evolution. Galarian Darmanitan's Zen Mode is a battle form, so it isn't listed.",
          "",
          "## Totals",
          "",

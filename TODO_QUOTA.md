@@ -90,9 +90,10 @@
 ---
 *Done items stay ticked for a week, then get cleared. Started 2026-11-22. This file replaces the old `design/WED_SPRINT_QUEUE.md`, which now just points here.*
 
-## Status note: trainer coverage agent (2026-11-25)
-- Done: `tools/trainer_gen/coverage.py` + `design/TRAINER_COVERAGE.md`; 263 new generic trainers (Ch5 30, Ch6–13 231, two Ch19 roster rows: Isolde, Hjal & Ama) in `routes.py` and spliced into `pbs/trainers.txt`; coverage 175 → 900 / 900; validate 0 errors.
-- Left: map events for all of them (maps unbuilt); regional forms as a bonus pass (`m(..., form=n)` works in routes.py now); the Ch14–18 script rosters and the rest of Ch19's are still unbuilt (TODO §5 "Build from each new script's Density section").
+## Status note: trainer coverage agent (2026-11-25, updated 2026-11-26)
+- Done: `tools/trainer_gen/coverage.py` + `design/TRAINER_COVERAGE.md`; 263 generic trainers for Ch5–13 (+2 Ch19 roster rows); coverage 900 / 900; validate 0 errors.
+- In progress (2026-11-26): the Ch14–18 script-roster and gym trainers (94; data in `routes.py`, inserted one chapter per commit; Ch14 done) and the 54 regional forms on generic trainers (last commit of the batch). Route rows can carry `v=` now (a returning name: Hiker Dunstan v1, Hiker Bram v1, Bird Keeper Wren v1).
+- **If cut off:** regenerate (`gen.py ... > /tmp/g.txt`) and splice the `routes.py` blocks `pbs/trainers.txt` lacks in front of `# Map 861 The Thornwar Marches`; validate; re-run coverage.py.
 
 ## Agent status: Ch15–21 + post-game engine hooks (Claude, engine-backlog agent)
 *Finished 2026-11-25. Everything below is committed; the lines above in sections 3 and 5b carry the detail.*

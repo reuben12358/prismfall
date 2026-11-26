@@ -64,11 +64,14 @@ def ROUTES(P):
         # Coverage fill, Ch13 (segment 11, cap 59)
         345: (0, 59, {}), 350: (0, 59, {}), 351: (0, 59, {}), 352: (0, 59, {}), 353: (0, 59, {}), 355: (0, 59, {}), 740: (0, 59, {}), 741: (0, 59, {}),
         742: (0, 59, {}), 743: (0, 59, {}), 744: (0, 59, {}), 745: (0, 59, {}), 748: (0, 59, {}), 752: (0, 59, {}), 755: (0, 59, {}), 756: (0, 59, {}),
+        # Ch14 script roster (story density sections, 2026-11-26)
+        360: (0, 63, {}), 370: (0, 63, {}), 371: (0, 63, {}), 372: (0, 63, {}), 760: (0, 63, {}), 761: (0, 63, {}), 764: (0, 63, {}), 765: (0, 63, {}),
+        772: (0, 63, {}), 773: (0, 63, {}), 783: (0, 67, {}), 810: (0, 67, {}),
         # Coverage fill, Ch19 (segment 17, cap 85)
         861: (0, 85, {}), 864: (0, 85, {}),
     }
     DEFAULT_CAP = 23                                          # 560-564, 170-173: unchanged (Gym 3 stretch)
-    def t(note, tt, nm, lose, mons, cap=None):
+    def t(note, tt, nm, lose, mons, cap=None, v=0):   # v: a version for a name that returns (Hiker Dunstan, Ch2 -> Ch14)
         mid = int(re.match(r"Map (\d+)", note).group(1))
         delta, pcap, swaps = PLAN.get(mid, (0, DEFAULT_CAP, {}))
         out = []
@@ -78,7 +81,7 @@ def ROUTES(P):
                 sp, ab = swaps[mon["sp"]]
                 mon = dict(mon, sp=sp, ab=ab or mon["ab"])
             out.append(mon)
-        R.append((note, tt, nm, lose, out, cap if cap is not None else pcap))
+        R.append((note, tt, nm, lose, out, cap if cap is not None else pcap) + ((v,) if v else ()))
     # Map 520 The Ferrymen's Mile (lv 4-6) - MEADOW: Run Away Pokemon dart into the grass (+1 Speed on entry)
     t("Map 520 The Ferrymen's Mile", "YOUNGSTER", "Pip", "Aw, my squad lost!", [m("LILLIPUP", 4, "RUNAWAY", "JOLLY"), m("SKWOVET", 5, "CHEEKPOUCH", "IMPISH")])
     t("Map 520 The Ferrymen's Mile", "LASS", "Wren", "My birdies! Oh, well done.", [m("PIKIPEK", 4, "KEENEYE", "ADAMANT"), m("FLETCHLING", 5, "BIGPECKS", "JOLLY")])
@@ -806,6 +809,69 @@ def ROUTES(P):
       [m("HYPNO", 55, "FOREWARN", "ADAMANT"), m("MUSHARNA", 56, "FOREWARN", "MODEST"), m("POLTEAGEIST", 57, "WEAKARMOR", "MODEST"), m("CURSOLA", 58, "WEAKARMOR", "MODEST")])
     t("Map 353 Lucent Gym - Puzzle Room 3", "CHANNELER", "Morgane", "Someone you've forgotten says well done.",
       [m("DRAKLOAK", 55, "CLEARBODY", "JOLLY"), m("MIMIKYU", 56, "DISGUISE", "JOLLY"), m("GOLURK", 57, "IRONFIST", "ADAMANT"), m("SKELEDIRGE", 58, "BLAZE", "MODEST")])
+    # ---------------------------------------------------------------------------------------------------------------
+    # Ch14 - Yesterday's Road, the Barrows, Spinefall, the Vertebrae, Geode Hollow and the Undersands; Gym 13 (cap 63, 67 after the badge; story/33_SCRIPT_CH14.md roster)
+    # Hiker Osgood: the hiker on the halfway stone (Inverse flips Ground's immunities; Levitate still holds)
+    t("Map 772 Yesterday's Road", "HIKER", "Osgood", "Zero. I like zero. Sit on it and you're nowhere for a minute.",
+      [m("DONPHAN", 55, "STURDY", "ADAMANT"), m("CLAYDOL", 56, "LEVITATE", "ADAMANT"), m("GOLURK", 57, "IRONFIST", "ADAMANT")])
+    # Psychic F Ilia: Novice Ilia, a Synod novice with a broom; Galarian Slowpoke wanders up from the Dreaming Quarter, the Hisuian Braviary is the road's old bird
+    t("Map 772 Yesterday's Road", "PSYCHIC_F", "Ilia", "We sweep yesterday's footprints off the road. Yours too, now.",
+      [m("SLOWPOKE", 54, "OWNTEMPO", "ADAMANT", form=1), m("BRONZONG", 55, "LEVITATE", "ADAMANT"), m("BRAVIARY", 56, "SHEERFORCE", "MODEST", form=1), m("GOTHITELLE", 57, "FRISK", "MODEST")])
+    # Hiker Mott: the gravedigger (script: Worker)
+    t("Map 772 Yesterday's Road", "HIKER", "Mott", "Dig 'em in, dig 'em out. You're the first I've had to dig myself out from.",
+      [m("ZOROARK", 55, "ILLUSION", "TIMID", form=1), m("HOUNDSTONE", 56, "SANDRUSH", "ADAMANT"), m("RUNERIGUS", 57, "WANDERINGSPIRIT", "ADAMANT"), m("MUDSDALE", 58, "OWNTEMPO", "ADAMANT")])
+    # Channeler Severine: Hex Maniac Severine
+    t("Map 760 The Obsidian Barrows", "CHANNELER", "Severine", "The barrows remember you now. Sorry.",
+      [m("MAROWAK", 55, "CURSEDBODY", "ADAMANT", form=1), m("BANETTE", 56, "FRISK", "ADAMANT"), m("POLTEAGEIST", 57, "WEAKARMOR", "MODEST"), m("MISMAGIUS", 58, "LEVITATE", "TIMID")])
+    # Channeler Agathe: Medium Agathe
+    t("Map 760 The Obsidian Barrows", "CHANNELER", "Agathe", "They told me you'd win. The dead are such gossips.",
+      [m("SPIRITOMB", 57, "PRESSURE", "ADAMANT"), m("COFAGRIGUS", 58, "MUMMY", "MODEST"), m("DUSKNOIR", 59, "PRESSURE", "ADAMANT")])
+    # Hiker Bram: Pallbearer Bram (version 1: the Brinecut Mine's Hiker Bram, twelve badges on)
+    t("Map 760 The Obsidian Barrows", "HIKER", "Bram", "Carried a hundred to the barrows. Never been carried off myself till now.",
+      [m("DUGTRIO", 56, "SANDVEIL", "JOLLY", form=1), m("SANDACONDA", 57, "SANDSPIT", "ADAMANT"), m("PALOSSAND", 58, "WATERCOMPACTION", "MODEST"), m("GOLURK", 59, "IRONFIST", "ADAMANT")], v=1)
+    t("Map 761 Spinefall Gorge", "FISHERMAN", "Teague", "The falls take the line. They take the fight too, apparently.",
+      [m("BASCULIN", 56, "RECKLESS", "JOLLY"), m("WHISCASH", 57, "OBLIVIOUS", "ADAMANT"), m("GOLDUCK", 58, "CLOUDNINE", "TIMID"), m("FLOATZEL", 59, "SWIFTSWIM", "JOLLY")])
+    # Blackbelt Kenji: Waterfall-trained (Focus Energy)
+    t("Map 761 Spinefall Gorge", "BLACKBELT", "Kenji", "I train under the falls. I'll be training under them a while longer.",
+      [m("POLIWRATH", 57, "DAMP", "ADAMANT"), m("HITMONLEE", 58, "RECKLESS", "JOLLY"), m("CONKELDURR", 59, "GUTS", "ADAMANT")])
+    # Engineer Rhys: Deep Works Fitter Rhys (script: Worker); Alolan Golem is the Works' magnet-rock
+    t("Map 773 The Vertebrae", "ENGINEER", "Rhys", "Deep Works says every seam has a weak point. Found mine.",
+      [m("GOLEM", 57, "MAGNETPULL", "ADAMANT", form=1), m("PROBOPASS", 58, "MAGNETPULL", "MODEST"), m("EXCADRILL", 59, "SANDFORCE", "JOLLY"), m("MAGNEZONE", 60, "STURDY", "MODEST")])
+    t("Map 773 The Vertebrae", "HIKER", "Marga", "The Vertebrae's a spine. I'm feeling mine.",
+      [m("AERODACTYL", 58, "ROCKHEAD", "JOLLY"), m("RHYDON", 59, "LIGHTNINGROD", "ADAMANT"), m("GARGANACL", 60, "STURDY", "ADAMANT")])
+    # Lady Opaline: Gemcutter Opaline (Crystal Cavern light moves)
+    t("Map 360 Cragholm", "LADY", "Opaline", "Cut wrong. One facet off and the whole stone's ruined.",
+      [m("SABLEYE", 57, "KEENEYE", "ADAMANT"), m("MAWILE", 58, "HYPERCUTTER", "ADAMANT"), m("KLEFKI", 59, "PRANKSTER", "ADAMANT"), m("CARBINK", 60, "CLEARBODY", "BOLD")])
+    t("Map 764 Geode Hollow", "RUINMANIAC", "Fenwick", "The geodes ring when you lose. Listen. That's me.",
+      [m("SIGILYPH", 58, "WONDERSKIN", "TIMID"), m("BRONZONG", 59, "LEVITATE", "ADAMANT"), m("CLAYDOL", 60, "LEVITATE", "ADAMANT"), m("GOLURK", 61, "IRONFIST", "ADAMANT")])
+    # Lady Beryl: Gemcutter Beryl
+    t("Map 765 Geode Hollow B1F", "LADY", "Beryl", "The deepest stones are the clearest. I'm less clear than I was.",
+      [m("CRUSTLE", 58, "SHELLARMOR", "ADAMANT"), m("MINIOR", 59, "SHIELDSDOWN", "BOLD"), m("CARBINK", 60, "CLEARBODY", "BOLD"), m("GLIMMORA", 61, "TOXICDEBRIS", "TIMID")])
+    # Tamer Hamid: Camel Driver Hamid (script: Backpacker)
+    t("Map 810 The Dry Tide", "TAMER", "Hamid", "The tide comes in as sand here. My caravan goes out as losers.",
+      [m("STUNFISK", 59, "MIMICRY", "ADAMANT", form=1), m("SANDSLASH", 60, "SANDVEIL", "ADAMANT"), m("MUDSDALE", 61, "OWNTEMPO", "ADAMANT"), m("HIPPOWDON", 62, "SANDSTREAM", "ADAMANT")])
+    # Ruinmaniac Tobiah: Unown x2 (!): O and K
+    t("Map 783 Duneholt Undersands", "RUINMANIAC", "Tobiah", "O. K. That's what they spell. That's all they've ever spelled.",
+      [m("UNOWN", 60, "LEVITATE", "ADAMANT", form=14), m("UNOWN", 61, "LEVITATE", "ADAMANT", form=10), m("SIGILYPH", 62, "WONDERSKIN", "TIMID"), m("COFAGRIGUS", 63, "MUMMY", "MODEST")])
+    # Hiker Dunstan: the Lacecliff Walk's Hiker Dunstan (version 1): his Nacli is a Garganacl now
+    t("Map 783 Duneholt Undersands", "HIKER", "Dunstan", "Another sun day. Lucky you, again.",
+      [m("FLYGON", 61, "LEVITATE", "JOLLY"), m("KROOKODILE", 62, "INTIMIDATE", "JOLLY"), m("GARGANACL", 63, "STURDY", "ADAMANT")], v=1)
+    # Engineer Lisle: Deep Works Engineer Lisle (script: Worker; sun + Steel); the Hisuian Arcanine guards the Works' old dig
+    t("Map 783 Duneholt Undersands", "ENGINEER", "Lisle", "Sun on steel. You'd think that'd be enough.",
+      [m("ARCANINE", 61, "FLASHFIRE", "JOLLY", form=1), m("EXCADRILL", 62, "SANDFORCE", "JOLLY"), m("DURALUDON", 63, "HEAVYMETAL", "TIMID"), m("MAGNEZONE", 64, "STURDY", "MODEST")])
+    t("Map 370 Cragholm Gym - Lamp Room", "HIKER", "Clem", "Bastian'll tell you a story about that. Three times.",
+      [m("LYCANROC", 57, "KEENEYE", "JOLLY"), m("CRUSTLE", 58, "SHELLARMOR", "ADAMANT"), m("RHYPERIOR", 59, "SOLIDROCK", "ADAMANT")])
+    # Lady Jacinth: Gemcutter Jacinth
+    t("Map 371 Cragholm Gym - Prism Gallery", "LADY", "Jacinth", "Every colour but the right one. Story of my afternoon.",
+      [m("MAWILE", 58, "HYPERCUTTER", "ADAMANT"), m("MINIOR", 59, "SHIELDSDOWN", "BOLD"), m("GIGALITH", 60, "STURDY", "ADAMANT")])
+    t("Map 371 Cragholm Gym - Prism Gallery", "HIKER", "Dolph", "Blue gate, green gate. I just walk through walls.",
+      [m("GOLEM", 59, "STURDY", "ADAMANT"), m("AGGRON", 60, "STURDY", "ADAMANT"), m("TYRANITAR", 61, "SANDSTREAM", "ADAMANT")])
+    # Engineer Ness: a quarry worker
+    t("Map 372 Cragholm Gym - Quarry", "ENGINEER", "Ness", "Quarry rules: what breaks, you leave.",
+      [m("COALOSSAL", 59, "FLAMEBODY", "ADAMANT"), m("STONJOURNER", 60, "POWERSPOT", "ADAMANT"), m("EXCADRILL", 61, "SANDFORCE", "JOLLY")])
+    # Ruinmaniac Petra: the Cragholm museum's fossils
+    t("Map 372 Cragholm Gym - Quarry", "RUINMANIAC", "Petra", "The museum wants them back by six. They'll be late.",
+      [m("OMASTAR", 59, "SHELLARMOR", "MODEST"), m("CRADILY", 60, "SUCTIONCUPS", "ADAMANT"), m("ARMALDO", 61, "BATTLEARMOR", "ADAMANT"), m("ARCHEOPS", 62, "DEFEATIST", "JOLLY")])
     # ---------------------------------------------------------------------------------------------------------------
     # Ch19 - two script-roster rows (story/38_SCRIPT_CH19.md) that carry the last four species (cap 85)
     # Cooltrainer F Isolde: script roster (story/38_SCRIPT_CH19.md): Ace Trainer Isolde
