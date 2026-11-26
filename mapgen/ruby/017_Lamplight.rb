@@ -34,8 +34,9 @@ module PrismfallLamplight
   #-----------------------------------------------------------------------------
   def starter_line
     r = Prismfall::Rival
-    return (Array(r.line(r.starter_gen, r.kestrel_slot)) + Array(r.line(r::RIVAL_SOURCE_GEN, r.kestrel_slot))).uniq
-  rescue StandardError
+    return (Array(r.line(r.starter_gen, r.kestrel_slot)) + Array(r.line(Prismfall::RIVAL_SOURCE_GEN, r.kestrel_slot))).uniq
+  rescue StandardError => e
+    PBDebug.log("[Lamplight] starter_line: #{e.class}: #{e.message}") if defined?(PBDebug)
     return []
   end
 
@@ -44,10 +45,11 @@ module PrismfallLamplight
   def match_starter(party)
     r = Prismfall::Rival
     gen = r.starter_gen
-    return if gen == r::RIVAL_SOURCE_GEN
+    src = Prismfall::RIVAL_SOURCE_GEN
+    return if gen == src
     party.each do |pk|
       info = r.lookup(pk.species)
-      next if !info || info[:gen] != r::RIVAL_SOURCE_GEN
+      next if !info || info[:gen] != src
       line = r.line(gen, info[:slot])
       sp = line && (line[info[:stage]] || line.last)
       next if !sp || !GameData::Species.exists?(sp)
@@ -243,8 +245,8 @@ module PrismfallLamplight
     lanes.each_with_index do |(fx, depth), i|
       bmp = charset_bitmap(CROWD[i % CROWD.length], "NPC 01")
       next if !bmp
-      zoom, foot, z, dark, tone = [[8.0, h + 24, 30, 240, 26], [5.0, h + 2, 20, 215, 44], [3.2, h - 58, 12, 190, 70],
-                                   [2.2, h - 104, 10, 170, 104]][depth]
+      zoom, foot, z, dark, tone = [[8.0, h + 24, 30, 240, 26], [5.0, h + 2, 20, 215, 44], [3.2, h - 92, 12, 190, 70],
+                                   [2.2, h - 150, 10, 170, 104]][depth]
       s = figure(vp, bmp, (i % 5 == 3) ? 2 : 3, zoom, (w * fx).round, foot, z, Color.new(tone, tone + 2, tone + 12, dark))
       if depth == 0                                # a small boy's height: coats and legs, no faces
         ch = bmp.height / 4

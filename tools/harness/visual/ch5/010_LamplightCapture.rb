@@ -138,11 +138,8 @@ if ENV["DEMO_PLAN"].to_s.start_with?("lamplight")
         DemoRun.stop if ENV["LAMP_SHOTS"] == "memory"          # the memory flash is on film by now
         foes = @battlers.compact.select(&:opposes?).map { |b| "#{b.species}/L#{b.level}" }
         mine = @battlers.compact.reject(&:opposes?).map { |b| "#{b.pokemon.name}/L#{b.level}" }
-        begin
-          LampCap.lines += 1 if PrismfallLamplight.say_line(self)
-        rescue StandardError => e
-          DemoRun.log("say_line: #{e.class}: #{e.message}")
-        end
+        # Kestrel's "Hold. Hold it." (017's own pbCommandPhase alias runs before this one and has said it by now)
+        LampCap.lines += 1 if PrismfallLamplight.instance_variable_get(:@line).nil?
         LampCap.battles << [foes, mine, "balls_off=#{@disablePokeBalls}", "can_lose=#{@canLose}", "run=#{@canRun}",
                             "field=#{(respond_to?(:prismfall_field) ? prismfall_field : nil).inspect}"].flatten
         DemoRun.log("battle: #{LampCap.battles.last.inspect}")
