@@ -80,6 +80,7 @@
 - [ ] Re-shoot older Warden VS GIFs (`docs/battle_captures/cast/wardens_*.gif`) so they show the new two-line class plates.
 
 ## Status: finale bosses agent (Bosses 113–115, Arceus rotation, Mega per trainer)
+*Round 4 (2026-11-26), in progress: (1) refusals: "one Warden in three refuses" to Standard prepared ~15–25%, Hard ~5–10%, by the size / scope of the refusal boost; (2) Voss / Quent / conduit to Standard prepared 25–40%, Hard 10–20%. Committed so far: nothing.*
 *Round 3 (2026-11-26): done and committed (eda5562 Arceus, 973f3b4 Valen, 814dd25 BALANCE). Nothing in flight.*
 *Round 2 (2026-11-26): done and committed (509f526, 43c9c3e, fcdcb92 and the docs commit). Nothing in flight. See the two ticked §2 lines (Arceus, rest; Mega lore).*
 *Round 1 (2026-11-25): done and committed.*
