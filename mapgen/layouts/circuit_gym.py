@@ -158,10 +158,10 @@ def paint_deeps(m):
 # ============================================================================================ 190 the Switchroom
 def build_190():
     from cavekit import PIT, TER
-    # Sculpted Neon Broadcast Switchroom matching 193 Core:
+    # Sculpted Neon Broadcast Switchroom (Wave 2 — authentic electrical switchgear wall & glowing floor conduit tracks!):
     #   MASS  -> sculpted stepped studio foyer silhouette & narrowed crimson-carpet entrance tunnel
-    #   PIT   -> twin starry dark-glass studio light-well chasms flanking the north bulkhead with glowing holos & rings
-    #   FLOOR -> sleek obsidian-glass TEACH bench with industrial grate rails & white-gold marble Door 191 landing
+    #   PIT   -> twin illuminated dark-glass studio light-well chasms flanking the north bulkhead with glowing holos & rings
+    #   FLOOR -> obsidian-glass TEACH bench connected by glowing circuit conduit tracks & brushed industrial studio paneling!
     m = hall(21, 15, 190)
     m.kit = {TER: 'lmw', FLOOR: 'cvZ', 'default': 'cvZ'}
 
@@ -171,7 +171,7 @@ def build_190():
     m.box(6, 13, 14, 13, FLOOR, '.')      # chamfered south foyer vestibule
     m.box(9, 14, 11, 14, FLOOR, '.')      # narrowed crimson-carpet entrance tunnel to Exit (10,14)
 
-    # Twin starry dark-glass studio light-well chasms (PIT -> lm_deep0..5)
+    # Twin illuminated dark-glass studio light-well chasms (PIT -> lm_deep0..5 + glowing conduits)
     m.box(1, 3, 3, 6, PIT, 'p')           # NW studio light-well chasm north of the generator
     m.box(17, 3, 19, 6, PIT, 'p')         # NE studio light-well chasm north of the Door Lamp
     m.plan_cliffs(rows=3)
@@ -202,14 +202,17 @@ def build_190():
                      (7, 6), (5, 8), (5, 10), (9, 8), (9, 10), (13, 8), (13, 10), (17, 8), (17, 10),
                      (3, 11), (4, 12), (2, 12), (6, 12), (14, 11), (14, 13), (15, 12), (13, 12), (16, 11), (16, 12), (17, 12)}
 
-    # ---- 3. North Broadcast Bulkhead (ON AIR, Twin Neon Bolts, Dual Monitor Banks, Tally Alarms & Posters) ----
+    # ---- 3. Authentic High-Voltage Electrical Switchgear North Bulkhead (ZERO clip-art lightning bolts!) ----
     on_faces(m, 'lm_onair', [(10, 3)])
     on_faces(m, 'lm_alarm_on', [(9, 4), (11, 4)])
-    on_faces(m, 'lm_poster1', [(4, 4), (16, 4)])
+    # Authentic breaker switches, fuseboxes, cooling vents & telemetry console banks replacing clip-art bolts!
+    on_faces(m, 'lm_splice_on', [(8, 3), (12, 3)])
+    on_faces(m, 'lm_junction_on', [(8, 4), (12, 4)])
+    on_faces(m, 'lm_vent', [(4, 3), (7, 3), (13, 3), (16, 3)])
+    on_faces(m, 'lm_junction', [(4, 4), (7, 4), (13, 4), (16, 4)])
     hang(m, 'lm_monitors', 5, 3); hang(m, 'lm_monitors', 14, 3)
-    hang(m, 'lm_neonbolt', 7, 3); hang(m, 'lm_neonbolt', 12, 3)
 
-    # ---- 4. Starry Studio Light-Well Hardware (Glowing Holographic Totems, Induction Rings & Energy Haze in PIT!) ----
+    # ---- 4. Illuminated Studio Light-Well Hardware (Glowing Holographic Totems, Induction Rings & Energy Haze in PIT!) ----
     abyss_piece(m, 'lm_holo', 1, 4)
     abyss_piece(m, 'lm_steam0', 2, 5)
     abyss_piece(m, 'lm_ring', 3, 5)
@@ -217,28 +220,63 @@ def build_190():
     abyss_piece(m, 'lm_steam1', 18, 5)
     abyss_piece(m, 'lm_ring', 17, 5)
 
-    # ---- 5. Broadcast Rig, Lounge & Framing Props ----
+    # ---- 5. Broadcast Rig, Switchgear Cabinets, Lounge & Framing Props ----
     dress_studio(m, [
-        ('lm_plant', 5, 5), ('lm_couch', 5, 7),
-        ('lm_desk', 13, 5), ('lm_rack', 15, 5), ('lm_gearbox', 15, 7),
+        ('lm_rack', 4, 5), ('lm_couch', 5, 6),
+        ('lm_desk', 13, 5), ('lm_rack', 15, 5), ('lm_gearbox', 16, 6),
         ('lm_bollard', 8, 6), ('lm_bollard', 12, 6),
         ('lm_speaker', 1, 10), ('lm_speaker', 19, 10),
+        ('lm_cam', 18, 8),
         ('lm_gearbox', 2, 11), ('lm_gearbox', 18, 11), ('lm_gearbox', 18, 12),
-        ('lm_plant', 5, 11), ('lm_cam', 15, 10), ('lm_ring', 12, 11),
+        ('lm_plant', 5, 11), ('lm_ring', 7, 12),
         ('lm_bollard', 8, 13), ('lm_bollard', 12, 13),
         ('lm_gearbox', 6, 13), ('lm_gearbox', 14, 13),
     ], seed=3)
 
-    # Dramatic overhead studio spotlights illuminating Door 191, the central TEACH node, and the Door Lamp!
+    # Dramatic overhead studio spotlights illuminating Door 191, light-wells, TEACH nodes, and the Door Lamp!
     m.stamps.append(('cv_shaft', 9, 4))
     m.stamps.append(('pf_glow', 9, 5))
     m.stamps.append(('cv_shaft', 8, 7))
     m.stamps.append(('pf_glow', 8, 8))
     m.stamps.append(('pf_glow', 16, 8))
+    m.stamps.append(('pf_glow', 1, 5))
+    m.stamps.append(('pf_glow', 18, 5))
 
     m.paint()
     paint_deeps(m)
     clean_studio_floor(m)
+
+    # ---- 6. Sleek Glowing Circuit Conduit Floor Tracks & Studio Floor Paneling (100% pas=0, ZERO puzzle interference!) ----
+    # Structured brushed obsidian-vs-slate floor zoning framing the broadcast chamber
+    for y in range(5, 13):
+        for x in range(1, 20):
+            if m.cls[y, x] != '.' or m.L[1, y, x] != 0:
+                continue
+            # Recessed brushed steel-grate pedestal deck banding cleanly north & south of the y=9 TEACH bench!
+            if y in (8, 10) and 3 <= x <= 17:
+                m.L[0, y, x] = P1('lm_grate') if x in (3, 5, 9, 13, 17) else P1('lm_grate_off')
+            elif (x in (4, 16) and 6 <= y <= 11) or (y == 6 and 5 <= x <= 15):
+                m.L[0, y, x] = P1('Z_f2')
+
+    # Glowing recessed brass-cyan circuit telemetry bus tracks (lm_inlay_*) visually wiring:
+    #   (A) Door Lamp (17,9) -> north up x=17 -> west along y=7 -> directly into Door 191 landing (10,5)!
+    #   (B) Generator (2,8) -> north to (3,7) -> east along y=7 -> central studio control aisle!
+    #   (C) Switch pedestals (5,9), (9,9), (13,9) -> south telemetry bus along y=11 connecting Spark, Guide, Drone & Volta!
+    inlay_pts = [
+        # East Lamp-to-Door 191 power telemetry bus (clear visual telegraphing!)
+        (17, 7, 'sw'), (16, 7, 'h'), (15, 7, 'h'), (14, 7, 'h'), (13, 7, 'h'), (12, 7, 'h'),
+        # West Generator-to-Control telemetry bus
+        (3, 7, 'se'), (4, 7, 'h'), (5, 7, 'h'), (6, 7, 'h'), (7, 7, 'h'), (8, 7, 'h'),
+        # Branch drop links from bus y=7 straight into Node pedestals (5,9) & (13,9) and Lamp (17,9)
+        (5, 8, 'v'), (13, 8, 'v'), (17, 8, 'v'),
+        # South studio telemetry bus connecting pedestals down to the foyer/trainer wings (y=11)
+        (3, 11, 'ne'), (4, 11, 'h'), (5, 11, 'h'), (6, 11, 'h'), (7, 11, 'h'), (8, 11, 'h'),
+        (12, 11, 'h'), (13, 11, 'h'), (14, 11, 'h'), (15, 11, 'h'), (16, 11, 'h'), (17, 11, 'nw'),
+        (5, 10, 'v'), (13, 10, 'v'), (17, 10, 'v'),
+    ]
+    for ix, iy, k in inlay_pts:
+        if m.cls[iy, ix] == '.' and m.L[1, iy, ix] == 0:
+            m.L[0, iy, ix] = P1('lm_inlay_' + k)
 
     # Unified royal crimson VIP broadcast runway framing Door 191 (9..11, 6..7) & South Foyer (9..11, 11..14)
     for x in (9, 10, 11):
@@ -246,10 +284,6 @@ def build_190():
     put_carpet(m, 9, 6, 11, 7)
     put_carpet(m, 9, 11, 11, 14)
 
-    # Technical steel floor grates cleanly framing the TEACH puzzle bench (never touching puzzle strip row y=9!)
-    for gx, gy in ((3, 8), (3, 10), (5, 8), (5, 10), (9, 8), (9, 10), (13, 8), (13, 10), (17, 8), (17, 10)):
-        if m.L[1, gy, gx] == 0:
-            m.L[0, gy, gx] = P1('lm_grate')
     return m
 
 

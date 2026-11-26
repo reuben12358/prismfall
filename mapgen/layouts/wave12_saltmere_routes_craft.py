@@ -40,7 +40,7 @@ import passguard as PG
 import rmarshal
 import craftkit as CK
 import routekit as RK
-from terrain import vnoise, NB2AUTO
+from terrain import vnoise, NB2AUTO, nbits
 
 BEFORE_DIR = '/tmp/wave12_before'
 
@@ -876,11 +876,70 @@ def restore_exact_border_seams(Lr, mid, tid):
     return Lr
 
 
+def fix_vauto_l0_w12(L, game, name, clear_l1_when_moving=True):
+    """Consolidate an opaque virtual autotile onto L0 ONLY and recompute exact 48-tile NB2AUTO (0 mismatches!)."""
+    lo = RC.vauto(game, name, 0)
+    hi = lo + 48
+    m0 = (L[0] >= lo) & (L[0] < hi)
+    m1 = (L[1] >= lo) & (L[1] < hi)
+    L[0, m1] = L[1, m1]
+    if clear_l1_when_moving:
+        L[1, m1] = 0
+    mask = m0 | m1
+    ys, xs = np.where(mask)
+    for y, x in zip(ys, xs):
+        L[0, y, x] = lo + NB2AUTO[nbits(mask, int(x), int(y))]
+
+
+def upgrade_saltmere_paving_w12(m, seed=1):
+    """Replace flat-sub0 Saltmere Cobbles & Flags autotiles on L0/L1 with crisp static Gen 5 pavers
+    (`T_f0..3` harbour blue-grey cobblestones & `lm_pave0..3`/`lm_plaza0..1` warm limestone flagstones)
+    so cobbles vs flagstones have sharp architectural contrast with ZERO green grass border bleed & 0 autotile mismatches!"""
+    cob_lo = RC.vauto('pf', 'Saltmere Cobbles', 0)
+    cob_hi = cob_lo + 48
+    flg_lo = RC.vauto('pf', 'Saltmere Flags', 0)
+    flg_hi = flg_lo + 48
+    cob_tiles = [P1('T_f%d' % i) for i in range(4)]
+    flg_tiles = [P1('lm_pave0'), P1('lm_pave1'), P1('lm_pave2'), P1('lm_pave3'), P1('lm_plaza0'), P1('lm_plaza1')]
+    H, W = m.H, m.W
+    for y in range(H):
+        for x in range(W):
+            t0, t1 = int(m.L[0, y, x]), int(m.L[1, y, x])
+            is_cob0 = cob_lo <= t0 < cob_hi
+            is_cob1 = cob_lo <= t1 < cob_hi
+            is_flg0 = flg_lo <= t0 < flg_hi
+            is_flg1 = flg_lo <= t1 < flg_hi
+            if is_cob0 or is_cob1:
+                nz = vnoise(x, y, seed * 17 + 41, 3.2)
+                m.L[0, y, x] = cob_tiles[min(3, int(nz * 3.999))]
+                if is_cob1:
+                    m.L[1, y, x] = 0
+            elif is_flg0 or is_flg1:
+                nz = vnoise(x, y, seed * 23 + 73, 3.6)
+                m.L[0, y, x] = flg_tiles[min(len(flg_tiles) - 1, int(nz * len(flg_tiles) * 0.999))]
+                if is_flg1:
+                    m.L[1, y, x] = 0
+
+
 def save_wave12_map(m, mid, header_comment, tone_override=None):
     """Resolve virtual autotiles, run passguard + exact border seam guard, write .npy & exact HEAD YAML."""
     Lr = RC.resolve(m.L, m.tid).astype(np.int32)
     if mid != 522:
         Lr = restore_exact_border_seams(Lr, mid, m.tid)
+    if mid in (140, 147):
+        # Convert any seam-guard-restored border Cobbles (192..239) / Flags (240..287) to static pavers (identical pas=0, 0 AT mismatches!)
+        cob_p, flg_p = P1('T_f0'), P1('lm_pave0')
+        for z_ in (0, 1):
+            c_m = (Lr[z_] >= 192) & (Lr[z_] < 240)
+            if c_m.any():
+                Lr[0, c_m] = cob_p
+                if z_ == 1:
+                    Lr[1, c_m] = 0
+            f_m = (Lr[z_] >= 240) & (Lr[z_] < 288)
+            if f_m.any():
+                Lr[0, f_m] = flg_p
+                if z_ == 1:
+                    Lr[1, f_m] = 0
 
     _, hspec = load_head_spec_text_and_dict(mid)
     ev_pts = [tuple(e['at']) for e in (hspec.get('events') or []) if e and e.get('at')]
@@ -914,9 +973,10 @@ def save_wave12_map(m, mid, header_comment, tone_override=None):
 # ================================================================================================
 
 def craft_140_saltmere(m):
-    """140 Saltmere — Core City: dressed stone Market Square & Promenade mosaic inlays, Pageant Hall
-    crimson carpet runner, striped awnings, clustered coastal plane-tree groves, textured mineral
-    salt-works with raker carts & bollards, bobbing lake buoys, warm lantern glows & coastal sunbeams."""
+    """140 Saltmere — Core City (Pass 2 Polished): varied High Town townhouse silhouettes with recessed garden
+    nooks & banners, open central Fountain & cobble gathering square with curated diverse market booths,
+    dressed stone Market Square & Promenade mosaic inlays, Pageant Hall crimson carpet runner, curbed lawns,
+    stone-courtyard west verge, textured mineral salt-works, bobbing lake buoys, warm lantern glows & 0 AT mismatches."""
     prot_exact, prot = build_prot_mask(m, 140)
     paves = [P1('lm_pave%d' % i) for i in range(4)]
     plazas = [P1('lm_plaza0'), P1('lm_plaza1'), P1('lm_pave1'), P1('lm_pave2')]
@@ -924,14 +984,61 @@ def craft_140_saltmere(m):
     pave0 = P1('lm_pave0')
     pave3 = P1('lm_pave3')
 
-    # 1. Grand Market Square (22..63, 25..41): crisp dressed limestone border + warm cream plaza + Fountain medallion!
+    # 0. Replace west-border salt cones/crust behind residential houses (0..3, 12..24) with stone courtyard & coastal hedgerow!
+    for y in range(12, 25):
+        for x in range(0, 4):
+            if m.inb(x, y) and not m.cliff[y, x] and not m.taken[y, x] and m.cls[y, x] == 'S':
+                m.cls[y, x] = 'c'
+                m.L[0, y, x] = P1('T_f%d' % ((x + y) % 4))
+                m.L[1, y, x] = 0
+    for wy in (14, 17, 20, 23):
+        put_near_now(m, 'nt_shrub0' if wy % 2 == 0 else 'nt_azalea1', 1, wy, on='cf.', r=1, prot=prot)
+    for wy in (15, 22):
+        put_near_now(m, 'pf_planter0' if wy == 15 else 'pf_planter2', 2, wy, on='cf.', r=1, prot=prot)
+
+    # 0b. Pave the 1-tile green grass slit (23, 15..24) & (26..27, 15..24) flanking Lantern House cleanly into dressed stone alley!
+    for y in range(15, 25):
+        for x in (23, 26, 27):
+            if m.inb(x, y) and m.cls[y, x] == '.' and not m.cliff[y, x] and not (hasattr(m, 'bfoot') and m.bfoot[y, x]):
+                m.cls[y, x] = 'c'
+                m.L[0, y, x] = paves[(x + y) % 4]
+                if not m.taken[y, x]:
+                    m.L[1, y, x] = 0
+
+    # 0c. Curb & dress ALL back-court lawns ((22..42, 14..20), (49..68, 14..22)) and promenade greens so ZERO abrupt grass rectangles touch cobbles!
+    m.grass_var = True
+    m.grass_variation(dark=0.46, worn=False)
+    rng_c = random.Random(14022)
+    FL_140 = K.DECOR_SH['flowers']
+    lawn_cells = (m.cls == '.') & ~m.cliff
+    for y in range(13, 58):
+        for x in range(2, m.W - 2):
+            if not lawn_cells[y, x] or m.taken[y, x] or prot[y, x]:
+                continue
+            near_pave = any(m.cls[y + dy, x + dx] in 'cf' and not m.cliff[y + dy, x + dx]
+                            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)) if m.inb(x + dx, y + dy))
+            if near_pave:
+                # Frame courtyard lawns behind Pageant Hall & PokeCenter with low flowering hedges & planters!
+                if 14 <= y <= 23 and 22 <= x <= 68:
+                    if m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+                        if (x + y) % 3 == 0:
+                            put_stamp_now(m, rng_c.choice(('nt_azalea0', 'nt_azalea1', 'nt_shrub0', 'nt_shrub1')), x, y, on='.', prot=prot)
+                        else:
+                            m.L[1, y, x] = ROSE_TILE if (x + y) % 2 == 0 else rng_c.choice([FL_140[2], FL_140[3], FL_140[6]])
+                elif 51 <= y <= 56:
+                    if m.L[1, y, x] == 0 and rng_c.random() < 0.72:
+                        m.L[1, y, x] = ROSE_TILE if rng_c.random() < 0.5 else rng_c.choice([FL_140[2], FL_140[3], FL_140[6]])
+            elif 14 <= y <= 23 and 22 <= x <= 68 and m.L[1, y, x] == 0 and rng_c.random() < 0.34:
+                m.L[1, y, x] = rng_c.choice([FL_140[2], FL_140[3], ROSE_TILE, FL_140[6]])
+
+    # 1. Grand Market Square (22..63, 25..41): crisp dressed limestone border + open warm cream gathering square!
     paint_plaza_inlay(m, 22, 25, 63, 41, pave0, paves, on_cls='fc', trim_tile=pave3, inset_border=True, seed=1)
-    # Inner warm cream Market Plaza ring around the Fountain (33..52, 27..39)
-    paint_plaza_inlay(m, 33, 27, 52, 39, pave0, warm_cream, on_cls='fc', seed=2)
-    # Central inlaid ashlar frame directly under Fountain dais (38..47, 29..36)
+    # Open central cobble/cream Fountain Gathering Square (32..53, 27..39)
+    paint_plaza_inlay(m, 32, 27, 53, 39, pave0, warm_cream, on_cls='fc', seed=2)
+    # Central inlaid ashlar dais directly around the Fountain (38..47, 29..36)
     paint_plaza_inlay(m, 38, 29, 47, 36, pave3, paves, on_cls='fc', seed=3)
 
-    # 2. Pageant Hall Crimson Carpet Welcome & Fountain Walk Ceremonial Runner (43..46, 42..49) — ZERO cutout holes!
+    # 2. Pageant Hall Crimson Carpet Welcome & Fountain Walk Ceremonial Runner (43..46, 42..49)
     paint_carpet_rect(m, 32, 25, 35, 28, on_cls='fc')
     paint_plaza_inlay(m, 40, 42, 49, 49, pave0, warm_cream, on_cls='fc', seed=4)
     paint_carpet_rect(m, 43, 42, 46, 49, on_cls='fc')
@@ -949,19 +1056,43 @@ def craft_140_saltmere(m):
     paint_plaza_inlay(m, 2, 8, 85, 11, pave0, paves, on_cls='cf', seed=6)
     paint_plaza_inlay(m, 43, 14, 48, 24, pave0, warm_cream, on_cls='cf', seed=7)
 
-    # 5. Striped Awnings over Market Stalls & Shopfronts (Layer 2 overhead)
+    # 5. Striped Awnings strictly over shopfronts (NOT duplicating market stall roofs!)
     add_awnings(m, [
-        (25, 28), (29, 36), (55, 35), (59, 28), (51, 37), (33, 37),
-        (51, 24), (59, 24), (24, 24), (4, 50), (30, 50), (44, 50), (68, 50), (76, 49),
+        (51, 24), (59, 24), (24, 24), (76, 49),
     ])
 
-    # 6. Sculpted Topiaries, Planters, Wrought-Iron Lanterns & Market Life
+    # 6. Recessed High Town Garden/Stair Nooks (breaking up the north wall y=1..8!) + Plaza Life!
     lamp_pts = collect_lamp_positions(m)
+    rw_w, rw_m, rw_e = P1('rw_rail_w'), P1('rw_rail_m'), P1('rw_rail_e')
+    for cx, cy in ((13, 4), (28, 4), (64, 4), (77, 4)):
+        paint_plaza_inlay(m, cx - 2, 2, cx + 2, 7, pave3, warm_cream, on_cls='fc.', seed=cx)
+        for rx in range(cx - 2, cx + 3):
+            if m.inb(rx, 1) and m.L[2, 1, rx] == 0:
+                m.L[2, 1, rx] = rw_w if rx == cx - 2 else rw_e if rx == cx + 2 else rw_m
+        place_grove_now(m, cx, 3, CHERRY_CANOPY if cx in (13, 64) else COAST_CANOPY, count=1, radius=1.2, on='.fc', seed=cx + 140, prot=prot, undergrowth=False)
+        for nm, dx, dy in (('pf_planter0', -2, -1), ('pf_planter2', 2, -1), ('pf_planter0', -1, 2), ('pf_planter2', 1, 2), ('pf_stonebench', 0, 1)):
+            put_near_now(m, nm, cx + dx, 4 + dy, on='fc.', r=1, prot=prot)
+        res = put_near_now(m, 'pf_lantern', cx - 2, 4, on='fc.', r=1, prot=prot, allow_l2_overlap=False)
+        if res:
+            lamp_pts.append((res[0], res[1] + 1))
+
+    # Colorful High Town & Civic Street Banners
     for nm, x, y in (
-        ('lm_topiary', 38, 28), ('lm_topiary', 47, 28), ('lm_topiary', 38, 35), ('lm_topiary', 47, 35),
-        ('lm_topiary', 41, 43), ('lm_topiary', 48, 43), ('lm_topiary', 41, 47), ('lm_topiary', 48, 47),
+        ('lm_banner', 10, 7), ('lm_banner_w', 16, 7), ('lm_banner', 25, 7), ('lm_banner_w', 30, 7),
+        ('lm_banner', 51, 7), ('lm_banner_w', 62, 7), ('lm_banner', 67, 7), ('lm_banner_w', 75, 7),
+        ('lm_banner', 39, 25), ('lm_banner_w', 49, 25),
+    ):
+        put_near_now(m, nm, x, y, on='fc', r=1, prot=prot)
+
+    # Sculpted Planters, Benches, Crates & Open Fountain Square Furnishings (shifted (34,55) -> (36,55) clear of (32,52..55)!)
+    for nm, x, y in (
+        ('pf_planter0', 38, 28), ('pf_planter2', 47, 28), ('pf_planter1', 38, 35), ('pf_planter3', 47, 35),
+        ('pf_planter0', 41, 43), ('pf_planter2', 48, 43), ('pf_planter1', 41, 47), ('pf_planter3', 48, 47),
         ('pf_planter0', 31, 26), ('pf_planter1', 36, 26), ('pf_planter2', 52, 26), ('pf_planter3', 57, 26),
-        ('pf_stonebench', 35, 30), ('pf_stonebench', 49, 30), ('pf_stonebench', 18, 55), ('pf_stonebench', 57, 55),
+        ('lm_planter3', 35, 38), ('lm_planter3', 48, 38), ('pf_planter0', 33, 32), ('pf_planter2', 51, 32),
+        ('pf_stonebench', 35, 30), ('pf_stonebench', 49, 30), ('pf_stonebench', 35, 35), ('pf_stonebench', 49, 35),
+        ('pf_stonebench', 18, 55), ('pf_stonebench', 57, 55), ('pf_stonebench', 36, 55),
+        ('hb_crates4', 28, 32), ('hb_barrels', 56, 33), ('hb_boxes', 55, 36), ('hb_tables', 33, 35),
         ('mn_statue', 42, 41), ('mn_statue', 47, 41),
         ('cv_cart_salt', 21, 66), ('cv_cart_salt', 34, 65), ('cv_cart_salt', 47, 66), ('cv_cart_salt', 77, 66),
         ('hb_salt0', 30, 65), ('hb_salt1', 42, 65), ('hb_salt2', 71, 66),
@@ -969,8 +1100,9 @@ def craft_140_saltmere(m):
         on_c = 'S' if nm in ('cv_cart_salt', 'hb_salt0', 'hb_salt1', 'hb_salt2') else 'fc'
         put_near_now(m, nm, x, y, on=on_c, r=2, prot=prot)
 
+    # Shifted (33,53) lantern -> (35,53) so ZERO collision with street tree (29..31,53..56) or bench (36,55)!
     for lx, ly in ((39, 31), (46, 31), (42, 45), (47, 45), (10, 62), (14, 66), (57, 62), (61, 66),
-                   (32, 66), (75, 66), (17, 53), (33, 53), (53, 53), (75, 53), (43, 19), (48, 19)):
+                   (32, 66), (75, 66), (17, 53), (35, 53), (53, 53), (75, 53), (43, 19), (48, 19)):
         res = put_near_now(m, 'pf_lantern', lx, ly - 2, on='fcS', r=1, prot=prot, allow_l2_overlap=False)
         if res:
             lamp_pts.append((res[0], res[1] + 1))
@@ -984,26 +1116,29 @@ def craft_140_saltmere(m):
         (63, 53.5, 2.8, 1.8, 0.55, 'petal'),
         (43, 33, 9.0, 5.0, 0.08, 'petal'),
         (85, 25, 2.5, 11.0, 0.45, 'wild'),
+        (13, 5, 2.5, 2.0, 0.45, 'petal'),
+        (64, 5, 2.5, 2.0, 0.45, 'petal'),
     ], seed=140)
 
-    # 8. Transform Salt Lake & Brine Pans (textured mineral crust + damp tidal edges + lake buoys!)
-    craft_salt_flats(m, seed=140, pink_keep=0.35, grey_salt=False, prot=prot)
-    enrich_water_zone(m, water_cls='wW', seed=140, lotus=False, shoals=True, glints=True,
+    # 8. Transform Salt Lake & Brine Pans (textured mineral crust + damp tidal edges + lake buoys! No square shoals!)
+    craft_salt_flats(m, seed=140, pink_keep=0.25, grey_salt=False, prot=prot)
+    enrich_water_zone(m, water_cls='wW', seed=140, lotus=False, shoals=False, glints=True,
                       buoys=[('hb_buoy', 6, 63), ('hb_buoy2', 15, 64), ('hb_buoy', 54, 65), ('hb_buoy2', 63, 66)],
                       rocks=[('cs_wrock0', 4, 67), ('cs_wrock1', 64, 63), ('cs_wrock2', 82, 61)],
                       reeds_cls='', prot=prot, glint_density=0.10)
 
-    # 9. Festive Garlands, Warm Golden Lantern Glows & Coastal Sunbeams
+    # 9. Festive Garlands (including Lantern Row!) & Warm Golden Lantern Glows (ZERO outdoor cv_shaft smears!)
     add_festoon_strings(m, [
         (40, 49, 44, 0), (40, 49, 48, 2), (9, 14, 62, 1), (56, 61, 62, 0),
         (43, 48, 17, 1), (31, 40, 29, 2), (46, 55, 29, 0),
+        (6, 20, 9, 1), (24, 38, 9, 0), (54, 68, 9, 2), (72, 84, 9, 1),
     ], kind='garl')
-    add_warm_glows(m, lamp_pts + [
-        (42, 31), (33, 24), (54, 24), (45, 7), (85, 44), (3, 32), (12, 58), (58, 58),
-    ])
-    add_light_shafts(m, [
-        (36, 28), (48, 30), (44, 44), (24, 52), (62, 52), (11, 63), (58, 63), (78, 45),
-    ])
+    add_warm_glows(m, lamp_pts)
+
+    # 10. Upgrade ALL flat-sub0 Cobbles & Flags to crisp static Gen 5 city pavers + recompute water NB2AUTO (0 mismatches!)
+    upgrade_saltmere_paving_w12(m, seed=140)
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Ocean')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Sea deep')
 
 
 def craft_146_harbour(m):
@@ -1107,9 +1242,10 @@ def craft_146_harbour(m):
 
 
 def craft_147_oldtown(m):
-    """147 Saltmere — Old Town: Pell Playhouse crimson theatrical red carpet down the Grand Stair,
-    5x5 golden sunburst medallion in Theatre Square, sculpted statues & topiaries, rose petal drifts,
-    terrace awnings, festival pennant garlands, glowing theatre lamps & golden sunset sunbeams."""
+    """147 Saltmere — Old Town (Pass 2 Polished): Pell Playhouse crimson theatrical red carpet down the Grand
+    Stair, 5x5 golden sunburst medallion in Theatre Square, softened organic courtyard gardens with flower
+    borders & blossom trees, varied historic Mask Row facades, clean promenade planters (ZERO wireframe nets!),
+    organic harbor deep-water bays (ZERO wood shoal debris & 0 AT mismatches!), & eastern pocket terrace."""
     prot_exact, prot = build_prot_mask(m, 147)
     paves = [P1('lm_pave%d' % i) for i in range(4)]
     plazas = [P1('lm_plaza0'), P1('lm_plaza1'), P1('lm_pave1'), P1('lm_pave2')]
@@ -1117,14 +1253,57 @@ def craft_147_oldtown(m):
     pave0 = P1('lm_pave0')
     pave3 = P1('lm_pave3')
 
+    # 0. Pave raw 2x3 grass box wedged between buildings at (10..13, 9..13) into dressed stone alley + courtyard planter!
+    for y in range(9, 14):
+        for x in range(10, 14):
+            if m.inb(x, y) and m.cls[y, x] == '.' and not m.cliff[y, x]:
+                m.cls[y, x] = 'c'
+                m.L[0, y, x] = paves[(x + y) % 4]
+                if not m.taken[y, x]:
+                    m.L[1, y, x] = 0
+                    m.L[2, y, x] = 0
+    put_near_now(m, 'pf_planter0', 11, 10, on='cf', r=1, prot=prot)
+
+    # 0b. Replace floating 3-tile standalone decorative house (72..74, 30..35, 0 events!) with an anchored stone pocket terrace courtyard!
+    ev_in_house = any(72 <= int(e['at'][0]) <= 74 and 30 <= int(e['at'][1]) <= 35 for e in (m.events or []) if e and e.get('at'))
+    if not ev_in_house:
+        prot_exact[30:38, 71:76] = False
+        prot[30:38, 71:76] = False
+        for y in range(30, 36):
+            for x in range(72, 75):
+                m.L[1, y, x] = 0
+                m.L[2, y, x] = 0
+                m.cls[y, x] = 'f'
+                m.taken[y, x] = False
+                if hasattr(m, 'bfoot'):
+                    m.bfoot[y, x] = False
+        paint_plaza_inlay(m, 71, 30, 75, 35, pave3, warm_cream, on_cls='fc', seed=1470)
+        place_grove_now(m, 73, 32, CHERRY_CANOPY, count=1, radius=1.0, on='fc.', seed=1471, prot=prot_exact, undergrowth=False)
+        for nm, gx, gy in (('pf_planter0', 71, 30), ('pf_planter2', 75, 30), ('pf_stonebench', 72, 34)):
+            put_near_now(m, nm, gx, gy, on='fc', r=1, prot=prot_exact)
+
     # 1. Players' Causeway (40..45, 1..6) & Mask Row (y=15..17): organically weathered dressed stone
     paint_plaza_inlay(m, 40, 1, 45, 6, paves, plazas, on_cls='fc', seed=21)
     paint_plaza_inlay(m, 2, 15, 85, 17, paves, paves, on_cls='cf', seed=22)
 
+    # Recessed Mask Row Historic Balcony/Garden Nooks (x=15..18 and x=64..67, y=8..14)
+    lamp_pts = collect_lamp_positions(m)
+    rw_w, rw_m, rw_e = P1('rw_rail_w'), P1('rw_rail_m'), P1('rw_rail_e')
+    for cx in (16, 65):
+        paint_plaza_inlay(m, cx - 2, 8, cx + 2, 14, pave3, warm_cream, on_cls='fc.', seed=cx + 147)
+        for rx in range(cx - 2, cx + 3):
+            if m.inb(rx, 7) and m.L[2, 7, rx] == 0:
+                m.L[2, 7, rx] = rw_w if rx == cx - 2 else rw_e if rx == cx + 2 else rw_m
+        place_grove_now(m, cx, 10, CHERRY_CANOPY, count=1, radius=1.2, on='.fc', seed=cx + 47, prot=prot, undergrowth=False)
+        for nm, dx, dy in (('pf_planter0', -2, -1), ('pf_planter2', 2, -1), ('pf_planter0', -1, 3), ('pf_planter2', 1, 3), ('pf_stonebench', 0, 2)):
+            put_near_now(m, nm, cx + dx, 10 + dy, on='fc.', r=1, prot=prot)
+        res = put_near_now(m, 'pf_lantern', cx - 2, 11, on='fc.', r=1, prot=prot, allow_l2_overlap=False)
+        if res:
+            lamp_pts.append((res[0], res[1] + 1))
+
     # 2. Pell Playhouse Forecourt (18..35, 34..37) + Curtain Lane (y=36..37) + GRAND CRIMSON CARPET!
     paint_plaza_inlay(m, 18, 34, 35, 37, pave3, warm_cream, on_cls='fc', seed=23)
     paint_plaza_inlay(m, 2, 36, 85, 37, paves, paves, on_cls='cf', seed=24)
-    # Seamless Royal Crimson Velvet Carpet from Pell Playhouse Gym door (zero NPC cutout holes!)
     paint_carpet_rect(m, 24, 34, 29, 37, on_cls='fc')
     paint_carpet_rect(m, 57, 36, 60, 37, on_cls='fc')
 
@@ -1139,71 +1318,161 @@ def craft_147_oldtown(m):
     if not placed_sun:
         paint_plaza_inlay(m, 27, 43, 35, 47, pave3, warm_cream, on_cls='fc', seed=26)
 
-    # 4. Seafront Promenade (y=57..59): weathered cream & ashlar seawall walk (asymmetric vnoise!)
+    # 4. Seafront Promenade (y=57..59): weathered cream & ashlar seawall walk
     paint_plaza_inlay(m, 1, 57, 86, 59, paves, plazas, on_cls='f', seed=27)
     for x in range(2, 86):
         if m.cls[59, x] == 'f' and not m.cliff[59, x] and vnoise(x, 59, 1473, 4.2) > 0.46:
             m.L[0, 59, x] = paves[(x * 5 + 2) % 4]
 
-    # 5. Theatre Awnings, Sculpted Statues, Topiaries, Planters & Wrought-Iron Lanterns
+    # 5. Soften ALL Old Town Garden Courts (x0-7 y20-24, x12-17 y21-26, x36..86 y20-26, x20..36 y51-56)!
+    # Layer organic weathered limestone garden paths (`S_floorpatch`) + dappled turf + flower/azalea borders!
+    m.grass_var = True
+    m.grass_variation(dark=0.46, worn=True)
+    garden_stone = np.zeros((m.H, m.W), dtype=bool)
+    for gcx, gcy, grx, gry in ((4, 22, 2.5, 2.0), (15, 23, 2.2, 2.0), (40, 23, 2.8, 2.0),
+                               (57, 23, 3.6, 2.2), (79, 23, 4.2, 2.2), (28, 53, 4.2, 1.8)):
+        for y in range(max(2, int(gcy - gry - 1)), min(m.H - 2, int(gcy + gry + 2))):
+            for x in range(max(1, int(gcx - grx - 1)), min(m.W - 1, int(gcx + grx + 2))):
+                if m.cls[y, x] == '.' and not m.cliff[y, x]:
+                    if ((x - gcx) / grx) ** 2 + ((y - gcy) / gry) ** 2 + 0.35 * (vnoise(x, y, 1478, 2.6) - 0.5) <= 0.72:
+                        garden_stone[y, x] = True
+    paint_floorpatch(m, garden_stone, prefix='S_floorpatch', on_cls='.', prot_exact=prot_exact, smooth=1)
+
+    rng_g = random.Random(14747)
+    FL_147 = K.DECOR_SH['flowers']
+    garden_cells = (m.cls == '.') & ~m.cliff
+    # Rim flower & shrub borders hugging every courtyard garden edge so zero hard bare-lawn rectangles remain!
+    for y in range(2, m.H - 2):
+        for x in range(1, m.W - 1):
+            if not garden_cells[y, x] or m.taken[y, x] or prot[y, x]:
+                continue
+            near_pave = any(m.cls[y + dy, x + dx] in 'cfB' or m.cliff[y + dy, x + dx]
+                            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)) if m.inb(x + dx, y + dy))
+            if near_pave:
+                rv = rng_g.random()
+                if rv < 0.24 and m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+                    put_stamp_now(m, rng_g.choice(('nt_azalea0', 'nt_azalea1', 'nt_azalea2', 'nt_shrub0')), x, y, on='.', prot=prot)
+                elif rv < 0.75 and m.L[1, y, x] == 0:
+                    m.L[1, y, x] = ROSE_TILE if rng_g.random() < 0.55 else rng_g.choice([FL_147[2], FL_147[3], FL_147[6], FL_147[0]])
+            elif m.L[1, y, x] == 0 and rng_g.random() < 0.32:
+                m.L[1, y, x] = rng_g.choice([FL_147[2], FL_147[3], ROSE_TILE, FL_147[6]])
+    # Lush blossom & garden shade clusters + charming courtyard benches/planters inside terraced gardens
+    for gcx, gcy in ((4, 22), (15, 23), (40, 23), (57, 23), (78, 23), (28, 53)):
+        place_grove_now(m, gcx, gcy, CHERRY_CANOPY if gcx in (4, 40, 78) else COAST_CANOPY, count=2, radius=2.2, on='.', seed=gcx + gcy, prot=prot, undergrowth=True)
+        put_near_now(m, 'pf_planter0' if (gcx % 2 == 0) else 'pf_planter2', gcx - 1, gcy + 1, on='.cf', r=2, prot=prot)
+        put_near_now(m, 'pf_stonebench', gcx + 1, gcy + 1, on='.cf', r=2, prot=prot)
+
+    # 6. Theatre Awnings (shopfronts only), Statues, Planters, Theatrical Banners & Clean Promenade Props (ZERO wireframe pf_p_net!)
     add_awnings(m, [
-        (18, 46), (27, 48), (33, 48), (43, 45), (52, 48), (18, 56), (78, 56),
-        (36, 35), (62, 35), (20, 33), (31, 33),
+        (36, 35), (62, 35), (20, 33), (31, 33), (78, 56),
     ])
-    lamp_pts = collect_lamp_positions(m)
     for nm, x, y in (
         ('mn_statue', 22, 34), ('mn_statue', 31, 34), ('mn_statue', 23, 41), ('mn_statue', 30, 41),
-        ('lm_topiary', 20, 35), ('lm_topiary', 33, 35), ('lm_topiary', 55, 35), ('lm_topiary', 61, 35),
-        ('lm_topiary', 16, 42), ('lm_topiary', 40, 42), ('lm_topiary', 20, 49), ('lm_topiary', 39, 49),
+        ('pf_planter0', 20, 35), ('pf_planter2', 33, 35), ('pf_planter1', 55, 35), ('pf_planter3', 61, 35),
+        ('pf_planter0', 16, 42), ('pf_planter2', 40, 42), ('pf_planter1', 20, 49), ('pf_planter3', 39, 49),
         ('pf_planter0', 38, 16), ('pf_planter1', 47, 16), ('pf_planter2', 12, 58), ('pf_planter3', 50, 58),
         ('pf_stonebench', 26, 44), ('pf_stonebench', 37, 45), ('pf_stonebench', 20, 58), ('pf_stonebench', 48, 58),
         ('fw_brazier', 23, 36), ('fw_brazier', 30, 36),
+        # Theatrical banners along Mask Row & Playhouse Forecourt
+        ('lm_banner', 13, 14), ('lm_banner_w', 20, 14), ('lm_banner', 62, 14), ('lm_banner_w', 69, 14),
+        ('lm_banner', 19, 34), ('lm_banner_w', 35, 34),
+        # Dockside barrels, crates, planters, tubs, ropes & anchor along Seafront Quay (replaced floating wireframe pf_p_net!)
+        ('hb_barrels', 9, 58), ('hb_crates4', 14, 58), ('pf_planter0', 26, 57), ('hb_tubs', 34, 57),
+        ('hb_rope', 42, 59), ('hb_barrels', 53, 58), ('pf_planter2', 61, 57), ('hb_fish', 66, 58),
+        ('hb_crates4', 72, 58), ('hb_rope', 82, 59), ('pf_anchor', 59, 56), ('hb_boxes', 4, 58),
     ):
         res = put_near_now(m, nm, x, y, on='fc', r=2, prot=prot)
         if res and nm == 'fw_brazier':
             lamp_pts.append((res[0], res[1]))
 
+    # Mooring bollards along seafront quay lip (y=60, clear of boat steps 56..58!)
+    for bx in (5, 11, 22, 37, 45, 52, 62, 71, 83):
+        if m.inb(bx, 60) and not prot[60, bx] and m.L[2, 60, bx] == 0:
+            m.L[2, 60, bx] = P1('hb_bollard%d' % (bx % 2))
+
     for lx, ly in ((24, 35), (29, 35), (21, 44), (39, 44), (31, 48), (48, 45), (41, 12), (45, 12),
-                   (18, 17), (64, 17), (24, 59), (40, 59), (60, 59), (74, 59)):
+                   (18, 17), (64, 17), (24, 59), (40, 59), (60, 59), (74, 59), (73, 33)):
         res = put_near_now(m, 'pf_lantern', lx, ly - 2, on='fc', r=1, prot=prot, allow_l2_overlap=False)
         if res:
             lamp_pts.append((res[0], res[1] + 1))
 
-    # 6. Theatrical Blossom Groves & Rose Petal Drifts across Theatre Square & Seafront
+    # 7. Theatrical Blossom Groves & Rose Petal Drifts across Gardens, Theatre Square & Seafront
     add_petals_and_flowers(m, [
         (27, 36, 7.0, 2.2, 0.28, 'petal'),
         (32, 45, 14.0, 4.5, 0.16, 'petal'),
         (42, 16, 10.0, 2.0, 0.12, 'petal'),
         (36, 58, 22.0, 1.8, 0.10, 'petal'),
+        (5, 22, 4.5, 3.0, 0.48, 'rose'),
+        (15, 23, 4.0, 3.0, 0.48, 'petal'),
+        (40, 23, 4.5, 3.0, 0.48, 'rose'),
+        (57, 23, 5.5, 3.0, 0.45, 'petal'),
+        (78, 23, 6.5, 3.0, 0.45, 'rose'),
+        (28, 53, 8.0, 2.8, 0.45, 'rose'),
     ], seed=147)
 
-    # 7. Northern Channel & Southern Sea detailing (asymmetric buoys/rocks/glints keep mirror < 11%!)
-    enrich_water_zone(m, water_cls='wW', seed=147, lotus=False, shoals=True, glints=True,
-                      buoys=[('hb_buoy', 15, 65), ('hb_buoy2', 39, 64), ('hb_buoy', 68, 66),
-                             ('hb_buoy2', 23, 3), ('hb_buoy', 61, 3)],
-                      rocks=[('cs_wrock0', 12, 67), ('cs_wrock1', 49, 68), ('cs_wrock2', 76, 67),
-                             ('cs_wrock0', 17, 2), ('cs_wrock1', 66, 2)],
-                      reeds_cls='', prot=prot, glint_density=0.22)
+    # Keep courtyard red carpet (25..28, 41..43) spotless (zero stray petals/artifacts on L1/L2, clean crimson center/border!)
+    paint_carpet_rect(m, 25, 41, 28, 43, on_cls='fc')
+    for cy_c in range(42, 44):
+        for cx_c in range(25, 29):
+            m.L[1, cy_c, cx_c] = 0
+            m.L[2, cy_c, cx_c] = 0
+
+    # 8. Smooth Southern Harbor Deep-Water Bays + Mixed Shoal-Stone Reefs, Buoys, Kelp & Glints (ZERO cs_shoal wood squares!)
+    oc_lo = RC.vauto('rejuvenation', 'Ocean', 0)
+    dp_lo = RC.vauto('rejuvenation', 'Sea deep', 0)
+    for x in range(m.W):
+        deep_y = int(round(66.8 + 1.8 * math.sin(x / 10.5) + 0.9 * math.cos(x / 6.0)))
+        deep_y = max(65, min(70, deep_y))
+        for y in range(62, m.H):
+            if m.cls[y, x] in 'wW':
+                if y >= deep_y:
+                    m.cls[y, x] = 'W'
+                    m.L[0, y, x] = dp_lo
+                    if dp_lo <= int(m.L[1, y, x]) < dp_lo + 48:
+                        m.L[1, y, x] = 0
+                else:
+                    m.cls[y, x] = 'w'
+                    m.L[0, y, x] = oc_lo
+                    if dp_lo <= int(m.L[1, y, x]) < dp_lo + 48:
+                        m.L[1, y, x] = 0
+
+    enrich_water_zone(m, water_cls='wW', seed=147, lotus=False, shoals=False, glints=True,
+                      buoys=[('hb_buoy', 17, 65), ('hb_buoy2', 38, 64), ('hb_buoy', 56, 65), ('hb_buoy2', 69, 66),
+                             ('hb_buoy2', 24, 3), ('hb_buoy', 58, 3)],
+                      rocks=[('cs_wrock0', 7, 68), ('cs_wrockb0', 9, 69), ('cs_wrock1', 28, 67), ('cs_wrock2', 30, 68),
+                             ('cs_wrockb1', 32, 67), ('cs_wrock0', 48, 68), ('cs_wrockb0', 50, 69),
+                             ('cs_wrock1', 79, 68), ('cs_wrock2', 82, 67), ('cs_wrockb1', 84, 69),
+                             ('cs_wrock0', 11, 2), ('cs_wrockb0', 77, 2), ('cs_wrock1', 79, 3), ('cs_wrock2', 81, 2)],
+                      reeds_cls='', prot=prot, glint_density=0.18)
+    # Natural kelp rings around reef clusters ONLY (NO cs_shoal0/cs_shoal1 detached wood squares!)
     rng_w = random.Random(14799)
     GL = [P1('hb_glint%d' % i) for i in range(4)]
+    KELP = [P1('cs_kelp0'), P1('cs_kelp1')]
+    for rx, ry in ((6, 67), (29, 67), (49, 68), (81, 68), (79, 2), (10, 3)):
+        for dy in range(-2, 3):
+            for dx in range(-2, 3):
+                X, Y = rx + dx, ry + dy
+                if m.inb(X, Y) and m.cls[Y, X] in 'wW' and m.L[1, Y, X] == 0 and m.L[2, Y, X] == 0:
+                    if abs(dx) + abs(dy) in (1, 2) and rng_w.random() < 0.35:
+                        m.L[2, Y, X] = rng_w.choice(KELP)
     for y in list(range(0, 7)) + list(range(61, m.H)):
         for x in range(1, m.W - 1):
             if m.cls[y, x] in 'wW' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
-                bias = 0.42 if x > 44 else 0.12
+                bias = 0.34 if x > 44 else 0.12
                 if rng_w.random() < bias:
                     m.L[2, y, x] = rng_w.choice(GL)
 
-    # 8. Festival Pennant Garlands, Theatrical Warm Glows & Golden Sunset Sunbeams
+    # 9. Festival Pennant Garlands & Theatrical Warm Glows (clear of red carpet y=42 & ZERO outdoor cv_shaft smears!)
     add_festoon_strings(m, [
-        (20, 34, 35, 0), (19, 36, 42, 2), (22, 40, 47, 1), (40, 45, 3, 0),
-        (54, 65, 36, 1), (10, 24, 58, 2), (48, 64, 58, 0),
+        (20, 34, 35, 0), (19, 24, 42, 2), (29, 36, 42, 0), (22, 40, 47, 1), (40, 45, 3, 0),
+        (54, 65, 36, 1), (10, 24, 58, 2), (48, 64, 58, 0), (8, 26, 16, 1), (56, 76, 16, 0),
     ], kind='garl')
-    add_warm_glows(m, lamp_pts + [
-        (26, 33), (27, 36), (58, 34), (42, 11), (32, 45), (22, 45), (42, 45), (30, 58), (64, 58),
-    ])
-    add_light_shafts(m, [
-        (26, 33), (33, 43), (21, 44), (58, 34), (42, 13), (18, 57), (54, 57),
-    ])
+    add_warm_glows(m, lamp_pts)
+
+    # 10. Upgrade ALL flat-sub0 Cobbles & Flags to crisp static Gen 5 city pavers + single-layer Sea deep/Ocean NB2AUTO (0 mismatches!)
+    upgrade_saltmere_paving_w12(m, seed=147)
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Sea deep')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Ocean')
 
 
 def craft_522_glassed_orchard(m, r):
@@ -1632,17 +1901,22 @@ def craft_520_ferrymens_mile(m, r):
 
 
 def craft_527_lacecliff_walk(m, r):
-    """527 Lacecliff Walk: chalk cliff arches over sparkling sea, sea-pink thrift carpets,
-    chalk flagstone headlands (`S_floorpatch`), glowing Wrecker's Lamp & Smugglers' Signal Pole,
-    Dew Pond lotus/reeds, cove campfires/shells, coastal buoys & dramatic coastal sunbeams!"""
+    """527 Lacecliff Walk (Pass 2 Polished): sculpted coastal groves across the western meadow, cliffside overlooks
+    with weathered drystone walls & benches, authentic Gen 5 chalk-rock gateways (ZERO MS-Paint arches or lavender
+    S_floorpatch spills!), smooth rounded coastal coves & deep-water contours, varied staggered sea-rock reefs &
+    Wingull chalk stack, sea-pink thrift carpets, Dew Pond lotus/reeds, warm lamp glows & 0 AT mismatches!"""
     extra_rects = [
         (0, 16, 4, 23),      # W->528 seam
         (135, 20, 139, 27),  # E->520 seam
         (74, 42, 82, 50),    # Lost Thread tide-rock neck
-        (40, 10, 47, 17),    # Fallen 3rd arch + Rock Smash rubble
+        (42, 9, 46, 16),     # Collapsed 3rd arch + Rock Smash rubble (43..45, 14) + PEARL (44, 10)
         (95, 7, 114, 10),    # High Down corridor between stairs, Birder, Signal Pole & Dew Pond!
+        (6, 13, 63, 17),     # West Down staggered chalk ledges (y=14..15) + immediate landing rows!
     ]
     prot_exact, prot = build_prot_mask(m, 527, extra_rects=extra_rects)
+    road_prot = prot | np.isin(m.cls, ['u', 'd'])
+    if hasattr(r, 'road_mask'):
+        road_prot |= r.road_mask
     H, W = m.H, m.W
 
     # Fix pre-existing HEAD High Down stair pinch: clear stray bushes blocking (98..99, 8..9) & (112, 9)!
@@ -1652,79 +1926,138 @@ def craft_527_lacecliff_walk(m, r):
             m.L[2, cy, cx] = 0
             m.taken[cy, cx] = False
 
-    # 1. Mottled coastal heath turf depth
+    # 1. Mottled coastal heath turf depth (ZERO lavender S_floorpatch spills on green grass!)
     m.grass_var = True
     m.grass_variation(dark=0.47, worn=True)
 
-    # 2. Chalk Flagstone Headlands (`S_floorpatch`) at Lace Arches, Lacemakers' Bench & Wrecker's Lamp!
-    chalk_mask = np.zeros((H, W), dtype=bool)
-    for cx, cy, rx, ry in (
-        (118, 45, 5.2, 4.0),  # Wrecker's Lamp headland
-        (57, 40, 4.8, 3.5),   # Lacemakers' Bench headland
-        (104, 28, 4.5, 4.0),  # Lace Arch A approach
-        (78, 29, 4.5, 4.0),   # Lace Arch B approach
-        (105, 5, 4.2, 2.6),   # Smugglers' Signal Pole pad
-    ):
-        for y in range(max(2, int(cy - ry - 1)), min(H - 2, int(cy + ry + 2))):
-            for x in range(max(2, int(cx - rx - 1)), min(W - 2, int(cx + rx + 2))):
-                if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 + 0.25 * (vnoise(x, y, 5271, 3.0) - 0.5) <= 1.0:
-                    chalk_mask[y, x] = True
-    paint_floorpatch(m, chalk_mask, prefix='S_floorpatch', on_cls='.ud', prot_exact=prot_exact, smooth=2)
-
-    # 3. Pack northern coastal woods & add windswept coastal pine/blossom clusters
+    # 2. Pack northern coastal woods & transform western meadow (x6..60, y16..39) with scenic coastal groves!
     infill_forest_now(m, seed=527, prot=prot, snow=False)
+    WIND_PINE_GROVE = ['nt_pine_a', 'nt_pine_b', 'nt_dpine_sh', 'nt_teal_a', 'tr_oak2', 'nt_dark_sh', 'nt_round_sh']
     for idx, (cx, cy, pal, cnt, rad, hero) in enumerate([
-        (20, 5, COAST_CANOPY, 4, 2.8, None),
-        (60, 4, COAST_CANOPY, 4, 2.8, None),
-        (132, 6, COAST_CANOPY, 4, 2.8, None),
-        (135, 31, COAST_CANOPY, 4, 2.6, None),
-        (6, 32, COAST_CANOPY, 4, 2.6, None),
-        (74, 12, COAST_CANOPY, 4, 2.6, None),
+        (12, 19, WIND_PINE_GROVE, 7, 3.4, None),
+        (28, 18, WIND_PINE_GROVE, 8, 3.6, None),
+        (48, 18, WIND_PINE_GROVE, 7, 3.4, None),
+        (16, 32, WIND_PINE_GROVE, 8, 3.6, None),
+        (36, 28, WIND_PINE_GROVE, 7, 3.4, None),
+        (48, 32, WIND_PINE_GROVE, 8, 3.6, None),
+        (63, 18, WIND_PINE_GROVE, 6, 3.2, None),
+        (20, 5, COAST_CANOPY, 5, 2.8, None),
+        (60, 4, COAST_CANOPY, 5, 2.8, None),
+        (132, 6, COAST_CANOPY, 5, 2.8, None),
+        (135, 31, COAST_CANOPY, 5, 2.8, None),
+        (6, 32, WIND_PINE_GROVE, 5, 2.8, None),
+        (74, 12, COAST_CANOPY, 5, 2.8, None),
+        (92, 22, WIND_PINE_GROVE, 6, 3.2, None),
     ]):
-        place_grove_now(m, cx, cy, pal, count=cnt, radius=rad, on='.t', seed=idx + 30, hero=hero, prot=prot)
+        place_grove_now(m, cx, cy, pal, count=cnt, radius=rad, on='.t', seed=idx + 30, hero=hero, prot=road_prot, undergrowth=True)
 
-    # 4. Headland Benches, Coastal Lanterns & Cove Camp Details
+    # 3. Weathered Coastal Drystone Walls along road shoulders & cliffside overlooks
+    for y_w, x0_w, x1_w in (
+        (17, 17, 23), (17, 35, 41), (26, 10, 17), (27, 22, 30), (26, 42, 49),
+        (36, 10, 16), (34, 28, 34), (24, 62, 68),
+    ):
+        for xw in range(x0_w, x1_w + 1):
+            nm_w = 'nr_wall_w' if xw == x0_w else 'nr_wall_e' if xw == x1_w else 'nr_wall_m'
+            put_stamp_now(m, nm_w, xw, y_w, on='.t', prot=road_prot)
+
+    # 4. Ground BOTH Arch Gateways (Arch A @ 104,27 & Arch B @ 78,28), Collapsed 3rd Arch, Standing Stones & Cove Props!
     lamp_pts = collect_lamp_positions(m)
     for nm, x, y in (
+        # Ground Arch A (wb_gate @ 102..106, 25..29) into chalk rock crags & coastal gorse hedgerows!
+        ('ck_rock_big', 99, 27), ('ck_rock_big', 107, 27), ('ck_boulder', 100, 29), ('ck_boulder', 107, 29),
+        ('nt_shrub1', 98, 28), ('nt_shrub1', 109, 28), ('nt_azalea0', 100, 25), ('nt_azalea1', 107, 25),
+        # Ground Arch B (sculpted Chalk Cairn & Column Gateway @ 75..81, 26..30) into flanking rock crags & hedges!
+        ('ck_rock_big', 72, 27), ('ck_rock_big', 82, 27), ('ck_boulder', 74, 29), ('ck_boulder', 81, 29),
+        ('nt_shrub1', 71, 28), ('nt_shrub1', 84, 28), ('nt_azalea2', 74, 26), ('nt_azalea0', 81, 26),
+        # Authentic collapsed 3rd arch ruin flanking Rock Smash (44, 14) & PEARL (44, 10)
+        ('nr_ruin', 39, 12), ('nr_col', 41, 13), ('nr_col', 47, 13), ('nr_colfall', 46, 10),
+        ('ck_boulder', 39, 10), ('ck_boulder', 47, 11),
+        # Standing stones & coastal rock outcrops across western heath
+        ('nr_col', 19, 28), ('nr_col', 21, 29), ('nr_colfall', 20, 31),
+        ('nr_col', 52, 28), ('ck_rock_big', 25, 31), ('ck_rock_big', 53, 19),
+        ('ck_boulder', 11, 27), ('ck_boulder', 39, 25), ('ck_boulder', 58, 30),
+        # Cliffside overlook benches, lanterns & cove details
+        ('pf_stonebench', 12, 35), ('pf_stonebench', 30, 34), ('pf_stonebench', 25, 20), ('pf_stonebench', 44, 22),
         ('pf_stonebench', 115, 46), ('hb_barrels', 113, 39), ('hb_crates4', 109, 39),
         ('cs_shell0', 27, 47), ('cs_shell1', 39, 47), ('cs_shell0', 86, 48), ('cs_shell1', 94, 48),
         ('nt_azalea0', 53, 41), ('nt_azalea1', 61, 41), ('nt_azalea2', 114, 43),
+        ('nt_azalea0', 15, 35), ('nt_azalea1', 34, 34), ('nt_azalea2', 22, 26), ('nt_azalea0', 46, 26),
     ):
         on_c = 's' if nm.startswith('cs_') else '.du'
-        put_near_now(m, nm, x, y, on=on_c, r=2, prot=prot)
+        put_near_now(m, nm, x, y, on=on_c, r=2, prot=road_prot if nm not in ('nr_col', 'nr_ruin', 'nr_colfall', 'ck_boulder', 'ck_rock_big') else prot)
 
-    for lx, ly in ((132, 23), (118, 22), (105, 34), (91, 35), (76, 22), (57, 24),
-                   (58, 41), (32, 22), (12, 22), (118, 46), (105, 5)):
-        res = put_near_now(m, 'pf_lantern', lx, ly - 2, on='.du', r=2, prot=prot)
+    for lx, ly in ((132, 23), (118, 22), (102, 31), (106, 31), (76, 31), (80, 31), (91, 35), (76, 22), (57, 24),
+                   (58, 41), (32, 22), (12, 22), (118, 46), (105, 5), (14, 36), (33, 35), (44, 21)):
+        res = put_near_now(m, 'pf_lantern', lx, ly - 2, on='.du', r=2, prot=road_prot)
         if res:
             lamp_pts.append((res[0], res[1] + 1))
 
-    # 5. Dew Pond (113, 6) lotus & reeds + Rich Coastal Sea (shoals, buoys, rocks, glints!)
-    enrich_water_zone(m, water_cls='p', seed=5271, lotus=True, shoals=True, glints=True,
+    # 5. Dew Pond (113, 6) lotus & reeds + Rich Coastal Sea (varied rock reefs, buoys, glints — ZERO cs_shoal squares!)
+    enrich_water_zone(m, water_cls='p', seed=5271, lotus=True, shoals=False, glints=True,
                       reeds_cls='.d', prot=prot)
-    enrich_water_zone(m, water_cls='wW', seed=5272, lotus=False, shoals=True, glints=True,
+    enrich_water_zone(m, water_cls='wW', seed=5272, lotus=False, shoals=False, glints=True,
                       buoys=[('hb_buoy', 18, 52), ('hb_buoy2', 44, 54), ('hb_buoy', 88, 56),
                              ('hb_buoy2', 124, 57)],
-                      rocks=[('cs_wrock0', 6, 54), ('cs_wrock1', 30, 56), ('cs_wrock2', 58, 56),
-                             ('cs_wrock0', 84, 59), ('cs_wrock1', 112, 57), ('cs_wrock2', 135, 58)],
+                      rocks=[('cs_wrock0', 7, 55), ('cs_wrockb0', 14, 57), ('cs_wrock1', 28, 57), ('cs_wrock2', 31, 59),
+                             ('cs_wrock2', 58, 56), ('cs_wrockb1', 62, 58), ('cs_wrock0', 84, 59),
+                             ('cs_wrock1', 102, 56), ('cs_wrock0', 108, 56), ('cs_wrock2', 113, 55), ('cs_wrockb1', 112, 58),
+                             ('cs_wrock2', 134, 57)],
                       reeds_cls='', prot=prot)
 
-    # 6. Iconic Sea-Pink Thrift Hollow (22, 5) & Cliff-Top Wildflower Drifts
+    # Clear any stray cs_shoal0/cs_shoal1 near Cove A boat & pier (28..42, 48..55)
+    sh_ids = {P1('cs_shoal0'), P1('cs_shoal1')}
+    for y in range(48, 56):
+        for x in range(28, 43):
+            if m.inb(x, y) and int(m.L[2, y, x]) in sh_ids:
+                m.L[2, y, x] = 0
+
+    # 6. Iconic Sea-Pink Thrift Hollow (22, 5) & Sweeping Cliff-Top + Overlook Wildflower Drifts
     add_petals_and_flowers(m, [
         (22, 5, 7.0, 3.2, 0.72, 'seapink'),   # Hidden field of sea-pinks!
-        (57, 39, 6.0, 3.5, 0.42, 'seapink'),  # Lacemakers' Bench headland
-        (119, 43, 6.0, 4.5, 0.42, 'seapink'), # Wrecker's Lamp headland
+        (57, 39, 6.0, 3.5, 0.45, 'seapink'),  # Lacemakers' Bench headland
+        (119, 43, 6.0, 4.5, 0.45, 'seapink'), # Wrecker's Lamp headland
+        (13, 36, 5.5, 3.0, 0.48, 'seapink'),  # West cliffside overlook
+        (32, 34, 5.5, 2.8, 0.44, 'seapink'),  # Cove A overlook
+        (21, 22, 6.0, 3.0, 0.38, 'wild'),     # West meadow roadside flowers
+        (43, 24, 6.5, 3.2, 0.40, 'wild'),     # Mid meadow roadside flowers
+        (53, 21, 5.0, 2.8, 0.38, 'seapink'),  # East meadow roadside thrift
         (113, 7, 8.0, 3.5, 0.35, 'wild'),     # High Down Dew Pond
         (46, 9, 7.0, 3.0, 0.32, 'wild'),      # West Down
-        (88, 25, 8.0, 4.0, 0.25, 'seapink'),  # Mid cliff heath
-        (16, 26, 7.0, 4.0, 0.28, 'wild'),     # West cliff road
+        (88, 25, 8.0, 4.0, 0.28, 'seapink'),  # Mid cliff heath
+        (16, 26, 7.0, 4.0, 0.32, 'wild'),     # West cliff road
     ], seed=527)
 
-    # 7. Warm Glows (Wrecker's Lamp, Signal Pole, Cove Campfire, Lamps) & Coastal Sunbeams!
-    add_warm_glows(m, lamp_pts + [(120, 47), (104, 4), (34, 43), (57, 41), (104, 28), (78, 29)])
-    add_light_shafts(m, [
-        (119, 45), (57, 39), (104, 26), (78, 27), (33, 44), (112, 6), (22, 5), (90, 46),
-    ])
+    # 7. Warm Glows ONLY on real lamps/beacons/campfire (ZERO outdoor cv_shaft smears!)
+    add_warm_glows(m, lamp_pts + [(120, 47), (104, 4), (34, 43)])
+
+    # 8. Rebuild ALL coastal & dirt autotiles on a SINGLE layer (L0) with exact 48-tile NB2AUTO (0 mismatches — was 280!)
+    # Smooth away any 1-tile jagged Dirt ('u') spurs around y=28..35 before recomputing NB2AUTO
+    dirt_lo = RC.vauto('rejuvenation', 'Dirt', 0)
+    dirt_hi = dirt_lo + 48
+    dmask = ((m.L[0] >= dirt_lo) & (m.L[0] < dirt_hi)) | ((m.L[1] >= dirt_lo) & (m.L[1] < dirt_hi))
+    # Fill 1-tile holes inside dirt & trim 1-tile isolated dirt speckles (skip protected cells)
+    pad_d = np.pad(dmask, 1, constant_values=False)
+    n4_d = pad_d[:-2, 1:-1].astype(int) + pad_d[2:, 1:-1] + pad_d[1:-1, :-2] + pad_d[1:-1, 2:]
+    for yy, xx in zip(*np.where(dmask & (n4_d == 0) & ~prot)):
+        if dirt_lo <= int(m.L[1, yy, xx]) < dirt_hi:
+            m.L[1, yy, xx] = 0
+        if dirt_lo <= int(m.L[0, yy, xx]) < dirt_hi:
+            m.L[0, yy, xx] = K.SH_GRASS[yy % 2][xx % 2]
+    # Ensure EVERY beach sand cell ('s') has Sand shore on L0 (never hidden Ocean L0 under cove props or cliff bases!)
+    sand_lo = RC.vauto('rejuvenation', 'Sand shore', 0)
+    sand_hi = sand_lo + 48
+    for yy, xx in np.argwhere(m.cls == 's'):
+        m.L[0, yy, xx] = sand_lo
+        if sand_lo <= int(m.L[1, yy, xx]) < sand_hi:
+            m.L[1, yy, xx] = 0
+        if sand_lo <= int(m.L[2, yy, xx]) < sand_hi:
+            m.L[2, yy, xx] = 0
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Dirt')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'DirtDark')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Sea deep')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Sand shore')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Ocean')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Sea(Grass)')
 
 
 def craft_528_marram_down(m, r):
@@ -1836,104 +2169,240 @@ def craft_528_marram_down(m, r):
 
 
 def craft_540_thistledown_lea(m, r):
-    """540 Thistledown Lea: grand overgrown estate meadows & Selvedge river!
-      - 100% preserves S->552 [20..23], E->524 [30..33] (Wave 11 Gossamer Wood!), Ha-ha ditch,
-        Ponyta paddock ledges (30..46, 30), and Stone Bridge (19..24)!
-      - Dressed estate flagstones (`S_floorpatch`), sculpted topiaries/statues & rose beds on Manor Hill
-      - Lush Selvedge River lotus pads, tall reeds, shoals, mossy rocks & islet groves
-      - Mowers' Camp packed earth & glow, lush Bamboo Stand, Gossamer Wood deep-emerald east transition!"""
+    """540 Thistledown Lea (Pass 2 Polished): grand overgrown estate meadows & Selvedge river!
+      - Fixes ALL 3 softlocks: (a) unseals Greavard @ (80,6) & purges orphaned cliff stubs (81..86,4..8);
+        (b) clears porch rail blocker (63,10) & left stair cliff wall (60..62,12..13) for Locked door @ (61,9);
+        (c) clears solid L2 cliff 6105 off Mine mouth warp @ (9,25)!
+      - Replaces E_floorpatch dark mud blobs with clean single-layer RJ DirtDark NB2AUTO (0 mismatches!)
+      - Replaces yellow-box lm_topiary with Gen 5 shrubs/flowerbeds & pulls S_floorpatch clear of cliff edges
+      - Strips outdoor cv_shaft smears, bridge pf_glow (21,51), detached cs_shoal1 (32,49) & stark fw_reeds1!"""
     extra_rects = [
         (18, 59, 25, 63),    # S->552 seam
         (125, 28, 129, 35),  # E->524 Gossamer Wood seam
         (18, 46, 25, 59),    # Old Stone Bridge
         (28, 28, 48, 32),    # Ponyta paddock ledges
-        (80, 1, 93, 25),     # Ha-ha ditch & secret back garden
+        (78, 1, 93, 25),     # Ha-ha ditch & Greavard back garden
         (6, 18, 12, 26),     # Brinecut mine mouth
+        (34, 20, 41, 27),    # Ponyta (36,22) grazing ring & Drover (40,26) approach
+        (59, 9, 68, 15),     # Manor porch + BOTH stairs (61,11..14) & (66..67,11..14)!
     ]
     prot_exact, prot = build_prot_mask(m, 540, extra_rects=extra_rects)
+    road_prot = prot | np.isin(m.cls, ['d', 'u'])
+    if hasattr(r, 'road_mask'):
+        road_prot |= r.road_mask
     H, W = m.H, m.W
+
+    # ---- 0. HARD FIX ALL 3 P0 GAMEPLAY SOFTLOCKS! ----
+    # (a) Mine mouth warp @ (9, 25): clear solid L2 cliff bottom 6105 stamped over pf_minemouth portal!
+    if m.inb(9, 25):
+        m.L[2, 25, 9] = 0
+        m.cliff[25, 9] = False
+    # (b) Locked door @ (61, 9): replace blocking porch rail 5014 (pas=5) at (63, 10) with walk-through rail 4982 (pas=1, Down-only)!
+    if m.inb(63, 10) and int(m.L[2, 10, 63]) == 5014:
+        m.L[2, 10, 63] = 4982
+    # Ensure left terrace stair (61..62, 12..14) & foot landing (61..62, 15) stay completely clear of rock/cliffs!
+    for sy in (12, 13, 14):
+        for sx in (61, 62):
+            if m.inb(sx, sy):
+                m.cliff[sy, sx] = False
+                m.taken[sy, sx] = True
+    for sx in (60, 61, 62):
+        if m.inb(sx, 15):
+            m.L[1, 15, sx] = 0
+            m.L[2, 15, sx] = 0
+            m.cliff[15, sx] = False
+    for sx in (60, 61):
+        if m.inb(sx, 16):
+            m.L[1, 16, sx] = 0
+            m.L[2, 16, sx] = 0
+    # (c) Greavard & Ha-ha back garden (79..87, 3..7): purge any residual cliff stubs & keep walkable dirt garden path clear!
+    cliff_stubs = {6072, 6073, 6075, 6080, 6082, 6083, 6084, 6088, 6089, 6090, 6096, 6097, 6098, 6104, 6105, 6106}
+    for gy in range(3, 8):
+        for gx in range(79, 88):
+            if m.inb(gx, gy):
+                if int(m.L[1, gy, gx]) in cliff_stubs:
+                    m.L[1, gy, gx] = 0
+                if int(m.L[2, gy, gx]) in cliff_stubs:
+                    m.L[2, gy, gx] = 0
+                m.cliff[gy, gx] = False
+    dd_lo = RC.vauto('rejuvenation', 'DirtDark', 0)
+    for gy in (4, 5):
+        for gx in range(80, 87):
+            if m.inb(gx, gy):
+                m.L[0, gy, gx] = dd_lo
+                m.L[1, gy, gx] = 0
+                m.L[2, gy, gx] = 0
+                m.cls[gy, gx] = 'd'
+                m.cliff[gy, gx] = False
 
     # 1. Deep unmown meadow shaded turf variation
     m.grass_var = True
     m.grass_variation(dark=0.46, worn=True)
 
-    # 2. Manor Hill Weathered Limestone Estate Terraces (`S_floorpatch`) & Mowers' Camp (`E_floorpatch`)!
+    # 2. Manor Hill Weathered Limestone Estate Terraces (`S_floorpatch`) kept strictly >= 1 tile clear of ALL cliff walls!
+    cliff_pad = np.pad(m.cliff, 1, constant_values=False)
+    near_cliff = (cliff_pad[:-2, 1:-1] | cliff_pad[2:, 1:-1] | cliff_pad[1:-1, :-2] | cliff_pad[1:-1, 2:] |
+                  cliff_pad[:-2, :-2] | cliff_pad[:-2, 2:] | cliff_pad[2:, :-2] | cliff_pad[2:, 2:] | m.cliff)
     manor_mask = np.zeros((H, W), dtype=bool)
-    for y in range(4, 23):
-        for x in range(52, 81):
-            if m.ht[y, x] >= 1 and not m.cliff[y, x]:
-                d2 = ((x - 66) / 13.5) ** 2 + ((y - 13) / 8.5) ** 2
-                if d2 + 0.25 * (vnoise(x, y, 5401, 3.5) - 0.5) <= 0.92:
+    for y in range(14, 21):
+        for x in range(54, 76):
+            if m.ht[y, x] >= 1 and not near_cliff[y, x] and m.cls[y, x] in '.d':
+                d2 = ((x - 65) / 10.5) ** 2 + ((y - 17) / 3.4) ** 2
+                if d2 + 0.25 * (vnoise(x, y, 5401, 3.5) - 0.5) <= 0.90:
                     manor_mask[y, x] = True
     paint_floorpatch(m, manor_mask, prefix='S_floorpatch', on_cls='.d', prot_exact=prot_exact, smooth=2)
 
+    # Organic worn earth strictly via properly bordered RJ DirtDark (REPLACING ugly square E_floorpatch blobs!)
     earth_mask = np.zeros((H, W), dtype=bool)
     for cx, cy, rx, ry in (
-        (80, 41, 6.2, 4.0),   # Mowers' camp yard
-        (95, 45, 4.5, 3.2),   # Broken mill yard
-        (112, 20, 5.5, 4.2),  # Bamboo stand floor
-        (38, 22, 7.0, 3.5),   # Ponyta paddock run
+        (80, 41, 5.4, 3.4),   # Mowers' camp yard
+        (95, 45, 3.8, 2.6),   # Broken mill yard
     ):
         for y in range(max(2, int(cy - ry - 1)), min(H - 2, int(cy + ry + 2))):
             for x in range(max(2, int(cx - rx - 1)), min(W - 2, int(cx + rx + 2))):
-                if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 + 0.25 * (vnoise(x, y, 5402, 3.0) - 0.5) <= 1.0:
+                if m.cls[y, x] in '.d' and not near_cliff[y, x]:
+                    if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 + 0.25 * (vnoise(x, y, 5402, 3.0) - 0.5) <= 1.0:
+                        earth_mask[y, x] = True
+    # Smooth curved dirt trail junction from main road (112,31) -> (110,27) -> (111,24)
+    curve_pts = [(113.0, 31.5), (111.5, 29.5), (110.2, 27.5), (110.0, 25.5), (111.0, 24.0)]
+    for x in range(107, 116):
+        for y in range(23, 33):
+            if m.cls[y, x] in '.d' and not near_cliff[y, x]:
+                md = min(math.hypot(x - px, y - py) for px, py in curve_pts)
+                if md <= 1.55 + 0.25 * (vnoise(x, y, 5406, 2.5) - 0.5):
                     earth_mask[y, x] = True
-    paint_floorpatch(m, earth_mask, prefix='E_floorpatch', on_cls='.d', prot_exact=prot_exact, smooth=2)
+    # Natural curved paddock grazing track from west drove-way (29, 22) -> (35, 22) -> (39, 25)
+    pad_pts = [(29.5, 22.0), (32.5, 21.5), (35.5, 22.2), (38.0, 23.5), (39.5, 25.0)]
+    for x in range(29, 43):
+        for y in range(20, 27):
+            if m.cls[y, x] in '.d' and not near_cliff[y, x]:
+                md = min(math.hypot(x - px, y - py) for px, py in pad_pts)
+                if md <= 1.65 + 0.3 * (vnoise(x, y, 5407, 2.8) - 0.5):
+                    earth_mask[y, x] = True
+    earth_mask = smooth_bool_mask(earth_mask, np.isin(m.cls, ['.', 'd']) & ~near_cliff, passes=2)
+    for y, x in np.argwhere(earth_mask):
+        if m.L[1, y, x] == 0 or (dd_lo <= int(m.L[1, y, x]) < dd_lo + 48):
+            m.L[0, y, x] = dd_lo
+            if dd_lo <= int(m.L[1, y, x]) < dd_lo + 48:
+                m.L[1, y, x] = 0
 
-    # 3. Pack forest rim & place rich estate/meadow/Gossamer-edge canopy groves!
+    # 3. Pack forest rim & place cohesive multi-tree estate groves framing clear sunlit meadows!
     infill_forest_now(m, seed=540, prot=prot, snow=False)
+    ESTATE_GROVE = ['tr_oak2', 'tr_oak', 'nt_dark_sh', 'nt_teal_a', 'nt_olive', 'nt_round_sh']
     for idx, (cx, cy, pal, cnt, rad, hero) in enumerate([
-        (119, 12, GOSSAMER_EDGE, 6, 3.5, 'pf_g_tree2'),
-        (124, 46, GOSSAMER_EDGE, 5, 3.0, 'pf_g_tree2'),
-        (6, 40, SPRING_CANOPY, 4, 2.8, None),
-        (36, 6, CHERRY_CANOPY, 5, 3.0, None),
-        (14, 8, SPRING_CANOPY, 4, 2.8, None),
-        (50, 46, SPRING_CANOPY, 4, 2.6, None),
-        (100, 46, SPRING_CANOPY, 4, 2.6, None),
+        (119, 12, GOSSAMER_EDGE, 8, 3.8, 'pf_g_tree2'),
+        (124, 46, GOSSAMER_EDGE, 7, 3.4, 'pf_g_tree2'),
+        (7, 40, ESTATE_GROVE, 7, 3.4, None),
+        (36, 7, CHERRY_CANOPY, 7, 3.4, None),
+        (15, 9, ESTATE_GROVE, 6, 3.2, None),
+        (49, 46, ESTATE_GROVE, 7, 3.4, None),
+        (100, 46, ESTATE_GROVE, 6, 3.2, None),
+        (24, 13, ESTATE_GROVE, 6, 3.2, None),
+        (102, 13, GOSSAMER_EDGE, 6, 3.2, None),
+        (116, 44, GOSSAMER_EDGE, 6, 3.2, None),
+        (68, 45, ESTATE_GROVE, 5, 2.8, None),
         (70, 53, CHERRY_CANOPY, 2, 1.8, None),   # River islet 1 shade!
         (104, 54, SPRING_CANOPY, 2, 1.6, None),  # River islet 2 shade!
     ]):
-        place_grove_now(m, cx, cy, pal, count=cnt, radius=rad, on='.t', seed=idx + 50, hero=hero, prot=prot)
+        place_grove_now(m, cx, cy, pal, count=cnt, radius=rad, on='.t', seed=idx + 50, hero=hero, prot=road_prot, undergrowth=True)
 
-    # 4. Manor Topiary Garden Statues, Rose Hedges, Bamboo Reinforcement & Antique Estate Lanterns!
+    # 4. Lived-In Pastoral Ponyta Paddock (x29-46, y17-27): hay bales, trough, fruit trees, crates, wagon & aligned east rail!
+    # (Removed disconnected west stub at (29, 25..26) and anchored ledge ends cleanly with shrubs!)
+    pal_v = P1('fw_pal_v')
+    for py_ in range(18, 27):
+        if m.inb(47, py_) and m.cls[py_, 47] == '.' and not m.taken[py_, 47] and not prot[py_, 47] and m.L[1, py_, 47] == 0:
+            m.L[1, py_, 47] = pal_v
+            m.taken[py_, 47] = True
+    # Ground paddock ledge corners at (29, 30) & (47, 30) with natural mossy boulders/shrubs
+    for gx, gy, nm in ((29, 30, 'nt_boulder'), (47, 30, 'nt_boulder'), (29, 28, 'nt_shrub0')):
+        if m.inb(gx, gy) and not prot[gy, gx]:
+            put_near_now(m, nm, gx, gy, on='.t', r=1, prot=prot)
+    # Paddock shade fruit trees in NW & NE corners (off grazing ring & events!)
+    place_grove_now(m, 44, 19, ['tr_pink', 'nt_blossom', 'tr_oak2'], count=2, radius=1.8, on='.', seed=5401, prot=road_prot, undergrowth=False)
+    place_grove_now(m, 31, 25, ['nt_blossom', 'tr_oak2'], count=1, radius=1.2, on='.', seed=5402, prot=road_prot, undergrowth=False)
+    if put_stamp_now(m, 'mn_trough_l', 33, 18, on='.', prot=road_prot):
+        put_stamp_now(m, 'mn_trough_r', 34, 18, on='.', prot=road_prot)
+    for nm, x, y in (
+        ('pf_hayrick', 30, 18), ('pf_hayrick', 44, 18), ('pf_hayrick', 42, 24),
+        ('pf_wagon', 43, 21), ('hb_crates4', 30, 20), ('hb_barrels', 45, 23),
+        ('hb_post1', 36, 18), ('hb_post1', 40, 18), ('pf_logbench', 31, 25),
+        ('nt_azalea0', 29, 24), ('nt_azalea1', 45, 26),
+    ):
+        put_near_now(m, nm, x, y, on='.d', r=1, prot=road_prot)
+
+    # 5. Manor Garden Statues, Lush Gen 5 Azalea/Shrub Hedges (REPLACED yellow-box lm_topiary!), Bamboo & Estate Lanterns!
     lamp_pts = collect_lamp_positions(m)
     for nm, x, y in (
-        ('mn_statue', 61, 16), ('mn_statue', 70, 16), ('lm_topiary', 55, 13), ('lm_topiary', 77, 13),
-        ('lm_topiary', 60, 12), ('lm_topiary', 72, 12), ('pf_stonebench', 61, 18), ('pf_stonebench', 70, 18),
+        ('mn_statue', 63, 16), ('mn_statue', 70, 16),
+        ('nt_azalea0', 55, 14), ('nt_azalea1', 76, 14), ('nt_shrub0', 69, 14), ('nt_shrub1', 55, 16),
+        ('pf_stonebench', 61, 18), ('pf_stonebench', 70, 18),
         ('pf_planter0', 62, 23), ('pf_planter1', 68, 23), ('pf_hayrick', 74, 40), ('pf_hayrick', 85, 42),
         ('hb_barrels', 92, 46), ('hb_crates4', 98, 46), ('pf_logbench', 35, 38),
-        ('pf_bamboo', 109, 20), ('pf_bamboo', 115, 19), ('pf_bamboo', 117, 21), ('pf_bamboo', 111, 14),
+        ('pf_bamboo', 109, 19), ('pf_bamboo', 115, 19), ('pf_bamboo', 117, 21), ('pf_bamboo', 111, 14),
+        ('pf_bamboo', 107, 20), ('pf_bamboo', 114, 21),
     ):
-        put_near_now(m, nm, x, y, on='.dt', r=2, prot=prot)
+        put_near_now(m, nm, x, y, on='.dt', r=2, prot=road_prot)
 
     for lx, ly in ((24, 46), (24, 59), (38, 35), (56, 33), (63, 25), (67, 25), (64, 15),
-                   (70, 15), (78, 34), (96, 35), (114, 31), (124, 31), (14, 30)):
-        res = put_near_now(m, 'pf_lantern', lx, ly - 2, on='.d', r=2, prot=prot)
+                   (70, 15), (78, 34), (96, 35), (114, 31), (124, 31), (14, 30), (31, 23)):
+        res = put_near_now(m, 'pf_lantern', lx, ly - 2, on='.d', r=2, prot=road_prot)
         if res:
             lamp_pts.append((res[0], res[1] + 1))
 
-    # 5. River Selvedge: lush lotus pads, tall reeds, shoals, mossy river boulders & sparkling glints!
-    enrich_water_zone(m, water_cls='w', seed=540, lotus=True, shoals=True, glints=True,
+    # 6. River Selvedge: bank- & islet-hugging organic lily-pad clusters (NO cs_shoal1 wood squares, NO stark white fw_reeds1!)
+    enrich_water_zone(m, water_cls='w', seed=540, lotus=False, shoals=False, glints=True,
                       rocks=[('cs_wrock0', 10, 52), ('cs_wrock1', 35, 54), ('cs_wrock2', 52, 52),
                              ('cs_wrock0', 84, 53), ('cs_wrock1', 116, 54)],
-                      reeds_cls='.d', prot=prot)
+                      reeds_cls='', prot=prot, glint_density=0.05)
+    # Clear any stray cs_shoal0/1, stark fw_reeds tiles, or water rocks overlapping the Old Stone Bridge (x=19..23)!
+    bad_river = {P1('cs_shoal0'), P1('cs_shoal1'), 19265, 19266, 19267, 19268}
+    for y in range(44, H):
+        for x in range(W):
+            if int(m.L[1, y, x]) in bad_river:
+                m.L[1, y, x] = 0
+            if int(m.L[2, y, x]) in bad_river:
+                m.L[2, y, x] = 0
+    m.L[2, 47:58, 19:24] = 0
+    # Cluster lily pads organically near calm river banks & islet coves ONLY (clear central channel!)
+    rng_lot = random.Random(54099)
+    lotus_coves = [
+        (13, 50, 3.2, 1.8), (39, 50, 3.5, 1.8), (67, 52, 4.0, 2.2),
+        (74, 54, 3.8, 2.0), (101, 53, 3.5, 2.0), (108, 55, 3.2, 1.8),
+        (56, 56, 3.4, 1.6), (89, 51, 3.2, 1.8), (121, 52, 3.5, 1.8),
+    ]
+    for lcx, lcy, lrx, lry in lotus_coves:
+        for y in range(max(2, int(lcy - lry - 1)), min(H - 2, int(lcy + lry + 2))):
+            for x in range(max(2, int(lcx - lrx - 1)), min(W - 2, int(lcx + lrx + 2))):
+                if m.cls[y, x] != 'w' or m.L[1, y, x] != 0 or m.L[2, y, x] != 0 or prot[y, x]:
+                    continue
+                near_bank = any(m.cls[y + dy, x + dx] != 'w'
+                                for dy in range(-2, 3) for dx in range(-2, 3)
+                                if m.inb(x + dx, y + dy))
+                if not near_bank:
+                    continue
+                d2 = ((x - lcx) / lrx) ** 2 + ((y - lcy) / lry) ** 2
+                if d2 <= 1.0 and rng_lot.random() < 0.62 * (1.0 - 0.45 * d2):
+                    m.L[2, y, x] = rng_lot.choice(LOTUS_TILES)
 
-    # 6. Sweeping Unmown Wildflower Ribbons, Manor Roses & Bamboo/Orchard Petals!
+    # 7. Sweeping Unmown Wildflower Ribbons, Paddock Clumps, Manor Roses & Bamboo/Orchard Petals!
     add_petals_and_flowers(m, [
         (66, 15, 13.0, 6.0, 0.35, 'rose'),    # Overgrown Thistledown Manor rose garden!
-        (38, 22, 8.0, 5.0, 0.32, 'wild'),     # Ponyta wildflower paddock
+        (33, 19, 4.5, 2.0, 0.48, 'wild'),     # Ponyta paddock north fence flowers
+        (42, 26, 4.8, 1.8, 0.46, 'wild'),     # Ponyta paddock south fence flowers
         (46, 44, 11.0, 4.0, 0.38, 'wild'),    # Unmown south meadows
         (88, 42, 10.0, 5.0, 0.30, 'petal'),   # Mowers' meadow petals
-        (112, 20, 7.0, 5.0, 0.28, 'petal'),   # Bamboo stand drifting leaves/petals
+        (111, 21, 5.5, 4.0, 0.32, 'petal'),   # Bamboo stand drifting leaves/petals
+        (110, 27, 4.0, 2.5, 0.36, 'wild'),    # Curved Bamboo trail junction border
         (118, 34, 8.0, 6.0, 0.30, 'rose'),    # Gossamer Wood border glade
         (18, 38, 7.0, 5.0, 0.35, 'wild'),     # West river lea
     ], seed=540)
 
-    # 7. Warm Antique Lantern Glows & Golden Estate Sunbeams!
-    add_warm_glows(m, lamp_pts + [(66, 10), (78, 41), (21, 52), (94, 44), (9, 22)])
-    add_light_shafts(m, [
-        (66, 11), (21, 51), (80, 40), (38, 21), (112, 20), (124, 31), (52, 36), (95, 45),
-    ])
+    # 8. Warm Antique Lantern Glows ONLY on real lamps & Mowers' campfire (ZERO outdoor cv_shaft & ZERO orphaned bridge glow (21,51)!)
+    add_warm_glows(m, lamp_pts + [(78, 41)])
+
+    # 9. Consolidate ALL RJ DirtDark onto L0 ONLY & recompute exact 48-tile NB2AUTO (0 mismatches — was 47!)
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'DirtDark')
+    fix_vauto_l0_w12(m.L, 'rejuvenation', 'Sea(Grass)')
 
 
 def craft_541_grey_saltings(m, r):
@@ -2056,11 +2525,173 @@ def run_saltmere_map(mid):
     import saltmere_rj as SM
     captured = {}
     orig_write = K.RMap.write
+    orig_stamp = K.RMap.stamp
+    orig_can_tree = K.RMap.can_tree
+    orig_put = SM.put
+    orig_block = SM.block
+    orig_props = SM.props
+    orig_boats = SM.boats
+    orig_gardens = SM.gardens
+    orig_street_trees = SM.street_trees
 
     def intercept_write(self, m_id, head, comment=''):
         captured['m'] = self
         captured['head'] = head
         return self.L
+
+    # Scoped architectural, tree & plaza upgrades ONLY for 140 & 147 (146 stays 100% untouched!)
+    if mid in (140, 147):
+        # Replace broken off-by-1 `tr_teal` stamp transparently with symmetric `nt_teal_a` (ZERO rstamps.yaml edits!)
+        def stamp_clean_teal(self, name, *args, **kw):
+            if name == 'tr_teal':
+                name = 'nt_teal_a'
+            return orig_stamp(self, name, *args, **kw)
+
+        def can_tree_clean_teal(self, name, *args, **kw):
+            if name == 'tr_teal':
+                name = 'nt_teal_a'
+            return orig_can_tree(self, name, *args, **kw)
+
+        def street_trees_clean(m, pts, kinds=('tr_oak2', 'tr_oak', 'nt_teal_a')):
+            clean_k = tuple('nt_teal_a' if k == 'tr_teal' else k for k in kinds)
+            return orig_street_trees(m, pts, kinds=clean_k)
+
+        K.RMap.stamp = stamp_clean_teal
+        K.RMap.can_tree = can_tree_clean_teal
+        SM.street_trees = street_trees_clean
+
+    if mid == 140:
+        WARM_TERR = ['th_a', 'th_c', 'th_d', 'th_w', 'th_j', 'sp_bake']
+        SLATE_TEAL = ['th_f', 'th_g', 'th_h', 'th_ad', 'th_k', 'sp_books', 'th_o']
+        TIMBER_PLUM = ['th_m', 'th_r', 'th_s', 'th_t', 'th_u', 'th_v', 'th_ae', 'th_n', 'sp_cafe', 'sp_cost']
+
+        def put_140(m, n, x, y, link=None, dname=None):
+            # Pull vertically sheared edge watchtowers inward >= 1 tile off x=0 / x=87 (keeping West Gate sign [3,30] clear!)
+            if n == 'gt_tower' and x == 0 and y == 25:
+                return orig_put(m, n, 1, 24, link, dname)
+            if n == 'gt_tower' and x == 0 and y == 35:
+                return orig_put(m, n, 1, 35, link, dname)
+            if n == 'gt_tower' and x == 85 and y in (38, 48):
+                return orig_put(m, n, 84, y, link, dname)
+            # Replace glitched upper-roof `th_af` at (24,17) with clean 3x8 `th_l` (exact same door [25,24]!)
+            if n == 'th_af' and x == 24 and y == 17:
+                return orig_put(m, 'th_l', 24, 17, link, dname)
+            return orig_put(m, n, x, y, link, dname)
+
+        def block_140(m, x0, x1, ytop, yb, pool, seed, alley_every=14, setback=0.15):
+            # Break the monotonous edge-to-edge north townhouse wall (y=0..7) into varied height/color segments + recessed garden nooks!
+            if ytop == 0 and yb == 7 and x0 == 0 and x1 == 39:
+                orig_block(m, 0, 10, 0, 7, WARM_TERR + SLATE_TEAL, 111, alley_every=0, setback=0.45)
+                m.rect(11, 1, 5, 7, 'f', only='T.c')
+                orig_block(m, 16, 25, 0, 7, TIMBER_PLUM + SLATE_TEAL, 112, alley_every=0, setback=0.40)
+                m.rect(26, 1, 4, 7, 'f', only='T.c')
+                orig_block(m, 30, 39, 0, 7, WARM_TERR + TIMBER_PLUM, 113, alley_every=0, setback=0.40)
+                return
+            if ytop == 0 and yb == 7 and x0 == 52 and x1 == 87:
+                orig_block(m, 52, 61, 0, 7, SLATE_TEAL + TIMBER_PLUM, 121, alley_every=0, setback=0.45)
+                m.rect(62, 1, 5, 7, 'f', only='T.c')
+                orig_block(m, 67, 74, 0, 7, WARM_TERR + SLATE_TEAL, 122, alley_every=0, setback=0.40)
+                m.rect(75, 1, 5, 7, 'f', only='T.c')
+                orig_block(m, 80, 87, 0, 7, TIMBER_PLUM + WARM_TERR, 123, alley_every=0, setback=0.45)
+                return
+            return orig_block(m, x0, x1, ytop, yb, pool, seed, alley_every=alley_every, setback=setback)
+
+        def props_140(m, items, on='cf', r=2):
+            # Break cloned market stalls, pull gl_tables off Pageant crimson carpet, give pf_well clearance, drop west salt cones!
+            stall_map = {
+                ('pf_stall4', 25, 29): ('fw_stall_e', 24, 28),
+                ('pf_stall3', 25, 32): ('lm_stall_b', 25, 33),
+                ('pf_stall1', 29, 37): ('lm_kiosk', 28, 37),
+                ('pf_stall0', 25, 36): None,   # open SW plaza corner!
+                ('pf_stall2', 33, 38): None,   # open south central gathering square!
+                ('pf_stall1', 59, 29): ('fw_stall_i', 58, 28),
+                ('pf_stall0', 59, 33): ('lm_stall_a', 59, 33),
+                ('pf_stall4', 51, 38): ('lm_stall_c', 52, 38),
+                ('pf_stall2', 55, 36): None,   # open SE plaza corner!
+                ('pf_stall3', 59, 37): None,   # open east market walkway!
+                # Pull stall/table off Pageant Hall red carpet (32..35, 25..28) & give well 1-tile clearance!
+                ('gl_tables', 33, 28): ('gl_tables', 33, 31),
+                ('pf_well', 30, 26): ('pf_well', 28, 27),
+                # Remove bizarre west-border salt cones behind residential houses (0..3, 15..25)
+                ('hb_salt0', 1, 15): None,
+                ('hb_salt1', 0, 20): None,
+                # Promenade stalls: genuine mix of awnings/kiosks/craft booth
+                ('pf_stall1', 4, 51): ('lm_kiosk', 4, 51),
+                ('pf_stall0', 30, 51): ('lm_stall_a', 30, 51),
+                ('pf_stall2', 44, 51): ('lm_stall_c', 45, 51),
+                ('pf_stall3', 68, 51): ('fw_stall_e', 68, 50),
+            }
+            new_items = []
+            for it in items:
+                if it in stall_map:
+                    rep = stall_map[it]
+                    if rep is not None:
+                        new_items.append(rep)
+                else:
+                    new_items.append(it)
+            return orig_props(m, tuple(new_items), on=on, r=r)
+
+        def gardens_140(m, seed, trees=('tr_oak', 'tr_oak2', 'nt_teal_a', 'tr_pink', 'tr_oak')):
+            clean_t = tuple('nt_teal_a' if t == 'tr_teal' else t for t in trees)
+            return orig_gardens(m, seed, trees=clean_t)
+
+        SM.put = put_140
+        SM.block = block_140
+        SM.props = props_140
+        SM.gardens = gardens_140
+
+    elif mid == 147:
+        OLD_HIST_A = ['th_m', 'th_r', 'th_f', 'th_d', 'th_v', 'sp_cafe', 'th_a', 'th_h']
+        OLD_HIST_B = ['th_ad', 'th_g', 'th_s', 'th_w', 'th_ae', 'sp_books', 'th_q', 'th_c']
+
+        def block_147(m, x0, x1, ytop, yb, pool, seed, alley_every=14, setback=0.15):
+            # Vary historic Mask Row facades (y=7..14) with height/color rhythm + 2 recessed garden/balcony nooks!
+            if ytop == 7 and yb == 14 and x0 == 0 and x1 == 36:
+                orig_block(m, 0, 13, 7, 14, OLD_HIST_A, 141, alley_every=0, setback=0.40)
+                m.rect(14, 8, 5, 7, 'f', only='T.c')
+                orig_block(m, 19, 36, 7, 14, OLD_HIST_B, 142, alley_every=10, setback=0.35)
+                return
+            if ytop == 7 and yb == 14 and x0 == 49 and x1 == 87:
+                orig_block(m, 49, 62, 7, 14, OLD_HIST_B, 143, alley_every=0, setback=0.40)
+                m.rect(63, 8, 5, 7, 'f', only='T.c')
+                orig_block(m, 68, 87, 7, 14, OLD_HIST_A, 144, alley_every=11, setback=0.35)
+                return
+            return orig_block(m, x0, x1, ytop, yb, pool, seed, alley_every=alley_every, setback=setback)
+
+        def gardens_147(m, seed, trees=('tr_oak', 'tr_oak2', 'nt_teal_a', 'tr_pink', 'tr_oak')):
+            # Soften all hard rectangular garden lawn boxes into organic chamfered courtyard gardens! (Zero tr_teal!)
+            clean_t = tuple('nt_teal_a' if t == 'tr_teal' else t for t in trees)
+            res = orig_gardens(m, seed, trees=clean_t)
+            for _ in range(2):
+                dot = (m.cls == '.')
+                to_cobble = []
+                for y in range(1, m.H - 1):
+                    for x in range(1, m.W - 1):
+                        if not dot[y, x] or m.taken[y, x] or m.cliff[y, x]:
+                            continue
+                        n4 = int(dot[y - 1, x]) + int(dot[y + 1, x]) + int(dot[y, x - 1]) + int(dot[y, x + 1])
+                        if n4 <= 2 or (n4 == 3 and vnoise(x, y, 1477, 2.8) > 0.68):
+                            to_cobble.append((x, y))
+                for x, y in to_cobble:
+                    m.cls[y, x] = 'c'
+            return res
+
+        def boats_147(m, items):
+            # Replace cloned rowboats & cloned ak_boulder sea-rock with varied moored vessels + crisp chalk headland rock!
+            varied = (
+                ('ck_rock_big', 3, 66),
+                ('fw_boat', 11, 63),
+                ('hb_boat2', 59, 63),
+                ('hb_wheelhouse', 76, 63),
+                ('fw_boat', 71, 65),
+                ('fw_boat', 15, 2),
+                ('hb_boat4', 66, 2),
+            )
+            return orig_boats(m, varied)
+
+        SM.block = block_147
+        SM.gardens = gardens_147
+        SM.boats = boats_147
 
     K.RMap.write = intercept_write
     try:
@@ -2072,6 +2703,14 @@ def run_saltmere_map(mid):
             SM.build_147(None)
     finally:
         K.RMap.write = orig_write
+        K.RMap.stamp = orig_stamp
+        K.RMap.can_tree = orig_can_tree
+        SM.put = orig_put
+        SM.block = orig_block
+        SM.props = orig_props
+        SM.boats = orig_boats
+        SM.gardens = orig_gardens
+        SM.street_trees = orig_street_trees
 
     m = captured['m']
     if mid == 140:
@@ -2119,7 +2758,15 @@ def run_route_map(mid):
     import routes_craft as RCRAFT
     captured = {}
     orig_rwrite = RK.Route.write
+    orig_finish_plan = RK.Route.finish_plan
+    orig_near = RK.Route.near
     orig_orchard = RE.orchard_rows
+    orig_stamp = K.RMap.stamp
+    orig_water_stamp = CK.water_stamp
+    orig_smooth_sea = CK.smooth_sea
+    orig_fringe = CK.fringe
+    orig_woods = CK.woods
+    orig_ledge = CK.ledge
 
     def intercept_rwrite(self, head, fname, comment, preview=None):
         m = self.m
@@ -2135,6 +2782,234 @@ def run_route_map(mid):
     RK.Route.write = intercept_rwrite
     if mid == 521:
         RE.orchard_rows = organic_orchard_rows
+    elif mid == 527:
+        # 527 Lacecliff Walk Pass-2 hooks:
+        # - Ground cliffs at (76..81, 41..45) cleanly onto sand meeting Tide-rock neck (y=46) (zero cliffs floating over cyan water!)
+        # - Smooth jagged Cove A/B shoreline teeth
+        # - Break 60-tile ruler-straight West Down wall into organic staggered chalk ledges sealed with boulders
+        # - Replace flat concrete pf_lacearch/pf_chalkarch with Gen 5 wb_gate & Chalk Cairn/Column Gateway
+        # - Keep cove props off cliff tops/faces (eliminates (40,42) cliff-top rope & (26..29,43) floating plank puddle!)
+        # - Replace 4 cloned sea rocks + flat pf_seastack cone with varied rock species/depths & pull boat off jetty!
+        def finish_plan_527(self, border=3):
+            m_ = self.m
+            # 1. Bring cliff lip at x=76..80 cleanly down to y=43 (matching x=81) so cliff base (y=45) meets Tide-rock sand neck (y=46)!
+            m_.ht[42:44, 76:81] = 1
+            m_.cls[43, 76:81] = '.'
+            m_.cls[44:47, 76:82] = 's'
+            m_.cls[47, 75:77] = 's'
+            m_.cls[47:, 77:81] = 'w'
+            # 2. Smooth 1-tile jagged sand/water shoreline teeth in Cove A (20..44) & Cove B (81..102)
+            for _ in range(2):
+                prev = m_.cls.copy()
+                for x0_, x1_ in ((20, 44), (81, 102)):
+                    for y_ in range(45, m_.H - 2):
+                        for x_ in range(x0_, x1_ + 1):
+                            if m_.ht[y_, x_] > 0 or prev[y_, x_] not in ('s', 'w'):
+                                continue
+                            if y_ == 46 and 74 <= x_ <= 83:
+                                continue
+                            ns = sum(1 for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)) if prev[y_ + dy, x_ + dx] == 's')
+                            nw = sum(1 for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)) if prev[y_ + dy, x_ + dx] in ('w', 'W'))
+                            if prev[y_, x_] == 's' and nw >= 3:
+                                m_.cls[y_, x_] = 'w'
+                            elif prev[y_, x_] == 'w' and ns >= 3:
+                                m_.cls[y_, x_] = 's'
+            return orig_finish_plan(self, border=border)
+
+        def ledge_527(r, x0, x1, y, chalk=False, face=None):
+            m_ = r.m
+            if chalk and x0 == 6 and x1 == 40 and y == 15:
+                orig_ledge(r, 6, 15, 14, chalk=True, face=face)
+                orig_ledge(r, 18, 28, 15, chalk=True, face=face)
+                orig_ledge(r, 31, 40, 14, chalk=True, face=face)
+                for bx in (16, 29):
+                    m_.cls[14:16, bx:bx + 2] = '.'
+                    m_.taken[14:16, bx:bx + 2] = False
+                    orig_stamp(m_, 'ck_boulder', bx, 14, mark='B')
+                return None
+            if chalk and x0 == 48 and x1 == 62 and y == 14:
+                orig_ledge(r, 48, 54, 14, chalk=True, face=face)
+                orig_ledge(r, 57, 62, 15, chalk=True, face=face)
+                m_.cls[14:16, 55:57] = '.'
+                m_.taken[14:16, 55:57] = False
+                orig_stamp(m_, 'ck_boulder', 55, 14, mark='B')
+                return None
+            return orig_ledge(r, x0, x1, y, chalk=chalk, face=face)
+
+        def woods_527(r, palettes, *args, **kw):
+            m_ = r.m
+            # Plant dense interlocking coastal pine/oak groves into the giant bare western meadow (x6..60, y16..39)!
+            for cx, cy, rx, ry in (
+                (14, 18, 3.6, 1.8), (30, 18, 3.8, 1.8), (50, 18, 4.0, 2.0),
+                (16, 31, 4.2, 2.8), (44, 31, 4.2, 2.8), (64, 18, 3.6, 2.0), (88, 22, 4.0, 2.4),
+            ):
+                for y in range(max(17, int(cy - ry - 1)), min(39, int(cy + ry + 2))):
+                    for x in range(max(6, int(cx - rx - 1)), min(95, int(cx + rx + 2))):
+                        if m_.cls[y, x] in '.t' and not m_.taken[y, x] and not m_.cliff[y, x] and not r.road_mask[max(0, y - 1):y + 2, max(0, x - 1):x + 2].any():
+                            if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 + 0.3 * (vnoise(x, y, 5278, 3.0) - 0.5) <= 1.0:
+                                m_.cls[y, x] = 'T'
+            return orig_woods(r, palettes, *args, **kw)
+
+        def stamp_527(self, name, x, y, *args, **kw):
+            if name == 'pf_lacearch' and x == 101 and y == 25:
+                # Replace floating concrete dome Arch A with authentic Gen 5 floral archway wb_gate (5x5, 3-tile road opening x103..105!)
+                return orig_stamp(self, 'wb_gate', 102, 25, mark='B')
+            if name == 'pf_lacearch' and x == 75 and y == 26:
+                # Replace MS-Paint concrete Arch B with sculpted Gen 5 Chalk Cairn & Column Gateway flanking road x77..79!
+                for rx, ry, rnm in (
+                    (76, 27, 'nr_col'), (80, 27, 'nr_col'),
+                    (76, 29, 'nr_col'), (80, 29, 'nr_col'),
+                    (75, 29, 'nr_wall_w'), (81, 29, 'nr_wall_e'),
+                    (73, 27, 'ck_rock_big'), (82, 27, 'ck_rock_big'),
+                ):
+                    st_ = STAMPS[rnm]
+                    if self.inb(rx, ry) and self.free(rx, ry, st_['w'], st_['h'], on='.tuT'):
+                        orig_stamp(self, rnm, rx, ry, mark='B')
+                return None
+            if name == 'pf_lacearch' and x == 41 and y == 11:
+                # Replace intact cloned 3rd dolmen with solid collapsed masonry side walls preserving Rock Smash gate (43..45, 14)!
+                for rx, ry, rnm in (
+                    (41, 13, 'ck_boulder'), (41, 14, 'nr_col'), (42, 14, 'ck_boulder'),
+                    (46, 13, 'ck_boulder'), (46, 14, 'nr_col'), (47, 13, 'ck_boulder'),
+                ):
+                    if self.inb(rx, ry) and self.free(rx, ry, STAMPS[rnm]['w'], STAMPS[rnm]['h'], on='.tuT'):
+                        orig_stamp(self, rnm, rx, ry, mark='B')
+                for bx in (41, 42, 46, 47):
+                    for by in (14, 15):
+                        if self.cls[by, bx] in '.tu' and not self.taken[by, bx]:
+                            orig_stamp(self, 'nr_wall_m', bx, by, mark='B')
+                return None
+            return orig_stamp(self, name, x, y, *args, **kw)
+
+        def near_527(self, name, x, y, on='.', r=4):
+            # Remap cliff-colliding cove props cleanly onto flat open Cove A beach sand & forbid cliff tiles on on='s'!
+            if name == 'hb_rope' and x == 40 and y == 42:
+                x, y = 39, 46
+            elif name == 'hb_plank' and x == 26 and y == 43:
+                x, y = 26, 46
+            if on == 's':
+                m_ = self.m
+                st_ = STAMPS[name]
+                ww, hh = st_['w'], st_['h']
+                for rad in range(0, r + 4):
+                    for dy in range(-rad, rad + 1):
+                        for dx in range(-rad, rad + 1):
+                            if abs(dx) != rad and abs(dy) != rad:
+                                continue
+                            xx, yy = x + dx, y + dy
+                            if not (m_.inb(xx, yy) and m_.inb(xx + ww - 1, yy + hh - 1)):
+                                continue
+                            if m_.cliff[yy:yy + hh, xx:xx + ww].any():
+                                continue
+                            if m_.free(xx, yy, ww, hh, on=on):
+                                orig_stamp(m_, name, xx, yy, mark='B')
+                                return (xx, yy)
+                return None
+            return orig_near(self, name, x, y, on=on, r=r)
+
+        def water_stamp_527(r, n, x, y):
+            # Replace 4 cloned sea rocks + flat concrete pf_seastack cone with varied rock species/sizes at irregular depths & clear boat from jetty!
+            remap = {
+                ('pf_seaarch', 11, 52): ('dk_rock_big', 10, 54),
+                ('pf_seastack', 50, 53): ('ak_rock2', 49, 57),
+                ('pf_seastack2', 76, 53): ('ck_rock_big', 74, 53),
+                ('pf_seaarch', 100, 55): ('dk_boulder', 97, 59),
+                ('pf_seastack2', 131, 54): ('ck_rock_big', 109, 54),  # Natural chalk Wingull sea stack below Birder (108, 7)!
+                ('pf_seastack', 22, 57): ('ck_boulder', 22, 58),
+                ('pf_seastack2', 64, 58): None,
+                ('hb_boat3', 34, 50): ('fw_boat', 37, 52),            # Cleanly separated >= 4 tiles from Cove A shore/jetty!
+            }
+            key = (n, x, y)
+            if key in remap:
+                rep = remap[key]
+                if rep is None:
+                    return True
+                rn, rx, ry = rep
+            else:
+                rn, rx, ry = n, x, y
+            # Clear purely decorative water glints on L2 inside the water footprint so rocks & boat always place cleanly!
+            m_ = r.m
+            st_ = STAMPS[rn]
+            ww, hh = st_['w'], st_['h']
+            if all(m_.inb(rx + i, ry + j) and m_.cls[ry + j, rx + i] in 'wW' for i in range(ww) for j in range(hh)):
+                m_.L[2, ry:ry + hh, rx:rx + ww] = 0
+            return orig_water_stamp(r, rn, rx, ry)
+
+        def smooth_sea_527(m, passes=3):
+            # Smooth out stair-stepping deep-water band ('W') into long, natural coastal depth curves!
+            H_, W_ = m.H, m.W
+            sea = np.isin(m.cls, ['w', 'W'])
+            for x in range(W_):
+                ys = np.where(sea[:, x])[0]
+                if not len(ys):
+                    continue
+                sea0 = int(ys[0])
+                deep_y = int(round(max(sea0 + 5.5, 54.5 + 2.4 * math.sin(x / 18.0) + 1.4 * math.cos(x / 11.0))))
+                deep_y = min(H_ - 2, max(sea0 + 4, deep_y))
+                for y in ys:
+                    m.cls[y, x] = 'W' if y >= deep_y else 'w'
+            return orig_smooth_sea(m, passes=5)
+
+        RK.Route.finish_plan = finish_plan_527
+        RK.Route.near = near_527
+        CK.ledge = ledge_527
+        CK.woods = woods_527
+        K.RMap.stamp = stamp_527
+        CK.water_stamp = water_stamp_527
+        CK.smooth_sea = smooth_sea_527
+
+    elif mid == 540:
+        # 540 Thistledown Lea Pass-2 hooks:
+        # - Square off Manor h2 plinth & add matching left terrace stair (61..62, 12..14) so Locked door @ (61,9) is 100% reachable!
+        # - Level Ha-ha back garden (79..88, 0..7) to ht=0 & square east manor lawn (79..84, 8..14) so ZERO diagonal cliff stubs form and Greavard is 100% reachable!
+        # - Build interlocking estate woodland groves & eliminate scattered confetti trees!
+        def finish_plan_540(self, border=3):
+            m_ = self.m
+            # 1. Clean rectangular Manor h2 front lip at y=12 across x=60..69 + matching 2-wide left terrace stair (61..62, 12..14)!
+            m_.ht[10:12, 59] = 2
+            m_.ht[10:13, 60:63] = 2
+            CK.stair(self, 61, 12, w=2, h=2)
+            # 2. Level Ha-ha back garden (78..88, 0..7) to ht=0 & square east manor rose lawn (78..84, 8..14) -> ZERO orphaned cliff stubs!
+            m_.ht[4:8, 77] = np.minimum(m_.ht[4:8, 77], 1)
+            m_.ht[0:8, 78:89] = 0
+            m_.ht[8:15, 78:85] = 1
+            m_.ht[8:17, 85:89] = 0
+            # Open Ha-ha back garden clearing & dirt spur connecting Ha-ha ditch (86..87, 3..14) directly to Greavard (80,4)!
+            for yy in range(3, 8):
+                for xx in range(79, 87):
+                    if m_.cls[yy, xx] == 'T':
+                        m_.cls[yy, xx] = '.'
+            for yy in (4, 5):
+                for xx in range(80, 87):
+                    m_.cls[yy, xx] = 'd'
+                    self.road_mask[yy, xx] = True
+            return orig_finish_plan(self, border=border)
+
+        def woods_540(r, palettes, *args, **kw):
+            m_ = r.m
+            for cx, cy, rx, ry in (
+                (15, 29, 4.0, 2.6), (55, 27, 4.0, 2.6), (98, 22, 4.2, 2.8),
+                (50, 45, 4.5, 2.6), (68, 45, 4.2, 2.6), (115, 43, 4.4, 2.8),
+            ):
+                for y in range(max(4, int(cy - ry - 1)), min(49, int(cy + ry + 2))):
+                    for x in range(max(4, int(cx - rx - 1)), min(124, int(cx + rx + 2))):
+                        if y < 9 and x >= 78:
+                            continue
+                        if m_.ht[y, x] == 0 and m_.cls[y, x] in '.t' and not m_.taken[y, x] and not m_.cliff[y, x]:
+                            if not r.road_mask[max(0, y - 1):y + 2, max(0, x - 1):x + 2].any():
+                                if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 + 0.3 * (vnoise(x, y, 5408, 3.0) - 0.5) <= 1.0:
+                                    m_.cls[y, x] = 'T'
+            return orig_woods(r, palettes, *args, **kw)
+
+        def fringe_540(r, kinds, n, box=None, on='.', seed=0, near_forest=2, zone_scale=9.0):
+            if near_forest == 0:
+                return 0
+            return orig_fringe(r, kinds, min(n, 70), box=box, on=on, seed=seed, near_forest=2, zone_scale=zone_scale)
+
+        RK.Route.finish_plan = finish_plan_540
+        CK.woods = woods_540
+        CK.fringe = fringe_540
+
     try:
         if mid == 521:
             RE.build_521()
@@ -2142,7 +3017,15 @@ def run_route_map(mid):
             RCRAFT.BUILD[mid]()
     finally:
         RK.Route.write = orig_rwrite
+        RK.Route.finish_plan = orig_finish_plan
+        RK.Route.near = orig_near
         RE.orchard_rows = orig_orchard
+        K.RMap.stamp = orig_stamp
+        CK.water_stamp = orig_water_stamp
+        CK.smooth_sea = orig_smooth_sea
+        CK.fringe = orig_fringe
+        CK.woods = orig_woods
+        CK.ledge = orig_ledge
 
     m = captured['m']
     r = captured['r']

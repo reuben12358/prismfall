@@ -1126,25 +1126,24 @@ def build_152(save=True):
 
 
 def build_153(save=True):
-    """Wave 14 craft of Map 153 (Pell Playhouse Backstage - The Trap Room, 20x15, Tileset 54).
-    Unified 100% with 150-154:
-      - Wraps the playable sub-stage labyrinth in a moody under-stage clockwork cellar & prop
-        vault (x=2..17, y=1..13) where EVERY non-playable vault cell stays strictly pas=15!
-      - North burgundy-plum cellar masonry wall with gilded rafters & opera sconces
-      - West & East sunken mechanical clockwork vaults with spare cogwheels, timber load-bearing
-        stage piers, vertical counterweight lines, retired scenery drops & dramatic cellar spotlights
-      - Inside the playable labyrinth: gilded Art-Deco velvet-and-brass 5x5 rotating turntable
-        (x=7..11, y=5..9), warm mahogany stage corridors, crimson damask entry landing for
-        Old Joss (8,11) & Ladder up (9,12), and spotlight over Prop chest (12,3)!"""
+    """Wave 2 craft of Map 153 (Pell Playhouse Backstage - The Trap Room, 20x15, Tileset 54).
+    Unified 100% with 150-154 while preserving playable mask & pb_trap (3 moves: crank x3) 100% verbatim:
+      - Breaks up the monotone rivet-grid floor with warm mahogany stage planking, timber catwalk gangplank
+        corridors, a warm crimson-gold woven turntable hub & gilded Art-Deco brass turntable frame (7..11, 5..9)
+        so the rotating dark machinery blocks pop with crisp figure-ground contrast!
+      - Replaces scattered gear dots & empty side wings with authentic theatrical backstage machinery
+        (ALL outer vault cells strictly pas=15): counterweight fly-rope pulley bays with winch spools,
+        stacked stage rigging crates, coiled rope baskets, rolled velvet curtain bolts, retired painted drops,
+        draped backstage wing curtains, horizontal timber catwalk beams, glowing work-lanterns & opera sconces!"""
     import hallkit as K
     from puzzles import playhouse as P
 
-    CU, MG, MI, NM = K.CU, K.MG, K.MI, K.NM
+    CU, MG, MI, NM, PF = K.CU, K.MG, K.MI, K.NM, K.PF
     T = P.TRAP_AT
     ox, oy = P.TRAP_OFF
     W, H = 20, 15
 
-    # Compute the EXACT playable cell mask (identical to gen_playhouse.py!)
+    # Compute the EXACT playable cell mask (identical to gen_playhouse.py — NEVER alter!)
     playable = np.zeros((H, W), dtype=bool)
     for y, r in enumerate(P.TRAP):
         for x, ch in enumerate(r):
@@ -1164,20 +1163,19 @@ def build_153(save=True):
     BOARDS_SH = [MI(1233), MI(1234), MI(1235)]
     st = K.STYLES['stage']
 
-    # 1. Outer Sub-Stage Cellar Architecture & Sunken Clockwork Vaults (x=2..17, y=1..13, STRICTLY pas=15!)
-    # North cellar burgundy-plum masonry wall (y=1..2, x=2..17 — NEVER overwriting playable cells!)
+    # 1. Outer Sub-Stage Cellar Architecture & Sunken Theatrical Rigging Vaults (x=2..17, y=1..13, STRICTLY pas=15!)
     for y in (1, 2):
         for x in range(2, 18):
             if not playable[y, x]:
                 h.put(NM(402) if y == 1 else NM(865), x, y, 0)
                 if y == 1:
                     h.put(CU('beam_l') if x == 2 else (CU('beam_r') if x == 17 else CU('beam_mid')), x, y, 1)
-    # Opera wall sconces & crest along the sub-stage ceiling beam (y=1..2, pri=5)
+    # Opera wall sconces & gilded theatre crest along the sub-stage ceiling beam (y=1..2, pri=5)
     for sx in (3, 6, 9, 12, 16):
         h.block([[NM(779)], [NM(787)]], sx, 1, 2)
     h.block([[CU('crest_0'), CU('crest_1'), CU('crest_2')]], 8, 1, 2)
 
-    # West Clockwork Vault (x=2..4, y=3..12) & East Scenery Prop Vault (x=14..17, y=3..12) — ALL pas=15!
+    # West Rigging/Counterweight Bay (x=2..4, y=3..12) & East Scenery/Prop Vault (x=14..17, y=3..12) — ALL pas=15!
     vault_cells = set()
     for y in range(3, 13):
         for x in (2, 3, 4, 14, 15, 16, 17):
@@ -1190,15 +1188,19 @@ def build_153(save=True):
 
     for (vx, vy) in vault_cells:
         if vy == 3:
-            h.put(CU('lower_1_%d' % rnd.randrange(3)), vx, vy, 0)
+            # Upper timber catwalk fascia & brass safety balustrade overlooking both backstage rigging bays!
+            h.put(CU('ledge_face_l') if vx in (2, 14) else (CU('ledge_face_r') if vx in (4, 17) else CU('ledge_face_mid')), vx, vy, 0)
             rail = 'pit_rail_l' if vx in (2, 14) else ('pit_rail_r' if vx in (4, 17) else 'pit_rail_mid')
             h.put(CU(rail), vx, vy, 1)
+        elif vy == 7 and vx in (3, 4, 14, 15, 16):
+            # Mid-span horizontal timber catwalk cross-beam breaking up vertical depth (ALL pas=15!)
+            h.put(CU('ledge_face_l') if vx in (3, 14) else (CU('ledge_face_r') if vx in (4, 16) else CU('ledge_face_mid')), vx, vy, 0)
         elif vy in (4, 5):
+            h.put(CU('lower_1_%d' % rnd.randrange(3)), vx, vy, 0)
+        elif vy in (6, 8):
             h.put(CU('lower_2_%d' % rnd.randrange(3)), vx, vy, 0)
-        elif vy in (6, 7, 8):
-            h.put(CU('lower_3_%d' % rnd.randrange(3)), vx, vy, 0)
         else:
-            h.put(CU('pit_%d' % rnd.randrange(3)), vx, vy, 0)
+            h.put(CU('lower_3_%d' % rnd.randrange(3)), vx, vy, 0)
 
     # Outer vault boundary casing (x=1, x=18, y=0, y=13) so the entire cellar sits crisply in the void
     for x in range(2, 18):
@@ -1213,38 +1215,72 @@ def build_153(save=True):
     h.put(st['edge']['NE'], 1, 13, 0)
     h.put(st['edge']['NW'], 18, 13, 0)
 
-    # Load-bearing timber stage piers descending through West & East vaults (ALL pas=15!)
+    # Heavy load-bearing timber rigging piers framing outer bays (ALL pas=15!)
     for px in (2, 17):
         for y in range(4, 13):
             tp = 'tpost_band' if y == 4 else ('tpost_base' if y == 12 else 'tpost_mid')
             h.put(CU(tp), px, y, 1)
 
-    # West Vault Mechanical Clockwork: spare turntable gears, counterweight cables & stage crates (ALL pas=15!)
-    for gx, gy in ((3, 5), (4, 6), (3, 7), (4, 8), (3, 9)):
-        h.put(CU('gear'), gx, gy, 1)
-    for y in range(4, 12):
+    # ---- WEST WING: Authentic Counterweight Pulley Bay, Winch Drum, Rope Coils & Rigging Crates (ALL pas=15!) ----
+    # Draped crimson wing curtain framing the far-west backstage pier (x=2, y=4..6 -> keep timber pier on 2, hang curtain or lantern!)
+    # Warm glowing backstage wall sconces mounted directly onto the heavy timber piers (pri=5, keeps pas=15 underneath!)
+    h.block([[NM(779)], [NM(787)]], 2, 5, 2)
+    h.block([[NM(779)], [NM(787)]], 2, 9, 2)
+    # Taut counterweight fly-ropes dropping from overhead pulley anchors into a compact 2-piece winch assembly (NOT scattered dots!)
+    h.put(CU('web_anchor_r'), 4, 4, 1)
+    for y in range(4, 9):
         h.put(CU('thread_gold_v'), 4, y, 2)
+    for y in range(4, 8):
+        h.put(CU('thread_red_v'), 3, y, 2)
+    h.put(CU('spool'), 3, 8, 1)                  # Counterweight rope winch drum
+    h.put(CU('gear'), 4, 8, 1)                   # Meshing winch drive cog right beside spool
+    # Stacked wooden stage rigging crates, coiled rope basket, rolled velvet bolts & backstage paint casks (y=9..12)
+    h.put(CU('basket'), 3, 9, 1)                 # Coiled backstage rigging rope & cloth basket
+    h.put(CU('bolt_r'), 4, 9, 1)                 # Rolled crimson stage-curtain bolt
+    h.put(PF(19434), 3, 10, 1); h.put(PF(19435), 4, 10, 1)   # Stacked timber stage cargo crates
     h.put(CU('dim_19381'), 3, 11, 1); h.put(CU('dim_19382'), 3, 12, 1)
-    h.put(CU('dim_17872'), 5, 11, 1); h.put(CU('dim_17873'), 6, 11, 1)
+    h.put(CU('dim_17872'), 4, 11, 1); h.put(CU('dim_17873'), 4, 12, 1)
+    # SW sub-stage prop stowage flanking Old Joss's landing (5..6, 11..12)
+    h.put(PF(19434), 5, 11, 1); h.put(PF(19436), 6, 11, 1)
+    h.put(CU('basket'), 5, 12, 1); h.put(CU('bolt_y'), 6, 12, 1)
 
-    # East Vault Retired Backstage Scenery & Spare Clockwork (ALL pas=15!)
+    # ---- EAST WING: Retired Scenery Drop Rack, Counterweight Lines, Stage Crates & Prop Vault (ALL pas=15!) ----
+    # Retired Act I-III painted scenery drops hanging cleanly in the east backstage rack (14..16, 4..5)
+    h.put(CU('drop_forest_top'), 14, 4, 1); h.put(CU('drop_forest_bot'), 14, 5, 1)
     h.put(CU('drop_ship_top'), 15, 4, 1); h.put(CU('drop_ship_bot'), 15, 5, 1)
     h.put(CU('drop_throne_top'), 16, 4, 1); h.put(CU('drop_throne_bot'), 16, 5, 1)
-    for gx, gy in ((14, 7), (15, 8), (14, 9)):
-        h.put(CU('gear'), gx, gy, 1)
-    for y in range(4, 12):
+    # Glowing lantern sconces mounted onto the east timber pier (pri=5, keeps pas=15!)
+    h.block([[NM(779)], [NM(787)]], 17, 5, 2)
+    h.block([[NM(779)], [NM(787)]], 17, 9, 2)
+    # East counterweight fly-ropes dropping into a compact backstage winch drum (x=15..16, y=6..9)
+    for y in range(6, 10):
         h.put(CU('thread_red_v'), 16, y, 2)
-    h.put(CU('dim_19434'), 12, 11, 1); h.put(CU('dim_19435'), 13, 11, 1)
-    h.put(CU('dim_17889'), 14, 12, 1); h.put(CU('dim_17872'), 15, 11, 1)
+    for y in range(6, 9):
+        h.put(CU('thread_blue_v'), 15, y, 2)
+    h.put(CU('spool'), 16, 9, 1)
+    h.put(CU('gear'), 15, 9, 1)
+    # Stacked stage rigging crates, rope coils, rolled curtain bolts, music stand & backstage paint kegs (y=8..12)
+    h.put(CU('basket'), 14, 8, 1)                # Coiled rope & rigging basket
+    h.put(CU('bolt_b'), 14, 9, 1)                # Rolled indigo backdrop bolt
+    h.put(PF(19434), 14, 10, 1); h.put(PF(19435), 15, 10, 1) # Backstage prop crates
+    h.put(CU('music_stand'), 16, 10, 1)          # Stowed orchestra music stand
+    h.put(CU('dim_17889'), 14, 11, 1); h.put(CU('dim_17872'), 15, 11, 1)
+    h.put(CU('dim_19381'), 16, 11, 1); h.put(CU('dim_19382'), 16, 12, 1)
+    h.put(CU('bolt_p'), 14, 12, 1); h.put(CU('basket'), 15, 12, 1)
+    # SE sub-stage prop stowage flanking the entry landing (12..13, 11..12)
+    h.put(PF(19435), 12, 11, 1); h.put(PF(19437), 13, 11, 1)
+    h.put(CU('music_stand'), 12, 12, 1); h.put(CU('dim_17873'), 13, 12, 1)
 
-    # Diagonal dramatic work-light shafts slicing into both sunken mechanical vaults (light_*_x pas=15!)
+    # Warm backstage stage-footlights mounted cleanly onto the mid-span timber cross-beams (y=7) & diagonal work-light shafts!
+    for fx in (3, 15):
+        h.put(CU('footlight'), fx, 7, 1)
     for y in range(4, 9):
         for bx in (3, 14):
             xx = bx + (y - 4) // 2
             if (xx, y) in vault_cells and h.L[2, y, xx] == 0:
                 h.put(CU('light_full_x'), xx, y, 2)
 
-    # 2. Enrich Playable Sub-Stage Labyrinth Floors (100% pas=0!)
+    # 2. Enrich Playable Sub-Stage Labyrinth Floors (100% pas=0 — warm mahogany planks & catwalk accents!)
     for y in range(H):
         for x in range(W):
             if not playable[y, x]:
@@ -1252,29 +1288,28 @@ def build_153(save=True):
             sh = (y > 0 and not playable[y - 1, x])
             h.put(rnd.choice(BOARDS_SH if sh else BOARDS), x, y, 0)
 
-    # Entry Landing (x=8..10, y=10..12): Nightbox dark crimson-plum Opera Carpet + royal crimson runner!
-    for y in (10, 11, 12):
-        for x in (8, 9, 10):
-            if playable[y, x]:
-                h.put(NM(685), x, y, 0)
-    for y, row_t in ((10, (773, 774, 775)), (11, (781, 782, 783))):
-        for i, x in enumerate((8, 9, 10)):
-            if playable[y, x]:
-                h.put(NM(row_t[i]), x, y, 1)
-    # Ladder up (9, 12) crisply preserved!
+    # Timber catwalk gangplank accents along the perimeter backstage walkway corridors (breaking up floor monotony!)
+    for cx, cy in ((6, 5), (6, 6), (6, 7), (6, 8), (6, 9), (12, 5), (12, 6), (12, 7), (12, 8), (12, 9)):
+        if playable[cy, cx]:
+            h.put(CU('plank'), cx, cy, 0)
+
+    # Entry Landing (x=8..10, y=10..12): Warm Crimson-Gold Playhouse Woven Runner framing Old Joss (8,11) & Ladder up (9,12)!
+    _put_mi_rug(h, 8, 10, 10, 12, z=1)
+    # Ladder up (9, 12) crisply preserved on top!
     lx, ly = T['ladder'][0] + ox, T['ladder'][1] + oy
     h.put(MG(3151), lx, ly, 1)
 
-    # Sumptuous Velvet-and-Gold 5x5 Rotating Turntable Ring (x=7..11, y=5..9)!
+    # Warm Golden-Mahogany & Gilded Brass 5x5 Rotating Stage Turntable (x=7..11, y=5..9)!
+    # Bright warm stage planks + crimson-gold inner hub make the dark rotating iron machinery blocks POP with crisp contrast!
     mx0, my0 = tx0 + ox, ty0 + oy
     for y in range(my0, my0 + tn):
         for x in range(mx0, mx0 + tn):
-            h.put(NM(685), x, y, 0)
+            h.put(BOARDS[(x + y) % 3], x, y, 0)
+    _put_mi_rug(h, mx0 + 1, my0 + 1, mx0 + tn - 2, my0 + tn - 2, z=1)
     _put_deco_frame(h, mx0, my0, mx0 + tn - 1, my0 + tn - 1, z=1)
-    # Warm crimson hub directly under Brass Crank (9, 7)
+    # Warm golden spotlight glow under Brass Crank (9, 7) & illuminating the secret Prop Chest alcove (11..12, 3..4)!
     cx, cy = T['crank'][0] + ox, T['crank'][1] + oy
-    h.put(MI(1049), cx, cy, 1)
-    # Soft spotlight illuminating the secret Prop Chest alcove (11..12, 3..4)
+    h.put(CU('glow'), cx, cy, 2)
     for sx, sy in ((12, 3), (11, 4), (12, 4)):
         if playable[sy, sx] and h.L[2, sy, sx] == 0:
             h.put(CU('light_full'), sx, sy, 2)

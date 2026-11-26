@@ -43,7 +43,8 @@ def terrace(x, y):
     return 1
 
 
-TREES = ['tr_oak', 'tr_oak2', 'tr_pink', 'tr_oak', 'tr_pink']
+TREES = ['tr_oak', 'tr_oak2', 'tr_pink', 'tr_pine', 'tr_pine2']
+GROVE_CONIFER = ['tr_pine', 'tr_pine2', 'tr_oak2', 'tr_oak', 'tr_pink']
 WHARF = (21, 49, 46, 47)                   # x0, x1, y0, y1: the timber wharf along the waterline
 
 
@@ -61,14 +62,12 @@ def build(preview=None):
     for x in range(W):                      # deep water offshore, a smooth band
         for y in range(H):
             if m.cls[y, x] == 'w' and y >= 55 + 3 * vnoise(x, 0, 5, 9.0) and not (PIER[0] - 2 <= x <= PIER[1] + 2): m.cls[y, x] = 'W'
-    for y in range(H):                      # woods: the knoll, the back of the terrace, the hill's east end, the edges
+    for y in range(H):                      # outer forest fringe ONLY at far corners; organic clustered groves fill west/east borders!
         for x in range(W):
             if m.ht[y, x] < 1: continue
-            nw = m.ht[y, x] == 3 or (m.ht[y, x] == 2 and x < 31 and (y < 2 + 2 * vnoise(x, 0, 9, 4.0) or x < 3))
-            ne = m.ht[y, x] == 2 and x >= 44 and (x > 61 + 2 * vnoise(0, y, 8, 4.0) or (y < 1 and x > 59))
-            east = x > 64 + 2 * vnoise(0, y, 11, 4.0) and y < 41
-            west = x < 2 + 2 * vnoise(0, y, 12, 4.0) and y < 25
-            if nw or ne or east or west: m.cls[y, x] = 'T'
+            nw = m.ht[y, x] == 2 and x < 16 and y < 2 + 2.5 * vnoise(x, 0, 9, 4.0)
+            ne = m.ht[y, x] == 2 and x >= 58 and y < 2 + 2.5 * vnoise(x, y, 8, 4.0)
+            if nw or ne: m.cls[y, x] = 'T'
     # ---------------------------------------------------------------- stairs first (they cut the cliff lines)
     m.stairs(45, 16, w=3, kit_rows=4)                                  # Tidewatch hill
     m.stairs(23, 20, w=3, kit_rows=4)                                  # the Center terrace
@@ -77,8 +76,7 @@ def build(preview=None):
     m.plan_cliffs()
     # ---------------------------------------------------------------- streets: curved lanes into one plaza
     G = dict(c='g', only='.tT')
-    m.rect(32, 0, 3, 7, 'd')                                           # The Ferrymen's Mile's dirt lane (520 x 14-16 = our x 32-34)
-    m.lane([(33.5, 6.5), (37.4, 8.8), (38.6, 13.5), (37, 19.5), (33.8, 24.5)], w=3.3, seed=31, wobble=0.2, **G)   # the valley road
+    m.lane([(33.0, 0.0), (33.5, 5.5), (37.4, 8.8), (38.6, 13.5), (37, 19.5), (33.8, 24.5)], w=3.3, seed=31, wobble=0.2, **G)   # continuous north-to-plaza valley road
     m.blob(32.5, 29.2, 8.6, 4.3, 'g', seed=32, rough=0.3, only='.tT')  # the plaza above the harbour
     m.rect(29, 31, 9, 3, 'g', only='.tT')                              # ... squared off along the overlook rail
     m.lane([(24.5, 24.5), (25.2, 27), (27, 28.5)], w=3.0, seed=33, wobble=0.3, **G)            # from the terrace stairs
@@ -95,12 +93,15 @@ def build(preview=None):
     m.rect(23, 18, 3, 2, 'd', only='.tTg')
     m.street([(46, 15), (46, 13), (51, 13)], 2, 'd', only='.')         # Tidewatch yard
     for c in "gd": m.smooth(c, into=".", passes=2, only=".tT")
+    # Re-assert continuous open north lane at y=0..7 after smooth() so it stays seamlessly open to Map 520 & joins valley road!
+    m.rect(32, 0, 3, 7, 'g', only='.gdT')
+    m.rect(33, 6, 3, 2, 'g', only='.gdT')
     for y in range(SHORE, H):
         for x in range(PIER[0], PIER[1] + 1): m.cls[y, x] = 'w'
     m.stamp('pf_anchor', 32, 29)                                       # the old anchor at the overlook, on the pier's axis
     E = []
     P = lambda n, at, **kw: E.append(SE.place(100, n, at, **kw))
-    # ---------------------------------------------------------------- buildings (doors on the lanes)
+    # ---------------------------------------------------------------- buildings (doors on the lanes; varied coastal silhouettes!)
     d = {}
     d['pc'] = m.stamp('gl_pc', 18, 4, 'FL_PC', 'Poke Center door')
     d['inn'] = m.stamp('gl_ell', 9, 24, 'FL_INN', 'Inn door')
@@ -111,11 +112,14 @@ def build(preview=None):
     m.stamp('lighthouse', 3, 25)
     light_door = (5, 40)
     m.cls[light_door[1], light_door[0]] = 'B'
-    houses = (('gl_shed', 11, 10), ('gl_shed', 31, 12), ('gl_shed', 19, 25), ('gl_cot', 52, 20), ('gl_shed', 60, 23),
+    # Differentiated village architecture: vine-draped sh_small cottages, Sheridan sh_cot, flat coastal workshops, unique gl_cot & gl_emblem!
+    houses = (('sh_small', 11, 10), ('gl_shed', 31, 12), ('sh_small', 19, 25), ('sh_cot', 52, 21), ('gl_flat1', 60, 23),
               ('gl_emblem', 52, 33), ('gl_cot', 11, 34), ('gl_flat2', 36, 1))
     hd = []
     for nm, x, y in houses:
-        m.stamp(nm, x, y); dd = STAMPS[nm]['door']; hd.append((x + dd[0], y + dd[1]))
+        m.stamp(nm, x, y)
+        dd = STAMPS[nm].get('door') or (1, 5)
+        hd.append((x + dd[0], y + dd[1]))
     for dx, dy in list(d.values()) + hd: m.doorpath((dx, dy), depth=3 if (dx, dy) == (32, 16) else 6)
     # ---------------------------------------------------------------- events (seated by name)
     for i, x in enumerate(range(PIER[0], PIER[1] + 1)): P('Customs gate %d' % (i + 1), (x, SHORE - 1))
@@ -161,28 +165,31 @@ def build(preview=None):
     dress_plaza(m)
     dress_beach(m)
     dress_yards(m)
-    for cx, cy, n in ((15, 8, 2), (8, 15, 2), (5, 10, 2), (29, 6, 1), (14, 16, 1), (4, 21, 2), (40, 12, 2), (41, 18, 2), (38, 22, 1),
-                      (30, 22, 1), (22, 33, 2), (16, 22, 1), (20, 36, 1), (51, 18, 1), (64, 21, 2), (58, 20, 1), (50, 27, 1),
-                      (43, 34, 2), (56, 36, 1), (63, 34, 2), (62, 40, 2), (56, 42, 2), (14, 30, 0), (3, 44, 1), (10, 46, 0),
-                      (60, 8, 2), (58, 14, 1), (46, 4, 1), (42, 11, 2), (20, 22, 0), (36, 34, 0), (52, 11, 0), (8, 22, 2), (42, 17, 2),
-                      (3, 30, 1), (22, 38, 1), (50, 36, 1), (64, 37, 2), (57, 33, 0), (33, 20, 1), (6, 46, 1), (20, 12, 0), (13, 5, 2),
-                      (27, 9, 1), (63, 26, 1), (41, 3, 0), (30, 3, 1), (16, 46, 1)):
-        if n: m.trees(cx, cy, n, TREES, r=3, seed=cx * 3 + cy)
+    # Keep north connection seam to 520 (x=32..35, y=0..2) strictly clear of trees/props!
+    m.taken[0:3, 32:36] = True
+    dress_groves(m)
     for x, y in ((31, 7), (36, 13), (38, 18), (32, 23), (26, 25), (40, 25), (22, 30), (15, 30), (10, 34), (7, 39), (44, 30),
                  (52, 29), (61, 29), (27, 33), (46, 33), (58, 38), (14, 18), (28, 18), (44, 21), (50, 14), (15, 42)):
         if m.free(x, y - 1, 1, 2, on='.') and not m.cliff[y - 1:y + 1, x].any(): m.stamp('gl_lamp', x, y - 1)
-    m.beds()
-    print('  street trees', m.autotrees(46, TREES + ['tr_oak2', 'tr_oak'], seed=5, gap=0, box=(0, 0, W, 45)))
-    m.greenfill(1)
+    m.beds(prefixes=('gl_', 'sh_'), p=0.85, seed=4)
+    print('  street trees', m.autotrees(28, GROVE_CONIFER, seed=5, gap=1, box=(0, 0, W, 45)))
     # ---------------------------------------------------------------- paint
-    m.paint_ground(); m.autotiles(); m.cliffs(); m.paint_stairs(); m.forest()
+    m.paint_ground(); m.autotiles()
+    # Keep solid interior sand on L[0] above the wharf (y < 46) so L[1] props & cliffs never expose L[0] Ocean!
+    sbase = K.RC.vauto('rejuvenation', 'Sand shore_2', 0)
+    for y in range(46):
+        for x in range(W):
+            if m.eff[y, x] == 's' and m.L[1, y, x] == sbase:
+                m.L[0, y, x] = sbase; m.L[1, y, x] = 0
+    m.cliffs(); m.paint_stairs(); m.forest()
     wharf_paint(m)
     m.put_stamps()
     m.grass_variation()
     ship(m, 0, 0)
     sea_rocks(m)
     boats(m)
-    m.scatter(10, seed=12, on=".T")
+    m.decor = {k: [t for t in v if t != 5654] for k, v in m.decor.items()}
+    m.scatter(14, seed=12, on=".T")
     m.seal_against([{'dir': 'N', 'offset': 28, 'to': 520, 'to_offset': 11}], spans=[('N', 32, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'] + [(x, y) for x in range(m.W) for y in range(m.H - 12, m.H)])   # map builder 9: only the lane meets the Ferrymen's Mile
     if preview: m.preview(preview, 0.5)
     head = {'id': 100, 'biome': 'village', 'name': "Ferrow's Landing", 'parent': 0, 'bgm': 'Lappet Town', 'rubric': True, 'yards_ok': True,
@@ -200,35 +207,100 @@ def put(m, nm, x, y, on='.', r=2):
     for dd in range(r + 1):
         for yy in range(y - dd, y + dd + 1):
             for xx in range(x - dd, x + dd + 1):
-                if max(abs(xx - x), abs(yy - y)) != dd: continue
+                if max(abs(xx - x), abs(yy - y)) != dd or yy < 1: continue
                 if m.free(xx, yy, st['w'], st['h'], on=on) and not m.cliff[yy:yy + st['h'], xx:xx + st['w']].any():
                     m.stamp(nm, xx, yy); return True
     return False
 
 
+def dress_groves(m):
+    """Organic multi-species coastal woodland groves along the west (x0-12) & east (x58-67) borders and town glades:
+    tall hero oaks (pf_g_tree2), varied conifers (tr_pine, tr_pine2), oaks, cherry blossoms & natural undergrowth skirts!"""
+    # 1. Hero tall coastal canopy oaks anchoring west & east wooded headlands (strictly level & off cliffs!)
+    for tx, ty in ((1, 4), (6, 2), (12, 1), (0, 12), (5, 11), (0, 20), (6, 22),
+                   (62, 1), (63, 9), (63, 18), (64, 32), (61, 38), (42, 1), (29, 0)):
+        if m.can_tree('pf_g_tree2', tx, ty, on='.'):
+            m.stamp('pf_g_tree2', tx, ty, mark='B')
+    # 2. Organic clustered conifer/oak/blossom groves along WEST border (x0-12) & EAST border (x58-67) + scenic interior glades
+    west_groves = (
+        (2, 8, 3, ['tr_pine', 'tr_pine2', 'tr_oak2']),
+        (8, 7, 3, ['tr_pine2', 'tr_oak', 'tr_pink']),
+        (4, 15, 3, ['tr_pine', 'tr_oak2', 'tr_pine2']),
+        (8, 16, 2, ['tr_pink', 'tr_pine']),
+        (2, 22, 3, ['tr_pine2', 'tr_oak', 'tr_pine']),
+        (8, 23, 2, ['tr_pine', 'tr_pink']),
+        (1, 29, 3, ['tr_pine', 'tr_pine2', 'tr_pink']),
+        (1, 37, 3, ['tr_pine2', 'tr_oak2', 'tr_pine']),
+        (3, 44, 3, ['tr_pine', 'tr_pink', 'tr_oak']),
+        (8, 45, 2, ['tr_pine2', 'tr_oak']),
+    )
+    east_groves = (
+        (60, 6, 3, ['tr_pine', 'tr_pine2', 'tr_oak2']),
+        (65, 6, 3, ['tr_pine2', 'tr_oak', 'tr_pine']),
+        (61, 14, 3, ['tr_pink', 'tr_pine', 'tr_oak2']),
+        (65, 15, 3, ['tr_pine2', 'tr_pine', 'tr_oak']),
+        (65, 22, 3, ['tr_pine', 'tr_pine2', 'tr_oak']),
+        (66, 28, 3, ['tr_pine2', 'tr_pine', 'tr_pink']),
+        (64, 34, 3, ['tr_pine', 'tr_oak2', 'tr_pink']),
+        (64, 40, 3, ['tr_pine2', 'tr_pine', 'tr_oak']),
+        (57, 42, 3, ['tr_pink', 'tr_pine', 'tr_oak2']),
+    )
+    mid_groves = (
+        (15, 7, 2, ['tr_pink', 'tr_pine']), (29, 6, 2, ['tr_pink', 'tr_oak2']),
+        (41, 10, 2, ['tr_pine', 'tr_pink']), (41, 17, 2, ['tr_oak2', 'tr_pink']),
+        (31, 21, 2, ['tr_pink', 'tr_pine']), (22, 33, 2, ['tr_oak2', 'tr_pine']),
+        (43, 34, 2, ['tr_pine2', 'tr_oak']), (50, 18, 2, ['tr_pine', 'tr_pink']),
+        (46, 5, 2, ['tr_pink', 'tr_pine']), (16, 46, 2, ['tr_pine', 'tr_oak']),
+    )
+    for cx, cy, n, kinds in west_groves + east_groves + mid_groves:
+        m.trees(cx, cy, n, kinds, r=3, seed=cx * 5 + cy * 3)
+    # 3. Natural coastal undergrowth skirts: ferns, wildflowers & mossy rocks hugging grove edges & cliff feet!
+    for fx, fy in ((4, 17), (9, 17), (1, 24), (8, 25), (1, 35), (3, 42), (9, 43), (17, 36),
+                   (59, 15), (64, 19), (66, 26), (62, 33), (62, 41), (55, 42), (41, 14), (30, 19), (44, 6)):
+        put(m, 'ak_fern', fx, fy, on='.', r=2)
+    # Lush wildflower skirts bordering the west & east woodland glades
+    fl = m.decor['flowers']
+    rng = __import__('random').Random(1009)
+    for y in range(2, 46):
+        for x in list(range(1, 14)) + list(range(56, 67)):
+            if m.cls[y, x] == '.' and not m.taken[y, x] and not m.cliff[y, x]:
+                if any(m.inb(x + dx, y + dy) and m.bodym[y + dy, x + dx] for dx in (-1, 0, 1) for dy in (-1, 0, 1)):
+                    if rng.random() < 0.28:
+                        m.tile(rng.choice(fl), x, y, 1)
+
+
 def dress_plaza(m):
-    """the plaza: the overlook rail with the anchor, a market row under awnings, picnic tables, tubs, notice boards"""
+    """the plaza: the overlook rail with the anchor, market tables, crates, tubs, notice boards"""
     m.fence(28, 46, 34)                                        # the overlook rail above the harbour
     for nm, x, y in (('hb_tables', 27, 26), ('hb_tables', 36, 26), ('gl_tables', 39, 27), ('gl_tables', 25, 28),
                      ('sh_crates', 30, 25), ('hb_boxes', 40, 31), ('hb_barrel', 29, 32), ('hb_cask', 38, 32),
                      ('pf_logbench', 36, 32), ('pf_logbench', 29, 30), ('hb_keg', 35, 25)):
         put(m, nm, x, y, on='g', r=2)
-    for x, y in ((27, 25), (36, 25)):                           # awnings over the market tables
-        if all(m.inb(x + i, y) and not m.taken[y, x + i] for i in range(3)):
-            st = STAMPS['pf_p_awning']
-            m.over += [(2, x + i, y, t) for i in range(3) for t in [max(st['layers'][z][0][i] for z in range(3))] if t]
 
 
 def dress_yards(m):
-    """what makes the houses lived-in: washing lines, rug lines, kegs and casks by side walls, fenced front gardens"""
-    for nm, x, y in (('hb_washline', 14, 39), ('hb_rugline', 55, 28), ('hb_washline', 57, 40), ('hb_cask', 23, 29),
-                     ('hb_barrel', 15, 14), ('hb_shed', 35, 14), ('hb_boxes2', 51, 28), ('hb_barrel2', 42, 28), ('hb_keg', 64, 28),
-                     ('hb_dyeline', 13, 22), ('pf_logbench', 15, 44), ('pf_logbench', 61, 37), ('hb_barrel', 19, 31),
-                     ('hb_cask', 35, 8), ('pf_logbench', 13, 17), ('hb_shed', 59, 26), ('sh_crates', 49, 24), ('hb_rugline2', 41, 6)):
-        put(m, nm, x, y, on='.', r=2)
-    m.fence(9, 18, 34, gaps=((11, 12),)) if False else None
-    m.fence(51, 58, 29, gaps=((54, 56),))                      # the cottage's front garden
-    m.fence(10, 18, 43) if False else None
+    """Individualized coastal cabin gardens: harbor banners, porch benches, dye vats, nets, barrels & fenced gardens!"""
+    # Tailored per-cabin yard vignettes:
+    for nm, x, y in (
+        ('pf_logbench', 12, 16), ('hb_barrel', 15, 14), ('pf_p_laundry', 14, 11),
+        ('pf_p_loom', 35, 14), ('pf_p_vat_b', 35, 16), ('pf_p_vat_r', 31, 17), ('hb_keg', 34, 16),
+        ('hb_banner', 23, 25), ('hb_cask', 23, 29), ('hb_barrel', 19, 31),
+        ('pf_bellpost', 35, 5), ('hb_rugline2', 43, 5), ('pf_hayrick', 40, 8), ('hb_cask', 35, 8),
+        ('hb_rugline', 55, 28), ('hb_boxes2', 51, 28), ('hb_barrel2', 42, 28), ('sh_crates', 49, 24),
+        ('pf_p_net', 64, 26), ('hb_keg', 65, 28), ('hb_dyeline', 13, 22),
+        ('hb_washline', 57, 40), ('pf_logbench', 60, 37), ('hb_banner', 51, 35), ('hb_shed', 59, 34),
+        ('hb_washline', 14, 43), ('pf_logbench', 15, 44), ('pf_p_net', 18, 36), ('hb_barrel2', 10, 39),
+        ('hb_banner', 47, 40), ('hb_rope', 46, 43), ('hb_buoy', 42, 43),
+    ):
+        put(m, nm, x, y, on='.s', r=2)
+    # Coastal flower beds hugging the vine-draped sh_small cottages (11,10) & (19,25)
+    fl = m.decor['flowers']
+    for i, (fx, fy) in enumerate(((11, 16), (14, 16), (10, 14), (10, 15), (20, 31), (21, 31), (22, 31))):
+        if m.inb(fx, fy) and m.cls[fy, fx] == '.' and not m.taken[fy, fx] and not m.cliff[fy, fx]:
+            m.tile(fl[(i * 3) % len(fl)], fx, fy, 1)
+    # Cozy fenced front cottage gardens (strictly clear of events!)
+    m.fence(51, 58, 28, gaps=((54, 56),))                      # East Sheridan cottage's front garden
+    m.fence(10, 17, 42, gaps=((13, 15),))                      # Headland cottage's coastal garden
 
 
 def dress_beach(m):
@@ -242,11 +314,12 @@ def dress_beach(m):
         m.near(nm, x, y, on='s', r=3)
     for x in (22, 27, 31, 37, 41, 45, 49):                      # bollards along the wharf edge
         if not m.taken[47, x] and not m.taken[46, x] and not m.taken[45, x]: m.stamp('hb_post1' if x % 2 else 'hb_post2', x, 46)
+    # Subtle coastal dune tufts ONLY hugging the cliff foot (y=38..40) — zero pink meadow flowers on open harbor sand!
     rng = __import__('random').Random(8)
-    for y in range(39, SHORE - 2):
-        for x in range(18, 54):
-            if m.cls[y, x] == 's' and not m.taken[y, x] and rng.random() < 0.05:
-                m.tile(rng.choice([C('ak', 414), C('ak', 427), C('ak', 435)]), x, y, 2); m.taken[y, x] = False
+    for y in range(38, 41):
+        for x in range(18, 53):
+            if m.cls[y, x] == 's' and not m.taken[y, x] and not m.cliff[y, x] and rng.random() < 0.04:
+                m.tile(C('ak', 414), x, y, 2); m.taken[y, x] = False
 
 
 def wharf_paint(m):
@@ -278,7 +351,7 @@ def sea_rocks(m):
     import numpy as _np
     small = [[[C('ak', 1644), C('ak', 1645)], [C('ak', 1652), C('ak', 1653)]], [[C('ak', 1646), C('ak', 1647)], [C('ak', 1654), C('ak', 1655)]]]
     rng = __import__('random').Random(5)
-    for nm, x, y in (('ak_rock2', 10, 50), ('ak_boulder', 58, 50), ('ak_rock2', 25, 54), ('ak_rock2', 61, 45)):
+    for nm, x, y in (('ak_rock2', 10, 50), ('ak_boulder', 63, 50), ('ak_rock2', 25, 54), ('ak_rock2', 61, 45)):
         L = _np.array(STAMPS[nm]['layers']); h, w = L.shape[1:]
         if all(m.cls[y + j, x + i] in 'wW' for i in range(w) for j in range(h)):
             for j in range(h):

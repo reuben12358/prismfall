@@ -197,7 +197,7 @@ events:
   intro: I train in the salt. Builds character. Also thirst.
   after: I need a drink. Not salt.
 - type: item
-  at: [4, 5]
+  at: [4, 6]
   item: HARDSTONE
 - type: item
   at: [37, 29]

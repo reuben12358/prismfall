@@ -2291,6 +2291,7 @@ events:
     through: true
   at: [7, 11]
   story: interlude1
+
 ---
 id: 106
 name: Ferrow Lighthouse Lamp Room
@@ -2549,6 +2550,7 @@ events:
     through: true
   at: [4, 7]
   story: interlude1
+
 ---
 id: 107
 name: Dockmaster's House

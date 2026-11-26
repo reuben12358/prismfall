@@ -2100,43 +2100,75 @@ def build_561():
 # =============================================================================
 def build_566():
     """Spinners' Rise (80x120, ts 53): sweeping highland switchback ascent from Briarwick (S col 38..41)
-    to Frostwick Pass (N col 42..45). Four organically sculpted fell terraces with elevation gradient:
-    dense emerald-blossom lower forest -> lush heather & drystone sheepfolds -> alpine pine & frost-kissed
-    hill-fort summit! Plunging Sheep-Wash brook with wider lotus plunge pool & Shearing Waterfall (14, 58),
-    cozy 3-cottage Shepherds' Hamlet, Fleece Cross (50, 34), Ram Race finish [47..53, 33] well within
-    the HEAD 73-step limit, drove-slide jump ledges, dark-moss ground depth, wildflower bands & warm glows."""
+    to Frostwick Pass (N col 42..45). Four continuous, grounded edge-to-edge fell terrace ridges (ZERO
+    disconnected mid-field cliff stubs!), smooth Sheep-Wash brook with 2-4 tile runs + 45° bends & Shearing
+    Waterfall, cozy 3-cottage Shepherds' Hamlet, Fleece Cross (50, 34), Ram Race finish [47..53, 33] well
+    within the HEAD 73-step limit, cohesive woodland groves + pathside flower beds."""
     W, H = 80, 120
     hspec = head_spec(566)
     evs = hspec['events']
     r = Route(566, W, H, 'meadow', base='.')
     m = r.m
 
-    # ---- 1. Sweeping Organic Fell Terraces & Rocky Tors ----
-    lips = [(97, 1), (73, 2), (47, 3), (23, 4)]
-    r.terraces(lips, wobble=4.5, scale=8.0)
-    CK.plateau(r, 14, 40, 9, 5, 4, rough=0.45, seed=1)   # Summit crag over cold spring (W)
-    CK.plateau(r, 68, 52, 7, 4, 3, rough=0.45, seed=2)   # Eastern fell tor
-    for h_ in (1, 2, 3, 4):
-        CK.smooth_ht(m, h_, 3)
+    # ---- 1. Continuous Grounded Edge-to-Edge Fell Terrace Ridges (ZERO disconnected mid-field stubs!) ----
+    def lip1_fn(x):
+        return 97.0 + 2.4 * math.sin(x / 13.0) + 1.8 * (vnoise(x, 1, 5661, 16.0) - 0.5) * 2 - bump(x, 65, 14, 1.5)
 
-    # ---- 2. Lush Briarwick Lower Woods -> Highland Edge Groves ----
-    r.forest_band('S', 22, wobble=6.0)
-    r.forest_band('W', 6, wobble=4.0)
-    r.forest_band('E', 6, wobble=4.0)
-    r.forest_band('N', 3, wobble=2.5)
+    def lip2_fn(x):
+        # Clean flat shelf at x=12..20 (y=72) so Shearing Waterfall drops crisply off a straight cliff!
+        if 12 <= x <= 20:
+            return 72.0
+        return 72.5 + 2.2 * math.cos(x / 14.0) + 1.8 * (vnoise(x, 2, 5662, 16.0) - 0.5) * 2
+
+    def lip3_fn(x):
+        # Clean flat shelf at x=16..22 (y=49) so upper Sheep-Wash Waterfall drops crisply off a straight cliff!
+        if 16 <= x <= 22:
+            return 49.0
+        # Sweeps gracefully south on the east flank (x=58..79) to y~53, absorbing the eastern fell tor continuously!
+        return 46.5 + 1.8 * math.sin(x / 12.0) + 1.5 * (vnoise(x, 3, 5663, 16.0) - 0.5) * 2 + bump(x, 73, 13, 7.0)
+
+    def lip4_fn(x):
+        # Sweeps gracefully south on the west flank (x=0..18) to y~36, grounding the western summit crag continuously!
+        # Stays north of y=23 across x=24..79 so [24,40] stays ht=3 and [70,20] stays ht=4!
+        return 22.5 + 1.8 * math.sin(x / 15.0) + 1.4 * (vnoise(x, 4, 5664, 16.0) - 0.5) * 2 + bump(x, 5, 11, 13.5)
+
+    lip_curves = [(colmap(W, lip1_fn), 1), (colmap(W, lip2_fn), 2), (colmap(W, lip3_fn), 3), (colmap(W, lip4_fn), 4)]
+    for curve, h_ in lip_curves:
+        for x in range(W):
+            yy = max(4, min(H - 5, curve[x]))
+            m.ht[:yy + 1, x] = np.maximum(m.ht[:yy + 1, x], h_)
+    for h_ in (1, 2, 3, 4):
+        CK.smooth_ht(m, h_, 2)
+    # Re-enforce flat waterfall lip shelves on terrace 2 (x=13..19, y=72) and terrace 3 (x=16..22, y=49)!
+    m.ht[:73, 13:20] = np.maximum(m.ht[:73, 13:20], 2)
+    m.ht[73:77, 13:20] = np.minimum(m.ht[73:77, 13:20], 1)
+    m.ht[:50, 16:23] = np.maximum(m.ht[:50, 16:23], 3)
+    m.ht[50:54, 16:23] = np.minimum(m.ht[50:54, 16:23], 2)
+    # Guarantee [70, 20] sits cleanly on ht=4 and [24, 40] sits cleanly on ht=3
+    m.ht[:23, 66:75] = np.maximum(m.ht[:23, 66:75], 4)
+    m.ht[38:44, 22:28] = 3
+
+    # ---- 2. Lush Briarwick Lower Woods & Cohesive Highland Edge Groves ----
+    r.forest_band('S', 20, wobble=5.0)
+    r.forest_band('W', 5, wobble=3.0)
+    r.forest_band('E', 5, wobble=3.0)
+    r.forest_band('N', 3, wobble=2.0)
+    # Cohesive, substantial woodland groves framing switchbacks & flanks (replacing scattered confetti!)
     for cx, cy, rx, ry in (
-        (22, 80, 5.2, 3.2), (62, 64, 4.5, 3.2), (12, 92, 5.5, 4.2), (70, 104, 5.5, 4.2),
-        (30, 30, 3.5, 2.4), (44, 66, 3.6, 2.4), (60, 56, 3.2, 2.2), (34, 84, 3.2, 2.2),
-        (70, 78, 3.2, 2.2), (58, 12, 3.5, 2.4), (24, 6, 3.5, 2.4), (66, 26, 3.4, 2.6),
-        (8, 30, 3.5, 3.2), (50, 104, 3.4, 2.4), (18, 108, 4.5, 3.5), (66, 110, 4.5, 3.5),
+        (14, 107, 7.5, 4.8), (68, 108, 7.5, 4.8), (50, 105, 5.2, 3.4),
+        (10, 91, 5.8, 4.0), (26, 81, 5.8, 3.8), (70, 77, 5.0, 3.4),
+        (36, 70, 5.4, 3.4), (63, 64, 5.4, 3.5), (40, 58, 4.8, 3.0),
+        (71, 44, 5.4, 3.6), (8, 28, 6.2, 4.2), (30, 30, 5.0, 3.2),
+        (67, 30, 5.5, 3.6), (17, 12, 6.2, 4.0), (26, 17, 4.8, 3.0),
+        (60, 10, 6.2, 3.8), (70, 10, 5.0, 3.4), (27, 50, 4.5, 2.8),
     ):
         r.copse(cx, cy, rx, ry)
 
     # ---- 3. Switchback Drove Road (Preserving Exact Ram Race [47..53, 33] <= 73 Steps from [56, 78]!) ----
     road = [(39.5, 119), (40, 108), (26, 100), (24, 88), (46, 82), (58, 74), (52, 62),
             (30, 56), (26, 44), (44, 36), (50, 33), (56, 28), (48, 14), (43.5, 0)]
-    r.road(road, w=3.2, open_=(2, 5))
-    # Direct shepherd drove-path shortcut climbing from hamlet shelf up through (47, 47) to Fleece Cross (50, 33) (Ram Race <= 60 steps!)
+    r.road(road, w=3.2, open_=(2, 4))
+    # Direct shepherd drove-path shortcut climbing from hamlet shelf up through (47, 47) to Fleece Cross (50, 33)
     r.lane([(57, 78), (57, 70), (50, 56), (48, 47), (49, 38), (50, 33)], w=2.2, open_=None)
     # Scenic summit spur out to REPEL (70, 20)
     r.lane([(52, 16), (62, 18), (70, 20)], w=2.2, open_=None)
@@ -2144,50 +2176,95 @@ def build_566():
     r.exit('N', 42, 4)
     # Keep Ram Race finish line [47..53, 33] cleanly on road/gravel!
     m.cls[32:35, 47:54] = 'd'
+
+    # Locate exact stair landings along each continuous terrace lip where road crosses
     stairs = []
-    for yl, h_ in lips:
-        xs = [x for x in range(W) if r.road_mask[yl, x]]
-        if xs:
-            stairs.append((min(xs) + max(0, (len(xs) - 3) // 2), yl, h_))
-    # Add direct highland drove stair on lip 3 (y~47) at x=47 for the Ram Race climb!
-    lip47_y = max(y for y in range(38, 56) if m.ht[y, 48] == 3)
+    for h_ in (1, 2, 3, 4):
+        best_x, best_y = None, None
+        for x in range(8, W - 8):
+            ys_lip = [y for y in range(4, H - 5) if m.ht[y, x] == h_ and m.ht[y + 1, x] < h_]
+            for yl in ys_lip:
+                if r.road_mask[max(0, yl - 2):min(H, yl + 5), x].any():
+                    if best_x is None:
+                        best_x, best_y = x, yl
+        if best_x is not None:
+            # Find center of road crossing around best_x
+            xs_hit = [x for x in range(max(4, best_x - 6), min(W - 4, best_x + 12))
+                      if any(m.ht[y, x] == h_ and m.ht[y + 1, x] < h_ and r.road_mask[max(0, y - 2):min(H, y + 5), x].any()
+                             for y in range(max(4, best_y - 4), min(H - 5, best_y + 5)))]
+            sx = (min(xs_hit) + max(xs_hit)) // 2 - 1 if xs_hit else best_x
+            yl_s = max(y for y in range(4, H - 5) if m.ht[y, sx + 1] == h_)
+            stairs.append((sx, yl_s, h_))
+    # Add direct highland drove stair on lip 3 at x=47 for the Ram Race climb!
+    lip47_y = max(y for y in range(36, 56) if m.ht[y, 48] == 3)
     stairs.append((47, lip47_y, 3))
-    # Shepherds' Hamlet shelf & Summit Hill-Fort Ring
-    r.clearing(64, 89, 13, 6)
+    # Also ensure lip 2 has direct drove stair near x=56 for the Ram Race start [56, 78]!
+    lip72_y = max(y for y in range(64, 80) if m.ht[y, 57] == 2)
+    if not any(h_ == 2 and abs(sx - 56) <= 4 for sx, _, h_ in stairs):
+        stairs.append((55, lip72_y, 2))
+
+    # Cozy 3-cottage Shepherds' Hamlet shelf (wide clear meadow on ht=1!) & Summit Hill-Fort Ring
+    r.clearing(63, 88, 16, 8)
+    m.cls[81:95, 50:77] = np.where(m.cls[81:95, 50:77] == 'T', '.', m.cls[81:95, 50:77])
     r.lane([(46, 84), (58, 92)], w=2.2)
     r.clearing(40, 9, 9.5, 6.2)
 
-    # ---- 4. Cold Spring, Organic Sheep-Wash Pool & Shearing Waterfall ----
-    CK.stream(r, [(20, 46), (19, 52), (18, 58), (16, 64), (14, 70), (12, 76), (9, 84), (6, 92)], w=2.0, seed=1, only='T.t')
-    # Sculpted organic sheep-wash pool (multi-lobe, zero oval stampiness!)
-    m.blob(18.0, 59.0, 3.6, 2.0, 'w', seed=5662, rough=0.45, only='.tT')
+    # ---- 4. Smooth Sheep-Wash Brook (2-4 Tile Runs + Clean 45° Bends — ZERO S5 Stair-Stepping!) ----
+    # Carve clean vertical runs + gentle 45° bends with width 3 so water reads as an organic mountain brook!
+    def carve_river_seg(x0, y0, x1, y1, hw=1):
+        steps = max(abs(x1 - x0), abs(y1 - y0), 1)
+        for i in range(steps + 1):
+            t = i / float(steps)
+            cx = int(round(x0 + (x1 - x0) * t))
+            cy = int(round(y0 + (y1 - y0) * t))
+            for dy in range(-hw, hw + 1):
+                for dx in range(-hw, hw + 1):
+                    if abs(dx) + abs(dy) <= hw + 1:
+                        X, Y = cx + dx, cy + dy
+                        if m.inb(X, Y) and m.cls[Y, X] in 'T.t':
+                            m.cls[Y, X] = 'w'
+
+    # Upper cold spring basin (18..20, 46..48) -> real 3-wide waterfall cascade (18..20, 49..51) -> Sheep-Wash basin -> Shearing Waterfall
+    carve_river_seg(19, 51, 19, 56, hw=1)
+    m.blob(18.5, 58.5, 3.6, 2.3, 'w', seed=5662, rough=0.35, only='.tT')
+    carve_river_seg(18, 60, 16, 63, hw=1)   # clean 45° bend SW
+    carve_river_seg(16, 63, 16, 71, hw=1)   # straight vertical run to Shearing Waterfall lip (y=72)!
+    # Plunge pool & lower brook: clean vertical -> 45° bend -> vertical run into west woods
+    m.blob(16.0, 77.5, 3.2, 2.1, 'w', seed=5665, rough=0.35, only='.tT')
+    carve_river_seg(15, 79, 12, 83, hw=1)   # clean 45° bend SW
+    carve_river_seg(12, 83, 12, 88, hw=1)   # 5-tile straight vertical run
+    carve_river_seg(12, 88, 9, 91, hw=1)    # clean 45° bend SW
+    carve_river_seg(9, 91, 9, 95, hw=1)     # straight vertical run into south woods
+    smooth_cls(m, 'w', into='.', passes=1, only='.')
+
+    # Lock crisp 3-wide upper spring basin (18..20, 47..48), waterfall throat (18..20, 49..50), & plunge (18..20, 51..53)!
+    for y in range(46, 54):
+        for x in (17, 21):
+            if m.cls[y, x] == 'w':
+                m.cls[y, x] = '.'
+    m.cls[47:49, 18:21] = 'w'
+    m.cls[49:51, 18:21] = '.'
+    m.cls[51:54, 18:21] = 'w'
+
     r.lane([(30, 58), (22, 60)], w=2.0)
     # Keep Shearing fall events ([13,60] Wooloo, [14,58] Waterfall, [15,61] SOFTSAND, [20,57] Sheep-wash) cleanly connected!
     for y_ in range(57, 62):
-        for x_ in range(12, 17):
+        for x_ in range(12, 16):
             if m.cls[y_, x_] in 'wT':
                 m.cls[y_, x_] = '.'
     for ex, ey in ((13, 60), (14, 58), (15, 61), (20, 57)):
         m.cls[ey, ex] = '.'
-    FALL = None
-    for x in range(6, 22):
-        for y in range(62, 90):
-            if m.cls[y, x] == 'w' and m.ht[y, x] == 2 and m.ht[y + 1, x] < 2:
-                FALL = (x, y)
-                break
-        if FALL:
-            break
-    if FALL:
-        fx, fy = FALL
-        for y in range(fy - 3, fy + 8):
-            for x in range(fx - 2, fx + 4):
-                if m.cls[y, x] == 'w':
-                    m.cls[y, x] = '.'
-            m.cls[y, fx] = m.cls[y, fx + 1] = 'w'
-        for y in range(fy, fy + 4):
-            m.cls[y, fx] = m.cls[y, fx + 1] = '.'
-        # Organic plunge pool at waterfall base
-        m.blob(fx + 0.5, fy + 6.0, 2.8, 1.8, 'w', seed=5665, rough=0.38, only='.t')
+
+    # Shearing Waterfall at fx=15..16 dropping off lip2 (y=72)
+    fx, fy = 15, 72
+    for y in range(fy - 2, fy + 6):
+        for x in range(fx - 1, fx + 3):
+            if m.cls[y, x] == 'w':
+                m.cls[y, x] = '.'
+        m.cls[y, fx] = m.cls[y, fx + 1] = 'w'
+    for y in range(fy, fy + 4):
+        m.cls[y, fx] = m.cls[y, fx + 1] = '.'
+    m.blob(fx + 0.5, fy + 5.5, 3.0, 2.0, 'w', seed=5666, rough=0.35, only='.t')
 
     for e in evs:
         ex, ey = e['at']
@@ -2197,21 +2274,21 @@ def build_566():
     for sx, yl, h_ in stairs:
         CK.stair(r, sx, yl, w=3, h=h_)
     # Stepping stones across the sheep-wash brook at y=58..59 connecting Wooloo (13,60), Waterfall (14,58) & SOFTSAND (15,61)!
-    wash_stones = [(x, 58) for x in range(15, 22) if m.cls[58, x] == 'w'] + [(x, 59) for x in range(15, 22) if m.cls[59, x] == 'w']
-    if FALL:
-        CK.waterfall(r, fx, fx + 1, fy)
-        wash_stones += [(fx, fy + 5), (fx + 1, fy + 6)] if m.cls[fy + 6, fx + 1] == 'w' else [(fx, fy + 5)]
+    wash_stones = [(x, 58) for x in range(15, 23) if m.cls[58, x] == 'w'] + [(x, 59) for x in range(15, 23) if m.cls[59, x] == 'w']
+    CK.waterfall(r, 18, 20, 49)
+    CK.waterfall(r, fx, fx + 1, fy)
+    wash_stones += [(fx, fy + 5), (fx + 1, fy + 6)] if m.cls[fy + 6, fx + 1] == 'w' else [(fx, fy + 5)]
     if wash_stones:
         CK.stones(r, sorted(set(wash_stones)))
 
     # One-way drove-slide jump ledges where the switchback doubles back
-    for x0, x1, y in ((30, 40, 66), (46, 56, 42), (60, 70, 82), (28, 36, 92)):
+    for x0, x1, y in ((30, 40, 66), (46, 56, 42), (61, 69, 79), (28, 36, 92)):
         if all(m.ht[y, x] == m.ht[y, x0] and m.cls[y, x] in '.t' and not r.road_mask[y - 1:y + 2, x].any() for x in range(x0, x1 + 1)):
             CK.ledge(r, x0, x1, y)
 
     CK.grass_fields(r, [
-        (32, 104, 4.0), (54, 98, 3.6), (16, 84, 3.2), (40, 74, 4.0), (64, 72, 3.2),
-        (40, 60, 3.6), (60, 46, 3.2), (30, 40, 3.2), (58, 20, 3.6), (26, 16, 3.2), (70, 34, 3.2),
+        (32, 104, 4.0), (54, 99, 3.4), (18, 84, 3.0), (38, 76, 3.8), (64, 70, 3.2),
+        (38, 60, 3.4), (58, 48, 3.2), (32, 40, 3.2), (58, 20, 3.4), (26, 16, 3.2), (70, 34, 3.2),
     ])
 
     # ---- 5. Lock ALL 26 Exact HEAD Events & Signposts ----
@@ -2225,24 +2302,31 @@ def build_566():
     # Elevation-graded highland woods! (Lush blossom lower -> deep emerald/pine mid -> alpine spruce summit!)
     def pick_566_pal(x, y):
         if y > 82:
-            return HIGHLAND_LOW_WOODS[int(vnoise(x, y, 5661, 10.0) * len(HIGHLAND_LOW_WOODS) * 0.999)]
+            return HIGHLAND_LOW_WOODS[int(vnoise(x, y, 5661, 12.0) * len(HIGHLAND_LOW_WOODS) * 0.999)]
         if y > 38:
-            return HIGHLAND_MID_WOODS[int(vnoise(x, y, 5662, 10.0) * len(HIGHLAND_MID_WOODS) * 0.999)]
-        return HIGHLAND_TOP_WOODS[int(vnoise(x, y, 5663, 10.0) * len(HIGHLAND_TOP_WOODS) * 0.999)]
+            return HIGHLAND_MID_WOODS[int(vnoise(x, y, 5662, 12.0) * len(HIGHLAND_MID_WOODS) * 0.999)]
+        return HIGHLAND_TOP_WOODS[int(vnoise(x, y, 5663, 12.0) * len(HIGHLAND_TOP_WOODS) * 0.999)]
 
-    CK.woods(r, HIGHLAND_LOW_WOODS, scale=11.0, pick=pick_566_pal, accents={'blossom': 0.015})
+    CK.woods(r, HIGHLAND_LOW_WOODS, scale=12.0, pick=pick_566_pal, accents=None)
 
-    # ---- 6. Shepherds' Hamlet Cottages, Fleece Cross, Hill-Fort Ring, Sheepfolds & Warm Lanterns ----
+    # ---- 6. Cozy 3-Cottage Shepherds' Hamlet, Fleece Cross, Hill-Fort Ring, Sheepfolds & Warm Lanterns ----
     glow_pts = []
-    for n, x, y in (('gl_cot', 52, 82), ('sh_small', 62, 83), ('sh_cot', 68, 83)):
-        put_safe(m, n, x, y, on='.t', r=5, prot=prot_wide)
+    sh_cot_pos = None
+    for n, x, y in (('gl_cot', 49, 82), ('sh_small', 59, 84), ('sh_cot', 67, 83)):
+        pos_c = put_safe(m, n, x, y, on='.t', r=3, prot=prot_wide)
+        if n == 'sh_cot':
+            sh_cot_pos = pos_c
+    for rx, ry, rnm in ((18, 53, 'nt_boulder'), (21, 55, 'nt_reed1'), (14, 65, 'nt_boulder'),
+                        (18, 66, 'nt_reed0'), (13, 79, 'nt_boulder'), (18, 80, 'nt_reed1'),
+                        (14, 86, 'nt_reed0'), (11, 90, 'nt_boulder')):
+        put_safe(m, rnm, rx, ry, on='.t', r=2, prot=prot_wide)
     put_safe(m, 'pf_fleececross', 49, 30, on='.t', r=3, prot=prot_wide)
-    m.fence(52, 78, 96, gaps=((60, 62),))
+    m.fence(52, 76, 95, gaps=((59, 62),))
     # Standing-stone Hill-Fort Ring crowning the summit
     for i, (cx, cy) in enumerate(((40, 3), (34, 5), (46, 5), (32, 10), (48, 10), (35, 14), (45, 14), (40, 16))):
         put_safe(m, 'fw_stone' if i % 2 else 'pf_roadstone', cx, cy, on='.t', r=1, prot=prot_wide)
-    # Drystone sheepfolds on every terrace
-    for (x0, y0, w_, h_) in ((54, 104, 9, 5), (14, 62, 7, 4), (60, 36, 8, 5), (22, 22, 7, 4)):
+    # Drystone sheepfolds on terraces (with hayricks inside!)
+    for (x0, y0, w_, h_) in ((55, 102, 8, 5), (60, 36, 8, 5), (24, 24, 7, 4)):
         for x in range(x0, x0 + w_):
             for y in (y0, y0 + h_):
                 if x != x0 + w_ // 2 or y == y0:
@@ -2254,8 +2338,8 @@ def build_566():
                     m.stamp('nr_wall_v', x, y, mark='B')
 
     for nm, x, y in (
-        ('pf_hayrick', 58, 100), ('pf_logbench', 56, 92), ('pf_well', 60, 86),
-        ('pf_wagon', 47, 90), ('pf_shrine', 50, 30), ('pf_hayrick', 66, 40), ('nt_stonering', 24, 26),
+        ('pf_hayrick', 58, 104), ('pf_logbench', 57, 92), ('pf_well', 62, 89),
+        ('pf_wagon', 47, 91), ('pf_shrine', 50, 30), ('pf_hayrick', 63, 38), ('pf_hayrick', 27, 26),
         ('pf_lantern', 43, 112), ('pf_lantern', 59, 90), ('pf_lantern', 69, 90),
         ('pf_lantern', 49, 35), ('pf_lantern', 22, 58), ('pf_lantern', 43, 10),
         ('pf_lantern', 29, 86), ('pf_lantern', 56, 73), ('pf_lantern', 30, 54),
@@ -2264,41 +2348,122 @@ def build_566():
         if res and nm == 'pf_lantern':
             glow_pts.append((res[0], res[1] + 1))
 
-    CK.fringe(r, CK.FRINGE['meadow'], 230, seed=1, near_forest=6)
-    CK.fringe(r, ['nt_pine_sh', 'nt_dpine_sh', 'tr_pine', 'nt_round_sh'], 75, box=(0, 0, W, 96), seed=2, near_forest=0)
-    CK.undergrowth(r, 260, seed=3)
-    CK.props(r, ['nt_boulder', 'nt_rocks_s0', 'nt_rocks_s1', 'nt_rock_big', 'nt_stump'], 42, box=(0, 0, W, 72), clump=3, seed=7)
-    CK.props(r, ['nt_log', 'nt_stump', 'nt_rocks_s1'], 18, box=(0, 70, W, H), clump=2, seed=8)
+    # Cohesive multi-tree highland woodland groves (REPLACING scattered lone confetti trees!)
+    def place_grove_566(cx, cy, count, rad, kinds, seed_):
+        grng = random.Random(56600 + seed_)
+        placed_g = 0
+        cands = []
+        for _ in range(count * 16):
+            k = grng.choice(kinds)
+            st = STAMPS[k]
+            ang = grng.uniform(0, 2 * math.pi)
+            dist = grng.uniform(0.4, rad)
+            tx = int(round(cx + math.cos(ang) * dist)) - st['w'] // 2
+            ty = int(round(cy + math.sin(ang) * dist * 0.78)) - st['h'] + 1
+            cands.append((ty, tx, k))
+        for ty, tx, k in sorted(cands):
+            if placed_g >= count:
+                break
+            st = STAMPS[k]
+            w_, h_ = st['w'], st['h']
+            if ty < 1 or tx < 1 or tx + w_ >= W - 1 or ty + h_ >= H - 1:
+                continue
+            if not m.can_tree(k, tx, ty, '.t'):
+                continue
+            if prot_wide[ty:ty + h_, tx:tx + w_].any() or r.road_mask[max(0, ty):min(H, ty + h_ + 1), max(0, tx - 1):min(W, tx + w_ + 1)].any():
+                continue
+            if m.cliff[max(0, ty - 1):min(H, ty + h_ + 1), tx:tx + w_].any():
+                continue
+            if m.ht[ty:ty + h_, tx:tx + w_].min() != m.ht[ty:ty + h_, tx:tx + w_].max():
+                continue
+            m.stamp(k, tx, ty, mark='B')
+            placed_g += 1
+        # Hug the grove skirt with dense ferns & shrubs
+        for _ in range(max(3, placed_g)):
+            ug = grng.choice(('nt_shrub0', 'nt_shrub1', 'nt_azalea0', 'nt_azalea1', 'nt_fern0', 'nt_fern1'))
+            ux = int(round(cx + grng.uniform(-rad - 1.2, rad + 1.2)))
+            uy = int(round(cy + grng.uniform(-rad * 0.5, rad + 1.2)))
+            put_safe(m, ug, ux, uy, on='.', r=1, prot=prot_wide)
 
-    # ---- 7. Paint + Forest Infill, Mossy Ground Depth, Wildflowers, Summit Hoar & Warm Glows ----
+    low_g = ['nt_dark_sh', 'nt_round_sh', 'tr_oak2', 'nt_teal_a', 'nt_olive']
+    mid_g = ['nt_dpine_sh', 'nt_pine_sh', 'nt_dark_sh', 'nt_teal_b', 'tr_pine']
+    top_g = ['nt_dpine_sh', 'nt_pine_sh', 'nt_pine_blue', 'tr_pine', 'nt_dark_sh']
+    for gi, (gx, gy, cnt, rad, gpal) in enumerate([
+        (33, 97, 7, 3.6, low_g), (66, 98, 6, 3.2, low_g), (18, 93, 6, 3.2, low_g),
+        (36, 85, 7, 3.5, low_g), (68, 74, 6, 3.2, mid_g), (22, 66, 6, 3.2, mid_g),
+        (46, 64, 7, 3.5, mid_g), (66, 56, 7, 3.4, mid_g), (34, 48, 6, 3.2, mid_g),
+        (20, 38, 6, 3.2, top_g), (62, 28, 7, 3.4, top_g), (26, 12, 7, 3.5, top_g),
+        (56, 12, 6, 3.2, top_g),
+    ]):
+        place_grove_566(gx, gy, cnt, rad, gpal, gi + 1)
+
+    # Tight forest-edge feathering ONLY (near_forest=2, ZERO random lone mid-field sticker trees!)
+    CK.fringe(r, ['nt_dark_sh', 'nt_dpine_sh', 'nt_pine_sh', 'nt_teal_a', 'tr_oak2', 'nt_round_sh'], 68, seed=1, near_forest=2)
+    CK.undergrowth(r, 175, kinds=('nt_fern0', 'nt_fern1', 'nt_shrub0', 'nt_shrub1', 'nt_azalea0', 'nt_azalea1'), seed=3)
+    CK.props(r, ['nt_boulder', 'nt_rocks_s0', 'nt_rocks_s1', 'nt_rock_big', 'nt_stump'], 32, box=(0, 0, W, 72), clump=2, seed=7)
+    CK.props(r, ['nt_log', 'nt_birch_h', 'nt_stump', 'nt_rocks_s1'], 14, box=(0, 70, W, H), clump=2, seed=8)
+
+    # ---- 7. Paint + Forest Infill, Mossy Ground Depth, Pathside Flower Beds & Warm Glows ----
     r.paint(glint=0.0)
     CK.paint_extras(r)
-    infill_forest(r, HIGHLAND_MID_WOODS, pick=pick_566_pal, scale=11.0, seed=566)
-    paint_forest_ground_depth(m, seed=566, clearings=[(63, 89, 8, 5, 'worn'), (40, 9, 6, 4, 'worn')], dark=0.45)
+    # Cap cliff end-tiles flanking upper waterfall (x=17/21, y=49..51) so rock walls frame the cascade cleanly
+    sh_rows_566 = K.KITS['sh']['rows']
+    for k_row, wy in enumerate((49, 50, 51)):
+        rk_i = 0 if k_row == 0 else (len(sh_rows_566) - 1 if k_row == 2 else 1)
+        if m.L[1, wy, 17] == sh_rows_566[rk_i][1]:
+            m.L[1, wy, 17] = sh_rows_566[rk_i][2]
+            m.L[0, wy, 17] = K.SH_GRASS[wy % 2][17 % 2]
+        if m.L[1, wy, 21] == sh_rows_566[rk_i][1]:
+            m.L[1, wy, 21] = sh_rows_566[rk_i][0]
+            m.L[0, wy, 21] = K.SH_GRASS[wy % 2][21 % 2]
+    # Clear disembodied brown pole (6167/6175/6183) & jammed fence stub (4846/4867/4875) in col 0 of sh_cot!
+    if sh_cot_pos is not None:
+        cx_c, cy_c = sh_cot_pos
+        for dy_c in range(7):
+            yy_c = cy_c + dy_c
+            if m.inb(cx_c, yy_c):
+                m.L[1, yy_c, cx_c] = 0
+                m.L[2, yy_c, cx_c] = 0
+                m.taken[yy_c, cx_c] = False
+    # Keep west sheep-wash stepping-stone landing (14..15, 58..60) clear of stray boulders so (14,58) & (13,60) stay 100% reachable!
+    for sy_w in (58, 59, 60):
+        for sx_w in (14, 15):
+            if m.inb(sx_w, sy_w) and m.cls[sy_w, sx_w] != 'w':
+                m.L[1, sy_w, sx_w] = 0
+                m.L[2, sy_w, sx_w] = 0
+    infill_forest(r, HIGHLAND_MID_WOODS, pick=pick_566_pal, scale=12.0, seed=566)
+    paint_forest_ground_depth(m, seed=566, clearings=[(63, 89, 10, 6, 'worn'), (40, 9, 6, 4, 'worn'), (50, 34, 5, 3, 'worn')], dark=0.46)
 
-    # Lotus lilies on Sheep-wash pool & wildflower ribbons across the fell terraces
+    # Organic bank-hugging lotus lilies on Sheep-Wash & waterfall plunge pool
     dress_water_lotus(m, prob=0.14, seed=566)
+    # Cohesive pathside, hamlet & waterside flower beds (NO scattered random mid-field blobs!)
     FL = K.DECOR_SH['flowers']
     for i, (cx_, cy_, rx, ry, ks) in enumerate((
-        (50, 70, 6, 2.2, (2, 6)), (24, 50, 5, 2.2, (8, 9)), (62, 30, 5, 2.2, (0, 4)),
-        (36, 96, 6, 3.0, (1, 5)), (68, 58, 4.5, 2.2, (6, 7)), (30, 22, 5, 2.2, (10, 11)),
-        (44, 110, 5, 2.5, (1, 2)),
+        (43, 111, 4.5, 2.2, (1, 2)),     # South Briarwick trail entrance
+        (34, 99, 4.5, 2.0, (2, 6)),      # Lower switchback shoulder
+        (56, 93, 5.5, 2.2, (0, 2)),      # Shepherds' Hamlet garden fence
+        (68, 92, 4.5, 2.0, (1, 5)),      # East hamlet cottage border
+        (24, 58, 4.0, 2.2, (6, 7)),      # Sheep-Wash brook east bank
+        (48, 60, 4.5, 2.0, (2, 6)),      # Mid drove-road shoulder
+        (33, 44, 4.2, 2.0, (8, 9)),      # Upper switchback shoulder
+        (52, 36, 4.8, 2.2, (2, 3)),      # Fleece Cross floral border
+        (54, 18, 4.5, 2.0, (0, 4)),      # Summit pass road shoulder
     )):
         CK.meadow(r, cx_, cy_, rx, ry, tiles=[FL[k] for k in ks], p=0.72, seed=i)
     scatter_petals_and_mushrooms(
         m,
-        spots_petals=[(40, 108, 6, 4, 0.25), (60, 90, 6, 4, 0.22), (50, 35, 5, 3, 0.20)],
-        spots_mush=[(16, 86, 3.0, 5), (22, 62, 3.0, 5), (36, 12, 3.0, 4)],
+        spots_petals=[(40, 109, 5, 3, 0.24), (60, 91, 6, 3.5, 0.24), (50, 34, 5, 3, 0.22)],
+        spots_mush=[(16, 86, 2.5, 5), (22, 62, 2.5, 5), (36, 12, 2.5, 4)],
         seed=566,
     )
-    # First mountain hoar frost on summit grass (transitioning naturally into snowy Frostwick Pass!)
-    for y in range(0, 26):
+    # Subtle summit hoar-frost drifts on top terrace (transitioning naturally into snowy Frostwick Pass!)
+    for y in range(0, 22):
         for x in range(W):
-            if m.cls[y, x] == '.' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and r.rng.random() < 0.22 * (1 - y / 26.0):
+            if m.cls[y, x] == '.' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and vnoise(x, y, 5669, 4.5) > 0.56 and r.rng.random() < 0.28 * (1 - y / 22.0):
                 m.L[1, y, x] = r.rng.choice([K.STAMPS['fw_drift0']['layers'][1][0][0], K.STAMPS['fw_drift1']['layers'][1][0][0]])
-    CK.shore(r, wet=0, wrack=0, shallows=0.05, kelp=0.0, chalk_rocks=False)
+    CK.shore(r, wet=0, wrack=0, shallows=0.04, kelp=0.0, chalk_rocks=False)
     add_warm_glows(m, glow_pts + [(50, 33), (62, 88), (40, 8)])
-    CK.scatter_quiet(r, 20)
+    CK.scatter_quiet(r, 14)
 
     # Seal ALL stray perimeter edges strictly except S (38..41 -> 120) and N (42..45 -> 577)!
     seal_unconnected_edges(
@@ -2306,6 +2471,17 @@ def build_566():
         open_cells=[(x, H - 1) for x in range(38, 42)] + [(x, 0) for x in range(42, 46)],
         filler=P1('nt_bush0'),
     )
+    # Consolidate RJ DirtDark onto L0 ONLY & recompute exact NB2AUTO (0 mismatches!)
+    from terrain import NB2AUTO, nbits
+    lo_dd = RC.vauto('rejuvenation', 'DirtDark', 0)
+    hi_dd = lo_dd + 48
+    m0_dd = (m.L[0] >= lo_dd) & (m.L[0] < hi_dd)
+    m1_dd = (m.L[1] >= lo_dd) & (m.L[1] < hi_dd)
+    m.L[0, m1_dd] = m.L[1, m1_dd]
+    m.L[1, m1_dd] = 0
+    mask_dd = m0_dd | m1_dd
+    for yy_d, xx_d in zip(*np.where(mask_dd)):
+        m.L[0, yy_d, xx_d] = lo_dd + NB2AUTO[nbits(mask_dd, int(xx_d), int(yy_d))]
     write_wave13_map(m, 566, "# Spinners' Rise (566). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).\n")
     return m
 

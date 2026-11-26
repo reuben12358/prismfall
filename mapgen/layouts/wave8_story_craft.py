@@ -1212,6 +1212,8 @@ def build_183():
     # Preserves EXACT HEAD events:
     #   #2 'Mart' @ (2, 3) (dir=6 right, exact badge-scaled pbPokemonMart script!)
     #   #3 'Exit' @ (4, 8) -> Map 180 (40, 45) (incoming arrival from 180 LC_DEPT lands @ (4, 7) up!)
+    # Wave 2 upgrade: ZERO glaring cyan-square 725 floor spam; sleek dark charcoal architectural void casing (5533..5562)
+    # so arcade cabinets, royal-blue/crimson neon carpets, prize counter & player pathing pop with razor-sharp Gen 5 contrast!
     TID = 34
     VOID = 5437
     W, H = 21, 12
@@ -1219,9 +1221,6 @@ def build_183():
     L[0, :, :] = VOID
 
     # ---- 1. Void-Sculpted Cyberpunk-DS Arcade Silhouette (Stepped L-Hall + Chamfered Lounges!) ----
-    # West Prize Counter & Entry Vestibule: x=1..6, y=2..7 + recessed Entry Door Notch x=3..5, y=8!
-    # Central Glowing Neon Game Floor:      x=7..15, y=2..10 (steps 2 rows deeper south into High-Roller Holo Lounge!)
-    # East Recessed Cyber-Vending Alcove:   x=16..19, y=3..8 (stepped 1 row inward north & chamfered SE into black void!)
     floor = np.zeros((H, W), dtype=bool)
     floor[2:8, 1:7] = True          # West prize counter & vestibule (x=1..6, y=2..7)
     floor[8, 3:6] = True            # Recessed south entry notch (x=3..5, y=8; Exit @ 4,8!)
@@ -1232,7 +1231,7 @@ def build_183():
     floor[3:9, 16:20] = True        # East cyber-vending & gaming PC alcove (x=16..19, y=3..8)
     floor[8, 19] = False            # SE alcove chamfer
 
-    # 2-row sleek dark-steel / neon-blue arcade north walls above every floor boundary!
+    # 2-row sleek dark-steel / electric-blue arcade north walls above every floor boundary!
     wall_face = np.zeros((H, W), dtype=bool)
     for y in range(2, H):
         for x in range(1, W - 1):
@@ -1243,17 +1242,14 @@ def build_183():
 
     interior = floor | wall_face
 
-    # ---- 2. Auto-Seamed Sleek Cyberpunk-Blue Wall Trim & Dark Diamond Luxury Floors ----
-    # Dark sleek obsidian-diamond floor (7737/7745 dark diamond carpet, pas=0) & dark slate (7091/7092/7099/7100)
+    # ---- 2. Sleek Dark Charcoal Architectural Casing (NO loud cyan block border!) & High-Contrast Obsidian Floors ----
     for y in range(H):
         for x in range(W):
             if floor[y, x]:
+                # Rich deep charcoal-diamond arcade flooring so vibrant neon carpets & cabinets pop unmistakably!
                 L[0, y, x] = 7737 if (x + y) % 2 == 0 else 7745
             elif wall_face[y, x]:
                 is_lower = (y + 1 < H and floor[y + 1, x])
-                # Sleek modern dark-steel & electric-blue illuminated arcade paneling!
-                # Row 0 (upper): 7520/7521/7522 crisp silver-framed top header + neon blue glass
-                # Row 1 (lower): 7536/7537/7538 dark steel kickplate + blue glow trim
                 left_end = not wall_face[y, x - 1]
                 right_end = not wall_face[y, x + 1]
                 if left_end:
@@ -1263,7 +1259,7 @@ def build_183():
                 else:
                     L[0, y, x] = 7537 if is_lower else 7521
             else:
-                # Sleek Electric-Blue Perimeter Trim (7552..7570) framing the sculpted void silhouette!
+                # Refined dark charcoal architectural void casing (5533..5562 — crisp framing, ZERO bright cyan glare!)
                 N = y > 0 and interior[y - 1, x]
                 S = y + 1 < H and interior[y + 1, x]
                 W_ = x > 0 and interior[y, x - 1]
@@ -1273,167 +1269,130 @@ def build_183():
                 SW = y + 1 < H and x > 0 and interior[y + 1, x - 1]
                 SE = y + 1 < H and x + 1 < W and interior[y + 1, x + 1]
                 if S and E:
-                    L[0, y, x] = 7564
+                    L[0, y, x] = 5562
                 elif S and W_:
-                    L[0, y, x] = 7563
+                    L[0, y, x] = 5561
                 elif N and E:
-                    L[0, y, x] = 7556
+                    L[0, y, x] = 5554
                 elif N and W_:
-                    L[0, y, x] = 7555
+                    L[0, y, x] = 5553
                 elif S:
-                    L[0, y, x] = 7569
+                    L[0, y, x] = 5534
                 elif N:
-                    L[0, y, x] = 7553
+                    L[0, y, x] = 5550
                 elif E:
-                    L[0, y, x] = 7562
+                    L[0, y, x] = 5541
                 elif W_:
-                    L[0, y, x] = 7560
+                    L[0, y, x] = 5543
                 elif SE:
-                    L[0, y, x] = 7570
+                    L[0, y, x] = 5533
                 elif SW:
-                    L[0, y, x] = 7568
+                    L[0, y, x] = 5535
                 elif NE:
-                    L[0, y, x] = 7554
+                    L[0, y, x] = 5549
                 elif NW:
-                    L[0, y, x] = 7552
+                    L[0, y, x] = 5551
 
-    # ---- 3. Neon Carpet Lanes, Glowing Cyan Floor Pads & Multi-Zone Arcade Flooring ----
+    # ---- 3. Clean Cohesive Arcade Flooring & Crisp Neon Carpet Aisles (ZERO harsh ## steel plates!) ----
     BLUE_CARPET = [[7496, 7497, 7498], [7504, 7505, 7506], [7512, 7513, 7514]]
     RED_CARPET = [[7172, 7173, 7174], [7180, 7181, 7182], [7188, 7189, 7190]]
-    DARK_SLATE = [[7091, 7092, 7091], [7099, 7100, 7099], [7091, 7092, 7091]]
 
-    # West Prize Booth behind-counter slate pad (x=1..2, y=2..4)
+    # Subtle matte charcoal slate service pads (7099 ONLY — zero white ## grids or vertical bars!)
     for y in range(2, 5):
-        for x in (1, 2):
-            L[0, y, x] = 7091 if (x + y) % 2 == 0 else 7092
-
-    # Glowing Crimson Arrival Carpet Lane from Exit (4,8) straight north through the Entry Vestibule (x=3..5, y=4..8)!
-    _put_9slice(L, RED_CARPET, 3, 5, 5, 7, z=1)
-    # Classic Arcade welcome mat right on Exit (4, 8)
-    L[1, 8, 4] = 444
-    L[0, 8, 3] = 7099; L[0, 8, 4] = 7100; L[0, 8, 5] = 7099
-
-    # Royal Electric-Blue Neon Carpet Spine guiding players through the Main Cabinet Floor (x=6..15, y=6..7)
-    _put_9slice(L, BLUE_CARPET, 6, 6, 15, 7, z=1)
-    # High-Roller Holo Lounge Crimson Medallion Carpet (x=9..13, y=8..10)
-    _put_9slice(L, RED_CARPET, 9, 8, 13, 10, z=1)
-    # East Cyber-Alley dark slate floor
-    for y in range(3, 9):
+        for x in (1, 2, 3):
+            if floor[y, x]:
+                L[0, y, x] = 7099
+    for y in range(3, 5):
         for x in range(16, 20):
             if floor[y, x]:
-                L[0, y, x] = 7099 if (x + y) % 2 == 0 else 7100
+                L[0, y, x] = 7099
 
-    # Ambient Glowing Cyan Neon Floor Accent Pads (725 = glowing electric-cyan floor tile, pas=0!)
-    # Creating authentic cyberpunk-DS neon floor glow pools around the cabinet islands, prize booth & holo pod!
-    for gx, gy in ((4, 3), (4, 4), (6, 2), (6, 3), (6, 4), (6, 5),
-                   (7, 2), (10, 2), (11, 2), (14, 2), (15, 2),
-                   (7, 5), (11, 5), (15, 5),
-                   (8, 8), (14, 8), (8, 9), (14, 9),
-                   (16, 4), (16, 5), (16, 6), (17, 7), (18, 7)):
-        if floor[gy, gx]:
-            L[0, gy, gx] = 725
+    # Glowing Crimson Arrival Carpet Lane from Exit (4,8) straight north to Prize & Mart Counter (x=3..5, y=5..7)!
+    _put_9slice(L, RED_CARPET, 3, 5, 5, 7, z=1)
+    L[0, 8, 3] = 7099; L[0, 8, 4] = 7099; L[0, 8, 5] = 7099
+    L[1, 8, 4] = 444  # Crisp arcade welcome mat squarely on Exit (4,8)
+
+    # Royal Electric-Blue Neon Carpet Spine guiding players cleanly through the Main Cabinet Aisle (x=6..16, y=6..7)
+    _put_9slice(L, BLUE_CARPET, 6, 6, 16, 7, z=1)
+    # High-Roller Holo Lounge Crimson Medallion Carpet (x=9..13, y=8..10)
+    _put_9slice(L, RED_CARPET, 9, 8, 13, 10, z=1)
 
     # ---- 4. Sleek Prize & Mart Counter Booth (100% HEAD #2 Mart @ 2,3 Compatible!) ----
-    # Mart clerk (#2) stands at (2, 3) facing RIGHT!
-    # Vertical counter with REAL 0x80 counter flag at (3, 3) & (3, 4) so Essentials shopping from (4, 3) works natively!
-    # PLUS leave (1, 4) cleanly passable so strict 4-neighbor BFS from (4, 7) ALSO reaches (1, 3) adjacent to Mart (2, 3)!
-    # Chrisola Blue Marble Counter tiles:
-    #   (3, 2) = 7227 (top vertical arm, pas=15)
-    #   (3, 3) = 7235 (vertical arm w/ flower & 0x80 COUNTER FLAG!)
-    #   (3, 4) = 7243 (SE corner counter w/ 0x80 COUNTER FLAG!)
-    #   (2, 4) = 7241 (front counter w/ cash register & 0x80 COUNTER FLAG!)
+    # Vertical counter with REAL 0x80 counter flag at (3, 3) & (3, 4) + front return (2, 4); (1, 4) stays open for strict BFS!
     L[1, 2, 3] = 7227
     L[1, 3, 3] = 7235
     L[1, 4, 3] = 7243
     L[1, 4, 2] = 7241
-    # Prize plushies & display case tucked cleanly in the SW corner (x=1..2, y=6) (leaves y=5 & (1,4) wide open!)
-    L[1, 6, 1] = 7128; L[1, 6, 2] = 7129  # Glass prize display case (0x80)
-    L[2, 5, 1] = 7120; L[2, 5, 2] = 7121  # Glass case upper rim (pri=5)
-    # Neon wall posters & glowing arcade screens along BOTH the main north wall (y=0..1) & East Alcove wall (y=1..2)!
-    for wx in (2, 5, 11, 14):
-        L[1, 0, wx] = 7718 if wx % 2 == 0 else 7719
-        L[1, 1, wx] = 7726 if wx % 2 == 0 else 7727
-    # Dress East Cyber-Alley north wall (17..19, 1..2) with matching glowing neon screens & retro tech panels!
-    L[1, 1, 17] = 7719; L[1, 2, 17] = 7727
-    L[1, 1, 18] = 7718; L[1, 2, 18] = 7726
-    L[1, 2, 19] = 7732
+    # Inviting modern silver waiting sofa in SW corner (1..2, 5..6: top 6024/6026 has pas=0, pri=1 -> (1,5)->(1,4) stays walkable!)
+    _put_grid(L, [[6024, 6026], [6032, 6034]], 1, 5, z_rows=(2, 1))
 
-    # ---- 5. Clustered Arcade Cabinet Islands, Prize Roulette, Holo-Pod & Gaming PCs! ----
-    # Island A (North-Center, x=7..9, y=2..4): Back-to-back Rejuvenation Blue Arcade Cabinet Pair + Prize Scoreboard!
-    # Dual Blue Arcade Machines (2x3: 7283..7284 / 7291..7292 / 7299..7300) at (8..9, 3..5) -> wait: put at (7..8, 3..5)!
+    # Cohesive North Wall Architecture strictly inside wall faces (y=0..1 for x=1..15, y=1..2 for x=16..19; >=1-tile gaps!):
+    # Skyline windows + illuminated arcade high-score board (ZERO ceiling-jammed shelves or garish 7718/7719 fire blocks!)
+    SKYLINE_WIN = [[2086, 2087], [2094, 2095]]
+    _put_grid(L, SKYLINE_WIN, 1, 0, z_rows=(1, 1))
+    SCOREBOARD_WALL = [
+        [7312, 7313, 7314],
+        [7320, 7321, 7322],
+    ]
+    _put_grid(L, SCOREBOARD_WALL, 7, 0, z_rows=(1, 1))
+    _put_grid(L, SKYLINE_WIN, 12, 0, z_rows=(1, 1))
+    _put_grid(L, SKYLINE_WIN, 17, 1, z_rows=(1, 1))
+
+    # ---- 5. Clustered Arcade Cabinet Islands, Complete 2-Wide Vending Machine, Prize Roulette, Holo-Pod & Gaming PCs! ----
+    # Complete INTACT 2-wide blue vending machine (2342..2343 / 2350..2351) cleanly anchored at (4..5, 1..2) —
+    # top on lower wall y=1 (zero ceiling jam!), base on floor y=2 (leaves Mart talk cell (4,3) 100% clear!).
+    VENDING_FULL = [
+        [2342, 2343],
+        [2350, 2351],
+    ]
+    _put_grid(L, VENDING_FULL, 4, 1, z_rows=(2, 1))
+
     ARCADE_PAIR = [
         [7283, 7284],
         [7291, 7292],
         [7299, 7300],
     ]
     _put_grid(L, ARCADE_PAIR, 7, 3, z_rows=(2, 1, 1))
-    # Side-facing blue cabinet (1x2: 7307/7315) at (9, 3..4) + prize stool / glowing pad!
     L[2, 3, 9] = 7307
     L[1, 4, 9] = 7315
+    # Player gaming stools neatly tucked beside arcade cabinets (leaving y=6..7 main aisle 100% clear!)
+    L[1, 5, 9] = 4077
 
-    # Island B (Center-East, x=12..14, y=2..5): 3x3 Neon-Blue Prize Roulette / Game Island (7280..7298)!
     ROULETTE_ISLAND = [
         [7280, 7281, 7282],
         [7288, 7289, 7290],
         [7296, 7297, 7298],
     ]
     _put_grid(L, ROULETTE_ISLAND, 12, 3, z_rows=(1, 1, 1))
-    # Green Arcade Scoreboard / Ticket Board mounted cleanly on the North Wall above the floor (x=7..9, y=0..1)!
-    SCOREBOARD_WALL = [
-        [7312, 7313, 7314],
-        [7320, 7321, 7322],
-    ]
-    _put_grid(L, SCOREBOARD_WALL, 7, 0, z_rows=(1, 1))
-    # Prize Display Shelf (2x3: 7277..7278 / 7285..7286 / 7293..7294) anchored cleanly at (4..5, 1..2) right beside Prize Counter!
-    PRIZE_SHELF = [
-        [7277, 7278],
-        [7285, 7286],
-        [7293, 7294],
-    ]
-    _put_grid(L, PRIZE_SHELF, 4, 0, z_rows=(2, 2, 1))
 
     # South High-Roller Hologram Lounge (x=9..13, y=8..10):
-    # Glowing Violet Holo-Capsule Pod (2x3: 7154..7155 / 7162..7163 / 7170..7171) centered at (10..11, 7..9)!
-    # Keep y=7 walkway open on x=6..9 & x=12..15, so put Holo-Pod centered at (10..11, 8..10) -> wait: height 3 at y=8..10!
-    # Check passability of 7154..7171: all 6 tiles are pas=15, pri=0, so players walk cleanly around x=9 & x=12 & y=7!
     HOLO_POD = [
         [7154, 7155],
         [7162, 7163],
         [7170, 7171],
     ]
     _put_grid(L, HOLO_POD, 10, 8, z_rows=(2, 1, 1))
-    # Plush Arcade Prize Showcase flanking the Holo Lounge (Eevee, Poké Balls, Magikarp on display pedestals!)
-    # Sleek silver lounge sofa (7571..7573 / 7579..7581) on West/East lounge flanks? Place sleek prize displays at (8, 9) & (14, 9)!
-    L[1, 9, 8] = 4416; L[2, 8, 8] = 4408    # Ticket/arcade prize machine on SW lounge wing
+    L[1, 9, 8] = 4416; L[2, 8, 8] = 4408    # Ticket/plushie prize machine on SW lounge wing
     L[1, 9, 14] = 4417; L[2, 8, 14] = 4409  # Companion prize machine on SE lounge wing
 
     # East Cyber-Alley & Gaming PC Alcove (x=16..19, y=3..8):
-    # Multi-Screen Gaming PC Rig (7712..7714 / 7720..7722 / 7728..7730 -> top 2 rows solid, bottom row walkable shadow) at (17..19, 3..4)!
     GAMING_PC = [
         [7712, 7713, 7714],
         [7720, 7721, 7722],
     ]
     _put_grid(L, GAMING_PC, 17, 3, z_rows=(2, 1))
-    # Second dual blue arcade cabinet pair in SE East Alcove (x=18..19, y=5..7)
     _put_grid(L, ARCADE_PAIR, 18, 5, z_rows=(2, 1, 1))
-    # Glowing Blue Token/Drink Vending Machine (2342/2350) tucked into north cyber-corner (16, 2..3)!
-    L[2, 2, 16] = 2342
-    L[1, 3, 16] = 2350
+    L[1, 5, 17] = 4077  # Gaming PC seat
+    # Intact 1-wide Lumen arcade pole lamp framing the East Gaming PC alcove cleanly (replaces sliced 1-tile vending machine!)
+    L[2, 2, 16] = 2247
+    L[1, 3, 16] = 2255
 
-    # Lush Parlor Palms framing the Arcade Entrance & Lounge Wings (7126 pri=5 top, 7134 pas=15 pot!)
-    for px, py in ((6, 7), (15, 2), (16, 8)):
+    # Sleek Parlor Palms framing entrance & lounge wings
+    for px, py in ((6, 2), (15, 2), (16, 8)):
         L[2, py - 1, px] = 7126
         L[1, py, px] = 7134
 
-    # Guarantee 100% passability on critical arrival/exit/mart-access cells!
-    for cx, cy in ((4, 8), (4, 7), (4, 6), (4, 5), (4, 4), (4, 3), (1, 4), (1, 3), (2, 3), (2, 2), (1, 2)):
-        if (cx, cy) == (4, 8):
-            continue
-        if L[1, cy, cx] in (7227, 7235, 7243, 7241):
-            continue
-        # Ensure nothing accidentally blocked the corridor
-
-    PG.guard(L, TID)
+    PG.guard(L, TID, [(4, 8), (4, 7), (4, 3), (2, 3), (1, 3), (1, 4)], 'map 183')
 
     # Save exact raw array to mapgen/data/raw/183.npy!
     os.makedirs(RAW_DIR, exist_ok=True)
@@ -1457,13 +1416,13 @@ def build_183():
         'drop_template_events': ['Questionnaire', 'Deliveryman'],
         'tileset': TID,
         'bgm': old183['bgm'],
-        'tone': [-12, -8, 12, 8],
+        'tone': [-10, -8, 10, 6],
         'metadata': old183['metadata'],
         'stretch': [['x', 10, 10], ['y', 8, 3]],
         'tile_edits': _compress_tile_edits(L),
         'events': [],
     }
-    doc183_txt = "# Map 183 revamped by layouts/wave8_story_craft.py (Wave 8 Map Craft; data/raw/183.npy).\n" + yaml.safe_dump(
+    doc183_txt = "# Map 183 revamped by layouts/wave8_story_craft.py (Wave 2 Map Craft; data/raw/183.npy).\n" + yaml.safe_dump(
         new183, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True
     )
     open(spec_path, 'w', encoding='utf-8').write(doc182_verbatim + '\n---\n' + doc183_txt)
@@ -1475,7 +1434,15 @@ def build_183():
 # MAP 5: 187 Glide Cycles (19x12, Tileset 60 PF Rejuv Lumen)
 # ================================================================================================
 def build_187():
-    # Iconic Lumen City Brass-and-Glass Bicycle Showroom (where players receive their Bicycle!).
+    # Iconic Lumen City Brass-and-Glass Bicycle Boutique & Mechanic Workshop (Wave 2 upgrade!):
+    #   - West Wall Cycle Display Racks: gleaming chrome wheel display stands (lm_ring) + forged brass bike racks (lm_railing_*)
+    #     on a dedicated dark-slate showroom gallery pad!
+    #   - Anchored Reception & Order Desk: dark cyan glass desk (lm_desk) anchored cleanly between cream sales counter
+    #     endcaps (lm_counter_l/r) right on the plush crimson reception rug beside Shopkeeper (4,5)!
+    #   - Central Flagship Showcase: full UNCLIPPED 5x5 golden spoked-wheel sunburst (lm_sun) framed by cycle wheel stands & fitting bench!
+    #   - East Mechanic Repair Bay: authentic craftsman repair workbench (lm_cobbler) with wall-mounted wrench/tool rack (cv_tools),
+    #     oil/parts shelf (cv_shelf), coiled tubes/cables (hb_rope/lm_cables), spare crates (hb_boxes), parts rack (lm_rack) &
+    #     clean dark obsidian slate (ZERO cyan Z_f3 static!).
     # Preserves 100% HEAD events & coords:
     #   #1 'Exit'       @ (6, 9) -> Map 180 (53, 45) (incoming arrival from 180 LC_BIKE lands @ (6, 8) up!)
     #   #2 'Shopkeeper' @ (4, 5) (NPC 12, facing down)
@@ -1484,39 +1451,26 @@ def build_187():
     m.STAIRS = LK.STAIRS_LM or LK.K.STAIRS_STONE
     m.kit = {TER: 'lmw', FLOOR: 'cvY', 'default': 'cvY'}
 
-    # ---- 1. Void-Sculpted Three-Bay Boutique Showroom Silhouette (ZERO rectangular checker box!) ----
-    # West Sales & Gala Reception Boutique: x=1..7, y=3..8 + recessed Entry Portal x=5..7, y=9 (Exit @ 6,9!)
-    # Central Flagship Cycle Showroom Bay:  x=8..13, y=3..10 (steps 1 row deeper south for Bike-Rack Fitting Bay!)
-    # East Mechanic Repair Bench Alcove:    x=14..17, y=3..9 (contrasting dark-slate workshop alcove, chamfered SE!)
+    # ---- 1. Void-Sculpted Three-Bay Boutique Showroom Silhouette ----
     m.box(1, 3, 7, 8, FLOOR, '.')
     m.box(5, 9, 7, 9, FLOOR, '.')
     m.box(8, 3, 13, 10, FLOOR, '.')
     m.box(14, 3, 17, 9, FLOOR, '.')
 
-    # Sculpted void chamfers along outer SW & SE showroom corners
     m.mass_at([
-        (1, 8), (2, 8),           # SW chamfered reception corner
         (17, 9), (16, 9),         # SE chamfered workshop corner
         (8, 10), (13, 10),        # Beveled south fitting-bay shoulders
     ])
-
-    # ---- 2. Sculpted Elevated Marble Flagship Cycle Display Podium (TER, lmw ashlar, x=9..12, y=3..6) ----
-    # Rises majestically right beside the central showroom promenade — approached via sleek marble steps at (10..11, 6..8)!
-    # Wait: with rows=3 cliffs on TER at y=3..6, lip=y=6, face=y=7, base=y=8 -> let's keep TER compact at y=3..5
-    # so the walkable podium deck is y=5 (x=9..12) with crisp marble face at y=6 and 2-wide steps at (10..11, 5..7)?
-    # Even cleaner: use a flush 5x5 Golden Sunburst Showcase Podium framed by brass railings & inlaid marble trim
-    # in the Central Showroom (x=8..13, y=5..9) so players have wide, effortless 360-degree showroom circulation
-    # AND zero cramped stair walls in a 12-tall boutique!
     m.plan_cliffs(rows=3)
 
     # Protect ALL critical walkways, arrival (6,8), Exit (6,9), & Shopkeeper (4,5) + direct talk cell (4,6)!
     m.keep_clear |= (
-        {(6, y) for y in range(5, 10)}
+        {(6, y) for y in range(6, 10)}
         | {(5, 8), (7, 8), (5, 9), (7, 9)}
-        | {(4, 5), (4, 6), (5, 5), (5, 6), (3, 6)}
+        | {(4, 5), (4, 6), (5, 6), (3, 6)}
         | {(x, 7) for x in range(4, 16)}
-        | {(8, y) for y in range(5, 10)}
-        | {(13, y) for y in range(5, 10)}
+        | {(8, y) for y in range(6, 10)}
+        | {(13, y) for y in range(6, 10)}
     )
 
     def put_if(name, x, y):
@@ -1527,6 +1481,21 @@ def build_187():
             return True
         return False
 
+    def place_arch(name, x, y, mark_base=True):
+        st = CK.STAMPS[name]
+        h, w = st['h'], st['w']
+        for dy in range(h):
+            for dx in range(w):
+                xx, yy = x + dx, y + dy
+                if not m.inb(xx, yy):
+                    continue
+                for z in (1, 2):
+                    t = st['layers'][z][dy][dx]
+                    if t:
+                        m.over.append((z, xx, yy, t))
+                        if mark_base and z == 1:
+                            m.taken[yy, xx] = True
+
     def hang_wall(name, x, y):
         st = CK.STAMPS[name]['layers']
         for dy in range(len(st[0])):
@@ -1535,115 +1504,114 @@ def build_187():
                 if t and m.inb(x + dx, y + dy) and m.cliff[y + dy, x + dx]:
                     m.over.append((2, x + dx, y + dy, t))
 
-    # ---- 3. Grand North Showroom Bulkhead (Panoramic Windows, Gala Banners, CAD Monitors & Posters) ----
-    for wx in (2, 7, 12):
+    # ---- 2. Grand North Showroom Bulkhead (Clean Windows, Cycle Banners, Sconces & CAD Monitors — ZERO wall-pasted floor props!) ----
+    for wx in (2, 7, 12, 16):
         hang_wall('lm_window', wx, 2)
     hang_wall('lm_banner_w', 4, 2)       # Royal crimson Meridian Gala promo banner behind Shopkeeper!
-    hang_wall('lm_banner_w', 9, 2)       # Gala promo banner framing Central Flagship Cycle Podium
-    hang_wall('lm_banner', 11, 2)        # Meridian navy-gold banner
-    hang_wall('lm_monitors', 15, 2)      # Bicycle frame CAD & spoke telemetry screens above Mechanic Repair Bench!
-    for px, py, nm in ((3, 3, 'lm_poster0'), (6, 3, 'lm_poster2'), (10, 3, 'lm_poster1'), (14, 3, 'lm_alarm_on')):
+    hang_wall('lm_banner', 10, 2)        # Meridian showroom crest centered over flagship cycle showcase!
+    hang_wall('lm_monitors', 14, 2)      # Bicycle frame CAD & spoke telemetry screens above Mechanic Repair Bay!
+    for px, py, nm in (
+        (3, 3, 'mn_sconce'), (6, 3, 'mn_sconce'), (9, 3, 'lm_poster0'), (11, 3, 'lm_poster2'),
+        (13, 3, 'mn_sconce'), (17, 3, 'mn_sconce'),
+    ):
         if m.cliff[py, px]:
             m.over.append((2, px, py, P1(nm)))
 
-    # ---- 4. West Sales & Gala Reception Boutique (x=1..7, y=5..8) ----
-    # Sleek cream-brass sales counter right beside Shopkeeper (4,5) -> leaves (4,6) & (5,5) wide open for direct talk!
-    m.over.append((1, 2, 5, P1('lm_counter_l')))
-    m.over.append((1, 3, 5, P1('lm_counter_m')))
-    m.taken[5, 2] = True; m.taken[5, 3] = True
-    put_if('lm_plant', 1, 5)             # Welcoming parlor greenery in NW corner
-    put_if('lm_planter', 3, 8)           # Floral planter framing the SW entry chamfer
-    put_if('lm_lamp_on', 2, 6)           # Warm brass reception lamp
+    # ---- 3. West Wall Cycle Display Racks (x=1..3, y=5..8) ----
+    # Gleaming chrome wheel-and-frame cycle display stands cleanly positioned on brushed workshop slate!
+    place_arch('lm_ring', 1, 5)          # West display bay cycle wheel stand #1 (ring y=5, base y=6)
+    place_arch('lm_ring', 2, 5)          # West display bay cycle wheel stand #2 (ring y=5, base y=6)
+    place_arch('lm_ring', 1, 7)          # West display bay cycle wheel stand #3 (ring y=7, base y=8)
+    # Forged brass bike-rack stanchions neatly framing the west display gallery floor (x=2..3, y=8)
+    m.over.append((1, 2, 8, P1('lm_railing_w')))
+    m.over.append((1, 3, 8, P1('lm_railing_e')))
+    m.taken[8, 2] = True; m.taken[8, 3] = True
+    m.over.append((1, 3, 5, P1('lm_bollard')))
+    m.taken[5, 3] = True
 
-    # ---- 5. Central Flagship Cycle Display Podium & Bike-Rack Showroom Bays (x=8..13, y=5..10) ----
-    # Illuminated Glass Showcase Cases (`lm_case`) displaying custom brass frames & gears along the north showcase wall!
-    put_if('lm_case', 9, 4)              # (9..10, 4..5) Flagship Brass-Frame Showcase Case!
-    put_if('lm_case', 11, 4)             # (11..12, 4..5) Glass-Spoke Prototype Showcase Case!
-    # Mounted Gleaming Glass-Spoked Wheel Display Stands (`lm_ring`, 1x2) & Forged Brass Bike-Rack Rails (`lm_railing_*`)!
-    put_if('lm_ring', 9, 8)              # South showroom bike-rack glass-spoked wheel display stand A!
-    put_if('lm_ring', 12, 8)             # South showroom bike-rack glass-spoked wheel display stand B!
-    # Forged brass bike-rack stanchions neatly framing the fitting bay (x=10..11, y=9) + bollards (zero floating glitches!)
-    m.over.append((1, 10, 9, P1('lm_railing_w')))
-    m.over.append((1, 11, 9, P1('lm_railing_e')))
-    m.taken[9, 10] = True; m.taken[9, 11] = True
-    put_if('lm_bollard', 8, 5)
-    put_if('lm_bollard', 13, 5)
-    put_if('lm_bench', 9, 10)            # Customer fitting & helmet bench in the sculpted south bay!
-    put_if('lm_topiary', 12, 9)          # Sculpted boutique topiary framing SE showroom corner
+    # ---- 4. Crisp Unified Mahogany Reception & Custom-Fit Sales Counter (ZERO chandelier or glow soup!) ----
+    # Shopkeeper stands at (4,5) facing DOWN (4,6 & 3,6 wide open); rich mahogany & brass lm_bar (5..7, 5)
+    # sits squarely on the crimson reception carpet (5..7, 5..9) with clean brass candelabra & boutique orchid!
+    place_arch('lm_bar', 5, 5)
+    m.over.append((2, 5, 5, P1('mn_dt_cand')))
+    m.over.append((2, 7, 5, P1('mn_orchid')))
 
-    # ---- 6. East Recessed Mechanic Repair Bench Alcove (x=14..17, y=5..9) ----
-    # Authentic bicycle craftsman workshop: workbench, precision spoke lathe, gearboxes, spare parts rack & cables!
-    put_if('lm_desk', 15, 5)             # (15..16, 5) Mechanic repair workbench!
-    put_if('lm_rack', 17, 4)             # (17, 4..5) Tall spare frames & parts shelving!
-    put_if('lm_gen', 16, 7)              # (16..17, 7..8) Wheel-truing & spoke-tensioning machine!
-    put_if('lm_gearbox', 14, 5)          # Hub & drivetrain gearbox stand!
-    put_if('lm_gearbox', 15, 8)          # Spare transmission block!
-    put_if('lm_junction_on', 14, 9)      # Glowing amber workshop power console!
-    m.over.append((2, 15, 6, P1('lm_cables')))  # Floor air-hose & power cables in the mechanic bay!
-    put_if('lm_lamp_on', 14, 8)          # Warm mechanic work-light!
+    # ---- 5. Central Boutique Flagship Cycle Showcase & Fitting Bay (x=8..13, y=5..10) ----
+    # Replaces oversized Spire Sunburst with a genuine bicycle boutique showcase on walnut hardwood & marble podium:
+    # parlor greenery, glass helmet/component case, twin chrome racing-wheel display stands & customer fitting bench!
+    place_arch('lm_plant', 8, 5)         # Framing greenery flanking the boutique showcase (canopy y=5, pot y=6)
+    place_arch('lm_case', 9, 5)          # (9..10, 5..6) Illuminated glass helmet, saddle & drivetrain showcase!
+    place_arch('lm_ring', 11, 5)         # Flagship chrome aero-wheel display stand #1 (ring y=5, base y=6)
+    place_arch('lm_ring', 12, 5)         # Flagship chrome racing-wheel display stand #2 (ring y=5, base y=6)
+    place_arch('lm_ring', 13, 8)         # South showroom wheel display stand (ring y=8, base y=9)
+    put_if('lm_bench', 9, 10)            # Customer fitting & helmet bench (9..10, 10)
+    put_if('lm_planter', 11, 10)         # Lush floral boutique planter (11..12, 10)
 
-    # ---- 7. Warm Boutique Showroom Lighting: Chandeliers, Skylight Shafts & Golden Glow Pools! ----
-    m.stamps.append(('lm_chand', 5, 5))   # Crystal chandelier over West Reception & Entrance!
-    m.stamps.append(('lm_chand', 10, 5))  # Crystal chandelier crowning Central Flagship Cycle Podium!
-    m.stamps.append(('cv_shaft', 10, 5))  # Sunlit skylight beam illuminating the Flagship Cycle Podium!
-    for gx, gy in ((5, 6), (10, 6), (11, 6), (15, 6), (10, 8)):
-        m.stamps.append(('pf_glow', gx, gy))
+    # ---- 6. East Mechanic Repair Bench & Spare-Parts Workshop (x=14..17, y=5..9) ----
+    # ALL workshop props sit cleanly ON FLOOR ROWS y=5..9 — ZERO props pasted on wall or clipping wainscot y=4!
+    place_arch('cv_tools', 14, 5)        # (14, 5) Freestanding mechanic wrench & tool stand cleanly on floor!
+    place_arch('lm_cobbler', 15, 5)      # (15..16, 5) Authentic craftsman tool-covered mechanic repair workbench!
+    place_arch('lm_rack', 17, 5)         # (17, 5..6) Tall spare frames, rims & parts shelving cleanly off wainscot!
+    place_arch('hb_boxes', 16, 7)        # (16..17, 7..8) Spare tires & cycle components shipping crates!
+    place_arch('hb_rope', 14, 8)         # Coiled inner-tubes & brake cables beside repair mat!
+    place_arch('lm_gearbox', 15, 9)      # Spare bottom-bracket & drivetrain test block
+    m.over.append((2, 15, 6, P1('lm_cables')))   # Floor air-hose & power cables on mechanic steel work-mat!
+    m.over.append((1, 14, 9, P1('lm_bollard')))  # Workshop safety bollard framing SE entrance
+    m.taken[9, 14] = True
+
+    # Zero disembodied floor chandeliers or smudged pf_glow blobs — crisp boutique showroom lighting!
 
     m.paint()
 
-    # ---- 8. Post-Paint Multi-Zone Showroom Floor Craft (ZERO blinding teal checkerboard!) ----
+    # ---- 8. Post-Paint Boutique Cycle Showroom Floor Craft (Walnut Hardwood + Brushed Slate + Closed Showcase Frame!) ----
     paves = [P1('lm_pave%d' % i) for i in range(4)]
     plazas = [P1('lm_plaza0'), P1('lm_plaza1')]
+    walnuts = [P1('H_f%d' % i) for i in range(4)]
+    slates = [P1('Q_f%d' % i) for i in range(4)]
     for y in range(m.H):
         for x in range(m.W):
             if m.cls[y, x] != '.' or m.cliff[y, x]:
                 continue
             if x >= 14:
-                # East Mechanic Repair Alcove: sleek dark obsidian slate & riveted steel workshop floor!
-                m.L[0, y, x] = P1('lm_grate') if (x == 15 and 6 <= y <= 8) else P1('Z_f%d' % ((x * 3 + y) % 4))
+                # East Mechanic Repair Bay: brushed industrial workshop slate + steel grate work-mat!
+                if x in (15, 16) and y in (6, 7):
+                    m.L[0, y, x] = P1('lm_grate')
+                else:
+                    m.L[0, y, x] = slates[(x * 3 + y * 5) % 4]
+            elif x <= 3:
+                # West Cycle Display Gallery: brushed steel-slate display pad making chrome wheel stands pop!
+                m.L[0, y, x] = slates[(x * 3 + y * 5) % 4]
             elif 8 <= x <= 13:
-                # Central Flagship Cycle Showroom: luminous warm cream limestone framed by inlaid brass border!
-                m.L[0, y, x] = plazas[(x + y) & 1]
+                # Central Flagship Cycle Showroom: rich dark walnut hardwood so chrome wheel stands & glass case POP sharply!
+                m.L[0, y, x] = walnuts[(x * 3 + y) % 4]
             else:
-                # West Reception Boutique: pale ashlar outer perimeter + warm cream marble center!
-                perim = (x <= 2 or y == 8)
-                m.L[0, y, x] = paves[(x * 3 + y * 5) % 4] if perim else plazas[(x + y) & 1]
+                perim = (y == 8)
+                m.L[0, y, x] = paves[(x * 3 + y * 5) % 4] if perim else walnuts[(x * 3 + y) % 4]
 
-    # Glowing Cyan-Brass Floor Inlay framing the Central Flagship Showcase Podium (x=8..13, y=6..9)
-    # + Inlaid Golden Spoked-Wheel Sunburst Mosaic (`lm_sun`) crowning the showroom center (x=8..12, y=6..9)!
-    sun_L = CK.STAMPS['lm_sun']['layers'][0]
-    for dy in range(5):
-        for dx in range(5):
-            xx, yy = 8 + dx, 5 + dy
-            if 6 <= yy <= 9 and 8 <= xx <= 13 and m.cls[yy, xx] == '.' and not m.cliff[yy, xx]:
-                t = sun_L[dy][dx]
-                if t:
-                    m.L[0, yy, xx] = t
-    for x in range(9, 13):
-        if m.cls[6, x] == '.':
-            m.L[0, 6, x] = P1('lm_inlay_h')
+    # Complete CLOSED brass-cyan architectural inlay frame around the open Central Cycle Test-Track Pad (9..12, 7..9)
+    # enclosing inlaid cycle test-track rails (lm_track_h) at (10..11, 8) — ZERO props overlapping any inlay tile!
+    for x in (10, 11):
+        if m.cls[7, x] == '.':
+            m.L[0, 7, x] = P1('lm_inlay_h')
         if m.cls[9, x] == '.':
             m.L[0, 9, x] = P1('lm_inlay_h')
-    for y in (7, 8):
-        m.L[0, y, 8] = P1('lm_inlay_v')
-        m.L[0, y, 13] = P1('lm_inlay_v')
-    m.L[0, 6, 8] = P1('lm_inlay_se')
-    m.L[0, 6, 13] = P1('lm_inlay_sw')
-    m.L[0, 9, 8] = P1('lm_inlay_ne')
-    m.L[0, 9, 13] = P1('lm_inlay_nw')
+        if m.cls[8, x] == '.':
+            m.L[0, 8, x] = P1('lm_track_h')
+    for x in (9, 12):
+        if m.cls[8, x] == '.':
+            m.L[0, 8, x] = P1('lm_inlay_v')
+    for ix, iy, k in ((9, 7, 'se'), (12, 7, 'sw'), (9, 9, 'ne'), (12, 9, 'nw')):
+        if m.cls[iy, ix] == '.':
+            m.L[0, iy, ix] = P1('lm_inlay_' + k)
 
-    # Meridian Workshop threshold power conduit into East Repair Bay
-    m.L[0, 7, 14] = P1('lm_strip_h_on')
-    m.L[0, 7, 15] = P1('lm_strip_h_on')
-
-    # Royal Crimson Gala Welcome Carpet Runner from Exit (6,9) straight into Reception & Showroom (x=5..7, y=6..9)!
-    for y in range(6, 10):
+    # Royal Crimson Gala Welcome & Reception Carpet Base (5..7, 5..9) anchoring the Sales Counter & Exit (6,9) cleanly!
+    for y in range(5, 10):
         for x in (5, 6, 7):
             if m.cls[y, x] == '.':
-                part = ('n' if y == 6 else 's' if y == 9 else '') + ('w' if x == 5 else 'e' if x == 7 else '')
+                part = ('n' if y == 5 else 's' if y == 9 else '') + ('w' if x == 5 else 'e' if x == 7 else '')
                 m.L[0, y, x] = P1('lm_carpet_' + (part or 'c'))
 
-    PG.guard(m.L, 60)
+    PG.guard(m.L, 60, [(6, 9), (6, 8), (4, 5), (4, 6)], 'map 187')
 
     os.makedirs(RAW_DIR, exist_ok=True)
     np.save(os.path.join(RAW_DIR, '187.npy'), m.L.astype(np.int16))
@@ -1662,7 +1630,7 @@ def build_187():
         'tileset': 60,
         'events': old_spec['events'],
     }
-    header = "# GENERATED by mapgen/layouts/wave8_story_craft.py (Wave 8 Map Craft): Glide Cycles (187).\n"
+    header = "# GENERATED by mapgen/layouts/wave8_story_craft.py (Wave 2 Map Craft): Glide Cycles (187).\n"
     open(spec_path, 'w').write(header + yaml.safe_dump(new_spec, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True))
     print(f"Wrote data/raw/187.npy {m.L.shape} and updated {spec_path}")
     return m.L

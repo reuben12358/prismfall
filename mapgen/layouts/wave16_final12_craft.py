@@ -47,6 +47,7 @@ SPEC_DIR = os.path.join(HERE, 'specs')
 # Verified Tileset 34 9-slice floor & rug palettes (all pas=0, pri=0)
 CREAM_STONE = [[5920, 5921, 5922], [5928, 5929, 5930], [5936, 5937, 5938]]
 BLUE_STONE = [[5768, 5769, 5770], [5776, 5777, 5778], [5784, 5785, 5786]]
+MODERN_TILE = [[640, 641, 642], [648, 649, 650], [656, 657, 658]]
 SAGE_MARBLE = [[1104, 1105, 1106], [1112, 1113, 1114], [1120, 1121, 1122]]
 IVORY_MARBLE = [[1107, 1108, 1109], [1115, 1116, 1117], [1123, 1124, 1125]]
 ALPINE_SLATE = [[1152, 1153, 1154], [1160, 1161, 1162], [1168, 1169, 1170]]
@@ -303,6 +304,85 @@ def _seam_cyber(L, floor, wall_rows=2, base_floor='diamond'):
     return wall_face
 
 
+def _seam_lumen_modern(L, floor, wall_rows=2, base_floor='slate', wall_style='steel'):
+    """Paint sleek modern Lumen City interior walls with subtle dark charcoal architectural void casing (5533..5562)
+    — banishing loud cyan glass-block borders (7552..7570) and rustic Sheridan timber clash!"""
+    H, W = floor.shape
+    L[0, :, :] = VOID
+    wall_face = np.zeros((H, W), dtype=bool)
+    for y in range(wall_rows, H):
+        for x in range(1, W - 1):
+            if floor[y, x] and not floor[y - 1, x]:
+                for k in range(1, wall_rows + 1):
+                    if y - k >= 0:
+                        wall_face[y - k, x] = True
+    interior = floor | wall_face
+    for y in range(H):
+        for x in range(W):
+            if floor[y, x]:
+                if base_floor == 'slate':
+                    L[0, y, x] = 7091 if (x + y) % 2 == 0 else 7092
+                elif base_floor == 'slate_dark':
+                    L[0, y, x] = 7099 if (x + y) % 2 == 0 else 7100
+                else:
+                    L[0, y, x] = 7737 if (x + y) % 2 == 0 else 7745
+            elif wall_face[y, x]:
+                is_lower = (y + 1 < H and floor[y + 1, x])
+                left_end = (x == 0) or not wall_face[y, x - 1]
+                right_end = (x + 1 >= W) or not wall_face[y, x + 1]
+                if wall_style == 'urban':
+                    # Crisp modern Lumen high-rise light-slate / steel-blue baseboard paneling (1787..1797, all pas=15!)
+                    if left_end:
+                        L[0, y, x] = 1795 if is_lower else 1787
+                    elif right_end:
+                        L[0, y, x] = 1797 if is_lower else 1789
+                    else:
+                        L[0, y, x] = 1796 if is_lower else 1788
+                else:
+                    # Sleek dark-steel metropolitan paneling (7520..7538, all pas=15!)
+                    if left_end:
+                        L[0, y, x] = 7536 if is_lower else 7520
+                    elif right_end:
+                        L[0, y, x] = 7538 if is_lower else 7522
+                    else:
+                        L[0, y, x] = 7537 if is_lower else 7521
+            else:
+                # Subtle dark charcoal architectural void casing (5533..5562 — crisp Gen 5 silhouette, ZERO loud cyan!)
+                N = y > 0 and interior[y - 1, x]
+                S = y + 1 < H and interior[y + 1, x]
+                W_ = x > 0 and interior[y, x - 1]
+                E = x + 1 < W and interior[y, x + 1]
+                NW = y > 0 and x > 0 and interior[y - 1, x - 1]
+                NE = y > 0 and x + 1 < W and interior[y - 1, x + 1]
+                SW = y + 1 < H and x > 0 and interior[y + 1, x - 1]
+                SE = y + 1 < H and x + 1 < W and interior[y + 1, x + 1]
+                if S and E:
+                    L[0, y, x] = 5562
+                elif S and W_:
+                    L[0, y, x] = 5561
+                elif N and E:
+                    L[0, y, x] = 5554
+                elif N and W_:
+                    L[0, y, x] = 5553
+                elif S:
+                    L[0, y, x] = 5534
+                elif N:
+                    L[0, y, x] = 5550
+                elif E:
+                    L[0, y, x] = 5541
+                elif W_:
+                    L[0, y, x] = 5543
+                elif SE:
+                    L[0, y, x] = 5533
+                elif SW:
+                    L[0, y, x] = 5535
+                elif NE:
+                    L[0, y, x] = 5549
+                elif NW:
+                    L[0, y, x] = 5551
+    return wall_face
+
+
 def _compress_tile_edits(L):
     """Encode (3, H, W) array cleanly as compact build.py tile_edits."""
     _, H, W = L.shape
@@ -350,72 +430,83 @@ def _save_raw(mid, L):
 # MAP 1: 182 Lumen Pokemon Center (15x11, TS 34) — LEAVES 183 100% BYTE-IDENTICAL!
 # ==============================================================================
 def build_182():
-    # Exact HEAD events (7/7):
+    # Exact HEAD events (7/7 + Lamplight @ 0,0):
     #   #2 Nurse @(7,2), #3 PC @(11,1), #4 Healing balls @(5,2),
     #   #6 Town Map @(12,1), #7 Exit @(7,9) [arrival (7,8)],
     #   #8 Gale Post desk @(3,6) [NPC 16 down], #9 News screen @(11,6)
+    # Wave 2 upgrade: softened architectural dark-charcoal void trim (ZERO loud cyan glass-block perimeter or 725 squares!)
+    # + crisp inviting modern lounge seating in both wings!
     W, H = 15, 11
     L = np.zeros((3, H, W), dtype=np.int32)
 
     floor = np.zeros((H, W), dtype=bool)
-    floor[2:8, 1:14] = True        # Main neon-marble lobby (x=1..13, y=2..7)
+    floor[2:8, 1:14] = True        # Main modern marble lobby (x=1..13, y=2..7)
     floor[7, 1] = False            # SW void chamfer
     floor[7, 13] = False           # SE void chamfer
     floor[8, 5:10] = True          # Stepped foyer vestibule (x=5..9, y=8)
     floor[9, 6:9] = True           # Recessed entry door notch (x=6..8, y=9; Exit @ 7,9!)
 
-    _seam_cyber(L, floor, wall_rows=2, base_floor='diamond')
+    _seam_lumen_modern(L, floor, wall_rows=2, base_floor='diamond', wall_style='steel')
 
-    # Multi-zone metropolitan floor: luminous pale blue-marble heart + 4x4 Pokeball Medallion + cyan Lattice pads!
+    # Clean multi-zone metropolitan Center flooring (ZERO jarring 725 bright cyan squares or ## metal grates!):
+    # Luminous pale blue-marble central heart + FULL 5x4 Cream-Gold Pokeball Medallion dead-centered on x=7!
+    POKEBALL_MEDAL_5X4 = [
+        [536, 537, 538, 539, 540],
+        [544, 545, 546, 547, 548],
+        [552, 553, 554, 555, 556],
+        [560, 561, 562, 563, 564],
+    ]
     _put_9slice(L, BLUE_STONE, 4, 2, 10, 7, z=0, mask=floor)
-    _put_grid(L, POKEBALL_MEDAL, 5, 4, z_rows=(0, 0, 0, 0))
-    # Electric-blue welcome carpet runner from Exit (7,9) up to Pokeball medallion
+    _put_9slice(L, BLUE_STONE, 5, 8, 9, 8, z=0, mask=floor)
+    _put_9slice(L, BLUE_STONE, 6, 9, 8, 9, z=0, mask=floor)
+    _put_grid(L, POKEBALL_MEDAL_5X4, 5, 4, z_rows=(0, 0, 0, 0))
+    # Plush royal-blue welcome runner from Exit (7,9) up to the Pokeball medallion
     _put_9slice(L, BLUE_CARPET, 6, 8, 8, 9, z=1)
-    L[1, 9, 7] = 444  # crisp red-white welcome mat on Exit (7,9)
-    # Dark slate floor pads under West Gale Post bay & East News Lounge + glowing cyan Lattice floor accents!
-    for y in range(4, 7):
-        for x in (1, 2, 3):
-            L[0, y, x] = 7091 if (x + y) % 2 == 0 else 7092
-        for x in (11, 12, 13):
-            L[0, y, x] = 7091 if (x + y) % 2 == 0 else 7092
-    for gx, gy in ((4, 4), (10, 4), (4, 7), (10, 7), (5, 8), (9, 8)):
-        L[0, gy, gx] = FLOOR_CYAN
+    L[1, 9, 7] = 444  # Crisp welcome mat on Exit (7,9)
+    # Refined dark-diamond lounge flooring framing West & East seating lounges cleanly from y=2..6
+    for y in range(2, 7):
+        for x in (1, 2, 3, 11, 12, 13):
+            if floor[y, x]:
+                L[0, y, x] = 7737 if (x + y) % 2 == 0 else 7745
 
-    # North wall architectural detail (y=0..1): sleek telemetry monitors, authentic PC @(11,1), full 2x2 Town Map @(12,1)
-    _put_grid(L, [[7136, 7137], [7144, 7145]], 2, 0, z_rows=(1, 1))
-    L[1, 0, 7] = 7312; L[1, 0, 8] = 7313; L[1, 0, 9] = 7314  # Illuminated header display above Nurse
+    # North wall architectural detail (y=0..1): sleek skyline window (replaces 7136/7137 ceiling scraps!), Center scoreboard,
+    # slim modern PC terminal (5847/5855 at (11,0..1) — clean margin beside Town Map & keeps (11,2) walkable for #3 PC @(11,1)!), & Town Map @(12,1)
+    _put_grid(L, [[2086, 2087], [2094, 2095]], 2, 0, z_rows=(1, 1))
+    L[1, 0, 7] = 7312; L[1, 0, 8] = 7313; L[1, 0, 9] = 7314
     L[1, 1, 7] = 7320; L[1, 1, 8] = 7321; L[1, 1, 9] = 7322
-    # #3 PC @(11,1): authentic Pokemon Center PC (7076/7084) cleanly interactable from (11,2) facing UP!
-    L[1, 0, 11] = 7076; L[1, 1, 11] = 7084
-    # #6 Town Map @(12,1): complete 2x2 framed Velmora transit map (4730..4739) cleanly interactable from (12,2)!
-    _put_grid(L, [[4730, 4731], [4738, 4739]], 12, 0, z_rows=(1, 1))
+    L[1, 0, 11] = 5847; L[1, 1, 11] = 5855                              # Slim modern PC at (11,0..1); (11,2) stays open & walkable!
+    _put_grid(L, [[4730, 4731], [4738, 4739]], 12, 0, z_rows=(1, 1))    # #6 Town Map @(12,1)
 
     # Healing Machine (2706..2723) at (4..5, 1..3) -> ball tray 2715 squarely on #4 Healing balls @(5,2)!
     _put_tf(L, 'heal', 4, 1)
     # Help Center Sleek Blue Curved Counter (0x80 flags!) wrapping Nurse @(7,2):
-    #   (6,3)=5849, (7,3)=5850, (8,3)=5852, (9,3)=5851, (9,2)=5843 (flower vase right corner!)
     L[1, 3, 6] = 5849
     L[1, 3, 7] = 5850  # 0x80 counter directly in front of #2 Nurse @(7,2) -> heal from (7,4)!
     L[1, 3, 8] = 5852
     L[1, 3, 9] = 5851
     L[1, 2, 9] = 5843
 
-    # West Gale Post Express Bay (x=1..3, y=4..6): mail crates & desk beside #8 Gale Post desk @(3,6)!
-    # Keep (3,6), (3,7), (4,6), (2,7) open walkable so player talks smoothly to Gale Post NPC!
-    L[1, 5, 1] = 4170; L[1, 5, 2] = 4171  # Express parcel crates
-    L[1, 6, 1] = 4178; L[1, 6, 2] = 4179
-    L[2, 4, 1] = 5580                     # Gale Post mail satchel on parcel stack
-    _put_plant(L, 1, 3, 7126, 7134)       # Sleek parlor ficus in NW corner
+    # West Inviting Trainer Lounge & Gale Post Express Corner (around #8 Gale Post desk @(3,6)):
+    # Sleek modern 2-wide silver lounge sofa (6024/6026 top pri=1, 6032/6034 base pas=15) cleanly at (2..3, 3..4)!
+    _put_grid(L, [[6024, 6026], [6032, 6034]], 2, 3, z_rows=(2, 1))
+    _put_plant(L, 1, 3, 7126, 7134)         # Sleek NW parlor ficus
+    # Clean intact 2x2 Gale Post mail table & ledger cleanly beside #8 Gale Post NPC @(3,6) (ZERO overhanging satchel!)
+    _put_grid(L, [[3466, 3467], [3474, 3475]], 1, 5, z_rows=(1, 1))
+    L[2, 5, 1] = 3428                       # Open Gale Post mail ledger resting cleanly atop table
+    L[2, 5, 2] = 4528                       # Parcel dispatch kit resting cleanly atop table
 
-    # East Anniversary News Kiosk (x=11..13, y=5..6):
-    # #9 News screen @(11,6): crisp blue widescreen terminal (2704..2713) squarely at (11..12, 5..6)!
+    # East Inviting News & PC Corner (around #3 PC @(11,1), #6 Town Map @(12,1), & #9 News screen @(11,6)):
+    # Keeps (11,2) open in front of PC @(11,1), (12,2) open in front of Town Map @(12,1), & (11,7) open for News screen!
     _put_tf(L, 'tv', 11, 5)
-    L[1, 6, 13] = 2255; L[2, 5, 13] = 2247  # Warm floor lamp framing east kiosk
-    _put_plant(L, 13, 3, 7126, 7134)        # Matching parlor ficus in NE corner
+    _put_plant(L, 13, 3, 7126, 7134)        # NE parlor ficus framing Town Map & PC bay
+    L[1, 4, 13] = 4077                      # Waiting stool cleanly tucked against east wall
+    _put_lamp(L, 13, 6, ruby=False)         # Warm ambient lounge floor lamp beside News screen
 
-    # Cozy vestibule framing (x=5,8 & x=9,8)
-    _put_lamp(L, 5, 8, ruby=False)
-    _put_lamp(L, 9, 8, ruby=False)
+    # Cozy vestibule framing stools & non-overlapping low floral planters (ZERO clip with News screen or mail desk!)
+    L[1, 8, 5] = 4077                       # Vestibule waiting stool W
+    L[1, 8, 9] = 4077                       # Vestibule waiting stool E
+    L[1, 7, 2] = 7177                       # Crisp low SW floral planter
+    L[1, 7, 12] = 7177                      # Crisp low SE floral planter (leaves (11,7) clear in front of News screen!)
 
     PG.guard(L, TID, [(7, 9), (7, 8), (7, 4), (7, 2), (5, 2), (11, 2), (12, 2), (3, 6), (3, 7), (11, 7)], 'map 182')
     _save_raw(182, L)
@@ -438,15 +529,15 @@ def build_182():
         'drop_template_events': old182['drop_template_events'],
         'tileset': TID,
         'bgm': old182['bgm'],
-        'tone': [-6, -4, 10, 4],
+        'tone': [-4, -2, 8, 2],
         'metadata': old182['metadata'],
         'stretch': [['y', 9, 1]],
         'tile_edits': _compress_tile_edits(L),
         'events': old182['events'],
     }
     doc182_txt = (
-        "# Map 182 revamped by layouts/wave16_final12_craft.py (Wave 16 Final Map Craft; data/raw/182.npy).\n"
-        "# Map 183 below is preserved 100% byte-identical from Wave 8.\n"
+        "# Map 182 revamped by layouts/wave16_final12_craft.py (Wave 2 Map Craft; data/raw/182.npy).\n"
+        "# Map 183 below is preserved 100% byte-identical.\n"
         + yaml.safe_dump(new182, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
     )
     open(spec_path, 'w', encoding='utf-8').write(doc182_txt + '\n---\n' + doc183_verbatim)
@@ -459,11 +550,14 @@ def build_182():
 # ==============================================================================
 def build_188():
     # Exact HEAD events (2/2): #1 Exit @(6,9) [arrival (6,8)], #2 Fossil scientist @(5,5)
+    # Wave 2 upgrade: REMOVED misplaced 2x3 outdoor cave boulder pile (1-3, 6-7) & 725 cyan floor spam;
+    # dressed with genuine mounted fossil skeleton plinth, glass fossil specimen display cases (3240..3253),
+    # fossil research chalkboard, paleontologist research desk, lab consoles & clean modern lab flooring!
     W, H = 19, 12
     L = np.zeros((3, H, W), dtype=np.int32)
 
     floor = np.zeros((H, W), dtype=bool)
-    floor[3:9, 1:8] = True         # West Field Intake & Excavation Bay (x=1..7, y=3..8)
+    floor[3:9, 1:8] = True         # West Paleontology Research & Specimen Intake Bay (x=1..7, y=3..8)
     floor[8, 1] = False            # SW void chamfer
     floor[9, 5:8] = True           # Recessed entry door notch (x=5..7, y=9; Exit @ 6,9!)
     floor[2:11, 8:14] = True       # Central Vaulted Paleontology Museum Gallery (x=8..13, y=2..10)
@@ -472,47 +566,57 @@ def build_188():
     floor[3:10, 14:18] = True      # East Lattice-Current Revival Chamber (x=14..17, y=3..9)
     floor[9, 17] = False           # SE chamber chamfer
 
-    _seam_cyber(L, floor, wall_rows=2, base_floor='slate')
+    _seam_lumen_modern(L, floor, wall_rows=2, base_floor='diamond', wall_style='steel')
 
-    # Multi-zone museum flooring:
-    # Central Gallery: luminous cream-gold museum stone framed by dark diamond perimeter
+    # Clean multi-zone museum & laboratory flooring (matte charcoal slate perimeter — ZERO harsh ## grids!):
+    for y in range(H):
+        for x in range(W):
+            if floor[y, x] and (x <= 7 or x >= 14):
+                L[0, y, x] = 7099
+    # West Research Bay: sleek muted cool steel-blue lab tile (MODERN_TILE) framed on matte dark slate
+    _put_9slice(L, MODERN_TILE, 2, 3, 6, 8, z=0, mask=floor)
+    # Central Paleontology Gallery: luminous cream-ivory museum floor framed by dark diamond perimeter
     for y in range(2, 11):
         for x in range(8, 14):
             if floor[y, x]:
                 L[0, y, x] = 7737 if (x + y) % 2 == 0 else 7745
     _put_9slice(L, CREAM_STONE, 9, 3, 12, 9, z=0)
+    # East Lattice Revival Chamber: sleek steel-blue scientific bay pad framing Incubator & Console
+    _put_9slice(L, MODERN_TILE, 14, 5, 16, 8, z=0, mask=floor)
     # West entry crimson museum carpet leading from Exit (6,9) to Fossil Scientist @(5,5)
-    _put_9slice(L, RED_CARPET, 5, 6, 7, 9, z=1)
-    L[1, 9, 6] = 444  # welcome mat right on Exit (6,9)
-    # East Lattice-Current glowing cyan conduits feeding the 3-wide Revival Incubator!
-    for gx, gy in ((13, 5), (14, 6), (15, 6), (16, 6), (14, 7), (16, 7), (15, 8)):
-        L[0, gy, gx] = FLOOR_CYAN
+    _put_9slice(L, RED_CARPET, 5, 7, 7, 9, z=1)
+    L[1, 9, 6] = 444  # Crisp welcome mat squarely on Exit (6,9)
 
-    # North wall architectural dressings:
-    # West Bay wall (y=1..2): Velmora Bone Sands excavation map & sleek telemetry displays
-    _put_grid(L, [[4730, 4731], [4738, 4739]], 2, 1, z_rows=(1, 1))
-    _put_grid(L, [[7136, 7137], [7144, 7145]], 5, 1, z_rows=(1, 1))
-    # Central Vaulted Gallery wall (y=0..1): Ancient Fossil Museum Bookcases & complete 2x2 geology frame!
+    # North wall architectural dressings (ZERO floating 1-tile ceiling scraps!):
+    # West Bay wall (y=1..2): Fossil Excavation Chalkboard (3260..3262 / 3268..3270) & Velmora Bone Sands map!
+    _put_grid(L, [[3260, 3261, 3262], [3268, 3269, 3270]], 2, 1, z_rows=(1, 1))
+    _put_grid(L, [[4730, 4731], [4738, 4739]], 5, 1, z_rows=(1, 1))
+    # Central Vaulted Gallery wall (y=0..1): Ancient Fossil Museum Bookcase & full 2-row metropolitan window (replaces 7136/7137 scraps!)
     _put_grid(L, [[4650, 4651, 4652], [4658, 4659, 4660], [4666, 4667, 4668]], 9, 0, z_rows=(2, 2, 1))
-    _put_grid(L, [[7141, 7142], [7149, 7150]], 12, 0, z_rows=(1, 1))
-    # East Revival Chamber wall (y=1..2): intact 1x2 telemetry chart above server rack
-    _put_grid(L, [[7140], [7148]], 17, 1, z_rows=(1, 1))
+    _put_grid(L, [[2086, 2087], [2094, 2095]], 12, 0, z_rows=(1, 1))
+    # East Revival Chamber wall (y=1..2): clean steel paneling above the tall blue server rack (7140 scrap removed!)
 
-    # West Excavation & Scientist Intake Desk (around #2 Fossil scientist @(5,5)):
-    # Scientist stands cleanly at (5,5) facing down -> keep (5,5), (5,6), (6,5), (6,6) open!
-    _put_grid(L, [[2515, 2516], [2523, 2524]], 2, 4, z_rows=(2, 1))  # (2..3, 4..5) Solid mahogany intake desk!
-    # Ancient fossil rock samples & stone specimen plinths in SW alcove (x=1..3, y=6..8) — pure amber rock, ZERO flowers!
-    _put_grid(L, [[4749, 4750, 4751], [4757, 4750, 4765]], 1, 6, z_rows=(1, 1))
-    L[1, 8, 2] = 4763; L[1, 8, 3] = 4764   # Intact fossil display plinths
-    _put_plant(L, 1, 4, 7126, 7134)        # NW specimen hall ficus
+    # West Research & Fossil Specimen Intake Bay (around #2 Fossil scientist @(5,5)):
+    # Scientist stands cleanly at (5,5) facing down -> keep (5,5), (5,6), (6,5), (6,6), (4,5) open!
+    # Clean intact wooden Paleontology Research Desk (3466..3475 — ZERO flower-painting 3307 overlap!) shifted to (2..3, 3..4)
+    # leaving a full clean walkable aisle at y=5 separating the desk from the twin amber fossil display cases at (1..2, 6..7)!
+    _put_grid(L, [[3466, 3467], [3474, 3475]], 2, 3, z_rows=(1, 1))
+    L[2, 3, 2] = 3428                      # Open Bone Sands paleontology ledger atop research desk!
+    L[2, 3, 3] = 4528                      # Amber fossil-extraction reagent flask atop desk!
+    _put_plant(L, 1, 4, 7126, 7134)        # NW lab ficus
+    # Twin enclosed glass-dome amber fossil specimen cases cleanly isolated at (1..2, 6..7) + stool & intact fern!
+    _put_grid(L, [[3240, 3241], [3248, 3249]], 1, 6, z_rows=(2, 1))
+    L[1, 8, 2] = 4077                      # Researcher inspection stool cleanly in front of specimen cases!
+    _put_plant(L, 4, 8, 5431, 5439)        # Intact parlor fern flanking crimson entry carpet (replaces sliced 1-tile bookcase!)
 
     # Central Paleontology Specimen Gallery (x=8..13, y=3..10):
-    # Twin Glass Museum Showcase Cases (7120..7122 pri=5 top, 7128..7130 solid showcase base!)
-    _put_grid(L, [[7120, 7121, 7122], [7128, 7129, 7130]], 9, 4, z_rows=(2, 1))   # North Fossil Display Case
-    _put_grid(L, [[7120, 7121, 7122], [7128, 7129, 7130]], 9, 7, z_rows=(2, 1))   # South Amber & Bone Display Case
+    # SHOWSTOPPER CENTERPIECE: Intact 2x3 Mounted Ancient Fossil Skeleton on Museum Plinth centered at (10..11, 3..5)!
+    _put_grid(L, [[3148, 3149], [3156, 3157], [3164, 3165]], 10, 3, z_rows=(2, 2, 1))
+    # South Gallery Glass Fossil Specimen Cases (3242..3245 / 3250..3253 — authentic museum bone & trilobite plinths!)
+    _put_grid(L, [[3242, 3243, 3244, 3245], [3250, 3251, 3252, 3253]], 9, 7, z_rows=(2, 1))
     _put_lamp(L, 8, 3, ruby=False)
     _put_lamp(L, 13, 3, ruby=False)
-    _put_plant(L, 9, 10, 5431, 5439)       # South gallery botanical fern
+    _put_plant(L, 9, 10, 5431, 5439)
     _put_plant(L, 12, 10, 5431, 5439)
 
     # East Lattice-Current Revival Chamber (x=14..17, y=3..9):
@@ -520,8 +624,9 @@ def build_188():
     _put_grid(L, LABTANK_FULL, 14, 2, z_rows=(2, 1, 1, 1))
     # Authentic Tall Blue Lattice Telemetry Server Rack (2795/2803/2811) at (17, 3..5)
     L[2, 3, 17] = 2795; L[1, 4, 17] = 2803; L[1, 5, 17] = 2811
-    # Scientific Revival Control Console (4779..4789) at (14..16, 8..9) (leaves (14..16, 6..7) wide open!)
+    # Scientific Revival Control Console (4779..4789) at (14..16, 8..9) + lab technician stool at (15, 7)
     _put_grid(L, [[4779, 4780, 4781], [4787, 4788, 4789]], 14, 8, z_rows=(2, 1))
+    L[1, 7, 15] = 4077
 
     PG.guard(L, TID, [(6, 9), (6, 8), (5, 5), (5, 6)], 'map 188')
     _save_raw(188, L)
@@ -534,83 +639,104 @@ def build_188():
         'parent': old['parent'],
         'metadata': old['metadata'],
         'bgm': old.get('bgm', ''),
-        'tone': [-6, -2, 6, 2],
+        'tone': [-4, -2, 6, 2],
         'raw': 'data/raw/188.npy',
         'tileset': TID,
         'events': old['events'],
     }
-    hdr = "# GENERATED by mapgen/layouts/wave16_final12_craft.py (Wave 16 Final Map Craft): Lumen Fossil Lab (188).\n"
+    hdr = "# GENERATED by mapgen/layouts/wave16_final12_craft.py (Wave 2 Map Craft): Lumen Fossil Lab (188).\n"
     open(spec_path, 'w').write(hdr + yaml.safe_dump(new_spec, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True))
     print(f"Built 188 {L.shape} -> data/raw/188.npy")
     return L
 
 
 # ==============================================================================
-# MAP 3: 189 Lumen Apartment (19x12, TS 34) — High-Rise Skyline Metropolitan Loft!
+# MAP 3: 189 Lumen Apartment (19x12, TS 34) — Sleek Modern Urban Lumen High-Rise Loft!
 # ==============================================================================
 def build_189():
     # Exact HEAD events (2/2): #1 Exit @(6,9) [arrival (6,8)], #2 Retired pilot @(4,5)
+    # Pass 2 upgrade: warm residential honey-oak hardwood laminate planks in Living & Entry zones (ZERO industrial ## metal plates!),
+    # proper 3-wide crimson exit doormat (5512..5514) on matching flooring, complete intact 2-wide bedroom bookcase (13..14,1..2),
+    # and pilot's PC workstation cleanly anchored against the north wall (5..7,3..4) well clear of south baseboard!
     W, H = 19, 12
     L = np.zeros((3, H, W), dtype=np.int32)
 
     floor = np.zeros((H, W), dtype=bool)
-    floor[3:9, 1:8] = True         # West Pilot's Living Room & Study (x=1..7, y=3..8)
+    floor[3:9, 1:8] = True         # West Cozy Living Lounge (x=1..7, y=3..8)
     floor[8, 1] = False            # SW chamfer
     floor[9, 5:8] = True           # Recessed entry hall (x=5..7, y=9; Exit @ 6,9!)
-    floor[3:10, 8:13] = True       # Central Open-Plan Kitchen & Dining Nook (x=8..12, y=3..9)
-    floor[2:10, 13:18] = True      # East Elevated Metropolitan Bedroom Suite (x=13..17, y=2..9)
+    floor[3:10, 8:13] = True       # Central Dressed Modern Kitchen, Dining & Entry Hall (x=8..12, y=3..9)
+    floor[2:10, 13:18] = True      # East Sleek Metropolitan Bedroom Nook (x=13..17, y=2..9)
     floor[9, 17] = False           # SE chamfer
 
-    _seam_sheridan(L, floor, wall_rows=2)
+    _seam_lumen_modern(L, floor, wall_rows=2, base_floor='diamond', wall_style='urban')
 
-    # Multi-zone metropolitan loft flooring:
-    # Central Kitchen Nook: crisp ivory marble tile (x=8..12, y=3..6) contrasting warm hardwood planks!
-    _put_9slice(L, IVORY_MARBLE, 8, 3, 12, 6, z=0)
-    # Entry stone pad & doormat at (5..7, 9)
-    for xx in (5, 6, 7):
-        L[0, 9, xx] = IVORY_MARBLE[2][xx - 5]
+    # Warm Modern Residential Wood-Laminate Flooring across West Lounge, Entry Alcove & Central Hall (ZERO industrial ## steel grates!):
+    for y in range(H):
+        for x in range(1, 13):
+            if floor[y, x]:
+                top_row = (y == 0) or not floor[y - 1, x]
+                left_edge = (x == 0) or not floor[y, x - 1]
+                if top_row:
+                    L[0, y, x] = 5352 if left_edge else 5353 + (x - 3) % 3
+                else:
+                    L[0, y, x] = 5360 if left_edge else 5361 + (x - 3) % 3
+    # 1) Modern sleek steel-blue tiled Kitchenette & Dining Zone (x=8..12, y=3..6)
+    _put_9slice(L, MODERN_TILE, 8, 3, 12, 6, z=0)
+    # 2) Sleek dark charcoal-diamond carpeted East Bedroom Nook (x=13..17, y=2..9)
+    for y in range(2, 10):
+        for x in range(13, 18):
+            if floor[y, x]:
+                L[0, y, x] = 7737 if (x + y) % 2 == 0 else 7745
+    # 3) Plush modern Royal-Blue Living Room Rug (x=2..4, y=6..8) framing sofa & TV lounge
+    _put_9slice(L, BLUE_CARPET, 2, 6, 4, 8, z=1)
+    # 4) Warm Crimson Accent Rug framing the Bedroom Nook (x=13..16, y=5..8)
+    _put_9slice(L, RED_CARPET, 13, 5, 16, 8, z=1)
+    # 5) Proper 3-wide crimson exit doormat (5512..5514) directly on matching honey-oak planks at Exit (5..7, 9)!
     _put_doormat(L, 6, 9, 'sheridan')
-    # Plush crimson living rug in West Lounge (x=2..5, y=6..8)
-    _put_9slice(L, RED_CARPET, 2, 6, 5, 8, z=1)
-    # Soft royal-blue carpet in East Bedroom Suite (x=13..16, y=5..8)
-    _put_9slice(L, BLUE_CARPET, 13, 5, 16, 8, z=1)
 
-    # Panoramic Skyline Windows & Pilot's Wall Art along North Walls:
-    # Sunlit arched metropolitan skyline window (2086..2095) centered over Pilot's living room at (3..4, 1..2)!
-    _put_grid(L, [[2086, 2087], [2094, 2095]], 3, 1, z_rows=(1, 1))
-    # Complete 2x2 framed Skyreach flight route chart on wall (6..7, 1..2)
-    _put_grid(L, [[4730, 4731], [4738, 4739]], 6, 1, z_rows=(1, 1))
-    # Crisp Sheridan kitchen window cleanly to the right of fridge (12, 1..2)
-    L[0, 1, 12] = 5544; L[0, 2, 12] = 5552
-    # Sunlit arched high-rise bedroom window (2086..2095) cleanly at (15..16, 0..1)
+    # Panoramic Modern High-Rise Skyline Windows & Aviation Wall Art (ZERO floating 1-tile scraps!):
+    _put_grid(L, [[2086, 2087], [2094, 2095]], 2, 1, z_rows=(1, 1))
+    # Framed Skyreach aviation flight-route map (4730..4739) cleanly above pilot's PC workstation at (5..6, 1..2)
+    _put_grid(L, [[4730, 4731], [4738, 4739]], 5, 1, z_rows=(1, 1))
+    # Bedroom skyline window cleanly centered above the modern blue bed (15..16, 0..1)
     _put_grid(L, [[2086, 2087], [2094, 2095]], 15, 0, z_rows=(1, 1))
 
-    # West Pilot's Living Room & Study (around #2 Retired pilot @(4,5)):
-    # Keep (4,5), (4,6), (5,5), (3,5) completely open!
-    _put_tf(L, 'bookcase', 1, 3)           # (1..2, 3..4) Aviation logbook shelf
-    _put_tf(L, 'table_tea', 2, 6)          # (2..3, 6..7) Coffee table on plush crimson rug
-    L[1, 7, 1] = 5580                      # Retired pilot's leather flight suitcase
-    _put_lamp(L, 4, 8, ruby=True)          # Warm ruby floor lamp framing entry
-    _put_plant(L, 7, 4, 7126, 7134)        # Tall metropolitan parlor ficus dividing living & kitchen
+    # Zone 1: Cozy Modern Living Lounge & Pilot's North-Wall Aviation Study (around #2 Retired pilot @(4,5)):
+    # Keep (4,5),(4,6),(5,5),(3,5) 100% open & walkable!
+    # Sleek modern widescreen blue flat-screen TV on media console (3603..3605 / 3611..3613) at (1..3, 3..4)!
+    _put_grid(L, [[3603, 3604, 3605], [3611, 3612, 3613]], 1, 3, z_rows=(2, 1))
+    L[1, 5, 1] = 5580                       # Retired pilot's leather flight satchel by NW wall
+    # Pilot's Sleek Aviation Study Desk & Multi-Screen PC Workstation cleanly anchored against NORTH wall at (5..7, 3..4)
+    # directly beneath the flight-route map (ZERO south-baseboard collision!), with study stool at (6, 5)!
+    _put_grid(L, [[7712, 7713, 7714], [7720, 7721, 7722]], 5, 3, z_rows=(2, 1))
+    L[1, 5, 6] = 4077                       # Study desk chair cleanly clear of Retired pilot @(4,5)
+    # Cozy plush modern silver-grey living sofa (7571..7573 / 7579..7581) on blue living rug at (2..4, 7..8)!
+    _put_grid(L, [[7571, 7572, 7573], [7579, 7580, 7581]], 2, 7, z_rows=(2, 1))
+    _put_lamp(L, 1, 7, ruby=False)          # Modern brass reading floor lamp flanking sofa
 
-    # Central Open-Plan Kitchen & Dining Terrace (x=8..12, y=3..9):
-    # Modern white-and-wood kitchen counter, stove & fridge (3504..3515) at (8..11, 2..3)
+    # Zone 2: Dressed Modern Kitchen Counter, Dining Nook & Spacious Entry Foyer (x=8..12, y=3..9):
+    # Modern white-and-steel kitchen stove, sink, counter & fridge (3504..3515) cleanly dressed at (8..11, 2..3)
     _put_grid(L, [[3504, 3505, 3506, 3507], [3512, 3513, 3514, 3515]], 8, 2, z_rows=(2, 1))
-    _put_tf(L, 'table_w', 9, 5)            # (9..10, 5..7) Modern wood dining table
-    L[1, 6, 8] = 4077                      # Dining stool west
-    L[1, 6, 11] = 4077                     # Dining stool east
-    # Sleek modern hotel sofa (7571..7581) at (9..11, 8..9)
-    _put_grid(L, [[7571, 7572, 7573], [7579, 7580, 7581]], 9, 8, z_rows=(2, 1))
+    _put_plant(L, 12, 3, 7126, 7134)        # Metropolitan parlor ficus framing kitchen & bedroom threshold
+    # Dressed modern dining table on L1 (3466..3475) so L2 dinnerware & warm mug composite cleanly ON TOP of tabletop!
+    _put_grid(L, [[3466, 3467], [3474, 3475]], 9, 5, z_rows=(1, 1))
+    L[2, 5, 9] = 4528; L[2, 5, 10] = 4529   # Dressed tabletop dinnerware & warm mug!
+    L[1, 6, 8] = 4077                       # Dining stool west
+    L[1, 6, 11] = 4077                      # Dining stool east
+    # Spacious, uncluttered south entry foyer with warm modern corner lamp (leaves Exit alcove (5..7,9) wide open!)
+    _put_lamp(L, 11, 9, ruby=False)
 
-    # East Elevated Metropolitan Bedroom Suite (x=13..17, y=2..9):
-    # Cozy modern amber-quilt bed (3509..3535, 3x4) cleanly at (15..17, 2..5)
-    _put_grid(L, [[3509, 3510, 3511], [3517, 3518, 3519], [3525, 3526, 3527], [3533, 3534, 3535]], 15, 2, z_rows=(2, 1, 1, 1))
-    # Grandfather clock (3633..3649, 1x3) flush against north bedroom wall at (13, 0..2)!
-    _put_tf(L, 'clock', 13, 0)
-    # Mirrored vanity dresser (3621..3638, 2x3) at (15..16, 6..8)
-    _put_tf(L, 'dresser_mirror', 15, 6)
-    _put_plant(L, 14, 9, 5431, 5439)       # Lush bedroom fern beside SE chamfer
-    _put_lamp(L, 13, 8, ruby=False)
+    # Zone 3: Sleek Modern High-Rise Bedroom Nook (x=13..17, y=2..9):
+    # Modern luxury crisp-blue hotel bed (7632..7650, 3x3) at (15..17, 2..4)!
+    _put_grid(L, [[7632, 7633, 7634], [7640, 7641, 7642], [7648, 7649, 7650]], 15, 2, z_rows=(2, 1, 1))
+    # COMPLETE INTACT 2-wide Aviation & Star-Chart Bookcase (3309..3318) cleanly on flat wall (13..14, 1..2) (ZERO slicing!)
+    _put_grid(L, [[3309, 3310], [3317, 3318]], 13, 1, z_rows=(2, 1))
+    _put_lamp(L, 14, 4, ruby=False)         # Modern bedside brass lamp cleanly flanking bed & bookcase!
+    # Sleek modern mirrored dresser (3621..3638) & lush parlor palm in SE bedroom nook
+    _put_tf(L, 'dresser_mirror', 15, 6)     # (15..16, 6..8) Bedroom vanity dresser
+    _put_plant(L, 17, 8, 7126, 7134)        # Sleek bedroom parlor ficus
+    _put_plant(L, 13, 9, 5431, 5439)        # Lush indoor fern
 
     PG.guard(L, TID, [(6, 9), (6, 8), (4, 5), (4, 6)], 'map 189')
     _save_raw(189, L)
@@ -623,12 +749,12 @@ def build_189():
         'parent': old['parent'],
         'metadata': old['metadata'],
         'bgm': old.get('bgm', ''),
-        'tone': [8, 4, -4, 0],
+        'tone': [-2, 0, 8, 2],
         'raw': 'data/raw/189.npy',
         'tileset': TID,
         'events': old['events'],
     }
-    hdr = "# GENERATED by mapgen/layouts/wave16_final12_craft.py (Wave 16 Final Map Craft): Lumen Apartment (189).\n"
+    hdr = "# GENERATED by mapgen/layouts/wave16_final12_craft.py (Wave 2 Map Craft): Lumen Apartment (189).\n"
     open(spec_path, 'w').write(hdr + yaml.safe_dump(new_spec, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True))
     print(f"Built 189 {L.shape} -> data/raw/189.npy")
     return L
@@ -708,66 +834,105 @@ def build_281_layers():
 def build_282_layers():
     # Exact HEAD events (2/2): #2 Mart @(2,3) [dir=right], #3 Exit @(4,8) [arrival (4,7)]
     # Stretched from mart.json (11x9) via stretch: [['x', 10, 6], ['y', 8, 2]] -> 17x11 (ZERO events shifted!)
+    # Wave 2 upgrade: unified warm honey-timber botanical apothecary floor (ZERO mismatched 3-way patchwork or double red rugs!),
+    # ONE continuous warm woven runner guiding from Exit (4,8) past the dressed checkout counter through organized herb & potion aisles!
     W, H = 17, 11
     L = np.zeros((3, H, W), dtype=np.int32)
 
     floor = np.zeros((H, W), dtype=bool)
-    floor[2:8, 1:7] = True         # West Apothecary Counter & Vestibule (x=1..6, y=2..7)
+    floor[2:8, 1:7] = True         # West Apothecary Checkout Counter & Entry Vestibule (x=1..6, y=2..7)
     floor[7, 1] = False            # SW void chamfer
     floor[8, 3:6] = True           # Recessed entry door notch (x=3..5, y=8; Exit @ 4,8!)
-    floor[2:10, 7:12] = True       # Central Provision & Potion Aisle (x=7..11, y=2..9)
+    floor[2:10, 7:12] = True       # Central Organized Herb & Potion Provision Aisles (x=7..11, y=2..9)
     floor[9, 7] = False            # Beveled south aisle SW shoulder
     floor[9, 11] = False           # Beveled south aisle SE shoulder
-    floor[3:9, 12:16] = True       # East Sunlit Botanical Herbarium Conservatory (x=12..15, y=3..8)
+    floor[2:9, 12] = True          # Clean flush doorway column x=12 so wall step sits cleanly behind cabinet x=13..15!
+    floor[3:9, 13:16] = True       # East Sunlit Botanical Herbarium Apothecary Alcove (x=13..15, y=3..8)
     floor[8, 15] = False           # SE herbarium chamfer
 
+    # Unified warm Sheridan honey-oak timber plank floor & wainscoted walls across the ENTIRE apothecary (including exit (3..5,8)!)
     _seam_sheridan(L, floor, wall_rows=2)
 
-    # Multi-Zone Royal Botanical Apothecary Flooring:
-    _put_9slice(L, SAGE_MARBLE, 1, 2, 11, 9, z=0, mask=floor)
-    _put_9slice(L, IVORY_MARBLE, 3, 5, 5, 8, z=0, mask=floor)
-    for y in range(3, 9):
-        for x in range(12, 16):
-            if floor[y, x]:
-                L[0, y, x] = FLOOR_EMERALD
-    # Crimson welcome runner from Exit (4,8) north into the Apothecary
-    _put_9slice(L, SHER_RUG, 3, 5, 5, 7, z=1)
-    L[1, 8, 4] = 444
-    # Center showcase crimson medallion carpet (8..10, 7..9)
-    _put_9slice(L, RED_CARPET, 8, 7, 10, 9, z=1)
+    # Proper 3-wide woven red exit doormat directly on matching warm honey-oak floorboards at Exit (3..5, 8)!
+    _put_doormat(L, 4, 8, 'sheridan')
 
-    # Sunlit Arched Verdance Windows & Apothecary Wall Shelving:
-    for wx in (2, 6, 9, 13):
-        wy = 1 if wx >= 12 else 0
+    # ONE single unified warm woven crimson-and-gold apothecary runner (SHER_RUG) guiding the customer's eye
+    # seamlessly from Entry (4..5, 6..7) right past the checkout counter & down the central herb/potion promenade (4..12, 6..7)!
+    _put_9slice(L, SHER_RUG, 4, 6, 12, 7, z=1)
+
+    # Sunlit Arched Verdance Windows cleanly spaced along north walls (ZERO overlap with tall shelves!)
+    for wx in (3, 8, 11, 14):
+        wy = 1 if wx >= 13 else 0
         L[0, wy, wx] = 5544; L[0, wy + 1, wx] = 5552
     _put_tf(L, 'painting3', 4, 0)
 
-    # Warm Royal Botanical Mart Counter (5944..5967, REAL 0x80 flags!) backing #2 Mart @(2,3) facing RIGHT!
+    # Dressed Botanical Apothecary Checkout Counter (5944..5967, REAL 0x80 flags!) backing #2 Mart @(2,3) facing RIGHT!
     # Vertical counter at (3, 2..4) + front return at (2, 4) — leaves (1,4) passable so BOTH (4,3) across 0x80 AND (1,3) direct BFS pass!
-    L[1, 2, 3] = 5948  # upper counter arm (0x80)
-    L[1, 3, 3] = 5955  # bouquet vertical counter right in front of Mart @(2,3) (0x80!)
-    L[1, 4, 3] = 5963  # SE curved counter corner (0x80)
-    L[1, 4, 2] = 5961  # front counter under clerk (0x80)
-    L[1, 6, 1] = 7178  # blooming rose planter tucked in SW corner (leaves (1,4) & (1,5) open!)
-    _put_lamp(L, 2, 7, ruby=True)
+    # Apothecary bottle & tincture shelf mounted cleanly behind clerk on wall (1..2, 1..2)!
+    _put_tf(L, 'shelf_bottles', 1, 1)       # (1..2, 1..2) Stocked apothecary tinctures & elixirs behind shopkeeper!
+    L[1, 2, 3] = 5948                       # Upper counter arm (0x80)
+    L[2, 2, 3] = 4528                       # Amber apothecary elixir jar dressing the checkout counter!
+    L[1, 3, 3] = 5955                       # Fresh floral bouquet vertical counter right in front of Mart @(2,3) (0x80!)
+    L[1, 4, 3] = 5963                       # SE curved counter corner (0x80)
+    L[1, 4, 2] = 5961                       # Front counter under clerk (0x80)
+    L[2, 4, 2] = 3428                       # Open apothecary ledger book on counter!
+    # Cozy SW rustic wooden botanical stand beside entry (leaves (1,4) & (1,5) 100% open for BFS!)
+    L[2, 5, 1] = 5475; L[1, 6, 1] = 5483    # Warm carved wooden botanical stand
+    L[1, 7, 2] = 7178                       # Blooming rose planter framing SW chamfer
 
-    # Central Potion & Apothecary Provision Isles (x=7..11, y=2..9):
-    _put_tf(L, 'shelf_goods', 7, 1)        # (7..8, 1..3) Tall stocked Pokeball & Potion shelf against north wall
-    _put_tf(L, 'shelf_goods', 10, 1)       # (10..11, 1..3) Second stocked provision shelf
-    _put_tf(L, 'shelf_green', 7, 5)        # (7..8, 5..6) Emerald apothecary herb display rack
-    _put_tf(L, 'display', 10, 5)           # (10..11, 5..6) Glass botanical tincture showcase
-    _put_tf(L, 'table_tea', 9, 8)          # (9..10, 8..9) South bouquet & tea sampling table on crimson carpet
+    # Organized North Wall Provision & Apothecary Shelving (y=1..3 — clean symmetrical aisles!)
+    _put_tf(L, 'shelf_goods', 6, 1)         # (6..7, 1..3) Stocked Pokeball & Potion apothecary shelf A
+    _put_tf(L, 'shelf_goods', 9, 1)         # (9..10, 1..3) Stocked Pokeball & Potion apothecary shelf B
+    _put_tf(L, 'china', 13, 2)              # (13..15, 2..4) Antique wood-and-glass botanical apothecary cabinet!
 
-    # East Sunlit Botanical Herbarium Conservatory (x=12..15, y=3..8):
-    _put_tf(L, 'china', 13, 2)             # (13..15, 2..4) Ornate antique apothecary glass cabinet!
-    _put_grid(L, [[5422], [5430], [5438]], 15, 4, z_rows=(2, 1, 1))  # East flowering shelf
-    _put_grid(L, [[5446, 5447], [5454, 5455]], 13, 7, z_rows=(1, 1)) # Blooming flower-box bench
-    _put_plant(L, 12, 4, 7874, 7882)       # Grand conservatory palm
-    _put_plant(L, 12, 8, 5431, 5439)       # Conservatory fern framing SE arch
+    # Organized Mid-Shop Herb & Tincture Display Islands (y=4..5, cleanly north of the continuous woven runner y=6..7!)
+    _put_tf(L, 'shelf_green', 6, 4)         # (6..7, 4..5) Emerald apothecary herb & remedy display rack
+    _put_tf(L, 'display', 9, 4)             # (9..10, 4..5) Glass botanical tincture & tonic showcase
+    _put_plant(L, 12, 3, 7874, 7882)        # Grand Verdance conservatory palm cleanly framing the herbarium cabinet!
+
+    # South Botanical Sampling Table & East Herbarium Display (cleanly south/east of the woven runner!)
+    _put_grid(L, [[3466, 3467], [3474, 3475]], 8, 8, z_rows=(1, 1))  # (8..9, 8..9) Herbal tea & remedy sampling table on L1
+    L[2, 8, 8] = 4528; L[2, 8, 9] = 4529    # Dressed with glowing apothecary bottles & mortar cup atop tabletop!
+    L[1, 8, 7] = 4077                       # Customer tasting stool
+    L[2, 8, 10] = 5475; L[1, 9, 10] = 5483  # Warm rustic carved wooden stand (replaces biome-breaking sci-fi Lumen pole lamp!)
+    _put_grid(L, [[5422], [5430], [5438]], 15, 4, z_rows=(2, 1, 1))   # East potted flowering herb shelf
+    _put_grid(L, [[5446, 5447], [5454, 5455]], 13, 7, z_rows=(1, 1))  # Blooming botanical herb-box bench
+    _put_plant(L, 12, 8, 5431, 5439)        # Lush conservatory fern framing SE corner
 
     PG.guard(L, TID, [(4, 8), (4, 7), (4, 3), (2, 3), (1, 3), (1, 4)], 'map 282')
     _save_raw(282, L)
     return L
+
+
+def build_282():
+    """Update ONLY Map 282 in 281_verdance_interiors.yaml; preserve Map 281 100% byte-identical!"""
+    L282 = build_282_layers()
+    spec_path = os.path.join(SPEC_DIR, '281_verdance_interiors.yaml')
+    raw_txt = open(spec_path, 'r', encoding='utf-8').read()
+    parts = raw_txt.split('\n---\n')
+    assert len(parts) == 2, f"Expected 2 docs in 281_verdance_interiors.yaml, got {len(parts)}"
+    doc281_verbatim = parts[0]
+    d282 = yaml.safe_load(parts[1])
+    assert d282.get('id') == 282
+    s282 = {
+        'id': 282,
+        'name': d282['name'],
+        'parent': d282['parent'],
+        'template': 'mart',
+        'exit_link': d282['exit_link'],
+        'drop_template_events': d282['drop_template_events'],
+        'tileset': TID,
+        'bgm': d282['bgm'],
+        'tone': [6, 8, -6, 0],
+        'metadata': d282['metadata'],
+        'stretch': [['x', 10, 6], ['y', 8, 2]],
+        'tile_edits': _compress_tile_edits(L282),
+        'events': d282['events'],
+    }
+    doc282_txt = yaml.safe_dump(s282, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
+    open(spec_path, 'w', encoding='utf-8').write(doc281_verbatim + '\n---\n' + doc282_txt)
+    print(f"Built 282 {L282.shape} ({len(s282['tile_edits'])} edits); 281 preserved verbatim.")
+    return L282
 
 
 def build_verdance_281_282():
@@ -1427,6 +1592,8 @@ def main(which=None):
         if not sel or (sel & ids):
             if fn is build_frostwick_571_576 and sel:
                 fn(only={int(x) for x in (sel & ids)})
+            elif fn is build_verdance_281_282 and sel == {'282'} or (fn is build_verdance_281_282 and '282' in sel and '281' not in sel):
+                build_282()
             else:
                 fn()
 
