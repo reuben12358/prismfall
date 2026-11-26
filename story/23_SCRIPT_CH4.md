@@ -24,11 +24,14 @@ As in `20_SCRIPT_CH0-2.md`: `[portrait: NAME, expression]` faces for the story c
 *Built events stand: road sign, the Fleece Cross, the Ribbon-tier, the Shepherd, the third cottage, the shepherd boy's Ram Race, the sheep-wash, the hill-fort ring, Road Stone III.*
 ```
 [CHANGED] Shepherd (second talk):
-[name: Shepherd] Boy in a black coat came up the drove road yesterday at a run. Didn't stop at the Cross.
+[name: Shepherd] Boy in a black coat came up the drove road yesterday at a run.
+[name: Shepherd] Didn't stop at the Cross.
 [name: Shepherd] Everybody stops at the Cross. Even the Wooloo stop at the Cross.
 [NEW] Ribbon-tier (after the Fleece Cross is read):
-[name: Ribbon-tier] Three women in grey tied a ribbon here two nights back. Grey ribbon. Nobody ties grey.
-[name: Ribbon-tier] One of them cut it off the spool with shears so sharp the end didn't fray. You don't see that outside Briarwick.
+[name: Ribbon-tier] Three women in grey tied a ribbon here two nights back.
+[name: Ribbon-tier] Grey ribbon. Nobody ties grey.
+[name: Ribbon-tier] One of them cut it off the spool with shears so sharp the end didn't fray.
+[name: Ribbon-tier] You don't see that outside Briarwick.
 ```
 
 ## Map 577 — Frostwick Pass (`:SNOWY_MOUNTAIN`; built)
@@ -42,8 +45,11 @@ You walk under it. For a step you are in neither kingdom.
 The Elowen ledger has a new entry, two days old: "Three on foot. Grey cloaks. Paid in silk."
 The Isenmar ledger, same day: "Nobody."
 [NEW] Hrodgar, the huscarl at the Arch (trainer lines; BLACKBELT "Hrodgar"):
-[name: Huscarl Hrodgar] I keep the arch. The Elowen forester keeps the other half. We've never agreed which half is which. (Battle.)
-[name: Huscarl Hrodgar] [after] Pass. You've a thaw in you. Isenmar respects a thaw. It doesn't trust one.
+[name: Huscarl Hrodgar] I keep the arch. The Elowen forester keeps the other half.
+[name: Huscarl Hrodgar] We've never agreed which half is which.
+(Battle.)
+[name: Huscarl Hrodgar] [after] Pass. You've a thaw in you.
+[name: Huscarl Hrodgar] Isenmar respects a thaw. It doesn't trust one.
 ```
 
 ## Map 570 — Frostwick (built) and interiors 571–576
@@ -52,17 +58,22 @@ The Isenmar ledger, same day: "Nobody."
 ```
 (Six giant trees glazed in clear ice, with Elowen treehouses in their arms. Under them, turf-roofed longhouses with whalebone gables. A frozen brook runs through the square; children are fishing through holes in it. Over everything hang curtains of silk that froze years ago and never thawed.)
 [name: Huscarl at the gate] Wipe your boots. Declare any honey.
-[name: Forester at the gate] He means welcome. We both mean welcome. We just say it in two languages and neither of them is "welcome".
+[name: Forester at the gate] He means welcome. We both mean welcome.
+[name: Forester at the gate] We just say it in two languages and neither of them is "welcome".
 ```
 *Built events stand: the Hearth Stone, Brannagh and Halvard, the honey-seller, the fishmonger, the children in ogre and whale masks, the ice-fisher, the brazier woman, the Swinub herder, the rime-silk weaver, the South Gate sign.*
 ```
 [CHANGED] Fishmonger (second talk):
 [name: Fishmonger] Boy in a black coat bought one smoked eel and asked had anyone seen a woman in a mask.
-[name: Fishmonger] I said, in Frostwick? It's Thawfeast in a fortnight, love. Everyone's in a mask. He didn't laugh. Then he bought a second eel.
+[name: Fishmonger] I said, in Frostwick? It's Thawfeast in a fortnight, love.
+[name: Fishmonger] Everyone's in a mask. He didn't laugh. Then he bought a second eel.
 [CHANGED] Old woman by the brazier (third talk):
-[name: Old Woman] Three women in grey slept by my brazier two nights back. One had shears on her belt.
-[name: Old Woman] I woke and my old shawl was mended. Twelve years I've had that hole. She didn't take a thing. Didn't leave a name.
-[name: Old Woman] Hollow, the huscarl says. I said, then the Hollow darn better than the huscarls.
+[name: Old Woman] Three women in grey slept by my brazier two nights back.
+[name: Old Woman] One had shears on her belt.
+[name: Old Woman] I woke and my old shawl was mended. Twelve years I've had that hole.
+[name: Old Woman] She didn't take a thing. Didn't leave a name.
+[name: Old Woman] Hollow, the huscarl says.
+[name: Old Woman] I said, then the Hollow darn better than the huscarls.
 ```
 
 ### 571 — Frostwick Pokémon Center: Gale Post desk [NEW]
@@ -86,13 +97,16 @@ P.P.S. Is he being rude to you?"
 ### 573 — The Two Hearths (inn; built: Brannagh, Halvard, a guest)
 ```
 [NEW] Bard (by the Isenmar hearth; maps.json "bard"):
-[name: Bard] A song for the stranger? It's the only one I know all the way through. Everybody in Isenmar does.
+[name: Bard] A song for the stranger?
+[name: Bard] It's the only one I know all the way through. Everybody in Isenmar does.
 ♪ Sleep, old whale, under the ice.
   We salted the sea, and we've paid the price.
   Keep your eyes shut and your great heart slow,
   for the day you wake, all the ice will go. ♪
-[name: Bard] My gran said the frozen sea's a blanket, and there's something asleep under it. When the whale wakes, the sea remembers it's a sea.
-[name: Bard] The southerners think it's a lullaby. It's a warning. We just sing it gently.
+[name: Bard] My gran said the frozen sea's a blanket, and there's something asleep under it.
+[name: Bard] When the whale wakes, the sea remembers it's a sea.
+[name: Bard] The southerners think it's a lullaby.
+[name: Bard] It's a warning. We just sing it gently.
 HALF-TALLY BOARD (Ingrith, the rune-carver; Trials): one board, runes on the Isenmar side, lanterns on the Elowen side.
   → "Two Hearths, One Pot" (IS_TWO_HEARTHS) and "The Oathbound Parcel" (IS_OATH_PARCEL), as TRIALS_QUESTS.
 ```
@@ -104,7 +118,7 @@ HALF-TALLY BOARD (Ingrith, the rune-carver; Trials): one board, runes on the Ise
 [name: Isenmar Clerk] Name and hall.
 [name: Meridian Clerk] Name and tint. Hand on the plate, please.
 (SE: chime. Then nothing. The plate stays dark.)
-[name: Meridian Clerk] ...
+[name: Meridian Clerk] [emote: dots] ...
 [name: Meridian Clerk] I'll put "pending".
 [name: Elowen Clerk] There's no box for "pending".
 [name: Isenmar Clerk] There's no box for anything. Stamp it and let them through.
@@ -126,7 +140,7 @@ A camp, two nights cold. Three sleeping hollows in the snow, close together. Str
 Beside the ash, half a carved bark mask with the same sad face as the masks in Briarwick. Someone stopped carving it halfway.
 Over the three sets of footprints going north, a fourth set, newer, bigger strides. Boots. In a hurry.
 [NEW] Lantern Birch (578), second page (after the built Never-Melt Ice gift):
-[name: Trapper's note, nailed under the lamp] "For whoever's late. — the trappers." Somebody has added under it in a sharp hand: "Not late. Ahead." Then, in a third hand, very neat: "Mind the boy in the coat. He walks like he's angry at the snow."
+[name: Trapper's note] "For whoever's late. — the trappers." Somebody has added under it in a sharp hand: "Not late. Ahead." Then, in a third hand, very neat: "Mind the boy in the coat. He walks like he's angry at the snow."
 ```
 
 ## Map 561 — Gullcry Cliffs (`:MOUNTAIN`; built) and Map 564 — Gullcry Caves (built)
@@ -136,48 +150,62 @@ Over the three sets of footprints going north, a fourth set, newer, bigger strid
 ```
 (The cliff path narrows between two tors. A boy in a too-big black coat stands in the gap with his back to you, watching the road to Ebbmouth through a cracked brass spyglass. Gulls wheel below. He doesn't turn round.)
 [portrait: KESTREL, neutral] Don't. Whatever you're about to say. Don't.
-[name: Kestrel] Three of them. Grey cloaks. Over the pass two days ago, into that town last night. I've been one day behind them since Saltmere.
+[name: Kestrel] Three of them. Grey cloaks.
+[name: Kestrel] Over the pass two days ago, into that town last night.
+[name: Kestrel] I've been one day behind them since Saltmere.
 [portrait: KESTREL, angry] And now there's you. Standing in my one gap. Breathing loudly.
 > I'm going to Ebbmouth too.
-  [portrait: KESTREL, deadpan] Of course you are. Everyone's going to Ebbmouth. It's very popular, for a town that smells of eel.
+  [portrait: KESTREL, deadpan] Of course you are. Everyone's going to Ebbmouth.
+  [name: Kestrel] It's very popular, for a town that smells of eel.
 > Who are they?
-  [portrait: KESTREL, neutral] Hollow. The ones who cut the ropes in Saltmere. One of them talks to the Mourner. I'm going to find out what he says back.
+  [portrait: KESTREL, deadpan] Hollow. The ones who cut the ropes in Saltmere.
+  [name: Kestrel] One of them talks to the Mourner.
+  [name: Kestrel] I'm going to find out what he says back.
 > ...
-  [portrait: KESTREL, angry] Gran does that. I told you. The staring.
+  [portrait: KESTREL, deadpan] Gran does that. I told you. The staring.
 MOVE: Kestrel turns round and lowers the spyglass. At his hip, one of his Poké Balls is humming, steel on steel.
 [portrait: KESTREL, neutral] Gran gave me something before I left. She came down the lighthouse stairs at four in the morning, put it in my hands and went back up. Didn't say a word.
-[name: Kestrel] Then she shouted down the stairs: "It was your mother's blade's child. Don't you dare lose it."
+[name: Kestrel] Then she shouted down the stairs:
+[name: Kestrel] "It was your mother's blade's child. Don't you dare lose it."
 [name: Kestrel] Honedge. Most she's said to me in a year.
-[portrait: KESTREL, smug] I named it Morwen. Gran hasn't spoken to me since.
+[name: Kestrel] I named it Morwen. Gran hasn't spoken to me since.
 [portrait: KESTREL, angry] Move. Or don't, and I'll move you.
 Script: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)     # K2; version 20 + starter slot (SPINE); Staravia, Honedge "Morwen", the counter-starter (BALANCE); field :MOUNTAIN (561 default)
 (When Honedge enters:) [portrait: KESTREL, neutral] Go on, Morwen. Show them how she held a line.
 (LOSE: standard whiteout to the Frostwick Pokémon Center. Kestrel on retry: "Back again. Good. I needed the practice of beating you.")
 (WIN:)
-[portrait: KESTREL, shocked] ...
-[portrait: KESTREL, angry] Morwen held. It HELD. It's the rest of them that — tch.
+[portrait: KESTREL, angry] ...
+[name: Kestrel] Morwen held. It HELD.
+[name: Kestrel] It's the rest of them that — tch.
 MOVE: Kestrel recalls Honedge and holds the Ball against his chest a moment too long. Two fingers tap his sternum, twice.
-[portrait: KESTREL, neutral] You were in the Lantern. You heard him. Under the doubling.
+[portrait: KESTREL, neutral] You were in the Lantern. You heard him.
+[name: Kestrel] Under the doubling.
 ```
 **CHOICE `:ch4_kestrel_mourner`**
 ```
 > Do you think the Mourner is your mother? (kind)
   Script: pf_choose(:ch4_kestrel_mourner, :kind)
-  [portrait: KESTREL, angry] Don't.
-  [portrait: KESTREL, sad] ...Don't ask it like that. Like it's a thing you can just ask.
-  [name: Kestrel] She died in Gravenmoor six years ago. They sent Gran a box. There was a veil in it and a form. The form said "personal effects".
-  [portrait: KESTREL, neutral] So I don't think anything. I'm just going to look at his face.
+  [portrait: KESTREL, sad] Don't.
+  [name: Kestrel] ...Don't ask it like that.
+  [name: Kestrel] Like it's a thing you can just ask.
+  [name: Kestrel] She died in Gravenmoor six years ago. They sent Gran a box.
+  [name: Kestrel] There was a veil in it and a form.
+  [name: Kestrel] The form said "personal effects".
+  [name: Kestrel] So I don't think anything. I'm just going to look at his face.
   [name: Kestrel] ...Thanks for asking it quiet. I suppose.
 > He sounds just like her, doesn't he. (blunt)
   Script: pf_choose(:ch4_kestrel_mourner, :blunt)
-  [portrait: KESTREL, angry] You never heard her. You don't get to say what she sounds like.
+  [portrait: KESTREL, angry] You never heard her.
+  [name: Kestrel] You don't get to say what she sounds like.
   MOVE: Kestrel shoves past, shoulder to shoulder, hard enough to rock you.
   [name: Kestrel] Stay out of Ebbmouth, ferry kid.
 > ... (silent)
   Script: pf_choose(:ch4_kestrel_mourner, :silent)
   [portrait: KESTREL, sad] ...She'd never wear a mask. She hated masks.
-  [name: Kestrel] Gravenmoor's all veils. Everybody in mourning all the time. She said a face is the only honest thing a Warden owns.
-  [portrait: KESTREL, neutral] So it isn't her. It can't be. I just need to see that it isn't.
+  [name: Kestrel] Gravenmoor's all veils. Everybody in mourning all the time.
+  [name: Kestrel] She said a face is the only honest thing a Warden owns.
+  [name: Kestrel] So it isn't her. It can't be.
+  [name: Kestrel] I just need to see that it isn't.
 (All:)
 MOVE: Kestrel goes north toward Ebbmouth, fast, coat flapping.
 Switch S111 CH4_K2_DONE = ON. V114 KESTREL_STAGE = 1 (already 1 since Saltmere). V124 = 1.
@@ -193,28 +221,40 @@ Switch S111 CH4_K2_DONE = ON. V114 KESTREL_STAGE = 1 (already 1 since Saltmere).
 SE: the river's noise cuts out. Every mill-wheel on the Ebb freezes mid-turn. On the quay, a dockworker stops with a crate half-lifted. Nobody moves. WAIT 90.
 SE: the river comes back with a slap against the pilings. The wheels lurch and turn. The dockworker breathes out and puts the crate down.
 [name: Dockworker] Forty seconds. That's the longest this week.
-[name: Dockworker] Welcome to Ebbmouth. The river runs both ways. Lately it can't decide.
+[name: Dockworker] Welcome to Ebbmouth. The river runs both ways.
+[name: Dockworker] Lately it can't decide.
 V108 EBB_STATE = 1.
 QUEST LOG: "Eighteen Roads" — Earn the third badge at the Tidelock Gym. (The gym is on the river, east.)
 ```
 *Built events stand: the Upper Mill and Guild Mill wheels, the harbour mast, the ice-fisher's song, the Guild striker, the dockworker, the Guild organiser, the eel-smoker, the lock-keeper, the Meridian surveyor, the child with the toy boat, the old whaler, the gull, the signs. Lines that change:*
 ```
 [CHANGED] Child with a toy boat (17,41) → name her Pella:
-[name: Pella] I race my boat down the race! When the river stops, it stops too. Then it's a draw.
-[name: Pella] (again) My da says never go on the water when it's stopped. It's stopped all the time now. What's the point of a rule that's on all the time?
+[name: Pella] I race my boat down the race!
+[name: Pella] When the river stops, it stops too. Then it's a draw.
+[name: Pella] (again) My da says never go on the water when it's stopped.
+[name: Pella] It's stopped all the time now.
+[name: Pella] What's the point of a rule that's on all the time?
 [CHANGED] Lock-keeper (43,20), before V124 >= 5:
-[name: Lock-keeper] Tidelock's shut today. The Warden's at the Guild vote on the Mill Quay, up the towpath. North.
-[name: Lock-keeper] She's the Guild's Warden, see. Elected. When the Guild calls, she goes, and the gym waits. You can go and watch. Everybody watches.
+[name: Lock-keeper] Tidelock's shut today.
+[name: Lock-keeper] The Warden's at the Guild vote on the Mill Quay, up the towpath. North.
+[name: Lock-keeper] She's the Guild's Warden, see. Elected.
+[name: Lock-keeper] When the Guild calls, she goes, and the gym waits.
+[name: Lock-keeper] You can go and watch. Everybody watches.
 [NEW] Teamster, just back from the south (by the harbour; war seed, 14_WAR Ch4):
-[name: Teamster] Ashkaar rider burned a sled-caravan on the dune road west of Duneholt. Isenmar sleds, Isenmar furs, Isenmar men.
+[name: Teamster] Ashkaar rider burned a sled-caravan on the dune road west of Duneholt.
+[name: Teamster] Isenmar sleds, Isenmar furs, Isenmar men.
 [name: Teamster] Ossaria says it's none of their business. It happened on their sand.
 [NEW] Meridian recruiter (by a poster on the Lattice station wall):
-[name: Meridian Recruiter] Heat contracts! Meridian Contract Seven! Warm for life, and your grandchildren's lives!
+[name: Meridian Recruiter] Heat contracts! Meridian Contract Seven!
+[name: Meridian Recruiter] Warm for life, and your grandchildren's lives!
 POSTER: "HEAT FOR ISENMAR — Meridian Concord." The picture is of great forges glowing in a crater. They're in Ashkaar. Somebody has written under it: "THEIRS."
 [CHANGED] Guild organiser (22,30), second line:
-[name: Guild Organiser] And the Thane's raising a war-levy on the catch. "Just in case." In case of what? He won't say. Everyone knows.
+[name: Guild Organiser] And the Thane's raising a war-levy on the catch. "Just in case."
+[name: Guild Organiser] In case of what? He won't say. Everyone knows.
 [NEW] Fishwife (at the eel stall's end):
-[name: Fishwife] The Professor? Larch? The one with the tea? She gets letters from the Meridian Spire. Sunburst seal and everything. I've seen the postman's face.
+[name: Fishwife] The Professor? Larch? The one with the tea?
+[name: Fishwife] She gets letters from the Meridian Spire. Sunburst seal and everything.
+[name: Fishwife] I've seen the postman's face.
 ```
 *(The fishwife plants the red herring "Larch works for Meridian" an hour before Larch's confession.)*
 
@@ -227,25 +267,32 @@ POSTER: "HEAT FOR ISENMAR — Meridian Concord." The picture is of great forges 
 ### EV "He Followed You Here" (the eel-smoker's stall, (13,29); touch, V124 == 1) — comedy scene Ch4 [NEW]
 ```
 (The smoked-eel stall. Behind it, wedged between two barrels with a spyglass, is a black coat.)
-[name: Eel-smoker] Smoked eel! Smoked char! Smoked anything you hold still long enough!
+[name: Eel-smoker] Smoked eel! Smoked char!
+[name: Eel-smoker] Smoked anything you hold still long enough!
 (A woman comes down the quay in rolled sleeves, oilskin over one shoulder, a brass union pin on her collar. She has the walk of someone who's been on a deck all her life. She stops, looks at the barrels, and grins.)
-[portrait: MARISOL, smug] That your friend, kid? The one who's been hiding behind my eel stall since noon?
+[portrait: MARISOL, smug] That your friend, kid?
+[name: Marisol] The one who's been hiding behind my eel stall since noon?
 MOVE: Kestrel stands up too fast and hits his head on the stall's awning.
 [bubble: KESTREL, shocked, shock] I was conducting SURVEILLANCE!
-[portrait: MARISOL, smug] You bought four eels.
+[name: Marisol] You bought four eels.
 [portrait: KESTREL, blush] ...They're good eels.
-[portrait: MARISOL, happy] Tides take it, he's adorable. Does he bite?
+[name: Marisol] Tides take it, he's adorable. Does he bite?
 > Yes.
   [portrait: KESTREL, angry] I do NOT—
 > Only Juno.
-  [portrait: KESTREL, panic] That was ONE TIME and she was HUGGING me!
+  [portrait: KESTREL, panic] [emote: sweat] That was ONE TIME and she was HUGGING me!
 > ...
-  [portrait: MARISOL, happy] Silent type. And a biter. I've hired worse. I've hired worse this week.
+  [portrait: MARISOL, smug] Silent type. And a biter.
+  [name: Marisol] I've hired worse. I've hired worse this week.
 [portrait: KESTREL, angry] Stay out of my way. Both of you. I work alone.
 MOVE: Kestrel stalks off along the quay. He comes back, buys a fifth eel without looking at anyone, and stalks off again.
-[portrait: MARISOL, happy] Marisol Reyes. I keep the Tidelock, and the Guild keeps me. You'll want a badge.
-[portrait: MARISOL, neutral] Not today. Today the Guild votes on whether we strike, and the Warden's got to be on the quay when it does. That's the job here. They elected me. They can un-elect me.
-[name: Marisol] Mill Quay, up the towpath, at the bell. Come and see what a Warden's for in Ebbmouth. Then come and lose to me tomorrow.
+[portrait: MARISOL, smug] Marisol Reyes. I keep the Tidelock, and the Guild keeps me.
+[name: Marisol] You'll want a badge.
+[portrait: MARISOL, neutral] Not today. Today the Guild votes on whether we strike, and the Warden's got to be on the quay when it does.
+[name: Marisol] That's the job here. They elected me. They can un-elect me.
+[name: Marisol] Mill Quay, up the towpath, at the bell.
+[name: Marisol] Come and see what a Warden's for in Ebbmouth.
+[name: Marisol] Then come and lose to me tomorrow.
 MOVE: Marisol goes north up the towpath.
 V124 = 2.
 ```
@@ -258,27 +305,42 @@ V124 = 2.
 BGM: fades out. SE: the Guild bell, three slow strokes.
 (The Mill Quay at dusk. Two hundred dockworkers, millers, net-menders and ice-cutters packed between the union halls. The great Mill Quay wheel turns behind them. Marisol stands on an upturned eel barrel. High on the wheel's platform, a young man in a fisherman's jumper sits with his legs dangling.)
 [portrait: MARISOL, neutral] Right. Shut up. Thank you.
-[name: Marisol] The Thane wants a levy on the catch. Meridian wants a third of the mill crews gone by spring. The river stopped forty seconds this morning, and the Lattice man says that's "within tolerance".
-[name: Marisol] I've a motion to strike. I've a motion not to. I'll hear both and then we'll vote like people, not gulls.
+[name: Marisol] The Thane wants a levy on the catch.
+[name: Marisol] Meridian wants a third of the mill crews gone by spring.
+[name: Marisol] The river stopped forty seconds this morning, and the Lattice man says that's "within tolerance".
+[name: Marisol] I've a motion to strike. I've a motion not to.
+[name: Marisol] I'll hear both and then we'll vote like people, not gulls.
 [name: Young Man on the Wheel] Ask her who pays the Warden's lamp oil!
 (Laughter. Some of it isn't kind.)
-[portrait: MARISOL, angry] Meridian pays for every lamp on this quay, Teo, yours included, and you know it.
+[name: Marisol] Meridian pays for every lamp on this quay, Teo, yours included, and you know it.
 [portrait: TEO, smug] Then turn yours off, sis. I have.
-[name: Teo] (to the crowd) They take the river at night! Every night! You sleep and the Ebb stops and in the morning it's "within tolerance"! Strike! Strike or drown!
+[name: Teo] (to the crowd) They take the river at night! Every night!
+[name: Teo] You sleep and the Ebb stops and in the morning it's "within tolerance"!
+[name: Teo] Strike! Strike or drown!
 (Half the quay cheers. The other half looks at its boots.)
-[name: Mrs Reyes (from the crowd)] TEODOR. Come down off that wheel. You'll fall in like your father.
-[portrait: TEO, neutral] ...Hi, Ma.
+[name: Mrs Reyes (from the crowd)] TEODOR. Come down off that wheel.
+[name: Mrs Reyes (from the crowd)] You'll fall in like your father.
+[portrait: TEO, neutral] [emote: sweat] ...Hi, Ma.
 (The river stutters. The great wheel stops dead. Two hundred people hold their breath. WAIT 60. SE: the slap of the river coming back. The wheel lurches on.)
-[portrait: MARISOL, neutral] One minute. That's a minute now.
-[name: Marisol] We don't vote in the dark. Every hall votes at first light, the way we always have. Go home. Kiss somebody. Count your nets.
+[name: Marisol] One minute. That's a minute now.
+[name: Marisol] We don't vote in the dark.
+[name: Marisol] Every hall votes at first light, the way we always have.
+[name: Marisol] Go home. Kiss somebody. Count your nets.
 (The crowd breaks up, muttering. Teo drops down off the wheel, lands like a cat, and walks straight up to you.)
-[portrait: TEO, happy] You're the ferry kid. The null one. Yes, I know; the fishwives here write to the fishwives in Saltmere. Teo. Teo Reyes. The disaster in the family.
-[name: Teo] Free lesson, since you came all this way. The Ebb runs in on the morning tide and out at night. Three hundred years. My da set his watch by it.
-[portrait: TEO, angry] Now it stops when Meridian gets thirsty. Count it with me next time. One. Two. It's always on the hour. Rivers don't wear watches.
-[portrait: TEO, smug] Don't tell my sister I was charming. She thinks I'm a lost cause. It's the one thing we agree on.
+[portrait: TEO, happy] You're the ferry kid. The null one.
+[name: Teo] Yes, I know; the fishwives here write to the fishwives in Saltmere.
+[name: Teo] Teo. Teo Reyes. The disaster in the family.
+[name: Teo] Free lesson, since you came all this way.
+[name: Teo] The Ebb runs in on the morning tide and out at night. Three hundred years.
+[name: Teo] My da set his watch by it.
+[portrait: TEO, angry] Now it stops when Meridian gets thirsty. Count it with me next time.
+[name: Teo] One. Two. It's always on the hour. Rivers don't wear watches.
+[name: Teo] Don't tell my sister I was charming.
+[name: Teo] She thinks I'm a lost cause. It's the one thing we agree on.
 MOVE: Teo jogs off up the quay into the dusk, toward the river mouth. He doesn't go home.
 [portrait: MARISOL, sad] *(watching him go)* He's nineteen. He thinks shouting is a plan.
-[portrait: MARISOL, neutral] Gym's open at first light, after the vote. Get some sleep, kid. There's a bed at the Center.
+[name: Marisol] Gym's open at first light, after the vote.
+[name: Marisol] Get some sleep, kid. There's a bed at the Center.
 V124 = 3.
 ```
 *Built Mill Quay events stand (strikers, the union steward, the miller who hears "a note held too long" under the wheel, the carter). Aria's quest finishes under this wheel ("The Drowned Note").*
@@ -290,15 +352,17 @@ V124 = 3.
 SE: the river stops.
 (Every wheel freezes. The silence is so complete you can hear the rain land on the water, and the water doesn't move.)
 V108 EBB_STATE = 2. WAIT 120.
-[name: Dockworker (from a window)] That's not a stutter. That's... it's not coming back.
+[name: Dockworker (from a window)] That's not a stutter.
+[name: Dockworker (from a window)] That's... it's not coming back.
 (Doors open up and down the quay. People in nightshirts stand on their steps with lamps. From the river mouth, the brass intake by the Lattice station gives off a high, thin whine, like a finger round the rim of a glass, and it is climbing.)
 [name: Pella's Father] PELLA! Pella, come back here!
 (In the middle of the dead-still river, a small girl in a nightdress is paddling a punt toward a toy boat that has stopped exactly mid-channel.)
 [name: Pella] It's FINE, Da! It's not moving! It's like a big puddle!
 (On the far bank, at the intake, three figures in grey cowls and carved bark masks. One of them, a woman, is cutting cable at the intake's housing with a pair of shears, one clean cut, then another.)
 MOVE: Marisol comes down the towpath at a dead run in her nightshirt and an oilskin, barefoot.
-[portrait: MARISOL, shocked] Who's on the water? Who's — oh, tides take it. Pella.
-[portrait: MARISOL, angry] Kid. Whoever's at that intake is about to let the whole river go at once. Stop them. I'm getting Pella off the water before they do.
+[portrait: MARISOL, angry] Who's on the water? Who's — oh, tides take it. Pella.
+[name: Marisol] Kid. Whoever's at that intake is about to let the whole river go at once.
+[name: Marisol] Stop them. I'm getting Pella off the water before they do.
 MOVE: Marisol throws a Poké Ball into the river. A Floatzel hits the still water and she goes in after it, swimming hard for the punt.
 (Two grey cowls run down the towpath toward you from the intake. They see you and stop.)
 [name: Bereaved] Out of the way!
@@ -314,8 +378,10 @@ BATTLE: HOLLOW_TEO "Teo", version 0 (his first battle; BALANCE 4b). Field: Water
 [name: Masked Boy] You're not — you're a kid. You're just a—
 SE: a flat, hard BANG from the intake. A shower of sparks. The whine stops dead.
 (And the river comes back. All at once. A black wall of water heaves down the channel toward the harbour. Out of the mist, upriver, a punt comes spinning round the bend into the mill lamps, with a child in a nightdress clinging to it and screaming for her father, Marisol and the Floatzel thrashing behind it in the surge.)
-[portrait: MARISOL, shocked] *(from the water)* The race! The RACE! She'll go under the wheel! The GATE!
-[name: Masked Boy] ...No. No, no, no. There wasn't anyone on the water — there wasn't anyone on the WATER—
+[portrait: MARISOL, shocked] *(from the water)* The race! The RACE!
+[name: Marisol] She'll go under the wheel! The GATE!
+[name: Masked Boy] ...No. No, no, no.
+[name: Masked Boy] There wasn't anyone on the water — there wasn't anyone on the WATER—
 (He wrenches at his own wedge and hauls on the chain to drop the gate. It doesn't move.)
 [name: Masked Boy] Help me. HELP me. It's jammed at the pawl, it takes two!
 > (Haul the chain with him.)
@@ -325,9 +391,10 @@ SE: the river, running, roaring, alive.
 (On the platform, the boy has pushed his mask up onto his forehead to see the water. He is soaked, shaking, and very young. In the lamplight from the mill, his face is plain.)
 (Marisol comes up the race steps with Pella in her arms. She sees him.)
 [portrait: MARISOL, shocked] ...Teo?
-[portrait: TEO, sad] Mari. I didn't know she was out there. I swear on Da. I swear on Da, I didn't know.
+[portrait: TEO, sad] Mari. I didn't know she was out there.
+[name: Teo] I swear on Da. I swear on Da, I didn't know.
 [portrait: MARISOL, sad] *(very quietly)* Same race. Same race, Teo.
-[portrait: TEO, neutral] They take it every night. Every night, Mari. Somebody had to—
+[name: Teo] They take it every night. Every night, Mari. Somebody had to—
 [portrait: MARISOL, angry] Go.
 [name: Teo] Mari—
 [name: Marisol] GO. Before the Lattice men come down. Go!
@@ -335,8 +402,10 @@ MOVE: Teo pulls the mask down, vaults the platform rail and drops into the black
 (Marisol stands there holding the girl. Then she looks at you. She knows you saw.)
 WAIT 60.
 MOVE: a Meridian Security guard runs down from the Lattice station with a lamp, out of breath.
-[name: Meridian Guard] The intake! They've blown the intake! Warden, are you hurt? Is the child—
-[name: Meridian Guard] Who was it? You, challenger. You were on the platform. Did you see a face?
+[name: Meridian Guard] The intake! They've blown the intake!
+[name: Meridian Guard] Warden, are you hurt? Is the child—
+[name: Meridian Guard] Who was it? You, challenger. You were on the platform.
+[name: Meridian Guard] Did you see a face?
 (Marisol says nothing. Pella has her face in Marisol's shoulder. Marisol is looking at you.)
 ```
 **CHOICE `:ch4_teo`**
@@ -346,7 +415,8 @@ MOVE: a Meridian Security guard runs down from the Lattice station with a lamp, 
   [name: Meridian Guard] Reyes? The Warden's—
   [portrait: MARISOL, neutral] My brother. Write it down properly. R-E-Y-E-S.
   MOVE: Marisol walks past you with the girl without looking at you, toward Pella's father.
-  [name: Meridian Guard] ...Thank you. Meridian appreciates it. Really. There'll be a reward.
+  [name: Meridian Guard] ...Thank you. Meridian appreciates it. Really.
+  [name: Meridian Guard] There'll be a reward.
 > "I didn't see his face." (keep_secret)
   Script: pf_choose(:ch4_teo, :keep_secret)
   [name: Meridian Guard] Didn't see his — you were standing next to him!
@@ -361,7 +431,8 @@ MOVE: a Meridian Security guard runs down from the Lattice station with a lamp, 
 MOVE: Kestrel comes pounding down the towpath, coat flying, much too late. He looks at the dropped gate, the blown intake, the empty water.
 [portrait: KESTREL, angry] Where? WHERE did they go?
 [portrait: KESTREL, neutral] *(he fishes a length of cable out of the race, washed down from the intake, and turns the end to the light)* One cut. Clean as a ribbon. Shears.
-[portrait: KESTREL, sad] It's her. The one from Saltmere. One of them talks to the Mourner, and she was right HERE—
+[portrait: KESTREL, sad] It's her. The one from Saltmere.
+[name: Kestrel] One of them talks to the Mourner, and she was right HERE—
 MOVE: Kestrel runs east along the dark quay after nothing.
 Switch S112 CH4_TEO_MET = ON. V108 EBB_STATE = 1. V124 = 4.
 (Fade to black.)
@@ -371,20 +442,28 @@ Switch S112 CH4_TEO_MET = ON. V108 EBB_STATE = 1. V124 = 4.
 ```
 (The Reyes kitchen. A lamp, a kettle not yet boiling, a net half-mended over a chair. Marisol sits at the table in her wet oilskin. Mrs Reyes has taken Pella home. A photograph on the dresser: a big man with a union pin and Marisol's grin, at the Guild Mill.)
 [portrait: MARISOL, sad] Sit. You're going to anyway.
-[name: Marisol] Our da worked the Guild Mill forty years. AF 297, the first time the Ebb stuttered, he was in the race clearing weed off the wheel.
+[name: Marisol] Our da worked the Guild Mill forty years.
+[name: Marisol] AF 297, the first time the Ebb stuttered, he was in the race clearing weed off the wheel.
 [name: Marisol] It stopped. He thought it was done. Then it started.
-[portrait: MARISOL, crying] Teo was fifteen. He was on the platform. He's been on that platform ever since, one way or another.
-[portrait: MARISOL, angry] And yes. YES. I knew. I've known since winter. I tell him where the Lattice patrols are going to be. Every week. Tides take me, I'm the Warden and I tell a Hollow cell where the guards walk.
+[name: Marisol] Teo was fifteen. He was on the platform.
+[name: Marisol] He's been on that platform ever since, one way or another.
+[portrait: MARISOL, angry] And yes. YES. I knew. I've known since winter.
+[name: Marisol] I tell him where the Lattice patrols are going to be. Every week.
+[name: Marisol] Tides take me, I'm the Warden and I tell a Hollow cell where the guards walk.
 [name: Marisol] Because he's nineteen and furious and he's RIGHT about the river, and because if they catch him they'll put him in a Meridian cell, not an Accord one, and I don't know what happens in those.
-[portrait: MARISOL, crying] And tonight he nearly put a little girl under my da's wheel. So you tell me which of us is the monster.
+[portrait: MARISOL, crying] And tonight he nearly put a little girl under my da's wheel.
+[name: Marisol] So you tell me which of us is the monster.
 > Neither of you.
-  [portrait: MARISOL, sad] That's kind. It's not true, but it's kind.
+  [portrait: MARISOL, crying] That's kind. It's not true, but it's kind.
 > Both of you.
-  [portrait: MARISOL, neutral] Ha. Yes. That's the Ebbmouth answer. You'd make a good Guild steward.
+  [portrait: MARISOL, neutral] Ha. Yes. That's the Ebbmouth answer.
+  [name: Marisol] You'd make a good Guild steward.
 > ...
-  [portrait: MARISOL, sad] ...Yeah. Me neither.
-[portrait: MARISOL, neutral] The cellar's his. The door's barred from below, but there's a key in the teapot. Go and look, if you want to know who my brother is. I can't.
-[name: Marisol] Gym's open at first light. Come and fight me. I'll be better at it than this.
+  [portrait: MARISOL, neutral] ...Yeah. Me neither.
+[portrait: MARISOL, neutral] The cellar's his. The door's barred from below, but there's a key in the teapot.
+[name: Marisol] Go and look, if you want to know who my brother is. I can't.
+[name: Marisol] Gym's open at first light. Come and fight me.
+[name: Marisol] I'll be better at it than this.
 (Received: CELLAR KEY.)
 ```
 *[if `:ch4_teo` == :keep_secret], the Reyes House that night:* `[portrait: MARISOL, neutral] Not tonight, kid. Tonight I'm sitting here till he comes home or doesn't. Cellar key's in the teapot if you're curious. I'm not.` (Received: CELLAR KEY.)
@@ -393,11 +472,15 @@ Switch S112 CH4_TEO_MET = ON. V108 EBB_STATE = 1. V124 = 4.
 ### 166 — Reyes Cellar (the Hollow cell) [NEW map: maps.json has it, no spec yet]
 ```
 [if :ch4_teo == :report] (Morning. The cellar door has been kicked in. Two Meridian guards are boxing up maps and wire.)
-  [name: Meridian Guard] Nothing here. Cleared out before we came. Somebody tipped them. ...Not you. You're the one who told us. Thanks again.
+  [name: Meridian Guard] Nothing here. Cleared out before we came. Somebody tipped them.
+  [name: Meridian Guard] ...Not you. You're the one who told us. Thanks again.
   PHOTO (on the floor, boot-printed): two children on the Guild Mill's platform with a big man between them. On the back: "Da, Mari, Teo. AF 291."
 [else] (A cellar under the house: a cold forge, wire, a map of the Lattice intake with the patrol times written in Marisol's hand. Two Bereaved are packing it into sacks.)
-  [name: Bereaved] He said you'd come. He said you're all right. We're still not letting you through. (Battle: HOLLOW_GRUNT, single.)
-  [name: Bereaved] (second, after the first) Teo's gone south. Don't ask where. (Battle: HOLLOW_GRUNT, single.)
+  [name: Bereaved] He said you'd come. He said you're all right.
+  [name: Bereaved] We're still not letting you through.
+  (Battle: HOLLOW_GRUNT, single.)
+  [name: Bereaved] (second, after the first) Teo's gone south. Don't ask where.
+  (Battle: HOLLOW_GRUNT, single.)
   NOTE (pinned to the map): "Sis — they'll come here first. Don't lie for me. Don't stop lying for me either. Love to Ma. — T."
   PHOTO (on the forge's hood): two children on the Guild Mill's platform with a big man between them. On the back: "Da, Mari, Teo. AF 291."
   ITEM: NET BALL ×2 (in a sack). "Grey paint on them. Hollow-issue."
@@ -408,19 +491,26 @@ Switch S112 CH4_TEO_MET = ON. V108 EBB_STATE = 1. V124 = 4.
 (Morning. The river is running in from the sea on the morning tide, the way it's meant to. The blown intake is wrapped in Meridian canvas. The Guild Mill turns.)
 [if :ch4_teo == :report]
   (Wanted posters on every post: a sketch of Teo, too handsome. "TEO REYES — WANTED — SABOTAGE OF THE MERIDIAN TIDAL LATTICE — REWARD ₽5000.")
-  [name: Guild Striker] (tearing one down) He pulled Pella out of the race. Everybody knows. And somebody gave Meridian his name.
+  [name: Guild Striker] (tearing one down) He pulled Pella out of the race. Everybody knows.
+  [name: Guild Striker] And somebody gave Meridian his name.
   [name: Guild Striker] (looking at you) ...Everybody knows that too.
   [name: Mrs Reyes] (on her step, arms folded, to nobody) The door's shut. It'll stay shut.
 [if :ch4_teo == :keep_secret or :confront]
   [name: Mrs Reyes] (on her step) You. Ferry child. Here.
   (Received: SMOKED CHAR. "Wrapped in yesterday's Gale Post. Still warm.")
-  [name: Mrs Reyes] From Marisol. She won't say it, so I'm saying it. Go and beat her. She needs to lose at something she can lose at.
+  [name: Mrs Reyes] From Marisol. She won't say it, so I'm saying it.
+  [name: Mrs Reyes] Go and beat her. She needs to lose at something she can lose at.
 (All:)
-[name: Pella's Father] You dropped the gate. I saw. I saw you and— whoever it was.
-[name: Pella's Father] There's no reward from me, I've nothing. Take this. It's the only thing on the boat that's worth anything.
+[name: Pella's Father] You dropped the gate. I saw.
+[name: Pella's Father] I saw you and— whoever it was.
+[name: Pella's Father] There's no reward from me, I've nothing. Take this.
+[name: Pella's Father] It's the only thing on the boat that's worth anything.
 (Received: BIG PEARL.)
-[name: Pella] I'm not allowed on the water any more. Not even when it's stopped. ESPECIALLY not when it's stopped.
-[name: Lock-keeper] Tidelock's open. Vote went seven halls to six: no strike, for now. The Warden didn't vote. She says a Warden doesn't. She went to the gym at five and she hasn't come out.
+[name: Pella] I'm not allowed on the water any more.
+[name: Pella] Not even when it's stopped. ESPECIALLY not when it's stopped.
+[name: Lock-keeper] Tidelock's open. Vote went seven halls to six: no strike, for now.
+[name: Lock-keeper] The Warden didn't vote. She says a Warden doesn't.
+[name: Lock-keeper] She went to the gym at five and she hasn't come out.
 V124 = 5.
 ```
 *Bersi in the Net Loft (168) [after S112]:* `[name: Bersi Gullsong] I'm already carving it: "The night the river died, and a stranger and a shadow hauled the gate." I don't know who the shadow was. A skald never checks his sources.`
@@ -429,106 +519,146 @@ V124 = 5.
 *Built and proven: the Lock Hall (170, practice lock, Tove the apprentice, Fisherman Gunnar), the Basins at low, mid and high water (171–173; Ingrid, Leif, Oskar, Bjorn; Tove's hints and reset), and the Warden's Pool (174, with Meridian's intake bolted into the lock wall). The Lock Hall door opens only at V124 >= 5.*
 ```
 [CHANGED] Gym guide (170):
-[name: Gym Guide] The Tidelock! Water-types, and the Water Surface field. Electric and Grass do well here. Fire doesn't. Fire never does, near a lock.
-[name: Gym Guide] The puzzle's the lock itself. Raise the water and anything loose drifts inland, till the end of the channel or a shut gate stops it. Lower it and the chain winds the raft home. That's the whole job.
-[name: Gym Guide] The Warden's been in since five. She's in a mood. A GOOD mood, mind. For Marisol, a fight's a good mood.
+[name: Gym Guide] The Tidelock! Water-types, and the Water Surface field.
+[name: Gym Guide] Electric and Grass do well here. Fire doesn't.
+[name: Gym Guide] Fire never does, near a lock.
+[name: Gym Guide] The puzzle's the lock itself.
+[name: Gym Guide] Raise the water and anything loose drifts inland, till the end of the channel or a shut gate stops it.
+[name: Gym Guide] Lower it and the chain winds the raft home. That's the whole job.
+[name: Gym Guide] The Warden's been in since five. She's in a mood.
+[name: Gym Guide] A GOOD mood, mind. For Marisol, a fight's a good mood.
 ```
 
 ### 174 — the Warden's Pool: Marisol [CHANGED: replaces the built lines]
 ```
 (The Warden's Pool: a lock basin full to the brim, timber galleries, and in the old stone wall a brass Meridian intake, humming. Marisol is standing on the lock gate's walkway with her sleeves rolled up. Her eyes are red. She's grinning anyway.)
 [if :ch4_teo == :report]
-  [portrait: MARISOL, neutral] You told them his name. Right. I've thought about it all night. I'd have done the same, maybe. If he weren't mine.
-  [portrait: MARISOL, angry] I'm not going to throw this to make you feel bad. I'm going to win it to make ME feel better.
+  [portrait: MARISOL, angry] You told them his name. Right. I've thought about it all night.
+  [name: Marisol] I'd have done the same, maybe. If he weren't mine.
+  [name: Marisol] I'm not going to throw this to make you feel bad.
+  [name: Marisol] I'm going to win it to make ME feel better.
 [if :ch4_teo == :keep_secret]
-  [portrait: MARISOL, neutral] You kept your mouth shut last night. In Ebbmouth that's worth more than a badge.
-  [portrait: MARISOL, smug] You're still not getting one free.
+  [portrait: MARISOL, smug] You kept your mouth shut last night.
+  [name: Marisol] In Ebbmouth that's worth more than a badge.
+  [name: Marisol] You're still not getting one free.
 [if :ch4_teo == :confront]
-  [portrait: MARISOL, neutral] You saw me at my worst last night. Swearing at a kitchen table with a teapot full of keys.
-  [portrait: MARISOL, smug] Now come and see me at my best.
+  [portrait: MARISOL, smug] You saw me at my worst last night.
+  [name: Marisol] Swearing at a kitchen table with a teapot full of keys.
+  [name: Marisol] Now come and see me at my best.
 (All:)
-[portrait: MARISOL, neutral] The Ebb runs both ways. Always has. Lately it can't decide.
-[portrait: MARISOL, happy] My river, my rules. Water lifts what floats and drowns what doesn't. So float, kid!
+[portrait: MARISOL, smug] The Ebb runs both ways. Always has. Lately it can't decide.
+[name: Marisol] My river, my rules.
+[name: Marisol] Water lifts what floats and drowns what doesn't. So float, kid!
 Script: Prismfall.gym_battle(pfm_gym(:LEADER_MARISOL), double: false)     # LEADER_MARISOL, :WATER_SURFACE, cap 23, single
 (When her ace enters:) [portrait: MARISOL, happy] Up you come, Lucky! They laughed at you on the docks too!
 (LOSE: standard whiteout to the Pokémon Center. Marisol on retry: "Back in the water! That's the spirit. That's the ONLY spirit.")
 (WIN:)
-[portrait: MARISOL, shocked] ...
-[portrait: MARISOL, happy] HA! Tides take it, you rode it both ways!
+[portrait: MARISOL, happy] ...
+[name: Marisol] HA! Tides take it, you rode it both ways!
 (Received: the TIDETURN BADGE.)
 (The PC opens the Badge Case and sets the badge beside the other two. SE: the first note, the second, and then a third, low, under both of them, like a floor laid under a room.)
 [portrait: MARISOL, shocked] ...Your box is singing.
-[portrait: MARISOL, neutral] My da had a harmonium. Played three notes like that and called it a hymn. Never went to chapel in his life.
+[name: Marisol] My da had a harmonium. Played three notes like that and called it a hymn.
+[name: Marisol] Never went to chapel in his life.
 (Received: TM03 WATER PULSE.)
 [portrait: MARISOL, happy] Water Pulse. Hits like a wave, leaves 'em seasick.
-[name: Marisol] And that badge is the Guild's word, and the Accord's, that Pokémon up to level twenty-seven will heed you. Come up on the quay. I'm buying you an eel. I'm buying the whole quay an eel.
+[name: Marisol] And that badge is the Guild's word, and the Accord's, that Pokémon up to level twenty-seven will heed you.
+[name: Marisol] Come up on the quay. I'm buying you an eel.
+[name: Marisol] I'm buying the whole quay an eel.
 V124 = 6.
 ```
 
 ### EV "Pick One" (160, the quay by the eel stall, after Gym 3; autorun once) [NEW]
 ```
 (Evening. Marisol and the PC on the quay's edge with their feet over the water, eating smoked eel out of newspaper. The Ebb runs out to sea, steady. For now.)
-[portrait: MARISOL, neutral] Half this quay draws a Meridian wage. The other half fishes a river Meridian's drinking dry. Same families. Same kitchens.
-[portrait: MARISOL, angry] Meridian pays my people. Meridian's killing my river. Pick one, kid. I dare you.
+[portrait: MARISOL, neutral] Half this quay draws a Meridian wage.
+[name: Marisol] The other half fishes a river Meridian's drinking dry.
+[name: Marisol] Same families. Same kitchens.
+[name: Marisol] Meridian pays my people. Meridian's killing my river.
+[name: Marisol] Pick one, kid. I dare you.
 > The river.
   [portrait: MARISOL, neutral] Easy to say when it's not your people's wages.
 > Your people.
   [portrait: MARISOL, neutral] Easy to say when it's not your river.
 > I can't.
-  [portrait: MARISOL, sad] No. Neither can I. That's the whole problem. That's why I swear so much.
+  [portrait: MARISOL, sad] No. Neither can I. That's the whole problem.
+  [name: Marisol] That's why I swear so much.
 [if :ch2_tamsin == :expose]
-  [portrait: MARISOL, neutral] Briarwick's Warden signed with them, I hear. Then tore it up in front of her whole guild. Poor lamb.
-  [name: Marisol] I'm not signing anything. I'm going to stand on this quay and swear till one of them blinks.
+  [portrait: MARISOL, neutral] Briarwick's Warden signed with them, I hear.
+  [name: Marisol] Then tore it up in front of her whole guild. Poor lamb.
+  [name: Marisol] I'm not signing anything.
+  [name: Marisol] I'm going to stand on this quay and swear till one of them blinks.
 [if :ch2_tamsin == :help_confess]
   [portrait: MARISOL, neutral] Briarwick's Warden signed with them, I hear. Then walked into her guildhall, owned up to it, and made them rewrite the whole thing. Poor lamb.
   [name: Marisol] I'm not signing anything. I'm going to stand on this quay and swear till one of them blinks.
 [if :ch4_teo == :confront]
-  [portrait: MARISOL, sad] And I'd tell my little brother where the guards walk again. Every night. Don't look at me like that. You'd do it too.
-[portrait: MARISOL, happy] Finish your eel. There's a woman at the Center with a box of papers asking for you, and she looks like she bites.
+  [portrait: MARISOL, sad] And I'd tell my little brother where the guards walk again. Every night.
+  [name: Marisol] Don't look at me like that. You'd do it too.
+[portrait: MARISOL, happy] Finish your eel.
+[name: Marisol] There's a woman at the Center with a box of papers asking for you, and she looks like she bites.
 ```
 
 ## Map 161 — Ebbmouth Pokémon Center: **EV "Larch's Tide Tables"** [CHANGED: replaces the built Larch event] — **key event 2**
 *Plays on entering the Center after "Pick One" (V124 == 6). The built event's two lines become this scene.*
 ```
 (Larch is at the corner table in her oilskin, salt in her grey braid, surrounded by rolled charts. A Gale Post satchel is on the floor. A pot of something brown and terrible steams beside her.)
-[portrait: LARCH, neutral] There you are. Sit.
-[portrait: LARCH, angry] No. First. You dropped a mill-race gate. At night. In Isenmar. During a Hollow sabotage. Four days after I said, in writing, "wear a hat".
+[portrait: LARCH, angry] There you are. Sit.
+[name: Larch] No. First. You dropped a mill-race gate. At night. In Isenmar.
+[name: Larch] During a Hollow sabotage.
+[name: Larch] Four days after I said, in writing, "wear a hat".
 [bubble: LARCH, angry, anger] This is LECTURE THREE. It has a DIAGRAM.
 > You came all this way to tell me off?
-  [portrait: LARCH, deadpan] I came all this way because of the river. Telling you off is on the way.
+  [portrait: LARCH, deadpan] I came all this way because of the river.
+  [name: Larch] Telling you off is on the way.
 > I wore a hat.
   [portrait: LARCH, deadpan] You did not wear a hat.
 > ...
-  [portrait: LARCH, deadpan] Silence. Lovely. Your mother did that. It never worked on me either.
+  [portrait: LARCH, deadpan] Silence. Lovely. Your mother did that.
+  [name: Larch] It never worked on me either.
 [portrait: LARCH, neutral] Drink this. It's disgusting.
 (Received: a cup of kelp tea. You hold it. It holds you back.)
 (She unrolls the first chart across the table and weighs the corners with sugar bowls.)
-[portrait: LARCH, neutral] Tide tables. Ebbmouth, six months. Every stutter the Guild's logged since winter, by the minute. I've been collecting them by post.
-[name: Larch] And this, on top: the tidal Lattice's draw, hour by hour. Don't ask how I got it. I trained half the linemen in Isenmar. Some of them still answer my letters.
+[name: Larch] Tide tables. Ebbmouth, six months.
+[name: Larch] Every stutter the Guild's logged since winter, by the minute.
+[name: Larch] I've been collecting them by post.
+[name: Larch] And this, on top: the tidal Lattice's draw, hour by hour.
+[name: Larch] Don't ask how I got it. I trained half the linemen in Isenmar.
+[name: Larch] Some of them still answer my letters.
 (She lays the second sheet over the first. The paper is thin enough to see through. Every stutter sits exactly on a spike.)
-[portrait: LARCH, sad] Every one. Every single stutter is a draw peak. On the hour, every hour they need the load.
-[name: Larch] And last night. Midnight to five to one. That's the night export: Meridian runs the Lattice flat out while the Guild's asleep, fills the Prism Cells, and ships them south to the Concert of Regions on the night boats. The quarantine has an exemption for that. It always did.
-[portrait: LARCH, neutral] The Hollow blew the intake at eight minutes to one. The river came back at eight minutes to one.
-[portrait: LARCH, sad] They didn't stop your river, child. They started it.
-[portrait: LARCH, neutral] All at once, in the dark, with a child on the water, because nobody looked. Both of those are true. That's the trouble with being right in a hurry.
+[portrait: LARCH, sad] Every one. Every single stutter is a draw peak.
+[name: Larch] On the hour, every hour they need the load.
+[name: Larch] And last night. Midnight to five to one. That's the night export: Meridian runs the Lattice flat out while the Guild's asleep, fills the Prism Cells, and ships them south to the Concert of Regions on the night boats.
+[name: Larch] The quarantine has an exemption for that. It always did.
+[name: Larch] The Hollow blew the intake at eight minutes to one.
+[name: Larch] The river came back at eight minutes to one.
+[name: Larch] They didn't stop your river, child. They started it.
+[name: Larch] All at once, in the dark, with a child on the water, because nobody looked.
+[name: Larch] Both of those are true. That's the trouble with being right in a hurry.
 WAIT 40.
-[portrait: LARCH, sad] It's not the Hollow stopping the river. It's us.
+[name: Larch] It's not the Hollow stopping the river. It's us.
 [name: Larch] It's my design.
 > Your design?
 > You built it?
 > ...
-[portrait: LARCH, neutral] I was Meridian's Chief Engineer. The Lattice is mine. Pylon, intake, the cells, the switching. I drew the first one on a napkin in a Lumen tea-shop.
-[portrait: LARCH, sad] I lit up this whole region, you know. Eleven cities on my design. And I think I'm killing it.
-[name: Larch] I left them eight years ago. Don't ask me why yet. I'll tell you when I can say it without throwing something.
+[portrait: LARCH, sad] I was Meridian's Chief Engineer. The Lattice is mine.
+[name: Larch] Pylon, intake, the cells, the switching.
+[name: Larch] I drew the first one on a napkin in a Lumen tea-shop.
+[name: Larch] I lit up this whole region, you know. Eleven cities on my design.
+[name: Larch] And I think I'm killing it.
+[name: Larch] I left them eight years ago. Don't ask me why yet.
+[name: Larch] I'll tell you when I can say it without throwing something.
 [portrait: LARCH, deadpan] Drink your tea.
 > (Drink it.)
-  [portrait: LARCH, shocked] ...You actually—
-  [portrait: LARCH, deadpan] Don't tell anyone. They'll expect it of themselves.
+  [portrait: LARCH, shocked] [emote: exclaim] ...You actually—
+  [name: Larch] Don't tell anyone. They'll expect it of themselves.
   (The tea is warm, and vile, and you finish it. Somehow that's the worst part.)
 > (Save it for later.)
-  [portrait: LARCH, deadpan] That's what Kestrel says. He's had one "for later" since spring.
-[portrait: LARCH, neutral] I'm going back to the Landing on the morning post-boat. Tidewatch doesn't run itself, and I need to put these somewhere Meridian doesn't read my letters.
-[name: Larch] You go on up the Lock Road to Lumen. Rook Calder's the next Warden. Pretty boy, very loud, always being filmed. Try not to be filmed.
+  [portrait: LARCH, shocked] That's what Kestrel says. He's had one "for later" since spring.
+[portrait: LARCH, neutral] I'm going back to the Landing on the morning post-boat.
+[name: Larch] Tidewatch doesn't run itself, and I need to put these somewhere Meridian doesn't read my letters.
+[name: Larch] You go on up the Lock Road to Lumen.
+[name: Larch] Rook Calder's the next Warden. Pretty boy, very loud, always being filmed.
+[name: Larch] Try not to be filmed.
 V124 = 7.
 ```
 *(No portrait for Hesper: her letter is plain text.)*
@@ -541,15 +671,18 @@ stay away from my grandson.
 Everyone who gets close to that boy's mother's ghost gets hurt."
 (Unsigned.)
 [portrait: LARCH, neutral] *(reading over your shoulder, because of course she is)* That's Hesper Vane's paper. She buys it from the Landing chandler by the ream and writes to nobody.
-[portrait: LARCH, sad] ...Well. She wrote to you.
+[name: Larch] ...Well. She wrote to you.
 [if :ch4_kestrel_mourner == :kind]
   (A second note, folded small, pushed under the desk's blotter in a sharp hand:)
   "Ferry kid. Gone home. Gran wrote. Don't follow. — K.
    The eel was good. Don't tell anyone."
 [else]
-  [name: Nurse] Your friend in the black coat took the salt-sledge south at dawn. He left owing the eel stall for one eel. The eel stall's started a third page.
+  [name: Nurse] Your friend in the black coat took the salt-sledge south at dawn.
+  [name: Nurse] He left owing the eel stall for one eel.
+  [name: Nurse] The eel stall's started a third page.
 (Outside, 167 the Mill Quay: the towpath gate east is open. A gatekeeper leans on it.)
-[name: Towpath Gatekeeper] The towpath east. The Reedholms, the Icecutters' Haul, the Locks, and up onto the Crownland. Lumen's four days on foot. Or one by airship, if you're rich. You're not rich.
+[name: Towpath Gatekeeper] The towpath east. The Reedholms, the Icecutters' Haul, the Locks, and up onto the Crownland. Lumen's four days on foot.
+[name: Towpath Gatekeeper] Or one by airship, if you're rich. You're not rich.
 SIGN: THE TOWPATH EAST — The Lock Road. The Reedholms · the Icecutters' Haul · Brassfall · the Icefall Locks · LUMEN CITY.
 QUEST LOG: "Eighteen Roads" — Earn the fourth badge in Lumen City, up the Lock Road.
 V102 STORY_CHAPTER = 5.
