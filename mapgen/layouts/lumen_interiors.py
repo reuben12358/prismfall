@@ -100,11 +100,14 @@ def build_582():
 
     # ---- 2. Events (100% Exit, Arc-Lamp Mile warp, Scanner cutscene, Meridian Security, Gate board & Brass tube exact!) ----
     scan = [N('Meridian Security', "Lumen West Gate. Hand on the plate, please. Tint check. It's the anniversary; we're being thorough."),
-            "(Juno puts her hand on the plate. A chime. The bar glows green.)",
+            S('pbSEPlay("GUI sel decision", 90, 120)\npfm_flash(120, 255, 160, 8, 110)'), {'wait': 14},   # Juno's hand: a chime, the bar glows green
             N('Meridian Security', "Meadow tint, Verdance. Welcome."),
-            "(Your turn. A chime... nothing. The bar stays dark. Then a word scrolls across it: NULL.)", {'se': 'GUI sel buzzer'},
+            MV('player', ['turn_up']), S('pbSEPlay("GUI sel decision", 90, 120)'), {'wait': 50},   # your turn: a chime... nothing
+            {'se': 'GUI sel buzzer'}, N('Scanner', "NULL."),
             N('Meridian Security', "...That's a new one. Hold on."),
-            "(He speaks into a brass tube on the wall. A voice answers, small and tinny. He straightens up very fast.)",
+            S('pfm_face("Meridian Security", "Brass tube")'), {'wait': 10},             # into the brass tube on the wall
+            S('4.times { |i| pbSEPlay("GUI sel cursor", 70, 170 - i * 9); pbWait(0.18) }'), {'wait': 10},   # small and tinny
+            MV('Meridian Security', [{'jump': [0, 0]}, 'face_player']),               # he straightens up very fast
             N('Meridian Security', "You're on the Chair's list. Personally. Gala guest, tomorrow night, at the Spire."),
             N('Meridian Security', "And this came for you. It's been waiting a week. I was told you'd come up the Lock Road."),
             ITEM('GALAINVITATION', 1, 'GALA INVITATION'),
@@ -386,15 +389,27 @@ def build_186():
 
     # ---- 3. Events (100% gameplay, dialogue, trigger, & warp contract preserved!) ----
     E = m.events
-    raid = ["(The lights flicker. Once. Twice. The quartet stops mid-bar.)", N('Guest', "Is that part of it?"),
-            {'tone': [-40, -40, -40, 120, 20]},
-            "(The lights go grey. A low hum. The same grey as the stage lights in the Lantern Theatre, in Saltmere.)",
+    lift_open = S('pfm_event("Service lift").instance_variable_set(:@tile_id, %d) rescue nil' % P1('lm_pdoor_open'))
+    raid = [{'tone': [-50, -50, -50, 60, 2]}, {'wait': 4}, {'tone': [0, 0, 0, 0, 2]}, {'wait': 10},      # the lights flicker: once
+            {'tone': [-50, -50, -50, 60, 2]}, {'wait': 4}, {'tone': [0, 0, 0, 0, 2]}, S('pbBGMStop(0.2)'),  # twice; the quartet stops mid-bar
+            {'wait': 20}, N('Guest', "Is that part of it?"),
+            {'tone': [-40, -40, -40, 120, 20]}, S('pbSEPlay("Anim/Psych Up", 60, 40)'), {'wait': 24},   # the lights go grey; a low hum
             J('shocked', "\\PN. That's the same — that's the same—"),
-            {'se': 'Anim/Explosion1'}, "(The service-lift doors on the east wall bend outward and burst.)",
-            "(Grey cowls pour out of the shaft. Carved bark masks with sad faces. Hollow Ring banners unroll down the glass. At the front, a woman with weaver's shears on her belt.)",
+            {'raw': [203, [6, 6, 4]]}, {'raw': [203, [2, 3, 4]]}, {'wait': 12},                    # the east wall
+            {'se': 'Anim/Explosion1'}, S('pfm_shake(6, 9, 16)\npfm_flash(255, 240, 220, 6, 150)'), lift_open,   # the lift doors burst
+            MV('Thistle (raid)', [{'graphic': ['trainer_HOLLOW_THISTLE', 0, 4, 0]}, {'opacity': 255}, 'through_on', 'left', 'left', 'left', 'left',
+                                  'left', 'left', 'turn_left', 'through_off'], wait=False),       # grey cowls pour out; at the front, Thistle
+            MV('Cowl 1', ['wait 8', {'graphic': ['trainer_HOLLOW_GRUNT_M', 0, 4, 0]}, {'opacity': 255}, 'through_on', 'left', 'left', 'left', 'up', 'turn_left'], wait=False),
+            MV('Cowl 2', ['wait 14', {'graphic': ['trainer_HOLLOW_GRUNT_F', 0, 4, 0]}, {'opacity': 255}, 'through_on', 'left', 'left', 'left', 'left', 'turn_left']),
+            S('pfm_pan_home(24)'),
             P('THISTLE', 'neutral', "Nobody move. Nobody is going to be hurt. We're not here for you."),
             N('Thistle', "We're here for what's under your feet."),
-            "(Screaming. Guests run for the main lift. Directorate guards draw. Voss steps in front of Rook and Calla without thinking about it. Valen doesn't move at all.)",
+            # guests run for the main lift; Voss steps in front of Rook and Calla; Valen doesn't move at all
+            MV('Hollis', ['through_on', {'speed': 5}, 'down', 'down', 'right', 'right', 'right', 'right', 'right', 'right', 'down', 'down', 'down', 'down', {'opacity': 0}], wait=False),
+            MV('Councillor Sallow', ['through_on', {'speed': 5}] + ['right'] * 10 + ['down'] * 4 + [{'opacity': 0}], wait=False),
+            MV('Lucent Scholar', ['through_on', {'speed': 5}, 'down', 'down', 'down', 'down', 'down', 'right', 'right', 'right', 'right', 'down', 'down', 'down', 'down', {'opacity': 0}], wait=False),
+            MV('Quent', ['through_on', {'speed': 5}, 'down', 'down'] + ['left'] * 11 + ['down'] * 4 + [{'opacity': 0}], wait=False),
+            MV('Voss', ['down', 'turn_right'], wait=False), {'wait': 50},
             P('THISTLE', 'angry', "You. Briarwick. The one he looked at—"),
             J('angry', "(stepping up beside you, shaking, blossoms everywhere) We're not letting you."),
             P('THISTLE', 'sad', "Girl. You don't know what you're standing in front of."),
@@ -402,31 +417,43 @@ def build_186():
             IF('pfm_lumen_tag([:RIVAL_JUNO, "Juno", 13], [:HOLLOW_THISTLE, "Thistle", 1], [:HOLLOW_GRUNT_M, "Pallbearer", 5])',
                [P('THISTLE', 'shocked', "...Twice. Twice, now."),
                 P('THISTLE', 'neutral', "It doesn't matter. We were never the ones who mattered tonight. He's already down there."),
-                "(Directorate guards seize her. She doesn't fight them. As they take her past you she says, very low:)",
-                P('THISTLE', 'sad', "Ask what's in the vault. Ask why it's warm."),
+                MV('Thistle (raid)', ['through_on', {'speed': 2}, 'left', 'left', 'left', 'left'], wait=False),   # taken past you; she doesn't fight
+                MV('Cowl 1', [{'opacity': 0}], wait=False), MV('Cowl 2', [{'opacity': 0}], wait=False), {'wait': 30},
+                P('THISTLE', 'sad', "Ask what's in the vault. Ask why it's warm.", '', 'Thistle (raid)'),
+                MV('Thistle (raid)', ['left', 'left', 'left', 'down', 'down', 'down', 'down', 'down', {'opacity': 0}], wait=False),
                 J('panic', "\"He\"? Who's \"he\"? \\PN—"),
-                "(The service-lift shaft stands open, its cable still swinging. Far below, a grey light.)",
+                {'raw': [203, [6, 6, 3]]}, {'raw': [203, [2, 3, 3]]}, S('pbSEPlay("Anim/Wind1", 50, 50)'), {'wait': 40},   # the shaft stands open
+                S('pfm_pan_home(24)'),
                 J('neutral', "Go. GO. I'll hold the lift. I'll hold — I'll hold everyone. I'm very good at holding people."),
                 {'var': [STEP, 8]}])]
-    speech = ["(A chime. The quartet stops. Voss steps onto a low dais by the window with the whole lit city behind him, his chipped mug still in his hand. Rook stands beside him, smiling for the cameras. Valen stands at the back.)",
+    speech = [S('pbSEPlay("Anim/HealBell", 80, 110)\npbBGMFade(1.0)'), {'wait': 20},          # a chime; the quartet stops
+              {'raw': [203, [6, 4, 3]]}, {'wait': 10},                                          # Voss on the dais by the window
+              MV('Voss', ['turn_down']), MV('Valen', ['turn_right']), {'wait': 20},
               P('VOSS', 'neutral', "Ten years ago this spring we switched on the first Lattice in Lumen, and the Lowlight saw electric light for the first time in its history."),
               N('Voss', "I was a linesman once. I climbed those pylons in the rain. I know exactly what one lamp costs."),
               P('VOSS', 'happy', "They'll tell you light is a gift. Light is work. Every lamp in this city was lit by someone who was told to be grateful for the dark."),
               N('Voss', "So I won't ask you to be grateful tonight. I'll ask you to look down, just once, at the city you built, and be proud of it."),
-              "(Applause. It's real. Juno is clapping. You're clapping. Beside you Larch isn't, and then, after a moment, she is.)",
+              S('pbSEPlay("Anim/Applause", 80, 100)'),                                        # applause, and it's real
+              MV('Juno (gala)', [{'jump': [0, 0]}, {'jump': [0, 0]}], wait=False), {'wait': 40},
+              MV('Larch (gala)', [{'jump': [0, 0]}]),                                         # Larch isn't, and then she is
+              S('pfm_pan_home(20)'),
               P('VOSS', 'neutral', "To ten years of light. And to the next hundred.")]
     replica = ["REPLICA: A golden Plate behind glass, turning. \"THE ZAP PLATE (REPLICA). The original is kept safe by Meridian Concord.\"",
                P('LARCH', 'neutral', "That's a copy."),
                N('Larch', "The real one isn't in Rook's gym. You saw the cradle. It's here. Under our feet. In their vault."),
                N('Larch', "It's been there seven years. Every lamp in this city drinks straight off it."),
-               "(Behind you, Rook, who has come over with two glasses of something blue, stops. He looks at the replica for a long moment. He doesn't say anything. He puts the glasses down on the plinth and walks away.)",
+               MV('Rook (gala)', ['through_on', 'right', 'right', 'up', 'up', 'up', 'turn_up', 'through_off']),   # behind you, two glasses
+               {'wait': 70}, {'se': 'GUI storage put down'}, {'wait': 16},                  # a long look; the glasses on the plinth
+               MV('Rook (gala)', ['through_on', 'down', 'down', 'down', 'right', 'right', 'right', 'right', 'right', 'right', 'right', 'right',
+                                  'right', 'right', 'up', 'up', 'up', 'up', 'turn_down', 'through_off'], wait=False),   # and walks away
                J('sad', "...Did he know?"), P('LARCH', 'sad', "He knew. Since he was fourteen. That's why he never stops talking.")]
     def guest(name, spr, d, lines, x, y):
-        return at(ev(name, page([], cond=None), page(lines, spr, d, cond=V(7)), page([], cond=V(8))), x, y)
+        return at(ev(name, page([], cond=None), page(lines, spr, d, cond=V(6)), page([], cond=V(8))), x, y)   # there for the opening pan
     E += [{'type': 'warp', 'name': 'Down to the lobby', 'at': [13, 19], 'to': {'map': 185, 'x': 12, 'y': 6, 'dir': 'down'}, 'se': 'Door exit'},
           at(ev('The Tenth Year Gala', page([], cond=None),
-                page(["(The top of Meridian Spire: a hall of glass and gold with all of Lumen lit up below the windows and airships moored outside at eye level, their lamps blinking. On the east side a great window looks down into the Spire's atrium shaft, and far down at the bottom of it, something black glows. A replica of a golden Plate turns slowly in a glass case on a plinth.)",
-                      "(Guests in Zenith brass, Elowen green and Isenmar fur. Rook in a suit that lights up. Juno in a dress made out of a very good curtain. Larch in her oilskin.)",
+                page([{'raw': [203, [8, 3, 3]]}, {'wait': 16}, {'raw': [203, [6, 8, 3]]}, {'wait': 30},   # glass and gold; the atrium window
+                      S('pfm_glow(-40, -40, -20, 10, 6)'),                                     # far down the shaft, something black glows
+                      {'raw': [203, [4, 14, 3]]}, {'wait': 30}, S('pfm_pan_home(30)'),            # the guests, the replica on its plinth
                       P('LARCH', 'deadpan', "I was told \"formal\". This is my formal oilskin."), {'var': [STEP, 7]}], cond=V(6), trigger='autorun'),
                 page([], cond=V(7))), 0, 19),
           at(ev('Replica', page(["A golden Plate behind glass, turning. \"THE ZAP PLATE (REPLICA).\""], tile=P1('lm_cradle_plate')),
@@ -448,7 +475,7 @@ def build_186():
                                                  [[P('VALEN', 'neutral', "\"Valen\" will do, in a room this loud.")],
                                                   [P('VALEN', 'neutral', "Because Lumen asked, and the Accord doesn't refuse Lumen anything this year. Draw your own conclusions. Quietly.")],
                                                   [P('VALEN', 'neutral', "Hm. Good. Most people talk at me as if I'm a statue that might answer.")]], cancel=3),
-                                              "(He looks at you a moment longer than he looks at anyone else in the room. Then he turns back to the window.)",
+                                              S('pfm_face("Valen", :player)'), {'wait': 44}, MV('Valen', ['turn_up']), {'wait': 10},   # a moment too long; back to the window
                                               N('Valen', "Enjoy the gala. These things end. They always end.")], 4, 7),
           guest('Calla', SPR['CALLA'], 'down', [P('CALLA', 'neutral', "Oh — it's you. From the dock. The... faulty unit."),
                                                 P('CALLA', 'panic', "I mean the UNIT was faulty! Not you! You're not faulty. You're a guest."),
@@ -468,7 +495,10 @@ def build_186():
           guest('Rook (gala)', SPR['ROOK'], 'down', [P('ROOK', 'happy', "You came! Stand here. Smile at me. ...Not like that. Like you mean it. Chat's watching. Chat's always watching.")], 10, 10),
           guest('Larch (gala)', SPR['LARCH'], 'down', [P('LARCH', 'deadpan', "Come and look at the replica with me. Bring your eyes.")], 14, 6),
           at(ev('Atrium window', page(["You look down the Spire's shaft. A long way below, something black sits in a brass cradle and glows, not with light but with a deeper dark the light bends round.",
-                                       N('Guest at the window', "They say it breathes. Watch. ...There. Did you see?"), "(You watch. You're almost sure you saw.)"])), 26, 8),
+                                       N('Guest at the window', "They say it breathes. Watch. ...There. Did you see?"),
+                                       {'wait': 20}, S('pbSEPlay("Anim/Psych Up", 40, 30)\npfm_glow(-50, -50, -40, 14, 4)')])), 26, 8),
+          at(ev('Thistle (raid)', page([], through=True)), 26, 13), at(ev('Cowl 1', page([], through=True)), 27, 13),
+          at(ev('Cowl 2', page([], through=True)), 26, 14),
           at(ev('Service lift', page(["A service lift in the east wall. Brass doors, a STAFF ONLY plate."], tile=P1('lm_pdoor')),
                 page([{'se': 'Door exit'}, {'transfer': {'map': 951, 'x': 10, 'y': 7, 'dir': 'down'}}], tile=P1('lm_pdoor_open'), cond=V(8), trigger='touch'),
                 page(["The service lift is sealed with Directorate tape."], tile=P1('lm_pdoor'), cond=V(9))), 27, 14)]
@@ -665,11 +695,15 @@ def build_951():
                                    SPR['GRUNT'], 'up'),
                 page([N('Bereaved', "Go on, then. Go and see.")], SPR['GRUNT'], 'up', cond={'self': 'A'})), 14, 13),
           at(ev('Rook catches up', page([], cond=None),
-                page(["(Footsteps on the stair above. Rook comes clattering down in his light-up suit, without his drone.)",
+                page([S('4.times { |i| pbSEPlay("Player bump", 80, 150 - i * 6); pbWait(0.16) }'),   # footsteps on the stair above
+                      MV('player', ['turn_up'], wait=False),
+                      MV('Rook (stair)', [{'graphic': [SPR['ROOK'], 0, 2, 0]}, 'through_on', {'opacity': 255}, {'speed': 5}, 'down', 'down', 'down', 'down', 'through_off']),
                       P('ROOK', 'neutral', "I'm coming. Don't argue. That's MY Plate down there. ...It's supposed to be my Plate."),
                       P('ROOK', 'sad', "I've never even seen it. Seven years. They never once let me see it."),
-                      "(Rook follows you down.)", {'selfswitch': ['A', True]}], cond=V(8), trigger='touch'),
+                      MV('Rook (stair)', ['through_on', {'speed': 4}, 'down', 'down', 'down', 'down', {'opacity': 0}]),   # he goes on down ahead of you
+                      {'selfswitch': ['A', True]}], cond=V(8), trigger='touch'),
                 page([], cond={'self': 'A'})), 10, 12),
+          at(ev('Rook (stair)', page([], through=True)), 10, 7),
           {'type': 'warp', 'name': 'Down to the vault', 'at': [10, 16], 'to': {'map': 952, 'x': 12, 'y': 17, 'dir': 'up'}, 'se': 'Door exit'}]
 
     m.keep_clear |= ({(x, y) for x in (9, 10, 11) for y in range(6, 17)}

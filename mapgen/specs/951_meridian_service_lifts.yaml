@@ -66,10 +66,37 @@ events:
     trigger: action
     move: fixed
   - commands:
-    - (Footsteps on the stair above. Rook comes clattering down in his light-up suit, without his drone.)
+    - {script: '4.times { |i| pbSEPlay("Player bump", 80, 150 - i * 6); pbWait(0.16) }'}
+    - move:
+        who: player
+        route: [turn_up]
+        wait: false
+    - move:
+        who: Rook (stair)
+        route:
+        - graphic: [trainer_ROCKER, 0, 2, 0]
+        - through_on
+        - {opacity: 255}
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - through_off
+        wait: true
     - '\pf[ROOK,neutral]Rook: I''m coming. Don''t argue. That''s MY Plate down there. ...It''s supposed to be my Plate.'
     - '\pf[ROOK,sad]Rook: I''ve never even seen it. Seven years. They never once let me see it.'
-    - (Rook follows you down.)
+    - move:
+        who: Rook (stair)
+        route:
+        - through_on
+        - {speed: 4}
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: true
     - selfswitch: [A, true]
     trigger: touch
     move: fixed
@@ -80,6 +107,14 @@ events:
     move: fixed
     cond: {self: A}
   at: [10, 12]
+- type: event
+  name: Rook (stair)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [10, 7]
 - type: warp
   name: Down to the vault
   at: [10, 16]

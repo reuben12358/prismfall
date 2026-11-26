@@ -23,12 +23,30 @@ events:
   pages:
   - commands:
     - 'Meridian Security: Lumen West Gate. Hand on the plate, please. Tint check. It''s the anniversary; we''re being thorough.'
-    - (Juno puts her hand on the plate. A chime. The bar glows green.)
+    - {script: 'pbSEPlay("GUI sel decision", 90, 120)
+
+        pfm_flash(120, 255, 160, 8, 110)'}
+    - {wait: 14}
     - 'Meridian Security: Meadow tint, Verdance. Welcome.'
-    - '(Your turn. A chime... nothing. The bar stays dark. Then a word scrolls across it: NULL.)'
+    - move:
+        who: player
+        route: [turn_up]
+        wait: true
+    - {script: 'pbSEPlay("GUI sel decision", 90, 120)'}
+    - {wait: 50}
     - {se: GUI sel buzzer}
+    - 'Scanner: NULL.'
     - 'Meridian Security: ...That''s a new one. Hold on.'
-    - (He speaks into a brass tube on the wall. A voice answers, small and tinny. He straightens up very fast.)
+    - {script: 'pfm_face("Meridian Security", "Brass tube")'}
+    - {wait: 10}
+    - {script: '4.times { |i| pbSEPlay("GUI sel cursor", 70, 170 - i * 9); pbWait(0.18) }'}
+    - {wait: 10}
+    - move:
+        who: Meridian Security
+        route:
+        - jump: [0, 0]
+        - face_player
+        wait: true
     - 'Meridian Security: You''re on the Chair''s list. Personally. Gala guest, tomorrow night, at the Spire.'
     - 'Meridian Security: And this came for you. It''s been waiting a week. I was told you''d come up the Lock Road.'
     - {script: 'pfm_item(:GALAINVITATION, 1, "GALA INVITATION")'}

@@ -106,6 +106,38 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch5stage")
       log("RESULT 608 testimony: CH5_STEP=#{$game_variables[125]} S115=#{$game_switches[115]} choice=#{pf_choice(:ch5_lowlight_testimony).inspect} frames=#{f}+#{f2}")
     end
 
+    def spire
+      # --- 582: the scanner (Juno green, you NULL, the brass tube)
+      $game_variables[125] = 2
+      s_map(582, 8, 10, 8)
+      f = s_talk("Scanner")
+      log("RESULT 582 scanner: CH5_STEP=#{$game_variables[125]} invitation=#{(pfm_has?(:GALAINVITATION) rescue '?').inspect} " \
+          "guard_dir=#{s_ev('Meridian Security')&.direction} frames=#{f}")
+      # --- 186: the gala opening, Valen, the window, then the replica -> the speech -> the raid
+      $game_variables[125] = 6
+      s_map(186, 13, 18, 8)
+      f = s_autorun
+      log("RESULT 186 opening: CH5_STEP=#{$game_variables[125]} display=#{$game_map.display_x},#{$game_map.display_y} " \
+          "#{s_shown('Rook (gala)', 'Juno (gala)', 'Larch (gala)').inspect} frames=#{f}")
+      $game_player.moveto(4, 8); $game_player.turn_up
+      f = s_talk("Valen")
+      log("RESULT 186 valen: dir=#{s_ev('Valen')&.direction} frames=#{f}")
+      $game_player.moveto(25, 9); $game_player.turn_left
+      f = s_talk("Atrium window")
+      $game_player.moveto(13, 6); $game_player.turn_up
+      s_run(10, 10) { false }
+      f = s_talk("Replica", 9000)
+      lift = s_ev("Service lift")
+      log("RESULT 186 raid: CH5_STEP=#{$game_variables[125]} battles=#{C5S.battles.length} lift_tile=#{lift&.tile_id} " \
+          "#{s_shown('Thistle (raid)', 'Hollis', 'Quent', 'Rook (gala)', 'Voss').inspect} tone=#{$game_screen.tone.red.round} frames=#{f}")
+      # --- 951: Rook on the stair
+      $game_variables[125] = 8
+      s_map(951, 10, 11, 2)
+      $game_player.move_down
+      f = s_run(3000, 40) { s_idle? }
+      log("RESULT 951 rook: selfA=#{s_selfsw('Rook catches up').inspect} #{s_shown('Rook (stair)').inspect} pos=#{$game_player.x},#{$game_player.y} frames=#{f}")
+    end
+
     def run
       self.started = true
       File.write("#{DemoRun::ROOT}/demo.log", "") rescue Dir.mkdir(DemoRun::ROOT)

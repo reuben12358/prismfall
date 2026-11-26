@@ -23,11 +23,20 @@ events:
     trigger: action
     move: fixed
   - commands:
-    - '(The top of Meridian Spire: a hall of glass and gold with all of Lumen lit up below the windows and airships moored outside at eye level, their lamps
-      blinking. On the east side a great window looks down into the Spire''s atrium shaft, and far down at the bottom of it, something black glows. A replica
-      of a golden Plate turns slowly in a glass case on a plinth.)'
-    - (Guests in Zenith brass, Elowen green and Isenmar fur. Rook in a suit that lights up. Juno in a dress made out of a very good curtain. Larch in her
-      oilskin.)
+    - raw:
+      - 203
+      - [8, 3, 3]
+    - {wait: 16}
+    - raw:
+      - 203
+      - [6, 8, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(-40, -40, -20, 10, 6)'}
+    - raw:
+      - 203
+      - [4, 14, 3]
+    - {wait: 30}
+    - {script: pfm_pan_home(30)}
     - '\pf[LARCH,deadpan]Larch: I was told "formal". This is my formal oilskin.'
     - var: [CH5_STEP, 7]
     trigger: autorun
@@ -52,33 +61,216 @@ events:
     - '\pf[LARCH,neutral]Larch: That''s a copy.'
     - 'Larch: The real one isn''t in Rook''s gym. You saw the cradle. It''s here. Under our feet. In their vault.'
     - 'Larch: It''s been there seven years. Every lamp in this city drinks straight off it.'
-    - (Behind you, Rook, who has come over with two glasses of something blue, stops. He looks at the replica for a long moment. He doesn't say anything.
-      He puts the glasses down on the plinth and walks away.)
+    - move:
+        who: Rook (gala)
+        route: [through_on, right, right, up, up, up, turn_up, through_off]
+        wait: true
+    - {wait: 70}
+    - {se: GUI storage put down}
+    - {wait: 16}
+    - move:
+        who: Rook (gala)
+        route: [through_on, down, down, down, right, right, right, right, right, right, right, right, right, right, up, up, up, up, turn_down, through_off]
+        wait: false
     - '\pf[JUNO,sad]Juno: ...Did he know?'
     - '\pf[LARCH,sad]Larch: He knew. Since he was fourteen. That''s why he never stops talking.'
-    - (A chime. The quartet stops. Voss steps onto a low dais by the window with the whole lit city behind him, his chipped mug still in his hand. Rook
-      stands beside him, smiling for the cameras. Valen stands at the back.)
+    - {script: 'pbSEPlay("Anim/HealBell", 80, 110)
+
+        pbBGMFade(1.0)'}
+    - {wait: 20}
+    - raw:
+      - 203
+      - [6, 4, 3]
+    - {wait: 10}
+    - move:
+        who: Voss
+        route: [turn_down]
+        wait: true
+    - move:
+        who: Valen
+        route: [turn_right]
+        wait: true
+    - {wait: 20}
     - '\pf[VOSS,neutral]Voss: Ten years ago this spring we switched on the first Lattice in Lumen, and the Lowlight saw electric light for the first time
       in its history.'
     - 'Voss: I was a linesman once. I climbed those pylons in the rain. I know exactly what one lamp costs.'
     - '\pf[VOSS,happy]Voss: They''ll tell you light is a gift. Light is work. Every lamp in this city was lit by someone who was told to be grateful for
       the dark.'
     - 'Voss: So I won''t ask you to be grateful tonight. I''ll ask you to look down, just once, at the city you built, and be proud of it.'
-    - (Applause. It's real. Juno is clapping. You're clapping. Beside you Larch isn't, and then, after a moment, she is.)
+    - {script: 'pbSEPlay("Anim/Applause", 80, 100)'}
+    - move:
+        who: Juno (gala)
+        route:
+        - jump: [0, 0]
+        - jump: [0, 0]
+        wait: false
+    - {wait: 40}
+    - move:
+        who: Larch (gala)
+        route:
+        - jump: [0, 0]
+        wait: true
+    - {script: pfm_pan_home(20)}
     - '\pf[VOSS,neutral]Voss: To ten years of light. And to the next hundred.'
-    - (The lights flicker. Once. Twice. The quartet stops mid-bar.)
+    - tone: [-50, -50, -50, 60, 2]
+    - {wait: 4}
+    - tone: [0, 0, 0, 0, 2]
+    - {wait: 10}
+    - tone: [-50, -50, -50, 60, 2]
+    - {wait: 4}
+    - tone: [0, 0, 0, 0, 2]
+    - {script: pbBGMStop(0.2)}
+    - {wait: 20}
     - 'Guest: Is that part of it?'
     - tone: [-40, -40, -40, 120, 20]
-    - (The lights go grey. A low hum. The same grey as the stage lights in the Lantern Theatre, in Saltmere.)
+    - {script: 'pbSEPlay("Anim/Psych Up", 60, 40)'}
+    - {wait: 24}
     - '\pf[JUNO,shocked]Juno: \PN. That''s the same — that''s the same—'
+    - raw:
+      - 203
+      - [6, 6, 4]
+    - raw:
+      - 203
+      - [2, 3, 4]
+    - {wait: 12}
     - {se: Anim/Explosion1}
-    - (The service-lift doors on the east wall bend outward and burst.)
-    - (Grey cowls pour out of the shaft. Carved bark masks with sad faces. Hollow Ring banners unroll down the glass. At the front, a woman with weaver's
-      shears on her belt.)
+    - {script: 'pfm_shake(6, 9, 16)
+
+        pfm_flash(255, 240, 220, 6, 150)'}
+    - {script: 'pfm_event("Service lift").instance_variable_set(:@tile_id, 25936) rescue nil'}
+    - move:
+        who: Thistle (raid)
+        route:
+        - graphic: [trainer_HOLLOW_THISTLE, 0, 4, 0]
+        - {opacity: 255}
+        - through_on
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - turn_left
+        - through_off
+        wait: false
+    - move:
+        who: Cowl 1
+        route:
+        - wait 8
+        - graphic: [trainer_HOLLOW_GRUNT_M, 0, 4, 0]
+        - {opacity: 255}
+        - through_on
+        - left
+        - left
+        - left
+        - up
+        - turn_left
+        wait: false
+    - move:
+        who: Cowl 2
+        route:
+        - wait 14
+        - graphic: [trainer_HOLLOW_GRUNT_F, 0, 4, 0]
+        - {opacity: 255}
+        - through_on
+        - left
+        - left
+        - left
+        - left
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(24)}
     - '\pf[THISTLE,neutral]Thistle: Nobody move. Nobody is going to be hurt. We''re not here for you.'
     - 'Thistle: We''re here for what''s under your feet.'
-    - (Screaming. Guests run for the main lift. Directorate guards draw. Voss steps in front of Rook and Calla without thinking about it. Valen doesn't
-      move at all.)
+    - move:
+        who: Hollis
+        route:
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Councillor Sallow
+        route:
+        - through_on
+        - {speed: 5}
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Lucent Scholar
+        route:
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - down
+        - right
+        - right
+        - right
+        - right
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Quent
+        route:
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Voss
+        route: [down, turn_right]
+        wait: false
+    - {wait: 50}
     - '\pf[THISTLE,angry]Thistle: You. Briarwick. The one he looked at—'
     - '\pf[JUNO,angry]Juno: (stepping up beside you, shaking, blossoms everywhere) We''re not letting you.'
     - '\pf[THISTLE,sad]Thistle: Girl. You don''t know what you''re standing in front of.'
@@ -87,10 +279,51 @@ events:
       then:
       - '\pf[THISTLE,shocked]Thistle: ...Twice. Twice, now.'
       - '\pf[THISTLE,neutral]Thistle: It doesn''t matter. We were never the ones who mattered tonight. He''s already down there.'
-      - (Directorate guards seize her. She doesn't fight them. As they take her past you she says, very low:)
-      - '\pf[THISTLE,sad]Thistle: Ask what''s in the vault. Ask why it''s warm.'
+      - move:
+          who: Thistle (raid)
+          route:
+          - through_on
+          - {speed: 2}
+          - left
+          - left
+          - left
+          - left
+          wait: false
+      - move:
+          who: Cowl 1
+          route:
+          - {opacity: 0}
+          wait: false
+      - move:
+          who: Cowl 2
+          route:
+          - {opacity: 0}
+          wait: false
+      - {wait: 30}
+      - '\pf[THISTLE,sad,,Thistle (raid)]Thistle: Ask what''s in the vault. Ask why it''s warm.'
+      - move:
+          who: Thistle (raid)
+          route:
+          - left
+          - left
+          - left
+          - down
+          - down
+          - down
+          - down
+          - down
+          - {opacity: 0}
+          wait: false
       - '\pf[JUNO,panic]Juno: "He"? Who''s "he"? \PN—'
-      - (The service-lift shaft stands open, its cable still swinging. Far below, a grey light.)
+      - raw:
+        - 203
+        - [6, 6, 3]
+      - raw:
+        - 203
+        - [2, 3, 3]
+      - {script: 'pbSEPlay("Anim/Wind1", 50, 50)'}
+      - {wait: 40}
+      - {script: pfm_pan_home(24)}
       - '\pf[JUNO,neutral]Juno: Go. GO. I''ll hold the lift. I''ll hold — I''ll hold everyone. I''m very good at holding people.'
       - var: [CH5_STEP, 8]
     trigger: action
@@ -131,7 +364,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -153,13 +386,19 @@ events:
       - ['\pf[VALEN,neutral]Valen: Because Lumen asked, and the Accord doesn''t refuse Lumen anything this year. Draw your own conclusions. Quietly.']
       - ['\pf[VALEN,neutral]Valen: Hm. Good. Most people talk at me as if I''m a statue that might answer.']
       cancel: 3
-    - (He looks at you a moment longer than he looks at anyone else in the room. Then he turns back to the window.)
+    - {script: 'pfm_face("Valen", :player)'}
+    - {wait: 44}
+    - move:
+        who: Valen
+        route: [turn_up]
+        wait: true
+    - {wait: 10}
     - 'Valen: Enjoy the gala. These things end. They always end.'
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: up}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -179,7 +418,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: down}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -200,7 +439,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: left}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -219,7 +458,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -239,7 +478,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_LADY, dir: right}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -258,7 +497,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 20, dir: down}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -277,7 +516,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_RIVAL2, dir: down}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -295,7 +534,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_ROCKER, dir: down}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -313,7 +552,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_PROFESSOR, dir: down}
     cond:
-      var: [CH5_STEP, 7]
+      var: [CH5_STEP, 6]
   - commands: []
     trigger: action
     move: fixed
@@ -323,11 +562,41 @@ events:
 - type: event
   name: Atrium window
   pages:
-  - commands: ['You look down the Spire''s shaft. A long way below, something black sits in a brass cradle and glows, not with light but with a deeper dark
-        the light bends round.', 'Guest at the window: They say it breathes. Watch. ...There. Did you see?', (You watch. You're almost sure you saw.)]
+  - commands:
+    - You look down the Spire's shaft. A long way below, something black sits in a brass cradle and glows, not with light but with a deeper dark the light
+      bends round.
+    - 'Guest at the window: They say it breathes. Watch. ...There. Did you see?'
+    - {wait: 20}
+    - {script: 'pbSEPlay("Anim/Psych Up", 40, 30)
+
+        pfm_glow(-50, -50, -40, 14, 4)'}
     trigger: action
     move: fixed
   at: [26, 8]
+- type: event
+  name: Thistle (raid)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [26, 13]
+- type: event
+  name: Cowl 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [27, 13]
+- type: event
+  name: Cowl 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [26, 14]
 - type: event
   name: Service lift
   pages:
