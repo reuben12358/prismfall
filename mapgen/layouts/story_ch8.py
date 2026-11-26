@@ -157,8 +157,10 @@ WHOSE = [
          S('pfm_fade_out(20)'), {'wait': 16},                                    # later, on the steps
          P('LARCH', 'sad', "He'll forgive you. He forgives everybody."),
          N('Larch', "He won't forget, though. Smiths don't.")]], cancel=0),
-    {'var': [STEP, 7]},
-    S('pfm_fade_out(30)')]                                                        # "Chestnuts" takes it from here, in the dark
+    S('pfm_fade_out(30)'),                                                        # "Chestnuts" takes it from here, in the dark
+    MV('Brann', [{'opacity': 0}], wait=False), MV('Sigrun', [{'opacity': 0}], wait=False),
+    MV('Haskar (night)', [{'opacity': 0}], wait=False), MV('Oath-guard (night) 1', [{'opacity': 0}]),
+    {'var': [STEP, 7]}]
 
 # ============================================================================================ 244 "Chestnuts"
 CHESTNUTS = [

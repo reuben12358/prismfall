@@ -490,8 +490,28 @@ events:
         - '\pf[LARCH,sad]Larch: He''ll forgive you. He forgives everybody.'
         - 'Larch: He won''t forget, though. Smiths don''t.'
       cancel: 0
-    - var: [CH8_STEP, 7]
     - {script: pfm_fade_out(30)}
+    - move:
+        who: Brann
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Sigrun
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Haskar (night)
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Oath-guard (night) 1
+        route:
+        - {opacity: 0}
+        wait: true
+    - var: [CH8_STEP, 7]
     trigger: autorun
     move: fixed
     cond:
