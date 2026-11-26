@@ -3,8 +3,10 @@
 # war maps: for each :war_climax side, the map's own events run - the "War front" sets S605-607, the gauntlet singles
 # and the partner double start from their events - and every battle is auto-won after a few frames.
 #   DEMO_PLAN=warlines   WL_SIDES=back_ashkaar,back_isenmar,stand_between   WL_SHOTS=1 (every 30th frame; off by default)
-# Per side: the player stands in the partner pair's line of sight (one step away), so the Trainer(4) page must start by
-# sight; if it doesn't within 400 frames the event is started directly (logged as "sight: no").
+# Per side: the player stands five tiles in front of the partner pair and takes one step toward it with the d-pad, so
+# the Trainer(4) page must start by sight; if it doesn't within 400 frames the event is started directly ("sight: no").
+# The engine is slow under xvfb (a map message waits ~45 frames): allow ~10 minutes a side, and if the engine ignores
+# the run's timeout, kill its pfcap-engine process by pid.
 # Copy maps_out/Data/system_prismfall.txt and the rebuilt Map920/924/925/926.rxdata into run_intro's game/Data first.
 # RESULT lines in demo.log: each battle's foes, its field, the partner, and after the double pfm(:war_partner_done),
 # V140, the pair's self-switch A, and whether 926's crest still holds any trainer.
@@ -12,8 +14,8 @@
 if ENV["DEMO_PLAN"].to_s.start_with?("warlines")
   module WarLines
     SIDES = { :back_ashkaar => [920, "Sigrun"], :back_isenmar => [924, "Marisol"], :stand_between => [925, "Sigrun"] }
-    @battles = []
-    class << self; attr_accessor :battles; end
+    @battles = []; @walk = nil
+    class << self; attr_accessor :battles, :walk; end
 
     def self.wait(n); n.times { Graphics.update; Input.update; $scene.update }; end
 
@@ -70,21 +72,27 @@ if ENV["DEMO_PLAN"].to_s.start_with?("warlines")
                   "pair at #{ev.x},#{ev.y} dir #{ev.direction} page=#{ev.instance_variable_get(:@page) ? 'on' : 'off'} player #{sx},#{sy}")
       before = WarLines.battles.length
       DemoRun.auto = true
-      { :up => 8, :down => 2, :left => 4, :right => 6 }[dir].then { |d| $game_player.move_generic(d) rescue $game_player.send({ 8 => :move_up, 2 => :move_down, 4 => :move_left, 6 => :move_right }[d]) }
+      # walk one step toward the pair with the d-pad, as a player would (Input.dir4 below)
+      WarLines.walk = { :up => 8, :down => 2, :left => 4, :right => 6 }[dir]
       sight = false
       400.times do
         wait(1)
-        if $game_system.map_interpreter.running? || $game_temp.in_battle
+        WarLines.walk = nil if $game_player.x != sx || $game_player.y != sy
+        # an event started by sight can run to its end (battle, win lines) inside a single wait(1)
+        if WarLines.battles.length > before || $game_system.map_interpreter.running? || $game_temp.in_battle
           sight = true
           break
         end
       end
-      ev.start if !sight
+      WarLines.walk = nil
+      DemoRun.log("#{side}: player now #{$game_player.x},#{$game_player.y}; faces=#{pbEventFacesPlayer?(ev, $game_player, 4)} " \
+                  "reach=#{pbEventCanReachPlayer?(ev, $game_player, 4)} trigger=#{ev.trigger} interp=#{$game_system.map_interpreter.running?}")
+      ev.start if !sight && WarLines.battles.length == before
       frames = 0
       loop do
         wait(1); frames += 1
         break if frames > 3000
-        break if WarLines.battles.length > before && !$game_system.map_interpreter.running? && !$game_temp.in_battle && frames > 60
+        break if $game_self_switches[[map, ev.id, "A"]] && !$game_system.map_interpreter.running? && !$game_temp.in_battle
       end
       DemoRun.auto = false
       selfA = $game_self_switches[[map, ev.id, "A"]]
@@ -149,6 +157,11 @@ if ENV["DEMO_PLAN"].to_s.start_with?("warlines")
   end
   module Input
     class << self
+      alias wl_dir4 dir4 unless method_defined?(:wl_dir4)
+      def dir4
+        return WarLines.walk if WarLines.walk
+        return wl_dir4
+      end
       alias wl_trigger? trigger? unless method_defined?(:wl_trigger?)
       def trigger?(button)
         return DemoRun.frame % 45 == 0 if button == Input::USE && DemoRun.auto
