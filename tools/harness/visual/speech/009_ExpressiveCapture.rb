@@ -1,16 +1,21 @@
 #===============================================================================
-# Expressive conversation (Cutscenes 018) and chapter card (Cutscenes 020) in the real engine, dev tool.
-# Stands Juno and Kestrel in front of the player on whatever map a new game starts on, plays a four-line
-# exchange through pbMessage (two-speaker stage, one \pfe balloon each for two lines, a \pfp stance, a
-# \pfa step back), then chapter 3's card in full, then lets a map event set V102 = 4 (the automatic card,
-# skipped with USE). RESULT lines in demo.log.
+# Expressive conversation (Cutscenes 018) and the Act I -> II transition (END OF ACT I, then Chapter 6's
+# card, Cutscenes 020) in the real engine, dev tool. RESULT lines in demo.log.
+#   1. On the start map: Juno and Kestrel stand two tiles up from the player and talk to each other (two-speaker
+#      stage, a \pfe balloon on two lines, a \pfp stance, a \pfa step back); they should turn to each other
+#      (018's auto_face :context). Then the PC speaks and Kestrel answers: nobody turns.
+#   2. Map 106's "Lamplight finale" autorun (Interlude I's last scene) with the automatic chapter card ON:
+#      the card order is logged (expected: PF_ACT1_END while V102 = 5, then the CH06 card, no "II — IMPRINTS").
+#   cp maps_out/Data/Map{106,182}.rxdata maps_out/Data/system_prismfall.txt /home/claude/run_intro/game/Data/
 #   bash tools/harness/visual/intro/run_intro.sh --capture "$PWD/tools/harness/visual/speech/009_ExpressiveCapture.rb" --plan expr
-# Frames: /home/claude/run_intro/frames/ch0_expr (sparse; delete them and captures_keep/ch0_expr after looking).
+# Frames (sparse): frames/ch0_expr (the talk), ch0_actend and ch0_ch6card (the two cards). Delete them and the
+# same folders in captures_keep/ after looking. EXPR_EVERY = frame stride (default 45).
 #===============================================================================
 if ENV["DEMO_PLAN"].to_s.start_with?("expr")
   module ExprCap
     @press = false
-    class << self; attr_accessor :press; end
+    @cards = []
+    class << self; attr_accessor :press, :cards; end
   end
   class << DemoRun
     def expr_event(id, name, charset, x, y, dir = 2)
@@ -29,6 +34,41 @@ if ENV["DEMO_PLAN"].to_s.start_with?("expr")
       end
     end
 
+    def expr_step(limit, min = 30)
+      f = 0
+      loop do
+        Graphics.update; Input.update
+        $scene.update
+        f += 1
+        break if f > limit || (f > min && yield)
+      end
+      return f
+    end
+
+    # Logs every title card and chapter card as it starts, with V102 at that moment, and records a few frames of it.
+    def expr_watch_cards
+      stride = (ENV["EXPR_EVERY"] || "45").to_i
+      Object.send(:alias_method, :expr_pfm_card, :pfm_card)
+      Object.send(:define_method, :pfm_card) do |scene, *lines|
+        ExprCap.cards << [scene, $game_variables[102]]
+        DemoRun.every = stride
+        DemoRun.record("ch0_actend") if scene == :PF_ACT1_END
+        r = expr_pfm_card(scene, *lines)
+        DemoRun.stop
+        r
+      end
+      cc = Prismfall::ChapterCards
+      cc.singleton_class.send(:alias_method, :expr_play, :play)
+      cc.define_singleton_method(:play) do |id, **opts|
+        ExprCap.cards << [cc.resolve_key(id), $game_variables[102]]
+        DemoRun.every = stride
+        DemoRun.record("ch0_ch#{$game_variables[102]}card")
+        r = expr_play(id, **opts)
+        DemoRun.stop
+        r
+      end
+    end
+
     def run
       self.started = true
       File.write("#{DemoRun::ROOT}/demo.log", "") rescue Dir.mkdir(DemoRun::ROOT)
@@ -43,7 +83,10 @@ if ENV["DEMO_PLAN"].to_s.start_with?("expr")
       pbChangePlayer(1)
       $player.name = "Wren"
       $PokemonSystem.textspeed = 2
-      Prismfall::ChapterCards.auto = true           # off by default under DEMO_PLAN
+      Prismfall::ChapterCards.auto = true           # off by default under DEMO_PLAN; on here, as in play
+      ex = Prismfall::Expressive
+      pf = Prismfall::Portrait
+      #--- 1. two characters talking to each other -----------------------------------------------------------
       px = $game_player.x
       py = $game_player.y
       $game_player.turn_up
@@ -54,59 +97,67 @@ if ENV["DEMO_PLAN"].to_s.start_with?("expr")
       $game_map.need_refresh = true
       juno = $game_map.events[901]
       kes = $game_map.events[902]
-      self.every = (ENV["EXPR_EVERY"] || "30").to_i
+      self.every = (ENV["EXPR_EVERY"] || "45").to_i
       record("ch0_expr")
       expr_idle(40)
       ExprCap.press = true
-      ex = Prismfall::Expressive
-      pf = Prismfall::Portrait
       views = []
       pf.singleton_class.send(:alias_method, :expr_open_real, :open)
       pf.define_singleton_method(:open) { |sp, win = nil, mode = nil| v = expr_open_real(sp, win, mode); views.push(v); v }
       begin
+        log("auto_face=#{ex.auto_face.inspect} face_mode=#{ex.face_mode.inspect} start dirs juno=#{juno.direction} kestrel=#{kes.direction} player=#{$game_player.direction}")
         pbMessage("\\pf[JUNO,happy]Juno: Kestrel! You came back to Briarwick. I wasn't sure you would.")
-        r1 = [juno.pf_pose_sheet, juno.pf_pose_index]
         pbMessage("\\pf[KESTREL,deadpan]\\pfp[crossed]Kestrel: Don't make a fuss. I only stopped by for Larch's report.")
-        r2 = [kes.pf_pose_sheet, kes.pf_pose_index, views.last.side, views.last.listener && views.last.listener.id]
+        r2 = [juno.direction, kes.direction, kes.pf_pose_sheet, views.last.side, views.last.listener && views.last.listener.id]
         pbMessage("\\pf[JUNO,sad]\\pfe[question]Juno: You heard what happened at the Spire... didn't you?")
-        r3 = [ex.emotes_shown, views.last.entry, views.last.side]
         pbMessage("\\pf[KESTREL,sad]\\pfe[dots]\\pfa[step_back]Kestrel: ...Keep off the ridge tonight. Meridian's watching.")
-        r4 = [ex.emotes_shown, kes.pf_visual_ox, kes.pf_visual_oy, views.last.class.name]
-        log("RESULT expressive: juno_pose=#{r1.inspect} kestrel=#{r2.inspect} line3=#{r3.inspect} line4=#{r4.inspect} " \
-            "views=#{views.map { |v| v.class.name.split('::').last }.inspect}")
+        r4 = [ex.emotes_shown, kes.pf_visual_ox, kes.pf_visual_oy]
+        kes.pf_set_facing(2)                              # Kestrel turns to the PC...
+        pbMessage("\\pf[PLAYER,neutral]Wren: I'll be careful.")
+        pbMessage("\\pf[KESTREL,neutral]Kestrel: You won't. Nobody is.")
+        r6 = [juno.direction, kes.direction, $game_player.direction]
+        log("RESULT talk: after line 2 [juno_dir, kestrel_dir, stance, side, listener]=#{r2.inspect} (expect 6, 4) " \
+            "line 4 [emotes, ox, oy]=#{r4.inspect} after the PC's line [juno, kestrel, player]=#{r6.inspect} (expect 6, 2, 8) " \
+            "views=#{views.map { |v| v.class.name.split('::').last }.uniq.inspect}")
       rescue Exception => e
         raise if e.is_a?(SystemExit)
         log("EXCEPTION #{e.class}: #{e.message}\n  " + (e.backtrace || []).first(12).join("\n  "))
       end
       ExprCap.press = false
       expr_idle(30)
-      log("RESULT after the event: active=#{ex.active?} juno_pose=#{juno.pf_pose_sheet.inspect} kestrel_pose=#{kes.pf_pose_sheet.inspect} " \
+      stop
+      log("RESULT after the talk: active=#{ex.active?} poses=#{[juno.pf_pose_sheet, kes.pf_pose_sheet].inspect} " \
           "offsets=#{[kes.pf_visual_ox, kes.pf_visual_oy].inspect} live_portrait=#{pf.current.inspect}")
-      # chapter card, in full
-      t0 = System.uptime
+      #--- 2. the end of Act I on 106 ------------------------------------------------------------------------
       begin
-        shown = pf_chapter_card(3, skippable: false)
-        again = pf_chapter_card(3)
-        log("RESULT card: shown=#{shown} again=#{again} secs=#{(System.uptime - t0).round(1)} seen=#{Prismfall::ChapterCards.seen.inspect}")
+        expr_watch_cards
+        Prismfall::ChapterCards.seen.push(:CH05)        # Chapter 5's card belongs to an earlier save state
+        $game_variables[102] = 5
+        $game_variables[101] = 1
+        $game_variables[125] = 12
+        $game_variables[119] = 1                          # the interlude is running (the finale's page condition)
+        $game_map.setup(106)
+        $game_player.moveto(4, 7)
+        $game_player.turn_up
+        %w[Lamplight\ (lamp\ room) Lamplight\ finale].each do |name|
+          ev = $game_map.events.values.find { |e| e.name == name }
+          log("event #{name}: #{ev&.id.inspect}")
+          $game_self_switches[[106, ev.id, "A"]] = true if ev
+        end
+        $scene.disposeSpritesets rescue nil
+        $scene.createSpritesets
+        $game_map.need_refresh = true
+        ExprCap.press = true
+        t0 = System.uptime
+        f = expr_step(9000, 60) { $game_variables[125] >= 13 && $game_map.map_id == 182 && !$game_system.map_interpreter.running? }
+        ExprCap.press = false
+        log("RESULT act end: cards (id, V102 when it began)=#{ExprCap.cards.inspect} (expect PF_ACT1_END @5, CH06 @6) " \
+            "ACT=#{$game_variables[101]} CHAPTER=#{$game_variables[102]} map=#{$game_map.map_id} seen=#{Prismfall::ChapterCards.seen.inspect} " \
+            "frames=#{f} secs=#{(System.uptime - t0).round(1)}")
       rescue Exception => e
         raise if e.is_a?(SystemExit)
         log("EXCEPTION #{e.class}: #{e.message}\n  " + (e.backtrace || []).first(12).join("\n  "))
       end
-      # the automatic card: a map event sets V102
-      ExprCap.press = true
-      list = [RPG::EventCommand.new(355, 0, ["$game_variables[102] = 4"]), RPG::EventCommand.new(0, 0, [])]
-      $game_system.map_interpreter.setup(list, 0)
-      t0 = System.uptime
-      f = 0
-      loop do
-        Graphics.update; Input.update
-        $scene.update
-        f += 1
-        break if f > 900 || (Prismfall::ChapterCards.seen.include?(:CH04) && !$game_system.map_interpreter.running?)
-      end
-      ExprCap.press = false
-      log("RESULT auto card: V102=#{$game_variables[102]} seen=#{Prismfall::ChapterCards.seen.inspect} secs=#{(System.uptime - t0).round(1)} (skipped with USE)")
-      expr_idle(20)
       stop
       log("done")
     end
@@ -115,7 +166,8 @@ if ENV["DEMO_PLAN"].to_s.start_with?("expr")
     class << self
       alias expr_trigger? trigger? unless method_defined?(:expr_trigger?)
       def trigger?(button)
-        return DemoRun.frame % 120 == 0 if button == Input::USE && ExprCap.press
+        return false if button == Input::USE && Prismfall::ChapterCards.playing?    # let a card play out for the frames
+        return DemoRun.frame % 90 == 0 if button == Input::USE && ExprCap.press
         return expr_trigger?(button)
       end
     end

@@ -158,12 +158,18 @@
 - [ ] For Reuben: keep or drop the ACT title cards now that chapter cards carry the act name; `Prismfall::Expressive.auto_face` is off (speakers are not turned toward each other automatically); 14 lines where Gemini wants a face for a plain speaker (Dominar Hrothgar, Coll, Calla).
 
 ## Reuben's calls, 2026-11-26 ("ur call" on all seven; decided by Claude)
-- [ ] Act title cards: keep END OF ACT as the act's closing beat; drop the separate act-opening card where the next
-  chapter card already names the act (dialogue agent).
-- [ ] The 14 lines where Gemini wants a face for a plain speaker (Hrothgar, Coll, Calla): portrait where the art exists,
-  plain where it doesn't (dialogue agent).
-- [ ] Auto-turning ("depends on the context"): two characters talking to each other turn toward each other; whoever is
-  addressing the PC keeps facing the PC (dialogue agent, 018).
+- [x] Act title cards: keep END OF ACT as the act's closing beat; drop the separate act-opening card where the next
+  chapter card already names the act (dialogue agent). Done f43b3daf: "ACT I" on 100 and "II — IMPRINTS" on 106 gone;
+  on 106 END OF ACT I now plays before V102 = 6, so Chapter 6's card follows it; scripts 20/24/27/32/36 write
+  `CHAPTER CARD` lines in that order. Real engine: PF_ACT1_END (V102 5) then CH06 (V102 6).
+- [x] The 14 lines where Gemini wants a face for a plain speaker (Hrothgar, Coll, Calla): portrait where the art exists,
+  plain where it doesn't (dialogue agent). Done af169c9b: 11 tagged (Coll 3, Calla 1, Juno 1, Sahar 1, Hrothgar 5; all have
+  art); Hallgerd / Tavi stay plain (no art). 014 `labels:` keeps Hrothgar's face on his `[name: Dominar]` lines.
+- [x] Auto-turning ("depends on the context"): two characters talking to each other turn toward each other; whoever is
+  addressing the PC keeps facing the PC (dialogue agent, 018). Done 27906d0c: `auto_face = :context` is the default
+  (the event the player talked to, or one next to and facing the player, keeps facing them; a line answering the PC
+  turns nobody; the player is never turned); `pf_auto_face(:off / :always)` per conversation. Real engine: Juno and
+  Kestrel turned to each other, nobody turned on the PC's line.
 - [x] Ch5 Shatter: no Lowlight cutaway (as story/24 writes it); `SH1_LOWLIGHT_CUTAWAY` stays off.
 - [x] SPINE.md / MEGA_EVOLUTION.md: one Mega per trainer, one Z-move per side.
 - [x] Post-game: Tier 3 at 3 Tier-2 clears; T1-8 at 8 settled rumours; the Hush silences battles too. Kept as built.
@@ -175,3 +181,13 @@
 - [x] Fixed: chapter card text is centred on its drawn glyphs (the act line sat on the top rule); run_intro now installs the Gen 5 reskin after `merge_tilesets` (before this, every capture showed the old tiles); Core 025 stale 926 aliases out, `TYPE_CHARSETS` covers the Ch19 classes.
 - [ ] Art for Gemini (appended to `art/HANDOFF_GEMINI.md`): Venam's strip has no irises in its rest frames; `PARTNER_GIRATINA` has no art (the one `check_art_wiring` error); optional seated surf-fish sheets and a centred speech windowskin.
 - [ ] Not mine, noted: `HROTHGAR` front strip / bust have no type or VS id yet (wire with his encounter); `mapgen/layouts/war_craft.py` still maps Sigrun / Marisol to stock sheets (`trainer_ELITEFOUR_Lance` / `trainer_LEADER_Misty`); their own `trainer_LEADER_SIGRUN` / `trainer_LEADER_MARISOL` exist.
+
+## Status: dialogue agent, Reuben's calls (2026-11-26)
+- [x] All three calls done and committed (f43b3daf act cards, af169c9b portraits, 27906d0c auto-turning). Cutscenes
+  selftest 234 / 234. Real engine (`tools/harness/visual/speech/009_ExpressiveCapture.rb`, plan `expr`): the two-NPC
+  talk (two-speaker stage, balloon, step back, turns) and 106's finale (END OF ACT I, then Chapter 6's card) as
+  expected; frames looked at and deleted. Codex rebuilt (dist_web left uncommitted).
+- [ ] Map builders: when Acts II-IV's closing events are built (Ch9 294, Ch13 340, Ch17 docks), play END OF ACT before
+  setting V101 / V102, as the scripts now write; the chapter card follows by itself. The Ruin Route's first event calls
+  `pf_chapter_card(:RUIN)`. Layouts that name Hrothgar's lines need `SE.NAMES['HROTHGAR'] = 'Dominar'` (or the
+  registered "Dominar Hrothgar") so the `[name: Dominar]` holds keep his face.
