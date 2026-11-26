@@ -312,6 +312,14 @@ Core already runs this stage through `EliteBattle.bossBattle(:ARCEUS, 100, 1, fa
 | Recover in sets | no | yes, max 2 uses per phase | yes |
 | Telegraph next Plate | 2 turns ahead | 1 turn ahead | 1 turn ahead |
 
+**Built 2026-11-25 (Bosses 103, Field Effects 136):** bars by story variant; the `:gym_order` rotation below
+(`:prism_order` → the arena's `:set_order`: at each break the arena moves to the next bar's fields and turns at once;
+inside a bar it cycles them every 3 rounds, announced a round ahead; the fight opens on Gym 1's field with no resting
+rounds); forced locks; Miscalibrated's six-Plate bar 5 at ×0.85; War's and Judgment's seventh bar (??? type; Judgment
+on `:INVERSE`); HARMONY_BUFF. The `:prism_turn` break effect had never fired before this (a frozen state summary).
+Not built: Gilded's bar-6 refills and binding, Judgment's Giratina partner, the per-phase Recover limit, the "best
+field against the player's active" skip, the 2-turn Casual telegraph, `:bossboost` HP. Win rates: §9b.
+
 **Alignment with NARRATIVE_KEYS §6.6 (authoritative for bar counts):** a "phase" below = one **bar**. Default
 `ARCEUS_BOUND` has 6 bars; bar *k* holds the Plates of gyms 3k−2..3k (bar 1 Normal/Bug/Water since SPINE Rev 14 … bar 6 Dark/Fairy/Dragon), so
 within a bar Arceus cycles only among those three Plates/fields. Forced locks (+1 all stats per refusing Warden) stack on top.
@@ -434,6 +442,42 @@ their setup move (Calm Mind, Bulk Up) for a utility move.
 | Giratina, Reverse Depths (71) | 100% | 0% | 0% (the prepared model picks answers by the normal chart, wrong on Inverse) | 0% |
 | Zekrom, the Engine (75) | 93% | 0% | 77% | 20% |
 | Gilded King Aurelius (100, Ruin) | 47% | 13% | 57% | 67% |
+
+**Finale bosses (2026-11-25; Bosses 103, 113–115; `winrates_r4.rb` cells VALEN, VOSS, QH, VOSSC, BORI, ARC, ARCF,
+ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard or Hard was tuned to these numbers
+(Reuben's ruling above), and the harness plays without a strategy. Logic checks: `tools/harness/run_finale_bosses.rb` (63/63).
+- **Valen's Zygarde "Order"** (`:VALEN_ZYGARDE_ORDER`, trainer boss, the Final v0 / 100 / 200 only): bars Casual 2 /
+  Standard 2 / Hard 3; the 50% Forme until the last bar, then the Complete Forme at its own full HP (Power Construct is
+  held until then); no stat multipliers on Standard / Hard, Casual bars ×0.55 HP. The Last Tuning (v1) is unchanged.
+- **Silvally "NULL"** (`:VOSS_SILVALLY_NULL` / `:QUENT_SILVALLY_NULL`, trainer boss, Voss v0 / 100 / 200 and Quent
+  v99 / 199 / 299): 3 bars in every mode, no stat multipliers on Standard / Hard, Casual bars ×0.55 HP; its Memory, form
+  and type follow the arena's ascendant Plate (the §6 "Project NULL" hook, now built in Bosses, not Core); the conduit:
+  only if `KESTREL_FALLEN`, `:ch21_reach_kestrel` is asked in battle when bar 2 breaks, and on `:let_go` NULL
+  regenerates every round of bar 3 (Casual 1/16, Standard 1/8, Hard 1/6); `VOSS_FEIGNED`: −1 to every stat for 3 rounds.
+- **Giratina's Origin trial** (`:GIRATINA_ORIGIN_TRIAL`, Ruin R1): Origin Forme, Lv 72, `:INVERSE`, bars 2 / 3 / 4,
+  Adamant 252 HP / 252 Atk; Casual HP ×0.75 and offence ×0.6. It ends as a win the first round the player holds back
+  once 1 bar is broken (Hard: 2), or when every bar is broken. The AI never holds back, so BORI is the harder road.
+- **Arceus** (`:ARCEUS_FINALE`): bars now come from the story variant (Bound 6, Gilded 6, Miscalibrated 5, War 7,
+  Judgment 7), not the difficulty (it was 3 / 3 / 4); each bar cycles its three gym fields in gym order (§7). Bar HP is
+  ×1.0 of Arceus's own max HP on Standard and ×1.25 on Hard; §7's `:bossboost` HP (×2.0 / ×2.5 on top) is **not**
+  applied. Casual only is eased: bar HP ×0.5, offence ×0.6, Safeguard in place of Recover / Calm Mind, and a forced
+  lock raises Defense / Sp. Def alone (at most +2).
+
+| Fight (cap) | Casual typ / prep | Standard typ / prep | Hard typ / prep | Before (Std typ / prep) |
+|---|---|---|---|---|
+| Final: Valen, Zygarde with bars (96) | 57% / 100% | 2% / 18% | 0% / 0% | 3% / 48% |
+| Hijack: Voss, NULL 3 bars (100) | 58% / 100% | 0% / 13% | 0% / 12% | 7% / 68% |
+| Hijack: Quent, NULL 3 bars (100) | 42% / 100% | 0% / 45% | 0% / 18% | 15% / 87% |
+| Hijack: Voss, the conduit live (`:let_go`) | 53% / 100% | 0% / 10% | 0% / 10% | new |
+| Giratina's Origin trial, fought to the end (71) | 98% / 95% | 38% / 27% | 0% / 0% | new |
+| Arceus, Bound, every Warden releases (100) | 43% / 60% | 0% / 0% | 0% / 0% | no cell before |
+| Arceus, Bound, one Warden in three refuses | 15% / 35% | 0% / 0% | 0% / 0% | no cell before |
+| Arceus, Miscalibrated, 5 bars | 58% / 67% | 0% / 0% | 0% / 0% | no cell before |
+
+Arceus on Standard / Hard is 0% for the harness in the old 3-bar shape too (checked: 0 of 60, typical and prepared,
+parties swept in about nine turns by a Lv 100 Judgment before the first bar breaks), so the bar count is not what
+decides it; before the Casual easing Casual was 0% as well. Open for Reuben: whether Standard Arceus and Hard Valen
+(prepared 35% → 0%) should stay where the designs put them.
 
 **Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,
 1 / 2 / 3 bars, Standard HP ×1.5 and ×1.15–1.25 elsewhere, Hard HP ×1.5 and ×1.2–1.25. A typical Lv 49–51 six (60 a
