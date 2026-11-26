@@ -1687,9 +1687,9 @@ S("Ch19 war partner - Sigrun beside the PC in the lines (backing Ashkaar: 920 :F
   "Fire attacks or heavy blows break it), Infiltrator Dragapult ignores the Aurora Veil, Mold Breaker Haxorus brings "
   "Close Combat for the Ice types. Her dragons are 4x weak here: protect them.",
   "LEADER_SIGRUN", "Sigrun", 19, 85, "Hold here. Let them come to us.", [
-    P("HAXORUS", 83, "MOLDBREAKER", "LUMBERRY", "JOLLY", "DRAGONCLAW,CLOSECOMBAT,XSCISSOR,PROTECT", "A"),
-    P("DRAGAPULT", 84, "INFILTRATOR", "SITRUSBERRY", "NAIVE", "DRAGONDARTS,FLAMETHROWER,SHADOWBALL,PROTECT", "MX"),
-    P("SALAMENCE", 84, "INTIMIDATE", "SITRUSBERRY", "TIMID", "HEATWAVE,DRAGONPULSE,TAILWIND,PROTECT", "S", nick="Dreamwing"),
+    P("HAXORUS", 83, "MOLDBREAKER", "YACHEBERRY", "JOLLY", "DRAGONCLAW,CLOSECOMBAT,XSCISSOR,PROTECT", "A"),
+    P("DRAGAPULT", 84, "INFILTRATOR", "YACHEBERRY", "NAIVE", "DRAGONDARTS,FLAMETHROWER,SHADOWBALL,PROTECT", "MX"),
+    P("SALAMENCE", 84, "INTIMIDATE", "YACHEBERRY", "TIMID", "HEATWAVE,DRAGONPULSE,TAILWIND,PROTECT", "S", nick="Dreamwing"),
 ], nobag="partner")
 S("Ch19 war partner - Marisol beside the PC in the lines (backing Isenmar: 924 :DESERT vs the Ember-Riders). Against "
   "the sand: Kingdra's Rain Dance soaks the dunes into the Superbloom (the Water nerf lifts, Fire is halved in the rain) "
@@ -1905,14 +1905,16 @@ def hirdman(nm, lose, mons, note):
     S("Ch19 the lines - " + note, "ISENMAR_HIRDMAN", nm, 0, 85, lose, mons, nobag=True)
 hirdman("Hjalmar", "The Thane's shield. ...Cracked. Tell him it took two of you.", [
     # Aurora Veil works without hail on the frozen sand; Snow Warning brings the hail anyway (Blizzard spread).
-    P("VANILLUXE", 83, "SNOWWARNING", "LIGHTCLAY", "MODEST", "AURORAVEIL,BLIZZARD,FREEZEDRY,PROTECT", "BS",
-      casual={"ab": "ICEBODY", "item": "SITRUSBERRY", "moves": "ICEBEAM,FREEZEDRY,FLASHCANNON,PROTECT"}),
+    # Standard: Ice Body and Ice Beam (a spread Blizzard at x1.5 in its own hail won the fight alone); Hard has the hail.
+    P("VANILLUXE", 83, "ICEBODY", "SITRUSBERRY", "MODEST", "AURORAVEIL,ICEBEAM,FREEZEDRY,PROTECT", "BS",
+      hard={"ab": "SNOWWARNING", "item": "LIGHTCLAY", "moves": "AURORAVEIL,BLIZZARD,FREEZEDRY,PROTECT"},
+      casual={"moves": "ICEBEAM,FREEZEDRY,FLASHCANNON,PROTECT"}),
     # Ice Scales: +1 Defense on entry here. Wide Guard is the drilled answer to Sigrun's Heat Wave; Tailwind.
     P("FROSMOTH", 83, "ICESCALES", "SITRUSBERRY", "MODEST", "BUGBUZZ,ICEBEAM,TAILWIND,WIDEGUARD", "BS", only="nocasual",
       hard={"moves": "BUGBUZZ,BLIZZARD,TAILWIND,WIDEGUARD"}),
     P("CRYOGONAL", 83, "LEVITATE", "SITRUSBERRY", "TIMID", "FREEZEDRY,FLASHCANNON,RAPIDSPIN,PROTECT", "S", only="hard"),
     # Thermal Exchange: a Fire hit is +1 Attack and it can't be burned. Ice Shard slides (+1 Speed).
-    P("BAXCALIBUR", 84, "THERMALEXCHANGE", "SITRUSBERRY", "ADAMANT", "ICICLECRASH,DRAGONCLAW,ICESHARD,PROTECT", "A",
+    P("BAXCALIBUR", 84, "THERMALEXCHANGE", "SITRUSBERRY", "ADAMANT", "DRAGONCLAW,ICEFANG,ICESHARD,PROTECT", "A",
       hard={"item": "LOADEDDICE", "moves": "ICICLESPEAR,GLAIVERUSH,ICESHARD,PROTECT"}),
 ], "Thane's Hirdman Hjalmar, tag DOUBLE with Torunn vs the PC + Sigrun (map 920, :FROZEN_LAKE). The shield: Aurora "
    "Veil, Wide Guard, Thermal Exchange against the dragons' fire.")
@@ -1920,16 +1922,17 @@ hirdman("Torunn", "We drilled for dragons. Nobody drilled for you.", [
     # Competitive: Dreamwing's Intimidate is +2 Sp. Atk. Muddy Water is the spread.
     P("MILOTIC", 83, "COMPETITIVE", "SITRUSBERRY", "MODEST", "MUDDYWATER,ICEBEAM,RECOVER,PROTECT", "BS",
       hard={"item": "MYSTICWATER"}, casual={"ab": "MARVELSCALE", "moves": "WATERPULSE,ICEBEAM,RECOVER,PROTECT"}),
-    P("EISCUE", 83, "ICEFACE", "SITRUSBERRY", "JOLLY", "ICICLECRASH,LIQUIDATION,ZENHEADBUTT,PROTECT", "A", only="nocasual",
-      hard={"moves": "ICICLECRASH,LIQUIDATION,BELLYDRUM,PROTECT"}),
+    P("EISCUE", 83, "ICEFACE", "SITRUSBERRY", "JOLLY", "ICICLECRASH,LIQUIDATION,BELLYDRUM,PROTECT", "A", only="hard"),
     # Hard only: a second Veil, and Moonblast for the dragons.
     P("NINETALES", 83, "SNOWWARNING", "LIGHTCLAY", "TIMID", "AURORAVEIL,BLIZZARD,MOONBLAST,PROTECT", "S", form=1, only="hard"),
     # The axe. Triple Axel is x1.3 on the ice (and x1.5 Ice); Ice Shard slides.
-    P("WEAVILE", 84, "PRESSURE", "SITRUSBERRY", "JOLLY", "TRIPLEAXEL,KNOCKOFF,ICESHARD,PROTECT", "A",
+    P("WEAVILE", 84, "PRESSURE", "SITRUSBERRY", "JOLLY", "ICEPUNCH,KNOCKOFF,ICESHARD,PROTECT", "A",
       hard={"item": "LIFEORB", "moves": "TRIPLEAXEL,KNOCKOFF,ICESHARD,FAKEOUT"},
       casual={"moves": "ICEPUNCH,NIGHTSLASH,ICESHARD,PROTECT"}),
 ], "Thane's Hirdman Torunn, Hjalmar's tag partner (map 920, :FROZEN_LAKE). The axe: Competitive Milotic punishes "
-   "Intimidate, Weavile's Triple Axel is x1.3 on the ice.")
+   "Intimidate; Hard's Weavile has Triple Axel (x1.3 on the ice). Standard is five between the pair, Ice Beam for "
+   "Blizzard and Ice Fang / Ice Punch for the big Ice attacks: Ice is x1.5 here and Sigrun's dragons are 4x weak "
+   "(harness, a typical six: 0 of 12 with six foes and the hail Blizzard, 7 of 18 like this).")
 hirdman("Styr", "North and east agree on one thing, and it's you. ...It was you.", [
     # BLEED: attacks that don't match the user's type are x1.2, so this side is all coverage.
     P("STARMIE", 83, "NATURALCURE", "SITRUSBERRY", "TIMID", "HYDROPUMP,ICEBEAM,THUNDERBOLT,PROTECT", "S",
