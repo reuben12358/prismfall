@@ -253,7 +253,7 @@ MOVE: Voss walks up from behind the queue.
 [name: Calla] Sir, the protocol says—
 [name: Voss] The protocol was written by me, on a train.
 [name: Voss] Let them through.
-[name: Calla] ...Yes, sir.
+[portrait: CALLA, neutral] ...Yes, sir.
 [name: Calla] Welcome to Velmora.
 MOVE: PC walks through. Voss follows, pauses beside the PC.
 [name: Voss] There. Ordinary as anyone.
@@ -325,7 +325,7 @@ QUEST LOG: "Mum's Letter" — Find Imelda Larch at the research station on the h
 
 **Coll Hale** (mending nets beside the stall)
 ```
-[name: Coll] Mm. Ferry child.
+[portrait: COLL, neutral] Mm. Ferry child.
 [name: Coll] Farm's up the lane if you need a bed.
 [name: Coll] Wenna'll say the same but with more words.
 [name: Coll] ...Did she give you a tart?
@@ -698,7 +698,7 @@ HEADBUTT TUTOR (farmhand in the yard): Want your partner to learn to headbutt tr
 [portrait: JUNO, happy] You can have my bed! I'll take the hayloft.
 [name: Juno] I always take the hayloft when we have guests.
 [name: Juno] We've never had guests. I'm very excited about the hayloft.
-[name: Coll] *(from the yard)* Hayloft's got a Skiddo in it.
+[portrait: COLL, neutral] *(from the yard)* Hayloft's got a Skiddo in it.
 [name: Juno] I'm excited about the Skiddo.
 [portrait: WENNA, happy] Supper's whenever you come in.
 [name: Wenna] Coll made the bed, so it's made badly. But it's made.
@@ -872,14 +872,14 @@ MOVE: The door opens. Larch, in yesterday's coat, holding yesterday's cup. She h
 [name: Larch] Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off — the Glasswood's walked across it — so you go round by the coast.
 [name: Larch] Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden's Dorian Pell. He'll call you "darling" and mean it about a third of the time.
 [name: Larch] Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post.
-[name: Juno] I'm coming as far as Saltmere!
+[portrait: JUNO, happy] I'm coming as far as Saltmere!
 [name: Juno] Mum's promised forty tarts to the Pageant crowd and I'm the cart!
 [portrait: WENNA, deadpan] Forty-one. One's for the cart.
 [name: Juno] And I've wanted to see the Pageant since I was six. There's a bit where the Plates fall and they use REAL glitter.
 [portrait: LARCH, deadpan] They use salt.
 [portrait: JUNO, shocked] [emote: exclaim] ...Why would you tell me that. *(shock lines)*
 (Received: TOWN MAP. "Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.")
-[name: Coll] Bell's on your way. At the fork. I tied the clapper the night they shut the strait. Nothing left to ring for.
+[portrait: COLL, neutral] Bell's on your way. At the fork. I tied the clapper the night they shut the strait. Nothing left to ring for.
 [name: Coll] You come back with all eighteen, I'll untie it.
 [name: Coll] Don't make it strange.
 [bubble: WENNA, shocked, shock] That's MY line.

@@ -393,7 +393,7 @@ V126 = 6.
 ```
 (Inside the skull: a hall cut into bone and sandstone, running down. Strength boulders choke the side passages. In the walls, Unown drift like fish in a tank, in and out of the stone.)
 FIELD NOTES pop-up: "THE OSSUARY OF DUNES — CAVE. Unown in the walls. They aren't hiding. They're the words." (Larch, in the margin: "Copy everything. Twice.")
-[name: Sahar] The Unown are the inscription. They move.
+[portrait: SAHAR, neutral] The Unown are the inscription. They move.
 [name: Sahar] That's why nobody could read it, before.
 [name: Sahar] You have to wait for the sentence to come round.
 ```

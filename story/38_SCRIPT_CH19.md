@@ -279,7 +279,7 @@ V140 = 8.
 ## **The Dominar** (the Command Pavilion, 928, built; touch, V140 == 8 → 9)
 ```
 (The Command Pavilion. The oath-brazier, white at the heart. The lacquer map table. The black-glass stand, empty, still dusty where something round sat. The Dominar of Ashkaar in a plain red coat, a burnt hand bandaged, the Light Stone's cradle-cloth on the table in front of him, empty.)
-[name: Dominar] My daughter flew the Unimprinted into my war.
+[portrait: HROTHGAR, neutral] My daughter flew the Unimprinted into my war.
 [name: Dominar] She tells me you swore an oath at the Draco Plate and the fire believed you.
 (A beat.)
 [name: Dominar] Speak plainly. The brazier is lit.
@@ -295,13 +295,13 @@ V140 = 8.
   [name: Dominar] (reading, in silence, for a long time) ...And they were on the mesa this morning. Reading us.
 [if bond(:SIGRUN) >= 4]
   [portrait: SIGRUN, neutral] (from the tent-flap) Father. I weighed them. They're light. They're true. Fly.
-[name: Dominar] If the god is in chains, then dragons will break them.
+[portrait: HROTHGAR, neutral] If the god is in chains, then dragons will break them.
 [name: Dominar] Not for the Accord. For the god.
 Script: pf_choose(:ch19_dominar, :swayed)
 ```
 - Otherwise:
 ```
-[name: Dominar] Words. Good words. The fire liked them.
+[portrait: HROTHGAR, neutral] Words. Good words. The fire liked them.
 (He turns the cradle-cloth over.)
 [name: Dominar] My riders go home after the truce.
 [name: Dominar] Crownhaven can defend itself. It always says it can.

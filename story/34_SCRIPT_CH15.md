@@ -362,7 +362,7 @@ V136 = 8.
 The skiff drops the PC on the Glass Dunes (926). A short walk to the **Ashkaar Siege Camp** (924, built), then the **Command Pavilion** (928, built).
 ```
 (The Command Pavilion. A lacquer map table. The oath-brazier, white at the heart. An empty stand of black glass, dusty, where something round and heavy sat until recently. In an iron hawk-cage made larger: Anja, in her furs, sitting very straight.)
-[name: Dominar] Speak plainly. The brazier is lit.
+[portrait: HROTHGAR, neutral] Speak plainly. The brazier is lit.
 [name: Dominar] In this tent a lie is a death sentence, and I have signed eleven.
 [name: Dominar] The Unimprinted. My daughter's friend, they tell me, and the Thane's sister's.
 [name: Dominar] Everyone's friend. Have you come to buy a Warden?
@@ -389,7 +389,7 @@ The skiff drops the PC on the Glass Dunes (926). A short walk to the **Ashkaar S
   [name: Anja] Write that down too.
 > Leave it. (leave)
   Script: pf_choose(:war_prisoner, :leave)
-  [name: Dominar] Wise. Or cold.
+  [portrait: HROTHGAR, neutral] Wise. Or cold.
   [name: Dominar] The brazier can't tell the difference. Neither can I.
   [portrait: ANJA, sad] (as you go, very quietly) Count it. Somebody should.
 V136 = 9.

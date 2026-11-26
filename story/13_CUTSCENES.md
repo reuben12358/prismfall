@@ -20,8 +20,9 @@ like a bad idea". Engine: `plugins/Prismfall Cutscenes/014_Portraits.rb`. A line
   Older scripts' *(shock lines)*-style notes are staging only, and they show nothing in face mode.
 - **Plain** (everyone else): the message box with a name label, `[name: X]`. That means generic NPCs, townsfolk,
   shopkeepers, quest-givers, route and gym trainers, guards, signs and objects. **Only characters in
-  `Prismfall::Portrait::CAST` get a face or a bubble.** Anyone else stays plain even if tagged, so don't tag them (Coll and
-  the sister-game cameos, for example, are plain).
+  `Prismfall::Portrait::CAST` get a face or a bubble.** Anyone else stays plain even if tagged, so don't tag them. (Since
+  2026-11-24 the CAST includes Coll, Calla, Dominar Hrothgar and the sister-game cameos, who have portrait art. A
+  speaker shown under another name holds the face with that name when it is registered, e.g. HROTHGAR's `[name: Dominar]`.)
 - A new conversation starts fresh: a new event, an `[after X]` variant, or a choice branch.
 - **Emote balloon** (rare): `[emote: kind]` after the speaker tag pops one small balloon over that speaker's map sprite
   (`[emote: kind, Name]` over someone else). Kinds: exclaim, double_exclaim, question, dots, anger, sweat, heart, idea,

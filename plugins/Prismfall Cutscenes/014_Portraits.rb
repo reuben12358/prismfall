@@ -193,8 +193,10 @@ module Prismfall
         return { :id => hit[0], :expression => hit[1], :emotes => nil, :event => nil, :bubble => false, :carried => true }
       end
 
+      # labels: register(:ID, labels: ["Dominar"]) - other "Name: " labels a script uses for the same face
       def remember(spec, text)
-        [label_of(text), display_name(spec[:id]).downcase].compact.uniq.each do |label|
+        labels = Array(person(spec[:id])[:labels]).map { |l| l.to_s.downcase }
+        ([label_of(text), display_name(spec[:id]).downcase] + labels).compact.uniq.each do |label|
           @scene_faces[label] = [spec[:id], spec[:expression]]
         end
       end
@@ -878,7 +880,7 @@ Prismfall::Portrait.register(:ASHE,     name: "Ashe",               art: :MERIDI
 Prismfall::Portrait.register(:MAUD,     name: "Hierophant Ellery",  cast: true)
 Prismfall::Portrait.register(:GUTTER,   name: "Mother Gutter",      trainer: :SUMP_BARON, cast: true)
 Prismfall::Portrait.register(:EIRIK,    name: "Thane Eirik",        cast: true)
-Prismfall::Portrait.register(:HROTHGAR, name: "Dominar Hrothgar",   cast: true)
+Prismfall::Portrait.register(:HROTHGAR, name: "Dominar Hrothgar",   labels: ["Dominar"], cast: true)   # scripts hold his face with [name: Dominar]
 Prismfall::Portrait.register(:KASSAN,   name: "Prince-Elector Kassan", cast: true)
 Prismfall::Portrait.register(:REFLECTION, name: "Reflection",       trainer: :REFLECTION, cast: true)
 Prismfall::Portrait.register(:ZARA,     name: "Zara",               trainer: :PUNK_ZARA, cast: true)
