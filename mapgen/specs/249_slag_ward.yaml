@@ -129,8 +129,28 @@ events:
   - graphic: {sprite: NPC 15, dir: up}
     trigger: action
     move: fixed
-    commands: ['Mother: Keep your boots off the grate edges, love. The channels are running hot today.', 'Mother: Three bells means off the forges. Four
-        means get up the stairs before the steam rises.']
+    commands: ['Mother: Keep your boots off the grate edges, love. The channels are running hot today.', 'Mother: Three bells means off the forges. Four means get
+        up the stairs before the steam rises.']
+  - commands: ['Mother: Five bells! Up, love, up! Don''t look at the grates!']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 15, dir: up}
+    cond:
+      var: [CH8_STEP, 5]
+    story: ch8
+  - commands:
+    - if: $game_variables[@@CINDERVAULT_STATE] == 1
+      then: ['Mother: Ash on the shutters, ash in the broth. Better than the alternative.']
+      else:
+      - if: $game_variables[@@CINDERVAULT_STATE] == 2
+        then: ['Mother: The grates hum all night now. The Warden says it''ll hold. The Warden says.']
+        else: ['Mother: The channels have gone quiet. First quiet night in a month. I keep waking up for it.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 15, dir: up}
+    cond:
+      var: [CH8_STEP, 7]
+    story: ch8
 - type: event
   name: Child with Litwick Jar
   at: [15, 13]
@@ -138,8 +158,28 @@ events:
   - graphic: {sprite: NPC 05, dir: up}
     trigger: action
     move: fixed
-    commands: ['(The child holds a glass jam jar up like a lantern. Inside, a tiny purple flame bobs cheerfully.)', 'Child: Mama says the bells mean go
-        up, not down. My Litwick isn''t scared—he likes the warm steps!']
+    commands: ['(The child holds a glass jam jar up like a lantern. Inside, a tiny purple flame bobs cheerfully.)', 'Child: Mama says the bells mean go up, not down.
+        My Litwick isn''t scared—he likes the warm steps!']
+  - commands: ['Child: My Litwick''s not scared. I am. A bit.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 05, dir: up}
+    cond:
+      var: [CH8_STEP, 5]
+    story: ch8
+  - commands:
+    - if: $game_variables[@@CINDERVAULT_STATE] == 1
+      then: ['Child: It snowed grey! My Litwick ate some. He''s fine. He''s a bit grey.']
+      else:
+      - if: $game_variables[@@CINDERVAULT_STATE] == 2
+        then: ['Child: The steps are still warm! My Litwick likes it. Mama doesn''t.']
+        else: ['Child: My Litwick''s sulking. Everything''s gone cold and he liked the warm steps.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 05, dir: up}
+    cond:
+      var: [CH8_STEP, 7]
+    story: ch8
 - type: event
   name: Hearthguild Watchman
   at: [16, 8]
@@ -147,8 +187,28 @@ events:
   - graphic: {sprite: trainer_BLACKBELT, dir: down}
     trigger: action
     move: fixed
-    commands: ['Hearthguild Watchman: Cindervault''s bells used to ring the hours. Now they ring the heat.', 'Hearthguild Watchman: Three bells, you take
-        your Pokémon off the forges. Four, you take yourself. We''ve never rung five.']
+    commands: ['Hearthguild Watchman: Cindervault''s bells used to ring the hours. Now they ring the heat.', 'Hearthguild Watchman: Three bells, you take your Pokémon
+        off the forges. Four, you take yourself. We''ve never rung five.']
+  - commands: ['Hearthguild Watchman: Five bells! Everyone up to the terraces! You — not DOWN, up!']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_BLACKBELT, dir: down}
+    cond:
+      var: [CH8_STEP, 5]
+    story: ch8
+  - commands:
+    - if: $game_variables[@@CINDERVAULT_STATE] == 1
+      then: ['Hearthguild Watchman: One bell. Then nothing, all night. Forges are cold for a season. We''ll live.']
+      else:
+      - if: $game_variables[@@CINDERVAULT_STATE] == 2
+        then: ['Hearthguild Watchman: One bell. The tap''s still drawing, mind. Meridian''s got brass rings on it now.']
+        else: ['Hearthguild Watchman: One bell. Somebody shut Tap Seven. With their hands, they say.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_BLACKBELT, dir: down}
+    cond:
+      var: [CH8_STEP, 7]
+    story: ch8
 - type: event
   name: Slag Ward Smith
   at: [23, 14]
@@ -156,8 +216,8 @@ events:
   - graphic: {sprite: trainer_HIKER, dir: left}
     trigger: action
     move: fixed
-    commands: ['Slag Ward Smith: Meridian bolted Tap Seven straight into the caldera floor under our boots.', 'Slag Ward Smith: They put a brass gauge on
-        it. The gauge says fine. The gauge is also melting.']
+    commands: ['Slag Ward Smith: Meridian bolted Tap Seven straight into the caldera floor under our boots.', 'Slag Ward Smith: They put a brass gauge on it. The
+        gauge says fine. The gauge is also melting.']
 - type: event
   name: Broth Seller
   at: [23, 19]
@@ -165,8 +225,8 @@ events:
   - graphic: {sprite: NPC 18, dir: down}
     trigger: action
     move: fixed
-    commands: ['Broth Seller: Boiled broth! Very boiled! Didn''t even need a fire—just set the kettle on the grate.', 'Broth Seller: Lying''s a crime in
-        Ashkaar, so I won''t tell you it''s delicate. It''s hot and it''s cheap.']
+    commands: ['Broth Seller: Boiled broth! Very boiled! Didn''t even need a fire—just set the kettle on the grate.', 'Broth Seller: Lying''s a crime in Ashkaar,
+        so I won''t tell you it''s delicate. It''s hot and it''s cheap.']
 - type: event
   name: Old Coal-Hauler
   at: [12, 26]
@@ -174,8 +234,8 @@ events:
   - graphic: {sprite: NPC 25, dir: right}
     trigger: action
     move: fixed
-    commands: ['Old Coal-Hauler: Whole Slag Ward sits on two hundred years of cooled foundry run-off.', 'Old Coal-Hauler: Hearthguild keeps the stairs patched
-        and the drains clear. Up on the rim they forget we''re down here until the bells start.']
+    commands: ['Old Coal-Hauler: Whole Slag Ward sits on two hundred years of cooled foundry run-off.', 'Old Coal-Hauler: Hearthguild keeps the stairs patched and
+        the drains clear. Up on the rim they forget we''re down here until the bells start.']
 - type: event
   name: Salvage Tinker
   at: [29, 28]
@@ -208,3 +268,227 @@ events:
   at: [38, 28]
   item: CHARCOAL
   name: Slag Ward Charcoal
+- type: event
+  name: Five Bells (ward)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pfm_tone(40, -12, -40, 20, 20)'}
+    - {script: '5.times { pbSEPlay("Anim/HealBell", 90, 60); pbWait(0.9) }'}
+    - move:
+        who: Hearthguild Watchman
+        route: [turn_down]
+        wait: true
+    - 'Hearthguild Watchman: Five. FIVE! Up the stairs! Leave the bundles if they''re heavy! UP!'
+    - move:
+        who: Evacuee 1
+        route:
+        - graphic: [NPC 13, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 4}
+        - up
+        - up
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Evacuee 2
+        route:
+        - graphic: [NPC 21, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 4}
+        - up
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Evacuating Mother
+        route:
+        - through_on
+        - {speed: 4}
+        - up
+        - up
+        - up
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Evacuee 3
+        route:
+        - graphic: [NPC 26, 0, 8, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 4}
+        - up
+        - up
+        - up
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Child with Litwick Jar
+        route:
+        - wait 20
+        - through_on
+        - {speed: 4}
+        - up
+        - up
+        - up
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Litwick jar
+        route:
+        - wait 20
+        - through_on
+        - {speed: 4}
+        - {opacity: 255}
+        - up
+        - up
+        - up
+        - up
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: false
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 7]
+  at: [0, 0]
+  story: ch8
+- type: event
+  name: Evacuee 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [13, 12]
+  story: ch8
+- type: event
+  name: Evacuee 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [14, 11]
+  story: ch8
+- type: event
+  name: Evacuee 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [14, 13]
+  story: ch8
+- type: event
+  name: Litwick jar
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: Followers/LITWICK, dir: up, opacity: 0}
+    through: true
+    step_anime: true
+  at: [15, 14]
+  story: ch8

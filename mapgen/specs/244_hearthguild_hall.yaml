@@ -25,8 +25,8 @@ events:
   - graphic: {sprite: trainer_HIKER, dir: right}
     trigger: action
     move: fixed
-    commands: ['Hearthguild Apprentice: Warden Brann says a blade decides what it''s going to be in the quench. Too slow, it''s soft; too fast, it cracks.',
-      'Hearthguild Apprentice: Lately the quench trough steams before we even dip a bar. That''s the mountain''s fever.']
+    commands: ['Hearthguild Apprentice: Warden Brann says a blade decides what it''s going to be in the quench. Too slow, it''s soft; too fast, it cracks.', 'Hearthguild
+        Apprentice: Lately the quench trough steams before we even dip a bar. That''s the mountain''s fever.']
 - type: event
   name: Elder Smith
   at: [17, 11]
@@ -35,14 +35,13 @@ events:
     trigger: action
     move: fixed
     commands: ['Elder Smith: That white stone over the forge has been in the Hearthguild''s keeping for thirty years—since before the Dominar''s great-grandmother
-        learned to ride.', 'Elder Smith: Warden Brann roasts chestnuts on the coals at two in the morning when he''s thinking hard. Cuts a cross in every
-        shell so they don''t go off like a Voltorb.']
+        learned to ride.', 'Elder Smith: Warden Brann roasts chestnuts on the coals at two in the morning when he''s thinking hard. Cuts a cross in every shell so
+        they don''t go off like a Voltorb.']
 - type: sign
   name: Light Stone Grille
   at: [10, 4]
   post: false
-  text: 'Behind the iron grille, resting in a forged cradle: a white stone the size of a fist, giving off a light like a cold morning. The Light Stone of
-    the Hearthguild.'
+  text: 'Behind the iron grille, resting in a forged cradle: a white stone the size of a fist, giving off a light like a cold morning. The Light Stone of the Hearthguild.'
 - type: sign
   name: Hearthguild Forge
   at: [6, 5]
@@ -52,8 +51,7 @@ events:
   name: Warden Chair
   at: [7, 10]
   post: false
-  text: Warden Brann's chair at the head of the basalt table, iron-ringed and worn smooth by big hands. Ashkaar envoys have been known to sit in it without
-    asking.
+  text: Warden Brann's chair at the head of the basalt table, iron-ringed and worn smooth by big hands. Ashkaar envoys have been known to sit in it without asking.
 - type: sign
   name: Basalt Council Table
   at: [10, 10]
@@ -74,3 +72,635 @@ events:
   at: [16, 9]
   post: false
   text: 'THE HEARTHGUILD LEDGER — CINDERVAULT. Entries run back three centuries in iron-gall ink: bellows mended, bells cast, and Warden rings cut.'
+- type: event
+  name: My Father
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - move:
+        who: player
+        route: [up, up]
+        wait: true
+    - move:
+        who: Larch
+        route:
+        - graphic: [LARCH, 0, 8, 0]
+        - {opacity: 255}
+        - up
+        - up
+        - turn_up
+        wait: false
+    - move:
+        who: Brann
+        route:
+        - graphic: [BRANN, 0, 8, 0]
+        - {opacity: 255}
+        - up
+        - up
+        - right
+        - right
+        - right
+        - up
+        - up
+        - up
+        - turn_left
+        wait: true
+    - raw:
+      - 203
+      - [8, 4, 3]
+    - {wait: 30}
+    - raw:
+      - 203
+      - [2, 4, 3]
+    - {wait: 20}
+    - 'Envoy Haskar: Warden. The Dominar''s patience is a coal.'
+    - 'Envoy Haskar: It glows a long while. It is not endless.'
+    - '\pf[BRANN,angry,,Brann]Brann: And my answer''s a hammer, Haskar. It doesn''t glow at all.'
+    - 'Brann: The Light Stone is the Hearthguild''s.'
+    - 'Brann: It''s been the Hearthguild''s since before your Dominar''s great-grandmother learned to ride.'
+    - 'Envoy Haskar: The Stone is Reshiram''s. Reshiram is Ashkaar''s.'
+    - 'Envoy Haskar: The Hearthguild is in Ashkaar. You see how it follows.'
+    - 'Brann: The Concordance says a Warden keeps what was put in their keeping.'
+    - 'Brann: Say true, Haskar.'
+    - 'Brann: Was the Stone put in your keeping?'
+    - {wait: 30}
+    - 'Envoy Haskar: ...No.'
+    - '\pf[BRANN,happy,,Brann]Brann: There! See! Honesty! Isn''t it marvellous!'
+    - {script: 'pbSEPlay("Fly", 100, 70)
+
+        pfm_shake(3, 10, 12)'}
+    - {wait: 20}
+    - move:
+        who: player
+        route: [turn_down]
+        wait: false
+    - move:
+        who: Larch
+        route: [turn_down]
+        wait: false
+    - move:
+        who: Sigrun
+        route:
+        - graphic: [SIGRUN, 0, 8, 0]
+        - {opacity: 255}
+        - up
+        - left
+        - left
+        - left
+        - up
+        - up
+        - up
+        - turn_up
+        wait: false
+    - {wait: 6}
+    - move:
+        who: Salamence
+        route:
+        - graphic: [Followers/SALAMENCE, 0, 8, 0]
+        - {opacity: 255}
+        - step_anime_on
+        - turn_up
+        wait: true
+    - {waitmove: true}
+    - '\pf[SIGRUN,neutral,,Sigrun]Sigrun: Haskar. Get out of the Warden''s chair.'
+    - move:
+        who: Envoy Haskar
+        route: [left, turn_right]
+        wait: true
+    - 'Envoy Haskar: Wardeness. The Dominar sent me to—'
+    - '\pf[SIGRUN,angry,,Sigrun]Sigrun: I know what my father sent you to do.'
+    - 'Sigrun: I read the letter before he sealed it. Sit somewhere else.'
+    - {script: 'pfm_face("Sigrun", :player)'}
+    - {script: 'pfm_face(:player, "Sigrun")'}
+    - {wait: 40}
+    - 'Sigrun: So you''re the ferry child everyone''s whispering about.'
+    - 'Sigrun: Hm. Smaller than I expected.'
+    - choices: [I've been told., 'Smaller than what?', '...']
+      branches:
+      - ['\pf[SIGRUN,smug,,Sigrun]Sigrun: By Brann, I imagine. Loudly.']
+      - ['\pf[SIGRUN,smug,,Sigrun]Sigrun: Than the whispering.']
+      - ['\pf[SIGRUN,smug,,Sigrun]Sigrun: Good. You don''t talk to fill the air. Neither do I.']
+      cancel: 3
+    - '\pf[SIGRUN,smug,,Sigrun]Sigrun: I''m Sigrun Ashfall. Wyrmrest. The Dragon Warden.'
+    - 'Sigrun: I''m here to keep two stubborn men from starting a war over a rock, which is the most Ashkaar sentence anyone will say to you this week.'
+    - '\pf[BRANN,happy,,Brann]Brann: She''s very good. She''s been doing it since she was nine.'
+    - 'Sigrun: Since I was eleven. At nine I was starting them.'
+    - move:
+        who: Larch
+        route: [turn_right]
+        wait: true
+    - {script: 'pfm_face(:player, "Larch")'}
+    - '\pf[LARCH,neutral,,Larch]Larch: Watch her.'
+    - 'Larch: She''s the only person in this room who isn''t scared of the mountain.'
+    - 'Larch: That''s either very brave or she knows something.'
+    - {script: '4.times { pbSEPlay("Anim/HealBell", 90, 70); pbWait(0.9) }'}
+    - {wait: 10}
+    - '\pf[BRANN,sad,,Brann]Brann: Four. That''s four.'
+    - {script: 'pfm_face(:player, "Brann")'}
+    - 'Brann: Go and get your badge while I''ve still got a gym that isn''t on fire.'
+    - 'Brann: I''ll be down in the Foundry.'
+    - 'Brann: Sigrun, keep him out of my chair.'
+    - move:
+        who: Brann
+        route:
+        - through_on
+        - {speed: 4}
+        - down
+        - down
+        - down
+        - left
+        - left
+        - left
+        - down
+        - down
+        - down
+        - {se: Door exit}
+        - {opacity: 0}
+        - through_off
+        wait: true
+    - {script: 'pfm_set(:gym7_open)'}
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 5]
+  at: [0, 0]
+  story: ch8
+- type: event
+  name: Envoy Haskar
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['Envoy Haskar: The Dominar''s patience is a coal. I am merely holding it.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_OFFICER, dir: right}
+    cond:
+      var: [CH8_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 5]
+  at: [6, 10]
+  story: ch8
+- type: event
+  name: Oath-guard 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['Oath-guard: I''m not here. I''m the Envoy''s nothing''s escort.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_SOLDIER_M, dir: right}
+    cond:
+      var: [CH8_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 5]
+  at: [5, 9]
+  story: ch8
+- type: event
+  name: Oath-guard 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['Oath-guard: Lying''s a crime. So I''ll just say nothing. Loudly.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_SOLDIER_F, dir: right}
+    cond:
+      var: [CH8_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 5]
+  at: [5, 11]
+  story: ch8
+- type: event
+  name: Brann
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [11, 15]
+  story: ch8
+- type: event
+  name: Larch
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [9, 15]
+  story: ch8
+- type: event
+  name: Sigrun
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [10, 15]
+  story: ch8
+- type: event
+  name: Salamence
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [11, 16]
+  story: ch8
+- type: event
+  name: Whose Is It
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pfm_tone(-58, -56, -30, 46, 20)'}
+    - {wait: 20}
+    - 'Envoy Haskar: The Warden was occupied. The city was in danger.'
+    - 'Envoy Haskar: The Stone was safest with—'
+    - {script: 'pbSEPlay("Cries/SALAMENCE", 90, 60)
+
+        pfm_shake(2, 12, 8)'}
+    - move:
+        who: Sigrun
+        route:
+        - graphic: [SIGRUN, 0, 8, 0]
+        - {opacity: 255}
+        wait: true
+    - move:
+        who: Haskar (night)
+        route: [turn_down]
+        wait: true
+    - '\pf[SIGRUN,angry,,Sigrun]Sigrun: Say true, Haskar.'
+    - {wait: 20}
+    - 'Envoy Haskar: ...The Dominar told me to take it while everyone was looking at the mountain.'
+    - 'Sigrun: Thank you. Put it down.'
+    - move:
+        who: Haskar (night)
+        route: [left, turn_right]
+        wait: false
+    - move:
+        who: Sigrun
+        route: [up]
+        wait: false
+    - move:
+        who: Oath-guard (night) 1
+        route: [down, down, down, down, turn_down]
+        wait: false
+    - move:
+        who: Oath-guard (night) 2
+        route: [down, down, down, turn_down]
+        wait: true
+    - {script: 'pbSEPlay("GUI storage put down", 90, 70)
+
+        pfm_glow(70, 76, 96, 16, 30)'}
+    - move:
+        who: Brann
+        route:
+        - graphic: [BRANN, 0, 8, 0]
+        - {opacity: 255}
+        - up
+        - up
+        - right
+        - right
+        - up
+        - up
+        - turn_left
+        wait: true
+    - {wait: 24}
+    - '\pf[BRANN,sad,,Brann]Brann: Thirty years it''s been on that wall. Nobody touched it.'
+    - 'Brann: And tonight I''d have let them, if they''d asked nicely.'
+    - 'Brann: I was carrying a woman''s grandmother up four hundred steps.'
+    - 'Sigrun: This won''t stop.'
+    - 'Sigrun: My father will send another envoy, and another, and one day he''ll send a legion.'
+    - {script: 'pfm_face("Sigrun", :player)'}
+    - {script: 'pfm_face(:player, "Sigrun")'}
+    - 'Sigrun: You''ve stood in three kingdoms'' business this year.'
+    - 'Sigrun: You might as well stand in a fourth.'
+    - 'Sigrun: Say it. Who should keep it?'
+    - choices: [The Hearthguild. It's Brann's to keep., Wyrmrest. A Warden's neutral ground., The Dominar. It's his people's.]
+      branches:
+      - - {script: 'pf_choose(:ch8_lightstone, :hearthguild)'}
+        - '\pf[BRANN,crying,,Brann]Brann: Thank you.'
+        - move:
+            who: Brann
+            route: [through_on, right, up, up, up, left, left, left, up, up, up, left, turn_up, through_off]
+            wait: true
+        - {script: 'pbSEPlay("Door slide", 90, 60)
+
+            pfm_glow(50, 54, 70, 10, 10)'}
+        - '\pf[SIGRUN,neutral,,Sigrun]Sigrun: Then my father''s grudge gets heavier, and Brann carries it.'
+        - 'Sigrun: He''s strong.'
+        - move:
+            who: Sigrun
+            route: [turn_left]
+            wait: true
+        - 'Sigrun: Go home and say true.'
+        - move:
+            who: Haskar (night)
+            route:
+            - through_on
+            - down
+            - right
+            - down
+            - {se: Door exit}
+            - {opacity: 0}
+            wait: true
+      - - {script: 'pf_choose(:ch8_lightstone, :wyrmrest)'}
+        - '\pf[SIGRUN,shocked,,Sigrun]Sigrun: ...Mine?'
+        - move:
+            who: Brann
+            route: [turn_down, wait 16, turn_left]
+            wait: true
+        - '\pf[BRANN,neutral,,Brann]Brann: Hers. Aye. Not the Dominar''s. Not mine. A Warden''s, with dragons round it.'
+        - 'Brann: That''s the Concordance done properly. I''m too fond of the thing to have thought of it.'
+        - 'Sigrun: My father will hate it. He can''t argue with it.'
+        - '\pf[SIGRUN,smug,,Sigrun]Sigrun: You think like a rider.'
+      - - {script: 'pf_choose(:ch8_lightstone, :dominar)'}
+        - {script: 'pfm_face("Brann", :player)'}
+        - {wait: 50}
+        - move:
+            who: Brann
+            route: [turn_left]
+            wait: true
+        - {wait: 40}
+        - move:
+            who: Brann
+            route: [turn_down]
+            wait: true
+        - {wait: 40}
+        - '\pf[BRANN,crying,,Brann]Brann: ...Take it, then, Haskar.'
+        - 'Brann: Tell him the ferry child said.'
+        - move:
+            who: Oath-guard (night) 1
+            route:
+            - through_on
+            - {speed: 4}
+            - up
+            - left
+            - left
+            - left
+            - down
+            - down
+            - down
+            - down
+            - down
+            - right
+            - right
+            - down
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Haskar (night)
+            route:
+            - through_on
+            - down
+            - right
+            - down
+            - {se: Door exit}
+            - {opacity: 0}
+            wait: false
+        - '\pf[SIGRUN,angry,,Sigrun]Sigrun: You''ve just told a man who wants a war that the war''s right.'
+        - 'Sigrun: Remember you did.'
+        - {script: pfm_fade_out(20)}
+        - {wait: 16}
+        - '\pf[LARCH,sad]Larch: He''ll forgive you. He forgives everybody.'
+        - 'Larch: He won''t forget, though. Smiths don''t.'
+      cancel: 0
+    - var: [CH8_STEP, 7]
+    - {script: pfm_fade_out(30)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 6]
+      switch: CH8_CALDERA_DONE
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 7]
+  at: [1, 0]
+  story: ch8
+- type: event
+  name: Haskar (night)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_OFFICER, dir: down}
+    cond:
+      var: [CH8_STEP, 6]
+      switch: CH8_CALDERA_DONE
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 7]
+  at: [10, 14]
+  story: ch8
+- type: event
+  name: Oath-guard (night) 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_SOLDIER_M, dir: up}
+    cond:
+      var: [CH8_STEP, 6]
+      switch: CH8_CALDERA_DONE
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 7]
+  at: [9, 5]
+  story: ch8
+- type: event
+  name: Oath-guard (night) 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_SOLDIER_F, dir: up}
+    cond:
+      var: [CH8_STEP, 6]
+      switch: CH8_CALDERA_DONE
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 7]
+  at: [11, 6]
+  story: ch8
+- type: event
+  name: Chestnuts
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(12, 5)'}
+        - turn_right
+        wait: true
+    - if: $game_variables[@@CINDERVAULT_STATE] == 1
+      then:
+      - {script: 'pfm_tone(-70, -66, -48, 60, 30)'}
+      else:
+      - {script: 'pfm_tone(-30, -52, -72, 30, 30)'}
+    - {wait: 20}
+    - move:
+        who: Brann (chestnuts)
+        route: [turn_left]
+        wait: true
+    - '\pf[BRANN,happy,,Brann (chestnuts)]Brann: I''ll tell you a thing about chestnuts, ferry child.'
+    - 'Brann: You''ve to cut a cross in ''em first.'
+    - 'Brann: Else they go off like a Voltorb.'
+    - {script: 'pbSEPlay("Anim/Explosion7", 35, 160)'}
+    - '\pf[LARCH,deadpan,,Larch (chestnuts)]Larch: He told me that in AF 271. And AF 280. And AF 288.'
+    - 'Brann: And it''s still TRUE!'
+    - {script: 'pbSEPlay("Water1", 60, 120)'}
+    - {wait: 14}
+    - move:
+        who: Brann (chestnuts)
+        route: [turn_up]
+        wait: true
+    - {wait: 60}
+    - 'Brann: Thirty years at this anvil. You know the best thing I ever made?'
+    - 'Brann: Not a blade. A setting.'
+    - 'Brann: A little gold setting for a little white stone.'
+    - '\pf[BRANN,sad,,Brann (chestnuts)]Brann: I reset the Crown''s stone myself, y''know. After the accident. Ten years back.'
+    - 'Brann: It was smaller than it should''ve been.'
+    - {script: 'pbSEPlay("Anim/Saint7", 50, 40)
+
+        pfm_shake(1, 20, 4)'}
+    - {wait: 30}
+    - move:
+        who: Larch (chestnuts)
+        route: [turn_right]
+        wait: true
+    - '\pf[LARCH,neutral,dots,Larch (chestnuts)]Larch: ...'
+    - move:
+        who: Brann (chestnuts)
+        route: [turn_left]
+        wait: true
+    - '\pf[BRANN,shocked,,Brann (chestnuts)]Brann: Ach. Ach, I''m an old fool.'
+    - 'Brann: Forget it. Cider talking. Forget it.'
+    - '\pf[BRANN,neutral,,Brann (chestnuts)]Brann: Have a chestnut. Cross on top.'
+    - move:
+        who: Brann (chestnuts)
+        route: [turn_up]
+        wait: true
+    - {wait: 50}
+    - {script: pfm_fade_out(20)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(10, 14)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Larch (chestnuts)
+        route:
+        - {script: 'moveto(11, 14)'}
+        - turn_left
+        wait: true
+    - if: $game_variables[@@CINDERVAULT_STATE] == 1
+      then:
+      - {script: 'pfm_tone(-70, -66, -48, 60, 20)'}
+      else:
+      - {script: 'pfm_tone(-30, -52, -72, 30, 20)'}
+    - '\pf[LARCH,neutral,,Larch (chestnuts)]Larch: You flinched. Just then. When he said "smaller".'
+    - choices: [It was nothing., I don't know what it was., '...']
+      branches:
+      - ['\pf[LARCH,neutral,,Larch (chestnuts)]Larch: It''s always nothing.', 'Larch: I''ve got a notebook full of nothings. They''re starting to rhyme.']
+      - ['\pf[LARCH,sad,,Larch (chestnuts)]Larch: No. Neither do I. That''s the bit I don''t like.']
+      - ['\pf[LARCH,sad,,Larch (chestnuts)]Larch: All right. Go to bed.', 'Larch: I''m going to write something down and then pretend I didn''t.']
+      cancel: 3
+    - 'FIELD NOTES: "Brann reset the Crown''s stone ten years ago. It was ''smaller than it should''ve been''. Something in me answered when he said it. I don''t
+      know what that means. I''m writing it down so I can''t pretend I didn''t hear it."'
+    - var: [CH8_STEP, 8]
+    - {script: pfm_fade_in(30)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH8_STEP, 7]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 8]
+  at: [2, 0]
+  story: ch8
+- type: event
+  name: Brann (chestnuts)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: BRANN, dir: up}
+    cond:
+      var: [CH8_STEP, 7]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 8]
+  at: [13, 5]
+  story: ch8
+- type: event
+  name: Larch (chestnuts)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: LARCH, dir: right}
+    cond:
+      var: [CH8_STEP, 7]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 8]
+  at: [11, 5]
+  story: ch8
