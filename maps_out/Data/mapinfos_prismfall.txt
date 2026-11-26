@@ -41,6 +41,7 @@
 163	160	Anglers' Guild
 164	160	Reyes House
 165	160	Net-mender's House
+166	164	Reyes Cellar (Hollow cell)
 167	160	Ebbmouth - Mill Quay
 168	160	The Net Loft
 170	160	Tidelock Gym - Lock Hall
@@ -52,6 +53,7 @@
 181	180	Lumen City - The Lowlight
 182	180	Lumen Pokémon Center
 183	180	Lumen Arcade 1F
+184	180	Lumen Arcade Dept. Store 2F
 185	180	Meridian Spire - Lobby
 186	185	Meridian Spire - Gala Hall
 187	180	Glide Cycles
@@ -61,6 +63,12 @@
 191	190	Circuit Gym - Breadboard Hall
 192	190	Circuit Gym - Live Wire Hall
 193	190	Circuit Gym - Core
+194	180	Lumen City - Council Ward
+195	180	Lumen City - Spire District
+196	180	Lumen City - Skyport Terrace
+197	194	Zenith Council Hall - Council Chamber
+198	185	Meridian Spire - Executive Gallery
+199	185	Meridian Spire - Dark Stone Core
 240	0	Cindervault - Forge Terraces
 241	240	Cindervault Pokémon Center
 242	240	Cindervault Mart
@@ -123,4 +131,5 @@
 930	0	The Bone-Carters' Camp
 951	185	Meridian Spire - Service Lifts
 952	185	Meridian Spire - Plate Vault
+959	196	Skyport Customs
 990	0	Prismfall Test Arena

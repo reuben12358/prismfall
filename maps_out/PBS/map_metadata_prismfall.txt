@@ -218,6 +218,10 @@ MapPosition = 0,3,7
 Name = Net-mender's House
 MapPosition = 0,3,7
 #-------------------------------
+[166]   # Reyes Cellar (Hollow cell)
+Name = Reyes Cellar (Hollow cell)
+MapPosition = 0,3,7
+#-------------------------------
 [167]   # Ebbmouth - Mill Quay
 Name = Ebbmouth - Mill Quay
 Outdoor = true
@@ -268,6 +272,10 @@ MapPosition = 0,16,16
 Name = Lumen Arcade 1F
 MapPosition = 0,16,16
 #-------------------------------
+[184]   # Lumen Arcade Dept. Store 2F
+Name = Lumen Arcade Dept. Store 2F
+MapPosition = 0,16,16
+#-------------------------------
 [185]   # Meridian Spire - Lobby
 Name = Meridian Spire - Lobby
 MapPosition = 0,16,16
@@ -307,6 +315,39 @@ SnapEdges = true
 #-------------------------------
 [193]   # Circuit Gym - Core
 Name = Circuit Gym
+MapPosition = 0,16,16
+SnapEdges = true
+#-------------------------------
+[194]   # Lumen City - Council Ward
+Name = Council Ward
+Outdoor = true
+ShowArea = true
+MapPosition = 0,16,16
+#-------------------------------
+[195]   # Lumen City - Spire District
+Name = Spire District
+Outdoor = true
+ShowArea = true
+MapPosition = 0,16,16
+#-------------------------------
+[196]   # Lumen City - Skyport Terrace
+Name = Skyport Terrace
+Outdoor = true
+ShowArea = true
+MapPosition = 0,16,16
+#-------------------------------
+[197]   # Zenith Council Hall - Council Chamber
+Name = Zenith Council Hall - Council Chamber
+MapPosition = 0,16,16
+SnapEdges = true
+#-------------------------------
+[198]   # Meridian Spire - Executive Gallery
+Name = Meridian Spire - Executive Gallery
+MapPosition = 0,16,16
+SnapEdges = true
+#-------------------------------
+[199]   # Meridian Spire - Dark Stone Core
+Name = Meridian Spire - Dark Stone Core
 MapPosition = 0,16,16
 SnapEdges = true
 #-------------------------------
@@ -682,6 +723,10 @@ SnapEdges = true
 Name = Meridian Spire - Plate Vault
 MapPosition = 0,16,16
 SnapEdges = true
+#-------------------------------
+[959]   # Skyport Customs
+Name = Skyport Customs
+MapPosition = 0,19,14
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena
