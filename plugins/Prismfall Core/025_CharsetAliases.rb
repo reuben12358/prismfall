@@ -17,9 +17,9 @@ module Prismfall
     "trainer_RIVAL1"    => "KESTREL",
     "trainer_PROFESSOR" => "LARCH",
     # Exclusive placeholders (audited across maps_out and war.py; Gemini wiring proposal 2026-11-22)
-    "trainer_ROCKER"          => "ROOK",     # all 4 events are Rook (181/186/193/608)
-    "trainer_ELITEFOUR_Lance" => "SIGRUN",   # 926 Glass Dunes "Partner"
-    "trainer_LEADER_Misty"    => "MARISOL"   # 926 Glass Dunes "Partner"
+    "trainer_ROCKER"          => "ROOK"      # all 4 events are Rook (181/186/193/608)
+    # (2026-11-26: the 926 "Partner" rows for trainer_ELITEFOUR_Lance / trainer_LEADER_Misty went with the Ch19 rebuild;
+    #  no built map uses either sheet. A Sigrun or Marisol event is reached by name below.)
   }
   NAME_ALIASES = {
     "Dorian" => "DORIAN",  "Tamsin" => "TAMSIN",  "Marisol" => "MARISOL", "Voss" => "VOSS",
@@ -54,8 +54,9 @@ module Prismfall
   }
   # Not the Hollow or Meridian agents: some are in disguise on purpose (145 "Pageant" is a grunt in a gentleman's coat).
   TYPE_CHARSETS = %i[
-    ASHKAAR_SOLDIER_M ASHKAAR_SOLDIER_F ASHKAAR_OFFICER ISENMAR_SOLDIER_M ISENMAR_SOLDIER_F ISENMAR_OFFICER
-    MERIDIAN_DIRECTORATE THORNGUARD
+    ASHKAAR_SOLDIER ASHKAAR_SOLDIER_M ASHKAAR_SOLDIER_F ASHKAAR_OFFICER ASHKAAR_EMBER_RIDER
+    ISENMAR_SOLDIER_M ISENMAR_SOLDIER_F ISENMAR_OFFICER ISENMAR_TRENCHER ISENMAR_HIRDMAN
+    MERIDIAN_DIRECTORATE THORNGUARD THORNWATCH
   ]
 
   def self.charset_alias(name, event_name = nil)
@@ -98,8 +99,13 @@ module Prismfall
     key = [map_id, event.id]
     return @type_charset_cache[key] || nil if @type_charset_cache.key?(key)
     type = event_trainer_type(event)
-    sheet = (type && TYPE_CHARSETS.include?(type)) ? "trainer_#{type}" : nil
-    sheet = nil if sheet && !pbResolveBitmap("Graphics/Characters/#{sheet}")
+    sheet = nil
+    if type && TYPE_CHARSETS.include?(type)
+      # the class's own sheet, or the one Core 032 lends it (ASHKAAR_SOLDIER -> _M)
+      file = (GameData::TrainerType.charset_filename(type) rescue nil)
+      file ||= "Graphics/Characters/trainer_#{type}" if pbResolveBitmap("Graphics/Characters/trainer_#{type}")
+      sheet = file.sub(%r{\AGraphics/Characters/}, "") if file
+    end
     @type_charset_cache[key] = sheet || false
     return sheet
   end

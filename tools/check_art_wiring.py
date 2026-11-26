@@ -222,7 +222,11 @@ def main():
         if t not in types:
             errors.append("TYPE_CHARSETS: %s is not a trainer type" % t)
         elif "trainer_" + t not in chars:
-            gaps.append("TYPE_CHARSETS %s: no graphics/Characters/trainer_%s.png yet (the stand-in stays)" % (t, t))
+            alt = stand_ins.get(t)
+            if alt and "trainer_" + alt in chars:
+                notes.append("TYPE_CHARSETS %s: wears trainer_%s.png (Core 032 stand-in)" % (t, alt))
+            else:
+                gaps.append("TYPE_CHARSETS %s: no graphics/Characters/trainer_%s.png yet (the stand-in stays)" % (t, t))
     pl_src = read("plugins/Prismfall Core/026_PlayerLooks.rb")
     player_sheets = set(re.findall(r":(?:walk|run|cycle|surf|dive|fish|surf_fish)\s*=>\s*\"([A-Za-z0-9_]+)\"", pl_src))
     for sheet in sorted(player_sheets):
