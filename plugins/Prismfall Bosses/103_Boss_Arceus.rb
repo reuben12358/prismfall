@@ -32,8 +32,8 @@
 #     :prismfall_arceus_locks_broken (battle, bar, gyms, forced, final)  the bar
 #        breaks: the refused locks tear free by force
 #   Gilded (ENGINE_CALIBRATED): "the last bar can't be broken". It refills three
-#     times (each refill = the Casual bar HP, BALANCE.md section 7; on Casual,
-#     half a Casual bar), then the Gilded Chain closes: the battle ends, result
+#     times, then the Gilded Chain closes (the last bar is one bar's HP in four
+#     pieces: 0.4, then 3 x 0.2; 2026-11-26): the battle ends, result
 #     :gilded_chain (the event then runs END_GILDED_CHAIN). Elsewhere the last
 #     bar's fall ends the battle as a win, result :freed (Arceus never faints).
 #   Judgment (Ruin Route R7): Giratina-Origin fights at the PC's side (:partner,
@@ -92,10 +92,16 @@ module Prismfall
     #---------------------------------------------------------------------------
     ARCEUS_DEFAULT_VARIANT = { :id => :ARCEUS_BOUND, :bars => 6 }.freeze
     ARCEUS_STAT_STAGES     = [:ATTACK, :DEFENSE, :SPECIAL_ATTACK, :SPECIAL_DEFENSE, :SPEED].freeze
+    # When nobody is asked (every lock forced), the forced stages a bar are capped (BALANCE.md section 7: +2 on
+    # Casual / Standard).
     ARCEUS_WAR_STAGE_CAP   = { :CASUAL => 2, :STANDARD => 2, :HARD => 3 }
     # Casual only: a forced lock hardens Arceus (Defense, Sp. Def) but doesn't sharpen it; at most two stages a bar.
     ARCEUS_FORCED_STAGES   = { :CASUAL => [:DEFENSE, :SPECIAL_DEFENSE], :default => ARCEUS_STAT_STAGES }
     ARCEUS_FORCED_CAP      = { :CASUAL => 2, :default => 3 }
+    # When nobody is asked (War, Judgment) every lock is forced every bar, so the forced stages harden Arceus (Defense,
+    # Sp. Def) without sharpening it, on every difficulty (2026-11-26: with offence too the harness lost one Pokemon a
+    # bar and never won, at any bar HP).
+    ARCEUS_UNASKED_FORCED_STAGES = [:DEFENSE, :SPECIAL_DEFENSE].freeze
 
     class << self
       # Tests / debug: a variant id (:ARCEUS_WAR ...) or Hash to force, and a proc { |gym| true/false } for consent.
@@ -147,7 +153,34 @@ module Prismfall
     # War: the shard eats the types; Judgment: no Warden releases anything. Nobody is asked, every lock is forced.
     ARCEUS_NOBODY_ASKED = [:ARCEUS_WAR, :ARCEUS_JUDGMENT].freeze
     ARCEUS_GILDED_REFILLS = 3
-    ARCEUS_CASUAL_BAR_HP  = 0.5     # = :stat_mults[:CASUAL][:HP] below; Gilded's refills use it on every difficulty
+    # Gilded's last bar is one bar's HP cut into four (2026-11-26): it starts at 0.4 of a bar and refills 3x at 0.2, so
+    # the Gilded Chain costs what the last bar costs on Bound (with full refills a prepared team never reached it).
+    # Bar HP and stats by difficulty (2026-11-26, Reuben: "use best judgement" -> a team built for the fight must be able
+    # to win; BALANCE.md section 9b has the before / after). Was Standard x1.0 HP, x1.25 Atk / Def / SpA / SpD, x1.1 Spe;
+    # Hard x1.25 HP, x1.3, x1.15 Spe: Arceus one-shot every prepared Pokemon after its turn-1 Calm Mind, 0% at 3 or 6 bars.
+    ARCEUS_MULTS = {
+      :CASUAL   => { :HP => 0.5, :ATTACK => 0.6, :SPECIAL_ATTACK => 0.6 },
+      :STANDARD => { :HP => 0.32, :ATTACK => 0.8, :DEFENSE => 1.0, :SPECIAL_ATTACK => 0.8, :SPECIAL_DEFENSE => 1.0, :SPEED => 1.1 },
+      :HARD     => { :HP => 0.32, :ATTACK => 0.8, :DEFENSE => 1.0, :SPECIAL_ATTACK => 0.8, :SPECIAL_DEFENSE => 1.0, :SPEED => 1.15 }
+    }.freeze
+    # The variants' structure differs (Gilded's four-piece last bar, Judgment's partner, War's forced locks), so each
+    # scales its bar HP to land near Bound's difficulty (harness-tuned 2026-11-26; Casual only where it fell short).
+    ARCEUS_VARIANT_HP = {
+      :ARCEUS_GILDED        => { :CASUAL => 1.0, :STANDARD => 0.8,  :HARD => 0.8 },
+      :ARCEUS_JUDGMENT      => { :CASUAL => 1.0, :STANDARD => 1.45, :HARD => 1.3 },
+      :ARCEUS_WAR           => { :CASUAL => 0.4, :STANDARD => 0.4,  :HARD => 0.4 },
+      :ARCEUS_MISCALIBRATED => { :CASUAL => 1.0, :STANDARD => 1.15, :HARD => 1.15 }
+    }.freeze
+
+    def self.arceus_stat_mults
+      m = (resolve(ARCEUS_MULTS) || {}).dup
+      f = resolve(ARCEUS_VARIANT_HP[arceus_variant[:id]])
+      m[:HP] = ((m[:HP] || 1.0) * f).round(3) if f.is_a?(Numeric) && f != 1.0
+      return m
+    end
+
+    ARCEUS_GILDED_LAST_BAR = 0.4
+    ARCEUS_GILDED_REFILL   = 0.2
 
     def self.arceus_nobody_asked?
       return ARCEUS_NOBODY_ASKED.include?(arceus_variant[:id])
@@ -168,10 +201,7 @@ module Prismfall
     # A Gilded refill: the Casual bar's HP, as a fraction of this difficulty's bar. Casual only (eased 2026-11-26:
     # 13% for the harness with full refills): half its own bar.
     def self.arceus_gilded_refill
-      return 0.5 if difficulty == :CASUAL
-      m = resolve(get(:ARCEUS_FINALE)[:stat_mults])
-      cur = (m.is_a?(Hash) && m[:HP].is_a?(Numeric)) ? m[:HP] : 1.0
-      return [ARCEUS_CASUAL_BAR_HP / cur, 1.0].min
+      return ARCEUS_GILDED_REFILL
     end
 
     # A bar has just been broken (or, final = true, the last one fell): its refused locks tear free.
@@ -187,7 +217,7 @@ module Prismfall
       bar    = st.phase
       forced = arceus_forced_locks(bar)
       prev   = battle.instance_variable_get(:@prismfall_arceus_forced).to_i
-      stats = resolve(ARCEUS_FORCED_STAGES) || ARCEUS_STAT_STAGES
+      stats = (arceus_nobody_asked?) ? ARCEUS_UNASKED_FORCED_STAGES : (resolve(ARCEUS_FORCED_STAGES) || ARCEUS_STAT_STAGES)
       if prev > 0     # last bar's forced locks are spent
         stats.each { |s| b.stages[s] = [b.stages[s] - prev, 0].max if b.stages[s] > 0 }
       end
@@ -251,11 +281,7 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
     (v[:player_side].to_i >= 2) ? [:PARTNER_GIRATINA, "Depths", 0] : nil
   },
   :move_limits       => { :STANDARD => { :RECOVER => 2 }, :default => nil },   # Casual has no Recover; Hard has no limit
-  :stat_mults        => {
-    :CASUAL   => { :HP => 0.5, :ATTACK => 0.6, :SPECIAL_ATTACK => 0.6 },
-    :STANDARD => { :ATTACK => 1.25, :DEFENSE => 1.25, :SPECIAL_ATTACK => 1.25, :SPECIAL_DEFENSE => 1.25, :SPEED => 1.1 },
-    :HARD     => { :HP => 1.25, :ATTACK => 1.3, :DEFENSE => 1.3, :SPECIAL_ATTACK => 1.3, :SPECIAL_DEFENSE => 1.3, :SPEED => 1.15 }
-  },
+  :stat_mults        => proc { Prismfall::Bosses.arceus_stat_mults },
   :field             => :PRISM_ARENA,
   :catch             => false,
   :status_immunity   => true,
@@ -265,6 +291,9 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
   :on_break          => [
     # The bar just broken: its refused locks tear free (Bosses 116), before the Plates turn to the next bar.
     { :proc => proc { |battle, _b, st| Prismfall::Bosses.arceus_end_bar(battle, st.breaks_done) } },
+    # Gilded: the last bar starts at 0.4 (then refills 3x at 0.2: on_defeat below).
+    { :condition => proc { |_battle, _b, st| st.last_bar? && Prismfall::Bosses.arceus_gilded? },
+      :refill => Prismfall::Bosses::ARCEUS_GILDED_LAST_BAR },
     # Miscalibrated: the last bar holds six Plates; BALANCE.md section 7 keeps it fair with bar HP x0.85.
     { :condition => proc { |_battle, _b, st| st.last_bar? && Prismfall::Bosses.arceus_variant[:id] == :ARCEUS_MISCALIBRATED },
       :refill => 0.85 },
@@ -288,7 +317,7 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
       :messages  => ["The last lock cracks... and gold pours into the break!",
                      "The Engine binds the chain shut again!"],
       :reset_stats => :negative, :cure_status => true,
-      :revive    => proc { |_battle, _b, _st| Prismfall::Bosses.arceus_gilded_refill } },
+      :revive    => proc { |_battle, _b, _st| Prismfall::Bosses.arceus_gilded_refill }, :carry => true },
     # ...and then the Gilded Chain closes (END_GILDED_CHAIN).
     { :condition => proc { |_battle, _b, st|
         Prismfall::Bosses.arceus_gilded? && st.revives >= Prismfall::Bosses::ARCEUS_GILDED_REFILLS },

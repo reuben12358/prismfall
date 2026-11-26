@@ -94,6 +94,10 @@ module Prismfall
         battler.pbRecoverHP(target - battler.hp) if target > battler.hp
         battle.scene.pbRefreshOne(battler.index) if battle.scene.respond_to?(:pbRefreshOne)
         EventHandlers.trigger(:prismfall_boss_bar_refilled, battle, battler, st.id, st.revives)
+        # :carry => true: the hit that emptied the bar keeps going into the refill (so a refill costs HP, not a turn).
+        carry = (effects.any? { |e| e[:carry] }) ? st.last_overflow.to_i : 0
+        st.last_overflow = 0
+        battler.pbReduceHP(carry, false) if carry > 0 && !battler.fainted?    # may empty it again (the next refill)
         return
       end
       EventHandlers.trigger(:prismfall_boss_defeated, battle, battler, st.id, st.result)

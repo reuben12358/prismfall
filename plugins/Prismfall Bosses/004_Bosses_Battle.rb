@@ -33,6 +33,10 @@ module Prismfall
         st.pending_defeat = defeat
       end
       st.overflow += amt_i - hp
+      # what the depleting hit had left (a :carry revive spends it); a move's damage is capped at the target's HP
+      # before it gets here, so read the uncapped figure from the damage state
+      raw = (from_move && ds.respond_to?(:calcDamage) && ds.calcDamage.to_i > amt_i) ? ds.calcDamage.to_i : amt_i
+      st.last_overflow = raw - hp + 1
       lost = 0
       if hp > 1
         lost = battler.prismfall_bosses_pbReduceHP(hp - 1, anim, register, any_anim)

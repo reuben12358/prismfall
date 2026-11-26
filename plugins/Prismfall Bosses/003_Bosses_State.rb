@@ -8,7 +8,7 @@ module Prismfall
     class BossState
       attr_reader   :id, :data, :pokemon, :bars
       attr_accessor :bars_left, :pending, :pending_defeat, :phase_turn, :overflow, :defeated,
-                    :intro_shown, :result, :end_decision, :breaks_done, :revives
+                    :intro_shown, :result, :end_decision, :breaks_done, :revives, :last_overflow
 
       def initialize(id, data, pokemon, bars)
         @id          = id
