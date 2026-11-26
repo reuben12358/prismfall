@@ -331,3 +331,89 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 - **Verified:** `ruby -c`; the Cutscenes selftest (13 new checks; 228 checks, 0 failed);
   real engine: the vault flow CH5_STEP 8 → 9 → 12 three ways (scene, photosensitive, scene removed), and `:CH2_PAGEANT`,
   `:CH8_CALDERA`, `:WAR_CLIMAX`, `:CH9_UNMASK` played to the end and handed control back. Frames looked at and deleted.
+
+## 2026-11-25 — Expressive conversations, chapter opening cards, playscripts (Claude)
+
+### `2026-11-24_expressive-conversations-system` — **adopted, reworked on install** (`plugins/Prismfall Cutscenes/018_ExpressiveDialogue.rb`)
+- **Kept:** the three pillars, the tag names (`\pfe[...]`, `\pfp[...]`, `\pfa[...]`), the emote sheet and its ten rows, the
+  six strip pose sheets and their pose names, the listener tone, the 0.10 s fade and cross-fade, the helper names (`pf_emote`,
+  `pf_nod`, `pf_step_back`, `pf_lean_in`, `pf_turn_away`, `pf_face_each_other`, `pf_pose`, `pf_stage_clear`).
+- **Changed, and why:**
+  - *The stage owned sprites between message boxes.* As written, two portraits stayed on screen through walks, waits, battles
+    and cutscenes until the event ended. Now a portrait exists only while its message box does; the stage remembers who
+    stands where and rebuilds. The listener is kept through an unbroken exchange only (two face lines within 0.35 s).
+  - *It bypassed 014.* The spec re-implemented 014's message hook and called the core directly, which also broke
+    014's selftest. 018 now replaces `Portrait.open` for face lines (the view is a `FaceBox` subclass), so `014_Portraits.rb`
+    is untouched and the audio agent's VoiceTicker hook still sits in the chain.
+  - *4x4 sheets.* The 60 later `pose_*.png` are 128x192, a pose a row with four frames; the spec's slicer assumed the
+    128x48 strip and would have drawn the whole column. Both layouts work; a row plays once and holds its last frame.
+    Shared names for the rows: `crossed` / `point` / `brace` / `shrug`.
+  - *Automatic stances only for a speaker standing still and facing the camera* (the art is front-facing); walking off or
+    turning ends one.
+  - *`AUTO_FACE_SPEAKER` is off by default* (`Prismfall::Expressive.auto_face = true` turns it on). Most lines are said to
+    the silent player and map events already stage who faces whom; turning each speaker toward the previous speaker turned
+    people away from the player. `[act: face]`, `pf_face_each_other` and `pf_turn_toward` do it on request, and never
+    touch a character its event has walked into place.
+  - *Who an emote lands on.* `Portrait.speaker` falls back to the event running the text, so a balloon for Juno could
+    appear over a sign. A cast member is found by event name (prefix match: "Kestrel K1", "Juno (lab yard)") or as the
+    follower; only a plain speaker falls back to the running event.
+  - *Three balloons a conversation* is enforced (the creator directive), a fourth is dropped and logged. Balloons are
+    cleared when the map screen goes away (a battle), so none hangs over the battle scene.
+  - `[emote: kind]`, `[pose: name]`, `[act: name]` are accepted as the story-bible forms of the three tags.
+  - Dropped: the voice blips (the audio agent's `014_Portraits_Voice.rb` does that), the "Battle damage normal" SE on a
+    wince, the per-idle-frame `clear_all`.
+- **Art:** present: `Animations/pf_emote_balloons.png` (128x320), strips for JUNO, KESTREL, LARCH, PLAYER_A, PLAYER_B, VOSS,
+  4x4 sheets for 61 more of the cast. **No pose sheet:** REFLECTION, MERIDIAN_ASHE (Ashe) and the four class portraits
+  (ASHKAAR_OFFICER, ISENMAR_OFFICER, MERIDIAN_ADMIN, OCTAVE_SINGER); a `\pfp` for them is a logged no-op.
+  The 4x4 sheets have no written row map except Venam's; the four shared names above are what the rows look like.
+- **Verified:** `ruby -c`; Cutscenes selftest, 26 new checks (no pixel of movement across fade, dim and cross-fade; sides;
+  third speaker; gap; cap; acting offsets; nothing left alive after a box).
+
+### `2026-11-24_rejuv-chapter-opening-cards` — **adopted** (`plugins/Prismfall Cutscenes/020_ChapterOpeningCards.rb`)
+- **Kept:** the 24 paintings, the manifest (titles, acts, places, accents, camera), the particle emitter, the timeline,
+  the skip after 1.5 s, `pbChapterOpeningCard` and the debug previewer (now under the Cutscenes debug menu).
+- **Changed:** the map fades to black before the card and back after it (the spec cut straight in and out); the pan is
+  clamped and a black sheet sits behind the painting (at the ends of some pans the map showed at the edge); the viewport is
+  above message boxes and screen fades; the chime is the installed SE only (`Chapter Card Prismatic Wipe`,
+  `Glitch Tear Static` for the Ruin card) — the "BP Fanfare" ME fallback is gone; timing on the game clock.
+- **The hook:** `pf_chapter_card(n)` (no argument = the current V102) shows a chapter's card **once a save**
+  (`$PokemonGlobal.pf_chapter_cards`); `force: true` repeats it. **Automatic:** when a map event sets V102, the card plays
+  there and then; set from anywhere else it waits until the player stands free on the map. V102 0-21 = Prologue and
+  Chapters 1-21, 23 = "Fallmorn"; 22 (the epilogue) has none. The Ruin Route does not move V102: its first event should
+  call `pf_chapter_card(:RUIN)`. `Prismfall::ChapterCards.auto = false` turns the automatic card off; it is off under the
+  capture harness (`DEMO_PLAN`).
+- **For Reuben:** the existing "ACT I — THE LAST FERRY" title card (and the END OF ACT / next-act cards) still play; at
+  the first chapter of an act the act title is followed by a chapter card that carries the act name too. Say if the act
+  cards should go.
+- **Verified:** `ruby -c`; selftest, 20 new checks (ids, the V102 map, every painting on disk, length, skip, no leak,
+  once-a-save, the automatic paths).
+
+### `2026-11-24_playscript-dialogue-and-expressions` — **presentation layer merged; the rewording was not**
+- **What it is:** copies of all 22 story scripts with long lines cut into one- or two-line boxes, `[name: X]` holds in
+  place of repeated `[portrait: ...]` tags, emote cues, and — despite "zero rewritten character voices" — **769 spoken
+  lines changed** (285 punctuation only, 162 with a bracketed cue or aside dropped or rewritten, 322 with words changed),
+  132 stage-direction or system lines reworded, and 38 lines added inside script blocks. It asked for
+  `cp act3_5/*.md story/`. That was not done: the copies also predate the Aurelius rename and the 2c3c22b Ruin King rewrite.
+- **What was merged** (`tools/playscript_merge.py`; commits c1138b3, fb66ff0, 12d6be2, b232adc, c2e7a45): the box cuts
+  (about 2,150 more boxes), about 1,560 holds, 104 `[emote: kind]` cues, 69 whole-sentence stage directions moved to
+  their own lines, and Gemini's expression where it differs and the art exists (which also fixes `LARCH, worried` and
+  `SAHAR, worried`). The words are the canon's: for every file the fenced text is token-for-token what it was, lines
+  outside the blocks are untouched, and trainer references are unchanged (`check_script_trainers.py` gives the same result).
+  A hold is written only in a straight run of lines; a choice or branch starts with the face spelled out.
+- **Not taken:** every reworded line (kept as written, cut into boxes only where the cut could be placed exactly);
+  a face for a line the canon keeps plain (14: Dominar → HROTHGAR, Coll, Calla, and single lines of Juno and Sahar);
+  `THEODRIC` tags (26, the canon's AURELIUS tags stay); two new `[bubble: ...]` (Kestrel "Don't.", Larch "You did
+  WHAT."); ten emote cues on lines of their own.
+- **Examples of the rewording, for Reuben** (full list: `python3 -I tools/playscript_merge.py --check --report /tmp/div.txt`):
+  - Ch14 Bastian: "I was carrying the Stone Plate in the procession. Wardens carry their Plates up the nave, you see, and
+    then the Choir sings, and the Crown takes them." → "I carried the Stone Plate up the nave." (the Tuning set-up is gone)
+  - Ch11 Voss: "...to every crown in the Accord, the Fellowship stands ready to provide logistics, heat and medical
+    support..." → "...to every crown, we stand ready to assist."
+  - Ch12 Kestrel: "It's the only thing of hers left in the world that isn't a lie somebody else told." → "The only thing
+    of hers left that isn't somebody else's lie."
+  - Ch2 Gym Guide: three sentences on the field and the type chart rewritten into one each.
+  - Throughout: full stops and commas turned into dashes, "(a shrug)" asides rewritten as "(A shrug.)" sentences, the
+    older `*(music note)*` / `*(shock lines)*` cues dropped.
+- **Portrait check:** every `[portrait: ...]` / `[bubble: ...]` in the 22 scripts has its file (`SALLOW` uses RENATA's
+  through 014's `art:` entry); every emote is one of the ten kinds; no block has more than three cues.
+- **Docs:** `story/13_CUTSCENES.md` "Portrait use" has the emote cue, the one-box-a-line rule and the motionless stage.
