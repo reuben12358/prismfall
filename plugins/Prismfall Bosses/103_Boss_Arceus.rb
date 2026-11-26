@@ -97,6 +97,17 @@ module Prismfall
     ARCEUS_WAR_STAGE_CAP   = { :CASUAL => 2, :STANDARD => 2, :HARD => 3 }
     # Casual only: a forced lock hardens Arceus (Defense, Sp. Def) but doesn't sharpen it; at most two stages a bar.
     ARCEUS_FORCED_STAGES   = { :CASUAL => [:DEFENSE, :SPECIAL_DEFENSE], :default => ARCEUS_STAT_STAGES }
+    # Standard / Hard (2026-11-26, a refusal is a consequence, not a dead end): a refusing Warden's lock raises the one
+    # stat its Plate stands for, +1 each (two refusals on one stat stack), instead of +1 to every stat (a refusal in
+    # every bar was 0% for prepared teams). :all restores the old rule. Casual keeps ARCEUS_FORCED_STAGES above.
+    ARCEUS_REFUSAL_SCOPE   = :plate
+    ARCEUS_PLATE_STATS = {
+      :NORMAL => :SPEED,           :BUG => :SPEED,              :FLYING => :SPEED,
+      :ELECTRIC => :SPECIAL_ATTACK, :FIRE => :SPECIAL_ATTACK,   :PSYCHIC => :SPECIAL_ATTACK, :GHOST => :SPECIAL_ATTACK,
+      :FIGHTING => :ATTACK,        :DARK => :ATTACK,            :DRAGON => :ATTACK,
+      :GROUND => :DEFENSE,         :ICE => :DEFENSE,            :ROCK => :DEFENSE,           :STEEL => :DEFENSE,
+      :WATER => :SPECIAL_DEFENSE,  :POISON => :SPECIAL_DEFENSE, :GRASS => :SPECIAL_DEFENSE,  :FAIRY => :SPECIAL_DEFENSE
+    }.freeze
     ARCEUS_FORCED_CAP      = { :CASUAL => 2, :default => 3 }
     # When nobody is asked (War, Judgment) every lock is forced every bar, so the forced stages harden Arceus (Defense,
     # Sp. Def) without sharpening it, on every difficulty (2026-11-26: with offence too the harness lost one Pokemon a
@@ -213,25 +224,49 @@ module Prismfall
     end
 
     # A bar starts: forced locks (+1 to every stat stage per refusing Warden, for this bar only).
+    # { stat => stages } the bar's forced locks give Arceus.
+    def self.arceus_forced_boosts(forced)
+      return {} if forced.empty?
+      if arceus_nobody_asked? || difficulty == :CASUAL || ARCEUS_REFUSAL_SCOPE != :plate
+        stats = (arceus_nobody_asked?) ? ARCEUS_UNASKED_FORCED_STAGES : (resolve(ARCEUS_FORCED_STAGES) || ARCEUS_STAT_STAGES)
+        n = [forced.length, resolve(ARCEUS_FORCED_CAP) || 3].min
+        n = [n, resolve(ARCEUS_WAR_STAGE_CAP) || 2].min if arceus_nobody_asked?
+        return stats.map { |s| [s, n] }.to_h
+      end
+      ret = Hash.new(0)
+      forced.each do |g|
+        gym = Prismfall.gym(g)
+        ret[ARCEUS_PLATE_STATS[gym[:type]] || :SPECIAL_DEFENSE] += 1 if gym
+      end
+      return ret
+    end
+
+    # A bar starts: the last bar's forced stages are spent, the Wardens kneel (Core 033 / Bosses 116), then this bar's
+    # refused locks hold and their stages are added (for this bar only).
     def self.arceus_start_bar(battle, b, st)
       bar    = st.phase
       forced = arceus_forced_locks(bar)
-      prev   = battle.instance_variable_get(:@prismfall_arceus_forced).to_i
-      stats = (arceus_nobody_asked?) ? ARCEUS_UNASKED_FORCED_STAGES : (resolve(ARCEUS_FORCED_STAGES) || ARCEUS_STAT_STAGES)
-      if prev > 0     # last bar's forced locks are spent
-        stats.each { |s| b.stages[s] = [b.stages[s] - prev, 0].max if b.stages[s] > 0 }
+      (battle.instance_variable_get(:@prismfall_arceus_boosts) || {}).each do |s, k|
+        b.stages[s] = [b.stages[s] - k, 0].max if b.stages[s] > 0
       end
-      n = [forced.length, resolve(ARCEUS_FORCED_CAP) || 3].min
-      n = [n, resolve(ARCEUS_WAR_STAGE_CAP) || 2].min if arceus_nobody_asked?
-      battle.instance_variable_set(:@prismfall_arceus_forced, n)
+      boosts = arceus_forced_boosts(forced)
+      battle.instance_variable_set(:@prismfall_arceus_boosts, boosts)
+      battle.instance_variable_set(:@prismfall_arceus_forced, boosts.values.max.to_i)
       battle.instance_variable_set(:@prismfall_arceus_forced_list, forced.dup)
-      # The bar's Wardens kneel and release or refuse (Bosses 116), then the refused locks harden the god.
       EventHandlers.trigger(:prismfall_arceus_locks, battle, bar, arceus_bar_gyms[bar - 1] || [], forced)
-      if n > 0
-        battle.pbDisplay(text((n == 1) ? "One lock holds fast!" : "{2} locks hold fast!", b.pbThis, n))
-        stats.each { |s| b.stages[s] = [b.stages[s] + n, 6].min }
-        battle.pbCommonAnimation("StatUp", b) rescue nil
-        battle.pbDisplay(text((stats.length < ARCEUS_STAT_STAGES.length) ? "{1}'s defenses hardened!" : "{1}'s power surged!", b.pbThis))
+      return if boosts.empty?
+      n = forced.length
+      battle.pbDisplay(text((n == 1) ? "One lock holds fast!" : "{2} locks hold fast!", b.pbThis, n))
+      boosts.each { |s, k| b.stages[s] = [b.stages[s] + k, 6].min }
+      battle.pbCommonAnimation("StatUp", b) rescue nil
+      if boosts.length == ARCEUS_STAT_STAGES.length
+        battle.pbDisplay(text("{1}'s power surged!", b.pbThis))
+      elsif boosts.keys.all? { |s| [:DEFENSE, :SPECIAL_DEFENSE].include?(s) } && boosts.length == 2
+        battle.pbDisplay(text("{1}'s defenses hardened!", b.pbThis))
+      else
+        boosts.each do |s, k|
+          battle.pbDisplay(text((k > 1) ? "{1}'s {2} rose sharply!" : "{1}'s {2} rose!", b.pbThis, GameData::Stat.get(s).name))
+        end
       end
     end
 

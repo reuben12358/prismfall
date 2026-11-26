@@ -212,8 +212,14 @@ check("released Wardens still release: Juno's line and her lock opens", log.incl
 
 check("forced-lock lines shown (one lock, then two)", log.include?(/One lock holds fast!/) && log.include?(/2 locks hold fast!/))
 # stages recorded when a bar breaks = that bar's forced stages plus whatever Arceus set up itself
-df = BREAKS.map { |b| b[:stages][:DEFENSE] }
-check("+1 to every stat for a forced bar, gone with the bar: Defense at breaks 1-5", df == [0, 2, 0, 0, 0], df.inspect)
+df = BREAKS.map { |b| [b[:stages][:ATTACK], b[:stages][:SPEED], b[:stages][:DEFENSE]] }
+check("a refusal raises its Plate's one stat for that bar (2026-11-26): Kaito's Fist -> Attack +1 in bar 3, Tamsin's " \
+      "Insect -> Speed +1 in bar 1, both gone with their bar; Defense untouched",
+      df.map(&:first) == [0, 1, 0, 0, 0] && df.all? { |_a, sp, d| sp == 0 && d == 0 } &&
+      log.include?(/The wild Arceus's Speed rose!/) && log.include?(/The wild Arceus's Attack rose!/) &&
+      log.include?(/The wild Arceus's Special Attack rose!/), df.inspect)
+check("...the old +1-to-every-stat rule is still the switch (ARCEUS_REFUSAL_SCOPE)", bs::ARCEUS_REFUSAL_SCOPE == :plate &&
+      bs.arceus_forced_boosts([7, 8]) == { :SPECIAL_ATTACK => 1, :ATTACK => 1 } && bs.arceus_forced_boosts([3, 6, 9]) == { :SPECIAL_DEFENSE => 3 })
 check("the Finale record after the fight: 2, 7, 8 :forced (their locks broken by force), the rest :released",
       [2, 7, 8].all? { |g| Prismfall::Finale.lock_state(g) == :forced } && Prismfall::Finale.lock_state(9) == :released)
 log = arceus.call("Arceus, Bound: Corvin not freed (a porter holds his Plate)", :refuse => [6])
