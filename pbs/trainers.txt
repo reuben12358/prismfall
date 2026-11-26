@@ -28961,6 +28961,1234 @@ Pokemon = UMBREON,73
     Nature = ADAMANT
     IV = 0
     EV = 0
+# Map 852 The Throat
+#-------------------------------
+[ROCKER,Sallow]
+LoseText = No relation to the Councillor. She'd have won.
+Pokemon = SNEASLER,72
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 8
+Pokemon = OVERQWIL,73
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 8
+Pokemon = SKUNTANK,74
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GRIMMSNARL,75
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[ROCKER,Sallow,100]
+LoseText = No relation to the Councillor. She'd have won.
+Pokemon = SNEASLER,73
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 20
+Pokemon = OVERQWIL,74
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 20
+Pokemon = SKUNTANK,75
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GRIMMSNARL,76
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[ROCKER,Sallow,200]
+LoseText = No relation to the Councillor. She'd have won.
+Pokemon = SNEASLER,71
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = OVERQWIL,72
+    Ability = POISONPOINT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SKUNTANK,73
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GRIMMSNARL,74
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 852 The Throat
+#-------------------------------
+[CHANNELER,Morwenna]
+LoseText = The Throat swallows sound. It'll swallow that too.
+Pokemon = MAROWAK,72
+    Form = 1
+    Ability = CURSEDBODY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CERULEDGE,73
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 8
+Pokemon = POLTEAGEIST,74
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = GENGAR,75
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[CHANNELER,Morwenna,100]
+LoseText = The Throat swallows sound. It'll swallow that too.
+Pokemon = MAROWAK,73
+    Form = 1
+    Ability = CURSEDBODY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CERULEDGE,74
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 20
+Pokemon = POLTEAGEIST,75
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = GENGAR,76
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[CHANNELER,Morwenna,200]
+LoseText = The Throat swallows sound. It'll swallow that too.
+Pokemon = MAROWAK,71
+    Form = 1
+    Ability = CURSEDBODY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CERULEDGE,72
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = POLTEAGEIST,73
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GENGAR,74
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 840 The Blindwater
+#-------------------------------
+[FISHERMAN,Tam]
+LoseText = Don't need eyes to fish. Needed them for that.
+Pokemon = SLOWBRO,72
+    Form = 1
+    Ability = QUICKDRAW
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SEISMITOAD,73
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = QUAGSIRE,74
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LANTURN,75
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[FISHERMAN,Tam,100]
+LoseText = Don't need eyes to fish. Needed them for that.
+Pokemon = SLOWBRO,73
+    Form = 1
+    Ability = QUICKDRAW
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SEISMITOAD,74
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = QUAGSIRE,75
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LANTURN,76
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[FISHERMAN,Tam,200]
+LoseText = Don't need eyes to fish. Needed them for that.
+Pokemon = SLOWBRO,71
+    Form = 1
+    Ability = QUICKDRAW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SEISMITOAD,72
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = QUAGSIRE,73
+    Ability = DAMP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LANTURN,74
+    Ability = ILLUMINATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 840 The Blindwater
+#-------------------------------
+[RUINMANIAC,Pell]
+LoseText = My gran swims the Drownings. I dig. Neither of us wins, it seems.
+Pokemon = RUNERIGUS,73
+    Ability = WANDERINGSPIRIT
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GIGALITH,74
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CLAYDOL,75
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GOLURK,76
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Pell,100]
+LoseText = My gran swims the Drownings. I dig. Neither of us wins, it seems.
+Pokemon = RUNERIGUS,74
+    Ability = WANDERINGSPIRIT
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GIGALITH,75
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CLAYDOL,76
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GOLURK,77
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Pell,200]
+LoseText = My gran swims the Drownings. I dig. Neither of us wins, it seems.
+Pokemon = RUNERIGUS,72
+    Ability = WANDERINGSPIRIT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GIGALITH,73
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CLAYDOL,74
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GOLURK,75
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 840 The Blindwater
+#-------------------------------
+[BLACKBELT,Oyuki]
+LoseText = Strike, breathe, strike. You breathed better.
+Pokemon = LILLIGANT,73
+    Form = 1
+    Ability = CHLOROPHYLL
+    Nature = JOLLY
+    IV = 8
+Pokemon = HITMONTOP,74
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CONKELDURR,75
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LUCARIO,76
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[BLACKBELT,Oyuki,100]
+LoseText = Strike, breathe, strike. You breathed better.
+Pokemon = LILLIGANT,74
+    Form = 1
+    Ability = CHLOROPHYLL
+    Nature = JOLLY
+    IV = 20
+Pokemon = HITMONTOP,75
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CONKELDURR,76
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LUCARIO,77
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[BLACKBELT,Oyuki,200]
+LoseText = Strike, breathe, strike. You breathed better.
+Pokemon = LILLIGANT,72
+    Form = 1
+    Ability = CHLOROPHYLL
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = HITMONTOP,73
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CONKELDURR,74
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LUCARIO,75
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 848 The Inverted Ward
+#-------------------------------
+[LADY,Ama]
+LoseText = Lie still. You've worn them all out.
+Pokemon = AUDINO,73
+    Ability = HEALER
+    Nature = BOLD
+    IV = 8
+Pokemon = INDEEDEE,74
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 8
+Pokemon = HATTERENE,75
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 8
+Pokemon = BLISSEY,76
+    Ability = SERENEGRACE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LADY,Ama,100]
+LoseText = Lie still. You've worn them all out.
+Pokemon = AUDINO,74
+    Ability = HEALER
+    Nature = BOLD
+    IV = 20
+Pokemon = INDEEDEE,75
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 20
+Pokemon = HATTERENE,76
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 20
+Pokemon = BLISSEY,77
+    Ability = SERENEGRACE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LADY,Ama,200]
+LoseText = Lie still. You've worn them all out.
+Pokemon = AUDINO,72
+    Ability = HEALER
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = INDEEDEE,73
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = HATTERENE,74
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BLISSEY,75
+    Ability = SERENEGRACE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 848 The Inverted Ward
+#-------------------------------
+[PSYCHIC_F,Ottilie]
+LoseText = Upside down, the future reads clearer. It read you.
+Pokemon = ALAKAZAM,73
+    Ability = SYNCHRONIZE
+    Nature = TIMID
+    IV = 8
+Pokemon = ESPATHRA,74
+    Ability = OPPORTUNIST
+    Nature = TIMID
+    IV = 8
+Pokemon = BRONZONG,75
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GARDEVOIR,76
+    Ability = TRACE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[PSYCHIC_F,Ottilie,100]
+LoseText = Upside down, the future reads clearer. It read you.
+Pokemon = ALAKAZAM,74
+    Ability = SYNCHRONIZE
+    Nature = TIMID
+    IV = 20
+Pokemon = ESPATHRA,75
+    Ability = OPPORTUNIST
+    Nature = TIMID
+    IV = 20
+Pokemon = BRONZONG,76
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GARDEVOIR,77
+    Ability = TRACE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[PSYCHIC_F,Ottilie,200]
+LoseText = Upside down, the future reads clearer. It read you.
+Pokemon = ALAKAZAM,72
+    Ability = SYNCHRONIZE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = ESPATHRA,73
+    Ability = OPPORTUNIST
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = BRONZONG,74
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GARDEVOIR,75
+    Ability = TRACE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 850 Mothwell
+#-------------------------------
+[BUGCATCHER,Fen]
+LoseText = They come to the lanterns. They came to you instead.
+Pokemon = VOLBEAT,73
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 8
+Pokemon = VIKAVOLT,74
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 8
+Pokemon = FROSMOTH,75
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 8
+Pokemon = VOLCARONA,76
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Fen,100]
+LoseText = They come to the lanterns. They came to you instead.
+Pokemon = VOLBEAT,74
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 20
+Pokemon = VIKAVOLT,75
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 20
+Pokemon = FROSMOTH,76
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 20
+Pokemon = VOLCARONA,77
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Fen,200]
+LoseText = They come to the lanterns. They came to you instead.
+Pokemon = VOLBEAT,72
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = VIKAVOLT,73
+    Ability = LEVITATE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = FROSMOTH,74
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = VOLCARONA,75
+    Ability = FLAMEBODY
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 850 Mothwell
+#-------------------------------
+[LASS,Posy]
+LoseText = I picked these for Celestine. She'll have to make do.
+Pokemon = SLURPUFF,73
+    Ability = SWEETVEIL
+    Nature = MODEST
+    IV = 8
+Pokemon = WHIMSICOTT,74
+    Ability = PRANKSTER
+    Nature = TIMID
+    IV = 8
+Pokemon = COMFEY,75
+    Ability = FLOWERVEIL
+    Nature = TIMID
+    IV = 8
+Pokemon = FLORGES,76
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LASS,Posy,100]
+LoseText = I picked these for Celestine. She'll have to make do.
+Pokemon = SLURPUFF,74
+    Ability = SWEETVEIL
+    Nature = MODEST
+    IV = 20
+Pokemon = WHIMSICOTT,75
+    Ability = PRANKSTER
+    Nature = TIMID
+    IV = 20
+Pokemon = COMFEY,76
+    Ability = FLOWERVEIL
+    Nature = TIMID
+    IV = 20
+Pokemon = FLORGES,77
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LASS,Posy,200]
+LoseText = I picked these for Celestine. She'll have to make do.
+Pokemon = SLURPUFF,72
+    Ability = SWEETVEIL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = WHIMSICOTT,73
+    Ability = PRANKSTER
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = COMFEY,74
+    Ability = FLOWERVEIL
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = FLORGES,75
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 841 The Gloamwood Verge
+#-------------------------------
+[THORNGUARD,Ilsabet]
+LoseText = The Queen's thorns hold. I'm only one of them.
+Pokemon = GOGOAT,74
+    Moves = HORNLEECH,EARTHQUAKE,BULKUP,MILKDRINK
+    Ability = SAPSIPPER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TSAREENA,75
+    Moves = TROPKICK,HIGHJUMPKICK,POWERWHIP,RAPIDSPIN
+    Ability = LEAFGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = RILLABOOM,76
+    Moves = DRUMBEATING,WOODHAMMER,KNOCKOFF,GRASSYTERRAIN
+    Ability = OVERGROW
+    Nature = JOLLY
+    IV = 8
+Pokemon = DECIDUEYE,77
+    Form = 1
+    Moves = TRIPLEARROWS,LEAFBLADE,BRAVEBIRD,SUCKERPUNCH
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[THORNGUARD,Ilsabet,100]
+LoseText = The Queen's thorns hold. I'm only one of them.
+Pokemon = GOGOAT,75
+    Moves = HORNLEECH,EARTHQUAKE,BULKUP,MILKDRINK
+    Ability = SAPSIPPER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TSAREENA,76
+    Moves = TROPKICK,HIGHJUMPKICK,POWERWHIP,RAPIDSPIN
+    Ability = LEAFGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = RILLABOOM,77
+    Moves = DRUMBEATING,WOODHAMMER,KNOCKOFF,GRASSYTERRAIN
+    Ability = OVERGROW
+    Nature = JOLLY
+    IV = 20
+Pokemon = DECIDUEYE,78
+    Form = 1
+    Moves = TRIPLEARROWS,LEAFBLADE,BRAVEBIRD,SUCKERPUNCH
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[THORNGUARD,Ilsabet,200]
+LoseText = The Queen's thorns hold. I'm only one of them.
+Pokemon = GOGOAT,73
+    Moves = HORNLEECH,EARTHQUAKE,BULKUP,MILKDRINK
+    Ability = SAPSIPPER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TSAREENA,74
+    Moves = TROPKICK,HIGHJUMPKICK,POWERWHIP,RAPIDSPIN
+    Ability = LEAFGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = RILLABOOM,75
+    Moves = DRUMBEATING,WOODHAMMER,KNOCKOFF,GRASSYTERRAIN
+    Ability = OVERGROW
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = DECIDUEYE,76
+    Form = 1
+    Moves = TRIPLEARROWS,LEAFBLADE,BRAVEBIRD,SUCKERPUNCH
+    Ability = OVERGROW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 841 The Gloamwood Verge
+#-------------------------------
+[SCIENTIST,Gant]
+LoseText = Surveying the dusk for Meridian. It surveyed me.
+Pokemon = PROBOPASS,74
+    Ability = MAGNETPULL
+    Nature = MODEST
+    IV = 8
+Pokemon = FERROTHORN,75
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KLINKLANG,76
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 8
+Pokemon = MAGNEZONE,77
+    Ability = STURDY
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SCIENTIST,Gant,100]
+LoseText = Surveying the dusk for Meridian. It surveyed me.
+Pokemon = PROBOPASS,75
+    Ability = MAGNETPULL
+    Nature = MODEST
+    IV = 20
+Pokemon = FERROTHORN,76
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KLINKLANG,77
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 20
+Pokemon = MAGNEZONE,78
+    Ability = STURDY
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SCIENTIST,Gant,200]
+LoseText = Surveying the dusk for Meridian. It surveyed me.
+Pokemon = PROBOPASS,73
+    Ability = MAGNETPULL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = FERROTHORN,74
+    Ability = IRONBARBS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KLINKLANG,75
+    Ability = MINUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MAGNEZONE,76
+    Ability = STURDY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 450 Gloaming Gym - Prologue Page
+#-------------------------------
+[LADY,Perrine]
+LoseText = Once upon a time, I won. That was a different story.
+Pokemon = RAPIDASH,73
+    Form = 1
+    Ability = PASTELVEIL
+    Nature = JOLLY
+    IV = 8
+Pokemon = GRANBULL,74
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = AZUMARILL,75
+    Ability = HUGEPOWER
+    Nature = BOLD
+    IV = 8
+Pokemon = GRIMMSNARL,76
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[LADY,Perrine,100]
+LoseText = Once upon a time, I won. That was a different story.
+Pokemon = RAPIDASH,74
+    Form = 1
+    Ability = PASTELVEIL
+    Nature = JOLLY
+    IV = 20
+Pokemon = GRANBULL,75
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = AZUMARILL,76
+    Ability = HUGEPOWER
+    Nature = BOLD
+    IV = 20
+Pokemon = GRIMMSNARL,77
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[LADY,Perrine,200]
+LoseText = Once upon a time, I won. That was a different story.
+Pokemon = RAPIDASH,72
+    Form = 1
+    Ability = PASTELVEIL
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = GRANBULL,73
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = AZUMARILL,74
+    Ability = HUGEPOWER
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = GRIMMSNARL,75
+    Ability = PRANKSTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 452 Gloaming Gym - Midnight Ballroom
+#-------------------------------
+[BEAUTY,Odile]
+LoseText = The clock struck. I'm the one who lost a shoe.
+Pokemon = CLEFABLE,74
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 8
+Pokemon = PRIMARINA,75
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 8
+Pokemon = HATTERENE,76
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 8
+Pokemon = TOGEKISS,77
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BEAUTY,Odile,100]
+LoseText = The clock struck. I'm the one who lost a shoe.
+Pokemon = CLEFABLE,75
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 20
+Pokemon = PRIMARINA,76
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 20
+Pokemon = HATTERENE,77
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 20
+Pokemon = TOGEKISS,78
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BEAUTY,Odile,200]
+LoseText = The clock struck. I'm the one who lost a shoe.
+Pokemon = CLEFABLE,73
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = PRIMARINA,74
+    Ability = TORRENT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = HATTERENE,75
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = TOGEKISS,76
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Marina]
+LoseText = The tide took my voice. It brought you.
+Pokemon = MILOTIC,77
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 8
+Pokemon = LAPRAS,78
+    Ability = WATERABSORB
+    Nature = ADAMANT
+    IV = 8
+Pokemon = VAPOREON,79
+    Ability = WATERABSORB
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LADY,Marina,100]
+LoseText = The tide took my voice. It brought you.
+Pokemon = MILOTIC,78
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 20
+Pokemon = LAPRAS,79
+    Ability = WATERABSORB
+    Nature = ADAMANT
+    IV = 20
+Pokemon = VAPOREON,80
+    Ability = WATERABSORB
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LADY,Marina,200]
+LoseText = The tide took my voice. It brought you.
+Pokemon = MILOTIC,76
+    Ability = COMPETITIVE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = LAPRAS,77
+    Ability = WATERABSORB
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = VAPOREON,78
+    Ability = WATERABSORB
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Goldie]
+LoseText = Too hot, too cold, and you were just right.
+Pokemon = AMPHAROS,77
+    Ability = STATIC
+    Nature = MODEST
+    IV = 8
+Pokemon = ZEBSTRIKA,78
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 8
+Pokemon = JOLTEON,79
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[LADY,Goldie,100]
+LoseText = Too hot, too cold, and you were just right.
+Pokemon = AMPHAROS,78
+    Ability = STATIC
+    Nature = MODEST
+    IV = 20
+Pokemon = ZEBSTRIKA,79
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 20
+Pokemon = JOLTEON,80
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[LADY,Goldie,200]
+LoseText = Too hot, too cold, and you were just right.
+Pokemon = AMPHAROS,76
+    Ability = STATIC
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = ZEBSTRIKA,77
+    Ability = MOTORDRIVE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = JOLTEON,78
+    Ability = VOLTABSORB
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Cinder]
+LoseText = Midnight already? I'll leave a shoe somewhere.
+Pokemon = NINETALES,77
+    Ability = FLASHFIRE
+    Nature = TIMID
+    IV = 8
+Pokemon = DELPHOX,78
+    Ability = BLAZE
+    Nature = TIMID
+    IV = 8
+Pokemon = FLAREON,79
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[LADY,Cinder,100]
+LoseText = Midnight already? I'll leave a shoe somewhere.
+Pokemon = NINETALES,78
+    Ability = FLASHFIRE
+    Nature = TIMID
+    IV = 20
+Pokemon = DELPHOX,79
+    Ability = BLAZE
+    Nature = TIMID
+    IV = 20
+Pokemon = FLAREON,80
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[LADY,Cinder,200]
+LoseText = Midnight already? I'll leave a shoe somewhere.
+Pokemon = NINETALES,76
+    Ability = FLASHFIRE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = DELPHOX,77
+    Ability = BLAZE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = FLAREON,78
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Aurora]
+LoseText = I'll sleep a hundred years on this.
+Pokemon = GOTHITELLE,77
+    Ability = FRISK
+    Nature = MODEST
+    IV = 8
+Pokemon = ESPATHRA,78
+    Ability = OPPORTUNIST
+    Nature = TIMID
+    IV = 8
+Pokemon = ESPEON,79
+    Ability = SYNCHRONIZE
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[LADY,Aurora,100]
+LoseText = I'll sleep a hundred years on this.
+Pokemon = GOTHITELLE,78
+    Ability = FRISK
+    Nature = MODEST
+    IV = 20
+Pokemon = ESPATHRA,79
+    Ability = OPPORTUNIST
+    Nature = TIMID
+    IV = 20
+Pokemon = ESPEON,80
+    Ability = SYNCHRONIZE
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[LADY,Aurora,200]
+LoseText = I'll sleep a hundred years on this.
+Pokemon = GOTHITELLE,76
+    Ability = FRISK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = ESPATHRA,77
+    Ability = OPPORTUNIST
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = ESPEON,78
+    Ability = SYNCHRONIZE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Selene]
+LoseText = It's not in an alcove I'd ever enter. That's all you get.
+Pokemon = HONCHKROW,77
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MISMAGIUS,78
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+Pokemon = UMBREON,79
+    Ability = SYNCHRONIZE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[LADY,Selene,100]
+LoseText = It's not in an alcove I'd ever enter. That's all you get.
+Pokemon = HONCHKROW,78
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MISMAGIUS,79
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+Pokemon = UMBREON,80
+    Ability = SYNCHRONIZE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[LADY,Selene,200]
+LoseText = It's not in an alcove I'd ever enter. That's all you get.
+Pokemon = HONCHKROW,76
+    Ability = SUPERLUCK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MISMAGIUS,77
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = UMBREON,78
+    Ability = SYNCHRONIZE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Briar]
+LoseText = The thorns grew round me. You cut straight through.
+Pokemon = ROSERADE,77
+    Ability = NATURALCURE
+    Nature = TIMID
+    IV = 8
+Pokemon = LILLIGANT,78
+    Ability = OWNTEMPO
+    Nature = TIMID
+    IV = 8
+Pokemon = LEAFEON,79
+    Ability = LEAFGUARD
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[LADY,Briar,100]
+LoseText = The thorns grew round me. You cut straight through.
+Pokemon = ROSERADE,78
+    Ability = NATURALCURE
+    Nature = TIMID
+    IV = 20
+Pokemon = LILLIGANT,79
+    Ability = OWNTEMPO
+    Nature = TIMID
+    IV = 20
+Pokemon = LEAFEON,80
+    Ability = LEAFGUARD
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[LADY,Briar,200]
+LoseText = The thorns grew round me. You cut straight through.
+Pokemon = ROSERADE,76
+    Ability = NATURALCURE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = LILLIGANT,77
+    Ability = OWNTEMPO
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = LEAFEON,78
+    Ability = LEAFGUARD
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Snow]
+LoseText = Cold, lit, east. You'll work it out.
+Pokemon = FROSLASS,77
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 8
+Pokemon = NINETALES,78
+    Form = 1
+    Ability = SNOWCLOAK
+    Nature = TIMID
+    IV = 8
+Pokemon = GLACEON,79
+    Ability = SNOWCLOAK
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LADY,Snow,100]
+LoseText = Cold, lit, east. You'll work it out.
+Pokemon = FROSLASS,78
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 20
+Pokemon = NINETALES,79
+    Form = 1
+    Ability = SNOWCLOAK
+    Nature = TIMID
+    IV = 20
+Pokemon = GLACEON,80
+    Ability = SNOWCLOAK
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LADY,Snow,200]
+LoseText = Cold, lit, east. You'll work it out.
+Pokemon = FROSLASS,76
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = NINETALES,77
+    Form = 1
+    Ability = SNOWCLOAK
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = GLACEON,78
+    Ability = SNOWCLOAK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 453 Gloaming Gym - The Eight Princesses
+#-------------------------------
+[LADY,Belle]
+LoseText = A key, a rose, a beast. Two out of three.
+Pokemon = FLORGES,77
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 8
+Pokemon = TOGEKISS,78
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 8
+Pokemon = SYLVEON,79
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LADY,Belle,100]
+LoseText = A key, a rose, a beast. Two out of three.
+Pokemon = FLORGES,78
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 20
+Pokemon = TOGEKISS,79
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 20
+Pokemon = SYLVEON,80
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LADY,Belle,200]
+LoseText = A key, a rose, a beast. Two out of three.
+Pokemon = FLORGES,76
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = TOGEKISS,77
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SYLVEON,78
+    Ability = CUTECHARM
+    Nature = MODEST
+    IV = 0
+    EV = 0
 # Map 861 The Thornwar Marches
 #-------------------------------
 [COOLTRAINER_F,Isolde]

@@ -73,6 +73,8 @@ def ROUTES(P):
         400: (0, 71, {}), 403: (0, 71, {}), 410: (0, 71, {}), 411: (0, 71, {}), 412: (0, 71, {}), 801: (0, 71, {}), 811: (0, 71, {}),
         # Ch17 script roster (story density sections, 2026-11-26)
         430: (0, 75, {}), 431: (0, 75, {}), 432: (0, 75, {}), 820: (0, 75, {}), 821: (0, 75, {}), 822: (0, 75, {}), 828: (0, 75, {}), 832: (0, 75, {}),
+        # Ch18 script roster (story density sections, 2026-11-26)
+        450: (0, 80, {}), 452: (0, 80, {}), 453: (0, 80, {}), 840: (0, 80, {}), 841: (0, 80, {}), 848: (0, 80, {}), 850: (0, 80, {}), 852: (0, 80, {}),
         # Coverage fill, Ch19 (segment 17, cap 85)
         861: (0, 85, {}), 864: (0, 85, {}),
     }
@@ -1025,6 +1027,68 @@ def ROUTES(P):
     # Lady Mirela: the Informant
     t("Map 432 Underveil Gym - The Vault", "LADY", "Mirela", "I know a secret about you. I'll keep it. You've earned that.",
       [m("MANDIBUZZ", 72, "OVERCOAT", "ADAMANT"), m("MALAMAR", 73, "SUCTIONCUPS", "ADAMANT"), m("UMBREON", 74, "SYNCHRONIZE", "ADAMANT")])
+    # ---------------------------------------------------------------------------------------------------------------
+    # Ch18 - the Throat, the Blindwater, the Inverted Ward, Mothwell, the Gloamwood Verge; Gym 17 and its eight princesses (cap 80; story/37_SCRIPT_CH18.md roster)
+    # Rocker Sallow: Sallow-the-younger, a punk
+    t("Map 852 The Throat", "ROCKER", "Sallow", "No relation to the Councillor. She'd have won.",
+      [m("SNEASLER", 72, "PRESSURE", "JOLLY"), m("OVERQWIL", 73, "POISONPOINT", "JOLLY"), m("SKUNTANK", 74, "STENCH", "ADAMANT"), m("GRIMMSNARL", 75, "PRANKSTER", "ADAMANT")])
+    # Channeler Morwenna: Hex Maniac
+    t("Map 852 The Throat", "CHANNELER", "Morwenna", "The Throat swallows sound. It'll swallow that too.",
+      [m("MAROWAK", 72, "CURSEDBODY", "ADAMANT", form=1), m("CERULEDGE", 73, "FLASHFIRE", "JOLLY"), m("POLTEAGEIST", 74, "WEAKARMOR", "MODEST"), m("GENGAR", 75, "CURSEDBODY", "TIMID")])
+    # Fisherman Tam: Blind Tam (Cave: the echo boosts sound); a Galarian Slowbro from the dark pools
+    t("Map 840 The Blindwater", "FISHERMAN", "Tam", "Don't need eyes to fish. Needed them for that.",
+      [m("SLOWBRO", 72, "QUICKDRAW", "ADAMANT", form=1), m("SEISMITOAD", 73, "SWIFTSWIM", "ADAMANT"), m("QUAGSIRE", 74, "DAMP", "ADAMANT"), m("LANTURN", 75, "ILLUMINATE", "MODEST")])
+    # Ruinmaniac Pell: Pell-the-Younger
+    t("Map 840 The Blindwater", "RUINMANIAC", "Pell", "My gran swims the Drownings. I dig. Neither of us wins, it seems.",
+      [m("RUNERIGUS", 73, "WANDERINGSPIRIT", "ADAMANT"), m("GIGALITH", 74, "STURDY", "ADAMANT"), m("CLAYDOL", 75, "LEVITATE", "ADAMANT"), m("GOLURK", 76, "IRONFIST", "ADAMANT")])
+    # Blackbelt Oyuki: Master Oyuki; the Hisuian Lilligant is her dancing sparring partner
+    t("Map 840 The Blindwater", "BLACKBELT", "Oyuki", "Strike, breathe, strike. You breathed better.",
+      [m("LILLIGANT", 73, "CHLOROPHYLL", "JOLLY", form=1), m("HITMONTOP", 74, "TECHNICIAN", "ADAMANT"), m("CONKELDURR", 75, "GUTS", "ADAMANT"), m("LUCARIO", 76, "INNERFOCUS", "TIMID")])
+    # Lady Ama: Sister Ama, a nurse (script: Lady); Inverse: Normal is weak here
+    t("Map 848 The Inverted Ward", "LADY", "Ama", "Lie still. You've worn them all out.",
+      [m("AUDINO", 73, "HEALER", "BOLD"), m("INDEEDEE", 74, "INNERFOCUS", "TIMID"), m("HATTERENE", 75, "ANTICIPATION", "MODEST"), m("BLISSEY", 76, "SERENEGRACE", "MODEST")])
+    t("Map 848 The Inverted Ward", "PSYCHIC_F", "Ottilie", "Upside down, the future reads clearer. It read you.",
+      [m("ALAKAZAM", 73, "SYNCHRONIZE", "TIMID"), m("ESPATHRA", 74, "OPPORTUNIST", "TIMID"), m("BRONZONG", 75, "LEVITATE", "ADAMANT"), m("GARDEVOIR", 76, "TRACE", "MODEST")])
+    # Bugcatcher Fen: Lantern-boy Fen
+    t("Map 850 Mothwell", "BUGCATCHER", "Fen", "They come to the lanterns. They came to you instead.",
+      [m("VOLBEAT", 73, "SWARM", "JOLLY"), m("VIKAVOLT", 74, "LEVITATE", "MODEST"), m("FROSMOTH", 75, "SHIELDDUST", "MODEST"), m("VOLCARONA", 76, "FLAMEBODY", "TIMID")])
+    t("Map 850 Mothwell", "LASS", "Posy", "I picked these for Celestine. She'll have to make do.",
+      [m("SLURPUFF", 73, "SWEETVEIL", "MODEST"), m("WHIMSICOTT", 74, "PRANKSTER", "TIMID"), m("COMFEY", 75, "FLOWERVEIL", "TIMID"), m("FLORGES", 76, "FLOWERVEIL", "MODEST")])
+    # Thornguard Ilsabet: Thornguard Ilsabet (Captain Rowe's guard); the Hisuian Decidueye is the Thornguard's archer
+    t("Map 841 The Gloamwood Verge", "THORNGUARD", "Ilsabet", "The Queen's thorns hold. I'm only one of them.",
+      [m("GOGOAT", 74, "SAPSIPPER", "ADAMANT", "HORNLEECH,EARTHQUAKE,BULKUP,MILKDRINK"), m("TSAREENA", 75, "LEAFGUARD", "ADAMANT", "TROPKICK,HIGHJUMPKICK,POWERWHIP,RAPIDSPIN"), m("RILLABOOM", 76, "OVERGROW", "JOLLY", "DRUMBEATING,WOODHAMMER,KNOCKOFF,GRASSYTERRAIN"), m("DECIDUEYE", 77, "OVERGROW", "ADAMANT", "TRIPLEARROWS,LEAFBLADE,BRAVEBIRD,SUCKERPUNCH", form=1)])
+    # Scientist Gant: Meridian Surveyor Gant
+    t("Map 841 The Gloamwood Verge", "SCIENTIST", "Gant", "Surveying the dusk for Meridian. It surveyed me.",
+      [m("PROBOPASS", 74, "MAGNETPULL", "MODEST"), m("FERROTHORN", 75, "IRONBARBS", "ADAMANT"), m("KLINKLANG", 76, "MINUS", "JOLLY"), m("MAGNEZONE", 77, "STURDY", "MODEST")])
+    # Lady Perrine: the Galarian Rapidash is the storybook's unicorn
+    t("Map 450 Gloaming Gym - Prologue Page", "LADY", "Perrine", "Once upon a time, I won. That was a different story.",
+      [m("RAPIDASH", 73, "PASTELVEIL", "JOLLY", form=1), m("GRANBULL", 74, "INTIMIDATE", "ADAMANT"), m("AZUMARILL", 75, "HUGEPOWER", "BOLD"), m("GRIMMSNARL", 76, "PRANKSTER", "ADAMANT")])
+    t("Map 452 Gloaming Gym - Midnight Ballroom", "BEAUTY", "Odile", "The clock struck. I'm the one who lost a shoe.",
+      [m("CLEFABLE", 74, "CUTECHARM", "MODEST"), m("PRIMARINA", 75, "TORRENT", "MODEST"), m("HATTERENE", 76, "ANTICIPATION", "MODEST"), m("TOGEKISS", 77, "HUSTLE", "MODEST")])
+    # Lady Marina: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Marina", "The tide took my voice. It brought you.",
+      [m("MILOTIC", 77, "COMPETITIVE", "MODEST"), m("LAPRAS", 78, "WATERABSORB", "ADAMANT"), m("VAPOREON", 79, "WATERABSORB", "MODEST")])
+    # Lady Goldie: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Goldie", "Too hot, too cold, and you were just right.",
+      [m("AMPHAROS", 77, "STATIC", "MODEST"), m("ZEBSTRIKA", 78, "MOTORDRIVE", "JOLLY"), m("JOLTEON", 79, "VOLTABSORB", "TIMID")])
+    # Lady Cinder: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Cinder", "Midnight already? I'll leave a shoe somewhere.",
+      [m("NINETALES", 77, "FLASHFIRE", "TIMID"), m("DELPHOX", 78, "BLAZE", "TIMID"), m("FLAREON", 79, "FLASHFIRE", "ADAMANT")])
+    # Lady Aurora: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Aurora", "I'll sleep a hundred years on this.",
+      [m("GOTHITELLE", 77, "FRISK", "MODEST"), m("ESPATHRA", 78, "OPPORTUNIST", "TIMID"), m("ESPEON", 79, "SYNCHRONIZE", "TIMID")])
+    # Lady Selene: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Selene", "It's not in an alcove I'd ever enter. That's all you get.",
+      [m("HONCHKROW", 77, "SUPERLUCK", "ADAMANT"), m("MISMAGIUS", 78, "LEVITATE", "TIMID"), m("UMBREON", 79, "SYNCHRONIZE", "ADAMANT")])
+    # Lady Briar: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Briar", "The thorns grew round me. You cut straight through.",
+      [m("ROSERADE", 77, "NATURALCURE", "TIMID"), m("LILLIGANT", 78, "OWNTEMPO", "TIMID"), m("LEAFEON", 79, "LEAFGUARD", "JOLLY")])
+    # Lady Snow: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Snow", "Cold, lit, east. You'll work it out.",
+      [m("FROSLASS", 77, "SNOWCLOAK", "JOLLY"), m("NINETALES", 78, "SNOWCLOAK", "TIMID", form=1), m("GLACEON", 79, "SNOWCLOAK", "MODEST")])
+    # Lady Belle: a princess of the gauntlet (Eeveelution ace)
+    t("Map 453 Gloaming Gym - The Eight Princesses", "LADY", "Belle", "A key, a rose, a beast. Two out of three.",
+      [m("FLORGES", 77, "FLOWERVEIL", "MODEST"), m("TOGEKISS", 78, "HUSTLE", "MODEST"), m("SYLVEON", 79, "CUTECHARM", "MODEST")])
     # ---------------------------------------------------------------------------------------------------------------
     # Ch19 - two script-roster rows (story/38_SCRIPT_CH19.md) that carry the last four species (cap 85)
     # Cooltrainer F Isolde: script roster (story/38_SCRIPT_CH19.md): Ace Trainer Isolde

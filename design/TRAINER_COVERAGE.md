@@ -25,7 +25,7 @@ checked against its own evolution. Galarian Darmanitan's Zen Mode is a battle fo
 | Eligible species | 900 |
 | Covered by a generic trainer | **900** (100.0%) |
 | Missing | 0 |
-| Generic trainers (Standard versions) | 475 |
+| Generic trainers (Standard versions) | 496 |
 | Legendary/Mythical/UB/Paradox on a generic trainer (must be 0) | 0 |
 | Level-plausibility flags | 0 |
 
@@ -66,6 +66,7 @@ Counted from the `# Map NNN` note above each block and that map's `segment` (bad
 | 13 | 15 | 18 | 392, 780, 781, 783, 790, 810 |
 | 14 | 16 | 20 | 400, 403, 410, 411, 412, 800, 801, 804, 811 |
 | 15 | 17 | 16 | 430, 431, 432, 820, 821, 822, 828, 832 |
+| 16 | 18 | 21 | 450, 452, 453, 840, 841, 848, 850, 852 |
 | 17 | 19 | 2 | 861, 864 |
 | — | — | 53 | no map note (story-placed grunts, soldiers, Trials) |
 
@@ -75,10 +76,10 @@ None: every eligible species is on a generic trainer.
 
 ## Regional forms (bonus)
 
-19 of 54 regional forms are on a generic trainer.
+24 of 54 regional forms are on a generic trainer.
 
-- Covered: Alolan Raticate, Alolan Sandslash, Alolan Dugtrio, Alolan Persian, Alolan Golem, Galarian Slowpoke, Alolan Muk, Alolan Marowak, Galarian Weezing, Galarian Slowking, Galarian Stunfisk, Hisuian Arcanine, Hisuian Electrode, Hisuian Typhlosion, Hisuian Samurott, Hisuian Zoroark, Hisuian Braviary, Hisuian Goodra, Hisuian Avalugg
-- Not yet: Alolan Rattata, Alolan Raichu, Alolan Sandshrew, Alolan Vulpix, Alolan Ninetales, Alolan Diglett, Alolan Meowth, Galarian Meowth, Alolan Geodude, Alolan Graveler, Galarian Ponyta, Galarian Rapidash, Galarian Slowbro, Galarian Farfetch'd, Alolan Grimer, Alolan Exeggutor, Galarian Mr. Mime, Galarian Corsola, Galarian Zigzagoon, Galarian Linoone, Galarian Darumaka, Galarian Standard Mode Darmanitan, Galarian Yamask, Hisuian Growlithe, Hisuian Voltorb, Paldean (Combat Breed) Tauros, Paldean (Blaze Breed) Tauros, Paldean (Aqua Breed) Tauros, Paldean Wooper, Hisuian Qwilfish, Hisuian Sneasel, Hisuian Lilligant, Hisuian Zorua, Hisuian Sliggoo, Hisuian Decidueye
+- Covered: Alolan Raticate, Alolan Sandslash, Alolan Ninetales, Alolan Dugtrio, Alolan Persian, Alolan Golem, Galarian Rapidash, Galarian Slowpoke, Galarian Slowbro, Alolan Muk, Alolan Marowak, Galarian Weezing, Galarian Slowking, Galarian Stunfisk, Hisuian Arcanine, Hisuian Electrode, Hisuian Typhlosion, Hisuian Samurott, Hisuian Lilligant, Hisuian Zoroark, Hisuian Braviary, Hisuian Goodra, Hisuian Avalugg, Hisuian Decidueye
+- Not yet: Alolan Rattata, Alolan Raichu, Alolan Sandshrew, Alolan Vulpix, Alolan Diglett, Alolan Meowth, Galarian Meowth, Alolan Geodude, Alolan Graveler, Galarian Ponyta, Galarian Farfetch'd, Alolan Grimer, Alolan Exeggutor, Galarian Mr. Mime, Galarian Corsola, Galarian Zigzagoon, Galarian Linoone, Galarian Darumaka, Galarian Standard Mode Darmanitan, Galarian Yamask, Hisuian Growlithe, Hisuian Voltorb, Paldean (Combat Breed) Tauros, Paldean (Blaze Breed) Tauros, Paldean (Aqua Breed) Tauros, Paldean Wooper, Hisuian Qwilfish, Hisuian Sneasel, Hisuian Zorua, Hisuian Sliggoo
 
 ## Level-plausibility flags
 
