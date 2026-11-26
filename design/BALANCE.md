@@ -325,6 +325,10 @@ Gilded's last bar refills three times at the Casual bar HP (Casual: half a Casua
 (result `:gilded_chain`); elsewhere the last bar's fall ends the battle (result `:freed`; Arceus never faints);
 Judgment: Giratina-Origin Lv 100 at the PC's side (`PARTNER_GIRATINA`, a 2v1) and every lock forced, capped like War;
 Standard: Recover at most twice a bar (Hard: no limit; Casual: no Recover).
+**Retuned 2026-11-26 for prepared teams** (§9b "Retune"): bar HP ×0.32 (Standard and Hard), offence ×0.8, defences
+×1.0, per-variant bar HP, defences-only forced locks when nobody is asked, Gilded's four-piece last bar. The bar-HP row
+in the table above (×0.6 / ×1.0 / ×1.25) is the original design; the shipped numbers are Casual ×0.5, Standard and Hard
+×0.32 of Arceus's own max HP.
 Not built: the "best field against the player's active" skip at a break, the 2-turn Casual telegraph, `:bossboost`
 HP. Win rates: §9b.
 
@@ -455,8 +459,10 @@ their setup move (Calm Mind, Bulk Up) for a utility move.
 ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard or Hard was tuned to these numbers
 (Reuben's ruling above), and the harness plays without a strategy. Logic checks: `tools/harness/run_finale_bosses.rb` (63/63).
 - **Valen's Zygarde "Order"** (`:VALEN_ZYGARDE_ORDER`, trainer boss, the Final v0 / 100 / 200 only): bars Casual 2 /
-  Standard 2 / Hard 3; the 50% Forme until the last bar, then the Complete Forme at its own full HP (Power Construct is
-  held until then); no stat multipliers on Standard / Hard, Casual bars ×0.55 HP. The Last Tuning (v1) is unchanged.
+  Standard 2 / Hard 3; the 50% Forme until the last bar, then the Complete Forme (Power Construct is held until then).
+  **Retuned 2026-11-26** (below): the Complete bar starts at 0.6 (Standard) / 0.5 (Hard) of the Complete Forme's own
+  HP (Casual: full), Hard's bars ×0.7 HP, and no +1 Defense at a break; offence untouched; Casual bars ×0.55 HP. The
+  Last Tuning (v1) is unchanged.
 - **Silvally "NULL"** (`:VOSS_SILVALLY_NULL` / `:QUENT_SILVALLY_NULL`, trainer boss, Voss v0 / 100 / 200 and Quent
   v99 / 199 / 299): 3 bars in every mode, no stat multipliers on Standard / Hard, Casual bars ×0.55 HP; its Memory, form
   and type follow the arena's ascendant Plate (the §6 "Project NULL" hook, now built in Bosses, not Core); the conduit:
@@ -465,31 +471,44 @@ ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard 
 - **Giratina's Origin trial** (`:GIRATINA_ORIGIN_TRIAL`, Ruin R1): Origin Forme, Lv 72, `:INVERSE`, bars 2 / 3 / 4,
   Adamant 252 HP / 252 Atk; Casual HP ×0.75 and offence ×0.6. It ends as a win the first round the player holds back
   once 1 bar is broken (Hard: 2), or when every bar is broken. The AI never holds back, so BORI is the harder road.
-- **Arceus** (`:ARCEUS_FINALE`): bars now come from the story variant (Bound 6, Gilded 6, Miscalibrated 5, War 7,
-  Judgment 7), not the difficulty (it was 3 / 3 / 4); each bar cycles its three gym fields in gym order (§7). Bar HP is
-  ×1.0 of Arceus's own max HP on Standard and ×1.25 on Hard; §7's `:bossboost` HP (×2.0 / ×2.5 on top) is **not**
-  applied. Casual only is eased: bar HP ×0.5, offence ×0.6, Safeguard in place of Recover / Calm Mind, and a forced
-  lock raises Defense / Sp. Def alone (at most +2).
+- **Arceus** (`:ARCEUS_FINALE`): bars come from the story variant (Bound 6, Gilded 6, Miscalibrated 5, War 7,
+  Judgment 7), not the difficulty; each bar cycles its three gym fields in gym order (§7). §7's `:bossboost` HP is
+  **not** applied. **Retuned 2026-11-26** (below): bar HP ×0.32 of Arceus's own max HP on Standard and Hard (was
+  ×1.0 / ×1.25), Atk / SpA ×0.8 (was ×1.25 / ×1.3), Def / SpD ×1.0 (was ×1.25 / ×1.3), Spe ×1.1 / ×1.15 (kept); per
+  variant (`ARCEUS_VARIANT_HP`, Standard / Hard): Gilded ×0.8, Judgment ×1.45 / ×1.3 (Giratina's at your side),
+  War ×0.4 (Casual too), Miscalibrated ×1.15; on War and Judgment (every lock forced) a forced lock raises Defense /
+  Sp. Def only; Gilded's last bar is one bar in four pieces (0.4, then three refills of 0.2) and the hit that empties
+  it carries into the refill. Kept: the story bar counts, Standard's two Recovers a bar, the turn-1 Calm Mind, +1 to
+  every stat per refusing Warden on Bound / Miscalibrated / Gilded. Casual: bar HP ×0.5, offence ×0.6, Safeguard in
+  place of Recover / Calm Mind, forced locks raise Defense / Sp. Def alone (at most +2).
 
 | Fight (cap) | Casual typ / prep | Standard typ / prep | Hard typ / prep | Before (Std typ / prep) |
 |---|---|---|---|---|
-| Final: Valen, Zygarde with bars (96) | 57% / 100% | 2% / 18% | 0% / 0% | 3% / 48% |
+| Final: Valen, Zygarde with bars (96), retuned 2026-11-26 | 57% / 100% | 2% / 28% | 2% / 10% | 3% / 48% (bars, untuned: 2% / 18%; Hard 0% / 0%) |
 | Hijack: Voss, NULL 3 bars (100) | 58% / 100% | 0% / 13% | 0% / 12% | 7% / 68% |
 | Hijack: Quent, NULL 3 bars (100) | 42% / 100% | 0% / 45% | 0% / 18% | 15% / 87% |
 | Hijack: Voss, the conduit live (`:let_go`) | 53% / 100% | 0% / 10% | 0% / 10% | new |
 | Giratina's Origin trial, fought to the end (71) | 98% / 95% | 38% / 27% | 0% / 0% | new |
-| Arceus, Bound, every Warden releases (100) | 43% / 60% | 0% / 0% | 0% / 0% | no cell before |
-| Arceus, Bound, one Warden in three refuses | 15% / 35% | 0% / 0% | 0% / 0% | no cell before |
-| Arceus, Miscalibrated, 5 bars | 58% / 67% | 0% / 0% | 0% / 0% | no cell before |
-| Arceus, Gilded, 6 bars + 3 refills to the Gilded Chain (2026-11-26) | 18% / 37% | 0% / 0% | 0% / 0% | new |
-| Arceus, Judgment (Ruin), 7 bars, all forced, Giratina beside you (2026-11-26) | 42% / 67% | 0% / 0% | 0% / 0% | new |
+| Arceus, Bound, every Warden releases (100) | 43% / 60% | 3% / 37% | 3% / 13% | 0% / 0% before the retune |
+| Arceus, Bound, one Warden in three refuses | 15% / 35% | 0% / 0% | 0% / 0% | 0% / 0% |
+| Arceus, Miscalibrated, 5 bars | 58% / 67% | 2% / 40% | 2% / 22% (17% at 120) | 0% / 0% |
+| Arceus, Gilded, 6 bars + 3 refills to the Gilded Chain | 38% / 58% | 3% / 40% (37% at 120) | 2% / 12% | 0% / 0% (Casual 18% / 37%) |
+| Arceus, War, 7 bars, every lock forced | 57% / 68% | 2% / 35% | 3% / 10% | new (Casual 5% / 12% before ×0.4) |
+| Arceus, Judgment (Ruin), 7 bars, all forced, Giratina beside you | 42% / 67% | 10% / 40% (36% at 120) | 2% / 5% (13% at 120) | 0% / 0% |
 
-Arceus on Standard / Hard is 0% for the harness in the old 3-bar shape too (checked: 0 of 60, typical and prepared,
-parties swept in about nine turns by a Lv 100 Judgment before the first bar breaks), so the bar count is not what
-decides it; before the Casual easing Casual was 0% as well. The 2026-11-26 rerun (the locks' lines, Standard's
-Recover limit, the last bar ending the battle) left ARC / ARCF / ARCM exactly where they were. Gilded's Casual refills
-were halved after a first 13% / 20%. Open for Reuben: whether Standard Arceus and Hard Valen
-(prepared 35% → 0%) should stay where the designs put them.
+**Retune, 2026-11-26 (Reuben: "use best judgement" -> prepared teams must be able to win).** Targets on this
+no-strategy harness: Standard typical under ~10%, Standard prepared 25–40%, Hard prepared 10–20%, Casual unchanged.
+- *Arceus, the cause:* the prepared-team logs showed Arceus outspeeding and one-shooting every Pokémon after its
+  turn-1 Calm Mind; prepared sixes broke 0–2 of 6 bars, and 0% in the old 3-bar shape too, so bar count wasn't it.
+  Trimming offence alone (×1.0) or bar HP alone (×0.35) stayed at 0–13%; together (×0.32 HP, ×0.8 offence, ×1.0
+  defences) Bound reached 33–37%. On War a forced +1 to offence every bar cost one Pokémon a bar at any bar HP, hence
+  defences-only locks there and on Judgment. Gilded's four extra hits at the end (overflow discarded) held it at 5–8%
+  until its last bar became one bar in four pieces and the emptying hit carried on.
+- *Valen, the cause:* the bars gave Zygarde extra turns to Coil, plus +1 Defense a break; about a third of prepared
+  teams lose before Zygarde (as before the bars). Complete-bar HP alone barely moved Hard, removing the Defense gain did.
+- *Left as it is:* a forced lock on Bound (one refusal every bar, ARCF) is still 0% on Standard / Hard: refusals are
+  the player's own consequences, and lowering them would ease every refusing save; it's Reuben's call. Voss (Standard
+  prepared 13%) and the conduit cell (10%) are below the Standard band too; they weren't in this pass.
 
 **Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,
 1 / 2 / 3 bars, Standard HP ×1.5 and ×1.15–1.25 elsewhere, Hard HP ×1.5 and ×1.2–1.25. A typical Lv 49–51 six (60 a
