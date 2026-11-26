@@ -79,7 +79,7 @@
 - [ ] Re-shoot older Warden VS GIFs (`docs/battle_captures/cast/wardens_*.gif`) so they show the new two-line class plates.
 
 ## Status: finale bosses agent (Bosses 113–115, Arceus rotation, Mega per trainer)
-*Round 3 (2026-11-26), in progress: Reuben "use best judgement"; coordinator targets (60 a cell, no-strategy harness): Standard typical < ~10%, Standard prepared 25–40%, Hard prepared 10–20%, Casual unchanged. Arceus (all variants) and Hard Valen are 0% prepared. Diagnosing first (logs), then the smallest change per boss. Committed so far: nothing.*
+*Round 3 (2026-11-26), in progress: tuning committed (eda5562 Arceus, 973f3b4 Valen); the final 60-a-cell table run is going, then BALANCE §7 / §9b and the tick.*
 *Round 2 (2026-11-26): done and committed (509f526, 43c9c3e, fcdcb92 and the docs commit). Nothing in flight. See the two ticked §2 lines (Arceus, rest; Mega lore).*
 *Round 1 (2026-11-25): done and committed.*
 - Built: Bosses 113 / 114 / 115, the Arceus rotation and `:prism_turn` fix, one Mega per trainer; see the three ticked lines in §2 and the two open lines under them. Checks: `tools/harness/run_finale_bosses.rb` (63/63), `tools/harness/run_mega.rb` (78/79, a PBS data failure), `winrates_r4.rb` cells VALEN, VOSS, QH, VOSSC, BORI, ARC, ARCF, ARCM (BALANCE.md §9).
