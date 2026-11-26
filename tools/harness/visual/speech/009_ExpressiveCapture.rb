@@ -36,6 +36,10 @@ if ENV["DEMO_PLAN"].to_s.start_with?("expr")
       Graphics.transition(0)
       PrismfallMaps.define_singleton_method(:apply_start_position) { false } if defined?(PrismfallMaps)
       Game.start_new
+      # the base project's start map has an autorun (pbChangePlayer + pbTrainerName, the name entry screen) that would
+      # wait forever for typing: drop it before the first full update
+      $game_map.events.each_value { |e| e.erase if [3, 4].include?(e.trigger) }
+      $game_system.map_interpreter.clear rescue nil
       pbChangePlayer(1)
       $player.name = "Wren"
       $PokemonSystem.textspeed = 2
