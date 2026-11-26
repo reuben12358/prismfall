@@ -42,6 +42,7 @@ module PrismfallMaps
     163 => [-4, 0, 6, 4],   # Anglers' Guild
     164 => [-2, 0, 6, 4],   # Reyes House
     165 => [-4, 0, 6, 4],   # Net-mender's House
+    166 => [-14, -12, 4, 24],   # Reyes Cellar (Hollow cell)
     167 => [-6, -4, 6, 18],   # Ebbmouth - Mill Quay
     170 => [-6, -8, 4, 14],   # Tidelock Gym - Lock Hall
     171 => [-6, -8, 4, 14],   # Tidelock Gym - Basins (Low Water)
@@ -52,6 +53,7 @@ module PrismfallMaps
     181 => [-24, -28, -8, 30],   # Lumen City - The Lowlight
     182 => [-4, -2, 8, 2],   # Lumen Pokémon Center
     183 => [-10, -8, 10, 6],   # Lumen Arcade 1F
+    184 => [-4, -2, 8, 2],   # Lumen Arcade Dept. Store 2F
     185 => [4, 0, -4, 8],   # Meridian Spire - Lobby
     186 => [4, 0, -6, 10],   # Meridian Spire - Gala Hall
     187 => [8, 4, -6, 0],   # Glide Cycles
@@ -61,6 +63,12 @@ module PrismfallMaps
     191 => [-10, -14, 6, 20],   # Circuit Gym - Breadboard Hall
     192 => [-10, -14, 6, 20],   # Circuit Gym - Live Wire Hall
     193 => [-10, -14, 6, 20],   # Circuit Gym - Core
+    194 => [6, 4, 2, 0],   # Lumen City - Council Ward
+    195 => [4, 2, 0, 0],   # Lumen City - Spire District
+    196 => [8, 6, 4, 0],   # Lumen City - Skyport Terrace
+    197 => [6, 2, -4, 6],   # Zenith Council Hall - Council Chamber
+    198 => [2, 0, -6, 10],   # Meridian Spire - Executive Gallery
+    199 => [-18, -20, 10, 34],   # Meridian Spire - Dark Stone Core
     240 => [22, 2, -16, 10],   # Cindervault - Forge Terraces
     241 => [12, 2, -10, 4],   # Cindervault Pokémon Center
     242 => [12, 2, -10, 4],   # Cindervault Mart
@@ -120,6 +128,7 @@ module PrismfallMaps
     930 => [14, 8, 0, 6],   # The Bone-Carters' Camp
     951 => [-14, -18, 8, 30],   # Meridian Spire - Service Lifts
     952 => [-12, -16, 16, 28],   # Meridian Spire - Plate Vault
+    959 => [-2, 0, 6, 2],   # Skyport Customs
     990 => [4, 2, 6, 0],   # Prismfall Test Arena
   }
 
@@ -133,6 +142,7 @@ module PrismfallMaps
     147 => ["prismfall_seamist", 0, 24, 0, 100, 2, 0],   # Saltmere - Old Town
     160 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth
     167 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth - Mill Quay
+    199 => ["prismfall_cave", 0, 28, 1, 100, 1, 0],   # Meridian Spire - Dark Stone Core
     240 => ["prismfall_cave", 0, 22, 1, 100, 1, 0],   # Cindervault - Forge Terraces
     243 => ["prismfall_cave", 0, 22, 1, 100, 1, 0],   # Cindervault - Caldera Gate
     249 => ["prismfall_cave", 0, 24, 1, 100, 1, 0],   # Cindervault - Slag Ward
