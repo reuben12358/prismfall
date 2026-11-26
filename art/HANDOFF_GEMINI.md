@@ -87,3 +87,30 @@ Themes: `violet, rose, blue, teal, green, gold, red, grey`.
 
 ## Delivering
 Return PNGs with the exact names and sizes above, in a `Graphics/` folder tree (`Trainers/`, `Characters/`, `Portraits/`). Installing is then a straight copy.
+
+## Real-engine art check, 2026-11-26 (Claude): what the captures showed
+
+Checked in mkxp-z with plans `artcheck` (`tools/harness/visual/artcheck/008_ArtChecksCapture.rb`) and `expr`
+(`tools/harness/visual/speech/009_ExpressiveCapture.rb`).
+
+**Good, nothing to do:** `PLAYER_A` / `PLAYER_B` walk, run, bike, surf and fishing sheets (anchored, no jump between
+sheets, rod frames read well); Venam's VS bust and violet screen; Wyrm Rider Tova's new 16-frame strip in the battle
+intro; the reskinned Brinecut B1F (545): the textured teal lake against the rose-salt floor reads well, so the earlier
+worry about the shore colour is settled; Juno / Kestrel faces, the dimmed listener and the emote balloons in a
+two-speaker conversation; Chapter 3 and 4 card paintings.
+
+**Please fix (art):**
+1. **`Trainers/FESTIVAL_VENAM.png`, the eyes.** In the rest frames (0–4 and 10–15) her eyes are white slits under heavy
+   lids with no irises, so at battle size her face reads blank. Only the spin peak (frames 5–9) shows a brown iris. Give
+   every frame her chestnut irises, as on the VS bust and portraits.
+2. **`Trainers/PARTNER_GIRATINA.png` (+ `_back`, and `Characters/trainer_PARTNER_GIRATINA.png`)**: a new partner class
+   from the Arceus finale (`[PARTNER_GIRATINA,Depths]`), with no art at all yet. It's the one error left in
+   `tools/check_art_wiring.py`. Follow the `PARTNER_OGRE` pattern.
+
+**Optional:**
+3. A seated surf-fishing sheet, `Characters/PLAYER_A_surffish_offset.png` / `PLAYER_B_…` (same 384×320 layout as
+   `_fish_offset`). While surfing, the game reuses the standing fishing sheet, so the legs show on top of the surf
+   mount (stock Essentials does the same). If you make them, Claude points `:surf_fish` at them in Core 026.
+4. **The message box.** The base project's `Windowskins/speech hgss 1.png` (96×48) has its white panel off-centre, so
+   the engine's middle slice stretches a grey band down the right ~60 px of every message box. A Prismfall speech
+   skin with a centred panel (same 96×48 size, 16 px border slice in the middle) would fix it everywhere.
