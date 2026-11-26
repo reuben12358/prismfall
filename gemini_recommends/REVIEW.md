@@ -433,3 +433,9 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 - **Drip - Nadir loop: ADOPTED.** Measured here: seam 0.1 dB (old file 4.3 dB in a mono mix), same peak. Installed in
   `audio/gemini_cc0/BGS/`. The 545 salt-lake fix answers our question.
 
+### `2026-11-26_claude-integration-handoff` §2c items 1-2 (244 / 249 story hooks) — **adopted** (Claude, 2026-11-26)
+- Built as a story layer, `mapgen/layouts/story_ch8.py`, on top of `cindervault_town.py` (tiles and Gemini's events
+  untouched; pages added to the Mother, the child and the watchman). 244: My Father (V129 4), Whose Is It
+  (`:ch8_lightstone`, V129 6 with S120 -> 7), Chestnuts (-> 8). 249: the Five Bells evacuation (V129 5-6) and the
+  ward afterwards by V110. Checked in the real engine on all three choice paths (`tools/harness/visual/ch8/008_Ch8StoryCapture.rb`).
+- Not done here: `AS_FORGE_REMEMBERS` (Ch17, the Trials owner's) and the MAP_AUDIO entries for 244 / 249.
