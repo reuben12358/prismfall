@@ -26073,6 +26073,981 @@ Pokemon = ARCHEOPS,61
     Nature = JOLLY
     IV = 0
     EV = 0
+# Map 780 The Jawbone Ridge
+#-------------------------------
+[HIKER,Gunnar]
+LoseText = Wind off the ridge. My birds hate it. So do my rocks, now.
+Pokemon = AVALUGG,60
+    Form = 1
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LYCANROC,61
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 8
+Pokemon = STEELIX,62
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GARGANACL,63
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Gunnar,100]
+LoseText = Wind off the ridge. My birds hate it. So do my rocks, now.
+Pokemon = AVALUGG,61
+    Form = 1
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LYCANROC,62
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 20
+Pokemon = STEELIX,63
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GARGANACL,64
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Gunnar,200]
+LoseText = Wind off the ridge. My birds hate it. So do my rocks, now.
+Pokemon = AVALUGG,59
+    Form = 1
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LYCANROC,60
+    Ability = KEENEYE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = STEELIX,61
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GARGANACL,62
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 780 The Jawbone Ridge
+#-------------------------------
+[COOLTRAINER_F,Rosalind]
+LoseText = Not the Rosalind you're thinking of. Thankfully.
+Pokemon = SKARMORY,61
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MAMOSWINE,62
+    Ability = SNOWCLOAK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KINGDRA,63
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 8
+Pokemon = LUCARIO,64
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[COOLTRAINER_F,Rosalind,100]
+LoseText = Not the Rosalind you're thinking of. Thankfully.
+Pokemon = SKARMORY,62
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MAMOSWINE,63
+    Ability = SNOWCLOAK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KINGDRA,64
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 20
+Pokemon = LUCARIO,65
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[COOLTRAINER_F,Rosalind,200]
+LoseText = Not the Rosalind you're thinking of. Thankfully.
+Pokemon = SKARMORY,60
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MAMOSWINE,61
+    Ability = SNOWCLOAK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KINGDRA,62
+    Ability = SNIPER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = LUCARIO,63
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 780 The Jawbone Ridge
+#-------------------------------
+[COOLTRAINER_M,Brask]
+LoseText = Going home the long way. Even longer now.
+Pokemon = TURTONATOR,62
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = FLYGON,63
+    Ability = LEVITATE
+    Nature = JOLLY
+    IV = 8
+Pokemon = SALAMENCE,64
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[COOLTRAINER_M,Brask,100]
+LoseText = Going home the long way. Even longer now.
+Pokemon = TURTONATOR,63
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = FLYGON,64
+    Ability = LEVITATE
+    Nature = JOLLY
+    IV = 20
+Pokemon = SALAMENCE,65
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[COOLTRAINER_M,Brask,200]
+LoseText = Going home the long way. Even longer now.
+Pokemon = TURTONATOR,61
+    Ability = SHELLARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = FLYGON,62
+    Ability = LEVITATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SALAMENCE,63
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 781 Hindmoor
+#-------------------------------
+[CHANNELER,Morag]
+LoseText = The moor keeps its own. It'll keep you, if you're not careful.
+Pokemon = GOURGEIST,61
+    Ability = FRISK
+    Nature = JOLLY
+    IV = 8
+Pokemon = TREVENANT,62
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CURSOLA,63
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = MISMAGIUS,64
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[CHANNELER,Morag,100]
+LoseText = The moor keeps its own. It'll keep you, if you're not careful.
+Pokemon = GOURGEIST,62
+    Ability = FRISK
+    Nature = JOLLY
+    IV = 20
+Pokemon = TREVENANT,63
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CURSOLA,64
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = MISMAGIUS,65
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[CHANNELER,Morag,200]
+LoseText = The moor keeps its own. It'll keep you, if you're not careful.
+Pokemon = GOURGEIST,60
+    Ability = FRISK
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = TREVENANT,61
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CURSOLA,62
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = MISMAGIUS,63
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 781 Hindmoor
+#-------------------------------
+[BLACKBELT,Ansel]
+LoseText = A pilgrim walks. Today I mostly fell over.
+Pokemon = SNEASLER,62
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 8
+Pokemon = MEDICHAM,63
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HITMONTOP,64
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LUCARIO,65
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[BLACKBELT,Ansel,100]
+LoseText = A pilgrim walks. Today I mostly fell over.
+Pokemon = SNEASLER,63
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 20
+Pokemon = MEDICHAM,64
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HITMONTOP,65
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LUCARIO,66
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[BLACKBELT,Ansel,200]
+LoseText = A pilgrim walks. Today I mostly fell over.
+Pokemon = SNEASLER,61
+    Ability = PRESSURE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MEDICHAM,62
+    Ability = PUREPOWER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HITMONTOP,63
+    Ability = TECHNICIAN
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LUCARIO,64
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 781 Hindmoor
+#-------------------------------
+[ROCKER,Cassidy]
+LoseText = Inverse road, inverse result. Should've played it backwards.
+Pokemon = MALAMAR,62
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SKUNTANK,63
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = HOUNDOOM,64
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 8
+Pokemon = TOXTRICITY,65
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[ROCKER,Cassidy,100]
+LoseText = Inverse road, inverse result. Should've played it backwards.
+Pokemon = MALAMAR,63
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SKUNTANK,64
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = HOUNDOOM,65
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 20
+Pokemon = TOXTRICITY,66
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[ROCKER,Cassidy,200]
+LoseText = Inverse road, inverse result. Should've played it backwards.
+Pokemon = MALAMAR,61
+    Ability = SUCTIONCUPS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SKUNTANK,62
+    Ability = STENCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = HOUNDOOM,63
+    Ability = EARLYBIRD
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = TOXTRICITY,64
+    Ability = PUNKROCK
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 790 Downflame Road
+#-------------------------------
+[GENTLEMAN,Ashby]
+LoseText = Flames that burn downward. One gets used to it. One does not get used to this.
+Pokemon = SLOWKING,62
+    Form = 1
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 8
+Pokemon = MRRIME,63
+    Ability = TANGLEDFEET
+    Nature = MODEST
+    IV = 8
+Pokemon = AEGISLASH,64
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 8
+Pokemon = POLTEAGEIST,65
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[GENTLEMAN,Ashby,100]
+LoseText = Flames that burn downward. One gets used to it. One does not get used to this.
+Pokemon = SLOWKING,63
+    Form = 1
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 20
+Pokemon = MRRIME,64
+    Ability = TANGLEDFEET
+    Nature = MODEST
+    IV = 20
+Pokemon = AEGISLASH,65
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 20
+Pokemon = POLTEAGEIST,66
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[GENTLEMAN,Ashby,200]
+LoseText = Flames that burn downward. One gets used to it. One does not get used to this.
+Pokemon = SLOWKING,61
+    Form = 1
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = MRRIME,62
+    Ability = TANGLEDFEET
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = AEGISLASH,63
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = POLTEAGEIST,64
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 790 Downflame Road
+#-------------------------------
+[PSYCHIC_F,Seren]
+LoseText = I read the road. The road didn't mention you.
+Pokemon = MUSHARNA,62
+    Ability = FOREWARN
+    Nature = MODEST
+    IV = 8
+Pokemon = INDEEDEE,63
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 8
+Pokemon = BRONZONG,64
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = GARDEVOIR,65
+    Ability = TRACE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[PSYCHIC_F,Seren,100]
+LoseText = I read the road. The road didn't mention you.
+Pokemon = MUSHARNA,63
+    Ability = FOREWARN
+    Nature = MODEST
+    IV = 20
+Pokemon = INDEEDEE,64
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 20
+Pokemon = BRONZONG,65
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = GARDEVOIR,66
+    Ability = TRACE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[PSYCHIC_F,Seren,200]
+LoseText = I read the road. The road didn't mention you.
+Pokemon = MUSHARNA,61
+    Ability = FOREWARN
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = INDEEDEE,62
+    Ability = INNERFOCUS
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = BRONZONG,63
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = GARDEVOIR,64
+    Ability = TRACE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 800 The Noonless Road
+#-------------------------------
+[CHANNELER,Wenna]
+LoseText = No noon here. Never was. You brought a little.
+Pokemon = TYPHLOSION,64
+    Form = 1
+    Ability = BLAZE
+    Nature = TIMID
+    IV = 8
+Pokemon = FROSLASS,65
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 8
+Pokemon = BANETTE,66
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DUSKNOIR,67
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CHANNELER,Wenna,100]
+LoseText = No noon here. Never was. You brought a little.
+Pokemon = TYPHLOSION,65
+    Form = 1
+    Ability = BLAZE
+    Nature = TIMID
+    IV = 20
+Pokemon = FROSLASS,66
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 20
+Pokemon = BANETTE,67
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DUSKNOIR,68
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CHANNELER,Wenna,200]
+LoseText = No noon here. Never was. You brought a little.
+Pokemon = TYPHLOSION,63
+    Form = 1
+    Ability = BLAZE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = FROSLASS,64
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = BANETTE,65
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DUSKNOIR,66
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 800 The Noonless Road
+#-------------------------------
+[CHANNELER,Ilse]
+LoseText = Something walked with you here. It's gone ahead.
+Pokemon = DRAKLOAK,65
+    Ability = CLEARBODY
+    Nature = JOLLY
+    IV = 8
+Pokemon = MIMIKYU,66
+    Ability = DISGUISE
+    Nature = JOLLY
+    IV = 8
+Pokemon = HATTERENE,67
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 8
+Pokemon = GENGAR,68
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[CHANNELER,Ilse,100]
+LoseText = Something walked with you here. It's gone ahead.
+Pokemon = DRAKLOAK,66
+    Ability = CLEARBODY
+    Nature = JOLLY
+    IV = 20
+Pokemon = MIMIKYU,67
+    Ability = DISGUISE
+    Nature = JOLLY
+    IV = 20
+Pokemon = HATTERENE,68
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 20
+Pokemon = GENGAR,69
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[CHANNELER,Ilse,200]
+LoseText = Something walked with you here. It's gone ahead.
+Pokemon = DRAKLOAK,64
+    Ability = CLEARBODY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = MIMIKYU,65
+    Ability = DISGUISE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = HATTERENE,66
+    Ability = ANTICIPATION
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GENGAR,67
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 804 Barrow of the Wardens
+#-------------------------------
+[GENTLEMAN,Faraday]
+LoseText = I swore an oath to these halls. It didn't mention losing.
+Pokemon = SAMUROTT,65
+    Form = 1
+    Ability = TORRENT
+    Nature = JOLLY
+    IV = 8
+Pokemon = GOLURK,66
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DOUBLADE,67
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = AEGISLASH,68
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 8
+#-------------------------------
+[GENTLEMAN,Faraday,100]
+LoseText = I swore an oath to these halls. It didn't mention losing.
+Pokemon = SAMUROTT,66
+    Form = 1
+    Ability = TORRENT
+    Nature = JOLLY
+    IV = 20
+Pokemon = GOLURK,67
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DOUBLADE,68
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = AEGISLASH,69
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 20
+#-------------------------------
+[GENTLEMAN,Faraday,200]
+LoseText = I swore an oath to these halls. It didn't mention losing.
+Pokemon = SAMUROTT,64
+    Form = 1
+    Ability = TORRENT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = GOLURK,65
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DOUBLADE,66
+    Ability = NOGUARD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = AEGISLASH,67
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 0
+    EV = 0
+# Map 392 Gravenmoor Gym - Dead Nave
+#-------------------------------
+[CHANNELER,Edwina]
+LoseText = The bell's for the living. You'll hear it for a while.
+Pokemon = DRIFBLIM,61
+    Ability = AFTERMATH
+    Nature = MODEST
+    IV = 8
+Pokemon = BANETTE,62
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CHANDELURE,63
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[CHANNELER,Edwina,100]
+LoseText = The bell's for the living. You'll hear it for a while.
+Pokemon = DRIFBLIM,62
+    Ability = AFTERMATH
+    Nature = MODEST
+    IV = 20
+Pokemon = BANETTE,63
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CHANDELURE,64
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[CHANNELER,Edwina,200]
+LoseText = The bell's for the living. You'll hear it for a while.
+Pokemon = DRIFBLIM,60
+    Ability = AFTERMATH
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BANETTE,61
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CHANDELURE,62
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 392 Gravenmoor Gym - Dead Nave
+#-------------------------------
+[CHANNELER,Beatrix]
+LoseText = They don't move the pews. They just watch you do it.
+Pokemon = JELLICENT,62
+    Ability = CURSEDBODY
+    Nature = MODEST
+    IV = 8
+Pokemon = COFAGRIGUS,63
+    Ability = MUMMY
+    Nature = MODEST
+    IV = 8
+Pokemon = DUSKNOIR,64
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CHANNELER,Beatrix,100]
+LoseText = They don't move the pews. They just watch you do it.
+Pokemon = JELLICENT,63
+    Ability = CURSEDBODY
+    Nature = MODEST
+    IV = 20
+Pokemon = COFAGRIGUS,64
+    Ability = MUMMY
+    Nature = MODEST
+    IV = 20
+Pokemon = DUSKNOIR,65
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CHANNELER,Beatrix,200]
+LoseText = They don't move the pews. They just watch you do it.
+Pokemon = JELLICENT,61
+    Ability = CURSEDBODY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = COFAGRIGUS,62
+    Ability = MUMMY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = DUSKNOIR,63
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 392 Gravenmoor Gym - Dead Nave
+#-------------------------------
+[CHANNELER,Grizel]
+LoseText = Ysolde sang for them once. You fight like a hymn.
+Pokemon = SABLEYE,62
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MISMAGIUS,63
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+Pokemon = GENGAR,64
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 8
+#-------------------------------
+[CHANNELER,Grizel,100]
+LoseText = Ysolde sang for them once. You fight like a hymn.
+Pokemon = SABLEYE,63
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MISMAGIUS,64
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+Pokemon = GENGAR,65
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 20
+#-------------------------------
+[CHANNELER,Grizel,200]
+LoseText = Ysolde sang for them once. You fight like a hymn.
+Pokemon = SABLEYE,61
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MISMAGIUS,62
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = GENGAR,63
+    Ability = CURSEDBODY
+    Nature = TIMID
+    IV = 0
+    EV = 0
+# Map 392 Gravenmoor Gym - Dead Nave
+#-------------------------------
+[GENTLEMAN,Mortimer]
+LoseText = One doesn't die in the Dead Nave. One merely sits down.
+Pokemon = SINISTCHA,63
+    Ability = HOSPITALITY
+    Nature = MODEST
+    IV = 8
+Pokemon = GHOLDENGO,64
+    Ability = GOODASGOLD
+    Nature = MODEST
+    IV = 8
+Pokemon = AEGISLASH,65
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 8
+#-------------------------------
+[GENTLEMAN,Mortimer,100]
+LoseText = One doesn't die in the Dead Nave. One merely sits down.
+Pokemon = SINISTCHA,64
+    Ability = HOSPITALITY
+    Nature = MODEST
+    IV = 20
+Pokemon = GHOLDENGO,65
+    Ability = GOODASGOLD
+    Nature = MODEST
+    IV = 20
+Pokemon = AEGISLASH,66
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 20
+#-------------------------------
+[GENTLEMAN,Mortimer,200]
+LoseText = One doesn't die in the Dead Nave. One merely sits down.
+Pokemon = SINISTCHA,62
+    Ability = HOSPITALITY
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GHOLDENGO,63
+    Ability = GOODASGOLD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = AEGISLASH,64
+    Ability = STANCECHANGE
+    Nature = BOLD
+    IV = 0
+    EV = 0
+# Map 392 Gravenmoor Gym - Dead Nave
+#-------------------------------
+[LADY,Ermengarde]
+LoseText = My veil is three hundred years old. So is that line.
+Pokemon = FROSLASS,63
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 8
+Pokemon = POLTEAGEIST,64
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 8
+Pokemon = CHANDELURE,65
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LADY,Ermengarde,100]
+LoseText = My veil is three hundred years old. So is that line.
+Pokemon = FROSLASS,64
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 20
+Pokemon = POLTEAGEIST,65
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 20
+Pokemon = CHANDELURE,66
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LADY,Ermengarde,200]
+LoseText = My veil is three hundred years old. So is that line.
+Pokemon = FROSLASS,62
+    Ability = SNOWCLOAK
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = POLTEAGEIST,63
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CHANDELURE,64
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 392 Gravenmoor Gym - Dead Nave
+#-------------------------------
+[HOLLOW_GRUNT_F,Acolyte]
+LoseText = The Mourner taught us grief. You're teaching us something else.
+Pokemon = TREVENANT,64
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DUSKNOIR,65
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SKELEDIRGE,66
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[HOLLOW_GRUNT_F,Acolyte,100]
+LoseText = The Mourner taught us grief. You're teaching us something else.
+Pokemon = TREVENANT,65
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DUSKNOIR,66
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SKELEDIRGE,67
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[HOLLOW_GRUNT_F,Acolyte,200]
+LoseText = The Mourner taught us grief. You're teaching us something else.
+Pokemon = TREVENANT,63
+    Ability = FRISK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DUSKNOIR,64
+    Ability = PRESSURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SKELEDIRGE,65
+    Ability = BLAZE
+    Nature = MODEST
+    IV = 0
+    EV = 0
 # Map 861 The Thornwar Marches
 #-------------------------------
 [COOLTRAINER_F,Isolde]

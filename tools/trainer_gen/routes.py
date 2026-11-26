@@ -67,6 +67,8 @@ def ROUTES(P):
         # Ch14 script roster (story density sections, 2026-11-26)
         360: (0, 63, {}), 370: (0, 63, {}), 371: (0, 63, {}), 372: (0, 63, {}), 760: (0, 63, {}), 761: (0, 63, {}), 764: (0, 63, {}), 765: (0, 63, {}),
         772: (0, 63, {}), 773: (0, 63, {}), 783: (0, 67, {}), 810: (0, 67, {}),
+        # Ch15 script roster (story density sections, 2026-11-26)
+        392: (0, 67, {}), 780: (0, 67, {}), 781: (0, 67, {}), 790: (0, 67, {}), 800: (0, 71, {}), 804: (0, 71, {}),
         # Coverage fill, Ch19 (segment 17, cap 85)
         861: (0, 85, {}), 864: (0, 85, {}),
     }
@@ -872,6 +874,54 @@ def ROUTES(P):
     # Ruinmaniac Petra: the Cragholm museum's fossils
     t("Map 372 Cragholm Gym - Quarry", "RUINMANIAC", "Petra", "The museum wants them back by six. They'll be late.",
       [m("OMASTAR", 59, "SHELLARMOR", "MODEST"), m("CRADILY", 60, "SUCTIONCUPS", "ADAMANT"), m("ARMALDO", 61, "BATTLEARMOR", "ADAMANT"), m("ARCHEOPS", 62, "DEFEATIST", "JOLLY")])
+    # ---------------------------------------------------------------------------------------------------------------
+    # Ch15 - the Jawbone Ridge, Hindmoor, Downflame Road, the Noonless Road and the Barrow; Gym 14 (cap 67, 71 after the badge; story/34_SCRIPT_CH15.md roster)
+    # Hiker Gunnar: Mountain: wind-boosted Flying is bad news for him; the Hisuian Avalugg is the ridge's old ice
+    t("Map 780 The Jawbone Ridge", "HIKER", "Gunnar", "Wind off the ridge. My birds hate it. So do my rocks, now.",
+      [m("AVALUGG", 60, "STRONGJAW", "ADAMANT", form=1), m("LYCANROC", 61, "KEENEYE", "JOLLY"), m("STEELIX", 62, "STURDY", "ADAMANT"), m("GARGANACL", 63, "STURDY", "ADAMANT")])
+    # Cooltrainer F Rosalind: Ace Trainer
+    t("Map 780 The Jawbone Ridge", "COOLTRAINER_F", "Rosalind", "Not the Rosalind you're thinking of. Thankfully.",
+      [m("SKARMORY", 61, "KEENEYE", "ADAMANT"), m("MAMOSWINE", 62, "SNOWCLOAK", "ADAMANT"), m("KINGDRA", 63, "SNIPER", "JOLLY"), m("LUCARIO", 64, "INNERFOCUS", "TIMID")])
+    # Cooltrainer M Brask: Dragon Tamer Brask, a deserter with no uniform
+    t("Map 780 The Jawbone Ridge", "COOLTRAINER_M", "Brask", "Going home the long way. Even longer now.",
+      [m("TURTONATOR", 62, "SHELLARMOR", "MODEST"), m("FLYGON", 63, "LEVITATE", "JOLLY"), m("SALAMENCE", 64, "INTIMIDATE", "JOLLY")])
+    # Channeler Morag: Hex Maniac
+    t("Map 781 Hindmoor", "CHANNELER", "Morag", "The moor keeps its own. It'll keep you, if you're not careful.",
+      [m("GOURGEIST", 61, "FRISK", "JOLLY"), m("TREVENANT", 62, "FRISK", "ADAMANT"), m("CURSOLA", 63, "WEAKARMOR", "MODEST"), m("MISMAGIUS", 64, "LEVITATE", "TIMID")])
+    # Blackbelt Ansel: Pilgrim Ansel
+    t("Map 781 Hindmoor", "BLACKBELT", "Ansel", "A pilgrim walks. Today I mostly fell over.",
+      [m("SNEASLER", 62, "PRESSURE", "JOLLY"), m("MEDICHAM", 63, "PUREPOWER", "ADAMANT"), m("HITMONTOP", 64, "TECHNICIAN", "ADAMANT"), m("LUCARIO", 65, "INNERFOCUS", "TIMID")])
+    # Rocker Cassidy: a punk (script: Guitarist); Inverse: Poison loves it
+    t("Map 781 Hindmoor", "ROCKER", "Cassidy", "Inverse road, inverse result. Should've played it backwards.",
+      [m("MALAMAR", 62, "SUCTIONCUPS", "ADAMANT"), m("SKUNTANK", 63, "STENCH", "ADAMANT"), m("HOUNDOOM", 64, "EARLYBIRD", "TIMID"), m("TOXTRICITY", 65, "PUNKROCK", "MODEST")])
+    # Gentleman Ashby: Mr. Ashby
+    t("Map 790 Downflame Road", "GENTLEMAN", "Ashby", "Flames that burn downward. One gets used to it. One does not get used to this.",
+      [m("SLOWKING", 62, "OWNTEMPO", "MODEST", form=1), m("MRRIME", 63, "TANGLEDFEET", "MODEST"), m("AEGISLASH", 64, "STANCECHANGE", "BOLD"), m("POLTEAGEIST", 65, "WEAKARMOR", "MODEST")])
+    t("Map 790 Downflame Road", "PSYCHIC_F", "Seren", "I read the road. The road didn't mention you.",
+      [m("MUSHARNA", 62, "FOREWARN", "MODEST"), m("INDEEDEE", 63, "INNERFOCUS", "TIMID"), m("BRONZONG", 64, "LEVITATE", "ADAMANT"), m("GARDEVOIR", 65, "TRACE", "MODEST")])
+    # Channeler Wenna: Medium Wenna; the Hisuian Typhlosion's flame is a ghost-fire
+    t("Map 800 The Noonless Road", "CHANNELER", "Wenna", "No noon here. Never was. You brought a little.",
+      [m("TYPHLOSION", 64, "BLAZE", "TIMID", form=1), m("FROSLASS", 65, "SNOWCLOAK", "JOLLY"), m("BANETTE", 66, "FRISK", "ADAMANT"), m("DUSKNOIR", 67, "PRESSURE", "ADAMANT")])
+    # Channeler Ilse: Hex Maniac
+    t("Map 800 The Noonless Road", "CHANNELER", "Ilse", "Something walked with you here. It's gone ahead.",
+      [m("DRAKLOAK", 65, "CLEARBODY", "JOLLY"), m("MIMIKYU", 66, "DISGUISE", "JOLLY"), m("HATTERENE", 67, "ANTICIPATION", "MODEST"), m("GENGAR", 68, "CURSEDBODY", "TIMID")])
+    # Gentleman Faraday: Revenant Lord Faraday (Barrow, Cave); an old Hisuian blade at his side
+    t("Map 804 Barrow of the Wardens", "GENTLEMAN", "Faraday", "I swore an oath to these halls. It didn't mention losing.",
+      [m("SAMUROTT", 65, "TORRENT", "JOLLY", form=1), m("GOLURK", 66, "IRONFIST", "ADAMANT"), m("DOUBLADE", 67, "NOGUARD", "ADAMANT"), m("AEGISLASH", 68, "STANCECHANGE", "BOLD")])
+    t("Map 392 Gravenmoor Gym - Dead Nave", "CHANNELER", "Edwina", "The bell's for the living. You'll hear it for a while.",
+      [m("DRIFBLIM", 61, "AFTERMATH", "MODEST"), m("BANETTE", 62, "FRISK", "ADAMANT"), m("CHANDELURE", 63, "FLASHFIRE", "MODEST")])
+    t("Map 392 Gravenmoor Gym - Dead Nave", "CHANNELER", "Beatrix", "They don't move the pews. They just watch you do it.",
+      [m("JELLICENT", 62, "CURSEDBODY", "MODEST"), m("COFAGRIGUS", 63, "MUMMY", "MODEST"), m("DUSKNOIR", 64, "PRESSURE", "ADAMANT")])
+    t("Map 392 Gravenmoor Gym - Dead Nave", "CHANNELER", "Grizel", "Ysolde sang for them once. You fight like a hymn.",
+      [m("SABLEYE", 62, "KEENEYE", "ADAMANT"), m("MISMAGIUS", 63, "LEVITATE", "TIMID"), m("GENGAR", 64, "CURSEDBODY", "TIMID")])
+    # Gentleman Mortimer: the revenant
+    t("Map 392 Gravenmoor Gym - Dead Nave", "GENTLEMAN", "Mortimer", "One doesn't die in the Dead Nave. One merely sits down.",
+      [m("SINISTCHA", 63, "HOSPITALITY", "MODEST"), m("GHOLDENGO", 64, "GOODASGOLD", "MODEST"), m("AEGISLASH", 65, "STANCECHANGE", "BOLD")])
+    t("Map 392 Gravenmoor Gym - Dead Nave", "LADY", "Ermengarde", "My veil is three hundred years old. So is that line.",
+      [m("FROSLASS", 63, "SNOWCLOAK", "JOLLY"), m("POLTEAGEIST", 64, "WEAKARMOR", "MODEST"), m("CHANDELURE", 65, "FLASHFIRE", "MODEST")])
+    # Hollow Grunt F Acolyte: the Mourner-acolyte (HOLLOW)
+    t("Map 392 Gravenmoor Gym - Dead Nave", "HOLLOW_GRUNT_F", "Acolyte", "The Mourner taught us grief. You're teaching us something else.",
+      [m("TREVENANT", 64, "FRISK", "ADAMANT"), m("DUSKNOIR", 65, "PRESSURE", "ADAMANT"), m("SKELEDIRGE", 66, "BLAZE", "MODEST")])
     # ---------------------------------------------------------------------------------------------------------------
     # Ch19 - two script-roster rows (story/38_SCRIPT_CH19.md) that carry the last four species (cap 85)
     # Cooltrainer F Isolde: script roster (story/38_SCRIPT_CH19.md): Ace Trainer Isolde
