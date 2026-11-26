@@ -469,8 +469,8 @@ ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard 
   and type follow the arena's ascendant Plate (the §6 "Project NULL" hook, now built in Bosses, not Core); the conduit:
   only if `KESTREL_FALLEN`, `:ch21_reach_kestrel` is asked in battle when bar 2 breaks, and on `:let_go` NULL
   regenerates every round of bar 3 (Casual 1/16, Standard 1/8, Hard 1/6); `VOSS_FEIGNED`: −1 to every stat for 3 rounds.
-  **Retuned 2026-11-26** (Voss's NULL, Standard / Hard): every stat stage resets at a break, its own boosts too (it was
-  drops only); Quent's NULL keeps the drops-only reset.
+  **Retuned 2026-11-26** (Voss's NULL, Standard only): every stat stage resets at a break, its own boosts too (it was
+  drops only); Hard and Quent's NULL keep the drops-only reset.
 - **Giratina's Origin trial** (`:GIRATINA_ORIGIN_TRIAL`, Ruin R1): Origin Forme, Lv 72, `:INVERSE`, bars 2 / 3 / 4,
   Adamant 252 HP / 252 Atk; Casual HP ×0.75 and offence ×0.6. It ends as a win the first round the player holds back
   once 1 bar is broken (Hard: 2), or when every bar is broken. The AI never holds back, so BORI is the harder road.
@@ -488,9 +488,9 @@ ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard 
 | Fight (cap) | Casual typ / prep | Standard typ / prep | Hard typ / prep | Before (Std typ / prep) |
 |---|---|---|---|---|
 | Final: Valen, Zygarde with bars (96), retuned 2026-11-26 | 57% / 100% | 2% / 28% | 2% / 10% | 3% / 48% (bars, untuned: 2% / 18%; Hard 0% / 0%) |
-| Hijack: Voss, NULL 3 bars (100), retuned 2026-11-26 | 58% / 100% | 0% / 28% (120) | 0% / 23% (120) | 7% / 68% (bars, untuned: 0% / 13%, Hard 0% / 12%) |
+| Hijack: Voss, NULL 3 bars (100), retuned 2026-11-26 | 58% / 100% | 0% / 28% (120) | 0% / 13% (Standard-only reset; 23% with it on Hard) | 7% / 68% (bars, untuned: 0% / 13%, Hard 0% / 12%) |
 | Hijack: Quent, NULL 3 bars (100), unchanged | 42% / 100% | 0% / 37–45% | 0% / 18–22% | 15% / 87% |
-| Hijack: Voss, the conduit live (`:let_go`), retuned | 53% / 100% | 2% / 29% (120) | 0% / 17% (120) | 0% / 10%, Hard 0% / 10% before |
+| Hijack: Voss, the conduit live (`:let_go`), retuned | 53% / 100% | 2% / 29% (120) | 0% / 10% (Standard-only reset; 17% with it on Hard) | 0% / 10%, Hard 0% / 10% before |
 | Giratina's Origin trial, fought to the end (71) | 98% / 95% | 38% / 27% | 0% / 0% | new |
 | Arceus, Bound, every Warden releases (100) | 43% / 60% | 3% / 37% | 3% / 13% | 0% / 0% before the retune |
 | Arceus, Bound, one Warden in three refuses (refusal boost retuned 2026-11-26) | 15% / 35% | 2% / 18% (120) | 0% / 8% (120) | 0% / 0% |
@@ -519,9 +519,10 @@ no-strategy harness: Standard typical under ~10%, Standard prepared 25–40%, Ha
   are unchanged; Casual (Def / Sp. Def) and War / Judgment (every lock forced) are unchanged.
 - *Voss (second pass).* Cause, from the prepared logs: NULL's Swords Dance and Flame Charge carried across its three
   bars (a break reset only drops) and snowballed; most prepared teams fell on bars 1–2, and those that reached bar 3
-  mostly won. Fix: Voss's NULL resets every stat stage at a break on Standard / Hard. Bar HP, offence, the conduit's
+  mostly won. Fix: Voss's NULL resets every stat stage at a break, on Standard only. Bar HP, offence, the conduit's
   regeneration, the in-battle choice and his lines are untouched. Quent (same NULL, already 37–45% / 18–22%) keeps the
-  drops-only reset. Hard Voss at 23% (120 fights; 18% at 60) sits on the band's top edge.
+  drops-only reset. On Hard the reset pushed Voss to 23% prepared (above the 10–20% band he was already in at 12%), so
+  Hard keeps the drops-only reset: 13% prepared, 10% with the conduit live (60 fights). Standard: 27% / 20% at 60.
 
 **Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,
 1 / 2 / 3 bars, Standard HP ×1.5 and ×1.15–1.25 elsewhere, Hard HP ×1.5 and ×1.2–1.25. A typical Lv 49–51 six (60 a

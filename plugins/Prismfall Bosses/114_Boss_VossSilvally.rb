@@ -137,12 +137,11 @@ module Prismfall
       end
     }
 
-    # Voss's NULL, Standard / Hard: every stat stage resets at a break, its own boosts too (2026-11-26: Swords Dance and
-    # Flame Charge carried across the bars and snowballed; prepared teams won 13% / 12%). The feint's -1 goes with them.
-    # Quent's NULL keeps the negative-only reset (his cell was already 45% / 18%).
+    # Voss's NULL, Standard only: every stat stage resets at a break, its own boosts too (2026-11-26: Swords Dance and
+    # Flame Charge carried across the bars and snowballed; prepared teams won 13%). The feint's -1 goes with them.
+    # Hard keeps the negative-only reset: it was already 12% prepared, inside the 10-20% band (with the reset it went to
+    # 23%). Quent's NULL keeps the negative-only reset too (his cell was already 45% / 18%).
     NULL_ON_BREAK = { :STANDARD => { :cure_status => true, :reset_stats => true,
-                                     :proc => proc { |battle, _b, _st| Prismfall::Bosses.null_state(battle)[:feigned] = 0 } },
-                      :HARD     => { :cure_status => true, :reset_stats => true,
                                      :proc => proc { |battle, _b, _st| Prismfall::Bosses.null_state(battle)[:feigned] = 0 } },
                       :default  => { :cure_status => true, :reset_stats => :negative } }
 
