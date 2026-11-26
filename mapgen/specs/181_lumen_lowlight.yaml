@@ -17,12 +17,12 @@ tileset: 60
 events:
 - type: sign
   name: Door plate 0
-  at: [10, 10]
+  at: [11, 10]
   post: false
   text: Locked. Somebody inside is practising the trumpet. Badly. With feeling.
 - type: sign
   name: Door plate 1
-  at: [16, 10]
+  at: [17, 10]
   post: false
   text: 'A brass plate: CHANDLER & SONS, LAMP-MAKERS SINCE BEFORE.'
 - type: sign
@@ -32,109 +32,94 @@ events:
   text: Locked. The doorbell plays four notes of the anniversary song.
 - type: sign
   name: Door plate 3
-  at: [25, 10]
+  at: [33, 10]
   post: false
   text: 'A brass plate: PRIVATE RESIDENCE. A smaller plate under it: NO HAWKERS. A smaller one under that: NO, REALLY.'
 - type: sign
   name: Door plate 4
-  at: [30, 10]
+  at: [38, 10]
   post: false
   text: Locked. Through the glass, a hallway lit like noon.
 - type: sign
   name: Door plate 5
-  at: [36, 10]
+  at: [43, 10]
   post: false
   text: 'A brass plate: OFFICES OF THE SALLOW LINE. Closed for the anniversary.'
 - type: sign
   name: Door plate 6
-  at: [41, 10]
+  at: [51, 10]
   post: false
   text: 'Locked. A note in the door: GONE TO THE GALA (STANDING OUTSIDE IT).'
 - type: sign
   name: Door plate 7
-  at: [45, 10]
+  at: [54, 10]
   post: false
   text: 'A brass plate: LATTICE ENGINEERS'' GUILD, LUMEN CHAPTER.'
 - type: sign
   name: Door plate 8
-  at: [53, 10]
+  at: [12, 23]
   post: false
   text: Locked. Somebody inside is practising the trumpet. Badly. With feeling.
 - type: sign
   name: Door plate 9
-  at: [12, 23]
+  at: [18, 23]
   post: false
   text: 'A brass plate: CHANDLER & SONS, LAMP-MAKERS SINCE BEFORE.'
 - type: sign
   name: Door plate 10
-  at: [18, 23]
+  at: [39, 23]
   post: false
   text: Locked. The doorbell plays four notes of the anniversary song.
 - type: sign
   name: Door plate 11
-  at: [39, 23]
+  at: [48, 23]
   post: false
   text: 'A brass plate: PRIVATE RESIDENCE. A smaller plate under it: NO HAWKERS. A smaller one under that: NO, REALLY.'
 - type: sign
   name: Door plate 12
-  at: [49, 23]
+  at: [14, 36]
   post: false
   text: Locked. Through the glass, a hallway lit like noon.
 - type: sign
   name: Door plate 13
-  at: [54, 23]
+  at: [19, 36]
   post: false
   text: 'A brass plate: OFFICES OF THE SALLOW LINE. Closed for the anniversary.'
 - type: sign
   name: Door plate 14
-  at: [13, 36]
+  at: [31, 36]
   post: false
   text: 'Locked. A note in the door: GONE TO THE GALA (STANDING OUTSIDE IT).'
 - type: sign
   name: Door plate 15
-  at: [18, 36]
+  at: [36, 36]
   post: false
   text: 'A brass plate: LATTICE ENGINEERS'' GUILD, LUMEN CHAPTER.'
 - type: sign
   name: Door plate 16
-  at: [23, 36]
+  at: [41, 36]
   post: false
   text: Locked. Somebody inside is practising the trumpet. Badly. With feeling.
 - type: sign
   name: Door plate 17
-  at: [31, 36]
+  at: [49, 36]
   post: false
   text: 'A brass plate: CHANDLER & SONS, LAMP-MAKERS SINCE BEFORE.'
 - type: sign
   name: Door plate 18
-  at: [37, 36]
+  at: [53, 36]
   post: false
   text: Locked. The doorbell plays four notes of the anniversary song.
 - type: sign
   name: Door plate 19
-  at: [42, 36]
+  at: [3, 23]
   post: false
   text: 'A brass plate: PRIVATE RESIDENCE. A smaller plate under it: NO HAWKERS. A smaller one under that: NO, REALLY.'
 - type: sign
   name: Door plate 20
-  at: [50, 36]
-  post: false
-  text: Locked. Through the glass, a hallway lit like noon.
-- type: sign
-  name: Door plate 21
-  at: [55, 36]
-  post: false
-  text: 'A brass plate: OFFICES OF THE SALLOW LINE. Closed for the anniversary.'
-- type: sign
-  name: Door plate 22
-  at: [3, 23]
-  post: false
-  text: 'Locked. A note in the door: GONE TO THE GALA (STANDING OUTSIDE IT).'
-- type: sign
-  name: Door plate 23
   at: [3, 36]
   post: false
-  text: 'A brass plate: LATTICE ENGINEERS'' GUILD, LUMEN CHAPTER.'
+  text: Locked. Through the glass, a hallway lit like noon.
 - type: event
   name: Dex
   pages:

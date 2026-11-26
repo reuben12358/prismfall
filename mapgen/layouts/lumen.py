@@ -338,11 +338,15 @@ def build_lowlight(shattered=False):
     W, H = 60, 44
     m = City(W, H, 181 if not shattered else 608, base='l')
     m.ht[:] = 1; m.roof_kind = 'T'
-    # the Spire's foot (north wall), the drop to Nadir (south and east)
+    # the Spire's foot (north wall), the drop to Nadir (south and east stepped parapet)
     m.cls[0:3, :] = 'x'; m.ht[0:3, :] = 2
     m.cls[0:3, 0:8] = 'p'; m.ht[0:3, 0:8] = 1
     m.cls[41:, :] = 'x'; m.ht[41:, :] = 0
-    m.cls[:, 57:] = 'x'; m.ht[:, 57:] = 0
+    m.cls[:, 58:] = 'x'; m.ht[:, 58:] = 0
+    if not shattered:
+        m.cls[3:41, 57] = 'l'; m.ht[3:41, 57] = 1             # Stepped east stone parapet coping ledge (replaces starry-void pylon strip!)
+    else:
+        m.cls[:, 57:] = 'x'; m.ht[:, 57:] = 0
     m.rect(0, 3, 8, 8, 'p')                                  # the landing at the foot of the Concourse steps
 
     # ---- 1. Sculpted Neon-Noir Street Hierarchy & Undercity Market Court (Rejuv V14 craft for 181!) ----
@@ -363,20 +367,39 @@ def build_lowlight(shattered=False):
         m.rect(22, 14, 14, 10, 'q')                          # 608 shattered keeps its original pale cracked plaza
     for x, y in ((9, 29), (10, 29), (9, 30), (10, 30), (9, 31), (10, 31)): m.taken[y, x] = True       # the lift cage
     placed = []
-    placed += pack(m, 8, 46, 10, 5, PACK_LOW, seed=1)
-    placed += pack(m, 50, 56, 10, 5, PACK_LOW, seed=2)
-    placed += pack(m, 9, 21, 23, 14, PACK_LOW, seed=3)
-    placed += pack(m, 36, 43, 23, 14, PACK_LOW, seed=4)
-    placed += pack(m, 47, 56, 23, 14, PACK_LOW, seed=5)
-    placed += pack(m, 11, 25, 36, 27, PACK_LOW, seed=6)
-    placed += pack(m, 28, 43, 36, 27, PACK_LOW, seed=7)
-    placed += pack(m, 47, 56, 36, 27, PACK_LOW, seed=8)
-    placed += pack(m, 0, 5, 23, 14, PACK_LOW, seed=9)
-    placed += pack(m, 0, 5, 36, 27, PACK_LOW, seed=10)
+    if not shattered:
+        # Break up S8 copy-paste facades: mix Lowlight tenements with varied teal/slate shopfronts & carve 3 recessed urban alley nooks!
+        PACK_MIX_N = ['lb_l5a', 'lb_l4a', 'lb_l3a', 'lb_t4a', 'lb_l6a', 'lb_t5b']
+        PACK_MIX_M = ['lb_l5b', 'lb_l6b', 'lb_t4b', 'lb_l4a', 'lb_t5a', 'lb_l3a', 'lb_l6a']
+        # North Shadow Row: split around recessed street-food & market alley nook at x=25..29!
+        placed += pack(m, 8, 24, 10, 5, PACK_MIX_N, seed=11)
+        placed += pack(m, 30, 46, 10, 5, PACK_MIX_N, seed=12)
+        placed += pack(m, 50, 55, 10, 5, PACK_MIX_N, seed=2)
+        # Mid blocks flanking Market Court & East alley nook (x=51..54 open crate/stall pocket)
+        placed += pack(m, 9, 21, 23, 14, PACK_MIX_M, seed=13)
+        placed += pack(m, 36, 43, 23, 14, PACK_MIX_M, seed=14)
+        placed += pack(m, 47, 50, 23, 14, ['lb_l4a', 'lb_l3a'], seed=15)
+        # South blocks: split SW block with recessed courtyard market nook at x=21..25!
+        placed += pack(m, 11, 20, 36, 27, PACK_MIX_M, seed=16)
+        placed += pack(m, 28, 43, 36, 27, PACK_MIX_M, seed=17)
+        placed += pack(m, 47, 55, 36, 27, PACK_MIX_M, seed=18)
+        placed += pack(m, 0, 5, 23, 14, PACK_LOW, seed=9)
+        placed += pack(m, 0, 5, 36, 27, PACK_LOW, seed=10)
+    else:
+        placed += pack(m, 8, 46, 10, 5, PACK_LOW, seed=1)
+        placed += pack(m, 50, 56, 10, 5, PACK_LOW, seed=2)
+        placed += pack(m, 9, 21, 23, 14, PACK_LOW, seed=3)
+        placed += pack(m, 36, 43, 23, 14, PACK_LOW, seed=4)
+        placed += pack(m, 47, 56, 23, 14, PACK_LOW, seed=5)
+        placed += pack(m, 11, 25, 36, 27, PACK_LOW, seed=6)
+        placed += pack(m, 28, 43, 36, 27, PACK_LOW, seed=7)
+        placed += pack(m, 47, 56, 36, 27, PACK_LOW, seed=8)
+        placed += pack(m, 0, 5, 23, 14, PACK_LOW, seed=9)
+        placed += pack(m, 0, 5, 36, 27, PACK_LOW, seed=10)
     # Break monotonous uniform brown tenement roofs on 181 with alternating slate-blue & weathered tin districts!
     if not shattered:
         slate_cells = set()
-        for (x0, y0, x1, y1) in ((8, 5, 26, 10), (36, 14, 43, 23), (11, 27, 25, 36), (47, 27, 56, 36)):
+        for (x0, y0, x1, y1) in ((8, 5, 24, 10), (36, 14, 43, 23), (11, 27, 20, 36), (47, 27, 55, 36)):
             for yy in range(y0, y1 + 1):
                 for xx in range(x0, x1 + 1):
                     if m.cls[yy, xx] == 'f':
@@ -423,7 +446,7 @@ def build_lowlight(shattered=False):
         m.keep_clear.add((x, y))
         for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)): m.keep_clear.add((x + dx, y + dy))
 
-    # ---- 3. Neon-Noir Market Court Bazaar, Street Furniture, Steam Vents, Lamps & Festoon Lights ----
+    # ---- 3. Neon-Noir Market Court Bazaar, Recessed Alley Nooks, Street Furniture, Steam Vents & Festoon Lights ----
     m.try_put('lm_noodles', 22, 14, on='qrp'); m.try_put('lm_cobbler', 13, 24, on='lr')
     m.try_put('lm_ladder', 37, 12, on='lr')
     m.over.append((2, 40, 24, P1('lm_wear5')))
@@ -431,6 +454,23 @@ def build_lowlight(shattered=False):
         if m.free(x, y, 3, 1, on='lqrp'): m.stamp('lm_washline', x, y)
 
     if not shattered:
+        # Dress the 3 carved recessed alley nooks with varied awning stalls, crates, benches, planters & signage!
+        # Nook 1 (Shadow Row x=25..29, y=5..10)
+        m.try_put('lm_stall_c', 26, 6, on='lrp')
+        m.try_put('lm_planter', 25, 9, on='lrp'); m.try_put('lm_bench', 28, 9, on='lrp')
+        m.try_put('lm_news', 25, 6, on='lrp')
+        # Nook 2 (SW Courtyard x=21..25, y=27..36)
+        m.try_put('lm_stall_a', 21, 29, on='lrp')
+        m.try_put('lm_kiosk', 21, 33, on='lrp')
+        m.try_put('lm_bench', 24, 31, on='lrp'); m.try_put('lm_planter', 24, 28, on='lrp')
+        # Nook 3 (East Mid Alley x=51..54, y=14..23)
+        m.try_put('lm_stall_b', 51, 16, on='lrp')
+        m.try_put('lm_junk1', 53, 19, on='lrp'); m.try_put('lm_junk0', 51, 20, on='lrp')
+        m.try_put('lm_bench', 52, 22, on='lrp'); m.try_put('lm_steam0', 54, 15, on='lrp')
+        # Varied streetfront awnings/signage breaking up tenement fronts along main avenues
+        m.try_put('lm_stall_b', 10, 11, on='lr'); m.try_put('lm_stall_a', 36, 11, on='lr')
+        m.try_put('lm_stall_c', 33, 37, on='lr'); m.try_put('lm_holo', 25, 11, on='lr')
+
         # Bustling Undercity Market Court stalls, kiosk, benches, planters & broadcast rig (ZERO blank sand-box!)
         m.try_put('lm_stall_a', 28, 21, on='pqr')
         m.try_put('lm_stall_c', 32, 14, on='pqr')
@@ -451,8 +491,8 @@ def build_lowlight(shattered=False):
         lamps(m, [(1, 3), (6, 3)], name='lm_arclamp')
 
         # Warm glowing Neon-Noir streetlamps at key plazas/intersections + gritty dim lamps in deep back-alleys!
-        lit_lamps = [(25, 15), (31, 15), (26, 23), (32, 23), (12, 26), (44, 26), (8, 33), (25, 39), (42, 39), (47, 10)]
-        dim_lamps = [(16, 13), (41, 13), (55, 12), (52, 26), (54, 39), (3, 12), (3, 39)]
+        lit_lamps = [(25, 15), (31, 15), (26, 23), (32, 23), (12, 26), (44, 26), (8, 33), (25, 39), (42, 39), (47, 10), (27, 10), (23, 35)]
+        dim_lamps = [(16, 13), (41, 13), (54, 12), (52, 26), (54, 39), (3, 12), (3, 39)]
         lamps(m, lit_lamps, name='lm_arclamp')
         lamps(m, dim_lamps, name='lm_arclamp_off')
 
@@ -483,10 +523,10 @@ def build_lowlight(shattered=False):
             inlay_pts.add((x, 3)); inlay_pts.add((x, 9))
         m.inlay([pt for pt in sorted(inlay_pts) if m.cls[pt[1], pt[0]] in 'pq' and not m.taken[pt[1], pt[0]]])
 
-        # Warm glowing streetlamp halos (pf_glow, pri=5, pas=0) bathing Market Court, Service Door, Lift & Nadir Abyss!
+        # Warm glowing streetlamp halos (pf_glow, pri=5, pas=0) bathing Market Court, Alley Nooks, Service Door & Lift!
         for gx, gy in ((27, 17), (28, 17), (24, 14), (31, 14), (25, 22), (31, 22),
                        (47, 4), (8, 30), (12, 25), (44, 25), (24, 38), (41, 38), (3, 6),
-                       (57, 12), (57, 24), (23, 41), (37, 41)):
+                       (27, 8), (23, 31), (52, 18), (23, 41), (37, 41)):
             m.stamps.append(('pf_glow', gx, gy))
     else:
         lamps(m, [(16, 13), (41, 13), (55, 12), (12, 26), (52, 26), (25, 39), (42, 39), (54, 39), (3, 12), (3, 39)], name='lm_arclamp_off')
@@ -524,7 +564,7 @@ def build_lowlight(shattered=False):
     m.try_put('lm_junk1', 14, 38, on='lr'); m.try_put('lm_junk2', 45, 38, on='lr'); m.try_put('lm_junk1', 30, 12, on='lr')
     m.try_put('lm_bench', 9, 24, on='lr'); m.try_put('lm_viewer', 33, 39, on='lr')
 
-    # ---- 4. Abyssal Nadir Edge Landmarks (Towering Spire Pylons, Induction Rings & Brass Overlook Railings on 181!) ----
+    # ---- 4. Stepped Stone Parapet & Forged Brass Balustrade Overlook (replaces right starry-void pylon repeat!) ----
     if not shattered:
         def abyss_piece(name, x, y):
             st = STAMPS[name]; h, w = st['h'], st['w']
@@ -534,29 +574,52 @@ def build_lowlight(shattered=False):
                         t = st['layers'][z][dy][dx]
                         if t and m.inb(x + dx, y + dy):
                             m.over.append((z, x + dx, y + dy, t))
-        for py in (6, 17, 29):
-            abyss_piece('lm_pylon', 58, py)
-        for ry in (12, 24, 36):
-            abyss_piece('lm_ring', 58, ry)
-        for rx in (10, 23, 37, 50):
-            abyss_piece('lm_ring', rx, 42)
-        abyss_piece('lm_steam0', 57, 14); abyss_piece('lm_steam1', 57, 26); abyss_piece('lm_steam0', 29, 42)
+        # Subtle Nadir steam vents below south lip only (ZERO repeated pylon column on right edge!)
+        abyss_piece('lm_steam0', 29, 42); abyss_piece('lm_steam1', 46, 42)
         for x in range(1, 7):
             m.over.append((1, x, 2, P1('lm_bollard' if x in (1, 6) else 'lm_railing_m')))
+        # South overlook brass balustrade
         for x in range(2, 56, 4):
             if x not in (33,):
                 m.over.append((1, x, 40, P1('lm_bollard')))
                 if x + 1 < 56: m.over.append((1, x + 1, 40, P1('lm_railing_w')))
                 if x + 2 < 56: m.over.append((1, x + 2, 40, P1('lm_railing_m')))
                 if x + 3 < 56: m.over.append((1, x + 3, 40, P1('lm_railing_e')))
+        # East stepped stone parapet coping & forged brass guard posts along x=56..57 (y=4..40)!
+        for y in range(4, 41):
+            if y % 5 == 0:
+                m.over.append((1, 56, y, P1('lm_bollard')))
+                m.taken[y, 56] = True
+            elif y == 20:
+                m.over.append((1, 56, y, P1('lm_viewer')))
+                m.taken[y, 56] = True
+            else:
+                m.over.append((1, 56, y, P1('nr_wall_v')))
+                m.taken[y, 56] = True
+            m.over.append((1, 57, y, P1('nr_wall_m')))
+            m.taken[y, 57] = True
 
     scatter_wear(m, 6, on='lq', seed=2, kinds=(0, 1, 2))
     m.paint()
 
-    # ---- 5. Post-Paint Architectural Surface Craft (Moody Obsidian Market Court, 5x5 Sunburst, Crimson Spire Overlook!) ----
+    # ---- 5. Post-Paint Architectural Surface Craft (Warm Weathered Grey-Stone Sidewalks, Market Court, Sunburst!) ----
     if not shattered:
+        # Warm weathered grey-stone flagstone paving (L~149, rgb~(144,148,160)) — crisp contrast against dark basalt avenues
+        # and dark roofs WITHOUT blinding pure-white marble glare!
+        weathered_paves = [3924, 3926, 3940, 3942, 4221, 4223, 4237, 4239]
         walkable_base = {0, P1('lm_road0'), P1('lm_road1'), P1('lm_low0'), P1('lm_low1'), P1('lm_low2'), P1('lm_low3'),
-                         P1('lm_pave0'), P1('lm_pave1'), P1('lm_pave2'), P1('lm_pave3'), P1('lm_pave4'), P1('lm_pave5'), P1('lm_pave6'), P1('lm_pave7')}
+                         P1('lm_pave0'), P1('lm_pave1'), P1('lm_pave2'), P1('lm_pave3'), P1('lm_pave4'), P1('lm_pave5'), P1('lm_pave6'), P1('lm_pave7')} | set(weathered_paves)
+        low_set = {P1('lm_low%d' % k) for k in range(4)}
+        for y in range(4, 41):
+            for x in range(0, 57):
+                if m.cls[y, x] == 'l' and m.L[0, y, x] in low_set:
+                    pv = weathered_paves[(x * 5 + y * 11) % len(weathered_paves)]
+                    m.L[0, y, x] = pv
+                    if m.L[1, y, x] in low_set:
+                        m.L[1, y, x] = pv
+        # Dark obsidian coping surface beneath east stepped parapet (x=57)
+        for y in range(4, 41):
+            m.L[0, y, 57] = P1('Z_f0')
         # Tame the pale center square: dark basalt/obsidian bazaar perimeter surrounding a sculpted warm octagonal Sunburst Court!
         for y in range(14, 24):
             for x in range(22, 36):

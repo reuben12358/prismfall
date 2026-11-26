@@ -96,6 +96,25 @@ SHER_RUG = [
     [5419, 5420, 5421],
     [5427, 5428, 5429],
 ]
+BLUE_CARPET = [
+    [7496, 7497, 7498],
+    [7504, 7505, 7506],
+    [7512, 7513, 7514],
+]
+NORDIC_RUG = [
+    [1008, 1009, 1010],
+    [1016, 1017, 1018],
+    [1024, 1025, 1026],
+    [1032, 1033, 1034],
+]
+
+
+def _put_nordic_rug(L, x0, y0, x1, y1, z=1):
+    for y in range(y0, y1 + 1):
+        ry = 0 if y == y0 else (3 if y == y1 else (1 if (y - y0) % 2 == 1 else 2))
+        for x in range(x0, x1 + 1):
+            rx = 0 if x == x0 else (2 if x == x1 else 1)
+            L[z, y, x] = NORDIC_RUG[ry][rx]
 
 
 # ==============================================================================
@@ -1276,11 +1295,30 @@ def build_153(save=True):
 # ==============================================================================
 # GROUP 3: ALL 4 TRIAL INTERIORS (Maps 148, 126, 168, 542 — Tileset 34)
 # ==============================================================================
+def _put_dressed_table(L, x, y, item_l=0, item_r=0):
+    """Place intact 2x2 timber craft/tea table on L1 with crisp L2 tabletop items."""
+    L[1, y, x] = 3466; L[1, y, x + 1] = 3467
+    L[1, y + 1, x] = 3474; L[1, y + 1, x + 1] = 3475
+    if item_l:
+        L[2, y, x] = item_l
+    if item_r:
+        L[2, y, x + 1] = item_r
+
+
+def _put_dressed_workbench(L, x, y, i0=0, i1=0, i2=0):
+    """Place intact 3x2 raw-timber workbench on L1 with crisp L2 tools/twine/ledgers."""
+    L[1, y, x] = 4082; L[1, y, x + 1] = 4083; L[1, y, x + 2] = 4084
+    L[1, y + 1, x] = 4090; L[1, y + 1, x + 1] = 4091; L[1, y + 1, x + 2] = 4092
+    for dx, t in enumerate((i0, i1, i2)):
+        if t:
+            L[2, y, x + dx] = t
+
+
 def build_148(save=True):
     """Wave 14 craft of Map 148 (Saltmere Lantern House, 20x16, Tileset 34).
-    Void-sculpted octagonal weathered-stone coastal vigil chapel with west & east side-chapels,
-    panoramic clerestory & arched coastal windows, slate apse & ornate crimson-silver vigil
-    carpet, radiant crystal lantern pedestal at Lantern rope (8,5), ruby lamps & archives."""
+    Void-sculpted octagonal weathered-stone coastal vigil & wick-craft sanctuary: maritime
+    cobalt carpet anchored by a central lantern-mending & oil-wick worktable with glowing jars,
+    coastal charts, oil cask, wick sacks, crystal Lantern rope (8,5) & max 1 standing lamp."""
     W, H = 20, 16
     L = np.zeros((3, H, W), dtype=np.int32)
 
@@ -1291,58 +1329,63 @@ def build_148(save=True):
     floor[11, 12] = False          # SE octagonal chamfer
     floor[12, 7:10] = True         # Recessed storm-entry vestibule around Exit (8,12)
     floor[6:11, 2:4] = True        # West Vigil Pew Side-Chapel (x=2..3, y=6..10)
-    floor[6:11, 13:16] = True      # East Votive Archive & Lantern Alcove (x=13..15, y=6..10)
+    floor[6:11, 13:16] = True      # East Coastal Chart & Oil-Archive Alcove (x=13..15, y=6..10)
 
     _seam_room(L, floor, style='stone', wall_rows=2)
 
-    # 2. Multi-Zone Weathered Coastal Slate, Warm Timber Nave & Ornate Crimson-Silver Sanctuary Carpet!
+    # 2. Multi-Zone Weathered Coastal Slate, Timber Nave & Maritime Blue Sanctuary Carpet (distinct from 126!):
     _put_9slice(L, SLATE, 2, 6, 3, 10, z=0)
     _put_9slice(L, SLATE, 13, 6, 15, 10, z=0)
-    # Cool coastal slate apse altar directly beneath Lantern rope (8,5) & clerestory windows!
     _put_9slice(L, SLATE, 6, 5, 10, 6, z=0)
     for y in (11, 12):
         for x in (7, 8, 9):
             L[0, y, x] = SLATE[0 if y == 11 else 2][x - 7]
     for i, x in enumerate((7, 8, 9)):
         L[1, 12, x] = 5512 + i
-    # Sumptuous crimson-and-silver ornamental chapel carpet (HOTEL_RUG) framing Sister Hollin (9,7) & Slate (7,7)!
-    _put_9slice(L, HOTEL_RUG, 6, 7, 10, 10, z=1)
+    # Saltmere maritime cobalt-blue woven sanctuary carpet (replaces generic empty red S7 rug!)
+    _put_9slice(L, BLUE_CARPET, 6, 7, 10, 10, z=1)
 
-    # 3. Panoramic Coastal Clerestory & Arched Stone Windows (y=3..4 on nave; y=4..5 on side-chapels)
-    # Clean full-pane 3-wide beacon clerestory directly behind Lantern rope (8,5)!
+    # 3. Panoramic Coastal Clerestory, Arched Windows & Framed Sea Chart (y=3..4 on nave; y=4..5 on side-chapels)
     _put_grid(L, [[2105, 2108, 2109], [2113, 2116, 2117]], 7, 3, z_rows=(1, 1))
-    # Flanking 2x2 sunlit coastal sky arched windows!
     _put_grid(L, [[2086, 2087], [2094, 2095]], 4, 3, z_rows=(1, 1))
     _put_grid(L, [[2086, 2087], [2094, 2095]], 11, 3, z_rows=(1, 1))
-    # Side-chapel dark-framed glass casement windows (2105/2113 — zero beige panels!)
     L[1, 4, 2] = 2105; L[1, 5, 2] = 2113
+    # Framed coastal tide & lighthouse chart on East archive wall (13..14, 4..5)
+    _put_grid(L, [[4730, 4731], [4738, 4739]], 13, 4, z_rows=(1, 1))
     L[1, 4, 15] = 2105; L[1, 5, 15] = 2113
 
-    # 4. Exact Story Anchors & Vigil Chapel Props (100% intact transparent sprites!)
-    # Lantern rope (8,5): Radiant tall crystal lantern pedestal (2245/2253 -> solid at (8,5), matching BEFORE!)
+    # 4. Exact Story Anchors & Lantern-Crafting Craft (100% intact transparent sprites, MAX 1 brass floor lamp!):
+    # Lantern rope (8,5): Radiant tall crystal lantern pedestal (2245/2253 -> solid at (8,5))
     L[2, 4, 8] = 2245; L[1, 5, 8] = 2253
-    # Flanking glowing ruby vigil lamps & potted herbs on the slate apse
-    L[2, 4, 5] = 2244; L[1, 5, 5] = 2252
-    L[2, 4, 11] = 2244; L[1, 5, 11] = 2252
-    L[1, 5, 6] = 3391
-    L[1, 5, 10] = 3391
-    # Quiet vigil stools flanking the crimson sanctuary carpet (clear of Slate (7,7) & Sister Hollin (9,7)!)
-    for sx, sy in ((4, 7), (4, 9), (12, 7), (12, 9)):
-        L[1, sy, sx] = 4077
-    # Notice easel tucked respectfully on west edge (4, 5..6)
-    _put_tf(L, 'easel1', 4, 5)
-    # West Vigil Pew Side-Chapel (x=2..3, y=6..10)
-    _put_tf(L, 'bench_v', 2, 6)           # (2, 6..8) timber vigil pew
-    _put_tf(L, 'bookshelf_s', 3, 5)       # (3, 5..6) vigil ledger shelf flush on stone wall
-    L[2, 9, 2] = 5431; L[1, 10, 2] = 5439  # crisp transparent coastal fern
-    # East Votive Archive & Lantern Alcove (x=13..15, y=6..10)
-    _put_tf(L, 'bookcase', 13, 5)         # (13..14, 5..6) scripture & keeper's archive bookcase
-    _put_tf(L, 'bench_v', 15, 7)          # (15, 7..9) east vigil pew
-    L[2, 9, 13] = 2244; L[1, 10, 13] = 2252  # warm glowing archive lamp
-    L[2, 9, 14] = 3293; L[1, 10, 14] = 3301  # crisp transparent woodland fern (zero grey background!)
-    # Twin welcoming ruby vigil lamps flanking the storm-entry vestibule!
-    L[2, 10, 5] = 2244; L[1, 11, 5] = 2252
-    L[2, 10, 11] = 2244; L[1, 11, 11] = 2252
+    # Single warm indoor brass candle stand on West apse (5, 5) — ZERO mirrored lamp pair!
+    L[2, 4, 5] = 2247; L[1, 5, 5] = 2255
+    L[1, 5, 6] = 3391                       # Coastal herb offering beside beacon
+    # East apse oil-bottle & wick-trimming shelf (10..11, 4..5 -> replaces 2nd mirrored standing lamp!)
+    _put_tf(L, 'shelf_bottles', 10, 4)
+
+    # Central Lantern-Display & Wick-Crafting Table breaking up the central carpet (clear of Slate (7,7) & Hollin (9,7)!):
+    _put_dressed_table(L, 7, 9, 4528, 4529) # (7..8, 9..10) Glowing amber lantern-oil jar & ruby wick phials!
+    L[2, 9, 6] = 4077                       # West wick-crafter's stool on blue carpet
+    L[2, 9, 9] = 4077                       # East wick-crafter's stool on blue carpet (leaves y=8 & x=10 wide open!)
+    L[1, 8, 4] = 4077                       # Quiet side vigil stool
+    L[1, 8, 12] = 4077
+
+    # West Vigil Pew & Wick-Notice Side-Chapel (x=2..4, y=5..10):
+    _put_tf(L, 'easel1', 4, 5)              # (4, 5..6) Tide & lantern-watch notice easel
+    _put_tf(L, 'bench_v', 2, 6)             # (2, 6..8) Timber vigil pew
+    _put_tf(L, 'bookshelf_s', 3, 5)         # (3, 5..6) Vigil ledger shelf flush on stone wall
+    L[2, 9, 2] = 5431; L[1, 10, 2] = 5439   # Coastal parlor fern
+
+    # East Coastal Chart, Lamp-Oil & Archive Alcove (x=13..15, y=6..10):
+    _put_tf(L, 'barrel_y', 15, 6)           # (15, 6..7) Golden lamp-oil cask
+    _put_tf(L, 'bench_v', 15, 8)            # (15, 8..10) East chart-reading bench
+    _put_dressed_table(L, 13, 7, 3428, 4546)  # (13..14, 7..8) Open coastal lantern-logbook & folded linen wicks!
+    L[1, 10, 13] = 4077                     # Archive reading stool
+    L[1, 10, 14] = 4101                     # Oak lamp-trimming bucket
+
+    # Storm-entry braided wick sack & oil pitcher flanking vestibule (replaces half-crate 4168!):
+    L[2, 10, 5] = 5475; L[1, 11, 5] = 5483  # Intact tied wick & tallow burlap sack
+    L[1, 11, 11] = 5580                     # Keeper's weathered lantern-tool satchel
 
     PG.guard(L, TID_INT, [(8, 12), (9, 7), (8, 5), (7, 7)], 'map 148')
     if save:
@@ -1354,70 +1397,69 @@ def build_148(save=True):
 
 def build_126(save=True):
     """Wave 14 craft of Map 126 (Briarwick Lantern House, 20x16, Tileset 34).
-    Void-sculpted hollow-tree woodland sanctuary with Sheridan timber walls, west loom-dyer
-    niche, sunlit emerald-diamond East Botanical Conservatory bay (FLOOR_GLASS 501), woven
-    crimson shrine carpet under Mother Aldreth (7,6) & Lantern-loom (6,6), lush transparent
-    ferns & crystal/ruby sanctuary beacons."""
+    Distinct woodland-village botanical glass-chimney lantern workshop (NOT a clone of 148!):
+    fringed Nordic woodland rug anchored by a central glass-chimney & botanical sketch worktable,
+    dried-herb rack, wood-shaving & herb bales, sunlit emerald conservatory bay, max 1 standing lamp."""
     W, H = 20, 16
     L = np.zeros((3, H, W), dtype=np.int32)
 
     # 1. Sculpted Hollow-Tree Woodland Conservatory Silhouette
     floor = np.zeros((H, W), dtype=bool)
-    floor[5:12, 3:12] = True       # Core hollow-tree sanctuary (x=3..11, y=5..11)
+    floor[5:12, 3:12] = True       # Core hollow-tree workshop sanctuary (x=3..11, y=5..11)
     floor[11, 3] = False           # SW organic tree chamfer
     floor[11, 11] = False          # SE organic tree chamfer
     floor[12, 6:9] = True          # Recessed entry vestibule around Exit (7,12)
-    floor[6:11, 2] = True          # West loom-dyer's niche (x=2, y=6..10)
+    floor[6:11, 2] = True          # West loom-dyer & dried-herb niche (x=2, y=6..10)
     floor[6:11, 12:16] = True      # East Sunlit Loyal-Three Botanical Conservatory Bay (x=12..15, y=6..10)
 
     _seam_room(L, floor, style='timber', wall_rows=2)
 
-    # 2. Multi-Zone Woodland Timber, Woven Crimson Shrine Carpet & Luminous Emerald Conservatory Flooring
-    # East Botanical Conservatory Bay: luminous emerald-diamond glasshouse tile (501)!
+    # 2. Multi-Zone Woodland Timber, Fringed Nordic Woven Rug (distinct from 148!) & Emerald Conservatory Bay:
     for y in range(6, 11):
         for x in range(12, 16):
             L[0, y, x] = FLOOR_GLASS
-    # Lush crimson Briarwick woven sanctuary carpet sweeping up beneath Mother Aldreth (7,6) & Lantern-loom (6,6)!
-    _put_9slice(L, SHER_RUG, 5, 6, 9, 10, z=1)
-    # Welcoming timber entry threshold mat (6..8, 12) framing Exit (7,12)
+    # Warm Fringed Nordic Woven Workshop Rug (replaces empty plain red S7 rug!)
+    _put_nordic_rug(L, 5, 7, 9, 10, z=1)
     for i, x in enumerate((6, 7, 8)):
         L[1, 12, x] = 5512 + i
 
     # 3. Sheridan Hollow-Tree Walls, Timber Pilasters & Sunlit Conservatory Windows
     for px in (5, 9):
         L[0, 3, px] = 5548; L[0, 4, px] = 5556
-    # Tall sunlit woodland windows on north sanctuary & East Botanical Conservatory bay!
     for wx, wy in ((7, 3), (12, 4), (14, 4)):
         L[0, wy, wx] = 5544; L[0, wy + 1, wx] = 5552
-    # Framed botanical tapestry on NW timber wall (3..4, 3..4) & scroll chart above Lantern board (10,6)
     _put_tf(L, 'painting1', 3, 3)
     L[1, 3, 10] = 5453; L[1, 4, 10] = 5461
 
-    # 4. Exact Story Anchors & Hollow-Tree Shrine Props (100% intact transparent sprites!)
-    # Mother Aldreth (7,6), Lantern-loom (6,6), Lantern board (10,6) all remain cell_pas=True!
-    _put_tf(L, 'easel1', 5, 4)              # (5, 4..5) woven paper-cord loom frame just north-west of (6,6)!
-    L[2, 4, 4] = 2245; L[1, 5, 4] = 2253    # radiant crystal sanctuary beacon lamp
-    L[1, 5, 3] = 3391                        # potted woodland herb
-    # Carved wooden shrine notice shelf backing Lantern board (10,6) + glowing ruby beacon
-    _put_tf(L, 'shelf_wood', 9, 4)          # (9..10, 4..5) lantern-cord archive shelf
-    L[2, 4, 11] = 2244; L[1, 5, 11] = 2252  # warm ruby sanctuary lamp
-    # Weaving stools flanking the crimson carpet
-    L[1, 8, 4] = 4077
-    L[1, 8, 10] = 4077
-    # West Loom-Dyer's Niche (x=2, y=6..10): crisp transparent woodland fern & dye bucket!
-    L[1, 6, 2] = 3391
-    L[2, 7, 2] = 3293; L[1, 8, 2] = 3301    # crisp transparent woodland fern (zero grey backing!)
-    L[1, 10, 2] = 4101                       # oak dye-water bucket
+    # 4. Exact Story Anchors & Distinct Woodland Botanical Lantern-Workshop Craft (MAX 1 standing lamp!):
+    # Mother Aldreth (7,6), Lantern-loom (6,6), Lantern board (10,6) all remain cell_pas=True & reachable via y=7!
+    _put_tf(L, 'easel1', 5, 4)              # (5, 4..5) Woven paper-cord lantern loom frame NW of (6,6)
+    L[2, 4, 4] = 2245; L[1, 5, 4] = 2253    # Single radiant crystal sanctuary beacon (max 1 standing lamp!)
+    L[1, 5, 3] = 3391                       # Potted woodland herb
+    _put_tf(L, 'shelf_wood', 9, 4)          # (9..10, 4..5) Lantern-cord & pressed-leaf archive shelf
+    L[1, 5, 11] = 7178                      # Blooming briar-rose planter (replaces 2nd standing lamp at 11,5!)
+
+    # Central Glass-Chimney & Botanical Sketch Worktable breaking up the central rug (x=6..7, y=8..9):
+    _put_dressed_table(L, 6, 8, 4544, 4548) # (6..7, 8..9) Botanical sketch ledger & glass lantern-chimney vase!
+    L[2, 8, 5] = 2604                       # Backed timber workshop chair west of worktable
+    L[2, 8, 8] = 2605                       # Backed timber workshop chair east of worktable
+    L[2, 10, 7] = 4077                      # Low craftsman's stool south of worktable (leaves y=7 & x=4,9 wide open!)
+
+    # West Loom-Dyer, Dried-Herb & Wood-Shaving Niche (x=2..3, y=6..10):
+    _put_grid(L, [[5422], [5430], [5438]], 2, 6, z_rows=(2, 1, 1))  # Hanging dried-herb & flower drying rack!
+    L[2, 8, 3] = 5476; L[1, 9, 3] = 5484    # Bundled botanical herb & cedar-shaving bale
+    L[1, 10, 2] = 4101                      # Oak dye-water bucket
+
     # East Sunlit Botanical Conservatory Bay (x=12..15, y=6..10):
-    _put_tf(L, 'table_tea', 13, 7)          # (13..14, 7..8) cozy conservatory tea & cord-knot table
-    L[2, 7, 13] = 3428                       # open lantern-name ledger on table!
-    L[2, 5, 15] = 5431; L[1, 6, 15] = 5439  # lush emerald fern in NE conservatory corner
-    L[2, 9, 15] = 5431; L[1, 10, 15] = 5439  # matching emerald fern in SE conservatory corner
-    L[2, 9, 12] = 2245; L[1, 10, 12] = 2253  # luminous crystal conservatory beacon!
-    L[1, 6, 12] = 3391                       # potted woodland sprout
-    # Twin welcoming ruby lamps flanking Exit vestibule (4,10..11) & (10,10..11)
-    L[2, 10, 4] = 2244; L[1, 11, 4] = 2252
-    L[2, 10, 10] = 2244; L[1, 11, 10] = 2252
+    _put_dressed_table(L, 13, 7, 3428, 4528)  # (13..14, 7..8) Open lantern-name ledger & glowing amber oil lamp!
+    L[2, 5, 15] = 5431; L[1, 6, 15] = 5439  # Lush emerald fern in NE conservatory corner
+    L[2, 9, 15] = 5431; L[1, 10, 15] = 5439 # Matching emerald fern in SE conservatory corner
+    L[1, 10, 12] = 4077                     # Conservatory reading stool
+    L[1, 6, 12] = 3391                      # Potted woodland sprout
+
+    # Woven cordage & wood-shaving sacks flanking Exit vestibule (replaces half-crate 4168!):
+    L[2, 10, 4] = 5475; L[1, 11, 4] = 5483  # Tied cedar-shaving & paper-pulp burlap sack
+    L[2, 10, 10] = 5476; L[1, 11, 10] = 5484  # Bundled dried-briar lantern herbs
 
     PG.guard(L, TID_INT, [(7, 12), (7, 6), (6, 6), (10, 6)], 'map 126')
     if save:
@@ -1429,9 +1471,10 @@ def build_126(save=True):
 
 def build_168(save=True):
     """Wave 14 craft of Map 168 (The Net Loft, 21x17, Tileset 34).
-    Void-sculpted Ebbmouth harbor net loft with stepped west net-hoist & east tackle/rum-cask
-    bays, slate cargo apron, crimson crew feast carpet around the long dining table, glowing
-    Tally Mast beacon bay, unclipped 2x2 wall lifebuoy, coastal charts, barrels & fishing gear."""
+    Authentic Ebbmouth coastal Net-Mender's Loft (ZERO generic red banquet dining room!):
+    slate net-hauling wharf bays, weathered oak floor & maritime blue runner, central 3-wide
+    raw-timber net-mending workbench w/ twine & tally ledger, coiled hawser rope sacks, fishing
+    rods & hanging line poles, cork-float crates, brine/tar barrels, lifebuoy & coastal charts."""
     W, H = 21, 17
     L = np.zeros((3, H, W), dtype=np.int32)
 
@@ -1441,63 +1484,68 @@ def build_168(save=True):
     floor[12, 3:5] = False         # SW timber wharf chamfer
     floor[12, 16:18] = False       # SE timber wharf chamfer
     floor[13, 9:12] = True         # Recessed wharf door vestibule around Exit (10,13)
-    floor[6:11, 2] = True          # West Net-Hoist & Rope Bay (x=2, y=6..10)
-    floor[6:11, 18] = True         # East Tackle & Rum-Cask Bay (x=18, y=6..10)
+    floor[6:11, 2] = True          # West Net-Hoist & Hawser Bay (x=2, y=6..10)
+    floor[6:11, 18] = True         # East Tackle, Rods & Brine-Cask Bay (x=18, y=6..10)
 
     _seam_room(L, floor, style='timber', wall_rows=2)
 
-    # 2. Multi-Zone Coastal Slate Cargo Apron, Warm Timber Loft & Crimson Feast Carpet
-    _put_9slice(L, SLATE, 3, 5, 5, 11, z=0)
+    # 2. Multi-Zone Coastal Slate Wharf Aprons, Oak Loft Floor & Maritime Blue Runner (ZERO plain red dining rug!):
+    _put_9slice(L, SLATE, 3, 5, 5, 11, z=0)                 # West wet-net & tar-hoist slate apron
     for y in range(6, 11):
         L[0, y, 2] = SLATE[0 if y == 6 else (2 if y == 10 else 1)][0]
+    _put_9slice(L, SLATE, 15, 5, 17, 10, z=0)               # East brine-cask & tackle slate apron
+    for y in range(6, 11):
+        L[0, y, 18] = SLATE[0 if y == 6 else (2 if y == 10 else 1)][2]
     for y in (12, 13):
         for x in (9, 10, 11):
             L[0, y, x] = SLATE[0 if y == 12 else 2][x - 9]
     for i, x in enumerate((9, 10, 11)):
         L[1, 13, x] = 5512 + i
-    # Grand crimson harbor feast-hall carpet (6..14, 8..11)
-    _put_9slice(L, SHER_RUG, 6, 8, 14, 11, z=1)
+    # Weathered maritime cobalt-blue loft work runner under the net-mending workbenches (x=7..14, y=8..10)
+    _put_9slice(L, BLUE_CARPET, 7, 8, 14, 10, z=1)
 
-    # 3. Harbor Loft North Wall: ZERO wall-prop overlap!
+    # 3. Harbor Loft North Wall: Coastal Charts, Maritime Portholes & Intact 2x2 Lifebuoy (ZERO overlap!):
     for px in (6, 11, 16):
         L[0, 3, px] = 5548; L[0, 4, px] = 5556
     for wx in (5, 10):
         L[0, 3, wx] = 5544; L[0, 4, wx] = 5552
-    # Maritime diamond portholes on outer loft corners
-    L[0, 3, 3] = 5560; L[0, 4, 3] = 5568
-    L[0, 3, 17] = 5560; L[0, 4, 17] = 5568
-    # Framed coastal navigation chart cleanly at (8..9, 3..4) directly behind Tally Mast (9,5) — ZERO overlap!
-    _put_grid(L, [[4730, 4731], [4738, 4739]], 8, 3, z_rows=(1, 1))
-    # COMPLETE 2x2 maritime lifebuoy cleanly on open wall (14..15, 3..4) — ZERO overlap with shelves!
-    _put_grid(L, [[4118, 4119], [4126, 4127]], 14, 3, z_rows=(1, 1))
+    L[0, 3, 3] = 5560; L[0, 4, 3] = 5568                    # West maritime porthole
+    L[0, 3, 17] = 5560; L[0, 4, 17] = 5568                  # East maritime porthole
+    _put_grid(L, [[4730, 4731], [4738, 4739]], 8, 3, z_rows=(1, 1))   # Framed coastal chart behind Tally Mast (9,5)
+    _put_grid(L, [[4118, 4119], [4126, 4127]], 14, 3, z_rows=(1, 1))  # COMPLETE 2x2 maritime lifebuoy!
 
-    # 4. Exact Story Anchors & Authentic Ebbmouth Net-Loft Props (100% intact sprites!)
+    # 4. Exact Story Anchors & Authentic Net-Mender's Craft (100% intact sprites, MAX 1 beacon lamp!):
     # Tally Mast (9,5), Bersi Gullsong (10,6), Tally board (13,6) all remain cell_pas=True!
-    _put_tf(L, 'shelf_bottles', 6, 4)       # (6..7, 4..5) harbor grog & tally ledger bottles (clear of chart!)
-    L[2, 4, 8] = 2245; L[1, 5, 8] = 2253    # glowing crystal beacon flanking Tally Mast (9,5)
-    L[2, 4, 11] = 2244; L[1, 5, 11] = 2252  # warm ruby lamp flanking Bersi (10,6)
-    _put_tf(L, 'shelf_wood', 12, 4)         # (12..13, 4..5) tally records shelf backing Tally board (13,6) — clear of lifebuoy!
-    # Long Crew Feast Hall on crimson carpet (6..14, 8..11):
-    _put_tf(L, 'dining', 7, 8)              # (7..9, 8..11) long harbor feast table!
-    _put_tf(L, 'table_tea', 12, 9)          # (12..13, 9..10) secondary tally & dice table
-    L[2, 9, 12] = 3428                       # open harbor debt ledger on table!
-    for sx, sy in ((10, 9), (10, 10), (11, 9), (14, 9)):
-        L[2, sy, sx] = 4077                  # crew feast stools cleanly on rug!
-    # West Cargo & Net-Mending Wharf Bay (x=2..5, y=5..11):
-    _put_tf(L, 'crates3', 3, 5)             # (3..5, 5..7) stacked harbor fish & salt crates
-    L[1, 6, 2] = 4168                        # coiled trawl net & rope basket
-    L[1, 8, 2] = 4101                        # tar & pitch bucket
-    _put_tf(L, 'pallet', 2, 9)              # (2..3, 9..10) stacked wharf cargo pallet
-    _put_tf(L, 'bench_v', 5, 9)             # (5, 9..11) net-mender's long bench
-    # East Tackle & Rum-Cask Bay (x=15..18, y=5..11):
-    L[2, 4, 16] = 4823; L[1, 5, 16] = 4831  # tall brine barrel
-    L[2, 4, 17] = 4822; L[1, 5, 17] = 4830  # tall ale cask
-    _put_tf(L, 'rodbucket', 18, 6)          # (18, 6..7) bundle of Ebbmouth fishing rods!
-    _put_tf(L, 'bench_v', 16, 8)            # (16, 8..10) sailor's bench
-    _put_grid(L, [[5585, 5586], [5593, 5594]], 17, 9, z_rows=(1, 1))  # 2x2 iron-bound sailor's sea chest!
-    # Twin welcoming ruby harbor lamps flanking Exit vestibule (6, 11..12) & (14, 11..12)
-    L[2, 11, 6] = 2244; L[1, 12, 6] = 2252
-    L[2, 11, 14] = 2244; L[1, 12, 14] = 2252
+    _put_tf(L, 'shelf_bottles', 6, 4)                       # (6..7, 4..5) Pitch, varnish & tally bottle shelf
+    L[2, 4, 8] = 2245; L[1, 5, 8] = 2253                    # Single radiant crystal beacon flanking Tally Mast (9,5)
+    L[1, 5, 11] = 4101                                      # Oak tar & pitch bucket (replaces 2nd standing lamp!)
+    _put_tf(L, 'shelf_wood', 12, 4)                         # (12..13, 4..5) Net-tally & twine shelf backing (13,6)
+
+    # Central Long Timber Net-Mending Workbench & Float-Sorting Table (replaces red feast dining room!):
+    _put_dressed_workbench(L, 8, 8, 4546, 3428, 4528)       # (8..10, 8..9) Long net-mending bench w/ blue twine, log & oil jar!
+    L[2, 9, 7] = 4077                                       # West net-mender's wooden stool
+    L[2, 10, 9] = 4077                                      # South net-mender's wooden stool
+    L[2, 9, 11] = 4077                                      # Center net-mender's wooden stool
+    _put_dressed_table(L, 12, 9, 4548, 4529)                # (12..13, 9..10) Cork-float & wax-seal tally table!
+    L[2, 9, 14] = 2605                                      # Backed sailor's chair east of sorting table
+
+    # West Net-Hoist, Coiled Hawser Sacks & Cork-Float Wharf Bay (x=2..6, y=5..11):
+    _put_tf(L, 'crates3', 3, 5)                             # (3..5, 5..7) Stacked harbor cork-float & fish crates
+    L[2, 5, 2] = 5475; L[1, 6, 2] = 5483                    # Intact tied hawser-rope & net-cordage burlap sack
+    L[2, 7, 2] = 5476; L[1, 8, 2] = 5484                    # Bundled dried kelp-cord & trawl netting bale
+    _put_tf(L, 'pallet', 2, 9)                              # (2..3, 9..10) Stacked timber wharf cargo pallet
+    _put_tf(L, 'crate_i', 5, 9)                             # (5..6, 9..10) Open crate brimming with cork floats & coiled line!
+    L[1, 11, 5] = 4101                                      # Oak caulking & pitch bucket
+    L[2, 11, 6] = 5475; L[1, 12, 6] = 5483                  # Tied spare net-mending twine sack by door
+
+    # East Tackle, Hanging Line Poles, Brine Casks & Sailor's Sea Chest (x=15..18, y=5..11):
+    L[2, 4, 16] = 4823; L[1, 5, 16] = 4831                  # Tall salt-brine barrel
+    L[2, 4, 17] = 4822; L[1, 5, 17] = 4830                  # Tall pine-tar & oil cask
+    _put_tf(L, 'rodbucket', 18, 6)                          # (18, 6..7) Bundle of Ebbmouth fishing rods & gaffs!
+    L[2, 6, 17] = 4061; L[1, 7, 17] = 4069                  # Hanging fishing-line & float-rigging pole beside rods!
+    _put_tf(L, 'crate_i2', 15, 7)                           # (15..16, 7..8) Dyed buoy-flag & colored float crate!
+    _put_grid(L, [[5584, 5585, 5586], [5592, 5593, 5594]], 16, 9, z_rows=(1, 1))  # 3-wide iron-bound maritime sea chest!
+    L[1, 12, 14] = 5580                                     # Rigger's leather marlinspike & needle satchel!
 
     PG.guard(L, TID_INT, [(10, 13), (10, 6), (9, 5), (13, 6)], 'map 168')
     if save:
@@ -1511,7 +1559,7 @@ def build_542(save=True):
     """Wave 14 craft of Map 542 (The Brinewife's Rest, 20x16, Tileset 34).
     Void-sculpted storm-weathered stone-and-timber marsh wayside inn with twin tucked-in
     sleeper bunk alcoves, simmering salt-broth stone hearth kitchenette, crimson hearth carpet
-    & guestbook table below Rest house keeper (9,7), glowing ruby hearth lamps & marsh ferns."""
+    & guestbook table below Rest house keeper (9,7), warm bedside candle stands & marsh ferns."""
     W, H = 20, 16
     L = np.zeros((3, H, W), dtype=np.int32)
 
@@ -1546,16 +1594,16 @@ def build_542(save=True):
     # 4. Cozy Wayside Healing Refuge Props (100% intact sprites, wide circulation around Keeper (9,7)!)
     _put_tf(L, 'kitchen', 6, 4)
     _put_tf(L, 'shelf_bottles', 10, 4)
-    # West Sleeper Alcove: warm orange traveler's bunk (3..4, 5..7), bedside ruby lamp (2, 7..8), satchel (2, 9) & barrel!
+    # West Sleeper Alcove: warm orange traveler's bunk (3..4, 5..7), bedside candle stand (2, 7..8), satchel (2, 9) & barrel!
     _put_tf(L, 'bunk_o', 3, 5)
     L[1, 6, 2] = 3391                        # marsh-herb drying pot
-    L[2, 7, 2] = 2244; L[1, 8, 2] = 2252    # glowing bedside ruby lamp
+    L[2, 7, 2] = 2247; L[1, 8, 2] = 2255    # warm bedside indoor candle stand
     L[1, 9, 2] = 5580                        # traveler's leather pack
     L[2, 9, 3] = 4822; L[1, 10, 3] = 4830   # salt-brine barrel (leaves (3..4, 8) open beside bunk!)
-    # East Sleeper Alcove: cool blue traveler's bunk (12..13, 5..7), supply crate (14..15, 5..6), fern & ruby lamp!
+    # East Sleeper Alcove: cool blue traveler's bunk (12..13, 5..7), supply crate (14..15, 5..6), fern & candle stand!
     _put_tf(L, 'bunk_b', 12, 5)
     _put_tf(L, 'crate_i', 14, 5)             # (14..15, 5..6) spare marsh wool & rations trunk
-    L[2, 7, 15] = 2244; L[1, 8, 15] = 2252  # glowing east bedside ruby lamp
+    L[2, 7, 15] = 2247; L[1, 8, 15] = 2255  # warm east bedside candle stand
     L[2, 8, 14] = 5431; L[1, 9, 14] = 5439  # intact marsh fern palm
     L[1, 9, 15] = 4101                       # rainwater bucket
     # Central Salt-Broth Table on crimson hearth carpet (7..8, 8..9) + guestbook + stools!
@@ -1563,9 +1611,9 @@ def build_542(save=True):
     L[2, 8, 7] = 3428                        # open marsh wayfarers' guestbook on table!
     L[2, 9, 6] = 4077                        # stool west of broth table
     L[2, 9, 9] = 4077                        # stool east of broth table
-    # Twin welcoming ruby hearth lamps & marsh greenery flanking the storm-porch entry!
-    L[2, 10, 5] = 2244; L[1, 11, 5] = 2252
-    L[2, 10, 11] = 2244; L[1, 11, 11] = 2252
+    # Storm-porch entry welcome accents (no outdoor street lamps!)
+    L[1, 11, 5] = 4101                       # boot-wash brine bucket
+    L[1, 11, 11] = 5580                      # traveler's spare pack
     L[1, 10, 4] = 3391
     L[1, 10, 12] = 4168                      # coiled marsh-rope basket
 

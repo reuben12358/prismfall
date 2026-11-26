@@ -65,6 +65,8 @@ module PrismfallMaps
     191 => { :bgm => "Gym - Warden Hall", :bgs => "Machinery - Zenith", :bgs_volume => 50 },   # Circuit Gym - Breadboard Hall
     192 => { :bgm => "Gym - Warden Hall", :bgs => "Machinery - Zenith", :bgs_volume => 55 },   # Circuit Gym - Live Wire Hall
     193 => { :bgm => "Gym - Warden Hall", :bgs => "Machinery - Zenith", :bgs_volume => 60 },   # Circuit Gym - Core
+    244 => { :bgm => "Town - Ashkaar", :bgs => "" },   # Hearthguild Hall
+    249 => { :bgm => "Town - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 55 },   # Cindervault - Slag Ward
     255 => { :bgm => "Route - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 75 },   # Cindervault - Tap Chamber
     280 => { :bgm => "Town - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 45, :rain => true },   # Verdance - Market Terraces
     281 => { :bgs => "" },   # Verdance Pokémon Center
@@ -109,6 +111,7 @@ module PrismfallMaps
     578 => { :bgm => "Route - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 60, :rain => true },   # Rimewood Path
     579 => { :bgm => "Route - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 65, :rain => true },   # The Wolfsrime
     582 => { :bgm => "Town - Zenith", :bgs => "Machinery - Zenith", :bgs_volume => 40 },   # Lumen West Gate
+    593 => { :bgm => "Route - Borderlands", :bgs => "Machinery - Zenith", :bgs_volume => 35, :rain => true },   # The Arc-Lamp Mile
     608 => { :bgm => "Route - Antumbra", :bgs => "Glassfall Bleed", :bgs_volume => 75, :rain => true },   # The Lowlight (Shattered)
     920 => { :bgm => "War - March", :bgs => "War - Distant Battle", :bgs_volume => 65, :rain => true },   # The Rimed Sands
     924 => { :bgm => "War - March", :bgs => "War - Distant Battle", :bgs_volume => 70, :rain => true },   # Ashkaar Siege Camp

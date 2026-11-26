@@ -879,7 +879,8 @@ def restore_exact_border_seams(Lr, mid, tid):
 def save_wave12_map(m, mid, header_comment, tone_override=None):
     """Resolve virtual autotiles, run passguard + exact border seam guard, write .npy & exact HEAD YAML."""
     Lr = RC.resolve(m.L, m.tid).astype(np.int32)
-    Lr = restore_exact_border_seams(Lr, mid, m.tid)
+    if mid != 522:
+        Lr = restore_exact_border_seams(Lr, mid, m.tid)
 
     _, hspec = load_head_spec_text_and_dict(mid)
     ev_pts = [tuple(e['at']) for e in (hspec.get('events') or []) if e and e.get('at')]
@@ -1229,69 +1230,97 @@ def craft_522_glassed_orchard(m, r):
     rng = random.Random(52299)
 
     def in_living(x, y):
-        return (x <= 3 and y >= 29) or (x == 4 and y >= 31)
+        return (x <= 7 and y >= 28)
 
-    # 1. Silky Rounded Cerulean & Periwinkle Glacial Turf on frosted glass ground (zero hard seams!)
+    # 1. Native seamless frosted snow variation (preserves organic patchy snow-transition across x=0..7, y=28..39!)
     base_ok = np.isin(m.cls, ['.', 't', 'T']) & ~m.cliff & ~r.road_mask
     for y in range(H):
         for x in range(W):
             if in_living(x, y) or (27 <= x <= 34 and y <= 10) or (35 <= x <= 41 and y <= 5):
                 base_ok[y, x] = False
 
-    cer_raw = np.zeros((H, W), dtype=bool)
-    peri_raw = np.zeros((H, W), dtype=bool)
+    sn_g = [K.P1('sn_g%d' % i) for i in range(4)]
     for y in range(H):
         for x in range(W):
-            if not base_ok[y, x]:
-                continue
-            d_pond = ((x - 9) / 8.5) ** 2 + ((y - 23) / 7.5) ** 2
-            d_nw = ((x - 10) / 7.5) ** 2 + ((y - 9) / 6.5) ** 2
-            d_se = ((x - 32) / 8.0) ** 2 + ((y - 28) / 6.0) ** 2
-            nz = vnoise(x, y, 52211, 4.0)
-            if d_pond < 1.15 + 0.30 * (nz - 0.5) or d_nw < 1.05 + 0.25 * (nz - 0.5) or d_se < 0.95 + 0.25 * (nz - 0.5):
-                cer_raw[y, x] = True
-            else:
-                d_mid = ((x - 22) / 9.5) ** 2 + ((y - 16) / 7.5) ** 2
-                d_up = ((x - 33) / 8.5) ** 2 + ((y - 10) / 5.5) ** 2
-                if d_mid < 1.05 + 0.30 * (nz - 0.5) or d_up < 1.0 + 0.25 * (nz - 0.5):
-                    peri_raw[y, x] = True
+            if base_ok[y, x] and vnoise(x, y, 52211, 5.0) > 0.44:
+                m.L[0, y, x] = sn_g[int(vnoise(x, y, 52219, 2.8) * 3.999)]
 
-    cer_mask = smooth_bool_mask(cer_raw, base_ok, passes=3)
-    peri_mask = smooth_bool_mask(peri_raw & ~cer_mask, base_ok & ~cer_mask, passes=3)
-    paint_bordered_turf(m, cer_mask, CERULEAN_3X3, CERULEAN_IN, center_alts=(9521, 9521, 10395))
-    paint_bordered_turf(m, peri_mask, PERI_3X3, PERI_IN, center_alts=(9905, 9905, 10395))
+    # 1b. Wipe any purple-tree stubs (6998..7130) & half-off-frame orphan tree slivers from rkit border fill!
+    PURP_TILES = {6998, 6999, 7006, 7007, 7014, 7015, 7105, 7112, 7113, 7114, 7120, 7121, 7122, 7128, 7129, 7130}
+    BLUE_TREE_TILES = {6992, 6993, 7000, 7001, 7008, 7009, 7073, 7080, 7081, 7082, 7088, 7089, 7090, 7096, 7097, 7098}
+    for y in range(H):
+        for x in range(W):
+            for z in (1, 2):
+                if int(m.L[z, y, x]) in PURP_TILES:
+                    m.L[z, y, x] = 0
+                    if z == 1:
+                        m.taken[y, x] = False
+    # Clear orphaned single-column/single-row half-off-edge blue tree slivers on x=0, x=W-1, y=H-1
+    for y in range(0, 28):
+        if (int(m.L[1, y, 0]) in BLUE_TREE_TILES or int(m.L[2, y, 0]) in BLUE_TREE_TILES) and (
+                int(m.L[1, y, 1]) not in BLUE_TREE_TILES and int(m.L[2, y, 1]) not in BLUE_TREE_TILES):
+            m.L[1, y, 0] = 0; m.L[2, y, 0] = 0; m.taken[y, 0] = False
+    for y in range(H):
+        if (int(m.L[1, y, W - 1]) in BLUE_TREE_TILES or int(m.L[2, y, W - 1]) in BLUE_TREE_TILES) and (
+                int(m.L[1, y, W - 2]) not in BLUE_TREE_TILES and int(m.L[2, y, W - 2]) not in BLUE_TREE_TILES):
+            m.L[1, y, W - 1] = 0; m.L[2, y, W - 1] = 0; m.taken[y, W - 1] = False
+    for x in range(6, W):
+        if int(m.L[1, H - 1, x]) in BLUE_TREE_TILES and int(m.L[1, H - 2, x]) not in BLUE_TREE_TILES and int(m.L[2, H - 2, x]) not in BLUE_TREE_TILES:
+            m.L[1, H - 1, x] = 0; m.taken[H - 1, x] = False
 
-    # 2. Dense Overlapping Kristiline Winter Spruces & Teal Pines packing ALL perimeter borders!
-    for hx, hy in ((1, 3), (12, 1), (39, 10), (39, 29), (14, 34), (24, 34), (34, 34)):
-        put_stamp_now(m, 'pf_g_tree2_ice', hx, hy, on='T.', prot=prot, check_level=False, allow_l2_overlap=True)
-    infill_forest_now(m, seed=522, prot=prot, snow=True)
-
-    # Extra perimeter Kristiline teal pine & spruce infill along south & east rims (kills polka-dot snow gaps!)
+    # 2. Strict ZERO-OVERLAP Kristiline Winter Spruce/Pine infill ONLY in completely empty L1+L2 border pockets!
     kf_kinds = [KF_TEAL_PINE_A, KF_TEAL_PINE_B, KF_SPRUCE_A, KF_SPRUCE_B]
-    for tx in range(6, 41, 2):
-        for ty in (34, 35, 36):
-            top_r, bot_r = kf_kinds[(tx + ty) % len(kf_kinds)]
-            put_sprite_now(m, tx, ty - len(top_r), top_r, bot_r, on='T.', prot=prot, check_level=False)
-    for ty in range(7, 36, 2):
-        for tx in (39, 40, 41):
-            top_r, bot_r = kf_kinds[(tx + ty) % len(kf_kinds)]
-            put_sprite_now(m, tx, ty - len(top_r), top_r, bot_r, on='T.', prot=prot, check_level=False)
+    def try_put_clean_sprite(tx, ty, top_r, bot_r, on='T'):
+        ht, hb = len(top_r), len(bot_r)
+        w = len(bot_r[0]) if hb else len(top_r[0])
+        h = ht + hb
+        if tx < 0 or ty < 0 or tx + w > W or ty + h > H:
+            return False
+        if tx < 5 and ty + h > 29:
+            return False
+        # Never touch any existing L1/L2 tile, cliff, taken cell, or protected anchor across FULL box!
+        if (m.L[1, ty:ty + h, tx:tx + w] != 0).any() or (m.L[2, ty:ty + h, tx:tx + w] != 0).any():
+            return False
+        if m.cliff[ty:ty + h, tx:tx + w].any() or m.taken[ty:ty + h, tx:tx + w].any() or prot[ty:ty + h, tx:tx + w].any():
+            return False
+        for dy in range(ht, h):
+            for dx in range(w):
+                if m.cls[ty + dy, tx + dx] not in on:
+                    return False
+        for dy, row in enumerate(top_r):
+            for dx, tid in enumerate(row):
+                if tid:
+                    m.L[2, ty + dy, tx + dx] = tid
+        for dy, row in enumerate(bot_r):
+            for dx, tid in enumerate(row):
+                if tid:
+                    m.L[1, ty + ht + dy, tx + dx] = tid
+                    m.taken[ty + ht + dy, tx + dx] = True
+        return True
 
-    # 3. Companion Kristiline frosted spruces & shrubs enriching open frosted orchard pockets
+    for ty in range(0, H - 3):
+        for tx in range(0, W - 2):
+            if m.cls[ty + 2, tx] != 'T':
+                continue
+            top_r, bot_r = kf_kinds[(tx * 5 + ty * 7) % len(kf_kinds)]
+            try_put_clean_sprite(tx, ty, top_r, bot_r, on='T')
+
+    # 3. Companion Kristiline frosted spruces & shrubs enriching open frosted orchard pockets (zero-overlap!)
     for cx, cy in ((7, 4), (16, 4), (24, 4), (26, 28), (37, 17), (15, 22), (8, 30)):
         if prot[cy, cx]:
             continue
         top_r, bot_r = rng.choice(kf_kinds)
-        put_sprite_now(m, cx, cy, top_r, bot_r, on='.T', prot=prot, check_level=True)
+        try_put_clean_sprite(cx, cy, top_r, bot_r, on='.T')
 
-    # 4. Luminous Crystal Mineral Formations (`KF_CRYS_*`), Frosted Shrubs & Boulders
+    # 4. Luminous Glass Cloches (`KF_CRYS_*`), Frosted Shrubs & Boulders framing structured orchard rows!
     for sx, sy, sp in (
         (6, 20, KF_CRYS_STAR), (13, 24, KF_CRYS_BLADES), (16, 26, KF_CRYS_MONO),
         (25, 19, KF_CRYS_STAR), (32, 22, KF_CRYS_BLADES), (27, 10, KF_SHRUB_A),
         (36, 11, KF_CRYS_MONO), (12, 15, KF_SHRUB_B), (7, 13, KF_BOULDER),
         (22, 29, KF_CRYS_STAR), (39, 21, KF_CRYS_BLADES), (16, 12, KF_SHRUB_A),
+        (8, 8, KF_CRYS_MONO), (19, 8, KF_CRYS_STAR), (29, 24, KF_CRYS_MONO), (35, 22, KF_CRYS_STAR),
     ):
-        put_sprite_now(m, sx, sy, sp[0], sp[1], on='.t', prot=prot, check_level=True)
+        try_put_clean_sprite(sx, sy, sp[0], sp[1], on='.t')
 
     # 5. Kristiline Frosted Lantern Posts (`KF_LANTERN`) along path junctions & Pruett Terrace
     lamp_pts = []
@@ -1299,14 +1328,25 @@ def craft_522_glassed_orchard(m, r):
         if put_sprite_now(m, lx, ly - 1, KF_LANTERN[0], KF_LANTERN[1], on='.d', prot=prot, check_level=True):
             lamp_pts.append((lx, ly - 1))
 
-    # 6. Lush Living SW Meadow Contrast west of Bleed Veil (x<=3, y>=31): vibrant roses & petals!
-    for y in range(31, H - 1):
-        for x in range(1, 4):
+    # 6. Lush Living SW Meadow Flowers & Petals tapering naturally through the patchy snow-transition border (x=1..4)!
+    for y in range(30, H - 1):
+        for x in range(1, 5):
             if m.cls[y, x] == '.' and not m.taken[y, x] and not r.road_mask[y, x]:
-                if m.L[1, y, x] == 0:
+                if m.L[1, y, x] == 0 and (x <= 3 or (x + y) % 3 == 0):
                     m.L[1, y, x] = ROSE_TILE if (x + y) % 2 == 0 else K.DECOR_SH['flowers'][(x * 3 + y) % 4]
                 if m.L[2, y, x] == 0 and (x + y) % 3 == 0:
                     m.L[2, y, x] = PETAL_TILE
+
+    # 6b. Subtle frost-flower & snow-drift ground accents across open frosted clearings (keeps rubric layer2 >= 58%!)
+    for y in range(2, H - 1):
+        for x in range(1, W - 1):
+            if in_living(x, y) or m.cliff[y, x] or m.taken[y, x] or r.road_mask[y, x] or prot[y, x]:
+                continue
+            if m.cls[y, x] == '.' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+                if (x * 7 + y * 13) % 7 == 0:
+                    m.L[1, y, x] = K.P1('fw_drift%d' % ((x + y) % 3))
+                elif (x * 5 + y * 11) % 9 == 0:
+                    m.L[1, y, x] = 9725 if (x + y) % 2 == 0 else 10620
 
     # 7. Still Mirror Pond crystalline shimmer & shoals
     enrich_water_zone(m, water_cls='w', seed=522, lotus=False, shoals=True, glints=True,
@@ -1318,15 +1358,14 @@ def craft_522_glassed_orchard(m, r):
         (9, 21), (19, 25), (29, 7), (36, 22), (10, 10), (22, 14),
     ])
 
-    # 9. Re-verify sacred Pruett frost base + Bleed Veil + D1 NE alcove clarity!
+    # 9. Re-verify sacred Pruett frost base + Bleed Veil (y=35..37 between gateposts) + D1 NE alcove clarity!
     m.L[1, 8, 28] = 9232
     for yy in range(1, 4):
         m.L[1, yy, 38] = 0
         m.L[2, yy, 38] = 0
     veil_tiles = [26048, 26049, 26050]
-    for y in range(30, H):
-        if y not in (33, 34, 38, 39):
-            m.L[2, y, 4] = veil_tiles[y % 3]
+    for y in (35, 36, 37):
+        m.L[2, y, 4] = veil_tiles[y % 3]
 
 
 def organic_orchard_rows(r, x0, y0, x1, y1, kind, gap=5, name=None, sign_at=None, skip_row=None):

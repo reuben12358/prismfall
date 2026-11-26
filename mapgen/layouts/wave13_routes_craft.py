@@ -499,24 +499,18 @@ def _open_2x2(mask):
 
 
 def paint_snow_turf_layering(m, seed=1, cer_thr=0.61, peri_thr=0.69, only_cls='.'):
-    """Break up flat white snow plains with smooth rounded >=2x2 cerulean & periwinkle snow-edged glacial turf!"""
+    """Break up flat white snow plains with native seamless wind-swept snow drift variation (sn_g0..sn_g3).
+    Replaces CERULEAN_3X3 / PERI_3X3 which carry purple outer borders that created hard square boxes on white snow (S1)."""
     ok = np.isin(m.cls, list(only_cls)) & ~m.cliff & (m.L[1] == 0)
-    cer = np.zeros((m.H, m.W), bool)
-    peri = np.zeros((m.H, m.W), bool)
+    G = [K.P1('sn_g%d' % i) for i in range(4)]
     for y in range(1, m.H - 1):
         for x in range(1, m.W - 1):
             if not ok[y, x]:
                 continue
             v1 = vnoise(x, y, seed * 17 + 3, 7.5)
-            v2 = vnoise(x, y, seed * 29 + 11, 8.5)
-            if v1 > cer_thr:
-                cer[y, x] = True
-            elif v2 > peri_thr:
-                peri[y, x] = True
-    cer = _open_2x2(smooth_bool_mask(cer, ok, passes=2))
-    peri = _open_2x2(smooth_bool_mask(peri & ~cer, ok & ~cer, passes=2))
-    paint_bordered_turf(m, cer, CERULEAN_3X3, CERULEAN_IN)
-    paint_bordered_turf(m, peri, PERI_3X3, PERI_IN)
+            v2 = vnoise(x, y, seed * 29 + 11, 4.5)
+            if v1 > cer_thr - 0.08:
+                m.L[0, y, x] = G[int(v2 * 3.999)]
 
 
 def paint_forest_ground_depth(m, seed=1, clearings=(), dark=0.48):
@@ -615,14 +609,25 @@ def infill_forest(r, palettes, pick=None, scale=9.0, seed=0):
     return placed
 
 
-def infill_winter(m_or_r, palettes, scale=9.0, seed=0):
-    """Dense winter canopy packer: 3x2 Kristiline spruces -> 2x2 teal pines -> 2x1 frosted shrubs/boulders."""
+def infill_winter(m_or_r, palettes, scale=9.0, seed=0, avoid_top=None):
+    """Dense winter canopy packer: 3x2 Kristiline spruces -> 2x2 teal pines -> 2x1 frosted shrubs/boulders.
+    Respects `avoid_top` mask so tree canopies NEVER clip over hut roofs, doorways, or hero landmarks."""
     m = m_or_r.m if hasattr(m_or_r, 'm') else m_or_r
     sd = m_or_r.seed if hasattr(m_or_r, 'seed') else m.seed
     rng = random.Random(sd * 37 + seed + 13)
     s = sd + 1313
     hole = (m.cls == 'T') & ~m.taken & (m.L[1] == 0) & ~m.cliff
     placed = 0
+
+    def top_blocked(xs, ys):
+        if avoid_top is None:
+            return False
+        for yy in ys:
+            for xx in xs:
+                if m.inb(xx, yy) and avoid_top[yy, xx]:
+                    return True
+        return False
+
     for y in range(m.H):
         for x in range(m.W):
             if not hole[y, x]:
@@ -632,6 +637,8 @@ def infill_winter(m_or_r, palettes, scale=9.0, seed=0):
                 tx = x + ox
                 foot = [(tx + dx, y + dy) for dx in range(3) for dy in range(2)]
                 if not all(m.inb(fx, fy) and hole[fy, fx] for fx, fy in foot):
+                    continue
+                if top_blocked(range(tx, tx + 3), range(y - 2, y)):
                     continue
                 z = vnoise(tx, y, s, scale)
                 pal = palettes[min(len(palettes) - 1, int(z * len(palettes) * 0.999))]
@@ -655,6 +662,8 @@ def infill_winter(m_or_r, palettes, scale=9.0, seed=0):
                 continue
             for ox in (0, -1):
                 if all(m.inb(x + ox + dx, y + dy) and hole[y + dy, x + ox + dx] for dx in range(2) for dy in range(2)):
+                    if top_blocked(range(x + ox, x + ox + 2), range(y - 2, y)):
+                        continue
                     top, bot = KF_TEAL_PINE_A if (x + y) % 2 == 0 else KF_TEAL_PINE_B
                     for dy in range(2):
                         for dx in range(2):
@@ -676,7 +685,7 @@ def infill_winter(m_or_r, palettes, scale=9.0, seed=0):
                 if all(m.inb(x + ox + dx, y) and hole[y, x + ox + dx] for dx in range(2)):
                     sp = rng.choice((KF_SHRUB_A, KF_SHRUB_B, KF_SHRUB_A, KF_BOULDER))
                     top, bot = sp
-                    if top and y > 0:
+                    if top and y > 0 and not top_blocked(range(x + ox, x + ox + 2), (y - 1,)):
                         for dx in range(2):
                             if m.L[2, y - 1, x + ox + dx] == 0:
                                 m.L[2, y - 1, x + ox + dx] = top[0][dx]
@@ -690,11 +699,57 @@ def infill_winter(m_or_r, palettes, scale=9.0, seed=0):
                     break
             if done:
                 continue
-            m.L[1, y, x] = rng.choice((10551, 10551, 10555, 10556, 10371))
+            m.L[1, y, x] = rng.choice((10551, 10551, 9872, 9888, 10371))
             m.taken[y, x] = True
             hole[y, x] = False
             placed += 1
     return placed
+
+
+def mark_stamp_avoid(avoid, name, x, y, pad_x=1, pad_n=2, pad_s=1):
+    """Mark a stamp's full silhouette + surrounding apron so overhead tree canopies never clip roofs/doorways."""
+    st = STAMPS[name]
+    H, W = avoid.shape
+    y0 = max(0, y - pad_n)
+    y1 = min(H, y + st['h'] + pad_s)
+    x0 = max(0, x - pad_x)
+    x1 = min(W, x + st['w'] + pad_x)
+    avoid[y0:y1, x0:x1] = True
+
+
+def erode_snow_grass_organic(m, seed=1):
+    """Erode boxy snow tall-grass ('t') patches into ragged organic wind-swept glades with curved edges,
+    interior snow-drift bites, and wispy scattered perimeter tufts (eliminates rigid rectangular grids!)."""
+    rng = random.Random(seed * 73 + 19)
+    mask = (m.cls == 't')
+    H, W = m.H, m.W
+    out = mask.copy()
+    # 1. Bite out square corners & straight run edges using noise
+    for y in range(1, H - 1):
+        for x in range(1, W - 1):
+            if not mask[y, x]:
+                continue
+            n4 = int(mask[y - 1, x]) + int(mask[y + 1, x]) + int(mask[y, x - 1]) + int(mask[y, x + 1])
+            n8 = int(mask[y - 1:y + 2, x - 1:x + 2].sum()) - 1
+            vn = vnoise(x, y, seed * 19 + 5, 2.6)
+            # Round off rectangular corners (2 orthogonal neighbors) & bite straight flanks
+            if n4 <= 2 and vn < 0.62:
+                out[y, x] = False
+            elif n4 == 3 and vn < 0.34:
+                out[y, x] = False
+            # Carve occasional wind-scoured snow drift clearings inside solid >= 3x3 blocks
+            elif n8 == 8 and vnoise(x, y, seed * 31 + 7, 3.2) > 0.72:
+                out[y, x] = False
+    # 2. Feather wispy stray tufts 1-2 tiles off curved borders onto free open snow
+    for y in range(2, H - 2):
+        for x in range(2, W - 2):
+            if out[y, x] or m.cls[y, x] != '.' or m.cliff[y, x] or m.taken[y, x]:
+                continue
+            n4 = int(out[y - 1, x]) + int(out[y + 1, x]) + int(out[y, x - 1]) + int(out[y, x + 1])
+            if n4 == 1 and rng.random() < 0.22:
+                out[y, x] = True
+    m.cls[mask & ~out] = '.'
+    m.cls[out & ~mask] = 't'
 
 
 def dress_water_lotus(m, prob=0.14, seed=1, avoid_x=None):
@@ -765,11 +820,12 @@ def seal_unconnected_edges(m, open_cells=(), filler=None):
         if (x, y) in keep:
             continue
         if is_passable(x, y):
+            ft = f[(x * 7 + y * 13) % len(f)] if isinstance(f, (tuple, list)) else f
             m.L[2, y, x] = 0
             if m.L[1, y, x] == 0 or (int(m.L[1, y, x]) < len(pas) and (pas[int(m.L[1, y, x])] & 0x0f) != 0x0f):
-                m.L[1, y, x] = f
+                m.L[1, y, x] = ft
             else:
-                m.L[2, y, x] = f
+                m.L[2, y, x] = ft
 
 
 def water_prop_stamp(m, name, x, y, water_cls='wW', skip_cells=()):
@@ -1153,7 +1209,7 @@ def build_552():
     CK.stones(r, stones_)
     prot_wide = reserve_events(m, evs, road_mask=r.road_mask, radius=1,
                                extra=[(39, 0), (40, 0), (41, 0), (42, 0), (38, H - 1), (39, H - 1), (40, H - 1), (41, H - 1),
-                                      (64, 7), (64, 8), (64, 9), (60, 4)])
+                                      (64, 7), (64, 8), (64, 9), (60, 4), (57, 4), (58, 4), (59, 4)])
     paint_signposts(m, evs)
 
     # Dense multi-canopy Elowen valley woods
@@ -1164,14 +1220,23 @@ def build_552():
     for nm, x, y in (('gl_shed', 45, 4), ('gl_shed', 51, 6), ('gl_shed', 58, 5)):
         put_safe(m, nm, x, y, on='.d', r=3, prot=prot_wide)
     for n, x, y in (
+        # Upper dye-works terrace (vats, hanging fabric racks, barrels & sluice works)
         ('pf_p_vat_r', 49, 16), ('pf_p_vat_b', 51, 16), ('pf_p_vat_y', 53, 16),
         ('pf_p_vat_r', 45, 11), ('pf_p_vat_b', 52, 12), ('pf_p_vat_y', 57, 13),
         ('hb_dyeline', 43, 8), ('hb_rugline', 49, 11), ('hb_rugline2', 55, 11),
         ('hb_barrels', 60, 16), ('hb_crates4', 58, 17), ('df_sluice', 62, 16),
+        # North & south bankside drying racks, dye vats & barrels framing The Dyers' Ford!
+        ('hb_rugline', 19, 25), ('hb_dyeline', 27, 26), ('hb_rugline2', 35, 25),
+        ('hb_barrels', 21, 28), ('hb_crates4', 29, 28), ('hb_barrels', 36, 28),
+        ('hb_dyeline', 46, 26), ('hb_rugline', 53, 25),
+        ('pf_p_vat_r', 18, 45), ('pf_p_vat_b', 20, 45), ('pf_p_vat_y', 23, 45),
+        ('hb_rugline2', 25, 46), ('hb_dyeline', 45, 47), ('hb_rugline', 48, 45),
+        ('pf_p_vat_b', 46, 49), ('pf_p_vat_y', 48, 49), ('hb_crates4', 32, 49),
         ('pf_logbench', 31, 47), ('hb_tubs', 63, 58), ('hb_barrels', 21, 48),
         ('pf_shrine', 63, 25), ('pf_lantern', 46, 17), ('pf_lantern', 56, 17),
         ('pf_lantern', 35, 29), ('pf_lantern', 43, 47), ('pf_lantern', 64, 25),
         ('pf_lantern', 23, 47), ('pf_lantern', 38, 66), ('pf_lantern', 42, 6),
+        ('pf_lantern', 25, 29), ('pf_lantern', 47, 46),
     ):
         res = put_safe(m, n, x, y, on='.dg', r=3, prot=prot_wide)
         if res and n == 'pf_lantern':
@@ -1182,39 +1247,64 @@ def build_552():
         if m.free(x, 19, 1, 1, on='.g') and not m.taken[19, x] and not prot_wide[19, x]:
             m.stamp('nr_wall_' + ('w' if x == 47 else 'e' if x == 55 else 'm'), x, 19, mark='B')
 
-    # Grounded Fulling Mill on SW river bend + timber mill-race deck
+    # Grounded Fulling Mill on SW river bend + timber mill-race deck & south dye-washing pier
     put_safe(m, 'gl_flat2', 11, 43, on='.t', r=5, prot=prot_wide)
     mill_y0 = max(y for y in range(25, 52) if m.cls[y, 16] == 'w')
     r.deck += [(x, y) for x in (15, 16) for y in range(mill_y0 - 1, mill_y0 + 1) if m.inb(x, y) and m.cls[y, x] == 'w']
+    for sx_p in (22, 47):
+        s_bank = max(y for y in range(25, 52) if m.cls[y, sx_p] == 'w')
+        r.deck += [(sx_p, s_bank), (sx_p + 1, s_bank)]
 
-    # Sheep-wash fences & staggered drying-cloth corridors across the Weavers' Road
+    # Sheep-wash fences & organically staggered, themed drying-cloth bunting banners (NO identical parallel lines!)
     m.fence(58, 68, 51, gaps=((62, 64),))
     m.fence(58, 68, 64, gaps=((60, 62),))
-    for i, (yy, x_lo, x_hi) in enumerate(((5, 34, 45), (10, 31, 42), (26, 31, 42), (29, 36, 48))):
-        xs = [x for x in range(x_lo, x_hi) if (m.cls[yy, x] in 'd.tg' and not m.taken[yy, x]) or r.road_mask[yy, x]]
+    bunting_specs = [
+        # (y_base, x_lo, x_hi, palette_seq, sag_center)
+        (6,  35, 44, 'rrybrr', True),    # Upper Weavers' Road — crimson & weld welcome banner
+        (12, 30, 38, 'bbybby', False),   # Dye-works lane — indigo woad banner (shorter, shifted W)
+        (25, 32, 40, 'ryyryb', True),    # Bluff foot — ochre & crimson drying flags
+        (30, 39, 47, 'rbrbyy', False),   # Ford north approach — festive tri-colour guild flags (shifted E)
+        (49, 34, 42, 'ybyrbb', True),    # South ford bank — fulling-mill pennant line
+    ]
+    for i, (yy, x_lo, x_hi, pal, sag) in enumerate(bunting_specs):
+        xs = [x for x in range(x_lo, x_hi + 1)
+              if (m.cls[yy, x] in 'd.tg' and not m.taken[yy, x]) or r.road_mask[yy, x]]
         if len(xs) < 4:
             continue
         x0, x1 = min(xs), max(xs)
+        xm = (x0 + x1) // 2
         for x in range(x0, x1 + 1):
+            y_row = yy + (1 if (sag and abs(x - xm) <= 1 and m.inb(x, yy + 1) and m.cls[yy + 1, x] in 'd.tg' and not m.taken[yy + 1, x]) else 0)
             if x in (x0, x1):
                 if m.free(x, yy, 1, 1, on='.t') and not prot_wide[yy, x]:
                     m.stamp('dl_post', x, yy, mark='B')
             else:
-                m.over.append((2, x, yy, K.P1('dl_cloth_%s%d' % ('rby'[(x + i) % 3], (x * 3 + yy) % 2))))
+                col_c = pal[(x - x0 + i) % len(pal)]
+                m.over.append((2, x, y_row, K.P1('dl_cloth_%s%d' % (col_c, (x * 5 + y_row + i) % 2))))
 
     # Cloth-barge jetty in NE bend + timber footbridge across the Fourth Colour stream so Bargee (72, 26) is reachable!
     jetty = [(x, y) for x in (70, 71, 72) for y in range(cy[71] - 5, cy[71] - 1) if m.cls[y, x] == 'w']
     barge_bridge = [(x, y) for x in range(65, 72) for y in (25, 26) if m.cls[y, x] == 'w']
     r.deck += jetty + barge_bridge
 
-    # Three stone spillway chutes on north riverbank discharging the 3 dye ribbons
-    for ch_x, vat_nm in ((24, 'pf_p_vat_r'), (31, 'pf_p_vat_b'), (38, 'pf_p_vat_y')):
+    # Three riverside dye-works spillway stations on north bank: paired vats, wooden sluice chutes & timber bank aprons!
+    chute_banks = []
+    for ch_x, vat_nm, barrel_dx in ((23, 'pf_p_vat_r', -2), (31, 'pf_p_vat_b', 2), (38, 'pf_p_vat_y', -2)):
         bank_y = min(y for y in range(20, 48) if m.cls[y, ch_x] == 'w') - 1
-        put_safe(m, vat_nm, ch_x, bank_y - 1, on='.t', r=2, prot=prot_wide)
+        chute_banks.append((ch_x, bank_y))
+        put_safe(m, vat_nm, ch_x, bank_y - 2, on='.tdg', r=2, prot=prot_wide)
+        put_safe(m, vat_nm, ch_x + (1 if barrel_dx < 0 else -1), bank_y - 1, on='.tdg', r=2, prot=prot_wide)
+        put_safe(m, 'df_sluice', ch_x, bank_y - 1, on='.tdg', r=1, prot=prot_wide)
+        put_safe(m, 'hb_barrels', ch_x + barrel_dx, bank_y - 1, on='.tdg', r=2, prot=prot_wide)
+        # Small weathered wooden wash-pier stepping 1 tile into the river edge right below each chute
+        if m.inb(ch_x, bank_y + 1) and m.cls[bank_y + 1, ch_x] == 'w':
+            r.deck.append((ch_x, bank_y + 1))
+        if m.inb(ch_x + 1, bank_y + 1) and m.cls[bank_y + 1, ch_x + 1] == 'w':
+            r.deck.append((ch_x + 1, bank_y + 1))
         if m.free(ch_x - 1, bank_y, 1, 1, on='.t') and not prot_wide[bank_y, ch_x - 1]:
             m.stamp('nr_wall_v', ch_x - 1, bank_y, mark='B')
-        if m.free(ch_x + 1, bank_y, 1, 1, on='.t') and not prot_wide[bank_y, ch_x + 1]:
-            m.stamp('nr_wall_v', ch_x + 1, bank_y, mark='B')
+        if m.free(ch_x + 2, bank_y, 1, 1, on='.t') and not prot_wide[bank_y, ch_x + 2]:
+            m.stamp('nr_wall_v', ch_x + 2, bank_y, mark='B')
 
     # Lush trees on twin mossy river islets
     for ix, iy, trk in ((15, cy[15], 'tr_oak2'), (58, cy[58], 'nt_teal_a')):
@@ -1236,53 +1326,37 @@ def build_552():
     CK.fringe(r, ['tr_pink', 'nt_blossom', 'nt_teal_a'], 24, box=(2, 22, 78, 70), seed=2, near_forest=0)
     CK.undergrowth(r, 240, seed=3)
 
-    # ---- 7. Paint + Dense Forest Infill, Ground Depth, Dye Plumes, Lotus & Warm Lantern Glows ----
+    # ---- 7. Paint + Dense Forest Infill, Ground Depth, Clean Animated River, Lotus & Warm Lantern Glows ----
     r.paint(glint=0.25)
     CK.paint_extras(r)
     infill_forest(r, VALLEY_WOODS, scale=10.0, seed=552)
-    paint_forest_ground_depth(m, seed=552, clearings=[(51, 16, 6, 4, 'worn'), (39, 51, 4, 3, 'worn')], dark=0.46)
+    paint_forest_ground_depth(m, seed=552, clearings=[(51, 16, 6, 4, 'worn'), (39, 51, 4, 3, 'worn'), (28, 28, 8, 2.5, 'worn')], dark=0.46)
     CK.boardwalks(r, r.deck)
 
-    # Dye the madder/woad/weld tall grass patches
+    # Dye the madder/woad/weld tall grass patches (authentic crop meadows on land!)
     T_dye = {k: K._ST['_dyegrass']['tall_' + k] for k in 'rby'}
     for k, msk in dyemask.items():
         for y, x in np.argwhere(msk & (m.cls == 't')):
             m.L[1, y, x] = T_dye[k]
 
-    # Sinuous braided dye plumes (red -> blue -> yellow flowing naturally downstream, pure open water only!)
-    for y, x in np.argwhere(m.cls == 'w'):
-        if x < 21 or x > 62:
-            continue
-        if not all(m.cls[y + dy, x + dx] == 'w' for dy in (-1, 0, 1) for dx in (-1, 0, 1) if m.inb(x + dx, y + dy)):
-            continue
-        c = cy[x]
-        if x >= 66 and y < c - 4:
-            continue
-        if m.L[1, y, x] != 0 or m.L[2, y, x] != 0:
-            continue
-        wob = 0.75 * math.sin((x - 22) / 9.5)
-        dy_ = (y - c) + wob
-        fade = max(0.0, (x - 54) / 9.0)
-        if fade > 0 and vnoise(x, y, 5577, 2.8) < fade * 0.85:
-            continue
-        nm = None
-        if x >= 22 and -3.3 <= dy_ <= -1.25:
-            nm = 'red'
-        elif x >= 29 and -0.95 <= dy_ <= 1.05:
-            nm = 'blue'
-        elif x >= 35 and 1.35 <= dy_ <= 3.35:
-            nm = 'yellow'
-        if nm:
-            m.L[1, y, x] = K.P1('dye_%s%d' % (nm, (x * 7 + y) % 2))
+    # Clean animated river water flows uninterrupted (ZERO opaque flat dye squares on top of water!).
+    # Add natural river shoreline stones & subtle current ripples near the 3 bankside dye chutes.
+    rng_sh = random.Random(5529)
+    for ch_x, bank_y in chute_banks:
+        for dx, dy in ((-2, 2), (2, 2), (0, 3), (3, 2)):
+            rx, ry = ch_x + dx, bank_y + dy
+            if m.inb(rx, ry) and m.cls[ry, rx] == 'w' and m.L[1, ry, rx] == 0 and m.L[2, ry, rx] == 0:
+                if rng_sh.random() < 0.7:
+                    m.L[2, ry, rx] = K.P1('cs_wrock%d' % ((rx + ry) % 3))
 
-    # Lotus lilies on SE sheep-wash pond & calm west river backwaters (outside central dye plumes!)
-    dress_water_lotus(m, prob=0.16, seed=552, avoid_x=(21, 63))
+    # Lotus lilies on SE sheep-wash pond & calm river backwaters across the full clean channel!
+    dress_water_lotus(m, prob=0.14, seed=552)
     # Moored boats & river boulders
     m.L[2, 29:35, 73:79] = 0
     water_prop_stamp(m, 'hb_boat2', 74, 30, water_cls='w')
     m.L[2, 29:35, 4:10] = 0
     water_prop_stamp(m, 'hb_boat1', 5, 31, water_cls='w')
-    for bx, by in ((10, 34), (63, 35), (71, 58)):
+    for bx, by in ((10, 34), (27, 36), (48, 37), (63, 35), (71, 58)):
         water_prop_stamp(m, 'nt_boulder', bx, by, water_cls='w')
 
     # Bleachfield white flowers, valley flower meadows, petals & glowing mushrooms
@@ -1296,7 +1370,7 @@ def build_552():
         seed=552,
     )
     add_warm_glows(m, glow_pts + [(51, 18), (68, 26)])
-    add_water_glints(m, water_cls='w', seed=552, density=0.03)
+    add_water_glints(m, water_cls='w', seed=552, density=0.035)
     CK.scatter_quiet(r, 14)
 
     # Seal all perimeter edges strictly except N (39..42 -> 540) and S (38..41 -> 541)!
@@ -1314,98 +1388,147 @@ def build_552():
 # =============================================================================
 def build_560():
     """Frostflat Causeway (64x30, ts 52): sweeping arctic coastal causeway linking Frostwick (N col 2..4)
-    to Saltmere (E row 12..14) and The Rehearsal (S warp 30, 29). Crisp 3-row shs3 coastal escarpment
-    with zero jagged cliff fragments, organic crystalline brine pools replacing boxy rectangles, sinuous
-    sea-ice floes, dense Kristiline conifer windbreaks, Customs Chain at x=34, Border Stones, warm glows."""
+    to Saltmere (E row 12..14) and The Rehearsal (S warp 30, 29). Staggered multi-headland shs3 coastal
+    escarpment, smooth curved NE brine lagoon & NW frost-pan (zero comb teeth or rectangular trenches),
+    deep-sea & pine-headland north border (zero uniform top-row boulder fence), Customs Chain at x=34."""
     W, H = 64, 30
     hspec = head_spec(560)
     evs = hspec['events']
     m = snowmap(W, H, 560, kit='shs3')
 
-    # ---- 1. Organic Coastlines & Crisp Embankment (h=1 north of embankment, ZERO 1-tile spikes!) ----
+    def emb_at(x):
+        if x <= 7:
+            return 16
+        if x <= 16:
+            return 14
+        if x <= 26:
+            return 16
+        if x <= 38:
+            return 15
+        if x <= 45:
+            return 13
+        if x <= 54:
+            return 15
+        return 16
+
+    # ---- 1. Organic Coastlines, Deep-Sea North Rim & Staggered Headland Escarpment ----
     for x in range(W):
-        top = 2 + int(round(1.2 * math.sin(x / 6.5) + 1.1 * vnoise(x, 0, 5601, 5.0)))
+        # Taper north coast cleanly east of the N pine headland (x>=10) to avoid any vertical trench at x=7..8
+        if x < 10 or x >= 59:
+            top = -1
+        else:
+            taper = min(1.0, (x - 9) / 4.5, (59 - x) / 4.5)
+            top = int(round((1.5 + 1.0 * math.sin(x / 6.5) + 0.9 * vnoise(x, 0, 5601, 5.0)) * taper))
         bot = 26 - int(round(1.3 * math.sin(x / 8.0 + 1.8) + 1.3 * vnoise(x, 0, 5602, 5.5)))
-        # Gentle stepped causeway embankment (stays clean across all 3 stairs at x=11, 29, 49!)
-        emb = 14 if 8 <= x <= 37 else 15
+        emb = emb_at(x)
         for y in range(H):
             if y <= emb:
                 m.ht[y, x] = 1
-            if y <= top and x > 6:
-                m.cls[y, x] = 'o'
+            if top >= 0 and y <= top:
+                m.cls[y, x] = 'W' if (y == 0 or (y == 1 and top >= 2 and x % 5 != 0)) else 'o'
             if y >= bot and not (28 <= x <= 32):
-                m.cls[y, x] = 'o'
-    RW.lagoon(m, 0.52, seed=560)
+                m.cls[y, x] = 'W' if y == H - 1 and bot <= H - 2 else 'o'
+    RW.lagoon(m, 0.42, seed=560)
+    # Keep y=0 north sea strictly deep impassable water 'W' (zero uniform boulder fence!)
+    for x in range(10, 59):
+        m.cls[0, x] = 'W'
+        if m.cls[1, x] == 'o' and vnoise(x, 1, 5608, 4.0) > 0.48:
+            m.cls[1, x] = 'W'
+    for x in range(W):
+        if m.cls[H - 1, x] == 'o' and not (28 <= x <= 32):
+            m.cls[H - 1, x] = 'W'
+
     # Keep N exit (x=2..4) and E exit (y=12..14) clean & open
-    for y in range(0, 12):
+    for y in range(0, 14):
         for x in range(2, 5):
             m.cls[y, x] = 'd'
             m.ht[y, x] = 1
 
-    # Three crisp flights of timber steps down the 3-row shs3 escarpment
+    # Three crisp flights of timber steps aligned cleanly with the staggered headland escarpment
     for sx in (11, 29, 49):
-        ey = 14 if 8 <= sx <= 37 else 15
-        m.stairs(sx, ey, w=3, kit_rows=3)
+        m.stairs(sx, emb_at(sx), w=3, kit_rows=3)
     m.plan_cliffs()
 
-    # ---- 2. Causeway Road, South Spur to Rehearsal & Organic Flats ----
-    m.rect(0, 12, W, 3, 'd', only='.o')
-    m.rect(8, 11, 30, 1, 'd', only='.o')
-    m.rect(27, 11, 13, 1, 'd', only='.o')
-    for x0, w in ((4, 3), (17, 2), (44, 4), (55, 2)):
-        m.rect(x0, 11, w, 1, 'd', only='.')
+    # ---- 2. Gently Curving Causeway Road, South Spur to Rehearsal & Organic Flats ----
+    for x in range(W):
+        emb = emb_at(x)
+        # Keep causeway road cleanly north of cliff lip while meeting E exit (12..14) & Customs chain (34, 11..14)
+        y1 = min(14, emb - 1)
+        y0 = max(10, y1 - 2)
+        if 31 <= x <= 36:
+            y0, y1 = 11, 14
+        elif x >= 58:
+            y0, y1 = 12, 14
+        for y in range(y0, y1 + 1):
+            if m.cls[y, x] in '.o' and not m.cliff[y, x]:
+                m.cls[y, x] = 'd'
+    # Smooth diagonal road transitions at headland bends
+    for bx in (7, 8, 16, 17, 26, 27, 38, 39, 45, 46, 54, 55):
+        for y in range(11, 15):
+            if m.cls[y, bx] == '.' and not m.cliff[y, bx]:
+                m.cls[y, bx] = 'd'
     # Spur south to the drowned pier warp (30, 29)
-    m.rect(29, 17, 3, 9, 'd', only='.o')
+    m.rect(29, 18, 3, 8, 'd', only='.o')
     for y in range(19, H):
-        if m.cls[y, 30] in 'oI.' and y >= 24:
+        if m.cls[y, 30] in 'oIW.' and y >= 24:
             for x in (29, 30, 31):
                 m.cls[y, x] = 'D'
-    m.lane([(12, 18), (13, 21), (18, 22)], 'd', 2.0, seed=4, only='.')
-    m.lane([(50, 19), (50, 21), (44, 22)], 'd', 2.0, seed=5, only='.')
+    m.lane([(12, 17), (13, 21), (18, 22)], 'd', 2.0, seed=4, only='.')
+    m.lane([(50, 18), (50, 21), (44, 22)], 'd', 2.0, seed=5, only='.')
     m.lane([(30, 21), (26, 21)], 'd', 1.8, seed=6, only='.')
     m.lane([(30, 21), (36, 21), (42, 21)], 'd', 1.8, seed=7, only='.')
 
-    # Organic frost-pans (NW ice slides) & ORGANIC curved crystal brine pools (NE salt-works — ZERO boxy rects!)
-    for cx, cy, rx, ry in ((7.0, 6.2, 3.6, 1.7), (15.5, 5.2, 2.8, 1.5), (21.5, 8.2, 2.3, 1.2)):
-        m.blob(cx, cy, rx, ry, 'p', seed=int(cx * 7) + 50, only='.', rough=0.45)
+    # Organic curved NW frost-pan (ZERO vertical rectangular trench!) & smooth crescent NE brine lagoon (ZERO comb teeth!)
     for cx, cy, rx, ry, sd in (
-        (43.0, 5.0, 3.2, 1.6, 561), (49.5, 4.8, 3.4, 1.5, 562), (55.0, 6.2, 2.8, 1.4, 563),
-        (45.5, 8.2, 2.8, 1.3, 564), (52.5, 8.8, 3.2, 1.4, 565),
+        (11.5, 6.2, 3.8, 2.0, 51), (16.0, 5.8, 3.0, 1.7, 52), (14.2, 7.6, 2.8, 1.4, 53),
     ):
-        m.blob(cx, cy, rx, ry, 'w', seed=sd, only='.', rough=0.42)
+        m.blob(cx, cy, rx, ry, 'p', seed=sd, only='.', rough=0.32)
+    for cx, cy, rx, ry, sd in (
+        (44.8, 5.8, 4.4, 2.1, 561), (49.8, 6.0, 4.4, 2.0, 562), (47.5, 7.5, 3.8, 1.6, 563),
+    ):
+        m.blob(cx, cy, rx, ry, 'w', seed=sd, only='.', rough=0.28)
     # First slide frost-pan on SW flat (with stoppers at 14,23 & 18,22!)
-    m.blob(15.0, 23.0, 6.2, 2.3, 'p', seed=21, only='.', rough=0.38)
-    smooth_cls(m, 'p', into='.', passes=1)
-    smooth_cls(m, 'w', into='.', passes=1)
+    m.blob(15.0, 23.0, 6.2, 2.3, 'p', seed=21, only='.', rough=0.35)
+    smooth_cls(m, 'p', into='.', passes=2)
+    smooth_cls(m, 'w', into='.', passes=2)
+    # Keep item (56, 6), item (3, 8), surveyor (20, 6), trainer (48, 10) cleanly on walkable dry shore!
+    for gx, gy in ((56, 6), (55, 6), (56, 7), (55, 7), (57, 6), (3, 8), (20, 6), (48, 10)):
+        if m.cls[gy, gx] in 'wp':
+            m.cls[gy, gx] = '.'
 
-    # Frosted sedge tall-grass encounter pockets
+    # Frosted sedge tall-grass encounter pockets (eroded organically!)
     for cx, cy, rx, ry in (
-        (26, 5.5, 3.2, 1.6), (34, 6.0, 3.4, 1.5), (11, 9.0, 2.6, 1.1), (59, 4.5, 2.2, 1.3),
+        (26, 5.5, 3.2, 1.6), (34, 6.0, 3.4, 1.5), (10, 9.5, 2.6, 1.2), (59, 6.5, 2.2, 1.4),
         (40, 21.5, 3.0, 1.5), (56.5, 20.5, 2.8, 1.6), (6.5, 20.5, 2.2, 1.3), (23.0, 20.0, 2.2, 1.1),
     ):
         m.blob(cx, cy, rx, ry, 't', seed=int(cx + cy * 3), only='.', rough=0.65)
+    erode_snow_grass_organic(m, seed=560)
 
-    # Natural forest windbreak borders (W & far-E corners — replaces ugly fence posts!)
+    # Natural forest windbreak borders & north-coast pine capes (x=0..1, 5..9, 59..63 — replaces top boulder fence!)
     for y in range(H):
         for x in range(W):
             if m.cls[y, x] != '.' or m.cliff[y, x]:
                 continue
             if x <= 1 and y >= 15:
                 m.cls[y, x] = 'T'
-            if x == 0 and y < 11:
+            if x <= 1 and y < 11:
                 m.cls[y, x] = 'T'
-            if x >= W - 2 and (y < 10 or y > 16):
+            if 5 <= x <= 9 and y <= 2:
+                m.cls[y, x] = 'T'
+            if x >= 59 and y <= 3:
+                m.cls[y, x] = 'T'
+            if x >= W - 2 and (y < 10 or y > 17):
                 m.cls[y, x] = 'T'
 
     # ---- 3. Lock ALL 20 Exact HEAD Events & Signposts ----
     for e in evs:
         ex, ey = e['at']
-        if m.cls[ey, ex] in 'oT':
+        if m.cls[ey, ex] in 'oWT':
             m.cls[ey, ex] = 'd' if e['name'].startswith('Customs chain') else '.'
     # Ensure walk corridor on S warp (30, 29) & E/N seams
     m.cls[28:30, 29:32] = 'D'
     prot_wide = reserve_events(m, evs, radius=1, extra=[(2, 0), (3, 0), (4, 0), (W - 1, 12), (W - 1, 13), (W - 1, 14),
-                                                        (30, 28), (30, 29), (14, 23), (18, 22)])
+                                                        (30, 28), (30, 29), (14, 23), (18, 22), (56, 6), (55, 6), (56, 7)])
     prot_strict = reserve_events(m, evs, radius=0)
     paint_signposts(m, evs, skip_names=('Border Stones',))
 
@@ -1417,31 +1540,32 @@ def build_560():
     for nm, x, y in (
         ('sh_crates', 44, 19), ('pf_barricade', 46, 21), ('fw_sled', 47, 19),
         ('fw_rack', 38, 9), ('fw_wood', 57, 10), ('fw_skull', 14, 9),
-        ('pf_lantern', 27, 9), ('pf_lantern', 39, 9), ('pf_lantern', 32, 24), ('pf_lantern', 5, 10),
-        ('fw_sled', 7, 10), ('sh_crates', 60, 8), ('fw_brazier', 41, 10), ('fw_brazier', 32, 10),
+        ('pf_lantern', 27, 9), ('pf_lantern', 39, 8), ('pf_lantern', 32, 24), ('pf_lantern', 5, 10),
+        ('fw_sled', 7, 10), ('sh_crates', 60, 8), ('fw_brazier', 41, 9), ('fw_brazier', 32, 10),
         ('wr_sacks', 43, 21), ('hb_barrels', 52, 19), ('pf_whalebone', 25, 23),
     ):
         res = put_safe(m, nm, x, y, on='.td', r=2, prot=prot_wide)
         if res and nm in ('pf_lantern', 'fw_brazier'):
             glow_pts.append((res[0], res[1] + (1 if nm == 'pf_lantern' else 0)))
 
-    # Causeway north verge rope-and-post railing with clean lay-by gaps
-    for x0, x1 in ((6, 9), (14, 17), (23, 26), (42, 46), (51, 57)):
+    # Causeway north verge rope-and-post railing with clean lay-by gaps following staggered road
+    for x0, x1 in ((6, 9), (14, 17), (23, 26), (51, 57)):
         for x in range(x0, x1 + 1):
-            vy = 10 if 8 <= x <= 37 else 11
+            vy = max(9, min(11, emb_at(x) - 4))
             if m.free(x, vy, 1, 1, on='.') and not prot_wide[vy, x] and not m.cliff[vy, x]:
                 m.stamp('fw_pal_h', x, vy, mark='B')
 
     # Meridian survey pegs across the flats
-    for x, y in ((5, 4), (9, 5), (13, 6), (17, 7), (22, 4), (25, 9), (37, 4), (52, 3), (55, 19), (36, 20), (20, 19), (8, 19)):
+    for x, y in ((5, 5), (9, 5), (17, 7), (22, 4), (25, 9), (37, 4), (54, 4), (55, 19), (36, 20), (20, 19), (8, 19)):
         if m.free(x, y, 1, 1, on='.t') and not prot_wide[y, x] and not m.cliff[y, x]:
             m.stamp('fw_peg', x, y)
 
     # Dense Kristiline conifer windbreak groves (STRICTLY off cliff faces!)
     for idx, (cx, cy, cnt, rad, hero) in enumerate((
         (3, 22, 4, 2.4, False), (27, 4, 3, 2.2, True), (37, 5, 3, 2.2, False),
-        (59, 8, 3, 2.0, False), (59, 23, 3, 2.2, True), (37, 23, 3, 2.0, False),
+        (60, 8, 3, 2.0, False), (59, 23, 3, 2.2, True), (37, 23, 3, 2.0, False),
         (23, 24, 2, 1.8, False), (15, 19, 2, 1.6, False), (52, 23, 2, 1.8, False),
+        (7, 3, 3, 1.8, False),
     )):
         place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=560 + idx, hero=hero, prot=prot_wide)
 
@@ -1462,35 +1586,39 @@ def build_560():
     for x, y in ((14, 23), (18, 22)):
         if m.cls[y, x] == 'p':
             m.L[1, y, x] = 10371
-    # Crystalline salt crust & shimmer strictly on INTERIOR NE evaporation pool cells (crisp icy rims!)
+    # Crystalline salt crust & shimmer strictly on INTERIOR NE evaporation lagoon cells (crisp icy rims!)
     for y, x in np.argwhere(m.cls == 'w'):
         if all(m.inb(x + dx, y + dy) and m.cls[y + dy, x + dx] == 'w' for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
             if vnoise(x, y, 61, 2.0) > 0.52:
                 m.L[1, y, x] = ice_at(x, y)
-    # Sea-ice rocks & glacial boulders framing the north & south lagoons
-    for nm, x, y in (('nt_boulder', 20, 1), ('nt_boulder', 48, 1), ('nt_boulder', 10, 27), ('nt_boulder', 45, 27), ('nt_boulder', 58, 26)):
-        water_prop_stamp(m, nm, x, y, water_cls='oI')
+    # Clustered sea-ice boulders & rocky skerries framing the north & south lagoons (natural clusters, NOT a straight line!)
+    for nm, x, y in (
+        ('nt_boulder', 16, 1), ('nt_boulder', 18, 2), ('nt_boulder', 33, 1),
+        ('nt_boulder', 47, 1), ('nt_boulder', 49, 2), ('nt_boulder', 10, 27),
+        ('nt_boulder', 45, 27), ('nt_boulder', 58, 26),
+    ):
+        water_prop_stamp(m, nm, x, y, water_cls='oIW')
 
-    # Glacial cerulean/periwinkle snow-edged turf patches across the flats!
+    # Wind-swept snow drift variation across the flats!
     paint_snow_turf_layering(m, seed=560, cer_thr=0.59, peri_thr=0.67)
     # Subtle crystal outcrops near the salt-works & frost-pans
-    for cx, cy, sp in ((39, 7, KF_CRYS_MONO), (57, 7, KF_CRYS_STAR), (8, 8, KF_CRYS_BLADES), (34, 22, KF_CRYS_MONO)):
+    for cx, cy, sp in ((39, 7, KF_CRYS_MONO), (58, 7, KF_CRYS_STAR), (8, 8, KF_CRYS_BLADES), (34, 22, KF_CRYS_MONO)):
         put_sprite(m, cx, cy, sp[0], sp[1], on='.', avoid_mask=prot_wide, post_paint=True)
 
     m.scatter(14, seed=560)
     RW.icy_faces(m, 0.65, seed=560)
     RW.dress_ice(m, 0.70, seed=560)
-    RW.reed_beds(m, 110, seed=561)
+    RW.reed_beds(m, 14, seed=561)
     RW.road_tracks(m, 0.12, seed=560)
-    RW.drifts(m, 0.16, seed=560)
+    RW.drifts(m, 0.06, seed=560)
     add_warm_glows(m, glow_pts + [(33, 12), (30, 26)])
     add_water_glints(m, water_cls='w', seed=560, density=0.05)
 
-    # Seal ALL stray perimeter edges strictly except N (2..4 -> 570), E (12..14 -> 140), and S warp (30, 29)!
+    # Seal any remaining stray perimeter edges with varied frosted shrubs/boulders (deep water 'W' already seals N sea!)
     seal_unconnected_edges(
         m,
         open_cells=[(2, 0), (3, 0), (4, 0), (W - 1, 12), (W - 1, 13), (W - 1, 14), (30, H - 1)],
-        filler=10371,
+        filler=(10551, 10371, 9872, 9888),
     )
     write_wave13_map(m, 560, '# Frostflat Causeway (560). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).\n')
     return m
@@ -1750,36 +1878,48 @@ def build_561():
     r.lane([(20, 36), (34, 38), (46, 40), (50, 39)], w=2.0, open_=None)
     r.lane([(15, 16), (30, 10), (44, 12), (50, 16)], w=2.0, open_=None)
 
-    # Kestrel's tors: road narrows to 1 tile at (11, 8) right below Kestrel [11, 7]!
+    # Kestrel's tors: organic staggered pine groves + twin crag tors narrowing road cleanly at (11, 8) (NO 1-tile horizontal fence!)
     KG = (11, 8)
-    for x in range(3, 23):
-        if x != KG[0] and m.cls[KG[1], x] in '.d':
-            m.cls[KG[1], x] = 'B'
+    r.copse(4.5, 7.5, 3.6, 3.0)
+    r.copse(20.5, 9.5, 3.2, 2.4)
+    for bx, by in ((8, 8), (9, 8), (10, 8), (12, 8), (13, 8)):
+        if m.cls[by, bx] in '.d':
+            m.cls[by, bx] = 'B'
     m.cls[KG[1], KG[0]] = 'd'
     m.cls[KG[1] - 1, KG[0]] = 'd'
 
-    # Dramatic organic fan-shaped landslide (rows 55..70) spilling from crag S all the way into the sea!
-    # MUST seal 100% of columns across rows 55..70 so gate_check('Gullcry landslide') passes with 0 leaks!
-    SLIDE = (55, 70)
-    for y in range(SLIDE[0] - 2, SLIDE[1] + 3):
-        for x in range(W):
-            fan_lo = SLIDE[0] + int(round(1.8 * math.sin(x / 6.0) + 1.5 * vnoise(x, 0, 5617, 5.0)))
-            fan_hi = SLIDE[1] + int(round(1.8 * math.cos(x / 5.5) - 1.2 * vnoise(x, 1, 5618, 5.0)))
-            # Keep solid band across y=58..67 for every single column so ZERO bypasses exist!
-            in_core = (58 <= y <= 67)
-            in_fan = (fan_lo <= y <= fan_hi)
-            if (in_core or in_fan) and m.ht[y, x] <= 1 and m.cls[y, x] in '.dtw':
-                if m.cls[y, x] == 'w' and not in_core and vnoise(x, y, 5613, 2.0) <= 0.42:
-                    continue
-                m.cls[y, x] = 'B'
+    # Readable snow switchback approach trails framing the north & south sides of the diagonal rockslide!
+    r.lane([(18, 49), (26, 52), (38, 54), (48, 53), (52, 52)], w=2.0, open_=None)
+    r.lane([(13, 74), (22, 72), (32, 70), (39, 73)], w=2.0, open_=None)
 
-    # Forest windbreaks on inland crags & sheltered cliff hollows
+    # ONE sculpted organic diagonal rockslide ridge (only ~3 tiles thick, clearing ~85% of the old boulder spam block!)
+    # Sweeps from the west inland crag (x=13, y=58) diagonally SE into the eastern sea (x=54, y=68) -> 100% airtight GATE!
+    def slide_cy(x):
+        return 58.2 + 0.24 * max(0.0, x - 13.0) + 1.35 * math.sin((x - 13.0) / 7.2)
+
+    SLIDE = (55, 72)
+    slide_spine = np.zeros((H, W), bool)
+    for x in range(12, W):
+        yc = int(round(slide_cy(x)))
+        # Airtight 3-row diagonal core (yc-1..yc+1) guarantees zero orthogonal or diagonal bypasses!
+        for y in range(max(0, yc - 1), min(H, yc + 2)):
+            if m.ht[y, x] <= 1 and m.cls[y, x] in '.dtw':
+                m.cls[y, x] = 'B'
+                slide_spine[y, x] = True
+        # Organic subtle scree shoulders (sporadic ±1 tile toe rocks, NEVER a solid wall)
+        if m.ht[yc, x] <= 1 and vnoise(x, yc, 5617, 3.5) > 0.62:
+            for y_s in (yc - 2, yc + 2):
+                if m.inb(x, y_s) and m.ht[y_s, x] <= 1 and m.cls[y_s, x] == '.' and (x, y_s) not in ((52, 52), (52, 53)):
+                    if vnoise(x, y_s, 5618, 2.5) > 0.58:
+                        m.cls[y_s, x] = 'B'
+
+    # Forest windbreaks on inland crags & sheltered cliff hollows (framing switchbacks north & south of the rockslide)
     r.forest_band('W', 4, wobble=2.2)
     for cx, cy_, rx, ry in (
         (4, 10, 4.5, 6.0), (22, 122, 4.5, 3.2), (3, 82, 3.5, 5.0), (26, 92, 4.2, 2.8),
-        (24, 60, 4.0, 3.0), (26, 4, 3.5, 2.8), (28, 40, 3.5, 3.0), (24, 22, 2.8, 3.0),
-        (22, 80, 3.5, 2.6), (24, 110, 3.5, 3.2), (32, 60, 3.0, 2.0), (6, 20, 3.5, 3.0),
-        (36, 75, 3.5, 2.5), (14, 102, 3.0, 2.5),
+        (25, 55, 3.2, 2.2), (26, 4, 3.5, 2.8), (28, 40, 3.5, 3.0), (24, 22, 2.8, 3.0),
+        (22, 80, 3.5, 2.6), (24, 110, 3.5, 3.2), (34, 71, 3.0, 2.0), (6, 20, 3.5, 3.0),
+        (36, 77, 3.5, 2.5), (14, 102, 3.0, 2.5),
     ):
         r.copse(cx, cy_, rx, ry)
     # Organic frozen cove rock-pools (ice slides!)
@@ -1806,7 +1946,7 @@ def build_561():
 
     CK.grass_fields(r, [
         (20, 116, 3.6), (22, 92, 3.2), (6, 104, 2.6), (26, 30, 3.6), (8, 16, 3.0),
-        (28, 8, 3.2), (22, 50, 2.6), (38, 30, 2.6), (6, 120, 2.6),
+        (28, 8, 3.2), (22, 50, 2.6), (38, 30, 2.6), (6, 120, 2.6), (28, 67, 2.8), (44, 57, 2.6),
     ])
 
     # ---- 4. Lock ALL 25 Exact HEAD Events + 3 trial_overlay anchors (15,9 Parcel rattle, 36,107 Old Asta, 44,13 Egg ledge)! ----
@@ -1815,14 +1955,15 @@ def build_561():
         extra=[(x, 0) for x in range(10, 14)] + [(x, H - 1) for x in range(10, 14)] +
               [(MN[0], MN[1] + 1), (MS[0], MS[1] + 1), KG, (15, 9), (36, 107), (44, 13),
                (38, 100), (39, 100), (38, 103), (39, 103), (49, 98), (49, 100), (49, 102),
-               (46, 44), (47, 44), (46, 47), (47, 47), (50, 18), (51, 18), (50, 21), (51, 21)],
+               (46, 44), (47, 44), (46, 47), (47, 47), (50, 18), (51, 18), (50, 21), (51, 21),
+               (52, 52), (52, 53)],
     )
     paint_signposts(m, evs)
 
     # Dense Kristiline alpine woods on all inland crags & hollows!
     CK.woods(r, ALPINE_WOODS, scale=9.0)
 
-    # ---- 5. Stilt Fishing Hamlet, Signal Beacon, Whalebones, Cave Lanterns & Landslide Rubble ----
+    # ---- 5. Stilt Fishing Hamlet, Signal Beacon, Whalebones, Cave Lanterns & Sculpted Landslide Ridge ----
     glow_pts = []
     for nm, x, y in (
         ('kf_flat', 32, 104), ('kf_flat', 44, 103), ('wb_hut', 38, 114),
@@ -1839,26 +1980,52 @@ def build_561():
         if res and nm in ('pf_beacon', 'fw_brazier', 'pf_lantern'):
             glow_pts.append((res[0] + (1 if nm == 'pf_beacon' else 0), res[1] + (1 if nm != 'fw_brazier' else 0)))
 
-    # Kestrel's twin crag tors framing (11, 8)
-    for (x, y) in ((KG[0] - 2, KG[1] - 1), (KG[0] + 2, KG[1] - 1), (KG[0] - 4, KG[1]), (KG[0] + 4, KG[1])):
-        put_safe(m, 'ck_rock_big', x - 1, y - 2, on='.B', r=1, prot=prot_wide)
+    # Kestrel's twin crag tors + staggered pine clusters framing (11, 8) organically
+    for (x, y) in ((8, 6), (12, 6)):
+        put_safe(m, 'ck_rock_big', x, y, on='.B', r=1, prot=prot_wide)
+    for (x, y) in ((16, 11), (19, 8), (7, 11)):
+        put_safe(m, 'ck_boulder', x, y, on='.B', r=1, prot=prot_wide)
+    place_snow_grove(m, 19, 9, count=3, radius=2.2, on='.t', seed=5619, prot=prot_wide)
 
-    # Geological landslide boulder tumble (organic big crags + frosted rocks across SLIDE!)
-    rr = random.Random(5615)
-    for _ in range(320):
-        k = rr.choice(['ck_rock_big', 'ck_boulder', 'ck_boulder', 'ck_pebbles', 'fw_stone', 'fw_log_m'])
+    # Sculpted diagonal rockslide ridge: bold 3x3 crags + 2x2 boulders + 4 Strength-style round boulders + fallen logs!
+    # Step systematically along the diagonal spine so multi-tile rock masses dominate (ZERO small-snowball grid!)
+    for idx, x in enumerate(range(14, 52, 3)):
+        yc = int(round(slide_cy(x)))
+        k = 'ck_rock_big' if idx % 2 == 0 else 'ck_boulder'
         st = STAMPS[k]
-        x = rr.randrange(0, W - st['w'])
-        y = rr.randrange(max(0, SLIDE[0] - 2), min(H - st['h'], SLIDE[1] + 3 - st['h']))
-        if m.free(x, y, st['w'], st['h'], on='B') and not m.cliff[y:y + st['h'], x:x + st['w']].any() and not prot_wide[y:y + st['h'], x:x + st['w']].any():
-            m.stamp(k, x, y, mark='B')
+        ty = yc - st['h'] // 2
+        if m.inb(x, ty) and m.inb(x + st['w'] - 1, ty + st['h'] - 1):
+            if not m.cliff[ty:ty + st['h'], x:x + st['w']].any() and not prot_wide[ty:ty + st['h'], x:x + st['w']].any():
+                if not m.taken[ty:ty + st['h'], x:x + st['w']].any():
+                    m.stamp(k, x, ty, mark='B')
+    # Secondary pass filling 2x2 boulders & 4 iconic Strength-style accent boulders along the ridge toe
+    for sx_b, nm_b in ((18, 'nt_boulder'), (27, 'nt_boulder'), (36, 'nt_boulder'), (45, 'nt_boulder')):
+        yb = int(round(slide_cy(sx_b))) + 1
+        put_safe(m, nm_b, sx_b, yb, on='.B', r=1, prot=prot_wide)
+    rr = random.Random(5615)
+    for x in range(13, 53):
+        yc = int(round(slide_cy(x)))
+        for dy in (-1, 0, 1):
+            y = yc + dy
+            if not m.inb(x, y) or m.cls[y, x] != 'B' or m.taken[y, x]:
+                continue
+            for k in ('ck_boulder', 'fw_log_m', 'ck_pebbles', 'fw_stone'):
+                st = STAMPS[k]
+                if m.inb(x + st['w'] - 1, y + st['h'] - 1) and not m.taken[y:y + st['h'], x:x + st['w']].any() \
+                        and not m.cliff[y:y + st['h'], x:x + st['w']].any() and not prot_wide[y:y + st['h'], x:x + st['w']].any() \
+                        and all(m.cls[y + yy, x + xx] in 'B.' for yy in range(st['h']) for xx in range(st['w'])):
+                    m.stamp(k, x, y, mark='B')
+                    break
 
-    # Coastal Kristiline conifer clusters along cliff-top heaths
-    for idx, (cx, cy, cnt, rad) in enumerate(((16, 118, 3, 2.2), (8, 96, 3, 2.2), (17, 40, 3, 2.2), (24, 14, 3, 2.2), (32, 36, 3, 2.0), (18, 86, 3, 2.0))):
+    # Coastal Kristiline conifer clusters along cliff-top heaths & flanking the diagonal rockslide!
+    for idx, (cx, cy, cnt, rad) in enumerate((
+        (16, 118, 3, 2.2), (8, 96, 3, 2.2), (17, 40, 3, 2.2), (24, 14, 3, 2.2),
+        (32, 36, 3, 2.0), (18, 86, 3, 2.0), (29, 53, 3, 2.2), (42, 56, 3, 2.0), (22, 69, 3, 2.2),
+    )):
         place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=561 + idx, prot=prot_wide)
 
-    CK.undergrowth(r, 95, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
-    CK.props(r, ['fw_stone', 'fw_drift2', 'fw_drift0', 'fw_wood'], 45, box=(0, 0, W, H), clump=3, seed=7)
+    CK.undergrowth(r, 28, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
+    CK.props(r, ['fw_stone', 'fw_drift2', 'fw_drift0', 'fw_wood'], 18, box=(0, 0, W, H), clump=3, seed=7)
 
     # ---- 6. Paint + Dense Winter Canopy, Cave Mouths, Glacial Turf, Sea Stacks & Warm Glows ----
     r.paint(glint=0.0)
@@ -1873,10 +2040,17 @@ def build_561():
     # Paint real cave mouths on the crag cliff faces at exact HEAD coordinates MN=(6,49) & MS=(6,75)!
     for x, y in (MN, MS):
         RW.cave_mouth(m, x, y)
-    # Seal every uncovered landslide 'B' cell with dense ice-glazed boulders/scree (ZERO gate leaks!)
-    for y, x in np.argwhere(m.cls == 'B'):
+    # Seal only remaining tiny uncovered seam cells strictly inside the thin diagonal spine (ZERO giant snowball grid!)
+    for y, x in np.argwhere(slide_spine):
+        if (x, y) in ((52, 52), (52, 53)):
+            continue
         if m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
-            m.L[1, y, x] = 10371 if vnoise(x, y, 5616, 2.0) > 0.55 else 10551 if (x + y) % 2 else int(np.array(STAMPS['fw_stone']['layers']).max())
+            m.L[1, y, x] = 10551 if (x + y) % 2 else int(np.array(STAMPS['fw_stone']['layers']).max())
+    # Ensure Kestrel's tor flank cells stay solid
+    for bx, by in ((8, 8), (9, 8), (10, 8), (12, 8), (13, 8)):
+        if m.L[1, by, bx] == 0 and m.L[2, by, bx] == 0:
+            m.L[1, by, bx] = 10551
+    m.L[1, 53, 52] = 0; m.L[2, 53, 52] = 0   # ensure south approach to Item @(52,52) is walkable
 
     # Stilt fishing hamlet timber boardwalk quay & smoky stove chimneys
     paint_boardwalk_strip(m, 34, 111, 46, 112, style='ak', on_cls='.d')
@@ -1904,10 +2078,10 @@ def build_561():
     paint_snow_turf_layering(m, seed=561, cer_thr=0.62, peri_thr=0.70)
     CK.snow_ground_var(r, thr=0.48)
     RW.icy_faces(m, 0.60, seed=561)
-    RW.drifts(m, 0.24, seed=561)
+    RW.drifts(m, 0.05, seed=561)
     RW.road_tracks(m, 0.12, seed=561)
-    RW.dress_ice(m, 0.42, seed=561)
-    RW.reed_beds(m, 34, seed=561)
+    RW.dress_ice(m, 0.24, seed=561)
+    RW.reed_beds(m, 8, seed=561)
     add_warm_glows(m, glow_pts + [(51, 38), (6, 50), (6, 76), (40, 109)])
     add_water_glints(m, water_cls='wW', seed=561, density=0.04)
 
@@ -2141,22 +2315,48 @@ def build_566():
 # =============================================================================
 def build_577():
     """Frostwick Pass (72x96, ts 52): sweeping alpine pass climbing from Spinners' Rise (S col 30..33)
-    to Frostwick East Gate (W row 37..40). Crisp shs3 snow cliffs with icy faces, dense Kristiline alpine
-    spruce canopy framing the entire upper snow basin (eliminating the barren white upper plateau!),
-    strictly sealed Wind Gap (x=40..42, y=54..66), Rock-Smash-sealed Icium Z gully ([66, 57] sealing
-    [69,57]/[68,56]/[70,58]), organic jagged-shore Frozen Tarn (54, 32), Frozen Fall hollow (56, 14),
-    Handfast Arch (8, 36), Wolfsrime snow-bank landing (16..19, 4), lantern-lit Bothy & Toll Hut."""
+    to Frostwick East Gate (W row 37..40). Boldly staggered multi-promontory shs3 snow cliffs (zero
+    ruler-straight horizontal walls!), organic eroded snow-grass glades, dense Kristiline alpine spruce
+    canopy with clean hut aprons, strictly sealed Wind Gap (x=40..42, y=54..66), Rock-Smash-sealed
+    Icium Z gully ([66, 57]), Frozen Tarn (54, 32), Handfast Arch (8, 36), lantern-lit Bothy & Toll Hut."""
     W, H = 72, 96
     hspec = head_spec(577)
     evs = hspec['events']
     r = Route(577, W, H, 'snow', base='.', kit='shs3')
     m = r.m
 
-    # ---- 1. Sweeping Organic Alpine Terraces (shs3, smooth contours!) ----
-    lips = [(74, 1), (50, 2)]
-    r.terraces(lips, wobble=3.4, scale=12.5)
+    # ---- 1. Boldly Staggered Alpine Ridge Terraces (shs3 — ZERO ruler-straight horizontal walls!) ----
+    def lip1_at(x):
+        if x <= 18:
+            return 71
+        if x <= 27:
+            return 77
+        if x <= 36:
+            return 73
+        if x <= 46:
+            return 75
+        if x <= 58:
+            return 79
+        return 72
+
+    def lip2_at(x):
+        if x <= 15:
+            return 52
+        if x <= 31:
+            return 45
+        if x <= 44:
+            return 50
+        if x <= 57:
+            return 47
+        return 48
+
+    for x in range(W):
+        y1 = lip1_at(x)
+        y2 = lip2_at(x)
+        m.ht[:y1 + 1, x] = 1
+        m.ht[:y2 + 1, x] = 2
     for hh in (1, 2):
-        CK.smooth_ht(m, hh, 3)
+        CK.smooth_ht(m, hh, 1)
 
     # ---- 2. Dense Alpine Forest Framing & Rich Upper-Basin Groves (ZERO barren snow slab!) ----
     r.forest_band('E', 9, wobble=4.0)
@@ -2166,8 +2366,8 @@ def build_577():
 
     # ---- 3. Winding Hoar Road & Strictly Framed Wind Gap (x=40..42, y=54..66) ----
     GX, GY0, GY1 = 40, 54, 66
-    road = [(31.5, 95), (33, 86), (40, 79), (41, 72), (41, GY1 + 2), (41, GY0 - 2),
-            (36, 46), (26, 41), (14, 38.5), (0, 38.5)]
+    road = [(31.5, 95), (33, 86), (40, 80), (41, 75), (41, GY1 + 2), (41, GY0 - 2),
+            (37, 46), (26, 41), (14, 38.5), (0, 38.5)]
     r.road(road, w=3.0, c='d', open_=(2, 5))
     r.exit('S', 30, 4)
     r.exit('W', 37, 4)
@@ -2179,31 +2379,39 @@ def build_577():
         for x in (GX, GX + 1, GX + 2):
             m.cls[y, x] = 'd'
 
+    # Align road stairs cleanly onto the exact staggered lip row where the road crosses
     stairs = []
-    for yl, hh in lips:
-        xs = [x for x in range(W) if r.road_mask[yl, x]]
+    for yl, hh in ((75, 1), (50, 2)):
+        xs = [x for x in range(34, 46) if r.road_mask[yl, x]]
         if xs:
-            stairs.append((min(xs) + max(0, (len(xs) - 3) // 2), yl, hh))
+            sx = min(xs) + max(0, (len(xs) - 3) // 2)
+            # Ensure flat 3-wide lip directly at the stair crossing
+            m.ht[:yl + 1, sx - 1:sx + 4] = np.maximum(m.ht[:yl + 1, sx - 1:sx + 4], hh)
+            m.ht[yl + 1:yl + 4, sx - 1:sx + 4] = np.minimum(m.ht[yl + 1:yl + 4, sx - 1:sx + 4], hh - 1)
+            stairs.append((sx, yl, hh))
 
     # ---- 4. Organic Multi-Lobe Frozen Tarn, Frozen Fall Hollow, Wolfsrime Landing & Side Lanes ----
     m.blob(54.0, 32.0, 7.6, 4.2, 'p', seed=5771, rough=0.45, only='.tT')
     m.blob(58.5, 34.5, 4.0, 2.5, 'p', seed=5772, rough=0.42, only='.tT')
     m.blob(49.5, 30.0, 3.5, 2.2, 'p', seed=5773, rough=0.40, only='.tT')
-    smooth_cls(m, 'p', into='.', passes=1)
+    smooth_cls(m, 'p', into='.', passes=2)
     r.lane([(38, 46), (46, 36), (52, 28)], w=2.0, c='d', open_=(1, 3))
     r.pocket(58, 20, 4.5, 2.8, gate=None)
     r.lane([(52, 28), (57, 22)], w=2.0, c='d', open_=(1, 2))
-    r.lane([(30, 82), (20, 84), (14, 80)], w=2.0, c='d', open_=(1, 3))
+    r.lane([(31, 82), (20, 84), (14, 80)], w=2.0, c='d', open_=(1, 3))
     r.lane([(42, 70), (54, 70), (60, 66)], w=2.0, c='d', open_=(1, 2))
+    # Clear snow aprons around Toll Hut (31, 77) & Bothy (12, 78) so zero pine woods encroach on roofs!
+    r.clearing(33, 79, 5.0, 3.5, c='.')
+    r.clearing(15, 80, 5.5, 3.8, c='.')
     # Wolfsrime snow-bank arrival clearing (16..19, 4) connected cleanly down onto the upper pass!
     r.clearing(17.5, 5.5, 4.5, 3.2, c='.')
     r.lane([(17.5, 6), (22, 16), (34, 17), (37, 25), (35, 38)], w=2.2, c='d', open_=(1, 3))
 
     # Rich copses sculpting intimate alpine glades across the upper down (zero bare flat plateau!)
     for cx, cy_, rx, ry in (
-        (14, 86, 6.2, 4.0), (10, 20, 7.5, 5.5), (61, 46, 4.5, 4.2), (22, 60, 5.2, 3.2),
-        (51, 86, 4.5, 3.2), (27, 24, 4.8, 3.5), (46, 15, 5.5, 3.8), (28, 8, 5.0, 3.5),
-        (12, 30, 4.2, 3.0), (48, 45, 3.8, 2.8), (62, 79, 4.5, 3.5), (24, 34, 3.8, 2.6),
+        (11, 88, 5.2, 3.2), (10, 20, 7.5, 5.5), (61, 46, 4.5, 4.2), (22, 60, 5.2, 3.2),
+        (51, 87, 4.5, 3.2), (27, 24, 4.8, 3.5), (46, 15, 5.5, 3.8), (28, 8, 5.0, 3.5),
+        (12, 30, 4.2, 3.0), (48, 44, 3.5, 2.5), (62, 79, 4.5, 3.5), (24, 34, 3.8, 2.6),
     ):
         r.copse(cx, cy_, rx, ry)
 
@@ -2215,6 +2423,8 @@ def build_577():
     r.lane([(56, 66), (56, 57), (64, 57)], w=2.0, c='d', open_=(0, 1))
     r.lane([(54, 45), (64, 45)], w=2.0, c='d', open_=(0, 1))
     r.lane([(40, 44), (46, 44), (50, 40)], w=2.0, c='d', open_=(0, 1))
+    # Ensure Snowmen [24, 49] & Snorunt [27, 49] connect cleanly south onto the central plateau!
+    r.lane([(24, 50), (31, 51), (37, 51)], w=2.0, c='.', open_=(1, 1))
 
     # Keep all HEAD event coordinates & Wolfsrime landing (16..19, 4) free of 'T'
     for e in evs:
@@ -2229,10 +2439,12 @@ def build_577():
     for sx, yl, hh in stairs:
         CK.stair(r, sx, yl, w=3, h=hh)
 
+    # Organic eroded tall-grass glades (smaller varied multi-lobe clusters + organic erosion -> ZERO 6x6 blocks!)
     CK.grass_fields(r, [
-        (18, 46, 3.5), (30, 54, 3.0), (54, 58, 3.0), (24, 70, 3.5), (50, 80, 3.0),
-        (14, 28, 3.0), (40, 28, 3.0), (34, 88, 2.5), (26, 16, 3.0),
+        (16, 43, 2.8), (22, 42, 2.3), (30, 53, 2.6), (54, 58, 2.6), (22, 69, 2.8),
+        (51, 76, 2.6), (56, 74, 2.2), (14, 28, 2.6), (40, 28, 2.8), (34, 88, 2.3), (26, 16, 2.6),
     ])
+    erode_snow_grass_organic(m, seed=577)
 
     # ---- 5. Lock ALL 64 Exact HEAD Events & Signposts ----
     prot_wide = reserve_events(
@@ -2249,16 +2461,22 @@ def build_577():
 
     # ---- 6. Handfast Arch, Bothy, Toll Hut, Avalanche Fences, Frozen Fall, Lanterns & Groves ----
     glow_pts = []
+    avoid_top = np.zeros((H, W), bool)
     if m.free(7, 33, STAMPS['wb_gate']['w'], STAMPS['wb_gate']['h'], on='.dt'):
         m.stamp('wb_gate', 7, 33)
+        mark_stamp_avoid(avoid_top, 'wb_gate', 7, 33)
+    smoke_pts = []
     for n, x, y in (
-        ('wb_hut', 32, 72), ('wb_short', 12, 78), ('fw_rack', 58, 66), ('fw_rack', 54, 64),
-        ('fw_sled', 36, 80), ('fw_fall', 56, 14), ('fw_brazier', 20, 80), ('fw_brazier', 35, 76),
+        ('wb_hut', 30, 77), ('wb_short', 12, 77), ('fw_rack', 58, 66), ('fw_rack', 54, 64),
+        ('fw_sled', 36, 80), ('fw_fall', 56, 14), ('fw_brazier', 20, 80), ('fw_brazier', 36, 76),
         ('pf_lantern', 9, 37), ('pf_lantern', 12, 40), ('pf_lantern', 38, 68), ('pf_lantern', 38, 52),
         ('pf_lantern', 33, 89), ('pf_lantern', 49, 34), ('pf_lantern', 19, 7), ('pf_lantern', 56, 21),
         ('fw_wood', 18, 83), ('sh_crates', 37, 75), ('pf_logbench', 16, 84), ('fw_skull', 44, 52),
     ):
         res = put_safe(m, n, x, y, on='.td', r=4, prot=prot_wide)
+        if res and n in ('wb_hut', 'wb_short'):
+            mark_stamp_avoid(avoid_top, n, res[0], res[1], pad_x=1, pad_n=2, pad_s=1)
+            smoke_pts.append((res[0] + 3, max(0, res[1] - 2)))
         if res and n in ('fw_brazier', 'pf_lantern'):
             glow_pts.append((res[0], res[1] + (1 if n == 'pf_lantern' else 0)))
 
@@ -2273,48 +2491,51 @@ def build_577():
         put_safe(m, 'fw_stone', x, y, on='.t', r=1, prot=prot_wide)
     # Ancient ice-glazed giant trees framing the Wolfsrime snow-bank descent & upper down!
     for nm, x, y in (('pf_g_tree4p_ice', 10, 1), ('pf_g_tree2_ice', 22, 2), ('pf_g_tree2_ice', 42, 20)):
-        put_safe(m, nm, x, y, on='.tT', r=2, prot=prot_wide)
+        res = put_safe(m, nm, x, y, on='.tT', r=2, prot=prot_wide)
+        if res:
+            mark_stamp_avoid(avoid_top, nm, res[0], res[1], pad_x=1, pad_n=1, pad_s=1)
     # Kristiline conifer clusters breaking up open alpine glades
-    for idx, (cx, cy, cnt, rad) in enumerate(((22, 42, 3, 2.2), (43, 30, 3, 2.2), (29, 44, 3, 2.0), (50, 74, 3, 2.2), (16, 68, 3, 2.2))):
-        place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=577 + idx, prot=prot_wide)
+    prot_groves = prot_wide | avoid_top
+    for idx, (cx, cy, cnt, rad) in enumerate(((22, 40, 3, 2.2), (43, 30, 3, 2.2), (29, 43, 3, 2.0), (50, 72, 3, 2.2), (16, 67, 3, 2.2))):
+        place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=577 + idx, prot=prot_groves)
 
     CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2'], 28, box=(0, 0, W, H), clump=3, seed=7)
 
     # ---- 7. Paint + Dense Winter Canopy, Sealed Icium Z Gully, Glacial Turf & Warm Glows ----
     r.paint(glint=0.0)
     CK.paint_extras(r)
-    infill_winter(r, ALPINE_WOODS, scale=9.5, seed=577)
+    infill_winter(r, ALPINE_WOODS, scale=9.5, seed=577, avoid_top=avoid_top)
 
     # Guarantee 100% airtight Rock-Smash wall around Icium Z gully (x=63..71)!
     for y in range(52, 63):
         for x in range(63, 72):
-            if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+            if m.cls[y, x] == 'T' and m.L[1, y, x] == 0:
                 m.L[1, y, x] = (10371, 10551)[(x + y) % 2]
     # Guarantee Wind Gap flanking 'T' cells are 100% solid (zero bypass!)
     for y in range(GY0, GY1 + 1):
         for x in range(GX - 12, GX + 13):
-            if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0:
+            if m.cls[y, x] == 'T' and m.L[1, y, x] == 0:
                 m.L[1, y, x] = (10551, 10371)[(x + y) % 2]
 
-    # Cerulean & periwinkle snow-edged glacial turf across the alpine down + crystal spires near Frozen Fall!
+    # Native seamless wind-swept snow drift variation + crystal spires near Frozen Fall!
     paint_snow_turf_layering(m, seed=577, cer_thr=0.61, peri_thr=0.69)
     for cx, cy, sp in ((55, 21, KF_CRYS_MONO), (61, 19, KF_CRYS_STAR), (48, 34, KF_CRYS_BLADES), (14, 7, KF_CRYS_MONO)):
         put_sprite(m, cx, cy, sp[0], sp[1], on='.', avoid_mask=prot_wide, post_paint=True)
-    for nm, x, y in (('fw_smoke_w', 15, 76), ('fw_smoke_w', 34, 70)):
-        put_overlay_stamp(m, nm, x, y, z=2)
+    for sx_, sy_ in smoke_pts:
+        put_overlay_stamp(m, 'fw_smoke_w', sx_, sy_, z=2)
     CK.snow_ground_var(r, thr=0.48)
     RW.icy_faces(m, 0.65, seed=577)
-    RW.drifts(m, 0.28, seed=577)
+    RW.drifts(m, 0.06, seed=577)
     RW.road_tracks(m, 0.14, seed=577)
-    RW.dress_ice(m, 0.50, seed=577)
-    RW.reed_beds(m, 55, seed=577)
+    RW.dress_ice(m, 0.25, seed=577)
+    RW.reed_beds(m, 12, seed=577)
     add_warm_glows(m, glow_pts + [(8, 36), (17, 81), (36, 77), (58, 19)])
 
     # Seal ALL stray perimeter edges strictly except S (30..33 -> 566) and W (37..40 -> 570)!
     seal_unconnected_edges(
         m,
         open_cells=[(x, H - 1) for x in range(30, 34)] + [(0, y) for y in range(37, 41)],
-        filler=10371,
+        filler=(10551, 10371, 9872, 9888),
     )
     write_wave13_map(m, 577, '# Frostwick Pass (577). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).\n')
     return m
@@ -2325,65 +2546,130 @@ def build_577():
 # =============================================================================
 def build_578():
     """Rimewood Path (80x88, ts 52): sweeping hoar-wood ascent from Frostwick (S col 40..43) to
-    The Rimewood (N col 36..39) over three shs3 alpine terraces. Long Ice frozen brook (y=47..48, x=6..35)
-    under the crag wall with stopper (19, 48) -> Snare Nook & Frozen Fall + smoking Charcoal Kiln;
-    airtight Rock-Smash Silk-fall Glade (curtain [60, 34] sealing [70, 35]/[67, 33]); airtight Unblazed
-    Stantler labyrinth (all 15 wrong-turn warps + tracks + second curtain [51, 5]); dense Kristiline
-    evergreen canopy, cerulean/periwinkle glacial hollows, rime-silk drapes, warm Lantern Birch glow."""
+    The Rimewood (N col 36..39) over three boldly staggered overlapping shs3 alpine ridges (zero
+    ruler-straight cliffs!). Meandering +/-3-tile Long Ice frozen creek curving through its freed-up
+    glacial valley (connecting Frozen fall [4,48], Snare Nook [19,50] stopper, and Long Ice [37,48]),
+    organic eroded snow-grass glades, airtight Rock-Smash Silk-fall Glade ([60, 34]) & Unblazed maze."""
     W, H = 80, 88
     hspec = head_spec(578)
     evs = hspec['events']
     r = Route(578, W, H, 'snow', base='.', kit='shs3')
     m = r.m
 
-    # ---- 1. Sweeping Terraces (shs3! Long Ice lip YL=44 -> cliff y=44..46, ice y=47..48!) ----
-    lips = [(70, 1), (45, 2), (21, 3)]
-    r.terraces(lips, wobble=3.4, scale=11.0)
-    YL, LX0, LX1 = 44, 2, 38
-    for x in range(LX0, LX1 + 1):
-        m.ht[:YL + 1, x] = np.maximum(m.ht[:YL + 1, x], 2)
-        m.ht[YL + 1:YL + 8, x] = np.minimum(m.ht[YL + 1:YL + 8, x], 1)
+    # ---- 1. Three Boldly Staggered Overlapping Alpine Ridges (ZERO ruler-straight horizontal walls!) ----
+    def lip1_at(x):
+        if x <= 18:
+            return 66
+        if x <= 31:
+            return 70
+        if x <= 44:
+            return 68
+        if x <= 55:
+            return 73
+        return 67
+
+    def lip2_at(x):
+        if x <= 9:
+            return 44
+        if x <= 22:
+            return 39
+        if x <= 33:
+            return 41
+        if x <= 48:
+            return 45
+        if x <= 60:
+            return 42
+        return 46
+
+    def lip3_at(x):
+        if x <= 15:
+            return 18
+        if x <= 31:
+            return 23
+        if x <= 46:
+            return 20
+        if x <= 65:
+            return 22
+        return 24
+
+    for x in range(W):
+        m.ht[:lip1_at(x) + 1, x] = 1
+        m.ht[:lip2_at(x) + 1, x] = 2
+        m.ht[:lip3_at(x) + 1, x] = 3
     for hh in (1, 2, 3):
-        CK.smooth_ht(m, hh, 3)
-    for x in range(LX0, LX1 + 1):
+        CK.smooth_ht(m, hh, 1)
+    # Lock Frozen Fall crag lip (x=1..9, y=44) so waterfall pours cleanly into [4, 48]
+    YL = 44
+    for x in range(1, 10):
         m.ht[:YL + 1, x] = np.maximum(m.ht[:YL + 1, x], 2)
-        m.ht[YL + 1:YL + 8, x] = np.minimum(m.ht[YL + 1:YL + 8, x], 1)
+        m.ht[YL + 1:YL + 5, x] = np.minimum(m.ht[YL + 1:YL + 5, x], 1)
 
     # ---- 2. Forest Borders, Winding Hoar Road & Copses ----
     r.forest_band('W', 5, wobble=3.0)
     r.forest_band('E', 6, wobble=3.0)
     r.forest_band('N', 3, wobble=2.0)
     r.forest_band('S', 3, wobble=2.0)
-    road = [(41.5, 87), (44, 81), (41, 75), (36, 70), (37, 63), (43, 57), (45, 50),
-            (44, 44), (40, 38), (35, 31), (38, 25), (44, 20), (43, 13), (39, 6), (37.5, 0)]
+    road = [(41.5, 87), (44, 81), (41, 75), (37, 68), (37, 63), (43, 57), (45, 50),
+            (44, 45), (40, 38), (35, 31), (38, 25), (43, 20), (43, 13), (39, 6), (37.5, 0)]
     r.road(road, w=3.0, open_=None)
     r.exit('S', 40, 4)
     r.exit('N', 36, 4)
     stairs = []
-    for yl, hh in lips:
-        xs = [x for x in range(W) if r.road_mask[yl, x]]
+    for yl, hh, xlo, xhi in ((68, 1, 33, 43), (45, 2, 38, 48), (20, 3, 38, 47)):
+        xs = [x for x in range(xlo, xhi + 1) if r.road_mask[yl, x]]
         if xs:
-            stairs.append((min(xs) + max(0, (len(xs) - 3) // 2), yl, hh))
+            sx = min(xs) + max(0, (len(xs) - 3) // 2)
+            m.ht[:yl + 1, sx - 1:sx + 4] = np.maximum(m.ht[:yl + 1, sx - 1:sx + 4], hh)
+            m.ht[yl + 1:yl + 4, sx - 1:sx + 4] = np.minimum(m.ht[yl + 1:yl + 4, sx - 1:sx + 4], hh - 1)
+            stairs.append((sx, yl, hh))
+    # Ensure flat lip at west Woodcutter stair (x=25, y=70, h=1)
+    m.ht[:71, 24:29] = np.maximum(m.ht[:71, 24:29], 1)
+    m.ht[71:74, 24:29] = np.minimum(m.ht[71:74, 24:29], 0)
 
-    BY = 47   # exact ice rows y=47, 48 matching HEAD events (Frozen fall [4,48], Long Ice [37,48], Snare [19,50])!
+    BY = 47   # exact anchor rows y=47, 48 matching Frozen fall [4,48], Long Ice [37,48], Snare [19,50]
     BX0, BX1 = 6, 35
+
+    def creek_rows(x):
+        """Organic +/-3-tile meandering frozen creek across x=6..35 inside the broadened middle valley!"""
+        if x <= 8:
+            return (47, 48)
+        if x <= 17:
+            c = int(round(47.0 - 2.8 * math.sin((x - 8.0) * math.pi / 9.5)))
+            return (c, c + 1)
+        if x <= 21:
+            return (47, 48)
+        if x <= 32:
+            c = int(round(47.0 - 2.3 * math.sin((x - 21.0) * math.pi / 11.5)))
+            return (c, c + 1)
+        return (47, 48)
+
     for cx, cy_, rx, ry in (
-        (20, 53, 12, 3.2), (14, 82, 6, 3), (66, 84, 7, 3), (58, 60, 6, 4), (70, 47, 6, 5),
-        (24, 30, 6, 4), (56, 30, 5, 4), (62, 10, 5, 3), (14, 12, 6, 4), (30, 66, 5, 3),
-        (52, 74, 4, 2.5), (10, 64, 4, 3), (20, 18, 4.5, 3.2), (14, 40, 4.5, 2.8),
+        (26, 54, 6.5, 2.8), (14, 83, 5.0, 2.5), (66, 84, 7, 3), (58, 60, 6, 4), (70, 48, 6, 4.5),
+        (24, 30, 6, 4), (56, 30, 5, 4), (62, 10, 5, 3), (14, 12, 6, 4), (30, 63, 4.5, 2.8),
+        (52, 74, 4, 2.5), (10, 62, 4, 2.8), (20, 17, 4.5, 3.0), (14, 34, 4.5, 2.8),
     ):
         r.copse(cx, cy_, rx, ry)
 
-    # Woodcutters' yard (SW), Honey-stump hives (SE), Long Ice & Burners' Clearing (W)
-    r.clearing(22, 78, 9, 5, only='T.t')
+    # Woodcutters' yard (SW — generous apron around wb_hut 12,77!), Honey-stump hives (SE), Long Ice & Burners' Clearing (W)
+    r.clearing(20, 78, 11.0, 5.5, only='T.t')
     r.lane([(40, 79), (30, 78)], w=2.0, open_=None)
     r.clearing(58, 81, 7, 3.5, only='T.t')
+    # Carve snow valley around the meandering creek first so banks breathe organically
+    for x in range(BX0 - 2, BX1 + 3):
+        y0c, y1c = creek_rows(min(BX1, max(BX0, x)))
+        for y in range(max(43, y0c - 1), min(53, y1c + 2)):
+            if m.cls[y, x] in 'T.t':
+                m.cls[y, x] = '.'
     for x in range(BX0, BX1 + 1):
-        for y in (BY, BY + 1):
+        y0c, y1c = creek_rows(x)
+        for y in range(y0c, y1c + 1):
             m.cls[y, x] = 'p'
-        for y in range(BY + 2, BY + 7):
-            if BX0 + 4 <= x <= BX1 - 3 and m.cls[y, x] in '.t':
-                m.cls[y, x] = 'T'
+        # Smooth organic inner bend fills so curves are never 1-tile stair-steps
+        if x in (10, 11, 15, 16, 23, 24, 30, 31):
+            m.cls[y1c + 1, x] = 'p'
+    # Organic conifer clumps framing the creek's south bends (instead of a rigid horizontal tree bar!)
+    for cx, cy_, rx, ry in ((14, 52, 3.2, 2.0), (26, 52, 4.0, 2.2), (32, 53, 2.8, 1.8)):
+        r.copse(cx, cy_, rx, ry)
     for x in range(BX0 - 4, BX0):
         for y in range(BY - 1, BY + 4):
             m.cls[y, x] = '.'
@@ -2392,10 +2678,10 @@ def build_578():
             m.cls[y, x] = '.'
     r.lane([(BX1 + 4, BY + 1), (43, 50)], w=2.0, open_=None)
     SNARE = 20
-    for x in range(SNARE - 3, SNARE + 1):
+    for x in range(SNARE - 3, SNARE + 2):
         for y in (BY + 2, BY + 3):
             m.cls[y, x] = '.'
-    r.clearing(9, 54, 5, 3.4, only='T.t')
+    r.clearing(9, 54, 5.5, 3.6, only='T.t')
     r.lane([(4, BY + 3), (8, 52)], w=2.0, open_=None)
     r.lane([(12, 57), (24, 60), (36, 62)], w=2.0, open_=None)
 
@@ -2460,16 +2746,23 @@ def build_578():
     for sx, yl, hh in stairs:
         CK.stair(r, sx, yl, w=3, h=hh)
     CK.stair(r, 25, 70, w=3, h=1)
+    # Re-apply meandering frozen creek strictly off cliff faces!
     for x in range(BX0, BX1 + 1):
-        for y in (BY, BY + 1):
-            m.cls[y, x] = 'p'
+        y0c, y1c = creek_rows(x)
+        for y in range(y0c, y1c + 1):
+            if not m.cliff[y, x]:
+                m.cls[y, x] = 'p'
+        if x in (10, 11, 15, 16, 23, 24, 30, 31) and not m.cliff[y1c + 1, x]:
+            m.cls[y1c + 1, x] = 'p'
     # One-way snow-bank drop from Trapper's lean-to shelf down to Honey-stump hives
     CK.ledge(r, 54, 62, 74, face='snow')
 
+    # Eroded organic snow-grass glades (ZERO stamped rectangular boxes!)
     CK.grass_fields(r, [
-        (18, 76, 3.0), (30, 84, 2.5), (60, 66, 3.5), (28, 64, 3.0), (52, 52, 3.5),
-        (30, 38, 3.5), (20, 26, 3.0), (30, 12, 3.0), (14, 34, 3.0), (64, 26, 2.5),
+        (19, 75, 2.5), (30, 84, 2.3), (60, 63, 2.8), (28, 62, 2.6), (52, 52, 2.8),
+        (30, 35, 2.8), (20, 27, 2.5), (30, 12, 2.6), (14, 32, 2.6), (64, 26, 2.3),
     ])
+    erode_snow_grass_organic(m, seed=578)
 
     # ---- 5. Lock ALL 47 Exact HEAD Events & Signposts ----
     prot_wide = reserve_events(
@@ -2485,17 +2778,22 @@ def build_578():
 
     # ---- 6. Woodcutters' Yard, Honey-Stumps, Trapper's Lean-To, Charcoal Kiln, Lantern Birch & Giants ----
     glow_pts = []
+    avoid_top = np.zeros((H, W), bool)
+    smoke_pts = [(7, 50)]
     for n, x, y in (
-        ('wb_hut', 12, 77), ('fw_wood', 20, 75), ('fw_wood', 22, 75), ('fw_log_m', 22, 81),
-        ('pf_sledge', 28, 80), ('fw_rack', 17, 80), ('fw_wood', 14, 79), ('fw_log_n', 26, 74), ('fw_log_s', 18, 83),
+        ('wb_hut', 12, 76), ('fw_wood', 20, 75), ('fw_wood', 22, 75), ('fw_log_m', 22, 81),
+        ('pf_sledge', 28, 80), ('fw_rack', 17, 80), ('fw_wood', 14, 81), ('fw_log_n', 26, 74), ('fw_log_s', 18, 83),
         ('nt_stump_big', 55, 78), ('nt_stump', 60, 82), ('nt_stump_big', 61, 78), ('nt_stump', 64, 82),
-        ('fw_rack', 58, 71), ('fw_brazier', 61, 72), ('fw_rack', 67, 72), ('fw_wood', 65, 73), ('fw_skull', 69, 73),
+        ('fw_rack', 58, 70), ('fw_brazier', 61, 72), ('fw_rack', 67, 71), ('fw_wood', 65, 73), ('fw_skull', 69, 72),
         ('nt_stonering', 5, 54), ('fw_smoke_a', 7, 50), ('fw_wood', 11, 51), ('fw_wood', 13, 53), ('fw_sled', 13, 56),
         ('pf_lantern', 42, 38), ('fw_stone', 39, 42),
         ('pf_lantern', 43, 83), ('pf_lantern', 38, 60), ('pf_lantern', 46, 17), ('pf_lantern', 65, 33),
-        ('pf_lantern', 39, 5), ('fw_brazier', 17, 79),
+        ('pf_lantern', 39, 5), ('fw_brazier', 18, 79),
     ):
         res = put_safe(m, n, x, y, on='.d', r=3, prot=prot_wide)
+        if res and n == 'wb_hut':
+            mark_stamp_avoid(avoid_top, 'wb_hut', res[0], res[1], pad_x=1, pad_n=2, pad_s=1)
+            smoke_pts.append((res[0] + 3, max(0, res[1] - 2)))
         if res and n in ('pf_lantern', 'fw_brazier'):
             glow_pts.append((res[0], res[1] + (1 if n == 'pf_lantern' else 0)))
 
@@ -2503,35 +2801,37 @@ def build_578():
         if m.free(x, BY + 2, 1, 1, on='.') and not prot_wide[BY + 2, x]:
             m.stamp('fw_peg', x, BY + 2)
     m.stamp('fw_fall', BX0 - 4, YL - 1, mark='B')
-    # Towering ancient ice-glazed giants on the upper terrace!
-    for nm, x, y in (('pf_g_tree6_ice', 2, 1), ('pf_g_tree4p_ice', 25, 2), ('pf_g_tree2_ice', 74, 24), ('pf_g_tree2_ice', 28, 45)):
-        put_safe(m, nm, x, y, on='.tT', r=3, prot=prot_wide)
+    # Towering ancient ice-glazed giants on the upper ridges!
+    for nm, x, y in (('pf_g_tree6_ice', 2, 1), ('pf_g_tree4p_ice', 25, 2), ('pf_g_tree2_ice', 74, 25), ('pf_g_tree2_ice', 27, 33)):
+        res = put_safe(m, nm, x, y, on='.tT', r=3, prot=prot_wide)
+        if res:
+            mark_stamp_avoid(avoid_top, nm, res[0], res[1], pad_x=1, pad_n=1, pad_s=1)
 
     # Extra Kristiline conifer groves framing the woodcutters' yard & birch hollows
-    for idx, (cx, cy, cnt, rad) in enumerate(((50, 82, 3, 2.2), (24, 38, 3, 2.2), (18, 28, 3, 2.2), (48, 56, 3, 2.2), (28, 16, 3, 2.2))):
-        place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=578 + idx, prot=prot_wide)
+    prot_groves = prot_wide | avoid_top
+    for idx, (cx, cy, cnt, rad) in enumerate(((50, 82, 3, 2.2), (24, 36, 3, 2.0), (18, 28, 3, 2.2), (48, 56, 3, 2.2), (28, 15, 3, 2.2))):
+        place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=578 + idx, prot=prot_groves)
 
-    CK.undergrowth(r, 110, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
-    CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2', 'fw_drift0'], 38, box=(0, 0, W, H), clump=3, seed=7)
+    CK.undergrowth(r, 30, kinds=('fw_stone', 'fw_drift2', 'fw_drift0'), seed=3)
+    CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2', 'fw_drift0'], 16, box=(0, 0, W, H), clump=3, seed=7)
 
     # ---- 7. Paint + Dense Winter Canopy, Airtight Walls, Stantler Tracks, Crystals & Glows ----
     r.paint(glint=0.0)
     CK.paint_extras(r)
-    infill_winter(r, ALPINE_WOODS, scale=8.5, seed=578)
+    infill_winter(r, ALPINE_WOODS, scale=8.5, seed=578, avoid_top=avoid_top)
 
-    SHRUB = (10371, 10551, 10555)
+    SHRUB = (10371, 10551, 9872)
     # Long Ice stopper dropping players cleanly at the Snare Nook (17..20, 49..50)!
     m.L[1, BY + 1, SNARE - 1] = 10371
     # Airtight Silk-fall glade wall (ZERO gate leaks around [60, 34]!)
     for x, y in RING:
         if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and (x, y) != GAP1:
             m.L[1, y, x] = SHRUB[(x * 7 + y * 3) % 3]
-    # Airtight Unblazed wood & Long Ice south bank (no slipping between trees!)
-    for (x0, y0, x1, y1) in ((47, 0, W, 23), (BX0 + 3, BY + 2, BX1 - 2, BY + 8)):
-        for y in range(y0, y1):
-            for x in range(x0, x1):
-                if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and not m.taken[y, x]:
-                    m.L[1, y, x] = SHRUB[(x * 7 + y * 3) % 3]
+    # Airtight Unblazed wood (no slipping between trees!)
+    for y in range(0, 23):
+        for x in range(47, W):
+            if m.cls[y, x] == 'T' and m.L[1, y, x] == 0 and not m.taken[y, x]:
+                m.L[1, y, x] = SHRUB[(x * 7 + y * 3) % 3]
 
     # Visible Stantler hoofprints leading cleanly through The Unblazed (A -> B -> C)!
     TK = [STAMPS['fw_tracks%d' % i]['layers'][1][0][0] for i in range(2)]
@@ -2541,26 +2841,26 @@ def build_578():
         if m.inb(x, y) and m.cls[y, x] in '.d' and m.L[2, y, x] == 0 and (UNB[y, x] or not m.taken[y, x]):
             m.L[2, y, x] = TK[(x + y) % 2]
 
-    # Cerulean/periwinkle glacial turf + glistening frost crystals around Frozen Fall & Silk-fall glade!
+    # Native seamless wind-swept snow drift variation + glistening frost crystals around Frozen Fall & Silk-fall glade!
     paint_snow_turf_layering(m, seed=578, cer_thr=0.62, peri_thr=0.70)
     for cx, cy, sp in ((64, 33, KF_CRYS_STAR), (69, 32, KF_CRYS_MONO), (66, 36, KF_CRYS_BLADES), (5, 50, KF_CRYS_MONO)):
         put_sprite(m, cx, cy, sp[0], sp[1], on='.', avoid_mask=prot_wide, post_paint=True)
-    for nm, x, y in (('fw_smoke_w', 15, 75), ('fw_smoke_w', 7, 50)):
-        put_overlay_stamp(m, nm, x, y, z=2)
+    for sx_, sy_ in smoke_pts:
+        put_overlay_stamp(m, 'fw_smoke_w', sx_, sy_, z=2)
     CK.snow_ground_var(r, thr=0.46)
     RW.icy_faces(m, 0.65, seed=578)
-    RW.rime_silk(m, ((30, 12), (48, 22), (63, 31), (65, 31), (70, 31), (72, 35), (26, 76), (20, 46), (8, 58)))
-    RW.drifts(m, 0.28, seed=578)
+    RW.rime_silk(m, ((30, 12), (48, 22), (63, 31), (65, 31), (70, 31), (72, 35), (26, 76), (20, 44), (8, 58)))
+    RW.drifts(m, 0.06, seed=578)
     RW.road_tracks(m, 0.14, seed=578)
-    RW.dress_ice(m, 0.42, seed=578)
-    RW.reed_beds(m, 70, seed=578)
+    RW.dress_ice(m, 0.24, seed=578)
+    RW.reed_beds(m, 14, seed=578)
     add_warm_glows(m, glow_pts + [(41, 40), (7, 52), (62, 72), (67, 34)])
 
     # Seal ALL stray perimeter edges strictly except S (40..43 -> 570) and N (36..39 -> 562)!
     seal_unconnected_edges(
         m,
         open_cells=[(x, H - 1) for x in range(40, 44)] + [(x, 0) for x in range(36, 40)],
-        filler=10371,
+        filler=(10551, 10371, 9872, 9888),
     )
     write_wave13_map(m, 578, '# Rimewood Path (578). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).\n')
     return m
@@ -2572,45 +2872,68 @@ def build_578():
 def build_579():
     """The Wolfsrime (80x88, ts 52): haunting ancient drove road winding down from The Rimewood
     (N warps [36..39, 0]) to the steep one-way snow bank above Frostwick Pass (S events [40..43, 87]).
-    Deep layered DARK_WINTER_WOODS + Kristiline spruces + towering ice-glazed ancient trees (ZERO flat
-    monotone pine grid!), sinuous frozen brook with weathered rustic timber crossing, cozy Drovers' Bothy
-    cabin (60, 74) with warm hearth & chimney smoke, Cold Kiln camp (20, 44), lantern-lit Hanging Bell
-    birch (42, 34), secret Clawed Birch trail (46, 28) -> Old Wolf Den (62, 18), cerulean glacial hollows."""
+    Sculpted breathing northern timberland with 6 spacious connected woodland glades (breaking wall-to-wall
+    pine grid spam!), mixed-scale conifers/snowdrifts/fallen logs, sinuous brook valley with weathered
+    timber bridge, cozy Drovers' Bothy cabin (59, 65) with clean snow apron & zero tree clipping, Cold
+    Kiln amphitheater (20, 44), Hanging Bell crossroads (42, 34), and hidden Old Wolf Den (62, 18)."""
     W, H = 80, 88
     hspec = head_spec(579)
     evs = hspec['events']
     r = Route(579, W, H, 'snow', base='T', kit='shs3')
     m = r.m
 
-    # ---- 1. Winding Ancient Drove Road & Storybook Woodland Clearings ----
+    # ---- 1. Winding Ancient Drove Road & Spacious Connected Woodland Clearings (ZERO 80% pine wallpaper!) ----
     road = [(42, 87), (44, 76), (36, 64), (40, 52), (50, 42), (44, 30), (38, 18), (38, 8), (38, 0)]
-    r.road(road, w=3.2, open_=(3, 7))
+    r.road(road, w=3.2, open_=(5, 10))
     r.exit('S', 40, 4)
     r.exit('N', 36, 4)
 
-    # Organic sinuous frozen brook meandering east-west across y~56..61 with rocky ice bays!
+    # Six generous, connected storybook snow glades framing every landmark & hut (bringing forest to ~48%!)
+    r.clearing(20, 45, 11.5, 7.5)                                               # 1. Cold Kiln amphitheater (20, 44)
+    r.lane([(40, 50), (26, 46)], w=2.6, open_=(2, 4))
+    r.clearing(60, 70, 12.5, 8.5)                                               # 2. Drovers' Bothy meadow (59, 65 / 60, 74)
+    r.lane([(44, 74), (54, 73), (62, 73), (66, 72)], w=2.8, open_=(2, 4))
+    r.clearing(62, 19, 9.5, 6.5)                                                # 3. Old Wolf Den crystalline basin (62, 18)
+    r.lane([(44, 28), (52, 24), (58, 22)], w=2.2, open_=(1, 3))
+    r.clearing(19, 21, 10.5, 7.2)                                               # 4. NW Ancient-Tree & Birch glade
+    r.clearing(29, 25, 7.0, 4.5)                                                #    merged into Birch Hollow (28, 24)
+    r.lane([(38, 24), (31, 25), (21, 22)], w=2.2, open_=(2, 3))
+    r.clearing(45, 34, 9.5, 6.0)                                                # 5. Hanging Bell crossroads glade (42, 34)
+    r.clearing(24, 70, 10.5, 6.8)                                               # 6. SW Birch Fork & Brookside meadow (31, 67)
+    r.clearing(33, 67, 5.2, 3.8)
+    r.lane([(36, 65), (30, 67), (24, 69)], w=2.4, open_=(1, 3))
+    # North gate glade & South bank glade so entries breathe gracefully
+    r.clearing(38, 9, 8.5, 5.0)
+    r.clearing(42, 80, 9.0, 5.2)
+
+    # Organic sinuous frozen brook meandering east-west across y~56..61 inside a snowy brook valley!
     for x in range(W):
         c = 58.0 + 2.4 * math.sin(x / 10.5) + 1.6 * (vnoise(x, 0, 5791, 9.0) - 0.5) * 2
         hw = 1.6 + 0.8 * bump(x, 22, 7.0, 1.0) + 0.9 * bump(x, 54, 7.0, 1.0)
+        # Open snowy riverbanks flanking the brook across the valley interior (x=10..68)
+        if 10 <= x <= 68:
+            for y in range(int(round(c - hw - 2.6)), int(round(c + hw + 2.6)) + 1):
+                if m.inb(x, y) and m.cls[y, x] == 'T':
+                    m.cls[y, x] = '.'
         for y in range(int(round(c - hw)), int(round(c + hw)) + 1):
             if m.inb(x, y) and m.cls[y, x] in 'T.t':
                 m.cls[y, x] = 'p'
-    smooth_cls(m, 'p', into='.', passes=1)
+    smooth_cls(m, 'p', into='.', passes=2)
 
-    # Four deeply atmospheric clearings + connecting trails
-    r.clearing(20, 46, 7.5, 5.2)
-    r.lane([(40, 50), (24, 46)], w=2.2, open_=(1, 2))                  # Drovers' old camp & Cold Kiln (20, 44)
-    r.clearing(61, 71, 8.5, 6.2)
-    r.lane([(44, 74), (54, 73), (62, 73), (66, 72)], w=2.6, open_=(1, 2))  # Wide approach to Drovers' Bothy (60, 74) & SUPERPOTION (66, 72)
-    r.clearing(62, 20, 6.5, 5.0)
-    r.lane([(44, 28), (52, 24), (58, 22)], w=1.8, open_=(1, 2))        # Clawed Birch -> hidden Old Wolf Den (62, 18)
-    r.clearing(28, 26, 5.5, 3.5)
-    r.lane([(38, 24), (31, 25)], w=1.8, open_=(1, 2))                  # Birch Hollow (hidden BIGMUSHROOM 28, 24)
-    # Scenic alcoves around Drover's grandson (46, 59), Old Wolf Trap (56, 58) & Birch Fork (31, 67)
-    r.clearing(46, 59, 3.6, 2.6)
-    r.clearing(55, 58, 3.8, 2.6)
-    r.lane([(40, 56), (46, 59), (55, 58)], w=2.2, open_=(1, 1))
-    r.clearing(32, 67, 3.8, 2.8)
+    # Scenic brookside alcoves around Drover's grandson (46, 59) & Old Wolf Trap (56, 58)
+    r.clearing(46, 59, 4.5, 3.2)
+    r.clearing(56, 58, 4.8, 3.2)
+    r.lane([(40, 56), (46, 59), (56, 58)], w=2.4, open_=(1, 2))
+    # Connect Cold Kiln & SW meadow smoothly across brook west bank so zero clearing tiles are cut off
+    r.lane([(20, 51), (20, 56), (22, 64)], w=2.4, c='.', open_=(1, 1))
+    r.lane([(56, 61), (57, 65)], w=2.4, c='.', open_=(1, 1))
+
+    # Strict 3-tile north / 2-tile W/E/S clear snow apron around Drovers' Bothy hut (59, 65 -> 59..63, 65..69)
+    # Guarantees ZERO pine crowns poke behind its roof or clip its NW porch!
+    for y in range(62, 72):
+        for x in range(56, 67):
+            if m.cls[y, x] == 'T':
+                m.cls[y, x] = '.'
 
     # Ensure ALL 23 HEAD events sit on clear walkable snow (NEVER trapped inside 'T'!)
     for e in evs:
@@ -2618,6 +2941,12 @@ def build_579():
         if m.cls[ey, ex] == 'T':
             m.cls[ey, ex] = '.'
     r.grass(thr=0.58, scale=5.0)
+    erode_snow_grass_organic(m, seed=579)
+    # Keep Drovers' Bothy yard & doorstep neat snow/packed path (no grass right over roof/porch)
+    for y in range(63, 72):
+        for x in range(57, 66):
+            if m.cls[y, x] == 't':
+                m.cls[y, x] = '.'
     r.finish_plan(border=0)
 
     # ---- 2. Lock ALL 23 Exact HEAD Events & Signposts ----
@@ -2633,39 +2962,54 @@ def build_579():
     # ---- 3. Deep Haunted Dark-Winter Kristiline Spruce Canopy! ----
     CK.woods(r, DARK_WINTER_WOODS, scale=8.5)
 
-    # ---- 4. Landmarks: Drovers' Bothy Cabin, Cold Kiln Ring, Hanging Bell Lantern, Giants & Wolf Skulls ----
+    # ---- 4. Landmarks: Drovers' Bothy Cabin, Cold Kiln Ring, Hanging Bell Lantern, Giants & Mixed Glade Islands ----
     glow_pts = []
-    # Cozy timber Drovers' Bothy cabin perched cleanly NORTH of the yard (59, 65) leaving (60, 74) & (66, 72) wide open!
-    put_safe(m, 'wb_hut', 59, 65, on='.td', r=2, prot=prot_wide)
+    avoid_top = np.zeros((H, W), bool)
+    # Cozy timber Drovers' Bothy cabin perched cleanly NORTH of the yard (59, 65) with wide cleared snow apron!
+    hut_pos = put_safe(m, 'wb_hut', 59, 65, on='.td', r=2, prot=prot_wide)
+    if hut_pos:
+        mark_stamp_avoid(avoid_top, 'wb_hut', hut_pos[0], hut_pos[1], pad_x=2, pad_n=3, pad_s=2)
     put_safe(m, 'nt_stonering', 18, 43, on='.td', r=2, prot=prot_wide)   # Cold kiln stonework!
     for nm, x, y in (
         ('fw_wood', 18, 48), ('fw_rack', 24, 42), ('fw_sled', 48, 63), ('fw_wood', 50, 64),
-        ('pf_lantern', 43, 33), ('pf_lantern', 40, 8), ('pf_lantern', 58, 71), ('pf_lantern', 21, 46),
-        ('pf_lantern', 45, 29), ('pf_lantern', 42, 84), ('fw_brazier', 63, 71), ('fw_brazier', 22, 44),
+        ('pf_lantern', 43, 33), ('pf_lantern', 40, 8), ('pf_lantern', 57, 71), ('pf_lantern', 21, 46),
+        ('pf_lantern', 45, 29), ('pf_lantern', 42, 84), ('fw_brazier', 64, 71), ('fw_brazier', 22, 44),
         ('fw_skull', 32, 66), ('fw_skull', 61, 19), ('fw_skull', 57, 57),
         ('pf_logbench', 57, 75), ('fw_log_m', 26, 25), ('fw_wood', 65, 75), ('sh_crates', 55, 70),
+        # Fallen winter timber logs, snowdrifts & mossy boulders seasoning the open woodland clearings!
+        ('fw_log_m', 14, 48), ('fw_log_n', 25, 49), ('fw_log_s', 22, 67), ('fw_log_m', 18, 72),
+        ('fw_log_n', 49, 36), ('fw_log_m', 15, 24), ('fw_log_s', 65, 23), ('fw_sled', 26, 71),
+        ('ck_boulder', 13, 43), ('ck_boulder', 29, 73), ('ck_boulder', 51, 32), ('ck_boulder', 34, 11),
+        ('fw_wood', 24, 21), ('fw_stone', 19, 17), ('fw_stone', 65, 67),
     ):
         res = put_safe(m, nm, x, y, on='.td', r=3, prot=prot_wide)
         if res and nm in ('pf_lantern', 'fw_brazier'):
             glow_pts.append((res[0], res[1] + (1 if nm == 'pf_lantern' else 0)))
 
-    # Towering ice-glazed ancient trees guarding the drove road & Old Wolf Den!
+    # Towering ice-glazed ancient trees showcased in open glades (zero pine overlap!)
     for nm, x, y in (
-        ('pf_g_tree6_ice', 10, 10), ('pf_g_tree4p_ice', 64, 38), ('pf_g_tree4p_ice', 14, 66),
-        ('pf_g_tree2_ice', 66, 6), ('pf_g_tree2_ice', 57, 15), ('pf_g_tree2_ice', 30, 34),
+        ('pf_g_tree6_ice', 12, 16), ('pf_g_tree4p_ice', 64, 38), ('pf_g_tree4p_ice', 15, 67),
+        ('pf_g_tree2_ice', 66, 6), ('pf_g_tree2_ice', 56, 15), ('pf_g_tree2_ice', 31, 34),
+        ('pf_g_tree2_ice', 12, 40), ('pf_g_tree2_ice', 48, 76),
     ):
-        put_safe(m, nm, x, y, on='.tT', r=3, prot=prot_wide)
+        res = put_safe(m, nm, x, y, on='.tT', r=3, prot=prot_wide | avoid_top)
+        if res:
+            mark_stamp_avoid(avoid_top, nm, res[0], res[1], pad_x=1, pad_n=1, pad_s=1)
 
-    # Extra Kristiline spruce clusters framing clearings
-    for idx, (cx, cy, cnt, rad) in enumerate(((46, 78, 3, 2.2), (35, 50, 3, 2.2), (48, 36, 3, 2.2), (33, 14, 3, 2.2), (56, 66, 3, 2.0))):
-        place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=579 + idx, prot=prot_wide)
+    # Mixed-size Kristiline spruce islands framing clearings (strictly OUTSIDE hut & giant-tree aprons!)
+    prot_groves = prot_wide | avoid_top
+    for idx, (cx, cy, cnt, rad) in enumerate((
+        (48, 79, 3, 2.2), (35, 50, 3, 2.2), (49, 38, 2, 2.0), (33, 13, 3, 2.2),
+        (24, 17, 2, 2.0), (14, 51, 2, 2.0), (29, 74, 2, 2.0), (68, 66, 2, 2.0),
+    )):
+        place_snow_grove(m, cx, cy, count=cnt, radius=rad, on='.t', seed=579 + idx, prot=prot_groves)
 
-    CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2', 'fw_drift0'], 36, box=(0, 0, W, H), clump=3, seed=7)
+    CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2', 'fw_drift0', 'ck_boulder'], 28, box=(0, 0, W, H), clump=3, seed=7)
 
-    # ---- 5. Paint + Deep Winter Canopy Infill, Rustic Timber Crossing, Glacial Hollows & Glows ----
+    # ---- 5. Paint + Deep Winter Canopy Infill (with avoid_top!), Rustic Timber Crossing & Glows ----
     r.paint(glint=0.0)
     CK.paint_extras(r)
-    infill_winter(r, DARK_WINTER_WOODS, scale=8.5, seed=579)
+    infill_winter(r, DARK_WINTER_WOODS, scale=8.5, seed=579, avoid_top=avoid_top)
 
     # Rustic weathered timber bridge across the frozen brook where the drove road crosses!
     brook_rows = sorted(set(y for y in range(53, 64) if m.cls[y, 38] == 'p'))
@@ -2676,27 +3020,28 @@ def build_579():
                 if m.inb(x, y) and m.cls[y, x] == 'p':
                     m.L[1, y, x] = C('ak', 1524 + i)
 
-    # Cerulean & periwinkle snow-edged glacial hollows inside the forest clearings!
-    paint_snow_turf_layering(m, seed=579, cer_thr=0.61, peri_thr=0.69)
-    # Eerie frost crystals & ethereal forest light shafts near Hanging Bell & Old Den!
-    for cx, cy, sp in ((60, 21, KF_CRYS_MONO), (64, 17, KF_CRYS_STAR), (26, 23, KF_CRYS_BLADES), (40, 35, KF_CRYS_MONO)):
-        put_sprite(m, cx, cy, sp[0], sp[1], on='.', avoid_mask=prot_wide, post_paint=True)
-    for sx_, sy_ in ((41, 32), (61, 16), (37, 2)):
+    # Native seamless wind-swept snow drift variation across forest clearings!
+    paint_snow_turf_layering(m, seed=579, cer_thr=0.58, peri_thr=0.67)
+    # Eerie frost crystals & ethereal forest light shafts near Hanging Bell, Ancient Tree & Old Den!
+    for cx, cy, sp in ((60, 21, KF_CRYS_MONO), (64, 17, KF_CRYS_STAR), (26, 23, KF_CRYS_BLADES), (40, 35, KF_CRYS_MONO), (16, 23, KF_CRYS_STAR)):
+        put_sprite(m, cx, cy, sp[0], sp[1], on='.', avoid_mask=prot_groves, post_paint=True)
+    for sx_, sy_ in ((41, 32), (61, 16), (37, 2), (18, 20)):
         put_overlay_stamp(m, 'cv_shaft', sx_, sy_, z=2)
-    put_overlay_stamp(m, 'fw_smoke_w', 62, 63, z=2)   # Warm Bothy chimney smoke!
+    if hut_pos:
+        put_overlay_stamp(m, 'fw_smoke_w', hut_pos[0] + 3, max(0, hut_pos[1] - 2), z=2)   # Warm Bothy chimney smoke!
     CK.snow_ground_var(r, thr=0.45)
     RW.rime_silk(m, ((30, 12), (48, 22), (34, 40), (52, 50), (26, 78), (58, 24), (44, 34)))
-    RW.drifts(m, 0.30, seed=579)
+    RW.drifts(m, 0.08, seed=579)
     RW.road_tracks(m, 0.14, seed=579)
-    RW.dress_ice(m, 0.50, seed=579)
-    RW.reed_beds(m, 55, seed=579)
+    RW.dress_ice(m, 0.25, seed=579)
+    RW.reed_beds(m, 14, seed=579)
     add_warm_glows(m, glow_pts + [(42, 34), (60, 73), (20, 45), (38, 1)])
 
     # Seal ALL stray perimeter edges strictly except N warps (36..39, 0) and S snow banks (40..43, 87)!
     seal_unconnected_edges(
         m,
         open_cells=[(x, 0) for x in range(36, 40)] + [(x, H - 1) for x in range(40, 44)],
-        filler=10371,
+        filler=(10551, 10371, 9872, 9888),
     )
     write_wave13_map(m, 579, '# The Wolfsrime (579). WRITTEN BY layouts/wave13_routes_craft.py (Wave 13 Rejuv V14 Craft).\n')
     return m

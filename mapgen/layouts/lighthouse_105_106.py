@@ -159,9 +159,9 @@ def build_105_layers():
     #    - Warm Sheridan crimson braided living rug in center hearth (x=5..8, y=7..9)
     #    - Slate watch alcove under East Keeper's bay (x=14..16, y=6..10)
     SLATE = [
-        [1144, 1145, 1146],
         [1152, 1153, 1154],
         [1160, 1161, 1162],
+        [1168, 1169, 1170],
     ]
     SHER_RUG = [
         [5411, 5412, 5413],
@@ -258,9 +258,9 @@ def build_105_layers():
     # Let's clear (4..5, 10) and place COMPLETE intact props ONLY (ZERO half-sliced tiles!):
     L[1, 10, 4] = 0; L[1, 10, 5] = 0
     _put_grid(L, [[4118, 4119], [4126, 4127]], 3, 9, z_rows=(1, 1))  # COMPLETE 2x2 maritime lifebuoy at (3..4, 9..10)!
-    # Move bedside ruby lamp cleanly to (5, 10..11) flanking the SW stone vestibule!
+    # Warm indoor brass candle lamp flanking the SW stone vestibule (5, 10..11)
     L[2, 8, 3] = 0; L[1, 9, 3] = 0
-    L[2, 10, 5] = 2244; L[1, 11, 5] = 2252
+    L[2, 10, 5] = 2247; L[1, 11, 5] = 2255
 
     #    - East Keeper's Watch & Chart Bay (x=12..16, y=6..10):
     #      Keep (12..13, 6..10) open circulation beside stairs (11,6) and arrival (10,7)!
@@ -275,8 +275,8 @@ def build_105_layers():
     L[2, 8, 16] = 4822; L[1, 9, 16] = 4830
     L[2, 9, 15] = 4060; L[1, 10, 15] = 4068  # COMPLETE 1x2 fishing rods bucket
     L[2, 9, 16] = 0; L[1, 10, 16] = 4101     # oak oil bucket in SE corner
-    # Twin tall brass reflector lamp flanking the SE vestibule chamfer (12, 10..11) + lush intact coastal fern (14, 9..10)!
-    L[2, 10, 12] = 2244; L[1, 11, 12] = 2252
+    # Weathered brass tool satchel flanking SE vestibule chamfer (12, 11) + lush intact coastal fern (14, 9..10)!
+    L[1, 11, 12] = 5580
     L[2, 9, 14] = 5431; L[1, 10, 14] = 5439  # COMPLETE intact coastal fern palm!
 
     PG.guard(L, TID, [(7, 12), (11, 6), (10, 10), (3, 6), (5, 5), (8, 10)], 'map 105')
@@ -318,22 +318,27 @@ def build_106_layers():
         rgt = x + 1 >= W or not fl[y, x + 1]
         ry = 0 if top else (2 if bot else 1)
         rx = 0 if lft else (2 if rgt else 1)
-        return [[1144, 1145, 1146], [1152, 1153, 1154], [1160, 1161, 1162]][ry][rx]
+        return [[1152, 1153, 1154], [1160, 1161, 1162], [1168, 1169, 1170]][ry][rx]
 
     _seam_stone_room(L, floor, wall_rows=2, base_floor_fn=slate_floor)
 
-    # 2. Radiant Golden Fresnel Beacon Light Pool (585..603, pas=0, pri=0)!
-    #    Bathes the central 5x4 beacon dais (x=4..8, y=4..7) in concentric sunlit golden radiance,
-    #    directly framing Hesper Vane @ (6, 7) and the Great Fresnel Lamp @ (5..7, 4..6)!
+    # 2. Concentric Radiant Golden Fresnel Beacon Light Floor (585..603 outer glow + 960..978 ornate gold turntable dais)!
+    #    Bathes the central 5x4 beacon dais (x=4..8, y=4..7) in concentric sunlit golden light,
+    #    framing Hesper Vane @ (6, 7) and the Great Octagonal Fresnel Lighthouse Beacon @ (5..7, 4..6)!
     GOLD_DAIS = [
         [585, 586, 587],
         [593, 594, 595],
         [601, 602, 603],
     ]
     _put_9slice(L, GOLD_DAIS, 4, 4, 8, 7, z=0)
+    GOLD_RING = [
+        [960, 961, 962],
+        [968, 969, 970],
+        [976, 977, 978],
+    ]
+    _put_grid(L, GOLD_RING, 5, 4, z_rows=(0, 0, 0))
 
-    # Warm crimson keeper's runner mat leading from the stairwell (4, 8..9) straight toward Hesper & the Great Lamp!
-    # Plus crisp timber stairwell hatch landing right at Warp (4, 9) (with (3..5, 9) timber stair deck)!
+    # Crisp timber stairwell hatch landing right at Warp (4, 9) (with (3..5, 9) timber stair deck)!
     for x in (3, 4, 5):
         L[0, 9, x] = 5361 + (x - 3)
     L[1, 9, 3] = 5512
@@ -350,7 +355,7 @@ def build_106_layers():
         L[1, 9, x] = SHER_RUG[2][i]
 
     # 3. 360-Degree Panoramic Glass Lighthouse Lantern Wall (y=2..3, x=2..10)!
-    #    - Center 3-wide multi-pane lantern glasshouse window (5..7, 2..3) directly behind the Great Lamp!
+    #    - Center 3-wide multi-pane lantern glasshouse window (5..7, 2..3) directly behind the Great Beacon!
     _put_grid(L, [[2107, 2108, 2109], [2115, 2116, 2117]], 5, 2, z_rows=(1, 1))
     #    - Flanking 2-wide sunlit coastal sky arched windows (3..4, 2..3) & (8..9, 2..3)!
     _put_grid(L, [[2086, 2087], [2094, 2095]], 3, 2, z_rows=(1, 1))
@@ -362,47 +367,49 @@ def build_106_layers():
     L[1, 3, 1] = 2073; L[1, 4, 1] = 2081
     L[1, 3, 11] = 2073; L[1, 4, 11] = 2081
 
-    # 4. CENTERPIECE: THE GREAT FRESNEL STARLIGHT LIGHTHOUSE BEACON (3x3 at x=5..7, y=4..6)!
-    #    - Top row (3872..3874, pri=2) rises majestically in front of the panoramic lantern windows
-    #    - Mid row (3880..3882, pas=15) gleams with starry golden prism facets
-    #    - Base row (3888..3890, pas=15) anchors the carved stone lens turntable dead-center above Hesper Vane (6, 7)!
-    GREAT_LAMP = [
-        [3872, 3873, 3874],
-        [3880, 3881, 3882],
-        [3888, 3889, 3890],
+    # 4. CENTERPIECE: OCTAGONAL CRYSTAL-AND-BRASS FRESNEL LIGHTHOUSE BEACON HOUSING (x=5..7, y=4..6)!
+    #    Replaces the grey Pokémon statue with an unmistakable revolving lighthouse lens & flame housing:
+    #    - Base turntable: 3x3 Octagonal Stone & Crystal Lens Housing (8139..8157, pas=15) centered dead-on x=6!
+    #    - Glowing Beacon Flame Core: Blazing golden lighthouse lantern/brazier (4886 top / 4894 flame bowl) at (6, 4..5)
+    #      rising directly from the heart of the crystal Fresnel drum!
+    FRESNEL_PLINTH = [
+        [8139, 8140, 8141],
+        [8147, 8148, 8149],
+        [8155, 8156, 8157],
     ]
-    _put_grid(L, GREAT_LAMP, 5, 4, z_rows=(2, 1, 1))
+    _put_grid(L, FRESNEL_PLINTH, 5, 4, z_rows=(1, 1, 1))
+    L[2, 4, 6] = 7718                      # Roaring golden beacon flame rising from the brass Fresnel optic!
+    L[2, 5, 6] = 2470                      # Gleaming golden-brass trunnioned Fresnel lantern orb at dead center (6, 5)!
 
-    # Flanking tall crystal-and-brass Fresnel reflector pilot lamps on the golden dais (4, 5..6) & (8, 5..6)!
-    # (Leave (3, 4..9), (4, 7..9), (5..7, 7..8), (8, 7..9), (9, 4..9) 100% open walkable 360-degree lantern gallery!)
-    L[2, 5, 4] = 2245; L[1, 6, 4] = 2253
-    L[2, 5, 8] = 2245; L[1, 6, 8] = 2253
+    # Flanking warm golden brass Fresnel reflector stands (2247/2255) & brass stanchion guard posts (3958/3966)!
+    # (Leaves (3, 4..9), (4, 7..9), (5..7, 7..8), (8, 7..9), (9, 4..9) 100% open walkable 360-degree lantern gallery!)
+    L[2, 5, 4] = 2247; L[1, 6, 4] = 2255   # West golden brass reflector lamp stand
+    L[2, 5, 8] = 2247; L[1, 6, 8] = 2255   # East golden brass reflector lamp stand
+    L[1, 4, 4] = 3966                      # NW brass turntable stanchion post
+    L[1, 4, 8] = 3966                      # NE brass turntable stanchion post
 
-    # Twin warm ruby storm beacon pilot lamps framing the south watch parapet (3, 9..10) & (9, 9..10)!
-    # Wait: (3, 9) has stair mat 5512; place ruby lamps symmetrically at (3, 10)? No, lamp is 1x2!
-    # Place twin ruby lamps cleanly at (2, 7..8) & (10, 7..8) flanking the octagonal gallery!
-    L[2, 7, 2] = 2244; L[1, 8, 2] = 2252
-    L[2, 7, 10] = 2244; L[1, 8, 10] = 2252
+    # Subtle coastal watch gallery detail at (2, 8) & (10, 8) instead of outdoor street lamp posts!
+    L[1, 8, 2] = 4168
+    L[1, 8, 10] = 4077
 
     # 5. Authentic Keeper's Lamp-Room Gallery Props (100% COMPLETE intact sprites, 360-degree walkable loop!):
     #    - West Gallery (x=1, y=5..8): Keeper's lamp-oil canisters (4822/4830) & spare Fresnel polishing gear crate!
     L[2, 5, 1] = 4822; L[1, 6, 1] = 4830   # tall blue-gold lamp-oil canister
-    L[2, 6, 1] = 0                          # wait: don't overwrite L[2,6,1], put second canister at (1, 7..8)!
+    L[2, 6, 1] = 0
     L[2, 7, 1] = 4823; L[1, 8, 1] = 4831   # second matching lamp-oil canister
     #    - East Gallery (x=11, y=5..8): Keeper's spare wick & oil-bottle shelf + maritime pitch bucket!
     L[2, 5, 11] = 4822; L[1, 6, 11] = 4830
     L[1, 7, 11] = 4168                      # coiled maintenance rope basket
     L[1, 8, 11] = 4101                      # keeper's rag & polishing bucket!
-    #    - South Watch Parapet (x=4..8, y=10): low maritime watch bench / open lighthouse logbook table centered at (6..7, 10)?
-    #      Keep (4..5, 10) open below Warp (4, 9) and place a cozy keeper's logbook & stool on the SE watch corner (8..9, 10)!
-    L[1, 10, 6] = 4077                      # keeper's wooden stool facing north toward the Great Lamp
+    #    - South Watch Parapet (x=4..9, y=10): keeper's watch stool, tool satchel & coastal fern palm!
+    L[1, 10, 6] = 4077                      # keeper's wooden stool facing north toward the Great Beacon
     L[1, 10, 8] = 5580                      # keeper's weathered brass-buckled tool satchel
     L[2, 9, 9] = 5431; L[1, 10, 9] = 5439  # intact coastal lantern-room fern palm on SE corner!
-    #    - NW/NE Gallery Balancing Accents (2, 4) & (10, 4): wooden supply stool & intact herb pot
+    #    - NW/NE Gallery Balancing Accents (2, 4) [Wireless event!] & (10, 4): keep (2, 4) clear + intact herb pot at (10, 4)
     L[1, 4, 2] = 4077
     L[1, 4, 10] = 3391
 
-    PG.guard(L, TID, [(4, 9), (4, 8), (6, 7)], 'map 106')
+    PG.guard(L, TID, [(4, 9), (4, 8), (6, 7), (3, 8), (5, 8), (4, 7)], 'map 106')
     return L
 
 

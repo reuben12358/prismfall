@@ -61,6 +61,8 @@ module PrismfallMaps
     191 => [-10, -14, 6, 20],   # Circuit Gym - Breadboard Hall
     192 => [-10, -14, 6, 20],   # Circuit Gym - Live Wire Hall
     193 => [-10, -14, 6, 20],   # Circuit Gym - Core
+    244 => [16, 2, -16, 8],   # Hearthguild Hall
+    249 => [20, 0, -18, 10],   # Cindervault - Slag Ward
     255 => [28, 2, -22, 12],   # Cindervault - Tap Chamber
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     281 => [6, 8, -6, 0],   # Verdance Pokémon Center
@@ -102,6 +104,7 @@ module PrismfallMaps
     578 => [-12, -8, 8, 16],   # Rimewood Path
     579 => [-12, -8, 8, 16],   # The Wolfsrime
     582 => [4, 0, -4, 8],   # Lumen West Gate
+    593 => [4, 2, -2, 0],   # The Arc-Lamp Mile
     608 => [-36, -44, 14, 52],   # The Lowlight (Shattered)
     920 => [10, 6, 14, 10],   # The Rimed Sands
     924 => [18, 4, -10, 10],   # Ashkaar Siege Camp
@@ -125,6 +128,7 @@ module PrismfallMaps
     147 => ["prismfall_seamist", 0, 24, 0, 100, 2, 0],   # Saltmere - Old Town
     160 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth
     167 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth - Mill Quay
+    249 => ["prismfall_cave", 0, 24, 1, 100, 1, 0],   # Cindervault - Slag Ward
     255 => ["prismfall_cave", 0, 30, 1, 100, 1, 0],   # Cindervault - Tap Chamber
     520 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Ferrymen's Mile
     524 => ["prismfall_spores", 0, 40, 1, 100, 1, -1],   # Gossamer Wood

@@ -190,11 +190,21 @@ def shade_outdoor_nature(rgb_u8: np.ndarray, alpha: np.ndarray, warm_timber: boo
     s_new = s_new * (1.0 - w_mint) + grass_s * w_mint
     v_new = v_new * (1.0 - w_mint) + grass_v * w_mint
 
+    # 1b. Dirt-path grass rim highlight (e.g. RGB(168,216,160) on RJ DirtDark/Dirt/Gravel):
+    # pull down from pale highlighter mint into warm B2W2 sunlit olive blade edge (matches grass seamlessly!)
+    rim_h = 1.0 - smoothstep(14.0, 24.0, hue_dist(h, 111.0))
+    rim_s = smoothstep(0.18, 0.24, s) * (1.0 - smoothstep(0.32, 0.40, s))
+    rim_v = smoothstep(0.76, 0.84, v)
+    w_rim = rim_h * rim_s * rim_v * (1.0 - w_mint)
+    h_new = lerp_hue_arr(h_new, np.full_like(h, 90.0), w_rim)
+    s_new = s_new * (1.0 - w_rim) + np.clip(s * 1.95, 0.46, 0.56) * w_rim
+    v_new = v_new * (1.0 - w_rim) + np.clip(v * 0.72, 0.56, 0.63) * w_rim
+
     # 2. Gen 3 Cartoon Foliage / Trees / Bushes / Tall Grass -> B2W2 Hue-Shifted Forest Canopies
     # Deep cool pine-teal shadows (V<0.42) -> Lush emerald mid -> Warm sunlit olive crowns (V>0.62)
     fol_h = 1.0 - smoothstep(32.0, 48.0, hue_dist(h, 134.0))
     fol_s = smoothstep(0.18, 0.30, s)
-    w_fol = fol_h * fol_s * (1.0 - w_mint)
+    w_fol = fol_h * fol_s * (1.0 - w_mint) * (1.0 - w_rim)
 
     w_dark = 1.0 - smoothstep(0.20, 0.46, v)
     w_bright = smoothstep(0.54, 0.82, v)
@@ -331,12 +341,17 @@ def shade_cave_strata(rgb_u8: np.ndarray, alpha: np.ndarray, mode: str = "salt")
     is_rock = (1.0 - is_crystal) * (1.0 - is_wood) * smoothstep(0.04, 0.10, v)
 
     if mode == "salt":
-        w_lip = smoothstep(0.76, 0.90, v)
-        target_h = np.where(w_lip > 0.5, 275.0, 238.0 + 18.0 * smoothstep(0.35, 0.78, v))
-        target_s = 0.34 * (1.0 - w_lip) + 0.16 * w_lip
-        target_v = np.clip(0.11 + 0.50 * np.power(v, 1.45), 0.08, 0.68)
-        w_rim = smoothstep(0.88, 0.97, v)
-        target_v = target_v * (1.0 - w_rim) + np.clip(v * 0.78, 0.58, 0.78) * w_rim
+        # Chargestone two-tone: deep cool slate-violet rock shadows paired with warm rose-white
+        # crystalline salt crust on brick faces, upper ledges, and drained salt ridges.
+        w_lip = smoothstep(0.66, 0.84, v)
+        base_h = 238.0 + 18.0 * smoothstep(0.32, 0.72, v)
+        target_h = lerp_hue_arr(base_h, np.full_like(h, 336.0), w_lip)
+        target_s = 0.32 * (1.0 - w_lip) + (0.16 + 0.04 * (1.0 - smoothstep(0.84, 0.96, v))) * w_lip
+        target_v = np.clip(0.11 + 0.50 * np.power(v, 1.42), 0.08, 0.64)
+        salt_v = np.clip(0.68 + 0.24 * smoothstep(0.66, 0.96, v), 0.68, 0.92)
+        target_v = target_v * (1.0 - w_lip) + salt_v * w_lip
+        w_rim = smoothstep(0.90, 0.98, v)
+        target_v = target_v * (1.0 - w_rim) + np.clip(v * 0.94, 0.84, 0.95) * w_rim
     elif mode == "limestone":
         target_h = np.full_like(h, 212.0)
         target_s = np.clip(s * 0.6 + 0.24, 0.16, 0.36)
@@ -997,13 +1012,13 @@ def add_cave_strata_relief(tile_rgba: np.ndarray, is_lip: bool = False, is_base:
 # (bank_undercut, deep_velvet, mid_velvet, soft_swell, wave_glint, shallow_shelf, shoreline_foam)
 WATER_PALETTES = {
     "salt_lake": (
-        (6, 48, 66),
-        (10, 84, 98),
-        (14, 104, 114),
-        (22, 126, 134),
-        (56, 174, 176),
-        (36, 152, 158),
-        (216, 252, 255),
+        (90, 66, 88),      # #5A4258 plum-salt undercut grounding the rose-salt lip
+        (12, 79, 90),      # #0C4F5A deep brine
+        (23, 119, 126),    # #17777E mid brine
+        (42, 154, 154),    # #2A9A9A brine-mint swell
+        (108, 200, 192),   # #6CC8C0 specular brine glint
+        (72, 178, 174),    # #48B2AE luminous brine shelf
+        (230, 251, 246),   # #E6FBF6 crisp salt foam
     ),
     "ocean": (
         (14, 58, 118),
@@ -1100,7 +1115,21 @@ def synthesize_water_autotile(arr: np.ndarray, pal_key: str, bank_mode: str, is_
         elif bank_mode == "snow":
             bank_rgb = shade_snow_biome(frame[..., :3], alp)
         elif bank_mode == "salt_cave":
+            # Pale rose-salt crust ring: keeps Brinecut's salt identity and creates crisp
+            # figure-ground separation against both slate-violet cave floor and brine water.
+            bh, bs, bv = rgb_to_hsv(frame[..., :3].astype(np.float32) / 255.0)
             bank_rgb = shade_cave_strata(frame[..., :3], alp, mode="salt")
+            # Map original bank tones (shadow ~0.58, mid ~0.77, bright lip ~0.87..0.98)
+            # to rose-salt crust (#A8879B -> #D6BAC8 -> #F0E2E8)
+            is_crust = (alp > 128) & (bv > 0.52)
+            t_hi = smoothstep(0.76, 0.94, bv)
+            t_mid = smoothstep(0.54, 0.78, bv)
+            c_sh = np.array([168.0, 135.0, 155.0], dtype=np.float32)   # #A8879B crust shadow
+            c_md = np.array([214.0, 186.0, 200.0], dtype=np.float32)   # #D6BAC8 rose-salt crust
+            c_hi = np.array([240.0, 226.0, 232.0], dtype=np.float32)   # #F0E2E8 bright salt lip
+            crust = c_sh * (1.0 - t_mid[..., None]) + c_md * t_mid[..., None]
+            crust = crust * (1.0 - t_hi[..., None]) + c_hi * t_hi[..., None]
+            bank_rgb = np.where(is_crust[..., None], np.clip(crust + 0.5, 0, 255).astype(np.uint8), bank_rgb)
         elif bank_mode == "limestone_cave":
             bank_rgb = shade_cave_strata(frame[..., :3], alp, mode="limestone")
         elif bank_mode == "volcanic":

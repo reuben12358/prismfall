@@ -59,7 +59,7 @@ def build():
     m.tall = 18446
     m.STAIRS = K.STAIRS_STONE
     m.grass2 = None
-    m.auto['e'] = ('KristilineDirt', 'rejuvenation')
+    m.auto['e'] = ('Packed Snow', 'pf')
     m.keep_under = 'de'
 
     rng = random.Random(5222)
@@ -211,7 +211,7 @@ def build():
             if y == 0 and x == 38:
                 m.cls[y, x] = 'T'
                 continue
-            if y < n_edge or x > e_edge or (y > s_edge and x >= 6) or (x < w_edge and y < 30):
+            if y < n_edge or x > e_edge or (y > s_edge and x >= 6) or (x < w_edge and y < 30) or (x >= 24 and y >= 32):
                 m.cls[y, x] = 'T'
 
     # ---- 7. Frosted tall grass pockets tucked between orchard rows ----
@@ -252,18 +252,41 @@ def build():
             if m.cls[y, x] == 'w' and (x * 7 + y * 13) % 11 == 0:
                 m.L[2, y, x] = 25824 + ((x + y) % 3)
 
-    # ---- 9. Living Sheridan green pocket west of the Bleed Veil ----
-    for y in range(28, H):
-        for x in range(0, 5):
-            if _in_living(x, y) or (x <= 3 and y >= 29):
-                if m.cls[y, x] in '.tT':
+    # ---- 9. Organic 4-5 Tile Patchy Snow-Transition Border around SW Living Meadow (x=0..8, y=27..39) ----
+    # Gently dissolves living Sheridan grass into snowdrifts & frosted tufts across a wide organic arc (ZERO hard slab!).
+    sn_tr = [K.P1('sn_g%d' % i) for i in range(4)]
+    for y in range(27, H):
+        for x in range(0, 9):
+            if m.cls[y, x] not in '.tT' or m.cliff[y, x]:
+                continue
+            dx_l = max(0.0, x - 1.2)
+            dy_l = max(0.0, 33.5 - y)
+            dist = math.hypot(dx_l, dy_l)
+            nz = vnoise(x, y, 5227, 2.2)
+            # Core living corner (dist <= 1.5): lush meadow with subtle snow frosting on fringes
+            if dist <= 1.5 + 0.6 * (nz - 0.5):
+                m.L[0, y, x] = K.SH_GRASS[y & 1][x & 1]
+                if m.cls[y, x] == 't':
+                    m.L[1, y, x] = K.SH_TALL
+                elif not r.road_mask[y, x] and (x * 7 + y * 11) % 4 == 0:
+                    m.L[1, y, x] = K.DECOR_SH['flowers'][(x + y) % 4]
+                elif not r.road_mask[y, x] and (x * 5 + y * 3) % 3 == 0:
+                    m.L[1, y, x] = K.DECOR_SH['green'][(x + y) % len(K.DECOR_SH['green'])]
+            # Wide patchy 4-5 tile frosted bleed gradient (1.5 < dist <= 6.2)
+            elif dist <= 6.2 + 1.2 * (nz - 0.5):
+                p_green = max(0.0, 1.0 - (dist - 1.3) / 4.8) + 0.42 * (nz - 0.5)
+                if p_green > 0.58:
                     m.L[0, y, x] = K.SH_GRASS[y & 1][x & 1]
-                    if m.cls[y, x] == 't':
-                        m.L[1, y, x] = K.SH_TALL
-                    elif not r.road_mask[y, x] and (x * 7 + y * 11) % 4 == 0:
-                        m.L[1, y, x] = K.DECOR_SH['flowers'][(x + y) % 4]
-                    elif not r.road_mask[y, x] and (x * 5 + y * 3) % 3 == 0:
+                    if not r.road_mask[y, x] and m.L[1, y, x] == 0:
+                        m.L[1, y, x] = K.P1('fw_drift%d' % ((x + y) % 3)) if (x + y) % 2 == 0 else K.DECOR_SH['green'][(x + y) % len(K.DECOR_SH['green'])]
+                elif p_green > 0.34:
+                    m.L[0, y, x] = sn_tr[(x * 3 + y * 5) % 4]
+                    if x <= 4 and not r.road_mask[y, x] and m.L[1, y, x] == 0 and (x * 5 + y * 3) % 2 == 0:
                         m.L[1, y, x] = K.DECOR_SH['green'][(x + y) % len(K.DECOR_SH['green'])]
+                else:
+                    m.L[0, y, x] = 10395 if (x + y) % 2 == 0 else sn_tr[(x + y) % 4]
+                    if not r.road_mask[y, x] and m.L[1, y, x] == 0 and (x * 7 + y * 3) % 4 == 0:
+                        m.L[1, y, x] = K.P1('fw_drift%d' % ((x + y) % 3))
 
     # ---- 10. Place Pruett Farmhouse, landmarks, gateposts, and Veil ----
     # Frosted Pruett Farmhouse (kf_aframe 5x7, door at [2, 6] -> (30, 8) exact!)
@@ -279,23 +302,30 @@ def build():
     m.stamp('nr_col', VX, 33)
     m.stamp('nr_col', VX, 38)
 
-    # Living green oaks, pines & shrubs framing the SW pocket cleanly (zero overlap)
-    m.stamp('tr_oak2', 0, 29)
-    m.stamp('tr_pine', 3, 29)
-    m.stamp('tr_pine', 0, 32)
+    # Full-footprint tree occupancy mask so NO tree crown/trunk ever shears another tree or overlaps a cliff!
+    tree_box = np.zeros((H, W), bool)
+    def mark_box(nm, tx, ty):
+        s = STAMPS[nm]
+        y1, x1 = min(H, ty + s['h']), min(W, tx + s['w'])
+        tree_box[max(0, ty):y1, max(0, tx):x1] = True
+
+    # Living green oaks & conifers transitioning cleanly across the SW pocket (zero overlap with Veil x=4!)
+    m.stamp('tr_oak2', 0, 29); mark_box('tr_oak2', 0, 29)
+    m.stamp('tr_pine', 0, 32); mark_box('tr_pine', 0, 32)
     m.stamp('nt_bush0', 3, 33)
     m.stamp('nt_bush1', 0, 39)
+    tree_box[32:40, 3:6] = True  # Keep Veil gateposts & SW transition clear of overlapping crowns
 
     # Single pale fallen glass-frosted branch resting beside the Still Mirror Pond
     m.stamp('nt_birch_h', 8, 20)
 
     # ---- 11. Sealed D1 NE Alcove crystal walls (guaranteeing (38,3) blocks (38,1..2)) ----
-    m.stamp('nt_pine_purp', 36, 0)
-    m.stamp('nt_pine_blue', 39, 0)
-    m.stamp('cr_purple_t', 37, 2)
-    m.stamp('cr_teal_t', 39, 2)
-    m.stamp('nt_pine_blue', 37, 0)
+    m.stamp('nt_pine_blue', 36, 0); mark_box('nt_pine_blue', 36, 0)
+    m.stamp('nt_pine_blue', 39, 0); mark_box('nt_pine_blue', 39, 0)
+    m.stamp('cr_teal_t', 37, 2)
+    m.stamp('cr_clear_t', 39, 2)
     m.stamp('cr_blue_c', 38, 0)
+    tree_box[0:5, 36:42] = True
     for yy in range(1, 5):
         m.taken[yy, 38] = False
 
@@ -315,15 +345,20 @@ def build():
         if tx < 0 or ty < 0 or tx + w > W or ty + h > H:
             return False
         # Do not place frosted crystal trees inside living SW pocket
-        if tx < 5 and ty + h > 30:
+        if tx < 5 and ty + h > 29:
             return False
         # Do not touch Pruett house or D1 alcove corridor (38, 1..4)
-        if tx < 34 and tx + w > 27 and ty < 10 and ty + h > 1:
+        if tx < 35 and tx + w > 27 and ty < 11 and ty + h > 1:
             return False
         if tx <= 38 < tx + w and ty <= 4 and ty + h > 0:
             return False
+        # Strict full-box check: NEVER overlap any existing tree footprint OR any cliff tile!
+        if tree_box[ty:ty + h, tx:tx + w].any():
+            return False
+        if m.cliff[ty:ty + h, tx:tx + w].any():
+            return False
         h0 = int(m.ht[min(H - 1, ty + h - 1), min(W - 1, tx + w // 2)])
-        # Check bottom 2 rows (solid trunk/base footprint) for collisions, roads, cliffs, water
+        # Check bottom 2 rows (solid trunk/base footprint) for collisions, roads, water, level
         for dy in range(max(0, h - 2), h):
             for dx in range(w):
                 xx, yy = tx + dx, ty + dy
@@ -337,7 +372,7 @@ def build():
                     return False
                 if not allow_border and m.ht[yy, xx] != h0:
                     return False
-        # Prevent tall crowns from overwriting already-placed trunks OR the two stone staircases
+        # Prevent tall crowns from overwriting already-placed bodies OR the two stone staircases
         for dy in range(0, max(0, h - 2)):
             for dx in range(w):
                 xx, yy = tx + dx, ty + dy
@@ -347,45 +382,49 @@ def build():
                     return False
         return True
 
-    # ---- 13. Place Signature Frosted Glass Apple Orchard Rows FIRST (NW, Mid-North, SE, & D1 Anchors!) ----
-    # Deliberate spaced rows of frosted apple trees (kf_tree, nt_tree_blue, nt_tree_purp, nt_deadtree)
-    # including anchor trees beside D1 Cracked Trees L (4,16), M (23,16), and H (35,25)!
+    def stamp_tree(nm, tx, ty):
+        m.stamp(nm, tx, ty)
+        mark_box(nm, tx, ty)
+
+    # ---- 13. Structured Frosted Fruit-Tree Orchard Rows + Glass Cloches & Harvest Crates (ZERO loud purple trees!) ----
+    # Deliberate, readable orchard rows of snow-dusted fruit trees (`kf_tree`, `nt_tree_blue`, `nt_deadtree`)
+    # framing D1 Cracked Trees L (4,16), M (23,16), and H (35,25), with glass cloches & fallen ruby glass apples!
     hero_orchard = [
-        # NW Orchard Grove (around Biscuit (11,13) & Cracked tree L (4,16))
-        ('kf_tree', 5, 5), ('nt_tree_blue', 10, 6), ('nt_tree_purp', 5, 11),
-        ('kf_tree', 10, 15), ('nt_deadtree', 6, 16),
-        # Mid-North Orchard Terrace (around Cracked tree M (23,16) & Wurmple (24,18))
-        ('kf_tree', 17, 5), ('nt_tree_purp', 21, 5), ('nt_tree_blue', 17, 10),
-        ('kf_tree', 20, 10), ('nt_tree_purp', 17, 15), ('nt_deadtree', 21, 14),
-        # Central & SE Orchard Terrace (around Cracked tree H (35,25) & Glass apple (38,24))
-        ('kf_tree', 25, 22), ('nt_tree_blue', 29, 21), ('kf_tree', 33, 19),
-        ('nt_tree_purp', 37, 18), ('nt_tree_blue', 30, 25),
-        # South lower frosted grove
-        ('kf_tree', 11, 29), ('nt_tree_purp', 8, 28),
+        # NW Frosted Apple Orchard Rows (3 structured pairs!)
+        ('kf_tree', 5, 5), ('kf_tree', 10, 5), ('nt_tree_blue', 5, 11),
+        ('kf_tree', 10, 11), ('nt_deadtree', 6, 16),
+        # Mid-North Orchard Terrace Rows (neat rows marching up toward Pruett Homestead!)
+        ('kf_tree', 17, 5), ('nt_tree_blue', 21, 5), ('kf_tree', 17, 11),
+        ('nt_tree_blue', 21, 10), ('nt_deadtree', 21, 14),
+        # Central & SE Orchard Terrace Rows (structured fruit rows + glass cloches!)
+        ('kf_tree', 25, 22), ('kf_tree', 29, 21), ('nt_tree_blue', 33, 19),
+        ('kf_tree', 37, 18), ('nt_tree_blue', 26, 26), ('nt_tree_blue', 30, 25),
+        # South lower frosted orchard grove
+        ('kf_tree', 11, 29), ('nt_tree_blue', 8, 28), ('nt_tree_blue', 13, 33),
     ]
     placed_orchard = 0
     for nm, ax, ay in hero_orchard:
         if can_put_tree(nm, ax, ay, allow_border=False, strict_road=False):
-            m.stamp(nm, ax, ay)
+            stamp_tree(nm, ax, ay)
             placed_orchard += 1
-            # Drop gleaming ruby crystal glass apple beside select trunks on free grass
+            # Place gleaming ruby glass apple OR crystalline glass cloche beside orchard trunks!
             s = STAMPS[nm]
             for dx, dy in ((0, s['h']), (s['w'] - 1, s['h']), (-1, s['h'] - 1)):
                 rx, ry = ax + dx, ay + dy
                 if m.inb(rx, ry) and m.cls[ry, rx] == '.' and not m.taken[ry, rx] and not r.road_mask[ry, rx] and not m.cliff[ry, rx]:
-                    if (rx * 3 + ry * 5) % 2 == 0:
-                        m.stamp('cr_red_c', rx, ry)
-                        break
+                    m.stamp('cr_clear_c' if (rx + ry) % 3 == 0 else 'cr_red_c', rx, ry)
+                    break
 
-    # ---- 14. Lush Organic Multi-Species Crystal Canopy Border (N, E, S, NW — ZERO soldier rows!) ----
-    border_big = ['nt_tree_blue', 'nt_tree_purp', 'kf_tree', 'nt_tree_blue', 'nt_tree_purp']
-    border_small = ['nt_pine_blue', 'nt_pine_purp', 'nt_pine_blue', 'nt_pine_purp', 'nt_tree_purp']
+    # ---- 14. Harmonious Non-Overlapping Frosted Alpine Pine Perimeter Border ----
+    # Uses crisp 3x4 & 2x3 frosted pines strictly checked against full tree_box & cliffs (ZERO sheared crowns!)
+    border_big = ['nt_tree_blue', 'nt_pine_blue', 'nt_pine_blue']
+    border_small = ['nt_pine_blue']
     pts_border = []
     for ty in range(0, H - 2, 2):
-        for tx in range(0, W - 2, 2):
+        for tx in range(0, W - 1, 2):
             jx = (tx * 7 + ty * 13) % 2
             jy = (tx * 11 + ty * 5) % 2
-            pts_border.append((min(W - 3, tx + jx), min(H - 3, ty + jy)))
+            pts_border.append((min(W - 2, tx + jx), min(H - 3, ty + jy)))
     rng.shuffle(pts_border)
     for tx, ty in pts_border:
         cx, cy = min(W - 1, tx + 1), min(H - 1, ty + 2)
@@ -395,46 +434,45 @@ def build():
             continue
         nm = border_big[(tx * 5 + ty * 9) % len(border_big)]
         if can_put_tree(nm, tx, ty, allow_border=True):
-            m.stamp(nm, tx, ty)
+            stamp_tree(nm, tx, ty)
         else:
-            nm2 = border_small[(tx * 3 + ty * 7) % len(border_small)]
+            nm2 = border_small[0]
             if can_put_tree(nm2, tx, ty, allow_border=True):
-                m.stamp(nm2, tx, ty)
+                stamp_tree(nm2, tx, ty)
 
-    # Organic infill for any remaining border gaps
+    # Organic infill for any remaining border gaps (strictly non-overlapping frosted blue pines!)
     gap_pts = [(tx, ty) for ty in range(0, H - 2) for tx in range(0, W - 1) if m.cls[ty + 2, tx] == 'T']
     rng.shuffle(gap_pts)
     for tx, ty in gap_pts:
         if m.taken[ty + 2, tx] or (tx <= 4 and ty >= 27):
             continue
-        nm = rng.choice(['nt_pine_blue', 'nt_pine_purp'])
-        if can_put_tree(nm, tx, ty, allow_border=True):
-            m.stamp(nm, tx, ty)
+        if can_put_tree('nt_pine_blue', tx, ty, allow_border=True):
+            stamp_tree('nt_pine_blue', tx, ty)
 
-    # ---- 15. Additional Orchard Row Fillers ----
+    # ---- 15. Structured Frosted Orchard Row Fillers (snow-dusted fruit trees + dead frosted snags) ----
     for row_i, y0 in enumerate(range(4, 33, 4)):
         for x0 in range(5 + (row_i % 2) * 2, 39, 4):
             k = (x0 * 11 + y0 * 7) % 10
             if k == 0:
                 nm = 'nt_deadtree'
-            elif k in (1, 2, 3, 4):
+            elif k in (1, 2, 3, 4, 5, 6):
                 nm = 'kf_tree'
-            elif k in (5, 6, 7):
-                nm = 'nt_tree_blue'
             else:
-                nm = 'nt_tree_purp'
+                nm = 'nt_tree_blue'
             if can_put_tree(nm, x0, y0, allow_border=False):
-                m.stamp(nm, x0, y0)
+                stamp_tree(nm, x0, y0)
                 placed_orchard += 1
 
     print('  522 orchard trees placed:', placed_orchard)
 
-    # ---- 16. Crystal spires, Bleed shards, fallen ruby glass apples, & frosted undergrowth ----
+    # ---- 16. Glass Cloches, Crystal Arbors, Orchard Harvest Crates & Frosted Undergrowth ----
     spires = [
-        ('gd_spire', 25, 3), ('cr_purple_t', 34, 5), ('cr_teal_t', 26, 9),
-        ('gd_shard0', 13, 21), ('gd_shard1', 5, 22), ('cr_teal_t', 13, 25),
-        ('gd_spire', 22, 26), ('cr_purple_t', 15, 33), ('gd_shard0', 31, 18),
+        ('cr_clear_t', 25, 3), ('cr_teal_t', 34, 5), ('cr_clear_t', 26, 9),
+        ('cr_clear_c', 13, 21), ('cr_teal_c', 5, 22), ('cr_teal_t', 13, 25),
+        ('cr_clear_t', 22, 26), ('cr_teal_t', 15, 33), ('cr_clear_c', 31, 18),
         ('cr_teal_t', 39, 26), ('nt_log', 12, 31),
+        ('hb_crates4', 15, 11), ('hb_barrels', 26, 20), ('hb_crates4', 32, 23),
+        ('pf_stonebench', 12, 27), ('pf_stonebench', 20, 12),
     ]
     for nm, sx, sy in spires:
         s = STAMPS[nm]
@@ -481,13 +519,12 @@ def build():
         if m.L[1, ry, rx] in (22895, 22915, 22880, 10551, 10371):
             m.L[1, ry, rx] = 0
 
-    # Shimmering Bleed Veil curtain right down x = VX (4) across the living/glass divide (y = 30..39)
+    # Shimmering Bleed Veil curtain strictly across the open gateway between the two stone gateposts (y = 35..37)
     veil_tiles = [26048, 26049, 26050]
     bleed_tiles = [25824, 25825, 25826]
-    for y in range(30, H):
-        if y not in (33, 34, 38, 39):
-            m.L[2, y, VX] = veil_tiles[y % 3]
-        if y >= 30 and m.L[2, y, VX + 1] == 0:
+    for y in (35, 36, 37):
+        m.L[2, y, VX] = veil_tiles[y % 3]
+        if m.L[2, y, VX + 1] == 0:
             m.L[2, y, VX + 1] = bleed_tiles[y % 3]
 
     # ---- 16. Events (100% contract-preserved from story/20_SCRIPT_CH0-2.md, "Map 522") ----

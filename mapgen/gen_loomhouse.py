@@ -326,7 +326,7 @@ def main():
                             'SEWADDLE': "The Sewaddle is wearing a leaf hood that Leavanny made. It doesn't fit. It won't take it off.",
                             'KAKUNA': "The Kakuna hangs from the deck by one thread. It does not appear to mind.",
                             'SWADLOON': "The Swadloon is wrapped in leaves for the night. It's the middle of the afternoon."}[spr]})
-    d = head(131, 'Loomhouse Gym - The Canopy', 130, [-12, -8, -16, 8]); d.update(h.write(131, [tuple(e['at']) for e in ev if e.get('at')])); d['events'] = ev; docs.append(d)
+    d = head(131, 'Loomhouse Gym - The Canopy', 130, [-12, -8, -16, 8], {'walk_airborne': '^Web '}); d.update(h.write(131, [tuple(e['at']) for e in ev if e.get('at')])); d['events'] = ev; docs.append(d)
 
     # ---------------------------------------------------------------- 132 Canopy Lofts (COMBINE: spools, cords, the brass wire)
     A = g1.LOFT_AT

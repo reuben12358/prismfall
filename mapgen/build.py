@@ -406,7 +406,11 @@ def check_reach(spec, ctx, m):
     import render as R
     ts = R.tilesets()[m.tileset_id]
     lay = m.data.data
+    import re as _re
+    airborne = _re.compile(spec['walk_airborne']) if spec.get('walk_airborne') else None
     for ev in m.events.values():
+        if airborne is not None and airborne.search(ev.name or ''):
+            continue   # reached mid-throw (see walk_check); the puzzle checker proves the landings
         n = [cell_passable(lay, ts, ev.x + dx, ev.y + dy) for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0))]
         if not any(n) and not cell_passable(lay, ts, ev.x, ev.y):
             if any(p.trigger in (0, 1, 2) and any(c.code != 0 for c in p.list) for p in ev.pages):
@@ -566,10 +570,18 @@ def walk_check(spec, ctx, m):
         for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
             if 0 <= x + dx < W and 0 <= y + dy < H and ok[y + dy, x + dx] and not seen[y + dy, x + dx]:
                 st.append((x + dx, y + dy))
+    import re as _re
+    airborne = _re.compile(spec['walk_airborne']) if spec.get('walk_airborne') else None
     for e in m.events.values():
         if not any(c.code != 0 for p in e.pages for c in p.list):
             continue
-        if all(p.trigger in (3, 4) for p in e.pages):          # autorun / parallel: nobody walks to them
+        # autorun / parallel: nobody walks to them.  Only pages that run something count: an empty rest page (the usual
+        # `cond: {self: A}` after a one-shot parallel setter) is inert whatever its trigger.
+        if all(p.trigger in (3, 4) for p in e.pages if any(c.code != 0 for c in p.list)):
+            continue
+        # walk_airborne: a name regex for events the player reaches in mid-air (the Canopy's web trampolines: one web
+        # throws you onto the next).  Their landings are proved by the puzzle checker, not by this flood fill.
+        if airborne is not None and airborne.search(e.name or ''):
             continue
         if not any(0 <= e.x + dx < W and 0 <= e.y + dy < H and seen[e.y + dy, e.x + dx]
                    for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0))):
@@ -577,6 +589,20 @@ def walk_check(spec, ctx, m):
     ign = spec.get('walk_ignore', ['wall', 'tower', 'keep'])   # parapet walks are scenery unless stairs reach them
     if spec.get('_painter') is not None:
         ok = ok & ~spec['_painter'].mask([c for c in ign if c in set(spec['_painter'].cls.reshape(-1))])
+    # speckle: unreachable pockets of <= 4 tiles (passable rock / icicle tops, ravine-rim autotile corners) are scenery
+    # gaps, not stranded areas.  Events inside them are still flagged above.
+    lost = ok & ~seen; done = np.zeros_like(lost)
+    for y0 in range(H):
+        for x0 in range(W):
+            if not lost[y0, x0] or done[y0, x0]: continue
+            comp = []; st2 = [(x0, y0)]; done[y0, x0] = True
+            while st2:
+                x, y = st2.pop(); comp.append((x, y))
+                for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                    if 0 <= x + dx < W and 0 <= y + dy < H and lost[y + dy, x + dx] and not done[y + dy, x + dx]:
+                        done[y + dy, x + dx] = True; st2.append((x + dx, y + dy))
+            if len(comp) <= spec.get('walk_speckle', 4):
+                for x, y in comp: ok[y, x] = False
     stranded = int((ok & ~seen).sum())
     if stranded > ok.sum() * 0.05 and '--walkmap' in sys.argv:
         for y in range(H):

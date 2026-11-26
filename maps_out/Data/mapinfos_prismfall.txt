@@ -61,6 +61,8 @@
 191	190	Circuit Gym - Breadboard Hall
 192	190	Circuit Gym - Live Wire Hall
 193	190	Circuit Gym - Core
+244	249	Hearthguild Hall
+249	0	Cindervault - Slag Ward
 255	249	Cindervault - Tap Chamber
 280	0	Verdance - Market Terraces
 281	280	Verdance Pokémon Center
@@ -105,6 +107,7 @@
 578	0	Rimewood Path
 579	0	The Wolfsrime
 582	180	Lumen West Gate
+593	0	The Arc-Lamp Mile
 608	180	The Lowlight (Shattered)
 920	0	The Rimed Sands
 924	0	Ashkaar Siege Camp

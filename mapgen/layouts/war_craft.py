@@ -246,6 +246,63 @@ def paint_patch(r, mask, prefix, sand_base, exclude=None, smooth=2):
     return pm
 
 
+def smooth_flood(mask, passes=2):
+    """Smooth a water/flood channel mask and eliminate raw 1-tile diagonal stair-stepping."""
+    m = smooth_mask(mask.astype(bool), passes=passes)
+    H, W = m.shape
+    # Fill 1-tile diagonal pinch corners so streams flow in clean 2-4 tile runs + smooth corners
+    for _ in range(2):
+        add = np.zeros_like(m)
+        for y in range(H - 1):
+            for x in range(W - 1):
+                a, b, c, d = m[y, x], m[y, x + 1], m[y + 1, x], m[y + 1, x + 1]
+                if a and d and not b and not c:
+                    add[y, x + 1] = True
+                elif b and c and not a and not d:
+                    add[y, x] = True
+        m |= add
+    # Remove isolated 1-tile nubs (orthogonally attached on only 1 side)
+    pad = np.pad(m, 1, mode='edge')
+    n4 = (pad[:-2, 1:-1].astype(int) + pad[2:, 1:-1].astype(int) +
+          pad[1:-1, :-2].astype(int) + pad[1:-1, 2:].astype(int))
+    m &= (n4 >= 2)
+    return m
+
+
+def paint_auto_patch(r, mask, auto_name, sand_base, exclude=None, smooth=2, game='rejuvenation'):
+    """Paint a smooth, feathered 48-shape RPG Maker autotile ground patch (e.g. 'DirtDark' or 'Gravel Spring')
+    over sand_base on L[0], eliminating harsh jagged square teeth."""
+    m = r.m
+    pm = mask.astype(bool) & ~m.cliff & ~np.isin(m.cls, ['w', 'W'])
+    if exclude is not None:
+        pm &= ~exclude
+    if smooth:
+        pm = smooth_mask(pm, passes=smooth) & ~m.cliff & ~np.isin(m.cls, ['w', 'W'])
+        # Dilate-then-erode closing pass kills thin 1-tile stray teeth along diagonal trails
+        pad = np.pad(pm, 1, mode='edge')
+        n4 = (pad[:-2, 1:-1].astype(int) + pad[2:, 1:-1].astype(int) +
+              pad[1:-1, :-2].astype(int) + pad[1:-1, 2:].astype(int))
+        pm = (pm & (n4 >= 2)) | (~pm & (n4 >= 3))
+        pm &= ~m.cliff & ~np.isin(m.cls, ['w', 'W'])
+        if exclude is not None:
+            pm &= ~exclude
+    if not pm.any():
+        return pm
+    base = K.V(auto_name, game)
+    shape = pm | m.cliff
+    for y, x in np.argwhere(pm):
+        sh = NB2AUTO[CK.nbits(shape, x, y)]
+        is_s1 = _is_sand_l1(m, y, x, sand_base) or (int(m.L[1, y, x]) >= K.RC.VBASE)
+        if sh == 0:
+            m.L[0, y, x] = base
+            if is_s1:
+                m.L[1, y, x] = 0
+        elif is_s1:
+            m.L[0, y, x] = sand_base
+            m.L[1, y, x] = base + sh
+    return pm
+
+
 def _is_floorpatch_tile(v):
     if not v:
         return False
@@ -1327,8 +1384,8 @@ def build_926():
     r, m = desert(W, H, 926, kit='gdc', seal='wr_sandbags',
                   stairs=('L_stairl', 'L_stairm', 'L_stairr'))
 
-    # 1. Primary tactical roads (caravan road, crest entrance, camp approaches, goat-path south)
-    trail(r, [(29.5, 0), (30, 6), (30, 12)], w=3.2)                                  # Steamline -> Crest arena
+    # 1. Primary tactical roads (caravan road, curving crest approach, camp approaches, goat-path south)
+    trail(r, [(29.5, 0), (29, 3), (30, 5), (31, 9), (30, 12)], w=2.8)                 # Gently curving Steamline -> Crest arena
     trail(r, [(7, 1), (9, 12), (14, 22), (24, 28), (36, 30), (48, 31), (59, 31.5)], w=3.2)
     trail(r, [(51, 1), (50, 12), (47, 22), (44, 30)], w=3.0)
     trail(r, [(30, 31), (30, 40), (30, 46)], w=2.4, only='su.')
@@ -1337,24 +1394,23 @@ def build_926():
     r.exit('N', 28, 4)
     r.exit('E', 30, 4)
 
-    # 2. Sculpted Obsidian-Glass Crater Walls (Sealing the Climax Crest Amphitheater Organically!)
-    #    Ragged curving outer slopes while keeping the exact sealed core (x=13..17 & x=43..47, y=0..12) 100% solid!
-    for x0, x1, out in ((13, 17, -1), (43, 47, 1)):
-        for y in range(0, 13):
-            for x in range(x0, x1 + 1):
-                m.ht[y, x] = 1
-            # Curved amphitheater shoulders wider near y=2..8, tapering organically near y=11..12
-            arch = int(round(2.5 * math.sin(math.pi * y / 13.0) + 1.8 * vnoise(x0, y, 9267, 3.0)))
-            for k in range(1, arch + 1):
-                xx = (x0 - k) if out < 0 else (x1 + k)
-                if 0 <= xx < W and not r.road_mask[y, xx]:
-                    m.ht[y, xx] = 1
+    # 2. Broad Organic Obsidian-Glass Blast Crater Shoulders (Sealing the Climax Crest Amphitheater — ZERO jagged vertical stair-step bars!)
+    #    Two broad, cohesive sandstone headlands curve inward smoothly at y=8..12 to cradle the central blast crater
+    #    while keeping West/East approaches strictly sealed off from Crest [30,4] until the player clears the Crest mouth!
+    # West sweeping crater shoulder (solid broad sandstone rim stepping cleanly once!)
+    m.ht[0:6, 12:17] = 1
+    m.ht[5:11, 11:17] = 1
+    m.ht[9:13, 13:19] = 1
+    # East sweeping crater shoulder (asymmetric broad sandstone rim stepping cleanly once!)
+    m.ht[0:6, 43:48] = 1
+    m.ht[5:11, 44:49] = 1
+    m.ht[9:13, 41:47] = 1
 
-    # Four sculpted obsidian-glass battlefield lookout ridges
-    ridge(r, 16, 25, 33, 38, seed=1, h=1, rough=0.40)    # West lookout ridge (stair from central lane)
-    ridge(r, 34, 43, 36, 41, seed=2, h=1, rough=0.40)    # South-central glass ridge
-    ridge(r, 51, 58, 16, 22, seed=3, h=1, rough=0.40)    # East lookout ridge (stair from east lane)
-    ridge(r, 49, 57, 38, 43, seed=4, h=1, rough=0.40)    # SE glass bluff
+    # Four sculpted organic battlefield lookout bluffs (multi-lobe rounded silhouettes, no sharp rectangles!)
+    ridge(r, 17, 25, 33, 38, seed=1, h=1, rough=0.45)    # West lookout ridge (stair from central lane)
+    ridge(r, 34, 43, 36, 41, seed=2, h=1, rough=0.45)    # South-central glass ridge
+    ridge(r, 51, 58, 16, 22, seed=3, h=1, rough=0.45)    # East lookout ridge (stair from east lane)
+    ridge(r, 49, 57, 38, 43, seed=4, h=1, rough=0.45)    # SE glass bluff
 
     # Keep roads and key item/event pockets cleanly carved out of cliffs
     for x0, x1, y0, y1 in ((15, 26, 31, 40), (33, 44, 34, 43), (50, 59, 14, 24), (48, 58, 36, 45)):
@@ -1363,16 +1419,16 @@ def build_926():
                 if r.road_mask[max(0, y - 1):y + 4, max(0, x - 1):x + 2].any():
                     m.ht[y, x] = 0
         CK.smooth_ht(m, 1, 2, box=(max(0, x0 - 1), max(0, y0 - 1), min(W, x1 + 2), min(H, y1 + 2)))
-    CK.smooth_ht(m, 1, 2, box=(8, 0, 20, 14))
-    CK.smooth_ht(m, 1, 2, box=(41, 0, 53, 14))
-    # Guarantee Crest side walls stay 100% sealed (strict GATE invariant!)
-    for x0, x1 in ((13, 17), (43, 47)):
-        m.ht[0:13, x0:x1 + 1] = 1
-    # Guarantee FULLRESTORE (22, 35) & HYPERPOTION (55, 18) sit cleanly on top of their lookout ridges (ht=1)!
-    m.ht[33:37, 19:24] = 1
-    m.ht[17:21, 53:57] = 1
+    CK.smooth_ht(m, 1, 2, box=(9, 0, 21, 15))
+    CK.smooth_ht(m, 1, 2, box=(39, 0, 51, 15))
+    # Keep (7, 1)/(51, 1) warps, (40, 9) Bone-carters' banner & (38, 4) HiddenItem cleanly off cliff walls
+    for cx_k, cy_k in ((7, 1), (7, 2), (51, 1), (51, 2), (40, 9), (39, 9), (38, 4)):
+        m.ht[cy_k, cx_k] = 0
+    # Guarantee FULLRESTORE (22, 35) & HYPERPOTION (55, 18) sit cleanly on top of their lookout bluffs (ht=1)
+    m.ht[34:37, 20:24] = 1
+    m.ht[17:20, 53:57] = 1
 
-    # Stairs up the West (y=31..40) & East (y=15..24) battlefield lookout ridges (explicit y-bounds so East Ridge never hits SE bluff!)
+    # Stairs up the West (y=31..40) & East (y=15..24) battlefield lookout ridges
     for sx, ex, y0, y1 in ((20, 29, 31, 41), (53, 48, 15, 25)):
         col = [y for y in range(y0, y1) if m.ht[y, sx + 1] == 1]
         if not col:
@@ -1382,18 +1438,18 @@ def build_926():
         foot = lip + 4
         trail(r, [(ex, foot + 0.5), (sx + 1, foot + 0.5)], w=2.0, only='su.')
 
-    # 3. Braided Turquoise Flood Channels across the western Isenmar flats (Kyogre's sea dragged inland!)
-    flood = (
-        band(W, H, [(0, 13), (3, 15), (5, 20), (10, 24), (16, 26), (19, 30)], 1.35, 9261) |
-        band(W, H, [(0, 26), (5, 28), (8, 33), (7, 38), (11, 43), (13, 47)], 1.40, 9262) |
-        band(W, H, [(5, 28), (2, 34), (0, 37)], 1.05, 9263)
+    # 3. Smooth Braided Turquoise Flood Channels across the western Isenmar flats (2-4 tile runs + smooth corners, ZERO S5 stair-stepping!)
+    flood_raw = (
+        band(W, H, [(0, 14), (4, 14), (6, 17), (6, 21), (10, 24), (16, 25), (19, 28)], 1.75, 9261, wob=0.22) |
+        band(W, H, [(0, 27), (5, 27), (7, 31), (7, 37), (10, 41), (12, 47)], 1.80, 9262, wob=0.22) |
+        band(W, H, [(5, 28), (3, 33), (0, 36)], 1.45, 9263, wob=0.20)
     )
-    flood = plan_flood(r, flood)
+    flood = plan_flood(r, smooth_flood(flood_raw, passes=2))
 
     # Organic wind-carved dune lee ledges (avoiding roads, flood & events)
-    dunes(r, 6, 9268, box=(19, 21, 47, 30), w=(4, 8), exclude=flood)
-    dunes(r, 4, 9269, box=(44, 33, 57, 37), w=(4, 7), exclude=flood)
-    dunes(r, 3, 9270, box=(15, 41, 28, 46), w=(4, 7), exclude=flood)
+    dunes(r, 5, 9268, box=(20, 22, 46, 29), w=(4, 7), exclude=flood)
+    dunes(r, 3, 9269, box=(44, 33, 56, 37), w=(4, 6), exclude=flood)
+    dunes(r, 2, 9270, box=(16, 42, 27, 45), w=(4, 6), exclude=flood)
 
     r.finish_plan(border=1)
 
@@ -1462,17 +1518,42 @@ def build_926():
         fx(item((58, 46), 'MAXREVIVE')),
     ]
 
-    # Iconic Hero Setpiece: The Frozen Wave (NW, 6x5)
-    m.stamp('gd_wave', 1, 6, mark='B')
+    # Iconic NW Setpiece: Sculpted Vitrified Obsidian-Glass & Sea-Glass Crystal Wave-Ridge (replaces cartoonish blue ocean-wave stamp!)
+    # Keeps inspect trigger (7, 9) & HiddenItem NEVERMELTICE (7, 14) 100% intact and reachable!
+    for nm, x, y in (
+        ('sk_rock_big', 1, 5), ('gd_spire', 3, 5), ('cr_teal_t', 4, 6),
+        ('gd_spire', 2, 7), ('cr_clear_t', 5, 7), ('gd_shard0', 1, 8),
+        ('gd_shard1', 4, 8), ('sk_boulder', 2, 9), ('cr_teal_c', 5, 9),
+    ):
+        r.near(nm, x, y, on='su', r=1)
     r.add(*E)
     r.seat_events(on='su')
 
-    # Crest South Lee: strict one-way glass jump ledge across x=18..42, y=14 (seals Crest from below!)
-    for x in range(18, 43):
-        m.over.append((1, x, 14, P1('gdl_' + ('w' if x == 18 else 'e' if x == 42 else 'm'))))
-        m.taken[14, x] = True
-        if m.cls[14, x] not in 'su':
-            m.cls[14, x] = 'u'
+    # Crest South Lee: organic stepped 3-segment curved glass crater lip (breaks ruler-straight y=14 bar while staying 100% GATE-sealed!)
+    #   West curve: x=17..23 @ y=13; anchor spire/rock @ x=24, y=13..14;
+    #   Center mouth: x=25..35 @ y=14; anchor spire/rock @ x=36, y=13..14;
+    #   East curve: x=37..43 @ y=13!
+    ledge_segs = [(17, 23, 13), (25, 35, 14), (37, 43, 13)]
+    for x0, x1, ly in ledge_segs:
+        for x in range(x0, x1 + 1):
+            if m.cliff[ly, x]:
+                continue
+            m.over.append((1, x, ly, P1('gdl_' + ('w' if x == x0 else 'e' if x == x1 else 'm'))))
+            m.taken[ly, x] = True
+            if m.cls[ly, x] not in 'su':
+                m.cls[ly, x] = 'u'
+    # Seal the 2 stepped transition corners (x=24 & x=36, y=13..14) with solid pas=15 obsidian/rock anchors so ZERO bypasses exist!
+    for ax in (24, 36):
+        m.over.append((1, ax, 13, P1('gd_shard2')))
+        m.over.append((1, ax, 14, P1('gd_shard2')))
+        m.taken[13, ax] = True
+        m.taken[14, ax] = True
+    # Also ensure any gap between curved rim tip and ledge end at y=13..14 is sealed solid
+    for sx_g in (15, 16, 17, 18, 42, 43, 44, 45):
+        for sy_g in (13, 14):
+            if m.ht[sy_g, sx_g] == 0 and not m.cliff[sy_g, sx_g] and not m.taken[sy_g, sx_g]:
+                m.over.append((1, sx_g, sy_g, P1('gd_shard2')))
+                m.taken[sy_g, sx_g] = True
 
     # 5. Climax Arena Cathedral Spires, Siege Wrecks, Flooded Frontline & Camp Clusters
     hero_926 = [
@@ -1490,9 +1571,9 @@ def build_926():
         ('wr_bonecart', 32, 33), ('wr_bonecart', 27, 37), ('wr_supply', 40, 33), ('wr_supply', 52, 28), ('wr_supply', 18, 23),
         ('pf_wagon', 45, 34), ('wr_tally', 47, 38), ('wr_picket', 55, 30), ('nr_colfall', 53, 45), ('fw_sled', 4, 30),
         ('fw_skull', 33, 37), ('pf_whalebone', 42, 43),
-        # NW Frozen Wave Forward Post
-        ('wr_sledfort2', 1, 12), ('fw_brazier', 5, 14), ('wr_ban_ise_t', 11, 9),
-        ('cr_clear_t', 8, 6), ('cr_blue_t', 1, 3), ('cr_clear_e', 8, 11), ('fw_boat', 1, 17),
+        # NW Vitrified Wave-Ridge Forward Post
+        ('wr_sledfort2', 1, 12), ('fw_brazier', 5, 14), ('wr_ban_ise_t', 10, 9),
+        ('cr_clear_c', 7, 6), ('cr_teal_c', 1, 4), ('fw_boat', 1, 17),
         # NE Ashkaar Dragon Lines & Scorched Siege Post
         ('wr_treb_broken', 53, 4), ('wr_picket', 50, 9), ('wr_picket', 56, 10), ('wr_picket', 58, 7),
         ('wr_ban_ash_t', 49, 4), ('fw_brazier', 53, 10), ('wr_sandbags', 54, 13), ('wr_sacks', 57, 13), ('wr_rack', 52, 11),
@@ -1527,16 +1608,16 @@ def build_926():
             if not m.taken[y, x] and m.cls[y, x] in 'su' and not r.road_mask[y, x] and m.ht[y, x] == 0 and not m.cliff[y, x]:
                 m.stamp('wr_stakes', x, y, mark='B')
 
-    # Clustered glass spires, shards & battlefield debris (organic groupings, ZERO sparse scatter!)
-    CK.props(r, ['gd_spire', 'gd_shard0', 'gd_shard1', 'gd_shard2'], 18, box=(18, 1, 43, 13), on='su', clump=2, seed=6)
-    CK.props(r, ['gd_spire', 'gd_shard0', 'gd_shard1', 'cr_teal_c'], 26, box=(18, 15, W - 2, H - 2), on='su', clump=2, seed=7)
+    # Clustered glass spires, shards & battlefield debris
+    CK.props(r, ['gd_spire', 'gd_shard0', 'gd_shard1', 'gd_shard2'], 16, box=(19, 1, 41, 12), on='su', clump=2, seed=6)
+    CK.props(r, ['gd_spire', 'gd_shard0', 'gd_shard1', 'cr_teal_c'], 24, box=(18, 15, W - 2, H - 2), on='su', clump=2, seed=7)
     CK.props(r, ['cr_teal_c', 'cr_clear_c', 'sk_boulder'], 12, box=(2, 15, 28, H - 2), on='su', clump=2, seed=8)
-    CK.props(r, ['gd_shard0', 'gd_shard1'], 8, box=(13, 1, 18, 12), on='su', seed=9)
-    CK.props(r, ['gd_shard0', 'gd_shard1'], 8, box=(43, 1, 48, 12), on='su', seed=10)
+    CK.props(r, ['gd_shard0', 'gd_shard1'], 8, box=(11, 1, 18, 12), on='su', seed=9)
+    CK.props(r, ['gd_shard0', 'gd_shard1'], 8, box=(42, 1, 49, 12), on='su', seed=10)
     CK.props(r, ['sk_rock_big', 'sk_boulder', 'ak_rock2'], 10, box=(1, 1, W - 1, H - 1), on='su', clump=2, seed=5)
     CK.props(r, ['wr_firering', 'wr_sacks', 'wr_rack', 'wr_stakes', 'wr_sandbags'], 10, box=(18, 20, 48, 34), on='su', clump=2, seed=11)
 
-    # Organic boulder/glass perimeter framing (ZERO neon-cyan gd_shard2 border fence!)
+    # Organic boulder/glass perimeter framing
     frame_border_crags(r, sides='NSE', kinds=('sk_rock_big', 'sk_boulder', 'ak_rock2'), seed=9269)
     seal_non_exit_edge(r, 'N', palette=('wr_sandbags', 'wr_pal_h', 'wr_stakes'), keep_pts=((7, 1), (51, 1)))
     seal_non_exit_edge(r, 'E', palette=('wr_pal_v', 'wr_sandbags', 'wr_stakes'))
@@ -1545,44 +1626,40 @@ def build_926():
     m.cls[m.cls == 'd'] = 'u'
     r.paint()
 
-    # 6. Clean Sand Base + Multi-Biome War Ground (Frost NW, Ash SE, Packed Caravan Road, Flood + Glass Causeway, Vitrified Glass!)
+    # 6. Clean Sand Base + Feathered Autotile Roads, Smooth Flood Channels & Rounded Vitrified Blast Craters!
     sand_base = clean_sand_base(r)
 
-    # Frost halo around the Frozen Wave & Isenmar western flats (S_floorpatch)
+    # Subtle windblown frost decal zone around NW wave-ridge & SW Isenmar camp (NO jarring purple floorpatch!)
     frost_926 = (
-        blob(W, H, 5.5, 9.5, 8.5, 6.8, 92631, 0.38) |
-        blob(W, H, 7.0, 41.0, 7.0, 5.5, 92632, 0.40)
+        blob(W, H, 4.5, 8.5, 6.5, 5.2, 92631, 0.38) |
+        blob(W, H, 7.0, 41.0, 6.5, 5.0, 92632, 0.40)
     ) & ~flood & (m.ht == 0)
-    paint_patch(r, frost_926, 'S_floorpatch', sand_base, exclude=flood, smooth=2)
 
     # Ashkaar scorched eastern flats (L_floorpatch)
     ash_926 = (
-        blob(W, H, 53.0, 8.0, 6.5, 5.5, 92633, 0.40) |
-        blob(W, H, 53.0, 29.0, 5.5, 4.5, 92634, 0.38) |
-        blob(W, H, 52.0, 44.0, 6.0, 4.0, 92635, 0.38)
+        blob(W, H, 53.0, 8.0, 6.0, 5.0, 92633, 0.40) |
+        blob(W, H, 53.0, 29.0, 5.2, 4.2, 92634, 0.38) |
+        blob(W, H, 52.0, 44.0, 5.5, 3.8, 92635, 0.38)
     ) & ~flood & (m.ht == 0)
     paint_patch(r, ash_926, 'L_floorpatch', sand_base, exclude=flood, smooth=2)
 
-    # Packed-earth caravan road & Goat-path approach (E_floorpatch)
-    paint_patch(r, r.road_mask & ~flood, 'E_floorpatch', sand_base, exclude=flood, smooth=1)
+    # Smooth feathered Gen-5 autotile caravan road (RJ DirtDark — ZERO jagged square brown teeth!)
+    paint_auto_patch(r, r.road_mask & ~flood, 'DirtDark', sand_base, exclude=flood, smooth=2)
 
-    # Braided turquoise flood channels + wet shore rims + steaming mist
+    # Smooth braided turquoise flood channels + wet shore rims + steaming mist
     paint_flood(r, flood, sand_base, steam=0.45, seed=926)
 
-    # Vitrified Obsidian-Glass Clash Crater, Lava-Glass Flows, Glass Causeway Crossing (13,22) & Ridges
+    # Organic Rounded Obsidian-Glass Blast Craters & Glass Causeway (ZERO rectangular top glass tanks!)
     glass = (
-        blob(W, H, 30, 6.8, 12.2, 7.5, 92601, 0.35) | (m.ht == 1) |
-        band(W, H, [(23, 15), (25, 20), (22, 25), (20, 29)], 2.1, 92602) |
-        band(W, H, [(31, 15), (31, 21), (33, 26), (36, 29)], 2.0, 92603) |
-        band(W, H, [(37, 15), (41, 20), (46, 25), (52, 29), (58, 31)], 2.4, 92604) |
-        blob(W, H, 52, 21, 7, 5, 92605, 0.40) | blob(W, H, 45, 40, 6, 4, 92606, 0.45) |
-        blob(W, H, 37, 22, 4, 3, 92607) | blob(W, H, 55, 7, 5, 4, 92608, 0.45) |
-        blob(W, H, 24, 41, 7, 3.5, 92609, 0.45) | blob(W, H, 39, 44, 7, 3, 92610, 0.45) |
-        blob(W, H, 21, 33, 4, 2.5, 92611, 0.50) |
-        band(W, H, [(30, 15), (29, 24), (30, 31), (30, 40)], 1.6, 92612) |
-        blob(W, H, 13, 3, 4, 2.5, 92613, 0.40) | blob(W, H, 47, 13, 3, 2, 92614, 0.40) |
-        blob(W, H, 4, 25, 3, 2.5, 92615, 0.50) |
-        blob(W, H, 13.5, 22.0, 3.0, 2.2, 92616, 0.25)   # Smooth vitrified-glass causeway crossing the flood!
+        blob(W, H, 30.0, 6.8, 9.6, 5.4, 92601, 0.40) |
+        blob(W, H, 3.8, 8.0, 3.2, 2.5, 92619, 0.38) |
+        blob(W, H, 22.0, 19.5, 3.8, 2.5, 92602, 0.42) |
+        blob(W, H, 39.5, 19.0, 4.0, 2.5, 92604, 0.42) |
+        blob(W, H, 30.0, 25.0, 4.0, 2.6, 92607, 0.38) |
+        blob(W, H, 47.0, 25.0, 3.8, 2.4, 92605, 0.40) |
+        blob(W, H, 28.0, 39.0, 4.2, 2.4, 92609, 0.42) |
+        blob(W, H, 42.0, 40.5, 4.0, 2.3, 92610, 0.42) |
+        blob(W, H, 13.5, 22.0, 2.8, 2.0, 92616, 0.25)
     ) & ~flood
     glass = paint_glass(r, glass, sand_base, cracks=0.08, rope=0.10, spill=0.05, seed=926)
     glass_dress(r, glass, sheen=0.09, sky=0.045, seed=926)
@@ -1997,35 +2074,46 @@ def build_930():
                   stairs=('E_stairl', 'E_stairm', 'E_stairr'))
 
     # 1. Main caravan road W (Glass Dunes) -> E (Dry Tide cairn) + camp loops
-    trail(r, [(0, 16.5), (10, 16), (22, 15.5), (32, 17), (43, 16.5)], w=3.2)
+    trail(r, [(0, 16.5), (10, 16), (22, 16), (32, 16.5), (43, 16.5)], w=3.2)
     trail(r, [(21, 16), (22, 21)], w=2.2, only='su.')
-    trail(r, [(22, 15), (25, 11)], w=2.2, only='su.')
+    trail(r, [(22, 15), (24, 11)], w=2.2, only='su.')
     r.exit('W', 15, 4)
     r.exit('E', 15, 4)
 
-    # 2. Wind-Carved Sandstone Canyon Hollow Framing the Camp (DESTROY the flat empty desert rectangle!)
-    #    Four asymmetric sandstone perimeter ridges sheltering the camp alcoves while keeping all events open!
-    ridge(r, 0, 11, 0, 5, seed=93001, h=1, rough=0.38)      # NW sandstone shelf (shelters HiddenItem STARDUST (6,5) below!)
-    ridge(r, 32, 43, 0, 5, seed=93002, h=1, rough=0.38)     # NE desert bluff
-    ridge(r, 0, 10, 26, 31, seed=93003, h=1, rough=0.38)    # SW dune crag
-    ridge(r, 31, 39, 27, 31, seed=93004, h=1, rough=0.38)   # SE canyon ridge (shelters FULLRESTORE (40,28) alcove!)
-
-    # Keep roads, exits, and all event positions cleanly off cliffs
+    # 2. ONE Continuous Sweeping Sandstone Canyon Rim (ZERO 6-piece gapped rectangles!)
+    #    Keep HiddenItem STARDUST (6, 5) cleanly reachable inside a sheltered NW sandstone cove (n_lip=2),
+    #    then sweep smoothly into a continuous unbroken north canyon wall across x=12..43 (n_lip=4 -> 3)!
+    for x in range(W):
+        if x <= 11:
+            n_lip = 2
+        elif x <= 32:
+            n_lip = 4
+        else:
+            n_lip = 3
+        m.ht[0:n_lip + 1, x] = 1
+        # Continuous south canyon rim (leaving FULLRESTORE (40,28) cleanly open in SE canyon bay!)
+        if x >= 35:
+            s_lip = 30
+        elif x >= 22:
+            s_lip = 28
+        else:
+            s_lip = 27
+        m.ht[s_lip:H, x] = 1
+    # Keep roads, exits & exact event spots cleanly off cliffs
     for y in range(H):
         for x in range(W):
             if r.road_mask[max(0, y - 1):y + 4, max(0, x - 1):x + 2].any():
                 m.ht[y, x] = 0
-            if 4 <= x <= 9 and 4 <= y <= 8:       # HiddenItem (6, 5)
-                m.ht[y, x] = 0
-            if 38 <= x <= 42 and 26 <= y <= 30:   # FULLRESTORE (40, 28)
-                m.ht[y, x] = 0
-            if 34 <= x <= 39 and 4 <= y <= 9:     # NE tent alcove
-                m.ht[y, x] = 0
-    CK.smooth_ht(m, 1, 2)
+    for cx_k, cy_k in ((6, 5), (6, 6), (24, 11), (28, 9), (40, 28), (39, 28), (40, 27)):
+        m.ht[cy_k, cx_k] = 0
+    CK.smooth_ht(m, 1, 1)
+    # Lock unbroken north rim crown (y=0..2) & south rim so smooth_ht never splits the canyon!
+    m.ht[0:3, :] = 1
+    m.ht[30:32, 0:35] = 1
+    for cx_k, cy_k in ((6, 5), (6, 6), (40, 28), (39, 28)):
+        m.ht[cy_k, cx_k] = 0
 
-    # Organic wind-carved dune lee ledges framing the northern & southern slopes
-    dunes(r, 4, 930, box=(12, 3, 32, 8), w=(4, 7))
-    dunes(r, 4, 931, box=(12, 25, 31, 29), w=(4, 7))
+    # NO floating 1-tile thin ledge bars (removed dunes() calls that created floating brown bars at y=9, 26, 29!)
 
     r.finish_plan(border=1)
 
@@ -2049,61 +2137,66 @@ def build_930():
     r.add(*E)
     r.seat_events(on='su')
 
-    # 4. Eerie Bleached Bone & Timber Storytelling Clusters, Memorial Hearth & Embalmers' Sanctuary!
+    # 4. Eerie Bleached Bone & Timber Storytelling Clusters, Memorial Hearth, Weathered Barrels & Desert Scrub!
     props_930 = [
         # Central Memorial Sanctuary: White Bone-Banner, Tally-Wall, Whalebone Arch & Vigil Hearth!
-        ('wr_ban_bone', 22, 6), ('wr_tally', 27, 6),
-        ('pf_whalebone', 20, 7), ('pf_whalebone', 30, 7), ('fw_skull', 24, 7),
+        ('wr_ban_bone', 22, 7), ('wr_tally', 27, 7),
+        ('pf_whalebone', 20, 8), ('pf_whalebone', 30, 8), ('fw_skull', 24, 8),
         ('fw_brazier', 21, 12), ('wr_firering', 26, 13), ('pf_stonebench', 23, 13),
-        ('nr_ruin', 17, 6), ('nr_col', 31, 9), ('pf_lantern', 19, 13), ('pf_lantern', 29, 13),
+        ('nr_ruin', 17, 7), ('nr_col', 31, 9), ('pf_lantern', 19, 13), ('pf_lantern', 29, 13),
         # West Gateposts & Burial-Cart Convoy Yard
         ('wr_ban_bone', 4, 12), ('pf_whalebone', 3, 19), ('fw_skull', 7, 13),
         ('wr_bonecart', 11, 18), ('wr_bonecart', 14, 18), ('wr_bonecart', 17, 18),
         ('wr_tent_bone', 7, 22), ('fw_rack', 6, 9), ('wr_sacks', 10, 21), ('pf_logbench', 10, 24),
-        ('fw_brazier', 15, 22),
-        # East Embalmers' Sanctuary ("Salt, resin and a song" — salt mounds, embalming tubs, curing well!)
-        ('wr_tent_bone', 31, 18), ('wr_well', 30, 24), ('hb_tubs', 25, 23),
+        ('fw_brazier', 15, 22), ('nt_deadtree', 12, 9), ('pf_whalebone', 15, 8),
+        # East Embalmers' Sanctuary (weathered water barrels, salt mounds, bone piles & curing well — ZERO neon cyan pools!)
+        ('wr_tent_bone', 31, 18), ('wr_well', 30, 24),
+        ('hb_barrels', 25, 23), ('wr_sacks', 27, 23), ('pf_whalebone', 25, 25), ('hb_crates4', 27, 25),
         ('hb_salt0', 34, 24), ('hb_salt1', 36, 21), ('wr_rack', 29, 20),
-        ('wr_tent_w', 35, 6), ('hb_crates4', 34, 10), ('wr_supply', 37, 12), ('wr_sacks', 34, 12),
-        ('pf_wagon', 37, 24), ('wr_bonecart', 40, 19),
-        # East Dry-Tide Road Cairn & Desert Relics
-        ('sk_rock_big', 41, 12), ('pf_roadstone', 41, 18), ('wr_ban_bone', 42, 13),
-        ('pf_whalebone', 14, 26), ('fw_skull', 36, 28), ('nr_colfall', 17, 27),
+        ('wr_tent_w', 35, 8), ('hb_crates4', 34, 11), ('wr_supply', 37, 12), ('wr_sacks', 34, 12),
+        ('pf_wagon', 37, 24), ('wr_bonecart', 40, 19), ('nt_deadtree', 38, 22),
+        # East Dry-Tide Road Cairn & Desert Corner Framing (dresses SW, SE, NW, NE sand flats richly!)
+        ('sk_rock_big', 41, 11), ('pf_roadstone', 41, 18), ('wr_ban_bone', 42, 13),
+        ('pf_whalebone', 14, 25), ('fw_skull', 36, 25), ('nr_colfall', 17, 25),
+        # SW & SE Sandstone Boulder / Deadwood / Scrub Clusters (kills sparse empty tan sand!)
+        ('sk_rock_big', 2, 24), ('sk_boulder', 5, 25), ('nt_deadtree', 3, 21), ('pf_whalebone', 11, 25),
+        ('sk_boulder', 2, 9), ('nt_deadtree', 9, 8), ('sk_pebbles', 8, 11),
+        ('sk_rock_big', 33, 26), ('sk_boulder', 36, 26), ('nt_deadtree', 41, 23), ('fw_skull', 41, 25),
+        ('wr_sacks', 39, 22), ('sk_pebbles', 29, 26), ('sk_boulder', 20, 25),
     ]
     for nm, x, y in props_930:
         r.near(nm, x, y, on='su', r=2)
 
-    CK.props(r, ['sk_rock_big', 'sk_boulder', 'sk_pebbles', 'nt_deadtree'], 13, box=(1, 2, W - 1, H - 2), on='su', clump=2, seed=5)
+    CK.props(r, ['sk_boulder', 'sk_pebbles', 'nt_deadtree', 'fw_skull', 'ak_rock2'], 26, box=(2, 6, W - 2, H - 5), on='su', clump=2, seed=5)
 
-    # Organic boulder/crag perimeter framing on W edge (ZERO repetitive sack-wall!)
-    frame_border_crags(r, sides='NSWE', kinds=('sk_rock_big', 'sk_boulder', 'ak_rock2'), seed=9308)
+    # Seal only west non-exit rim cleanly (canyon ridges naturally bound N and S)
     seal_non_exit_edge(r, 'W', palette=('wr_sandbags', 'wr_sacks', 'wr_stakes'))
 
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
     m.cls[m.cls == 'd'] = 'u'
     r.paint()
 
-    # 5. Clean Sand Base + Ancient Dried-Sea Shell Pavement (S_floorpatch), Dragon Landing Ring (L_floorpatch) & Caravan Road!
+    # 5. Clean Sand Base + Weathered Stone-Gravel Camp Apron, Feathered Autotile Cart Track & Subtle Scorch Ring!
     sand_base = clean_sand_base(r)
 
-    # Sweeping ancient dried-sea pale shell-crust pavement across the heart of the burial camp (S_floorpatch!)
-    shell_pave = (
-        blob(W, H, 23.0, 16.5, 11.5, 7.2, 93041, 0.36) |
-        blob(W, H, 33.0, 21.5, 6.0, 4.2, 93042, 0.38)
+    # Weathered pale-stone camp yard apron around the burial sanctuary (Gravel Spring autotile — warm & natural, NO lavender blob!)
+    camp_yard = (
+        blob(W, H, 23.0, 16.5, 10.5, 6.2, 93041, 0.36) |
+        blob(W, H, 32.5, 21.0, 5.2, 3.6, 93042, 0.38)
     ) & (m.ht == 0)
-    paint_patch(r, shell_pave, 'S_floorpatch', sand_base, smooth=2)
+    paint_auto_patch(r, camp_yard, 'Gravel Spring', sand_base, smooth=2, game='pf')
 
-    # Packed-earth burial-cart caravan road (E_floorpatch)
-    paint_patch(r, r.road_mask, 'E_floorpatch', sand_base, smooth=1)
+    # Smooth feathered Gen-5 autotile burial-cart caravan road (RJ DirtDark — ZERO jagged square teeth!)
+    paint_auto_patch(r, r.road_mask, 'DirtDark', sand_base, smooth=2)
 
-    # LITERAL VISUAL STORYTELLING: Scorched dark-basalt ring right around Sigrun's Dragon Landing Stone (21, 21)!
-    landing_scorch = blob(W, H, 21.0, 21.0, 3.1, 2.4, 93045, 0.25) & (m.ht == 0)
-    paint_patch(r, landing_scorch, 'L_floorpatch', sand_base, smooth=1)
+    # Tight, organic scorched-earth ring right around Sigrun's Dragon Landing Stone (21, 21)
+    landing_scorch = blob(W, H, 21.0, 21.0, 2.2, 1.7, 93045, 0.22) & (m.ht == 0)
+    paint_patch(r, landing_scorch, 'E_floorpatch', sand_base, smooth=2)
 
     paint_cliff_shadows(r, 'E_shadow')
-    sand_dress(r, 0.44, seed=930, exclude=landing_scorch, bones=0.04)
-    decal(r, ['wr_ember0', 'wr_ember1'], 0.35, seed=9, cells=[(x, y) for y, x in np.argwhere(landing_scorch)])
-    decal(r, ['wr_bones0', 'wr_bones1', 'wr_rut0'], 0.06, seed=4)
+    sand_dress(r, 0.48, seed=930, exclude=landing_scorch, bones=0.065)
+    decal(r, ['wr_ember0', 'wr_ember1'], 0.42, seed=9, cells=[(x, y) for y, x in np.argwhere(landing_scorch)])
+    decal(r, ['wr_bones0', 'wr_bones1', 'wr_rut0'], 0.11, seed=4)
 
     add_fire_lighting(m)
     place_shaft(m, 23, 8)   # Quiet atmospheric light beam over Elder Ossa & the Tally-Wall!

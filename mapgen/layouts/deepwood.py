@@ -419,31 +419,18 @@ def hollow():
                 if m.ht[y, x] == 0 and m.cls[y, x] in '.dt' and not m.cliff[y, x]:
                     if ((x - cx_l) / rx_l) ** 2 + ((y - cy_l) / ry_l) ** 2 + 0.16 * (vnoise(x, y, 5491, 2.8) - 0.5) <= 1.0:
                         lav_mask[y, x] = True
-    for _ in range(2):
-        pad = np.pad(lav_mask, 1, constant_values=False)
-        n4 = pad[:-2, 1:-1].astype(int) + pad[2:, 1:-1] + pad[1:-1, :-2] + pad[1:-1, 2:]
-        ok_l = (m.ht == 0) & np.isin(m.cls, ['.', 'd', 't']) & ~m.cliff
-        lav_mask = (lav_mask & (n4 >= 2)) | (~lav_mask & ok_l & (n4 >= 3))
-    paint_bordered_turf(
-        lav_mask,
-        (9901, 9902, 9903, 9909, 9910, 9911, 9917, 9918, 9919),
-        (9925, 9926, 9933, 9934),
-        center_alts=(9929, 9931, 9910),
-    )
+    # Native seamless frosted snow variation across the crater floor (replaces hard-edged lavender rectangles!)
+    sn_g = [K.P1('sn_g%d' % i) for i in range(4)]
+    for y in range(3, H - 2):
+        for x in range(5, W - 2):
+            if m.ht[y, x] == 0 and m.cls[y, x] == '.' and not m.cliff[y, x] and vnoise(x, y, 5491, 4.5) > 0.42:
+                m.L[0, y, x] = sn_g[int(vnoise(x, y, 5497, 2.6) * 3.999)]
 
-    # Deeper twilight-amethyst core (9488..9506) NESTED STRICTLY INSIDE lav_mask (1-tile inset = ZERO sharp snow seam!)
-    pad_lav = np.pad(lav_mask, 1, constant_values=False)
-    lav_inner = lav_mask & pad_lav[:-2, 1:-1] & pad_lav[2:, 1:-1] & pad_lav[1:-1, :-2] & pad_lav[1:-1, 2:]
+    # Keep twilight-amethyst sanctuary floor strictly inside the walled Matriarch cathedral alcove (x=17..21, y=4..8)
     ame_mask = np.zeros((H, W), dtype=bool)
-    # Matriarch cathedral floor (x=17..21, y=4..8) sits cleanly between solid cliff spurs!
     for y in range(4, 9):
         for x in range(17, 22):
             if m.ht[y, x] == 0 and not m.cliff[y, x] and m.cls[y, x] not in 'wWp':
-                ame_mask[y, x] = True
-    # Central harp core nested cleanly inside lavender turf
-    for y in range(15, 20):
-        for x in range(16, 23):
-            if lav_inner[y, x]:
                 ame_mask[y, x] = True
     paint_bordered_turf(
         ame_mask,

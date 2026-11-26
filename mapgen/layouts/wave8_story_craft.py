@@ -421,7 +421,6 @@ def build_285():
     _put_stamp_33(L, 'tp_garden_01', 10, 34, clear_top=False)
     # Cozy noble patio umbrellas & crates in the East Noble Barracks Courtyard
     _put_stamp_33(L, 'tp_patio_05', 67, 45, clear_top=True)
-    _put_stamp_33(L, 't_barrel', 53, 41, clear_top=True)
     _put_stamp_33(L, 't_barrel2', 77, 46, clear_top=True)
     _put_stamp_33(L, 't_barrel', 52, 48, clear_top=True)
 
@@ -456,7 +455,7 @@ def build_285():
         (22, 54), (27, 54),   # South Kingsgate approach lanterns
         (23, 60), (26, 60),   # South Kingsgate arrival welcome glow!
         (17, 48), (24, 48),   # Lily Pond & Bride Tree overlook lanterns
-        (56, 42), (65, 42), (75, 42),   # East Noble Avenue lanterns
+        (60, 42), (65, 42), (75, 42),   # East Noble Avenue lanterns (clear of garden arch at 53..57,40!)
         (61, 51), (73, 51),             # East Barracks lower court lanterns
     ):
         put_warm_lamp(lx, ly)
@@ -712,12 +711,13 @@ def build_608():
     m.ht[:] = 1
     m.roof_kind = 'T'
 
-    # ---- 1. Exact 1-to-1 Architectural Unification with Wave 4's 181 Lumen Lowlight! ----
-    # Spire north bulkhead, south/east abyssal drop to Nadir, NW Concourse landing
+    # ---- 1. Architectural Unification with 181 + 3 DRAMATICALLY DEMOLISHED / CRATERED TENEMENT BLOCKS! ----
+    # Spire north bulkhead, south abyssal drop, east stepped stone parapet (matches 181 — NO repeated pylon strip!)
     m.cls[0:3, :] = 'x'; m.ht[0:3, :] = 2
     m.cls[0:3, 0:8] = 'p'; m.ht[0:3, 0:8] = 1
     m.cls[41:, :] = 'x'; m.ht[41:, :] = 0
-    m.cls[:, 57:] = 'x'; m.ht[:, 57:] = 0
+    m.cls[:, 58:] = 'x'; m.ht[:, 58:] = 0
+    m.cls[3:41, 57] = 'l'; m.ht[3:41, 57] = 1
     m.rect(0, 3, 8, 8, 'p')
 
     reserve = {(47, y) for y in range(5, 11)} | {(48, y) for y in range(5, 11)} | {(49, y) for y in range(5, 11)}
@@ -737,24 +737,30 @@ def build_608():
     for x, y in ((9, 29), (10, 29), (9, 30), (10, 30), (9, 31), (10, 31)):
         m.taken[y, x] = True
 
-    # Identical deterministic tenement block layout (use seed=181 RNG for exact building placement parity with 181!)
+    # Matching facade mix with 181 — EXCEPT 3 ENTIRE TENEMENT BLOCKS ARE COMPLETELY DEMOLISHED INTO BLAST CRATERS!
+    #   Crater 1 (NE Epicenter):      x=34..46, y=5..10   (obliterated by the Spire Service Door Shatter blast!)
+    #   Crater 2 (West Market Flank): x=13..21, y=14..23  (collapsed directly beside the Sunburst dais!)
+    #   Crater 3 (South-Central):     x=28..38, y=27..36  (torn wide open by the southbound shockwave fissure!)
     m.seed = 181
+    PACK_MIX_N = ['lb_l5a', 'lb_l4a', 'lb_l3a', 'lb_t4a', 'lb_l6a', 'lb_t5b']
+    PACK_MIX_M = ['lb_l5b', 'lb_l6b', 'lb_t4b', 'lb_l4a', 'lb_t5a', 'lb_l3a', 'lb_l6a']
     placed = []
-    placed += lm_pack(m, 8, 46, 10, 5, PACK_LOW, seed=1)
-    placed += lm_pack(m, 50, 56, 10, 5, PACK_LOW, seed=2)
-    placed += lm_pack(m, 9, 21, 23, 14, PACK_LOW, seed=3)
-    placed += lm_pack(m, 36, 43, 23, 14, PACK_LOW, seed=4)
-    placed += lm_pack(m, 47, 56, 23, 14, PACK_LOW, seed=5)
-    placed += lm_pack(m, 11, 25, 36, 27, PACK_LOW, seed=6)
-    placed += lm_pack(m, 28, 43, 36, 27, PACK_LOW, seed=7)
-    placed += lm_pack(m, 47, 56, 36, 27, PACK_LOW, seed=8)
+    placed += lm_pack(m, 8, 24, 10, 5, PACK_MIX_N, seed=11)        # NW Shadow Row standing (Nook 25..29, Crater 1 34..46 DEMOLISHED!)
+    placed += lm_pack(m, 30, 33, 10, 5, ['lb_l4a', 'lb_l3a'], seed=12)  # Lonely sheared stub facing Crater 1!
+    placed += lm_pack(m, 50, 55, 10, 5, PACK_MIX_N, seed=2)
+    placed += lm_pack(m, 9, 12, 23, 14, ['lb_l4a', 'lb_l3a'], seed=13)  # Sheared west stub beside Crater 2 (13..21 DEMOLISHED!)
+    placed += lm_pack(m, 36, 43, 23, 14, PACK_MIX_M, seed=14)
+    placed += lm_pack(m, 47, 50, 23, 14, ['lb_l4a', 'lb_l3a'], seed=15)
+    placed += lm_pack(m, 11, 20, 36, 27, PACK_MIX_M, seed=16)
+    placed += lm_pack(m, 39, 43, 36, 27, ['lb_l5a', 'lb_l4a'], seed=17) # Sheared east stub beside Crater 3 (28..38 DEMOLISHED!)
+    placed += lm_pack(m, 47, 55, 36, 27, PACK_MIX_M, seed=18)
     placed += lm_pack(m, 0, 5, 23, 14, PACK_LOW, seed=9)
     placed += lm_pack(m, 0, 5, 36, 27, PACK_LOW, seed=10)
     m.seed = 608
 
-    # Identical alternating slate-blue & weathered tin roof districts as 181!
+    # Identical alternating slate-blue & weathered tin roof districts on surviving tenements!
     slate_cells = set()
-    for (x0, y0, x1, y1) in ((8, 5, 26, 10), (36, 14, 43, 23), (11, 27, 25, 36), (47, 27, 56, 36)):
+    for (x0, y0, x1, y1) in ((8, 5, 24, 10), (36, 14, 43, 23), (11, 27, 20, 36), (47, 27, 55, 36)):
         for yy in range(y0, y1 + 1):
             for xx in range(x0, x1 + 1):
                 if m.cls[yy, xx] == 'f':
@@ -787,7 +793,7 @@ def build_608():
         m.keep_clear.add((ex, ey))
         for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
             m.keep_clear.add((ex + dx, ey + dy))
-    # Also protect main arterial walking lanes so NO barricade or crystal can EVER cause a softlock!
+    # Also protect main arterial walking lanes so NO barricade, crater rubble, or crystal can EVER cause a softlock!
     main_corridors = (
         {(x, 12) for x in range(1, 56)}
         | {(x, 25) for x in range(1, 56)}
@@ -802,7 +808,7 @@ def build_608():
     )
     m.keep_clear |= main_corridors
 
-    # ---- 3. Iconic Resident Storytelling Props (Frozen in the Shatter!) ----
+    # ---- 3. Iconic Resident Storytelling Props & Wrecked Alley Nooks (Frozen in the Shatter!) ----
     m.try_put('lm_noodles', 22, 14, on='qrp')     # Benno's noodle cart ("The steam is glass")
     m.try_put('lm_cobbler', 13, 24, on='lr')      # Old Jory's cobbler bench
     m.try_put('lm_ladder', 37, 12, on='lr')       # Hob Carrow's lamplighter ladder
@@ -810,15 +816,56 @@ def build_608():
     for x, y in ((12, 11), (28, 11), (17, 24), (32, 24), (49, 24), (16, 37), (34, 37)):
         if m.free(x, y, 3, 1, on='lqrp'):
             m.stamp('lm_washline', x, y)
+    # Wrecked remnants inside the 3 alley nooks matching 181's footprint
+    m.try_put('lm_junk0', 26, 7, on='lrp'); m.try_put('lm_junk3', 28, 8, on='lrp')
+    m.try_put('lm_junk2', 22, 30, on='lrp'); m.try_put('lm_junk1', 23, 33, on='lrp')
+    m.try_put('lm_junk0', 52, 17, on='lrp'); m.try_put('lm_junk3', 53, 20, on='lrp')
 
-    # ---- 4. VISCERAL POST-SHATTER AFTERMATH: Wrecked Bazaar, Downed Pylons, Barricades, Crystalline Rift! ----
-    # Dead unlit arc lamps across the entire district (unified coordinates with 181, ALL switched OFF!)
+    # ---- 4. VISCERAL POST-SHATTER AFTERMATH: 3 DEMOLISHED TENEMENT CRATERS, RUBBLE HEAPS & RADIATING FISSURES! ----
+    # Dead unlit arc lamps across the entire district
     dead_lamps = [
         (1, 3), (6, 3), (25, 15), (31, 15), (26, 23), (32, 23),
         (12, 26), (44, 26), (8, 33), (25, 39), (42, 39), (47, 10),
-        (16, 13), (41, 13), (55, 12), (52, 26), (54, 39), (3, 12), (3, 39),
+        (16, 13), (41, 13), (54, 12), (52, 26), (54, 39), (3, 12), (3, 39),
     ]
     lm_lamps(m, dead_lamps, name='lm_arclamp_off')
+
+    # --- DEMOLISHED CRATER 1 (NE Epicenter x=34..46, y=5..10): Collapsed masonry, fallen girders & amethyst shards! ---
+    crater_stamps = [
+        # Crater 1 (NE Shadow Row x=34..46, y=5..10)
+        ('nr_ruin', 35, 5), ('nr_ruin', 40, 6), ('nr_colfall', 37, 8), ('nr_colfall', 42, 9),
+        ('cr_purple_t', 38, 5), ('cr_teal_t', 43, 5), ('cr_purple_c', 36, 9), ('cr_teal_c', 44, 8),
+        ('lm_junk0', 34, 8), ('lm_junk1', 40, 9), ('lm_junk2', 45, 7), ('lm_junk3', 35, 7),
+        ('ck_boulder', 41, 5), ('ck_pebbles', 39, 9),
+        # Crater 2 (West Market Court Flank x=13..21, y=14..23 — right west of the Golden Sunburst!)
+        ('nr_ruin', 14, 14), ('nr_ruin', 18, 15), ('nr_ruin', 14, 19),
+        ('nr_colfall', 16, 18), ('nr_colfall', 14, 22), ('nr_colfall', 18, 21),
+        ('cr_purple_t', 17, 15), ('cr_teal_t', 15, 17), ('cr_purple_t', 19, 18),
+        ('cr_purple_c', 14, 16), ('cr_teal_c', 20, 21), ('cr_blue_c', 16, 20),
+        ('lm_junk0', 13, 15), ('lm_junk1', 19, 16), ('lm_junk2', 13, 21), ('lm_junk3', 17, 22),
+        ('ck_boulder', 15, 20), ('ck_boulder', 19, 14), ('ck_pebbles', 18, 19),
+        # Crater 3 (South-Central Block x=28..38, y=27..36 — blasted open south of Market Court!)
+        ('nr_ruin', 29, 27), ('nr_ruin', 34, 28), ('nr_ruin', 30, 32), ('nr_ruin', 35, 33),
+        ('nr_colfall', 31, 30), ('nr_colfall', 28, 34), ('nr_colfall', 34, 31),
+        ('cr_purple_t', 32, 28), ('cr_teal_t', 36, 29), ('cr_purple_t', 31, 33),
+        ('cr_purple_c', 29, 31), ('cr_teal_c', 37, 34), ('cr_purple_c', 33, 35),
+        ('lm_junk0', 28, 29), ('lm_junk1', 33, 29), ('lm_junk2', 36, 32), ('lm_junk3', 29, 35),
+        ('ck_boulder', 34, 34), ('ck_boulder', 30, 29), ('ck_pebbles', 32, 31),
+    ]
+    for nm, cx, cy in crater_stamps:
+        st_c = CK.STAMPS[nm]
+        cw, ch = st_c['w'], st_c['h']
+        if all((cx + dx, cy + dy) not in m.keep_clear for dx in range(cw) for dy in range(ch)):
+            if m.free(cx, cy, cw, ch, on='lrpq'):
+                m.stamp(nm, cx, cy)
+    # Jagged snapped foundation wall stubs around the rims of all 3 demolished blocks!
+    for wx, wy, wn in (
+        (34, 5, 'nr_wall_w'), (35, 5, 'nr_wall_m'), (44, 5, 'nr_wall_e'), (34, 10, 'nr_wall_w'), (45, 10, 'nr_wall_e'),
+        (13, 14, 'nr_wall_w'), (13, 18, 'nr_wall_v'), (21, 14, 'nr_wall_e'), (21, 22, 'nr_wall_e'), (15, 23, 'nr_wall_m'),
+        (28, 27, 'nr_wall_w'), (29, 27, 'nr_wall_m'), (38, 27, 'nr_wall_e'), (38, 35, 'nr_wall_v'), (30, 36, 'nr_wall_m'), (36, 36, 'nr_wall_e'),
+    ):
+        if m.free(wx, wy, 1, 1, on='lrpq') and (wx, wy) not in m.keep_clear:
+            m.stamp(wn, wx, wy)
 
     # Shattered Market Court remnants: wrecked broadcast camera, snapped cables, knocked-over stalls/debris, fallen column!
     m.try_put('lm_cam', 30, 19, on='pqr')
@@ -844,40 +891,34 @@ def build_608():
     ):
         m.try_put(nm, sx, sy, on='lrpq')
 
-    # Directorate Quarantine Barricades (`pf_barricade`) pinching back-alley sightlines & framing the NW Veil!
+    # Directorate Quarantine Barricades (`pf_barricade`) pinching back-alley sightlines & framing craters!
     for bx, by in (
-        (1, 2), (4, 2),             # NW Veil overlook north quarantine barricades
-        (2, 10), (5, 10),           # NW Veil south perimeter tape/barricades (keeps x=7 Lift Lane wide open!)
-        (19, 11), (32, 11),         # Shadow Row back-alley sightline pinch points
-        (24, 23), (32, 23),         # Shattered Market Court south quarantine tape
-        (46, 13), (52, 24),         # East Shatter blast zone barricades (keeps Pidove Steps x=45 & Service Alley x=48 clear!)
-        (15, 39), (38, 39),         # Edge Walk overlook cordons
+        (1, 2), (4, 2), (2, 10), (5, 10),
+        (19, 11), (32, 11), (24, 23), (32, 23),
+        (46, 13), (52, 24), (15, 39), (38, 39),
     ):
         m.try_put('pf_barricade', bx, by, on='lrpq')
 
-    # Flickering Amber Emergency Beacons (`lm_junction_on`, `cv_lamp_on`, `pf_beacon` / `lm_lamp_on`) cutting through the dark!
+    # Flickering Amber Emergency Beacons cutting through the dark ruins!
     for nm, ax, ay in (
-        ('lm_junction_on', 6, 4),       # Directorate Veil checkpoint emergency beacon
-        ('lm_junction_on', 1, 10),      # SW Veil checkpoint amber beacon
-        ('lm_junction_on', 47, 5),      # Spire Service Door blast-zone warning beacon
-        ('lm_junction_on', 25, 14),     # Market Court north amber emergency flare
-        ('lm_junction_on', 34, 22),     # Market Court south amber emergency flare
-        ('lm_junction_on', 9, 26),      # Lift Lane emergency beacon
-        ('lm_junction_on', 44, 26),     # Pidove Steps emergency beacon
-        ('lm_junction_on', 25, 39),     # Edge Walk overlook emergency beacon
-        ('cv_lamp_on', 3, 2),           # Emergency work-lamp illuminating Valen/Testimony at the Veil!
-        ('cv_lamp_on', 49, 6),          # Emergency work-lamp at Spire Service Door!
-        ('cv_lamp_on', 23, 19),         # Flickering amber beacon beside Market Court wreckage!
-        ('cv_lamp_on', 34, 14),         # Flickering beacon on NE Market Court!
+        ('lm_junction_on', 6, 4), ('lm_junction_on', 1, 10), ('lm_junction_on', 47, 5),
+        ('lm_junction_on', 25, 14), ('lm_junction_on', 34, 22), ('lm_junction_on', 9, 26),
+        ('lm_junction_on', 44, 26), ('lm_junction_on', 25, 39),
+        ('cv_lamp_on', 3, 2), ('cv_lamp_on', 49, 6), ('cv_lamp_on', 23, 19), ('cv_lamp_on', 34, 14),
     ):
         m.try_put(nm, ax, ay, on='lrpq')
 
-    # VIOLENT DIAGONAL SHATTER RIFT tearing from Spire Service Door (48,5) -> Pidove Steps -> ACROSS Golden Sunburst -> Market Row!
+    # VIOLENT RADIATING SHATTER RIFTS tearing from Central Sunburst Dais into ALL THREE demolished tenement craters!
     rng = random.Random(6088)
     rift_pts = [
-        (48, 5), (47, 7), (46, 9), (45, 11), (43, 12), (40, 12), (37, 13),
-        (34, 15), (32, 16), (30, 17), (28, 18), (26, 19), (24, 21), (22, 23), (20, 24), (18, 25),
-        (15, 26), (12, 27), (44, 15), (44, 18), (44, 21), (43, 24),
+        # Arm 1: Spire Service Door (48,5) -> Crater 1 -> Golden Sunburst (28,18)
+        (48, 5), (46, 6), (44, 7), (41, 8), (38, 9), (36, 11), (34, 13), (32, 15), (30, 17), (28, 18),
+        # Arm 2: Golden Sunburst (28,18) -> West straight into Demolished Crater 2 (13..21, 14..23)!
+        (26, 18), (24, 18), (22, 18), (20, 18), (18, 18), (16, 18), (14, 19), (18, 21), (16, 16),
+        # Arm 3: Golden Sunburst (28,18) -> South straight into Demolished Crater 3 (28..38, 27..36)!
+        (28, 20), (29, 22), (30, 24), (31, 26), (32, 28), (33, 30), (34, 32), (35, 34), (31, 31), (30, 34),
+        # Arm 4: SW radial fracture along Market Row
+        (26, 20), (24, 22), (22, 24), (19, 25), (16, 26),
     ]
     for rx, ry in rift_pts:
         for dy in (-1, 0, 1):
@@ -891,22 +932,18 @@ def build_608():
                 if dist == 0:
                     m.over.append((1, xx, yy, P1('gd_crack%d' % ((xx + yy) % 2))))
                     m.over.append((2, xx, yy, P1('lm_bleed%d' % ((xx * 3 + yy) % 3))))
-                elif dist == 1 and rng.random() < 0.78:
+                elif dist == 1 and rng.random() < 0.72:
                     m.over.append((2, xx, yy, P1('lm_bleed%d' % rng.randrange(3))))
 
-    # Sculpted Asymmetric Crystalline Debris Clusters (tall spires + low crystal shards along rift & blast margins!)
+    # Secondary crystalline debris clusters framing street margins
     crystal_clusters = [
-        # Blast epicenter around Spire Service Door (48,4)
         (49, 8, 'cr_purple_t'), (46, 10, 'cr_teal_e'), (49, 10, 'cr_purple_c'),
-        # Shattered Sunburst Market Court crystal eruptions (framing the diagonal rift, NEVER blocking paths!)
         (35, 14, 'cr_purple_t'), (34, 15, 'cr_teal_c'), (35, 22, 'cr_teal_t'),
         (22, 22, 'cr_purple_t'), (23, 15, 'cr_teal_e'), (31, 16, 'cr_purple_e'),
         (26, 21, 'cr_purple_c'), (29, 15, 'cr_teal_c'), (25, 19, 'cr_blue_c'),
-        # Secondary shockwave crystal eruptions down Pidove Steps, Shadow Row & Market Row
         (44, 14, 'cr_teal_t'), (46, 26, 'cr_purple_t'), (44, 24, 'cr_teal_c'),
-        (19, 24, 'cr_purple_e'), (18, 26, 'cr_teal_c'), (10, 26, 'cr_purple_c'),
-        (38, 12, 'cr_purple_c'), (26, 11, 'cr_teal_c'), (51, 12, 'cr_purple_e'),
-        (31, 39, 'cr_purple_c'), (48, 39, 'cr_teal_e'), (11, 39, 'cr_purple_c'),
+        (10, 26, 'cr_purple_c'), (26, 11, 'cr_teal_c'), (51, 12, 'cr_purple_e'),
+        (48, 39, 'cr_teal_e'), (11, 39, 'cr_purple_c'),
     ]
     for cx, cy, nm in crystal_clusters:
         st_c = CK.STAMPS[nm]
@@ -915,12 +952,14 @@ def build_608():
             if m.free(cx, cy, cw, ch, on='lrpq'):
                 m.stamp(nm, cx, cy)
 
-    # Shimmering Violet Bleed Glass Shards across the Shattered streets (denser near the Spire & Rift!)
+    # Shimmering Violet Bleed Glass Shards (concentrated in the 3 craters & along rifts, clean elsewhere!)
     for y in range(3, 41):
         for x in range(1, 56):
             if m.cls[y, x] in 'lrpq' and not m.taken[y, x]:
-                near_rift = abs((x - 28) * 0.55 + (y - 18)) < 11
-                prob = 0.24 if near_rift else 0.13
+                in_crater = ((34 <= x <= 46 and 5 <= y <= 10) or
+                             (13 <= x <= 21 and 14 <= y <= 23) or
+                             (28 <= x <= 38 and 27 <= y <= 36))
+                prob = 0.34 if in_crater else 0.08
                 if rng.random() < prob:
                     m.over.append((2, x, y, P1('lm_bleed%d' % rng.randrange(3))))
 
@@ -928,7 +967,7 @@ def build_608():
     for y in range(3, 11):
         m.over.append((2, 0, y, P1('lm_veil%d' % (y % 3))))
 
-    # ---- 5. Abyssal Nadir Edge Landmarks (Darkened Dead Spire Pylons, Broken South Brass Railings & Rising Smoke!) ----
+    # ---- 5. Stepped Stone East Parapet (matching 181, with shatter-broken gaps & ZERO repeated pylon column!) ----
     def abyss_piece(name, x, y):
         st = CK.STAMPS[name]
         h, w = len(st['layers'][0]), len(st['layers'][0][0])
@@ -939,23 +978,15 @@ def build_608():
                     if t and m.inb(x + dx, y + dy):
                         m.over.append((z, x + dx, y + dy, t))
 
-    for py in (6, 17, 29):
-        abyss_piece('lm_pylon_off', 58, py)      # Dead darkened Nadir pylons (visceral contrast with 181's lit pylons!)
-    for ry in (12, 24, 36):
-        abyss_piece('lm_ring', 58, ry)
-    for rx in (10, 23, 37, 50):
-        abyss_piece('lm_ring', rx, 42)
-    abyss_piece('lm_steam0', 57, 14)
-    abyss_piece('lm_steam1', 57, 26)
     abyss_piece('lm_steam0', 29, 42)
     abyss_piece('lm_steam1', 48, 42)
     # NW Overlook brass railing
     for x in range(1, 7):
         m.over.append((1, x, 2, P1('lm_bollard' if x in (1, 6) else 'lm_railing_m')))
-    # South Overlook forged brass railings — WITH DRAMATIC SHATTER-BLOWN GAPS at x=22..25 & x=42..45!
+    # South Overlook forged brass railings — WITH DRAMATIC SHATTER-BLOWN GAPS at x=22..25 & x=33..36!
     for x in range(2, 56, 4):
         if x in (22, 33, 42):
-            m.over.append((1, x, 40, P1('lm_bollard')))  # snapped lonely bollard where the railing gave way!
+            m.over.append((1, x, 40, P1('lm_bollard')))
             continue
         m.over.append((1, x, 40, P1('lm_bollard')))
         if x + 1 < 56:
@@ -964,44 +995,104 @@ def build_608():
             m.over.append((1, x + 2, 40, P1('lm_railing_m')))
         if x + 3 < 56:
             m.over.append((1, x + 3, 40, P1('lm_railing_e')))
+    # East stepped stone parapet along x=56..57 (with shatter-breached gaps showing damage!)
+    for y in range(4, 41):
+        if y in (15, 16, 30, 31):
+            m.over.append((1, 56, y, P1('lm_bollard')))
+            m.taken[y, 56] = True
+            m.over.append((1, 57, y, P1('gd_crack0')))
+            m.taken[y, 57] = True
+            continue
+        m.over.append((1, 56, y, P1('lm_bollard' if y % 5 == 0 else 'nr_wall_v')))
+        m.taken[y, 56] = True
+        m.over.append((1, 57, y, P1('nr_wall_m')))
+        m.taken[y, 57] = True
 
     # ---- 6. Eerie Broken-Prism Shafts & Amber Emergency Beacon Glow Pools! ----
-    for sx, sy in ((47, 4), (27, 17), (2, 5)):
-        m.stamps.append(('cv_shaft', sx, sy))    # Eerie shattered-vault & veil light shafts!
+    for sx, sy in ((47, 4), (27, 17), (2, 5), (39, 6), (17, 17), (32, 30)):
+        m.stamps.append(('cv_shaft', sx, sy))    # Eerie shattered-vault & crater light shafts!
     for gx, gy in (
-        (47, 4), (48, 6),          # Glowing violet-amber breach pouring out of Spire Service Door!
-        (2, 6), (5, 5), (5, 8),    # Amber emergency beacons at the NW Veil quarantine checkpoint!
-        (28, 18), (24, 15), (33, 21),  # Shattered Sunburst Court crystalline rift & beacon glows!
-        (9, 26), (44, 26), (25, 39),   # Emergency intersection flares cutting the blackout!
+        (47, 4), (48, 6), (39, 7), (17, 18), (33, 30),
+        (2, 6), (5, 5), (5, 8),
+        (28, 18), (24, 15), (33, 21),
+        (9, 26), (44, 26), (25, 39),
     ):
         m.stamps.append(('pf_glow', gx, gy))
 
     lm_scatter_wear(m, 8, on='lqr', seed=608, kinds=(0, 1, 2, 3))
     m.paint()
 
-    # ---- 7. Post-Paint Architectural Unification with 181 (Obsidian Market Court, Cracked Sunburst, Torn Carpet!) ----
+    # ---- 7. Post-Paint Surface Craft: Weathered Grey-Stone Sidewalks + DARK OBSIDIAN EXPOSED CRATER FOUNDATIONS + BOLD RADIATING FISSURES! ----
+    weathered_paves = [3924, 3926, 3940, 3942, 4221, 4223, 4237, 4239]
     walkable_base = {0, P1('lm_road0'), P1('lm_road1'), P1('lm_low0'), P1('lm_low1'), P1('lm_low2'), P1('lm_low3'),
                      P1('lm_plaza0'), P1('lm_plaza1'),
-                     P1('lm_pave0'), P1('lm_pave1'), P1('lm_pave2'), P1('lm_pave3'), P1('lm_pave4'), P1('lm_pave5'), P1('lm_pave6'), P1('lm_pave7')}
+                     P1('lm_pave0'), P1('lm_pave1'), P1('lm_pave2'), P1('lm_pave3'), P1('lm_pave4'), P1('lm_pave5'), P1('lm_pave6'), P1('lm_pave7')} | set(weathered_paves)
+    low_set608 = {P1('lm_low%d' % k) for k in range(4)}
+
+    # Build bold 2-tile-wide obsidian/amethyst shatter fissures + full demolished crater floor masks!
+    crater_floor = set()
+    # Crater 1 (NE Epicenter x=34..46, y=5..10)
+    for y in range(5, 11):
+        for x in range(34, 47):
+            if ((x - 40.0) / 6.2) ** 2 + ((y - 7.5) / 3.4) ** 2 <= 1.15:
+                crater_floor.add((x, y))
+    # Crater 2 (West Market Flank x=13..21, y=14..23)
+    for y in range(14, 24):
+        for x in range(13, 22):
+            if ((x - 17.0) / 4.8) ** 2 + ((y - 18.5) / 5.0) ** 2 <= 1.15:
+                crater_floor.add((x, y))
+    # Crater 3 (South-Central Shockwave Ruin x=28..38, y=27..36)
+    for y in range(27, 37):
+        for x in range(28, 39):
+            if ((x - 33.0) / 5.5) ** 2 + ((y - 31.5) / 4.8) ** 2 <= 1.15:
+                crater_floor.add((x, y))
+
+    fissure_cells = set()
+    for (fx, fy) in rift_pts:
+        for dx, dy in ((0, 0), (1, 0), (0, 1)):
+            if 1 <= fx + dx < 56 and 4 <= fy + dy < 40:
+                fissure_cells.add((fx + dx, fy + dy))
+
+    for y in range(4, 41):
+        for x in range(0, 57):
+            if m.cls[y, x] == 'l' and m.L[0, y, x] in low_set608:
+                pv = weathered_paves[(x * 5 + y * 11) % len(weathered_paves)]
+                m.L[0, y, x] = pv
+                if m.L[1, y, x] in low_set608:
+                    m.L[1, y, x] = pv
+            # Dark shattered obsidian/charred foundation inside all 3 demolished tenement craters!
+            if (x, y) in crater_floor:
+                in_core = (((x - 40.0) / 4.2) ** 2 + ((y - 7.5) / 2.2) ** 2 <= 1.0 or
+                           ((x - 17.0) / 3.1) ** 2 + ((y - 18.5) / 3.2) ** 2 <= 1.0 or
+                           ((x - 33.0) / 3.6) ** 2 + ((y - 31.5) / 3.0) ** 2 <= 1.0)
+                t_c = P1('Z_f0') if in_core else P1('lm_low%d' % ((x + y) % 4))
+                m.L[0, y, x] = t_c
+                if m.L[1, y, x] in walkable_base:
+                    m.L[1, y, x] = P1('gd_crack%d' % ((x + y) % 2)) if (in_core and (x + y) % 3 == 0) else t_c
+            elif (x, y) in fissure_cells and m.L[1, y, x] in walkable_base:
+                m.L[0, y, x] = P1('Z_f0')
+                m.L[1, y, x] = P1('gd_crack%d' % ((x + y) % 2)) if (x + y) % 2 == 0 else P1('Z_f0')
+    for y in range(4, 41):
+        m.L[0, y, 57] = P1('Z_f0')
     # Symmetric Octagonal Obsidian & Wet Basalt Market Court framing the centered 5x5 Golden Sunburst (x=26..30, y=16..20)!
     for y in range(14, 24):
         for x in range(22, 36):
             in_inner = (25 <= x <= 31 and 15 <= y <= 21) and (x, y) not in {(25, 15), (31, 15), (25, 21), (31, 21)}
             in_curb = (24 <= x <= 32 and 14 <= y <= 22) and not in_inner
             is_ground = (m.L[1, y, x] in walkable_base) or (not m.taken[y, x] and m.L[1, y, x] == m.L[0, y, x])
-            if not in_inner and is_ground:
+            if not in_inner and is_ground and (x, y) not in fissure_cells:
                 t = P1('Z_f0') if in_curb else P1('lm_road%d' % ((x + y) & 1))
                 m.L[0, y, x] = t
                 m.L[1, y, x] = t
-    # 5x5 Golden Meridian Sunburst Medallion underneath the Market Court — CRACKED diagonally by the Shatter Rift!
+    # 5x5 Golden Meridian Sunburst Medallion underneath the Market Court — CRACKED diagonally & radially by the Shatter Rift!
     sun_L = CK.STAMPS['lm_sun']['layers'][0]
-    rift_cut = {(30, 16), (29, 17), (28, 18), (27, 19), (26, 20)}
+    rift_cut = {(30, 16), (29, 17), (28, 18), (27, 19), (26, 20), (26, 18), (27, 18), (28, 19), (28, 20)}
     for dy in range(5):
         for dx in range(5):
             xx, yy = 26 + dx, 16 + dy
             t = sun_L[dy][dx]
             if t:
-                m.L[0, yy, xx] = t
+                m.L[0, yy, xx] = P1('Z_f0') if (xx, yy) in rift_cut else t
                 if (xx, yy) in rift_cut:
                     m.L[1, yy, xx] = P1('gd_crack%d' % ((xx + yy) % 2))
                     m.L[2, yy, xx] = P1('lm_bleed%d' % ((xx * 3 + yy) % 3))

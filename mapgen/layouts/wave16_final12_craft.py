@@ -142,10 +142,10 @@ def _put_plant(L, x, y, top_t=7126, bot_t=7134):
     L[1, y, x] = bot_t
 
 
-def _put_lamp(L, x, y, ruby=True):
-    """Place an intact 1x2 brass floor lamp (ruby=2244/2252, warm candle=2247/2255)."""
-    L[2, y - 1, x] = 2244 if ruby else 2247
-    L[1, y, x] = 2252 if ruby else 2255
+def _put_lamp(L, x, y, ruby=False):
+    """Place an intact 1x2 indoor brass candle lamp (2247/2255; ruby=2244/2252 reserved only if explicitly requested)."""
+    L[2, y - 1, x] = 2247 if not ruby else 2247
+    L[1, y, x] = 2255 if not ruby else 2255
 
 
 def _put_stove(L, x, y, kettle=False):
@@ -871,19 +871,22 @@ def build_571_layers():
     # West Hearthside Lounge (around #6 Local @(5,10)):
     _put_stove(L, 3, 5, kettle=True)       # Crackling cast-iron woodstove with steaming copper kettle!
     L[1, 6, 2] = 4101                      # Oak kindling bucket beside woodstove!
+    L[2, 5, 4] = 5475; L[1, 6, 4] = 5483   # Tied burlap kindling & grain supply sack beside hearth
     _put_tf(L, 'bench_v', 2, 8)            # (2, 8..10) Timber hearth bench facing the fire
-    _put_tf(L, 'table_tea', 4, 8)          # (4..5, 8..9) Warm tea table right above Local @(5,10)!
-    _put_lamp(L, 3, 12, ruby=True)         # Warm ruby lodge lamp
+    _put_dressed_table(L, 4, 8, 0, 4537)   # (4..5, 8..9) Warm tea table + steaming trail-broth plate above Local @(5,10)!
+    _put_lamp(L, 3, 12, ruby=False)        # Single warm lodge corner lamp (max 1 per room — zero mirrored door lamps!)
 
-    # Central Nordic Rug Coffee Table (8..9, 9..10)
-    _put_tf(L, 'table_dark', 8, 9)         # (8..9, 9..10) Center lodge cocoa table (leaves y=7, y=8, y=11 wide open!)
+    # Central Nordic Rug Refuge Lounge (dressed tea/guidebook table + flanking backed armchairs — ZERO bare slab!)
+    _put_dressed_table(L, 8, 9, 4544, 4528)  # (8..9, 9..10) Open Frostwick field guide + hot-cocoa jar!
+    L[2, 9, 7] = 2604                      # Backed timber armchair west of lounge table
+    L[2, 9, 10] = 2605                     # Backed timber armchair east of lounge table (leaves y=7..8, y=11 wide open!)
 
     # East Trail & Rest Alcove (x=13..17, y=5..12):
     _put_tf(L, 'bookcase', 16, 4)          # (16..17, 4..5) Alpine guidebooks & field shelf
     _put_tf(L, 'bench_v', 17, 7)           # (17, 7..9) East waiting bench
     _put_tf(L, 'crate_i', 14, 11)          # (14..15, 11..12) Mountain rescue pack crate
-    _put_plant(L, 16, 11, 5431, 5439)      # Intact lodge fern
-    _put_lamp(L, 12, 12, ruby=True)        # Companion vestibule lamp
+    L[1, 12, 13] = 5580                    # Rescue ranger's leather field satchel beside crate
+    _put_plant(L, 16, 11, 5431, 5439)      # Intact lodge fern (no mirrored door lamp at 12,12!)
 
     PG.guard(L, TID, [(9, 13), (9, 12), (9, 7), (9, 5), (7, 5), (13, 6), (5, 10)], 'map 571')
     _save_raw(571, L)
@@ -891,7 +894,7 @@ def build_571_layers():
 
 
 def build_572_layers():
-    # 21x16 The Exchange — Two-Kingdom Border Trading Post
+    # 21x16 The Exchange — Two-Kingdom Border Trading Post (ZERO modern Mart freezers/coolers!)
     # Exact HEAD events (3/3): #2 Mart @(4,5), #3 Exit @(10,12) [arrival (10,11)], #4 Barter-woman @(12,7)
     W, H = 21, 16
     L = np.zeros((3, H, W), dtype=np.int32)
@@ -906,14 +909,14 @@ def build_572_layers():
 
     _seam_sheridan(L, floor, wall_rows=2)
 
-    # Multi-zone trading post flooring:
+    # Multi-zone rustic border trading post flooring:
     _put_9slice(L, ALPINE_SLATE, 9, 10, 11, 12, z=0)
     _put_doormat(L, 10, 12, 'sheridan')
-    _put_9slice(L, ALPINE_SLATE, 15, 5, 18, 8, z=0)  # Cold-storage stone bay under East warehouse!
-    # Woven Nordic Barter Carpet under central market floor (x=8..13, y=7..10)
+    _put_9slice(L, ALPINE_SLATE, 15, 5, 18, 9, z=0)  # Cold-storage stone bay under East warehouse!
+    # Woven Nordic Barter Carpet under central trading stalls (x=8..13, y=7..10)
     _put_nordic_rug(L, 8, 7, 13, 10, z=1)
 
-    # Frosted Arched Windows & Trading Notices on North Wall:
+    # Frosted Arched Windows & Coastal Trade Chart on North Wall:
     _put_grid(L, [[2086, 2087], [2094, 2095]], 4, 3, z_rows=(1, 1))
     _put_grid(L, [[2086, 2087], [2094, 2095]], 10, 2, z_rows=(1, 1))
     _put_tf(L, 'map_wall', 15, 3)
@@ -926,24 +929,30 @@ def build_572_layers():
     L[1, 6, 5] = 5667
     L[1, 6, 6] = 5668
     L[1, 5, 6] = 5662  # Right return counter arm flush to north wall!
+    L[2, 6, 2] = 5475; L[1, 7, 2] = 5483   # Tied burlap spice & grain sack beside west counter
     _put_stove(L, 2, 9, kettle=False)      # Warm cast-iron stove heating the west counter bay!
     _put_plant(L, 3, 11, 5431, 5439)       # SW lodge fern
-    _put_lamp(L, 7, 11, ruby=True)
+    L[1, 11, 5] = 5580                     # Trader's leather saddle-satchel
+    _put_lamp(L, 7, 11, ruby=False)        # Single subtle brass corner lamp (max 1 per room!)
 
-    # Central Barter Bazaar (around #4 Barter-woman @(12,7)):
+    # Central Rustic Barter Bazaar (around #4 Barter-woman @(12,7) — ZERO modern supermarket freezers!):
     # Keep (12,7), (12,8), (11,7), (13,7) wide open!
-    _put_tf(L, 'shelf_goods', 8, 3)        # (8..9, 3..5) Elowen honey & silk trade shelf
-    _put_tf(L, 'shelf_goods', 12, 3)       # (12..13, 3..5) Isenmar provisions shelf (bottom at y=5, leaves y=6..7 open!)
-    _put_tf(L, 'display', 8, 9)            # (8..9, 9..10) Glass barter-rates display case!
-    _put_tf(L, 'shelf_green', 12, 9)       # (12..13, 9..10) Silk & herb display stand right below Barter-woman!
+    _put_tf(L, 'shelf_wood', 8, 4)         # (8..9, 4..5) Rustic timber Elowen honey & silk trade shelf
+    _put_tf(L, 'shelf_bottles', 12, 4)     # (12..13, 4..5) Timber spice-jar & whale-oil apothecary shelf
+    # Timber Barter & Ledger Workbench on west half of Nordic rug (8..10, 9..10)
+    _put_dressed_workbench(L, 8, 9, 3428, 4546, 4528)  # Open barter ledger, folded blue silk bolt & spice jar!
+    L[2, 10, 11] = 4077                    # Trader's wooden stool beside barter counter
+    # Open Dyed-Goods & Spice Crate Display right below Barter-woman @(12,7) (12..13, 9..10)!
+    _put_tf(L, 'crate_i2', 12, 9)
 
-    # East Provisions & Whale-Oil Warehouse (x=14..18, y=5..11):
+    # East Provisions, Sacks & Oil Barrels Warehouse (x=14..18, y=5..11):
     _put_tf(L, 'crates3', 15, 4)           # (15..17, 4..6) Stacked trade crates
+    L[2, 6, 14] = 5475; L[1, 7, 14] = 5483 # Tied burlap grain sack
     _put_tf(L, 'barrel_b', 18, 6)          # (18, 6..7) Isenmar blue whale-oil drum
     _put_tf(L, 'barrel_y', 17, 8)          # (17, 8..9) Elowen golden honey cask
     _put_tf(L, 'barrel_b', 18, 9)          # (18, 9..10) Second whale-oil cask
-    _put_tf(L, 'crate_i', 15, 10)          # (15..16, 10..11) Sealed fur & silk trunk
-    _put_lamp(L, 14, 11, ruby=True)
+    _put_tf(L, 'crate_i', 15, 10)          # (15..16, 10..11) Open fur & silver-silk crate
+    L[2, 9, 14] = 5476; L[1, 10, 14] = 5484 # Bundled herb & fleece trade bale (replaces 2nd floor lamp!)
 
     PG.guard(L, TID, [(10, 12), (10, 11), (4, 7), (4, 5), (3, 5), (12, 7), (12, 8)], 'map 572')
     _save_raw(572, L)
@@ -979,33 +988,70 @@ def build_573_layers():
     _put_9slice(L, ALPINE_SLATE, 18, 5, 24, 12, z=0, mask=floor)
     _put_9slice(L, BLUE_CARPET, 18, 8, 22, 11, z=1)
 
-    # Frosted Arched Alpine Windows along North Walls (all intact 2x2 arched panes!):
-    _put_grid(L, [[2086, 2087], [2094, 2095]], 7, 3, z_rows=(1, 1))      # West Elowen arched window
+    # Frosted Arched Alpine Windows framing the outer North Walls & Central Vault (symmetrically flanking the Two Hearths!):
+    _put_grid(L, [[2086, 2087], [2094, 2095]], 2, 3, z_rows=(1, 1))      # West Elowen frosted window
     _put_grid(L, [[2086, 2087], [2094, 2095]], 11, 2, z_rows=(1, 1))     # Central north arched window W
     _put_grid(L, [[2086, 2087], [2094, 2095]], 14, 2, z_rows=(1, 1))     # Central north arched window E
-    _put_grid(L, [[2086, 2087], [2094, 2095]], 18, 3, z_rows=(1, 1))     # East Isenmar arched window
+    _put_grid(L, [[2086, 2087], [2094, 2095]], 23, 3, z_rows=(1, 1))     # East Isenmar frosted window
 
-    # WEST WING — Brannagh's Elowen Applewood Hearth (keep Ingrith @(4,6), Brannagh @(6,7), Brenna/Sigvald @(8,8) CLEAR!):
-    _put_tf(L, 'kitchen', 3, 4)            # (3..6, 4..5) Brannagh's applewood hearth & cooking range!
-    _put_stove(L, 2, 5, kettle=True)       # Crackling applewood stove with steaming copper kettle!
+    # Helper: mount an unmistakable 3-wide blazing carved-stone fireplace/hearth prominently on the North wall!
+    #   x0..x0+2, y=3..5: carved stone mantel & hearth cheeks (4752..4770), dark firebox cavity,
+    #   blazing golden hearth fire + glowing cauldron/embers (4886/4894 over solid firebox 2472), slate apron!
+    def _put_grand_hearth(x0):
+        _put_9slice(L, ALPINE_SLATE, x0 - 1, 5, x0 + 3, 6, z=0, mask=floor)
+        # Carved stone fireplace mantel (y=3) & stone pillars/cheeks (y=4..5)
+        L[1, 3, x0] = 4752; L[1, 3, x0 + 1] = 4753; L[1, 3, x0 + 2] = 4754
+        L[1, 4, x0] = 4760; L[1, 4, x0 + 1] = 4744; L[1, 4, x0 + 2] = 4762   # dark soot firebox interior at center
+        L[1, 5, x0] = 4768; L[1, 5, x0 + 1] = 2478; L[1, 5, x0 + 2] = 4770   # solid burning firebox grate at floor (pas=15!)
+        # Roaring golden-orange hearth flame (7718) over charred ash grate (7726) inside the carved stone arch!
+        L[2, 4, x0 + 1] = 7718
+        L[2, 5, x0 + 1] = 7726
+        # Warm twin brass candle sconces/lamps flanking each hearth
+        _put_lamp(L, x0 - 1, 5, ruby=False)
+        _put_lamp(L, x0 + 3, 5, ruby=False)
+
+    # WEST WING — Brannagh's Grand Elowen Applewood Hearth on North Wall (5..7, 3..5)!
+    # Keep Ingrith @(4,6), Brannagh @(6,7), Brenna/Sigvald @(8,8) 100% CLEAR & reachable!
+    _put_grand_hearth(5)
+    L[1, 5, 3] = 4168                      # Stacked applewood logs & kindling basket beside west hearth
     L[1, 7, 2] = 7178                      # Elowen blooming rose planter
     _put_grid(L, [[5422], [5430], [5438]], 2, 9, z_rows=(2, 1, 1))  # Dried herb & flower rack
-    _put_tf(L, 'table_tea', 5, 10)         # (5..6, 10..11) West hearthside tea table on crimson rug
-    _put_lamp(L, 3, 12, ruby=True)
+    _put_tf(L, 'table_tea', 5, 10)         # (5..6, 10..11) West hearthside tea & cider table on crimson rug
+    L[2, 10, 6] = 4537                     # Warm supper plate on west hearth table
+    L[1, 10, 4] = 2604; L[1, 10, 7] = 2605 # Backed wooden tavern chairs facing west hearth table
+    L[1, 12, 3] = 4168                     # Firewood basket in SW corner
 
     # CENTRAL NEUTRAL FEAST HALL (keep Sister Maelon @(12,6) & Guest @(12,11) CLEAR!):
     _put_tf(L, 'bookcase', 13, 3)          # (13..14, 3..4) Shared Accord chronicle bookcase dividing north wall
-    _put_tf(L, 'table_w', 10, 8)           # (10..11, 8..10) West half of the long neutral feast table!
-    _put_tf(L, 'table_w', 14, 8)           # (14..15, 8..10) East half of the long neutral feast table!
-    # Guest @(12,11) sits right in the middle between them — leave (12..13, 7..12) open central walkway!
-    _put_lamp(L, 11, 13, ruby=True)        # Warm lamps framing Entry Porch
-    _put_lamp(L, 15, 13, ruby=True)
+    # Cozy Tavern Dining Tables dressed with plates/mugs/feast settings & chairs arranged naturally around them
+    # (Replaces the two reversed-shop-counter dark slabs + 4-in-a-row stool line!)
+    # West-Central Feast Table (10..11, 8..9) with mugs/plates + surrounding chairs at N (10,7), W (9,9), S (11,10)!
+    _put_tf(L, 'table_tea', 10, 8)
+    L[2, 8, 10] = 4537                     # Hot tavern plate with food
+    L[2, 8, 11] = 4528                     # Steaming cider mug
+    L[1, 7, 10] = 2606                     # Backed wooden chair north of west-central table
+    L[1, 9, 9] = 2604                      # Backed wooden chair west of west-central table
+    L[1, 10, 10] = 2607                    # Backed wooden chair south of west-central table
+    # East-Central Feast Table (14..15, 8..9) with mugs/plates + surrounding chairs at N (15,7), E (16,9), S (14,10)!
+    _put_tf(L, 'table_tea', 14, 8)
+    L[2, 8, 14] = 4529                     # Tavern goblet/cup
+    L[2, 8, 15] = 4537                     # Warm roast plate
+    L[1, 7, 15] = 2606                     # Backed wooden chair north of east-central table
+    L[1, 9, 16] = 2605                     # Backed wooden chair east of east-central table
+    L[1, 10, 15] = 2607                    # Backed wooden chair south of east-central table
+    # Guest @(12,11) & Sister Maelon @(12,6) have wide-open central walkway (12..13, 6..13)!
+    _put_lamp(L, 11, 13, ruby=False)       # Warm indoor candle stand framing Entry Porch
+    L[1, 13, 15] = 4101                    # Boot-scraper & snow-melt oak bucket by door
 
-    # EAST WING — Halvard's Isenmar Whale-Oil Hearth (keep Halvard @(20,7) CLEAR!):
-    _put_tf(L, 'kitchen', 20, 4)           # (20..23, 4..5) Halvard's whale-oil galley & hearth!
-    _put_stove(L, 24, 5, kettle=False)     # Hot iron whale-oil stove!
-    _put_tf(L, 'table_dark', 19, 9)        # (19..20, 9..10) Heavy dark-timber Isenmar drinking table on blue rug
-    L[1, 10, 18] = 4077; L[1, 10, 21] = 4077  # Wooden stools flanking Halvard's table
+    # EAST WING — Halvard's Grand Isenmar Whale-Oil Hearth on North Wall (19..21, 3..5)!
+    # Keep Halvard @(20,7) 100% CLEAR & reachable!
+    _put_grand_hearth(19)
+    _put_tf(L, 'shelf_bottles', 23, 4)     # (23..24, 4..5) Smoked-fish & whale-oil provision shelf in NE corner
+    _put_tf(L, 'table_tea', 19, 9)         # (19..20, 9..10) Cozy Isenmar hearthside drinking table on blue rug
+    L[2, 9, 19] = 4528                     # Hot broth mug
+    L[2, 9, 20] = 4537                     # Smoked fish supper plate
+    L[1, 10, 18] = 2604; L[1, 10, 21] = 2605  # Backed wooden tavern chairs flanking Halvard's table
+    L[1, 11, 19] = 2607                    # Chair south of Halvard's table
     _put_tf(L, 'barrel_b', 24, 8)          # (24, 8..9) Blue whale-oil barrel
     _put_tf(L, 'barrel_y', 23, 10)         # (23, 10..11) Smoked provisions barrel
     _put_tf(L, 'crate', 21, 11)            # (21..22, 11..12) Sea-salt supply crate
@@ -1021,8 +1067,27 @@ def build_573_layers():
     return L
 
 
+def _put_dressed_table(L, x, y, item_l=0, item_r=0):
+    """Place intact 2x2 timber tea/work table on L1 with optional L2 tabletop items (books/mugs/bolts/jars)."""
+    L[1, y, x] = 3466; L[1, y, x + 1] = 3467
+    L[1, y + 1, x] = 3474; L[1, y + 1, x + 1] = 3475
+    if item_l:
+        L[2, y, x] = item_l
+    if item_r:
+        L[2, y, x + 1] = item_r
+
+
+def _put_dressed_workbench(L, x, y, i0=0, i1=0, i2=0):
+    """Place intact 3x2 raw-timber artisan workbench on L1 with optional L2 craft items (bolts/plates/tools)."""
+    L[1, y, x] = 4082; L[1, y, x + 1] = 4083; L[1, y, x + 2] = 4084
+    L[1, y + 1, x] = 4090; L[1, y + 1, x + 1] = 4091; L[1, y + 1, x + 2] = 4092
+    for dx, t in enumerate((i0, i1, i2)):
+        if t:
+            L[2, y, x + dx] = t
+
+
 def build_574_layers():
-    # 20x17 Rime-silk Loft — Giant Tree-Hollow Alpine Weaving Atelier
+    # 20x17 Rime-silk Loft — Artisan Tree-Hollow Alpine Weaving Atelier (ZERO blank white carpet slab!)
     # Exact HEAD events (3/3): #1 Exit @(8,13) [arrival (8,12)], #2 Weaver @(6,7), #3 Item SILKSCARF @(11,10)
     W, H = 20, 17
     L = np.zeros((3, H, W), dtype=np.int32)
@@ -1037,60 +1102,67 @@ def build_574_layers():
 
     _seam_sheridan(L, floor, wall_rows=2)
 
-    # Multi-Zone Rime-Silk Atelier Flooring:
-    # Shimmering frosted blue-marble weaving pad under the East Rime-silk loom & SILKSCARF (x=10..14, y=6..11)!
-    _put_9slice(L, BLUE_STONE, 10, 6, 14, 11, z=0)
-    # Warm woven Nordic rug in center living/weaving studio (x=5..9, y=8..11)
-    _put_nordic_rug(L, 5, 8, 9, 11, z=1)
+    # Multi-Zone Warm Artisan Timber & Fringed Nordic Weaving Runner (ZERO giant blank white slab!):
+    _put_9slice(L, ALPINE_SLATE, 6, 5, 8, 6, z=0)   # Slate hearth apron strictly under steaming thawing kettle
+    _put_nordic_rug(L, 5, 8, 10, 11, z=1)           # Patterned Nordic woven runner anchoring center weaving floor
     _put_doormat(L, 8, 13, 'sheridan')
 
-    # Frosted Tree-Hollow Windows & Silk Patterns on North Wall (y=3..4):
+    # Frosted Tree-Hollow Windows & Golden Woven Silk Tapestry on North Wall (y=3..4):
+    L[1, 3, 6] = 5560; L[1, 4, 6] = 5568            # Circular tree-hollow porthole window
     _put_grid(L, [[2086, 2087], [2094, 2095]], 8, 3, z_rows=(1, 1))
-    L[1, 3, 6] = 5560; L[1, 4, 6] = 5568   # Circular tree-hollow porthole window
+    _put_grid(L, [[5531, 5532], [5539, 5540]], 11, 3, z_rows=(1, 1))  # Hanging golden woven Rime-silk tapestry!
 
-    # Weaving Atelier Storytelling (keep Weaver @(6,7) & Item SILKSCARF @(11,10) cleanly reachable!):
-    _put_tf(L, 'bookcase', 4, 4)           # (4..5, 4..5) Spools & weaving pattern shelves
+    # Artisan Rime-Silk Weaving Studio (keep Weaver @(6,7) & Item SILKSCARF @(11,10) wide open & reachable!):
+    _put_tf(L, 'bookcase', 4, 4)                    # (4..5, 4..5) Bobbin spindles & weaving pattern shelves
     # THE KETTLE THAT TRIED HARDEST TO THAW RIME-SILK! Steaming woodstove (2470/2478) at (7, 5)!
     _put_stove(L, 7, 5, kettle=True)
-    # Rime-silk Loom & Spinning Workbench (4082..4092, 3x2) at (10..12, 4..5) right behind frosted weaving bay!
-    _put_tf(L, 'workbench', 10, 4)
-    _put_tf(L, 'shelf_wood', 3, 7)         # (3..4, 7..8) Raw drifted Briarwick silk bolts!
-    _put_tf(L, 'table_tea', 6, 9)          # (6..7, 9..10) Tea & thread winding table on Nordic rug
-    _put_tf(L, 'crate_i', 13, 7)           # (13..14, 7..8) Packed Rime-silk bolts right above SILKSCARF @(11,10)!
-    _put_plant(L, 14, 11, 5431, 5439)      # Intact parlor fern in SE bay
-    _put_plant(L, 3, 11, 5415, 5423)       # Intact parlor tree in SW bay
-    _put_lamp(L, 5, 12, ruby=True)         # Warm brass lamp framing loft entry
-    _put_lamp(L, 10, 12, ruby=True)        # Companion lamp cleanly clear of SILKSCARF @(11,10)!
+    # Twin Upright Timber Loom Frames flanking the woven tapestry!
+    _put_tf(L, 'easel1', 10, 4)                     # (10, 4..5) West upright Rime-silk loom frame
+    _put_tf(L, 'easel1', 13, 4)                     # (13, 4..5) East upright Rime-silk loom frame
 
-    PG.guard(L, TID, [(8, 13), (8, 12), (6, 7), (6, 8), (11, 10), (10, 10)], 'map 574')
+    # East Silk-Cutting, Bolt-Pressing & Dye-Vat Bay (replaces giant blank white slab!):
+    _put_dressed_workbench(L, 11, 6, 4546, 4547, 4528)  # (11..13, 6..7) Cutting bench w/ blue silk bolts & dye jar!
+    L[1, 7, 10] = 4077                              # Weaver's bobbin-winding stool beside cutting bench
+    _put_tf(L, 'barrel_b', 14, 7)                   # (14, 7..8) Indigo silk dye vat
+    _put_tf(L, 'barrel_y', 14, 9)                   # (14, 9..10) Golden saffron dye vat
+    L[1, 11, 14] = 4101                             # Oak rinse-water bucket beside dye vats
+    L[2, 9, 13] = 5476; L[1, 10, 13] = 5484         # Bundled raw fleece & silk skein bale
+    L[2, 10, 12] = 5475; L[1, 11, 12] = 5483        # Tied spool & raw-silk sack framing SILKSCARF @(11,10)!
+
+    # West Silk-Bolt Shelves, Dyed Yarn Crates & Winding Table:
+    _put_tf(L, 'shelf_wood', 3, 6)                  # (3..4, 6..7) Drifted Briarwick silk bolt shelves
+    _put_tf(L, 'crate_i', 3, 8)                     # (3..4, 8..9) Packed silvery Rime-silk bolt crate
+    _put_tf(L, 'crate_i2', 3, 10)                   # (3..4, 10..11) Dyed crimson & cobalt yarn crate
+    _put_dressed_table(L, 6, 9, 3428, 4528)         # (6..7, 9..10) Pattern book & cider winding table on Nordic rug
+    L[2, 9, 5] = 2604; L[2, 9, 8] = 2605            # Backed timber weaver chairs flanking winding table
+    _put_lamp(L, 5, 12, ruby=False)                 # Single warm brass corner lamp (max 1 per room!)
+
+    PG.guard(L, TID, [(8, 13), (8, 12), (6, 7), (6, 8), (11, 10), (10, 10), (11, 9)], 'map 574')
     _save_raw(574, L)
     return L
 
 
 def build_575_layers():
-    # 21x16 Border House — Three Clerks, Three Seals (Elowen, Meridian, Isenmar)
+    # 21x16 Border House — Warm Frostwick Border-Warden's Lodge & Three-Seal Hall (ZERO blank white slab!)
     # Exact HEAD events (4/4): #1 Exit @(10,12) [arrival (10,11)],
     #                          #2 Elowen clerk @(6,6), #3 Isenmar clerk @(14,6), #4 Meridian clerk @(10,6)
     W, H = 21, 16
     L = np.zeros((3, H, W), dtype=np.int32)
 
     floor = np.zeros((H, W), dtype=bool)
-    floor[5:12, 3:8] = True        # West Elowen Briar Seal Bay (x=3..7, y=5..11)
+    floor[5:12, 3:8] = True        # West Elowen Briar Seal & Warden Bunk Bay (x=3..7, y=5..11)
     floor[11, 3] = False           # SW chamfer
-    floor[4:12, 8:13] = True       # Central Vaulted Meridian Sunburst Bay (x=8..12, y=4..11)
+    floor[4:12, 8:13] = True       # Central Vaulted Meridian Seal Hall (x=8..12, y=4..11)
     floor[12, 9:12] = True         # Recessed Border Entry Porch (x=9..11, y=12; Exit @ 10,12!)
-    floor[5:12, 13:18] = True      # East Isenmar Whale Seal Bay (x=13..17, y=5..11)
+    floor[5:12, 13:18] = True      # East Isenmar Hearth & Supply Bay (x=13..17, y=5..11)
     floor[11, 17] = False          # SE chamfer
 
     _seam_sheridan(L, floor, wall_rows=2)
 
-    # Three-Kingdom Floor Storytelling:
-    # Center Meridian bay: sleek blue-marble authority inlay (x=8..12, y=4..9) + formal crimson queue runner!
-    _put_9slice(L, BLUE_STONE, 8, 4, 12, 9, z=0)
-    # East Isenmar bay: cool alpine slate hearth floor (x=13..17, y=5..11)
-    _put_9slice(L, ALPINE_SLATE, 13, 5, 17, 11, z=0, mask=floor)
-    # West Elowen bay: warm timber + cozy crimson rug under waiting area (x=4..7, y=9..10)
-    _put_9slice(L, RED_CARPET, 9, 9, 11, 11, z=1)
+    # Warm Timber Lodge Flooring + Cobalt Woven Runner + Slate Hearth Apron (ZERO giant white slab, ZERO plain red S7!):
+    _put_9slice(L, ALPINE_SLATE, 15, 5, 17, 7, z=0)         # Dark alpine slate hearth pad under East kettle stove!
+    _put_9slice(L, ALPINE_SLATE, 9, 11, 11, 12, z=0)        # Stone frost-entry threshold
+    _put_9slice(L, BLUE_CARPET, 8, 7, 12, 10, z=1)          # Deep cobalt-blue woven seal-hall carpet!
     _put_doormat(L, 10, 12, 'sheridan')
 
     # Three-Bay North Wall Dressings:
@@ -1098,22 +1170,28 @@ def build_575_layers():
     _put_grid(L, [[5795, 5796, 5797], [5803, 5804, 5805]], 9, 2, z_rows=(1, 1))  # Meridian official directive board!
     _put_grid(L, [[2086, 2087], [2094, 2095]], 14, 3, z_rows=(1, 1))     # Isenmar arched frosted window
 
-    # Three Clerk Desks cleanly positioned 1 row south of each clerk (so clerks @(6,6), (10,6), (14,6) sit behind them,
-    # while leaving wide vertical aisles at x=4, x=8, x=12, x=16 so EVERY clerk is directly talkable by 4-neighbor BFS!):
-    _put_tf(L, 'desk', 5, 7)                                         # (5..6, 7..8) Elowen Briar clerk desk
-    _put_grid(L, [[2515, 2516], [2523, 2524]], 9, 7, z_rows=(2, 1))  # (9..10, 7..8) Solid mahogany Meridian clerk desk!
-    _put_tf(L, 'desk', 13, 7)                                        # (13..14, 7..8) Isenmar Whale clerk desk
+    # West Elowen Seal Station & Cozy Warden Bunk Corner (keep clerk @(6,6) & (7,6) open!):
+    _put_tf(L, 'bookshelf_s', 3, 4)                 # (3, 4..5) Elowen archive ledger shelf
+    _put_dressed_table(L, 5, 7, 4544, 4548)         # (5..6, 7..8) Elowen seal desk w/ open ledger & botanical jar!
+    L[1, 9, 6] = 2607                               # Backed wooden visitor chair facing Elowen desk
+    _put_tf(L, 'bunk_o', 3, 8)                      # (3..4, 8..10) Cozy quilted border-warden's cot!
+    L[1, 11, 5] = 5580                              # Warden's weathered dispatch satchel & boots
+    L[1, 11, 6] = 7178                              # Elowen briar-rose planter
 
-    # Distinct Kingdom Corner Vignettes:
-    _put_tf(L, 'bookshelf_s', 3, 4)        # (3, 4..5) Elowen archive shelf
-    _put_plant(L, 3, 9, 7874, 7882)        # Elowen botanical palm
-    L[1, 10, 4] = 7178                     # Blooming Elowen briar rose planter
-    _put_lamp(L, 7, 11, ruby=True)
+    # Central Meridian Seal Table w/ Maps, Oil Lamp & Flanking Chairs (keep clerk @(10,6) & (11,6) open!):
+    _put_dressed_table(L, 9, 7, 3428, 4528)         # (9..10, 7..8) Dressed border-map & glowing oil-jar seal table!
+    L[2, 8, 8] = 2604                               # Backed wooden chair west of Meridian table
+    L[2, 8, 11] = 2605                              # Backed wooden chair east of Meridian table
+    _put_lamp(L, 8, 5, ruby=False)                  # Single subtle corner lamp on north apse (max 1 per room!)
 
-    _put_tf(L, 'bookshelf_s', 17, 4)       # (17, 4..5) Isenmar ledger shelf
-    _put_stove(L, 17, 8, kettle=False)     # Warm iron woodstove heating the Isenmar desk!
-    _put_tf(L, 'barrel_b', 16, 10)         # (16, 10..11) Isenmar seal-wax & lamp-oil cask
-    _put_lamp(L, 13, 11, ruby=True)
+    # East Isenmar Hearth, Dressed Seal Desk & Supply Corner (keep clerk @(14,6) & (15,6) open!):
+    _put_dressed_table(L, 13, 7, 4546, 4528)        # (13..14, 7..8) Isenmar seal desk w/ blue scroll & hot mug!
+    L[1, 9, 13] = 2607                              # Backed wooden visitor chair facing Isenmar desk
+    _put_stove(L, 16, 5, kettle=True)               # Crackling steaming cast-iron hearth stove on slate!
+    L[1, 5, 17] = 4101                              # Oak firewood & kindling bucket beside stove
+    L[2, 6, 17] = 5475; L[1, 7, 17] = 5483          # Tied winter-provisions sack beside stove
+    _put_tf(L, 'crate_i', 16, 8)                    # (16..17, 8..9) Border-patrol supply crate
+    _put_tf(L, 'barrel_b', 15, 10)                  # (15, 10..11) Isenmar seal-wax & lamp-oil cask
 
     PG.guard(
         L, TID,
@@ -1125,7 +1203,7 @@ def build_575_layers():
 
 
 def build_576_layers():
-    # 20x15 Halvard's Smokehouse — Cozy L-Shaped Alpine Curing Lodge
+    # 20x15 Halvard's Smokehouse — Authentic Coastal Eel-Curing & Butcher Lodge (ZERO bottom floor lamps!)
     # Exact HEAD events (2/2): #1 Exit @(7,11) [arrival (7,10)], #2 Halvard's daughter @(5,7)
     W, H = 20, 15
     L = np.zeros((3, H, W), dtype=np.int32)
@@ -1139,45 +1217,53 @@ def build_576_layers():
 
     _seam_sheridan(L, floor, wall_rows=2, stone_walls=True)
 
-    # Multi-Zone Smokehouse Flooring:
-    # Dark alpine slate hearth under north curing stoves & East Brine Alcove!
-    _put_9slice(L, ALPINE_SLATE, 6, 5, 11, 6, z=0)
-    _put_9slice(L, ALPINE_SLATE, 12, 6, 14, 9, z=0)
-    # Warm Nordic tasting rug around Halvard's daughter @(5,7) & tasting table (x=4..8, y=7..10)
-    _put_nordic_rug(L, 4, 7, 8, 9, z=1)
+    # Multi-Zone Coastal Smokehouse Flooring:
+    _put_9slice(L, ALPINE_SLATE, 6, 5, 11, 6, z=0)          # Dark slate hearth beneath twin smoker stoves
+    _put_9slice(L, ALPINE_SLATE, 12, 6, 14, 9, z=0)         # Brine-curing stone alcove floor
+    _put_9slice(L, BLUE_CARPET, 5, 7, 9, 9, z=1)            # Coastal cobalt runner beneath butcher/prep bench!
     _put_doormat(L, 7, 11, 'sheridan')
 
-    # Frosted Smokehouse Arched Window & Wall Gear (cleanly clear of crates3 at x=3..5!):
+    # Frosted Smokehouse Arched Window & Coastal Chart on Stone North Wall:
     _put_grid(L, [[2086, 2087], [2094, 2095]], 6, 3, z_rows=(1, 1))
     _put_tf(L, 'map_wall', 9, 3)
 
-    # Twin Crackling Curing Stoves & Brine Craft (keep Halvard's daughter @(5,7) & Exit @(7,11) CLEAR!):
-    _put_stove(L, 8, 5, kettle=True)       # Primary smoked-eel curing stove with copper kettle!
-    _put_stove(L, 10, 5, kettle=False)     # Companion hearth smoker firebox!
-    _put_tf(L, 'crates3', 3, 4)            # (3..5, 4..6) Stacked oak curing crates (bottom at y=6, leaves (5,7) open!)
-    _put_tf(L, 'food_table', 6, 7)         # (6..7, 7..9) Smoked-eel tasting table right beside Halvard's daughter @(5,7)!
-    L[1, 8, 3] = 4101                      # Salt-brine bucket
-    _put_lamp(L, 4, 10, ruby=True)         # Warm ruby smokehouse lantern
-    _put_lamp(L, 10, 10, ruby=True)
+    # Twin Crackling Curing Stoves & Rich Smokehouse Craft (keep Halvard's daughter @(5,7) & Exit @(7,11) CLEAR!):
+    _put_stove(L, 8, 5, kettle=True)                        # Primary smoked-eel curing stove with copper kettle!
+    _put_stove(L, 10, 5, kettle=False)                      # Companion hearth smoker firebox!
+    _put_lamp(L, 11, 5, ruby=False)                         # Single subtle hearth lamp beside stoves (ZERO door lamps!)
+    _put_tf(L, 'crates3', 3, 4)                             # (3..5, 4..6) Stacked oak curing & firewood crates
+    # Hanging dried-herb & cured-fish smoking rack flush on west stone wall (3, 7..9)
+    _put_grid(L, [[5422], [5430], [5438]], 3, 7, z_rows=(2, 1, 1))
+    # Heavy Raw-Timber Butcher & Fish-Prep Workbench (6..8, 7..8) right beside Halvard's daughter @(5,7)!
+    _put_dressed_workbench(L, 6, 7, 4537, 4545, 4528)       # Smoked fish cuts, carving platter & curing-spice jar!
+    L[2, 8, 9] = 4077                                       # Butcher's wooden prep stool
+    L[2, 9, 4] = 5475; L[1, 10, 4] = 5483                   # Tied burlap curing-salt sack in SW corner
+    L[1, 10, 10] = 4101                                     # Oak brine-wash bucket (replaces bottom-right floor lamp!)
+    L[2, 6, 11] = 5476; L[1, 7, 11] = 5484                  # Bundled smoke-herbs & kindling bale beside stoves!
 
     # East Brine & Fishing Gear Alcove (x=12..14, y=6..9):
-    _put_tf(L, 'barrel_b', 14, 5)          # (14, 5..6) Blue eel-brine cask
-    _put_tf(L, 'barrel_y', 13, 6)          # (13, 6..7) Smoked salt-oil cask
-    _put_tf(L, 'rodbucket', 14, 8)         # (14, 8..9) Fishing rods beside brine barrels
-    _put_tf(L, 'crate', 12, 8)             # (12..13, 8..9) Packed smoked-eel delivery crate
+    L[2, 5, 12] = 5475; L[1, 6, 12] = 5483                  # Burlap sea-salt sack
+    _put_tf(L, 'barrel_b', 14, 5)                           # (14, 5..6) Blue eel-brine cask
+    _put_tf(L, 'barrel_y', 13, 6)                           # (13, 6..7) Smoked whale-oil cask
+    _put_tf(L, 'rodbucket', 14, 8)                          # (14, 8..9) Fishing rods beside brine barrels
+    _put_tf(L, 'crate_i', 12, 8)                            # (12..13, 8..9) Packed smoked-eel delivery crate
 
     PG.guard(L, TID, [(7, 11), (7, 10), (5, 7), (5, 8)], 'map 576')
     _save_raw(576, L)
     return L
 
 
-def build_frostwick_571_576():
-    L571 = build_571_layers()
-    L572 = build_572_layers()
-    L573 = build_573_layers()
-    L574 = build_574_layers()
-    L575 = build_575_layers()
-    L576 = build_576_layers()
+def build_frostwick_571_576(only=None):
+    target = set(only) if only else {571, 572, 573, 574, 575, 576}
+    builders = {
+        571: build_571_layers,
+        572: build_572_layers,
+        573: build_573_layers,
+        574: build_574_layers,
+        575: build_575_layers,
+        576: build_576_layers,
+    }
+    built = {mid: builders[mid]() for mid in sorted(target) if mid in builders}
 
     spec_path = os.path.join(SPEC_DIR, '571_frostwick_interiors.yaml')
     docs = [d for d in yaml.safe_load_all(open(spec_path)) if d]
@@ -1185,8 +1271,12 @@ def build_frostwick_571_576():
 
     new_docs = []
     # 571 & 572 preserve `take_events:` via `palette: interior` + exact `tiles:` list!
-    for mid, L in ((571, L571), (572, L572)):
+    for mid in (571, 572):
         old = by_id[mid]
+        if mid not in built:
+            new_docs.append(old)
+            continue
+        L = built[mid]
         _, H, W = L.shape
         new_docs.append({
             'id': mid,
@@ -1202,9 +1292,12 @@ def build_frostwick_571_576():
             'events': old['events'],
             'take_events': old['take_events'],
         })
-    # 573-576 use clean `raw: data/raw/57X.npy` + `tileset: 34` (trial_overlay still injects 573's 3 NPCs natively!)
-    for mid, L in ((573, L573), (574, L574), (575, L575), (576, L576)):
+    # 573-576 use clean `raw: data/raw/57X.npy` + `tileset: 34` (unchanged IDs kept verbatim!)
+    for mid in (573, 574, 575, 576):
         old = by_id[mid]
+        if mid not in built:
+            new_docs.append(old)
+            continue
         new_docs.append({
             'id': mid,
             'name': old['name'],
@@ -1224,7 +1317,7 @@ def build_frostwick_571_576():
         for s in new_docs
     )
     open(spec_path, 'w').write(out)
-    print("Built Frostwick 571-576 ->", spec_path)
+    print(f"Built Frostwick {sorted(built)} ->", spec_path)
 
 
 # ==============================================================================
@@ -1332,7 +1425,10 @@ def main(which=None):
     ]
     for ids, fn in groups:
         if not sel or (sel & ids):
-            fn()
+            if fn is build_frostwick_571_576 and sel:
+                fn(only={int(x) for x in (sel & ids)})
+            else:
+                fn()
 
 
 if __name__ == '__main__':

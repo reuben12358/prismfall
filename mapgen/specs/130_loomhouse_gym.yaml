@@ -148,6 +148,7 @@ metadata:
   - 12
   - 22
   SnapEdges: true
+walk_airborne: '^Web '
 raw: data/raw/131.npy
 tileset: 54
 events:

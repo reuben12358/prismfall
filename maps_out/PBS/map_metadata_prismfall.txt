@@ -310,6 +310,18 @@ Name = Circuit Gym
 MapPosition = 0,16,16
 SnapEdges = true
 #-------------------------------
+[244]   # Hearthguild Hall
+Name = Hearthguild Hall
+SnapEdges = true
+MapPosition = 0,24,8
+#-------------------------------
+[249]   # Cindervault - Slag Ward
+Name = Cindervault
+Outdoor = true
+ShowArea = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
 [255]   # Cindervault - Tap Chamber
 Name = Cindervault
 SnapEdges = true
@@ -571,6 +583,12 @@ MapPosition = 0,7,11
 Name = Lumen West Gate
 MapPosition = 0,14,14
 SnapEdges = true
+#-------------------------------
+[593]   # The Arc-Lamp Mile
+Name = The Arc-Lamp Mile
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,14
 #-------------------------------
 [608]   # The Lowlight (Shattered)
 Name = The Lowlight
