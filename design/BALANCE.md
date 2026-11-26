@@ -324,7 +324,8 @@ the 36 lines of story/11_FINALE_LINES.md, now with 11's stage directions and the
 Gilded's last bar refills three times at the Casual bar HP (Casual: half a Casual bar), then the Gilded Chain closes
 (result `:gilded_chain`); elsewhere the last bar's fall ends the battle (result `:freed`; Arceus never faints);
 Judgment: Giratina-Origin Lv 100 at the PC's side (`PARTNER_GIRATINA`, a 2v1) and every lock forced, capped like War;
-Standard: Recover at most twice a bar (Hard: no limit; Casual: no Recover).
+Standard: Recover at most twice a bar (Hard: no limit; Casual: no Recover). Forced locks (Standard / Hard, since
+2026-11-26): each refusing Warden's lock raises the one stat its Plate stands for, not every stat (§9b "Refusals").
 **Retuned 2026-11-26 for prepared teams** (§9b "Retune"): bar HP ×0.32 (Standard and Hard), offence ×0.8, defences
 ×1.0, per-variant bar HP, defences-only forced locks when nobody is asked, Gilded's four-piece last bar. The bar-HP row
 in the table above (×0.6 / ×1.0 / ×1.25) is the original design; the shipped numbers are Casual ×0.5, Standard and Hard
@@ -468,6 +469,8 @@ ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard 
   and type follow the arena's ascendant Plate (the §6 "Project NULL" hook, now built in Bosses, not Core); the conduit:
   only if `KESTREL_FALLEN`, `:ch21_reach_kestrel` is asked in battle when bar 2 breaks, and on `:let_go` NULL
   regenerates every round of bar 3 (Casual 1/16, Standard 1/8, Hard 1/6); `VOSS_FEIGNED`: −1 to every stat for 3 rounds.
+  **Retuned 2026-11-26** (Voss's NULL, Standard / Hard): every stat stage resets at a break, its own boosts too (it was
+  drops only); Quent's NULL keeps the drops-only reset.
 - **Giratina's Origin trial** (`:GIRATINA_ORIGIN_TRIAL`, Ruin R1): Origin Forme, Lv 72, `:INVERSE`, bars 2 / 3 / 4,
   Adamant 252 HP / 252 Atk; Casual HP ×0.75 and offence ×0.6. It ends as a win the first round the player holds back
   once 1 bar is broken (Hard: 2), or when every bar is broken. The AI never holds back, so BORI is the harder road.
@@ -485,12 +488,12 @@ ARCM; 60 fights a cell, typical / prepared).** Report only: nothing on Standard 
 | Fight (cap) | Casual typ / prep | Standard typ / prep | Hard typ / prep | Before (Std typ / prep) |
 |---|---|---|---|---|
 | Final: Valen, Zygarde with bars (96), retuned 2026-11-26 | 57% / 100% | 2% / 28% | 2% / 10% | 3% / 48% (bars, untuned: 2% / 18%; Hard 0% / 0%) |
-| Hijack: Voss, NULL 3 bars (100) | 58% / 100% | 0% / 13% | 0% / 12% | 7% / 68% |
-| Hijack: Quent, NULL 3 bars (100) | 42% / 100% | 0% / 45% | 0% / 18% | 15% / 87% |
-| Hijack: Voss, the conduit live (`:let_go`) | 53% / 100% | 0% / 10% | 0% / 10% | new |
+| Hijack: Voss, NULL 3 bars (100), retuned 2026-11-26 | 58% / 100% | 0% / 28% (120) | 0% / 23% (120) | 7% / 68% (bars, untuned: 0% / 13%, Hard 0% / 12%) |
+| Hijack: Quent, NULL 3 bars (100), unchanged | 42% / 100% | 0% / 37–45% | 0% / 18–22% | 15% / 87% |
+| Hijack: Voss, the conduit live (`:let_go`), retuned | 53% / 100% | 2% / 29% (120) | 0% / 17% (120) | 0% / 10%, Hard 0% / 10% before |
 | Giratina's Origin trial, fought to the end (71) | 98% / 95% | 38% / 27% | 0% / 0% | new |
 | Arceus, Bound, every Warden releases (100) | 43% / 60% | 3% / 37% | 3% / 13% | 0% / 0% before the retune |
-| Arceus, Bound, one Warden in three refuses | 15% / 35% | 0% / 0% | 0% / 0% | 0% / 0% |
+| Arceus, Bound, one Warden in three refuses (refusal boost retuned 2026-11-26) | 15% / 35% | 2% / 18% (120) | 0% / 8% (120) | 0% / 0% |
 | Arceus, Miscalibrated, 5 bars | 58% / 67% | 2% / 40% | 2% / 22% (17% at 120) | 0% / 0% |
 | Arceus, Gilded, 6 bars + 3 refills to the Gilded Chain | 38% / 58% | 3% / 40% (37% at 120) | 2% / 12% | 0% / 0% (Casual 18% / 37%) |
 | Arceus, War, 7 bars, every lock forced | 57% / 68% | 2% / 35% | 3% / 10% | new (Casual 5% / 12% before ×0.4) |
@@ -506,9 +509,19 @@ no-strategy harness: Standard typical under ~10%, Standard prepared 25–40%, Ha
   until its last bar became one bar in four pieces and the emptying hit carried on.
 - *Valen, the cause:* the bars gave Zygarde extra turns to Coil, plus +1 Defense a break; about a third of prepared
   teams lose before Zygarde (as before the bars). Complete-bar HP alone barely moved Hard, removing the Defense gain did.
-- *Left as it is:* a forced lock on Bound (one refusal every bar, ARCF) is still 0% on Standard / Hard: refusals are
-  the player's own consequences, and lowering them would ease every refusing save; it's Reuben's call. Voss (Standard
-  prepared 13%) and the conduit cell (10%) are below the Standard band too; they weren't in this pass.
+- *Refusals (second pass, same day; coordinator's call under Reuben's ruling: a consequence, not a dead end).* With +1
+  to every stat per refusal, a refusal in every bar (ARCF) was 0% prepared. Now, on Standard / Hard, a refusing
+  Warden's lock raises the **one stat its Plate stands for** (+1 each, stacking on one stat): Speed for Blank / Insect /
+  Sky, Sp. Atk for Zap / Flame / Mind / Spooky, Attack for Fist / Dread / Draco, Defense for Earth / Icicle / Stone /
+  Iron, Sp. Def for Splash / Toxic / Meadow / Pixie. ARCF: Standard 18%, Hard 8% prepared (target about half of
+  all-release Bound's 37% / 13%). ARCF's refusers are mostly Sp. Def Plates; refusals on Sp. Atk Plates (Rook, Brann,
+  Ilsa, Ysolde) cost more against a special attacker, by design. The beats, the forced lock and the Plate tearing free
+  are unchanged; Casual (Def / Sp. Def) and War / Judgment (every lock forced) are unchanged.
+- *Voss (second pass).* Cause, from the prepared logs: NULL's Swords Dance and Flame Charge carried across its three
+  bars (a break reset only drops) and snowballed; most prepared teams fell on bars 1–2, and those that reached bar 3
+  mostly won. Fix: Voss's NULL resets every stat stage at a break on Standard / Hard. Bar HP, offence, the conduit's
+  regeneration, the in-battle choice and his lines are untouched. Quent (same NULL, already 37–45% / 18–22%) keeps the
+  drops-only reset. Hard Voss at 23% (120 fights; 18% at 60) sits on the band's top edge.
 
 **Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,
 1 / 2 / 3 bars, Standard HP ×1.5 and ×1.15–1.25 elsewhere, Hard HP ×1.5 and ×1.2–1.25. A typical Lv 49–51 six (60 a
