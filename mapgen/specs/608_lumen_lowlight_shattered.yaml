@@ -104,11 +104,27 @@ events:
   name: Aftermath
   pages:
   - commands:
-    - (The vault's service door opens onto the Lowlight. It's quiet. The lamps are out. The light that's left is violet and comes from the glass.)
-    - (Twelve people stand in the street where they stood this afternoon. They are glass.)
+    - {script: 'pbBGMFade(1.5)
+
+        pbBGSFade(1.5)'}
+    - {script: 'pfm_tone(-60, -70, 10, 70, 40)'}
+    - {wait: 30}
+    - raw:
+      - 203
+      - [4, 8, 2]
+    - {wait: 30}
+    - {script: 'pbSEPlay("Anim/Ice1", 50, 60)'}
+    - raw:
+      - 203
+      - [2, 6, 2]
+    - {wait: 30}
+    - {script: 'pbSEPlay("Anim/Ice1", 45, 55)'}
+    - {script: pfm_pan_home(30)}
     - '\pf[JUNO,shocked]Juno: ...'
-    - (Beyond the edge of the district a shimmer hangs in the air like heat over a road. On the far side of it, people are shouting. Nobody comes in.)
-    - (You can stand here. Nobody else can.)
+    - {script: 'pfm_glow(30, 10, 60, 24, 20)
+
+        pbSEPlay("Anim/Psych Up", 50, 50)'}
+    - You can stand here. Nobody else can.
     - selfswitch: [A, true]
     trigger: autorun
     move: fixed
@@ -141,7 +157,13 @@ events:
   pages:
   - commands:
     - '\pf[VALEN,neutral]Valen: You were in the Lowlight when it went? And you''re... standing.'
-    - (He looks a beat too long, then turns away.)
+    - {script: 'pfm_face("Valen at the Veil", :player)'}
+    - {wait: 40}
+    - move:
+        who: Valen at the Veil
+        route: [turn_up]
+        wait: true
+    - {wait: 16}
     - 'Valen: Who''s in charge here?'
     - '\pf[MARCHETTI,neutral]Marchetti: Director Marchetti, Sovereign. Meridian Security Directorate.'
     - 'Valen: Then take statements. All of them. Including that one.'
@@ -166,7 +188,11 @@ events:
 - type: event
   name: Voss with the crate
   pages:
-  - commands: ['(Voss, in shirtsleeves, carrying a glassed child''s soda crate out of the Lowlight himself. Every screen in Lumen is showing him.)']
+  - commands:
+    - {script: 'pfm_flash(255, 255, 255, 4, 60)
+
+        pbSEPlay("Battle catch click", 70, 140)'}
+    - A child's soda crate, glassed through. He carries it out himself, and doesn't stop.
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
@@ -188,7 +214,8 @@ events:
       - - {script: 'pf_choose(:ch5_lowlight_testimony, :mourner) rescue nil'}
         - 'Directorate Officer: Thank you. That''s very clear.'
       - - {script: 'pf_choose(:ch5_lowlight_testimony, :someone_else) rescue nil'}
-        - 'Director Marchetti: (She writes your name down.)'
+        - {script: '2.times { pbSEPlay("Mining pick", 40, 150); pbWait(0.5) }'}
+        - 'Director Marchetti: Thank you. I''ll remember you.'
         - '\pf[LARCH,neutral]Larch: (quietly) Good.'
       - - {script: 'pf_choose(:ch5_lowlight_testimony, :unknown) rescue nil'}
         - 'Directorate Officer: Nobody does, tonight.'

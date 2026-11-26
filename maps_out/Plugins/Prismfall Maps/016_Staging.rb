@@ -18,6 +18,9 @@
 #   pfm_appear(name, dur = 16)                 fades an event in from opacity 0
 #   pfm_step(who, dx, dy)                      teleports who by a tile offset with no walk (staging under a fade)
 #   pfm_needle(key, from, to, dur)             three SE ticks falling or rising in pitch: a gauge needle moving
+#   pfm_pan_home(dur = 20)                     the camera glides back onto the player after a pan (clamped to the map)
+#   pfm_shadow_pass(dur = 60, dark = 70)       a long soft shadow slides across the screen, left to right (an airship
+#                                              overhead); waits. Over the map, under the message box.
 #===============================================================================
 module PrismfallStaging
   module_function
@@ -177,6 +180,61 @@ def pfm_needle(se = "Voltorb Flip mark", from = 120, to = 70, dur = 24)
     pitch = (from + ((to - from) * i / 2.0)).round
     pbSEPlay(se, 80, pitch) rescue nil
     pbWait(PrismfallStaging.secs(dur) / 3.0)
+  end
+  return true
+end
+
+def pfm_shadow_pass(dur = 60, dark = 70)
+  w = Graphics.width
+  h = Graphics.height
+  bw = (w * 0.9).round
+  bh = (h * 0.55).round
+  spr = Sprite.new(Spriteset_Map.viewport)
+  spr.bitmap = Bitmap.new(bw, bh)
+  bh.times do |y|
+    ky = Math.sin(Math::PI * y / bh.to_f)
+    (0...bw).step(4) do |x|
+      kx = Math.sin(Math::PI * x / bw.to_f)
+      a = (dark * ky * kx).round
+      spr.bitmap.fill_rect(x, y, 4, 1, Color.new(60, 60, 50, a)) if a > 0
+    end
+  end
+  spr.blend_type = 2
+  spr.z = 8999
+  y0 = (h * 0.15).round
+  pbSEPlay("Anim/Wind1", 50, 50) rescue nil
+  t0 = System.uptime
+  len = [dur / 20.0, 0.2].max
+  loop do
+    k = [(System.uptime - t0) / len, 1.0].min
+    spr.x = (-bw + ((w + bw) * k)).round
+    spr.y = (y0 + (h * 0.12 * k)).round
+    break if k >= 1.0
+    pbWait(0.02)
+  end
+  spr.bitmap.dispose
+  spr.dispose
+  return true
+end
+
+def pfm_pan_home(dur = 20)
+  return false if !$game_map || !$game_player
+  x0 = $game_map.display_x
+  y0 = $game_map.display_y
+  $game_player.center($game_player.x, $game_player.y)      # where the camera belongs (Game_Player clamps it)
+  x1 = $game_map.display_x
+  y1 = $game_map.display_y
+  $game_map.display_x = x0
+  $game_map.display_y = y0
+  t0 = System.uptime
+  len = [dur / 20.0, 0.05].max
+  loop do
+    k = [(System.uptime - t0) / len, 1.0].min
+    e = 0.5 - (0.5 * Math.cos(Math::PI * k))
+    $game_map.display_x = (x0 + ((x1 - x0) * e)).round
+    $game_map.display_y = (y0 + ((y1 - y0) * e)).round
+    break if k >= 1.0
+    pbWait(0.02)
   end
   return true
 end

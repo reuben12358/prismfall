@@ -271,7 +271,7 @@ def build_180():
     seat(m, 180, 'Gym attendant', (16, 23))
     seat(m, 180, 'Lift-grille', (75, 38))
     m.over.append((1, 74, 38, P1('lm_grate'))); m.over.append((1, 75, 38, P1('lm_grate')))
-    seat(m, 180, 'Nadir Kid', (74, 38)); ST.EVENTS[180]['Grille scene']['_placed'] = True
+    seat(m, 180, 'Nadir Kid', (74, 38))                             # talking to him plays the grille scene
     seat(m, 180, 'Zenith Officer', (77, 38))
     seat(m, 180, 'Office Worker', (33, 24))
     seat(m, 180, 'Old Man', (40, 28))

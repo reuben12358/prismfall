@@ -222,9 +222,16 @@ events:
     trigger: action
     move: fixed
   - commands:
-    - (White-stone boulevards between towers of glass and brass. Holograms of the Meridian sunburst turn slowly over the plaza. Rotom drones zip overhead
-      with parcels. An airship slides across the sky, so low its shadow crosses the fountain. Every window is lit, and it's noon.)
-    - '\pf[JUNO,shocked]Juno: ...'
+    - raw:
+      - 203
+      - [8, 5, 3]
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 50}
+    - {script: 'pfm_shadow_pass(70, 80)'}
+    - {script: pfm_pan_home(30)}
+    - '\pf[JUNO,shocked,dots]Juno: ...'
     - '\pf[JUNO,happy]Juno: Everything''s ON. Everything''s on at the same TIME.'
     - 'Juno: In Verdance you light a lamp when it gets dark and you''re careful with it. Here they''ve just left everything on. Like it''s free.'
     - 'Pin-seller: It IS free! Ten years of free! Light for Everyone! Anniversary pins, only ₽200!'
@@ -297,10 +304,62 @@ events:
 - type: event
   name: Nadir Kid
   pages:
-  - commands: ['(He''s sitting on the grille, swinging his boots over the shaft.)']
+  - commands:
+    - move:
+        who: Nadir Kid
+        route: [face_player, wait 20, turn_down]
+        wait: true
+    - 'Nadir Kid: ...'
     trigger: action
     move: fixed
     graphic: {sprite: NPC 09, dir: down}
+  - commands:
+    - move:
+        who: Nadir Kid
+        route: [face_player]
+        wait: true
+    - {wait: 16}
+    - move:
+        who: Zenith Officer
+        route: [through_on, left, left, turn_left, through_off]
+        wait: true
+    - 'Zenith Officer: You. Back downstairs.'
+    - 'Nadir Kid: I''m just sitting.'
+    - 'Zenith Officer: Sit downstairs.'
+    - move:
+        who: Nadir Kid
+        route:
+        - turn_down
+        - wait 10
+        - {se: Player jump}
+        - jump: [0, 0]
+        - through_on
+        - {opacity: 160}
+        - wait 2
+        - {opacity: 80}
+        - wait 2
+        - {opacity: 0}
+        wait: true
+    - {wait: 10}
+    - '\pf[JUNO,angry]Juno: He wasn''t doing anything!'
+    - {script: 'pfm_face("Zenith Officer", :player)'}
+    - 'Zenith Officer: It''s the anniversary, miss. Nadir''s very welcome to watch the fireworks. From Nadir.'
+    - move:
+        who: Zenith Officer
+        route: [through_on, right, right, turn_left, through_off]
+        wait: true
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 09, dir: down}
+    cond:
+      var: [CH5_STEP, 3]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH5_STEP, 3]
+      self: A
   - commands: []
     trigger: action
     move: fixed

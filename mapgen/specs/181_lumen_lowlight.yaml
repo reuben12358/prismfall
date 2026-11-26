@@ -126,8 +126,17 @@ events:
   - commands:
     - '\pf[DEX,happy]Dex: FIZZBOLT! Fizzbolt, ice-cold, colder than the Thane''s heart! You two! You''re new! You''ve got new faces!'
     - 'Dex: I''m Dex. That''s Spark. Spark makes them cold. Watch.'
-    - (The Pichu lays a paw on a bottle. A tiny zap. Frost blooms up the glass.)
+    - move:
+        who: Spark the Pichu
+        route:
+        - turn_right
+        - jump: [0, 0]
+        wait: true
     - {se: Anim/Thunder1}
+    - {script: 'pfm_flash(200, 230, 255, 6, 90)
+
+        pbSEPlay("Anim/Ice1", 70, 140)'}
+    - {wait: 12}
     - '\pf[JUNO,happy]Juno: That''s AMAZING.'
     - '\pf[DEX,happy]Dex: Fifty a bottle. Thirty for you, because you said "amazing". Nobody says "amazing" down here. They say "how much".'
     - {script: 'pfm_item(:FIZZBOLT, 2, "FIZZBOLT") rescue nil'}
@@ -252,12 +261,20 @@ events:
 - type: event
   name: Spark the Pichu
   pages:
-  - commands: ['Pichu: Pi! (It crackles at you, friendly.)']
+  - commands:
+    - {script: 'pbSEPlay("Cries/PICHU", 80, 110)'}
+    - move:
+        who: Spark the Pichu
+        route:
+        - face_player
+        - jump: [0, 0]
+        wait: true
+    - 'Pichu: Pi!'
     trigger: action
     move: fixed
     graphic: {sprite: Followers/PICHU, dir: down}
     cond:
-      var: [CH5_STEP, 4]
+      var: [CH5_STEP, 3]
   at: [3, 7]
 - type: event
   name: Rook
@@ -273,22 +290,32 @@ events:
     - 'Benno: I don''t know what that means!'
     - '\pf[DEX,happy]Dex: Rook! Your sodas! That''s eleven you owe me now. Chat owes me eleven.'
     - '\pf[ROOK,happy]Rook: Chat, pay the man! ...Chat says it''ll pay you in exposure. Chat is a terrible person, Dex.'
-    - '\pf[ROOK,neutral]Rook: (He sees you.) Oh. Challengers. Hi. Gym''s shut, sorry. The Spire wanted a "community special", and when the Spire wants a
-      thing, the thing happens.'
+    - {script: 'pfm_face("Rook", :player)'}
+    - '\pf[ROOK,neutral]Rook: \pfe[exclaim]Oh. Challengers. Hi. Gym''s shut, sorry. The Spire wanted a "community special", and when the Spire wants a thing,
+      the thing happens.'
     - '\pf[ROOK,happy]Rook: Chat says you look tired. Chat says—'
     - {se: Anim/Thunder3}
     - tone: [80, 80, 80, 0, 6]
     - 'Director: Rook, we''re pulling too much off the—'
-    - tone: [-120, -120, -90, 40, 20]
-    - (The floodlights die. Then the street lamps. Then every window, block by block. The Lowlight goes black. Somewhere a Pidove panics.)
+    - {script: 'pbSEPlay("PC close", 90, 60)'}
+    - tone: [-50, -50, -38, 20, 4]
+    - {wait: 16}
+    - {script: 'pbSEPlay("PC close", 90, 50)'}
+    - tone: [-86, -86, -66, 30, 4]
+    - {wait: 16}
+    - {script: 'pbSEPlay("PC close", 90, 40)'}
+    - tone: [-120, -120, -90, 40, 10]
+    - {wait: 24}
+    - {script: 'pbSEPlay("Cries/PIDOVE", 70, 130)'}
+    - {wait: 20}
     - '\pf[ROOK,shocked]Rook: —CHAT? Chat, are you there? Rotom, are we live?'
     - 'Rotom Drone: (bzzt) ...signal lost.'
     - '\pf[ROOK,panic]Rook: We''re not live. We''re not LIVE. I haven''t been not-live since I was fourteen.'
-    - (In the dark, the junction boxes on the street corners start to glow from the inside, one after another. Something in each of them is giggling.)
+    - switch: [424, true]
+    - {script: '4.times { |i| pbSEPlay("Cries/ROTOM", 55, 130 + i * 12); pbWait(0.45) }'}
     - 'Hob Carrow: (from his ladder) Rotom! The floods pulled ''em out of the Spire feed! They''re in the boxes, they''ll drink the whole block!'
     - '\pf[ROOK,neutral]Rook: Okay. Okay. I can do this. This is fine. This is content.'
     - '\pf[ROOK,panic]Rook: I can''t do this, my drone''s dead. You. You''ve got Pokémon that aren''t plugged into anything, right? Boxes. Corners. GO.'
-    - switch: [424, true]
     - selfswitch: [A, true]
     trigger: action
     move: fixed
@@ -486,8 +513,33 @@ events:
     move: fixed
   - commands:
     - {se: PC open}
-    - tone: [0, 0, 0, 0, 20]
-    - (The hum of a whole block coming back. The floodlights flicker up, then the lamps, then the windows. The Lowlight cheers.)
+    - tone: [-60, -60, -45, 20, 4]
+    - {wait: 8}
+    - tone: [-110, -110, -80, 36, 2]
+    - {wait: 6}
+    - {se: PC open}
+    - tone: [-40, -40, -30, 12, 6]
+    - {wait: 10}
+    - tone: [0, 0, 0, 0, 16]
+    - {wait: 16}
+    - {script: 'pbSEPlay("Anim/Applause", 70, 100)'}
+    - move:
+        who: Nessa
+        route:
+        - jump: [0, 0]
+        - jump: [0, 0]
+        wait: false
+    - move:
+        who: Old Jory
+        route:
+        - jump: [0, 0]
+        wait: false
+    - move:
+        who: Benno
+        route:
+        - wait 6
+        - jump: [0, 0]
+        wait: true
     - '\pf[ROOK,happy]Rook: We''re back. WE''RE BACK. Chat! Chat, are you— (bzzt) —chat is saying "WHAT HAPPENED". Chat, you would not BELIEVE what happened.'
     - '\pf[ROOK,neutral]Rook: (quieter, with the drone pointed away) Thanks. Really. I''m not good in the dark. Nobody up there''s good in the dark. That''s
       kind of the whole problem with up there.'

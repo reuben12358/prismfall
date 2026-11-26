@@ -46,3 +46,23 @@ def patch(spec_file, mid, events, pages=None, tag='story'):
         open(path, 'w', encoding='utf-8').write('\n---\n'.join(chunks))
         return len(evs)
     raise SystemExit('storylayer %s: no map %d in %s' % (tag, mid, path))
+
+
+def sync_pages(spec_file, mid, source, names, tag='story'):
+    """For a map whose spec another layout regenerates WITHOUT re-reading the story source (608: Gemini's craft carries
+    the old events over): copy the pages of the named events from `source` ({name: event}, e.g. story_ch5.EVENTS[608])
+    into the spec's events of the same name. Position, type and every other event stay as they are."""
+    path = os.path.join(HERE, 'specs', spec_file)
+    text = open(path, encoding='utf-8').read()
+    doc = yaml.safe_load(text)
+    if doc.get('id') != mid: raise SystemExit('storylayer %s: %s is not map %d' % (tag, spec_file, mid))
+    evs = doc['events']
+    for n in names:
+        e = next((e for e in evs if e.get('name') == n), None)
+        if e is None: raise SystemExit('storylayer %s: no event %r on map %d' % (tag, n, mid))
+        e['pages'] = [{k: v for k, v in p.items() if k != '_placed'} for p in source[n]['pages']]
+    lines = text.split('\n')
+    k = next(i for i, l in enumerate(lines) if l.startswith('events:'))
+    body = yaml.safe_dump({'events': evs}, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
+    open(path, 'w', encoding='utf-8').write('\n'.join(lines[:k]) + '\n' + body)
+    return len(names)
