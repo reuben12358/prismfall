@@ -295,25 +295,23 @@ module Prismfall
     # The tag battle
     #---------------------------------------------------------------------------
     TAG_VERSION    = 21
-    KESTREL_PARTNER = [:RIVAL_KESTREL, "Kestrel", 21]      # the script's key for the Redeemed partner team
+    KESTREL_PARTNER_DECADE = 9   # Redeemed Kestrel: Prismfall::Rival.partner_version(9) = 93 / 94 / 95 by starter slot
     TAG_FOES = [
       [:MERIDIAN_MARCHETTI, "Helene", "!flag(:MARCHETTI_TURNED)"],
       [:MERIDIAN_QUENT, "Percival", "!flag(:VOSS_DISCREDITED)"],     # Quent is in the harness when Voss fell
       [:MERIDIAN_KROLL, "Sabine", nil]
     ].freeze
 
-    # [type, name, version]. Kestrel's version 21 is also his K2 number (2 * 10 + starter slot 1): until the
-    # Redeemed team is filed under a key of its own, a v21 party that isn't finale-sized falls back to his
-    # semifinal team, so the partner is never a Lv 21 Honedge.
+    # [type, name, version]. The Redeemed team is a rival PARTNER team (Core 006): one block per starter slot, 93 / 94 /
+    # 95, so his starter follows the player's (the script's "version 21" was his K2 number). If that block is missing,
+    # he brings his semifinal team.
     def self.partner
       if flag(:KESTREL_FALLEN)
         return [:RIVAL_JUNO, "Juno", Prismfall::Rival.version_for(7)]
       end
-      type, name, version = KESTREL_PARTNER
-      data = GameData::Trainer.try_get(type, name, version)
-      top = (data) ? data.pokemon.map { |p| p[:level].to_i }.max.to_i : 0
-      return [type, name, version] if top >= 80
-      return [type, name, Prismfall::Rival.version_for(8)]
+      version = Prismfall::Rival.partner_version(KESTREL_PARTNER_DECADE)
+      return [:RIVAL_KESTREL, "Kestrel", version] if GameData::Trainer.exists?(:RIVAL_KESTREL, "Kestrel", version)
+      return [:RIVAL_KESTREL, "Kestrel", Prismfall::Rival.version_for(8)]
     end
 
     def self.tag_foes

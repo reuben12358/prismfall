@@ -157,35 +157,37 @@ module Prismfall
   # The Grounds Ladder
   #=============================================================================
   module GroundsLadder
-    VERSION = 20   # the PBS version of every Ladder team (Hard / Casual at +100 / +200 as usual)
+    VERSION = 0    # the PBS version of every Ladder team (Hard / Casual at +100 / +200 as usual)
 
-    # Rung order = the script's roster table. :trainer is [type, "Name", version]; :types lists other trainer
-    # types the same name may be filed under. Fields are each kingdom's Imprint, as their pavilion flies it.
+    # Rung order = the script's roster table (story/39_SCRIPT_CH20.md "Rosters"). :trainer is [type, "Name", version],
+    # the PBS blocks of tools/trainer_gen/gen.py "the Grounds Ladder" (each challenger has a class of their own);
+    # :types lists other trainer types the same name may be filed under. Fields are each kingdom's Imprint, as their
+    # pavilion flies it.
     ROSTER = [
       { :key => :WEAVER,     :kingdom => "Elowen",     :who => "a Briarwick weaver",
-        :trainer => [:PAINTER, "Linnet", VERSION],      :field => :SILKWOOD },
+        :trainer => [:WEAVER, "Maud", VERSION],             :field => :SILKWOOD },
       { :key => :HARPOONER,  :kingdom => "Isenmar",    :who => "a Rimeholt harpooner",
-        :trainer => [:FISHERMAN, "Brynjar", VERSION],   :field => :FROZEN_LAKE },
+        :trainer => [:HARPOONER, "Sten", VERSION],          :field => :FROZEN_LAKE },
       { :key => :STREAMER,   :kingdom => "Zenith",     :who => "a Lumen streamer",
-        :trainer => [:ROCKER, "Vix", VERSION],          :field => :NEON_GRID },
+        :trainer => [:STREAMER, "Kiri", VERSION],           :field => :NEON_GRID },
       { :key => :FOREMAN,    :kingdom => "Zenith",     :who => "a Cogsworth foreman",
-        :trainer => [:ENGINEER, "Dobbin", VERSION],     :field => :FACTORY },
+        :trainer => [:FOREMAN, "Dunmore", VERSION],         :field => :FACTORY },
       { :key => :BROKER,     :kingdom => "Nadir",      :who => "a Moon Market broker",
-        :trainer => [:GAMBLER, "Quill", VERSION],       :field => :NEW_MOON },
+        :trainer => [:MOON_BROKER, "Silas", VERSION],       :field => :NEW_MOON },
       { :key => :RIDER,      :kingdom => "Ashkaar",    :who => "a Wyrmrest rider",
-        :trainer => [:TAMER, "Asgerd", VERSION],        :field => :DRAGONS_DEN },
+        :trainer => [:WYRM_RIDER, "Tova", VERSION],         :field => :DRAGONS_DEN },
       { :key => :LAMPRUNNER, :kingdom => "Ossaria",    :who => "a Cragholm lamp-runner (Pip's rival)",
-        :trainer => [:YOUNGSTER, "Tam", VERSION],       :field => :CRYSTAL_CAVERN },
+        :trainer => [:LAMP_RUNNER, "Tansy", VERSION],       :field => :CRYSTAL_CAVERN },
       { :key => :WELLKEEPER, :kingdom => "Ossaria",    :who => "a Duneholt well-keeper",
-        :trainer => [:RUINMANIAC, "Nasrin", VERSION],   :field => :DESERT },
+        :trainer => [:WELL_KEEPER, "Nasim", VERSION],       :field => :DESERT },
       { :key => :PRIEST,     :kingdom => "Antumbra",   :who => "a Gravenmoor lantern-priest",
-        :trainer => [:CHANNELER, "Osric", VERSION],     :field => :HOLLOW_CATHEDRAL },
+        :trainer => [:LANTERN_ACOLYTE, "Osric", VERSION],   :field => :HOLLOW_CATHEDRAL },
       { :key => :EMBALMER,   :kingdom => "Antumbra",   :who => "a Vigil embalmer",
-        :trainer => [:SCIENTIST, "Thessaly", VERSION],  :field => :HOLLOW_CATHEDRAL },
+        :trainer => [:EMBALMER, "Thessaly", VERSION],       :field => :HOLLOW_CATHEDRAL },
       { :key => :WARDGUARD,  :kingdom => "Crownhaven", :who => "a Wardguard",
-        :trainer => [:COOLTRAINER_M, "Halvard", VERSION], :field => :GRAND_STAGE },
+        :trainer => [:WARDGUARD, "Aldous", VERSION],        :field => :GRAND_STAGE },
       { :key => :CANTOR,     :kingdom => "Crownhaven", :who => "a Choir cantor",
-        :trainer => [:LADY, "Liesl", VERSION],          :field => [:HOLLOW_CATHEDRAL, 2] }
+        :trainer => [:CANTOR, "Anselm", VERSION],           :field => [:HOLLOW_CATHEDRAL, 2] }
     ]
 
     @answers = []   # scripted answers for run's "Next challenger?" (headless tests)

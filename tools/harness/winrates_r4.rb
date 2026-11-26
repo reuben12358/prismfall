@@ -554,7 +554,8 @@ module WR4
     h["MIXD"] = tag(:LEADER_SIGRUN, "Sigrun", 19, [:ISENMAR_HIRDMAN, "Styr", 0, :ASHKAAR_EMBER_RIDER, "Kessa", 0], 17, 85,
                     :BLEED, "Ch19 the lines: PC + Sigrun vs the mixed pair (Bleed)")
     h["TOLL"] = story(:ASHKAAR_OFFICER, "Orrin", 0, 18, 90, :MOUNTAIN, "Ch19 the Dominar's Toll (Mountain)")
-    h["LAD12"] = story(:CANTOR, "Anselm", 0, 18, 90, :PRISM_ARENA, "Ch20 Grounds Ladder rung 12, Cantor Anselm (Prism Arena)")
+    h["LAD12"] = story(:CANTOR, "Anselm", 0, 18, 90, :HOLLOW_CATHEDRAL, "Ch20 Grounds Ladder rung 12, Cantor Anselm (Hollow Cathedral)")
+    h["LAD6"] = story(:WYRM_RIDER, "Tova", 0, 18, 90, :DRAGONS_DEN, "Ch20 Grounds Ladder rung 6, Wyrm Rider Tova (Dragon's Den)")
     h["BKYO"] = wild_boss(:KYOGRE_ISENMAR, 55, 10, "Ch12 Kyogre, Isenmar (Frozen Lake -> Water Surface; cap 55)")
     h["BGRO"] = wild_boss(:GROUDON_UNDERSANDS, 67, 13, "Ch14 Groudon, the Undersands (Desert; cap 67)")
     h["BGIR"] = wild_boss(:GIRATINA_DEPTHS, 71, 14, "Ch15 Giratina, Reverse Depths (Inverse; cap 71)")

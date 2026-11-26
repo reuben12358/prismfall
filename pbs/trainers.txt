@@ -29773,7 +29773,7 @@ Pokemon = RUNERIGUS,85
     Nature = BRAVE
     IV = 20
     EV = 0
-# Ch20 Grounds Ladder, rung 11 - a Wardguard (Crownhaven). No kingdom's Plate flies over the Wardguard's pavilion: the arena's own cycle, or no field (pavilion field :PRISM_ARENA)
+# Ch20 Grounds Ladder, rung 11 - a Wardguard (Crownhaven). The capital's pavilions are a show ground: showpieces draw the applause (pavilion field :GRAND_STAGE)
 #-------------------------------
 [WARDGUARD,Aldous]
 LoseText = Mind the forty-third step on your way up. Tradition.
@@ -29830,7 +29830,7 @@ Pokemon = GALLADE,86
     Nature = JOLLY
     IV = 20
     EV = 0
-# Ch20 Grounds Ladder, rung 12 - a Choir cantor (Crownhaven), the top rung. Sound: Hyper Voice and Boomburst (pavilion field :PRISM_ARENA)
+# Ch20 Grounds Ladder, rung 12 - a Choir cantor (Crownhaven), the top rung, in the consecrated nave (stage 2: hymns x1.3). Sound: Hyper Voice and Boomburst (pavilion field :HOLLOW_CATHEDRAL)
 #-------------------------------
 [CANTOR,Anselm]
 LoseText = ...And rest. Four bars. You've earned them.

@@ -89,11 +89,6 @@
 - **Grounds Ladder PBS contract:** `GroundsLadder::ROSTER` expects version 20 blocks: PAINTER Linnet, FISHERMAN Brynjar, ROCKER Vix, ENGINEER Dobbin, GAMBLER Quill, TAMER Asgerd, YOUNGSTER Tam, RUINMANIAC Nasrin, CHANNELER Osric, SCIENTIST Thessaly, COOLTRAINER_M Halvard, LADY Liesl (Lv 88–90, two Pokémon each). Other names/types: edit ROSTER (a same-name block under another type is found automatically). Missing blocks are skipped, never a crash.
 - **Next, in order:** (1) `mapgen/ruby/018_Crownhaven.rb` ceremony walk + pylon lighting + the white vision; (2) Core `031_Finale.rb` (hijack hook points, allies montage + Larch's 11 lamps, tag foes/partner, the 36 kneel lines on `:prismfall_arceus_locks`, ending vignette table) and Cutscenes scenes for them; (3) Trials `:POSTGAME` category + Registry board (`115_Quests_Postgame.rb`), tier switches S279/S285; (4) `tools/harness/run_story_hooks.rb` (headless checks) and the Cutscenes selftest.
 
-## Status: Ch16–21 + post-game trainer PBS (agent, 2026-11-25)
-*Running note so the work can be picked up. Source of every block: `tools/trainer_gen/gen.py`, the section "CH16-CH21 STORY FIGHTS, THE GROUNDS LADDER AND THE WARDEN'S GAUNTLET". Check with `python3 -I tools/check_script_trainers.py` (scripts vs PBS) and `python3 -I tools/validate_trainers.py`.*
-- [x] Ch16: Officers Grane and Tull (Interlude IV, Lv 60–62, no Bag).
-- [ ] Next, in order: Ch17 (SUMP_BARON, GILDER_AUTOMATON, Mallory/Kade), Ch18 (THORNGUARD Rowe), Ch19 (partners v19, the lines, the Toll, Thornwatch), Ch20 (the Grounds Ladder), Ch21 (Redeemed Kestrel partner), post-game (the Warden's Gauntlet).
-
 ## Agent status: Interlude I + Map Pass 2 (Lamplight agent)
 - 2026-11-25: Interlude I "Lamplight" is written and builds (commit 4674a4e): `mapgen/layouts/story_interlude1.py` (a story layer that upserts its events into the specs of 952 / 182 / 105 / 106 by name; run it again after any layout regenerates one of those specs), `mapgen/ruby/016_Staging.rb` (pfm_fade_out / pfm_flash / ... for stage directions), `mapgen/ruby/017_Lamplight.rb` (pfm_il1_*). It uses Core `028_Interludes.rb` loadout 1. **Next:** real-engine capture (`tools/harness/visual/ch5/010_LamplightCapture.rb`), then 255 Tap Chamber, then the bracketed-narration pass.
 
@@ -107,6 +102,9 @@
 - [x] Ch21: Redeemed Kestrel partner = `[RIVAL_KESTREL,Kestrel,93/94/95]` via the new `Prismfall::Rival.partner_version(9)` (Core 006; "version 21" collided with K2 = 20–22); validator `RIVAL_PARTNERS`; BALANCE §5.
 - [x] Post-game: the Warden's Gauntlet, `[LEADER_X,Name,98]` for 17 Wardens + `[LEADER_JUNO,Juno,60/61/62]`, Lv 96–100 (3 versions each).
 
+- [x] Engine wiring: `Prismfall::GroundsLadder::ROSTER` (Core 030) now names these twelve blocks (it expected version-20 stock-class blocks that were never written); `Prismfall::Finale.partner` (Core 033) uses `Rival.partner_version(9)`.
+- Harness cells (winrates_r4): GUT, BARR, TWARD, ROWE, HIRD, EMBR, MIXD, TOLL, LAD6, LAD12.
+- Left: the Ch16–18 script roster trainers (route classes; the coverage agent's note), map events for all of these, maps 920–926 re-wired to the script's lines, T1-6 "Quent's automated security" and the Concord Zero fights (the script only outlines them), art for the new classes (stand-ins are in Core 032).
 ## Status: Audio v4.3 wiring agent (2026-11-25)
 *Running note so the work can be picked up. Checks: `python3 -I mapgen/map_audio.py --check`, `ruby "plugins/Prismfall Cutscenes/selftest/voice.ruby_stub"`, the Cutscenes selftest.*
 - [x] Checkpoint 1 (commit 43a6ec2): `design/MAP_AUDIO.yaml` (117 maps) → `mapgen/map_audio.py` → `maps_out/Plugins/Prismfall Maps/013_MapAudio.rb` (run-time, installed files only); `Prismfall Core/031_AudioCues.rb` (cues, stock stand-ins for trainer BGMs, title, boss / field SE); badge / trial-rank / game-over jingles; default wild boss music; the nine v5 field-audio BGS in `audio/gemini_cc0/BGS`. Trainer-type BGMs are in `pbs/trainer_types.txt` (went in with f0c31c3); the VS lightning cue is in `010_Bridge_VersusIntro.rb` (went in with afad6dd).

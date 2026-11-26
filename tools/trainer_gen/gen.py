@@ -2155,7 +2155,7 @@ rung("EMBALMER", "Thessaly", "HOLLOW_CATHEDRAL", "a Vigil embalmer (Antumbra). A
     P("RUNERIGUS", 89, "WANDERINGSPIRIT", "SITRUSBERRY", "BRAVE", "POLTERGEIST,EARTHQUAKE,BODYPRESS,WILLOWISP", "HA", tr=True,
       hard={"item": "LEFTOVERS"}, casual={"moves": "SHADOWCLAW,BULLDOZE,BRUTALSWING,IRONDEFENSE"}),
 ])
-rung("WARDGUARD", "Aldous", "PRISM_ARENA", "a Wardguard (Crownhaven). No kingdom's Plate flies over the Wardguard's pavilion: the arena's own cycle, or no field",
+rung("WARDGUARD", "Aldous", "GRAND_STAGE", "a Wardguard (Crownhaven). The capital's pavilions are a show ground: showpieces draw the applause",
      "Mind the forty-third step on your way up. Tradition.", [
     P("FALINKS", 89, "DEFIANT", "SITRUSBERRY", "JOLLY", "CLOSECOMBAT,MEGAHORN,ROCKSLIDE,THROATCHOP", "A",
       hard={"moves": "CLOSECOMBAT,MEGAHORN,ROCKSLIDE,NORETREAT"},
@@ -2165,7 +2165,7 @@ rung("WARDGUARD", "Aldous", "PRISM_ARENA", "a Wardguard (Crownhaven). No kingdom
       hard={"ab": "JUSTIFIED", "item": "LUMBERRY", "moves": "CLOSECOMBAT,PSYCHOCUT,NIGHTSLASH,SWORDSDANCE"},
       casual={"moves": "BRICKBREAK,PSYCHOCUT,NIGHTSLASH,LEAFBLADE"}),
 ])
-rung("CANTOR", "Anselm", "PRISM_ARENA", "a Choir cantor (Crownhaven), the top rung. Sound: Hyper Voice and Boomburst",
+rung("CANTOR", "Anselm", "HOLLOW_CATHEDRAL", "a Choir cantor (Crownhaven), the top rung, in the consecrated nave (stage 2: hymns x1.3). Sound: Hyper Voice and Boomburst",
      "...And rest. Four bars. You've earned them.", [
     P("WIGGLYTUFF", 89, "COMPETITIVE", "SITRUSBERRY", "MODEST", "HYPERVOICE,DAZZLINGGLEAM,FLAMETHROWER,THUNDERWAVE", "HS",
       hard={"item": "THROATSPRAY", "moves": "HYPERVOICE,DAZZLINGGLEAM,FLAMETHROWER,SING"},

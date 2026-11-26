@@ -563,10 +563,10 @@ Crownhaven (480–519) isn't built. **[NEW]** = an event or map not in maps.json
 | 8 | Ossaria (`:DESERT`) | Well-Keeper Nasim, a Duneholt well-keeper | `[WELL_KEEPER,Nasim]`: Clodsire 88, Palossand 89 |
 | 9 | Antumbra (`:HOLLOW_CATHEDRAL`) | Lantern Acolyte Osric, a Gravenmoor lantern-priest | `[LANTERN_ACOLYTE,Osric]`: Drifblim 88, Houndstone 89 |
 | 10 | Antumbra (`:HOLLOW_CATHEDRAL`) | Embalmer Thessaly, a Vigil embalmer | `[EMBALMER,Thessaly]`: Aromatisse 88 (Trick Room), Runerigus 89 |
-| 11 | Crownhaven (`:PRISM_ARENA` or none) | Wardguard Aldous | `[WARDGUARD,Aldous]`: Falinks 89, Gallade 90 |
-| 12 | Crownhaven (`:PRISM_ARENA` or none) | Cantor Anselm, a Choir cantor | `[CANTOR,Anselm]`: Wigglytuff 89, Noivern 90 |
+| 11 | Crownhaven (`:GRAND_STAGE`) | Wardguard Aldous | `[WARDGUARD,Aldous]`: Falinks 89, Gallade 90 |
+| 12 | Crownhaven (`:HOLLOW_CATHEDRAL`, consecrated) | Cantor Anselm, a Choir cantor | `[CANTOR,Anselm]`: Wigglytuff 89, Noivern 90 |
 
-*(All twelve are in PBS, in three versions, no Bag; twelve new trainer types. Their lose lines are the PBS LoseText. The class "Lantern Acolyte" keeps Ysolde's "Lantern Priest" hers alone.)*
+*(All twelve are in PBS, in three versions, no Bag, and `Prismfall::GroundsLadder::ROSTER` (Core 030) calls them; twelve new trainer types. Their lose lines are the PBS LoseText. The class "Lantern Acolyte" keeps Ysolde's "Lantern Priest" hers alone.)*
 
 **EventMons:** Eevee "Amen" + Eevium Z (the Octave), Indeedee "Usher" (gift, Lv 60), Alcremie "Festival" (gift, Lv 60).
 
