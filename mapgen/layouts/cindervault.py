@@ -73,80 +73,166 @@ def build_255():
     return m
 
 
+def MV(who, route, wait=True): return {'move': {'who': who, 'route': route, 'wait': wait}}
+def SC(code): return {'script': code}
+def scroll(d, n, speed=4): return {'raw': [203, [{'down': 2, 'left': 4, 'right': 6, 'up': 8}[d], n, speed]]}
+
+
+QUENT, WICK, LARCH, BRANN = 'Quent', 'Wick', 'Larch', 'Brann'
+SOLDIER_A, SOLDIER_B, BOMBER = 'Directorate soldier', 'Directorate soldier b', 'Hammer Bomber'
+HEAT = SC('pbSEPlay("Anim/Earth4", 70, 70)\npfm_shake(2, 9, 16)\npfm_glow(64, 6, -30, 14, 4)')   # the mountain pushes back
+TICK = [{'se': 'Voltorb Flip mark'}, {'wait': 9}, {'se': 'Voltorb Flip mark'}, {'wait': 9}, {'se': 'Voltorb Flip mark'}, {'wait': 9}]
+
+
 def crisis_commands():
+    """story/29_SCRIPT_CH8.md "Three Doctors". The script's bracketed narration is stage direction: it is played
+    (move routes, the camera, tones, SEs; helpers in mapgen/ruby/016_Staging.rb), and a line of text stays only
+    for what a picture can't carry (the plate's wording, the detonator, the lever's label)."""
     S = []
     S += [{'script': 'Prismfall.checkpoint'},
-          "(The Tap Chamber: a round iron room around a pipe the width of a well, going down into rock that glows. A ring of gauges. A heat that pushes on your face. Three groups, and nobody listening to anybody.)",
-          say('QUENT', 'happy', "Oh, it's YOU! The null reading! *giggling* Hold still, I've only got one probe."),
+          {'if': '$game_player.y >= 19', 'then': [MV('player', ['up', 'up'])],
+           'else': [{'if': '$game_player.y == 18', 'then': [MV('player', ['up'])]}]},     # stand at the stair's head (13,17)
+          HEAT,                                                                             # a heat that pushes on your face
+          MV(QUENT, ['face_player', {'jump': [0, 0]}, 'wait 4', {'jump': [0, 0]}]),            # bouncing on his toes
+          say('QUENT', 'happy', "Oh, it's YOU! The null reading! Hold still, I've only got one probe."),
           say('QUENT', 'neutral', "Dr. Percival Quent, Meridian Applied Sciences. These are dampers. We fit them, the draw evens out, the pressure drops, and Tap Seven keeps running. Everyone keeps their lights. It's terribly simple."),
+          # Brann, down the stair behind you, to the brass plate on the pipe's collar
+          MV(BRANN, ['through_on', {'graphic': ['BRANN', 0, 8, 0]}, {'opacity': 255}, 'up', 'up', 'up', 'up', 'through_off']),
+          {'se': 'GUI storage put down'}, {'wait': 16},                                      # he wipes it with his sleeve
+          say('BRANN', 'angry', '"TAP SEVEN. CINDERVAULT. DESTINATION: RIMEHOLT — HEAT TOWERS ONE TO FOUR. SECONDARY: LUMEN GRID."'),
+          say('BRANN', 'angry', "Rimeholt. Our fire, piped over the mountains to keep the Thane's people warm. And none of us was asked."),
+          say('QUENT', 'happy', "Isn't it marvellous? One mountain, two kingdoms! It's the most efficient thing I've ever seen!"),
+          # the far wall: Wick at the old sluices
+          MV('player', ['turn_left']), MV(WICK, ['face_player']), scroll('left', 3), {'wait': 16},
           say('WICK', 'neutral', "Hello."),
           say('WICK', 'sad', "We open the old channels and run Lake Sallow down them, onto the Imprint. The fever breaks. The mountain sleeps. And the forges go cold for a season, and the ash comes down on the Ashmarch like snow."),
-          say('WICK', 'neutral', "It isn't kind. It's only safe."),
-          "(Halfway up the iron ladder on the pipe, a figure in a grey cowl and a hammer-painted mask is strapping a brass-and-glass device to the collar. A Splitter. It's ticking.)",
+          "Wick: It isn't kind. It's only safe.",
+          scroll('right', 3), {'wait': 16},
+          # on the pipe itself: the Splitter, ticking
+          MV('player', ['turn_up'])] + TICK + [
+          {'anim': ['player', 3]},
+          MV(BOMBER, ['turn_down', {'jump': [0, 0]}]),
           "Hammer Bomber: Stay back! All of you! The Hollow, the Meridian, the lot!",
-          "Hammer Bomber: They'll cover up a fever. They can't cover up a mountain. When this goes, every screen in Velmora will show it, and THEN they'll listen.",
+          "Hammer Bomber: They'll cover up a fever. They'll cover up a crack. They can't cover up a mountain. When this goes, every screen in Velmora will show it, and THEN they'll listen.",
           say('WICK', 'angry', "There are families on the stairs, child."),
+          MV(BRANN, ['through_on', {'speed': 4}, 'down', 'down', 'down', 'down', {'opacity': 0}], wait=False),   # Brann goes back up for them
           "Hammer Bomber: There were families in the Lowlight!",
           {'script': 'setBattleRule("field", :%s)\nsetBattleRule("double")' % FIELD}]
-    detonator = [
-        "(The bomber is cornered on the ladder. The Splitter is still ticking. He holds out his hand: a brass detonator with one red key.)",
+    detonator = TICK + [
+        MV(BOMBER, ['down', 'wait 10']),                                                     # cornered: he comes down off the ladder, hand out
+        "In his hand, a brass detonator with one red key.",
         "Hammer Bomber: You saw the Lowlight. I know you did. You were there.",
         "Hammer Bomber: Do it. They'll finally listen.",
         {'choices': ["(Turn the key.)", "(Throw it into the glow.)", "(Don't take it.)"], 'cancel': 3, 'branches': [
             [{'script': 'Prismfall.game_over(:GO_LET_THEM_LISTEN)'}],
-            ["(It goes down the pipe's throat without a sound. The bomber watches it go.)", "Hammer Bomber: ...Coward.",
+            [{'se': 'Battle throw'}, MV(BOMBER, ['turn_up']), {'wait': 44},                  # into the pipe's throat, without a sound
+             MV(BOMBER, ['turn_down']),
+             "Hammer Bomber: ...Coward.",
              say('WICK', 'sad', "No. That was the brave one, child. You'll understand in about ten years. I'm sorry it takes so long.")],
-            ["Hammer Bomber: ...No. No, I can't either. I can't either.", "(He drops it. Quent's engineer stamps on it, hard, three times.)"]]},
-        "(The bomber is gone up the stair. Quent unstraps the dead Splitter with two fingers and pockets it, humming. And the gauges keep climbing.)",
+            [MV(BOMBER, ['dir_fix_on', {'jump': [0, 0]}, 'dir_fix_off']),                    # his hand is shaking
+             "Hammer Bomber: ...No. No, I can't either. I can't either.",
+             {'se': 'Battle ball drop'}, {'wait': 14},                                       # he drops it; the engineer stamps on it, three times
+             SC('3.times { pbSEPlay("Rock Smash", 80, 120); pfm_shake(2, 14, 4); pbWait(0.3) }')]]},
+        # the bomber goes up the stair; Quent pockets the dead Splitter, humming; the gauges keep climbing
+        MV(BOMBER, ['through_on', {'speed': 4}, 'left', 'down', 'down', 'down', {'opacity': 0}]),
+        MV(QUENT, [{'speed': 4}, 'down', 'left', 'left', 'left', 'left', 'turn_up', 'wait 8', {'se': 'GUI storage pick up'}, 'wait 12',
+                   'right', 'right', 'right', 'right', 'up', 'turn_left', {'speed': 3}]),
+        SC('pfm_needle("Voltorb Flip mark", 90, 150, 30)'), HEAT,
+        MV(LARCH, ['turn_up']), {'anim': [LARCH, 3]},
         say('LARCH', 'shocked', "The bomb was never the problem. The tap's still drawing. It's still going UP."),
         say('QUENT', 'happy', "Dampers, then! Help me fit them and we're done by supper!"),
         say('WICK', 'neutral', "Or help me open the channels and we're done by supper, and nobody's done anything to the mountain it didn't ask for."),
-        "(Through the steam, on the Meridian side: a red lever under a glass cover. TAP 7 - EMERGENCY CLOSE - DIRECTORATE AUTHORISATION ONLY. Two Directorate soldiers stand in front of it.)",
+        # the third option nobody says out loud: the camera finds the red lever, and the two soldiers in front of it
+        scroll('up', 5), scroll('right', 4), {'wait': 44},
+        MV(SOLDIER_A, ['turn_right', 'wait 6', 'turn_down'], wait=False), MV(SOLDIER_B, ['turn_left', 'wait 6', 'turn_down']),
+        "TAP 7 - EMERGENCY CLOSE. DIRECTORATE AUTHORISATION ONLY.",
+        scroll('left', 4), scroll('down', 5), {'wait': 44},
+        MV(LARCH, ['face_player']),
         say('LARCH', 'neutral', "Three doctors. Your call, I'm afraid. I'm only a professor."),
     ]
+    falls = lambda low: SC('pfm_needle("Voltorb Flip mark", 140, %d, 40)' % low)             # the gauges fall
     vent = [
             say('QUENT', 'sad', "Oh, don't. Don't. Do you know what that'll do to my DATA?"),
             {'script': 'setBattleRule("field", :%s)\nsetBattleRule("fieldChange", [3, :ASHEN_WASTE, "Lake water roars down the old channels! The fire goes grey!"])' % FIELD},
             {'if': 'TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 0)', 'then': [
                 {'script': 'pf_choose(:ch8_caldera, :vent)'},
                 say('QUENT', 'neutral', 'Fine. Fine. I\'ll write it up as a natural experiment. "Subject vents mountain." Do you know how rare that is?'),
-                "(Lake water roars down the stone. Steam fills the chamber, white and then grey, and then the grey comes down as ash, soft, everywhere.)",
-                "(The gauges fall. Out of the red. Through the amber. Into the green.)",
+                # lake water down the stone; steam, white and then grey; then the grey comes down as ash
+                SC('pbSEPlay("Anim/Water5", 90, 80)\npfm_shake(4, 10, 30)\npfm_tone(110, 110, 120, 0, 24)'), {'wait': 20},
+                SC('pfm_tone(-24, -24, -18, 170, 50)'), {'wait': 30},
+                falls(60),
                 say('WICK', 'sad', "There. It's asleep. It'll be cross when it wakes up."),
                 {'var': ['CINDERVAULT_STATE', 1]}, {'selfswitch': ['B', True]}], 'else': []}]
     dampers = [
                say('WICK', 'sad', "Then hold its mouth shut, if you must. It'll still have a fever."),
-               "(The Hollow pick up their hose and go. But the Hammers come back down the stair with a third, and this time they're after the dampers.)",
+               # the Hollow pick up their hose and go; the Hammers come back down the stair, after the dampers
+               MV(WICK, ['through_on', {'speed': 4}, 'down', 'right', 'right', 'right', 'right', 'down', 'down', 'down', 'down', {'opacity': 0}]),
+               MV('Hammer a', ['through_on', {'graphic': ['trainer_BURGLAR', 0, 8, 0]}, {'opacity': 255}, {'speed': 4}, 'up', 'up'], wait=False),
+               MV('Hammer b', ['through_on', {'graphic': ['trainer_BURGLAR', 0, 8, 0]}, {'opacity': 255}, {'speed': 4}, 'up', 'up']),
+               MV('player', ['turn_down']), {'anim': ['player', 3]},
                {'script': 'pbRegisterPartner(:MERIDIAN_QUENT, "Percival", 0)\nsetBattleRule("field", :%s)\nsetBattleRule("double")' % FIELD},
                {'if': 'TrainerBattle.start(:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8)', 'then': [
                    {'script': 'pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)'},
                    {'script': 'pf_choose(:ch8_caldera, :dampers)'},
-                   "(The engineers lock the brass rings round the pipe. The draw evens out. The gauges fall to the amber and stay there, humming.)",
+                   MV('Hammer a', [{'speed': 4}, 'down', 'down', {'opacity': 0}], wait=False), MV('Hammer b', [{'speed': 4}, 'down', 'down', {'opacity': 0}]),
+                   # the engineers lock the brass rings round the pipe; the gauges fall to the amber and stay there, humming
+                   SC('3.times { pbSEPlay("Anim/metal", 80, 90); pfm_shake(1, 14, 3); pbWait(0.35) }'),
+                   falls(100), SC('pfm_glow(40, 22, -24, 20, 10)'),
                    say('QUENT', 'happy', "Done by supper. I said! We should do this again. You're very good at holding things."),
                    {'var': ['CINDERVAULT_STATE', 2]}, {'selfswitch': ['B', True]}],
                 'else': [{'script': 'pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)'}]}]
     shutdown = [
+                # you walk past both of them to the red lever; the soldiers step together
+                MV('player', ['up', 'up', 'up', 'right', 'right', 'right', 'right', 'up', 'up', 'up', 'up', 'turn_right']),
+                MV(SOLDIER_A, ['turn_left'], wait=False), MV(SOLDIER_B, ['turn_left']),
                 "Directorate Lieutenant: That's Sovereign's property. Step back from it.",
                 say('QUENT', 'shocked', "Oh, you CAN'T, that's - that's a whole tap, that's MONTHS-"),
                 {'script': 'setBattleRule("field", :%s)\nsetBattleRule("double")' % FIELD},
                 {'if': 'TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 0, :MERIDIAN_DIRECTORATE, "Lieutenant", 8)', 'then': [
                     {'script': 'pf_choose(:ch8_caldera, :shutdown)'},
-                    "(You break the glass and pull. The lever takes your whole weight. Somewhere far down, something very large stops turning.)",
-                    "(The gauges shudder, and drop, and keep dropping, and stop in the green. The forges up the walls stay lit.)",
+                    MV(SOLDIER_B, ['right']), MV(SOLDIER_A, ['right', 'turn_left']),         # they give way
+                    MV('player', ['right', 'turn_up']),
+                    SC('pbSEPlay("Rock Smash", 90, 140)\npfm_flash(255, 255, 255, 6, 150)'), {'wait': 14},     # you break the glass
+                    SC('pbSEPlay("Door slide", 100, 50)\npfm_shake(6, 6, 44)'), {'wait': 50},                   # and pull, with your whole weight
+                    SC('pbBGMFade(2.0)'), {'wait': 40},                                      # far down, something very large stops turning
+                    falls(50), falls(40),
                     say('QUENT', 'sad', "Seven taps in the realm. Now six. Someone's going to be so cross with me."),
                     "Directorate Lieutenant: This goes to the Directorate. With your name on it.",
                     say('WICK', 'neutral', "Spell it right."),
                     {'var': ['CINDERVAULT_STATE', 0]}, {'selfswitch': ['B', True]}], 'else': []}]
     after = [{'if': "$game_self_switches[[255, @event_id, 'B']]", 'then': [
-        "(Up the stair, out into the night. From the bell-tower, slowly, a single bell: one. All clear.)",
+        # up the stair, out into the night; from the bell-tower, slowly, a single bell: one. All clear.
+        SC('pfm_fade_out(30)'), {'wait': 20}, SC('pbSEPlay("Anim/HealBell", 90, 60)'), {'wait': 50},
+        say('BRANN', 'sad', "One bell. One bell. I've never been so glad to hear one bell."),
+        {'if': 'pf_choice(:ch8_caldera) == :vent', 'then': [
+            say('BRANN', 'sad', "And my forges are out. All of them. For a season. ...Better cold than gone. I'll grumble about it till spring. Let me.")]},
+        {'if': 'pf_choice(:ch8_caldera) == :dampers', 'then': [
+            say('BRANN', 'happy', "And my forges are lit! You kept my forges lit!"),
+            say('LARCH', 'neutral', "For now. Ask me in a year how Emberfall's doing.")]},
+        {'if': 'pf_choice(:ch8_caldera) == :shutdown', 'then': [
+            say('BRANN', 'shocked', "You shut it. You actually shut it. With your hands. Sovereign's property! HA!")]},
         {'switch': ['CH8_CALDERA_DONE', True]}, {'var': ['CH8_STEP', 6]}, {'selfswitch': ['A', True]},
         # on to Hearthguild Hall for the Light Stone; guarded until 244 is built (a missing map would crash)
-        {'if': 'pbRgssExists?("Data/Map244.rxdata")', 'then': [{'transfer': {'map': 244, 'x': 10, 'y': 8, 'dir': 'up'}}], 'else': []}],
+        {'if': 'pbRgssExists?("Data/Map244.rxdata")', 'then': [{'transfer': {'map': 244, 'x': 10, 'y': 8, 'dir': 'up'}}],
+         'else': [MV('player', [{'script': 'moveto(13, 17)'}, 'turn_up'])]},
+        SC('pbBGMPlay($game_map.bgm) rescue nil\npfm_fade_in(40)')],
         'else': []}]
     S += [{'if': 'TrainerBattle.start(:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8)', 'then': detonator + [
         {'choices': ["Help Wick vent it.", "Help Quent fit the dampers.", "Shut the tap down."], 'cancel': 0,
          'branches': [vent, dampers, shutdown]}] + after, 'else': []}]
     return S
+
+
+def actor(name, x, y, sprite, d, cmds):
+    """a crisis actor: there while the crisis runs, gone once it is resolved (CH8_CALDERA_DONE)"""
+    g = {'sprite': sprite, 'dir': d}
+    return {'type': 'event', 'name': name, 'at': [x, y], 'pages': [
+        {'graphic': g, 'commands': cmds}, {'cond': {'switch': 'CH8_CALDERA_DONE'}, 'commands': []}]}
+
+
+def walk_on(name, x, y):
+    """an actor who walks on during the scene (no graphic until a move route gives one)"""
+    return {'type': 'event', 'name': name, 'at': [x, y], 'pages': [{'through': True, 'commands': []}]}
 
 
 def events_255(m):
@@ -159,23 +245,19 @@ def events_255(m):
         {'type': 'event', 'name': 'Atmosphere', 'at': [0, 0], 'pages': [{'trigger': 'parallel', 'commands': [{'script': 'pfm_cave_light'}, {'wait': 12}]}]},
         {'type': 'event', 'name': 'The Caldera Crisis', 'at': [13, 16], 'pages': [
             {'commands': []},
-            # Gym 7 won (CH8_STEP 5) opens the crisis. Self A is set only once it's resolved (see `after`), so a
-            # whiteout or a lost branch battle replays the crisis from the checkpoint instead of bricking Ch8.
+            # Gym 7 won (CH8_STEP 5; the Five Bells set 6) opens the crisis. Self A is set only once it's resolved
+            # (see `after`), so a whiteout or a lost branch battle replays the crisis instead of bricking Ch8.
             {'cond': {'var': ['CH8_STEP', 5]}, 'trigger': 'autorun', 'commands': crisis_commands()},
             {'cond': {'self': 'A'}, 'commands': []},
             {'cond': {'switch': 'CH8_CALDERA_DONE'}, 'commands': []}]},
         # Tightened cinematic staging: all actors sit clearly inside the 16x12 camera viewport from (13, 17)
-        {'type': 'npc', 'name': 'Quent', 'at': [18, 13], 'sprite': 'trainer_SCIENTIST', 'dir': 'left', 'commands': [
-            say('QUENT', 'happy', "The gauges are SO pretty when they're red. I mean that as a scientist.")]},
-        {'type': 'npc', 'name': 'Wick', 'at': [8, 13], 'sprite': 'trainer_CHANNELER', 'dir': 'right', 'commands': [
-            say('WICK', 'neutral', "Hello. Mind the hose. It's the only thing in here that isn't hot.")]},
-        {'type': 'npc', 'name': 'Larch', 'at': [15, 16], 'sprite': 'trainer_PROFESSOR', 'dir': 'up', 'commands': [
-            say('LARCH', 'neutral', "Don't touch anything that glows. Which is everything. Don't touch anything.")]},
-        {'type': 'npc', 'name': 'Directorate soldier', 'at': [18, 10], 'sprite': 'trainer_COOLTRAINER_M', 'dir': 'down', 'commands': [
-            "Directorate Soldier: Sovereign's property. Move along."]},
-        {'type': 'npc', 'name': 'Directorate soldier b', 'at': [19, 10], 'sprite': 'trainer_COOLTRAINER_F', 'dir': 'down', 'commands': [
-            "Directorate Soldier: Don't look at the lever. Looking's how it starts."]},
-        {'type': 'npc', 'name': 'Hammer Bomber', 'at': [13, 14], 'sprite': 'trainer_BURGLAR', 'dir': 'down', 'commands': []},
+        actor(QUENT, 18, 13, 'QUENT', 'left', [say('QUENT', 'happy', "The gauges are SO pretty when they're red. I mean that as a scientist.")]),
+        actor(WICK, 8, 13, 'WICK', 'right', [say('WICK', 'neutral', "Hello. Mind the hose. It's the only thing in here that isn't hot.")]),
+        actor(LARCH, 15, 16, 'trainer_PROFESSOR', 'up', [say('LARCH', 'neutral', "Don't touch anything that glows. Which is everything. Don't touch anything.")]),
+        actor(SOLDIER_A, 18, 10, 'trainer_COOLTRAINER_M', 'down', ["Directorate Soldier: Sovereign's property. Move along."]),
+        actor(SOLDIER_B, 19, 10, 'trainer_COOLTRAINER_F', 'down', ["Directorate Soldier: Don't look at the lever. Looking's how it starts."]),
+        actor(BOMBER, 13, 14, 'trainer_BURGLAR', 'up', []),
+        walk_on(BRANN, 14, 18), walk_on('Hammer a', 12, 19), walk_on('Hammer b', 14, 19),
         {'type': 'sign', 'name': 'Gauge ring', 'at': [11, 8], 'post': False, 'text':
          "MERIDIAN STANDARD TAP No. 7. DRAW: ------>|. The needles lean into the red like they're trying to get out of it."},
         {'type': 'sign', 'name': 'Emergency lever', 'at': [18, 9], 'post': False, 'text':
@@ -188,6 +270,9 @@ def events_255(m):
         # Continuous walkway loop around the magma pit
         (9, 9), (9, 10), (9, 11), (9, 12), (9, 14), (10, 14), (11, 14), (15, 14), (16, 14), (17, 14),
         (17, 12), (17, 11), (17, 10), (17, 9), (16, 8), (15, 8), (10, 8),
+        # the scene's walks: Brann and the Hammers on the stair, Quent to the pipe, the soldiers giving way
+        (14, 18), (14, 17), (14, 16), (14, 15), (12, 19), (14, 19), (12, 18), (12, 17), (12, 16), (12, 15),
+        (18, 14), (20, 10), (21, 10),
     }
 
 

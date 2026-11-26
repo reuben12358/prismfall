@@ -43,43 +43,219 @@ events:
     trigger: autorun
     commands:
     - {script: Prismfall.checkpoint}
-    - '(The Tap Chamber: a round iron room around a pipe the width of a well, going down into rock that glows. A ring of gauges. A heat that pushes on your
-      face. Three groups, and nobody listening to anybody.)'
-    - '\pf[QUENT,happy]Quent: Oh, it''s YOU! The null reading! *giggling* Hold still, I''ve only got one probe.'
+    - if: $game_player.y >= 19
+      then:
+      - move:
+          who: player
+          route: [up, up]
+          wait: true
+      else:
+      - if: $game_player.y == 18
+        then:
+        - move:
+            who: player
+            route: [up]
+            wait: true
+    - &id007 {script: 'pbSEPlay("Anim/Earth4", 70, 70)
+
+        pfm_shake(2, 9, 16)
+
+        pfm_glow(64, 6, -30, 14, 4)'}
+    - move:
+        who: Quent
+        route:
+        - face_player
+        - jump: [0, 0]
+        - wait 4
+        - jump: [0, 0]
+        wait: true
+    - '\pf[QUENT,happy]Quent: Oh, it''s YOU! The null reading! Hold still, I''ve only got one probe.'
     - '\pf[QUENT,neutral]Quent: Dr. Percival Quent, Meridian Applied Sciences. These are dampers. We fit them, the draw evens out, the pressure drops, and
       Tap Seven keeps running. Everyone keeps their lights. It''s terribly simple.'
+    - move:
+        who: Brann
+        route:
+        - through_on
+        - graphic: [BRANN, 0, 8, 0]
+        - {opacity: 255}
+        - up
+        - up
+        - up
+        - up
+        - through_off
+        wait: true
+    - {se: GUI storage put down}
+    - {wait: 16}
+    - '\pf[BRANN,angry]Brann: "TAP SEVEN. CINDERVAULT. DESTINATION: RIMEHOLT — HEAT TOWERS ONE TO FOUR. SECONDARY: LUMEN GRID."'
+    - '\pf[BRANN,angry]Brann: Rimeholt. Our fire, piped over the mountains to keep the Thane''s people warm. And none of us was asked.'
+    - '\pf[QUENT,happy]Quent: Isn''t it marvellous? One mountain, two kingdoms! It''s the most efficient thing I''ve ever seen!'
+    - move:
+        who: player
+        route: [turn_left]
+        wait: true
+    - move:
+        who: Wick
+        route: [face_player]
+        wait: true
+    - raw:
+      - 203
+      - [4, 3, 4]
+    - {wait: 16}
     - '\pf[WICK,neutral]Wick: Hello.'
     - '\pf[WICK,sad]Wick: We open the old channels and run Lake Sallow down them, onto the Imprint. The fever breaks. The mountain sleeps. And the forges
       go cold for a season, and the ash comes down on the Ashmarch like snow.'
-    - '\pf[WICK,neutral]Wick: It isn''t kind. It''s only safe.'
-    - (Halfway up the iron ladder on the pipe, a figure in a grey cowl and a hammer-painted mask is strapping a brass-and-glass device to the collar. A
-      Splitter. It's ticking.)
+    - 'Wick: It isn''t kind. It''s only safe.'
+    - raw:
+      - 203
+      - [6, 3, 4]
+    - {wait: 16}
+    - move:
+        who: player
+        route: [turn_up]
+        wait: true
+    - &id001 {se: Voltorb Flip mark}
+    - &id002 {wait: 9}
+    - &id003 {se: Voltorb Flip mark}
+    - &id004 {wait: 9}
+    - &id005 {se: Voltorb Flip mark}
+    - &id006 {wait: 9}
+    - anim: [player, 3]
+    - move:
+        who: Hammer Bomber
+        route:
+        - turn_down
+        - jump: [0, 0]
+        wait: true
     - 'Hammer Bomber: Stay back! All of you! The Hollow, the Meridian, the lot!'
-    - 'Hammer Bomber: They''ll cover up a fever. They can''t cover up a mountain. When this goes, every screen in Velmora will show it, and THEN they''ll
-      listen.'
+    - 'Hammer Bomber: They''ll cover up a fever. They''ll cover up a crack. They can''t cover up a mountain. When this goes, every screen in Velmora will
+      show it, and THEN they''ll listen.'
     - '\pf[WICK,angry]Wick: There are families on the stairs, child.'
+    - move:
+        who: Brann
+        route:
+        - through_on
+        - {speed: 4}
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
     - 'Hammer Bomber: There were families in the Lowlight!'
     - {script: 'setBattleRule("field", :VOLCANIC)
 
         setBattleRule("double")'}
     - if: TrainerBattle.start(:HOLLOW_GRUNT_M, "Hammer", 8, :HOLLOW_GRUNT_F, "Hammer", 8)
       then:
-      - '(The bomber is cornered on the ladder. The Splitter is still ticking. He holds out his hand: a brass detonator with one red key.)'
+      - *id001
+      - *id002
+      - *id003
+      - *id004
+      - *id005
+      - *id006
+      - move:
+          who: Hammer Bomber
+          route: [down, wait 10]
+          wait: true
+      - In his hand, a brass detonator with one red key.
       - 'Hammer Bomber: You saw the Lowlight. I know you did. You were there.'
       - 'Hammer Bomber: Do it. They''ll finally listen.'
       - choices: [(Turn the key.), (Throw it into the glow.), (Don't take it.)]
         cancel: 3
         branches:
         - - {script: 'Prismfall.game_over(:GO_LET_THEM_LISTEN)'}
-        - [(It goes down the pipe's throat without a sound. The bomber watches it go.), 'Hammer Bomber: ...Coward.', '\pf[WICK,sad]Wick: No. That was the
-            brave one, child. You''ll understand in about ten years. I''m sorry it takes so long.']
-        - ['Hammer Bomber: ...No. No, I can''t either. I can''t either.', '(He drops it. Quent''s engineer stamps on it, hard, three times.)']
-      - (The bomber is gone up the stair. Quent unstraps the dead Splitter with two fingers and pockets it, humming. And the gauges keep climbing.)
+        - - {se: Battle throw}
+          - move:
+              who: Hammer Bomber
+              route: [turn_up]
+              wait: true
+          - {wait: 44}
+          - move:
+              who: Hammer Bomber
+              route: [turn_down]
+              wait: true
+          - 'Hammer Bomber: ...Coward.'
+          - '\pf[WICK,sad]Wick: No. That was the brave one, child. You''ll understand in about ten years. I''m sorry it takes so long.'
+        - - move:
+              who: Hammer Bomber
+              route:
+              - dir_fix_on
+              - jump: [0, 0]
+              - dir_fix_off
+              wait: true
+          - 'Hammer Bomber: ...No. No, I can''t either. I can''t either.'
+          - {se: Battle ball drop}
+          - {wait: 14}
+          - {script: '3.times { pbSEPlay("Rock Smash", 80, 120); pfm_shake(2, 14, 4); pbWait(0.3) }'}
+      - move:
+          who: Hammer Bomber
+          route:
+          - through_on
+          - {speed: 4}
+          - left
+          - down
+          - down
+          - down
+          - {opacity: 0}
+          wait: true
+      - move:
+          who: Quent
+          route:
+          - {speed: 4}
+          - down
+          - left
+          - left
+          - left
+          - left
+          - turn_up
+          - wait 8
+          - {se: GUI storage pick up}
+          - wait 12
+          - right
+          - right
+          - right
+          - right
+          - up
+          - turn_left
+          - {speed: 3}
+          wait: true
+      - {script: 'pfm_needle("Voltorb Flip mark", 90, 150, 30)'}
+      - *id007
+      - move:
+          who: Larch
+          route: [turn_up]
+          wait: true
+      - anim: [Larch, 3]
       - '\pf[LARCH,shocked]Larch: The bomb was never the problem. The tap''s still drawing. It''s still going UP.'
       - '\pf[QUENT,happy]Quent: Dampers, then! Help me fit them and we''re done by supper!'
       - '\pf[WICK,neutral]Wick: Or help me open the channels and we''re done by supper, and nobody''s done anything to the mountain it didn''t ask for.'
-      - '(Through the steam, on the Meridian side: a red lever under a glass cover. TAP 7 - EMERGENCY CLOSE - DIRECTORATE AUTHORISATION ONLY. Two Directorate
-        soldiers stand in front of it.)'
+      - raw:
+        - 203
+        - [8, 5, 4]
+      - raw:
+        - 203
+        - [6, 4, 4]
+      - {wait: 44}
+      - move:
+          who: Directorate soldier
+          route: [turn_right, wait 6, turn_down]
+          wait: false
+      - move:
+          who: Directorate soldier b
+          route: [turn_left, wait 6, turn_down]
+          wait: true
+      - TAP 7 - EMERGENCY CLOSE. DIRECTORATE AUTHORISATION ONLY.
+      - raw:
+        - 203
+        - [4, 4, 4]
+      - raw:
+        - 203
+        - [2, 5, 4]
+      - {wait: 44}
+      - move:
+          who: Larch
+          route: [face_player]
+          wait: true
       - '\pf[LARCH,neutral]Larch: Three doctors. Your call, I''m afraid. I''m only a professor.'
       - choices: [Help Wick vent it., Help Quent fit the dampers., Shut the tap down.]
         cancel: 0
@@ -92,14 +268,61 @@ events:
             then:
             - {script: 'pf_choose(:ch8_caldera, :vent)'}
             - '\pf[QUENT,neutral]Quent: Fine. Fine. I''ll write it up as a natural experiment. "Subject vents mountain." Do you know how rare that is?'
-            - (Lake water roars down the stone. Steam fills the chamber, white and then grey, and then the grey comes down as ash, soft, everywhere.)
-            - (The gauges fall. Out of the red. Through the amber. Into the green.)
+            - {script: 'pbSEPlay("Anim/Water5", 90, 80)
+
+                pfm_shake(4, 10, 30)
+
+                pfm_tone(110, 110, 120, 0, 24)'}
+            - {wait: 20}
+            - {script: 'pfm_tone(-24, -24, -18, 170, 50)'}
+            - {wait: 30}
+            - {script: 'pfm_needle("Voltorb Flip mark", 140, 60, 40)'}
             - '\pf[WICK,sad]Wick: There. It''s asleep. It''ll be cross when it wakes up.'
             - var: [CINDERVAULT_STATE, 1]
             - selfswitch: [B, true]
             else: []
         - - '\pf[WICK,sad]Wick: Then hold its mouth shut, if you must. It''ll still have a fever.'
-          - (The Hollow pick up their hose and go. But the Hammers come back down the stair with a third, and this time they're after the dampers.)
+          - move:
+              who: Wick
+              route:
+              - through_on
+              - {speed: 4}
+              - down
+              - right
+              - right
+              - right
+              - right
+              - down
+              - down
+              - down
+              - down
+              - {opacity: 0}
+              wait: true
+          - move:
+              who: Hammer a
+              route:
+              - through_on
+              - graphic: [trainer_BURGLAR, 0, 8, 0]
+              - {opacity: 255}
+              - {speed: 4}
+              - up
+              - up
+              wait: false
+          - move:
+              who: Hammer b
+              route:
+              - through_on
+              - graphic: [trainer_BURGLAR, 0, 8, 0]
+              - {opacity: 255}
+              - {speed: 4}
+              - up
+              - up
+              wait: true
+          - move:
+              who: player
+              route: [turn_down]
+              wait: true
+          - anim: [player, 3]
           - {script: 'pbRegisterPartner(:MERIDIAN_QUENT, "Percival", 0)
 
               setBattleRule("field", :VOLCANIC)
@@ -109,13 +332,43 @@ events:
             then:
             - {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
             - {script: 'pf_choose(:ch8_caldera, :dampers)'}
-            - (The engineers lock the brass rings round the pipe. The draw evens out. The gauges fall to the amber and stay there, humming.)
+            - move:
+                who: Hammer a
+                route:
+                - {speed: 4}
+                - down
+                - down
+                - {opacity: 0}
+                wait: false
+            - move:
+                who: Hammer b
+                route:
+                - {speed: 4}
+                - down
+                - down
+                - {opacity: 0}
+                wait: true
+            - {script: '3.times { pbSEPlay("Anim/metal", 80, 90); pfm_shake(1, 14, 3); pbWait(0.35) }'}
+            - {script: 'pfm_needle("Voltorb Flip mark", 140, 100, 40)'}
+            - {script: 'pfm_glow(40, 22, -24, 20, 10)'}
             - '\pf[QUENT,happy]Quent: Done by supper. I said! We should do this again. You''re very good at holding things.'
             - var: [CINDERVAULT_STATE, 2]
             - selfswitch: [B, true]
             else:
             - {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
-        - - 'Directorate Lieutenant: That''s Sovereign''s property. Step back from it.'
+        - - move:
+              who: player
+              route: [up, up, up, right, right, right, right, up, up, up, up, turn_right]
+              wait: true
+          - move:
+              who: Directorate soldier
+              route: [turn_left]
+              wait: false
+          - move:
+              who: Directorate soldier b
+              route: [turn_left]
+              wait: true
+          - 'Directorate Lieutenant: That''s Sovereign''s property. Step back from it.'
           - '\pf[QUENT,shocked]Quent: Oh, you CAN''T, that''s - that''s a whole tap, that''s MONTHS-'
           - {script: 'setBattleRule("field", :VOLCANIC)
 
@@ -123,8 +376,30 @@ events:
           - if: TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 0, :MERIDIAN_DIRECTORATE, "Lieutenant", 8)
             then:
             - {script: 'pf_choose(:ch8_caldera, :shutdown)'}
-            - (You break the glass and pull. The lever takes your whole weight. Somewhere far down, something very large stops turning.)
-            - (The gauges shudder, and drop, and keep dropping, and stop in the green. The forges up the walls stay lit.)
+            - move:
+                who: Directorate soldier b
+                route: [right]
+                wait: true
+            - move:
+                who: Directorate soldier
+                route: [right, turn_left]
+                wait: true
+            - move:
+                who: player
+                route: [right, turn_up]
+                wait: true
+            - {script: 'pbSEPlay("Rock Smash", 90, 140)
+
+                pfm_flash(255, 255, 255, 6, 150)'}
+            - {wait: 14}
+            - {script: 'pbSEPlay("Door slide", 100, 50)
+
+                pfm_shake(6, 6, 44)'}
+            - {wait: 50}
+            - {script: pbBGMFade(2.0)}
+            - {wait: 40}
+            - {script: 'pfm_needle("Voltorb Flip mark", 140, 50, 40)'}
+            - {script: 'pfm_needle("Voltorb Flip mark", 140, 40, 40)'}
             - '\pf[QUENT,sad]Quent: Seven taps in the realm. Now six. Someone''s going to be so cross with me.'
             - 'Directorate Lieutenant: This goes to the Directorate. With your name on it.'
             - '\pf[WICK,neutral]Wick: Spell it right.'
@@ -133,56 +408,107 @@ events:
             else: []
       - if: $game_self_switches[[255, @event_id, 'B']]
         then:
-        - '(Up the stair, out into the night. From the bell-tower, slowly, a single bell: one. All clear.)'
+        - {script: pfm_fade_out(30)}
+        - {wait: 20}
+        - {script: 'pbSEPlay("Anim/HealBell", 90, 60)'}
+        - {wait: 50}
+        - '\pf[BRANN,sad]Brann: One bell. One bell. I''ve never been so glad to hear one bell.'
+        - if: pf_choice(:ch8_caldera) == :vent
+          then: ['\pf[BRANN,sad]Brann: And my forges are out. All of them. For a season. ...Better cold than gone. I''ll grumble about it till spring. Let
+              me.']
+        - if: pf_choice(:ch8_caldera) == :dampers
+          then: ['\pf[BRANN,happy]Brann: And my forges are lit! You kept my forges lit!', '\pf[LARCH,neutral]Larch: For now. Ask me in a year how Emberfall''s
+              doing.']
+        - if: pf_choice(:ch8_caldera) == :shutdown
+          then: ['\pf[BRANN,shocked]Brann: You shut it. You actually shut it. With your hands. Sovereign''s property! HA!']
         - switch: [CH8_CALDERA_DONE, true]
         - var: [CH8_STEP, 6]
         - selfswitch: [A, true]
         - if: pbRgssExists?("Data/Map244.rxdata")
           then:
           - transfer: {map: 244, x: 10, y: 8, dir: up}
-          else: []
+          else:
+          - move:
+              who: player
+              route:
+              - {script: 'moveto(13, 17)'}
+              - turn_up
+              wait: true
+        - {script: 'pbBGMPlay($game_map.bgm) rescue nil
+
+            pfm_fade_in(40)'}
         else: []
       else: []
   - cond: {self: A}
     commands: []
   - cond: {switch: CH8_CALDERA_DONE}
     commands: []
-- type: npc
+- type: event
   name: Quent
   at: [18, 13]
-  sprite: trainer_SCIENTIST
-  dir: left
-  commands: ['\pf[QUENT,happy]Quent: The gauges are SO pretty when they''re red. I mean that as a scientist.']
-- type: npc
+  pages:
+  - graphic: {sprite: QUENT, dir: left}
+    commands: ['\pf[QUENT,happy]Quent: The gauges are SO pretty when they''re red. I mean that as a scientist.']
+  - cond: {switch: CH8_CALDERA_DONE}
+    commands: []
+- type: event
   name: Wick
   at: [8, 13]
-  sprite: trainer_CHANNELER
-  dir: right
-  commands: ['\pf[WICK,neutral]Wick: Hello. Mind the hose. It''s the only thing in here that isn''t hot.']
-- type: npc
+  pages:
+  - graphic: {sprite: WICK, dir: right}
+    commands: ['\pf[WICK,neutral]Wick: Hello. Mind the hose. It''s the only thing in here that isn''t hot.']
+  - cond: {switch: CH8_CALDERA_DONE}
+    commands: []
+- type: event
   name: Larch
   at: [15, 16]
-  sprite: trainer_PROFESSOR
-  dir: up
-  commands: ['\pf[LARCH,neutral]Larch: Don''t touch anything that glows. Which is everything. Don''t touch anything.']
-- type: npc
+  pages:
+  - graphic: {sprite: trainer_PROFESSOR, dir: up}
+    commands: ['\pf[LARCH,neutral]Larch: Don''t touch anything that glows. Which is everything. Don''t touch anything.']
+  - cond: {switch: CH8_CALDERA_DONE}
+    commands: []
+- type: event
   name: Directorate soldier
   at: [18, 10]
-  sprite: trainer_COOLTRAINER_M
-  dir: down
-  commands: ['Directorate Soldier: Sovereign''s property. Move along.']
-- type: npc
+  pages:
+  - graphic: {sprite: trainer_COOLTRAINER_M, dir: down}
+    commands: ['Directorate Soldier: Sovereign''s property. Move along.']
+  - cond: {switch: CH8_CALDERA_DONE}
+    commands: []
+- type: event
   name: Directorate soldier b
   at: [19, 10]
-  sprite: trainer_COOLTRAINER_F
-  dir: down
-  commands: ['Directorate Soldier: Don''t look at the lever. Looking''s how it starts.']
-- type: npc
+  pages:
+  - graphic: {sprite: trainer_COOLTRAINER_F, dir: down}
+    commands: ['Directorate Soldier: Don''t look at the lever. Looking''s how it starts.']
+  - cond: {switch: CH8_CALDERA_DONE}
+    commands: []
+- type: event
   name: Hammer Bomber
   at: [13, 14]
-  sprite: trainer_BURGLAR
-  dir: down
-  commands: []
+  pages:
+  - graphic: {sprite: trainer_BURGLAR, dir: up}
+    commands: []
+  - cond: {switch: CH8_CALDERA_DONE}
+    commands: []
+- type: event
+  name: Brann
+  at: [14, 18]
+  pages:
+  - through: true
+    commands: []
+- type: event
+  name: Hammer a
+  at: [12, 19]
+  pages:
+  - through: true
+    commands: []
+- type: event
+  name: Hammer b
+  at: [14, 19]
+  pages:
+  - through: true
+    commands: []
 - type: sign
   name: Gauge ring
   at: [11, 8]

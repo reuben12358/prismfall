@@ -34,10 +34,29 @@ module PrismfallLamplight
   #-----------------------------------------------------------------------------
   def starter_line
     r = Prismfall::Rival
-    line = r.line(r.starter_gen, r.kestrel_slot) || r.line(r::RIVAL_SOURCE_GEN, r.kestrel_slot)
-    return Array(line)
+    return (Array(r.line(r.starter_gen, r.kestrel_slot)) + Array(r.line(r::RIVAL_SOURCE_GEN, r.kestrel_slot))).uniq
   rescue StandardError
     return []
+  end
+
+  # The PBS party carries the source generation's starter line (the rival hook swaps it when a battle loads the
+  # trainer); the borrowed team gets the same swap, so Kestrel holds the starter he really picked.
+  def match_starter(party)
+    r = Prismfall::Rival
+    gen = r.starter_gen
+    return if gen == r::RIVAL_SOURCE_GEN
+    party.each do |pk|
+      info = r.lookup(pk.species)
+      next if !info || info[:gen] != r::RIVAL_SOURCE_GEN
+      line = r.line(gen, info[:slot])
+      sp = line && (line[info[:stage]] || line.last)
+      next if !sp || !GameData::Species.exists?(sp)
+      r.swap_species(pk, sp)
+      pk.calc_stats
+      pk.heal
+    end
+  rescue StandardError => e
+    PBDebug.log("[Lamplight] match_starter: #{e.class}: #{e.message}") if defined?(PBDebug)
   end
 
   def start
@@ -50,6 +69,7 @@ module PrismfallLamplight
     ok = Prismfall::Interlude.start(1, :drop => nil, :only => [:HONEDGE, :STARAVIA] + starter_line)
     return false if !ok
     party = $player.party
+    match_starter(party)
     morwen = party.find { |pk| pk.isSpecies?(:HONEDGE) }
     if morwen                                   # "Morwen. Up.": she leads
       party.delete(morwen)
@@ -183,7 +203,7 @@ module PrismfallLamplight
   def step_frame(s, pattern)
     cw = s.bitmap.width / 4
     r = s.src_rect
-    s.src_rect = Rect.new((pattern % 4) * cw, r.y, r.width, r.height)
+    s.src_rect = Rect.new((pattern % 4) * cw, r.y, r.width, r.height)       # keeps a cropped (legs only) row
   end
 
   #-----------------------------------------------------------------------------
@@ -217,14 +237,22 @@ module PrismfallLamplight
     glow.opacity = 0
     # the crowd: three depths, a lane left open up the middle. Backs to us: they are all looking at the lights.
     crowd = []
-    lanes = [[0.06, 0], [0.20, 1], [0.33, 2], [0.67, 2], [0.80, 1], [0.94, 0], [0.13, 2], [0.87, 2], [0.26, 0], [0.74, 0]]
+    # depth 0: right beside him, hems and legs only, half off the screen. 1: a row of backs. 2, 3: the crowd beyond.
+    lanes = [[0.02, 0], [0.98, 0], [0.19, 1], [0.81, 1], [0.31, 2], [0.69, 2], [0.10, 2], [0.90, 2],
+             [0.38, 3], [0.62, 3], [0.24, 3], [0.76, 3], [0.05, 3], [0.95, 3]]
     lanes.each_with_index do |(fx, depth), i|
       bmp = charset_bitmap(CROWD[i % CROWD.length], "NPC 01")
       next if !bmp
-      zoom, foot, z, dark = [[9.0, h + 70, 30, 235], [6.0, h + 6, 20, 205], [3.6, h - 70, 10, 165]][depth]
-      s = figure(vp, bmp, (i % 5 == 3) ? 2 : 3, zoom, (w * fx).round, foot, z, Color.new(34, 36, 48, dark))
+      zoom, foot, z, dark, tone = [[8.0, h + 24, 30, 240, 26], [5.0, h + 2, 20, 215, 44], [3.2, h - 58, 12, 190, 70],
+                                   [2.2, h - 104, 10, 170, 104]][depth]
+      s = figure(vp, bmp, (i % 5 == 3) ? 2 : 3, zoom, (w * fx).round, foot, z, Color.new(tone, tone + 2, tone + 12, dark))
+      if depth == 0                                # a small boy's height: coats and legs, no faces
+        ch = bmp.height / 4
+        s.src_rect = Rect.new(s.src_rect.x, s.src_rect.y + (ch * 2 / 5), s.src_rect.width, ch - (ch * 2 / 5))
+        s.oy = s.src_rect.height
+      end
       s.opacity = 0
-      crowd << [s, s.x, i * 1.7, (depth == 0) ? 7.0 : 4.0]
+      crowd << [s, s.x, i * 1.7, (depth == 0) ? 7.0 : 3.0]
     end
     # the woman in the veil, running away up the lane
     veil_bmp = charset_bitmap("MORWEN", "trainer_CHANNELER", "NPC 19")
@@ -326,7 +354,7 @@ module PrismfallLamplight
     b = sea.bitmap
     horizon = 52
     horizon.times { |y| b.fill_rect(0, y, pw, 1, Color.new(10 + (y / 6), 14 + (y / 5), 34 + (y / 3))) }           # night sky
-    (ph - horizon).times { |y| b.fill_rect(0, horizon + y, pw, 1, Color.new(6 + (y / 14), 16 + (y / 9), 30 + (y / 6))) }
+    (ph - horizon).times { |y| b.fill_rect(0, horizon + y, pw, 1, Color.new(14 + (y / 10), 30 + (y / 6), 52 + (y / 4))) }
     [[30, 10], [88, 22], [150, 8], [214, 30], [270, 14], [330, 24], [372, 9]].each { |sx, sy| b.fill_rect(sx % pw, sy, 2, 2, Color.new(200, 206, 230)) }
     b.fill_rect(0, horizon - 12, 70, 12, Color.new(4, 6, 12))                  # the harbour mole, left
     b.fill_rect(pw - 54, horizon - 9, 54, 9, Color.new(4, 6, 12))              # and right
@@ -334,10 +362,10 @@ module PrismfallLamplight
     # the Concert's cutters, lanterns lit
     [[pw * 0.26, horizon + 26], [pw * 0.78, horizon + 40]].each do |cx, cy|
       cx = cx.round
-      b.fill_rect(cx - 22, cy, 44, 7, Color.new(18, 20, 30))
-      b.fill_rect(cx - 16, cy + 7, 32, 3, Color.new(12, 14, 22))
-      b.fill_rect(cx - 1, cy - 30, 2, 30, Color.new(18, 20, 30))
-      b.fill_rect(cx + 1, cy - 28, 14, 18, Color.new(150, 150, 160, 70))
+      b.fill_rect(cx - 22, cy, 44, 7, Color.new(70, 74, 92))
+      b.fill_rect(cx - 16, cy + 7, 32, 3, Color.new(46, 50, 66))
+      b.fill_rect(cx - 1, cy - 30, 2, 30, Color.new(70, 74, 92))
+      b.fill_rect(cx + 1, cy - 28, 14, 18, Color.new(190, 190, 200, 120))
       b.fill_rect(cx - 20, cy - 5, 4, 4, Color.new(255, 214, 120))
       b.fill_rect(cx - 21, cy + 9, 6, 1, Color.new(255, 214, 120, 110))
     end
@@ -400,6 +428,8 @@ module PrismfallLamplight
     @beam = nil
   end
 
+  ROOM = { 106 => [1, 2, 12, 11], 105 => [3, 3, 17, 13] }       # x0, y0, x1, y1 in tiles: where the band shows
+
   def beam_update
     on = running? && !@lamp_hold && $game_map && MAPS.include?($game_map.map_id) && $scene.is_a?(Scene_Map)
     if !on
@@ -427,8 +457,22 @@ module PrismfallLamplight
       @beam.opacity = 0
     else
       p = k / sweep
-      @beam.x = (-190 + ((Graphics.width + 190) * p)).round
-      @beam.opacity = (peak * Math.sin(Math::PI * p)).round
+      x0, y0, x1, y1 = ROOM[$game_map.map_id]
+      left = ((x0 * Game_Map::REAL_RES_X) - $game_map.display_x) / Game_Map::X_SUBPIXELS
+      right = ((x1 * Game_Map::REAL_RES_X) - $game_map.display_x) / Game_Map::X_SUBPIXELS
+      top = ((y0 * Game_Map::REAL_RES_Y) - $game_map.display_y) / Game_Map::Y_SUBPIXELS
+      bottom = ((y1 * Game_Map::REAL_RES_Y) - $game_map.display_y) / Game_Map::Y_SUBPIXELS
+      bx = (left - 190 + ((right - left + 190) * p)).round
+      a = [bx, left].max
+      b = [bx + 190, right].min
+      if b <= a
+        @beam.opacity = 0
+      else
+        @beam.src_rect = Rect.new(a - bx, 0, b - a, [bottom - top, Graphics.height].min)
+        @beam.x = a
+        @beam.y = top
+        @beam.opacity = (peak * Math.sin(Math::PI * p)).round
+      end
     end
   end
 end
