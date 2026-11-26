@@ -85,9 +85,40 @@ BLUE_MARITIME_RUG = [
     [7504, 7505, 7506],
     [7512, 7513, 7514],
 ]
+ALPINE_SLATE = [
+    [1152, 1153, 1154],
+    [1160, 1161, 1162],
+    [1168, 1169, 1170],
+]
+SAGE_MARBLE = [
+    [1104, 1105, 1106],
+    [1112, 1113, 1114],
+    [1120, 1121, 1122],
+]
+HONEY_PARQUET = [
+    [1051, 1052, 1053],
+    [1059, 1060, 1061],
+    [1067, 1068, 1069],
+]
+BROWN_WOVEN_RUG = [
+    [8620, 8621, 8622],
+    [8628, 8629, 8630],
+    [8636, 8637, 8638],
+]
+CREAM_MEDALLION_RUG = [
+    [960, 961, 962],
+    [968, 969, 970],
+    [976, 977, 978],
+]
+NORDIC_RUG = [
+    [1008, 1009, 1010],
+    [1016, 1017, 1018],
+    [1024, 1025, 1026],
+    [1032, 1033, 1034],
+]
 
 # ---------------------------------------------------------------------------
-# Verified Multi-Tile Stamps (visually proofed from ts34_sheets/stamp_proof.png)
+# Verified Multi-Tile Stamps (visually proofed from ts34 atlas scans)
 # ---------------------------------------------------------------------------
 LOFT_STAIRS = [
     [5675, 5676, 5677],
@@ -184,6 +215,45 @@ SHER_BED_SINGLE = [
     [5338, 5339],
     [5346, 5347],
 ]
+CREAM_BED = [
+    [3600, 3601, 3602],
+    [3608, 3609, 3610],
+    [3616, 3617, 3618],
+    [3624, 3625, 3626],
+]
+TAPESTRY_GOLD = [
+    [5531, 5532],
+    [5539, 5540],
+]
+HERB_RACK = [
+    [5422],
+    [5430],
+    [5438],
+]
+LOOM_FRAME_A = [[3305], [3313]]
+LOOM_FRAME_B = [[3306], [3314]]
+LOOM_FRAME_C = [[3307], [3315]]
+LOOM_WARP_RAIL = [[4174, 4175], [4182, 4183]]
+LOOM_THREAD_CAB = [
+    [3308, 3309, 3310, 3311],
+    [3316, 3317, 3318, 3319],
+]
+TEXTILE_RACK = [[7484, 7485], [7492, 7493]]
+LUGGAGE_CLOTH_RACK = [[7486, 7487], [7494, 7495]]
+SALT_FIBER_CRATE = [[4186, 4187], [4194, 4195]]
+BLUE_DYE_CATCH_CRATE = [[4188, 4189], [4196, 4197]]
+RODBUCKET_FULL = [[4060, 4061], [4068, 4069]]
+TIMBER_STACK = [[4826, 4827, 4828], [4834, 4835, 4836]]
+RAKE_TOOLS = [[4870, 4871], [4878, 4879]]
+TOOL_RACK = [[4869, 4870, 4871], [4877, 4878, 4879]]
+SPICE_SHELF = [[3440, 3441], [3448, 3449]]
+CHALKBOARD = [
+    [3276, 3277, 3278],
+    [3284, 3285, 3286],
+]
+PAINTING_HARBOR_A = [[7137], [7145]]
+PAINTING_HARBOR_B = [[7138], [7146]]
+COAT_STAND = [[2271], [2279]]
 
 
 # ---------------------------------------------------------------------------
@@ -230,6 +300,70 @@ def _put_9slice(L, tiles9, x0, y0, x1, y1, z=0, mask=None):
                 continue
             rx = 0 if x == x0 else (2 if x == x1 else 1)
             L[z, y, x] = tiles9[ry][rx]
+
+
+def _put_oak_inlay(L, x0, y0, x1, y1, mask=None):
+    """Warm Sheridan coastal oak timber floorboards (5352..5363) inlaid cleanly inside weathered slate rooms."""
+    H, W = L.shape[1:]
+    for y in range(max(0, y0), min(H, y1 + 1)):
+        top_row = (y == y0)
+        for x in range(max(0, x0), min(W, x1 + 1)):
+            if mask is not None and not mask[y, x]:
+                continue
+            left_edge = (x == x0)
+            if top_row:
+                L[0, y, x] = 5352 if left_edge else 5353 + (x - x0) % 3
+            else:
+                L[0, y, x] = 5360 if left_edge else 5361 + (x - x0) % 3
+
+
+def _put_nordic_rug(L, x0, y0, x1, y1, z=1, mask=None):
+    """Fringed woven hearth/tavern rug (1008..1034, all pas=0)."""
+    H, W = L.shape[1:]
+    for y in range(max(0, y0), min(H, y1 + 1)):
+        ry = 0 if y == y0 else (3 if y == y1 else (1 if (y - y0) % 2 == 1 else 2))
+        for x in range(max(0, x0), min(W, x1 + 1)):
+            if mask is not None and not mask[y, x]:
+                continue
+            rx = 0 if x == x0 else (2 if x == x1 else 1)
+            L[z, y, x] = NORDIC_RUG[ry][rx]
+
+
+def _put_lamp(L, x, y):
+    """Subtle 1x2 warm indoor brass floor lamp (2247 pri=1 over 2255 pas=15; MAX 1 per room!)."""
+    H, W = L.shape[1:]
+    if 0 <= y - 1 < H and 0 <= x < W:
+        L[2, y - 1, x] = 2247
+    if 0 <= y < H and 0 <= x < W:
+        L[1, y, x] = 2255
+
+
+def _put_stove(L, x, y, kettle=True):
+    """Crackling cast-iron hearth stove (kettle=2470/2478, plain=2464/2472)."""
+    H, W = L.shape[1:]
+    if 0 <= y - 1 < H and 0 <= x < W:
+        L[2, y - 1, x] = 2470 if kettle else 2464
+    if 0 <= y < H and 0 <= x < W:
+        L[1, y, x] = 2478 if kettle else 2472
+
+
+def _put_dressed_table(L, x, y, item_l=0, item_r=0):
+    """2x2 timber table (3466..3475) cleanly dressed with L2 tabletop items (plates, mugs, ledgers, cloth)."""
+    L[1, y, x] = 3466; L[1, y, x + 1] = 3467
+    L[1, y + 1, x] = 3474; L[1, y + 1, x + 1] = 3475
+    if item_l:
+        L[2, y, x] = item_l
+    if item_r:
+        L[2, y, x + 1] = item_r
+
+
+def _put_dressed_workbench(L, x, y, i0=0, i1=0, i2=0):
+    """3x2 timber artisan workbench (4082..4092) dressed with L2 craft props (cloth bolts, tools, ledgers)."""
+    L[1, y, x] = 4082; L[1, y, x + 1] = 4083; L[1, y, x + 2] = 4084
+    L[1, y + 1, x] = 4090; L[1, y + 1, x + 1] = 4091; L[1, y + 1, x + 2] = 4092
+    for dx, t in enumerate((i0, i1, i2)):
+        if t:
+            L[2, y, x + dx] = t
 
 
 def _put_tree(L, x, y, style='parlor'):
@@ -478,7 +612,7 @@ def build_102():
 
 
 def build_104():
-    """104: Tidewater Inn (21x18).
+    """104: Tidewater Inn (21x18) — Cozy Coastal Harbor Inn & Maritime Tavern.
     Events: #1 Exit (10,14), #2 Innkeeper (4,6), #3 Inn Guest (8,11), #4 Inn Guest 2 (13,7).
     """
     W, H = 21, 18
@@ -490,48 +624,61 @@ def build_104():
     floor[14, 9:12] = True
     _seam_room(L, floor, wall_style='sheridan', floor_style='oak')
 
-    # Floor zoning: coastal slate hearth kitchen + grand crimson-gold dining rug + east guest carpet
-    _put_9slice(L, SLATE_STONE, 10, 5, 14, 6, z=0, mask=floor)
-    _put_9slice(L, HOTEL_CRIMSON_RUG, 7, 8, 13, 12, z=1, mask=floor)
-    _put_9slice(L, SHER_RUG, 14, 8, 17, 11, z=1, mask=floor)
+    # Floor zoning: herringbone slate hearth kitchen + fringed Nordic tavern rug + warm brown woven guest alcove rug!
+    _put_9slice(L, ALPINE_SLATE, 8, 5, 13, 6, z=0, mask=floor)
+    _put_nordic_rug(L, 7, 8, 12, 12, z=1, mask=floor)
+    _put_9slice(L, BROWN_WOVEN_RUG, 14, 8, 16, 11, z=1, mask=floor)
     _doormat(L, 10, 14)
 
-    for wx in (6, 10, 15):
-        _sher_window(L, wx, 3)
+    # Maritime tavern north wall: harbor chart (clear of shelf_bottles & kitchen!), clock at (14,3), arched windows, pilasters & life ring
+    _put_grid(L, SEA_CHART, 6, 3, z_rows=(1, 1))
+    _put_tf(L, 'clock', 14, 3)
+    _sher_window(L, 10, 3)
     _sher_pilaster(L, 8, 3)
     _sher_pilaster(L, 13, 3)
-    _put_tf(L, 'painting3', 4, 3)
-    _put_tf(L, 'clock', 7, 3)
-    _put_tf(L, 'shelf_bottles', 5, 4)
+    _sher_window(L, 15, 3)
+    _put_tf(L, 'lifering', 16, 3)
+    _put_tf(L, 'shelf_bottles', 4, 4)
 
-    # Seamless Sheridan innkeeper counter wrapping Innkeeper (4,6)
+    # Innkeeper's mahogany reception counter & registry wrapping Innkeeper (4,6) -> pure 0x80 at (4,7)!
+    L[1, 5, 6] = 5662
     L[1, 6, 6] = 5658
     for x, t in ((3, 5664), (4, 5665), (5, 5665), (6, 5666)):
         L[1, 7, x] = t
-    _put_tf(L, 'kitchen', 11, 4)
-    _put_tf(L, 'food_table', 9, 5)
-    _put_tf(L, 'dining', 9, 8)
-    L[2, 9, 8] = 4077
-    L[2, 10, 12] = 4077
-    L[2, 8, 12] = 4077
+    L[2, 7, 3] = 3428                                     # Open guest registry ledger on left end of reception counter!
+    L[2, 7, 5] = 4528                                     # Warm tavern mug & bell on right side of counter (4,7 stays pure 0x80!)
 
-    # COMPLETE 3x3 Sheridan mahogany guest beds with headboards on east alcove!
-    _put_grid(L, SHER_BED_FULL, 15, 5, z_rows=(2, 1, 1))   # North guest bed (15..17, 5..7)
-    _put_grid(L, SHER_BED_FULL, 15, 9, z_rows=(2, 1, 1))   # South guest bed (15..17, 9..11)
-    L[1, 8, 17] = 5580
-    L[1, 12, 15] = 5580
-    _put_tf(L, 'bunk_b', 3, 9)
-    _put_grid(L, SHER_CHEST, 5, 12, z_rows=(2, 1))
-    _put_tf(L, 'barrel_y', 13, 12)
-    _put_tree(L, 14, 12, 'fern')
-    _put_tree(L, 3, 4, 'ficus')
-    L[1, 13, 8] = 3391
+    # Warm hearth kitchen & steaming kettle stove (clear of Inn Guest 2 @ (13,7)!)
+    _put_stove(L, 8, 5, kettle=True)
+    _put_tf(L, 'kitchen', 9, 4)
+    L[1, 6, 8] = 4101                                     # Oak kindling & wash bucket beside hearth
+
+    # Cozy dressed maritime tavern dining tables & backed wooden chairs (clear of Inn Guest @ (8,11)!)
+    _put_dressed_table(L, 9, 8, 4537, 4528)               # North tavern table w/ roast plate & steaming cider mug
+    L[2, 9, 8] = 2604; L[2, 9, 11] = 2605; L[1, 7, 10] = 2606
+    _put_dressed_table(L, 9, 11, 4529, 4537)              # South tavern table beside Inn Guest (8,11) w/ goblet & supper
+    L[2, 11, 11] = 2605
+
+    # West hearthside lounge & maritime storage
+    _put_grid(L, SOFA_GREY, 3, 9, z_rows=(2, 1))          # Cozy parlor lounge sofa
+    _put_lamp(L, 6, 10)                                   # Single warm reading lamp beside parlor sofa (max 1!)
+    _put_tf(L, 'barrel_y', 3, 11)                         # Spiced cider keg
+    _put_grid(L, SHER_CHEST, 5, 12, z_rows=(2, 1))        # Guest luggage chest
+
+    # Calm coastal guest sleeping alcove (warm cream-quilt timber bed + ocean-blue bunk — zero neon-red clash!)
+    _put_grid(L, CREAM_BED, 15, 5, z_rows=(2, 1, 1, 1))   # North cream-quilt inn bed (15..17, 5..8)
+    _put_tf(L, 'bunk_b', 16, 10)                          # South calm coastal guest bed (16..17, 10..12)
+    _put_grid(L, COAT_STAND, 13, 12, z_rows=(2, 1))       # Guest cloak & hat stand by foyer (clear of clock at 14,3!)
+    L[1, 11, 15] = 5580                                   # Traveler's leather satchel
+    _put_tree(L, 14, 11, 'fern')
+    _put_tree(L, 3, 4, 'parlor')
+    L[1, 13, 12] = 7178                                   # Blooming potted coastal flowers by foyer
 
     return _finalize(L, 104, [(10, 14), (4, 6), (8, 11), (13, 7)])
 
 
 def build_107():
-    """107: Dockmaster's House (20x16).
+    """107: Dockmaster's House (20x16) — Coastal Harbor Charts, Manifest Ledger & Freight Office.
     Events: #1 Exit (8,12), #2 Dockmaster (5,7), #3 Dockmaster's ledger (7,5).
     """
     W, H = 20, 16
@@ -543,33 +690,38 @@ def build_107():
     floor[12, 7:10] = True
     _seam_room(L, floor, wall_style='sheridan', floor_style='oak')
 
-    # Floor zoning: neat slate freight corner (3..5, 8..10) + warm braided study rug (7..10, 7..10)
-    _put_9slice(L, SLATE_STONE, 3, 8, 5, 10, z=0, mask=floor)
-    _put_9slice(L, SHER_RUG, 7, 7, 10, 10, z=1, mask=floor)
+    # Floor zoning: herringbone coastal slate freight bay + distinct sea-blue maritime study rug (zero red rug!)
+    _put_9slice(L, ALPINE_SLATE, 3, 8, 5, 10, z=0, mask=floor)
+    _put_9slice(L, BLUE_MARITIME_RUG, 7, 7, 10, 10, z=1, mask=floor)
     _doormat(L, 8, 12)
 
-    _sher_porthole(L, 4, 3)
-    _sher_window(L, 10, 3)
+    # Decluttered maritime harbor wall: shipping map, unclipped life ring, arched window & complete 1x2 harbor painting
     _put_tf(L, 'map_wall', 6, 3)
-    _put_tf(L, 'lifering', 11, 3)
+    _put_tf(L, 'lifering', 10, 3)
+    _sher_window(L, 12, 3)
+    _put_grid(L, PAINTING_HARBOR_A, 14, 3, z_rows=(1, 1)) # Complete 1x2 framed harbor painting (7137/7145)
 
-    # Dockmaster's office: desk north of Dockmaster (5,7), ledger desk cleanly at (7..8, 5..6) -> Dockmaster's ledger (7,5)!
-    _put_grid(L, SHER_BOOKCASE, 3, 3, z_rows=(2, 1, 1))   # Tall shipping archive bookcase NW (3..4, 3..5)
-    _put_grid(L, SHER_DESK, 7, 4, z_rows=(2, 1))          # Ledger desk (7..8, 4..5) cleanly on Dockmaster's ledger (7,5)!
-    L[2, 5, 7] = 3428                                     # Open unscheduled crossing ledger on desk!
-    _put_tf(L, 'table_dark', 8, 8)
-    L[2, 9, 10] = 4077
-    # Unclaimed harbour freight on slate pad (west)
+    # Dockmaster's office: shipping archives NW + manifest ledger desk cleanly on Dockmaster's ledger (7,5)!
+    _put_grid(L, SHER_BOOKCASE, 3, 3, z_rows=(2, 1, 1))
+    _put_grid(L, SHER_DESK, 7, 4, z_rows=(2, 1))
+    L[2, 5, 7] = 3428                                     # Open unscheduled crossing manifest ledger!
+    _put_lamp(L, 9, 6)                                    # Single subtle lantern cleanly clear of north wall & desk (max 1!)
+    _put_dressed_table(L, 8, 8, 3428, 4528)               # Coastal chart & tea table on blue maritime rug
+    L[2, 9, 7] = 2604; L[2, 9, 10] = 2605                 # Backed timber chairs flanking chart table
+
+    # Unclaimed harbour cargo bay on west slate pad
     _put_tf(L, 'crate_i', 3, 8)
-    _put_tf(L, 'barrel_y', 5, 10)
-    _put_tf(L, 'rodbucket', 6, 10)
-    # East cozy sleeping alcove
-    _put_tf(L, 'bigbed', 12, 5)
-    _put_tf(L, 'drawer', 10, 5)
-    L[1, 9, 13] = 5580
+    _put_tf(L, 'barrel_b', 5, 8)
+    L[1, 10, 3] = 4101                                    # Tar & oak deck bucket
+    _put_grid(L, RODBUCKET_FULL, 5, 10, z_rows=(2, 1))    # Intact fishing/sounding pole bucket (5,11 solid; 6,11 line)
+
+    # East cozy maritime quarters & barometer/log drawer (shifted below lifering so lifering hangs 100% unclipped!)
+    _put_tf(L, 'drawer', 10, 5)                           # Barometer & log drawer
+    _put_tf(L, 'bed_blue', 12, 5)                         # Calm ocean-blue harbormaster's bed
+    L[1, 10, 12] = 5580                                   # Sea chest & satchel
     _put_tree(L, 15, 5, 'parlor')
     _put_tree(L, 14, 9, 'fern')
-    L[1, 11, 11] = 3391
+    L[1, 11, 11] = 3391                                   # Coastal houseplant beside foyer
 
     return _finalize(L, 107, [(8, 12), (5, 7), (7, 5)])
 
@@ -681,7 +833,9 @@ def build_122():
 
 
 def build_123():
-    """123: Weavers' Guildhall (Ground x=3..17) + Warden's Loft (East x=24..34), 41x18."""
+    """123: Weavers' Guildhall (Ground x=3..17) + Warden's Loft (East x=24..34), 41x18.
+    Bustling silk-weaving studio with upright timber looms, yarn-spool cabinets, dressed workbenches & tapestries!
+    """
     W, H = 41, 18
     L = np.zeros((3, H, W), dtype=np.int32)
     floor = np.zeros((H, W), dtype=bool)
@@ -696,49 +850,67 @@ def build_123():
 
     _seam_room(L, floor, wall_style='sheridan', floor_style='oak')
 
-    # Ground floor zoning: emerald silk alcoves + ornate crimson-silver guild runner
-    for y in range(6, 11):
-        for x in (3, 4, 16, 17):
-            if floor[y, x]:
-                L[0, y, x] = FLOOR_GLASS
-    _put_9slice(L, HOTEL_CRIMSON_RUG, 8, 9, 12, 13, z=1, mask=floor)
+    # --- GROUND FLOOR: BRIARWICK WEAVERS' GUILDHALL (x=3..17) ---
+    # Warm cedar oak planks + soft sage botanical dye pad + rich woven walnut-tan guild runner (ZERO generic red box!)
+    _put_9slice(L, SAGE_MARBLE, 14, 9, 17, 11, z=0, mask=floor)
+    _put_9slice(L, BROWN_WOVEN_RUG, 8, 9, 12, 13, z=1, mask=floor)
     _doormat(L, 10, 14)
 
+    # North wall: Moth tally board (4,5), colorful yarn-spool thread cabinet, golden woven tapestry, shoji & loft stairs!
     _put_grid(L, BULLETIN_BOARD, 3, 3, z_rows=(1, 1))
-    L[1, 5, 4] = 3456
-    _sher_window(L, 7, 3)
-    _sher_window(L, 12, 3)
-    _put_grid(L, SHOJI_BLOSSOM, 8, 3, z_rows=(1, 1))
-    # Complete Sheridan stairs finishing cleanly with bottom landing rows above Loft stairs up (16,6)!
+    L[1, 5, 3] = 3456; L[1, 5, 4] = 3457                  # Complete 2-wide tally ledge squarely under Moth tally board (4,5)!
+    _put_grid(L, LOOM_THREAD_CAB, 6, 3, z_rows=(1, 1))    # 4x2 colorful yarn-spool & warp-thread wall cabinet!
+    _put_grid(L, TAPESTRY_GOLD, 10, 3, z_rows=(1, 1))     # Hanging golden woven Briarwick silk tapestry!
+    _put_grid(L, SHOJI_BLOSSOM, 12, 3, z_rows=(1, 1))
+    # Complete Sheridan stairs finishing cleanly above Loft stairs up (16,6)!
     _put_grid(L, LOFT_STAIRS[1:], 15, 3, z_rows=(2, 1, 1))
 
-    _put_grid(L, SHER_CHEST, 3, 11, z_rows=(2, 1))
-    _put_tf(L, 'workbench', 5, 8)
-    _put_tf(L, 'workbench', 12, 7)
-    _put_tf(L, 'easel1', 14, 4)
-    _put_tf(L, 'wardrobe', 6, 4)
-    _put_grid(L, BONSAI, 11, 5, z_rows=(2, 1))
-    _put_grid(L, FLOWER_CART, 15, 9, z_rows=(2, 1))
-    L[1, 12, 13] = 4077
-    L[1, 12, 6] = 4101
-    _put_tree(L, 3, 6, 'parlor')
-    _put_tree(L, 14, 11, 'fern')
+    # Upright Timber Weaving Looms, Warp Frames & Dyed Fiber Baskets (west loom gallery — zero oil-painting easels!)
+    _put_grid(L, LOOM_WARP_RAIL, 5, 5, z_rows=(2, 1))     # Upright timber warp loom frame #1 (5..6, 5..6)
+    _put_grid(L, LOOM_FRAME_B, 3, 8, z_rows=(2, 1))       # Upright blank tapestry loom frame (3, 8..9)
+    _put_grid(L, SALT_FIBER_CRATE, 3, 10, z_rows=(2, 1))  # Raw white silk bolts basket squarely on Silk bolts (3,11)!
+    _put_grid(L, BLUE_DYE_CATCH_CRATE, 6, 11, z_rows=(2, 1))  # Dyed indigo fiber basket (leaves 3..5,12 WIDE OPEN!)
+    L[1, 13, 5] = 2256                                    # Stacked folded white silk cloth bolts in SW corner
 
-    # Warden's Loft (warm cedar planks + rich crimson woven rug — ZERO white glare!)
-    _put_9slice(L, SHER_RUG, 27, 7, 31, 10, z=1, mask=floor)
-    _sher_window(L, 28, 2)
-    _sher_window(L, 30, 2)
-    _put_tf(L, 'clock', 33, 3)
-    _put_grid(L, SHER_BOOKCASE, 24, 3, z_rows=(2, 1, 1))
-    _put_tf(L, 'bookshelf_s', 26, 4)
-    _put_grid(L, SHER_DESK, 28, 5, z_rows=(2, 1))
-    L[2, 6, 28] = 3428
-    L[2, 8, 29] = 4077
-    # Grounded woven pot framing Loft stairs down (25,9) without blocking (25,9) or arrival (27,9)!
-    L[1, 8, 24] = 4101
-    _put_tf(L, 'crates3', 32, 8)
-    _put_tree(L, 34, 5, 'parlor')
-    L[1, 11, 29] = 7178
+    # Twin Dressed Artisan Weaving Workbenches (folded cloth bolts, pattern books & dye jars — NOT blank brown slabs!)
+    _put_dressed_workbench(L, 5, 8, 4546, 4547, 3428)     # West loom cutting & pattern bench (5..7, 8..9)
+    L[1, 10, 7] = 4077                                    # Weaver's bobbin-winding stool
+    _put_dressed_workbench(L, 11, 7, 4547, 4546, 4528)    # East silk-dyeing & folding workbench (11..13, 7..8)
+    L[1, 8, 10] = 4077                                    # Companion weaver's stool (leaves Hett 8,7 & Apprentice 12,10 open!)
+    _put_lamp(L, 10, 5)                                   # Single warm studio lamp beneath golden tapestry (max 1!)
+
+    # East Loom Warp Frame, Botanical Dye Cart & Indigo Vat (1-tile breathing space clear of FLOWER_CART 15..16,9..10!)
+    _put_grid(L, LOOM_WARP_RAIL, 16, 7, z_rows=(2, 1))    # Second upright timber warp loom frame (16..17, 7..8)!
+    _put_grid(L, FLOWER_CART, 15, 9, z_rows=(2, 1))       # Dyed-petal & floral mordant cart (15..16, 9..10)
+    _put_tf(L, 'barrel_b', 17, 9)                         # Indigo silk dye vat (17, 9..10)
+    L[1, 12, 14] = 4101                                   # Oak dye-rinse bucket
+    _put_tree(L, 13, 11, 'fern')
+    L[1, 13, 13] = 7178                                   # Blooming guild planter beside foyer
+
+    # --- EAST ROOM: WARDEN'S LOFT (x=24..34) ---
+    # Warm cedar planks + slate stairwell landing + cream-and-gold medallion woven rug (distinct from ground hall!)
+    _put_9slice(L, ALPINE_SLATE, 24, 8, 26, 9, z=0, mask=floor)
+    _put_9slice(L, CREAM_MEDALLION_RUG, 27, 7, 31, 10, z=1, mask=floor)
+    _sher_window(L, 27, 2)
+    _put_grid(L, TAPESTRY_GOLD, 28, 2, z_rows=(1, 1))     # Warden's ceremonial golden woven tapestry!
+    _sher_window(L, 31, 2)
+    _put_grid(L, SHER_BOOKCASE, 24, 3, z_rows=(2, 1, 1))  # Guild pattern & dye archive bookcase
+    _put_tf(L, 'clock', 26, 3)                            # Un-cramped grandfather clock beside archive bookcase!
+    _put_lamp(L, 27, 5)                                   # Single warm reading lamp cleanly in apse NW corner (max 1!)
+    _put_grid(L, SHER_DESK, 28, 5, z_rows=(2, 1))         # Master Guild ledger desk cleanly on (28,6)!
+    L[2, 6, 28] = 3428                                    # Open Guild ledger!
+    _put_grid(L, LOOM_FRAME_B, 32, 5, z_rows=(2, 1))      # Warden's upright master loom (32, 5..6)
+    _put_grid(L, BLUE_DYE_CATCH_CRATE, 33, 6, z_rows=(2, 1))  # Dyed indigo silk skein crate (33..34, 6..7)
+    _put_grid(L, SALT_FIBER_CRATE, 32, 8, z_rows=(2, 1))  # Fine combed white silk bolt basket (32..33, 8..9)
+    _put_dressed_table(L, 29, 8, 4546, 4528)              # Swatch inspection & tea table on medallion rug (29..30, 8..9)
+    L[2, 9, 28] = 4077                                    # Weaver's stool beside swatch table
+    # Visible descending Loft stairwell hatch (24..25, 7..8) + unmistakable step-down threshold mat (24..26, 9) at E11 (25, 9)!
+    _put_grid(L, [[4824, 4825], [4832, 4833]], 24, 7, z_rows=(2, 1))
+    L[1, 9, 24] = 5512; L[1, 9, 25] = 5513; L[1, 9, 26] = 5514
+    L[1, 11, 25] = 2256                                   # Folded white silk stack south of stairwell landing
+    L[1, 11, 26] = 4101                                   # Rinse pot cleanly off stairwell landing
+    _put_tree(L, 34, 4, 'parlor')
+    L[1, 11, 31] = 7178                                   # Blooming potted botanical accent
 
     return _finalize(
         L, 123,
@@ -748,7 +920,7 @@ def build_123():
 
 
 def build_124():
-    """124: Treetop House (West x=3..11) + Briarwick Chapel (East x=23..35), 40x18.
+    """124: Treetop House (West x=3..11) + Briarwick Canopy Lodge / Sanctuary (East x=23..35), 40x18.
     Events: House Exit (7,12), Retired Weaver (8,8), Bookshelf (9,5), Loom (3,8);
             Chapel Exit (29,14), Chapel mural (29,5), Child in pew (28,9), Chapel window (33,5).
     """
@@ -767,47 +939,58 @@ def build_124():
 
     _seam_room(L, floor, wall_style='sheridan', floor_style='oak')
 
-    # --- ROOM 1: TREETOP HOUSE (x=3..11) ---
-    _put_9slice(L, SHER_RUG, 5, 7, 9, 10, z=1, mask=floor)
+    # --- ROOM 1: TREETOP HOUSE (x=3..11) — Warm Living-Wood Weaver's Canopy Cottage ---
+    _put_9slice(L, BROWN_WOVEN_RUG, 5, 7, 9, 10, z=1, mask=floor)
     _doormat(L, 7, 12)
     _sher_window(L, 7, 3)
-    _put_tf(L, 'bunk_o', 3, 5)                              # Complete 2x3 warm quilted weaver's bed (3..4, 5..7)
-    # Loom at (3,8): narrow 1-wide tape loom easel (3, 8..9) so (4,8) & (4,9) are WIDE OPEN & REACHABLE!
-    _put_tf(L, 'easel1', 3, 8)
-    _put_grid(L, SHER_BOOKCASE, 9, 3, z_rows=(2, 1, 1))
-    _put_tf(L, 'dresser', 6, 4)
-    _put_tf(L, 'table_tea', 6, 8)
-    L[2, 9, 8] = 4077
-    _put_tree(L, 11, 5, 'parlor')
-    _put_tree(L, 4, 10, 'fern')
-    L[1, 10, 10] = 7178
+    _put_tf(L, 'bunk_o', 3, 5)                              # Warm quilted weaver's bed (3..4, 5..7)
+    _put_grid(L, LOOM_FRAME_B, 3, 8, z_rows=(2, 1))         # Upright tapestry loom cleanly on Loom (3,8)!
+    _put_grid(L, SHER_BOOKCASE, 9, 3, z_rows=(2, 1, 1))     # Timber bookshelf cleanly on Bookshelf (9,5)!
+    _put_stove(L, 6, 5, kettle=True)                        # Cozy steaming canopy kettle hearth!
+    L[1, 5, 5] = 4101                                       # Kindling & herbal tea bucket
+    _put_dressed_table(L, 6, 8, 3428, 4528)                 # Canopy tea & pattern table (6..7, 8..9)
+    L[2, 9, 5] = 2604                                       # Backed wooden chair (Retired Weaver @ 8,8 wide open!)
+    _put_lamp(L, 10, 7)                                     # Single reading lamp tucked beside bookshelf (max 1!)
+    _put_grid(L, HERB_RACK, 11, 7, z_rows=(2, 1, 1))        # Botanical hanging herb planter along east timber wall
+    _put_tree(L, 11, 4, 'parlor')
+    L[1, 10, 4] = 7178                                      # Blooming botanical planter
+    L[1, 10, 10] = 3391                                     # Cozy potted fern by doorway
 
-    # --- ROOM 2: BRIARWICK CHAPEL (x=23..35) — STATELY SLATE-MARBLE SANCTUARY ---
-    # Rich dark-slate diamond marble (7752..7770) framing the glowing crimson-silver velvet aisle runner!
-    _put_9slice(L, HOTEL_MARBLE, 23, 5, 35, 13, z=0, mask=floor)
-    _put_9slice(L, HOTEL_MARBLE, 26, 4, 32, 5, z=0, mask=floor)
-    _put_9slice(L, HOTEL_CRIMSON_RUG, 28, 5, 30, 13, z=1, mask=floor)
+    # --- ROOM 2: BRIARWICK CANOPY LODGE & SANCTUARY (x=23..35) ---
+    # Warm living-wood Sheridan oak planks across the entire canopy lodge + soft sage botanical planter alcoves
+    # + warm cream-and-gold woven sanctuary carpet (ZERO clashing diamond checker floor, ZERO bright mustard!)
+    _put_9slice(L, SAGE_MARBLE, 23, 5, 25, 7, z=0, mask=floor)
+    _put_9slice(L, SAGE_MARBLE, 33, 5, 35, 7, z=0, mask=floor)
+    _put_9slice(L, CREAM_MEDALLION_RUG, 27, 6, 31, 12, z=1, mask=floor)
     _doormat(L, 29, 14)
 
+    # North living-wood apse: central sanctuary mural (29,5) flanked by timber bookshelves & sunlit arched windows!
     _put_grid(L, HOTEL_PORTRAIT, 28, 2, z_rows=(1, 1))
-    _put_tf(L, 'table_dark', 28, 4)
-    _put_tf(L, 'shelf_low', 30, 5)
-    _sher_pilaster(L, 27, 2)
-    _sher_pilaster(L, 31, 2)
-    _put_grid(L, COASTAL_ARCH_WIN, 33, 3, z_rows=(1, 1))
-    _put_grid(L, COASTAL_ARCH_WIN, 24, 3, z_rows=(1, 1))
-    L[1, 5, 33] = 7178
-    L[1, 5, 25] = 7178
+    _put_tf(L, 'table_dark', 28, 4)                         # Sanctuary altar/table cleanly backing Chapel mural (29,5)!
+    _put_grid(L, SHER_BOOKCASE, 26, 2, z_rows=(2, 1, 1))    # West apse timber bookshelf (26..27, 2..4)
+    _put_grid(L, SHER_BOOKCASE, 31, 2, z_rows=(2, 1, 1))    # East apse timber bookshelf (31..32, 2..4)
+    _put_grid(L, COASTAL_ARCH_WIN, 24, 3, z_rows=(1, 1))    # West sunlit canopy window (100% unobstructed!)
+    _put_grid(L, COASTAL_ARCH_WIN, 33, 3, z_rows=(1, 1))    # East sunlit canopy window backing Chapel window (33,5)!
 
-    for py in (7, 10):
-        _put_grid(L, WOOD_BENCH, 24, py, z_rows=(2, 1))
-        _put_grid(L, WOOD_BENCH, 32, py, z_rows=(2, 1))
-    _put_grid(L, HOTEL_FLOWER_STAND, 26, 4, z_rows=(2, 1, 1))
-    _put_grid(L, HOTEL_FLOWER_STAND, 32, 4, z_rows=(2, 1, 1))
-    _put_grid(L, HOTEL_VASE, 23, 5, z_rows=(2, 1))
-    _put_grid(L, HOTEL_VASE, 35, 5, z_rows=(2, 1))
-    _put_tree(L, 25, 12, 'parlor')
-    _put_tree(L, 33, 12, 'parlor')
+    # Cozy Hearth (clear of NW arched window 24..25,3..4!), Living Botanical Planters, Timber Benches & Tea Table!
+    _put_lamp(L, 23, 5)                                     # Single warm hearthside reading lamp against west wall (clear of window!)
+    _put_stove(L, 24, 6, kettle=True)                       # Cozy crackling hearth stove below window on sage pad (24,5..6)!
+    L[1, 6, 25] = 4101                                      # Intact oak kindling bucket beside hearth (replaces chopped 4168!)
+    _put_grid(L, BONSAI, 31, 5, z_rows=(2, 1))              # Living canopy bonsai tree beside Chapel window (33,5)
+    L[1, 5, 34] = 7178                                      # Blooming botanical planter framing window (33,5 open!)
+    _put_grid(L, HERB_RACK, 23, 7, z_rows=(2, 1, 1))        # West wall vertical botanical herb planter (1-tile gap from lamp & tree!)
+    _put_grid(L, HERB_RACK, 35, 6, z_rows=(2, 1, 1))        # East wall vertical botanical herb planter!
+
+    # Warm timber lodge benches framing Child in pew (28,9) + cozy canopy tea table in SE reading bay!
+    _put_grid(L, WOOD_BENCH, 24, 8, z_rows=(2, 1))
+    _put_grid(L, WOOD_BENCH, 32, 8, z_rows=(2, 1))
+    _put_grid(L, WOOD_BENCH, 24, 10, z_rows=(2, 1))
+    _put_dressed_table(L, 32, 10, 4528, 3428)               # Cozy canopy tea & reading table (32..33, 10..11)!
+    L[1, 11, 31] = 2604; L[1, 11, 34] = 2605                # Backed wooden chairs flanking tea table
+    L[1, 12, 25] = 7178                                     # SW blooming botanical planter
+    L[1, 13, 27] = 7177                                     # Botanical accent framing sanctuary nave
+    _put_tree(L, 23, 11, 'parlor')
+    _put_tree(L, 35, 11, 'fern')
 
     return _finalize(
         L, 124,
@@ -816,7 +999,7 @@ def build_124():
 
 
 def build_125():
-    """125: Cutter's House (20x16).
+    """125: Cutter's House (20x16) — Warm Woodcutter's Cottage w/ Firewood, Timber Workbench, Hearth & Herbs.
     Events: #1 Exit (7,12), #2 Cutter (8,8), #3 Axe rack (6,5).
     """
     W, H = 20, 16
@@ -828,21 +1011,32 @@ def build_125():
     floor[12, 6:9] = True
     _seam_room(L, floor, wall_style='sheridan', floor_style='oak')
 
-    _put_9slice(L, SLATE_STONE, 8, 5, 11, 7, z=0, mask=floor)
-    _put_9slice(L, SHER_RUG, 5, 7, 9, 10, z=1, mask=floor)
+    # Warm oak planks + compact herringbone slate hearth apron + rustic brown woven rug cleanly under dining area!
+    _put_9slice(L, ALPINE_SLATE, 9, 5, 11, 6, z=0, mask=floor)
+    _put_9slice(L, BROWN_WOVEN_RUG, 6, 7, 9, 10, z=1, mask=floor)
     _doormat(L, 7, 12)
 
+    # North wall: woodland windows & hanging woodcutter tool rack!
     _sher_window(L, 4, 3)
-    _sher_window(L, 9, 3)
-    _put_tf(L, 'workbench', 5, 4)
-    _put_tf(L, 'bunk_o', 3, 5)
-    _put_tf(L, 'kitchen', 8, 4)
-    _put_tf(L, 'table_dark', 6, 8)
-    L[2, 9, 8] = 4077
-    _put_tf(L, 'crate_i', 3, 9)
-    _put_tf(L, 'barrel_y', 10, 9)
-    _put_tf(L, 'bucket', 9, 11)
-    _put_tree(L, 11, 7, 'fern')
+    _put_grid(L, RAKE_TOOLS, 8, 3, z_rows=(1, 1))           # Hanging woodcutter axes/shovels on timber wall!
+    _sher_window(L, 10, 3)
+
+    # Timber woodcutter's workbench & Axe rack squarely on (6,5) (leaves (6,6) 100% open & reachable!)
+    _put_dressed_workbench(L, 5, 4, 3428, 4528, 0)          # Timber workbench w/ tally book & whetstone oil jar
+    _put_tf(L, 'bunk_o', 3, 5)                              # Warm quilted woodcutter's cot (3..4, 5..7)
+
+    # Crackling hearth stove with steaming kettle & intact oak bucket + stacked firewood lumber in SW!
+    _put_stove(L, 10, 5, kettle=True)
+    L[1, 5, 11] = 4101                                      # Intact oak hearth water bucket (replaces chopped 4168!)
+    _put_grid(L, TIMBER_STACK, 3, 9, z_rows=(2, 1))         # Stacked cut firewood & timber planks on bare oak (3..5, 9..10)!
+    _put_lamp(L, 10, 8)                                     # Single warm lamp cleanly clear of bed footboard & stove (max 1!)
+    _put_grid(L, HERB_RACK, 11, 7, z_rows=(2, 1, 1))        # Dried woodland herbs hanging on east wall!
+
+    # Cozy dressed cottage supper table (clear of Cutter @ (8,8)!)
+    _put_dressed_table(L, 6, 8, 4537, 4528)                 # Hot stew plate & mug on rustic woven rug
+    L[1, 8, 5] = 2604                                       # Backed wooden chair facing supper table
+    _put_tf(L, 'barrel_y', 10, 9)                           # Cider & resin keg
+    L[1, 11, 9] = 3391                                      # Woodland fern pot by foyer
 
     return _finalize(L, 125, [(7, 12), (8, 8), (6, 5)])
 
@@ -1051,7 +1245,7 @@ def build_143():
 
 
 def build_144():
-    """144: Saltwife's House (20x16).
+    """144: Saltwife's House (20x16) — Unmistakable Coastal Salt-Curing Cottage.
     Events: #1 Exit (9,12), #2 Saltwife (9,7), #3 Salt crocks (4,8), #4 Rake (12,9).
     """
     W, H = 20, 16
@@ -1063,34 +1257,50 @@ def build_144():
     floor[12, 8:11] = True
     _seam_room(L, floor, wall_style='sheridan', floor_style='oak')
 
-    _put_9slice(L, SLATE_STONE, 3, 6, 6, 10, z=0, mask=floor)
-    _put_9slice(L, HOTEL_CRIMSON_RUG, 7, 7, 11, 10, z=1, mask=floor)
+    # Floor zoning: herringbone coastal slate salt-curing bay + sea-blue coastal runner (ZERO generic red box!)
+    _put_9slice(L, ALPINE_SLATE, 3, 5, 6, 10, z=0, mask=floor)
+    _put_9slice(L, BLUE_MARITIME_RUG, 7, 7, 11, 10, z=1, mask=floor)
     _doormat(L, 9, 12)
 
-    _put_grid(L, HOTEL_RED_WINDOW, 10, 3, z_rows=(1, 1))
-    _sher_window(L, 4, 3)
-    _put_tf(L, 'kitchen', 5, 4)
-    _put_tf(L, 'shelf_bottles', 3, 4)
-    _put_tf(L, 'barrel_b', 4, 7)
-    _put_tf(L, 'barrel_y', 3, 7)
-    _put_tf(L, 'bucket', 5, 9)
-    _put_tf(L, 'rodbucket', 12, 8)
-    _put_tf(L, 'table_tea', 8, 8)
-    L[2, 9, 7] = 4077
-    _put_tf(L, 'bed_blue', 13, 5)
-    _put_grid(L, HOTEL_VASE, 12, 4, z_rows=(2, 1))         # Tucked neatly against north wall beside bed
-    _put_tree(L, 14, 9, 'fern')
-    _put_tree(L, 5, 10, 'parlor')
+    # North wall: maritime porthole, coastal arched window & complete 1x2 sea painting (buried SPICE_SHELF removed!)
+    _sher_porthole(L, 4, 3)
+    _put_grid(L, COASTAL_ARCH_WIN, 10, 3, z_rows=(1, 1))
+    _put_grid(L, PAINTING_HARBOR_A, 13, 3, z_rows=(1, 1))    # Complete 1x2 coastal salt-marsh painting (7137/7145)
+
+    # Brine-curing shelf, oak brine tub & salt-evaporation kitchen (zero duplicate ovens!)
+    _put_tf(L, 'shelf_bottles', 3, 4)                        # Brine & cure bottle shelf (3..4, 4..5)
+    L[1, 5, 5] = 4101                                        # Oak brine-evaporation soaking bucket beside kitchen
+    _put_tf(L, 'kitchen', 6, 4)                              # Salt-curing hearth counter (6..9, 4..5)
+
+    # Coastal salt-curing corner around Salt crocks (4,8): burlap salt sacks, white coarse-salt crate & curing barrels!
+    _put_grid(L, SALT_FIBER_CRATE, 3, 7, z_rows=(2, 1))      # Coarse white sea-salt crate squarely on Salt crocks (4,8)!
+    L[1, 9, 3] = 2256                                        # Tied white burlap sea-salt sack
+    L[1, 10, 3] = 2257                                       # Companion burlap coarse-salt bag
+    _put_tf(L, 'barrel_b', 5, 9)                             # Blue brine-curing barrel (5, 9..10; 100% clear of ferns!)
+    L[1, 10, 6] = 4101                                       # Oak brine-rinse bucket
+
+    # Freestanding salt-raking equipment crate cleanly on Rake (12,9) + dried coastal herbs + ocean-blue sleeping nook!
+    _put_tf(L, 'crate_i', 12, 8)                             # Freestanding salt-pan rake & gear crate solidly on Rake (12,9)!
+    _put_grid(L, SHER_DESK, 11, 4, z_rows=(2, 1))            # Salt-harvest tally desk
+    _put_lamp(L, 13, 6)                                      # Single warm bedside/desk lamp cleanly clear of painting (max 1!)
+    _put_tf(L, 'bunk_b', 14, 5)                              # Calm sea-blue cottage bed (14..15, 5..7)
+    _put_grid(L, HERB_RACK, 15, 8, z_rows=(2, 1, 1))         # Dried kelp & curing-herb rack on east wall!
+
+    # Cozy coastal supper table on sea-blue runner (clear of Saltwife @ (9,7)!)
+    _put_dressed_table(L, 8, 8, 4528, 4537)                  # Steaming tea mug & cured-fish plate
+    L[2, 9, 7] = 2604                                        # Backed wooden chair
+    _put_tree(L, 7, 10, 'fern')                              # Potted coastal fern cleanly clear of barrel_b (5,9..10)!
+    L[1, 11, 11] = 3391                                      # Coastal potted herb by doorway
 
     return _finalize(L, 144, [(9, 12), (9, 7), (4, 8), (12, 9)])
 
 
 # ===========================================================================
-# GROUP D: EBBMOUTH (161, 162, 163, 164, 165) — Weathered Maritime Stonework
+# GROUP D: EBBMOUTH (161, 162, 163, 164, 165) — Weathered Maritime Stone & Timber
 # ===========================================================================
 
 def build_161():
-    """161: Ebbmouth Pokémon Center (15x10 — UPGRADED from stock Gen-3 template to Tileset 34!).
+    """161: Ebbmouth Pokémon Center (15x10) — Coastal Slate, Warm Timber Lounges & Cream-Gold Runner.
     Exact HEAD events: #2 Nurse (7,2), #3 PC (11,1), #4 Healing balls (5,2),
                        #6 Town Map, size(2,1) (12,1), #7 Exit (7,9), #8 Professor Larch (12,6).
     """
@@ -1103,33 +1313,43 @@ def build_161():
     floor[9, 6:9] = True
     _seam_room(L, floor, wall_style='stone', floor_style='slate')
 
-    _put_9slice(L, BLUE_MARITIME_RUG, 6, 4, 8, 8, z=1, mask=floor)
+    # Warm coastal Sheridan oak lounge wings inlaid into weathered slate + soft cream-gold welcome runner!
+    _put_oak_inlay(L, 1, 4, 4, 7, mask=floor)
+    _put_oak_inlay(L, 10, 4, 13, 7, mask=floor)
+    _put_9slice(L, CREAM_MEDALLION_RUG, 6, 5, 8, 8, z=1, mask=floor)
     _doormat(L, 7, 9)
 
+    # Stone north wall: coastal arched window, harbor art, life ring, PC (11,1) & Town Map Sea Chart (12,1)
     _put_grid(L, COASTAL_ARCH_WIN, 2, 0, z_rows=(1, 1))
     _put_tf(L, 'lifering', 9, 0)
     L[1, 0, 11] = 5847; L[1, 1, 11] = 5855
     _put_grid(L, SEA_CHART, 12, 0, z_rows=(1, 1))
 
+    # Healing machine on (5,2) & crisp maritime blue-steel reception counter wrapping Nurse (7,2) (ALL 0x80!)
     _put_grid(L, HELP_HEAL, 4, 1, z_rows=(2, 1))
     L[1, 2, 8] = 5843
     for x, t in ((5, 5848), (6, 5849), (7, 5850), (8, 5851)):
         L[1, 3, x] = t
 
+    # West sailors' warming lounge: steaming kettle stove, timber bench, kindling bucket & parlor tree!
+    _put_stove(L, 1, 3, kettle=True)
     _put_grid(L, WOOD_BENCH, 1, 5, z_rows=(2, 1))
-    _put_tf(L, 'rodbucket', 1, 3)
+    L[1, 7, 1] = 4101                                        # Rain-boot & kindling oak bucket
+    _put_tree(L, 4, 6, 'parlor')
+
+    # East Professor Larch research nook (keeps (11,2), (12,2) & Larch @ (12,6) 100% OPEN!)
     _put_grid(L, SHER_DESK, 10, 4, z_rows=(2, 1))
-    L[2, 4, 10] = 3428
-    L[1, 6, 10] = 4077
-    _put_tree(L, 13, 4, 'fern')
-    _put_tree(L, 4, 7, 'parlor')
-    _put_tree(L, 12, 7, 'palm')
+    L[2, 4, 10] = 3428                                       # Larch's coastal tide notes
+    _put_lamp(L, 12, 4)                                      # Single warm desk lamp beside Larch's study desk (max 1!)
+    L[1, 6, 10] = 4077                                       # Study stool
+    _put_tree(L, 13, 3, 'palm')
+    L[1, 7, 13] = 7178                                       # Blooming coastal planter
 
     return _finalize(L, 161, [(7, 2), (11, 1), (5, 2), (12, 1), (7, 9), (12, 6)])
 
 
 def build_162():
-    """162: Ebbmouth Mart (11x9 — UPGRADED from stock Gen-3 template to Tileset 34!).
+    """162: Ebbmouth Mart (11x9) — Coastal Slate & Warm Timber General Outfitter.
     Exact HEAD events: #2 Mart (2,3) [dir=6 facing right], #3 Exit (4,8).
     """
     W, H = 11, 9
@@ -1141,29 +1361,34 @@ def build_162():
     floor[8, 3:6] = True
     _seam_room(L, floor, wall_style='stone', floor_style='slate')
 
-    _put_9slice(L, BLUE_MARITIME_RUG, 4, 3, 6, 7, z=1, mask=floor)
+    # Warm coastal Sheridan oak shopping aisle inlaid into weathered slate + woven coir runner (NO stark blue slab!)
+    _put_oak_inlay(L, 4, 2, 8, 6, mask=floor)
+    _put_9slice(L, BROWN_WOVEN_RUG, 4, 4, 6, 6, z=1, mask=floor)
     _doormat(L, 4, 8)
 
-    _put_grid(L, COASTAL_ARCH_WIN, 4, 0, z_rows=(1, 1))
     _put_tf(L, 'lifering', 1, 0)
+    _put_grid(L, COASTAL_ARCH_WIN, 4, 0, z_rows=(1, 1))
+    _put_grid(L, PAINTING_HARBOR_A, 9, 0, z_rows=(1, 1))     # Complete 4-sided 1x2 framed Ebbmouth seascape (7137/7145, clear of lamp!)
 
-    # Crisp blue-steel maritime counter wrapping Mart (2,3): plain top cap (3,2), single hydrangea corner at (3,3)!
+    # Crisp maritime blue-steel checkout counter wrapping Mart (2,3) (ALL 0x80 at (3,3) & (1..3,4)!)
     L[1, 2, 3] = 5835
     L[1, 3, 3] = 5843
     L[1, 4, 1] = 5848; L[1, 4, 2] = 5849; L[1, 4, 3] = 5851
 
+    # Stocked maritime outfitter shelves, coarse salt/rope crate & harbor supplies (cramped rodbucket removed!)
+    _put_lamp(L, 6, 2)                                       # Single warm window-corner lamp beside shelves (max 1!)
     _put_tf(L, 'shelf_goods', 7, 1)
     _put_tf(L, 'shelf_green', 7, 5)
-    _put_tf(L, 'rodbucket', 9, 2)
+    _put_grid(L, SALT_FIBER_CRATE, 1, 5, z_rows=(2, 1))      # White sea-salt & hemp rope crate in SW bay
     _put_tf(L, 'barrel_b', 9, 4)
-    _put_tf(L, 'crate_i', 1, 5)
-    L[1, 7, 8] = 3391
+    L[1, 6, 9] = 7178                                        # Potted coastal blooms
+    L[1, 7, 6] = 3391                                        # Small coastal fern pot
 
     return _finalize(L, 162, [(2, 3), (4, 8)])
 
 
 def build_163():
-    """163: Anglers' Guild (13x10 — UPGRADED from stock Gen-3 house to Tileset 34!).
+    """163: Anglers' Guild (13x10) — Lively Ebbmouth Anglers' Guildhall w/ Tackle, Charts, Catch Displays & Hearth!
     Exact HEAD events: #1 Exit (3,9), #2 Guildmaster (5,4).
     """
     W, H = 13, 10
@@ -1175,34 +1400,40 @@ def build_163():
     floor[9, 2:5] = True
     _seam_room(L, floor, wall_style='stone', floor_style='oak')
 
-    _put_9slice(L, SLATE_STONE, 2, 7, 4, 9, z=0, mask=floor)
-    _put_9slice(L, BLUE_MARITIME_RUG, 5, 4, 9, 7, z=1, mask=floor)
+    # Herringbone slate wet-tackle landing + warm walnut-tan hemp guild carpet (breaks generic Ebbmouth blue boxes!)
+    _put_9slice(L, ALPINE_SLATE, 1, 6, 4, 9, z=0, mask=floor)
+    _put_9slice(L, BROWN_WOVEN_RUG, 5, 4, 9, 7, z=1, mask=floor)
     _doormat(L, 3, 9)
 
-    # Keep ALL wall hangings cleanly inside stone wall x=1..11 (ZERO overhang onto east void rim!)
-    _put_grid(L, COASTAL_ARCH_WIN, 2, 0, z_rows=(1, 1))
-    _put_grid(L, BULLETIN_BOARD, 4, 0, z_rows=(1, 1))
-    _put_grid(L, SEA_CHART, 8, 0, z_rows=(1, 1))
-    _put_tf(L, 'lifering', 10, 0)                          # (10..11, 0..1) cleanly inside stone wall!
+    # Rich Anglers' Guild north wall (strictly inside x=1..11): window, full 2-row chalkboard, chart, life ring & 1x2 print!
+    _put_grid(L, COASTAL_ARCH_WIN, 1, 0, z_rows=(1, 1))
+    _put_grid(L, CHALKBOARD, 3, 0, z_rows=(1, 1))            # Complete 2-row daily catch & tide-tally chalkboard w/ chalk tray!
+    _put_grid(L, SEA_CHART, 7, 0, z_rows=(1, 1))             # Coastal shoals & reef fishing chart
+    _put_tf(L, 'lifering', 9, 0)
+    _put_grid(L, PAINTING_HARBOR_A, 11, 0, z_rows=(1, 1))    # Complete 1x2 framed harbor trophy print (7137/7145)
 
-    _put_tf(L, 'table_dark', 6, 5)
-    L[2, 5, 6] = 3428
-    L[2, 6, 8] = 4077
-    L[2, 4, 7] = 4077
-    _put_tf(L, 'rodbucket', 1, 2)
-    _put_tf(L, 'barrel_b', 1, 4)
-    _put_tf(L, 'barrel_y', 1, 6)
-    _put_grid(L, SHER_CHEST, 8, 2, z_rows=(2, 1))
-    _put_tf(L, 'rodbucket', 11, 2)
-    _put_grid(L, WOOD_BENCH, 6, 7, z_rows=(2, 1))
-    _put_tree(L, 11, 5, 'fern')
-    L[1, 8, 5] = 4101
+    # Fishing rod bucket, hanging tackle/netting rack, fresh-catch crate, salt/bait crate & bait barrels!
+    _put_grid(L, RODBUCKET_FULL, 1, 2, z_rows=(2, 1))        # NW intact fishing rod & bobber bucket (1..2, 2..3)
+    _put_grid(L, BLUE_DYE_CATCH_CRATE, 1, 4, z_rows=(2, 1))  # Fresh blue coastal catch crate (1..2, 4..5)
+    _put_tf(L, 'barrel_b', 1, 6)                             # Salted bait & brine cask (1, 6..7)
+    _put_lamp(L, 6, 2)                                       # Single warm chart lamp cleanly between chalkboard & chart (max 1!)
+    _put_grid(L, LOOM_WARP_RAIL, 8, 2, z_rows=(2, 1))        # Upright hanging tackle & net-drying rack (8..9, 2..3)!
+    _put_grid(L, SALT_FIBER_CRATE, 10, 2, z_rows=(2, 1))     # NE sea-salt & bait-line crate (replaces mirrored twin rod bucket!)
+
+    # Trophy catch & guild chart table + sailor's hearth lounge (clear of Guildmaster @ (5,4)!)
+    _put_dressed_table(L, 6, 5, 4537, 3428)                  # Trophy catch supper platter & Anglers' logbook
+    L[2, 5, 8] = 2605; L[2, 4, 7] = 2606                     # Backed wooden guild chairs
+    _put_grid(L, WOOD_BENCH, 6, 7, z_rows=(2, 1))            # Cozy sailor's bench along south edge
+    _put_stove(L, 11, 5, kettle=True)                        # Crackling guildhall kettle stove on east wall!
+    L[1, 6, 11] = 4101                                       # Intact oak kindling/water bucket beside stove (replaces chopped 4168!)
+    L[1, 8, 5] = 4101                                        # Bait & deck-wash oak bucket
+    L[1, 8, 9] = 3391                                        # Potted coastal plant beside sailor's bench
 
     return _finalize(L, 163, [(3, 9), (5, 4)])
 
 
 def build_164():
-    """164: Reyes House (10x9 — UPGRADED from stock Gen-3 house2 to Tileset 34!).
+    """164: Reyes House (10x9) — Cozy Coastal Family Cottage w/ Hearth, Supper Table & Cellar Hatch.
     Exact HEAD events: #1 Exit (6,8), #2 Mrs Reyes (7,4), #3 Cellar door (1,6).
     """
     W, H = 10, 9
@@ -1214,26 +1445,35 @@ def build_164():
     floor[8, 5:8] = True
     _seam_room(L, floor, wall_style='stone', floor_style='oak')
 
-    _put_9slice(L, SLATE_STONE, 1, 5, 2, 6, z=0, mask=floor)
-    _put_9slice(L, SHER_RUG, 4, 4, 7, 6, z=1, mask=floor)
+    # Herringbone slate cellar bay + warm cream-and-gold family rug (ZERO generic S7 red box!)
+    _put_9slice(L, ALPINE_SLATE, 1, 5, 2, 6, z=0, mask=floor)
+    _put_9slice(L, CREAM_MEDALLION_RUG, 4, 4, 7, 6, z=1, mask=floor)
     _doormat(L, 6, 8)
 
-    _put_grid(L, COASTAL_ARCH_WIN, 6, 0, z_rows=(1, 1))
-    _put_tf(L, 'kitchen', 2, 1)
-    _put_tf(L, 'bookshelf_s', 8, 1)
-    # COMPLETE 2x2 barred wooden cellar hatch cleanly at (1..2, 5..6) -> solid on Cellar door (1,6), walkable at (1,5)/(2,5)/(3,6)!
+    # North stone wall: complete 1x2 family painting above bed, unobstructed arched window (6..7,0..1) clear of pantry shelf!
+    _put_grid(L, PAINTING_HARBOR_A, 2, 0, z_rows=(1, 1))     # Complete 1x2 framed coastal family painting (7137/7145)
+    _put_grid(L, COASTAL_ARCH_WIN, 6, 0, z_rows=(1, 1))      # Shifted to (6..7,0..1) — 100% clear of shelf_bottles (4..5,1..2)!
+    _put_tf(L, 'bunk_b', 1, 2)                               # Cozy blue quilted bed (1..2, 2..4)
+    _put_stove(L, 3, 2, kettle=True)                         # Crackling family kitchen kettle stove!
+    _put_tf(L, 'shelf_bottles', 4, 1)                        # Preserves & spice pantry shelf (4..5, 1..2)
+    _put_tf(L, 'bookshelf_s', 8, 1)                          # Family bookshelf in NE corner (8, 1..2)
+    _put_lamp(L, 8, 4)                                       # Single warm reading lamp cleanly clear of window & bookshelf (max 1!)
+
+    # COMPLETE 2x2 barred wooden cellar hatch cleanly at (1..2, 5..6) -> solid on Cellar door (1,6)!
     _put_grid(L, [[4824, 4825], [4832, 4833]], 1, 5, z_rows=(2, 1))
-    _put_tf(L, 'table_tea', 4, 4)
-    L[2, 5, 6] = 4077
-    _put_tf(L, 'bunk_b', 1, 2)
+
+    # Dressed family supper table (clear of Mrs Reyes @ (7,4)!)
+    _put_dressed_table(L, 4, 4, 4537, 4528)                  # Warm supper plate & teacup on cream medallion rug
+    L[2, 5, 6] = 2605                                        # Backed wooden family chair
     _put_tree(L, 8, 5, 'parlor')
-    L[1, 7, 3] = 4101
+    L[1, 7, 3] = 4101                                        # Kindling & wash bucket
+    L[1, 7, 7] = 3391                                        # Potted window flower beside entry
 
     return _finalize(L, 164, [(6, 8), (7, 4), (1, 6)])
 
 
 def build_165():
-    """165: Net-mender's House (10x9 — UPGRADED from stock Gen-3 house2 to Tileset 34!).
+    """165: Net-mender's House (10x9) — Coiled Rope/Twine Workbench, Netting Rack, Buoy Crates & Brine Barrels!
     Exact HEAD events: #1 Exit (6,8), #2 Net-mender (7,4).
     """
     W, H = 10, 9
@@ -1245,25 +1485,29 @@ def build_165():
     floor[8, 5:8] = True
     _seam_room(L, floor, wall_style='stone', floor_style='oak')
 
-    _put_9slice(L, SLATE_STONE, 1, 2, 3, 6, z=0, mask=floor)
+    # Herringbone slate wet-netting workbay + tailored sea-blue maritime runner
+    _put_9slice(L, ALPINE_SLATE, 1, 2, 3, 6, z=0, mask=floor)
     _put_9slice(L, BLUE_MARITIME_RUG, 4, 4, 7, 6, z=1, mask=floor)
     _doormat(L, 6, 8)
 
-    # Balanced stone north wall: arched windows flanking central life ring (ZERO wall overhang!)
+    # Balanced stone north wall: arched harbor window, life ring & coastal rigging chart (ZERO overhang!)
     _put_grid(L, COASTAL_ARCH_WIN, 1, 0, z_rows=(1, 1))
     _put_tf(L, 'lifering', 4, 0)
-    _put_grid(L, COASTAL_ARCH_WIN, 6, 0, z_rows=(1, 1))
+    _put_grid(L, SEA_CHART, 6, 0, z_rows=(1, 1))
 
-    _put_tf(L, 'crate_i', 1, 2)
-    _put_tf(L, 'barrel_y', 2, 2)
-    _put_tf(L, 'bunk_o', 1, 4)
-    _put_tf(L, 'rodbucket', 3, 2)
-    _put_tf(L, 'barrel_b', 8, 2)
-    _put_tf(L, 'table_dark', 4, 4)
-    L[2, 4, 5] = 3428
-    L[2, 5, 6] = 4077
-    L[1, 7, 3] = 4101
-    _put_tree(L, 8, 5, 'fern')
+    # Net-mender's workshop props: upright netting/rigging frame, rigging poles, buoy crate & coiled rope bench!
+    _put_grid(L, LOOM_WARP_RAIL, 1, 2, z_rows=(2, 1))        # Upright wooden fishing-net mending frame (1..2, 2..3)!
+    _put_grid(L, RODBUCKET_FULL, 3, 2, z_rows=(2, 1))        # Rigging poles & twine-line bucket (3..4, 2..3)!
+    _put_lamp(L, 6, 2)                                       # Single warm workshop lamp beneath rigging chart (max 1!)
+    _put_grid(L, BLUE_DYE_CATCH_CRATE, 7, 2, z_rows=(2, 1))  # Cork buoys & net-float crate (7..8, 2..3; clear of 7,4!)
+    _put_tf(L, 'bunk_o', 1, 4)                               # Warm quilted sailor's cot (1..2, 4..6)
+
+    # Coiled hawser rope & sailcloth mending workbench (cleanly below fishing line tip, clear of Net-mender @ (7,4)!)
+    _put_dressed_table(L, 4, 5, 4546, 3428)                  # Folded mending canvas & rigging logbook (4..5, 5..6)
+    L[2, 6, 6] = 4077                                        # Net-mender's wooden stool
+    L[1, 6, 3] = 2256                                        # Coiled white hawser rope & hemp twine stack on slate!
+    _put_tf(L, 'barrel_b', 8, 5)                             # Tar & brine waterproofing barrel (8, 5..6)
+    L[1, 7, 3] = 4101                                        # Oak brine-soaking bucket
 
     return _finalize(L, 165, [(6, 8), (7, 4)])
 
@@ -1389,11 +1633,14 @@ def _wire_take_events(d, mid, L):
     return s
 
 
-def main():
+def main(only=None):
+    sel = {int(x) for x in only} if only else set(BUILDERS)
     raw_dir = os.path.join(HERE, 'data', 'raw')
     os.makedirs(raw_dir, exist_ok=True)
     arrays = {}
     for mid, fn in BUILDERS.items():
+        if mid not in sel:
+            continue
         L = fn()
         arrays[mid] = L
         out_p = os.path.join(raw_dir, f'{mid:03d}.npy')
@@ -1401,35 +1648,41 @@ def main():
         print(f'Saved {out_p} ({L.shape})')
 
     # 1. Ferrow's Landing (101_ferrows_landing_interiors.yaml):
-    #    TOUCH ONLY 101, 102, 104, 107; LEAVE 103, 105, 106, 108 100% BYTE-IDENTICAL!
-    def tf_101(d):
-        mid = d.get('id')
-        if mid in (101, 102):
-            return _wire_take_events(d, mid, arrays[mid])
-        if mid in (104, 107):
-            return _wire_raw(d, mid)
-        return d
+    #    TOUCH ONLY selected IDs in (101, 102, 104, 107); LEAVE 103, 105, 106, 108 100% BYTE-IDENTICAL!
+    if sel & {101, 102, 104, 107}:
+        def tf_101(d):
+            mid = d.get('id')
+            if mid not in sel:
+                return d
+            if mid in (101, 102):
+                return _wire_take_events(d, mid, arrays[mid])
+            if mid in (104, 107):
+                return _wire_raw(d, mid)
+            return d
 
-    _update_spec_file(
-        '101_ferrows_landing_interiors.yaml',
-        "# Ferrow's Landing interiors (101-108). 101/102/104/107 by wave15_act1_interiors_craft.py; 103 by station_103.py; 105/106 by lighthouse_105_106.py; 108 by customs_108.py.\n",
-        tf_101,
-    )
+        _update_spec_file(
+            '101_ferrows_landing_interiors.yaml',
+            "# Ferrow's Landing interiors (101-108). 101/102/104/107 by wave15_act1_interiors_craft.py; 103 by station_103.py; 105/106 by lighthouse_105_106.py; 108 by customs_108.py.\n",
+            tf_101,
+        )
 
-    # 2. Briarwick (121_briarwick_interiors.yaml): ALL 7 (121, 122, 123, 124, 125, 523, 526)
-    def tf_121(d):
-        mid = d.get('id')
-        if mid in (121, 122):
-            return _wire_take_events(d, mid, arrays[mid])
-        if mid in (123, 124, 125, 523, 526):
-            return _wire_raw(d, mid)
-        return d
+    # 2. Briarwick (121_briarwick_interiors.yaml): TOUCH ONLY selected IDs!
+    if sel & {121, 122, 123, 124, 125, 523, 526}:
+        def tf_121(d):
+            mid = d.get('id')
+            if mid not in sel:
+                return d
+            if mid in (121, 122):
+                return _wire_take_events(d, mid, arrays[mid])
+            if mid in (123, 124, 125, 523, 526):
+                return _wire_raw(d, mid)
+            return d
 
-    _update_spec_file(
-        '121_briarwick_interiors.yaml',
-        "# Briarwick & Gossamer Wood interiors (121-125, 523, 526). Crafted by layouts/wave15_act1_interiors_craft.py.\n",
-        tf_121,
-    )
+        _update_spec_file(
+            '121_briarwick_interiors.yaml',
+            "# Briarwick & Gossamer Wood interiors (121-125, 523, 526). Crafted by layouts/wave15_act1_interiors_craft.py.\n",
+            tf_121,
+        )
 
     def _ensure_exit(evs, at, link):
         evs = list(evs or [])
@@ -1437,87 +1690,96 @@ def main():
             return evs
         return [{'type': 'exit', 'at': at, 'link': link}] + evs
 
-    # 3. Saltmere PC & Mart (141_saltmere_interiors.yaml): 141 & 142 (upgraded from stock templates with 100% EvID_exact!)
-    def tf_141(d):
-        mid = d.get('id')
-        if mid == 141:
-            nd = dict(d)
-            nd['events'] = _ensure_exit(d.get('events'), [7, 9], 'SM_PC')
-            nd['take_events'] = [
-                {'template': 'pokecenter', 'name': 'Nurse', 'at': [7, 2]},
-                {'template': 'pokecenter', 'name': 'Healing balls', 'at': [5, 2]},
-                {'template': 'pokecenter', 'name': 'PC', 'at': [11, 1]},
-                {'template': 'pokecenter', 'name': 'Town Map, size(2,1)', 'at': [12, 1]},
-            ]
-            return _wire_take_events(nd, 141, arrays[141])
-        if mid == 142:
-            nd = dict(d)
-            nd['events'] = _ensure_exit(d.get('events'), [4, 8], 'SM_MART')
-            nd['take_events'] = [
-                {'template': 'mart', 'name': 'Mart', 'at': [2, 3]},
-            ]
-            return _wire_take_events(nd, 142, arrays[142])
-        return d
+    # 3. Saltmere PC & Mart (141_saltmere_interiors.yaml): ONLY when 141 or 142 selected!
+    if sel & {141, 142}:
+        def tf_141(d):
+            mid = d.get('id')
+            if mid not in sel:
+                return d
+            if mid == 141:
+                nd = dict(d)
+                nd['events'] = _ensure_exit(d.get('events'), [7, 9], 'SM_PC')
+                nd['take_events'] = [
+                    {'template': 'pokecenter', 'name': 'Nurse', 'at': [7, 2]},
+                    {'template': 'pokecenter', 'name': 'Healing balls', 'at': [5, 2]},
+                    {'template': 'pokecenter', 'name': 'PC', 'at': [11, 1]},
+                    {'template': 'pokecenter', 'name': 'Town Map, size(2,1)', 'at': [12, 1]},
+                ]
+                return _wire_take_events(nd, 141, arrays[141])
+            if mid == 142:
+                nd = dict(d)
+                nd['events'] = _ensure_exit(d.get('events'), [4, 8], 'SM_MART')
+                nd['take_events'] = [
+                    {'template': 'mart', 'name': 'Mart', 'at': [2, 3]},
+                ]
+                return _wire_take_events(nd, 142, arrays[142])
+            return d
 
-    _update_spec_file(
-        '141_saltmere_interiors.yaml',
-        "# Saltmere Pokémon Center & Mart (141-142). Crafted on Tileset 34 by layouts/wave15_act1_interiors_craft.py.\n",
-        tf_141,
-    )
+        _update_spec_file(
+            '141_saltmere_interiors.yaml',
+            "# Saltmere Pokémon Center & Mart (141-142). Crafted on Tileset 34 by layouts/wave15_act1_interiors_craft.py.\n",
+            tf_141,
+        )
 
-    # 4. Saltmere Rooms (143_saltmere_rooms.yaml): TOUCH ONLY 143 & 144; LEAVE 145 UNTOUCHED!
-    def tf_143(d):
-        mid = d.get('id')
-        if mid in (143, 144):
-            return _wire_raw(d, mid)
-        return d
+    # 4. Saltmere Rooms (143_saltmere_rooms.yaml): TOUCH ONLY selected IDs in (143, 144); LEAVE 145 UNTOUCHED!
+    if sel & {143, 144}:
+        def tf_143(d):
+            mid = d.get('id')
+            if mid not in sel:
+                return d
+            if mid in (143, 144):
+                return _wire_raw(d, mid)
+            return d
 
-    _update_spec_file(
-        '143_saltmere_rooms.yaml',
-        "# Saltmere Harbour Office (143), Saltwife's House (144) by wave15_act1_interiors_craft.py; 145 Lantern Theatre preserved.\n",
-        tf_143,
-    )
+        _update_spec_file(
+            '143_saltmere_rooms.yaml',
+            "# Saltmere Harbour Office (143), Saltwife's House (144) by wave15_act1_interiors_craft.py; 145 Lantern Theatre preserved.\n",
+            tf_143,
+        )
 
-    # 5. Ebbmouth Interiors (161_ebbmouth_interiors.yaml): ALL 5 (161, 162, 163, 164, 165 — upgraded from stock templates!)
-    def tf_161(d):
-        mid = d.get('id')
-        if mid == 161:
-            nd = dict(d)
-            nd['events'] = _ensure_exit(d.get('events'), [7, 9], 'EB_PC')
-            nd['take_events'] = [
-                {'template': 'pokecenter', 'name': 'Nurse', 'at': [7, 2]},
-                {'template': 'pokecenter', 'name': 'Healing balls', 'at': [5, 2]},
-                {'template': 'pokecenter', 'name': 'PC', 'at': [11, 1]},
-                {'template': 'pokecenter', 'name': 'Town Map, size(2,1)', 'at': [12, 1]},
-            ]
-            return _wire_take_events(nd, 161, arrays[161])
-        if mid == 162:
-            nd = dict(d)
-            nd['events'] = _ensure_exit(d.get('events'), [4, 8], 'EB_MART')
-            nd['take_events'] = [
-                {'template': 'mart', 'name': 'Mart', 'at': [2, 3]},
-            ]
-            return _wire_take_events(nd, 162, arrays[162])
-        if mid == 163:
-            nd = dict(d)
-            nd['events'] = _ensure_exit(d.get('events'), [3, 9], 'EB_ANGLER')
-            return _wire_raw(nd, 163)
-        if mid == 164:
-            nd = dict(d)
-            nd['events'] = _ensure_exit(d.get('events'), [6, 8], 'EB_REYES')
-            return _wire_raw(nd, 164)
-        if mid == 165:
-            nd = dict(d)
-            nd['events'] = _ensure_exit(d.get('events'), [6, 8], 'EB_HOUSE')
-            return _wire_raw(nd, 165)
-        return d
+    # 5. Ebbmouth Interiors (161_ebbmouth_interiors.yaml): TOUCH ONLY selected IDs!
+    if sel & {161, 162, 163, 164, 165}:
+        def tf_161(d):
+            mid = d.get('id')
+            if mid not in sel:
+                return d
+            if mid == 161:
+                nd = dict(d)
+                nd['events'] = _ensure_exit(d.get('events'), [7, 9], 'EB_PC')
+                nd['take_events'] = [
+                    {'template': 'pokecenter', 'name': 'Nurse', 'at': [7, 2]},
+                    {'template': 'pokecenter', 'name': 'Healing balls', 'at': [5, 2]},
+                    {'template': 'pokecenter', 'name': 'PC', 'at': [11, 1]},
+                    {'template': 'pokecenter', 'name': 'Town Map, size(2,1)', 'at': [12, 1]},
+                ]
+                return _wire_take_events(nd, 161, arrays[161])
+            if mid == 162:
+                nd = dict(d)
+                nd['events'] = _ensure_exit(d.get('events'), [4, 8], 'EB_MART')
+                nd['take_events'] = [
+                    {'template': 'mart', 'name': 'Mart', 'at': [2, 3]},
+                ]
+                return _wire_take_events(nd, 162, arrays[162])
+            if mid == 163:
+                nd = dict(d)
+                nd['events'] = _ensure_exit(d.get('events'), [3, 9], 'EB_ANGLER')
+                return _wire_raw(nd, 163)
+            if mid == 164:
+                nd = dict(d)
+                nd['events'] = _ensure_exit(d.get('events'), [6, 8], 'EB_REYES')
+                return _wire_raw(nd, 164)
+            if mid == 165:
+                nd = dict(d)
+                nd['events'] = _ensure_exit(d.get('events'), [6, 8], 'EB_HOUSE')
+                return _wire_raw(nd, 165)
+            return d
 
-    _update_spec_file(
-        '161_ebbmouth_interiors.yaml',
-        "# Ebbmouth interiors (161-165). Crafted on Tileset 34 by layouts/wave15_act1_interiors_craft.py.\n",
-        tf_161,
-    )
+        _update_spec_file(
+            '161_ebbmouth_interiors.yaml',
+            "# Ebbmouth interiors (161-165). Crafted on Tileset 34 by layouts/wave15_act1_interiors_craft.py.\n",
+            tf_161,
+        )
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:] or None)

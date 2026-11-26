@@ -310,6 +310,29 @@ Name = Circuit Gym
 MapPosition = 0,16,16
 SnapEdges = true
 #-------------------------------
+[240]   # Cindervault - Forge Terraces
+Name = Cindervault
+Outdoor = true
+ShowArea = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
+[241]   # Cindervault Pokémon Center
+Name = Cindervault Pokémon Center
+HealingSpot = 240,7,21
+MapPosition = 0,24,8
+#-------------------------------
+[242]   # Cindervault Mart
+Name = Cindervault Mart
+MapPosition = 0,24,8
+#-------------------------------
+[243]   # Cindervault - Caldera Gate
+Name = Cindervault
+Outdoor = true
+ShowArea = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
 [244]   # Hearthguild Hall
 Name = Hearthguild Hall
 SnapEdges = true
@@ -589,6 +612,12 @@ Name = The Arc-Lamp Mile
 Outdoor = true
 ShowArea = true
 MapPosition = 0,14,14
+#-------------------------------
+[594]   # Wallshadow Row
+Name = Wallshadow Row
+Outdoor = true
+ShowArea = true
+MapPosition = 0,11,9
 #-------------------------------
 [608]   # The Lowlight (Shattered)
 Name = The Lowlight

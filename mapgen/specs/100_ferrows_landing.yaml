@@ -1,4 +1,4 @@
-# Ferrow's Landing (100). WRITTEN BY layouts/ferrow_rj.py (Wave 10 Rejuv V14 Craft) - edit wave10_towns_craft.py.
+# Ferrow's Landing (100). WRITTEN BY layouts/ferrow_rj.py (PF Rejuv) - edit that script.
 id: 100
 biome: village
 name: Ferrow's Landing
@@ -756,7 +756,7 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [35, 5]
+  at: [38, 6]
 - type: event
   name: Juno (sendoff)
   pages:
@@ -1124,7 +1124,7 @@ events:
   name: Town sign
   post: false
   text: FERROW'S LANDING — Elowen's Door on the Sea. Pop. 212 and one lighthouse.
-  at: [38, 7]
+  at: [35, 9]
 - type: sign
   name: Lane sign
   post: false
@@ -1187,7 +1187,7 @@ events:
 - type: event
   name: Kelp-drier
   pages:
-  - commands: ['Kelp-drier: Kelp for the Professor''s tea. I''ve offered to stop. She says no. I''ve offered to pay HER.']
+  - commands: ['Kelp-drier: Kelp for the Professor''s tea.', 'Kelp-drier: I''ve offered to stop. She says no. I''ve offered to pay HER.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 22, dir: down}
@@ -1195,7 +1195,7 @@ events:
 - type: event
   name: Old Sailor
   pages:
-  - commands: ['Old Sailor: That chain across the harbor? My grandfather forged the links. He''d be proud and furious.']
+  - commands: ['Old Sailor: That chain across the harbor? My grandfather forged the links.', 'Old Sailor: He''d be proud and furious.']
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
@@ -1204,7 +1204,8 @@ events:
   name: Meridian Linesman
   pages:
   - commands:
-    - 'Meridian Linesman: Don''t mind the gate, it''s just for counting. We''re putting lamps along the quay next month. Free light. You''ll like it.'
+    - 'Meridian Linesman: Don''t mind the gate, it''s just for counting.'
+    - 'Meridian Linesman: We''re putting lamps along the quay next month. Free light. You''ll like it.'
     - selfswitch: [A, true]
     trigger: action
     move: fixed
@@ -1218,7 +1219,7 @@ events:
 - type: event
   name: Fishwife
   pages:
-  - commands: ['Fishwife: The ferry child! Is it true you''ve no tint at all? Let me see your eyes. ...Huh. Like rain.']
+  - commands: ['Fishwife: The ferry child! Is it true you''ve no tint at all?', 'Fishwife: Let me see your eyes. ...Huh. Like rain.']
     trigger: action
     move: fixed
     graphic: {sprite: trainer_FISHERMAN, dir: down}
@@ -1226,7 +1227,8 @@ events:
 - type: event
   name: Woman hanging washing
   pages:
-  - commands: ['Woman hanging washing: I went to my cousin''s wedding across the strait. Nine days. Came back grey. Never again. I''ll send a card.']
+  - commands: ['Woman hanging washing: I went to my cousin''s wedding across the strait. Nine days.', 'Woman hanging washing: Came back grey. Never again.
+        I''ll send a card.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 14, dir: down}
@@ -1234,7 +1236,8 @@ events:
 - type: event
   name: Boy with toy boat
   pages:
-  - commands: ['Boy with toy boat: When I''m big I''m getting all eighteen badges. Then I''ll be Sovereign and make it illegal to have baths.']
+  - commands: ['Boy with toy boat: When I''m big I''m getting all eighteen badges.', 'Boy with toy boat: Then I''ll be Sovereign and make it illegal to
+        have baths.']
     trigger: action
     move: random
     graphic: {sprite: NPC 22, dir: down}
@@ -1242,7 +1245,7 @@ events:
 - type: event
   name: Accord Clerk
   pages:
-  - commands: ['Accord Clerk: Quarantine notices, form nine. You don''t need one. Nobody needs one. I have four hundred.']
+  - commands: ['Accord Clerk: Quarantine notices, form nine.', 'Accord Clerk: You don''t need one. Nobody needs one. I have four hundred.']
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
@@ -1250,7 +1253,7 @@ events:
 - type: event
   name: Drunk on the steps
   pages:
-  - commands: ['Drunk on the steps: They closed the sea. You can''t close the sea. I''ve seen it. It''s enormous.']
+  - commands: ['Drunk on the steps: They closed the sea. You can''t close the sea.', 'Drunk on the steps: I''ve seen it. It''s enormous.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 02, dir: down}
@@ -1258,7 +1261,8 @@ events:
 - type: event
   name: Old Woman on bench
   pages:
-  - commands: ['Old Woman on bench: The Festival poster''s up already. They always paint the Sovereign''s Crown a bit wrong these days. Fewer sparkles.']
+  - commands: ['Old Woman on bench: The Festival poster''s up already.', 'Old Woman on bench: They always paint the Sovereign''s Crown a bit wrong these
+        days. Fewer sparkles.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 17, dir: down}
@@ -1266,7 +1270,8 @@ events:
 - type: event
   name: Net-mender
   pages:
-  - commands: ['Net-mender: Two ferry-loads of folk came home this month who swore they''d never. You can run from Velmora. You just can''t stay run.']
+  - commands: ['Net-mender: Two ferry-loads of folk came home this month who swore they''d never.', 'Net-mender: You can run from Velmora. You just can''t
+        stay run.']
     trigger: action
     move: fixed
     graphic: {sprite: trainer_FISHERMAN, dir: down}
@@ -1290,8 +1295,8 @@ events:
 - type: event
   name: Meridian Recruiter
   pages:
-  - commands: ['Meridian Recruiter: Fellowship cards for promising trainers! Oh, you have one. From whom? ...HIM? Personally?  Excuse me, I need to sit
-        down.']
+  - commands: ['Meridian Recruiter: Fellowship cards for promising trainers!', 'Meridian Recruiter: Oh, you have one. From whom?', 'Meridian Recruiter:
+        [emote: exclaim] ...HIM? Personally?  Excuse me, I need to sit down.']
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: down}
@@ -1319,7 +1324,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 04, dir: down}
     cond: {switch: PRO_SCANNED_NULL}
-  at: [35, 9]
+  at: [35, 8]
 - type: event
   name: Woman with crate (town)
   pages:

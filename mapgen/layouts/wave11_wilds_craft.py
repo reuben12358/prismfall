@@ -42,7 +42,21 @@ from rkit import C, P1, STAMPS
 import rcompose as RC
 import craftkit as CK
 from routekit import Route
-from terrain import vnoise, NB2AUTO
+from terrain import vnoise, NB2AUTO, nbits
+
+
+def fix_vauto_l0(L, game, name):
+    """Consolidate an opaque virtual autotile onto L0 ONLY and recompute exact 48-shape NB2AUTO (0 mismatches)."""
+    lo = RC.vauto(game, name, 0)
+    hi = lo + 48
+    m0 = (L[0] >= lo) & (L[0] < hi)
+    m1 = (L[1] >= lo) & (L[1] < hi)
+    L[0, m1] = L[1, m1]
+    L[1, m1] = 0
+    mask = m0 | m1
+    ys, xs = np.where(mask)
+    for y, x in zip(ys, xs):
+        L[0, y, x] = lo + NB2AUTO[nbits(mask, int(x), int(y))]
 
 # =============================================================================
 # 1. IMMUTABLE HEAD EVENT & METADATA SNAPSHOT (100% exact coordinate parity)
@@ -443,12 +457,14 @@ def infill_forest(r, palettes, pick=None, scale=9.0, seed=0):
     return placed
 
 
-def infill_winter(r, palettes, scale=9.0, seed=0):
+def infill_winter(r, palettes, scale=9.0, seed=0, safe_canopy=False):
     """Zero-bubble-wrap winter canopy packer: 3x2 alpine spruces -> 2x2 Kristiline teal pines -> 2x1 frosted shrubs/boulders."""
     m = r.m
     rng = random.Random(r.seed * 37 + seed + 13)
     s = r.seed + 1313
     hole = (m.cls == 'T') & ~m.taken & (m.L[1] == 0) & ~m.cliff
+    if safe_canopy:
+        hole &= (m.L[2] == 0)
     placed = 0
     for y in range(m.H):
         for x in range(m.W):
@@ -461,14 +477,19 @@ def infill_winter(r, palettes, scale=9.0, seed=0):
                 foot = [(tx + dx, y + dy) for dx in range(3) for dy in range(2)]
                 if not all(m.inb(fx, fy) and hole[fy, fx] for fx, fy in foot):
                     continue
+                if safe_canopy and not all(m.L[2, y - 2 + dy, tx + dx] == 0 for dx in range(3) for dy in range(4) if m.inb(tx + dx, y - 2 + dy)):
+                    continue
                 z = vnoise(tx, y, s, scale)
                 pal = palettes[min(len(palettes) - 1, int(z * len(palettes) * 0.999))]
                 top, bot, _ = CK.SPECIES[rng.choices(list(pal), list(pal.values()))[0]]
                 for dy in range(2):
                     for dx in range(3):
                         X, Y = tx + dx, y - 2 + dy
-                        if m.inb(X, Y) and top[dy][dx] and m.L[2, Y, X] == 0:
-                            m.L[2, Y, X] = top[dy][dx]
+                        t_top = top[dy][dx]
+                        if safe_canopy and dy == 0 and dx == 2 and t_top == 0 and top[1][2] == 18388:
+                            t_top = 18380
+                        if m.inb(X, Y) and t_top and m.L[2, Y, X] == 0:
+                            m.L[2, Y, X] = t_top
                 for dy in range(2):
                     for dx in range(3):
                         X, Y = tx + dx, y + dy
@@ -484,6 +505,8 @@ def infill_winter(r, palettes, scale=9.0, seed=0):
             # 2. 2x2 Kristiline teal frosted pine (lush dark evergreen mass!)
             for ox in (0, -1):
                 if all(m.inb(x + ox + dx, y + dy) and hole[y + dy, x + ox + dx] for dx in range(2) for dy in range(2)):
+                    if safe_canopy and not all(m.L[2, y - 2 + dy, x + ox + dx] == 0 for dx in range(2) for dy in range(4) if m.inb(x + ox + dx, y - 2 + dy)):
+                        continue
                     top, bot = KF_TEAL_PINE_A if (x + y) % 2 == 0 else KF_TEAL_PINE_B
                     for dy in range(2):
                         for dx in range(2):
@@ -506,6 +529,13 @@ def infill_winter(r, palettes, scale=9.0, seed=0):
                 if all(m.inb(x + ox + dx, y) and hole[y, x + ox + dx] for dx in range(2)):
                     sp = rng.choice((KF_SHRUB_A, KF_SHRUB_B, KF_SHRUB_A, KF_BOULDER))
                     top, bot = sp
+                    if safe_canopy:
+                        # Require 1-tile L2==0 buffer around boulder/shrub top so boulders NEVER bite into snow_pine shoulders!
+                        bx0, bx1 = max(0, x + ox - 1), min(m.W, x + ox + 3)
+                        by0, by1 = max(0, y - 1), min(m.H, y + 2)
+                        if (m.L[2, by0:by1, bx0:bx1] != 0).any():
+                            sp = KF_SHRUB_LOW
+                            top, bot = sp
                     if top and y > 0:
                         for dx in range(2):
                             if m.L[2, y - 1, x + ox + dx] == 0:
@@ -520,8 +550,11 @@ def infill_winter(r, palettes, scale=9.0, seed=0):
                     break
             if done:
                 continue
-            # 4. Tiny 1x1 crevice: dark frosted bush (10551/10555/10556) with rare stone accent
-            m.L[1, y, x] = rng.choice((10551, 10551, 10555, 10556, 10371))
+            # 4. Tiny 1x1 crevice: crisp frosted boulder/ice crystal (avoid 10555/10556 grey triangle shards when safe_canopy!)
+            if safe_canopy:
+                m.L[1, y, x] = rng.choice((10551, 10551, 10371))
+            else:
+                m.L[1, y, x] = rng.choice((10551, 10551, 10555, 10556, 10371))
             m.taken[y, x] = True
             hole[y, x] = False
             placed += 1
@@ -624,7 +657,7 @@ def reed_beds(m, n, seed=3, on='.t', avoid_mask=None):
             k += 1
 
 
-def dress_ice(m, p=0.25, seed=2):
+def dress_ice(m, p=0.25, seed=2, reeds=True):
     rng = random.Random(seed)
     one = lambda n: STAMPS[n]['layers'][1][0][0]
     cracks = [one('fw_crack%d' % i) for i in range(3)]
@@ -638,7 +671,7 @@ def dress_ice(m, p=0.25, seed=2):
             continue
         shore = pad[y:y + 3, x:x + 3].any()
         rv = rng.random()
-        if shore and rv < 0.35 and m.inb(x, y - 1) and m.L[2, y - 1, x] == 0 and m.cls[y - 1, x] in 'I.t':
+        if reeds and shore and rv < 0.35 and m.inb(x, y - 1) and m.L[2, y - 1, x] == 0 and m.cls[y - 1, x] in 'I.t':
             st = STAMPS['fw_reeds%d' % rng.randrange(2)]['layers']
             m.L[1, y, x] = st[1][1][0]
             m.L[2, y - 1, x] = st[2][0][0]
@@ -799,20 +832,40 @@ def build_524():
 
     # 1. Sculpted Northern Upper-Wood Terrace (ht=1)
     lipy = colmap(r, lambda x: 26 + 2.5 * (vnoise(x, 0, 5241, 10.0) - 0.5) * 2 + bump(x, 80, 8, 3))
+    fall_y = int(lipy[64])
+    for x in range(61, 68):
+        lipy[x] = fall_y
     for x in range(W):
         m.ht[:lipy[x] + 1, x] = 1
     CK.smooth_ht(m, 1, 2)
+    # Re-lock flat waterfall shelf across x=62..66 so waterfall drops crisply off a straight cliff!
+    m.ht[:fall_y + 1, 62:67] = 1
+    m.ht[fall_y + 1:fall_y + 5, 62:67] = 0
 
-    # 2. Organic Winding Silkwood River + 4 Scenic Lotus Dew-Coves (ZERO boxy canals!)
-    stream_pts = [(68, 0), (66, 12), (64, lipy[64] - 3), (64, lipy[64] + 4), (60, 36), (58, 46),
-                  (54, 58), (48, 70), (40, 80), (28, 92), (16, 102), (8, 109)]
+    # 2. Organic Winding Silkwood River + 4 Scenic Lotus Dew-Coves (perpendicular channels at both bridges!)
+    stream_pts = [(68, 0), (66, 12), (64, fall_y - 2), (64, fall_y + 4), (60, 36),
+                  (58, 42), (58, 46), (58, 50),
+                  (54, 58), (48, 70), (45, 78), (42, 80), (39, 80), (36, 80),
+                  (31, 85), (26, 92), (16, 102), (8, 109)]
     CK.stream(r, stream_pts, w=3.2, c='w', only='T.t')
     # Organic river widenings & secluded mossy dew ponds (carefully off all events!)
-    CK.pond(r, 63.5, 31.5, 3.6, 2.4, c='w', rough=0.45, seed=11)   # waterfall plunge cove
+    CK.pond(r, 64.0, fall_y + 6.0, 3.6, 2.4, c='w', rough=0.45, seed=11)   # waterfall plunge cove
     CK.pond(r, 53.5, 57.5, 4.0, 3.0, c='w', rough=0.50, seed=12)   # lotus cove south of Weft Bridge
     CK.pond(r, 15.0, 36.5, 3.2, 2.3, c='w', rough=0.48, seed=13)   # enchanted west mossy dew pond
-    CK.pond(r, 34.5, 86.0, 3.2, 2.4, c='w', rough=0.45, seed=14)   # mossy bend south of fallen giant
+    CK.pond(r, 32.0, 87.5, 3.0, 2.2, c='w', rough=0.45, seed=14)   # mossy bend south of fallen giant
     smooth_cls(m, 'w', into='T', passes=1)
+    # Lock clean straight vertical N-S water channel under Weft Bridge (x=57..59, y=43..49)
+    for y in range(43, 50):
+        for x in range(55, 62):
+            m.cls[y, x] = 'w' if 57 <= x <= 59 else '.'
+    # Lock clean straight horizontal E-W water channel under Fallen Giant log bridge (x=36..43, y=79..82)
+    for y in range(77, 85):
+        for x in range(36, 44):
+            m.cls[y, x] = 'w' if 79 <= y <= 82 else '.'
+    # Prepare crisp 3-wide waterfall throat: upper water at fall_y-1, dry cliff face at fall_y..fall_y+2, plunge water at fall_y+3!
+    m.cls[fall_y - 2:fall_y, 63:66] = 'w'
+    m.cls[fall_y:fall_y + 3, 63:66] = '.'
+    m.cls[fall_y + 3:fall_y + 5, 63:66] = 'w'
 
     # 3. Winding Dappled Woodland Trails (demolishing straight bowling alleys!)
     main = [(0, 51.5), (12, 51), (22, 48), (28, 40), (31, lipy[31] + 4)]
@@ -825,8 +878,8 @@ def build_524():
     # Upper fork round the great mossy oak
     r.lane([(31, 20), (26, 15), (30, 9), (40, 13)], w=2.2, open_=(1, 2))
     # East trail: over the Weft Bridge -> Woodward's clearing -> Cut tree & Glasswood Veil
-    r.lane([(28, 40), (40, 44), (52, 46)], w=2.6, open_=(1, 3))
-    r.lane([(64, 46), (72, 47), (84, 48), (89, 48)], w=2.4, open_=(1, 3))
+    r.lane([(28, 40), (40, 44), (52, 46), (55, 46)], w=2.6, open_=(1, 3))
+    r.lane([(61, 46), (72, 47), (84, 48), (89, 48)], w=2.4, open_=(1, 3))
     r.clearing(70, 52, 8.5, 6.5)
 
     # South trail over Fallen Giant -> gently S-curving lane to Accord Cordon (40..42, 104) -> Windfall Row
@@ -898,52 +951,79 @@ def build_524():
             m.cls[y, 89] = 'T'
 
     CK.thin_bands(r, passes=2)
+    # Re-lock waterfall throat strictly before finish_plan so thin_bands never alters it
+    m.cls[fall_y - 2:fall_y, 63:66] = 'w'
+    m.cls[fall_y:fall_y + 3, 63:66] = '.'
+    m.cls[fall_y + 3:fall_y + 5, 63:66] = 'w'
     r.finish_plan(border=0)
 
     # Re-assert waterfall, Weft Bridge, Fallen Giant log bridge & stepping stones
     sx = 63
-    CK.waterfall(r, sx, sx + 2, lipy[sx + 1])
+    CK.waterfall(r, sx, sx + 2, fall_y)
 
+    # Straight perpendicular Weft Bridge (timber planks with rails!) spanning x=56..60, y=45..47
     weft_y = 46
-    wxs = [x for x in range(48, 70) if any(m.cls[yy, x] == 'w' for yy in (weft_y - 1, weft_y, weft_y + 1))]
-    wx0, wx1 = min(wxs) - 1, max(wxs) + 1
+    wx0, wx1 = 56, 60
     weft = []
+    for y in range(43, 50):
+        for x in range(55, 62):
+            m.cls[y, x] = 'w' if 57 <= x <= 59 else '.'
     for x in range(wx0, wx1 + 1):
         for k, y in enumerate((weft_y - 1, weft_y, weft_y + 1)):
             weft.append((x, y, 'nms'[k]))
-            m.cls[y, x] = 'w'
-    r.lane([(50, 46), (wx0 - 1, weft_y)], w=2.6, open_=(1, 2))
-    r.lane([(wx1 + 1, weft_y), (65, 46)], w=2.6, open_=(1, 2))
-
-    lys = [y for y in range(70, 90) if m.cls[y, 39] == 'w' or m.cls[y, 40] == 'w']
-    ly0, ly1 = min(lys) - 1, max(lys) + 1
-    giant_log = [(x, y) for y in range(ly0, ly1 + 1) for x in (39, 40)]
-    for x, y in giant_log:
-        m.cls[y, x] = 'w'
-    for x in (38, 41):
-        for y in range(ly0, ly1 + 1):
-            if m.cls[y, x] in '.dt':
-                m.cls[y, x] = 'T'
-    # Keep Fallen giant info sign (41, 76) on clear grass!
-    m.cls[76, 41] = '.'; m.cls[76, 40] = '.'; m.cls[75, 41] = '.'
+            if 57 <= x <= 59:
+                m.cls[y, x] = 'w'
+    # Clean open bridgehead aprons (ZERO clipped cypresses at 55..56, 44 or 55, 48!)
+    for x in (54, 55, 56, 60, 61):
+        for y in (44, 45, 46, 47, 48):
+            if m.cls[y, x] == 'T':
+                m.cls[y, x] = '.'
+    r.lane([(50, 46), (55, weft_y)], w=2.6, open_=(1, 2))
+    r.lane([(61, weft_y), (65, 46)], w=2.6, open_=(1, 2))
     # Keep The Weft Bridge sign (54, 47) on clear ground west of bridge
-    m.cls[47, 54] = '.'; m.cls[46, 54] = 'd'
+    m.cls[47, 54] = '.'; m.cls[46, 54] = 'd'; m.cls[45, 55] = 'd'; m.cls[46, 55] = 'd'; m.cls[47, 55] = '.'
+    m.cls[46, 61] = 'd'
+
+    # Straight perpendicular Fallen Giant log bridge (x=39..40, y=78..83) across horizontal E-W river (y=79..82)
+    for y in range(77, 85):
+        for x in range(36, 44):
+            m.cls[y, x] = 'w' if 79 <= y <= 82 else '.'
+    ly0, ly1 = 78, 83
+    giant_log = [(x, y) for y in range(ly0, ly1 + 1) for x in (39, 40)]
+    # Clear grassy north & south bank landings so Fallen giant sign (41, 76) & south exit (39..40, 84) have ZERO tree collisions!
+    for y in (75, 76, 77, 78, 83, 84, 85):
+        for x in range(38, 43):
+            if m.cls[y, x] == 'T':
+                m.cls[y, x] = '.'
+    m.cls[76, 39] = 'd'; m.cls[77, 39] = 'd'; m.cls[77, 40] = 'd'
+    m.cls[84, 39] = 'd'; m.cls[84, 40] = 'd'
 
     st = [(x, 11) for x in range(56, 78) if m.cls[11, x] == 'w']
     CK.stones(r, st)
 
-    # Glasswood edge palette east of x ~ 79 (creeping crystal trees right at the Veil!)
+    # Cohesive emerald/teal woodland groves (NO loud alternating purple/blue checkerboard spam!)
+    GOSSAMER_WOODS_524 = [
+        {'sh1': 5, 'teal2': 3, 'silk1': 2},
+        {'sh0': 4, 'teal': 3, 'silk0': 2, 'olive': 2},
+        {'teal': 4, 'teal2': 3, 'sh1': 3},
+        {'silk0': 3, 'silk1': 3, 'sh1': 3, 'olive': 2},
+        {'olive': 3, 'sh1': 4, 'teal2': 2, 'sh0': 2},
+    ]
+    VEIL_EDGE_524 = {'teal2': 5, 'sh1': 4, 'teal': 3, 'silk1': 2}
+
     def glass_pick(x, y):
         if x >= 79 and 38 <= y <= 58:
-            return GLASSWOOD_PAL
+            return VEIL_EDGE_524
         return None
 
-    CK.woods(r, GOSSAMER_WOODS, scale=10.0, accents={'blossom': 0.014}, pick=glass_pick)
+    CK.woods(r, GOSSAMER_WOODS_524, scale=13.0, accents=None, pick=glass_pick)
 
     # Register immutable HEAD events (zero coordinate drift!)
     r.events = events
+    bridge_pad = ([(x, y) for x in range(54, 62) for y in range(44, 49)] +
+                  [(x, y) for x in range(38, 43) for y in range(76, 85)])
     ev_mask = reserve_events(m, events, r.road_mask, radius=1,
-                             extra=[(45, 1), (44, 1), (40, 108), (41, 108), (42, 108), (88, 48), (1, 51), (1, 52), (70, 52)])
+                             extra=[(45, 1), (44, 1), (40, 108), (41, 108), (42, 108), (88, 48), (1, 51), (1, 52), (70, 52)] + bridge_pad)
     # Signpost graphic for Cordon notice (43, 103)
     m.tile(4847, 43, 103, 1)
 
@@ -951,9 +1031,9 @@ def build_524():
     m.front('gl_shed', 70, 51, None, None)
     m.events = []
 
-    # ---- Monumental Wild Giant Trees (pure wild pf_g_tree2 & pf_g_tree4p — ZERO random treehouse doors!)
+    # ---- Monumental Wild Giant Trees (nudged (20,28) west off central cliff stair!)
     for n, x, y in (
-        ('pf_g_tree4p', 58, 50), ('pf_g_tree2', 79, 52), ('pf_g_tree4p', 22, 28), ('pf_g_tree2', 46, 22),
+        ('pf_g_tree4p', 58, 50), ('pf_g_tree2', 79, 52), ('pf_g_tree4p', 20, 28), ('pf_g_tree2', 46, 22),
         ('pf_g_tree4p', 4, 58), ('pf_g_tree4p', 50, 86), ('pf_g_tree2', 6, 30), ('pf_g_tree4p', 72, 26),
         ('pf_g_tree2', 30, 98), ('pf_g_tree4p', 78, 92), ('pf_g_tree2', 7, 4), ('pf_g_tree2', 82, 8),
     ):
@@ -962,20 +1042,21 @@ def build_524():
             m.stamp(n, x, y, mark='B', blend=True)
 
     # ---- Iconic Story Landmarks & Clustered Vignettes ----
-    # 1. NW Sacred Mushroom Ring & Monkey Shrine Sanctuary
+    # 1. NW Sacred Mushroom Ring & Monkey Shrine Sanctuary (dedicated blossom accent glade)
     for n, x, y in (
         ('pf_shrine', 19, 6), ('nr_col', 11, 7), ('nr_col', 17, 7), ('nt_blossom', 21, 6),
         ('pf_lantern', 13, 9), ('pf_lantern', 21, 10), ('nt_azalea2', 10, 11), ('nt_azalea0', 17, 13),
+        ('nt_boulder', 12, 12), ('nt_rocks_s1', 18, 12), ('nt_birch_h', 15, 6),
     ):
         s = STAMPS[n]
         if m.free(x, y, s['w'], s['h'], on='.tT') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
             m.stamp(n, x, y, mark='B')
 
-    # 2. Woodward's Clearing (weavers' hub: looms, racks, spools, campfire, lanterns, benches)
+    # 2. Woodward's Clearing (weavers' hub: looms, racks, spools, campfire, lanterns, benches — NO wireframe pf_p_net!)
     for n, x, y in (
-        ('pf_p_loom', 66, 53), ('gw_spool', 75, 53), ('pf_p_net', 63, 56), ('pf_logbench', 68, 57),
+        ('pf_p_loom', 66, 53), ('gw_spool', 75, 53), ('gw_rack', 63, 56), ('pf_logbench', 68, 57),
         ('pf_lantern', 67, 51), ('pf_lantern', 73, 51), ('gw_rack', 75, 56), ('sh_campfire', 70, 58),
-        ('pf_p_lantern', 64, 49), ('nt_blossom', 75, 45), ('nt_azalea1', 64, 53),
+        ('pf_p_lantern', 64, 49), ('nt_azalea1', 64, 53), ('nt_azalea0', 76, 51), ('nt_boulder', 64, 59),
     ):
         s = STAMPS[n]
         if m.free(x, y, s['w'], s['h'], on='.dt') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
@@ -985,7 +1066,7 @@ def build_524():
     for n, x, y in (
         ('gw_rack', 6, 76), ('gw_rack', 15, 74), ('gw_spool', 17, 83), ('pf_p_lantern', 11, 79),
         ('pf_lantern', 7, 80), ('pf_lantern', 17, 79), ('pf_logbench', 10, 84), ('nt_boulder', 6, 84),
-        ('nt_azalea0', 14, 85), ('nt_blossom', 5, 72),
+        ('nt_azalea0', 14, 85), ('nt_birch_h', 12, 74), ('nt_rock_big', 7, 82),
     ):
         s = STAMPS[n]
         if m.free(x, y, s['w'], s['h'], on='.dtT') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
@@ -996,7 +1077,7 @@ def build_524():
         ('nr_col', wx0 - 1, weft_y - 2), ('nr_col', wx1 + 1, weft_y - 2),
         ('pf_lantern', wx0 - 2, weft_y - 1), ('pf_lantern', wx1 + 2, weft_y - 1),
         ('pf_lantern', 38, ly0 - 2), ('pf_lantern', 42, ly1 + 1),
-        ('nt_blossom', 79, 10), ('nt_azalea2', 74, 15), ('pf_lantern', 74, 12),   # NE Giga Drain grove
+        ('nt_blossom', 79, 10), ('nt_blossom', 73, 10), ('nt_azalea2', 74, 15), ('pf_lantern', 74, 12),   # NE Giga Drain grove
         ('pf_g_tree2', 80, 80), ('nt_azalea1', 75, 87), ('pf_lantern', 75, 83), ('pf_lantern', 81, 87),  # SE Sap Tree
         ('pf_lantern', 29, lipy[31] + 2), ('pf_lantern', 33, lipy[31] + 2),       # Upper wood stairs
         ('pf_lantern', 43, 4), ('pf_lantern', 47, 4),                             # Briarwick north gate
@@ -1007,31 +1088,34 @@ def build_524():
         if m.inb(x, y) and m.free(x, y, s['w'], s['h'], on='.dtT') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
             m.stamp(n, x, y, mark='B')
 
-    # 5. Creeping Glasswood Crystal Clusters along the East Veil (x=79..88, y=44..52)
+    # 5. Subtle Glasswood Crystal Accents along the East Veil (teal/blue harmony, zero neon checkerboard!)
     for n, x, y in (
-        ('cr_teal_t', 80, 45), ('cr_purple_t', 84, 45), ('cr_blue_c', 86, 46),
-        ('cr_purple_c', 81, 50), ('cr_teal_c', 85, 50), ('gd_shard0', 83, 49), ('gd_shard1', 87, 49),
+        ('cr_teal_t', 80, 45), ('cr_blue_c', 85, 45), ('cr_teal_c', 85, 50),
+        ('gd_shard0', 83, 49), ('gd_shard1', 87, 49), ('nt_boulder', 81, 50),
     ):
         s = STAMPS[n]
         if m.inb(x, y) and m.free(x, y, s['w'], s['h'], on='.dtT') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
             m.stamp(n, x, y, mark='B')
 
-    # ---- Silk Drapes, Clustered Props, Multi-Species Fringe & Ferns ----
-    CK.drapes_along(r, every=4, seed=1)
-    for _ in range(W * H // 26):
-        nm = rng.choice(['pf_p_web', 'pf_p_web1', 'gw_drape0', 'gw_drape1', 'gw_cocoons', 'gw_cocoons', 'pf_p_strand_w', 'pf_p_strand_p'])
-        x, y = rng.randrange(W), rng.randrange(H)
-        st_ = STAMPS[nm]
-        if nm.startswith('gw_drape') or nm == 'gw_cocoons':
-            if y + st_['h'] < H and (m.cls[y, x:x + st_['w']] == 'T').all() and m.free(x, y + 1, st_['w'], st_['h'] - 1, on='.dt'):
-                m.stamp(nm, x, y, mark=None)
-        elif m.free(x, y, st_['w'], st_['h'], on='.'):
-            m.stamp(nm, x, y, mark=None)
+    # 6. Clustered Moss-Stone Outcrops & Fallen Logs framing clearings, river bends & coves
+    # (ZERO blank white pf_p_web / gw_drape0 / gw_drape1 rectangles!)
+    for n, x, y in (
+        ('nt_rock_big', 13, 33), ('nt_boulder', 18, 35), ('nt_rocks_s0', 17, 38),       # West mossy dew pond
+        ('nt_boulder', 49, 55), ('nt_rocks_s1', 50, 58), ('nt_birch_h', 56, 61),        # Lotus cove south of Weft Bridge
+        ('nt_boulder', 60, 31), ('nt_rocks_s2', 66, 33), ('nt_birch_h2', 60, 22),       # Waterfall plunge cove
+        ('nt_boulder', 31, 84), ('nt_rocks_s0', 37, 88), ('nt_log', 32, 88),            # South mossy river bend
+        ('nt_stump_big', 25, 44), ('nt_birch_h', 33, 37), ('nt_boulder', 36, 40),       # Mid-wood trail clearings
+        ('nt_boulder', 48, 8), ('nt_rocks_s1', 51, 9), ('nt_birch_h', 58, 12),          # Upper wood north lane
+        ('nt_stump', 72, 65), ('nt_boulder', 76, 70), ('nt_rocks_s2', 75, 86),          # SE Unpicked Seam glades
+    ):
+        s = STAMPS[n]
+        if m.inb(x, y) and m.free(x, y, s['w'], s['h'], on='.t') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
+            m.stamp(n, x, y, mark='B')
 
-    CK.props(r, ['nt_log', 'nt_stump', 'nt_birch_h', 'nt_boulder', 'nt_rocks_s0', 'nt_stump_big'], 36, box=(0, 0, W, H), clump=3, seed=7)
-    # Clean Fringe (excluding broken nt_conifer!)
-    CK.fringe(r, ['nt_dark_sh', 'nt_dpine_sh', 'nt_teal_b', 'nt_olive', 'tr_oak2', 'nt_pine_b', 'nt_blossom'], 135, seed=1, near_forest=3)
-    CK.undergrowth(r, 260, kinds=('nt_fern0', 'nt_fern1', 'nt_shrub0', 'nt_shrub1', 'ak_fern', 'nt_azalea0', 'nt_azalea1'), seed=3)
+    CK.props(r, ['nt_log', 'nt_stump', 'nt_birch_h', 'nt_boulder', 'nt_rocks_s0', 'nt_rocks_s1', 'nt_stump_big'], 44, box=(0, 0, W, H), clump=3, seed=7)
+    # Cohesive Emerald/Teal Forest Fringe (tight near_forest=2, ZERO random pink blossom polka dots!)
+    CK.fringe(r, ['nt_dark_sh', 'nt_dpine_sh', 'nt_teal_a', 'nt_teal_b', 'nt_olive', 'tr_oak2', 'nt_pine_b'], 115, seed=1, near_forest=2)
+    CK.undergrowth(r, 290, kinds=('nt_fern0', 'nt_fern1', 'nt_shrub0', 'nt_shrub1', 'ak_fern', 'nt_azalea0', 'nt_azalea1'), seed=3)
 
     # Reeds around ALL river bends & mossy dew coves
     for rx, ry in ((44, 50), (36, 56), (51, 56), (56, 59), (30, 80), (50, 74), (62, 24), (65, 31),
@@ -1040,28 +1124,51 @@ def build_524():
 
     r.dress(trees=('tr_oak',), n_trees=0, copses=0, scatter=0)
     r.paint(glint=0.0)
-    infill_forest(r, GOSSAMER_WOODS, pick=glass_pick, scale=10.0, seed=524)
+    infill_forest(r, GOSSAMER_WOODS_524, pick=glass_pick, scale=13.0, seed=524)
     CK.paint_extras(r)
 
-    # Paint Weft Bridge (spun silk) & Fallen Giant log bridge
+    # Crisp cliff end-caps flanking the 524 waterfall (x=62 east-end of west cliff, x=66 west-end of east cliff)
+    sh_rows = K.KITS['sh']['rows']
+    for k_row in range(len(sh_rows)):
+        wy = fall_y + k_row
+        if m.inb(62, wy) and m.L[1, wy, 62] == sh_rows[k_row][1]:
+            m.L[1, wy, 62] = sh_rows[k_row][2]
+            m.L[0, wy, 62] = K.SH_GRASS[wy % 2][62 % 2]
+        if m.inb(66, wy) and m.L[1, wy, 66] == sh_rows[k_row][1]:
+            m.L[1, wy, 66] = sh_rows[k_row][0]
+            m.L[0, wy, 66] = K.SH_GRASS[wy % 2][66 % 2]
+
+    # Paint Weft Bridge with warm non-snow weathered timber planks (`ak` 1516..1534) + stone/iron rails on y=44/48!
+    ak_rows = {
+        'n': [C('ak', 1516), C('ak', 1517), C('ak', 1518)],
+        'm': [C('ak', 1524), C('ak', 1525), C('ak', 1526)],
+        's': [C('ak', 1532), C('ak', 1533), C('ak', 1534)],
+    }
     for x, y, k in weft:
-        m.L[1, y, x] = P1('gw_bridge_' + k)
+        col = 0 if x == wx0 else 2 if x == wx1 else 1
+        m.L[1, y, x] = ak_rows[k][col]
         m.L[2, y, x] = 0
+    for ry in (weft_y - 2, weft_y + 2):
+        for x in range(wx0, wx1 + 1):
+            rk = 'w' if x == wx0 else 'e' if x == wx1 else 'm'
+            rt = P1('rw_rail_' + rk)
+            if 57 <= x <= 59:
+                m.L[1, ry, x] = rt
+                m.L[2, ry, x] = 0
+            elif m.L[1, ry, x] == 0 and not ev_mask[ry, x]:
+                m.L[1, ry, x] = rt
+                m.L[2, ry, x] = 0
+    # Paint perpendicular Fallen Giant log bridge cleanly over straight E-W river channel (y=78..83)
     for x, y in giant_log:
         k = 'n' if y == ly0 else 's' if y == ly1 else 'm'
         L_ = STAMPS['fw_log_' + k]['layers']
         m.L[1, y, x] = int(L_[1][0][x - 39]) or int(L_[2][0][x - 39]) or int(L_[0][0][x - 39])
+        m.L[2, y, x] = 0
 
     # Overhead canopy rope walkways across Woodward's clearing
     for x in range(62, 79):
         if m.L[2, 49, x] == 0:
             m.L[2, 49, x] = P1('fw_walk_h')
-
-    # Shimmering Glasswood Veil curtain along x=79 (where Juno triggers!)
-    VEIL = [int(np.array(STAMPS['bl_veil%d' % i]['layers']).max()) for i in (0, 1)]
-    for y in range(46, 51):
-        if m.L[2, y, 79] == 0:
-            m.L[2, y, 79] = VEIL[y % 2]
 
     # Rich layered forest moss/earth depth + wildflowers + petals + glowing mushrooms + lotus water lilies!
     paint_forest_ground_depth(m, seed=524, clearings=[
@@ -1072,31 +1179,32 @@ def build_524():
         (78, 85, 5.5, 4.5, 'ring'),   # SE Sap Tree sanctuary
         (31, 32, 5.0, 4.0, 'dark'),   # Mid-wood trail hollow
         (45, 7, 4.5, 3.5, 'worn'),    # Briarwick north gate
+        (24, 52, 5.0, 3.8, 'dark'),   # West trail hollow
     ])
-    dress_water_lotus(m, prob=0.20, seed=524)
+    dress_water_lotus(m, prob=0.14, seed=524)
 
     FL = K.DECOR_SH['flowers']
-    for i, (cx_, cy_, rx, ry) in enumerate(((70, 59, 4.5, 2.5), (15, 11, 4.0, 2.5), (78, 15, 4.0, 2.5),
-                                            (26, 70, 3.5, 2.2), (35, 43, 3.5, 2.0), (78, 85, 4.0, 2.5),
-                                            (14, 79, 4.0, 2.5), (44, 7, 3.5, 2.0))):
-        CK.meadow(r, cx_, cy_, rx, ry, tiles=[FL[k] for k in (2, 4, 6)], p=0.62, seed=i)
+    for i, (cx_, cy_, rx, ry) in enumerate(((70, 59, 4.5, 2.5), (15, 11, 4.5, 2.8), (78, 15, 4.5, 2.8),
+                                            (26, 70, 3.8, 2.4), (35, 43, 3.8, 2.2), (78, 85, 4.2, 2.6),
+                                            (14, 79, 4.2, 2.6), (44, 7, 3.8, 2.2), (16, 48, 3.5, 2.2),
+                                            (31, 18, 3.8, 2.4), (56, 10, 3.5, 2.2), (74, 68, 3.2, 2.2))):
+        CK.meadow(r, cx_, cy_, rx, ry, tiles=[FL[k] for k in (2, 4, 6)], p=0.64, seed=i)
 
     scatter_petals_and_mushrooms(
         m,
-        spots_petals=[(15, 10, 5.0, 3.2, 0.35), (78, 14, 4.5, 3.0, 0.35), (70, 54, 5.5, 3.5, 0.22),
-                      (78, 85, 4.5, 3.2, 0.32), (12, 80, 4.5, 3.0, 0.22), (45, 7, 4.0, 2.5, 0.28)],
-        spots_mush=[(14, 11, 2.2, 10), (19, 9, 2.0, 8), (12, 77, 2.0, 8), (74, 68, 1.8, 7), (78, 85, 2.6, 10), (28, 36, 1.8, 7)],
+        spots_petals=[(15, 10, 5.0, 3.2, 0.36), (78, 14, 4.8, 3.2, 0.38), (70, 54, 5.5, 3.5, 0.24),
+                      (78, 85, 4.5, 3.2, 0.34), (12, 80, 4.5, 3.0, 0.24), (45, 7, 4.0, 2.5, 0.28),
+                      (31, 34, 4.0, 2.8, 0.22), (24, 50, 4.0, 2.8, 0.20)],
+        spots_mush=[(14, 11, 2.2, 10), (19, 9, 2.0, 8), (12, 77, 2.0, 8), (74, 68, 1.8, 7),
+                    (78, 85, 2.6, 10), (28, 36, 1.8, 7), (15, 38, 1.8, 6), (52, 56, 2.0, 6)],
         seed=524,
     )
 
-    # Atmospheric forest sunbeam shafts & warm clearing glow halos!
-    for sx_, sy_ in ((14, 9), (19, 8), (69, 51), (72, 57), (12, 78), (77, 12), (77, 84), (31, 31),
-                     (44, 5), (56, 44), (39, 77), (74, 67), (22, 47)):
-        put_overlay_stamp(m, 'cv_shaft', sx_, sy_, z=2)
-    for gx_, gy_ in ((14, 10), (69, 57), (11, 79), (77, 84), (77, 13), (57, 45), (44, 6)):
+    # Warm glow halos ONLY directly centered on real lamps & Woodward's campfire (ZERO cv_shaft smears & ZERO floating bridge glows!)
+    for gx_, gy_ in ((13, 9), (69, 57), (11, 79), (75, 83), (74, 12), (43, 4), (47, 4), (67, 51), (73, 51)):
         put_overlay_stamp(m, 'pf_glow', gx_, gy_, z=2)
 
-    CK.scatter_quiet(r, 14, seed=524)
+    CK.scatter_quiet(r, 16, seed=524)
 
     # Seal West border strictly to [50..53] (matching 540!) and keep N/S/E warps & arrival paths clean!
     r.exits = [('W', 50, 4)]
@@ -1106,6 +1214,8 @@ def build_524():
         open_cells=[(0, y) for y in range(50, 54)] + r._keep,
         filler=P1('nt_bush0'),
     )
+    # Consolidate RJ DirtDark onto L0 ONLY & recompute exact NB2AUTO (0 mismatches!)
+    fix_vauto_l0(m.L, 'rejuvenation', 'DirtDark')
     h = {k: v for k, v in hs.items() if k != 'events'}
     h['walk_from'] = [[78, 86]]
     r.write(h, '524_gossamer_wood.yaml', '# Gossamer Wood (524). WRITTEN BY layouts/wave11_wilds_craft.py (Wave 11 Rejuv V14 Craft).\n')
@@ -1445,27 +1555,8 @@ def build_562():
     rng = random.Random(56211)
     m.cls[:, :] = 'T'
 
-    # 1. TRUE Multi-Tier Primeval Snow-Clad Evergreen Ridges (ht=1, zero event/D7 overlap!)
-    for y in range(H):
-        for x in range(W):
-            # NW primeval cliff ridge overlooking ravine & west flank of north exit (x=12..15)
-            nw_q = ((x - 2.5) / 8.5) ** 2 + ((y - 3.5) / 7.5) ** 2 + 0.18 * (vnoise(x, y, 5621, 3.0) - 0.5)
-            if nw_q <= 1.0 and x <= 10 and y <= 10:
-                m.ht[y, x] = 1
-            # East-South primeval evergreen ridge framing Hoar Pond & Wolfsrime south flank
-            es_q = ((x - 45.5) / 6.2) ** 2 + ((y - 34.5) / 5.5) ** 2 + 0.18 * (vnoise(x, y, 5622, 3.0) - 0.5)
-            if es_q <= 1.0 and x >= 40 and 29 <= y <= 39:
-                m.ht[y, x] = 1
-            # SW snowy cliff shelf south of Trapper's Lodge
-            sw_q = ((x - 2.5) / 7.2) ** 2 + ((y - 53.0) / 5.5) ** 2 + 0.18 * (vnoise(x, y, 5623, 3.0) - 0.5)
-            if sw_q <= 1.0 and x <= 9 and y >= 47:
-                m.ht[y, x] = 1
-    CK.smooth_ht(m, 1, 2)
-    # Keep north exit (x=12..15) and Trapper's lodge (x=0..10, y=31..45) strictly ht=0!
-    m.ht[:, 11:40] = 0
-    m.ht[11:46, :12] = 0
-    m.ht[:29, 39:] = 0
-    m.ht[40:, 39:] = 0
+    # 1. Flat Primeval Snow-Forest Floor (ZERO tiny clipped ht=1 cliff-pillar shards or floating icicles!)
+    # Dense interlocking alpine spruces in NW/ES/SW naturally frame the forest without orphan cliff stubs.
 
     # 2. Winding Primeval Forest Trails & Clearings
     path = [(29, 56), (29, 50), (22, 46), (14, 44), (10, 38), (12, 30), (20, 27), (30, 26),
@@ -1475,7 +1566,7 @@ def build_562():
                            (20, 32, 8.2, 4.6), (44, 24, 4.2, 3.2), (35, 36, 4.6, 3.2), (12, 26, 3.6, 2.6), (8, 48, 3.5, 2.6)):
         m.blob(cx, cy, rx, ry, '.', seed=int(cx + cy), only='T', rough=0.55)
     m.lane([(29, 56), (29, 50), (22, 46), (14, 44), (10, 38), (12, 30), (20, 27), (30, 26),
-            (38, 22), (30, 22), (25, 21), (24.5, 14), (24, 11), (18, 8), (15, 4), (15, -1)],
+            (38, 22), (30, 22), (25.5, 21), (24.5, 14), (24, 11), (18, 8), (15, 4), (15, -1)],
            'd', 2.5, seed=4, only='.T', wobble=0.45)
     m.lane([(24, 11), (30, 10), (35, 9)], 'd', 2.2, seed=6, only='.T', wobble=0.3)
     m.lane([(33, 36), (37, 40), (40, 43)], '.', 2.2, seed=8, only='T', wobble=0.3)
@@ -1491,12 +1582,12 @@ def build_562():
         for y in range(52, 56):
             m.cls[y, x] = 'd' if m.cls[y, x] == 'd' else '.'
 
-    # 3. Sculpted Glacial Ravine (frost-rippled Sea deep 'W' with crisp snowy shorelines!)
+    # 3. Sculpted Glacial Ravine (frost-rippled water with crisp snowy shorelines!)
     for x in range(1, 47):
         c = 16.5 + 1.7 * math.sin(x / 6.2) + 1.5 * (vnoise(x, 0, 9, 3.0) - 0.5)
         hw = 1.4 + 1.3 * vnoise(x, 0, 10, 4.0) + (0.9 if 20 <= x <= 29 else 0)
         for y in range(int(c - hw), int(round(c + hw)) + 1):
-            if 0 <= y < m.H and m.ht[y, x] == 0 and m.cls[y, x] in '.dT':
+            if 0 <= y < m.H and m.cls[y, x] in '.dT':
                 m.cls[y, x] = 'W'
     smooth_cls(m, 'W', into='T', passes=2)
 
@@ -1523,29 +1614,45 @@ def build_562():
     for cx, cy in ((47, 15), (47, 14), (46, 14), (46, 13), (45, 13), (45, 12), (44, 12), (44, 13), (47, 19), (47, 20), (46, 20), (45, 20)):
         m.cls[cy, cx] = '.'
 
-    # Open ragged snowy bank along ravine so evergreens don't butt awkwardly into cliff/water edges
+    # Open ragged snowy bank along ravine so evergreens don't butt awkwardly into water edges
     bank = np.zeros((H, W), bool)
     for y, x in np.argwhere(np.isin(m.cls, ['o', 'W'])):
         bank[max(0, y - 2):y + 3, max(0, x - 1):x + 2] = True
-    for y, x in np.argwhere(bank & (m.cls == 'T') & (m.ht == 0)):
+    for y, x in np.argwhere(bank & (m.cls == 'T')):
         if x < 41 and vnoise(x, y, 12, 2.5) > 0.45:
             m.cls[y, x] = '.'
 
-    # 4. Sculpted Organic Hoar Pond Slide Puzzle (kidney lobes, snowy islet for ICESTONE [26, 33])
+    # 4. Sculpted Organic Hoar Pond Slide Puzzle (kidney lobes + rounded organic snow islet for ICESTONE [26, 33])
     for cx, cy, rx, ry, sd in ((22.5, 33.4, 6.2, 3.4, 19), (28.8, 34.8, 4.0, 2.6, 21),
                                (17.6, 31.4, 2.8, 2.0, 23), (25.5, 30.7, 3.2, 1.5, 25), (31.5, 32.2, 1.8, 1.4, 27)):
         m.blob(cx, cy, rx, ry, 'p', seed=sd, rough=0.35, only='.dT')
     smooth_cls(m, 'p', into='.', passes=2)
+    # Rounded organic snow island keeping ICESTONE [26,33] & solvable >=4-slide puzzle!
     ISLET = [(25, 33), (26, 33), (24, 34), (25, 34), (26, 34), (25, 35)]
     for x, y in ISLET:
         m.cls[y, x] = '.'
         m.taken[y, x] = True
+    # Crisp 1-tile open snowy south shore around Hoar Pond (pulls south-rim pines down +1 tile so ZERO sheared canopies!)
+    for y in range(32, 41):
+        for x in range(14, 34):
+            if m.cls[y, x] == 'T' and any(m.inb(x + dx, y - 1) and m.cls[y - 1, x + dx] == 'p' for dx in (-1, 0, 1)):
+                m.cls[y, x] = '.'
+            if m.cls[y, x] == 'T' and any(m.inb(x + dx, y - 2) and m.cls[y - 2, x + dx] == 'p' for dx in (0,)) and y <= 38:
+                m.cls[y, x] = '.'
 
     # 5. Fallen Giant Ice-Log Bridge spanning the ravine at x=24..25
     oy = [y for y in range(H) if m.cls[y, 24] in 'oW' or m.cls[y, 25] in 'oW']
     LOG = (min(oy) - 1, max(oy) + 1)
+    log_water_rows = [y for y in range(LOG[0] + 1, LOG[1]) if (m.cls[y, 23] in 'oW' or m.cls[y, 26] in 'oW')]
     for y in range(LOG[0], LOG[1] + 1):
         m.cls[y, 24] = m.cls[y, 25] = 'D'
+    # Clear wide snow landing south of Fallen Giant bridge (x=22..27, y=20..24) so signpost [24,21] has ZERO pine/log collision!
+    for y in range(LOG[1] + 1, min(H, LOG[1] + 6)):
+        for x in range(22, 28):
+            if m.cls[y, x] == 'T':
+                m.cls[y, x] = '.'
+    m.cls[20, 24] = '.'; m.cls[20, 25] = 'd'; m.cls[20, 26] = 'd'
+    m.cls[21, 24] = '.'; m.cls[21, 25] = 'd'; m.cls[21, 26] = 'd'
 
     # 6. Organic Frosted Fern Encounter Pockets (ZERO square rectangles!)
     for cx, cy, rx, ry, sd in ((12, 48, 3.6, 2.6, 51), (34, 39, 3.8, 2.6, 52), (16, 11, 3.6, 2.2, 53), (38, 46, 3.0, 2.2, 54)):
@@ -1554,7 +1661,7 @@ def build_562():
     # Clear Trapper's Chalet yard (1..9, 32..42)
     for yy in range(32, 42):
         for xx in range(0, 10):
-            if m.cls[yy, xx] == 'T' and m.ht[yy, xx] == 0:
+            if m.cls[yy, xx] == 'T':
                 m.cls[yy, xx] = '.'
 
     # Ensure ALL 18 HEAD events + D7 threads/cache/trapper sit on clean ground!
@@ -1574,22 +1681,21 @@ def build_562():
     m.cls[23, 46] = 'T'; m.cls[23, 47] = 'T'
 
     m.plan_cliffs(rows=3)
-    # Seal all elevated ridge tops (ht == 1) with dense alpine spruce canopy!
-    for y in range(H):
-        for x in range(W):
-            if m.ht[y, x] == 1 and not m.cliff[y, x]:
-                m.cls[y, x] = 'T'
 
     # Clean thin 1-cell T bands (protecting D7 walls!)
     R_ = types.SimpleNamespace(m=m, seed=562, road_mask=np.isin(m.cls, ['d']), events=events, rng=rng)
-    ev_mask = reserve_events(m, events, R_.road_mask, radius=1, extra=d7_pts + [(45, 24), (46, 26)])
-    for x, y in ((42, 10), (42, 11), (42, 12), (42, 13), (42, 14), (43, 10), (44, 10), (45, 10), (46, 10), (47, 10), (46, 23), (47, 23), (46, 25), (47, 25)):
+    d7_wall_cells = ((42, 10), (42, 11), (42, 12), (42, 13), (42, 14), (43, 10), (44, 10), (45, 10), (46, 10), (47, 10), (46, 23), (47, 23), (46, 25), (47, 25))
+    d7_wall_set = set(d7_wall_cells)
+    bridge_clear = [(x, y) for x in range(23, 27) for y in range(LOG[0], LOG[1] + 4)]
+    se_lane_clear = [(x, y) for x in range(34, 42) for y in range(37, 45) if abs((x - 34) - (y - 37)) <= 2]
+    ev_mask = reserve_events(m, events, R_.road_mask, radius=1, extra=d7_pts + [(45, 24), (46, 26)] + bridge_clear + se_lane_clear)
+    for x, y in d7_wall_cells:
         m.taken[y, x] = True
     CK.thin_bands(R_, passes=2)
-    for x, y in ((42, 10), (42, 11), (42, 12), (42, 13), (42, 14), (43, 10), (44, 10), (45, 10), (46, 10), (47, 10), (46, 23), (47, 23), (46, 25), (47, 25)):
+    for x, y in d7_wall_cells:
         m.taken[y, x] = False
 
-    # Signboards for Frost Loom [33, 10] & Fallen giant [24, 21]
+    # Signboards for Frost Loom [33, 10] & Fallen giant [24, 21] (cleanly clear of bridge & pines!)
     m.tile(4847, 33, 10, 1)
     m.tile(4847, 24, 21, 1)
 
@@ -1599,90 +1705,343 @@ def build_562():
     doorstep(m, (4, 40))
     m.cls[40, 4] = 'B'
 
-    # Frost Loom ancient wild giant tree (pf_g_tree4p_ice — NO doors/windows!) + frozen loom
-    for n, x, y in (
-        ('pf_g_tree4p_ice', 31, 4), ('pf_p_loom', 34, 11),
-        ('pf_g_tree2_ice', 2, 18), ('pf_g_tree4p_ice', 40, 30),
-        ('pf_g_tree2_ice', 41, 46), ('pf_g_tree2_ice', 18, 49), ('pf_g_tree4p_ice', 3, 2),
+    # Pre-paint hero kf_tree reservation (clears full 4x6 box + 2-row south canopy buffer from 'T' so CK.woods/infill NEVER shoot L2 up into kf_tree!)
+    hero_kf_trees = []
+    kf_reserved = np.zeros((H, W), dtype=bool)
+    for x, y in (
+        (31, 3), (3, 2), (1, 19), (1, 26),
+        (41, 30), (18, 49), (41, 47),
+        (41, 21), (28, 19), (36, 31),
     ):
-        s = STAMPS[n]
-        if m.inb(x, y) and m.free(x, y, s['w'], s['h'], on='T.t') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
-            m.stamp(n, x, y, mark='B', blend=True)
+        w, h = STAMPS['kf_tree']['w'], STAMPS['kf_tree']['h']
+        if x < 1 or y < 1 or x + w >= W - 1 or y + h >= H - 1:
+            continue
+        if not m.free(x, y, w, h, on='.T'):
+            continue
+        if m.cliff[y:y + h, x:x + w].any() or ev_mask[y:y + h, x:x + w].any():
+            continue
+        # Require 1-tile crown buffer & 2-row south clearance from other hero trees/walls/chalet
+        bx0, bx1 = max(0, x - 1), min(W, x + w + 1)
+        by0, by1 = max(0, y - 1), min(H, y + h + 2)
+        if kf_reserved[by0:by1, bx0:bx1].any():
+            continue
+        if any((xx, yy) in d7_wall_set for yy in range(by0, by1) for xx in range(bx0, bx1)):
+            continue
+        # Clear 'T' in full box + 2 rows south & 1 col E/W so CK.woods/infill stay strictly outside crown buffer!
+        for yy in range(by0, by1):
+            for xx in range(bx0, bx1):
+                if m.cls[yy, xx] == 'T':
+                    m.cls[yy, xx] = '.'
+        m.taken[y:y + h, x:x + w] = True
+        m.overm[y:y + h, x:x + w] = True
+        m.bodym[y:y + h, x:x + w] = True
+        kf_reserved[y:y + h, x:x + w] = True
+        hero_kf_trees.append((x, y))
 
-    # Trapper's warm yard, Aurora Clearing, Child's big tree, & Warm Lantern Trail Markers
+    # Frost Loom frozen loom prop
+    if m.free(34, 11, STAMPS['pf_p_loom']['w'], STAMPS['pf_p_loom']['h'], on='.dtT') and not ev_mask[11:13, 34:36].any():
+        m.stamp('pf_p_loom', 34, 11, mark='B')
+
+    # Trapper's warm yard, Aurora Clearing, Child's big tree, Fallen Birch Logs & Warm Lantern Trail Markers
+    # Track ONLY actually placed braziers/lanterns so pf_glow NEVER lands on bare snow!
+    placed_lights_562 = []
     for n, x, y in (
         # Trapper's yard
         ('fw_wood', 4, 43), ('fw_wood', 6, 44), ('pf_sledge', 9, 44), ('fw_rack', 1, 43),
-        ('fw_brazier', 10, 40), ('pf_lantern', 7, 39), ('fw_log_m', 13, 37), ('nt_stump', 15, 41),
-        # Aurora Clearing (sacred frost monoliths + warm braziers — NO broken nt_stonering!)
+        ('fw_brazier', 10, 40), ('pf_lantern', 7, 39), ('nt_birch_h', 12, 37), ('nt_stump', 15, 41),
+        # Aurora Clearing (sacred frost monoliths + warm braziers)
         ('fw_brazier', 22, 2), ('fw_brazier', 28, 2), ('fw_stone', 20, 4), ('fw_stone', 30, 4),
         # Warm lantern trail markers & Frost Loom / Fallen Giant / Glade framing
-        ('pf_lantern', 23, 21), ('pf_lantern', 26, 21), ('pf_lantern', 23, 12), ('pf_lantern', 26, 12),
+        ('pf_lantern', 22, 20), ('pf_lantern', 27, 20), ('pf_lantern', 23, 12), ('pf_lantern', 26, 12),
         ('pf_lantern', 32, 11), ('pf_lantern', 37, 10),
         ('pf_lantern', 12, 2), ('pf_lantern', 16, 2),
         ('pf_lantern', 26, 52), ('pf_lantern', 30, 52),
         ('pf_lantern', 44, 22), ('pf_lantern', 44, 27),
         ('fw_brazier', 35, 22), ('fw_brazier', 15, 28),
-        # Trail survey pegs (crisp fw_peg instead of awkward 4847 signboards!)
+        # Trail survey pegs
         ('fw_peg', 26, 27), ('fw_peg', 29, 25), ('fw_peg', 32, 24), ('fw_peg', 35, 23),
-        # Child's big tree camp (SE)
-        ('fw_skull', 38, 42), ('fw_wood', 42, 46), ('nt_stump_big', 43, 40), ('fw_peg', 36, 45),
+        # Child's big tree camp (SE) & natural fallen birch logs + alpine rock outcrops (NO pale-pink fw_skull!)
+        ('fw_wood', 38, 42), ('fw_wood', 42, 46), ('nt_stump_big', 43, 40), ('fw_peg', 36, 45),
         ('pf_lantern', 39, 43),
+        ('nt_birch_h', 16, 22), ('nt_birch_h2', 29, 28), ('nt_birch_h', 22, 44), ('nt_birch_h2', 32, 46),
+        ('nt_birch_v', 13, 30), ('nt_birch_h', 18, 9), ('fw_stone', 17, 23), ('fw_stone', 33, 35),
+        ('nt_rocks_s0', 21, 11), ('nt_rocks_s1', 28, 11), ('nt_rocks_s2', 14, 26), ('nt_rocks_s0', 36, 37),
+        ('nt_rocks_s1', 23, 47), ('nt_rocks_s2', 31, 48), ('nt_stump', 27, 48), ('nt_stump', 37, 26),
     ):
         s = STAMPS[n]
-        if m.inb(x, y) and m.free(x, y, s['w'], s['h'], on='.dt') and not ev_mask[y:y + s['h'], x:x + s['w']].any():
+        sw, sh = s['w'], s['h']
+        if (m.inb(x, y) and m.free(x, y, sw, sh, on='.d')
+                and not ev_mask[y:y + sh, x:x + sw].any()
+                and not m.overm[y:y + sh, x:x + sw].any()
+                and not kf_reserved[y:y + sh, x:x + sw].any()):
             m.stamp(n, x, y, mark='B')
+            if n in ('fw_brazier', 'pf_lantern'):
+                placed_lights_562.append((n, x, y))
 
-    # Aurora Clearing frost monoliths + Ravine sentinel teal pines + hero snow oaks
-    for tx, ty, sp in (
-        (24, 1, KF_CRYS_MONO), (26, 1, KF_CRYS_STAR),
-        (19, 13, KF_TEAL_PINE_A), (28, 12, KF_TEAL_PINE_B), (39, 12, KF_TEAL_PINE_A),
-        (7, 21, KF_TEAL_PINE_B), (13, 21, KF_TEAL_PINE_A), (35, 29, KF_TEAL_PINE_B),
-        (17, 38, KF_TEAL_PINE_A), (30, 44, KF_TEAL_PINE_B), (21, 50, KF_TEAL_PINE_A),
-        (11, 6, KF_TEAL_PINE_B), (32, 3, KF_TEAL_PINE_A),
-        (21, 3, KF_BOULDER), (29, 5, KF_BOULDER), (16, 24, KF_BOULDER), (34, 33, KF_BOULDER),
-    ):
-        put_sprite(m, tx, ty, *sp, on='.tT', avoid_mask=ev_mask)
-
-    for nm, tx, ty in (('kf_tree', 1, 22), ('kf_tree', 42, 21), ('kf_tree', 28, 19), ('kf_tree', 36, 32), ('kf_tree', 1, 27)):
-        s = STAMPS[nm]
-        if m.inb(tx, ty) and m.free(tx, ty, s['w'], s['h'], on='.tT') and not ev_mask[ty:ty + s['h'], tx:tx + s['w']].any():
-            m.stamp(nm, tx, ty, mark='B')
-
-    # 8. Interlocking Alpine Spruce Forest + Clustered Evergreen Fringe (ZERO grey bubble-wrap spam!)
-    CK.woods(R_, ALPINE_WOODS, scale=8.5, accents={'snowblue': 0.06})
-    CK.fringe(R_, ['pine2', 'kf_tree', 'pine2', 'pine2'], 55, seed=1, near_forest=3)
-    CK.props(R_, ['fw_wood', 'fw_log_m', 'nt_stump'], 16, box=(0, 0, W, H), clump=3, seed=7)
+    # 8. Interlocking Alpine Spruce Forest (CK.woods + safe_canopy infill_winter -> ZERO L2-on-L2 overlaps!)
+    CK.woods(R_, ALPINE_WOODS, scale=8.5, accents={'snowblue': 0.08})
 
     m.events = events
     m.paint()
-    infill_winter(R_, ALPINE_WOODS, scale=8.5, seed=562)
+    infill_winter(R_, ALPINE_WOODS, scale=8.5, seed=562, safe_canopy=True)
 
-    # Fallen Giant Ice-Glazed Log Bridge across Ravine
+    # P0 #1 FIX: Guarantee EVERY frosted_oak (snow0, L2=18388) has L2=18380 directly above it (0 missing crowns!)
+    for y_o, x_o in np.argwhere(m.L[2] == 18388):
+        if y_o > 0 and m.L[2, y_o - 1, x_o] == 0:
+            m.L[2, y_o - 1, x_o] = 18380
+
+    # Strict post-paint stamp & sprite placers for 562:
+    # Require FULL bounding box L1==0 & L2==0 PLUS 1-tile L2==0 crown buffer so ZERO tree/boulder ever clips another crown!
+    def stamp_post_562(nm, x, y, on='.T', crown_pad=1, check_taken=True):
+        s = STAMPS[nm]
+        w, h = s['w'], s['h']
+        if x < 1 or y < 1 or x + w >= W - 1 or y + h >= H - 1:
+            return False
+        if m.cliff[y:y + h, x:x + w].any() or ev_mask[y:y + h, x:x + w].any():
+            return False
+        if check_taken and m.taken[y:y + h, x:x + w].any():
+            return False
+        if any((xx, yy) in d7_wall_set for yy in range(y, y + h) for xx in range(x, x + w)):
+            return False
+        if (m.L[1, y:y + h, x:x + w] != 0).any() or (m.L[2, y:y + h, x:x + w] != 0).any():
+            return False
+        if crown_pad > 0:
+            px0, px1 = max(0, x - crown_pad), min(W, x + w + crown_pad)
+            py0, py1 = max(0, y - crown_pad), min(H, y + h + crown_pad)
+            if (m.L[2, py0:py1, px0:px1] != 0).any():
+                return False
+        for yy in range(y, y + h):
+            for xx in range(x, x + w):
+                if m.cls[yy, xx] not in on:
+                    return False
+        for z_ in (1, 2):
+            grid = s['layers'][z_]
+            for dy in range(h):
+                for dx in range(w):
+                    t = grid[dy][dx]
+                    if t:
+                        m.L[z_, y + dy, x + dx] = t
+        m.taken[y:y + h, x:x + w] = True
+        m.overm[y:y + h, x:x + w] = True
+        m.bodym[y:y + h, x:x + w] = True
+        return True
+
+    def put_sprite_562(tx, ty, top_r, bot_r, on='.T', post_paint=True, crown_pad=1):
+        ht_, hb_ = len(top_r), len(bot_r)
+        w_ = len(bot_r[0]) if hb_ else len(top_r[0])
+        h_ = ht_ + hb_
+        if tx < 1 or ty < 1 or tx + w_ >= W - 1 or ty + h_ >= H - 1:
+            return False
+        if m.cliff[ty:ty + h_, tx:tx + w_].any() or ev_mask[ty:ty + h_, tx:tx + w_].any() or m.taken[ty:ty + h_, tx:tx + w_].any():
+            return False
+        if any((xx, yy) in d7_wall_set for yy in range(ty, ty + h_) for xx in range(tx, tx + w_)):
+            return False
+        if (m.L[1, ty:ty + h_, tx:tx + w_] != 0).any() or (m.L[2, ty:ty + h_, tx:tx + w_] != 0).any():
+            return False
+        if crown_pad > 0 and ht_ > 0:
+            px0, px1 = max(0, tx - crown_pad), min(W, tx + w_ + crown_pad)
+            py0, py1 = max(0, ty - crown_pad), min(H, ty + h_ + crown_pad)
+            if (m.L[2, py0:py1, px0:px1] != 0).any():
+                return False
+        for yy in range(ty, ty + h_):
+            for xx in range(tx, tx + w_):
+                if m.cls[yy, xx] not in on:
+                    return False
+        if put_sprite(m, tx, ty, top_r, bot_r, on=on, avoid_mask=ev_mask, force=True, post_paint=True):
+            m.overm[ty:ty + h_, tx:tx + w_] = True
+            m.bodym[ty:ty + h_, tx:tx + w_] = True
+            m.taken[ty:ty + h_, tx:tx + w_] = True
+            return True
+        return False
+
+    # Stamp reserved hero kf_tree ancient frosted oaks cleanly into their pre-cleared pockets (ZERO overlap!)
+    for hx, hy in hero_kf_trees:
+        stamp_post_562('kf_tree', hx, hy, on='.T', crown_pad=1, check_taken=False)
+
+    # Post-paint focal nt_pine_blue conifers (strict L1==0 & L2==0 + 1-tile crown buffer, gentle r<=2 nudge if needed!)
+    for bx, by in (
+        (36, 3), (28, 4), (8, 2), (1, 6), (6, 20), (45, 30), (40, 36),
+        (23, 50), (15, 51), (45, 48), (42, 52), (15, 24), (33, 27),
+        (12, 34), (34, 43), (20, 41), (7, 46),
+    ):
+        placed_bp = False
+        for rad in range(0, 3):
+            for dy in range(-rad, rad + 1):
+                for dx in range(-rad, rad + 1):
+                    if abs(dx) != rad and abs(dy) != rad:
+                        continue
+                    if stamp_post_562('nt_pine_blue', bx + dx, by + dy, on='.', crown_pad=1):
+                        placed_bp = True
+                        break
+                if placed_bp:
+                    break
+            if placed_bp:
+                break
+
+    # Post-paint Aurora Clearing frost monoliths + Ravine sentinel teal pines + alpine boulders & frosted shrubs
+    # (ALL gated by full-box L1==0 & L2==0 + 1-tile L2 crown buffer -> ZERO sheared canopies or boulder-in-crown bites!)
+    for tx, ty, sp in (
+        (24, 1, KF_CRYS_MONO), (26, 1, KF_CRYS_STAR), (29, 1, KF_CRYS_BLADES),
+        (19, 12, KF_TEAL_PINE_A), (28, 12, KF_TEAL_PINE_B), (39, 12, KF_TEAL_PINE_A),
+        (7, 21, KF_TEAL_PINE_B), (35, 28, KF_TEAL_PINE_B),
+        (17, 39, KF_TEAL_PINE_A), (30, 44, KF_TEAL_PINE_B), (21, 50, KF_TEAL_PINE_A),
+        (11, 6, KF_TEAL_PINE_B), (32, 3, KF_TEAL_PINE_A),
+        # Clustered alpine boulder outcrops & frosted evergreen shrubs
+        (21, 3, KF_BOULDER), (29, 5, KF_BOULDER), (16, 24, KF_BOULDER), (34, 33, KF_BOULDER),
+        (37, 24, KF_BOULDER), (15, 45, KF_BOULDER), (31, 41, KF_BOULDER),
+        (19, 25, KF_SHRUB_A), (29, 23, KF_SHRUB_B), (13, 35, KF_SHRUB_A), (34, 37, KF_SHRUB_B),
+        (18, 43, KF_SHRUB_A), (27, 45, KF_SHRUB_B), (20, 7, KF_SHRUB_A), (30, 8, KF_SHRUB_B),
+    ):
+        put_sprite_562(tx, ty, sp[0], sp[1], on='.', post_paint=True, crown_pad=1)
+
+    # Post-paint pine2 fringe near woods (replaces pre-paint CK.fringe so 10610/10611 NEVER overwrites any crown below!)
+    fr_rng = random.Random(56291)
+    t_mask = (m.cls == 'T')
+    cand_fr = []
+    for fy in range(2, H - 4):
+        for fx in range(2, W - 3):
+            if m.cls[fy + 2, fx] == '.' and not m.taken[fy:fy + 3, fx:fx + 2].any():
+                if t_mask[max(0, fy - 2):min(H, fy + 5), max(0, fx - 2):min(W, fx + 4)].any():
+                    cand_fr.append((fx, fy))
+    fr_rng.shuffle(cand_fr)
+    fr_placed = 0
+    for fx, fy in cand_fr:
+        if fr_placed >= 26:
+            break
+        if stamp_post_562('pine2', fx, fy, on='.', crown_pad=1):
+            fr_placed += 1
+
+    # Post-paint small ground props (logs, stumps, stones) strictly on clear snow (ZERO crown overlaps!)
+    pr_rng = random.Random(5627)
+    pr_cands = [(x, y) for y in range(2, H - 3) for x in range(2, W - 3) if m.cls[y, x] == '.' and not m.taken[y, x]]
+    pr_rng.shuffle(pr_cands)
+    pr_placed = 0
+    for px, py in pr_cands:
+        if pr_placed >= 18:
+            break
+        pnm = pr_rng.choice(('fw_wood', 'nt_birch_h', 'nt_stump', 'fw_stone', 'nt_rocks_s0'))
+        if stamp_post_562(pnm, px, py, on='.', crown_pad=1):
+            pr_placed += 1
+
+    # Fallen Giant Ice-Glazed Log Bridge across Ravine — paint blue Still water snow on L0 underneath water rows!
+    w_vauto = RC.vauto('reborn', 'Still water snow', 0)
+    for y in log_water_rows:
+        m.L[0, y, 24] = w_vauto
+        m.L[0, y, 25] = w_vauto
+    fix_vauto_l0(m.L, 'reborn', 'Still water snow')
     for y in range(LOG[0], LOG[1] + 1):
         nm = 'fw_log_n' if y == LOG[0] else 'fw_log_s' if y == LOG[1] else 'fw_log_m'
         L_ = STAMPS[nm]['layers'][1][0]
         m.L[1, y, 24], m.L[1, y, 25] = L_[0], L_[1]
         m.L[2, y, 24] = m.L[2, y, 25] = 0
+    # Guarantee Fallen giant signpost [24, 21] has ZERO overhead canopy clipping
+    m.L[1, 21, 24] = 4847
+    m.L[2, 21, 24] = 0
 
-    # Hoar Pond Slide Puzzle stoppers (mathematically proven >= 4 slides to ICESTONE [26,33] & proven exit!)
-    pond_cells = [tuple(c[::-1]) for c in np.argwhere(m.cls == 'p')]
-    for x, y in slide_puzzle(m, pond_cells, ISLET, (26, 33), seed=11):
+    # Hoar Pond Slide Puzzle stoppers (mathematically proven >= 4 slides to ICESTONE [26,33] & proven exit,
+    # AND every stopper boulder sits strictly >= 1 tile inside the ice — ZERO shore-clipping boulders!)
+    pond_cells = set(tuple(c[::-1]) for c in np.argwhere(m.cls == 'p'))
+    isl_set = set(ISLET) - {(26, 33)}
+    land_out_562 = {
+        (x + dx, y + dy)
+        for (x, y) in pond_cells for dx, dy in DIRS4
+        if (x + dx, y + dy) not in pond_cells and (x + dx, y + dy) not in set(ISLET)
+        and m.inb(x + dx, y + dy) and m.cls[y + dy, x + dx] in '.dt'
+        and not m.taken[y + dy, x + dx] and not m.cliff[y + dy, x + dx]
+    }
+    pond_all = pond_cells | set(ISLET)
+    interior_ice = [c for c in sorted(pond_cells)
+                    if all((c[0] + dx, c[1] + dy) in pond_all for dx in (-1, 0, 1) for dy in (-1, 0, 1))]
+    isl_xs, isl_ys = {x for x, _ in isl_set}, {y for _, y in isl_set}
+    ray_ice = [c for c in interior_ice if c[0] in isl_xs or c[1] in isl_ys]
+    # Identify direct 1-slide lanes from shore to islet:
+    # - If a lane has interior_ice cells, sample an interior stopper along it.
+    # - If a lane is too short to contain any interior_ice cell (1-tile shore-to-islet gap), place a crisp L1-only snow-rim stone on the shore cell (strictly L1==0 & L2==0!).
+    direct_lanes = []
+    blocked_shore = set()
+    for sx, sy in sorted(land_out_562):
+        for dx, dy in DIRS4:
+            cx, cy = sx + dx, sy + dy
+            lane = []
+            while (cx, cy) in pond_cells:
+                lane.append((cx, cy))
+                cx += dx; cy += dy
+            if (cx, cy) in isl_set:
+                int_lane = [c for c in lane if c in interior_ice]
+                if int_lane:
+                    direct_lanes.append(int_lane)
+                elif m.cls[sy, sx] == '.' and not ev_mask[sy, sx] and m.L[1, sy, sx] == 0 and m.L[2, sy, sx] == 0:
+                    m.L[1, sy, sx] = 10551
+                    m.taken[sy, sx] = True
+                    blocked_shore.add((sx, sy))
+    land_out_562 -= blocked_shore
+    sp_rng = random.Random(56211)
+    best_sp = None
+    for it_ in range(20000):
+        rocks = set()
+        for ln in direct_lanes:
+            if sp_rng.random() < 0.92:
+                rocks.add(sp_rng.choice(ln))
+        rocks |= set(sp_rng.sample(ray_ice, min(len(ray_ice), sp_rng.randint(2, 7))))
+        rocks |= set(sp_rng.sample(interior_ice, min(len(interior_ice), sp_rng.randint(2, 7))))
+        ice_c = pond_cells - rocks - set(ISLET)
+        k_sl, _ = slide_solve(ice_c, land_out_562 | isl_set, land_out_562, isl_set)
+        if k_sl is None or k_sl < 4:
+            continue
+        back_sl, _ = slide_solve(ice_c, land_out_562 | isl_set, isl_set, land_out_562)
+        if back_sl is None:
+            continue
+        sc = k_sl * 100 - len(rocks)
+        if best_sp is None or sc > best_sp[0]:
+            best_sp = (sc, rocks, k_sl)
+        if k_sl >= 5 and len(rocks) <= 13:
+            break
+    if best_sp is None:
+        raise SystemExit('562 Hoar Pond: no solvable interior layout')
+    print('  pond puzzle: %d strictly-interior stoppers, islet in %d slides (shore cells %d)' %
+          (len(best_sp[1]), best_sp[2], len(land_out_562)))
+    for x, y in sorted(best_sp[1]):
         m.L[1, y, x] = 10371 if (x + y) % 3 else 10551
 
-    # Atmospheric details: winter light shafts, warm brazier/lantern glows, icicles, frosted reeds, drifts, rime silk!
-    for sx_, sy_ in ((24, 1), (34, 7), (24, 15), (9, 39), (24, 32), (40, 42)):
-        put_overlay_stamp(m, 'cv_shaft', sx_, sy_, z=2)
-    for gx_, gy_ in ((25, 2), (10, 39), (34, 9), (24, 20), (35, 21), (39, 43), (4, 40)):
-        put_overlay_stamp(m, 'pf_glow', gx_, gy_, z=2)
+    # P1 FIX: Warm glow halos ONLY on actually placed braziers/lanterns (ZERO orphaned pf_glow on bare snow!)
+    for lnm, lx, ly in placed_lights_562:
+        # Center 2x2 pf_glow halo cleanly on verified lamp/brazier tiles (never overwrite tree L2!)
+        gy_ = ly if lnm == 'fw_brazier' else ly + 1
+        if m.inb(lx, gy_) and m.L[1, gy_ + (1 if lnm == 'fw_brazier' else 0), lx] != 0:
+            put_overlay_stamp(m, 'pf_glow', lx, gy_, z=2)
 
-    rime_silk(m, ((6, 8), (12, 20), (30, 30), (35, 8), (20, 44), (34, 49), (14, 6), (36, 30), (26, 46)))
-    dress_ice(m, 0.28, seed=562)
-    reed_beds(m, 42, seed=562, avoid_mask=ev_mask)
-    drifts(m, 0.14, seed=562)
-    CK.snow_ground_var(R_, thr=0.38)
-    road_tracks(m, 0.11, seed=562)
-    icy_faces(m, p=0.28, seed=562)
+    rime_silk(m, ((33, 6), (36, 8), (22, 4), (27, 4), (35, 30)))
+    dress_ice(m, 0.22, seed=562, reeds=False)
+    # Frosted boulders & snow-shrubs framing ravine shoreline (strict full-box + 1-tile L2 crown buffer!)
+    for tx, ty, sp in (
+        (18, 13, KF_SHRUB_A), (29, 13, KF_SHRUB_B), (12, 19, KF_BOULDER),
+        (33, 19, KF_SHRUB_A), (36, 13, KF_BOULDER), (39, 34, KF_SHRUB_B), (39, 36, KF_SHRUB_A),
+    ):
+        put_sprite_562(tx, ty, sp[0], sp[1], on='.', post_paint=True, crown_pad=1)
+    # Wind-swept clustered snowdrift bands hugging tree edges & frosted glades
+    ds_tiles = [STAMPS['fw_drift%d' % i]['layers'][1][0][0] for i in range(3)]
+    open_snow = (m.cls == '.') & ~m.taken & (m.L[1] == 0) & (m.L[2] == 0) & ~m.cliff
+    pad_s = np.pad(open_snow, 1, constant_values=True)
+    for y, x in np.argwhere(open_snow):
+        if ev_mask[y, x]:
+            continue
+        edge = not pad_s[y:y + 3, x:x + 3].all()
+        nz_d = vnoise(x, y, 5629, 4.5)
+        if (edge and nz_d > 0.44 and rng.random() < 0.42) or (not edge and nz_d > 0.66 and rng.random() < 0.28):
+            m.L[1, y, x] = ds_tiles[int(vnoise(x, y, 5631, 2.5) * 2.999)]
+    CK.snow_ground_var(R_, thr=0.34)
+    # Purge any stray 10555/10556 grey triangle shard tiles (DECOR_SNOW['green'] in Gen 5 reskin!)
+    for z_ in (1, 2):
+        shard_m = (m.L[z_] == 10555) | (m.L[z_] == 10556)
+        if shard_m.any():
+            m.L[z_, shard_m] = 0
+    # Consolidate PF Packed Snow onto L0 ONLY & recompute exact NB2AUTO (0 mismatches!), THEN lay tracks on L1!
+    fix_vauto_l0(m.L, 'pf', 'Packed Snow')
+    tk_tiles = [STAMPS['fw_tracks%d' % i]['layers'][1][0][0] for i in range(2)]
+    tr_rng = random.Random(5625)
+    for y, x in np.argwhere(m.cls == 'd'):
+        if m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and not m.taken[y, x] and not m.cliff[y, x] and tr_rng.random() < 0.11:
+            m.L[1, y, x] = tr_rng.choice(tk_tiles)
 
     # Ensure D7 corridor (47, 14..20), Glade warp (47, 24) & Wolfsrime warp (47, 26) stay 100% passable!
     for ex, ey in ((47, 14), (47, 15), (47, 16), (47, 17), (47, 18), (47, 19), (47, 20), (47, 24), (47, 26)):
@@ -1702,6 +2061,8 @@ def build_562():
                    [(47, y) for y in (14, 15, 16, 17, 18, 19, 20, 24, 26)],
         filler=10371,
     )
+    fix_vauto_l0(m.L, 'pf', 'Packed Snow')
+    fix_vauto_l0(m.L, 'reborn', 'Still water snow')
     h = {k: v for k, v in hs.items() if k != 'events'}
     h['walk_from'] = [[13, 1]]
     h['_file'] = '562_rimewood.yaml'

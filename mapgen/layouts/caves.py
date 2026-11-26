@@ -143,12 +143,12 @@ def build_544():
     for y in range(30, 34):
         for x in (1, 2, 3):
             m.cls[y, x] = 'w'; m.ht[y, x] = FLOOR
-    # Organic curved NE depot brine cove (never a plain rectangle!)
-    for xx, yy in ((33, 23), (34, 23), (35, 23), (33, 24), (34, 24), (35, 24), (36, 24), (33, 25), (34, 25), (35, 25)):
+    # Clean NE depot brine cove (stays strictly clear of cliff base at x=36)
+    for xx, yy in ((33, 23), (34, 23), (35, 23), (33, 24), (34, 24), (35, 24), (33, 25), (34, 25), (35, 25)):
         m.cls[yy, xx] = 'w'; m.ht[yy, xx] = FLOOR
     for xx, yy in ((36, 23), (37, 23)):
         m.cls[yy, xx] = 'x'; m.ht[yy, xx] = MASS
-    for xx, yy in ((37, 24), (36, 25), (37, 25)):
+    for xx, yy in ((36, 24), (37, 24), (36, 25), (37, 25)):
         m.cls[yy, xx] = '.'; m.ht[yy, xx] = FLOOR
     for y in range(7, 11):
         for x in (1, 2):
@@ -236,19 +236,26 @@ def events_544(m, paths, off):
          'intro': "I train by punching chalk. Want to see?", 'after': "Chalk wins. Usually."},
         {'type': 'trainer', 'at': [44, 7], 'sight': 4, 'dir': 'left', 'sprite': 'trainer_BLACKBELT', 'trainer': ['BLACKBELT', 'Saul'],
          'intro': "I train in the salt. Builds character. Also thirst.", 'after': "I need a drink. Not salt."},
-        {'type': 'item', 'at': [4, 5], 'item': 'HARDSTONE'},
+        {'type': 'item', 'at': [4, 6], 'item': 'HARDSTONE'},
         {'type': 'item', 'at': [37, 29], 'item': 'ESCAPEROPE'},
         {'type': 'item', 'at': [45, 13], 'item': 'REVIVE', 'hidden': True},
         {'type': 'rock_smash', 'name': 'Rock', 'at': [43, 32], 'sprite': 'pf_cave_rock_S'},
         {'type': 'item', 'at': [43, 34], 'item': 'ETHER'},
     ]
     m.keep_clear |= ({(20, 26), (10, 36), (10, 35), (42, 1), (42, 2), (6, 11), (34, 11), (40, 11),
+                      (4, 6), (4, 7), (5, 6),
                       (21, 25), (19, 25), (22, 26), (10, 10), (14, 10), (43, 31), (43, 33),
                       (30, 7), (29, 6), (31, 6), (18, 10), (21, 10), (8, 30), (7, 29), (7, 31),
                       (4, 24), (5, 24), (6, 24), (4, 28), (5, 28), (6, 28),
                       (26, 28), (27, 28), (28, 28), (29, 28), (37, 28), (36, 29), (38, 29),
                       (17, 7), (17, 8), (43, 7), (42, 7), (44, 13), (44, 14), (44, 15)}
-                     | {(x, 27) for x in range(13, 21)})
+                     | {(x, 27) for x in range(13, 21)}
+                     | {(x, 18) for x in range(6, 41)}
+                     | {(6, y) for y in range(12, 19)}
+                     | {(20, y) for y in range(18, 27)}
+                     | {(29, y) for y in range(18, 24)}
+                     | {(34, y) for y in range(12, 19)}
+                     | {(40, y) for y in range(12, 19)})
 
 
 def dress_544(m):
@@ -257,7 +264,8 @@ def dress_544(m):
     m.tile(P1('cv_hole'), 30, 6)
     m.over.append((2, 10, 9, P1('cv_chalkx')))
     m.mass_at([(39, 32), (40, 32), (41, 32), (39, 33), (40, 33), (41, 33), (39, 34), (40, 34), (41, 34), (42, 32), (44, 32)])
-    m.tile(P1('cv_rail_end'), 29, 23)
+    # Seat vertical buffer stop squarely at pit bridge end (29,22) so south chasm rim (29,23) stays unbroken!
+    m.over.append((2, 29, 22, P1('cv_rail_end')))
 
     # ---- 1. Dramatic Atmospheric Cavern Light Shafts (cv_shaft, pri=2) & Warm Glow Pools (pf_glow, pri=5) ----
     for sx, sy in ((19, 24), (18, 8), (29, 6), (5, 7), (41, 7), (36, 26)):
@@ -268,11 +276,11 @@ def dress_544(m):
     m.stamps.append(('pf_glow', 19, 8))                                              # spotlight on Points Gallery P2/P3 levers
 
     # ---- 2. Shadowed Minecart Timber Portals, Siding Spur & Brine Sump Docks ----
-    for fx, fy in ((9, 34), (41, 1), (15, 25), (43, 22)):
+    for fx, fy in ((9, 34), (41, 1), (15, 25), (43, 22), (25, 8)):
         m.put('cv_frame', fx, fy)
-    # Depot siding spur west of main line
-    for x in range(14, 20): m.tile(P1('cv_rail_h'), x, 27)
-    m.tile(P1('cv_rail_end'), 13, 27)
+    # Depot siding spur west of main line with clean horizontal end & boulder stop (no perpendicular vertical T-stub!)
+    for x in range(13, 20): m.tile(P1('cv_rail_h'), x, 27)
+    m.over.append((2, 13, 27, P1('S_rock0')))
     for x in (15, 16, 18): m.tile(P1('cv_cart_salt'), x, 27)
     # Weathered timber sump docks beside the SW & NE brine seepage pools
     for dy, t in ((30, 'cv_raft_t'), (31, 'cv_raft_m'), (32, 'cv_raft_b')):
@@ -280,16 +288,19 @@ def dress_544(m):
     for dy, t in ((23, 'cv_raft_t'), (24, 'cv_raft_m'), (25, 'cv_raft_b')):
         m.over.append((1, 32, dy, P1(t)))
 
-    # ---- 3. Clustered Mining Depot Vignettes (Salt Stacks, Crates, Barrels, Sluice, Lanterns & Timber Supports) ----
+    # ---- 3. Clustered Mining Depot Vignettes (Salt Stacks, Crates, Barrels, Sluice, Lanterns & Timber Struts) ----
     for name, x, y in (
         ('cv_saltblocks', 7, 23), ('cv_saltblocks', 21, 32), ('cv_saltblocks', 27, 5), ('cv_saltblocks', 39, 26),
         ('hb_crates4', 27, 32), ('hb_barrels', 3, 23), ('hb_barrels', 45, 9), ('hb_barrels', 38, 24),
         ('hb_boxes', 25, 26), ('hb_boxes', 12, 31),
-        ('cv_sluice', 4, 33), ('cv_chain', 31, 24), ('cv_chain', 29, 5),
+        ('cv_sluice', 5, 33), ('cv_chain', 31, 24), ('cv_chain', 29, 5),
         ('cv_lamp_on', 12, 24), ('cv_lamp_on', 26, 24), ('cv_lamp_on', 38, 26), ('cv_lamp_on', 45, 26),
         ('cv_lamp_on', 6, 32), ('cv_lamp_on', 45, 21), ('cv_lamp_on', 3, 9), ('cv_lamp_on', 39, 8),
         ('cv_lamp_on', 25, 7), ('cv_lamp_on', 22, 6), ('cv_lamp_on', 14, 7), ('cv_lamp_on', 8, 24),
+        # Braced timber mine struts & support posts breaking up long cavern walls and Cut overlook rims
         ('cv_post', 11, 28), ('cv_post', 28, 30), ('cv_post', 41, 24), ('cv_post', 28, 7),
+        ('cv_post', 10, 23), ('cv_post', 14, 23), ('cv_post', 25, 23), ('cv_post', 31, 23),
+        ('cv_post', 15, 6), ('cv_post', 21, 6), ('cv_post', 32, 6), ('cv_post', 40, 6), ('cv_post', 6, 6),
         ('cv_tools', 26, 6), ('cv_tools', 12, 29),
     ):
         L = ST[name]['layers']; w, h = len(L[0][0]), len(L[0])
@@ -333,15 +344,15 @@ def dress_544(m):
             m.over.append((1, x, y, P1(n))); m.taken[y, x] = True
 
     # ---- 5. Clustered Chamber Crystal Spires, Salt Stalagmites (S_stal), & Bioluminescent Fungi ----
-    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0', p + '_rock1'], 18, seed=1, box=(2, 23, 47, 37))
-    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock1'], 14, seed=2, box=(2, 3, 47, 13))
-    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0'], 6, seed=3, box=(42, 13, 47, 26))
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0', p + '_rock1'], 20, seed=1, box=(2, 23, 47, 37))
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock1'], 16, seed=2, box=(2, 3, 47, 13))
+    m.solid_props(['cv_xsalt', 'cv_xblue', 'cv_xsea', p + '_rock0'], 8, seed=3, box=(42, 13, 47, 26))
     for name, x, y in (
-        ('cv_xrose2', 3, 10), ('cv_xblue2', 8, 5), ('S_stal', 9, 5), ('cv_xsea2', 14, 5), ('cv_xrose2', 22, 5),
-        ('cv_xblue2', 27, 5), ('S_stal', 32, 5), ('cv_xsea2', 38, 6), ('cv_xrose2', 46, 10),
-        ('cv_xblue2', 45, 19), ('S_stal', 3, 27), ('cv_xrose2', 5, 33), ('cv_xblue2', 15, 32),
-        ('S_stal', 24, 30), ('cv_xsea2', 31, 31), ('cv_xblue2', 42, 29), ('cv_xrose2', 46, 26),
-        ('cv_xsea2', 14, 16), ('cv_xblue2', 16, 17), ('S_stal', 38, 23),
+        ('cv_xrose2', 3, 10), ('cv_xrose2', 7, 5), ('cv_xblue2', 8, 5), ('S_stal', 9, 5), ('cv_xsea2', 14, 5),
+        ('cv_xrose2', 22, 5), ('cv_xblue2', 27, 5), ('cv_xrose2', 31, 5), ('S_stal', 32, 5), ('cv_xsea2', 38, 6),
+        ('cv_xrose2', 46, 10), ('cv_xblue2', 45, 19), ('S_stal', 3, 27), ('cv_xrose2', 8, 32), ('cv_xblue2', 15, 32),
+        ('cv_xrose2', 21, 30), ('S_stal', 24, 30), ('cv_xsea2', 31, 31), ('cv_xblue2', 42, 29), ('cv_xrose2', 46, 26),
+        ('cv_xsea2', 14, 16), ('cv_xblue2', 13, 15), ('cv_xrose2', 17, 15), ('S_stal', 38, 23), ('cv_xrose2', 10, 24),
     ):
         if m.free(x, y, 1, 2, on='.:') and (x, y) not in m.keep_clear and (x, y + 1) not in m.keep_clear:
             m.put(name, x, y)
@@ -353,13 +364,105 @@ def dress_544(m):
             m.over.append((2, x, y, P1('cv_fung0' if (x + y) % 2 == 0 else 'cv_fung1')))
             m.taken[y, x] = True
 
-    # Warm miners' wall sconces across every gallery cliff face
-    for x, y in ((6, 4), (15, 4), (20, 4), (29, 4), (39, 4), (45, 4),
-                 (5, 22), (11, 22), (26, 22), (39, 22), (44, 22), (7, 26)):
+    # Warm miners' wall sconces, hanging chains & mine banners breaking up long gallery cliff faces
+    for x, y in ((6, 4), (15, 4), (20, 4), (27, 4), (31, 4), (39, 4), (45, 4),
+                 (5, 22), (11, 22), (22, 22), (26, 22), (35, 22), (39, 22), (44, 22), (7, 26)):
         if m.inb(x, y) and m.cliff[y, x]:
             m.over.append((2, x, y, P1('cv_walllamp')))
+    for x, y in ((4, 4), (17, 4), (28, 4), (40, 4), (18, 22), (31, 22), (42, 25)):
+        if m.inb(x, y) and m.cliff[y, x]:
+            m.over.append((2, x, y, P1('cv_chain')))
 
     m.dress(14, seed=1)
+
+
+def polish_544(m):
+    """Post-paint polish for 544 Brinecut Mine 1F (100% passability-invariant with d4_points!):
+    1. Stepped rocky chasm/pit rim lip shading around the Cut void pits (x2-41, y14-22) so pits read as
+       deep rocky mine shafts rather than flat pure-black holes.
+    2. Richer rock-strata variation across long cave cliff walls (mixing S_facem2 & S_lipm2 fractures) to
+       break up identical crenellated wall segments."""
+    import numpy as np
+    L = m.L
+    H, W = m.H, m.W
+
+    # 1. Stepped rocky chasm rim shading inside solid PIT cells (all S_m* tiles are pas=15, 100% identical to cv_pit0!)
+    is_pit = (m.cls == 'p')
+    # Distance from any higher-ground rim (floor, terrace, or solid rock mass/spire) into the chasm
+    dist = np.where(is_pit, 99, 0)
+    for _ in range(5):
+        pad = np.pad(dist, 1, constant_values=0)
+        nb = np.minimum.reduce([
+            pad[0:H, 1:W + 1], pad[2:H + 2, 1:W + 1],
+            pad[1:H + 1, 0:W], pad[1:H + 1, 2:W + 2],
+            pad[0:H, 0:W] + 1, pad[0:H, 2:W + 2] + 1,
+            pad[2:H + 2, 0:W] + 1, pad[2:H + 2, 2:W + 2] + 1,
+        ])
+        dist = np.where(is_pit, np.minimum(dist, nb + 1), 0)
+
+    # Also treat cliff-base overhang rows inside the pit as depth 0 so rim shading wraps cleanly beneath cliff faces!
+    basem_set = {P1('S_basew'), P1('S_basem'), P1('S_basee'), P1('S_facew'), P1('S_facem'), P1('S_facem1'), P1('S_facem2'), P1('S_facee')}
+    has_wall_art = np.isin(L[1], list(basem_set)) | np.isin(L[2], list(basem_set))
+    dist2 = np.where(is_pit & ~has_wall_art, 99, 0)
+    for _ in range(5):
+        pad = np.pad(dist2, 1, constant_values=0)
+        nb = np.minimum.reduce([
+            pad[0:H, 1:W + 1], pad[2:H + 2, 1:W + 1],
+            pad[1:H + 1, 0:W], pad[1:H + 1, 2:W + 2],
+        ])
+        dist2 = np.where(is_pit & ~has_wall_art, np.minimum(dist2, nb + 1), 0)
+
+    sm1 = (P1('S_m1a'), P1('S_m1b'))
+    sm2 = (P1('S_m2a'), P1('S_m2b'))
+    sm3 = (P1('S_m3a'), P1('S_m3b'))
+    for y in range(H):
+        for x in range(W):
+            if not is_pit[y, x] or has_wall_art[y, x]:
+                continue
+            d = int(dist2[y, x])
+            var = (x * 7 + y * 13) % 2
+            # Crisp 3-tone shaft drop: d==1 rocky shaft rim (S_m1 under cliff/spire, S_m2 on south/side lip),
+            # d==2 deep shadowed shaft wall (S_m3a/b), d>=3 dramatic pitch-black abyssal core!
+            if d == 1:
+                under_cliff = (y > 0 and has_wall_art[y - 1, x])
+                L[0, y, x] = sm1[var] if under_cliff else sm2[var]
+            elif d == 2:
+                L[0, y, x] = sm3[var]
+
+    # Selective jagged solid rock outcrops & salt crystals perched right on non-track chasm rim shoulders (all pas=15!)
+    rim_rocks = (
+        (2, 16, 'S_rock0'), (2, 21, 'S_rock1'), (5, 22, 'S_rock0'), (7, 22, 'cv_xsalt'),
+        (11, 22, 'S_rock1'), (12, 15, 'S_rock0'), (12, 20, 'cv_xsalt'), (18, 16, 'S_rock1'),
+        (18, 21, 'cv_xblue'), (19, 22, 'S_rock0'), (22, 22, 'cv_xsalt'), (27, 22, 'S_rock1'),
+        (33, 22, 'cv_xsalt'), (35, 22, 'S_rock0'), (41, 16, 'S_rock1'), (41, 21, 'cv_xsea'),
+    )
+    for rx, ry, nm in rim_rocks:
+        if m.inb(rx, ry) and is_pit[ry, rx] and (rx, ry) not in m.track and L[1, ry, rx] == 0 and L[2, ry, rx] == 0:
+            L[1, ry, rx] = P1(nm)
+
+    # 2. Break up identical crenellated cave wall faces & lips with cracked strata S_facem2 / S_lipm2!
+    facem, facem1, facem2 = P1('S_facem'), P1('S_facem1'), P1('S_facem2')
+    lipm, lipm1, lipm2 = P1('S_lipm'), P1('S_lipm1'), P1('S_lipm2')
+    for y in range(H):
+        for x in range(W):
+            hval = (x * 19 + y * 37 + (x // 2) * 11) % 10
+            for z in (1, 2):
+                t = int(L[z, y, x])
+                if t == facem or t == facem1:
+                    if hval in (0, 2, 4, 6, 8):
+                        L[z, y, x] = facem2
+                    elif hval in (1, 3, 7):
+                        L[z, y, x] = facem1
+                    else:
+                        L[z, y, x] = facem
+                elif t == lipm or t == lipm1:
+                    if hval in (0, 2, 4, 6, 8):
+                        L[z, y, x] = lipm2
+                    elif hval in (1, 5, 7):
+                        L[z, y, x] = lipm1
+                    else:
+                        L[z, y, x] = lipm
+
 
 
 # ====================================================================================================== 545
@@ -912,6 +1015,7 @@ def main(which):
         events_544(m, paths, off)
         dress_544(m)
         m.paint()
+        polish_544(m)
         m.preview('/tmp/mb13/p544.png', scale=0.5)
         head = {'id': 544, 'name': 'Brinecut Mine 1F', 'parent': 540, 'bgm': 'Cave', 'field': 'CAVE',
                 'metadata': {'Name': 'Brinecut Mine', 'MapPosition': [0, 11, 23], 'BattleBack': 'cave1', 'SnapEdges': True},
