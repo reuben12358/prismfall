@@ -23,11 +23,21 @@ like a bad idea". Engine: `plugins/Prismfall Cutscenes/014_Portraits.rb`. A line
   `Prismfall::Portrait::CAST` get a face or a bubble.** Anyone else stays plain even if tagged, so don't tag them (Coll and
   the sister-game cameos, for example, are plain).
 - A new conversation starts fresh: a new event, an `[after X]` variant, or a choice branch.
+- **Emote balloon** (rare): `[emote: kind]` after the speaker tag pops one small balloon over that speaker's map sprite
+  (`[emote: kind, Name]` over someone else). Kinds: exclaim, double_exclaim, question, dots, anger, sweat, heart, idea,
+  music, jolt. Map events write `\pfe[kind]`. **At most three a conversation** (the engine drops a fourth), none in the
+  no-joke stretches. Overworld acting is opt-in the same way: `[pose: crossed]` / `\pfp[...]`, `[act: nod]` / `\pfa[...]`.
+- **Boxes** (2026-11-25): a line in a script block is one message box, one or two lines of text. Long speeches are cut
+  at sentence ends, the first box carrying the `[portrait: ...]` tag and the rest `[name: X]`. A stage direction that is a
+  whole sentence sits on its own line; a fragment such as `(pulling)` stays in the line of whoever does it.
 
 **How the engine reads these (`014_Portraits.rb`; shots: `docs/playtest/portraits_*.png`):**
 - Face: the frame is cut from the message box's own windowskin and sits on the box's left edge, above it, or below it
-  when the box is at the top (Desolation's face window). It rises and fades in (0.16 s) for a new speaker and gives a
-  2 px nudge for a new expression. A same-speaker, same-face line does not move at all.
+  when the box is at the top (Desolation's face window). **Portraits never move** (`018_ExpressiveDialogue.rb`,
+  2026-11-25): a new speaker fades in (0.10 s), a new expression cross-fades, a same-face line does nothing. When a
+  second cast member answers, their face fades in on the box's right end and the one who just spoke stays, dimmed; each
+  keeps a side for the conversation, and a third speaker takes the side of whoever spoke longest ago. After narration,
+  a walk or any pause the stage starts again with the speaker alone.
 - The expression only picks the file: `Graphics/Portraits/NAME_expression.png`, else `NAME.png` (any expression name
   works, e.g. Juno's `surprised`). With neither file, the line is plain. `PLAYER` uses `PLAYER_A` or `PLAYER_B`, by the
   look picked on the Dovetail.
