@@ -265,7 +265,7 @@ check("Gilded on Standard: each refill is the Casual bar's HP (x0.5 of the Stand
 fresh(:HARD)
 check("Gilded on Hard: refills are the Casual bar HP too (x0.4 of the Hard bar)", (bs.arceus_gilded_refill - 0.4).abs < 1e-9, bs.arceus_gilded_refill.to_s)
 fresh(:CASUAL)
-check("Gilded on Casual: a full Casual bar", bs.arceus_gilded_refill == 1.0)
+check("Gilded on Casual (eased): half a Casual bar", bs.arceus_gilded_refill == 0.5)
 
 # Standard's Recover limit: two a bar. A Blissey that chips 100 a round, so Arceus wants to Recover.
 recov = []

@@ -32,8 +32,8 @@
 #     :prismfall_arceus_locks_broken (battle, bar, gyms, forced, final)  the bar
 #        breaks: the refused locks tear free by force
 #   Gilded (ENGINE_CALIBRATED): "the last bar can't be broken". It refills three
-#     times (each refill = the Casual bar HP, on every difficulty: BALANCE.md
-#     section 7), then the Gilded Chain closes: the battle ends, result
+#     times (each refill = the Casual bar HP, BALANCE.md section 7; on Casual,
+#     half a Casual bar), then the Gilded Chain closes: the battle ends, result
 #     :gilded_chain (the event then runs END_GILDED_CHAIN). Elsewhere the last
 #     bar's fall ends the battle as a win, result :freed (Arceus never faints).
 #   Judgment (Ruin Route R7): Giratina-Origin fights at the PC's side (:partner,
@@ -165,8 +165,10 @@ module Prismfall
       return gyms.reject { |n| arceus_consents?(n) }
     end
 
-    # A Gilded refill: the Casual bar's HP, as a fraction of this difficulty's bar.
+    # A Gilded refill: the Casual bar's HP, as a fraction of this difficulty's bar. Casual only (eased 2026-11-26:
+    # 13% for the harness with full refills): half its own bar.
     def self.arceus_gilded_refill
+      return 0.5 if difficulty == :CASUAL
       m = resolve(get(:ARCEUS_FINALE)[:stat_mults])
       cur = (m.is_a?(Hash) && m[:HP].is_a?(Numeric)) ? m[:HP] : 1.0
       return [ARCEUS_CASUAL_BAR_HP / cur, 1.0].min
