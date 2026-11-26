@@ -78,6 +78,9 @@ Any value marked *D* may be a difficulty Hash `{ :CASUAL => x, :STANDARD => y, :
 | `:ai_skill` *D*, `:ai_script` *D*, `:ai_script_loop` | `:ai_script => { 1 => [:CALMMIND, nil, :JUDGMENT] }` (bar => one move per turn; `nil` = AI picks). It ends after its last entry unless looped |
 | `:follow_prism` | `{ :form => true, :form_message, :movesets => { :FIRE => [...], :default => [...] } }`: follows PRISM_ARENA's ascendant Plate |
 | `:prism_interval` *D* | sets the arena's writable `:interval` (rounds per turn) |
+| `:prism_order` *D* | `[[field, ...], ...]`, one list per bar (the last repeats), or a proc returning that: the arena cycles only the current bar's fields (its `:set_order`). Set when the boss enters (the Plates turn at once) and at every break with `:prism_turn` (Arceus: each bar's three gym fields) |
+| `:follow_prism[:items]` | `{ :FIRE => :FIREMEMORY, ..., :default => nil }`: the held item follows the ascendant Plate too (Silvally). `:form_message` may be a `proc { |type| "..." }` |
+| `:end_of_round` | `proc { |battle, battler, state| }`, run after every round the boss is on the field; it may set `state.result` / `state.end_decision` (the Origin trial's restraint check, NULL's regeneration) |
 | `:ebdx` | `{ :databox => true/false, :script => :BattleScriptName }` |
 
 ### Effect keys (inside `:on_break` / `:breaks` / `:on_defeat`)

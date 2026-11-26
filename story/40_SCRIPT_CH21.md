@@ -71,7 +71,7 @@ Script: Prismfall::Festival.next_match   # :FINAL, :PRISM_ARENA cycling, cap 96
 - **Each time the field cycles** (a battle hook, Valen only): his crystal visibly spreads from shoulder to throat, shown as a sprite overlay plus a line: "The crystal climbs Valen's throat..."
 - **Zygarde on its last bar** (Complete Forme): "Order, not justice. I chose order." `[bubble: VALEN, sad]`
 
-*(The Zygarde Complete bar is in TODO_QUOTA §2. Until it lands, Zygarde fights as a normal ace.)*
+*(Built: Bosses `113_Boss_ValenZygarde.rb`. Zygarde is a bar boss, Casual 2 / Standard 2 / Hard 3; Complete Forme and the line come with its last bar; the crystal line plays on every turn of the Plates.)*
 ```
 (WIN:)
 [portrait: VALEN, happy] (on one knee, smiling, breathing hard) Velmora has a new champion.
@@ -175,7 +175,7 @@ Script: Prismfall::Festival.next_match   # :HIJACK — Voss (or Quent), cap 100,
 - "Your mother wilted for ten years because a god dropped its furniture on her."
 - "I'm not your enemy. I'm the only adult in this arena who'll say the true thing out loud: *we don't need it*."
 
-**His ace, Silvally (Project NULL), multi-bar:** its type follows the active field as the arena cycles through the eighteen gym fields. *(Silvally's conduit bar is in TODO_QUOTA §2.)*
+**His ace, Silvally (Project NULL), multi-bar:** its type follows the active field as the arena cycles through the eighteen gym fields. *(Built: Bosses `114_Boss_VossSilvally.rb`. Three bars; `:ch21_reach_kestrel` below is asked inside the battle when bar 2 breaks; on `:let_go` NULL regenerates through bar 3.)*
 
 **Between bars 2 and 3, if `KESTREL_FALLEN`: `:ch21_reach_kestrel`**
 ```
@@ -365,8 +365,7 @@ The Prism Arena (Crownhaven, unbuilt) carries the whole chapter.
 - **The ending vignettes** reuse earlier chapters' maps: Verdance's Bride Tree, the Lowlight, Mirefen's Quiet Ward, the Glassfall Scar, Marrowgate's gate, the Ferrow's Landing rail, the Gravenmoor barrows, and the Basilica roof. Each is an autorun with tone, weather and NPC swaps keyed to the ending ID.
 
 ## Gaps this chapter depends on (TODO_QUOTA §2 and §3)
-- Valen's **Zygarde Complete** bar.
-- Voss's **Silvally conduit bar**.
+- ~~Valen's **Zygarde Complete** bar~~ and ~~Voss's **Silvally conduit bar**~~: built 2026-11-25 (Bosses 113, 114).
 - The **Redeemed Kestrel partner** team (Ch21).
 - The Ch21 tag-foe versions (v21) for Marchetti, Quent and Kroll exist in PBS.
 - Redeemed Kestrel's partner team exists in PBS as `[RIVAL_KESTREL,Kestrel,93]` / `94` / `95` (Staraptor 95, his starter 96, Aegislash "Morwen" 97 with Wide Guard; one version, no Mega). `Prismfall::Rival.partner_version(9)` picks the one for the player's starter.
