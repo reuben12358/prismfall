@@ -37,6 +37,11 @@ module Prismfall
     TARGET_W         = 512
     TARGET_H         = 384
     RIBBON_H         = 110   # [PF] was 96: the bottom rule struck through the location line (Gemini QA 2026-11-26)
+    # Where each text line's middle sits, in pixels below the ribbon's top rule. text_sprite centres the drawn glyphs
+    # on these, so they land in the same place whether the engine's draw_text centres text in its rect or puts it at
+    # the top: in the Linux mkxp-z capture the old 40 px rects were top-aligned, so the act line sat on the top rule
+    # and the location floated mid-ribbon (2026-11-26 capture).
+    TEXT_MID         = { :act => 16, :num => 34, :title => 59, :loc => 87 }
     LEAD_SEC         = 0.30         # the map fades to black before the painting, and back after
     SKIP_GRACE_SEC   = 1.5
     SKIP_FADE_SEC    = 0.45
@@ -910,10 +915,10 @@ module Prismfall
         gleam.x = -140
         gleam.y = @ribbon_y
         gleam.opacity = 0
-        text_sprite(:act, @cfg[:act], 15, Color.new(*@cfg[:accent]), true, false, @ribbon_y - 2, 50)
-        text_sprite(:num, "—  #{@cfg[:num]}  —", 17, Color.new(244, 224, 178), true, false, @ribbon_y + 15, 51)
-        text_sprite(:title, @cfg[:title], 30, Color.new(252, 249, 240), true, true, @ribbon_y + 38, 52)
-        text_sprite(:loc, @cfg[:location], 15, Color.new(204, 216, 238), false, false, @ribbon_y + 66, 53)
+        text_sprite(:act, @cfg[:act], 15, Color.new(*@cfg[:accent]), true, false, @ribbon_y + TEXT_MID[:act], 50)
+        text_sprite(:num, "—  #{@cfg[:num]}  —", 17, Color.new(244, 224, 178), true, false, @ribbon_y + TEXT_MID[:num], 51)
+        text_sprite(:title, @cfg[:title], 30, Color.new(252, 249, 240), true, true, @ribbon_y + TEXT_MID[:title], 52)
+        text_sprite(:loc, @cfg[:location], 15, Color.new(204, 216, 238), false, false, @ribbon_y + TEXT_MID[:loc], 53)
         curtain = sprite(:curtain, black, 90)
         curtain.opacity = 0
         hide_layers
@@ -950,20 +955,42 @@ module Prismfall
         end
       end
 
-      def text_sprite(key, text, size, color, bold, italic, y, z)
-        bmp = own(Bitmap.new(@w, 42))
+      # A line of text whose drawn glyphs are centred on mid_y. Engines differ in where draw_text puts a line inside
+      # a taller rect (the Linux mkxp-z capture puts it at the top), so the sprite's origin comes from the pixels
+      # actually drawn, not from the rect.
+      def text_sprite(key, text, size, color, bold, italic, mid_y, z)
+        box_h = (size * 2) + 12
+        bmp = own(Bitmap.new(@w, box_h))
+        style_font(bmp, size, bold, italic)
+        bmp.font.color = Color.new(6, 8, 14, 225)
+        [[-1, 0], [1, 0], [0, -1], [0, 1], [1, 2]].each { |dx, dy| bmp.draw_text(dx, 2 + dy, @w, box_h - 6, text, 1) }
+        bmp.font.color = color
+        bmp.draw_text(0, 2, @w, box_h - 6, text, 1)
+        sp = sprite(key, bmp, z)
+        sp.oy = ink_middle(bmp, text) || (box_h / 2)
+        sp.y = mid_y
+        sp.opacity = 0
+        return sp
+      end
+
+      # the middle row of the drawn glyphs (nil when the engine can't read pixels back)
+      def ink_middle(bmp, text)
+        return nil if !bmp.respond_to?(:get_pixel)
+        tw = (bmp.text_size(text.to_s).width rescue bmp.width) + 8
+        x0 = [(bmp.width - tw) / 2, 0].max
+        x1 = [x0 + tw, bmp.width].min
+        rows = (0...bmp.height).select { |y| (x0...x1).step(2).any? { |x| bmp.get_pixel(x, y).alpha > 40 } }
+        return nil if rows.empty?
+        return (rows.first + rows.last) / 2
+      rescue StandardError
+        return nil
+      end
+
+      def style_font(bmp, size, bold, italic)
         pbSetSystemFont(bmp) if defined?(pbSetSystemFont)
         bmp.font.size = size
         bmp.font.bold = bold if bmp.font.respond_to?(:bold=)
         bmp.font.italic = italic if bmp.font.respond_to?(:italic=)
-        bmp.font.color = Color.new(6, 8, 14, 225)
-        [[-1, 0], [1, 0], [0, -1], [0, 1], [1, 2]].each { |dx, dy| bmp.draw_text(dx, dy, @w, 40, text, 1) }
-        bmp.font.color = color
-        bmp.draw_text(0, 0, @w, 40, text, 1)
-        sp = sprite(key, bmp, z)
-        sp.y = y
-        sp.opacity = 0
-        return sp
       end
 
       # A slow pan and zoom, never far enough to show the painting's edge.
@@ -1014,10 +1041,10 @@ module Prismfall
         else
           gleam.opacity = 0
         end
-        animate_text(@sprites[:act],   @ribbon_y - 2,  t, 1.35, 1.88, 5, out_fade)
-        animate_text(@sprites[:num],   @ribbon_y + 15, t, 1.65, 2.20, 6, out_fade)
-        animate_text(@sprites[:title], @ribbon_y + 38, t, 2.00, 2.68, 9, out_fade)
-        animate_text(@sprites[:loc],   @ribbon_y + 66, t, 2.52, 3.12, 4, out_fade)
+        animate_text(@sprites[:act],   @ribbon_y + TEXT_MID[:act],   t, 1.35, 1.88, 5, out_fade)
+        animate_text(@sprites[:num],   @ribbon_y + TEXT_MID[:num],   t, 1.65, 2.20, 6, out_fade)
+        animate_text(@sprites[:title], @ribbon_y + TEXT_MID[:title], t, 2.00, 2.68, 9, out_fade)
+        animate_text(@sprites[:loc],   @ribbon_y + TEXT_MID[:loc],   t, 2.52, 3.12, 4, out_fade)
       end
 
       def animate_text(sp, target_y, t, t0, t1, slide_px, out_fade)
