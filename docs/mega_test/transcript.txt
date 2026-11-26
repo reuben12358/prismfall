@@ -26,22 +26,22 @@ Mega: the player's Camerupt (AI-controlled) on the Volcanic field
   But nothing happened!
   Camerupt used Earth Power!
   Magma erupted from below!
-    HP Chansey (foe): 388 -> 242 / 388
+    HP Chansey (foe): 388 -> 225 / 388
   (end of round)
   The volcano erupted!
-    HP Chansey (foe): 242 -> 193 / 388
+    HP Chansey (foe): 225 -> 176 / 388
   Lava rained down around the wild Chansey!
   Camerupt rode the eruption!
     (anim: StatUp)
   Camerupt's Special Attack rose!
 
 --- Turn 2 ---
-  [Camerupt 172/172 | Chansey 193/388]
+  [Camerupt 172/172 | Chansey 176/388]
   The wild Chansey used Splash!
   But nothing happened!
   Camerupt used Flamethrower!
   Camerupt drew fire up from the magma!
-    HP Chansey (foe): 193 -> 0 / 388
+    HP Chansey (foe): 176 -> 0 / 388
   The wild Chansey fainted!
     xx fainted: Chansey (foe)
   Camerupt got 4741 Exp. Points!

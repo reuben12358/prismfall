@@ -31,7 +31,7 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | the AI Mega Evolves the first turn its Glalie can act | 1 turn headers in between |
 | PASS | Brann's Camerupt Mega Evolves on Standard at Gym 7 (a designed weak Mega below Lv 50) | {:side=>1, :idx=>1, :species=>:CAMERUPT, :form=>1, :ability=>:SHEERFORCE, :old_ability=>:MAGMAARMOR, |
 | PASS | ...on Volcanic, and its Mega primes the eruption as designed (Brann's fight is kept as is, per the user) |  |
-| **FAIL** | trainers.txt: every important fight from ace 50 Megas in all modes (36 Std / 36 Hard / 36 Casual) or uses a designed Z (3 / 3 / 3); below it only designed weak Megas; one stone, a ring, no Z-crystal beside it | LEADER_ROOK,Rook,16: ace 71, no Mega; MERIDIAN_DIRECTORATE,Ostrander,11: ace 51, no Mega; MERIDIAN_DIRECTORATE,Ostrander,111: ace 51, no Mega; MERIDIAN_DIRECTORATE,Ostrander,211: ace 51, no Mega; MERI |
+| **FAIL** | trainers.txt: every important fight from ace 50 Megas in all modes (51 Std / 51 Hard / 51 Casual) or uses a designed Z (4 / 4 / 4); below it only designed weak Megas; one stone, a ring, no Z-crystal beside it | MERIDIAN_DIRECTORATE,Grane,0: ace 62, no Mega; MERIDIAN_DIRECTORATE,Grane,100: ace 62, no Mega; MERIDIAN_DIRECTORATE,Grane,200: ace 62, no Mega; MERIDIAN_DIRECTORATE,Tull,0: ace 62, no Mega; MERIDIAN_ |
 | PASS | K8 without Morwen's Ring: no ring, no stone (Kestrel has no ring of his own) |  |
 | PASS | K8 with Morwen's Ring (:ch18_kestrel_ring = :give_now): the ring, and his Scizor holds the Scizorite | SCIZOR Lv92 @SCIZORITE |
 | PASS | the foe used one Mega (Lucario) and one Z-move (Hydro Vortex) in the same battle | megas 1, z [:HYDROVORTEX] |
