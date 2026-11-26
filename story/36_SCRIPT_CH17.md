@@ -95,7 +95,8 @@ Trainers (Lv 71): 821: a fisher, a swimmer (in the puddle-lakes), a mudlark *(Ru
 (Underveil. A city of lanterns built in the upper towers of drowned Aurelia, in permanent night under the Dread Plate. This morning: smoke. Broken lanterns in the gutters. Directorate barricades of lift-cage grilles across the stairs.)
 (Bodies under sheets along the Tier wall. A lot of them. People sitting next to them.)
 (At the first barricade, a vast Muk fills the stair like a wall of tar. On top of the barricade, a fat old woman in a waxed coat with a ledger under one arm: Mother Gutter.)
-[portrait: GUTTER, angry] Topsider! You're the ferry one. Good. Get up here. We've got a line coming and I've got one Muk.
+[portrait: GUTTER, angry] Topsider! You're the ferry one. Good. Get up here.
+[name: Mother Gutter] We've got a line coming and I've got one Muk.
 ```
 **The barricade fight** (critical): PC + Mother Gutter vs a Directorate pair.
 ```
@@ -109,7 +110,8 @@ BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Mallory", :MERIDIAN_DIRECTOR
 (Down the Barons' Stair: a Directorate line, shields locked, advancing on a crowd of unarmed Nadir protestors with lanterns and bedsheets painted with the names of the dead.)
 (There's a gap between them. A few yards. Getting smaller.)
 > Step between them? (1st)
-  [name: Courier] (Nyx's, a boy with a moon earring, grabbing your sleeve) Not you. You're the one thing they want alive. Don't make them choose.
+  [name: Courier] (Nyx's, a boy with a moon earring, grabbing your sleeve) Not you. You're the one thing they want alive.
+  [name: Courier] Don't make them choose.
   > Step between them. (2nd)
     [name: Courier] (pulling) NOT YOU. Nyx said. Don't make them choose.
     > Step between them. (3rd)  Script: Prismfall.game_over(:GO_INTO_THE_LINE)
@@ -126,10 +128,15 @@ V138 = 1.
 (The Moon Market: a cavern-street of stalls selling things that aren't there: secrets, names, the way into places. Half the stalls are shut today. The ones that are open are selling bandages.)
 (At a stall with no goods at all, in silk with soot on it, a crescent-moon earring, sleeves rolled to the elbow and blood on them that isn't hers: Nyx Calloway.)
 [portrait: NYX, neutral] Sweetheart. You came down. Everyone else went up.
-[portrait: NYX, neutral] I've been carrying bodies since midnight. Forty-one. I've been counting, the way that ice-woman counts. It doesn't help. I thought it might.
-[portrait: NYX, angry] Underveil isn't on the Accord's maps, sweetheart. That's the point of Underveil. Apparently it's also why nobody comes when they shoot us.
+[name: Nyx] I've been carrying bodies since midnight. Forty-one.
+[name: Nyx] I've been counting, the way that ice-woman counts.
+[name: Nyx] It doesn't help. I thought it might.
+[portrait: NYX, angry] Underveil isn't on the Accord's maps, sweetheart.
+[name: Nyx] That's the point of Underveil.
+[name: Nyx] Apparently it's also why nobody comes when they shoot us.
 (She wipes her hands on a cloth, slowly, one finger at a time.)
-[portrait: NYX, neutral] This afternoon we're doing something stupid. Come and watch. You'll like it. Everyone likes stupid when it's brave.
+[portrait: NYX, neutral] This afternoon we're doing something stupid. Come and watch.
+[name: Nyx] You'll like it. Everyone likes stupid when it's brave.
 V138 = 2.
 ```
 - **Hangout, Nyx in the Moon Market** (from V138 >= 2): *Secrets for Sale.* Each visit sells one rumour for money or for a secret of the PC's (Codex lore; the "secret" options are jokes until S148). After the Purge, she sells nothing for money.
@@ -142,8 +149,11 @@ V138 = 2.
 (The Moon Market steps. Every Sump Baron in Nadir, in their best coats, some of them bandaged. A crowd that fills the cavern-street to the walls, lanterns held up.)
 (Nyx at the top of the steps, a sheet of paper in one hand, not reading from it.)
 [portrait: NYX, neutral] Zenith says we're lawless. Fine. Then we'll have our own law.
-[portrait: NYX, neutral] From this hour, Nadir is no part of Zenith. Not its Sump, not its slag, not its lifts, not its Directorate. We are the Undercity, and the Undercity is independent.
-[portrait: NYX, smug] It means nothing. No crown will recognise it. The Accord won't read it. We know.
+[name: Nyx] From this hour, Nadir is no part of Zenith.
+[name: Nyx] Not its Sump, not its slag, not its lifts, not its Directorate.
+[name: Nyx] We are the Undercity, and the Undercity is independent.
+[portrait: NYX, smug] It means nothing. No crown will recognise it.
+[name: Nyx] The Accord won't read it. We know.
 [portrait: NYX, angry] Say it anyway.
 (The cavern says it back. It doesn't mean anything. It's the loudest sound you've ever heard.)
 Switch S149 CH17_NADIR_INDEPENDENT = ON. Variable V111 NADIR_STATE = 3. V138 = 3.
@@ -165,7 +175,9 @@ Gym trainers (6): Burglar ×2, Gambler, Rocker, Hollow Defector, Informant (Lv 7
 ### 433 — the Warden Arena (double; illusions on both sides)
 ```
 [portrait: NYX, smug] Everything has a price, sweetheart. Yours just went up.
-[portrait: NYX, neutral] Nothing on my field is what it looks like. Neither am I. Neither are you, I suspect. Let's find out which of us is better at it.
+[portrait: NYX, neutral] Nothing on my field is what it looks like.
+[name: Nyx] Neither am I. Neither are you, I suspect.
+[name: Nyx] Let's find out which of us is better at it.
 BATTLE: Prismfall.gym_battle(16, double: true)
 ```
 - **Mid-battle (Zoroark's illusion breaks):** "Oh, look. The mask comes off. It always does." `[bubble: NYX, smug, sparkle]`
@@ -179,40 +191,67 @@ V138 = 4.
 
 ## After the gym: **Nyx's bargain and confession** (touch, Nyx at the Ledger door, V138 == 4 → 5)
 ```
-[portrait: NYX, neutral] Business. I have something you want. Meridian's install plans for the new Festival arena. Every cable, every lock, every room under the stands. Somebody at Strade sold them to me last month, which tells you what Strade thinks of its future.
-[portrait: NYX, smug] The price is a secret. Yours. The real one. The one you don't know yet, sweetheart, but you will by tonight. I want to know it first.
+[portrait: NYX, neutral] Business. I have something you want.
+[name: Nyx] Meridian's install plans for the new Festival arena.
+[name: Nyx] Every cable, every lock, every room under the stands.
+[name: Nyx] Somebody at Strade sold them to me last month, which tells you what Strade thinks of its future.
+[portrait: NYX, smug] The price is a secret. Yours. The real one.
+[name: Nyx] The one you don't know yet, sweetheart, but you will by tonight. I want to know it first.
 ```
 ```
 > Trade your secret. (trade)
   Script: pf_choose(:ch17_nyx, :trade)
-  [portrait: NYX, happy] Lovely. I'll collect when you have it. You'll know when. (She gives you a roll of oilcloth.)
+  [portrait: NYX, happy] Lovely. I'll collect when you have it. You'll know when.
+  (She gives you a roll of oilcloth.)
   RECEIVE: ARENA SCHEMATICS (Key Item).
-  [portrait: NYX, neutral] Don't look so worried. I only sell secrets to people who deserve them. I've never once sold one to someone who didn't. (A pause.) I've never once *not* sold one.
+  [portrait: NYX, neutral] Don't look so worried.
+  [name: Nyx] I only sell secrets to people who deserve them.
+  [name: Nyx] I've never once sold one to someone who didn't.
+  (A pause.)
+  [name: Nyx] I've never once *not* sold one.
 > Refuse. (refuse)
   Script: pf_choose(:ch17_nyx, :refuse)
-  [portrait: NYX, deadpan] (a shrug) Then I'll help anyway, badly, at the worst possible moment, and it'll cost me something. That's how it goes with people I like. Off you go.
+  [portrait: NYX, deadpan] (a shrug) Then I'll help anyway, badly, at the worst possible moment, and it'll cost me something. That's how it goes with people I like.
+  [name: Nyx] Off you go.
 ```
 *(NARRATIVE_KEYS: `:trade` NYX+4 → `NYX_PRECISE` (Ch21: she cuts Meridian's comms precisely); `:refuse` NYX−2 (Ch21: she helps sloppily and is injured).)*
 ```
 (As you turn to go, she says it, not to you, to the Ledger door.)
-[portrait: NYX, sad] Two years ago I sold Voss the way into the Sun Court. It's my family's door. The Calloways have kept that door shut for three hundred years. Not a lock. Just us, not telling.
-[portrait: NYX, sad] I told myself it was just a door. Everything's just a door, if you're selling it. (A beat.) I'm the one who opened it.
+[portrait: NYX, sad] Two years ago I sold Voss the way into the Sun Court.
+[name: Nyx] It's my family's door.
+[name: Nyx] The Calloways have kept that door shut for three hundred years.
+[name: Nyx] Not a lock. Just us, not telling.
+[name: Nyx] I told myself it was just a door.
+[name: Nyx] Everything's just a door, if you're selling it.
+(A beat.)
+[name: Nyx] I'm the one who opened it.
 V138 = 5.
 ```
 
 ## Branch: **the Accord Archive** (838, `:MINDSCAPE`; only if `standing(:ACCORD) >= 4`; the Coastwatch door on the Drownings, V138 == 5 → 6)
 ```
 (A sealed Coastwatch vault in the cliff of the Drownings, dry for the first time in three hundred years. Inside: shelves of oilskin cases. At a reading-desk, by a lamp, waiting for you: a big man in a smith's leather apron over a Warden's coat. Brann Holloway.)
-[portrait: BRANN, neutral] Ilsa said you'd be along, if you were the sort to be let in here. You're the sort. Sit. I'll tell you, and then you can hit me if you like.
+[portrait: BRANN, neutral] Ilsa said you'd be along, if you were the sort to be let in here.
+[name: Brann] You're the sort. Sit.
+[name: Brann] I'll tell you, and then you can hit me if you like.
 ```
 **Brann's confession, early and gently** (the same facts as at the docks; this version is softer, and he says it first):
 ```
-[portrait: BRANN, sad] The Concordance's Secret Articles. These are the originals. Maren's hand. Read them, or let me read them to you, it's quicker.
-[portrait: BRANN, neutral] The Tuning is real. Every Festival, the Crown sings the Plates into tune, and it costs the one who wears it. It kills Sovereigns. Slowly. That's what the Accord's for. Not peace. Replacement.
-[portrait: BRANN, sad] After the Fracture I reset the Crown's stone. I'm the only man alive who can. I knew it was short. A splinter short. I never asked where the rest went. I made very sure I never asked.
+[portrait: BRANN, sad] The Concordance's Secret Articles. These are the originals.
+[name: Brann] Maren's hand. Read them, or let me read them to you, it's quicker.
+[portrait: BRANN, neutral] The Tuning is real.
+[name: Brann] Every Festival, the Crown sings the Plates into tune, and it costs the one who wears it. It kills Sovereigns. Slowly.
+[name: Brann] That's what the Accord's for. Not peace. Replacement.
+[portrait: BRANN, sad] After the Fracture I reset the Crown's stone.
+[name: Brann] I'm the only man alive who can. I knew it was short.
+[name: Brann] A splinter short. I never asked where the rest went.
+[name: Brann] I made very sure I never asked.
 (He looks at your chest. You haven't told him. He looks anyway.)
-[portrait: BRANN, sad] Valen's arm is crystal to the shoulder. He has weeks. Maybe the Festival.
-[portrait: BRANN, neutral] (taking a page from an oilskin case: old vellum, a song in a cramped hand, the notes written as colours) The Hymn of Return. Maren's own copy. The Hollow have most of it. Nobody has all of it. Now you've got the first page. Keep it dry.
+[name: Brann] Valen's arm is crystal to the shoulder.
+[name: Brann] He has weeks. Maybe the Festival.
+[portrait: BRANN, neutral] (taking a page from an oilskin case: old vellum, a song in a cramped hand, the notes written as colours) The Hymn of Return. Maren's own copy.
+[name: Brann] The Hollow have most of it. Nobody has all of it.
+[name: Brann] Now you've got the first page. Keep it dry.
 RECEIVE: MAREN'S HYMN PAGE (Key Item).
 V138 = 6.
 ```
@@ -221,9 +260,15 @@ V138 = 6.
 ## The dive into Aurelia (from the Sump Docks, 424; touch, Sahar on the barge, V138 >= 5 → 7)
 ```
 (The Sump Docks. A dive barge with a Gale Post flag, Edda at the tiller, smoking. On the deck, in a brass-helmeted dive suit with the helmet under her arm and her hair tied up in a scarf: Sahar Ostrand.)
-[portrait: SAHAR, happy] Three hundred years. I've waited my whole *life*. (She checks the suit's seals three times.) Bastian sends his love. He said "eh?" when I asked if he had a message, so I made one up.
-[portrait: EDDA, neutral] Rules. You go down, you come up. Anybody who doesn't come up, I don't wait for. That's not cruelty, that's tide tables.
-[portrait: SAHAR, worried] And don't touch anything gold. *Anything.* I'm serious. The Gilders made gold that *wants* things.
+[portrait: SAHAR, happy] Three hundred years. I've waited my whole *life*.
+(She checks the suit's seals three times.)
+[name: Sahar] Bastian sends his love.
+[name: Sahar] He said "eh?" when I asked if he had a message, so I made one up.
+[portrait: EDDA, neutral] Rules. You go down, you come up.
+[name: Edda] Anybody who doesn't come up, I don't wait for.
+[name: Edda] That's not cruelty, that's tide tables.
+[portrait: SAHAR, sad] And don't touch anything gold. *Anything.* I'm serious.
+[name: Sahar] The Gilders made gold that *wants* things.
 V138 = 7.
 ```
 - **Hangouts:** Sahar on the dive barge (from V138 >= 7): *Field Notes*, Aurelian history in her voice, one site per visit. Edda at the Sump Docks: *Tide Tables*, and the smuggler's stock.
@@ -260,7 +305,11 @@ Air pockets inside the flooded palace: dry halls where the sea never got in, sme
 [portrait: NYX, sad] Oh, darling. You're the missing piece.
 (Sahar, on her knees at the cradle's base, holding her lamp up to an inscription in old Aurelian, reads it out in a voice that isn't quite working.)
 [portrait: SAHAR, neutral] "Here rests the One that is every color and none."
-[portrait: SAHAR, sad] It's the Legend Plate. The god's heart. The one that held the other eighteen together. (She looks up at you.) You've got a piece of it. In you. The piece that's missing from this hand.
+[portrait: SAHAR, sad] It's the Legend Plate. The god's heart.
+[name: Sahar] The one that held the other eighteen together.
+(She looks up at you.)
+[name: Sahar] You've got a piece of it. In you.
+[name: Sahar] The piece that's missing from this hand.
 \pf[PLAYER,neutral] (Your fourth authored line.) ...I know. I think I always knew. I just didn't have the word.
 Switch S148 CH17_SHARD_NAMED = ON. V138 = 8.
 ```
@@ -270,7 +319,8 @@ Switch S148 CH17_SHARD_NAMED = ON. V138 = 8.
 ```
 (The Gilded King's throne, behind the cradle. Gold. Its armrests are shaped like open hands, palm up.)
 > Sit on the throne? (1st)
-  [portrait: SAHAR, panic] Don't touch anything gold. *Anything*. Please. I mean it more than I've ever meant anything.
+  [portrait: SAHAR, panic] Don't touch anything gold. *Anything*. Please.
+  [name: Sahar] I mean it more than I've ever meant anything.
   > Sit. (2nd)
     (The armrests' fingers twitch.)
     > Sit. (3rd)  Script: Prismfall.game_over(:GO_THE_THRONE)
@@ -283,32 +333,54 @@ Switch S148 CH17_SHARD_NAMED = ON. V138 = 8.
 ## **Voss in the Sun Court** (autorun as the far wall is cut, V138 == 8 → 9; key event 2)
 ```
 (A cutting-torch, white, through the far wall. A Meridian salvage crew in pressure suits steps through the hole into the air pocket. Among them, in a pressure suit with the helmet off under his arm, his hair perfect: Aurelian Voss.)
-[portrait: VOSS, happy] (seeing you, lit up in eighteen colours, delighted) Oh, look at that. Oh, *look* at that. Ten years of telemetry and it's nothing to seeing it in person.
-[portrait: VOSS, neutral] You'll want the story. Everyone does, at the end. Let me tell it properly.
-[portrait: VOSS, neutral] House Aurel. My family. We changed the name and kept the grudge. When the Princess broke the chain, my ancestors were the King's engineers. We went up the cliffs with our tools and our notebooks and we waited.
-[portrait: VOSS, neutral] I was eight when my grandfather showed me Aurelius's notebooks. I was twenty-two when I realised he was right about everything except the chain. Metal was the wrong material.
-[portrait: VOSS, neutral] AF 290. My array. My dials. I was trying to measure the convergence. I didn't know it would break the Crown. I was very sorry about the forty people.
+[portrait: VOSS, happy] (seeing you, lit up in eighteen colours, delighted) Oh, look at that. Oh, *look* at that.
+[name: Voss] Ten years of telemetry and it's nothing to seeing it in person.
+[portrait: VOSS, neutral] You'll want the story. Everyone does, at the end.
+[name: Voss] Let me tell it properly.
+[name: Voss] House Aurel. My family. We changed the name and kept the grudge.
+[name: Voss] When the Princess broke the chain, my ancestors were the King's engineers.
+[name: Voss] We went up the cliffs with our tools and our notebooks and we waited.
+[name: Voss] I was eight when my grandfather showed me Aurelius's notebooks. I was twenty-two when I realised he was right about everything except the chain.
+[name: Voss] Metal was the wrong material.
+[name: Voss] AF 290. My array. My dials.
+[name: Voss] I was trying to measure the convergence.
+[name: Voss] I didn't know it would break the Crown.
+[name: Voss] I was very sorry about the forty people.
 [portrait: VOSS, happy] I was even sorrier when I understood what I'd learned.
-[portrait: VOSS, neutral] The Lowlight? Twelve people. I've lost more to the Bleed in a quiet week. I made those twelve *mean* something.
-[portrait: VOSS, neutral] Gods are absentee landlords. Arceus dropped its furniture on our heads three hundred years ago and never came back. I'm not trying to become a god. I'm trying to make sure we never need one again.
+[portrait: VOSS, neutral] The Lowlight? Twelve people.
+[name: Voss] I've lost more to the Bleed in a quiet week.
+[name: Voss] I made those twelve *mean* something.
+[name: Voss] Gods are absentee landlords.
+[name: Voss] Arceus dropped its furniture on our heads three hundred years ago and never came back.
+[name: Voss] I'm not trying to become a god.
+[name: Voss] I'm trying to make sure we never need one again.
 (He holds out his hand. Not to shake. Open, palm up, like the cradle.)
-[portrait: VOSS, neutral] Stand with me at the Festival. When it's done, no child in Velmora will ever be Fixed again.
-[portrait: VOSS, sad] Your mother wilted in exile because of a broken god. I can fix the god.
+[name: Voss] Stand with me at the Festival.
+[name: Voss] When it's done, no child in Velmora will ever be Fixed again.
+[portrait: VOSS, sad] Your mother wilted in exile because of a broken god.
+[name: Voss] I can fix the god.
 ```
 *("Your mother" is Ines, who raised the PC in exile and died last winter (03_CAST). Voss knowing about her is the threat.)*
 ```
 > Refuse. (refuse)
   Script: pf_choose(:ch17_voss_offer, :refuse)
   (You don't take the hand.)
-  [portrait: VOSS, neutral] (lowering it, not offended) Of course. You've only known for five minutes. I've known for twenty-five years. I'll ask again when you've caught up.
+  [portrait: VOSS, neutral] (lowering it, not offended) Of course. You've only known for five minutes.
+  [name: Voss] I've known for twenty-five years.
+  [name: Voss] I'll ask again when you've caught up.
 > Feign agreement. (feign)
   Script: pf_choose(:ch17_voss_offer, :feign)
   (You take the hand. His grip is warm and very steady.)
-  [portrait: VOSS, happy] There. Was that so hard? (He doesn't let go for a second too long.) I know you might be lying. Everyone's lying, at the start. Come to the Festival anyway.
+  [portrait: VOSS, happy] There. Was that so hard?
+  (He doesn't let go for a second too long.)
+  [name: Voss] I know you might be lying. Everyone's lying, at the start.
+  [name: Voss] Come to the Festival anyway.
 > Accept. (accept)
   Script: pf_choose(:ch17_voss_offer, :accept)
   (You take the hand, and you mean it. You can feel that you mean it. So can he.)
-  [portrait: VOSS, sad] (very quietly, for a moment not performing at all) ...Thank you. Nobody's ever said yes before. (Then the smile comes back.) Win your badges. We'll talk about the details.
+  [portrait: VOSS, sad] (very quietly, for a moment not performing at all) ...Thank you. Nobody's ever said yes before.
+  (Then the smile comes back.)
+  [portrait: VOSS, neutral] Win your badges. We'll talk about the details.
 V138 = 9.
 ```
 *(NARRATIVE_KEYS: `:refuse` VOSS−2; `:feign` VOSS+2 → `VOSS_FEIGNED` (he lets you close in the finale; risky with high Meridian Standing and live telemetry); `:accept` VOSS+3 MERIDIAN+3 NYX−2 RES−1 → `VOSS_ACCEPTED` (opens Concord Dawn; `:ch21_hand`).)*
@@ -316,14 +388,17 @@ V138 = 9.
 ### **Admin battle: Kroll, or Quent** (autorun as the crew rigs the cradle, V138 == 9 → 10)
 ```
 (Behind Voss, the salvage crew is fitting cables to the golden hand. A winch on the far side of the hole starts to take up slack.)
-[portrait: VOSS, neutral] I'll leave you with someone. Don't take it personally. They're holding the door, not you.
+[portrait: VOSS, neutral] I'll leave you with someone. Don't take it personally.
+[name: Voss] They're holding the door, not you.
 [if !KROLL_EXPOSED_CH13]
   (Out of the crew steps a woman in a pressure suit with a Hollow tattoo on her wrist, half-covered: Sabine Kroll.)
-  [portrait: KROLL, smug] Still nobody knows. Not really. You'd be amazed what people won't believe, even on tape.
+  [portrait: KROLL, smug] Still nobody knows. Not really.
+  [name: Kroll] You'd be amazed what people won't believe, even on tape.
   BATTLE: TrainerBattle.start(:MERIDIAN_KROLL, "Sabine", 1) — `:CAVE` (one quake cracks the ceiling, the next brings it down: 1/8 Rock-scaled to all).
 [if KROLL_EXPOSED_CH13]
   (Out of the crew steps a tall man in a pristine pressure suit, as if a pressure suit could be pristine: Percival Quent.)
-  [portrait: QUENT, happy] Your readings are *astonishing* right now. Do hold still. Oh, you won't. Very well.
+  [portrait: QUENT, happy] Your readings are *astonishing* right now. Do hold still.
+  [name: Quent] Oh, you won't. Very well.
   BATTLE: TrainerBattle.start(:MERIDIAN_QUENT, "Percival", 2) — `:CAVE`.
 (LOSE: whiteout to 421; the Sun Court restarts at Voss's arrival, the offer kept.)
 (WIN:) (Behind them the cradle is gone: winched out through the hole, the hand closing as it went, broken fingers and all.)
@@ -342,7 +417,8 @@ Rust that flowers: a flooded Gilder foundry where the iron has grown petals in t
 ## Underveil, evening: **Ysolde's lanterns** (autorun on surfacing at the Sump Docks, V138 == 10 → 11)
 ```
 (The Moon Market steps, at dusk. All the way up them, a lantern on every step, lit. At the top, with a cart of Gravenmoor lanterns and Nyx's people handing them up the line: Ysolde.)
-[portrait: YSOLDE, neutral] One for each. Forty-one. The Hospice sent them down. We're good at this in Gravenmoor. It's the only thing we're good at.
+[portrait: YSOLDE, neutral] One for each. Forty-one. The Hospice sent them down.
+[name: Ysolde] We're good at this in Gravenmoor. It's the only thing we're good at.
 [portrait: YSOLDE, sad] (lighting the last one, not looking at you) Is he eating? Kestrel. You'd know better than I would.
 (You don't know. You tell her you don't know. She nods, as if that was an answer too.)
 V138 = 11.
@@ -353,13 +429,23 @@ V138 = 11.
 ```
 (The Sump Docks, night. A big man sitting on a bollard with his hands between his knees, waiting: Brann Holloway, come from Crownhaven on the night lift.)
 [if made Archive branch]
-  [portrait: BRANN, neutral] You've had it from me once, in the dry. I'll not make you hear it twice. One thing I didn't say.
-  [portrait: BRANN, sad] I knew it was you. In the Archive. Before the cradle. I looked at you and I knew where the rest of my stone went. I should've said.
+  [portrait: BRANN, neutral] You've had it from me once, in the dry.
+  [name: Brann] I'll not make you hear it twice. One thing I didn't say.
+  [portrait: BRANN, sad] I knew it was you. In the Archive. Before the cradle.
+  [name: Brann] I looked at you and I knew where the rest of my stone went.
+  [name: Brann] I should've said.
 [else]
-  [portrait: BRANN, sad] I'll tell you the truth. I should have done it in Cindervault. I'm a coward about the truth, it turns out. It's the only thing I'm a coward about.
-  [portrait: BRANN, neutral] The Tuning is real. Every Festival, the Crown sings the Plates into tune, and it costs the one who wears it. It kills Sovereigns.
-  [portrait: BRANN, sad] After the Fracture I reset the Crown's stone. I knew it was short. I never asked where the rest went. (He looks at your chest. It's still glowing faintly, under your coat.) I don't have to ask now.
-[portrait: BRANN, sad] Valen's arm is crystal to the shoulder. He has weeks. Maybe the Festival.
+  [portrait: BRANN, sad] I'll tell you the truth. I should have done it in Cindervault.
+  [name: Brann] I'm a coward about the truth, it turns out.
+  [name: Brann] It's the only thing I'm a coward about.
+  [portrait: BRANN, neutral] The Tuning is real.
+  [name: Brann] Every Festival, the Crown sings the Plates into tune, and it costs the one who wears it. It kills Sovereigns.
+  [portrait: BRANN, sad] After the Fracture I reset the Crown's stone.
+  [name: Brann] I knew it was short. I never asked where the rest went.
+  (He looks at your chest. It's still glowing faintly, under your coat.)
+  [name: Brann] I don't have to ask now.
+[portrait: BRANN, sad] Valen's arm is crystal to the shoulder.
+[name: Brann] He has weeks. Maybe the Festival.
 [portrait: BRANN, neutral] He sent me with a message. Word for word, he said. So: "Win your last two badges. Then come to me, and I'll tell you everything."
 V138 = 12.
 ```
@@ -368,9 +454,12 @@ V138 = 12.
 ## The Underveil docks: **"Thirty days"** (END OF ACT IV; autorun, V138 == 12 → 13)
 ```
 (Night on the docks. Lantern-light. Crates for chairs. Nyx, Sahar wrapped in a blanket, Edda with her pipe, and, if he came down, Rowan, at the edge of the light. [if ROWAN_ALIVE]) (The water black and still where the Sump used to be. Far down in it, faint: eighteen colours, very faint, and then nothing.)
-[portrait: NYX, neutral] (counting on her fingers) Meridian wants you in that arena. The Accord wants you in that arena. The Hollow wants you in that arena.
-[portrait: NYX, neutral] Two kings want you as *their* champion in that arena.
-[portrait: NYX, sad] Thirty days, sweetheart. Every power in Velmora is waiting for you to walk into one room.
+[portrait: NYX, neutral] (counting on her fingers) Meridian wants you in that arena.
+[name: Nyx] The Accord wants you in that arena.
+[name: Nyx] The Hollow wants you in that arena.
+[name: Nyx] Two kings want you as *their* champion in that arena.
+[portrait: NYX, sad] Thirty days, sweetheart.
+[name: Nyx] Every power in Velmora is waiting for you to walk into one room.
 (Nobody says anything for a while. The lanterns on the steps above burn down one by one.)
 [portrait: EDDA, neutral] (knocking out her pipe on the crate) Then we'd best make sure you walk in on your own feet.
 V138 = 13. Variable V101 STORY_ACT = 5. Variable V102 STORY_CHAPTER = 18.

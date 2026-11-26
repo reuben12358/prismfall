@@ -56,10 +56,14 @@ Trainers (Lv 68): a worker, a scientist, a Directorate officer on a gantry ("Pap
 ```
 (Cogsworth. Three shifts, and the shift-whistles never quite stop. A clock-tower over every street, all of them chiming the quarter at once.)
 (The main plaza: a crowd under a giant screen, Directorate banners down every wall. On the screen, Aurelian Voss, in a white suit, filling the sky.)
-[name: Voss (screen)] Order. Light. Unity. For three hundred years the Bleed has eaten our children. Strade Works is building the machine that ends it. Every rivet you set this shift is a child who never turns to glass.
+[name: Voss (screen)] Order. Light. Unity.
+[name: Voss (screen)] For three hundred years the Bleed has eaten our children.
+[name: Voss (screen)] Strade Works is building the machine that ends it.
+[name: Voss (screen)] Every rivet you set this shift is a child who never turns to glass.
 [name: Voss (screen)] Order. Light. Unity.
 (The crowd says it back. Not loud. On time.)
-[name: Worker] (next to you, quietly, to nobody) Don't know what we're building. Big, whatever it is. Round. Eighteen of something.
+[name: Worker] (next to you, quietly, to nobody) Don't know what we're building.
+[name: Worker] Big, whatever it is. Round. Eighteen of something.
 V137 = 1.
 ```
 - **Cogsworth (400):** the Center (401), the Mart (402; Badge-15 stock, Metal Coat, Synthetic Seeds), the **bathysphere works** at the canal (Dive suits after Gym 15, as WALKTHROUGH: "Dive from the bathysphere works"). The **canal floor** (Dive) has **Glassfall Sliver**.
@@ -71,29 +75,48 @@ V137 = 1.
 ## The canteen: **Rook, off-camera** (touch, a hunched figure at the back table, V137 == 1 → 2)
 ```
 (The workers' canteen. Steam, noise, long tables, soup. At the back, alone, unshaven, in a borrowed work-coat with his holo-jacket balled up under the bench: Rook Calder. No drone. Nobody's recording.)
-[portrait: ROOK, neutral] Hey. Hey. Don't — don't say my name. Sit down. Please.
+[portrait: ROOK, neutral] Hey. Hey. Don't — don't say my name.
+[name: Rook] Sit down. Please.
 ```
 **Comedy scene Ch16, "Off Camera"** (15_COMEDY as written). Then:
 ```
-[portrait: ROOK, neutral] (pushing the bowl away) I've been going to the Spire every night since the Lowlight. To see them. Dex. The other eleven. I just stand there. Nobody films that.
-[portrait: ROOK, sad] And I've been doing something else. The Spire's security system backs up to the building I'm contracted to. I've got the password. They never changed it. I've been copying the footage.
+[portrait: ROOK, neutral] (pushing the bowl away) I've been going to the Spire every night since the Lowlight.
+[name: Rook] To see them. Dex. The other eleven.
+[name: Rook] I just stand there. Nobody films that.
+[portrait: ROOK, sad] And I've been doing something else.
+[name: Rook] The Spire's security system backs up to the building I'm contracted to.
+[name: Rook] I've got the password. They never changed it.
+[name: Rook] I've been copying the footage.
 (He slides a small Lattice-glass slate across the table and taps it. Grey, silent footage: a Spire service corridor, night. A figure in a long coat swipes a keycard at the Plate Vault door. The light goes green. The figure turns, and it's Sable.)
-[portrait: ROOK, sad] Sable. With a Meridian keycard. The night of the Lowlight. I've had it for months.
-[portrait: ROOK, sad] I was scared. I'm still scared. You're the only person I know who isn't scared of anything.
+[name: Rook] Sable. With a Meridian keycard. The night of the Lowlight.
+[name: Rook] I've had it for months.
+[name: Rook] I was scared. I'm still scared.
+[name: Rook] You're the only person I know who isn't scared of anything.
 (You are, actually. He doesn't need to know.)
-[portrait: ROOK, neutral] So. Tell me what to do. Put it out now? Or sit on it, smile for the cameras, and wait for the worst possible moment?
+[portrait: ROOK, neutral] So. Tell me what to do.
+[name: Rook] Put it out now?
+[name: Rook] Or sit on it, smile for the cameras, and wait for the worst possible moment?
 ```
 ```
 > Leak it now. (leak_now)
   Script: pf_choose(:ch16_rook, :leak_now)
-  [portrait: ROOK, neutral] (a long breath) Okay. Okay. Rotom — no. No Rotom. I'll do it myself. Old-fashioned. A post on every channel I've got.
+  [portrait: ROOK, neutral] (a long breath) Okay. Okay. Rotom — no. No Rotom.
+  [name: Rook] I'll do it myself. Old-fashioned. A post on every channel I've got.
   (He taps the slate. Somewhere above Cogsworth, on every screen, the grey footage plays between the Unity Rally clips.)
-  [portrait: ROOK, shocked] (his own slate buzzes forty times in a row) That's Meridian legal. That's Meridian legal. That's — oh, that's my contract. That's my contract being terminated. By message. With an emoji.
-  [portrait: ROOK, happy] (laughing, shaky) I'm fired. I'm blacklisted from the Spire. I'm — I think I'm free? Is this what it feels like?
+  [portrait: ROOK, shocked] (his own slate buzzes forty times in a row) That's Meridian legal. That's Meridian legal.
+  [name: Rook] That's — oh, that's my contract. That's my contract being terminated.
+  [name: Rook] By message. With an emoji.
+  [portrait: ROOK, happy] (laughing, shaky) I'm fired. I'm blacklisted from the Spire.
+  [name: Rook] I'm — I think I'm free? Is this what it feels like?
 > Hold it for the Festival. (hold)
   Script: pf_choose(:ch16_rook, :hold)
-  [portrait: ROOK, neutral] (pocketing the slate) The worst possible moment. Opening ceremony. Forty thousand people and Voss on the dais. I can do that. I'm good at moments. It's the only thing I'm good at.
-  [portrait: ROOK, sad] And I keep my keycards. All of them. Including the ones that open Strade Works. (A beat.) Want to see what they're building?
+  [portrait: ROOK, happy] (pocketing the slate) The worst possible moment. Opening ceremony.
+  [name: Rook] Forty thousand people and Voss on the dais.
+  [name: Rook] I can do that. I'm good at moments. It's the only thing I'm good at.
+  [portrait: ROOK, sad] And I keep my keycards. All of them.
+  [name: Rook] Including the ones that open Strade Works.
+  (A beat.)
+  [name: Rook] Want to see what they're building?
 V137 = 2.
 ```
 *(NARRATIVE_KEYS: `:leak_now` MERIDIAN−2 HOLLOW+1; Kroll exposed realm-wide even without Ch13's evidence; Rook can't cut the grid in Ch21 or reach the Zap Plate unless Marchetti turns. `:hold` → `ROOK_CUTS_GRID`. **On `:leak_now`, Rook still has the Strade Works keycards.** Meridian revokes his Spire access, not the contractor cards it forgot it had issued: "Nobody cancels the cards. Nobody ever cancels the cards." The infiltration happens on both branches.)*
@@ -108,9 +131,12 @@ As GYM_PUZZLES Gym 15: 410 Gatehouse (teach: the tick clock), 411 Assembly Line 
 ### 413 — the Warden Arena
 ```
 (A clean white arena in the middle of the foundry. A man in an immaculate grey suit, a prosthetic right hand of polished steel, consulting a pocket watch.)
-[portrait: MAGNUS, neutral] Four minutes and twelve seconds through the Crane Bay. Two seconds over tolerance. Acceptable.
-[portrait: MAGNUS, neutral] Faith gave us three hundred years of the Bleed. Engineering will give us the next three hundred without it. I'm told that's a slogan now. I wrote it as a sentence.
-[portrait: MAGNUS, neutral] Begin when ready. I'm always ready. It saves time.
+[portrait: MAGNUS, neutral] Four minutes and twelve seconds through the Crane Bay.
+[name: Magnus] Two seconds over tolerance. Acceptable.
+[name: Magnus] Faith gave us three hundred years of the Bleed.
+[name: Magnus] Engineering will give us the next three hundred without it.
+[name: Magnus] I'm told that's a slogan now. I wrote it as a sentence.
+[name: Magnus] Begin when ready. I'm always ready. It saves time.
 BATTLE: Prismfall.gym_battle(15)
 ```
 - **Mid-battle (Metagross "Engine" Mega Evolves):** "The foundry hammers its plating home. Tolerances: zero." `[bubble: MAGNUS, neutral, sparkle]`
@@ -118,7 +144,8 @@ BATTLE: Prismfall.gym_battle(15)
 ```
 [portrait: MAGNUS, neutral] (closing the watch) Within tolerance. Yours, not mine.
 RECEIVE: the TOLERANCE BADGE (badge 15). RECEIVE: TM91 FLASH CANNON.
-[portrait: MAGNUS, neutral] The bathysphere works will fit you for a diving suit. The canals here go down further than people think. Most things do.
+[name: Magnus] The bathysphere works will fit you for a diving suit.
+[name: Magnus] The canals here go down further than people think. Most things do.
 RECEIVE: (at the bathysphere works) DIVE.
 V137 = 3.
 ```
@@ -127,7 +154,8 @@ V137 = 3.
 ## Strade Works, the night shift: **the infiltration** (touch, Rook at the works' side gate, V137 == 3)
 ```
 (Night. The works' side gate. Rook in his borrowed work-coat, with a lanyard of keycards.)
-[portrait: ROOK, neutral] Rule one. We go when the whistle goes. No heroics. Rule two. I'm in charge of rule one.
+[portrait: ROOK, neutral] Rule one. We go when the whistle goes. No heroics.
+[name: Rook] Rule two. I'm in charge of rule one.
 (He swipes. Green. The gate opens onto the night shift: three hundred workers, sparks, a noise like the inside of a bell.)
 ```
 - **The Foundry Floor (403):** a stealth-lite crossing. Night-shift foremen patrol fixed step-routes (Gym 16's guard system, reused). Being seen means a fight (Strade Works trainers ×3, Lv 69–70) instead of a reset: "Papers!" Rook: "We're from Quality." The foreman: "Quality doesn't come at night." Rook: "That's what makes it quality."
@@ -136,20 +164,27 @@ V137 = 3.
 ```
 (The Casting Floor: a hall the size of a cathedral, molten metal running in channels, ladles the size of houses on chains overhead. On a gantry, waiting, Director Marchetti and Doctor Quent.)
 [if MARCHETTI_TURNED]
-  [portrait: MARCHETTI, neutral] (not quite looking at you) I'm here because he's here. Don't read anything into it. (A pause.) Read something into it.
+  [portrait: MARCHETTI, neutral] (not quite looking at you) I'm here because he's here. Don't read anything into it.
+  (A pause.)
+  [name: Marchetti] Read something into it.
 [else]
-  [portrait: MARCHETTI, neutral] The Spire logged a contractor card at the side gate. Forty minutes ago. I didn't think it'd be you, Calder.
-[portrait: QUENT, happy] And the young person! You never came for your medical. I'll take that as a "later". Most people mean later.
-[portrait: ROOK, angry] (stepping up beside you, voice shaking, standing anyway) Hey. Doctor. Chat says you're creepy. Chat's right for once.
+  [portrait: MARCHETTI, neutral] The Spire logged a contractor card at the side gate.
+  [name: Marchetti] Forty minutes ago. I didn't think it'd be you, Calder.
+[portrait: QUENT, happy] And the young person! You never came for your medical.
+[name: Quent] I'll take that as a "later". Most people mean later.
+[portrait: ROOK, angry] (stepping up beside you, voice shaking, standing anyway) Hey. Doctor. Chat says you're creepy.
+[name: Rook] Chat's right for once.
 Script: pbRegisterPartner(:LEADER_ROOK, "Rook", 16)
 BATTLE: TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene", 2, :MERIDIAN_QUENT, "Percival", 1) — tag double; `:FACTORY` (Bronzong's Explosion or three quakes → `:SCRAPYARD`).
 (LOSE: whiteout to 401; the infiltration restarts at the side gate, with Gym 15 kept.)
 (WIN:)
 [if MARCHETTI_TURNED]
-  [portrait: MARCHETTI, neutral] (to her troopers, flat) They went up the east stair. Go up the east stair. (They go up the east stair. You're on the west one.)
+  [portrait: MARCHETTI, neutral] (to her troopers, flat) They went up the east stair. Go up the east stair.
+  (They go up the east stair. You're on the west one.)
 [else]
   [portrait: MARCHETTI, angry] (Houndoom down, breathing hard) Get the doctor out. The floor's going.
-[portrait: QUENT, neutral] (being helped away, smiling at you over a shoulder) Such interesting readings. You really should let me look. It would save everybody a great deal of trouble.
+[portrait: QUENT, neutral] (being helped away, smiling at you over a shoulder) Such interesting readings. You really should let me look.
+[name: Quent] It would save everybody a great deal of trouble.
 V137 = 4.
 ```
 *(Mega Houndoom is the pair's one Mega (WALKTHROUGH). On `MARCHETTI_TURNED` she still fights: "I don't throw fights. I just lose them carefully.")*
@@ -162,7 +197,9 @@ V137 = 4.
 (At the bottom of the sheet, a box, the kind every blueprint has, for the load it's built to carry.)
 (CALIBRATION SUBJECT: UNIMPRINTED-01. RETENTION: INDEFINITE.)
 (You read it twice. It doesn't change.)
-[portrait: ROOK, shocked] (reading over your shoulder) "Unimprinted"... that's — that's you. That's what they call you on the screens. "Retention"? What's "retention"?
+[portrait: ROOK, shocked] (reading over your shoulder) "Unimprinted"... that's — that's you.
+[name: Rook] That's what they call you on the screens.
+[name: Rook] "Retention"? What's "retention"?
 (The copier at the end of the table is already running; Rook set it going when you came in. Sheet by sheet, the blueprints feed through.)
 RECEIVE: ARBITER BLUEPRINTS (Key Item). Switch S144 CH16_BLUEPRINTS_GOT = ON.
 V137 = 5.
@@ -212,18 +249,28 @@ Switch S145 CH16_ZEKROM_DONE = ON. V137 = 6.
 (The Drafting Vault, wrecked. Zekrom's exit has torn a hole through the ceiling to the night sky. Rain is coming in. Blueprint-paper everywhere, soaking, blowing about. Rook's gone ahead to hold the lift.)
 (In the middle of it, picking up a sheet of wet paper with his steel hand, smoothing it on a ruined table: Magnus Strade.)
 [portrait: MAGNUS, neutral] (without looking up) Don't run. I haven't called security. I'm not going to.
-[portrait: MAGNUS, neutral] I don't build weapons. I build tolerances. When they came to me, I was told it was a Plate stabiliser. Eighteen Plates, one cradle, the Bleed ended for ever. I believed it. It was beautiful.
-[portrait: MAGNUS, sad] I learned the truth two years ago. That box at the bottom of the sheet. I kept building. Because the mathematics was beautiful, and the alternative was the Bleed.
+[name: Magnus] I don't build weapons. I build tolerances. When they came to me, I was told it was a Plate stabiliser.
+[name: Magnus] Eighteen Plates, one cradle, the Bleed ended for ever.
+[name: Magnus] I believed it. It was beautiful.
+[portrait: MAGNUS, sad] I learned the truth two years ago. That box at the bottom of the sheet.
+[name: Magnus] I kept building.
+[name: Magnus] Because the mathematics was beautiful, and the alternative was the Bleed.
 (He holds up the sheet: CALIBRATION SUBJECT: UNIMPRINTED-01.)
-[portrait: MAGNUS, neutral] I didn't know it was a child until I saw you in the gym. Four minutes twelve through the Crane Bay. I thought, that's a person who would have been very good at my job.
+[portrait: MAGNUS, neutral] I didn't know it was a child until I saw you in the gym.
+[name: Magnus] Four minutes twelve through the Crane Bay.
+[name: Magnus] I thought, that's a person who would have been very good at my job.
 (He winds his pocket watch. Click, click, click.)
-[portrait: MAGNUS, neutral] What will you do with me?
+[name: Magnus] What will you do with me?
 ```
 ```
 > Expose him. (expose)
   Script: pf_choose(:ch16_magnus, :expose)
   (You take the blueprints to Councillor Renata Sallow, at her house's airship dock on Cogsworth's heights, before dawn.)
-  [portrait: SALLOW, neutral] (reading by a gas-lamp, in a dressing-gown, very awake) Oh, Aurelian. Oh, you *fool*. (To you:) The Council sits at nine. He'll lose the board vote. He'll lose half the city. He won't lose the war. (A beat.) And Strade?
+  [portrait: SALLOW, neutral] (reading by a gas-lamp, in a dressing-gown, very awake) Oh, Aurelian. Oh, you *fool*.
+  [name: Sallow] (To you:) The Council sits at nine. He'll lose the board vote.
+  [name: Sallow] He'll lose half the city. He won't lose the war.
+  (A beat.)
+  [name: Sallow] And Strade?
   (Magnus is arrested at dawn, in his suit, in the plaza, under the screen with Voss on it. He doesn't resist. He winds his watch as they take him.)
   [portrait: MAGNUS, neutral] (passing you, in irons) Correct. Unpleasant. Correct.
 > Appeal to his conscience. (conscience)
@@ -241,8 +288,11 @@ V137 = 7.
 ```
 (The plaza, past midnight. Rook waiting at the lift-head with his collar up. The third shift has stopped. Everyone is looking at the screens.)
 (On every screen in Cogsworth, a white sunburst on black, and two words: OPERATION CLEAR AIR.)
-[name: Voss (screen)] Since the Fault drained the Sump, Nadir's lower districts have fallen into lawlessness. Sweetrot gangs. Hollow terror cells. Tonight the Directorate restores order to the Underveil and the Mirefen.
-[name: Voss (screen)] Topside, you have nothing to fear. Go home. Sleep. In the morning the air will be clear.
+[name: Voss (screen)] Since the Fault drained the Sump, Nadir's lower districts have fallen into lawlessness.
+[name: Voss (screen)] Sweetrot gangs. Hollow terror cells.
+[name: Voss (screen)] Tonight the Directorate restores order to the Underveil and the Mirefen.
+[name: Voss (screen)] Topside, you have nothing to fear. Go home. Sleep.
+[name: Voss (screen)] In the morning the air will be clear.
 (On the screen: a column of grey coats marching into a lift. The lift going down.)
 (Around you, nobody says anything. A man next to you finishes his soup.)
 [name: Worker] (quietly, to nobody) My mum lives down there.
@@ -259,29 +309,40 @@ Switch S146 CH16_PURGE_BEGUN = ON. V137 = 8.
 ```
 (Corvin's Infirmary in the Mirefen. Night. Rain on the tin roof. Rows of cots. At the back, behind a curtain of hanging glass-beads, the Quiet Ward: forty patients who don't move, dreaming, some of them faintly glass at the edges.)
 (A young man of seventeen in a too-big oilcloth coat, the plague-doctor half-mask pushed up on his forehead, carrying three trays at once, about to drop all of them: Wenlow.)
-[portrait: WENLOW, happy] (to the room) Right! Evening rounds! Mrs. Pell, water. Old Fisk, the green one, not the brown one, the brown one's for the — yes, that one.
+[portrait: WENLOW, happy] (to the room) Right! Evening rounds! Mrs. Pell, water.
+[name: Wenlow] Old Fisk, the green one, not the brown one, the brown one's for the — yes, that one.
 [if CORVIN_FREED]
-  [portrait: WENLOW, neutral] (at the radio on the shelf) Infirmary to Cragholm, Infirmary to Cragholm. Doctor? It's me. I'm back with the medicine. Everyone's turned. The glass ones are fine. They're always fine. (A pause.) That's a joke. You never laugh at that one.
+  [portrait: WENLOW, neutral] (at the radio on the shelf) Infirmary to Cragholm, Infirmary to Cragholm. Doctor? It's me.
+  [name: Wenlow] I'm back with the medicine. Everyone's turned.
+  [name: Wenlow] The glass ones are fine. They're always fine.
+  (A pause.)
+  [name: Wenlow] That's a joke. You never laugh at that one.
 [else]
-  [portrait: WENLOW, neutral] (to a photo pinned over the desk: Corvin, masked, scowling) I'm back from the seams, Doctor. Sack of medicine, like I promised. Somebody has to turn the glass ones. You'd be furious if nobody turned the glass ones.
+  [portrait: WENLOW, neutral] (to a photo pinned over the desk: Corvin, masked, scowling) I'm back from the seams, Doctor. Sack of medicine, like I promised.
+  [name: Wenlow] Somebody has to turn the glass ones.
+  [name: Wenlow] You'd be furious if nobody turned the glass ones.
 (The radio crackles. A voice, not Corvin's: a fisher on the stilt-walks, out of breath.)
-[name: Radio] Infirmary? Grey coats at the east walks. Lots. They're going house to house. They've got the Sweetrot list.
+[name: Radio] Infirmary? Grey coats at the east walks. Lots.
+[name: Radio] They're going house to house. They've got the Sweetrot list.
 (Wenlow puts down the trays. All three. Without dropping any of them.)
-[portrait: WENLOW, neutral] ...Okay. Okay. I've read the book twice.
+[portrait: WENLOW, neutral] ...Okay. Okay.
+[name: Wenlow] I've read the book twice.
 ```
 
 ## Interlude play (223 and 220, the stilt-walks): three tasks, any order, then the Ward
 1. **Move the walking patients**: six patients who can walk, led down the back ladder to the boats (follow-the-leader; each one has a line: "Is it the gangs?" "No, Mrs. Pell. It's the government." "Oh, that's worse.").
 2. **Hide the Sweetrot addicts in the Quiet Ward**: four Sweetrot patients, shaking, carried to cots among the glass patients. The mechanic: Wenlow lays a sheet over each one and they go still.
 ```
-[portrait: WENLOW, neutral] (laying the last sheet) They won't search the glass ones. Nobody ever looks at the glass ones.
+[portrait: WENLOW, neutral] (laying the last sheet) They won't search the glass ones.
+[name: Wenlow] Nobody ever looks at the glass ones.
 ```
 3. **Fight two officers on the stilt-walks**: Directorate officers searching the walk-houses, in single battles on the walk (`:CORROSIVE_MIRE`, Lv 62).
 ```
 BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Grane") — single; Wenlow's party. *(PBS name "Grane": the class line already reads Mandate Officer.)*
 BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Tull") — single; Wenlow's party.
 (LOSE: back to the Infirmary; the task resets. The Interlude can't be failed, only replayed.)
-[name: Officer Tull] (recalling his Pokémon, irritated) Medic. You're obstructing. There's a list. Stand aside, or you're on it.
+[name: Officer Tull] (recalling his Pokémon, irritated) Medic. You're obstructing. There's a list.
+[name: Officer Tull] Stand aside, or you're on it.
 [portrait: WENLOW, neutral] I'm not on any lists. I'm not important enough for lists.
 ```
 
@@ -289,10 +350,11 @@ BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Tull") — single; Wenlow's 
 ```
 (The Infirmary. Silence: the BGM cuts. Only the rain.)
 (The front door opens. A Directorate squad: six grey coats, a lieutenant with a list, lamps.)
-[name: Lieutenant] Medical facility. We have reason to believe Sweetrot users are being harboured on these premises.
+[name: Lieutenant] Medical facility.
+[name: Lieutenant] We have reason to believe Sweetrot users are being harboured on these premises.
 (Wenlow is standing in the Ward's doorway, in front of the bead curtain. Behind him, forty patients dreaming. Four of them breathing.)
 [portrait: WENLOW, neutral] (the mask pushed up, his hands open) This is a hospital.
-[portrait: WENLOW, neutral] You have to —
+[name: Wenlow] You have to —
 [anim: cut to black, 0 frames]
 (A single gunshot SE. Nothing else. No music. Hold black for 120 frames.)
 ```
@@ -302,11 +364,13 @@ BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Tull") — single; Wenlow's 
 ```
 [if CORVIN_FREED]
   (Cragholm, the deep seams, the hospital. A radio on a pit-prop. Corvin is sitting very still next to it, in his coat, the mask in his hands.)
-  [name: Radio] ...Infirmary to Cragholm. Infirmary to — (static) — is anyone — the boy, Doctor. The boy. (static)
+  [name: Radio] ...Infirmary to Cragholm. Infirmary to — (static) — is anyone —
+  [name: Radio] the boy, Doctor. The boy. (static)
   (Corvin doesn't move. Pip, in the doorway, starts to come in, and Bastian, behind her, puts a hand on her shoulder and stops her.)
 [else]
   (A Directorate cell. Corvin on a bench, unmasked, his hands bandaged. A young guard at the bars, eating, chatting to nobody.)
-  [name: Guard] They did the Mirefen last night. Your place. (chewing) Some kid in the doorway. Wouldn't move.
+  [name: Guard] They did the Mirefen last night. Your place.
+  [name: Guard] (chewing) Some kid in the doorway. Wouldn't move.
   (Corvin stands up. He walks to the bars. He doesn't say anything. The guard stops chewing.)
 V137 = 9.
 ```
@@ -317,7 +381,8 @@ V137 = 9.
 ## Cogsworth, dawn: **the supply-lift** (chapter close; autorun at the lift-head, V137 == 9 → 10)
 ```
 (Dawn over Cogsworth. Grey. The shift-whistles haven't started yet. Rook at the supply-lift, holding the cage door, his work-coat buttoned to the neck.)
-[portrait: ROOK, sad] I heard on the union band. The Mirefen. The Infirmary. A kid.
+[portrait: ROOK, sad] I heard on the union band.
+[name: Rook] The Mirefen. The Infirmary. A kid.
 (He doesn't say anything else. He holds the door.)
 (The cage goes down. Through the grille in the floor, a long way below, Nadir: the stacked districts, the drained Sump, and over the Underveil, smoke, rising straight up in the still morning air.)
 (In your Bag: the blueprints. CALIBRATION SUBJECT: UNIMPRINTED-01.)

@@ -41,8 +41,10 @@ Trainers (Lv 57–58): the hiker, a psychic (Synod novice), a gravedigger.
 Vigil is a town of embalmers and mirror-polishers at Antumbra's edge, where the dead of three kingdoms come to be put behind the Glass. The **Grave Glass** is a standing mirror the height of a house, framed in bone, at the north gate. Through it the road goes on into the Obsidian Barrows.
 ```
 (The north gate. The Grave Glass stands across the road like a door with no handle. In it, the road goes on, under a darker sky.)
-[name: Embalmer] North? Through there? Living folk go through now and then. Mind you come out the far side the same shape.
-[name: Embalmer] (squinting at you) ...Huh. You don't show up right in it. Not wrong. Just thin. Like you've been through before.
+[name: Embalmer] North? Through there? Living folk go through now and then.
+[name: Embalmer] Mind you come out the far side the same shape.
+[name: Embalmer] [emote: question] (squinting at you) ...Huh. You don't show up right in it.
+[name: Embalmer] Not wrong. Just thin. Like you've been through before.
 (Under your collar, the scar is cool. For once, it's the glass that's warm.)
 V135 = 1.
 ```
@@ -70,17 +72,21 @@ Trainers (Lv 60): a worker (Meridian contractor), a hiker.
 (Cragholm. A canyon wall of lamplit galleries, one above another, linked by iron lift-cages that clank and sway on chains. Hundreds of little lamps, like a city built inside a lantern.)
 (At the main lifts: Directorate guards in grey, Linesmen with clipboards. A hand-painted sign under a printed one. The printed one: MERIDIAN DEEP WORKS — AUTHORISED PERSONNEL. The painted one: MIND YOUR HEADS.)
 (At the top cage, a stooped old man in a miner's hat with a lamp on it, smoking a clay pipe with enormous hands. A Directorate officer is talking at him.)
-[name: Directorate Officer] —registered with the Deep Works office by sundown, Warden. Every miner. Every name.
+[name: Directorate Officer] —registered with the Deep Works office by sundown, Warden.
+[name: Directorate Officer] Every miner. Every name.
 [portrait: BASTIAN, neutral] Eh?
 [name: Directorate Officer] (louder) EVERY NAME.
 [portrait: BASTIAN, happy] Lovely weather for it.
 (The officer gives up and stalks off. Bastian watches him go, then turns the lamp on his hat towards you.)
-[portrait: BASTIAN, neutral] Ilsa sent you? Course she did. She sent word on a mirror, and the mirror sent it to me crooked, but I got the gist.
-[portrait: BASTIAN, neutral] Sit down. No, there. That crate. I'm telling you about the crown.
+[portrait: BASTIAN, neutral] Ilsa sent you? Course she did.
+[name: Bastian] She sent word on a mirror, and the mirror sent it to me crooked, but I got the gist.
+[name: Bastian] Sit down. No, there. That crate. I'm telling you about the crown.
 (He opens his mouth. Shuts it. Looks at the guards on the lift.)
 [portrait: BASTIAN, deadpan] ...Not here. The rock's got ears and so's that lot. Pip!
 (A girl drops out of the lift-cage above on a rope, lands on the crate you were about to sit on, and doesn't fall off.)
-[portrait: PIP, happy] Here! Is this them? The ferry one? You're shorter than on the screens. Everyone is. I'm Pip. I'm fourteen. I'm the fastest lamp-runner in Ossaria, and that's not bragging, there's a board.
+[portrait: PIP, happy] Here! Is this them? The ferry one?
+[name: Pip] You're shorter than on the screens. Everyone is.
+[name: Pip] I'm Pip. I'm fourteen. I'm the fastest lamp-runner in Ossaria, and that's not bragging, there's a board.
 [portrait: BASTIAN, neutral] Take them down. The long way. Not the lifts.
 [portrait: PIP, smug] The long way's my favourite way. Keep up!
 V135 = 2.
@@ -94,15 +100,21 @@ Trainer (Lv 60): a gemcutter on the lift-landing (not the gym's).
 The long way down: Pip leads the PC through a chain of ladders, a disused lift-shaft and a seam so low the PC crouches. *(A short follow-the-runner sequence: Pip waits at each landing and taps her foot.)* Below the Deep Works' lowest gallery, a wall of old timbers swings open on a counterweight.
 ```
 (Beyond it, a long cavern lit by a hundred miners' lamps. Cots. Washing on lines strung between pit-props. Children. Someone playing a squeezebox badly. The smell of stew and wet stone.)
-[portrait: PIP, neutral] Everyone the Accord and the sun-badge lot would rather didn't exist. Grandad collects them. Like stamps.
+[portrait: PIP, neutral] Everyone the Accord and the sun-badge lot would rather didn't exist.
+[name: Pip] Grandad collects them. Like stamps.
 ```
 Who's here, in the order the PC meets them:
 - **Larch**, at a miner's bench under a hooded lamp, in a borrowed coat, writing in a ledger. Odessa got her out of Skyreach on a skiff and up the canyon by night.
 ```
-[portrait: LARCH, happy] There you are. Odessa said you'd be "along when you're along". She was right, which she'll be insufferable about.
+[portrait: LARCH, happy] There you are. Odessa said you'd be "along when you're along".
+[name: Larch] She was right, which she'll be insufferable about.
 [portrait: LARCH, neutral] You'll want to know what I've been doing. Hiding, mostly, and reading my own papers back to myself on the screens down here. They've cut it to pieces. I sound like a lunatic. I sound like a lunatic with excellent posture.
-[portrait: LARCH, worried] One thing. Before anybody else gets to you, and they will try. If anyone from Meridian ever offers to "check you over", a Fellowship medical, a scan, a nice doctor with warm hands... no. Never, ever let them examine you. Not for any reason. Not even if I'm the reason.
-[portrait: LARCH, neutral] Promise me you heard that. You don't have to say it. You just have to have heard it.
+[portrait: LARCH, sad] One thing. Before anybody else gets to you, and they will try.
+[name: Larch] If anyone from Meridian ever offers to "check you over", a Fellowship medical, a scan, a nice doctor with warm hands...
+[name: Larch] no. Never, ever let them examine you.
+[name: Larch] Not for any reason. Not even if I'm the reason.
+[portrait: LARCH, neutral] Promise me you heard that.
+[name: Larch] You don't have to say it. You just have to have heard it.
 V135 = 3.
 ```
 *(The GO_WILLING foreshadowing line; it must play before the badge case. 09 #14: the PC is what the Engine needs.)*
@@ -121,15 +133,20 @@ V135 = 3.
 ```
 (Morning, if it's morning; the lamps get turned up, so it must be. A commotion at the timber door.)
 (A column of people in Rimeholt furs comes in out of the dark, frostbitten, carrying children, led by a broad woman with a white bone-flag on a pole, the one flag both armies let pass.)
-[name: Zainab] Forty-one living. Six who weren't, by the Rimed Sands, and I carried those too, to the carters' ground. Zainab Darzi, Bone Chronicler. Somebody write that down, because I already did.
+[name: Zainab] Forty-one living. Six who weren't, by the Rimed Sands, and I carried those too, to the carters' ground.
+[name: Zainab] Zainab Darzi, Bone Chronicler. Somebody write that down, because I already did.
 (Behind her, last, limping, pulling a sledge with two children asleep on it: Anja.)
 [if ANJA_EXPOSED]
-  [portrait: ANJA, sad] (she sees you. She looks at the floor, and keeps looking at it.)
-  [portrait: ANJA, neutral] Rimeholt. Forty-one. I counted them twice. It's the only thing I'm still allowed to count.
+  (she sees you. She looks at the floor, and keeps looking at it.)
+  [portrait: ANJA, sad] Rimeholt. Forty-one. I counted them twice.
+  [name: Anja] It's the only thing I'm still allowed to count.
 [else]
-  [portrait: ANJA, neutral] (she walks straight up to you, pulls off a mitten, and holds out her hand.) You let me say it myself. I've been saying it all the way here. To every one of them.
+  [portrait: ANJA, neutral] (she walks straight up to you, pulls off a mitten, and holds out her hand.) You let me say it myself.
+  [name: Anja] I've been saying it all the way here. To every one of them.
   (You shake it. Her hand is ice.)
-[portrait: ANJA, angry] (at herself, not you) I sat on the readings. I sat on them and the sea came in. These are the ones the sea didn't take. That's my count now.
+[portrait: ANJA, angry] (at herself, not you) I sat on the readings.
+[name: Anja] I sat on them and the sea came in.
+[name: Anja] These are the ones the sea didn't take. That's my count now.
 V135 = 4.
 ```
 - She stays one night. When she goes, she goes **west**, to the front, to Skaldfast (`:war_prisoner`, Ch15–16): "Sigrun will want the readings I didn't sit on. All of them. Even the ones that make her look bad. Especially those."
@@ -144,24 +161,33 @@ Date-bread and miners' stew at one long table: miners, refugees, Hollow, Larch, 
   (Halfway through, she passes the salt down the table without being asked. It gets to him. He uses it.)
 [if !ROWAN_ALIVE && JUNO visiting]
   (Juno came down on the night lift. She sits next to Thistle, who was in the undercroft when they brought him up. Neither of them eats much. Thistle cuts Juno's bread for her, without asking, the way you would for a child.)
-[portrait: BASTIAN, happy] Eat. All of you. The Deep Works can register my stew. Eh? What? Can't hear a thing.
+[portrait: BASTIAN, happy] Eat. All of you. The Deep Works can register my stew.
+[name: Bastian] Eh? What? Can't hear a thing.
 ```
 *(`JUNO visiting` = `!flag(:JUNO_ESTRANGED)`. Otherwise Juno isn't here, and her chair is just a chair.)*
 
 ## Bastian's lamp-room: **Bastian's Account** (touch, Bastian, the evening of day two, V135 == 4 → 5)
 ```
 (The lowest of the Lift Galleries. Bastian's lamp-room: a cot, a kettle and forty years of lamps. He closes the door, and then he closes a second door you didn't know was there.)
-[portrait: BASTIAN, neutral] Ilsa says you went into your own head and came out with a church in it. Good. Then you'll know I'm not making this up.
-[portrait: BASTIAN, neutral] I've seen three Festivals, two Sovereigns and one crown break. AF 290. I was carrying the Stone Plate in the procession. Wardens carry their Plates up the nave, you see, and then the Choir sings, and the Crown takes them. I was nearest the Choir loft.
-[portrait: BASTIAN, sad] There was brass behind the loft that had no business in a church. Big brass, with dials. And men in white coats with little gold suns on their pockets, watching the dials.
+[portrait: BASTIAN, neutral] Ilsa says you went into your own head and came out with a church in it.
+[name: Bastian] Good. Then you'll know I'm not making this up.
+[name: Bastian] I've seen three Festivals, two Sovereigns and one crown break.
+[name: Bastian] AF 290. I was carrying the Stone Plate in the procession. Wardens carry their Plates up the nave, you see, and then the Choir sings, and the Crown takes them.
+[name: Bastian] I was nearest the Choir loft.
+[portrait: BASTIAN, sad] There was brass behind the loft that had no business in a church.
+[name: Bastian] Big brass, with dials.
+[name: Bastian] And men in white coats with little gold suns on their pockets, watching the dials.
 (Under your collar, the scar stings: once, the way a cut stings when someone else says the word "cut".)
 [portrait: BASTIAN, neutral] When the Crown cracked, the dials jumped. They weren't surprised.
 [portrait: BASTIAN, angry] They were *pleased*.
 [portrait: BASTIAN, sad] Then Valen said "find the child". And Morwen Vane threw herself over a little thing in a Choir ribbon. And the next week Morwen was ruined, and nobody ever asked me what I saw.
-[portrait: BASTIAN, sad] I never told. I was afraid. I'm still afraid. Seventy-four, and I still sleep with a lamp lit.
+[name: Bastian] I never told. I was afraid. I'm still afraid.
+[name: Bastian] Seventy-four, and I still sleep with a lamp lit.
 [portrait: BASTIAN, neutral] I'm telling you anyway.
 (He looks at your Bag, where the Secret Articles are, still sealed. He doesn't ask.)
-[portrait: BASTIAN, deadpan] Ilsa's father's papers. Don't open them in here. Accord business in my lamp-room, and the ceiling falls in. That's a mining rule. I just made it up.
+[portrait: BASTIAN, deadpan] Ilsa's father's papers. Don't open them in here.
+[name: Bastian] Accord business in my lamp-room, and the ceiling falls in.
+[name: Bastian] That's a mining rule. I just made it up.
 V135 = 5.
 ```
 *(09 #24 eyewitness; the gold suns are the Meridian sunburst, which the Mindscape showed on the brass machines. Bastian says "um, where was I" three times in a longer cut of this story (Gym 13 Mastery, GYM_PUZZLES 374): amethyst, red, green, blue. The script keeps the short cut on the critical path. The long cut plays if the PC asks him to "tell it again" afterwards, and only that cut carries the colour words.)*
@@ -169,7 +195,9 @@ V135 = 5.
 ## Cragholm, the next morning: comedy scene Ch14, **"Selectively"** (autorun at the top lift-cage, V135 == 5 → 6)
 The scene as written in `15_COMEDY.md` §4 (Bastian vs the Directorate officer; Pip and the ginger biscuits). After it:
 ```
-[portrait: BASTIAN, neutral] (once the officer's gone, not deaf at all) Gym's open. Go and break your head on my lamps. I'll be along in ten minutes. Rock's patient. I'm only seventy-four.
+[portrait: BASTIAN, neutral] (once the officer's gone, not deaf at all) Gym's open.
+[name: Bastian] Go and break your head on my lamps. I'll be along in ten minutes.
+[name: Bastian] Rock's patient. I'm only seventy-four.
 V135 = 6.
 ```
 
@@ -181,8 +209,10 @@ As GYM_PUZZLES Gym 13: 370 Lamp Room (teach), 371 Prism Gallery (twist; the veri
 ### 373 — the Warden Arena
 ```
 [portrait: BASTIAN, happy] There you are. Nine minutes. I lost a bet with myself.
-[portrait: BASTIAN, neutral] Light through crystal. Pretty. Darken it and the whole field turns, and then it's not pretty, it's mine.
-[portrait: BASTIAN, deadpan] Rock's patient. Rock'll wait for you to make a mistake for a thousand years. I'm only seventy-four, so I'll wait about ten minutes.
+[portrait: BASTIAN, neutral] Light through crystal. Pretty.
+[name: Bastian] Darken it and the whole field turns, and then it's not pretty, it's mine.
+[portrait: BASTIAN, deadpan] Rock's patient. Rock'll wait for you to make a mistake for a thousand years.
+[name: Bastian] I'm only seventy-four, so I'll wait about ten minutes.
 BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_BASTIAN), double: false)
 ```
 - **Mid-battle (Amber Mega Evolves):** "Rock's patient. So's this." `[bubble: BASTIAN, happy, sparkle]` *(The last Mega the PC faces without a ring. The VS plate reads PROSPECTOR above BASTIAN.)*
@@ -190,7 +220,8 @@ BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_BASTIAN), double: false)
 ```
 [portrait: BASTIAN, happy] Flawless cut. Don't tell the cavern I said so. It sulks.
 RECEIVE: the GEODE BADGE (badge 13). RECEIVE: TM76 STEALTH ROCK.
-[portrait: BASTIAN, neutral] Come down to my lamp-room after. Not now. After. I want to wash my hands first. Old man's thing.
+[portrait: BASTIAN, neutral] Come down to my lamp-room after. Not now. After.
+[name: Bastian] I want to wash my hands first. Old man's thing.
 V135 = 7.
 ```
 *(Badge name, proposed: the **Geode Badge**. `TELEMETRY_SABOTAGED` doesn't exist yet. The "did he notice?" beats start at badge 14.)*
@@ -202,7 +233,7 @@ After the quest's last line, two additions (in this script, not the plugin):
 (Larch has closed the book. She's looking at the ring the way she looked at the NULL scan, at the very beginning.)
 [portrait: LARCH, neutral] (carefully, to nobody) Brann cut that ten years ago.
 [portrait: BASTIAN, deadpan] Eh?
-[portrait: LARCH, neutral] Nothing. An old woman doing sums.
+[name: Larch] Nothing. An old woman doing sums.
 V135 = 8.
 ```
 *(Must not say "reset" or "Legend Plate" (09 #5/#6). Three clues now sit side by side: Brann's "Ten years back", Bastian's crown story an hour ago, and the ring that sings. Larch notices, says nothing, and we don't press it.)*
@@ -211,13 +242,18 @@ V135 = 8.
 ## Larch's bench: **The Badge Case** (touch, Larch, V135 == 8 → 9; key event 2)
 ```
 (Larch has your badge case open on the miner's bench under the hooded lamp. Thirteen badges in their slots. She's taken the lining out with a pen-knife and laid it flat.)
-[portrait: LARCH, neutral] I've wanted to do this since Ferrow's Landing. The way it chords when you win. That's not a badge case. Badge cases don't have opinions.
+[portrait: LARCH, neutral] I've wanted to do this since Ferrow's Landing.
+[name: Larch] The way it chords when you win.
+[name: Larch] That's not a badge case. Badge cases don't have opinions.
 (Inside the lining: a sliver of glass, rainbow-dark, no longer than a fingernail. Wired to it, a flat brass button with a sunburst stamped on the back.)
 [portrait: LARCH, angry] Lattice-glass. And a transmitter.
-[portrait: LARCH, neutral] Every badge you've won, it's recorded your... whatever it is in you. Resonating with that Warden's Plate. Thirteen Plates. And it's sent every one of them home.
+[portrait: LARCH, neutral] Every badge you've won, it's recorded your... whatever it is in you.
+[name: Larch] Resonating with that Warden's Plate. Thirteen Plates.
+[name: Larch] And it's sent every one of them home.
 [portrait: LARCH, angry] Voss isn't watching you. He's tuning you.
 (She looks up at you. She's never looked old to you before.)
-[portrait: LARCH, sad] They issued that case to every Fellowship child. I wrote the Fellowship's charter. I signed the form it came with.
+[portrait: LARCH, sad] They issued that case to every Fellowship child.
+[name: Larch] I wrote the Fellowship's charter. I signed the form it came with.
 \pf[PLAYER,neutral] (Your first words since the Mindscape.) What do we do with it?
 [portrait: LARCH, neutral] "We." Good. Three ways. Choose. It's your case.
 Switch S138 CH14_TELEMETRY_SCENE = ON.
@@ -226,16 +262,22 @@ Switch S138 CH14_TELEMETRY_SCENE = ON.
 > Smash it. (destroy)
   Script: pf_choose(:ch14_telemetry, :destroy)
   (You put a stone on it. Then you put the stone through it. The brass button cracks, the glass goes to sand.)
-  [portrait: LARCH, neutral] He'll know by morning. He'll stop guessing and start hurrying. That's not nothing. That's not everything, either.
+  [portrait: LARCH, neutral] He'll know by morning. He'll stop guessing and start hurrying.
+  [name: Larch] That's not nothing. That's not everything, either.
 > Feed it lies. (sabotage)
   Script: pf_choose(:ch14_telemetry, :sabotage)
   (Larch puts the lining back with two new wires in it and a crumb of crystal from Bastian's seam where the glass was.)
-  [portrait: LARCH, smug] It'll keep singing. Flat. A quarter-tone under every Plate, every badge, all the way to the Festival. He'll build his whole machine to a wrong note.
-  [portrait: LARCH, worried] And every badge from here on, you'll wonder if he's heard it. So will I. Win them anyway.
+  [portrait: LARCH, smug] It'll keep singing. Flat.
+  [name: Larch] A quarter-tone under every Plate, every badge, all the way to the Festival.
+  [name: Larch] He'll build his whole machine to a wrong note.
+  [portrait: LARCH, sad] And every badge from here on, you'll wonder if he's heard it.
+  [name: Larch] So will I. Win them anyway.
 > Leave it. (leave)
   Script: pf_choose(:ch14_telemetry, :leave)
   (You fold the lining back in. Larch watches you do it.)
-  [portrait: LARCH, sad] ...All right. Your case. Your call. (A long pause.) I'd have liked to break something today. I'll find something else.
+  [portrait: LARCH, sad] ...All right. Your case. Your call.
+  (A long pause.)
+  [name: Larch] I'd have liked to break something today. I'll find something else.
 V135 = 9.
 ```
 *(NARRATIVE_KEYS §4.2: `:destroy` VOSS−3 MERIDIAN−2; `:sabotage` → `TELEMETRY_SABOTAGED` (counts twice against ENGINE_CALIBRATED); `:leave` → `ENGINE_CALIBRATED` if the other safeguards fail, and Bastian's Plate condition fails ("you walked a Meridian beacon into his seams").)*
@@ -243,20 +285,27 @@ V135 = 9.
 ## **The Raid** (autorun on leaving Larch's bench, V135 == 9; no jokes until Thistle's last line)
 ```
 (Somewhere above, a lift-cage comes down too fast. Then another. Then the lamps in the upper gallery go out, one after another, all the way down, like someone running a hand along them.)
-[portrait: PIP, panic] (sliding down a rope) Grandad says they're on the lifts! Grey coats! All of them! He says get the doctor and the old lady and the... and the Hollow ones out the back seam, NOW.
-[portrait: BASTIAN, angry] (from the gallery above, not deaf at all) NOBODY RUNS DOWN THE MAIN SHAFT. Pip, the back seam. You, child, with me.
+[portrait: PIP, panic] [emote: exclaim] (sliding down a rope) Grandad says they're on the lifts!
+[name: Pip] Grey coats! All of them! He says get the doctor and the old lady and the... and the Hollow ones out the back seam, NOW.
+[portrait: BASTIAN, angry] (from the gallery above, not deaf at all) NOBODY RUNS DOWN THE MAIN SHAFT.
+[name: Bastian] Pip, the back seam. You, child, with me.
 Script: Prismfall.checkpoint
 ```
 ### The bench: **"Willing"** (GO_WILLING; autorun as the PC passes Larch's bench on the way to the shaft)
 ```
 (At Larch's bench, a tall man in a pristine white coat, a black case at his feet, alone, unhurried, as if he'd been here for some time.)
-[portrait: QUENT, neutral] Ah. You must be the young person with the unusual badge case. Doctor Percival Quent. Fellowship medical.
-[portrait: QUENT, happy] Someone's interfered with your device. It may be dangerous, all that loose glass. I can remove it painlessly. Two minutes. And while you're here, a full Fellowship medical, since nobody seems to have given you one. You'd like to know what you are, surely?
+[portrait: QUENT, neutral] Ah. You must be the young person with the unusual badge case.
+[name: Quent] Doctor Percival Quent. Fellowship medical.
+[portrait: QUENT, happy] Someone's interfered with your device. It may be dangerous, all that loose glass.
+[name: Quent] I can remove it painlessly. Two minutes.
+[name: Quent] And while you're here, a full Fellowship medical, since nobody seems to have given you one.
+[name: Quent] You'd like to know what you are, surely?
 > Let him look. (accept)
   [portrait: QUENT, happy] Sensible. Sit. This won't hurt at all.
   Script: Prismfall.game_over(:GO_WILLING)
 > No. (refuse)
-  [portrait: QUENT, neutral] (picking up the case) Of course. The offer stands. It always stands.
+  [portrait: QUENT, neutral] (picking up the case) Of course. The offer stands.
+  [name: Quent] It always stands.
   (He walks away up the gallery between the Directorate troopers, and they make way for him without being told.)
 ```
 *(GO_WILLING: NARRATIVE_KEYS §9, epitaph "The exam was painless, as promised. You've been asleep since. Meridian sends flowers." Foreshadowing: Larch's "Never, ever let them examine you" at V135 = 3. Quent doesn't fight here; his fight is Ch16/17.)*
@@ -267,16 +316,19 @@ Script: Prismfall.checkpoint
 (Thistle is standing at the shaft-head with her rope over her shoulder. She ties it off on a pit-prop, slowly, the way she ties everything.)
 [portrait: THISTLE, neutral] I know where a thread will fall. This one falls here.
 [if standing(:HOLLOW) >= 3]
-  [portrait: THISTLE, happy] (to you, quickly, almost warm) You've been kind to my people when it cost you. I noticed. I notice everything that isn't said. Stand by me.
+  [portrait: THISTLE, happy] (to you, quickly, almost warm) You've been kind to my people when it cost you.
+  [name: Thistle] I noticed. I notice everything that isn't said. Stand by me.
 [else]
-  [portrait: THISTLE, neutral] I don't owe you this. I'm doing it anyway. Stand there and don't get in my way.
+  [portrait: THISTLE, happy] I don't owe you this. I'm doing it anyway.
+  [name: Thistle] Stand there and don't get in my way.
 (The first cage hits the landing. Two Directorate officers step out.)
 Script: pbRegisterPartner(:HOLLOW_THISTLE, "Thistle", 14)
 BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Pruitt", :MERIDIAN_DIRECTORATE, "Vance") — double; the shaft-head (`:CAVE`); PC + Thistle.
 (LOSE: whiteout to 361; the raid replays from the bench, the telemetry choice kept.)
 (WIN:)
 (Thistle cuts the cage's guide-rope with one stroke. It doesn't fall. It just won't come any lower.)
-[portrait: THISTLE, neutral] Go. Larch went down the Darkglass side with the director's dogs after her. I'll hold this. I've held worse.
+[portrait: THISTLE, neutral] Go. Larch went down the Darkglass side with the director's dogs after her.
+[name: Thistle] I'll hold this. I've held worse.
 ```
 *(07_ACT_IV: Thistle defects openly, earlier and warmer at high Hollow Standing. Officers Pruitt and Vance are new (Mandate Officer class). Partner version 14: Thistle's Ch14 team, a new PBS block (3 mons, Lv 61–63, Ariados / Tsareena / Leavanny; she fights *with* the field, Sticky Web on a Cave).)*
 
@@ -285,12 +337,17 @@ BATTLE: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Pruitt", :MERIDIAN_DIRECTORA
 (The Darkglass Mine: a gallery of black crystal that drinks light. Larch has her back to the far wall. Between you and her, a Houndoom, and behind it, Director Helene Marchetti.)
 [if choice(:ch13_fault) == :rowan]
   (She's on a cane. A steel brace from hip to ankle under the grey coat. She doesn't lean on it while she's looking at you.)
-  [portrait: MARCHETTI, neutral] The undercroft. You looked at me and chose him. I've thought about that every day. I don't blame you. I'm just saying I've thought about it.
+  [portrait: MARCHETTI, neutral] The undercroft. You looked at me and chose him.
+  [name: Marchetti] I've thought about that every day.
+  [name: Marchetti] I don't blame you. I'm just saying I've thought about it.
 [if choice(:ch13_fault) == :marchetti]
   (She stands on her own. There's a white line of scar along her jaw that wasn't there in Lucent.)
-  [portrait: MARCHETTI, neutral] I owe you a life. I know. I'm here anyway. Orders don't care what I owe.
-[portrait: MARCHETTI, neutral] Professor Larch is a fugitive under the Mandate. You're obstructing. You're not under arrest. You're under —
-[portrait: MARCHETTI, angry] — no. I'm not saying "protection" again. I've stopped believing it. Fight me or step aside.
+  [portrait: MARCHETTI, neutral] I owe you a life. I know. I'm here anyway.
+  [name: Marchetti] Orders don't care what I owe.
+[portrait: MARCHETTI, neutral] Professor Larch is a fugitive under the Mandate. You're obstructing.
+[name: Marchetti] You're not under arrest. You're under —
+[portrait: MARCHETTI, angry] — no. I'm not saying "protection" again. I've stopped believing it.
+[name: Marchetti] Fight me or step aside.
 (A Directorate trooper shoots out the gallery's work-lamps, one after another. The crystal goes dark, and in the dark, it starts to hum.)
 BATTLE: TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene") — version 1; single; `:DARK_CRYSTAL`; her Mega Houndoom, and your ring.
 (LOSE: whiteout to 361; the raid replays from the shaft, Thistle's battle kept.)
@@ -305,16 +362,19 @@ BATTLE: TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene") — version 1; single
     (You hold it out. The Splitter casing from the Gale Post wreckage. [if IRONREACH_EVIDENCE] And the brass comm-box: MERIDIAN SPECIAL ACCOUNTS under its sunburst.)
     \pf[PLAYER,angry] Your own Special Accounts bombed Skyreach.
     (She takes it. She turns it over. She reads the stamp twice. Her face doesn't do anything at all.)
-    [portrait: MARCHETTI, neutral] ...I was on those catwalks. I had people on those catwalks.
+    [portrait: MARCHETTI, neutral] [emote: dots] ...I was on those catwalks.
+    [name: Marchetti] I had people on those catwalks.
     (She goes very still. Then she hands it back.)
-    [portrait: MARCHETTI, neutral] Keep that. Somewhere dry. (To the dark, louder:) Gallery's empty! Pull back to the lifts!
+    [name: Marchetti] Keep that. Somewhere dry.
+    [name: Marchetti] (To the dark, louder:) Gallery's empty! Pull back to the lifts!
     (Her troopers go. She goes last. She doesn't look back.)
   > Say nothing. (none)
     Script: pf_choose(:ch14_marchetti, :none)
 [if !(has SPLITTER CASING || IRONREACH_EVIDENCE)]
   Script: pf_choose(:ch14_marchetti, :none)
 [if :none]
-  [portrait: MARCHETTI, neutral] You're a good fighter in a bad cause, and I'm the reverse, and we're both very tired. (Louder:) Fall back. We'll come back with more lamps.
+  [portrait: MARCHETTI, neutral] You're a good fighter in a bad cause, and I'm the reverse, and we're both very tired.
+  [name: Marchetti] (Louder:) Fall back. We'll come back with more lamps.
 Switch S139 CH14_RAID_DONE = ON. V135 = 10.
 ```
 *(NARRATIVE_KEYS: `:show_evidence` MERIDIAN−1 → `MARCHETTI_TURNED` (stands down at the hijack). If she was already turned at the Fault, `:show_evidence` still plays: now she knows *why* she'll stand down. Without evidence and without the Fault rescue, she stays loyal.)*
@@ -323,11 +383,16 @@ Switch S139 CH14_RAID_DONE = ON. V135 = 10.
 ```
 (The back seam. Everyone counted out and counted back in. Pip has counted them three times.)
 [portrait: PIP, sad] All of them. Every one. And the grey coats got nobody.
-[portrait: THISTLE, neutral] (sitting on a crate, a bandage round her hand, coiling the cut rope) I said I know where a thread will fall. I didn't say it wouldn't hurt.
+[portrait: THISTLE, neutral] (sitting on a crate, a bandage round her hand, coiling the cut rope) I said I know where a thread will fall.
+[name: Thistle] I didn't say it wouldn't hurt.
 [if ROWAN_ALIVE]
-  [portrait: ROWAN, neutral] (to Thistle, quietly) That was well done. (To you:) The Directorate will be back. The Lantern Hollow moves tonight. West, to Gravenmoor. The dead don't inform on anyone.
-[portrait: BASTIAN, neutral] They'll come back with more lamps. Good luck to them. I've got forty years of lamps.
-[portrait: BASTIAN, sad] Go south, child. Duneholt. Sahar's well's gone dry, and the drill's found something hot under it, and she won't ask for help, so I'm asking for her. Then Gravenmoor. The dead have a lot to say this year.
+  [portrait: ROWAN, neutral] (to Thistle, quietly) That was well done.
+  [name: Rowan] (To you:) The Directorate will be back. The Lantern Hollow moves tonight.
+  [name: Rowan] West, to Gravenmoor. The dead don't inform on anyone.
+[portrait: BASTIAN, neutral] They'll come back with more lamps. Good luck to them.
+[name: Bastian] I've got forty years of lamps.
+[portrait: BASTIAN, sad] Go south, child. Duneholt. Sahar's well's gone dry, and the drill's found something hot under it, and she won't ask for help, so I'm asking for her. Then Gravenmoor.
+[name: Bastian] The dead have a lot to say this year.
 QUEST LOG: "Eighteen Roads" — South to Duneholt. Sahar Ostrand's well is dry.
 ```
 
@@ -351,13 +416,22 @@ Variable V109 DUNEHOLT_WELL = 1 (dry).
 - **Kassan, the Hall of Audience (206)** (touch; the palace guards wave the PC through: "The Elector's always pleased to see a celebrity."):
 ```
 (A long hall of painted tiles. Prince-Elector Idris Kassan on a low divan, beautifully dressed, delighted. On one side, a Meridian paymaster with a strongbox. On the other, two quartermasters, one in Isenmar furs and one in Ashkaar black, standing as far apart as the room allows and not speaking to each other.)
-[portrait: KASSAN, happy] The ferry child! Sit, sit. Have a date. Have two. I've been following your career. Everyone has. It's the only thing on the screens that isn't the war.
-[portrait: KASSAN, smug] You'll have heard I've declared Ossaria neutral. Wise, everybody says. Then you'll have heard I've done something cleverer. Look.
+[portrait: KASSAN, happy] The ferry child! Sit, sit. Have a date. Have two.
+[name: Kassan] I've been following your career. Everyone has.
+[name: Kassan] It's the only thing on the screens that isn't the war.
+[portrait: KASSAN, smug] You'll have heard I've declared Ossaria neutral. Wise, everybody says.
+[name: Kassan] Then you'll have heard I've done something cleverer. Look.
 (He unrolls a scroll with three seals on it: a whale, a forge-hammer and a sunburst.)
-[portrait: KASSAN, happy] The Elector's Lease. The western dunes, let to the Isenmar crown, the Ashkaar crown and the Meridian Fellowship at once. Fifty years. Paid in advance. All three of them signed it without reading the other two.
-[portrait: KASSAN, smug] The Bone Sands have buried every army that ever marched into them. I only charge for the plot.
+[portrait: KASSAN, happy] The Elector's Lease.
+[name: Kassan] The western dunes, let to the Isenmar crown, the Ashkaar crown and the Meridian Fellowship at once.
+[name: Kassan] Fifty years. Paid in advance.
+[name: Kassan] All three of them signed it without reading the other two.
+[portrait: KASSAN, smug] The Bone Sands have buried every army that ever marched into them.
+[name: Kassan] I only charge for the plot.
 (The Isenmar quartermaster looks at the Ashkaar quartermaster for the first time. Neither of them says anything.)
-[portrait: KASSAN, neutral] (lightly, to you only) The well? Sahar's well? Regrettable. Meridian assures me the drill has found nothing but warm rock. Warm rock is very good for the economy.
+[portrait: KASSAN, neutral] (lightly, to you only) The well? Sahar's well? Regrettable.
+[name: Kassan] Meridian assures me the drill has found nothing but warm rock.
+[name: Kassan] Warm rock is very good for the economy.
 V135 = 11.
 ```
 *(14_WAR_AND_BLESSING Part B: Kassan rents a battlefield. The caravan houses ignore him from here on.)*
@@ -393,8 +467,12 @@ Switch S140 CH14_GROUDON_DONE = ON. Variable V109 DUNEHOLT_WELL = 2 (refilling).
 (The well-head, an hour later. Duneholt has come out to look down it. A child drops a pebble. Everyone listens. A long way down: plink.)
 (The crowd makes a sound you'll remember.)
 (Sahar sits down in the dust by the well and looks west, towards the Steamline's haze on the horizon.)
-[portrait: SAHAR, sad] The King woke the red one and the blue one. Somebody's going to bring the blue one here again, you know. The sand remembers the sea. It doesn't want it back.
-[portrait: SAHAR, neutral] (getting up, dusting off) Right. That's enough feelings for one aquifer. The collapse has opened the old fossil beds east of town. Stonesleep. Bring me anything with teeth.
+[portrait: SAHAR, sad] The King woke the red one and the blue one.
+[name: Sahar] Somebody's going to bring the blue one here again, you know.
+[name: Sahar] The sand remembers the sea. It doesn't want it back.
+[portrait: SAHAR, neutral] (getting up, dusting off) Right. That's enough feelings for one aquifer.
+[name: Sahar] The collapse has opened the old fossil beds east of town. Stonesleep.
+[name: Sahar] Bring me anything with teeth.
 ```
 *(The first good news in an act. Ch11's Kyogre and this are the "red one and the blue one".)*
 
@@ -408,7 +486,7 @@ Pip comes south with the PC as far as the border ("Grandad said see you to the e
 (A shadow goes over you. A big one. Overhead, low, an airship in Meridian white with a gold sunburst on the envelope, engines droning, heading north into the fog.)
 (On its side, in letters a storey high: FELLOWSHIP CHAMPION SERIES — PROUDLY SPONSORING KESTREL VANE.)
 [portrait: PIP, shocked] That's a sponsor ship.
-[portrait: PIP, neutral] (watching it go into the fog, frowning) Who'd sponsor a *graveyard*?
+[portrait: PIP, neutral] [emote: question] (watching it go into the fog, frowning) Who'd sponsor a *graveyard*?
 (The fog closes behind it.)
 V135 = 13. Variable V102 STORY_CHAPTER = 15.
 QUEST LOG: "Eighteen Roads" — North to Gravenmoor. The dead have a lot to say this year. (First: Marisol's sledges, at first light, from Duneholt.)

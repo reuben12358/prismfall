@@ -34,8 +34,10 @@ As in the earlier scripts. **Portrait cast here:** Ysolde, Kestrel, Dask, Odessa
 ## Duneholt, the bazaar at first light: **War 2, the War Convoy** (touch, the green awnings, V136 == 0)
 ```
 (The Terrace Bazaar before the stalls open. Under green awnings: twelve sledges on sand-runners, roped and tarped. Ebb Guild sled-runners in Isenmar oilskins, too hot, not complaining. At the head of the line, an old caravan-mother on a camel, veiled, holding a lantern that's already out.)
-[name: Caravan-mother] The Unimprinted. Good. My house leads you to the glass. Past the glass, the glass is yours.
-[name: Sled-runner] (a letter, handed over) Captain Reyes says read it before you decide. Then decide quick. Siege closes tonight.
+[name: Caravan-mother] The Unimprinted. Good.
+[name: Caravan-mother] My house leads you to the glass. Past the glass, the glass is yours.
+[name: Sled-runner] (a letter, handed over) Captain Reyes says read it before you decide.
+[name: Sled-runner] Then decide quick. Siege closes tonight.
 (The letter, in Marisol's square hand.)
 "Two cargoes in the bazaar. I bought both. Under the left tarps, food: grain, salt-fish, milk powder for the Skaldfast creche. Under the right, harpoon-guns from the Ebb yards. Skaldfast's walls hold three days on either. Not both: the sledges won't take both through the steam.
  Whichever you walk in, I'll stand behind. Whichever you leave, my people sell back to the bazaar, and the caravan-mothers give it to the refugees here.
@@ -44,13 +46,19 @@ As in the earlier scripts. **Portrait cast here:** Ysolde, Kestrel, Dask, Odessa
 ```
 > Walk the food in. (relief)
   Script: pf_choose(:war_convoy, :relief)
-  [name: Sled-runner] (uncovering the left tarps) Milk powder. Fifty sacks of it. The Thane'll hate it. The creche won't.
+  [name: Sled-runner] (uncovering the left tarps) Milk powder. Fifty sacks of it.
+  [name: Sled-runner] The Thane'll hate it. The creche won't.
 > Walk the guns in. (arms)
   Script: pf_choose(:war_convoy, :arms)
-  [name: Sled-runner] (quietly) Right. Harpoons. Skaldfast'll hold. (A beat.) Somebody on the other side won't.
+  [name: Sled-runner] (quietly) Right. Harpoons. Skaldfast'll hold.
+  (A beat.)
+  [name: Sled-runner] Somebody on the other side won't.
 > I won't walk a war. (refuse)
   Script: pf_choose(:war_convoy, :refuse)
-  [name: Caravan-mother] Then the bazaar eats today. That's not nothing, child. (She turns the camel.) Marisol will be angry. Marisol is often angry. The bazaar is often hungry.
+  [name: Caravan-mother] Then the bazaar eats today. That's not nothing, child.
+  (She turns the camel.)
+  [name: Caravan-mother] Marisol will be angry. Marisol is often angry.
+  [name: Caravan-mother] The bazaar is often hungry.
   (Skip to "Odessa's skiff" below; the Steamline still opens for `OS_CARTERS_DEAD`.)
 V136 = 1 on :relief/:arms after the walk below; V136 = 1 immediately on :refuse.
 ```
@@ -65,15 +73,21 @@ The caravan-mother leads the line west across the Dry Tide and the Glass Dunes (
 (Wingbeats. A Dragonite lands across the path, steam boiling off its wings. Two riders in dragonhide.)
 [name: Ashkaar Rider] Halt! Sledges into Skaldfast. Under whose banner?
 [if :relief]
-  [name: Ashkaar Rider] Food, the runners say. Everyone says food. Show me, or show me your Pokémon.
+  [name: Ashkaar Rider] Food, the runners say. Everyone says food.
+  [name: Ashkaar Rider] Show me, or show me your Pokémon.
 [if :arms]
-  [name: Ashkaar Rider] Food, the runners say. (He lifts a tarp with his spear. Harpoon-steel.) ...Food. Draw.
+  [name: Ashkaar Rider] Food, the runners say.
+  (He lifts a tarp with his spear. Harpoon-steel.)
+  [name: Ashkaar Rider] ...Food. Draw.
 BATTLE: TrainerBattle.start(:ASHKAAR_OFFICER, "Rider Torvald", :ASHKAAR_SOLDIER, "Rider Esk") — double; `:BLEED` (the Steamline's own field); Lv 64–65.
 (LOSE: whiteout to 201; the convoy waits at the marker.)
 [if :relief]
-  [name: Ashkaar Rider] (looking at the milk powder) ...Go on. Dominar's orders are "no arms past the glass". He never said anything about milk.
+  [name: Ashkaar Rider] (looking at the milk powder) ...Go on.
+  [name: Ashkaar Rider] Dominar's orders are "no arms past the glass".
+  [name: Ashkaar Rider] He never said anything about milk.
 [if :arms]
-  [name: Ashkaar Rider] (bleeding, furious) The Dominar will hear the Unimprinted carry harpoons now. Remember who you used to be.
+  [name: Ashkaar Rider] (bleeding, furious) The Dominar will hear the Unimprinted carry harpoons now.
+  [name: Ashkaar Rider] Remember who you used to be.
   (They go up into the steam.)
 ```
 - **The Rimed Sands (920), Isenmar's lines.** The sledges come out of the steam into the trenches. Sled-runners cheer, very quietly, because there are snipers.
@@ -86,9 +100,13 @@ V136 = 1.
 ### Odessa's skiff (autorun at the Rimed Sands lookout, V136 == 1; on `:refuse`, at Duneholt's Gale Post)
 ```
 (A Gale Post skiff comes down out of the white sky on a long rope, rocking, and Odessa leans over the gunwale in flying goggles.)
-[portrait: ODESSA, happy] Mail's mail! Get in. You're overdue at a graveyard, and I've a sack for Vigil that won't deliver itself.
-[portrait: ODESSA, neutral] (as the skiff lifts, looking west at the smoke) I fly both sides' mail now. Same sack. I read nothing. I know everything. You'd be amazed what a war says in its letters home.
-[portrait: ODESSA, neutral] (as the Jawbone Ridge comes up under you) If they take somebody worth fetching, I'll come back for you. Don't make that face. They will.
+[portrait: ODESSA, happy] Mail's mail! Get in.
+[name: Odessa] You're overdue at a graveyard, and I've a sack for Vigil that won't deliver itself.
+[portrait: ODESSA, neutral] (as the skiff lifts, looking west at the smoke) I fly both sides' mail now.
+[name: Odessa] Same sack. I read nothing. I know everything.
+[name: Odessa] You'd be amazed what a war says in its letters home.
+[name: Odessa] (as the Jawbone Ridge comes up under you) If they take somebody worth fetching, I'll come back for you.
+[name: Odessa] Don't make that face. They will.
 ```
 **Hangout, Odessa at the skiff** (from V136 >= 2; at Vigil's Gale Post mooring, later Gravenmoor's): *Mail Call*, a postbag of letters from the war, read in her voice, one per visit. It also offers fast travel back to Duneholt and the Rimed Sands.
 
@@ -101,10 +119,13 @@ Trainers (Lv 63–64): a hiker, an Ace Trainer, a dragon tamer (an Ashkaar deser
 ## Vigil: **the Siege news** (autorun at Vigil's Center, V136 == 1 → 2)
 ```
 (Vigil's Center. A Gale Post courier, white with road dust, is pinning a sheet to the board while a crowd reads over his shoulders.)
-[name: Courier] THE SIEGE OF SKALDFAST. Ashkaar's dragons have ringed the fortress and burned the sled-road on the Mast Glacier. The Ebb Guild is running sleds over the glacier from Anchorhold by night. A sortie on the Rimed Sands, repulsed. Taken by Ashkaar...
+[name: Courier] THE SIEGE OF SKALDFAST.
+[name: Courier] Ashkaar's dragons have ringed the fortress and burned the sled-road on the Mast Glacier. The Ebb Guild is running sleds over the glacier from Anchorhold by night.
+[name: Courier] A sortie on the Rimed Sands, repulsed. Taken by Ashkaar...
 (He reads the list. The crowd goes quiet at one name.)
 [name: Courier] ...Warden Anja Sorrel of Rimeholt.
-[name: Courier] (to you, lower) Gale Post says you knew her. I'm sorry. She went west from the seams, didn't she. With a list.
+[name: Courier] (to you, lower) Gale Post says you knew her. I'm sorry.
+[name: Courier] She went west from the seams, didn't she. With a list.
 QUEST LOG: "The Taken" — Anja is held in the Ashkaar Siege Camp. Odessa says she'll come back for you.
 V136 = 2.
 ```
@@ -122,17 +143,24 @@ Trainers: Hindmoor (Lv 64–65): a hex maniac, a black-belt pilgrim, a punk; the
 ```
 (Gravenmoor. A town of grey slate and lanterns, built among barrows. Fog in the streets thick enough to lose your feet in. Everywhere, faint and grey, the echoes: a woman sweeping a step that isn't there; two children playing a game, the same three moves over and over; a man waving at a wall.)
 (At the gate, waiting, an old man in a veil of mirror-chips: Archseer Dask.)
-[portrait: DASK, neutral] You came by the road. Good. Roads are honest. Mirrors are not.
-[portrait: DASK, sad] The echoes are louder. Louder, the echoes. Since the Fault, since the boy came with his brass glove. Something behind the Glass is listening back.
-[portrait: DASK, neutral] (looking at you, which he never does) You still haven't looked back. Good. Keep not doing it. One day you'll have to decide whether that's a rule or a habit.
+[portrait: DASK, neutral] You came by the road. Good.
+[name: Dask] Roads are honest. Mirrors are not.
+[portrait: DASK, sad] The echoes are louder. Louder, the echoes.
+[name: Dask] Since the Fault, since the boy came with his brass glove.
+[name: Dask] Something behind the Glass is listening back.
+[portrait: DASK, neutral] (looking at you, which he never does) You still haven't looked back.
+[name: Dask] Good. Keep not doing it.
+[name: Dask] One day you'll have to decide whether that's a rule or a habit.
 (He walks off into the fog, and the fog doesn't seem to notice him go.)
 ```
 *(Dask's second encounter. 12_RUIN_ROUTE R1 calls back "you looked; I told you never to look", so this scene must play.)*
 ```
 (Further in, under a lit lantern on a pole, a pale woman in layered black lace, veiled, the lantern held up as if she's been holding it for a long time.)
 [portrait: YSOLDE, neutral] You're the ferry child. I've been waiting for you. And for him. He's come in on the white ship. He went straight up the hill.
-[portrait: YSOLDE, sad] Vane Hall. His home. Nobody's lived there since AF 290 except the dust and the... well. You'll see.
-[portrait: YSOLDE, neutral] The dead aren't gone here. They're just very bad at conversation.
+[portrait: YSOLDE, sad] Vane Hall. His home.
+[name: Ysolde] Nobody's lived there since AF 290 except the dust and the... well. You'll see.
+[portrait: YSOLDE, neutral] The dead aren't gone here.
+[name: Ysolde] They're just very bad at conversation.
 V136 = 3.
 ```
 - **Comedy scene Ch15, "The Dead Are Bad at This"** (touch, Ysolde by the waving man; available V136 3–5; 15_COMEDY as written). After "Hello, Aldous", **`AN_ALDOUS_DOOR`** opens (new; see Optional).
@@ -156,8 +184,10 @@ Rooms (each an echo, then a door):
 - **The music room** (optional; off the parlour): a tea service on a dust-sheeted piano. One cup is warm. **Sinistea (Antique form)** (static, Lv 64, Cursed Body; the authenticity mark under the cup: "*V.H. AF 211*").
 ```
 (Back in the hall. Kestrel, at the door, without looking at you.)
-[portrait: KESTREL, neutral] Voss says it's all in the Cathedral. The whole night. Recorded. And I've got a glove that can play it back.
-[portrait: KESTREL, angry] Go and get your badge. I'll be waiting at the altar. You're going to watch it with me.
+[portrait: KESTREL, neutral] Voss says it's all in the Cathedral. The whole night. Recorded.
+[name: Kestrel] And I've got a glove that can play it back.
+[portrait: KESTREL, angry] Go and get your badge. I'll be waiting at the altar.
+[name: Kestrel] You're going to watch it with me.
 V136 = 4.
 ```
 
@@ -169,8 +199,10 @@ As GYM_PUZZLES Gym 14: 390 Narthex (teach: the bell-rope worlds), 391/392 the Li
 
 ### 394 — the Warden Arena (double)
 ```
-[portrait: YSOLDE, neutral] Morwen taught me in this room. She'd stand there, where you are. She said the dead fight beside the living here, so you'd better be worth fighting beside.
-[portrait: YSOLDE, sad] I'm going to fight you, and then he's going to do something I can't stop. I want you to know I tried. Win, please. It'll be easier for you after.
+[portrait: YSOLDE, neutral] Morwen taught me in this room. She'd stand there, where you are.
+[name: Ysolde] She said the dead fight beside the living here, so you'd better be worth fighting beside.
+[portrait: YSOLDE, sad] I'm going to fight you, and then he's going to do something I can't stop.
+[name: Ysolde] I want you to know I tried. Win, please. It'll be easier for you after.
 BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_YSOLDE), double: true)
 ```
 - **Mid-battle (Sableye Mega Evolves):** "She'd have liked you. She liked anyone who wouldn't stay down." `[bubble: YSOLDE, sad, sparkle]`
@@ -179,7 +211,7 @@ BATTLE: Prismfall.gym_battle(pfm_gym(:LEADER_YSOLDE), double: true)
 [portrait: YSOLDE, neutral] There. Morwen's room has a new name in it.
 RECEIVE: the KNELL BADGE (badge 14). RECEIVE: TM30 SHADOW BALL.
 (Up in the nave, very faint, a Choir is tuning. Ysolde's lantern flickers.)
-[portrait: YSOLDE, panic] He's started. Come on.
+[portrait: YSOLDE, panic] [emote: exclaim] He's started. Come on.
 V136 = 5.
 ```
 *(Badge name, proposed: the **Knell Badge**. The VS plate reads LANTERN PRIEST above YSOLDE.)*
@@ -188,8 +220,10 @@ V136 = 5.
 **Cutscene: `CE-1` "AF 290, Through Her Eyes"** (new; 13_CUTSCENES). It needs the letterbox, the grey-sepia tone, the echo tint and the bell SE. Stage directions in brackets are animations, per the `[anim]` rule (design/MAPGEN.md): emotes, move routes, tone and flash, never text the player reads.
 ```
 (The nave. Candles. Kestrel at the altar, the Gauntlet on his raised left arm, its lattice of glass glowing white. The Spooky Plate's niche behind the altar glows back at it.)
-[portrait: YSOLDE, sad] Kestrel. Not like this. She made me swear — when you were ready —
-[portrait: KESTREL, angry] Ten years, Ysolde. "When he's ready." I'm ready. Watch me be ready.
+[portrait: YSOLDE, sad] Kestrel. Not like this.
+[name: Ysolde] She made me swear — when you were ready —
+[portrait: KESTREL, angry] Ten years, Ysolde. "When he's ready."
+[name: Kestrel] I'm ready. Watch me be ready.
 (He closes his fist. The Gauntlet screams like a tuning fork. Every candle in the Cathedral leans towards the altar.)
 [anim: screen tone → grey-sepia; letterbox in; the nave's walls dissolve into an arena]
 ```
@@ -209,16 +243,18 @@ V136 = 5.
 [name: Valen] Find the child. Whatever it costs. Find the child.
 [anim: cut; tone darker; a small stone room]
 (A vestry. A woman in a Warden's coat kneeling by the child, who is asleep now and still faintly glowing. Ines at the door, shaking.)
-[portrait: MORWEN, neutral] Take them. Edda's boat is at the Landing at midnight. I'll carry the name. Go.
+[portrait: MORWEN, neutral] Take them. Edda's boat is at the Landing at midnight.
+[name: Morwen] I'll carry the name. Go.
 [name: Ines] (a sound, not a word)
 [portrait: MORWEN, sad] Go.
 (A Mismagius rises out of the dark, gently, and lays a hand over the sleeping child's eyes, the way you'd close a curtain.)
 (Ines takes the child. The door closes.)
 (Morwen alone in the vestry, kneeling, to no one:)
-[portrait: MORWEN, sad] Kestrel. I'm sorry.
+[name: Morwen] Kestrel. I'm sorry.
 [anim: silence, 60 frames; then the echo stays and the tone half-returns]
 (And then, impossibly, the echo turns her head. Across the nave. Across ten years. She looks straight at you.)
-[portrait: MORWEN, neutral] Little one. You came back. I told her not to let you.
+[portrait: MORWEN, neutral] [emote: dots] Little one. You came back.
+[name: Morwen] I told her not to let you.
 [anim: the echo fades; letterbox out; tone back]
 Switch S141 CH15_ECHO_DONE = ON. V136 = 6.
 ```
@@ -246,10 +282,12 @@ After the echo, before Kestrel turns: a faint singing from the loft. **Ines's ec
 ```
 (Kestrel is standing where the echo was. The Gauntlet is smoking. He's looking at you like he's never seen you before, which, in a way, he hasn't.)
 [if choice(:ch12_letter) == :send]
-  [portrait: KESTREL, angry] You sent me her *letter*. Her letter to that woman. And you still came here.
+  [portrait: KESTREL, angry] You sent me her *letter*. Her letter to that woman.
+  [name: Kestrel] And you still came here.
 [portrait: KESTREL, angry] My whole life for you.
-[portrait: KESTREL, angry] Do you know what they called me in school? The Glassfall boy. My grandmother spat on her grave. Spat on it. I watched.
-[portrait: KESTREL, angry] And she was saving YOU.
+[name: Kestrel] Do you know what they called me in school? The Glassfall boy.
+[name: Kestrel] My grandmother spat on her grave. Spat on it. I watched.
+[name: Kestrel] And she was saving YOU.
 (The Gauntlet flares. The nave's candles gutter all at once.)
 BATTLE: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 6, field: :HOLLOW_CATHEDRAL) — `:HOLLOW_CATHEDRAL`; the Gauntlet overloads once (below).
 (LOSE: the rival rule: the story continues, and Kestrel's line below swaps to "Stay down. Stay down. She'd have wanted you to stay down.")
@@ -263,11 +301,13 @@ BATTLE: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 6, field: :HOLLOW_CATH
 > "I'm sorry. I didn't know. I'd give it back if I could." (sorry)
   Script: pf_choose(:ch15_kestrel, :sorry)
   \pf[PLAYER,sad] I'm sorry. I didn't know. I'd give it back if I could.
-  [portrait: KESTREL, sad] (a long time) ...You can't. That's the whole problem. You can't.
+  [portrait: KESTREL, sad] (a long time) ...You can't.
+  [name: Kestrel] That's the whole problem. You can't.
 > "I was five. She chose. Don't you dare make her choice my crime." (she_chose)
   Script: pf_choose(:ch15_kestrel, :she_chose)
   \pf[PLAYER,angry] I was five. She chose. Don't you dare make her choice my crime.
-  [portrait: KESTREL, angry] (he looks up, and for a second, something in his face is almost relief) ...There you are. I wondered if there was anybody in there.
+  [portrait: KESTREL, angry] (he looks up, and for a second, something in his face is almost relief) ...There you are.
+  [name: Kestrel] I wondered if there was anybody in there.
 > "...Your mother saved my life. I'm going to make it worth it." (resolve)
   Script: pf_choose(:ch15_kestrel, :resolve)
   \pf[PLAYER,neutral] ...Your mother saved my life. I'm going to make it worth it.
@@ -283,7 +323,11 @@ Switch S142 CH15_K6_DONE = ON. Variable V114 KESTREL_STAGE = 3. V136 = 7.
 (She holds out a Poké Ball. He looks at it. He takes it. Inside, for a second, a shape in a witch's hat.)
 (She holds out a sealed letter. He looks at it for a long time. He doesn't take it. He walks on into the fog.)
 (Ysolde stands there with the letter. Then she puts it inside her coat, very carefully, like something that could still break.)
-[portrait: YSOLDE, sad] (later, on the steps, to you) She made me swear. "When he's ready." I don't think anyone is ever ready. I'm sorry I waited. (A pause.) I'll keep it. I'm good at keeping things. It's the only thing I'm good at.
+[portrait: YSOLDE, sad] (later, on the steps, to you) She made me swear. "When he's ready."
+[name: Ysolde] I don't think anyone is ever ready. I'm sorry I waited.
+(A pause.)
+[name: Ysolde] I'll keep it. I'm good at keeping things.
+[name: Ysolde] It's the only thing I'm good at.
 ```
 *(Morwen's Mismagius goes to Kestrel (his team from K7). The sealed letter returns at the Festival semifinal.)*
 
@@ -292,27 +336,38 @@ Switch S142 CH15_K6_DONE = ON. Variable V114 KESTREL_STAGE = 3. V136 = 7.
 (The barrows under the Hospice. Rows of stones. One is plain and small and cut with two letters: M.V.)
 (A squat old woman in a sea-coat is kneeling at it, laying kelp-flowers, wet and green, on the stone. A gold tooth. A Lapras inked on her forearm.)
 [portrait: EDDA, neutral] Sprog.
-[portrait: EDDA, neutral] (not getting up) I took you out on the night ferry. Brought you back on the last one. Tide's got a sense of humour.
+[name: Edda] (not getting up) I took you out on the night ferry. Brought you back on the last one.
+[name: Edda] Tide's got a sense of humour.
 (A beat.)
-[portrait: EDDA, neutral] She paid me in her Warden's ring. Hers. Off her own hand. I never sold it. Twenty different times I nearly did. Couldn't.
+[name: Edda] She paid me in her Warden's ring. Hers. Off her own hand.
+[name: Edda] I never sold it. Twenty different times I nearly did. Couldn't.
 (She holds it out: a heavy ring of black glass and silver. In the black glass, very faint, the same colourless chip as yours.)
-[portrait: EDDA, sad] Her boy should have it. I'm a coward about boys. You give it to him. When you think he'll not throw it in the sea.
+[portrait: EDDA, sad] Her boy should have it. I'm a coward about boys.
+[name: Edda] You give it to him. When you think he'll not throw it in the sea.
 RECEIVE: MORWEN'S RING (Key Item).
-[portrait: EDDA, neutral] (getting up, knees cracking) The Dovetail's at the Hindmoor staithe. Smuggling, these days, since they took my licence. Mail, medicine, the odd Warden. Come and see me. Don't tell anyone. Tell everyone.
+[portrait: EDDA, neutral] (getting up, knees cracking) The Dovetail's at the Hindmoor staithe.
+[name: Edda] Smuggling, these days, since they took my licence.
+[name: Edda] Mail, medicine, the odd Warden. Come and see me.
+[name: Edda] Don't tell anyone. Tell everyone.
 V136 = 8.
 ```
 *(Morwen's Ring is for Kestrel in Ch18 (`:ch18_kestrel_ring`); it's the only way his Scizor Mega Evolves, at K8. "Sprog" is what she called the PC in the Prologue.)*
 
 ## **War 3, The Taken** (`:war_prisoner`; Odessa's skiff at Gravenmoor's mooring, V136 == 8 → 9)
 ```
-[portrait: ODESSA, neutral] Told you. Somebody worth fetching. Get in. We'll fly over the lines; from the drop it's a short walk across the sands. I don't land in camps. Camps shoot at things that land.
+[portrait: ODESSA, neutral] Told you. Somebody worth fetching. Get in.
+[name: Odessa] We'll fly over the lines; from the drop it's a short walk across the sands.
+[name: Odessa] I don't land in camps. Camps shoot at things that land.
 ```
 The skiff drops the PC on the Glass Dunes (926). A short walk to the **Ashkaar Siege Camp** (924, built), then the **Command Pavilion** (928, built).
 ```
 (The Command Pavilion. A lacquer map table. The oath-brazier, white at the heart. An empty stand of black glass, dusty, where something round and heavy sat until recently. In an iron hawk-cage made larger: Anja, in her furs, sitting very straight.)
-[name: Dominar] Speak plainly. The brazier is lit. In this tent a lie is a death sentence, and I have signed eleven.
-[name: Dominar] The Unimprinted. My daughter's friend, they tell me, and the Thane's sister's. Everyone's friend. Have you come to buy a Warden?
-[portrait: ANJA, neutral] (from the cage, without turning) Tell my brother I'd have signed for the heaters again. Tell him that first. Then whatever this is.
+[name: Dominar] Speak plainly. The brazier is lit.
+[name: Dominar] In this tent a lie is a death sentence, and I have signed eleven.
+[name: Dominar] The Unimprinted. My daughter's friend, they tell me, and the Thane's sister's.
+[name: Dominar] Everyone's friend. Have you come to buy a Warden?
+[portrait: ANJA, neutral] (from the cage, without turning) Tell my brother I'd have signed for the heaters again.
+[name: Anja] Tell him that first. Then whatever this is.
 ```
 ```
 > Free her. (free)
@@ -321,17 +376,22 @@ The skiff drops the PC on the Glass Dunes (926). A short walk to the **Ashkaar S
   BATTLE: TrainerBattle.start(:ASHKAAR_OFFICER, "Cage-Warden Hesk") — single; `:BLEED`; Lv 67.
   (LOSE: whiteout to 381; Odessa will fly you back.)
   (You walk her out through the Steamline the way you walked the sledges, in your own footsteps, with the Bleed quiet round you both.)
-  [portrait: ANJA, neutral] (at the Isenmar lines, not looking back) Every time someone saves me, I owe them a count I can't pay. (A beat.) I'll start a new ledger. Yours is the first line.
+  [portrait: ANJA, neutral] (at the Isenmar lines, not looking back) Every time someone saves me, I owe them a count I can't pay.
+  (A beat.)
+  [name: Anja] I'll start a new ledger. Yours is the first line.
 > Broker an exchange. (exchange)
   Script: pf_choose(:war_prisoner, :exchange)
   (Dawn, a caravan well between the lines. The bone-carters' white banner over it. Elder Ossa and Zainab Darzi at the well-head. Isenmar riders on one side with a young Ashkaar noble in chains; Ashkaar riders on the other with Anja.)
-  [name: Zainab] No blood at a well. That's the oldest law in the sand, older than both your crowns. Walk them across. Slowly. I'm writing this down.
+  [name: Zainab] No blood at a well. That's the oldest law in the sand, older than both your crowns. Walk them across. Slowly.
+  [name: Zainab] I'm writing this down.
   (The Dominar's nephew walks east. Anja walks west. They pass each other at the well. Neither of them looks at the other. Both of them look at the water.)
-  [portrait: ANJA, neutral] (passing you) That's the first time those two crowns have agreed on anything since AF 290. Write that down too.
+  [portrait: ANJA, neutral] (passing you) That's the first time those two crowns have agreed on anything since AF 290.
+  [name: Anja] Write that down too.
 > Leave it. (leave)
   Script: pf_choose(:war_prisoner, :leave)
-  [name: Dominar] Wise. Or cold. The brazier can't tell the difference. Neither can I.
-  [portrait: ANJA, neutral] (as you go, very quietly) Count it. Somebody should.
+  [name: Dominar] Wise. Or cold.
+  [name: Dominar] The brazier can't tell the difference. Neither can I.
+  [portrait: ANJA, sad] (as you go, very quietly) Count it. Somebody should.
 V136 = 9.
 ```
 *(NARRATIVE_KEYS: `:free` RES+1 ACCORD−1; `:exchange` ACCORD+2; `:leave` RES−1. `:war_prisoner != :leave` is a Blessing war condition. The empty stand is something the Dominar had brought out of Cindervault, whatever was on it (09; Act V). Don't explain it here.)*
