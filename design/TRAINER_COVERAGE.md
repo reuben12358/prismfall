@@ -22,7 +22,7 @@ Hard-only Pokémon and the Map 990 test dummy.
 | Eligible species | 900 |
 | Covered by a generic trainer | **900** (100.0%) |
 | Missing | 0 |
-| Generic trainers (Standard versions) | 380 |
+| Generic trainers (Standard versions) | 383 |
 | Legendary/Mythical/UB/Paradox on a generic trainer (must be 0) | 0 |
 | Level-plausibility flags | 0 |
 
@@ -60,7 +60,7 @@ Counted from the `# Map NNN` note above each block and that map's `segment` (bad
 | 10 | 12 | 28 | 330, 331, 332, 720, 721, 723, 724, 725, 726, 728, 732 |
 | 11 | 13 | 34 | 345, 350, 351, 352, 353, 355, 740, 741, 742, 743, 744, 745, 748, 752, 755, 756 |
 | 17 | 19 | 2 | 861, 864 |
-| — | — | 30 | no map note (story-placed grunts, soldiers, Trials) |
+| — | — | 33 | no map note (story-placed grunts, soldiers, Trials) |
 
 ## Missing species
 

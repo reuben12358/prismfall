@@ -32,7 +32,7 @@ module PluginManager
     if args[1].is_a?(String) && code.is_a?(String)
       PRISMFALL_SOURCE_PATCHES.each_value do |pt|
         next if !args[1].end_with?(pt[:file]) || !code.match?(pt[:line])
-        code = code.sub(pt[:line], pt[:with])
+        code = (pt[:all]) ? code.gsub(pt[:line], pt[:with]) : code.sub(pt[:line], pt[:with])   # :all => every match
         echoln("[Prismfall Base Fixes] #{args[1]}: #{pt[:note]}")
       end
     end
