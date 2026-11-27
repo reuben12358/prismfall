@@ -689,6 +689,12 @@ module FieldEffects
     [:MERIDIAN_QUENT, 2] => :CAVE,   # Ch17 alternative: Quent holds the Sun Court
     [:MERIDIAN_QUENT, 102] => :CAVE,   # Ch17 alternative: Quent holds the Sun Court
     [:MERIDIAN_QUENT, 202] => :CAVE,   # Ch17 alternative: Quent holds the Sun Court
+    [:FESTIVAL_AMARIA, 1] => :WATER_SURFACE,   # Ch17 cameo 'Deliverer' (CAMEOS 6): the double vs Amaria + Ti
+    [:FESTIVAL_AMARIA, 101] => :WATER_SURFACE,   # Ch17 cameo 'Deliverer' (CAMEOS 6): the double vs Amaria + Ti
+    [:FESTIVAL_AMARIA, 201] => :WATER_SURFACE,   # Ch17 cameo 'Deliverer' (CAMEOS 6): the double vs Amaria + Ti
+    [:FESTIVAL_TITANIA, 1] => :WATER_SURFACE,   # Ch17 cameo 'Deliverer': the same double when Titania is list
+    [:FESTIVAL_TITANIA, 101] => :WATER_SURFACE,   # Ch17 cameo 'Deliverer': the same double when Titania is list
+    [:FESTIVAL_TITANIA, 201] => :WATER_SURFACE,   # Ch17 cameo 'Deliverer': the same double when Titania is list
     [:OCTAVE_VESPER, 0] => :GRAND_STAGE,   # Ch2: backstage double with Chorister Lyra, after Gym 1
     [:OCTAVE_VESPER, 100] => :GRAND_STAGE,   # Ch2: backstage double with Chorister Lyra, after Gym 1
     [:OCTAVE_VESPER, 200] => :GRAND_STAGE,   # Ch2: backstage double with Chorister Lyra, after Gym 1

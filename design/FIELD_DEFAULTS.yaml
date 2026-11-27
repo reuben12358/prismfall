@@ -179,6 +179,8 @@ exceptions:
     - {trainer: MERIDIAN_QUENT, versions: [1, 101, 201], field: FACTORY, why: "Ch16: casting-floor tag battle; his Bronzong's Explosion makes it a Scrapyard"}
     - {trainer: MERIDIAN_KROLL, versions: [1, 101, 201], field: CAVE, why: "Ch17: the Sun Court in drowned Aurelia"}
     - {trainer: MERIDIAN_QUENT, versions: [2, 102, 202], field: CAVE, why: "Ch17 alternative: Quent holds the Sun Court"}
+    - {trainer: FESTIVAL_AMARIA, versions: [1, 101, 201], field: WATER_SURFACE, why: "Ch17 cameo 'Deliverer' (CAMEOS 6): the double vs Amaria + Titania in drowned Aurelia (824 Underwater, 825-826 Cave) is on the water, Amaria's side"}
+    - {trainer: FESTIVAL_TITANIA, versions: [1, 101, 201], field: WATER_SURFACE, why: "Ch17 cameo 'Deliverer': the same double when Titania is listed first (TRAINER_FIELDS match the first opponent); her Steel suffers on the water"}
     - {trainer: OCTAVE_VESPER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch2: backstage double with Chorister Lyra, after Gym 1"}
     - {trainer: OCTAVE_SINGER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch2: Lyra, Vesper's partner in the Saltmere double, after Gym 1. Octave rows: Carol 0, the singers 1-8 and Vesper 2 are retired; the duels (50) use the map default and the gauntlet bouts (60) get their field from the quest"}
     - {trainer: OCTAVE_VESPER, versions: [1, 101, 201], field: MINDSCAPE, why: "Ch13: Lucent Athenaeum cloister double"}
