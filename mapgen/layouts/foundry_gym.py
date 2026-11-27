@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# SUPERSEDED (2026-11-27) by Gemini's mapgen/layouts/cindervault_gym.py, which owns maps 250-253 (commit 6cb085b3).
+# DO NOT RUN: it would overwrite Gemini's crafted specs with our first-pass Foundry. Its specs are kept in
+# mapgen/superseded/specs/ for reference; the Gym 7 proofs (puzzles/foundry.py) and the story pages
+# (layouts/story_ch8.py) now describe Gemini's maps, so this file no longer even matches its own model.
 """layouts/foundry_gym.py - Gym 7, the Foundry (Cindervault; Brann Holloway, Fire, :VOLCANIC, cap 39).
 
 GYM_PUZZLES "Gym 7" (the model and proofs are mapgen/puzzles/foundry.py; every coordinate below is read from it, so map
@@ -277,4 +281,4 @@ def main(which=None):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    sys.exit('foundry_gym.py is superseded by layouts/cindervault_gym.py (Gemini owns 250-253); not run.')

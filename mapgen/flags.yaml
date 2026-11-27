@@ -25,11 +25,11 @@ variables:
   D5_PORTRAIT: 521    # Thistledown gallery (map builder 14): portraits set in curtain-call order (0-4)
   G4_ALARMS: 320      # Circuit Gym (map builder 15, the trimmed Gym 4): camera-flash alarms in the Breadboard Hall (hint tiers)
   LUMEN_BOXES: 321    # the Lowlight blackout (181): junction boxes done, bits 1-4 (pfm_lumen_box)
-  G7_AIM_K1: 335      # Gym 7, the Foundry (puzzles/foundry.py): crucible spouts, 0/1 (K1: X1|X2, K2: X2|X3, K3: X1|X3)
+  G7_AIM_K1: 335      # Gym 7, the Foundry (Gemini's layouts/cindervault_gym.py; proofs puzzles/foundry.py): crucible spouts, 0/1 (K1: X1|X2, K2: X2|X3, K3: X1|X3)
   G7_AIM_K2: 336
   G7_AIM_K3: 337
-  G7_QUENCHED: 338    # the Pour Floor's one quench used (0/1)
-  G7_TEACH: 339       # the Gate Hall trench: 0 empty, 1 molten, 2 iron
+  G7_QUENCHED: 338    # the Pour Floor's one quench charge, shared by valves Q1-Q3: 0 ready, 1 dry
+  G7_TEACH: 339       # 250 Entrance, the teach trench: 0 empty, 1 molten, 2 iron
   G7_X1: 435          # the Pour Floor trenches X1..X3: 0 empty, 1 molten, 2 iron
   G7_X2: 436
   G7_X3: 437
@@ -37,9 +37,9 @@ switches:
   G7_POURED_K1: 335   # Gym 7: crucible K1..K3 spent
   G7_POURED_K2: 336
   G7_POURED_K3: 337
-  G7_TEACH_DONE: 338  # the Gate Hall bridge quenched
-  G7_VAULT_DONE: 339  # the cracked-mould vault opened
-  G7_M1: 435          # the Mould Floor: mould under X1..X3 cast iron
+  G7_TEACH_DONE: 338  # 250 Entrance: the teach bridge quenched
+  G7_VAULT_DONE: 339  # 252: the cracked-mould vault's hoard taken (Brann mentions it)
+  G7_M1: 435          # 252 Mould Floor: mould M1..M3 cast iron (M1 / M2 under X1 / X2; M3 by the C2 landing)
   G7_M2: 436
   G7_M3: 437
   WAR_SIDE_ASH: 605   # the war maps (map builder 10): pf_choice(:war_climax) == :back_ashkaar (set by each war map's front event)
