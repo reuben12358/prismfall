@@ -258,6 +258,22 @@ check("the Final: one crystal line per Plates turn (#{turns}); the stage is kept
       turns > 0 && log.text.scan("The crystal climbs Valen's throat").length == turns && FieldEffects::StoryHooks.valen_crystal == [turns, 4].min,
       [turns, log.text.scan("The crystal climbs").length, FieldEffects::StoryHooks.valen_crystal])
 
+# Juno's Ogerpon (Core 034): on her J4 team only when OGERPON_TRUSTED; hers, never the player's.
+j4 = lambda do
+  t = pbLoadTrainer(:RIVAL_JUNO, "Juno", Prismfall::Rival.version_for(4))
+  EventHandlers.trigger(:on_trainer_load, t)      # as TrainerBattle.start does
+  t.party.map(&:species)
+end
+saved = Marshal.load(Marshal.dump(Prismfall.state.narrative))
+Prismfall::Narrative.store[:choices].delete(:ch10_ogre)
+untrusted = j4.call
+Prismfall::Choices.make(:ch10_ogre, :ogre, false)
+trusted = j4.call
+Prismfall.state.instance_variable_set(:@narrative, saved)
+check("J4 without OGERPON_TRUSTED: the PBS six (Lilligant, no Ogerpon)", untrusted.include?(:LILLIGANT) && !untrusted.include?(:OGERPON), untrusted)
+check("J4 with OGERPON_TRUSTED: Ogerpon in Lilligant's slot, six Pokemon; Juno's, not the player's",
+      trusted[2] == :OGERPON && trusted.length == 6 && !trusted.include?(:LILLIGANT) && !$player.party.any? { |p| p.isSpecies?(:OGERPON) }, trusted)
+
 #-------------------------------------------------------------------------------
 section "7. The Registry"
 #-------------------------------------------------------------------------------

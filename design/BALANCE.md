@@ -190,7 +190,7 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
 | J1 (14) | Cottonee *(−C)*, Bounsweet "Sweetpea", starter (unevolved) — Hard +Petilil. Saltmere, before Gym 1 (Rev 14) |
 | J2 (35) | Whimsicott, Floette "Everbloom" *(−C)* (white, SPINE Rev 12; round 4: on Standard too), Lilligant *(−C)*, Steenee, starter |
 | J3 (47, `LEADER_JUNO` 30–32) | Whimsicott (Telluric Seed), Florges "Everbloom" *(−C)* (white, Flower Veil), Lilligant, starter, ace **Tsareena** — Hard +Roserade "Rowan". Flower Garden: the seed, Growth, Leech Seed, Aromatherapy and Grassy Terrain grow the garden; burn it down with Fire at stage 5. |
-| J4 (90) | Florges "Everbloom", Whimsicott, Lilligant, Comfey, starter, **Tsareena** |
+| J4 (90) | Florges "Everbloom", Whimsicott, Lilligant, Comfey, starter, **Tsareena** — if `OGERPON_TRUSTED`, **Ogerpon** (Teal Mask; Lv 88, Hard 89 with Swords Dance and 252 Atk / Spe, Casual 80) takes Lilligant's slot and item (Core `034_JunoOgerpon.rb`, an `:on_trainer_load` hook, 2026-11-27; Juno's, never the player's) |
 
 **Rival partners (2026-11-25).** A rival who fights *beside* the player with a team of their own uses the spare versions
 of a decade: `Prismfall::Rival.partner_version(n)` = n × 10 + 3 + starter slot, one version (no Hard / Casual block; Core
