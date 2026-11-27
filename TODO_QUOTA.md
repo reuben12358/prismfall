@@ -180,7 +180,7 @@
 - [x] Player movement sheets A/B (walk, run, bike, surf, fish, surf-fish), Venam's VS screen, Wyrm Rider Tova's intro strip, map 545 reskinned, Chapter 3/4 cards, the Juno–Kestrel expressive conversation. Plans: `artcheck` (new, 008) and `expr` (009; it hung on the start map's name-entry autorun, fixed).
 - [x] Fixed: chapter card text is centred on its drawn glyphs (the act line sat on the top rule); run_intro now installs the Gen 5 reskin after `merge_tilesets` (before this, every capture showed the old tiles); Core 025 stale 926 aliases out, `TYPE_CHARSETS` covers the Ch19 classes.
 - [ ] Art for Gemini (appended to `art/HANDOFF_GEMINI.md`): Venam's strip has no irises in its rest frames; `PARTNER_GIRATINA` has no art (the one `check_art_wiring` error); optional seated surf-fish sheets and a centred speech windowskin.
-- [ ] Not mine, noted: `HROTHGAR` front strip / bust have no type or VS id yet (wire with his encounter); `mapgen/layouts/war_craft.py` still maps Sigrun / Marisol to stock sheets (`trainer_ELITEFOUR_Lance` / `trainer_LEADER_Misty`); their own `trainer_LEADER_SIGRUN` / `trainer_LEADER_MARISOL` exist.
+- [x] Not mine, noted (coordinator 2026-11-26): `HROTHGAR` is never battled (the Toll is Orrin, the pass-guard), so his front strip / bust need no trainer type or VS id; they stay for portraits and cutscenes. `war_craft.py` now gives Sigrun, Marisol and the Dominar their own sheets (7bf15ca0; Map928 rebuilt).
 
 ## Status: dialogue agent, Reuben's calls (2026-11-26)
 - [x] All three calls done and committed (f43b3daf act cards, af169c9b portraits, 27906d0c auto-turning). Cutscenes
