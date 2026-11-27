@@ -27,16 +27,58 @@ events:
   at: [15, 23]
   to: {map: 205, x: 20, y: 9, dir: down}
   se: Door exit
-- type: warp
+- type: event
   name: West to Mural Gallery
   at: [2, 14]
   to: {map: 207, x: 38, y: 8, dir: left}
   se: Door enter
-- type: warp
+  pages:
+  - commands:
+    - CLOSED FOR RESTORATION BY ORDER OF HIS EXCELLENCY.
+    - {script: '2.times { pbSEPlay("Player bump", 70, 55); pbWait(0.35) }'}
+    - move:
+        who: player
+        route: [dir_fix_on, backward, dir_fix_off]
+        wait: true
+    trigger: touch
+    move: fixed
+    story: ch6
+  - commands:
+    - {se: Door enter}
+    - {script: pfm_fade_out(8)}
+    - transfer: {map: 207, x: 38, y: 8, dir: left}
+    - {script: pfm_fade_in(8)}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 7]
+    story: ch6
+- type: event
   name: 'West to Mural Gallery '
   at: [2, 15]
   to: {map: 207, x: 38, y: 8, dir: left}
   se: Door enter
+  pages:
+  - commands:
+    - CLOSED FOR RESTORATION BY ORDER OF HIS EXCELLENCY.
+    - {script: '2.times { pbSEPlay("Player bump", 70, 55); pbWait(0.35) }'}
+    - move:
+        who: player
+        route: [dir_fix_on, backward, dir_fix_off]
+        wait: true
+    trigger: touch
+    move: fixed
+    story: ch6
+  - commands:
+    - {se: Door enter}
+    - {script: pfm_fade_out(8)}
+    - transfer: {map: 207, x: 38, y: 8, dir: left}
+    - {script: pfm_fade_in(8)}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 7]
+    story: ch6
 - type: warp
   name: East to Royal Crypt (Necropolis)
   at: [26, 14]

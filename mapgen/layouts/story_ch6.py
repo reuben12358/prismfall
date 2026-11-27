@@ -17,6 +17,7 @@ CH6_STEP (V126, design/FLAGS.md), map by map:
   209 the Dig Lab       Sahar, first meeting (warning 1); a tremor from the east sends you to the well
   204 Aquifer Quarter   "The Deep-works" and :ch6_drillsite, the first time you come after meeting Sahar
                         (Sergeant / Bereaved Duneholt versions; MANDATE PASS on :directorate)  3 -> 4
+  206 -> 207           the Mural Gallery stays shut through Chapter 6 (it would show the Ossuary's murals first)
   200 / 210-213 Gym 5   the Dig's door opens at step 4; the guide and the aide say the script's lines; Sahar in 213
                         (three openers by :ch6_drillsite, the badge, TM83, the lift up to the excavators) 4 -> 5
   620 Marrow Road       "The Door in the Skull" (Gemini's touch column at x 55)                    5 -> 6
@@ -28,7 +29,7 @@ Unbuilt: 602 Candle Down and 603 the Highwold (no step lives there); their guard
 back with a spoken line instead of a bracketed box (STAGE), and so does 200's west gate (810).
 
 Run after the layouts that write these specs:
-    python3 -I layouts/story_ch6.py && python3 -I build.py 180 200 203 204 209 210 213 600 601 608 612 620 624 --no-preview"""
+    python3 -I layouts/story_ch6.py && python3 -I build.py 180 200 203 204 206 209 210 213 600 601 608 612 620 624 --no-preview"""
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from story_early import P, N, S, IF, CH, MV, ITEM, page, ev
@@ -739,6 +740,18 @@ def setpages_624():
     return out
 
 
+# ============================================================================================ 206 -> 207, closed in Ch6
+# The script's 207: "CLOSED FOR RESTORATION BY ORDER OF HIS EXCELLENCY. (The door is new. The lock is newer.)" Gemini's
+# open gallery shows the Ossuary's four murals, which must stay the chapter's reveal; it opens with Chapter 7.
+GALLERY_SHUT = ["CLOSED FOR RESTORATION BY ORDER OF HIS EXCELLENCY.",
+                S('2.times { pbSEPlay("Player bump", 70, 55); pbWait(0.35) }'), BACK]     # a new door, a newer lock
+GALLERY_OPEN = [{'se': 'Door enter'}, S('pfm_fade_out(8)'), {'transfer': {'map': 207, 'x': 38, 'y': 8, 'dir': 'left'}}, S('pfm_fade_in(8)')]
+
+
+def setpages_206():
+    return {'West to Mural Gallery': [page(GALLERY_SHUT, trigger='touch'), page(GALLERY_OPEN, cond=CHAP(7), trigger='touch')]}
+
+
 # ============================================================================================ guarded exits to unbuilt maps
 STAGE = {
     612: {"(West along the Crown Road cutting lies Candle Down and the pilgrimage cairns. Directorate rail-crews are inspecting a signal switch on the western trestle.)":
@@ -752,6 +765,7 @@ STAGE = {
 
 
 FILES = {180: '180_lumen_concourse.yaml', 200: '200_duneholt_terrace_bazaar.yaml', 203: '203_duneholt_sandgate.yaml',
+         206: '206_electors_palace_hall.yaml',
          204: '204_duneholt_aquifer_quarter.yaml', 209: '209_sahars_dig_lab.yaml', 210: '210_duneholt_gym.yaml',
          213: '213_duneholt_gym_213.yaml', 600: '600_the_brass_dunes.yaml', 601: '601_the_rib_road.yaml',
          608: '608_lumen_lowlight_shattered.yaml', 612: '612_meridian_mainline.yaml', 620: '620_the_marrow_road.yaml',
@@ -772,7 +786,8 @@ def main():
     print('map 213: %d events' % SL.patch(FILES[213], 213, events_213(), None, TAG))
     print('map 620: %d events' % SL.patch(FILES[620], 620, events_620(), None, TAG))
     print('map 624: %d events' % SL.patch(FILES[624], 624, events_624(), None, TAG))
-    sets = {612: setpages_612(), 203: setpages_203(), 209: setpages_209(), 620: setpages_620(), 624: setpages_624()}
+    sets = {612: setpages_612(), 203: setpages_203(), 206: setpages_206(), 209: setpages_209(), 620: setpages_620(),
+            624: setpages_624()}
     sets.update(setpages_gym())
     for mid, table in sorted(sets.items()):
         names = [e.get('name') for e in spec_events(mid)]
