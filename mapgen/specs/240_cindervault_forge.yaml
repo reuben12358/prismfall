@@ -85,7 +85,7 @@ events:
     - if: pfm_get(:gym7_open) || $game_variables[129] >= 5
       then:
       - {se: Door exit}
-      - transfer: {map: 250, x: 10, y: 15, dir: up}
+      - transfer: {map: 250, x: 12, y: 22, dir: up}
       else:
       - {script: 'pbSEPlay("Door enter", 80, 60)'}
       - move:
@@ -104,7 +104,7 @@ events:
     - if: pfm_get(:gym7_open) || $game_variables[129] >= 5
       then:
       - {se: Door exit}
-      - transfer: {map: 250, x: 10, y: 15, dir: up}
+      - transfer: {map: 250, x: 12, y: 22, dir: up}
       else:
       - {script: 'pbSEPlay("Door enter", 80, 60)'}
       - move:
@@ -123,7 +123,7 @@ events:
     - if: pfm_get(:gym7_open) || $game_variables[129] >= 5
       then:
       - {se: Door exit}
-      - transfer: {map: 250, x: 10, y: 15, dir: up}
+      - transfer: {map: 250, x: 12, y: 22, dir: up}
       else:
       - {script: 'pbSEPlay("Door enter", 80, 60)'}
       - move:

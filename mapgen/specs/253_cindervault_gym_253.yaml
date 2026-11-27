@@ -44,24 +44,52 @@ events:
   name: Warden Brann
   at: [10, 6]
   pages:
-  - graphic: {sprite: BRANN, dir: down}
+  - commands:
+    - '\pf[BRANN,neutral,,Warden Brann]Brann: Some things you forge to last.'
+    - 'Brann: Some things you forge to BREAK right.'
+    - 'Brann: That''s the harder craft. Took me thirty years to learn the second one.'
+    - '\pf[BRANN,happy,,Warden Brann]Brann: Let''s see which one you are!'
+    - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_BRANN), double: false)'
+      then:
+      - '\pf[BRANN,crying,,Warden Brann]Brann: HA! Broke me right! That''s the harder craft!'
+      - {script: 'Prismfall.award_badge(pfm_gym(:LEADER_BRANN))'}
+      - {script: '7.times { |i| pbSEPlay("Anim/HealBell", 70, 70 + i * 9); pbWait(0.22) }
+
+          pfm_flash(255, 250, 230, 10, 80)'}
+      - move:
+          who: Warden Brann
+          route: [turn_down]
+          wait: true
+      - {wait: 30}
+      - '\pf[BRANN,shocked,dots,Warden Brann]Brann: ...Your case sings. Huh.'
+      - {wait: 30}
+      - 'Brann: Don''t let Imelda take it apart.'
+      - {script: 'pbReceiveItem(:TM35)'}
+      - 'Brann: The Quench Badge. Quench is the moment a blade decides what it''s going to be.'
+      - 'Brann: Too slow, it''s soft. Too fast, it cracks.'
+      - 'Brann: There''s a joke in there about Wardens.'
+      - 'Brann: I''m not going to make it, there''s a Sovereign''s man in town.'
+      - if: $game_switches[339]
+        then: ['\pf[BRANN,happy,,Warden Brann]Brann: Ha! Found the cracked one. Aye. Some things you break on purpose.']
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Seven badges. The road west goes down to Ironreach and the Conclave.")'}
+      - if: $game_variables[129] < 5
+        then:
+        - var: [CH8_STEP, 5]
+      - selfswitch: [A, true]
+      - {script: pfm_fade_out(20)}
+      - transfer: {map: 240, x: 21, y: 3, dir: down}
+      - {script: pfm_fade_in(10)}
     trigger: action
     move: fixed
-    commands:
-    - {script: "pbMessage(_INTL(\"Brann: Some things you forge to last.\"))\npbMessage(_INTL(\"Brann: Some things you forge to BREAK right. That's the harder\
-        \ craft. Took me thirty years to learn the second one.\"))\npbMessage(_INTL(\"Brann: Let's see which one you are!\"))\nif Prismfall.gym_battle(pfm_gym(:LEADER_BRANN),\
-        \ double: false)\n  pbMessage(_INTL(\"Brann: HA! Broke me right! That's the harder craft!\"))\n  Prismfall.award_badge(pfm_gym(:LEADER_BRANN))\n\
-        \  pbSEPlay(\"Anim/HealBell\", 90, 100)\n  pbMessage(_INTL(\"Seven clear notes ring out as the Quench Badge settles in. A thin, bright light runs\
-        \ along every seam of your badge case.\"))\n  pbMessage(_INTL(\"Brann: ...Your case sings. Huh. Don't let Imelda take it apart.\"))\n  pbReceiveItem(:TM35)\n\
-        \  pbMessage(_INTL(\"Brann: Flamethrower — honest heat, no tricks. And the Quench Badge: quench is the moment a blade decides what it's going to\
-        \ be. Too slow, it's soft. Too fast, it cracks.\"))\n  if $game_switches[339]\n    pbMessage(_INTL(\"Brann: Ha! And I hear you found my cracked\
-        \ mould down in the vault too! Aye — some things you break ON PURPOSE.\"))\n  end\n  $game_variables[129] = 5 if $game_variables[129].to_i < 5\n\
-        \  $game_self_switches[[253, @event_id, \"A\"]] = true\n  $game_map.need_refresh = true\nend"}
-  - cond: {self: A}
     graphic: {sprite: BRANN, dir: down}
+    story: ch8
+  - commands:
+    - if: $game_switches[339]
+      then: ['\pf[BRANN,happy,,Warden Brann]Brann: Found the cracked one down in the Mould Floor, did you? Some things you break on purpose.']
+    - '\pf[BRANN,happy,,Warden Brann]Brann: Go on, then! The bridge you don''t finish is the one that carries you.'
+    - 'Brann: The east lift''ll take you straight down to the lobby, if your legs are done.'
     trigger: action
     move: fixed
-    commands:
-    - {script: "if $game_switches[339]\n  pbMessage(_INTL(\"Brann: Ha! Found the cracked one down in the Mould Floor, did you? Aye — some things you break\
-        \ on purpose.\"))\nend\npbMessage(_INTL(\"Brann: You earned the Quench Badge clean and honest! Take the east Foundry Lift if you want a quick ride\
-        \ back to the lobby.\"))"}
+    graphic: {sprite: BRANN, dir: down}
+    cond: {self: A}
+    story: ch8

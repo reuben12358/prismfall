@@ -15,14 +15,16 @@ CH8_STEP agreement with 255 (layouts/cindervault.py): the Tap Chamber crisis run
 Five Bells may already have set 6) and ends with S120 on, CH8_STEP 6 and a transfer to 244 (10,8). "Whose Is It"
 needs BOTH CH8_STEP >= 6 and S120, so passing through the Hall during the crisis plays nothing.
 
-The Foundry's doors on 240 open on :gym7_open (set by "My Father") and lead to the Gym 7 maps 250-253
-(layouts/foundry_gym.py; Brann's fight there is LOCKED). Not here: the Ch17 Trials
-quest AS_FORGE_REMEMBERS (the Trials owner's).
+The Foundry's doors on 240 open on :gym7_open (set by "My Father") and lead to Gemini's crafted Gym 7, maps 250-253
+(layouts/cindervault_gym.py; arrival 250 (12, 22); puzzle proofs puzzles/foundry.py). On 253 this layer gives Gemini's
+"Warden Brann" the script's pages (portraits, the seven notes, the quest line, CH8_STEP 4 -> 5, then out into the square
+at 240 (21, 3) for the Five Bells); his fight is LOCKED and the battle call is Gemini's, unchanged. Not here: the Ch17
+Trials quest AS_FORGE_REMEMBERS (the Trials owner's).
 
 It also plays the bracketed narrator boxes of Gemini's guarded exits and NPCs on 240 / 243 / 249 (STAGE below).
 
-Run after cindervault_town.py / cindervault_core.py (which rewrite these specs from scratch):
-    python3 -I layouts/story_ch8.py && python3 -I build.py 240 243 244 249 --no-preview"""
+Run after cindervault_town.py / cindervault_core.py / cindervault_gym.py (which rewrite these specs from scratch):
+    python3 -I layouts/story_ch8.py && python3 -I build.py 240 243 244 249 253 --no-preview"""
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from story_early import P, N, S, IF, CH, MV, page, ev
@@ -428,6 +430,45 @@ def events_240():
             walk_on('Herald', 27, 34), walk_on('Standard-bearer', 27, 35), walk_on('Column guard 1', 27, 36), walk_on('Column guard 2', 27, 37)]
 
 
+# ============================================================================================ 253 Brann (Gym 7)
+# Gemini's crafted Warden Arena (layouts/cindervault_gym.py) places "Warden Brann" at (10, 6). These are his pages, from
+# story/29_SCRIPT_CH8.md "253 - the Warden Arena". The fight is LOCKED: the battle call below is Gemini's, unchanged
+# ([LEADER_BRANN,Brann] and its Hard / Casual versions; GYMS has no :double for him, so double: false changes nothing).
+BRANN = 'Warden Brann'
+GYM7 = 'pfm_gym(:LEADER_BRANN)'
+S_G7_VAULT = 339                                                               # G7_VAULT_DONE: the cracked-mould vault
+BRANN_WIN = [
+    P('BRANN', 'crying', "HA! Broke me right! That's the harder craft!", '', BRANN),
+    S('Prismfall.award_badge(%s)' % GYM7),                                     # the Quench Badge
+    S('7.times { |i| pbSEPlay("Anim/HealBell", 70, 70 + i * 9); pbWait(0.22) }\npfm_flash(255, 250, 230, 10, 80)'),   # seven notes; the case's seams
+    MV(BRANN, ['turn_down']), {'wait': 30},                                    # his hand half-raised for a slap on the back
+    P('BRANN', 'shocked', "...Your case sings. Huh.", 'dots', BRANN), {'wait': 30},
+    N('Brann', "Don't let Imelda take it apart."),
+    S('pbReceiveItem(:TM35)'),
+    N('Brann', "The Quench Badge. Quench is the moment a blade decides what it's going to be."),
+    N('Brann', "Too slow, it's soft. Too fast, it cracks."),
+    N('Brann', "There's a joke in there about Wardens."),
+    N('Brann', "I'm not going to make it, there's a Sovereign's man in town."),
+    IF('$game_switches[%d]' % S_G7_VAULT, [P('BRANN', 'happy', "Ha! Found the cracked one. Aye. Some things you break on purpose.", '', BRANN)]),
+    QUEST('Seven badges. The road west goes down to Ironreach and the Conclave.'),
+    IF('$game_variables[129] < 5', [{'var': [STEP, 5]}]),                      # "V129 = 5" (never back down)
+    {'selfswitch': ['A', True]},
+    S('pfm_fade_out(20)'),                                                      # out of the Foundry into the square: the Five Bells
+    {'transfer': {'map': 240, 'x': 21, 'y': 3, 'dir': 'down'}},
+    S('pfm_fade_in(10)')]
+BRANN_PAGES = [
+    page([P('BRANN', 'neutral', "Some things you forge to last.", '', BRANN),
+          N('Brann', "Some things you forge to BREAK right."),
+          N('Brann', "That's the harder craft. Took me thirty years to learn the second one."),
+          P('BRANN', 'happy', "Let's see which one you are!", '', BRANN),
+          IF('Prismfall.gym_battle(%s, double: false)' % GYM7, BRANN_WIN)],      # LOSE: whiteout to the Pokemon Center
+         'BRANN', 'down'),
+    page([IF('$game_switches[%d]' % S_G7_VAULT, [P('BRANN', 'happy', "Found the cracked one down in the Mould Floor, did you? Some things you break on purpose.", '', BRANN)]),
+          P('BRANN', 'happy', "Go on, then! The bridge you don't finish is the one that carries you.", '', BRANN),
+          N('Brann', "The east lift'll take you straight down to the lobby, if your legs are done.")],
+         'BRANN', 'down', cond={'self': 'A'})]
+
+
 # ============================================================================================ stage directions
 # The guarded exits Gemini's layouts write print a bracketed narrator box when the next map isn't built. Played
 # instead: the player is turned back a step with a sound, and somebody on the spot says why (no brackets).
@@ -463,13 +504,18 @@ def main():
     print('map 249: %d events' % SL.patch('249_slag_ward.yaml', 249, events_249(), pages_249(spec['events']), TAG))
     print('map 243: %d events' % SL.patch('243_caldera_gate.yaml', 243, events_243(), None, TAG))
     print('map 240: %d events' % SL.patch('240_cindervault_forge.yaml', 240, events_240(), None, TAG))
-    # the Foundry's doors (Gym 7, layouts/foundry_gym.py): open once "My Father" has played (pfm_set(:gym7_open);
-    # CH8_STEP stays 4 there), and for good once the badge is won (CH8_STEP >= 5)
+    # the Foundry's doors (Gym 7, Gemini's layouts/cindervault_gym.py): open once "My Father" has played
+    # (pfm_set(:gym7_open); CH8_STEP stays 4 there), and for good once the badge is won (CH8_STEP >= 5). They land on
+    # Gemini's arrival tile in 250's entry vestibule, (12, 22), facing up (its exits back to 240 are (11..13, 23)).
     foundry = [page([IF('pfm_get(:gym7_open) || $game_variables[129] >= 5',
-                        [{'se': 'Door exit'}, {'transfer': {'map': 250, 'x': 10, 'y': 15, 'dir': 'up'}}],
+                        [{'se': 'Door exit'}, {'transfer': {'map': 250, 'x': 12, 'y': 22, 'dir': 'up'}}],
                         shut('Door enter', "The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.", 60))],
                     trigger='touch')]
     print('map 240: the Foundry doors (%d)' % SL.set_pages('240_cindervault_forge.yaml', 240, 'To The Foundry (Gym 7)', foundry, TAG))
+    n = SL.set_pages('253_cindervault_gym_253.yaml', 253, BRANN, BRANN_PAGES, TAG)
+    spec253 = next(d for d in yaml.safe_load_all(open(os.path.join(SL.HERE, 'specs', '253_cindervault_gym_253.yaml'))) if d and d.get('id') == 253)
+    if not any(e.get('name') == BRANN for e in spec253['events']): raise SystemExit('story_ch8: no %r on 253' % BRANN)
+    print('map 253: %s (%d changed)' % (BRANN, n))
     files = {240: '240_cindervault_forge.yaml', 243: '243_caldera_gate.yaml', 249: '249_slag_ward.yaml'}
     for mid, mapping in STAGE.items():
         print('map %d: stage directions %s' % (mid, sorted(SL.replace_lines(files[mid], mid, mapping, TAG).values())))
