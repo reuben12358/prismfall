@@ -151,7 +151,7 @@ def build():
               'text': "Hay-cart Driver: Used to take me a day to Briarwick and back. Now the east road's all glass and I go round. Day and a half. Glass doesn't pay my horse."})
     E.append({'type': 'npc', 'name': 'Coll (Headbutt tutor)', 'at': P['tutor'], 'sprite': 'NPC 03', 'dir': 'down', 'commands': [
         "Coll: Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.",
-        {'script': 'pbMoveTutorChoice(:HEADBUTT)'}]})
+        {'script': 'pbMoveTutorChoose(:HEADBUTT)'}]})
     # Juno's follower chatter at the first flag (east end) and at the Pecha tree; once each, chapter 2 only
     fx, fy = flags[0] if flags else (55, 21)
     for i, (dx, dy) in enumerate(((0, 1), (-1, 1), (1, 1))):

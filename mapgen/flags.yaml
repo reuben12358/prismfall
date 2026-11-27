@@ -33,6 +33,31 @@ variables:
   G7_X1: 435          # the Pour Floor trenches X1..X3: 0 empty, 1 molten, 2 iron
   G7_X2: 436
   G7_X3: 437
+  G5_MIRROR_1: 325    # Gym 5, the Dig (Gemini's layouts/duneholt_gym.py, 210-213): 211 Sun-Mirror 1: 0 Lane a lit (start), 1 Lane b, 2 the wall
+  G5_MIRROR_2: 326    # 211 Sun-Mirror 2: 0 Lane d lit (start), 1 the wall, 2 Lane c
+  G5_TABLET_A: 425    # 212 Ud, the Elector Mural Mastery tablets A..D: 0 Sun, 1 Eye, 2 Wave, 3 Bone
+  G5_TABLET_B: 426
+  G5_TABLET_C: 427
+  G5_TABLET_D: 428
+  G6_FLASK_3: 330     # Gym 6, Mirefen (Gemini's layouts/mirefen_gym.py, 230-233): measures in the unmarked 3-flask (0-3)
+  G6_FLASK_5: 331     # measures in the unmarked 5-flask (0-5)
+  G6_FILTER: 332      # 232: mask-filter sludge steps used (0-10)
+  G6_BASIN: 333       # 232: Basin B's measures so far (0-7)
+  G6_HINTS: 334       # Wenlow's hint tier
+  G6_FLASK_4: 430     # 232 Quiet Alcove Mastery: the unmarked 4-flask
+  G6_FLASK_9: 431     # the unmarked 9-flask
+  G6_QUIET_STEP: 432  # doses delivered (0 needs 1, 1 needs 3, 2 needs 6, 3 done)
+  G8_ROUNDS: 340      # Gym 8, Ironreach (Gemini's layouts/ironreach_gym.py, 270-274): sparring contacts / resets
+  G8_PUSHES: 341      # boulder pushes
+  G8_HINT_271: 342    # Hiro's hint tier in 271
+  G8_HINT_272: 343    # ... in 272
+  G8_HINT_273: 344    # ... in 273
+  G9_HEDGES: 345      # Gym 9, Verdance (Gemini's layouts/verdance_gym.py, 290-293): hedges left in 291 + 292 (arena field stage 1 + min(V345, 4))
+  G9_HEDGES_291: 346  # hedges left in 291, the Hedge Garden
+  G9_HEDGES_292: 347  # hedges left in 292, the Glasshouse
+  G9_HINT_291: 348    # Bram's hint tier in 291
+  G9_HINT_292: 349    # ... in 292
+  D11_SUNDIAL: 551    # D11 Ossuary of Dunes (Gemini's layouts/ossaria_landmarks.py, 624/625): the capstone, 0-3, reading the four mural glyphs
 switches:
   G7_POURED_K1: 335   # Gym 7: crucible K1..K3 spent
   G7_POURED_K2: 336
@@ -42,6 +67,33 @@ switches:
   G7_M1: 435          # 252 Mould Floor: mould M1..M3 cast iron (M1 / M2 under X1 / X2; M3 by the C2 landing)
   G7_M2: 436
   G7_M3: 437
+  G5_MURAL_DONE: 325  # Gym 5: 212 Ud, the optional Elector Mural Mastery solved
+  G5_FIRST_FALL: 326  # 210: the first-fall teaching message shown
+  G5_STRENGTH: 327    # HM04 Strength received from Sahar's excavators after Badge 5
+  G6_VALVE_4: 330     # Gym 6: 231 Purge Funnel dosed with exactly 4
+  G6_SOCKET_A: 331    # 232 Socket A dosed with exactly 1 (opens the East Sluice Gate)
+  G6_BASIN_B: 332     # 232 Basin B at exactly 7 (opens the North Arena Bridge)
+  G6_QUIET_DONE: 333  # 232 the optional Quiet Alcove Mastery done
+  G6_TEACH_DONE: 334  # 230 the Teach Funnel dosed with exactly 3 (opens the Lobby drawbridge)
+  G8_BELL_1: 340      # Gym 8: 271 East Bell rung (the gate to 272)
+  G8_BELL_2: 341      # 272 Central Bell rung (the gate to 273)
+  G8_GAUNTLET: 342    # 273 Main Gauntlet plates held (the gate to 274)
+  G8_MARROWGATE: 343  # 273 the optional Marrowgate Mastery solved
+  G8_TEACH_BELL: 344  # 271 West Pillar Bell rung (the divider gate into the east half)
+  G9_RING_DONE: 345   # Gym 9: 291 ring P1 = P3 = P5 = 2
+  G9_EIGHT_DONE: 346  # 292 figure-eight J = A2 = A3 = B2 = B3 = 2
+  G9_BOWER_DONE: 347  # 292 the optional Bride Bower Mastery solved
+  G9_TEACH_DONE: 348  # 290 P0 bridged
+  D11_PULLEY: 552     # D11 Ossuary of Dunes: 625's sand-pulley wheel turned (drains 624's sluice trough)
+  D11_SEAL: 553       # 624 North Sanctum Seal opened (624 <-> 625)
+  D11_SPIRITOMB: 554  # 625 the static Spiritomb resolved
+  D11_UNOWN: 555      # 625 the optional Unown glyph swarm resolved
+  MAINLINE_GATE: 576  # Ossaria roads (Gemini's layouts/ossaria_routes.py / ossaria_tunnels.py; 576-581 of the reserved 576-600): 612 the Mandate Checkpoint cleared (barriers retract)
+  MAINLINE_SIDING: 577 # 612 Signal Box lever: the runaway handcar on Siding B
+  TUNNELS_RELAY: 578  # 604 Static Tunnels: North Relay Lever (opens the relay locker)
+  TUNNELS_BREAKER: 579 # 605 Deep Conduit Breaker (opens 604's South Conduit Vault shutter)
+  SINKFIELD_BOSS: 580 # 628 the Sinkfield's Galarian Stunfisk (OS_SINKFIELD) beaten or caught
+  SINKFIELD_CKPT: 581 # 628 the one-time entrance checkpoint shown
   WAR_SIDE_ASH: 605   # the war maps (map builder 10): pf_choice(:war_climax) == :back_ashkaar (set by each war map's front event)
   WAR_SIDE_ISE: 606   # ... == :back_isenmar
   WAR_SIDE_MID: 607   # ... == :stand_between
