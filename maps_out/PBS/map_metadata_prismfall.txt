@@ -386,6 +386,26 @@ ShowArea = true
 MapPosition = 0,24,8
 BattleBack = cave1
 #-------------------------------
+[250]   # Cindervault Gym - Gate Hall
+Name = Cindervault Gym
+MapPosition = 0,24,8
+SnapEdges = true
+#-------------------------------
+[251]   # Cindervault Gym - Pour Floor
+Name = Cindervault Gym
+MapPosition = 0,24,8
+SnapEdges = true
+#-------------------------------
+[252]   # Cindervault Gym - Mould Floor
+Name = Cindervault Gym
+MapPosition = 0,24,8
+SnapEdges = true
+#-------------------------------
+[253]   # Cindervault Gym - Warden Arena
+Name = Cindervault Gym
+MapPosition = 0,24,8
+SnapEdges = true
+#-------------------------------
 [255]   # Cindervault - Tap Chamber
 Name = Cindervault
 SnapEdges = true

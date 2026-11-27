@@ -75,6 +75,10 @@ module PrismfallMaps
     243 => [20, 0, -18, 10],   # Cindervault - Caldera Gate
     244 => [16, 2, -16, 8],   # Hearthguild Hall
     249 => [20, 0, -18, 10],   # Cindervault - Slag Ward
+    250 => [30, 4, -24, 10],   # Cindervault Gym - Gate Hall
+    251 => [30, 4, -24, 10],   # Cindervault Gym - Pour Floor
+    252 => [30, 4, -24, 10],   # Cindervault Gym - Mould Floor
+    253 => [30, 4, -24, 10],   # Cindervault Gym - Warden Arena
     255 => [28, 2, -22, 12],   # Cindervault - Tap Chamber
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     281 => [6, 8, -6, 0],   # Verdance Pokémon Center

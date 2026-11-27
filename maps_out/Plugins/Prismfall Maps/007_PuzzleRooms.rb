@@ -458,4 +458,150 @@ if defined?(PrismfallPuzzles)
   PrismfallPuzzles.room(:g4_190)[:reset][:proc] = proc { PFCircuit.power(190, true) }
   PrismfallPuzzles.room(:g4_191)[:reset][:proc] = proc { PFCircuit.power(191, true) }
   PrismfallPuzzles.room(:g4_192)[:reset][:proc] = proc { PFCircuit.power(192, true) }
+  PrismfallPuzzles.room(:g7_250, {
+    :name => "The Gate Hall",
+    :map => 250,
+    :start => [10, 15, 8],
+    :home => false,
+    :reset => { :vars => { 339 => 0 }, :switches => { 338 => false } },
+    :solved => { :vars => { 339 => 2 }, :switches => { 338 => true } },
+    :hints => ["Pour first. The crucible's spout runs straight into the trench.", "Molten iron's a wall. Turn the wheel and the cistern quenches it.", "Pour the crucible, turn the quench wheel, walk across."],
+  })
+  PrismfallPuzzles.room(:g7_foundry, {
+    :name => "The Pour Floor",
+    :map => 251,
+    :start => [14, 23, 8],
+    :home => false,
+    :reset => { :vars => { 335 => 0, 336 => 0, 337 => 0, 338 => 0, 435 => 0, 436 => 0, 437 => 0 }, :switches => { 335 => false, 336 => false, 337 => false, 435 => false, 436 => false, 437 => false } },
+    :solved => { :vars => { 335 => 0, 336 => 0, 337 => 1, 338 => 1, 435 => 0, 436 => 2, 437 => 0 }, :switches => { 335 => true, 336 => true, 337 => true, 435 => true, 436 => false, 437 => true }, :at => [14, 2, 8] },
+    :hints => ["Brann never wastes a pour. Whatever's still hot when you go down, the moulds get.", "You only need one bridge up here. Which one can't the moulds give you?", "Pour the first crucible into the near trench and the second into the middle one. Quench the middle one only. Turn the third spout to the far trench and pour it. Then take the near chute."],
+  })
+  # Gym 7 (mapgen/puzzles/foundry.py): pour, then quench.  The crucibles, valves and chutes of the Foundry.
+  module PFFoundry
+    V_AIM = { 1 => 335, 2 => 336, 3 => 337 }
+    S_POURED = { 1 => 335, 2 => 336, 3 => 337 }
+    V_X = { 1 => 435, 2 => 436, 3 => 437 }
+    S_M = { 1 => 435, 2 => 436, 3 => 437 }
+    V_QUENCHED = 338
+    V_TEACH = 339
+    S_TEACH_DONE = 338
+    AIMS = { 1 => [1, 2], 2 => [2, 3], 3 => [1, 3] }
+    NAMES = { 1 => "near", 2 => "middle", 3 => "far" }
+    module_function
+    def target(k); return AIMS[k][$game_variables[V_AIM[k]].to_i % 2]; end
+    def glow(strong = true)
+      if defined?(PrismfallStaging)
+        PrismfallStaging.flash(255, 140, 40, 10, strong ? 150 : 90)
+      else
+        $game_screen.start_flash(Color.new(255, 140, 40, 120), 10)
+      end
+    end
+    def refresh; $game_map.need_refresh = true; end
+    # a crucible: Aim the spout / Pour / Leave
+    def crucible(k)
+      if $game_switches[S_POURED[k]]
+        pbMessage(_INTL("The crucible's empty. Its spout is cold."))
+        return false
+      end
+      loop do
+        cmd = pbMessage(_INTL("A crucible of molten iron. The spout points at the {1} trench.", NAMES[target(k)]),
+                        [_INTL("Aim the spout"), _INTL("Pour"), _INTL("Leave")], 3)
+        case cmd
+        when 0
+          $game_variables[V_AIM[k]] = 1 - $game_variables[V_AIM[k]].to_i
+          pbSEPlay("Door slide", 70, 120) rescue nil
+          refresh
+        when 1
+          x = target(k)
+          $game_switches[S_POURED[k]] = true
+          if $game_variables[V_X[x]] == 1
+            pbSEPlay("Anim/Fire2", 70, 80) rescue nil
+            pbMessage(_INTL("The iron runs into the {1} trench. It's already molten; it just gets hotter.", NAMES[x]))
+          else
+            $game_variables[V_X[x]] = 1
+            pbSEPlay("Anim/Fire3", 90, 90) rescue nil
+            glow
+            refresh
+            pbWait(0.3)
+            pbMessage(_INTL("The iron runs down the spout and fills the {1} trench. It glows. Nobody's crossing that.", NAMES[x]))
+          end
+          return true
+        else
+          return false
+        end
+      end
+    end
+    # a quench valve: one charge for the whole floor
+    def valve(k)
+      if $game_variables[V_X[k]] != 1
+        pbMessage(_INTL("Nothing to quench. The {1} trench isn't molten.", NAMES[k]))
+        return false
+      end
+      if $game_variables[V_QUENCHED] > 0
+        pbMessage(_INTL("The wheel spins and nothing comes. The cistern's dry."))
+        return false
+      end
+      $game_variables[V_QUENCHED] = 1
+      $game_variables[V_X[k]] = 2
+      pbSEPlay("Anim/Water5", 90, 80) rescue nil
+      $game_screen.start_tone_change(Tone.new(60, 60, 70, 60), 6)
+      pbWait(0.35)
+      $game_screen.start_tone_change(PrismfallStaging.map_tone, 20) rescue $game_screen.start_tone_change(Tone.new(0, 0, 0, 0), 20)
+      refresh
+      pbMessage(_INTL("Steam roars up from the {1} trench. When it clears, the iron's black and hard. A bridge.", NAMES[k]))
+      return true
+    end
+    # a slag chute: whatever is still molten drains into the moulds below, then down you go
+    def chute(dest_map = 252)
+      drained = []
+      [1, 2, 3].each do |k|
+        next if $game_variables[V_X[k]] != 1
+        $game_variables[V_X[k]] = 0
+        $game_switches[S_M[k]] = true
+        drained << k
+      end
+      if !drained.empty?
+        pbSEPlay("Anim/Earth4", 90, 70) rescue nil
+        $game_screen.start_shake(3, 9, 12)
+        pbMessage(_INTL("A roar below: the moulds fill."))
+      end
+      refresh
+      PrismfallPuzzles.swap_map(dest_map)
+      return true
+    end
+    # 250: the one crucible and the wheel
+    def teach_pour
+      if $game_variables[V_TEACH] > 0
+        pbMessage(_INTL("The crucible's empty."))
+        return false
+      end
+      $game_variables[V_TEACH] = 1
+      pbSEPlay("Anim/Fire3", 90, 90) rescue nil
+      glow
+      refresh
+      pbMessage(_INTL("The iron fills the trench. It glows. Nobody's crossing that."))
+      return true
+    end
+    def teach_quench
+      case $game_variables[V_TEACH]
+      when 0 then pbMessage(_INTL("Nothing to quench. The trench is empty."))
+      when 2 then pbMessage(_INTL("The bridge is iron already."))
+      else
+        $game_variables[V_TEACH] = 2
+        $game_switches[S_TEACH_DONE] = true
+        pbSEPlay("Anim/Water5", 90, 80) rescue nil
+        $game_screen.start_tone_change(Tone.new(60, 60, 70, 60), 6)
+        pbWait(0.35)
+        $game_screen.start_tone_change(PrismfallStaging.map_tone, 20) rescue $game_screen.start_tone_change(Tone.new(0, 0, 0, 0), 20)
+        refresh
+        pbMessage(_INTL("Steam. When it clears, the trench is iron. A bridge."))
+      end
+      return true
+    end
+  end
+  def pfm_g7_crucible(k); return PFFoundry.crucible(k);   end
+  def pfm_g7_valve(k);    return PFFoundry.valve(k);      end
+  def pfm_g7_chute(m = 252); return PFFoundry.chute(m);   end
+  def pfm_g7_teach_pour;  return PFFoundry.teach_pour;    end
+  def pfm_g7_teach_quench; return PFFoundry.teach_quench; end
 end

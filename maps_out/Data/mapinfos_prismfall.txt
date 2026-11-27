@@ -75,6 +75,10 @@
 243	0	Cindervault - Caldera Gate
 244	249	Hearthguild Hall
 249	0	Cindervault - Slag Ward
+250	240	Cindervault Gym - Gate Hall
+251	250	Cindervault Gym - Pour Floor
+252	250	Cindervault Gym - Mould Floor
+253	250	Cindervault Gym - Warden Arena
 255	249	Cindervault - Tap Chamber
 280	0	Verdance - Market Terraces
 281	280	Verdance Pokémon Center
