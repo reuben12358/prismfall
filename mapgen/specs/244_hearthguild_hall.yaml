@@ -29,7 +29,7 @@ events:
         Apprentice: Lately the quench trough steams before we even dip a bar. That''s the mountain''s fever.']
 - type: event
   name: Elder Smith
-  at: [17, 11]
+  at: [15, 12]
   pages:
   - graphic: {sprite: NPC 25, dir: left}
     trigger: action
@@ -37,6 +37,7 @@ events:
     commands: ['Elder Smith: That white stone over the forge has been in the Hearthguild''s keeping for thirty years—since before the Dominar''s great-grandmother
         learned to ride.', 'Elder Smith: Warden Brann roasts chestnuts on the coals at two in the morning when he''s thinking hard. Cuts a cross in every shell so
         they don''t go off like a Voltorb.']
+  story: ch8
 - type: sign
   name: Light Stone Grille
   at: [10, 4]

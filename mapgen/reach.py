@@ -19,7 +19,8 @@ REACH    every warp, door and action-button event must be reachable from the map
          allowed, bridge tiles pass on and off the bridge, ledges jump two tiles (Game_Player#move_generic).  So an
          event it can't reach can't be reached at all, unless the map moves the player in ways the fill can't see
          (scripted relocations it can't parse, Through/jump routes on the player, tile edits, puzzle rooms).  Those
-         maps are "approximate": their REACH lines are warnings only.  On the others ("exact") `--strict` fails.
+         maps are "approximate": their REACH lines are warnings only.  On the others ("exact") `--strict` fails, except
+         for the KNOWN misses below (another owner's geometry, queued in mapgen/REFINE_QUEUE.md).
          A target is reached when the player can stand where Essentials triggers it: on its tile if its page is
          over_trigger, else on a 4-neighbour (or across a counter tile, Game_Player#check_event_trigger_there).
          Trainers (they walk to you) and events that move are not targets; a spec's `reach_ignore: [regex, ...]`
@@ -291,6 +292,20 @@ def puzzle_maps():
 PLUGIN_SWAPS = [(181, 608, 'the Lowlight swap (mapgen/ruby/012_Lumen.rb)')]
 
 
+# Known misses on exact maps whose geometry another owner's layout keeps (coordinator, 2026-11-27): they still print,
+# tagged "known", and are listed for that owner in mapgen/REFINE_QUEUE.md, but they don't stop --strict. Keyed by the
+# event's tile, so a miss anywhere else on the map (or after the event moves) is strict again.
+KNOWN = {
+    145: ("Gemini's layouts/halls_craft.py build_145: the proscenium curtains (NM 912/920 at x 11 and 26, y 4-9) shut "
+          "the wing doors (9-10 / 27-28, 7-8); the urns at (16, 22) and (21, 22) and the bouquets at (1-2 / 35-36, 17-18) "
+          "cut the side aisles",
+          {(2, 5), (34, 4), (31, 3), (4, 6), (7, 4), (5, 5), (6, 5), (7, 6), (34, 20), (31, 22), (34, 21), (28, 22),
+           (3, 22), (11, 22), (4, 22), (34, 22)}),
+    249: ("Gemini's layouts/cindervault_town.py: the east tenement forecourt (33-40, 6-10) and the west lane (3-8, 16-28) "
+          "have no way in", {(34, 8), (37, 7), (6, 24)}),
+}
+
+
 class Reach:
     """Arrivals and flood fills for every built map (a map's swaps need their source map's fill)."""
 
@@ -464,13 +479,15 @@ def check(selected, specs, ctx, verbose=False):
             pages = [p for p in ev.pages if (p.trigger == 0 and real_cmds(p)) or
                      (p.trigger in (1, 2) and any(c.code == 201 for c in p.list))]
             if pages and not reached(V, ev, seen, pages): miss.append((ev, pages[0]))
+        kn = KNOWN.get(mid)
         for ev, pg in miss:
             kind = 'warp/door' if any(c.code == 201 for p in ev.pages for c in p.list) else 'action event'
             how = 'standing on it (over_trigger)' if V.over_trigger(ev, pg) else 'a tile beside it'
+            known = exact and kn and (ev.x, ev.y) in kn[1]
             ctx.warn(mid, 'REACH%s: %s "%s" at %d,%d can\'t be reached from the arrivals (needs %s)%s' % (
-                '' if exact else ' (approximate)', kind, ev.name, ev.x, ev.y, how,
+                ' (known, REFINE_QUEUE)' if known else '' if exact else ' (approximate)', kind, ev.name, ev.x, ev.y, how,
                 '' if exact else '; approximate because ' + why[0]))
-        if exact: bad += len(miss)
+            if exact and not known: bad += 1
         if verbose:
             if not hasattr(ctx, 'reach_seen'): ctx.reach_seen = {}
             ctx.reach_seen[mid] = (seen, start)

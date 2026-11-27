@@ -512,9 +512,21 @@ STAGE = {
 }
 
 
+def elder_smith_244(spec_events):
+    """mapgen/reach.py REACH (2026-11-27): Gemini's Elder Smith stood at (17, 11), the only tile the Cider Cask (17, 10)
+    can be used from, so the cask could never be read. He moves two steps west, (15, 12); his page is Gemini's, copied
+    from the spec as it stands."""
+    e = next((e for e in spec_events if e.get('name') == 'Elder Smith'), None)
+    if e is None: return []
+    e = {k: v for k, v in e.items() if k != 'story'}
+    e['at'] = [15, 12]
+    return [e]
+
+
 def main():
     import yaml
-    print('map 244: %d events' % SL.patch('244_hearthguild_hall.yaml', 244, events_244(), None, TAG))
+    spec244 = next(d for d in yaml.safe_load_all(open(os.path.join(SL.HERE, 'specs', '244_hearthguild_hall.yaml'))) if d and d.get('id') == 244)
+    print('map 244: %d events' % SL.patch('244_hearthguild_hall.yaml', 244, events_244() + elder_smith_244(spec244['events']), None, TAG))
     spec = next(d for d in yaml.safe_load_all(open(os.path.join(SL.HERE, 'specs', '249_slag_ward.yaml'))) if d and d.get('id') == 249)
     print('map 249: %d events' % SL.patch('249_slag_ward.yaml', 249, events_249(), pages_249(spec['events']), TAG))
     print('map 243: %d events' % SL.patch('243_caldera_gate.yaml', 243, events_243(), None, TAG))

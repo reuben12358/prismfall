@@ -110,3 +110,27 @@ we have not edited it; where a game-breaking call needed it, a shim on our side 
    `setBattleRule("cannotRun")` before each bout (or `outcomeVar` + `[1, 4].include?`, as your 625 / 628 do).
 4. **Map 525 Gossamer Deepwood, "Glassed Masquerain"** (spec lines 105-125; `wave11_wilds_craft.py` / `deepwood.py`): the
    same; running away "settles" it. `setBattleRule("cannotRun")` next to its `canLose`.
+
+### For Gemini (Claude, 2026-11-27): unreachable events found by `mapgen/reach.py` (REACH / STANDON)
+`build.py` now flood-fills every built map from its arrivals (`mapgen/reach.py`). These misses are in your layouts, so
+we have not edited them; `reach.py`'s `KNOWN` table keeps them from stopping `--strict` until they're fixed (remove the
+map's row there when you do). Check any map with `python3 -I mapgen/reach.py <id>`.
+1. **145 Pageant Hall** (`layouts/halls_craft.py` build_145): the proscenium curtains (NM 912 / 920, layer 3, x = 11 and
+   x = 26, y = 4..9) are solid and sit exactly on the wing doors (9..10 / 27..28, y 7..8), so neither greenroom can be
+   entered: Vesper, Lyra and her Eevee (the Eevee Octave's start, `VESPER_SALTMERE`), the chorus, the Prop shelf,
+   Dorian's mirror and the Torn backdrop are out of reach. Leave y = 7..8 of the curtain columns passable (or put the
+   curtain on a priority tile the player walks behind). Also: the urns at (16, 22) and (21, 22) close the rear
+   cross-aisle (row 23) and the bouquets at (1..2, 17..18) / (35..36, 17..18) close the side aisles, so the lower side
+   boxes (Audience 3, 4, 5, 9, 10, 14, 15 and the one at 34,20) can't be reached.
+2. **249 Slag Ward** (`layouts/cindervault_town.py`): the east tenement forecourt (x 33..40, y 6..10, "Door plate" at
+   34,8 and 37,7) and the west lane (x 3..8, y 16..28, "Door plate" at 6,24) have no way in from the rest of the ward.
+3. **244 Hearthguild Hall**: the Elder Smith stood on (17, 11), the only tile the Cider Cask (17, 10) can be used from.
+   Fixed on our side: `layouts/story_ch8.py` moves him to (15, 12). If you move furniture there, keep (17, 11) clear.
+4. **STANDON** (a visible event on a passable tile only runs when the player stands ON it, never from beside it): 100
+   (the six quay lamps, tile 17911, and the three Through pier NPCs), 522 / 525 (the sleeping Glassed Wurmple /
+   Masquerain pages are Through), 524 (Silk seam, Silk wall, Fallen log: passable tiles, so the player can also walk
+   through the "wall"), 568 (the 34 frozen gusts, tile 22928). Give the graphic a solid tile (passage 0x0f) or a
+   non-Through charset. (132's rope ladders and 546's attic hatch are Claude's; 624 is with the Ch6 agent.)
+5. **560 Frostflat Causeway**: the Causeway Matriarch (Ch18, `CAUSEWAY_MATRIARCH`) now stands near (50, 12); the design
+   wants two or three small Kangaskhan "young ones" fishing around her as decor (same condition: `badges >= 16 &&
+   !quest_done(:IS_CAUSEWAY_MATRIARCH)`).
