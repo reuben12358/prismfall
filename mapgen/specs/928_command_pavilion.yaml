@@ -18,7 +18,7 @@ events:
   name: Dominar Hrothgar
   at: [12, 6]
   pages:
-  - graphic: {sprite: trainer_LEADER_Giovanni, dir: down}
+  - graphic: {sprite: HROTHGAR, dir: down}
     trigger: action
     commands: ['Dominar Hrothgar: Speak plainly. The brazier is lit. In this tent a lie is a death sentence, and I have signed eleven.']
 - type: event
@@ -62,7 +62,7 @@ events:
   name: Dominar Hrothgar
   at: [12, 6]
   pages:
-  - graphic: {sprite: trainer_LEADER_Giovanni, dir: down}
+  - graphic: {sprite: HROTHGAR, dir: down}
     trigger: action
     commands: ['Dominar Hrothgar: Speak plainly. The brazier is lit. In this tent a lie is a death sentence, and I have signed eleven.']
 - type: event

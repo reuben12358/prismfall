@@ -18,4 +18,6 @@ then PC + Sigrun vs Styr + Kessa at (32,26). 926 is the beam clash only (the six
 double are gone; the legend event and its WAR_CLIMAX call are unchanged). Comments in the file mark each block
 ("The lines, ..."). When you next craft these maps, please keep those event blocks as they are (move them only to
 keep them walkable, and tell us the new coordinates). `layouts/war.py` is superseded; don't run it over the crafted maps.
+Also (2026-11-26): the `SPRITE` table now gives Sigrun, Marisol and the Dominar their own cast sheets (`SIGRUN`,
+`MARISOL`, `HROTHGAR`; 928's two Hrothgar events rebuilt). Keep those when you next run the script.
 

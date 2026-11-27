@@ -63,9 +63,9 @@ SPRITE = {
     'ASHKAAR_SOLDIER_M': 'trainer_BLACKBELT',
     'ASHKAAR_SOLDIER_F': 'trainer_CRUSHGIRL',
     'ASHKAAR_OFFICER': 'trainer_TAMER',
-    'LEADER_SIGRUN': 'trainer_ELITEFOUR_Lance',
-    'LEADER_MARISOL': 'trainer_LEADER_Misty',
-    'DOMINAR': 'trainer_LEADER_Giovanni',
+    'LEADER_SIGRUN': 'SIGRUN',
+    'LEADER_MARISOL': 'MARISOL',
+    'DOMINAR': 'HROTHGAR',     # Sigrun, Marisol and the Dominar wear their own cast sheets (2026-11-26)
     # story/38_SCRIPT_CH19.md "the lines" (2026-11-26): stock stand-ins until the classes have overworld art
     'ISENMAR_TRENCHER': 'trainer_POKEMONRANGER_M',
     'ISENMAR_HIRDMAN': 'trainer_COOLTRAINER_M',
