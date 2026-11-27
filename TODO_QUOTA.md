@@ -210,3 +210,8 @@
 ## Status: Chapter 6 staging agent (2026-11-27)
 *Running note. Layer: `mapgen/layouts/story_ch6.py` (committed 596f2b2a). Next: Gym 5 proof module, the Duneholt
 Sergeant / Bereaved PBS blocks, the real-engine walk (`tools/harness/visual/ch6/`), the key-events GIF, notes.*
+
+## Status: battle-systems backlog agent (2026-11-27)
+*Running note. Checks: `run_finale_bosses.rb`, `run_story_hooks.rb`, `winrates_r4.rb` ARC* cells in a private run dir.*
+- [x] Ogerpon on Juno's J4 (168e8c2e); Aurelia 824–826 WATER_SURFACE (996b5b54); Ruin Inverse overlays (133ace4c); Ch11 harpooners checked (b8be22d0).
+- [ ] Arceus extras: telegraph (Casual 2 rounds) + best-field skip at a break built (uncommitted: Bosses 002 / 005 / 103, Field Effects 136, run_finale_bosses 98/98); `:bossboost` HP superseded. Next: same-day A/B of ARC / ARCF / ARCM / ARCG / ARCW / ARCJ, keep Standard / Hard in the 11-26 bands, then BALANCE §7 / §9b and commit.

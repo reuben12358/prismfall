@@ -327,16 +327,23 @@ module Prismfall
       return (pr.is_a?(Hash)) ? pr : nil
     end
 
-    # :prism_interval => n sets the arena's (writable) rounds-per-turn once it exists.
+    # :prism_interval => n sets the arena's (writable) rounds-per-turn once it exists; :prism_telegraph => n its
+    # rounds of warning before each turn (Arceus: 2 on Casual, 1 on Standard / Hard; BALANCE.md section 7).
+    PRISM_WRITABLE = [[:prism_interval, :interval, :@prismfall_prism_interval_done],
+                      [:prism_telegraph, :telegraph, :@prismfall_prism_telegraph_done]].freeze
+
     def self.apply_prism_interval(battle)
-      return if battle.instance_variable_get(:@prismfall_prism_interval_done)
-      pr = prism_state(battle)
-      return if !pr
-      boss_battlers(battle).each do |b|
-        n = resolve(state_for(b).data[:prism_interval])
-        next if !n.is_a?(Integer)
-        pr[:interval] = n
-        battle.instance_variable_set(:@prismfall_prism_interval_done, true)
+      pr = nil
+      PRISM_WRITABLE.each do |key, slot, flag|
+        next if battle.instance_variable_get(flag)
+        pr ||= prism_state(battle)
+        return if !pr
+        boss_battlers(battle).each do |b|
+          n = resolve(state_for(b).data[key])
+          next if !n.is_a?(Integer)
+          pr[slot] = n
+          battle.instance_variable_set(flag, true)
+        end
       end
     end
 
@@ -372,13 +379,54 @@ module Prismfall
       end
     end
 
+    # :prism_best_field => true (or a difficulty Hash): at a bar break (never when the boss enters) the Plates skip to
+    # the field of the new window whose type is best against the player's active Pokemon, and the cycle goes on from
+    # there in window order (BALANCE.md section 7, "Phase break": Arceus, every difficulty). Ties keep the window order.
     def self.apply_prism_order(battle, battler, st, turn_now = true)
       window = prism_window(st)
       pr = prism_state(battle)
       return false if !window || !pr || !pr[:set_order].respond_to?(:call)
-      return false if !pr[:set_order].call(battle, window)
+      start = (st.breaks_done > 0 && resolve(st.data[:prism_best_field])) ? prism_best_field(battle, battler, window, pr) : nil
+      return false if !pr[:set_order].call(battle, window, :custom, start)
+      if start && start != window.first
+        foe = prism_best_targets(battle, battler).first
+        battle.pbDisplay(text("{1} turns the Plates against {2}!", battler.pbThis, foe.pbThis(true))) if foe
+      end
       prism_turn(battle) if turn_now
       return true
+    end
+
+    # The player's own active Pokemon (a tag partner such as Judgment's Giratina doesn't count), else the boss's foes.
+    def self.prism_best_targets(battle, boss)
+      foes = battle.allOtherSideBattlers(boss.index).reject(&:fainted?)
+      own  = foes.select { |f| battle.pbOwnedByPlayer?(f.index) }
+      return (own.empty?) ? foes : own
+    end
+
+    # Abilities and items that make a type harmless to their holder (the pick shouldn't hand the player a free switch).
+    PRISM_TYPE_IMMUNITY = {
+      :GROUND => [:LEVITATE, :EARTHEATER], :FIRE => [:FLASHFIRE, :WELLBAKEDBODY], :WATER => [:WATERABSORB, :STORMDRAIN, :DRYSKIN],
+      :ELECTRIC => [:VOLTABSORB, :LIGHTNINGROD, :MOTORDRIVE], :GRASS => [:SAPSIPPER]
+    }.freeze
+
+    def self.prism_type_score(type, target)
+      return 0.0 if (PRISM_TYPE_IMMUNITY[type] || []).any? { |a| target.hasActiveAbility?(a) }
+      return 0.0 if type == :GROUND && target.hasActiveItem?(:AIRBALLOON)
+      return Effectiveness.calculate(type, *target.pbTypes(true)).to_f
+    end
+
+    def self.prism_best_field(battle, boss, window, pr)
+      tmap = pr[:type_map]
+      targets = prism_best_targets(battle, boss)
+      return nil if !tmap || targets.empty?
+      best = nil
+      best_score = nil
+      window.each do |f|
+        next if !tmap[f]
+        score = targets.sum { |t| prism_type_score(tmap[f], t) }
+        best, best_score = f, score if best_score.nil? || score > best_score
+      end
+      return best
     end
 
     # Bosses with :follow_prism take the form (sprite) and moveset of the

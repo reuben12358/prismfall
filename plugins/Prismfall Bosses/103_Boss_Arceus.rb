@@ -11,9 +11,11 @@
 # order (:prism_order -> the arena's :set_order; bar 1 Grand Stage / Silkwood /
 # Water Surface ... bar 6 New Moon / Fairy Tale / Dragon's Den). Every bar break
 # moves the arena to the next trio and turns the Plates at once through the
-# arena's own announced :turn (Multitype re-types); Arceus then takes that
-# type's form and Plate moveset. The arena's regular turns inside a bar are
-# followed the same way (:follow_prism).
+# arena's own announced :turn (Multitype re-types), to the trio's field best
+# against the player's active Pokemon (:prism_best_field; the cycle goes on from
+# there in gym order); Arceus then takes that type's form and Plate moveset. The
+# arena's regular turns inside a bar are followed the same way (:follow_prism),
+# telegraphed 2 rounds ahead on Casual, 1 elsewhere (:prism_telegraph).
 #   Miscalibrated: bar 5 cycles all six fields of gyms 13-18 (bar HP x0.85).
 #   War / Judgment: bar 7 is the Legend Plate phase (??? type; War settles the
 #     arena by Resonance, Judgment turns it to :INVERSE).
@@ -311,6 +313,11 @@ Prismfall::Bosses.register(:ARCEUS_FINALE, {
   # section 7's "bar HP" row): Casual x0.6, Standard x1.0, Hard x1.25 of Arceus's max HP a bar.
   :bars              => proc { Prismfall::Bosses.arceus_bars },
   :prism_order       => proc { Prismfall::Bosses.arceus_prism_order },
+  # BALANCE.md section 7: at every break the Plates skip to the new bar's field best against the player's active
+  # Pokemon (every difficulty; bar 1 still opens on Gym 1's field), and each turn is telegraphed 2 rounds ahead on
+  # Casual, 1 on Standard and Hard (2026-11-27).
+  :prism_best_field  => true,
+  :prism_telegraph   => { :CASUAL => 2, :default => 1 },
   :partner           => proc {
     v = Prismfall::Bosses.arceus_variant
     (v[:player_side].to_i >= 2) ? [:PARTNER_GIRATINA, "Depths", 0] : nil

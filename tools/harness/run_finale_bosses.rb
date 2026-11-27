@@ -121,7 +121,7 @@ EventHandlers.add(:prismfall_boss_bar_broken, :finale_test_breaks,
   proc { |battle, b, id, n, left|
     pr = FieldEffects.state(battle)[:prism]
     BREAKS << { :id => id, :n => n, :left => left, :field => battle.field_effect, :borrowed => FieldEffects.borrowed_fields(battle).first,
-                :order => pr && pr[:order].dup, :form => b.form, :types => b.pbTypes(true), :stages => b.stages.dup,
+                :order => pr && pr[:order].dup, :next => pr && pr[:next_field], :form => b.form, :types => b.pbTypes(true), :stages => b.stages.dup,
                 :hp => b.hp, :totalhp => b.totalhp, :item => b.item_id, :moves => b.moves.map(&:id) }
   })
 OVERLAYS = []
@@ -172,8 +172,17 @@ dor = log.lines.index { |l| l.include?("Dorian kneels at the Blank pylon") }
 check("bar 1 opens with Dorian at the Blank Plate's pylon, before the first blow", dor && dor < (log.lines.index { |l| l =~ /Garchomp used/ } || 0))
 check("bar 6: Celestine's song is taken up by the choirs and the crowd", log.include?(/Celestine: Not chained, not broken/) &&
       log.include?(/Forty thousand people singing/))
-check("REGRESSION :prism_turn - every break turns the Plates to the next bar's first gym field",
-      BREAKS.map { |b| b[:borrowed] } == TRIOS[1..5].map(&:first), BREAKS.map { |b| b[:borrowed] }.inspect)
+# BALANCE.md section 7 "Phase break" (2026-11-27): the Plates skip to the trio's field best against the player's active
+# Pokemon. Garchomp (Ground / Dragon): Electric 0 / Ground 1 / Poison 0.5 -> Desert; Fire 0.25 / Fighting 1 / Grass 1 ->
+# Colosseum (a tie keeps gym order); Ice 4 -> Frozen Lake; Rock 0.5 / Ghost 1 / Steel 1 -> Hollow Cathedral; Dark 1 /
+# Fairy 2 / Dragon 2 -> Fairy Tale.
+BEST_VS_GARCHOMP = [:DESERT, :COLOSSEUM, :FROZEN_LAKE, :HOLLOW_CATHEDRAL, :FAIRY_TALE]
+check("REGRESSION :prism_turn - every break turns the Plates, to the next trio's field best against the player's active (Garchomp)",
+      BREAKS.map { |b| b[:borrowed] } == BEST_VS_GARCHOMP, BREAKS.map { |b| b[:borrowed] }.inspect)
+check("...and the cycle goes on from there in gym order (Desert -> Corrosive Mire, Colosseum -> Flower Garden ...)",
+      BREAKS.map { |b| b[:next] } == [:CORROSIVE_MIRE, :FLOWER_GARDEN, :STORMFRONT, :FACTORY, :DRAGONS_DEN], BREAKS.map { |b| b[:next] }.inspect)
+check("...a skip away from the trio's first field is announced (\"turns the Plates against Garchomp\"): every break but the one into bar 4 (Frozen Lake is first)",
+      log.lines.count { |l| l.include?("turns the Plates against Garchomp!") } == 4)
 check("at each break the arena's cycle is narrowed to that bar's trio", BREAKS.map { |b| b[:order] } == TRIOS[1..5])
 type_of = FieldEffects.get(:PRISM_ARENA) && lambda { |f| { :GRAND_STAGE => :NORMAL, :SILKWOOD => :BUG, :WATER_SURFACE => :WATER, :NEON_GRID => :ELECTRIC,
             :DESERT => :GROUND, :CORROSIVE_MIRE => :POISON, :VOLCANIC => :FIRE, :COLOSSEUM => :FIGHTING, :FLOWER_GARDEN => :GRASS,
@@ -195,7 +204,21 @@ log = arceus.call("Arceus, Bound: ten idle rounds inside bar 1", :party => wall.
                     FieldEffects.borrowed_fields(battle).first })
 check("inside bar 1 the arena cycles Grand Stage -> Silkwood -> Water Surface -> Grand Stage, three rounds each",
       rows.first(10) == [:GRAND_STAGE] * 2 + [:SILKWOOD] * 3 + [:WATER_SURFACE] * 3 + [:GRAND_STAGE] * 2, rows.inspect)
-check("...and each turn is still announced a round ahead", log.include?(/Insect Plate begins to glow/) && log.include?(/Splash Plate begins to glow/))
+check("...and each turn is still announced a round ahead", log.include?(/Insect Plate begins to glow\.\.\. After the next turn/) &&
+      log.include?(/Splash Plate begins to glow/))
+check("Standard telegraphs 1 round ahead: no 'In 2 turns', no 'glows brighter'", !log.include?(/In 2 turns/) && !log.include?(/glows brighter/))
+rows = []
+log = arceus.call("Arceus, Bound (Casual): ten idle rounds inside bar 1", :party => wall.call, :difficulty => :CASUAL,
+                  :setup => recording(rows, proc { |_battle, _b| :SPLASH }) { |battle|
+                    battle.decision = 3 if battle.turnCount >= 9
+                    FieldEffects.borrowed_fields(battle).first })
+glow = log.lines.index { |l| l.include?("The Insect Plate begins to glow... In 2 turns, the arena becomes the Silkwood!") }
+bright = log.lines.index { |l| l.include?("The Insect Plate glows brighter... After the next turn, the arena becomes the Silkwood!") }
+turned = log.lines.index { |l| l.include?("The Insect Plate blazes") }
+check("Casual telegraphs 2 rounds ahead (BALANCE.md section 7): 'begins to glow... In 2 turns', then 'glows brighter', then the turn",
+      glow && bright && turned && glow < bright && bright < turned, [glow, bright, turned].inspect)
+check("...on the same three-round rhythm as Standard", rows.first(10) == [:GRAND_STAGE] * 2 + [:SILKWOOD] * 3 + [:WATER_SURFACE] * 3 + [:GRAND_STAGE] * 2,
+      rows.inspect)
 
 log = arceus.call("Arceus, Bound: Tamsin (2), Brann (7) and Kaito (8) refuse", :refuse => [2, 7, 8])
 forced = LOCKS.map { |l| l[2] }

@@ -16,6 +16,9 @@
 #     :rounds_left  end-of-rounds until the next turn
 #     :rotation     number of turns so far
 #     :interval     rounds per turn (default 3). WRITABLE - applied from the next turn
+#     :telegraph    rounds of warning before a turn (default 1; at most :interval - 1).
+#                   WRITABLE. 2 = "begins to glow... In two turns", then "glows brighter"
+#                   the round before (Bosses :prism_telegraph; Arceus on Casual, BALANCE.md section 7)
 #     :type_map     { gym_field_id => type },  :plate_map { type => plate item }
 #     :turn         lambda { |battle| } - turn the Plates NOW (announced, re-types
 #                   Multitype). Use this rather than FieldEffects.rotate_borrowed,
@@ -24,9 +27,10 @@
 #                   curated order below), :mode  :curated / :gym_order / :custom
 #     :gym_order    the 18 gym fields in GYM order (Core's GYMS: Grand Stage,
 #                   Silkwood, Water Surface ... Dragon's Den)
-#     :set_order    lambda { |battle, fields, mode = :custom| } - cycle only among
-#                   `fields`, from the first one, starting with the NEXT turn (call
-#                   :turn afterwards to go there at once). The True Finale uses it:
+#     :set_order    lambda { |battle, fields, mode = :custom, start = nil| } - cycle
+#                   only among `fields`, from the first one (or from `start`, a field
+#                   of the list, then on in list order), starting with the NEXT turn
+#                   (call :turn afterwards to go there at once). The True Finale uses it:
 #                   bar k of Arceus holds the Plates of gyms 3k-2..3k, so within a
 #                   bar the arena cycles those three fields in gym order (Bosses
 #                   :prism_order, design/BALANCE.md section 7). nil/[] = curated.
@@ -92,8 +96,9 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
     pr[:next_plate] = field && plates[types[field]]
   end
 
-  # Narrow (or restore) the cycle. The next turn takes fields[0]; nothing changes until then.
-  set_order = lambda do |battle, fields, mode = :custom|
+  # Narrow (or restore) the cycle. The next turn takes fields[0] (or `start`, then on in list order); nothing
+  # changes until then.
+  set_order = lambda do |battle, fields, mode = :custom, start = nil|
     pr = prism.call(battle)
     next false if !pr || !FieldEffects.field_is?(battle, :PRISM_ARENA)
     list = Array(fields).select { |f| types[f] && FieldEffects.exists?(f) }
@@ -102,7 +107,7 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
       mode = :curated
     end
     battle.fe_state[:borrow_pool]   = (mode == :curated) ? nil : list.dup
-    battle.fe_state[:borrow_cursor] = 0
+    battle.fe_state[:borrow_cursor] = (start && list.index(start)) || 0
     pr[:order] = list.dup
     pr[:mode]  = mode
     set_next.call(pr, peek.call(battle, 0))
@@ -179,7 +184,7 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
     ],
     :hooks         => {
       :on_start => proc { |battle, old_id|
-        pr = { :rounds_left => interval, :rotation => 0, :interval => interval,
+        pr = { :rounds_left => interval, :rotation => 0, :interval => interval, :telegraph => 1,
                :type_map => types, :plate_map => plates, :turn => turn,
                :order => order.dup, :mode => :curated, :gym_order => gym_order.call, :set_order => set_order }
         set_current.call(pr, nil)
@@ -198,10 +203,17 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
           battle.allBattlers.each { |b| attune.call(battle, b) }
         end
         pr[:rounds_left] -= 1
+        # Rounds of warning (writable :telegraph, 1 by default): the glow starts that many rounds ahead.
+        lead = [[pr[:telegraph].to_i, 1].max, [pr[:interval].to_i - 1, 1].max].min
         if pr[:rounds_left] <= 0
           pr[:rounds_left] = pr[:interval] if !turn.call(battle)
-        elsif pr[:rounds_left] == 1 && pr[:next_field]
-          battle.pbDisplay(FieldEffects.format("The {1} begins to glow... After the next turn, the arena becomes the {2}!",
+        elsif pr[:next_field] && pr[:rounds_left] == lead
+          msg = (lead == 1) ? "The {1} begins to glow... After the next turn, the arena becomes the {2}!" :
+                              "The {1} begins to glow... In {3} turns, the arena becomes the {2}!"
+          battle.pbDisplay(FieldEffects.format(msg, item_name.call(pr[:next_plate]), FieldEffects.name_of(pr[:next_field]),
+                                               pr[:rounds_left]))
+        elsif pr[:next_field] && pr[:rounds_left] == 1
+          battle.pbDisplay(FieldEffects.format("The {1} glows brighter... After the next turn, the arena becomes the {2}!",
                                                item_name.call(pr[:next_plate]), FieldEffects.name_of(pr[:next_field])))
         end
       },
