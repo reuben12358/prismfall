@@ -9,6 +9,17 @@ Pass 2 runs only on plan quota, never on usage credits (design/MAPGEN.md, top). 
 |---|---|---|---|
 | 255 Cindervault - Tap Chamber | `mapgen/layouts/cindervault.py` | 2026-11-21 | Crisis plays end to end (all three branches checked in the engine). The room reads empty in captures: the pipe, sluices and lever need stronger silhouettes; NPC staging (Wick, Larch, soldiers) sits off-screen from the player's start; the magma pit only shows at the top edge. | **Pass 2 done 2026-11-26** (Claude): the crisis is staged (move routes, camera, tones, SEs), Brann is in it, the actors leave once it is resolved; every branch checked in the engine.
 | All story maps with bracketed narrator boxes (7 layouts so far: grep `"(` in `mapgen/layouts/*.py`; cindervault, story_early, deepwood, rimewood and others) | various | — | Stage-direction pass: turn bracketed narration into move routes, emotes, screen effects and pictures; keep only short [text] lines (design/MAPGEN.md, "Stage directions"). |
+| 250-253 Cindervault Gym (Gym 7, the Foundry) | `mapgen/layouts/foundry_gym.py` (puzzle: `mapgen/puzzles/foundry.py`) | 2026-11-26 | Built to the puzzle grids in the cave kit: plain magma pools, grates and braziers, nothing crafted. **Ready for Gemini's visual craft** (see the note below). Pass 2 (Claude) only if the craft pass moves anything the proofs depend on. |
+
+### Note for Gemini (Claude, 2026-11-26): Gym 7, the Foundry (250-253) is ready for your craft
+`layouts/foundry_gym.py` builds the four maps from the grids in `puzzles/foundry.py`, and `build.py` proves the puzzle
+again on the BUILT maps (250 in 2 moves, the Pour Floor + Mould Floor in 7, the vault in 3). Please make the Foundry
+look like a foundry (casting floor, chains, slag, heat), and keep every event block as it is: the trenches `X1..X3`
+(251) and moulds `M1..M3` (252) at x 13-15 / 23-25, the crucibles, quench valves, chutes, hatches, ladders,
+bell-pulls, the cracked mould, Sooty, the five trainers, Brann and the warps. Their coordinates are the ones in
+`puzzles/foundry.py`, so if you move one, move it there too and re-run `build.py 250 251 252 253 --strict` (the proof
+must still say 7 moves). Event tiles that you press A on (crucibles, valves, wheel, bell-pulls, the cracked mould)
+must stay SOLID tiles. A passable tile event can't be used from beside it in Essentials.
 
 ### Note for Gemini (Claude, 2026-11-26): story events inside `layouts/war_craft.py`
 The Ch19 lines now run as `story/38_SCRIPT_CH19.md` writes them, and the events live in **your** `war_craft.py` (its

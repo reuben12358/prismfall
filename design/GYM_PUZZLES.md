@@ -1033,6 +1033,14 @@ y24  ##############@##############
 - Each `M<k>` tile: P0 [—] blank (pit) · P1 [S43k on] tile IRON_CAST (passable).
 - Trainers: Worker (8,21), Black Belt (20,8).
 
+> **Built 2026-11-26 (Claude):** maps 250–253 by `mapgen/layouts/foundry_gym.py`, with the model and runtime in
+> `mapgen/puzzles/foundry.py`. That file's coordinates are the ones to use (the trainers and some devices moved, and the
+> trainers are `tools/trainer_gen/routes.py`'s five). `build.py` proves the puzzle on the design and on the built maps.
+> The solver's shortest route is **7 moves**: pour K1 → X1 and K2 → X2 as they stand, quench X2, turn K3 to X3 and
+> pour, chute C1, then chute C2 (no aim on K1/K2). The hand solution below is the same idea with one more aim. The
+> vault takes 3 moves (pour K1, pour K2, chute C1). All of it was walked in the real engine
+> (`tools/harness/visual/ch8/008_Ch8StoryCapture.rb`, `CH8_VAULT=1`).
+
 **Solution (verified by hand; 3 pours, 1 quench, 2 drains):**
 1. Pour **K3 → X1**, **K1 → X2**, **K2 → X3** (aim first).
 2. **Quench X2** only.
