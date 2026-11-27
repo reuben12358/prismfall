@@ -45841,3 +45841,473 @@ Pokemon = TOXTRICITY,73
     Nature = MODEST
     IV = 20
     EV = 0
+#-------------------------------
+# Ch8 Trials (plugins/Prismfall Trials/121_Quests_Cindervault.rb; gen.py "Ch8 Trials"): Kessa (Adequate Swords), the
+# Crucible's seven bouts (Seven Bouts, no bag), Tribune Halden (The Trial of Truth). v50 / 150 Hard / 250 Casual.
+#-------------------------------
+[CRUSHGIRL,Kessa,50]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = ...Sharp. Fine. Excellent AND beaten. Both true.
+Pokemon = HONEDGE,35
+    Moves = SHADOWSNEAK,NIGHTSLASH,RETALIATE,IRONDEFENSE
+    Ability = NOGUARD
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 24
+Pokemon = DOUBLADE,37
+    Moves = SHADOWSNEAK,NIGHTSLASH,RETALIATE,IRONDEFENSE
+    Ability = NOGUARD
+    Item = EVIOLITE
+    Nature = ADAMANT
+    IV = 24
+#-------------------------------
+[CRUSHGIRL,Kessa,150]
+Items = FULLRESTORE,FULLRESTORE
+LoseText = ...Sharp. Fine. Excellent AND beaten. Both true.
+Pokemon = HONEDGE,36
+    Moves = SHADOWSNEAK,NIGHTSLASH,RETALIATE,IRONDEFENSE
+    Ability = NOGUARD
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,216,0,216,0,0
+Pokemon = PAWNIARD,36
+    Moves = SLASH,ASSURANCE,METALCLAW,TORMENT
+    Ability = DEFIANT
+    Item = BLACKGLASSES
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,216,0,216,0,0
+Pokemon = DOUBLADE,38
+    Moves = SHADOWSNEAK,NIGHTSLASH,IRONHEAD,IRONDEFENSE
+    Ability = NOGUARD
+    Item = EVIOLITE
+    Nature = ADAMANT
+    IV = 31
+    EV = 228,228,4,0,0,0
+#-------------------------------
+[CRUSHGIRL,Kessa,250]
+Items = HYPERPOTION
+LoseText = ...Sharp. Fine. Excellent AND beaten. Both true.
+Pokemon = HONEDGE,33
+    Moves = SHADOWSNEAK,NIGHTSLASH,RETALIATE,IRONDEFENSE
+    Ability = NOGUARD
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 12
+    EV = 0
+Pokemon = DOUBLADE,35
+    Moves = SHADOWSNEAK,NIGHTSLASH,RETALIATE,IRONDEFENSE
+    Ability = NOGUARD
+    Item = EVIOLITE
+    Nature = ADAMANT
+    IV = 12
+    EV = 0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Orrin,50]
+LoseText = Waited all morning for that. Worth it. Honestly.
+Pokemon = HOUNDOOM,33
+    Moves = FIREFANG,BITE,TAUNT,SMOG
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 18
+Pokemon = HARIYAMA,33
+    Moves = FAKEOUT,VITALTHROW,KNOCKOFF,FORCEPALM
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Orrin,150]
+LoseText = Waited all morning for that. Worth it. Honestly.
+Pokemon = HOUNDOOM,34
+    Moves = FIREFANG,BITE,TAUNT,SMOG
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 26
+    EV = 4,0,0,204,204,0
+Pokemon = HARIYAMA,34
+    Moves = FAKEOUT,VITALTHROW,KNOCKOFF,FORCEPALM
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 26
+    EV = 204,204,0,0,0,4
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Orrin,250]
+LoseText = Waited all morning for that. Worth it. Honestly.
+Pokemon = HOUNDOOM,31
+    Moves = FIREFANG,BITE,TAUNT,SMOG
+    Ability = FLASHFIRE
+    Nature = MODEST
+    IV = 8
+    EV = 0
+Pokemon = HARIYAMA,31
+    Moves = FAKEOUT,VITALTHROW,KNOCKOFF,FORCEPALM
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+#-------------------------------
+[ASHKAAR_SOLDIER_F,Tavi,50]
+LoseText = Three years on the Pyre Road. That was the best part. Don't tell anyone.
+Pokemon = PONYTA,34
+    Moves = FLAMEWHEEL,STOMP,AGILITY,FLAMECHARGE
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 18
+Pokemon = FLETCHINDER,34
+    Moves = ACROBATICS,FLAMECHARGE,AGILITY,QUICKATTACK
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[ASHKAAR_SOLDIER_F,Tavi,150]
+LoseText = Three years on the Pyre Road. That was the best part. Don't tell anyone.
+Pokemon = PONYTA,35
+    Moves = FLAMEWHEEL,STOMP,AGILITY,FLAMECHARGE
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 26
+    EV = 4,210,0,210,0,0
+Pokemon = FLETCHINDER,35
+    Moves = ACROBATICS,FLAMECHARGE,AGILITY,QUICKATTACK
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,210,0,210,0,0
+#-------------------------------
+[ASHKAAR_SOLDIER_F,Tavi,250]
+LoseText = Three years on the Pyre Road. That was the best part. Don't tell anyone.
+Pokemon = PONYTA,32
+    Moves = FLAMEWHEEL,STOMP,AGILITY,FLAMECHARGE
+    Ability = FLASHFIRE
+    Nature = JOLLY
+    IV = 8
+    EV = 0
+Pokemon = FLETCHINDER,32
+    Moves = ACROBATICS,FLAMECHARGE,AGILITY,QUICKATTACK
+    Ability = FLAMEBODY
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Hollen,50]
+LoseText = The Slag Ward says hello. Loudly.
+Pokemon = CAMERUPT,34
+    Moves = LAVAPLUME,EARTHPOWER,AMNESIA,ROCKSLIDE
+    Ability = SOLIDROCK
+    Nature = QUIET
+    IV = 18
+Pokemon = MACHOKE,35
+    Moves = VITALTHROW,KNOCKOFF,STRENGTH,LOWSWEEP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Hollen,150]
+LoseText = The Slag Ward says hello. Loudly.
+Pokemon = CAMERUPT,35
+    Moves = LAVAPLUME,EARTHPOWER,AMNESIA,ROCKSLIDE
+    Ability = SOLIDROCK
+    Nature = QUIET
+    IV = 26
+    EV = 210,0,4,0,210,0
+Pokemon = MACHOKE,36
+    Moves = VITALTHROW,KNOCKOFF,STRENGTH,LOWSWEEP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,216,0,216,0,0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Hollen,250]
+LoseText = The Slag Ward says hello. Loudly.
+Pokemon = CAMERUPT,32
+    Moves = LAVAPLUME,EARTHPOWER,AMNESIA,ROCKSLIDE
+    Ability = SOLIDROCK
+    Nature = QUIET
+    IV = 8
+    EV = 0
+Pokemon = MACHOKE,33
+    Moves = VITALTHROW,KNOCKOFF,STRENGTH,LOWSWEEP
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+#-------------------------------
+[ASHKAAR_EMBER_RIDER,Ilka,50]
+LoseText = Two at once and still not enough. Fair's fair.
+Pokemon = GROWLITHE,35
+    Moves = FIREFANG,CRUNCH,HELPINGHAND,RETALIATE
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 18
+Pokemon = TORKOAL,35
+    Moves = LAVAPLUME,BODYSLAM,PROTECT,CLEARSMOG
+    Ability = WHITESMOKE
+    Nature = BOLD
+    IV = 18
+Pokemon = SALAZZLE,35
+    Moves = INCINERATE,POISONFANG,NASTYPLOT,KNOCKOFF
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 18
+#-------------------------------
+[ASHKAAR_EMBER_RIDER,Ilka,150]
+LoseText = Two at once and still not enough. Fair's fair.
+Pokemon = GROWLITHE,36
+    Moves = FIREFANG,CRUNCH,HELPINGHAND,RETALIATE
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,216,0,216,0,0
+Pokemon = TORKOAL,36
+    Moves = LAVAPLUME,BODYSLAM,PROTECT,CLEARSMOG
+    Ability = WHITESMOKE
+    Nature = BOLD
+    IV = 26
+    EV = 216,4,216,0,0,0
+Pokemon = SALAZZLE,36
+    Moves = INCINERATE,POISONFANG,NASTYPLOT,KNOCKOFF
+    Ability = CORROSION
+    Nature = TIMID
+    IV = 26
+    EV = 4,0,0,216,216,0
+#-------------------------------
+[ASHKAAR_EMBER_RIDER,Ilka,250]
+LoseText = Two at once and still not enough. Fair's fair.
+Pokemon = GROWLITHE,33
+    Moves = FIREFANG,CRUNCH,HELPINGHAND,RETALIATE
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+Pokemon = TORKOAL,33
+    Moves = LAVAPLUME,BODYSLAM,PROTECT,CLEARSMOG
+    Ability = WHITESMOKE
+    Nature = BOLD
+    IV = 8
+    EV = 0
+#-------------------------------
+[ASHKAAR_SOLDIER_F,Senna,50]
+LoseText = Fifth bout. Nobody's lying to themselves now.
+Pokemon = GABITE,36
+    Moves = DRAGONBREATH,SLASH,BULLDOZE,BITE
+    Ability = ROUGHSKIN
+    Nature = JOLLY
+    IV = 24
+Pokemon = MONFERNO,36
+    Moves = MACHPUNCH,POWERUPPUNCH,FLAMEWHEEL,CLOSECOMBAT
+    Ability = IRONFIST
+    Nature = JOLLY
+    IV = 24
+#-------------------------------
+[ASHKAAR_SOLDIER_F,Senna,150]
+LoseText = Fifth bout. Nobody's lying to themselves now.
+Pokemon = GABITE,37
+    Moves = DRAGONBREATH,SLASH,BULLDOZE,BITE
+    Ability = ROUGHSKIN
+    Nature = JOLLY
+    IV = 31
+    EV = 4,222,0,222,0,0
+Pokemon = MONFERNO,37
+    Moves = MACHPUNCH,POWERUPPUNCH,FLAMEWHEEL,CLOSECOMBAT
+    Ability = IRONFIST
+    Nature = JOLLY
+    IV = 31
+    EV = 4,222,0,222,0,0
+#-------------------------------
+[ASHKAAR_SOLDIER_F,Senna,250]
+LoseText = Fifth bout. Nobody's lying to themselves now.
+Pokemon = GABITE,34
+    Moves = DRAGONBREATH,SLASH,BULLDOZE,BITE
+    Ability = ROUGHSKIN
+    Nature = JOLLY
+    IV = 12
+    EV = 0
+Pokemon = MONFERNO,34
+    Moves = MACHPUNCH,POWERUPPUNCH,FLAMEWHEEL,FEINT
+    Ability = IRONFIST
+    Nature = JOLLY
+    IV = 12
+    EV = 0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Rusk,50]
+LoseText = ...
+Pokemon = SHELGON,36
+    Moves = DRAGONCLAW,CRUNCH,PROTECT,HEADBUTT
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 24
+Pokemon = PIGNITE,36
+    Moves = HEATCRASH,ARMTHRUST,ASSURANCE,TAKEDOWN
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 24
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Rusk,150]
+LoseText = ...
+Pokemon = SHELGON,37
+    Moves = DRAGONCLAW,CRUNCH,PROTECT,HEADBUTT
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 31
+    EV = 222,4,222,0,0,0
+Pokemon = PIGNITE,37
+    Moves = HEATCRASH,ARMTHRUST,ASSURANCE,TAKEDOWN
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,222,0,222,0,0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Rusk,250]
+LoseText = ...
+Pokemon = SHELGON,34
+    Moves = DRAGONCLAW,CRUNCH,PROTECT,HEADBUTT
+    Ability = ROCKHEAD
+    Nature = IMPISH
+    IV = 12
+    EV = 0
+Pokemon = PIGNITE,34
+    Moves = HEATCRASH,ARMTHRUST,ASSURANCE,TAKEDOWN
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 12
+    EV = 0
+#-------------------------------
+[ASHKAAR_OFFICER,Corran,50]
+LoseText = Seven. The Legate will want a word. She'll want it to be short.
+Pokemon = DRAGONAIR,37
+    Moves = DRAGONTAIL,AQUATAIL,THUNDERWAVE,AGILITY
+    Ability = MARVELSCALE
+    Nature = ADAMANT
+    IV = 24
+Pokemon = HAKAMOO,37
+    Moves = DRAGONCLAW,HEADBUTT,IRONDEFENSE,WORKUP
+    Ability = BULLETPROOF
+    Nature = ADAMANT
+    IV = 24
+Pokemon = MAGMAR,38
+    Moves = LAVAPLUME,FIREPUNCH,CONFUSERAY,CLEARSMOG
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 24
+#-------------------------------
+[ASHKAAR_OFFICER,Corran,150]
+LoseText = Seven. The Legate will want a word. She'll want it to be short.
+Pokemon = DRAGONAIR,38
+    Moves = DRAGONTAIL,AQUATAIL,THUNDERWAVE,AGILITY
+    Ability = MARVELSCALE
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,228,0,228,0,0
+Pokemon = HAKAMOO,38
+    Moves = DRAGONCLAW,HEADBUTT,IRONDEFENSE,WORKUP
+    Ability = BULLETPROOF
+    Nature = ADAMANT
+    IV = 31
+    EV = 228,228,4,0,0,0
+Pokemon = MAGMAR,39
+    Moves = LAVAPLUME,FIREPUNCH,CONFUSERAY,CLEARSMOG
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 31
+    EV = 4,0,0,234,234,0
+#-------------------------------
+[ASHKAAR_OFFICER,Corran,250]
+LoseText = Seven. The Legate will want a word. She'll want it to be short.
+Pokemon = DRAGONAIR,35
+    Moves = DRAGONTAIL,AQUATAIL,THUNDERWAVE,AGILITY
+    Ability = MARVELSCALE
+    Nature = ADAMANT
+    IV = 12
+    EV = 0
+Pokemon = HAKAMOO,35
+    Moves = DRAGONCLAW,HEADBUTT,IRONDEFENSE,WORKUP
+    Ability = BULLETPROOF
+    Nature = ADAMANT
+    IV = 12
+    EV = 0
+Pokemon = MAGMAR,36
+    Moves = LAVAPLUME,FIREPUNCH,CONFUSERAY,CLEARSMOG
+    Ability = FLAMEBODY
+    Nature = MODEST
+    IV = 12
+    EV = 0
+#-------------------------------
+[ASHKAAR_OFFICER,Halden,50]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = My oath stands down. Not because I lost. Because it wasn't true.
+Pokemon = KROKOROK,39
+    Moves = CRUNCH,DIG,TORMENT,SANDTOMB
+    Ability = MOXIE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 24
+Pokemon = ARCANINE,40
+    Moves = FLAREBLITZ,EXTREMESPEED,CRUNCH,ROAR
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 24
+Pokemon = DRUDDIGON,41
+    Moves = DRAGONCLAW,CRUNCH,HONECLAWS,METALCLAW
+    Ability = ROUGHSKIN
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 24
+#-------------------------------
+[ASHKAAR_OFFICER,Halden,150]
+Items = FULLRESTORE,FULLRESTORE
+LoseText = My oath stands down. Not because I lost. Because it wasn't true.
+Pokemon = KROKOROK,40
+    Moves = CRUNCH,DIG,TORMENT,SANDTOMB
+    Ability = MOXIE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,240,0,240,0,0
+Pokemon = TURTONATOR,40
+    Moves = DRAGONPULSE,FLAMETHROWER,BODYSLAM,PROTECT
+    Ability = SHELLARMOR
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 240,0,4,0,240,0
+Pokemon = ARCANINE,41
+    Moves = FLAREBLITZ,EXTREMESPEED,CRUNCH,ROAR
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,246,0,246,0,0
+Pokemon = DRUDDIGON,41
+    Moves = DRAGONCLAW,CRUNCH,HONECLAWS,METALCLAW
+    Ability = ROUGHSKIN
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 246,246,4,0,0,0
+#-------------------------------
+[ASHKAAR_OFFICER,Halden,250]
+Items = HYPERPOTION
+LoseText = My oath stands down. Not because I lost. Because it wasn't true.
+Pokemon = KROKOROK,36
+    Moves = CRUNCH,DIG,TORMENT,SANDTOMB
+    Ability = MOXIE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 12
+    EV = 0
+Pokemon = ARCANINE,37
+    Moves = FLAREBLITZ,EXTREMESPEED,CRUNCH,ROAR
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 12
+    EV = 0
+Pokemon = DRUDDIGON,38
+    Moves = DRAGONCLAW,CRUNCH,HONECLAWS,METALCLAW
+    Ability = ROUGHSKIN
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 12
+    EV = 0

@@ -1181,6 +1181,97 @@ check("every rank-reward Pokemon has a badge gate and answers none of the next #
       rank_gate_errors.empty?, rank_gate_errors.first(4).join("; "))
 PBDayNight.define_singleton_method(:isNight?) { |*a| __harness_isNight?(*a) }
 
+section("10. Cindervault, Chapter 8 (121_Quests_Cindervault.rb): Adequate Swords, Seven Bouts, the Trial of Truth")
+#-------------------------------------------------------------------------------
+# Driven through the TALK rows the Cindervault map events call (mapgen/trial_overlay.py 240 / 247), real battles.
+$player.party = [mk(:SWAMPERT, 50, [:SURF, :EARTHQUAKE, :ICEBEAM, :PROTECT]),
+                 mk(:GARCHOMP, 50, [:EARTHQUAKE, :DRAGONCLAW, :CRUNCH, :SWORDSDANCE]),
+                 mk(:GYARADOS, 50, [:WATERFALL, :CRUNCH, :ICEFANG, :DRAGONDANCE]),
+                 mk(:LUCARIO, 50, [:AURASPHERE, :FLASHCANNON, :EXTREMESPEED, :NASTYPLOT])]
+fought10 = []
+tb_orig = tr.method(:trainer_battle)
+tr.define_singleton_method(:trainer_battle) do |spec, **kw|
+  fought10 << [spec[1], kw[:field], kw[:double] ? true : false, ($game_temp.battle_rules["noBagItems"] rescue nil) ? true : false]
+  tb_orig.call(spec, **kw)
+end
+# --- Adequate Swords (240 -> 247 -> 240) ---------------------------------------------------------
+badges9.call(5)
+check("Adequate Swords locked with 5 badges", tr.state(:AS_ADEQUATE_SWORDS) == :locked, tr.state(:AS_ADEQUATE_SWORDS))
+badges9.call(6)
+check("Adequate Swords offered by the owner with 6 badges; the sign keeps its own text",
+      tr.talk_ready?(:ADEQUATE_OWNER) && !tr.talk_ready?(:ADEQUATE_SIGN), tr.state(:AS_ADEQUATE_SWORDS))
+otalk(:ADEQUATE_OWNER, ["I'll test them."])
+check("accepted: step :test, Kessa's row is live", tr.at?(:AS_ADEQUATE_SWORDS, :test) && tr.talk_ready?(:EXCELLENT_SMITH), tr.step(:AS_ADEQUATE_SWORDS))
+retry_fight.call(:AS_ADEQUATE_SWORDS, :EXCELLENT_SMITH, [])
+check("Kessa's blade-test won ([CRUSHGIRL,Kessa,50] on :VOLCANIC): step :court", tr.at?(:AS_ADEQUATE_SWORDS, :court) &&
+      fought10.any? { |f| f[0] == "Kessa" && f[1] == :VOLCANIC }, "#{tr.step(:AS_ADEQUATE_SWORDS)} #{fought10.inspect}")
+otalk(:HONEST_COURT, ["They're adequate.", "They're excellent."])
+check("the Honest Court (Oath-Scribe, 247) records 'excellent' after the flinch: step :home",
+      tr.at?(:AS_ADEQUATE_SWORDS, :home) && tr.flag(:AS_ADEQUATE_SWORDS, :verdict) == :excellent, tr.step(:AS_ADEQUATE_SWORDS))
+otalk(:ADEQUATE_OWNER)
+check("Adequate Swords done: Metal Coat, +2 Ashkaar; the sign now reads (STILL.)",
+      tr.done?(:AS_ADEQUATE_SWORDS) && $bag.has?(:METALCOAT) && tr.talk_ready?(:ADEQUATE_SIGN), tr.state(:AS_ADEQUATE_SWORDS))
+# --- Seven Bouts (240, the Crucible) -------------------------------------------------------------
+check("Seven Bouts is on the Legate's rows, after Forte's and the Brazier Writ's",
+      tr::TALK[:CRUCIBLE_LEGATE][:rows].map { |r| r[0] }.uniq == [:AS_OCTAVE_TOO_LOUD, :AS_BRAZIER_WRIT, :AS_SEVEN_BOUTS])
+seven = lambda do |seed|
+  fought10.clear
+  $player.heal_party
+  srand(seed)
+  ftalk(:CRUCIBLE_LEGATE, ["Seven bouts. Now."])
+  3.times do |i|
+    break if !tr.at?(:AS_SEVEN_BOUTS, :bouts)
+    $player.heal_party
+    srand(seed + 1 + i)
+    ftalk(:CRUCIBLE_LEGATE, ["Ring the sand."])
+  end
+end
+saved_lc = tr.store[:quests][:AS_LITTLE_CRUCIBLE]
+tr.reset(:AS_LITTLE_CRUCIBLE)
+seven.call(4242)
+check("Seven Bouts done without the barge's paper: all seven, Orrin first (Charcoal, Fire Stone)",
+      tr.done?(:AS_SEVEN_BOUTS) && $bag.has?(:CHARCOAL) && $bag.has?(:FIRESTONE) &&
+      fought10.last(7).map(&:first) == ["Orrin", "Tavi", "Hollen", "Ilka", "Senna", "Rusk", "Corran"], fought10.map(&:first).inspect)
+tr.reset(:AS_SEVEN_BOUTS)
+tr.set_flag(:AS_LITTLE_CRUCIBLE, :recruited, true)
+seven.call(4342)
+last6 = fought10.last(6)
+check("with the Saltmere barge's paper (AS_LITTLE_CRUCIBLE :recruited) bout 1 is skipped: six fights",
+      tr.done?(:AS_SEVEN_BOUTS) && last6.map(&:first) == ["Tavi", "Hollen", "Ilka", "Senna", "Rusk", "Corran"] &&
+      fought10.none? { |f| f[0] == "Orrin" }, fought10.map(&:first).inspect)
+tr.reset(:AS_LITTLE_CRUCIBLE)
+tr.store[:quests][:AS_LITTLE_CRUCIBLE] = saved_lc if saved_lc
+check("every bout runs with the bag shut (noBagItems); bout 4 is a double; bout 7 is on the Dragon's Den",
+      fought10.all? { |f| f[3] } && last6[2][2] && last6[5][1] == :DRAGONS_DEN && last6[0..4].all? { |f| f[1] == :VOLCANIC },
+      last6.inspect)
+# --- The Trial of Truth (247, the Hall of Oaths) ---------------------------------------------------
+$game_switches[120] = false
+$game_variables[129] = 6
+check("Trial of Truth locked before the Caldera Crisis (S120)", tr.state(:AS_TRIAL_OF_TRUTH) == :locked)
+$game_switches[120] = true
+check("still locked until the Light Stone scene (CH8_STEP 7): the witness hasn't heard Haskar yet",
+      tr.state(:AS_TRIAL_OF_TRUTH) == :locked, tr.state(:AS_TRIAL_OF_TRUTH))
+$game_variables[129] = 7
+check("offered by Herald Pyke at CH8_STEP 7", tr.talk_ready?(:HERALD_PYKE) && tr.state(:AS_TRIAL_OF_TRUTH) == :available)
+otalk(:HERALD_PYKE, ["I'll testify.", "His oath is true."])
+check("lying at the brazier fails the Trial (no Flame Orb)", tr.failed?(:AS_TRIAL_OF_TRUTH) && !$bag.has?(:FLAMEORB), tr.state(:AS_TRIAL_OF_TRUTH))
+tr.reset(:AS_TRIAL_OF_TRUTH)
+otalk(:HERALD_PYKE, ["I'll testify.", "I was down at the tap. I'll say nothing."])
+check("silence is honoured: done (:silent), no Flame Orb, and Pyke keeps his own lines",
+      tr.outcome(:AS_TRIAL_OF_TRUTH) == :silent && !$bag.has?(:FLAMEORB) && !tr.talk_ready?(:HERALD_PYKE), tr.outcome(:AS_TRIAL_OF_TRUTH).inspect)
+tr.reset(:AS_TRIAL_OF_TRUTH)
+fought10.clear
+$player.heal_party
+srand(5150)
+ftalk(:HERALD_PYKE, ["I'll testify.", "Haskar said the Dominar told him to take it."])
+retry_fight.call(:AS_TRIAL_OF_TRUTH, :HALDEN, [])
+check("the truth contradicts Halden: the oath duel ([ASHKAAR_OFFICER,Halden,50], :VOLCANIC) won -> done, Flame Orb",
+      tr.done?(:AS_TRIAL_OF_TRUTH) && tr.outcome(:AS_TRIAL_OF_TRUTH).nil? && $bag.has?(:FLAMEORB) &&
+      fought10.any? { |f| f[0] == "Halden" && f[1] == :VOLCANIC }, "#{tr.state(:AS_TRIAL_OF_TRUTH)} #{fought10.inspect}")
+otalk(:HERALD_PYKE)
+check("Pyke's after line plays once, then his own lines (the Ashkaar board) again", !tr.talk_ready?(:HERALD_PYKE))
+tr.define_singleton_method(:trainer_battle, tb_orig)
+
 #-------------------------------------------------------------------------------
 fails = RESULTS.reject { |r| r[1] }
 File.write(File.join(OUT, "transcript.txt"), "LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).\n" + TRANSCRIPT.join("\n") + "\n")

@@ -2328,6 +2328,55 @@ for _s in (0, 1, 2):
              relevel(_j4(_s), GAUNTLET_LV), v=60 + _s)
 
 # ------------------------------------------------------------------------------
+# Ch8 Trials (plugins/Prismfall Trials/121_Quests_Cindervault.rb; Trials owner 2026-11-27). Quest versions 50 (+100 Hard,
+# +200 Casual). Cindervault, cap 39 (Brann); the Trial of Truth is rank 3 (rec. Lv 41).
+# --- Adequate Swords (240): Kessa of EXCELLENT SWORDS, the blade-test on the caldera floor (:VOLCANIC) ---------------
+S("Ch8 Trials - Kessa of EXCELLENT SWORDS, AS_ADEQUATE_SWORDS blade-test (240, field :VOLCANIC). The swords are excellent; "
+  "No Guard means every edge lands, both ways.", "CRUSHGIRL", "Kessa", 50, 39,
+  "...Sharp. Fine. Excellent AND beaten. Both true.", [
+    P("HONEDGE", 35, "NOGUARD", "ORANBERRY", "ADAMANT", "SHADOWSNEAK,NIGHTSLASH,RETALIATE,IRONDEFENSE", "A"),
+    P("PAWNIARD", 36, "DEFIANT", "BLACKGLASSES", "ADAMANT", "SLASH,ASSURANCE,METALCLAW,TORMENT", "A", only="hard"),
+    P("DOUBLADE", 37, "NOGUARD", "EVIOLITE", "ADAMANT", "SHADOWSNEAK,NIGHTSLASH,RETALIATE,IRONDEFENSE", "BA",
+      hard={"moves": "SHADOWSNEAK,NIGHTSLASH,IRONHEAD,IRONDEFENSE"}),
+])
+# --- Seven Bouts (240, the Crucible): seven back to back, no healing, no bag for either side (the rite's rule) -----------
+for _note, _tt, _nm, _lose, _mons in (
+    ("bout 1 (:VOLCANIC; skipped with the Saltmere barge's paper)", "ASHKAAR_SOLDIER_M", "Orrin", "Waited all morning for that. Worth it. Honestly.", [
+        P("HOUNDOOM", 33, "FLASHFIRE", None, "MODEST", "FIREFANG,BITE,TAUNT,SMOG", "S"),
+        P("HARIYAMA", 33, "THICKFAT", None, "ADAMANT", "FAKEOUT,VITALTHROW,KNOCKOFF,FORCEPALM", "HA")]),
+    ("bout 2 (:VOLCANIC)", "ASHKAAR_SOLDIER_F", "Tavi", "Three years on the Pyre Road. That was the best part. Don't tell anyone.", [
+        P("PONYTA", 34, "FLASHFIRE", None, "JOLLY", "FLAMEWHEEL,STOMP,AGILITY,FLAMECHARGE", "A"),
+        P("FLETCHINDER", 34, "FLAMEBODY", None, "ADAMANT", "ACROBATICS,FLAMECHARGE,AGILITY,QUICKATTACK", "A")]),
+    ("bout 3 (:VOLCANIC)", "ASHKAAR_SOLDIER_M", "Hollen", "The Slag Ward says hello. Loudly.", [
+        P("CAMERUPT", 34, "SOLIDROCK", None, "QUIET", "LAVAPLUME,EARTHPOWER,AMNESIA,ROCKSLIDE", "BS"),
+        P("MACHOKE", 35, "GUTS", None, "ADAMANT", "VITALTHROW,KNOCKOFF,STRENGTH,LOWSWEEP", "A")]),
+    ("bout 4, a DOUBLE (:VOLCANIC)", "ASHKAAR_EMBER_RIDER", "Ilka", "Two at once and still not enough. Fair's fair.", [
+        P("GROWLITHE", 35, "INTIMIDATE", None, "ADAMANT", "FIREFANG,CRUNCH,HELPINGHAND,RETALIATE", "A"),
+        P("TORKOAL", 35, "WHITESMOKE", None, "BOLD", "LAVAPLUME,BODYSLAM,PROTECT,CLEARSMOG", "BPD"),
+        P("SALAZZLE", 35, "CORROSION", None, "TIMID", "INCINERATE,POISONFANG,NASTYPLOT,KNOCKOFF", "S", only="nocasual")]),
+    ("bout 5 (:VOLCANIC)", "ASHKAAR_SOLDIER_F", "Senna", "Fifth bout. Nobody's lying to themselves now.", [
+        P("GABITE", 36, "ROUGHSKIN", None, "JOLLY", "DRAGONBREATH,SLASH,BULLDOZE,BITE", "A"),
+        P("MONFERNO", 36, "IRONFIST", None, "JOLLY", "MACHPUNCH,POWERUPPUNCH,FLAMEWHEEL,CLOSECOMBAT", "A",
+          casual={"moves": "MACHPUNCH,POWERUPPUNCH,FLAMEWHEEL,FEINT"})]),
+    ("bout 6 (:VOLCANIC)", "ASHKAAR_SOLDIER_M", "Rusk", "...", [
+        P("SHELGON", 36, "ROCKHEAD", None, "IMPISH", "DRAGONCLAW,CRUNCH,PROTECT,HEADBUTT", "BPD"),
+        P("PIGNITE", 36, "THICKFAT", None, "ADAMANT", "HEATCRASH,ARMTHRUST,ASSURANCE,TAKEDOWN", "A")]),
+    ("bout 7, the Legate's adjutant on a Dragon's Den preview (:DRAGONS_DEN)", "ASHKAAR_OFFICER", "Corran",
+     "Seven. The Legate will want a word. She'll want it to be short.", [
+        P("DRAGONAIR", 37, "MARVELSCALE", None, "ADAMANT", "DRAGONTAIL,AQUATAIL,THUNDERWAVE,AGILITY", "A"),
+        P("HAKAMOO", 37, "BULLETPROOF", None, "ADAMANT", "DRAGONCLAW,HEADBUTT,IRONDEFENSE,WORKUP", "BA"),
+        P("MAGMAR", 38, "FLAMEBODY", None, "MODEST", "LAVAPLUME,FIREPUNCH,CONFUSERAY,CLEARSMOG", "S")])):
+    S("Ch8 Trials - AS_SEVEN_BOUTS, the Crucible (240), " + _note, _tt, _nm, 50, 39, _lose, _mons, nobag=True)
+# --- The Trial of Truth (247, the Hall of Oaths): Tribune Halden under oath rules (:VOLCANIC) ---------------------------
+S("Ch8 Trials - Tribune Halden, AS_TRIAL_OF_TRUTH (247, field :VOLCANIC): the Legion's word against the PC's. Rank 3.",
+  "ASHKAAR_OFFICER", "Halden", 50, 41, "My oath stands down. Not because I lost. Because it wasn't true.", [
+    P("KROKOROK", 39, "MOXIE", "SITRUSBERRY", "ADAMANT", "CRUNCH,DIG,TORMENT,SANDTOMB", "A"),
+    P("TURTONATOR", 40, "SHELLARMOR", "SITRUSBERRY", "MODEST", "DRAGONPULSE,FLAMETHROWER,BODYSLAM,PROTECT", "BS", only="hard"),
+    P("ARCANINE", 40, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,EXTREMESPEED,CRUNCH,ROAR", "A"),
+    P("DRUDDIGON", 41, "ROUGHSKIN", "SITRUSBERRY", "ADAMANT", "DRAGONCLAW,CRUNCH,HONECLAWS,METALCLAW", "BA"),
+])
+
+# ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
 
 def main():

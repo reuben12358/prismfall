@@ -50,9 +50,12 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Rekk sent out Sizzlipede!
     |     >> sent out (foe): Sizzlipede Lv.19 [FLASHFIRE]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Sizzlipede 52/52]
@@ -72,9 +75,10 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | 
     | --- Turn 2 ---
     |   [Machoke 76/76 | Carkol 63/63]
-    |   Machoke used Karate Chop!
+    |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Carkol (foe): 63 -> 0 / 63
+    |   A critical hit!
     |   It's super effective!
     |   The opposing Carkol fainted!
     |     xx fainted: Carkol (foe)
@@ -93,15 +97,27 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Vasha sent out Capsakid!
     |     >> sent out (foe): Capsakid Lv.19 [CHLOROPHYLL]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Capsakid 52/52]
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
-    |     HP Capsakid (foe): 52 -> 0 / 52
+    |   Machoke used Knock Off!
+    |     HP Capsakid (foe): 52 -> 4 / 52
+    |   The opposing Capsakid used Growth!
+    |     (anim: StatUp)
+    |   The opposing Capsakid's Attack rose!
+    |   The opposing Capsakid's Special Attack rose!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Machoke 76/76 | Capsakid 4/52]
+    |   Machoke used Knock Off!
+    |     HP Capsakid (foe): 4 -> 0 / 52
     |   The opposing Capsakid fainted!
     |     xx fainted: Capsakid (foe)
     |   The crowd went wild for Machoke!
@@ -113,13 +129,12 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Vasha sent out Houndour!
     |     >> sent out (foe): Houndour Lv.20 [EARLYBIRD]
     | 
-    | --- Turn 2 ---
+    | --- Turn 3 ---
     |   [Machoke 76/76 | Houndour 52/52]
     |   The opposing Houndour used Bite!
-    |     HP Machoke (player): 76 -> 68 / 76
+    |     HP Machoke (player): 76 -> 67 / 76
     |   It's not very effective...
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    |   Machoke used Rock Tomb!
     |     HP Houndour (foe): 52 -> 0 / 52
     |   It's super effective!
     |   The opposing Houndour fainted!
@@ -139,15 +154,31 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Officer Brakka sent out Salandit!
     |     >> sent out (foe): Salandit Lv.20 [CORROSION]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 68/76 | Salandit 54/54]
+    |   [Machoke 67/76 | Salandit 54/54]
     |   The opposing Salandit used Sweet Scent!
     |     (anim: StatDown)
     |   Machoke's evasiveness harshly fell!
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Salandit (foe): 54 -> 2 / 54
+    |   It's not very effective...
+    |     (anim: StatDown)
+    |   The opposing Salandit's Speed fell!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Machoke 67/76 | Salandit 2/54]
+    |   Ashkaar Officer Brakka used a Super Potion.
+    |     HP Salandit (foe): 2 -> 54 / 54
+    |   The opposing Salandit's HP was restored.
     |   Machoke used Rock Tomb!
     |     HP Salandit (foe): 54 -> 0 / 54
     |   It's super effective!
@@ -162,8 +193,8 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Officer Brakka sent out Numel!
     |     >> sent out (foe): Numel Lv.20 [OBLIVIOUS]
     | 
-    | --- Turn 2 ---
-    |   [Machoke 68/76 | Numel 59/59]
+    | --- Turn 3 ---
+    |   [Machoke 67/76 | Numel 59/59]
     |   Machoke used Karate Chop!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Numel (foe): 59 -> 0 / 59
@@ -179,37 +210,18 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Officer Brakka sent out Fletchinder!
     |     >> sent out (foe): Fletchinder Lv.21 [FLAMEBODY]
     | 
-    | --- Turn 3 ---
-    |   [Machoke 68/76 | Fletchinder 62/62]
-    |   The opposing Fletchinder used Growl!
-    |     (anim: StatDown)
-    |   Machoke's Attack fell!
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
-    |     HP Fletchinder (foe): 62 -> 11 / 62
-    |   It's not very effective...
-    |     (anim: StatDown)
-    |   The opposing Fletchinder's Speed fell!
-    |   (end of round)
-    | 
     | --- Turn 4 ---
-    |   [Machoke 68/76 | Fletchinder 11/62]
-    |   Ashkaar Officer Brakka used a Super Potion.
-    |     HP Fletchinder (foe): 11 -> 62 / 62
-    |   The opposing Fletchinder's HP was restored.
+    |   [Machoke 67/76 | Fletchinder 62/62]
+    |   The opposing Fletchinder used Ember!
+    |     HP Machoke (player): 67 -> 48 / 76
+    |   A critical hit!
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
-    |     HP Fletchinder (foe): 62 -> 5 / 62
+    |     HP Fletchinder (foe): 62 -> 0 / 62
     |   It's not very effective...
-    |     (anim: StatDown)
-    |   The opposing Fletchinder's Speed fell!
-    |   (end of round)
-    | 
-    | --- Turn 5 ---
-    |   [Machoke 68/76 | Fletchinder 5/62]
-    |   Machoke used Rock Tomb!
-    |     HP Fletchinder (foe): 5 -> 0 / 62
-    |   It's super effective!
+    |     [ability: Fletchinder (foe)'s Flame Body]
+    |     (anim: Burn)
+    |   Machoke was burned!
     |   The opposing Fletchinder fainted!
     |     xx fainted: Fletchinder (foe)
     |   The crowd went wild for Machoke!
@@ -225,40 +237,46 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | 
     | --- Battle start ---
     |   field: COLOSSEUM | weather: None | terrain: None
-    |   Oh! A wild Litleo appeared!
+    |   Oh! A wild Cinderpaw appeared!
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
     |   Cinderpaw shakes its ember mane. The barge deck shudders under its paws!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 68/76 | Litleo 68/68]
-    |   The wild Litleo used Work Up!
+    |   [Machoke 48/76 BURN | Cinderpaw 68/68]
+    |   The wild Cinderpaw used Work Up!
     |     (anim: StatUp)
-    |   The wild Litleo's Attack rose!
-    |   The wild Litleo's Special Attack rose!
+    |   The wild Cinderpaw's Attack rose!
+    |   The wild Cinderpaw's Special Attack rose!
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
-    |     HP Litleo (foe): 68 -> 1 / 68
+    |     HP Cinderpaw (foe): 68 -> 1 / 68
     |   It's super effective!
     |     (anim: StatDown)
-    |   The wild Litleo's Speed fell!
-    |   The wild Litleo's shield shattered!
-    |     HP Litleo (foe): 1 -> 68 / 68
-    |   The wild Litleo roars, and the crowd roars back!
+    |   The wild Cinderpaw's Speed fell!
+    |   The wild Cinderpaw's shield shattered!
+    |     HP Cinderpaw (foe): 1 -> 68 / 68
+    |   The wild Cinderpaw roars, and the crowd roars back!
     |     (anim: StatUp)
-    |   The wild Litleo's Special Attack rose!
+    |   The wild Cinderpaw's Special Attack rose!
     |   (end of round)
+    |     (anim: Burn)
+    |     HP Machoke (player): 48 -> 44 / 76
+    |   Machoke was hurt by its burn!
     | 
     | --- Turn 2 ---
-    |   [Machoke 68/76 | Litleo 68/68]
+    |   [Machoke 44/76 BURN | Cinderpaw 68/68]
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
-    |     HP Litleo (foe): 68 -> 0 / 68
+    |     HP Cinderpaw (foe): 68 -> 0 / 68
     |   It's super effective!
-    |   The wild Litleo fainted!
-    |     xx fainted: Litleo (foe)
+    |   The wild Cinderpaw fainted!
+    |     xx fainted: Cinderpaw (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
@@ -509,8 +527,6 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
   Marguerite Fane: Oh, I see. He's moving on. Painters do.
   Marguerite Fane: Take him. Saltmere's painted. Paint something bigger.
   Tester obtained Smeargle!
-  The lantern is lit and let go. It rises over the roofs.
-  QUEST COMPLETE: "A Hole in the Sky"
 
 === 5. Badge-tier encounter swap: the Ferrymen's Mile (520) ===
   rumour: Big pawprints in the heather on The Ferrymen's Mile. Something's been at the honey pots. At night the Lillipup there act oddly.
@@ -1036,7 +1052,6 @@ RESULT: player won after 3 turn(s)
   \PN received $800!
   You obtained a Big Root!
   You put the Big Root in your Bag's Items pocket.
-  Your standing in The Quiet Way rose to Heartwood!
     | talk MOSS_STONE
     | ===============
     |   (overworld message) Lyra: Moss. Moss, please. I'll sing the one you like.
@@ -1093,7 +1108,6 @@ RESULT: player won after 3 turn(s)
     |   (overworld message) \PN received $800!
     |   (overworld message) You obtained a Big Root!
     |   (overworld message) You put the Big Root in your Bag's Items pocket.
-    |   (overworld message) Your standing in The Quiet Way rose to Heartwood!
 -- talk OCTAVE_CADENCE
   Cadence: If you're from Meridian, I've got a permit. If you're not, I haven't got a permit.
   Cadence: Cadence. Octave. Yes, that Octave. The Choir pays in hymns. Meridian pays in money. I tune their Lattice junctions on nights. Guess which one buys noodles.
@@ -2242,8 +2256,8 @@ RESULT: player won after 3 turn(s)
     | 
     | --- Battle start ---
     |   field: GRAND_STAGE | weather: None | terrain: None
-    |   You are challenged by Octave Cantor Vesper!
-    |   Octave Cantor Vesper sent out Amen!
+    |   You are challenged by First Voice Vesper!
+    |   First Voice Vesper sent out Amen!
     |     >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
     |   Go! Tyranitar!
     |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
@@ -2259,7 +2273,7 @@ RESULT: player won after 3 turn(s)
     |   The opposing Amen fainted!
     |     xx fainted: Amen (foe)
     |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
-    |   You defeated Octave Cantor Vesper!
+    |   You defeated First Voice Vesper!
     |   There. That's every note we have. ...You were worth all of them.
     |   You got $8,900 for winning!
     |   battle result code: 1
@@ -2321,8 +2335,8 @@ Champions rule: Vesper's Amen vs a Lv 100 Lugia
 
 --- Battle start ---
   field: GRAND_STAGE | weather: None | terrain: None
-  You are challenged by Octave Cantor Vesper!
-  Octave Cantor Vesper sent out Amen!
+  You are challenged by First Voice Vesper!
+  First Voice Vesper sent out Amen!
     >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
   Go! Lugia!
     >> sent out (player): Lugia Lv.100 @LEFTOVERS [PRESSURE]
@@ -2365,7 +2379,7 @@ Champions rule: Vesper's Amen vs a Lv 100 Lugia
   The opposing Amen fainted!
     xx fainted: Amen (foe)
   Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
-  You defeated Octave Cantor Vesper!
+  You defeated First Voice Vesper!
   There. That's every note we have. ...You were worth all of them.
   You got $8,900 for winning!
   battle result code: 1
@@ -2378,8 +2392,8 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> Yes
 
 --- Battle start ---
   field: GRAND_STAGE | weather: None | terrain: None
-  You are challenged by Octave Cantor Vesper!
-  Octave Cantor Vesper sent out Amen!
+  You are challenged by First Voice Vesper!
+  First Voice Vesper sent out Amen!
     >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
   Go! Eevee!
     >> sent out (player): Eevee Lv.70 @EEVIUMZ [ADAPTABILITY]
@@ -2453,7 +2467,7 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> Yes
   The opposing Amen fainted!
     xx fainted: Amen (foe)
   Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
-  You defeated Octave Cantor Vesper!
+  You defeated First Voice Vesper!
   There. That's every note we have. ...You were worth all of them.
   You got $8,900 for winning!
   battle result code: 1
@@ -2466,8 +2480,8 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> No
 
 --- Battle start ---
   field: GRAND_STAGE | weather: None | terrain: None
-  You are challenged by Octave Cantor Vesper!
-  Octave Cantor Vesper sent out Amen!
+  You are challenged by First Voice Vesper!
+  First Voice Vesper sent out Amen!
     >> sent out (foe): Amen Lv.89 @EEVIUMZ [ADAPTABILITY]
   Go! Eevee!
     >> sent out (player): Eevee Lv.70 @EEVIUMZ [ADAPTABILITY]
@@ -2554,7 +2568,7 @@ Champions rule: the player's Eevee, Fight menu, Last Resort -> No
   Lugia fainted!
     xx fainted: Lugia (player)
   You have no more Pokémon that can fight!
-  You lost against Octave Cantor Vesper!
+  You lost against First Voice Vesper!
   You gave $12,000 to the winner...
   battle result code: 2
   
@@ -2594,6 +2608,7 @@ RESULT: player lost after 5 turn(s)
   QUEST COMPLETE: "Two Unlisted"
   You obtained 2 Oran Berries!
   You put the Oran Berries in your Bag's Berries pocket.
+  Your standing in The Quiet Way rose to Heartwood!
 -- talk SCULPTOR
   Sand-sculptor: Every night since the Pageant, somebody walks out from Saltmere and kicks my Crown in.
   Sand-sculptor: 'Ask your Sovereign!' they shout. As if the Sovereign's ever been to Marram Down. As if he'd notice a sand Crown.
@@ -2605,191 +2620,6 @@ RESULT: player lost after 5 turn(s)
 -- talk SAND_CROWN
   In daylight it's just a very good sand Crown, as tall as you, with a chipped stone in the middle. The sand is warm.
   (The sculptor asked you to watch it after dark.)
--- talk SAND_CROWN
-  Pageant-goer: Ask your Sovereign! ASK HIM! Three hundred years of--
-  He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.
-  Pageant-goer: It's got me! The Crown's got me! I take it back! Long live the Sovereign!
-  The sand lets go. He runs all the way back to Saltmere with one boot.
-  Then the Crown turns round to look at you. There's a shovel handle sticking out of the top of it.
-  The Crown slumps into an ordinary heap of sand. By morning it'll be taller.
-    | talk SAND_CROWN
-    | ===============
-    |   (overworld message) Pageant-goer: Ask your Sovereign! ASK HIM! Three hundred years of--
-    |   (overworld message) He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.
-    |   (overworld message) Pageant-goer: It's got me! The Crown's got me! I take it back! Long live the Sovereign!
-    |   (overworld message) The sand lets go. He runs all the way back to Saltmere with one boot.
-    |   (overworld message) Then the Crown turns round to look at you. There's a shovel handle sticking out of the top of it.
-    | 
-    | --- Battle start ---
-    |   field: BEACH | weather: None | terrain: None
-    |   Oh! A wild Sandygast appeared!
-    |   Go! Ivysaur!
-    |     >> sent out (player): Ivysaur Lv.22 [OVERGROW]
-    | ## FIELD CHANGE: NONE -> BEACH
-    |   Waves lap at the sandy shore...
-    |   The sand Crown heaves itself up out of the dune!
-    |   The wild Sandygast hardened in the wet sand!
-    |     (anim: StatUp)
-    |   The wild Sandygast's Defense rose!
-    |   The wild Sandygast's Special Defense rose!
-    | 
-    | --- Turn 1 ---
-    |   [Ivysaur 65/65 | Sandygast 62/62]
-    |   Ivysaur ignored orders!
-    |   Ivysaur used Sleep Powder!
-    |   The wild Sandygast's shield repelled the effect!
-    |   The wild Sandygast used Sand Attack!
-    |     (anim: StatDown)
-    |   Ivysaur's accuracy fell!
-    |   The wild Sandygast flung a whole handful of beach sand!
-    |     (anim: StatDown)
-    |   Ivysaur's accuracy fell!
-    |   (end of round)
-    | 
-    | --- Turn 2 ---
-    |   [Ivysaur 65/65 | Sandygast 62/62]
-    |   Ivysaur used Leech Seed!
-    |   The wild Sandygast evaded the attack!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Ivysaur (player): 65 -> 49 / 65
-    |   Ivysaur became trapped by Sand Tomb!
-    |   (end of round)
-    |     (anim: SandTomb)
-    |     HP Ivysaur (player): 49 -> 41 / 65
-    |   Ivysaur is hurt by Sand Tomb!
-    | 
-    | --- Turn 3 ---
-    |   [Ivysaur 41/65 | Sandygast 62/62]
-    |   Ivysaur ignored orders!
-    |   Ivysaur used Razor Leaf!
-    |     HP Sandygast (foe): 62 -> 41 / 62
-    |   It's super effective!
-    |   The wild Sandygast used Harden!
-    |     (anim: StatUp)
-    |   The wild Sandygast's Defense rose!
-    |   (end of round)
-    |     (anim: SandTomb)
-    |     HP Ivysaur (player): 41 -> 33 / 65
-    |   Ivysaur is hurt by Sand Tomb!
-    | 
-    | --- Turn 4 ---
-    |   [Ivysaur 33/65 | Sandygast 41/62]
-    |   Ivysaur used Leech Seed!
-    |   The wild Sandygast evaded the attack!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Ivysaur (player): 33 -> 16 / 65
-    |   (end of round)
-    |     (anim: SandTomb)
-    |     HP Ivysaur (player): 16 -> 8 / 65
-    |   Ivysaur is hurt by Sand Tomb!
-    | 
-    | --- Turn 5 ---
-    |   [Ivysaur 8/65 | Sandygast 41/62]
-    |   Ivysaur ignored orders!
-    |   Ivysaur used Take Down!
-    |   It doesn't affect the wild Sandygast...
-    |   The wild Sandygast used Astonish!
-    |     HP Ivysaur (player): 8 -> 0 / 65
-    |   Ivysaur fainted!
-    |     xx fainted: Ivysaur (player)
-    |   (end of round)
-    |   Use next Pokémon?  [auto: Yes]
-    |   Go for it, Sneasel!
-    |     >> sent out (player): Sneasel Lv.22 [INNERFOCUS]
-    | 
-    | --- Turn 6 ---
-    |   [Sneasel 63/63 | Sandygast 41/62]
-    |   Sneasel turned away!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Sneasel (player): 63 -> 47 / 63
-    |   Sneasel became trapped by Sand Tomb!
-    |   (end of round)
-    |     (anim: SandTomb)
-    |     HP Sneasel (player): 47 -> 40 / 63
-    |   Sneasel is hurt by Sand Tomb!
-    | 
-    | --- Turn 7 ---
-    |   [Sneasel 40/63 | Sandygast 41/62]
-    |   Sneasel ignored orders!
-    |   Sneasel used Icy Wind!
-    |     HP Sandygast (foe): 41 -> 17 / 62
-    |   It's super effective!
-    |     (anim: StatDown)
-    |   The wild Sandygast's Speed fell!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Sneasel (player): 40 -> 25 / 63
-    |   (end of round)
-    |     (anim: SandTomb)
-    |     HP Sneasel (player): 25 -> 18 / 63
-    |   Sneasel is hurt by Sand Tomb!
-    | 
-    | --- Turn 8 ---
-    |   [Sneasel 18/63 | Sandygast 17/62]
-    |   Sneasel used Icy Wind!
-    |     HP Sandygast (foe): 17 -> 1 / 62
-    |   It's super effective!
-    |     (anim: StatDown)
-    |   The wild Sandygast's Speed fell!
-    |   The wild Sandygast's shield shattered!
-    |     HP Sandygast (foe): 1 -> 62 / 62
-    |   The wild Sandygast pulls the beach up round itself and rebuilds, taller!
-    |     (anim: StatUp)
-    |   The wild Sandygast's Defense rose!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Sneasel (player): 18 -> 4 / 63
-    |   (end of round)
-    |     (anim: SandTomb)
-    |     HP Sneasel (player): 4 -> 0 / 63
-    |   Sneasel is hurt by Sand Tomb!
-    |   Sneasel fainted!
-    |     xx fainted: Sneasel (player)
-    |   Use next Pokémon?  [auto: Yes]
-    |   You're in charge, Haunter!
-    |     >> sent out (player): Haunter Lv.22 [LEVITATE]
-    | 
-    | --- Turn 9 ---
-    |   [Haunter 58/58 | Sandygast 62/62]
-    |   Haunter used Confuse Ray!
-    |     (anim: Confusion)
-    |   The wild Sandygast became confused!
-    |     (anim: Confusion)
-    |   The wild Sandygast is confused!
-    |   The wild Sandygast used Astonish!
-    |     HP Haunter (player): 58 -> 40 / 58
-    |   It's super effective!
-    |   (end of round)
-    | 
-    | --- Turn 10 ---
-    |   [Haunter 40/58 | Sandygast 62/62]
-    |   Haunter ignored orders!
-    |   Haunter used Night Shade!
-    |     HP Sandygast (foe): 62 -> 40 / 62
-    |   The wild Sandygast snapped out of its confusion.
-    |   The wild Sandygast used Astonish!
-    |     HP Haunter (player): 40 -> 20 / 58
-    |   It's super effective!
-    |   (end of round)
-    | 
-    | --- Turn 11 ---
-    |   [Haunter 20/58 | Sandygast 40/62]
-    |   Haunter pretended not to notice!
-    |   The wild Sandygast used Astonish!
-    |     HP Haunter (player): 20 -> 1 / 58
-    |   It's super effective!
-    |   (end of round)
-    | 
-    | --- Turn 12 ---
-    |   [Haunter 1/58 | Sandygast 40/62]
-    |   Haunter won't obey!
-    |   The wild Sandygast used Astonish!
-    |     HP Haunter (player): 1 -> 0 / 58
-    |   It's super effective!
-    |   Haunter fainted!
-    |     xx fainted: Haunter (player)
-    |   You have no more Pokémon that can fight!
-    |   You panicked and dropped $352...
-    |   battle result code: 2
-    |   (overworld message) The Crown slumps into an ordinary heap of sand. By morning it'll be taller.
 -- talk SAND_CROWN
   Pageant-goer: Ask your Sovereign! ASK HIM! Three hundred years of--
   He kicks the Crown. His boot goes in up to the ankle. The sand closes round it.
@@ -2812,227 +2642,184 @@ RESULT: player lost after 5 turn(s)
     | 
     | --- Battle start ---
     |   field: BEACH | weather: None | terrain: None
-    |   Oh! A wild Sandygast appeared!
+    |   Oh! A wild Crown appeared!
     |   Go! Ivysaur!
     |     >> sent out (player): Ivysaur Lv.22 [OVERGROW]
     | ## FIELD CHANGE: NONE -> BEACH
     |   Waves lap at the sandy shore...
     |   The sand Crown heaves itself up out of the dune!
-    |   The wild Sandygast hardened in the wet sand!
+    |   The wild Crown hardened in the wet sand!
     |     (anim: StatUp)
-    |   The wild Sandygast's Defense rose!
-    |   The wild Sandygast's Special Defense rose!
+    |   The wild Crown's Defense rose!
+    |   The wild Crown's Special Defense rose!
     | 
     | --- Turn 1 ---
-    |   [Ivysaur 65/65 | Sandygast 66/66]
-    |   Ivysaur used Leech Seed!
-    |   The wild Sandygast was seeded!
-    |   The wild Sandygast used Sand Attack!
-    |     (anim: StatDown)
-    |   Ivysaur's accuracy fell!
-    |   The wild Sandygast flung a whole handful of beach sand!
-    |     (anim: StatDown)
-    |   Ivysaur's accuracy fell!
-    |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 66 -> 58 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    | 
-    | --- Turn 2 ---
-    |   [Ivysaur 65/65 | Sandygast 58/66]
-    |   Ivysaur used Razor Leaf!
-    |   The wild Sandygast avoided the attack!
-    |   The wild Sandygast used Harden!
-    |     (anim: StatUp)
-    |   The wild Sandygast's Defense rose!
-    |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 58 -> 50 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    | 
-    | --- Turn 3 ---
-    |   [Ivysaur 65/65 | Sandygast 50/66]
+    |   [Ivysaur 65/65 | Crown 66/66]
     |   Ivysaur ignored orders!
     |   Ivysaur used Sleep Powder!
-    |   The wild Sandygast's shield repelled the effect!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Ivysaur (player): 65 -> 51 / 65
+    |   The wild Crown's shield repelled the effect!
+    |   The wild Crown used Sand Attack!
+    |     (anim: StatDown)
+    |   Ivysaur's accuracy fell!
+    |   The wild Crown flung a whole handful of beach sand!
+    |     (anim: StatDown)
+    |   Ivysaur's accuracy fell!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Ivysaur 65/65 | Crown 66/66]
+    |   Ivysaur used Leech Seed!
+    |   The wild Crown evaded the attack!
+    |   The wild Crown used Sand Tomb!
+    |     HP Ivysaur (player): 65 -> 49 / 65
     |   Ivysaur became trapped by Sand Tomb!
     |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 50 -> 42 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Ivysaur (player): 51 -> 59 / 65
     |     (anim: SandTomb)
-    |     HP Ivysaur (player): 59 -> 51 / 65
+    |     HP Ivysaur (player): 49 -> 41 / 65
+    |   Ivysaur is hurt by Sand Tomb!
+    | 
+    | --- Turn 3 ---
+    |   [Ivysaur 41/65 | Crown 66/66]
+    |   Ivysaur used Leech Seed!
+    |   The wild Crown was seeded!
+    |   The wild Crown used Harden!
+    |     (anim: StatUp)
+    |   The wild Crown's Defense rose!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Crown (foe): 66 -> 58 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 41 -> 49 / 65
+    |     (anim: SandTomb)
+    |     HP Ivysaur (player): 49 -> 41 / 65
     |   Ivysaur is hurt by Sand Tomb!
     | 
     | --- Turn 4 ---
-    |   [Ivysaur 51/65 | Sandygast 42/66]
-    |   Ivysaur ignored orders!
-    |   Ivysaur used Leech Seed!
-    |   The wild Sandygast evaded the attack!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Ivysaur (player): 51 -> 35 / 65
+    |   [Ivysaur 41/65 | Crown 58/66]
+    |   Ivysaur used Razor Leaf!
+    |   The wild Crown avoided the attack!
+    |   The wild Crown used Astonish!
+    |     HP Ivysaur (player): 41 -> 32 / 65
     |   (end of round)
     |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 42 -> 34 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Ivysaur (player): 35 -> 43 / 65
+    |     HP Crown (foe): 58 -> 50 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 32 -> 40 / 65
     |     (anim: SandTomb)
-    |     HP Ivysaur (player): 43 -> 35 / 65
+    |     HP Ivysaur (player): 40 -> 32 / 65
     |   Ivysaur is hurt by Sand Tomb!
     | 
     | --- Turn 5 ---
-    |   [Ivysaur 35/65 | Sandygast 34/66]
-    |   Ivysaur pretended not to notice!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Ivysaur (player): 35 -> 18 / 65
+    |   [Ivysaur 32/65 | Crown 50/66]
+    |   Ivysaur ignored orders!
+    |   Ivysaur used Sleep Powder!
+    |   The wild Crown's shield repelled the effect!
+    |   The wild Crown used Sand Tomb!
+    |     HP Ivysaur (player): 32 -> 15 / 65
     |   (end of round)
     |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 34 -> 26 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Ivysaur (player): 18 -> 26 / 65
+    |     HP Crown (foe): 50 -> 42 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
+    |     HP Ivysaur (player): 15 -> 23 / 65
     |     (anim: SandTomb)
-    |     HP Ivysaur (player): 26 -> 18 / 65
+    |     HP Ivysaur (player): 23 -> 15 / 65
     |   Ivysaur is hurt by Sand Tomb!
     | 
     | --- Turn 6 ---
-    |   [Ivysaur 18/65 | Sandygast 26/66]
-    |   Ivysaur is loafing around!
-    |   The wild Sandygast used Sand Tomb!
-    |   The wild Sandygast's attack missed!
-    |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 26 -> 18 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Ivysaur (player): 18 -> 26 / 65
-    |     (anim: SandTomb)
-    |     HP Ivysaur (player): 26 -> 18 / 65
-    |   Ivysaur is hurt by Sand Tomb!
-    | 
-    | --- Turn 7 ---
-    |   [Ivysaur 18/65 | Sandygast 18/66]
-    |   Ivysaur ignored orders!
-    |   Ivysaur used Sleep Powder!
-    |   The wild Sandygast's shield repelled the effect!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Ivysaur (player): 18 -> 2 / 65
-    |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 18 -> 10 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Ivysaur (player): 2 -> 10 / 65
-    |   Ivysaur was freed from Sand Tomb!
-    | 
-    | --- Turn 8 ---
-    |   [Ivysaur 10/65 | Sandygast 10/66]
+    |   [Ivysaur 15/65 | Crown 42/66]
     |   Ivysaur used Razor Leaf!
-    |     HP Sandygast (foe): 10 -> 1 / 66
+    |     HP Crown (foe): 42 -> 22 / 66
     |   It's super effective!
-    |   The wild Sandygast's shield shattered!
-    |     HP Sandygast (foe): 1 -> 66 / 66
-    |   The wild Sandygast pulls the beach up round itself and rebuilds, taller!
-    |     (anim: StatUp)
-    |   The wild Sandygast's Defense rose!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Ivysaur (player): 10 -> 0 / 65
+    |   The wild Crown used Sand Tomb!
+    |     HP Ivysaur (player): 15 -> 0 / 65
+    |   A critical hit!
     |   Ivysaur fainted!
     |     xx fainted: Ivysaur (player)
     |   (end of round)
     |   Use next Pokémon?  [auto: Yes]
-    |   You're in charge, Sneasel!
+    |   Just a little more! Hang in there, Sneasel!
     |     >> sent out (player): Sneasel Lv.22 [INNERFOCUS]
     | 
-    | --- Turn 9 ---
-    |   [Sneasel 63/63 | Sandygast 66/66]
+    | --- Turn 7 ---
+    |   [Sneasel 63/63 | Crown 22/66]
+    |   Sneasel ignored orders!
+    |   Sneasel used Bite!
+    |     HP Crown (foe): 22 -> 1 / 66
+    |   It's super effective!
+    |   The wild Crown's shield shattered!
+    |     HP Crown (foe): 1 -> 66 / 66
+    |   The wild Crown pulls the beach up round itself and rebuilds, taller!
+    |     (anim: StatUp)
+    |   The wild Crown's Defense rose!
+    |   The wild Crown flinched and couldn't move!
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Crown (foe): 66 -> 58 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
+    | 
+    | --- Turn 8 ---
+    |   [Sneasel 63/63 | Crown 58/66]
+    |   Sneasel ignored orders!
     |   Sneasel used Leer!
     |     (anim: StatDown)
-    |   The wild Sandygast's Defense fell!
-    |   The wild Sandygast used Sand Attack!
+    |   The wild Crown's Defense fell!
+    |   The wild Crown used Sand Attack!
     |     (anim: StatDown)
     |   Sneasel's accuracy fell!
-    |   The wild Sandygast flung a whole handful of beach sand!
+    |   The wild Crown flung a whole handful of beach sand!
     |     (anim: StatDown)
     |   Sneasel's accuracy fell!
     |   (end of round)
     |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 66 -> 58 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
+    |     HP Crown (foe): 58 -> 50 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
     | 
-    | --- Turn 10 ---
-    |   [Sneasel 63/63 | Sandygast 58/66]
+    | --- Turn 9 ---
+    |   [Sneasel 63/63 | Crown 50/66]
     |   Sneasel won't obey!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Sneasel (player): 63 -> 48 / 63
+    |   The wild Crown used Sand Tomb!
+    |     HP Sneasel (player): 63 -> 47 / 63
     |   Sneasel became trapped by Sand Tomb!
     |   (end of round)
     |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 58 -> 50 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Sneasel (player): 48 -> 56 / 63
+    |     HP Crown (foe): 50 -> 42 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 47 -> 55 / 63
     |     (anim: SandTomb)
-    |     HP Sneasel (player): 56 -> 49 / 63
+    |     HP Sneasel (player): 55 -> 48 / 63
+    |   Sneasel is hurt by Sand Tomb!
+    | 
+    | --- Turn 10 ---
+    |   [Sneasel 48/63 | Crown 42/66]
+    |   Sneasel is loafing around!
+    |   The wild Crown used Sand Tomb!
+    |     HP Sneasel (player): 48 -> 32 / 63
+    |   (end of round)
+    |     (anim: LeechSeed)
+    |     HP Crown (foe): 42 -> 34 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 32 -> 40 / 63
+    |     (anim: SandTomb)
+    |     HP Sneasel (player): 40 -> 33 / 63
     |   Sneasel is hurt by Sand Tomb!
     | 
     | --- Turn 11 ---
-    |   [Sneasel 49/63 | Sandygast 50/66]
-    |   Sneasel pretended not to notice!
-    |   The wild Sandygast used Sand Tomb!
-    |   The wild Sandygast's attack missed!
-    |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 50 -> 42 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Sneasel (player): 49 -> 57 / 63
-    |     (anim: SandTomb)
-    |     HP Sneasel (player): 57 -> 50 / 63
-    |   Sneasel is hurt by Sand Tomb!
-    | 
-    | --- Turn 12 ---
-    |   [Sneasel 50/63 | Sandygast 42/66]
-    |   Sneasel used Bite!
-    |     HP Sandygast (foe): 42 -> 19 / 66
-    |   It's super effective!
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Sneasel (player): 50 -> 34 / 63
-    |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 19 -> 11 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Sneasel (player): 34 -> 42 / 63
-    |     (anim: SandTomb)
-    |     HP Sneasel (player): 42 -> 35 / 63
-    |   Sneasel is hurt by Sand Tomb!
-    | 
-    | --- Turn 13 ---
-    |   [Sneasel 35/63 | Sandygast 11/66]
+    |   [Sneasel 33/63 | Crown 34/66]
     |   Sneasel ignored orders!
-    |   Sneasel used Quick Attack!
-    |   It doesn't affect the wild Sandygast...
-    |   The wild Sandygast used Sand Tomb!
-    |     HP Sneasel (player): 35 -> 20 / 63
+    |   Sneasel used Icy Wind!
+    |     HP Crown (foe): 34 -> 8 / 66
+    |   It's super effective!
+    |     (anim: StatDown)
+    |   The wild Crown's Speed fell!
+    |   The wild Crown used Sand Tomb!
+    |   The wild Crown's attack missed!
     |   (end of round)
     |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 11 -> 3 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Sneasel (player): 20 -> 28 / 63
-    |     (anim: SandTomb)
-    |     HP Sneasel (player): 28 -> 21 / 63
-    |   Sneasel is hurt by Sand Tomb!
-    | 
-    | --- Turn 14 ---
-    |   [Sneasel 21/63 | Sandygast 3/66]
-    |   Sneasel won't obey!
-    |   The wild Sandygast used Sand Tomb!
-    |   The wild Sandygast's attack missed!
-    |   (end of round)
-    |     (anim: LeechSeed)
-    |     HP Sandygast (foe): 3 -> 0 / 66
-    |   The wild Sandygast's health is sapped by Leech Seed!
-    |     HP Sneasel (player): 21 -> 24 / 63
-    |   The wild Sandygast fainted!
-    |     xx fainted: Sandygast (foe)
+    |     HP Crown (foe): 8 -> 0 / 66
+    |   The wild Crown's health is sapped by Leech Seed!
+    |     HP Sneasel (player): 33 -> 41 / 63
+    |   The wild Crown fainted!
+    |     xx fainted: Crown (foe)
     |   Sneasel is at the level cap (Lv. 19) and can't gain Exp. Points.
     |   battle result code: 1
     |   (overworld message) The Sandygast sags into a smaller, rounder heap. Pressed into its sand is a brass letter from a ship's name-board: a W, from THE WANDERING CHORUS, the theatre barge buried in the dunes.
@@ -3109,7 +2896,7 @@ RESULT: player lost after 5 turn(s)
 -- talk WOLF_DEN
   It's a Greavard. Round its neck is a drover's collar with a brass tag, green with age: BRACKEN.
   It drops an old bone at your feet, backs off two steps, and crouches. It wants to play.
-  Bracken licks your face and trots back into its den. It isn't tired. It has never once been tired.
+  Bracken bounds off into the birches, delighted, and comes straight back with the bone. It wants to go again.
     | talk WOLF_DEN
     | =============
     |   (overworld message) It's a Greavard. Round its neck is a drover's collar with a brass tag, green with age: BRACKEN.
@@ -3126,63 +2913,52 @@ RESULT: player lost after 5 turn(s)
     | --- Turn 1 ---
     |   [Croconaw 67/67 | Bracken 54/54]
     |   Croconaw used Bite!
-    |     HP Bracken (foe): 54 -> 38 / 54
+    |     HP Bracken (foe): 54 -> 37 / 54
     |   It's super effective!
     |   The wild Bracken used Bite!
     |     HP Croconaw (player): 67 -> 57 / 67
     |   (end of round)
     | 
     | --- Turn 2 ---
-    |   [Croconaw 57/67 | Bracken 38/54]
+    |   [Croconaw 57/67 | Bracken 37/54]
     |   Croconaw used Ice Fang!
-    |     HP Bracken (foe): 38 -> 29 / 54
+    |     HP Bracken (foe): 37 -> 27 / 54
+    |     (anim: EatBerry)
+    |     HP Bracken (foe): 27 -> 37 / 54
+    |   The wild Bracken restored a little HP using its Oran Berry!
     |   The wild Bracken used Headbutt!
     |   The wild Bracken stampeded through the tall grass!
     |     HP Croconaw (player): 57 -> 44 / 67
     |   (end of round)
     | 
     | --- Turn 3 ---
-    |   [Croconaw 44/67 | Bracken 29/54]
+    |   [Croconaw 44/67 | Bracken 37/54]
     |   Croconaw used Ice Fang!
-    |     HP Bracken (foe): 29 -> 20 / 54
-    |     (anim: EatBerry)
-    |     HP Bracken (foe): 20 -> 30 / 54
-    |   The wild Bracken restored a little HP using its Oran Berry!
+    |     HP Bracken (foe): 37 -> 27 / 54
     |   The wild Bracken used Headbutt!
     |   The wild Bracken stampeded through the tall grass!
     |     HP Croconaw (player): 44 -> 30 / 67
     |   (end of round)
     | 
     | --- Turn 4 ---
-    |   [Croconaw 30/67 | Bracken 30/54]
+    |   [Croconaw 30/67 | Bracken 27/54]
     |   Croconaw used Ice Fang!
-    |     HP Bracken (foe): 30 -> 21 / 54
+    |     HP Bracken (foe): 27 -> 18 / 54
     |   The wild Bracken used Headbutt!
     |   The wild Bracken stampeded through the tall grass!
     |     HP Croconaw (player): 30 -> 18 / 67
     |   (end of round)
     | 
     | --- Turn 5 ---
-    |   [Croconaw 18/67 | Bracken 21/54]
+    |   [Croconaw 18/67 | Bracken 18/54]
     |   Croconaw used Bite!
-    |     HP Bracken (foe): 21 -> 2 / 54
+    |     HP Bracken (foe): 18 -> 0 / 54
     |   It's super effective!
-    |   The wild Bracken used Lick!
-    |     HP Croconaw (player): 18 -> 9 / 67
-    |     (anim: Paralysis)
-    |   Croconaw is paralyzed! It may be unable to move!
-    |   (end of round)
-    | 
-    | --- Turn 6 ---
-    |   [Croconaw 9/67 PARALYSIS | Bracken 2/54]
-    |   The wild Bracken used Lick!
-    |     HP Croconaw (player): 9 -> 0 / 67
-    |   Croconaw fainted!
-    |     xx fainted: Croconaw (player)
-    |   You have no more Pokémon that can fight!
-    |   You panicked and dropped $528...
-    |   battle result code: 2
-    |   (overworld message) Bracken licks your face and trots back into its den. It isn't tired. It has never once been tired.
+    |   The wild Bracken fainted!
+    |     xx fainted: Bracken (foe)
+    |   Croconaw got 211 Exp. Points!
+    |   battle result code: 1
+    |   (overworld message) Bracken bounds off into the birches, delighted, and comes straight back with the bone. It wants to go again.
 -- talk WOLF_DEN
   It's a Greavard. Round its neck is a drover's collar with a brass tag, green with age: BRACKEN.
   It drops an old bone at your feet, backs off two steps, and crouches. It wants to play.
@@ -3233,17 +3009,17 @@ RESULT: player lost after 5 turn(s)
     | --- Turn 1 ---
     |   [Mightyena 80/80 | Corsola 68/68]
     |   Mightyena used Bite!
-    |     HP Corsola (foe): 68 -> 22 / 68
+    |     HP Corsola (foe): 68 -> 19 / 68
     |   It's super effective!
     |   The wild Corsola used Ancient Power!
     |   The Bleed warped Ancient Power into something stronger!
-    |     HP Mightyena (player): 80 -> 66 / 80
+    |     HP Mightyena (player): 80 -> 64 / 80
     |   (end of round)
     | 
     | --- Turn 2 ---
-    |   [Mightyena 66/80 | Corsola 22/68]
+    |   [Mightyena 64/80 | Corsola 19/68]
     |   Mightyena used Bite!
-    |     HP Corsola (foe): 22 -> 0 / 68
+    |     HP Corsola (foe): 19 -> 0 / 68
     |   It's super effective!
     |   The wild Corsola fainted!
     |     xx fainted: Corsola (foe)
@@ -3358,3 +3134,1894 @@ RESULT: player lost after 5 turn(s)
   For reaching the rank of Evergreen, take this.
   You obtained 3 Magical Seeds!
   You put the Magical Seeds in your Bag's Items pocket.
+
+=== 10. Cindervault, Chapter 8 (121_Quests_Cindervault.rb): Adequate Swords, Seven Bouts, the Trial of Truth ===
+-- talk ADEQUATE_OWNER
+  Adequate Swords: You've a Warden's badges. Good. I need a witness, and witnesses here have to be able to hit things.
+  Adequate Swords: Look across the lane. EXCELLENT SWORDS. Painted last week. In gold.
+  Adequate Swords: Lying's a crime in Ashkaar. If her swords are only adequate, that sign's a lie, and the Honest Court will have it down by supper.
+  Adequate Swords: I can't test them. I'm the other shop. You can. Ask her for a blade-test and see if they're as good as the paint says.
+  Test the swords at EXCELLENT SWORDS?
+  NEW QUEST: "Adequate Swords" Test the blades at EXCELLENT SWORDS, across the lane.
+  Adequate Swords: Ha! Be honest about it. That's the only rule. Well. That and don't get cut.
+-- talk EXCELLENT_SMITH
+  Kessa of Excellent Swords: A blade-test? From HIM? ...Fine. Sharpness rules: my blades against your team. The last edge still standing decides.
+  Kessa of Excellent Swords: If my swords are only adequate, I'll paint the sign over myself. In front of everyone. In beige.
+  Kessa of Excellent Swords: ...You beat my blades. That's not the test, mind. The test is whether they're sharp.
+  You look at her Honedge's edge. You look at Doublade's. You have never seen steel this good. You don't know much about steel, and you can still tell.
+  Kessa of Excellent Swords: Well? Say true. The Honest Court will ask you the same thing, word for word.
+  QUEST LOG: "Adequate Swords" Take the result to the Honest Court: the Oath-Scribe in the Hall of Oaths, Pyre Keep.
+  Kessa of Excellent Swords: Off you go, then. The Hall of Oaths, up at Pyre Keep. The Oath-Scribe hears shop cases. He has a whole plinth for the word 'excellent'.
+    | talk EXCELLENT_SMITH
+    | ====================
+    |   (overworld message) Kessa of Excellent Swords: A blade-test? From HIM? ...Fine. Sharpness rules: my blades against your team. The last edge still standing decides.
+    |   (overworld message) Kessa of Excellent Swords: If my swords are only adequate, I'll paint the sign over myself. In front of everyone. In beige.
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Crush Girl Kessa!
+    |   Crush Girl Kessa sent out Honedge!
+    |     >> sent out (foe): Honedge Lv.35 @ORANBERRY [NOGUARD]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 175/175 | Honedge 89/89]
+    |   Swampert ignored orders!
+    |   Swampert used Protect!
+    |   Swampert protected itself!
+    |   The opposing Honedge used Retaliate!
+    |     (anim: Protect)
+    |   Swampert protected itself!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 175/175 | Honedge 89/89]
+    |   Swampert used Earthquake!
+    |     HP Honedge (foe): 89 -> 0 / 89
+    |   It's super effective!
+    |   The opposing Honedge fainted!
+    |     xx fainted: Honedge (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Swampert (player): 175 -> 164 / 175
+    |   Lava rained down around Swampert!
+    |   Crush Girl Kessa is about to send out Doublade. Will you switch your Pokémon?  [auto: No]
+    |   Crush Girl Kessa sent out Doublade!
+    |     >> sent out (foe): Doublade Lv.37 @EVIOLITE [NOGUARD]
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 164/175 | Doublade 104/104]
+    |   Swampert ignored orders!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Doublade (foe): 104 -> 91 / 104
+    |   It's not very effective...
+    |   The opposing Doublade used Retaliate!
+    |     HP Swampert (player): 164 -> 119 / 175
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Swampert 119/175 | Doublade 91/104]
+    |   Swampert turned away!
+    |   The opposing Doublade used Retaliate!
+    |     HP Swampert (player): 119 -> 96 / 175
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Swampert 96/175 | Doublade 91/104]
+    |   Swampert used Surf!
+    |     HP Doublade (foe): 91 -> 22 / 104
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Doublade used Iron Defense!
+    |     (anim: StatUp)
+    |   The opposing Doublade's Defense rose sharply!
+    |   (end of round)
+    | 
+    | --- Turn 6 ---
+    |   [Swampert 96/175 | Doublade 22/104]
+    |   Crush Girl Kessa used a Hyper Potion.
+    |     HP Doublade (foe): 22 -> 104 / 104
+    |   The opposing Doublade's HP was restored.
+    |   Swampert turned away!
+    |   (end of round)
+    | 
+    | --- Turn 7 ---
+    |   [Swampert 96/175 | Doublade 104/104]
+    |   Swampert ignored orders!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Doublade (foe): 104 -> 92 / 104
+    |   It's not very effective...
+    |   The opposing Doublade used Night Slash!
+    |     HP Swampert (player): 96 -> 74 / 175
+    |   (end of round)
+    | 
+    | --- Turn 8 ---
+    |   [Swampert 74/175 | Doublade 92/104]
+    |   Swampert used Surf!
+    |     HP Doublade (foe): 92 -> 0 / 104
+    | ## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
+    |   The magma was quenched! It set into black glass, and steam roars from every crack!
+    |   The opposing Doublade fainted!
+    |     xx fainted: Doublade (foe)
+    |   You defeated Crush Girl Kessa!
+    |   ...Sharp. Fine. Excellent AND beaten. Both true.
+    |   You got $888 for winning!
+    |   battle result code: 1
+    |   (overworld message) Kessa of Excellent Swords: ...You beat my blades. That's not the test, mind. The test is whether they're sharp.
+    |   (overworld message) You look at her Honedge's edge. You look at Doublade's. You have never seen steel this good. You don't know much about steel, and you can still tell.
+    |   (overworld message) Kessa of Excellent Swords: Well? Say true. The Honest Court will ask you the same thing, word for word.
+    |   (overworld message) QUEST LOG: "Adequate Swords" Take the result to the Honest Court: the Oath-Scribe in the Hall of Oaths, Pyre Keep.
+    |   (overworld message) Kessa of Excellent Swords: Off you go, then. The Hall of Oaths, up at Pyre Keep. The Oath-Scribe hears shop cases. He has a whole plinth for the word 'excellent'.
+-- talk HONEST_COURT
+  Oath-Scribe: A shop case. ADEQUATE against EXCELLENT. My nine hundred and forty-first 'excellent'. Witness, the oath first.
+  Oath-Scribe: Say true or say nothing. Are the swords of EXCELLENT SWORDS excellent?
+  What do you swear?
+  The brazier in the middle of the hall spits once, loudly, and everyone in the hall turns to look at you.
+  Oath-Scribe: The flame disagrees. So does my ledger: you beat her blades and you held them up to the light. Try again.
+  Oath-Scribe: Are they excellent?
+  ...
+  Oath-Scribe: Recorded. The sign stays up. No fine for the first try; everyone flinches once.
+  QUEST LOG: "Adequate Swords" Tell ADEQUATE SWORDS what the court said.
+  Oath-Scribe: Go and tell the plaintiff. Gently. They always take it hard.
+-- talk ADEQUATE_OWNER
+  Adequate Swords: Excellent. Really excellent? ...The court said so?
+  Adequate Swords: Then she's not lying. Then I'm not the only honest shop on the lane. Then I've been glaring at an honest woman for a week.
+  Adequate Swords: There. ADEQUATE SWORDS. (STILL.) A sign that's true twice. Take this. Keeps an edge, keeps a promise.
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "Adequate Swords"
+  You obtained a Metal Coat!
+  You put the Metal Coat in your Bag's Items pocket.
+  Your standing in The Trial by Flames rose to Brand!
+  Adequate Swords: I'm going to buy one of hers. For the shop. To remind me what excellent looks like.
+-- talk CRUCIBLE_LEGATE
+  Legate Varra Kosk: The Crucible's rite is seven bouts. Seven of the Legion, one after another, on the caldera floor.
+  Legate Varra Kosk: No potions. No healing between. Nobody complains, because complaining is a statement and statements here are under oath.
+  Take the Crucible's rite?
+  NEW QUEST: "Seven Bouts" Win seven bouts in a row on the Crucible floor (no healing, no bag).
+  Legate Varra Kosk: Herald. Ring the sand.
+  Crucible Herald: ON THE SAND! FROM ELOWEN, WITH A WARDEN'S BADGES AND NOBODY'S PAPERS: CHALLENGER \PN!
+  Crucible Herald: BOUT ONE! Recruit Orrin! He's been waiting all morning and he's said so, under oath, four times!
+  Crucible Herald: BOUT TWO! Legionnaire Tavi! Three years on the Pyre Road, and she's never once said she enjoyed it!
+  Crucible Herald: BOUT THREE! Hollen of the Slag Ward! The sand's warm now! Hollen's warmer!
+  Crucible Herald: BOUT FOUR, AND IT'S A DOUBLE! Ember-rider Ilka brings two at once! She says it's fair! It is, technically!
+  Crucible Herald: BOUT FIVE! Legionnaire Senna! She asked to be fifth! She says the fifth bout is where people start lying to themselves!
+  Crucible Herald: BOUT SIX! Rusk the Quiet! He hasn't said a word since the Pyre Road! Nobody's sure if that's an oath or a cold!
+  Crucible Herald: BOUT SEVEN. The Legate's adjutant, Captain Corran. On the Den's own ground.
+  Legate Varra Kosk: Corran fights the way Wyrmrest fights. Consider it a preview. Consider it a courtesy.
+  QUEST LOG: "Seven Bouts" Receive your brand from the Legate.
+  Crucible Herald: SEVEN! SEVEN FOR SEVEN! RING THE SAND!
+  Legate Varra Kosk: Seven bouts. No bag, no rest. And you didn't complain once, which I'm told is rarer than the winning.
+  Legate Varra Kosk: The Crucible's brand. Legion fighters will step aside for it on the Pyre Road. Some of them will want to fight you for it. Let them.
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "Seven Bouts"
+  You obtained a piece of Charcoal!
+  You put the piece of Charcoal in your Bag's Items pocket.
+  You obtained a Fire Stone!
+  You put the Fire Stone in your Bag's Items pocket.
+    | talk CRUCIBLE_LEGATE
+    | ====================
+    |   (overworld message) Legate Varra Kosk: The Crucible's rite is seven bouts. Seven of the Legion, one after another, on the caldera floor.
+    |   (overworld message) Legate Varra Kosk: No potions. No healing between. Nobody complains, because complaining is a statement and statements here are under oath.
+    |   (overworld message) Take the Crucible's rite?
+    |   (overworld message) NEW QUEST: "Seven Bouts" Win seven bouts in a row on the Crucible floor (no healing, no bag).
+    |   (overworld message) Legate Varra Kosk: Herald. Ring the sand.
+    |   (overworld message) Crucible Herald: ON THE SAND! FROM ELOWEN, WITH A WARDEN'S BADGES AND NOBODY'S PAPERS: CHALLENGER \PN!
+    |   (overworld message) Crucible Herald: BOUT ONE! Recruit Orrin! He's been waiting all morning and he's said so, under oath, four times!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Orrin!
+    |   Ashkaar Soldier Orrin sent out Houndoom!
+    |     >> sent out (foe): Houndoom Lv.33 [FLASHFIRE]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |   The power of the opposing Houndoom's Fire-type moves rose!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 175/175 | Houndoom 102/102]
+    |   Swampert won't obey!
+    |   The opposing Houndoom used Taunt!
+    |   Swampert fell for the taunt!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 175/175 | Houndoom 102/102]
+    |   Swampert ignored orders!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Houndoom (foe): 102 -> 86 / 102
+    |   It's not very effective...
+    |   The opposing Houndoom used Smog!
+    |     HP Swampert (player): 175 -> 172 / 175
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 172/175 | Houndoom 86/102]
+    |   Swampert used Surf!
+    |     HP Houndoom (foe): 86 -> 0 / 102
+    |   It's super effective!
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Houndoom fainted!
+    |     xx fainted: Houndoom (foe)
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Orrin is about to send out Hariyama. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Orrin sent out Hariyama!
+    |     >> sent out (foe): Hariyama Lv.33 [THICKFAT]
+    | 
+    | --- Turn 4 ---
+    |   [Swampert 172/175 | Hariyama 147/147]
+    |   Swampert ignored orders!
+    |   Swampert used Surf!
+    |     HP Hariyama (foe): 147 -> 9 / 147
+    | ## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
+    |   The magma was quenched! It set into black glass, and steam roars from every crack!
+    |   The opposing Hariyama used Force Palm!
+    |     HP Swampert (player): 172 -> 148 / 175
+    |   (end of round)
+    |   Swampert's taunt wore off!
+    | 
+    | --- Turn 5 ---
+    |   [Swampert 148/175 | Hariyama 9/147]
+    |   Swampert used Ice Beam!
+    |   The ice cracked apart on the hot glass...
+    |     HP Hariyama (foe): 9 -> 0 / 147
+    |   The opposing Hariyama fainted!
+    |     xx fainted: Hariyama (foe)
+    |   You defeated Ashkaar Soldier Orrin!
+    |   Waited all morning for that. Worth it. Honestly.
+    |   You got $1,584 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT TWO! Legionnaire Tavi! Three years on the Pyre Road, and she's never once said she enjoyed it!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Tavi!
+    |   Ashkaar Soldier Tavi sent out Ponyta!
+    |     >> sent out (foe): Ponyta Lv.34 [FLASHFIRE]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |   The power of the opposing Ponyta's Fire-type moves rose!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 148/175 | Ponyta 88/88]
+    |   The opposing Ponyta used Stomp!
+    |     HP Swampert (player): 148 -> 135 / 175
+    |   Swampert ignored orders!
+    |   Swampert used Surf!
+    |     HP Ponyta (foe): 88 -> 0 / 88
+    |   It's super effective!
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Ponyta fainted!
+    |     xx fainted: Ponyta (foe)
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Tavi is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Tavi sent out Fletchinder!
+    |     >> sent out (foe): Fletchinder Lv.34 [FLAMEBODY]
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 135/175 | Fletchinder 96/96]
+    |   Swampert ignored orders!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Fletchinder (foe): 96 -> 56 / 96
+    |   The opposing Fletchinder used Agility!
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose sharply!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 135/175 | Fletchinder 56/96]
+    |   The opposing Fletchinder used Flame Charge!
+    |   The opposing Fletchinder drew fire up from the magma!
+    |     HP Swampert (player): 135 -> 124 / 175
+    |   It's not very effective...
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose!
+    |   Swampert ignored orders!
+    |   Swampert used Protect!
+    |   But it failed!
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Swampert 124/175 | Fletchinder 56/96]
+    |   The opposing Fletchinder used Flame Charge!
+    |   The opposing Fletchinder drew fire up from the magma!
+    |     HP Swampert (player): 124 -> 112 / 175
+    |   It's not very effective...
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose!
+    |   Swampert is loafing around!
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Swampert 112/175 | Fletchinder 56/96]
+    |   The opposing Fletchinder used Quick Attack!
+    |     HP Swampert (player): 112 -> 104 / 175
+    |   Swampert turned away!
+    |   (end of round)
+    | 
+    | --- Turn 6 ---
+    |   [Swampert 104/175 | Fletchinder 56/96]
+    |   The opposing Fletchinder used Flame Charge!
+    |   The opposing Fletchinder drew fire up from the magma!
+    |     HP Swampert (player): 104 -> 92 / 175
+    |   It's not very effective...
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Fletchinder (foe): 56 -> 18 / 96
+    |   (end of round)
+    | 
+    | --- Turn 7 ---
+    |   [Swampert 92/175 | Fletchinder 18/96]
+    |   The opposing Fletchinder used Flame Charge!
+    |   The opposing Fletchinder drew fire up from the magma!
+    |     HP Swampert (player): 92 -> 81 / 175
+    |   It's not very effective...
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose!
+    |   Swampert turned away!
+    |   (end of round)
+    | 
+    | --- Turn 8 ---
+    |   [Swampert 81/175 | Fletchinder 18/96]
+    |   The opposing Fletchinder used Acrobatics!
+    |     HP Swampert (player): 81 -> 51 / 175
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Fletchinder (foe): 18 -> 0 / 96
+    |   The opposing Fletchinder fainted!
+    |     xx fainted: Fletchinder (foe)
+    |   You defeated Ashkaar Soldier Tavi!
+    |   Three years on the Pyre Road. That was the best part. Don't tell anyone.
+    |   You got $1,632 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT THREE! Hollen of the Slag Ward! The sand's warm now! Hollen's warmer!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Hollen!
+    |   Ashkaar Soldier Hollen sent out Camerupt!
+    |     >> sent out (foe): Camerupt Lv.34 [SOLIDROCK]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 51/175 | Camerupt 101/101]
+    |   Swampert used Earthquake!
+    |     HP Camerupt (foe): 101 -> 0 / 101
+    |   It's super effective!
+    |   The opposing Camerupt fainted!
+    |     xx fainted: Camerupt (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Swampert (player): 51 -> 40 / 175
+    |   Lava rained down around Swampert!
+    |   Ashkaar Soldier Hollen is about to send out Machoke. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Hollen sent out Machoke!
+    |     >> sent out (foe): Machoke Lv.35 [GUTS]
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 40/175 | Machoke 111/111]
+    |   Swampert used Earthquake!
+    |     HP Machoke (foe): 111 -> 0 / 111
+    |   The opposing Machoke fainted!
+    |     xx fainted: Machoke (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   You defeated Ashkaar Soldier Hollen!
+    |   The Slag Ward says hello. Loudly.
+    |   You got $1,680 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT FOUR, AND IT'S A DOUBLE! Ember-rider Ilka brings two at once! She says it's fair! It is, technically!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ember-Rider Ilka!
+    |   Ember-Rider Ilka sent out Growlithe and Torkoal!
+    |     >> sent out (foe): Growlithe Lv.35 [INTIMIDATE]
+    |     >> sent out (foe): Torkoal Lv.35 [WHITESMOKE]
+    |   Go! Swampert and Garchomp!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |     [ability: Growlithe (foe)'s Intimidate]
+    |     (anim: StatDown)
+    |   Swampert's Attack fell!
+    |     (anim: StatDown)
+    |   Garchomp's Attack fell!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 40/175 | Growlithe 94/94 | Garchomp 183/183 | Torkoal 104/104]
+    |   Garchomp ignored orders!
+    |   Garchomp used Crunch!
+    |     HP Growlithe (foe): 94 -> 33 / 94
+    |   Swampert used Surf!
+    |     HP Garchomp (player): 183 -> 116 / 183
+    |     HP Growlithe (foe): 33 -> 0 / 94
+    |     HP Torkoal (foe): 104 -> 0 / 104
+    |   It's super effective on the opposing Growlithe!
+    |   It's super effective on the opposing Torkoal!
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Growlithe fainted!
+    |     xx fainted: Growlithe (foe)
+    |   The opposing Torkoal fainted!
+    |     xx fainted: Torkoal (foe)
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ember-Rider Ilka sent out Salazzle!
+    |     >> sent out (foe): Salazzle Lv.35 [CORROSION]
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 40/175 | Salazzle 103/103 | Garchomp 116/183]
+    |   Garchomp ignored orders!
+    |   Garchomp used Swords Dance!
+    |     (anim: StatUp)
+    |   Garchomp's Attack rose sharply!
+    |   The opposing Salazzle used Poison Fang!
+    |     HP Garchomp (player): 116 -> 111 / 183
+    |   It's not very effective...
+    |   Swampert is loafing around!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 40/175 | Salazzle 103/103 | Garchomp 111/183]
+    |   Garchomp ignored orders!
+    |   Garchomp used Dragon Claw!
+    |     HP Salazzle (foe): 103 -> 0 / 103
+    |   The opposing Salazzle fainted!
+    |     xx fainted: Salazzle (foe)
+    |   You defeated Ember-Rider Ilka!
+    |   Two at once and still not enough. Fair's fair.
+    |   You got $2,800 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT FIVE! Legionnaire Senna! She asked to be fifth! She says the fifth bout is where people start lying to themselves!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Senna!
+    |   Ashkaar Soldier Senna sent out Gabite!
+    |     >> sent out (foe): Gabite Lv.36 [ROUGHSKIN]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 40/175 | Gabite 108/108]
+    |   The opposing Gabite used Dragon Breath!
+    |     HP Swampert (player): 40 -> 27 / 175
+    |     (anim: Paralysis)
+    |   Swampert is paralyzed! It may be unable to move!
+    |   Swampert pretended not to notice!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 27/175 PARALYSIS | Gabite 108/108]
+    |   The opposing Gabite used Bulldoze!
+    |     HP Swampert (player): 27 -> 5 / 175
+    |     (anim: StatDown)
+    |   Swampert's Speed fell!
+    |   The ground heaves... the volcano is about to erupt!
+    |     HP Swampert (player): 5 -> 0 / 175
+    |   Swampert won't obey! It hurt itself in its confusion!
+    |   Swampert fainted!
+    |     xx fainted: Swampert (player)
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Gabite (foe): 108 -> 101 / 108
+    |   Lava rained down around the opposing Gabite!
+    |   Go for it, Gyarados!
+    |     >> sent out (player): Gyarados Lv.50 [INTIMIDATE]
+    |     [ability: Gyarados (player)'s Intimidate]
+    |     (anim: StatDown)
+    |   The opposing Gabite's Attack fell!
+    | 
+    | --- Turn 3 ---
+    |   [Gyarados 170/170 | Gabite 101/108]
+    |   Gyarados used Ice Fang!
+    |   The ice melted before it could land...
+    |     HP Gabite (foe): 101 -> 0 / 108
+    |   It's super effective!
+    |     [ability: Gabite (foe)'s Rough Skin]
+    |     HP Gyarados (player): 170 -> 149 / 170
+    |   Gyarados is hurt!
+    |   The opposing Gabite fainted!
+    |     xx fainted: Gabite (foe)
+    |   Gyarados is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Senna is about to send out Monferno. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Senna sent out Monferno!
+    |     >> sent out (foe): Monferno Lv.36 [IRONFIST]
+    | 
+    | --- Turn 4 ---
+    |   [Gyarados 149/170 | Monferno 105/105]
+    |   Gyarados won't obey!
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Gyarados (player): 149 -> 134 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Gyarados 134/170 | Monferno 105/105]
+    |   Gyarados ignored orders!
+    |   Gyarados used Dragon Dance!
+    |     (anim: StatUp)
+    |   Gyarados's Attack rose!
+    |   Gyarados's Speed rose!
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Gyarados (player): 134 -> 117 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 6 ---
+    |   [Gyarados 117/170 | Monferno 105/105]
+    |   Gyarados ignored orders!
+    |   Gyarados used Ice Fang!
+    |   Gyarados's attack missed!
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Gyarados (player): 117 -> 102 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 7 ---
+    |   [Gyarados 102/170 | Monferno 105/105]
+    |   Gyarados turned away!
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Gyarados (player): 102 -> 87 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 8 ---
+    |   [Gyarados 87/170 | Monferno 105/105]
+    |   Gyarados ignored orders!
+    |   Gyarados used Ice Fang!
+    |   The ice melted before it could land...
+    |     HP Monferno (foe): 105 -> 76 / 105
+    |   It's not very effective...
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Gyarados (player): 87 -> 70 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 9 ---
+    |   [Gyarados 70/170 | Monferno 76/105]
+    |   Gyarados is loafing around!
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Gyarados (player): 70 -> 53 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 10 ---
+    |   [Gyarados 53/170 | Monferno 76/105]
+    |   Gyarados turned away!
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Gyarados (player): 53 -> 36 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 11 ---
+    |   [Gyarados 36/170 | Monferno 76/105]
+    |   Gyarados used Waterfall!
+    |     HP Monferno (foe): 76 -> 0 / 105
+    |   It's super effective!
+    |   The opposing Monferno fainted!
+    |     xx fainted: Monferno (foe)
+    |   You defeated Ashkaar Soldier Senna!
+    |   Fifth bout. Nobody's lying to themselves now.
+    |   You got $1,728 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT SIX! Rusk the Quiet! He hasn't said a word since the Pyre Road! Nobody's sure if that's an oath or a cold!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Rusk!
+    |   Ashkaar Soldier Rusk sent out Shelgon!
+    |     >> sent out (foe): Shelgon Lv.36 [ROCKHEAD]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 111/183 | Shelgon 106/106]
+    |   Garchomp ignored orders!
+    |   Garchomp used Crunch!
+    |     HP Shelgon (foe): 106 -> 60 / 106
+    |   The opposing Shelgon used Headbutt!
+    |     HP Garchomp (player): 111 -> 95 / 183
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Garchomp 95/183 | Shelgon 60/106]
+    |   Garchomp used Dragon Claw!
+    |     HP Shelgon (foe): 60 -> 0 / 106
+    |   A critical hit!
+    |   It's super effective!
+    |   The opposing Shelgon fainted!
+    |     xx fainted: Shelgon (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Rusk is about to send out Pignite. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Rusk sent out Pignite!
+    |     >> sent out (foe): Pignite Lv.36 [THICKFAT]
+    | 
+    | --- Turn 3 ---
+    |   [Garchomp 95/183 | Pignite 124/124]
+    |   Garchomp won't obey!
+    |   The opposing Pignite used Assurance!
+    |     HP Garchomp (player): 95 -> 79 / 183
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Garchomp 79/183 | Pignite 124/124]
+    |   Garchomp used Earthquake!
+    |     HP Pignite (foe): 124 -> 0 / 124
+    |   It's super effective!
+    |   The opposing Pignite fainted!
+    |     xx fainted: Pignite (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   You defeated Ashkaar Soldier Rusk!
+    |   ...
+    |   You got $1,728 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT SEVEN. The Legate's adjutant, Captain Corran. On the Den's own ground.
+    |   (overworld message) Legate Varra Kosk: Corran fights the way Wyrmrest fights. Consider it a preview. Consider it a courtesy.
+    | 
+    | --- Battle start ---
+    |   field: DRAGONS_DEN | weather: None | terrain: None
+    |   You are challenged by Ashkaar Officer Corran!
+    |   Ashkaar Officer Corran sent out Dragonair!
+    |     >> sent out (foe): Dragonair Lv.37 [MARVELSCALE]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> DRAGONS_DEN
+    |   Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 79/183 | Dragonair 105/105]
+    |   Garchomp ignored orders!
+    |   Garchomp used Earthquake!
+    |     HP Dragonair (foe): 105 -> 0 / 105
+    |   A critical hit!
+    |   The opposing Dragonair fainted!
+    |     xx fainted: Dragonair (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Officer Corran is about to send out Hakamo-o. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Corran sent out Hakamo-o!
+    |     >> sent out (foe): Hakamo-o Lv.37 [BULLETPROOF]
+    | 
+    | --- Turn 2 ---
+    |   [Garchomp 79/183 | Hakamo-o 101/101]
+    |   Garchomp pretended not to notice!
+    |   The opposing Hakamo-o used Iron Defense!
+    |     (anim: StatUp)
+    |   The opposing Hakamo-o's Defense rose sharply!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Garchomp 79/183 | Hakamo-o 101/101]
+    |   Garchomp ignored orders!
+    |   Garchomp used Earthquake!
+    |     HP Hakamo-o (foe): 101 -> 55 / 101
+    |   The opposing Hakamo-o used Dragon Claw!
+    |   The ancient wyrms roared in answer to the opposing Hakamo-o!
+    |     HP Garchomp (player): 79 -> 16 / 183
+    |   It's super effective!
+    |   The wyrm statues' eyes begin to glow... (3 more)
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Garchomp 16/183 | Hakamo-o 55/101]
+    |   Garchomp used Dragon Claw!
+    |   The ancient wyrms roared in answer to Garchomp!
+    |     HP Hakamo-o (foe): 55 -> 0 / 101
+    |   It's super effective!
+    |   The wyrm statues' eyes begin to glow... (2 more)
+    |   The opposing Hakamo-o fainted!
+    |     xx fainted: Hakamo-o (foe)
+    |   (end of round)
+    |   Ashkaar Officer Corran is about to send out Magmar. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Corran sent out Magmar!
+    |     >> sent out (foe): Magmar Lv.38 [FLAMEBODY]
+    | 
+    | --- Turn 5 ---
+    |   [Garchomp 16/183 | Magmar 111/111]
+    |   Garchomp ignored orders!
+    |   Garchomp used Dragon Claw!
+    |   The ancient wyrms roared in answer to Garchomp!
+    |     HP Magmar (foe): 111 -> 0 / 111
+    |   A critical hit!
+    |   The wyrm statues' eyes begin to glow... (1 more)
+    |   The opposing Magmar fainted!
+    |     xx fainted: Magmar (foe)
+    |   You defeated Ashkaar Officer Corran!
+    |   Seven. The Legate will want a word. She'll want it to be short.
+    |   You got $3,040 for winning!
+    |   battle result code: 1
+    |   (overworld message) QUEST LOG: "Seven Bouts" Receive your brand from the Legate.
+    |   (overworld message) Crucible Herald: SEVEN! SEVEN FOR SEVEN! RING THE SAND!
+    |   (overworld message) Legate Varra Kosk: Seven bouts. No bag, no rest. And you didn't complain once, which I'm told is rarer than the winning.
+    |   (overworld message) Legate Varra Kosk: The Crucible's brand. Legion fighters will step aside for it on the Pyre Road. Some of them will want to fight you for it. Let them.
+    |   (overworld message) The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+    |   (overworld message) QUEST COMPLETE: "Seven Bouts"
+    |   (overworld message) You obtained a piece of Charcoal!
+    |   (overworld message) You put the piece of Charcoal in your Bag's Items pocket.
+    |   (overworld message) You obtained a Fire Stone!
+    |   (overworld message) You put the Fire Stone in your Bag's Items pocket.
+-- talk CRUCIBLE_LEGATE
+  Legate Varra Kosk: The Crucible's rite is seven bouts. Seven of the Legion, one after another, on the caldera floor.
+  Legate Varra Kosk: No potions. No healing between. Nobody complains, because complaining is a statement and statements here are under oath.
+  Legate Varra Kosk: You signed Brakka's paper on the Saltmere barge. Ember-recruit. That's one bout fought already, in my book.
+  Take the Crucible's rite?
+  NEW QUEST: "Seven Bouts" Win seven bouts in a row on the Crucible floor (no healing, no bag).
+  Legate Varra Kosk: Herald. Ring the sand.
+  Crucible Herald: ON THE SAND! SIGNED ON THE SALTMERE BARGE, BRANDED BY SERGEANT BRAKKA HERSELF: EMBER-RECRUIT \PN!
+  Crucible Herald: The barge's paper is honoured. Bout one is FOUGHT. To bout two!
+  Crucible Herald: BOUT TWO! Legionnaire Tavi! Three years on the Pyre Road, and she's never once said she enjoyed it!
+  Crucible Herald: BOUT THREE! Hollen of the Slag Ward! The sand's warm now! Hollen's warmer!
+  Crucible Herald: BOUT FOUR, AND IT'S A DOUBLE! Ember-rider Ilka brings two at once! She says it's fair! It is, technically!
+  Crucible Herald: BOUT FIVE! Legionnaire Senna! She asked to be fifth! She says the fifth bout is where people start lying to themselves!
+  Crucible Herald: BOUT SIX! Rusk the Quiet! He hasn't said a word since the Pyre Road! Nobody's sure if that's an oath or a cold!
+  Crucible Herald: BOUT SEVEN. The Legate's adjutant, Captain Corran. On the Den's own ground.
+  Legate Varra Kosk: Corran fights the way Wyrmrest fights. Consider it a preview. Consider it a courtesy.
+  Crucible Herald: DOWN! On the sand, honestly! The Crucible thanks the challenger!
+  Legate Varra Kosk: No shame in it. Some shame in it. The rite starts again from the first bout whenever you're ready.
+    | talk CRUCIBLE_LEGATE
+    | ====================
+    |   (overworld message) Legate Varra Kosk: The Crucible's rite is seven bouts. Seven of the Legion, one after another, on the caldera floor.
+    |   (overworld message) Legate Varra Kosk: No potions. No healing between. Nobody complains, because complaining is a statement and statements here are under oath.
+    |   (overworld message) Legate Varra Kosk: You signed Brakka's paper on the Saltmere barge. Ember-recruit. That's one bout fought already, in my book.
+    |   (overworld message) Take the Crucible's rite?
+    |   (overworld message) NEW QUEST: "Seven Bouts" Win seven bouts in a row on the Crucible floor (no healing, no bag).
+    |   (overworld message) Legate Varra Kosk: Herald. Ring the sand.
+    |   (overworld message) Crucible Herald: ON THE SAND! SIGNED ON THE SALTMERE BARGE, BRANDED BY SERGEANT BRAKKA HERSELF: EMBER-RECRUIT \PN!
+    |   (overworld message) Crucible Herald: The barge's paper is honoured. Bout one is FOUGHT. To bout two!
+    |   (overworld message) Crucible Herald: BOUT TWO! Legionnaire Tavi! Three years on the Pyre Road, and she's never once said she enjoyed it!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Tavi!
+    |   Ashkaar Soldier Tavi sent out Ponyta!
+    |     >> sent out (foe): Ponyta Lv.34 [FLASHFIRE]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |   The power of the opposing Ponyta's Fire-type moves rose!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 175/175 | Ponyta 88/88]
+    |   The opposing Ponyta used Flame Wheel!
+    |   The opposing Ponyta drew fire up from the magma!
+    |     HP Swampert (player): 175 -> 155 / 175
+    |   It's not very effective...
+    |   Swampert used Earthquake!
+    |     HP Ponyta (foe): 88 -> 0 / 88
+    |   It's super effective!
+    |   The opposing Ponyta fainted!
+    |     xx fainted: Ponyta (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Swampert (player): 155 -> 144 / 175
+    |   Lava rained down around Swampert!
+    |   Ashkaar Soldier Tavi is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Tavi sent out Fletchinder!
+    |     >> sent out (foe): Fletchinder Lv.34 [FLAMEBODY]
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 144/175 | Fletchinder 96/96]
+    |   Swampert used Surf!
+    |     HP Fletchinder (foe): 96 -> 0 / 96
+    |   It's super effective!
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Fletchinder fainted!
+    |     xx fainted: Fletchinder (foe)
+    |   You defeated Ashkaar Soldier Tavi!
+    |   Three years on the Pyre Road. That was the best part. Don't tell anyone.
+    |   You got $1,632 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT THREE! Hollen of the Slag Ward! The sand's warm now! Hollen's warmer!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Hollen!
+    |   Ashkaar Soldier Hollen sent out Camerupt!
+    |     >> sent out (foe): Camerupt Lv.34 [SOLIDROCK]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 144/175 | Camerupt 101/101]
+    |   Swampert pretended not to notice!
+    |   The opposing Camerupt used Earth Power!
+    |   Magma erupted from below!
+    |     HP Swampert (player): 144 -> 98 / 175
+    |     (anim: StatDown)
+    |   Swampert's Special Defense fell!
+    |   The ground heaves... the volcano is about to erupt!
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Swampert (player): 98 -> 87 / 175
+    |   Lava rained down around Swampert!
+    |   The opposing Camerupt rode the eruption!
+    |     (anim: StatUp)
+    |   The opposing Camerupt's Special Attack rose!
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 87/175 | Camerupt 101/101]
+    |   Swampert ignored orders!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Camerupt (foe): 101 -> 70 / 101
+    |   The opposing Camerupt used Lava Plume!
+    |   The opposing Camerupt drew fire up from the magma!
+    |   The lava surged up with the opposing Camerupt!
+    |     HP Swampert (player): 87 -> 10 / 175
+    |   It's not very effective...
+    |     (anim: Burn)
+    |   Swampert was burned!
+    |   The ground heaves... the volcano is about to erupt!
+    |   (end of round)
+    |     (anim: Burn)
+    |     HP Swampert (player): 10 -> 0 / 175
+    |   Swampert was hurt by its burn!
+    |   Swampert fainted!
+    |     xx fainted: Swampert (player)
+    |   The volcano erupted!
+    |   The opposing Camerupt rode the eruption!
+    |     (anim: StatUp)
+    |   The opposing Camerupt's Special Attack rose!
+    |   Go for it, Gyarados!
+    |     >> sent out (player): Gyarados Lv.50 [INTIMIDATE]
+    |     [ability: Gyarados (player)'s Intimidate]
+    |     (anim: StatDown)
+    |   The opposing Camerupt's Attack fell!
+    | 
+    | --- Turn 3 ---
+    |   [Gyarados 170/170 | Camerupt 70/101]
+    |   Gyarados used Crunch!
+    |     HP Camerupt (foe): 70 -> 0 / 101
+    |   The opposing Camerupt fainted!
+    |     xx fainted: Camerupt (foe)
+    |   Gyarados is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Hollen is about to send out Machoke. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Hollen sent out Machoke!
+    |     >> sent out (foe): Machoke Lv.35 [GUTS]
+    | 
+    | --- Turn 4 ---
+    |   [Gyarados 170/170 | Machoke 111/111]
+    |   Gyarados used Ice Fang!
+    |   Gyarados's attack missed!
+    |   The opposing Machoke used Low Sweep!
+    |     HP Gyarados (player): 170 -> 155 / 170
+    |   It's not very effective...
+    |     (anim: StatDown)
+    |   Gyarados's Speed fell!
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Gyarados 155/170 | Machoke 111/111]
+    |   Gyarados won't obey!
+    |   The opposing Machoke used Vital Throw!
+    |     HP Gyarados (player): 155 -> 140 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 6 ---
+    |   [Gyarados 140/170 | Machoke 111/111]
+    |   Gyarados ignored orders!
+    |   Gyarados used Dragon Dance!
+    |     (anim: StatUp)
+    |   Gyarados's Attack rose!
+    |   Gyarados's Speed rose!
+    |   The opposing Machoke used Vital Throw!
+    |     HP Gyarados (player): 140 -> 124 / 170
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 7 ---
+    |   [Gyarados 124/170 | Machoke 111/111]
+    |   Gyarados used Ice Fang!
+    |   The ice melted before it could land...
+    |     HP Machoke (foe): 111 -> 61 / 111
+    |   The opposing Machoke used Low Sweep!
+    |     HP Gyarados (player): 124 -> 108 / 170
+    |   It's not very effective...
+    |     (anim: StatDown)
+    |   Gyarados's Speed fell!
+    |   (end of round)
+    | 
+    | --- Turn 8 ---
+    |   [Gyarados 108/170 | Machoke 61/111]
+    |   Gyarados used Waterfall!
+    |     HP Machoke (foe): 61 -> 0 / 111
+    |   The opposing Machoke fainted!
+    |     xx fainted: Machoke (foe)
+    |   You defeated Ashkaar Soldier Hollen!
+    |   The Slag Ward says hello. Loudly.
+    |   You got $1,680 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT FOUR, AND IT'S A DOUBLE! Ember-rider Ilka brings two at once! She says it's fair! It is, technically!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ember-Rider Ilka!
+    |   Ember-Rider Ilka sent out Growlithe and Torkoal!
+    |     >> sent out (foe): Growlithe Lv.35 [INTIMIDATE]
+    |     >> sent out (foe): Torkoal Lv.35 [WHITESMOKE]
+    |   Go! Garchomp and Gyarados!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    |     >> sent out (player): Gyarados Lv.50 [INTIMIDATE]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |     [ability: Gyarados (player)'s Intimidate]
+    |     (anim: StatDown)
+    |   The opposing Growlithe's Attack fell!
+    |     [ability: Torkoal (foe)'s White Smoke]
+    |   The opposing Torkoal's stats cannot be lowered!
+    |     [ability: Growlithe (foe)'s Intimidate]
+    |     (anim: StatDown)
+    |   Garchomp's Attack fell!
+    |     (anim: StatDown)
+    |   Gyarados's Attack fell!
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 183/183 | Growlithe 94/94 | Gyarados 108/170 | Torkoal 104/104]
+    |   Garchomp ignored orders!
+    |   Garchomp used Dragon Claw!
+    |     HP Torkoal (foe): 104 -> 70 / 104
+    |     HP Gyarados (player): 108 -> 89 / 170
+    |   Gyarados won't obey! It hurt itself in its confusion!
+    |   The opposing Growlithe used Fire Fang!
+    |   The opposing Growlithe's attack missed!
+    |   The opposing Torkoal used Lava Plume!
+    |   The opposing Torkoal drew fire up from the magma!
+    |   The lava surged up with the opposing Torkoal!
+    |     HP Growlithe (foe): 94 -> 52 / 94
+    |     HP Garchomp (player): 183 -> 160 / 183
+    |     HP Gyarados (player): 89 -> 66 / 170
+    |   It's not very effective on Garchomp...
+    |   It's not very effective on the opposing Growlithe...
+    |   It's not very effective on Gyarados...
+    |   The ground heaves... the volcano is about to erupt!
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Garchomp (player): 160 -> 149 / 183
+    |   Lava rained down around Garchomp!
+    |   The opposing Growlithe rode the eruption!
+    |     (anim: StatUp)
+    |   The opposing Growlithe's Attack rose!
+    |   The opposing Torkoal rode the eruption!
+    |     (anim: StatUp)
+    |   The opposing Torkoal's Special Attack rose!
+    | 
+    | --- Turn 2 ---
+    |   [Garchomp 149/183 | Growlithe 52/94 | Gyarados 66/170 | Torkoal 70/104]
+    |   Garchomp ignored orders!
+    |   Garchomp used Crunch!
+    |     HP Growlithe (foe): 52 -> 0 / 94
+    |   The opposing Growlithe fainted!
+    |     xx fainted: Growlithe (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   Gyarados is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   Gyarados used Waterfall!
+    |     HP Torkoal (foe): 70 -> 0 / 104
+    |   It's super effective!
+    |   The opposing Torkoal fainted!
+    |     xx fainted: Torkoal (foe)
+    |   (end of round)
+    |   Ember-Rider Ilka sent out Salazzle!
+    |     >> sent out (foe): Salazzle Lv.35 [CORROSION]
+    | 
+    | --- Turn 3 ---
+    |   [Garchomp 149/183 | Salazzle 103/103 | Gyarados 66/170]
+    |   Garchomp is loafing around!
+    |   Gyarados used Waterfall!
+    |     HP Salazzle (foe): 103 -> 0 / 103
+    |   It's super effective!
+    |   The opposing Salazzle fainted!
+    |     xx fainted: Salazzle (foe)
+    |   You defeated Ember-Rider Ilka!
+    |   Two at once and still not enough. Fair's fair.
+    |   You got $2,800 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT FIVE! Legionnaire Senna! She asked to be fifth! She says the fifth bout is where people start lying to themselves!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Senna!
+    |   Ashkaar Soldier Senna sent out Gabite!
+    |     >> sent out (foe): Gabite Lv.36 [ROUGHSKIN]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 149/183 | Gabite 108/108]
+    |   Garchomp ignored orders!
+    |   Garchomp used Swords Dance!
+    |     (anim: StatUp)
+    |   Garchomp's Attack rose sharply!
+    |   The opposing Gabite used Dragon Breath!
+    |     HP Garchomp (player): 149 -> 119 / 183
+    |   It's super effective!
+    |     (anim: Paralysis)
+    |   Garchomp is paralyzed! It may be unable to move!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Garchomp 119/183 PARALYSIS | Gabite 108/108]
+    |   The opposing Gabite used Bite!
+    |     HP Garchomp (player): 119 -> 106 / 183
+    |   Garchomp pretended not to notice!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Garchomp 106/183 PARALYSIS | Gabite 108/108]
+    |   The opposing Gabite used Bite!
+    |     HP Garchomp (player): 106 -> 93 / 183
+    |   Garchomp used Earthquake!
+    |     HP Gabite (foe): 108 -> 0 / 108
+    |   The opposing Gabite fainted!
+    |     xx fainted: Gabite (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Garchomp (player): 93 -> 82 / 183
+    |   Lava rained down around Garchomp!
+    |   Ashkaar Soldier Senna is about to send out Monferno. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Senna sent out Monferno!
+    |     >> sent out (foe): Monferno Lv.36 [IRONFIST]
+    | 
+    | --- Turn 4 ---
+    |   [Garchomp 82/183 PARALYSIS | Monferno 105/105]
+    |   The opposing Monferno used Power-Up Punch!
+    |     HP Garchomp (player): 82 -> 67 / 183
+    |     (anim: StatUp)
+    |   The opposing Monferno's Attack rose!
+    |   Garchomp used Dragon Claw!
+    |     HP Monferno (foe): 105 -> 0 / 105
+    |   The opposing Monferno fainted!
+    |     xx fainted: Monferno (foe)
+    |   You defeated Ashkaar Soldier Senna!
+    |   Fifth bout. Nobody's lying to themselves now.
+    |   You got $1,728 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT SIX! Rusk the Quiet! He hasn't said a word since the Pyre Road! Nobody's sure if that's an oath or a cold!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Rusk!
+    |   Ashkaar Soldier Rusk sent out Shelgon!
+    |     >> sent out (foe): Shelgon Lv.36 [ROCKHEAD]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 67/183 PARALYSIS | Shelgon 106/106]
+    |   Garchomp used Dragon Claw!
+    |     HP Shelgon (foe): 106 -> 0 / 106
+    |   It's super effective!
+    |   The opposing Shelgon fainted!
+    |     xx fainted: Shelgon (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Rusk is about to send out Pignite. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Rusk sent out Pignite!
+    |     >> sent out (foe): Pignite Lv.36 [THICKFAT]
+    | 
+    | --- Turn 2 ---
+    |   [Garchomp 67/183 PARALYSIS | Pignite 124/124]
+    |   Garchomp used Earthquake!
+    |     HP Pignite (foe): 124 -> 0 / 124
+    |   It's super effective!
+    |   The opposing Pignite fainted!
+    |     xx fainted: Pignite (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   You defeated Ashkaar Soldier Rusk!
+    |   ...
+    |   You got $1,728 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT SEVEN. The Legate's adjutant, Captain Corran. On the Den's own ground.
+    |   (overworld message) Legate Varra Kosk: Corran fights the way Wyrmrest fights. Consider it a preview. Consider it a courtesy.
+    | 
+    | --- Battle start ---
+    |   field: DRAGONS_DEN | weather: None | terrain: None
+    |   You are challenged by Ashkaar Officer Corran!
+    |   Ashkaar Officer Corran sent out Dragonair!
+    |     >> sent out (foe): Dragonair Lv.37 [MARVELSCALE]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> DRAGONS_DEN
+    |   Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 67/183 PARALYSIS | Dragonair 105/105]
+    |   Garchomp used Earthquake!
+    |     HP Dragonair (foe): 105 -> 1 / 105
+    |   The opposing Dragonair used Dragon Tail!
+    |   The ancient wyrms roared in answer to the opposing Dragonair!
+    |     HP Garchomp (player): 67 -> 18 / 183
+    |   It's super effective!
+    |   The wyrm statues' eyes begin to glow... (3 more)
+    |     << recalled: Garchomp (player)
+    |     >> sent out (player): Gyarados Lv.50 [INTIMIDATE]
+    |   Gyarados was dragged out!
+    |     [ability: Gyarados (player)'s Intimidate]
+    |     (anim: StatDown)
+    |   The opposing Dragonair's Attack fell!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Gyarados 66/170 | Dragonair 1/105]
+    |   Gyarados is loafing around!
+    |   The opposing Dragonair used Thunder Wave!
+    |     (anim: Paralysis)
+    |   Gyarados is paralyzed! It may be unable to move!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Gyarados 66/170 PARALYSIS | Dragonair 1/105]
+    |   Gyarados ignored orders!
+    |   Gyarados used Waterfall!
+    |   The lair's heat boiled the water away...
+    |     HP Dragonair (foe): 1 -> 0 / 105
+    |   It's not very effective...
+    |   Steam hisses from the cooling magma... (2 more)
+    |   The opposing Dragonair fainted!
+    |     xx fainted: Dragonair (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   Gyarados is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Officer Corran is about to send out Hakamo-o. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Corran sent out Hakamo-o!
+    |     >> sent out (foe): Hakamo-o Lv.37 [BULLETPROOF]
+    | 
+    | --- Turn 4 ---
+    |   [Gyarados 66/170 PARALYSIS | Hakamo-o 101/101]
+    |   The opposing Hakamo-o used Iron Defense!
+    |     (anim: StatUp)
+    |   The opposing Hakamo-o's Defense rose sharply!
+    |     HP Gyarados (player): 66 -> 39 / 170
+    |   Gyarados won't obey! It hurt itself in its confusion!
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Gyarados 39/170 PARALYSIS | Hakamo-o 101/101]
+    |   The opposing Hakamo-o used Dragon Claw!
+    |   The ancient wyrms roared in answer to the opposing Hakamo-o!
+    |     HP Gyarados (player): 39 -> 0 / 170
+    |   The wyrm statues' eyes begin to glow... (2 more)
+    |   Gyarados fainted!
+    |     xx fainted: Gyarados (player)
+    |   (end of round)
+    |   You're in charge, Lucario!
+    |     >> sent out (player): Lucario Lv.50 [STEADFAST]
+    | 
+    | --- Turn 6 ---
+    |   [Lucario 145/145 | Hakamo-o 101/101]
+    |   Lucario used Flash Cannon!
+    |     HP Hakamo-o (foe): 101 -> 26 / 101
+    |   The opposing Hakamo-o used Iron Defense!
+    |     (anim: StatUp)
+    |   The opposing Hakamo-o's Defense rose sharply!
+    |   (end of round)
+    | 
+    | --- Turn 7 ---
+    |   [Lucario 145/145 | Hakamo-o 26/101]
+    |   Lucario ignored orders!
+    |   Lucario used Aura Sphere!
+    |     [ability: Hakamo-o (foe)'s Bulletproof]
+    |   It doesn't affect the opposing Hakamo-o...
+    |   The opposing Hakamo-o used Dragon Claw!
+    |   The ancient wyrms roared in answer to the opposing Hakamo-o!
+    |     HP Lucario (player): 145 -> 118 / 145
+    |   It's not very effective...
+    |   The wyrm statues' eyes begin to glow... (1 more)
+    |   (end of round)
+    | 
+    | --- Turn 8 ---
+    |   [Lucario 118/145 | Hakamo-o 26/101]
+    |   Lucario used Flash Cannon!
+    |     HP Hakamo-o (foe): 26 -> 0 / 101
+    |   The opposing Hakamo-o fainted!
+    |     xx fainted: Hakamo-o (foe)
+    |   Lucario is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Officer Corran is about to send out Magmar. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Corran sent out Magmar!
+    |     >> sent out (foe): Magmar Lv.38 [FLAMEBODY]
+    | 
+    | --- Turn 9 ---
+    |   [Lucario 118/145 | Magmar 111/111]
+    |   Lucario won't obey!
+    |   The opposing Magmar used Lava Plume!
+    |   The magma-lit den blazed with Lava Plume!
+    |     HP Lucario (player): 118 -> 0 / 145
+    |   It's super effective!
+    |   Lucario fainted!
+    |     xx fainted: Lucario (player)
+    |   (end of round)
+    |   You're in charge, Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | 
+    | --- Turn 10 ---
+    |   [Garchomp 18/183 PARALYSIS | Magmar 111/111]
+    |   The opposing Magmar used Lava Plume!
+    |   The magma-lit den blazed with Lava Plume!
+    |     HP Garchomp (player): 18 -> 0 / 183
+    |   It's not very effective...
+    |   Garchomp fainted!
+    |     xx fainted: Garchomp (player)
+    |   You have no more Pokémon that can fight!
+    |   You lost against Ashkaar Officer Corran!
+    |   You gave $4,000 to the winner...
+    |   battle result code: 2
+    |   (overworld message) Crucible Herald: DOWN! On the sand, honestly! The Crucible thanks the challenger!
+    |   (overworld message) Legate Varra Kosk: No shame in it. Some shame in it. The rite starts again from the first bout whenever you're ready.
+-- talk CRUCIBLE_LEGATE
+  Legate Varra Kosk: Back for the rite. From the first bout, then. The sand doesn't remember who it nearly beat.
+  Fight the seven bouts?
+  Crucible Herald: ON THE SAND! SIGNED ON THE SALTMERE BARGE, BRANDED BY SERGEANT BRAKKA HERSELF: EMBER-RECRUIT \PN!
+  Crucible Herald: The barge's paper is honoured. Bout one is FOUGHT. To bout two!
+  Crucible Herald: BOUT TWO! Legionnaire Tavi! Three years on the Pyre Road, and she's never once said she enjoyed it!
+  Crucible Herald: BOUT THREE! Hollen of the Slag Ward! The sand's warm now! Hollen's warmer!
+  Crucible Herald: BOUT FOUR, AND IT'S A DOUBLE! Ember-rider Ilka brings two at once! She says it's fair! It is, technically!
+  Crucible Herald: BOUT FIVE! Legionnaire Senna! She asked to be fifth! She says the fifth bout is where people start lying to themselves!
+  Crucible Herald: BOUT SIX! Rusk the Quiet! He hasn't said a word since the Pyre Road! Nobody's sure if that's an oath or a cold!
+  Crucible Herald: BOUT SEVEN. The Legate's adjutant, Captain Corran. On the Den's own ground.
+  Legate Varra Kosk: Corran fights the way Wyrmrest fights. Consider it a preview. Consider it a courtesy.
+  QUEST LOG: "Seven Bouts" Receive your brand from the Legate.
+  Crucible Herald: SEVEN! SEVEN FOR SEVEN! RING THE SAND!
+  Legate Varra Kosk: Seven bouts. No bag, no rest. And you didn't complain once, which I'm told is rarer than the winning.
+  Legate Varra Kosk: The Crucible's brand. Legion fighters will step aside for it on the Pyre Road. Some of them will want to fight you for it. Let them.
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "Seven Bouts"
+  You obtained a piece of Charcoal!
+  You put the piece of Charcoal in your Bag's Items pocket.
+  You obtained a Fire Stone!
+  You put the Fire Stone in your Bag's Items pocket.
+  Your standing in The Trial by Flames rose to Pyre!
+    | talk CRUCIBLE_LEGATE
+    | ====================
+    |   (overworld message) Legate Varra Kosk: Back for the rite. From the first bout, then. The sand doesn't remember who it nearly beat.
+    |   (overworld message) Fight the seven bouts?
+    |   (overworld message) Crucible Herald: ON THE SAND! SIGNED ON THE SALTMERE BARGE, BRANDED BY SERGEANT BRAKKA HERSELF: EMBER-RECRUIT \PN!
+    |   (overworld message) Crucible Herald: The barge's paper is honoured. Bout one is FOUGHT. To bout two!
+    |   (overworld message) Crucible Herald: BOUT TWO! Legionnaire Tavi! Three years on the Pyre Road, and she's never once said she enjoyed it!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Tavi!
+    |   Ashkaar Soldier Tavi sent out Ponyta!
+    |     >> sent out (foe): Ponyta Lv.34 [FLASHFIRE]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |   The power of the opposing Ponyta's Fire-type moves rose!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 175/175 | Ponyta 88/88]
+    |   The opposing Ponyta used Flame Wheel!
+    |   The opposing Ponyta drew fire up from the magma!
+    |     HP Swampert (player): 175 -> 156 / 175
+    |   It's not very effective...
+    |   Swampert used Surf!
+    |     HP Ponyta (foe): 88 -> 0 / 88
+    |   It's super effective!
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Ponyta fainted!
+    |     xx fainted: Ponyta (foe)
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Tavi is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Tavi sent out Fletchinder!
+    |     >> sent out (foe): Fletchinder Lv.34 [FLAMEBODY]
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 156/175 | Fletchinder 96/96]
+    |   Swampert turned away!
+    |   The opposing Fletchinder used Agility!
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose sharply!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 156/175 | Fletchinder 96/96]
+    |   The opposing Fletchinder used Flame Charge!
+    |   The opposing Fletchinder drew fire up from the magma!
+    |     HP Swampert (player): 156 -> 145 / 175
+    |   It's not very effective...
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose!
+    |   Swampert ignored orders!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Fletchinder (foe): 96 -> 59 / 96
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Swampert 145/175 | Fletchinder 59/96]
+    |   The opposing Fletchinder used Flame Charge!
+    |   The opposing Fletchinder drew fire up from the magma!
+    |     HP Swampert (player): 145 -> 134 / 175
+    |   It's not very effective...
+    |     (anim: StatUp)
+    |   The opposing Fletchinder's Speed rose!
+    |   Swampert ignored orders!
+    |   Swampert used Surf!
+    |     HP Fletchinder (foe): 59 -> 0 / 96
+    |   It's super effective!
+    | ## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
+    |   The magma was quenched! It set into black glass, and steam roars from every crack!
+    |   The opposing Fletchinder fainted!
+    |     xx fainted: Fletchinder (foe)
+    |   You defeated Ashkaar Soldier Tavi!
+    |   Three years on the Pyre Road. That was the best part. Don't tell anyone.
+    |   You got $1,632 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT THREE! Hollen of the Slag Ward! The sand's warm now! Hollen's warmer!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Hollen!
+    |   Ashkaar Soldier Hollen sent out Camerupt!
+    |     >> sent out (foe): Camerupt Lv.34 [SOLIDROCK]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 134/175 | Camerupt 101/101]
+    |   Swampert used Earthquake!
+    |     HP Camerupt (foe): 101 -> 0 / 101
+    |   It's super effective!
+    |   The opposing Camerupt fainted!
+    |     xx fainted: Camerupt (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Swampert (player): 134 -> 123 / 175
+    |   Lava rained down around Swampert!
+    |   Ashkaar Soldier Hollen is about to send out Machoke. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Hollen sent out Machoke!
+    |     >> sent out (foe): Machoke Lv.35 [GUTS]
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 123/175 | Machoke 111/111]
+    |   Swampert ignored orders!
+    |   Swampert used Earthquake!
+    |     HP Machoke (foe): 111 -> 0 / 111
+    |   The opposing Machoke fainted!
+    |     xx fainted: Machoke (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   You defeated Ashkaar Soldier Hollen!
+    |   The Slag Ward says hello. Loudly.
+    |   You got $1,680 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT FOUR, AND IT'S A DOUBLE! Ember-rider Ilka brings two at once! She says it's fair! It is, technically!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ember-Rider Ilka!
+    |   Ember-Rider Ilka sent out Growlithe and Torkoal!
+    |     >> sent out (foe): Growlithe Lv.35 [INTIMIDATE]
+    |     >> sent out (foe): Torkoal Lv.35 [WHITESMOKE]
+    |   Go! Swampert and Garchomp!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |     [ability: Growlithe (foe)'s Intimidate]
+    |     (anim: StatDown)
+    |   Swampert's Attack fell!
+    |     (anim: StatDown)
+    |   Garchomp's Attack fell!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 123/175 | Growlithe 94/94 | Garchomp 183/183 | Torkoal 104/104]
+    |   Garchomp used Crunch!
+    |     HP Growlithe (foe): 94 -> 35 / 94
+    |   Swampert used Surf!
+    |     HP Garchomp (player): 183 -> 142 / 183
+    |     HP Growlithe (foe): 35 -> 0 / 94
+    |     HP Torkoal (foe): 104 -> 0 / 104
+    |   It's super effective on the opposing Growlithe!
+    |   It's super effective on the opposing Torkoal!
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Growlithe fainted!
+    |     xx fainted: Growlithe (foe)
+    |   The opposing Torkoal fainted!
+    |     xx fainted: Torkoal (foe)
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ember-Rider Ilka sent out Salazzle!
+    |     >> sent out (foe): Salazzle Lv.35 [CORROSION]
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 123/175 | Salazzle 103/103 | Garchomp 142/183]
+    |   Garchomp used Crunch!
+    |     HP Salazzle (foe): 103 -> 46 / 103
+    |   The opposing Salazzle used Nasty Plot!
+    |     (anim: StatUp)
+    |   The opposing Salazzle's Special Attack rose sharply!
+    |   Swampert is loafing around!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 123/175 | Salazzle 46/103 | Garchomp 142/183]
+    |   Garchomp used Crunch!
+    |     HP Salazzle (foe): 46 -> 0 / 103
+    |   The opposing Salazzle fainted!
+    |     xx fainted: Salazzle (foe)
+    |   You defeated Ember-Rider Ilka!
+    |   Two at once and still not enough. Fair's fair.
+    |   You got $2,800 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT FIVE! Legionnaire Senna! She asked to be fifth! She says the fifth bout is where people start lying to themselves!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Senna!
+    |   Ashkaar Soldier Senna sent out Gabite!
+    |     >> sent out (foe): Gabite Lv.36 [ROUGHSKIN]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 123/175 | Gabite 108/108]
+    |   The opposing Gabite used Dragon Breath!
+    |     HP Swampert (player): 123 -> 109 / 175
+    |   Swampert ignored orders!
+    |   Swampert used Protect!
+    |   But it failed!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 109/175 | Gabite 108/108]
+    |   The opposing Gabite used Bite!
+    |     HP Swampert (player): 109 -> 95 / 175
+    |   Swampert won't obey!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 95/175 | Gabite 108/108]
+    |   The opposing Gabite used Dragon Breath!
+    |     HP Swampert (player): 95 -> 82 / 175
+    |   Swampert ignored orders!
+    |   Swampert used Earthquake!
+    |     HP Gabite (foe): 108 -> 0 / 108
+    |   The opposing Gabite fainted!
+    |     xx fainted: Gabite (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Swampert (player): 82 -> 71 / 175
+    |   Lava rained down around Swampert!
+    |   Ashkaar Soldier Senna is about to send out Monferno. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Senna sent out Monferno!
+    |     >> sent out (foe): Monferno Lv.36 [IRONFIST]
+    | 
+    | --- Turn 4 ---
+    |   [Swampert 71/175 | Monferno 105/105]
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Swampert (player): 71 -> 56 / 175
+    |   It's not very effective...
+    |   Swampert ignored orders!
+    |   Swampert used Protect!
+    |   But it failed!
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Swampert 56/175 | Monferno 105/105]
+    |   The opposing Monferno used Power-Up Punch!
+    |     HP Swampert (player): 56 -> 32 / 175
+    |   A critical hit!
+    |     (anim: StatUp)
+    |   The opposing Monferno's Attack rose!
+    |   Swampert pretended not to notice!
+    |   (end of round)
+    | 
+    | --- Turn 6 ---
+    |   [Swampert 32/175 | Monferno 105/105]
+    |   The opposing Monferno used Flame Wheel!
+    |   The opposing Monferno drew fire up from the magma!
+    |     HP Swampert (player): 32 -> 12 / 175
+    |   It's not very effective...
+    |   Swampert ignored orders!
+    |   Swampert used Protect!
+    |   But it failed!
+    |   (end of round)
+    | 
+    | --- Turn 7 ---
+    |   [Swampert 12/175 | Monferno 105/105]
+    |   The opposing Monferno used Power-Up Punch!
+    |     HP Swampert (player): 12 -> 0 / 175
+    |   Swampert fainted!
+    |     xx fainted: Swampert (player)
+    |     (anim: StatUp)
+    |   The opposing Monferno's Attack rose!
+    |   (end of round)
+    |   You're in charge, Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | 
+    | --- Turn 8 ---
+    |   [Garchomp 142/183 | Monferno 105/105]
+    |   Garchomp used Earthquake!
+    |     HP Monferno (foe): 105 -> 0 / 105
+    |   It's super effective!
+    |   The opposing Monferno fainted!
+    |     xx fainted: Monferno (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   You defeated Ashkaar Soldier Senna!
+    |   Fifth bout. Nobody's lying to themselves now.
+    |   You got $1,728 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT SIX! Rusk the Quiet! He hasn't said a word since the Pyre Road! Nobody's sure if that's an oath or a cold!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Rusk!
+    |   Ashkaar Soldier Rusk sent out Shelgon!
+    |     >> sent out (foe): Shelgon Lv.36 [ROCKHEAD]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 142/183 | Shelgon 106/106]
+    |   Garchomp used Swords Dance!
+    |     (anim: StatUp)
+    |   Garchomp's Attack rose sharply!
+    |   The opposing Shelgon used Headbutt!
+    |     HP Garchomp (player): 142 -> 119 / 183
+    |   A critical hit!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Garchomp 119/183 | Shelgon 106/106]
+    |   Garchomp used Earthquake!
+    |     HP Shelgon (foe): 106 -> 0 / 106
+    |   The opposing Shelgon fainted!
+    |     xx fainted: Shelgon (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Garchomp (player): 119 -> 108 / 183
+    |   Lava rained down around Garchomp!
+    |   Ashkaar Soldier Rusk is about to send out Pignite. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Rusk sent out Pignite!
+    |     >> sent out (foe): Pignite Lv.36 [THICKFAT]
+    | 
+    | --- Turn 3 ---
+    |   [Garchomp 108/183 | Pignite 124/124]
+    |   Garchomp used Dragon Claw!
+    |     HP Pignite (foe): 124 -> 0 / 124
+    |   The opposing Pignite fainted!
+    |     xx fainted: Pignite (foe)
+    |   You defeated Ashkaar Soldier Rusk!
+    |   ...
+    |   You got $1,728 for winning!
+    |   battle result code: 1
+    |   (overworld message) Crucible Herald: BOUT SEVEN. The Legate's adjutant, Captain Corran. On the Den's own ground.
+    |   (overworld message) Legate Varra Kosk: Corran fights the way Wyrmrest fights. Consider it a preview. Consider it a courtesy.
+    | 
+    | --- Battle start ---
+    |   field: DRAGONS_DEN | weather: None | terrain: None
+    |   You are challenged by Ashkaar Officer Corran!
+    |   Ashkaar Officer Corran sent out Dragonair!
+    |     >> sent out (foe): Dragonair Lv.37 [MARVELSCALE]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> DRAGONS_DEN
+    |   Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 108/183 | Dragonair 105/105]
+    |   Garchomp ignored orders!
+    |   Garchomp used Earthquake!
+    |     HP Dragonair (foe): 105 -> 0 / 105
+    |   The opposing Dragonair fainted!
+    |     xx fainted: Dragonair (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Officer Corran is about to send out Hakamo-o. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Corran sent out Hakamo-o!
+    |     >> sent out (foe): Hakamo-o Lv.37 [BULLETPROOF]
+    | 
+    | --- Turn 2 ---
+    |   [Garchomp 108/183 | Hakamo-o 101/101]
+    |   Garchomp used Dragon Claw!
+    |   The ancient wyrms roared in answer to Garchomp!
+    |     HP Hakamo-o (foe): 101 -> 0 / 101
+    |   It's super effective!
+    |   The wyrm statues' eyes begin to glow... (3 more)
+    |   The opposing Hakamo-o fainted!
+    |     xx fainted: Hakamo-o (foe)
+    |   (end of round)
+    |   Ashkaar Officer Corran is about to send out Magmar. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Corran sent out Magmar!
+    |     >> sent out (foe): Magmar Lv.38 [FLAMEBODY]
+    | 
+    | --- Turn 3 ---
+    |   [Garchomp 108/183 | Magmar 111/111]
+    |   Garchomp ignored orders!
+    |   Garchomp used Crunch!
+    |     HP Magmar (foe): 111 -> 3 / 111
+    |   A critical hit!
+    |     (anim: StatDown)
+    |   The opposing Magmar's Defense fell!
+    |   The opposing Magmar used Fire Punch!
+    |   The magma-lit den blazed with Fire Punch!
+    |     HP Garchomp (player): 108 -> 94 / 183
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Garchomp 94/183 | Magmar 3/111]
+    |   Garchomp used Earthquake!
+    |     HP Magmar (foe): 3 -> 0 / 111
+    |   It's super effective!
+    |   The opposing Magmar fainted!
+    |     xx fainted: Magmar (foe)
+    |   You defeated Ashkaar Officer Corran!
+    |   Seven. The Legate will want a word. She'll want it to be short.
+    |   You got $3,040 for winning!
+    |   battle result code: 1
+    |   (overworld message) QUEST LOG: "Seven Bouts" Receive your brand from the Legate.
+    |   (overworld message) Crucible Herald: SEVEN! SEVEN FOR SEVEN! RING THE SAND!
+    |   (overworld message) Legate Varra Kosk: Seven bouts. No bag, no rest. And you didn't complain once, which I'm told is rarer than the winning.
+    |   (overworld message) Legate Varra Kosk: The Crucible's brand. Legion fighters will step aside for it on the Pyre Road. Some of them will want to fight you for it. Let them.
+    |   (overworld message) The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+    |   (overworld message) QUEST COMPLETE: "Seven Bouts"
+    |   (overworld message) You obtained a piece of Charcoal!
+    |   (overworld message) You put the piece of Charcoal in your Bag's Items pocket.
+    |   (overworld message) You obtained a Fire Stone!
+    |   (overworld message) You put the Fire Stone in your Bag's Items pocket.
+    |   (overworld message) Your standing in The Trial by Flames rose to Pyre!
+-- talk HERALD_PYKE
+  Herald Pyke: The Dominion convenes a Trial of Truth. Tribune Halden of the Legion has sworn an oath about the night of the five bells.
+  Herald Pyke: Every witness who was in Cindervault that night may answer it. You were in Cindervault that night.
+  Herald Pyke: Say true, or say nothing. Both are honoured here. Lying is not.
+  Testify before the brazier?
+  NEW QUEST: "The Trial of Truth" Testify before the Great Oath-Brazier in the Hall of Oaths.
+  Tribune Halden: I swear by the flame: on the night of the five bells, the Dominion's hands were clean.
+  Tribune Halden: The Meridian put a pipe in our fire. The Hollow poured a lake on it. The Envoy guarded the Light Stone while the city burned, as a friend guards a friend's house.
+  Tribune Halden: A child shut Zenith's tap with their own hands. The Dominion honours it. The Dominion also had no part in what came before.
+  Herald Pyke: Witness. You were in the Hearthguild Hall that night. Does his oath stand?
+  What do you say?
+  The brazier in the middle of the hall roars up and spits a long tongue of fire straight at the vault.
+  Herald Pyke: The flame says otherwise. You were in that hall. You heard the Envoy.
+  Herald Pyke: A witness who lies at the fire is struck from the Trial. Go. Your word is worth nothing here today.
+  QUEST FAILED: "The Trial of Truth"
+-- talk HERALD_PYKE
+  Herald Pyke: The Dominion convenes a Trial of Truth. Tribune Halden of the Legion has sworn an oath about the night of the five bells.
+  Herald Pyke: Every witness who was in Cindervault that night may answer it. You were in Cindervault that night.
+  Herald Pyke: Say true, or say nothing. Both are honoured here. Lying is not.
+  Testify before the brazier?
+  NEW QUEST: "The Trial of Truth" Testify before the Great Oath-Brazier in the Hall of Oaths.
+  Tribune Halden: I swear by the flame: on the night of the five bells, the Dominion's hands were clean.
+  Tribune Halden: The Meridian put a pipe in our fire. The Hollow poured a lake on it. The Envoy guarded the Light Stone while the city burned, as a friend guards a friend's house.
+  Tribune Halden: A child shut Zenith's tap with their own hands. The Dominion honours it. The Dominion also had no part in what came before.
+  Herald Pyke: Witness. You were in the Hearthguild Hall that night. Does his oath stand?
+  What do you say?
+  Herald Pyke: Say true or say nothing. You said nothing. That is honoured in this hall.
+  Tribune Halden: Then my oath stands.
+  Herald Pyke: It stands because nobody answered it. That's not the same as true. The Trial is closed.
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "The Trial of Truth"
+-- talk HERALD_PYKE
+  Herald Pyke: The Dominion convenes a Trial of Truth. Tribune Halden of the Legion has sworn an oath about the night of the five bells.
+  Herald Pyke: Every witness who was in Cindervault that night may answer it. You were in Cindervault that night.
+  Herald Pyke: Say true, or say nothing. Both are honoured here. Lying is not.
+  Testify before the brazier?
+  NEW QUEST: "The Trial of Truth" Testify before the Great Oath-Brazier in the Hall of Oaths.
+  Tribune Halden: I swear by the flame: on the night of the five bells, the Dominion's hands were clean.
+  Tribune Halden: The Meridian put a pipe in our fire. The Hollow poured a lake on it. The Envoy guarded the Light Stone while the city burned, as a friend guards a friend's house.
+  Tribune Halden: A child shut Zenith's tap with their own hands. The Dominion honours it. The Dominion also had no part in what came before.
+  Herald Pyke: Witness. You were in the Hearthguild Hall that night. Does his oath stand?
+  What do you say?
+  Herald Pyke: ...Say it again, for the scribe. Exactly.
+  You say it exactly: 'The Dominar told me to take it while everyone was looking at the mountain.' Envoy Haskar's words, to Sigrun, in front of Brann.
+  The hall makes a sound like a held breath. Tribune Halden takes his palm off the bronze.
+  Tribune Halden: Then your word and mine can't both stand at this fire. In Ashkaar that's settled the old way.
+  Herald Pyke: Oath rules. Steel decides which word stands. Lose, and his oath stands. Win, and the Legion answers for it.
+  QUEST LOG: "The Trial of Truth" Your word contradicts Tribune Halden's. Defend it in the Hall, under oath rules.
+  Tribune Halden: Under oath rules. No speeches. Just steel.
+  Tribune Halden looks at his last Pokémon for a long moment. Then he walks back to the brazier and puts his palm on the bronze again.
+  Tribune Halden: I withdraw my oath. The Envoy took the Light Stone because the Dominar ordered it, while the city burned. The Legion knew.
+  Nobody in the hall moves. Somewhere in the gallery, an old legionnaire starts to clap, very slowly, and stops because nobody joins in.
+  Herald Pyke: Recorded. The Legion has admitted fault before the flame. I have kept this hall for thirty years. I have never written that line.
+  Herald Pyke: The Dominion thanks the witness. It will not like you for it. Those are different things here.
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "The Trial of Truth"
+  You obtained a Flame Orb!
+  You put the Flame Orb in your Bag's Items pocket.
+    | talk HERALD_PYKE
+    | ================
+    |   (overworld message) Herald Pyke: The Dominion convenes a Trial of Truth. Tribune Halden of the Legion has sworn an oath about the night of the five bells.
+    |   (overworld message) Herald Pyke: Every witness who was in Cindervault that night may answer it. You were in Cindervault that night.
+    |   (overworld message) Herald Pyke: Say true, or say nothing. Both are honoured here. Lying is not.
+    |   (overworld message) Testify before the brazier?
+    |   (overworld message) NEW QUEST: "The Trial of Truth" Testify before the Great Oath-Brazier in the Hall of Oaths.
+    |   (overworld message) Tribune Halden: I swear by the flame: on the night of the five bells, the Dominion's hands were clean.
+    |   (overworld message) Tribune Halden: The Meridian put a pipe in our fire. The Hollow poured a lake on it. The Envoy guarded the Light Stone while the city burned, as a friend guards a friend's house.
+    |   (overworld message) Tribune Halden: A child shut Zenith's tap with their own hands. The Dominion honours it. The Dominion also had no part in what came before.
+    |   (overworld message) Herald Pyke: Witness. You were in the Hearthguild Hall that night. Does his oath stand?
+    |   (overworld message) What do you say?
+    |   (overworld message) Herald Pyke: ...Say it again, for the scribe. Exactly.
+    |   (overworld message) You say it exactly: 'The Dominar told me to take it while everyone was looking at the mountain.' Envoy Haskar's words, to Sigrun, in front of Brann.
+    |   (overworld message) The hall makes a sound like a held breath. Tribune Halden takes his palm off the bronze.
+    |   (overworld message) Tribune Halden: Then your word and mine can't both stand at this fire. In Ashkaar that's settled the old way.
+    |   (overworld message) Herald Pyke: Oath rules. Steel decides which word stands. Lose, and his oath stands. Win, and the Legion answers for it.
+    |   (overworld message) QUEST LOG: "The Trial of Truth" Your word contradicts Tribune Halden's. Defend it in the Hall, under oath rules.
+    |   (overworld message) Tribune Halden: Under oath rules. No speeches. Just steel.
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Ashkaar Officer Halden!
+    |   Ashkaar Officer Halden sent out Krokorok!
+    |     >> sent out (foe): Krokorok Lv.39 @SITRUSBERRY [MOXIE]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 175/175 | Krokorok 110/110]
+    |   Swampert used Earthquake!
+    |     HP Krokorok (foe): 110 -> 0 / 110
+    |   The opposing Krokorok fainted!
+    |     xx fainted: Krokorok (foe)
+    |   The ground heaves... the volcano is about to erupt!
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   (end of round)
+    |   The volcano erupted!
+    |     HP Swampert (player): 175 -> 164 / 175
+    |   Lava rained down around Swampert!
+    |   Ashkaar Officer Halden is about to send out Arcanine. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Halden sent out Arcanine!
+    |     >> sent out (foe): Arcanine Lv.40 @SITRUSBERRY [INTIMIDATE]
+    |     [ability: Arcanine (foe)'s Intimidate]
+    |     (anim: StatDown)
+    |   Swampert's Attack fell!
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 164/175 | Arcanine 137/137]
+    |   The opposing Arcanine used Flare Blitz!
+    |   The opposing Arcanine drew fire up from the magma!
+    |     HP Swampert (player): 164 -> 118 / 175
+    |   It's not very effective...
+    |     HP Arcanine (foe): 137 -> 122 / 137
+    |   The opposing Arcanine is damaged by recoil!
+    |   Swampert used Surf!
+    |     HP Arcanine (foe): 122 -> 0 / 137
+    |   It's super effective!
+    |   Steam roars up from the cooling magma... (1 more)
+    |   The opposing Arcanine fainted!
+    |     xx fainted: Arcanine (foe)
+    |   (end of round)
+    |   Ashkaar Officer Halden is about to send out Druddigon. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Halden sent out Druddigon!
+    |     >> sent out (foe): Druddigon Lv.41 @SITRUSBERRY [ROUGHSKIN]
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 118/175 | Druddigon 130/130]
+    |   Swampert ignored orders!
+    |   Swampert used Ice Beam!
+    |   The ice melted before it could land...
+    |     HP Druddigon (foe): 130 -> 88 / 130
+    |   It's super effective!
+    |   The opposing Druddigon used Crunch!
+    |     HP Swampert (player): 118 -> 86 / 175
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Swampert 86/175 | Druddigon 88/130]
+    |   Swampert won't obey!
+    |   The opposing Druddigon used Dragon Claw!
+    |     HP Swampert (player): 86 -> 10 / 175
+    |   A critical hit!
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Swampert 10/175 | Druddigon 88/130]
+    |   Swampert pretended not to notice!
+    |   The opposing Druddigon used Metal Claw!
+    |     HP Swampert (player): 10 -> 0 / 175
+    |   It's not very effective...
+    |   Swampert fainted!
+    |     xx fainted: Swampert (player)
+    |   (end of round)
+    |   Go for it, Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | 
+    | --- Turn 6 ---
+    |   [Garchomp 183/183 | Druddigon 88/130]
+    |   Garchomp used Crunch!
+    |     HP Druddigon (foe): 88 -> 37 / 130
+    |     [ability: Druddigon (foe)'s Rough Skin]
+    |     HP Garchomp (player): 183 -> 161 / 183
+    |   Garchomp is hurt!
+    |     (anim: EatBerry)
+    |     HP Druddigon (foe): 37 -> 69 / 130
+    |   The opposing Druddigon restored its health using its Sitrus Berry!
+    |   The opposing Druddigon used Dragon Claw!
+    |     HP Garchomp (player): 161 -> 80 / 183
+    |   It's super effective!
+    |   (end of round)
+    | 
+    | --- Turn 7 ---
+    |   [Garchomp 80/183 | Druddigon 69/130]
+    |   Garchomp used Dragon Claw!
+    |     HP Druddigon (foe): 69 -> 0 / 130
+    |   It's super effective!
+    |     [ability: Druddigon (foe)'s Rough Skin]
+    |     HP Garchomp (player): 80 -> 58 / 183
+    |   Garchomp is hurt!
+    |   The opposing Druddigon fainted!
+    |     xx fainted: Druddigon (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   You defeated Ashkaar Officer Halden!
+    |   My oath stands down. Not because I lost. Because it wasn't true.
+    |   You got $3,280 for winning!
+    |   battle result code: 1
+    |   (overworld message) Tribune Halden looks at his last Pokémon for a long moment. Then he walks back to the brazier and puts his palm on the bronze again.
+    |   (overworld message) Tribune Halden: I withdraw my oath. The Envoy took the Light Stone because the Dominar ordered it, while the city burned. The Legion knew.
+    |   (overworld message) Nobody in the hall moves. Somewhere in the gallery, an old legionnaire starts to clap, very slowly, and stops because nobody joins in.
+    |   (overworld message) Herald Pyke: Recorded. The Legion has admitted fault before the flame. I have kept this hall for thirty years. I have never written that line.
+    |   (overworld message) Herald Pyke: The Dominion thanks the witness. It will not like you for it. Those are different things here.
+    |   (overworld message) The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+    |   (overworld message) QUEST COMPLETE: "The Trial of Truth"
+    |   (overworld message) You obtained a Flame Orb!
+    |   (overworld message) You put the Flame Orb in your Bag's Items pocket.
+-- talk HERALD_PYKE
+  Herald Pyke: Halden's withdrawn oath is on the fourth plinth now. People come up from the terraces to read it.

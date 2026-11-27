@@ -289,7 +289,12 @@ maps:
     - {name: Forte, key: OCTAVE_FORTE, near: "outside the Crucible's gate on the caldera rim", sprite: "young woman in a scorched Choir robe; a Flareon", trigger: action,
        note: "Eevee Octave 6/8 (Ashkaar)."}
     - {name: Legate Varra Kosk, key: CRUCIBLE_LEGATE, near: "on the Crucible's steps, ledger on her knee", sprite: "legion officer, grey-haired", trigger: action,
-       note: "Keeper of the Crucible (Trial by Flames); falls through to the Ashkaar board."}
+       note: "Keeper of the Crucible (Trial by Flames): Too Loud for the Choir (Forte's second), Seven Bouts, the Brazier Writ (15 badges). Placed 2026-11-27 as a patch of Gemini's 'Legate Varra Kosk' (mapgen/trial_overlay.py); Forte likewise."}
+    - {name: Adequate Swords Owner, key: ADEQUATE_OWNER, patch: "Gemini's 'Adequate Swords Owner' outside his shop: {if: pf_trial_ready?(:ADEQUATE_OWNER), then: talk, else: his own lines}",
+       note: "Adequate Swords (Ch8, badges >= 6): the offer, the court's verdict and the after line."}
+    - {name: "Honest Sign: Adequate Swords", key: ADEQUATE_SIGN, patch: "Gemini's sign: reads ADEQUATE SWORDS (STILL.) once the quest is done"}
+    - {name: Kessa (Excellent Swords), key: EXCELLENT_SMITH, near: "beside the EXCELLENT SWORDS sign across the lane", sprite: trainer_CRUSHGIRL, trigger: action,
+       note: "The blade-test ([CRUSHGIRL,Kessa,50], :VOLCANIC) at step :test; idle line otherwise."}
   340:
     name: Lucent - Athenaeum Quarter
     events:
@@ -342,7 +347,15 @@ maps:
     name: Hearthguild Hall
     events:
     - {name: Brann, key: BRANN_HEARTHGUILD, near: "at the great anvil of the Hearthguild Hall", sprite: "Brann Holloway (forge apron)", trigger: action,
-       note: "His spare heartstone (AS_FORGE_REMEMBERS, Cameruptite) at 15 badges, after the Ring-Day. The Ring-Day itself no longer plays here (SPINE Rev 21: it is Bastian's, map 363). If the story map already has a Brann event here, patch it with the pf_trial_ready? branch instead."}
+       note: "His spare heartstone (AS_FORGE_REMEMBERS, Cameruptite) at 15 badges, after the Ring-Day. The Ring-Day itself no longer plays here (SPINE Rev 21: it is Bastian's, map 363). Placed 2026-11-27 as 'Brann (Hearthguild)' by the Warden Chair, condition badges >= 15 (244's other Brann events are Ch8 cutscene actors)."}
+  247:
+    name: Pyre Keep - Hall of Oaths
+    events:
+    - {name: Herald Pyke, key: HERALD_PYKE, patch: "Gemini's 'Herald Pyke' (his own lines still offer the Ashkaar board): {if: pf_trial_ready?(:HERALD_PYKE), then: talk, else: his own script}",
+       note: "The Trial of Truth (Ch8, badges >= 6, S120, CH8_STEP >= 7)."}
+    - {name: Oath-Scribe, key: HONEST_COURT, patch: "Gemini's 'Oath-Scribe': the Honest Court for Adequate Swords (step :court)"}
+    - {name: Tribune Halden, key: HALDEN, near: "at the Great Oath-Brazier", sprite: trainer_ASHKAAR_OFFICER, trigger: action,
+       condition: "quest_active(:AS_TRIAL_OF_TRUTH)", note: "[ASHKAAR_OFFICER,Halden,50] under oath rules (:VOLCANIC)."}
   248:
     name: Pyre Keep - Dragon Roosts
     events:

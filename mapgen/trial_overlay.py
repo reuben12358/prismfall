@@ -258,3 +258,17 @@ def apply(specs, passable, tilesets):
             if e.get('name') in pats and not e.get('_trial'):
                 _branch(e, pats[e['name']]); e['_trial'] = True
         for e in s.get('events', []): e.pop('_trial', None)
+
+
+# ---- Trials owner, 2026-11-27: Cindervault (Ch8) on Gemini's built maps (plugins/Prismfall Trials/121_Quests_Cindervault.rb,
+# 155_Talk_Cindervault.rb). Gemini's own NPCs get the branch; the two people its maps don't have are new events.
+PATCHES[240] = {'Adequate Swords Owner': 'ADEQUATE_OWNER', 'Honest Sign: Adequate Swords': 'ADEQUATE_SIGN',
+                'Legate Varra Kosk': 'CRUCIBLE_LEGATE', 'Forte': 'OCTAVE_FORTE'}
+PATCHES[247] = {'Herald Pyke': 'HERALD_PYKE', 'Oath-Scribe': 'HONEST_COURT'}
+EVENTS[240] = EVENTS.get(240, []) + [
+    ev('Kessa (Excellent Swords)', '@Honest Sign: Excellent Swords', 'EXCELLENT_SMITH', 'trainer_CRUSHGIRL', d='left')]
+EVENTS[247] = EVENTS.get(247, []) + [
+    ev('Tribune Halden', '@Great Oath-Brazier', 'HALDEN', 'trainer_ASHKAAR_OFFICER', condition='quest_active(:AS_TRIAL_OF_TRUTH)')]
+# The Forge Remembers (Ch17, after the Ring-Day): Brann back at his own table; 244's other Brann events are Ch8 actors.
+EVENTS[244] = EVENTS.get(244, []) + [
+    ev('Brann (Hearthguild)', '@Warden Chair', 'BRANN_HEARTHGUILD', 'trainer_LEADER_BRANN', condition='badges >= 15')]
