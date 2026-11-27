@@ -247,3 +247,9 @@ Sergeant / Bereaved PBS blocks, the real-engine walk (`tools/harness/visual/ch6/
   "(Say nothing.)" branch calls `pfm_set(:ashkaar_watched)`.
 - [ ] `docs/cutscene_previews/ch08_key_events.gif` not made (no Ch8 GIF exists yet; this pass fixed Gym 7, it didn't
   stage the chapter).
+
+### Reach checks + Trials on the new maps (Trials agent, 2026-11-27) - status
+- [x] `mapgen/reach.py` STANDON / REACH in `build.py` (23303dea; lines 16-17 above).
+- [x] Cindervault Trials (1235d14e): Adequate Swords, Seven Bouts, the Trial of Truth de-stubbed (121 / 155), Kosk / Forte /
+  the owner / Pyke / Oath-Scribe patched, Kessa / Halden / Brann (Ch17) placed; 240 244 247 rebuilt; run_trials 223/223.
+- [ ] Next: the engine capture on 240 / 247, TRIALS_WIRING status cells, REFINE_QUEUE notes.
