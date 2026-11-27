@@ -132,7 +132,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | --- Turn 3 ---
     |   [Machoke 76/76 | Houndour 52/52]
     |   The opposing Houndour used Bite!
-    |     HP Machoke (player): 76 -> 67 / 76
+    |     HP Machoke (player): 76 -> 68 / 76
     |   It's not very effective...
     |   Machoke used Rock Tomb!
     |     HP Houndour (foe): 52 -> 0 / 52
@@ -162,7 +162,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 67/76 | Salandit 54/54]
+    |   [Machoke 68/76 | Salandit 54/54]
     |   The opposing Salandit used Sweet Scent!
     |     (anim: StatDown)
     |   Machoke's evasiveness harshly fell!
@@ -175,7 +175,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   (end of round)
     | 
     | --- Turn 2 ---
-    |   [Machoke 67/76 | Salandit 2/54]
+    |   [Machoke 68/76 | Salandit 2/54]
     |   Ashkaar Officer Brakka used a Super Potion.
     |     HP Salandit (foe): 2 -> 54 / 54
     |   The opposing Salandit's HP was restored.
@@ -194,7 +194,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     >> sent out (foe): Numel Lv.20 [OBLIVIOUS]
     | 
     | --- Turn 3 ---
-    |   [Machoke 67/76 | Numel 59/59]
+    |   [Machoke 68/76 | Numel 59/59]
     |   Machoke used Karate Chop!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Numel (foe): 59 -> 0 / 59
@@ -211,9 +211,9 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     >> sent out (foe): Fletchinder Lv.21 [FLAMEBODY]
     | 
     | --- Turn 4 ---
-    |   [Machoke 67/76 | Fletchinder 62/62]
+    |   [Machoke 68/76 | Fletchinder 62/62]
     |   The opposing Fletchinder used Ember!
-    |     HP Machoke (player): 67 -> 48 / 76
+    |     HP Machoke (player): 68 -> 49 / 76
     |   A critical hit!
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
@@ -248,7 +248,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 48/76 BURN | Cinderpaw 68/68]
+    |   [Machoke 49/76 BURN | Cinderpaw 68/68]
     |   The wild Cinderpaw used Work Up!
     |     (anim: StatUp)
     |   The wild Cinderpaw's Attack rose!
@@ -266,11 +266,11 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   The wild Cinderpaw's Special Attack rose!
     |   (end of round)
     |     (anim: Burn)
-    |     HP Machoke (player): 48 -> 44 / 76
+    |     HP Machoke (player): 49 -> 45 / 76
     |   Machoke was hurt by its burn!
     | 
     | --- Turn 2 ---
-    |   [Machoke 44/76 BURN | Cinderpaw 68/68]
+    |   [Machoke 45/76 BURN | Cinderpaw 68/68]
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Cinderpaw (foe): 68 -> 0 / 68
@@ -5025,3 +5025,166 @@ RESULT: player lost after 5 turn(s)
     |   (overworld message) You put the Flame Orb in your Bag's Items pocket.
 -- talk HERALD_PYKE
   Herald Pyke: Halden's withdrawn oath is on the fourth plinth now. People come up from the terraces to read it.
+-- talk TAMM
+  Recruit Tamm: You know. Everyone knows. I told the Roost-mistress myself; I can't lie, it's the law, it's AWFUL.
+  Recruit Tamm: They gave me Grit until I'm 'ready'. Grit's a Trapinch. Trapinch don't fly. Neither do I. It's been two years.
+  Recruit Tamm: The Roost-mistress says a Trapinch gets its wings by fighting. If you spar with Grit... maybe one of us gets ready.
+  Spar with Tamm's Trapinch?
+  NEW QUEST: "Afraid of Heights" Spar with Tamm's Trapinch on the roost floor until it's ready (three spars).
+  Recruit Tamm: Really? Grit! Grit, we're TRAINING! ...Oh no. Oh no, that means flying eventually.
+  Recruit Tamm: That's one. Grit's not even upset. Grit likes you. Come back when you can; we'll be here. Low down.
+    | talk TAMM
+    | =========
+    |   (overworld message) Recruit Tamm: You know. Everyone knows. I told the Roost-mistress myself; I can't lie, it's the law, it's AWFUL.
+    |   (overworld message) Recruit Tamm: They gave me Grit until I'm 'ready'. Grit's a Trapinch. Trapinch don't fly. Neither do I. It's been two years.
+    |   (overworld message) Recruit Tamm: The Roost-mistress says a Trapinch gets its wings by fighting. If you spar with Grit... maybe one of us gets ready.
+    |   (overworld message) Spar with Tamm's Trapinch?
+    |   (overworld message) NEW QUEST: "Afraid of Heights" Spar with Tamm's Trapinch on the roost floor until it's ready (three spars).
+    |   (overworld message) Recruit Tamm: Really? Grit! Grit, we're TRAINING! ...Oh no. Oh no, that means flying eventually.
+    | 
+    | --- Battle start ---
+    |   field: DRAGONS_DEN | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Tamm!
+    |   Ashkaar Soldier Tamm sent out Grit!
+    |     >> sent out (foe): Grit Lv.33 [HYPERCUTTER]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.50 [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> DRAGONS_DEN
+    |   Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 58/183 | Grit 82/82]
+    |   Garchomp used Crunch!
+    |     HP Grit (foe): 82 -> 0 / 82
+    |   The opposing Grit fainted!
+    |     xx fainted: Grit (foe)
+    |   Garchomp is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   You defeated Ashkaar Soldier Tamm!
+    |   That's one. Grit's not even upset.
+    |   You got $1,584 for winning!
+    |   battle result code: 1
+    |   (overworld message) Recruit Tamm: That's one. Grit's not even upset. Grit likes you. Come back when you can; we'll be here. Low down.
+-- talk TAMM
+  Recruit Tamm: Again? Grit's ready. Grit's always ready. It's me that's the problem.
+  Recruit Tamm: Did you see that? Grit jumped! Almost a foot! That's practically altitude.
+    | talk TAMM
+    | =========
+    |   (overworld message) Recruit Tamm: Again? Grit's ready. Grit's always ready. It's me that's the problem.
+    | 
+    | --- Battle start ---
+    |   field: DRAGONS_DEN | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Tamm!
+    |   Ashkaar Soldier Tamm sent out Grit!
+    |     >> sent out (foe): Grit Lv.34 [HYPERCUTTER]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> DRAGONS_DEN
+    |   Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 175/175 | Grit 84/84]
+    |   Swampert ignored orders!
+    |   Swampert used Earthquake!
+    |     HP Grit (foe): 84 -> 0 / 84
+    |   The opposing Grit fainted!
+    |     xx fainted: Grit (foe)
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   You defeated Ashkaar Soldier Tamm!
+    |   Grit jumped! Almost a foot!
+    |   You got $1,632 for winning!
+    |   battle result code: 1
+    |   (overworld message) Recruit Tamm: Did you see that? Grit jumped! Almost a foot! That's practically altitude.
+-- talk TAMM
+  Recruit Tamm: Third spar. Grit's been glowing at the edges since breakfast. I'm choosing not to think about it.
+  QUEST LOG: "Afraid of Heights" Vibrava wants to fly. Tamm does not.
+  The Vibrava lifts Recruit Tamm three feet off the roost floor. He screams. It's the happiest scream you've ever heard.
+  Recruit Tamm: I'M FLYING. I'M THREE FEET UP. THIS IS THE WORST AND BEST DAY OF MY LIFE.
+  Recruit Tamm: They assigned me this one too. For 'when I'm ready'. It keeps looking at me like it knows. It knows I'm not.
+  Recruit Tamm: You take it. You're ready. It looks at you like it knows that too.
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "Afraid of Heights"
+  Tester obtained Noibat!
+  Your standing in The Trial by Flames rose to Dragonsworn!
+    | talk TAMM
+    | =========
+    |   (overworld message) Recruit Tamm: Third spar. Grit's been glowing at the edges since breakfast. I'm choosing not to think about it.
+    | 
+    | --- Battle start ---
+    |   field: DRAGONS_DEN | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Tamm!
+    |   Ashkaar Soldier Tamm sent out Grit!
+    |     >> sent out (foe): Grit Lv.36 [LEVITATE]
+    |   Go! Swampert!
+    |     >> sent out (player): Swampert Lv.50 [TORRENT]
+    | ## FIELD CHANGE: NONE -> DRAGONS_DEN
+    |   Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+    | 
+    | --- Turn 1 ---
+    |   [Swampert 175/175 | Grit 95/95]
+    |   Swampert ignored orders!
+    |   Swampert used Earthquake!
+    |     [ability: Grit (foe)'s Levitate]
+    |   The opposing Grit avoided the attack!
+    |   The opposing Grit used Screech!
+    |     (anim: StatDown)
+    |   Swampert's Defense harshly fell!
+    |   (end of round)
+    | 
+    | --- Turn 2 ---
+    |   [Swampert 175/175 | Grit 95/95]
+    |   Swampert pretended not to notice!
+    |   The opposing Grit used Screech!
+    |     (anim: StatDown)
+    |   Swampert's Defense harshly fell!
+    |   (end of round)
+    | 
+    | --- Turn 3 ---
+    |   [Swampert 175/175 | Grit 95/95]
+    |   Swampert pretended not to notice!
+    |   The opposing Grit used Bulldoze!
+    |     HP Swampert (player): 175 -> 96 / 175
+    |   A critical hit!
+    |     (anim: StatDown)
+    |   Swampert's Speed fell!
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Swampert 96/175 | Grit 95/95]
+    |   The opposing Grit used Bug Buzz!
+    |     HP Swampert (player): 96 -> 84 / 175
+    |   Swampert ignored orders!
+    |   Swampert used Surf!
+    |   The lair's heat boiled the water away...
+    |     HP Grit (foe): 95 -> 26 / 95
+    |   Steam hisses from the cooling magma... (2 more)
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Swampert 84/175 | Grit 26/95]
+    |   The opposing Grit used Bulldoze!
+    |     HP Swampert (player): 84 -> 28 / 175
+    |     (anim: StatDown)
+    |   Swampert's Speed fell!
+    |   Swampert used Ice Beam!
+    |   The lair's heat sapped the cold...
+    |     HP Grit (foe): 26 -> 0 / 95
+    |   It's super effective!
+    |   Steam hisses from the cooling magma... (1 more)
+    |   The opposing Grit fainted!
+    |     xx fainted: Grit (foe)
+    |   Swampert is at the level cap (Lv. 39) and can't gain Exp. Points.
+    |   You defeated Ashkaar Soldier Tamm!
+    |   ...Grit? Grit, you're glowing.
+    |   You got $1,728 for winning!
+    |   battle result code: 1
+    |   (overworld message) QUEST LOG: "Afraid of Heights" Vibrava wants to fly. Tamm does not.
+    |   (overworld message) The Vibrava lifts Recruit Tamm three feet off the roost floor. He screams. It's the happiest scream you've ever heard.
+    |   (overworld message) Recruit Tamm: I'M FLYING. I'M THREE FEET UP. THIS IS THE WORST AND BEST DAY OF MY LIFE.
+    |   (overworld message) Recruit Tamm: They assigned me this one too. For 'when I'm ready'. It keeps looking at me like it knows. It knows I'm not.
+    |   (overworld message) Recruit Tamm: You take it. You're ready. It looks at you like it knows that too.
+    |   (overworld message) The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+    |   (overworld message) QUEST COMPLETE: "Afraid of Heights"
+    |   (overworld message) Tester obtained Noibat!
+    |   (overworld message) Your standing in The Trial by Flames rose to Dragonsworn!
+-- talk TAMM
+  Recruit Tamm: Grit and I go up every morning now. Three feet. Then four. The Roost-mistress says by spring I'll be a rider. I said that's a lie. She said it's a forecast.

@@ -1270,6 +1270,19 @@ check("the truth contradicts Halden: the oath duel ([ASHKAAR_OFFICER,Halden,50],
       fought10.any? { |f| f[0] == "Halden" && f[1] == :VOLCANIC }, "#{tr.state(:AS_TRIAL_OF_TRUTH)} #{fought10.inspect}")
 otalk(:HERALD_PYKE)
 check("Pyke's after line plays once, then his own lines (the Ashkaar board) again", !tr.talk_ready?(:HERALD_PYKE))
+# --- Afraid of Heights (248, Recruit Tamm) --------------------------------------------------------
+fought10.clear
+check("Afraid of Heights offered by Recruit Tamm with 6 badges", tr.talk_ready?(:TAMM) && tr.state(:AS_AFRAID_OF_HEIGHTS) == :available)
+otalk(:TAMM, ["Let's train Grit."])
+2.times { |i| $player.heal_party; srand(6100 + i); ftalk(:TAMM) if tr.at?(:AS_AFRAID_OF_HEIGHTS, :train) }
+4.times { |i| break if !tr.at?(:AS_AFRAID_OF_HEIGHTS, :train); $player.heal_party; srand(6200 + i); ftalk(:TAMM) }
+noibat = all_mons9.call.find { |p| p.isSpecies?(:NOIBAT) }
+check("three spars with Grit (Trapinch 33, 34, Vibrava 36 on :DRAGONS_DEN), then Vibrava flies Tamm and the Noibat is yours",
+      tr.done?(:AS_AFRAID_OF_HEIGHTS) && fought10.map(&:first) == ["Tamm", "Tamm", "Tamm"] &&
+      fought10.all? { |f| f[1] == :DRAGONS_DEN } && noibat && em.status(:AS_NOIBAT) == :gifted,
+      "#{tr.state(:AS_AFRAID_OF_HEIGHTS)} #{fought10.inspect} #{noibat ? noibat.level : 'no Noibat'}")
+otalk(:TAMM)
+check("Tamm's after line plays once, then his own lines", !tr.talk_ready?(:TAMM))
 tr.define_singleton_method(:trainer_battle, tb_orig)
 
 #-------------------------------------------------------------------------------

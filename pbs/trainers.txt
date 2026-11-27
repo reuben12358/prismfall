@@ -46311,3 +46311,92 @@ Pokemon = DRUDDIGON,38
     Nature = ADAMANT
     IV = 12
     EV = 0
+#-------------------------------
+# Ch8 Trials: Recruit Tamm's Trapinch "Grit" (Afraid of Heights, three spars; gen.py "Ch8 Trials").
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,50]
+LoseText = That's one. Grit's not even upset.
+Pokemon = TRAPINCH,33
+    Name = Grit
+    Moves = BULLDOZE,CRUNCH,DIG,SANDTOMB
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,150]
+LoseText = That's one. Grit's not even upset.
+Pokemon = TRAPINCH,34
+    Name = Grit
+    Moves = BULLDOZE,CRUNCH,DIG,SANDTOMB
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,204,0,204,0,0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,250]
+LoseText = That's one. Grit's not even upset.
+Pokemon = TRAPINCH,31
+    Name = Grit
+    Moves = BULLDOZE,CRUNCH,DIG,SANDTOMB
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,51]
+LoseText = Grit jumped! Almost a foot!
+Pokemon = TRAPINCH,34
+    Name = Grit
+    Moves = BULLDOZE,CRUNCH,DIG,BITE
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,151]
+LoseText = Grit jumped! Almost a foot!
+Pokemon = TRAPINCH,35
+    Name = Grit
+    Moves = BULLDOZE,CRUNCH,DIG,BITE
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,210,0,210,0,0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,251]
+LoseText = Grit jumped! Almost a foot!
+Pokemon = TRAPINCH,32
+    Name = Grit
+    Moves = BULLDOZE,CRUNCH,DIG,BITE
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,52]
+LoseText = ...Grit? Grit, you're glowing.
+Pokemon = VIBRAVA,36
+    Name = Grit
+    Moves = DRAGONBREATH,BULLDOZE,SCREECH,BUGBUZZ
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 24
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,152]
+LoseText = ...Grit? Grit, you're glowing.
+Pokemon = VIBRAVA,37
+    Name = Grit
+    Moves = DRAGONBREATH,BULLDOZE,SCREECH,BUGBUZZ
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,222,0,222,0,0
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Tamm,252]
+LoseText = ...Grit? Grit, you're glowing.
+Pokemon = VIBRAVA,34
+    Name = Grit
+    Moves = DRAGONBREATH,BULLDOZE,SCREECH,BUGBUZZ
+    Ability = LEVITATE
+    Nature = ADAMANT
+    IV = 12
+    EV = 0

@@ -2375,6 +2375,13 @@ S("Ch8 Trials - Tribune Halden, AS_TRIAL_OF_TRUTH (247, field :VOLCANIC): the Le
     P("ARCANINE", 40, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,EXTREMESPEED,CRUNCH,ROAR", "A"),
     P("DRUDDIGON", 41, "ROUGHSKIN", "SITRUSBERRY", "ADAMANT", "DRAGONCLAW,CRUNCH,HONECLAWS,METALCLAW", "BA"),
 ])
+# --- Afraid of Heights (248, the Dragon Roosts): three spars with Recruit Tamm's Trapinch "Grit" (:DRAGONS_DEN) -------
+for _v, _lose, _mon in (
+    (50, "That's one. Grit's not even upset.", P("TRAPINCH", 33, "HYPERCUTTER", None, "ADAMANT", "BULLDOZE,CRUNCH,DIG,SANDTOMB", "A", nick="Grit")),
+    (51, "Grit jumped! Almost a foot!", P("TRAPINCH", 34, "HYPERCUTTER", None, "ADAMANT", "BULLDOZE,CRUNCH,DIG,BITE", "A", nick="Grit")),
+    (52, "...Grit? Grit, you're glowing.", P("VIBRAVA", 36, "LEVITATE", None, "ADAMANT", "DRAGONBREATH,BULLDOZE,SCREECH,BUGBUZZ", "A", nick="Grit"))):
+    S("Ch8 Trials - Recruit Tamm, AS_AFRAID_OF_HEIGHTS spar %d (248, field :DRAGONS_DEN; a training spar, no bag)" % (_v - 49),
+      "ASHKAAR_SOLDIER_M", "Tamm", _v, 39, _lose, [_mon], nobag=True)
 
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md

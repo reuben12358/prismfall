@@ -277,3 +277,5 @@ EVENTS[244] = EVENTS.get(244, []) + [
 PATCHES[154] = dict(PATCHES.get(154, {}), **{'Dorian': 'DORIAN_ENCORE'})
 EVENTS[560] = EVENTS.get(560, []) + [
     ev('The Matriarch', (50, 12), 'CAUSEWAY_MATRIARCH', 'Followers/KANGASKHAN', condition='badges >= 16 && !quest_done(:IS_CAUSEWAY_MATRIARCH)')]
+# Afraid of Heights (Ch8): Gemini's Recruit Tamm on the Dragon Roosts gets the branch.
+PATCHES[248] = dict(PATCHES.get(248, {}), **{'Recruit Tamm': 'TAMM'})

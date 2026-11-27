@@ -7,7 +7,8 @@
 #       (patch CRUCIBLE_LEGATE: Too Loud for the Choir, the Brazier Writ, Seven Bouts), "Forte" (patch OCTAVE_FORTE)
 #   247 Hall of Oaths: "Herald Pyke" (patch HERALD_PYKE; his own lines still offer the Ashkaar board), "Oath-Scribe"
 #       (patch HONEST_COURT), Tribune Halden at the Great Oath-Brazier while the Trial of Truth is open (new, HALDEN)
-#   248 Dragon Roosts: Gemini's Tarn and Old Cinder call ROOST_KEEPER / OLD_CINDER (152_Talk_Megas.rb) directly.
+#   248 Dragon Roosts: Gemini's Tarn and Old Cinder call ROOST_KEEPER / OLD_CINDER (152_Talk_Megas.rb) directly;
+#       "Recruit Tamm" (patch TAMM: Afraid of Heights).
 #===============================================================================
 Prismfall::Trials::TALK.merge!({
   #--- Cindervault market (240): Adequate Swords ------------------------------------------------
@@ -27,6 +28,11 @@ Prismfall::Trials::TALK.merge!({
     [:AS_TRIAL_OF_TRUTH, "quest_step(:SELF) == :testify", :testify],
     [:AS_TRIAL_OF_TRUTH, "quest_step(:SELF) == :duel", :duel],
     [:AS_TRIAL_OF_TRUTH, "quest_done(:SELF) && quest_outcome(:SELF) != :silent && !quest_flag(:SELF, :told)", :after]] },
+  #--- Pyre Keep, the Dragon Roosts (248): Recruit Tamm --------------------------------------------
+  :TAMM => { :rows => [
+    [:AS_AFRAID_OF_HEIGHTS, "quest_state(:SELF) == :available", :offer],
+    [:AS_AFRAID_OF_HEIGHTS, "quest_step(:SELF) == :train", :spar],
+    [:AS_AFRAID_OF_HEIGHTS, "quest_done(:SELF) && !quest_flag(:SELF, :told)", :after]] },
   :HALDEN => { :rows => [
     [:AS_TRIAL_OF_TRUTH, "quest_step(:SELF) == :testify", :testify],
     [:AS_TRIAL_OF_TRUTH, "quest_step(:SELF) == :duel", :duel]],

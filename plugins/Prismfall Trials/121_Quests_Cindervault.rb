@@ -275,3 +275,62 @@ tr.quest(:AS_TRIAL_OF_TRUTH, {
     ]
   }
 })
+
+#===============================================================================
+# Afraid of Heights (Ch8, the Dragon Roosts on 248: Gemini's Recruit Tamm and his Trapinch)
+#===============================================================================
+# The catalogue's "Trapinch as a guest in your party" needs a guest mechanic the Trials don't have; here you train it
+# the Ashkaar way, by sparring it three times on the roost floor (it grows each time; the third spar it is a Vibrava).
+tr.quest(:AS_AFRAID_OF_HEIGHTS, {
+  :trial => :ASHKAAR, :title => "Afraid of Heights", :giver => "Recruit Tamm", :map => 248, :where => "the Dragon Roosts, Pyre Keep",
+  :rank => 2, :points => 3, :rec_level => 40, :chapter => 8, :unlock => "badges >= 6", :board => true,
+  :tags => [:comedy, :training, :event_mon],
+  :summary => "A dragon-rider recruit is afraid of heights and has been assigned a Trapinch 'until he's ready'. He has been not-ready for two years.",
+  :steps => { :train => "Spar with Tamm's Trapinch on the roost floor until it's ready (three spars).",
+              :flight => "Vibrava wants to fly. Tamm does not." },
+  :reward => { :pokemon => :AS_NOIBAT },
+  :touches => "15_COMEDY Ashkaar bit; story/29 line 98 ('I'm afraid of heights. They don't know.')",
+  :design => "Three spars with Tamm's Trapinch (Lv 34, 35, then a Vibrava at 36). When it becomes a Vibrava it takes Tamm three feet off the ground and he screams with joy. He gives you the Noibat he was also assigned, because 'it looks at me like it knows'.",
+  :scenes => {
+    :offer => [
+      [:TAMM, :sad, "You know. Everyone knows. I told the Roost-mistress myself; I can't lie, it's the law, it's AWFUL."],
+      [:TAMM, :neutral, "They gave me Grit until I'm 'ready'. Grit's a Trapinch. Trapinch don't fly. Neither do I. It's been two years."],
+      [:TAMM, :neutral, "The Roost-mistress says a Trapinch gets its wings by fighting. If you spar with Grit... maybe one of us gets ready."],
+      { :choice => "Spar with Tamm's Trapinch?", :options => [
+          ["Let's train Grit.", [{ :accept => true }, [:TAMM, :happy, "Really? Grit! Grit, we're TRAINING! ...Oh no. Oh no, that means flying eventually."],
+                                { :run => :spar }]],
+          ["Not now.", [[:TAMM, :neutral, "That's fine. Honestly fine. I'll be here. On the ground."]]]] }
+    ],
+    :spar => [
+      { :if => "quest_count(:SELF, :spars) >= 2", :then => [
+          [:TAMM, :neutral, "Third spar. Grit's been glowing at the edges since breakfast. I'm choosing not to think about it."],
+          { :trainer => [:ASHKAAR_SOLDIER_M, "Tamm", 52], :field => :DRAGONS_DEN,
+            :won => [{ :count => [:spars, 1] }, { :step => :flight }, { :run => :flight }],
+            :lost => [[:TAMM, :happy, "We WON? Grit, we won! ...Don't tell anyone. No, wait, I have to. It's the law."]] }],
+        :else => [
+          { :if => "quest_count(:SELF, :spars) == 1", :then => [
+              [:TAMM, :neutral, "Again? Grit's ready. Grit's always ready. It's me that's the problem."],
+              { :trainer => [:ASHKAAR_SOLDIER_M, "Tamm", 51], :field => :DRAGONS_DEN,
+                :won => [{ :count => [:spars, 1] }, [:TAMM, :happy, "Did you see that? Grit jumped! Almost a foot! That's practically altitude."]],
+                :lost => [[:TAMM, :shocked, "Grit won? Grit WON. I'm going to need a minute."]] }],
+            :else => [
+              { :trainer => [:ASHKAAR_SOLDIER_M, "Tamm", 50], :field => :DRAGONS_DEN,
+                :won => [{ :count => [:spars, 1] }, [:TAMM, :neutral, "That's one. Grit's not even upset. Grit likes you. Come back when you can; we'll be here. Low down."]],
+                :lost => [[:TAMM, :happy, "Grit! You did it! ...Sorry. That was a spar. We're supposed to be helping each other."]] }] }] }
+    ],
+    :flight => [
+      { :map => "Grit glows white. When the light goes, a green-winged Vibrava is buzzing in the air, delighted with itself. It grabs Tamm's collar." },
+      "The Vibrava lifts Recruit Tamm three feet off the roost floor. He screams. It's the happiest scream you've ever heard.",
+      [:TAMM, :crying, "I'M FLYING. I'M THREE FEET UP. THIS IS THE WORST AND BEST DAY OF MY LIFE."],
+      { :map => "Grit puts him down. He sits on the floor for a while. A Noibat drops off a rafter and lands on his head." },
+      [:TAMM, :neutral, "They assigned me this one too. For 'when I'm ready'. It keeps looking at me like it knows. It knows I'm not."],
+      [:TAMM, :happy, "You take it. You're ready. It looks at you like it knows that too."],
+      { :complete => true }
+    ],
+    :after => [
+      [:TAMM, :happy, "Grit and I go up every morning now. Three feet. Then four. The Roost-mistress says by spring I'll be a rider. I said that's a lie. She said it's a forecast."],
+      { :flag => [:told, true] }
+    ]
+  }
+})
+tr::SPEAKERS.merge!({ :TAMM => "Recruit Tamm" })

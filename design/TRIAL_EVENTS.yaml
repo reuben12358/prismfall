@@ -364,6 +364,8 @@ maps:
        note: "Old Cinder (15 badges; was 11); falls through to the Ashkaar board."}
     - {name: Old Cinder, key: OLD_CINDER, near: "on the high roost, curled round an empty saddle", sprite: "Followers/CHARIZARD", trigger: action, condition: "!quest_done(:AS_OLD_CINDER)",
        note: "Boss (AS_OLD_CINDER, Lv 72): Charizardite X. The Legate's brazier writ (15 badges) is on CRUCIBLE_LEGATE (240), already placed."}
+    - {name: Recruit Tamm, key: TAMM, patch: "Gemini's 'Recruit Tamm' beside his Trapinch: {if: pf_trial_ready?(:TAMM), then: talk, else: his own lines}",
+       note: "Afraid of Heights (Ch8, badges >= 6): three spars with his Trapinch 'Grit' ([ASHKAAR_SOLDIER_M,Tamm,50/51/52], :DRAGONS_DEN), then the Noibat (AS_NOIBAT). Placed 2026-11-27."}
   260:
     name: Ironreach
     events:
