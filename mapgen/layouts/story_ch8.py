@@ -15,7 +15,8 @@ CH8_STEP agreement with 255 (layouts/cindervault.py): the Tap Chamber crisis run
 Five Bells may already have set 6) and ends with S120 on, CH8_STEP 6 and a transfer to 244 (10,8). "Whose Is It"
 needs BOTH CH8_STEP >= 6 and S120, so passing through the Hall during the crisis plays nothing.
 
-Not here: Brann's Gym 7 (LOCKED; maps 250-253 unbuilt), the Five Bells in the square (240 unbuilt), the Ch17 Trials
+The Foundry's doors on 240 open on :gym7_open (set by "My Father") and lead to the Gym 7 maps 250-253
+(layouts/foundry_gym.py; Brann's fight there is LOCKED). Not here: the Ch17 Trials
 quest AS_FORGE_REMEMBERS (the Trials owner's).
 
 It also plays the bracketed narrator boxes of Gemini's guarded exits and NPCs on 240 / 243 / 249 (STAGE below).
@@ -433,9 +434,7 @@ def events_240():
 BACK = MV('player', ['dir_fix_on', 'backward', 'dir_fix_off'])
 def shut(se, line, pitch=80): return [S('pbSEPlay("%s", 80, %d)' % (se, pitch)), BACK, line]
 STAGE = {
-    240: {"(The heavy bronze doors of The Foundry are sealed while Brann resets the casting channels. Gym 7 not built yet.)":
-              shut('Door enter', "The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.", 60),
-          "(Red-lacquered Oath-Guards bar the stair to Pyre Keep Rampart until the Dominar's envoys conclude their audience.)":
+    240: {"(Red-lacquered Oath-Guards bar the stair to Pyre Keep Rampart until the Dominar's envoys conclude their audience.)":
               shut('Player bump', N('Oath-Guard', "The Rampart's closed while the Dominar's envoys are in audience. Say true: I'd let you up if I could.")),
           "(A Roost-keeper waves you back—updrafts off the caldera rim are too fierce for climbers without a wing-pass.)":
               [S('pbSEPlay("Anim/Wind1", 70, 90)\npfm_shake(2, 10, 6)')] + shut('Player bump', N('Roost-keeper', "Back! Back! The updrafts off the rim'll have you over the edge without a wing-pass!")),
@@ -464,6 +463,13 @@ def main():
     print('map 249: %d events' % SL.patch('249_slag_ward.yaml', 249, events_249(), pages_249(spec['events']), TAG))
     print('map 243: %d events' % SL.patch('243_caldera_gate.yaml', 243, events_243(), None, TAG))
     print('map 240: %d events' % SL.patch('240_cindervault_forge.yaml', 240, events_240(), None, TAG))
+    # the Foundry's doors (Gym 7, layouts/foundry_gym.py): open once "My Father" has played (pfm_set(:gym7_open);
+    # CH8_STEP stays 4 there), and for good once the badge is won (CH8_STEP >= 5)
+    foundry = [page([IF('pfm_get(:gym7_open) || $game_variables[129] >= 5',
+                        [{'se': 'Door exit'}, {'transfer': {'map': 250, 'x': 10, 'y': 15, 'dir': 'up'}}],
+                        shut('Door enter', "The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.", 60))],
+                    trigger='touch')]
+    print('map 240: the Foundry doors (%d)' % SL.set_pages('240_cindervault_forge.yaml', 240, 'To The Foundry (Gym 7)', foundry, TAG))
     files = {240: '240_cindervault_forge.yaml', 243: '243_caldera_gate.yaml', 249: '249_slag_ward.yaml'}
     for mid, mapping in STAGE.items():
         print('map %d: stage directions %s' % (mid, sorted(SL.replace_lines(files[mid], mid, mapping, TAG).values())))

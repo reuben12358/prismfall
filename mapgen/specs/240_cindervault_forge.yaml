@@ -81,48 +81,59 @@ events:
   name: To The Foundry (Gym 7)
   at: [20, 2]
   pages:
-  - trigger: touch
-    commands:
-    - if: pbRgssExists?("Data/Map250.rxdata")
+  - commands:
+    - if: pfm_get(:gym7_open) || $game_variables[129] >= 5
       then:
-      - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 250\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
-          \ = 8\n  $scene.transfer_player\nend"}
+      - {se: Door exit}
+      - transfer: {map: 250, x: 10, y: 15, dir: up}
       else:
-      - &id001 {script: 'pbSEPlay("Door enter", 80, 60)'}
-      - &id002
-        move:
+      - {script: 'pbSEPlay("Door enter", 80, 60)'}
+      - move:
           who: player
           route: [dir_fix_on, backward, dir_fix_off]
           wait: true
       - The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.
+    trigger: touch
+    move: fixed
+    story: ch8
 - type: event
   name: To The Foundry (Gym 7)
   at: [21, 2]
   pages:
-  - trigger: touch
-    commands:
-    - if: pbRgssExists?("Data/Map250.rxdata")
+  - commands:
+    - if: pfm_get(:gym7_open) || $game_variables[129] >= 5
       then:
-      - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 250\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
-          \ = 8\n  $scene.transfer_player\nend"}
+      - {se: Door exit}
+      - transfer: {map: 250, x: 10, y: 15, dir: up}
       else:
-      - *id001
-      - *id002
+      - {script: 'pbSEPlay("Door enter", 80, 60)'}
+      - move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
       - The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.
+    trigger: touch
+    move: fixed
+    story: ch8
 - type: event
   name: To The Foundry (Gym 7)
   at: [22, 2]
   pages:
-  - trigger: touch
-    commands:
-    - if: pbRgssExists?("Data/Map250.rxdata")
+  - commands:
+    - if: pfm_get(:gym7_open) || $game_variables[129] >= 5
       then:
-      - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 250\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
-          \ = 8\n  $scene.transfer_player\nend"}
+      - {se: Door exit}
+      - transfer: {map: 250, x: 10, y: 15, dir: up}
       else:
-      - *id001
-      - *id002
+      - {script: 'pbSEPlay("Door enter", 80, 60)'}
+      - move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
       - The Foundry's bronze doors are barred from inside. Somewhere behind them, Brann is resetting the casting channels.
+    trigger: touch
+    move: fixed
+    story: ch8
 - type: event
   name: To Pyre Keep Rampart
   at: [5, 2]
@@ -134,8 +145,12 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 245\n  $game_temp.player_new_x = 16\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - &id003 {script: 'pbSEPlay("Player bump", 80, 80)'}
-      - *id002
+      - &id001 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - &id002
+        move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
       - 'Oath-Guard: The Rampart''s closed while the Dominar''s envoys are in audience. Say true: I''d let you up if I could.'
 - type: event
   name: To Pyre Keep Rampart
@@ -148,7 +163,7 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 245\n  $game_temp.player_new_x = 16\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - *id003
+      - *id001
       - *id002
       - 'Oath-Guard: The Rampart''s closed while the Dominar''s envoys are in audience. Say true: I''d let you up if I could.'
 - type: event
@@ -162,7 +177,7 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 245\n  $game_temp.player_new_x = 16\n  $game_temp.player_new_y = 22\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - *id003
+      - *id001
       - *id002
       - 'Oath-Guard: The Rampart''s closed while the Dominar''s envoys are in audience. Say true: I''d let you up if I could.'
 - type: event
@@ -176,10 +191,10 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 248\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 20\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - &id004 {script: 'pbSEPlay("Anim/Wind1", 70, 90)
+      - &id003 {script: 'pbSEPlay("Anim/Wind1", 70, 90)
 
           pfm_shake(2, 10, 6)'}
-      - &id005 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - &id004 {script: 'pbSEPlay("Player bump", 80, 80)'}
       - *id002
       - 'Roost-keeper: Back! Back! The updrafts off the rim''ll have you over the edge without a wing-pass!'
 - type: event
@@ -193,8 +208,8 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 248\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 20\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
+      - *id003
       - *id004
-      - *id005
       - *id002
       - 'Roost-keeper: Back! Back! The updrafts off the rim''ll have you over the edge without a wing-pass!'
 - type: event
@@ -208,8 +223,8 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 248\n  $game_temp.player_new_x = 12\n  $game_temp.player_new_y = 20\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
+      - *id003
       - *id004
-      - *id005
       - *id002
       - 'Roost-keeper: Back! Back! The updrafts off the rim''ll have you over the edge without a wing-pass!'
 - type: event
@@ -223,7 +238,7 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - &id006 {script: 'pbSEPlay("Door slide", 80, 60)'}
+      - &id005 {script: 'pbSEPlay("Door slide", 80, 60)'}
       - *id002
       - 'Hearthguild Warden: West Pass is chained till the bells stop. Nobody out on the Ashmarch with the mountain like this.'
 - type: event
@@ -237,7 +252,7 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - *id006
+      - *id005
       - *id002
       - 'Hearthguild Warden: West Pass is chained till the bells stop. Nobody out on the Ashmarch with the mountain like this.'
 - type: event
@@ -251,7 +266,7 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 660\n  $game_temp.player_new_x = 118\n  $game_temp.player_new_y = 36\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - *id006
+      - *id005
       - *id002
       - 'Hearthguild Warden: West Pass is chained till the bells stop. Nobody out on the Ashmarch with the mountain like this.'
 - type: event
@@ -531,9 +546,9 @@ events:
       else:
       - {script: 'pfm_tone(14, 8, -6, 0, 20)'}
     - {wait: 20}
-    - &id007 {script: '6.times { |i| pbSEPlay("Anim/Earth4", 90, (i.even? ? 60 : 50)); pfm_shake(1, 20, 3); pbWait(0.42) }'}
+    - &id006 {script: '6.times { |i| pbSEPlay("Anim/Earth4", 90, (i.even? ? 60 : 50)); pfm_shake(1, 20, 3); pbWait(0.42) }'}
     - {wait: 10}
-    - *id007
+    - *id006
     - move:
         who: Herald
         route:
@@ -629,7 +644,7 @@ events:
     - 'Dominar''s Herald: Say true: this is not war.'
     - {wait: 30}
     - 'Dominar''s Herald: It is the door to it.'
-    - *id007
+    - *id006
     - move:
         who: Herald
         route:

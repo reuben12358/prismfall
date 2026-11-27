@@ -8,7 +8,7 @@ layout placed. `patch(spec_file, map_id, events, pages, tag)` upserts them by na
     re-run replaces them instead of stacking;
   * every other key, tile and event of the spec stays byte for byte (only the `events:` block is re-dumped).
 Idempotent. Run the layer again after any layout that regenerates the spec from scratch."""
-import os
+import copy, os
 import yaml
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -109,4 +109,29 @@ def replace_lines(spec_file, mid, mapping, tag='story'):
         chunks[i] = '\n'.join(lines[:k]) + '\n' + body.rstrip('\n') + ('\n' if i == len(chunks) - 1 else '')
         open(path, 'w', encoding='utf-8').write('\n---\n'.join(chunks))
         return hits
+    raise SystemExit('storylayer %s: no map %d in %s' % (tag, mid, path))
+
+
+def set_pages(spec_file, mid, name, pages, tag='story'):
+    """Give EVERY event called `name` on the map (a door three tiles wide is three events) these pages, tagged; the
+    events keep their position and type. Re-runnable. Returns how many events changed."""
+    path = os.path.join(HERE, 'specs', spec_file)
+    chunks = open(path, encoding='utf-8').read().split('\n---\n')
+    for i, chunk in enumerate(chunks):
+        doc = yaml.safe_load(chunk)
+        if not doc or doc.get('id') != mid: continue
+        evs = doc.get('events') or []
+        n = 0
+        for e in evs:
+            if e.get('name') != name: continue
+            new = [dict(copy.deepcopy(p), story=tag) for p in pages]     # a copy each: no YAML anchors between doors
+            if e.get('pages') != new or e.get('type') != 'event':
+                e['type'] = 'event'; e['pages'] = new; n += 1
+        if not n: return 0
+        lines = chunk.split('\n')
+        k = next(j for j, l in enumerate(lines) if l.startswith('events:'))
+        body = yaml.safe_dump({'events': evs}, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
+        chunks[i] = '\n'.join(lines[:k]) + '\n' + body.rstrip('\n') + ('\n' if i == len(chunks) - 1 else '')
+        open(path, 'w', encoding='utf-8').write('\n---\n'.join(chunks))
+        return n
     raise SystemExit('storylayer %s: no map %d in %s' % (tag, mid, path))
