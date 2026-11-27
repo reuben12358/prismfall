@@ -224,7 +224,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch6story")
       c6_wait_step(3, "the sandgate")
       # --- 200: the Dig is shut before the drill site
       c6_goto(200, 8, 39, 8)
-      c6_step("the Dig's door at step 3", 200, 8, 38, :use)
+      c6_step("the Dig's door at step 3", 200, 8, 38, :touch)
       c6_fail("the Dig let the player in at CH6_STEP 3") if $game_map.map_id != 200
       # --- 209 Sahar, then 204 the Deep-works
       c6_goto(209, 10, 13, 8)
@@ -238,7 +238,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch6story")
       c6_goto(200, 8, 39, 8)
       Ch6Cap.gym = true
       n0 = Ch6Cap.battles.length
-      c6_step("the Dig's door", 200, 8, 38, :use, [], 210)
+      c6_step("the Dig's door", 200, 8, 38, :touch, [], 210)
       c6_step("210 the entrance drop", 210, 10, 9, :touch, [], 212)
       c6_step("212 the cellar ladder", 212, 14, 22, :touch, [], 211)
       c6_step("211 drop into lane c", 211, 5, 8, :touch, [], 212)

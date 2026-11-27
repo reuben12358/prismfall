@@ -444,7 +444,7 @@ def pages_204(spec_events):
 # ============================================================================================ Gym 5: 200 door, 210, 213
 DIG_DOOR = [IF('$game_variables[126] >= 4',
                [{'se': 'Door enter'}, S('pfm_fade_out(8)'), {'transfer': {'map': 210, 'x': 10, 'y': 15, 'dir': 'up'}}, S('pfm_fade_in(8)')],
-               [S('pbSEPlay("Player bump", 80, 80)'), N("Sahar's Aide", "The Warden's up at her Dig Lab, on the northwest terrace.")])]
+               [S('pbSEPlay("Player bump", 80, 80)'), N("Sahar's Aide", "The Warden's up at her Dig Lab, on the northwest terrace."), BACK])]
 
 GYM_GUIDE = [N('Gym Guide', "The Dig: Ground-types on the Desert field."),
              N('Gym Guide', "Water, Grass and Ice dig in. Electric doesn't, ever, at all."),
@@ -492,7 +492,7 @@ ARENA = [IF('pfm_get(:ch6_sahar_tried)', [say('SAHAR', "Again. Good. The second 
 
 def setpages_gym():
     return {
-        200: {'The Dig (Duneholt Gym)': [page(DIG_DOOR)]},
+        200: {'The Dig (Duneholt Gym)': [page(DIG_DOOR, trigger='touch')]},     # a walkable door tile: walk into it
         210: {'Gym Guide': [page(GYM_GUIDE, 'NPC 21', 'right')], "Sahar's Aide": [page(AIDE, 'NPC 14', 'down')]},
         213: {'Warden Sahar': [page([]), page(ARENA, 'SAHAR', 'down', cond=V(4)), page([], cond=V(5))]}}
 
@@ -730,8 +730,9 @@ def events_624():
         unown.append(at(ev('Unown in the wall %d' % i, p), x, y))
     return [at(ev('Into the Ossuary', page([]), page(ENTRY, cond=V(6), trigger='autorun'), page([], cond=V(6, self='A')),
                   page([], cond=V(7))), 1, 1),
-            at(ev(COMP, page([]), page([say('SAHAR', "You have to wait for the sentence to come round.", COMP)], 'SAHAR', 'up',
-                                     cond=V(6), through=True), page([], cond=V(7))), 22, 37)] + unown
+            # a convoy follower: Through, so she never blocks the way back; no talk page (a Through action page only
+            # runs when stood on, reach.py STANDON)
+            at(ev(COMP, page([]), page([], 'SAHAR', 'up', cond=V(6), through=True), page([], cond=V(7))), 22, 37)] + unown
 
 
 def setpages_624():

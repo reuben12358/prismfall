@@ -528,7 +528,7 @@ events:
   - commands: []
     trigger: action
     move: fixed
-  - commands: ['\pf[SAHAR,neutral,,Sahar (companion)]Sahar: You have to wait for the sentence to come round.']
+  - commands: []
     trigger: action
     move: fixed
     graphic: {sprite: SAHAR, dir: up}

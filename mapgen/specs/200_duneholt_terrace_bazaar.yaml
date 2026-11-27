@@ -82,7 +82,11 @@ events:
       else:
       - {script: 'pbSEPlay("Player bump", 80, 80)'}
       - 'Sahar''s Aide: The Warden''s up at her Dig Lab, on the northwest terrace.'
-    trigger: action
+      - move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+    trigger: touch
     move: fixed
     story: ch6
   fixed: true
