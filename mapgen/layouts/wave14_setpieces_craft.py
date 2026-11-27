@@ -290,95 +290,305 @@ def _put_windows_54(h, xs, y0):
 # GROUP 1: THE DOVETAIL PROLOGUE FERRY (Maps 109 & 110)
 # ==============================================================================
 def build_109(save=True):
-    """Wave 14 craft of Map 109 (The Dovetail - Deck, 34x22, Tileset 51).
-    Layered deep-ocean swell channels, shimmering wake glints, organized nautical cargo &
-    rigging vignettes, glowing deck lanterns, coiled rope by HiddenItem (27,12), and wide
-    unobstructed cutscenes for Deckhand (5..8,12), Edda (6,9), Voss (21,8), Start (7,6),
-    Wattrel nest (12,9), Cabin hatch (15,10..11) & Gangway (9,15)."""
+    """Ch0 Opening Rethink (Pass 2) of Map 109 (The Dovetail - Deck, 34x22, Tileset 51).
+    Authentic Victorian / Gen 5 coastal passenger steam ferry sailing through twilight ocean:
+      - Silky smooth twilight sea + straight northern deep-ocean horizon band + wake sparkles.
+      - Sleek 1-tile-per-step tapered ferry hull silhouette (100% sealed perimeter: ZERO
+        unfenced ocean drop-offs!) with cohesive dark-mahogany freeboard paneling, rhythmic
+        brass ship portholes, and dark riveted-ironclad waterline plates (ZERO bricks or
+        dock pilings!).
+      - Recessed pier-ready starboard Gangway opening (9,15..17) framed by hull endcaps,
+        brass mooring bollards, descending wooden gangplank apron, and a complete 3x2
+        four-side-bordered crimson-gold arrival mat (8..10, 13..14).
+      - Authentic Stern Captain's Wheelhouse (x=3..5, y=4..8) aligned cleanly with the
+        X-braced dark-timber stern bulwark railing (x=3, y=9..13), 3D walnut bridge roof,
+        warm glowing helm windows, warm mahogany double bridge door (mn_door) behind Captain
+        Edda (6,9), and a riveted dark-iron steam funnel stack (4,3..4) with steam rising
+        seamlessly directly out of its open louvered crown.
+      - Authentic 3D-roofed timber Midship Companionway Deckhouse (x=14..16, y=8..10) centered
+        on Cabin hatch warp (15,10) with bevelled walnut roof, warm timber clapboard walls,
+        twin amber-lit cabin windows, glowing transom, and warm walkable wooden cabin door
+        (3067) with brass diamond medallion (ZERO neon-cyan sci-fi sliding doors!).
+      - Pure seamless golden-teak midship promenade planks (ZERO dark shadow crack artifacts),
+        matching horizontal dark-walnut aft quarterdeck & raised bow forecastle decking,
+        inlaid flush deck hatches, warm wooden passenger benches, compact rail-mounted warning
+        plaque (12,5) with zero ocean overhang, ship's brass bellpost beside the deckhouse,
+        and 3 warm glowing deck lanterns with 100% unbroken 4-quadrant golden halos (L1 poles
+        under uninterrupted L2 pf_glow).
+      - Preserves 100% of ALL 22 events, player start (7,6), Cabin arrival (15,11), Gangplank
+        arrival (9,14), and all cutscene 167a corridors."""
     import rkit as K
-    import render as R
-    import ship_art as SA
 
     W, H = 34, 22
     m = K.RMap(W, H, 51, 109, water='Ocean')
-    SA.use('dovetail')
-    deck = SA.deck
-    dk = np.array([[bool(deck(x, y)) for x in range(W)] for y in range(H)])
 
-    # Sculpt dramatic layered deep-ocean swell bands framing the ferry (banishing polka-dot blobs!)
-    for y in range(H):
-        for x in range(W):
-            m.cls[y, x] = 'w'
-    # Outer deep-water horizon bands top (y=0..2), bottom (y=19..21), plus sweeping bow/stern ocean swells
-    for y in range(H):
-        for x in range(W):
-            dy_ship = 0
-            if y < 5:
-                dy_ship = 5 - y
-            elif y > 15:
-                dy_ship = y - 15
-            # Gentle sinusoidal coastal swell waves in open water far from the hull
-            wave_n = 2.6 + 0.85 * np.sin((x + 3) * 0.38)
-            wave_s = 18.4 + 0.85 * np.sin((x - 2) * 0.34)
-            if y <= wave_n or y >= wave_s:
-                m.cls[y, x] = 'W'
-            # Distant deep-ocean horizon pockets on far west/east edges
-            if (x <= 1 and (y <= 6 or y >= 15)) or (x >= 32 and (y <= 6 or y >= 15)):
-                m.cls[y, x] = 'W'
-    # Keep a 2-tile clear turquoise wake cushion immediately surrounding the hull
-    near = np.zeros((H, W), bool)
-    for y, x in np.argwhere(dk):
-        near[max(0, y - 2):min(H, y + 3), max(0, x - 2):min(W, x + 3)] = True
-    m.cls[near] = 'w'
-    K.RMap.smooth(m, 'W', into='w', passes=1, only='w')
-    m.cls[near] = 'w'
+    # Helper: grab single-tile ID from K.STAMPS
+    def st1(nm):
+        st = K.STAMPS[nm]
+        for z in (0, 1, 2):
+            v = int(st['layers'][z][0][0])
+            if v:
+                return v
+        raise KeyError(nm)
 
+    # ------------------------------------------------------------------ 1. Silky Twilight Ocean
+    # Base ocean ('w' = RJ Ocean) everywhere; pure straight northern deep-ocean horizon band on y=0..1.
+    # Promote opaque RJ Sea deep autotiles from L1 -> L0 so bad_auto == 0!
+    m.cls[:, :] = 'w'
+    m.cls[0:2, :] = 'W'
     m.paint_ground()
     m.autotiles()
+    deep_mask = (m.L[1] >= 100000) | ((m.L[1] >= 48) & (m.L[1] < 384))
+    m.L[0, deep_mask] = m.L[1, deep_mask]
+    m.L[1, deep_mask] = 0
 
-    # Paint the vessel hull onto the ocean
-    tc = R.TileCache(R.tilesets()[51])
-    opaque = {}
+    # ------------------------------------------------------------------ 2. Sleek 1-Tile-Stepped Tapered Ferry Geometry
+    # Every step tapers strictly by 1 row per column so EVERY walkable tile is 100% sealed from ocean!
+    #   Stern quarter (x=3..5):     y=5..14 (Wheelhouse x=3..5, y=4..8; stern rail x=3, y=9..14)
+    #   Midship waist (x=6..25):    y=5..15 (Port rail y=5, Starboard rail y=15, Gangway opening 9,15)
+    #   Forecastle step 1 (x=26..27): y=6..14 (Sailor 26,9 & HiddenItem coiled rope 27,12 cleanly inside!)
+    #   Forecastle step 2 (x=28):   y=7..13
+    #   Bow step 3 (x=29):          y=8..12
+    #   Bow pulpit (x=30):          y=9..11 (Horizon lookout 30,10 framed tightly by solid rails at 30,9 & 30,11!)
+    #   Bow prow stem (x=31):       (31, 10) pointed bow stempost & brass prow finial sealing (30, 10) east!
+    col_span = {}
+    for x in (3, 4, 5):
+        col_span[x] = (5, 14)
+    for x in range(6, 26):
+        col_span[x] = (5, 15)
+    for x in (26, 27):
+        col_span[x] = (6, 14)
+    col_span[28] = (7, 13)
+    col_span[29] = (8, 12)
+    col_span[30] = (9, 11)
 
-    def is_opaque(t):
-        if t not in opaque:
-            im = tc.tile(t)
-            opaque[t] = im is not None and im.getchannel('A').getextrema()[0] == 255
-        return opaque[t]
+    deck_mask = np.zeros((H, W), dtype=bool)
+    rail_mask = np.zeros((H, W), dtype=bool)
+    hull_mask = np.zeros((H, W), dtype=bool)
+    for x, (yt, yb) in col_span.items():
+        for y in range(yt, yb + 1):
+            deck_mask[y, x] = True
+            if y == yt or y == yb:
+                rail_mask[y, x] = True
+    # West stern vertical bulwark rail along x=3 (y=9..14)
+    for y in range(9, 15):
+        rail_mask[y, 3] = True
+    # Gangway boarding opening at (9, 15) is OPEN (walkable!), backed by solid recessed ramp at (9, 16..17)
+    rail_mask[15, 9] = False
 
-    interior = np.zeros((H, W), bool)
-    for x, y, z, t in K._ST['_ship_dovetail']['tiles']:
-        if not m.inb(x, y):
-            continue
-        if z == 0:
-            if is_opaque(t):
-                m.L[0, y, x] = t
-                m.L[1, y, x] = 0
-                interior[y, x] = True
+    # Tile palettes (all verified 2x-zoomed live-reskinned TS 51 IDs & passabilities!)
+    DARK_OAK = [st1('N_f0'), st1('N_f1'), st1('N_f2'), st1('N_f3')]      # horizontal dark-walnut ship planks (p0)
+    TEAK_TOP = (7964, 7965, 7966)                                         # warm teak top-edge planks (p0)
+    TEAK_MID = (7972, 7973, 7974)                                         # warm teak midship planks (p0)
+    TEAK_BOT = (7980, 7981, 7982)                                         # warm teak bottom-edge planks (p0)
+    RAIL_W, RAIL_M, RAIL_E = st1('lm_railing_w'), st1('lm_railing_m'), st1('lm_railing_e')  # brass rails (p15)
+    HULL_WOOD = (24068, 24069, 24070)                                     # dark-mahogany ship hull paneling (p15)
+    HULL_IRON = (25880, 25881, 25881)                                     # silver-trimmed riveted-iron waterline hull (p15)
+    PORTHOLE = 25939                                                      # round brass ship porthole (p15)
+    CABIN_BULK = (24048, 24049, 24050)                                    # warm mahogany cabin bulkhead (p15)
+
+    # Paint cohesive horizontal timber ship decking onto layer 0 (ZERO checkered parquet seams, ZERO dark cracks!)
+    for x, (yt, yb) in col_span.items():
+        for y in range(yt, yb + 1):
+            is_rail_base = (y == yt or y == yb or x == 3)
+            if is_rail_base or x <= 5 or x >= 26:
+                # Gunwale borders, Aft Quarterdeck (x=4..5) & Raised Bow Forecastle (x=26..30): horizontal dark walnut!
+                m.L[0, y, x] = DARK_OAK[(x + y) % 4]
             else:
-                m.L[1, y, x] = t
-        else:
-            m.L[2, y, x] = t
+                # Main Midship Passenger Promenade (x=6..25, y=6..14): crisp seamless golden-teak ship planks!
+                if y == 6:
+                    m.L[0, y, x] = TEAK_TOP[0 if x == 6 else (2 if x == 25 else 1)]
+                elif y == 14:
+                    m.L[0, y, x] = TEAK_BOT[0 if x == 6 else (2 if x == 25 else 1)]
+                else:
+                    if x == 6:
+                        m.L[0, y, x] = TEAK_MID[0]
+                    elif x == 25:
+                        m.L[0, y, x] = TEAK_MID[2]
+                    else:
+                        m.L[0, y, x] = TEAK_MID[1]  # pure seamless teak planks — ZERO stray shadow cracks!
 
-    # Reserved cells: ALL 22 events (incl. Wattrel nest (12,9)), start (7,6), Cabin arrival (15,11),
-    # Deckhand intro walk (5..8,12), Rail watch (10..14,6), Voss approach (15..21,8), Edda approach (6..9,7..9)
+    # Smooth wooden deck transition steps onto the raised bow forecastle at (26, 10)
+    m.L[1, 10, 26] = st1('tb_stair_m')  # 20199 (p0 q0) subtle wooden step leading to Horizon (30,10)!
+
+    # ------------------------------------------------------------------ 3. Cohesive Mahogany & Riveted-Iron Steam-Ferry Hull Flank
+    # Visible 2-row 3D ship hull below every starboard gunwale:
+    #   Row yb+1: Dark mahogany ship-timber hull panels with rhythmic round brass portholes
+    #   Row yb+2: Dark riveted ironclad waterline hull slicing through the twilight sea (ZERO dock pilings!)
+    # Recessed pier-ready Gangway boarding bay carved cleanly at x=9, y=16..17!
+    xs_hull = sorted(col_span.keys())
+    for x in xs_hull:
+        yb = col_span[x][1]
+        if x == 9 and yb == 15:
+            # Recessed pier-ready wooden gangway apron descending cleanly to the waterline (ALL solid f/0!)
+            m.L[0, 16, 9] = DARK_OAK[0]  # solid dark-walnut timber backing eliminates 1px ocean edge slivers
+            m.L[0, 17, 9] = DARK_OAK[1]
+            m.L[1, 16, 9] = 23994  # seamless horizontal slatted wooden gangplank boards (p15 q0, zero side seams)
+            m.L[1, 17, 9] = 23997  # seamless descending wooden boarding ramp kissing the waterline (p15 q0)
+            hull_mask[16, 9] = hull_mask[17, 9] = True
+            continue
+        # Treat Gangway opening (x=9) as a crisp hull break so (8,16..17) & (10,16..17) get proper endcaps!
+        is_l = (x == xs_hull[0] or col_span.get(x - 1, (0, -9))[1] != yb or (x == 10 and yb == 15))
+        is_r = (x == xs_hull[-1] or col_span.get(x + 1, (0, -9))[1] != yb or (x == 8 and yb == 15))
+        k = 0 if is_l else (2 if is_r else 1)
+        if yb + 1 < H:
+            m.L[1, yb + 1, x] = HULL_WOOD[k]
+            if k == 1 and yb == 15 and x in (12, 16, 20, 24):
+                m.L[2, yb + 1, x] = PORTHOLE  # exact 4-tile rhythmic brass ship portholes bolted onto hull!
+            hull_mask[yb + 1, x] = True
+        if yb + 2 < H:
+            m.L[1, yb + 2, x] = HULL_IRON[k]
+            hull_mask[yb + 2, x] = True
+
+    # Pointed Tapered Ship Bow Stem Prow at (31, 10) + Riveted Iron Cutwater at (31, 11) — seals Horizon (30,10) east!
+    m.L[0, 10, 31] = DARK_OAK[1]
+    m.L[1, 10, 31] = HULL_WOOD[2]       # mahogany bow stempost right ahead of Horizon (30,10)!
+    m.L[2, 10, 31] = st1('lm_bollard')  # gleaming brass bow prow capstan finial!
+    m.L[1, 11, 31] = HULL_IRON[2]       # silver-trimmed riveted dark-iron bow cutwater slicing the twilight waves!
+    hull_mask[10, 31] = hull_mask[11, 31] = True
+
+    # ------------------------------------------------------------------ 4. 100% Sealed Polished Brass & X-Braced Timber Ship Railings
+    # North (Port) rail: midship (6..25, 5), step 1 (26..27, 6), step 2 (28, 7), step 3 (29, 8), bow pulpit (30, 9)
+    for x in range(6, 26):
+        m.L[1, 5, x] = RAIL_W if x == 6 else (RAIL_E if x == 25 else RAIL_M)
+    m.L[1, 6, 26] = RAIL_W; m.L[1, 6, 27] = RAIL_E
+    m.L[1, 7, 28] = RAIL_E
+    m.L[1, 8, 29] = RAIL_E
+    m.L[1, 9, 30] = RAIL_E
+
+    # Compact 1x1 wooden-framed maritime warning plaque mounted cleanly INSIDE Rail sign (12, 5) — ZERO ocean overhang!
+    m.L[2, 5, 12] = 20243   # compact wood-framed warning notice plaque (p0 q2 over solid RAIL_M)
+
+    # South (Starboard) rail: stern (3..5, 14), midship (6..25, 15 breaking cleanly at Gangway 9,15), bow steps
+    m.L[1, 14, 3] = RAIL_W; m.L[1, 14, 4] = RAIL_M; m.L[1, 14, 5] = RAIL_E
+    for x in range(6, 26):
+        if x == 9:
+            continue
+        if x in (6, 10):
+            t = RAIL_W
+        elif x in (8, 25):
+            t = RAIL_E
+        else:
+            t = RAIL_M
+        m.L[1, 15, x] = t
+    m.L[1, 14, 26] = RAIL_W; m.L[1, 14, 27] = RAIL_E
+    m.L[1, 13, 28] = RAIL_E
+    m.L[1, 12, 29] = RAIL_E
+    m.L[1, 11, 30] = RAIL_E
+
+    # West Stern Vertical Bulwark Railing along x=3 (y=9..13) — authentic X-braced dark timber flush with wheelhouse!
+    # ZERO blank grey slab, ZERO protruding x=2 dock strip, ZERO ocean-overhanging buoy!
+    m.L[1, 9, 3] = 7976     # dark-walnut vertical timber rail top cap (p15 q0)
+    m.L[1, 10, 3] = 7984    # X-braced dark-timber vertical ship rail (p15 q0)
+    m.L[1, 11, 3] = 7992    # X-braced dark-timber vertical ship rail (p15 q0)
+    m.L[1, 12, 3] = 8000    # X-braced dark-timber vertical ship rail (p15 q0)
+    m.L[1, 13, 3] = 8008    # dark-walnut vertical timber rail base cap (p15 q0)
+
+    # Framed Gangway Boarding Gate at (9, 15): wooden boarding steps + brass mooring bollards at (8,15) & (10,15)!
+    m.L[0, 15, 9] = TEAK_BOT[1]
+    m.L[1, 15, 9] = st1('tb_stair_m')   # walkable wooden boarding steps (20199, p0 q0)
+    m.L[2, 15, 8] = st1('lm_bollard')   # brass bollard flanking gangway west
+    m.L[2, 15, 10] = st1('lm_bollard')  # brass bollard flanking gangway east
+
+    # ------------------------------------------------------------------ 5. Bordered Gangway Arrival Mat & Flush Deck Hatches
+    def put_carpet(x0, y0, x1, y1):
+        cmap = {
+            (0, 0): 'lm_carpet_nw', (1, 0): 'lm_carpet_n', (2, 0): 'lm_carpet_ne',
+            (0, 1): 'lm_carpet_w',  (1, 1): 'lm_carpet_c', (2, 1): 'lm_carpet_e',
+            (0, 2): 'lm_carpet_sw', (1, 2): 'lm_carpet_s', (2, 2): 'lm_carpet_se',
+        }
+        for y in range(y0, y1 + 1):
+            ry = 0 if y == y0 else (2 if y == y1 else 1)
+            for x in range(x0, x1 + 1):
+                rx = 0 if x == x0 else (2 if x == x1 else 1)
+                m.L[1, y, x] = st1(cmap[(rx, ry)])
+
+    # Complete 3x2 4-side-bordered Crimson-Gold Gangway Welcome Mat framing Gangplank Arrival (9,14) -> Gangway (9,15)!
+    # ZERO chopped borderless 1-tile carpet strips!
+    put_carpet(8, 13, 10, 14)
+
+    # Clean inlaid timber companionway threshold at Cabin Arrival (15, 11) (ZERO stark gold bar blocking doorway!)
+    m.L[1, 11, 14] = 24335              # mn_mat left slatted timber mat (p0 q0)
+    m.L[1, 11, 15] = st1('tb_stair_m')  # wooden threshold step directly below Cabin Door (p0 q0)
+    m.L[1, 11, 16] = 24336              # mn_mat right slatted timber mat (p0 q0)
+
+    # Flush walkable wooden cargo deck hatches (mn_trap 24272, p0 q0) giving authentic ship-deck rhythm!
+    m.L[1, 10, 10] = 24272
+    m.L[1, 10, 20] = 24272
+
+    # ------------------------------------------------------------------ 6. Superstructure A: Stern Captain's Wheelhouse & Iron Smokestack Funnel (x=3..5, y=2..8)
+    # Aligned 100% flush with Stern Rail x=3; preserves Start (7,6), Captain Edda (6,9), Seasick Man (4,11), Deckhand (5..8,12)!
+    #   - 3D Bevelled Dark-Walnut Bridge Roof (x=3..5, y=5..6)
+    #   - Brass upper bridge railings at (3,4) & (5,4) flanking a riveted dark-iron Steam Funnel at (4,3..4)
+    #   - Soft coastal steam plume rising SEAMLESSLY directly from the open louvered funnel crown (4,2..3)!
+    #   - Warm mahogany front bulkhead (x=3..5, y=7..8) with glowing wooden helm windows (3..4, 7..8),
+    #     brass sconce (5,7), and authentic solid mahogany double Bridge Door mn_door (5,8) behind Captain Edda!
+    WHEEL_ROOF_TOP = (6409, 6410, 6413)  # 3D bevelled walnut wheelhouse roof top (p15 q0)
+    WHEEL_ROOF_BOT = (6425, 6426, 6429)  # 3D bevelled walnut wheelhouse roof eaves (p15 q0)
+    for idx, x in enumerate((3, 4, 5)):
+        m.L[0, 5, x] = DARK_OAK[0]
+        m.L[0, 6, x] = DARK_OAK[0]
+        m.L[0, 7, x] = DARK_OAK[1]
+        m.L[0, 8, x] = DARK_OAK[1]
+        m.L[1, 5, x] = WHEEL_ROOF_TOP[idx]
+        m.L[1, 6, x] = WHEEL_ROOF_BOT[idx]
+        m.L[1, 7, x] = CABIN_BULK[idx]
+        m.L[1, 8, x] = CABIN_BULK[idx]
+        hull_mask[4:9, x] = True
+    # Upper wheelhouse brass railings flanking the iron smokestack funnel
+    m.L[1, 4, 3] = RAIL_W
+    m.L[1, 4, 5] = RAIL_E
+    # Authentic Riveted Dark-Iron Coastal Steam-Ferry Smokestack Funnel at (4, 3..4) — ZERO sci-fi visor dome!
+    m.L[1, 4, 4] = 25883          # riveted dark-iron smokestack base rising from wheelhouse roof (p15 q0)
+    m.L[1, 3, 4] = 25783          # dark-iron louvered smokestack crown & silver lip (p15 q0)
+    hull_mask[3, 4] = True
+    # Seamless drifting coastal steam rising DIRECTLY out of the iron funnel mouth (ZERO floating gap!)
+    m.L[2, 3, 4] = 25780          # lm_steam0 base emerging straight from funnel rim y_px=12..25 (p0 q2)
+    m.L[2, 2, 4] = 25779          # lm_steam0 upper plume drifting into twilight sky (p0 q2)
+    # Warm framed wooden helm navigation windows at (3, 7..8) & (4, 7..8)
+    for wx in (3, 4):
+        m.L[2, 7, wx] = 24212     # mn_window_bare top (p15 q0)
+        m.L[2, 8, wx] = 24213     # mn_window_bare bot (p15 q0)
+    # Warm brass bulkhead sconce (5, 7) + Authentic Mahogany Double Bridge Door mn_door (5, 8) behind Captain Edda!
+    m.L[2, 7, 5] = st1('mn_sconce')
+    m.L[2, 8, 5] = st1('mn_door') # 24366 warm mahogany double cabin door (p15 q0 — ZERO steel elevator panel!)
+
+    # ------------------------------------------------------------------ 7. Superstructure B: Roofed Timber Midship Companionway Deckhouse (x=14..16, y=8..10)
+    # Centered DEAD-SYMMETRICALLY on Cabin hatch warp (15,10) -> Map 110 Cabin!
+    # Preserves Boy (16,7), Boy's Mother (17,8), Wattrel nest (12,9), Rail watch (10..14,6), Voss (21,8)!
+    #   - Row y=8: Real dark-walnut plank cabin roof with centered cabin skylight/vent (26061, 26062, 26061; p15 q1)
+    #   - Row y=9: Warm timber clapboard cabin bulkhead with window tops & clean arched glowing transom (3058, 3122, 3060; p15 q0)
+    #   - Row y=10: Twin warm amber-lit cabin windows (3066, 3068; p15 q0) flanking walkable warm wooden Cabin Door
+    #     with brass diamond medallion (3067; p0 q0 — ZERO neon-cyan sci-fi sliding door!)
+    m.L[1, 8, 14] = 26061         # dark walnut plank cabin roof left (p15 q1)
+    m.L[1, 8, 15] = 26062         # dark walnut plank cabin roof with iron deckhouse skylight/vent (p15 q1)
+    m.L[1, 8, 16] = 26061         # dark walnut plank cabin roof right (p15 q1)
+    m.L[1, 9, 14] = 3058          # warm timber cabin upper window left (p15 q0)
+    m.L[1, 9, 15] = 3122          # clean timber eave + arched glowing door transom (p15 q0, ZERO cut-off oval!)
+    m.L[1, 9, 16] = 3060          # warm timber cabin upper window right (p15 q0)
+    m.L[1, 10, 14] = 3066         # warm amber-lit cabin window left (p15 q0)
+    m.L[1, 10, 15] = 3067         # WALKABLE warm wooden cabin door with brass diamond medallion (p0 q0!)
+    m.L[1, 10, 16] = 3068         # warm amber-lit cabin window right (p15 q0)
+
+    # ------------------------------------------------------------------ 8. Cozy Maritime Passenger Furnishings & Unbroken Glowing Lanterns
     events_109 = {
         (16, 13), (12, 5), (13, 5), (10, 6), (11, 6), (12, 6), (13, 6), (14, 6),
         (6, 9), (21, 8), (9, 15), (30, 10), (27, 12), (8, 12), (18, 6), (24, 13),
         (16, 7), (17, 8), (26, 9), (4, 11), (15, 10), (15, 11), (12, 9), (7, 6),
     }
     reserved = set(events_109) | {
-        (5, 12), (6, 12), (7, 12),  # Deckhand intro walk [left, left, left] from (8,12)
-        (8, 6), (9, 6),             # Clear port-rail promenade right from Start (7,6) to Rail watch (10,6)!
-        (7, 7), (8, 7), (9, 7), (10, 7),  # Edda & player promenade
-        (9, 14), (9, 13),           # Clear approach to Gangway (9,15)
-        (14, 10), (16, 10), (15, 9), (15, 12),  # Clear approach around Cabin hatch (15,10)
-        (18, 8), (19, 8), (20, 8),  # Voss walk corridor west toward rail
-        (27, 11), (26, 12), (28, 12),  # Clear access around HiddenItem coiled rope (27,12)
-        (27, 10), (28, 10), (29, 10),  # Clear bow Horizon (30,10) approach!
+        (5, 12), (6, 12), (7, 12),               # Deckhand intro walk [left, left, left] from (8,12)
+        (8, 6), (9, 6),                          # Port-rail promenade Start (7,6) -> Rail watch (10..14,6)
+        (7, 7), (8, 7), (9, 7), (10, 7),         # Edda & player approach
+        (7, 8), (8, 8), (9, 8), (7, 9), (8, 9),  # Edda walk corridor
+        (9, 14), (9, 13),                        # Gangway approach
+        (15, 12), (14, 11), (16, 11),            # Cabin door landing
+        (18, 8), (19, 8), (20, 8),               # Voss walk corridor
+        (26, 10), (27, 10), (28, 10), (29, 10),  # Bow Horizon (30,10) promenade
+        (27, 11), (28, 11), (28, 12),            # Access around HiddenItem coiled rope (27,12)
     }
 
-    def place_stamp(nm, x, y, allow_water=False):
+    def place_stamp(nm, x, y):
         st = K.STAMPS[nm]
         Ls = np.array(st['layers'])
         for j in range(st['h']):
@@ -387,9 +597,7 @@ def build_109(save=True):
                 if not m.inb(cx, cy):
                     return False
                 if Ls[1, j, i]:
-                    if (cx, cy) in reserved or m.taken[cy, cx]:
-                        return False
-                    if not allow_water and not interior[cy, cx]:
+                    if (cx, cy) in reserved or m.taken[cy, cx] or rail_mask[cy, cx] or not deck_mask[cy, cx]:
                         return False
         for j in range(st['h']):
             for i in range(st['w']):
@@ -397,72 +605,86 @@ def build_109(save=True):
                 if Ls[1, j, i]:
                     m.L[1, cy, cx] = int(Ls[1, j, i])
                     m.taken[cy, cx] = True
-                if Ls[2, j, i]:
-                    if m.L[2, cy, cx] == 0:
-                        m.L[2, cy, cx] = int(Ls[2, j, i])
+                if Ls[2, j, i] and m.L[2, cy, cx] == 0:
+                    m.L[2, cy, cx] = int(Ls[2, j, i])
         return True
 
-    # Organized nautical deck architecture & cargo clusters:
+    # Dedicated lantern placer: puts walkable upper pole tiles (18113/18114) on L[1] so L[2] is 100% free
+    # for ALL 4 symmetric quadrants of pf_glow centered dead-on the hanging lantern bulb (ZERO 90° cutouts!).
+    def place_lantern_with_glow(lx, ly):
+        if (lx, ly + 2) in reserved or m.taken[ly + 2, lx] or rail_mask[ly + 2, lx] or not deck_mask[ly + 2, lx]:
+            return False
+        m.L[1, ly, lx] = 18113       # lantern crossbeam + glowing bulb (p0 q2) on L[1]
+        m.L[1, ly + 1, lx] = 18114   # lantern vertical pole shaft (p0 q1) on L[1]
+        m.L[1, ly + 2, lx] = 18115   # lantern solid base (p15 q0) on L[1]
+        m.taken[ly + 2, lx] = True
+        # Stamp ALL 4 quadrants of pf_glow (p0 q5) onto L[2] centered directly on lantern bulb at (lx, ly)!
+        Lg = np.array(K.STAMPS['pf_glow']['layers'])
+        for j in range(2):
+            for i in range(2):
+                cx, cy = lx + i, ly + j
+                if m.inb(cx, cy) and Lg[2, j, i]:
+                    m.L[2, cy, cx] = int(Lg[2, j, i])
+        return True
+
+    # Mark superstructures as taken so no prop can overlap them
+    m.taken[4:9, 3:6] = True
+    m.taken[8:11, 14:17] = True
+
     props = [
-        # 1. Stern Wheelhouse & Captain Edda's Quarterdeck
-        ('hb_wheelhouse', 4, 6),
-        ('hb_lamp2', 4, 9),          # Warm deck lamp framing stern rail beside Edda (6,9)!
-        ('hb_barrels', 6, 13),
-        ('hb_rope', 7, 13),
-        ('hb_keg', 5, 13),
-        # 2. Midship Companionway & Aft Lantern Framing
-        ('pf_lantern', 10, 11),      # Tall glowing deck lantern illuminating Gangway & midship!
-        ('hb_boxes', 11, 13),
-        ('sh_crates', 13, 12),
-        ('hb_keg', 12, 12),
-        ('hb_bollard1', 10, 14),
-        # 3. Starboard Cargo & Fresh-Catch Freight Cluster (x=18..23, y=11..14)
-        ('sh_crates', 18, 11),
-        ('sh_crates', 21, 11),
-        ('hb_fish', 18, 13),
-        ('hb_barrel', 20, 13),
-        ('hb_barrel2', 21, 13),
-        ('hb_boxes2', 22, 13),
-        ('hb_keg', 17, 12),
-        # 4. Port-Side Rail Rigging & Fore-Deck Watch (bow corridor y=10 wide open to Horizon (30,10)!)
-        ('hb_crates4', 20, 6),
-        ('pf_p_lantern', 23, 6),     # Hanging ship's rigging lantern frame!
-        ('hb_boxes', 25, 6),
-        ('pf_p_net', 24, 8),         # Stowed maritime haul net
-        ('hb_buoy2', 26, 7),         # Red-and-white lifebuoy near Sailor (26,9)
-        ('hb_cask', 25, 11),         # Ship's rum cask aft of bow watch (keeps (27,10) wide open!)
-        ('hb_rope', 26, 12),         # Coiled hawser rope right beside HiddenItem (27,12)!
-        ('hb_bollard0', 28, 8),
-        ('hb_bollard1', 28, 11),
+        # 1) Warm Teak-and-Brass Passenger Deck Benches facing the sea!
+        ('lm_bench', 13, 14),       # Warm timber passenger deck bench along starboard rail
+        ('lm_bench', 18, 14),       # Matching timber passenger deck bench along starboard rail
+        ('lm_bench', 20, 6),        # Matching timber promenade bench along port rail
+        # 2) Ship's Brass Watch Bellpost mounted cleanly beside Midship Deckhouse (ZERO port-rail cut, keeps (13,9) W0!)
+        ('pf_bellpost', 13, 10),    # Base at (13, 12) beside cabin landing; keeps Wattrel (12,9) & cutscene (13,9) W0!
+        # 3) Aft Quarterdeck & Gangway Mooring Gear (100% inboard, clear of Deckhand 5..8,12 & Seasick Man 4,11!)
+        ('hb_keg', 4, 9),           # Ship's supply keg tucked beside Stern Wheelhouse bulkhead
+        ('hb_buoy', 4, 13),         # Inboard red-and-white life-ring tucked cleanly by aft stern rail
+        ('mn_trunk', 5, 13),        # Passenger steamer trunk aft
+        ('hb_barrels', 6, 13),      # Neat lashed water barrels beside aft rail
+        ('hb_rope', 7, 14),         # Coiled mooring hawser by Gangway
+        # 4) Starboard Passenger Baggage & Freight Vignette beside Woman with crate (24,13)
+        ('hb_buoy', 17, 14),        # Red-and-white life-ring along midship starboard rail
+        ('mn_trunk', 21, 13),       # Vintage leather steamer trunk
+        ('mn_trunk', 21, 14),       # Matching steamer trunk
+        ('sh_crates', 22, 12),      # Crisp clean stacked wooden cargo crates
+        ('hb_cask', 25, 13),        # Ship's oak cask aft of forecastle
+        # 5) Foredeck Watch & Tapered Bow Forecastle Lookout Gear (spacious & 100% inside sealed rails!)
+        ('hb_buoy', 25, 6),         # Inboard life-ring beside port foredeck rail
+        ('hb_rope', 26, 12),        # Coiled hawser rope right beside HiddenItem coiled rope (27,12)!
+        ('hb_lamp2', 27, 7),        # Bow forecastle brass marine binoculars (base at 27,8) gazing at Velmora!
+        ('lm_bollard', 27, 13),     # Brass forecastle mooring bollard south (mirrors binoculars north!)
+        ('lm_bollard', 29, 9),      # Forward bow bollard north flanking Horizon lookout (30,10)
+        ('lm_bollard', 29, 11),     # Forward bow bollard south flanking Horizon lookout (30,10)
     ]
     for nm, x, y in props:
         place_stamp(nm, x, y)
 
-    # Subtle warm amber lantern halos (pf_glow: pri=5, pas=0) centered cleanly on ship lanterns only
-    for gx, gy in ((10, 11), (23, 6)):
-        st = K.STAMPS['pf_glow']
-        Lg = np.array(st['layers'])
-        for j in range(st['h']):
-            for i in range(st['w']):
-                cx, cy = gx + i, gy + j
-                if m.inb(cx, cy) and Lg[2, j, i] and m.L[2, cy, cx] == 0:
-                    m.L[2, cy, cx] = int(Lg[2, j, i])
+    # Three Balanced Warm Glowing Deck Lanterns with 100% UNBROKEN 4-quadrant golden halos (ZERO ocean spill!)
+    for lx, ly in (
+        (11, 12),   # Gangway lantern (base 11,14; full 2x2 halo 11..12, 12..13)
+        (20, 12),   # Starboard promenade lantern (base 20,14; full 2x2 halo 20..21, 12..13)
+        (24, 6),    # Foredeck port lantern (base 24,8; pole 24,6..7 BELOW rail y=5; full 2x2 halo 24..25, 6..7!)
+    ):
+        place_lantern_with_glow(lx, ly)
 
-    # Shimmering white-gold ocean wake & swell glints (hb_glint0..3: pri=2, pas=0) strictly on open water!
+    # ------------------------------------------------------------------ 9. Shimmering Ocean Wake & Horizon Sparkles
+    # Trailing stern propeller wake, hull waterline foam shimmer, and crisp V-shaped bow wave sparkles!
     wake_spots = [
-        # Trailing stern wake turbulence (x=0..4, y=7..14)
-        (0, 9), (1, 10), (1, 12), (2, 8), (2, 13), (3, 14),
-        # Bow wave & Velmora horizon sparkles (x=29..33, y=7..14)
-        (30, 8), (31, 9), (32, 11), (31, 13), (29, 14), (33, 10),
-        # Distant northern & southern ocean swell glints
-        (6, 3), (12, 2), (19, 3), (26, 2), (8, 17), (15, 18), (22, 17), (28, 18),
-        (4, 17), (14, 4), (24, 4), (17, 17),
+        # Trailing stern propeller wake (x=0..2, y=8..16)
+        (0, 9), (0, 11), (0, 13), (1, 10), (1, 12), (1, 14), (2, 11), (2, 15),
+        # Bow cutting V-wave & Velmora horizon sparkles (x=29..33, y=6..15)
+        (29, 6), (30, 7), (31, 8), (32, 9), (33, 10), (32, 11), (31, 13), (30, 15),
+        # Hull waterline foam sparkles hugging the riveted ironclad south flank (y=18)
+        (6, 18), (9, 18), (12, 18), (16, 18), (20, 18), (24, 18), (27, 17),
+        # Distant twilight ocean wave glints
+        (8, 3), (15, 2), (22, 3), (28, 3), (8, 20), (16, 19), (24, 20),
     ]
     for idx, (wx, wy) in enumerate(wake_spots):
-        if m.inb(wx, wy) and not dk[wy, wx] and m.L[1, wy, wx] == 0 and m.L[2, wy, wx] == 0:
+        if m.inb(wx, wy) and not deck_mask[wy, wx] and not hull_mask[wy, wx] and m.L[1, wy, wx] == 0 and m.L[2, wy, wx] == 0:
             gnm = 'hb_glint%d' % (idx % 4)
-            gt = int(K.STAMPS[gnm]['layers'][2][0][0])
-            m.L[2, wy, wx] = gt
+            m.L[2, wy, wx] = int(K.STAMPS[gnm]['layers'][2][0][0])
 
     Lr = K.RC.resolve(m.L, 51).astype(np.int32)
     PG.guard(Lr, 51, list(events_109), 'map 109')
