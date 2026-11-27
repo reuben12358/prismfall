@@ -45215,6 +45215,104 @@ Pokemon = PAWNIARD,27
     Nature = ADAMANT
     IV = 8
     EV = 0
+# Ch7 the Leach Canyons (621) - Directorate Officers, the Escort double (gen.py; map 621 not built yet)
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Officer,7]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = ...You'll be in another report.
+Pokemon = MAGNETON,32
+    Moves = SPARK,FLASHCANNON,THUNDERWAVE,SUPERSONIC
+    Ability = STURDY
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 18
+Pokemon = PAWNIARD,31
+    Moves = METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER
+    Ability = DEFIANT
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 18
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Officer,107]
+Items = FULLRESTORE,FULLRESTORE
+LoseText = ...You'll be in another report.
+Pokemon = MAGNETON,33
+    Moves = SPARK,FLASHCANNON,THUNDERWAVE,SUPERSONIC
+    Ability = STURDY
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 26
+    EV = 4,0,0,198,198,0
+Pokemon = PAWNIARD,32
+    Moves = METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER
+    Ability = DEFIANT
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,192,0,192,0,0
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Officer,207]
+Items = HYPERPOTION
+LoseText = ...You'll be in another report.
+Pokemon = MAGNETON,30
+    Moves = SPARK,FLASHCANNON,THUNDERWAVE,SUPERSONIC
+    Ability = STURDY
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 8
+    EV = 0
+Pokemon = PAWNIARD,29
+    Moves = METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER
+    Ability = DEFIANT
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Officer,77]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = It was an arrest with good manners.
+Pokemon = KLEFKI,32
+    Moves = DRAININGKISS,METALSOUND,FAIRYLOCK,ASTONISH
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = BOLD
+    IV = 18
+Pokemon = ELECTABUZZ,33
+    Moves = THUNDERPUNCH,LOWKICK,LEER,QUICKATTACK
+    Ability = STATIC
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 18
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Officer,177]
+Items = FULLRESTORE,FULLRESTORE
+LoseText = It was an arrest with good manners.
+Pokemon = KLEFKI,33
+    Moves = DRAININGKISS,METALSOUND,FAIRYLOCK,ASTONISH
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = BOLD
+    IV = 26
+    EV = 198,4,198,0,0,0
+Pokemon = ELECTABUZZ,34
+    Moves = THUNDERPUNCH,LOWKICK,LEER,QUICKATTACK
+    Ability = STATIC
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 26
+    EV = 4,204,0,204,0,0
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Officer,277]
+Items = HYPERPOTION
+LoseText = It was an arrest with good manners.
+Pokemon = KLEFKI,30
+    Moves = DRAININGKISS,METALSOUND,FAIRYLOCK,ASTONISH
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = BOLD
+    IV = 8
+    EV = 0
 # Ch6 the Deep-works (204) - the Bereaved, Duneholt (:ch6_drillsite :directorate)
 #-------------------------------
 [HOLLOW_GRUNT_M,Bereaved,7]

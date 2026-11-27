@@ -1071,6 +1071,19 @@ X("Ch6 the Deep-works (204) - Directorate Sergeant, Duneholt (:ch6_drillsite :ho
     P("PAWNIARD", 29, "DEFIANT", "ORANBERRY", "ADAMANT", "METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER", "A"),
     P("KLEFKI", 30, "PRANKSTER", "SITRUSBERRY", "BOLD", "DRAININGKISS,METALSOUND,SPIKES,ASTONISH", "BPD", only="nocasual"),
 ])
+# Ch7 the Leach Canyons (621, :WASTELAND; story/26_SCRIPT_CH7.md "Escort", only on :ch6_drillsite :hollow): two
+# Directorate officers as a DOUBLE (TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Officer", 7, :MERIDIAN_DIRECTORATE,
+# "Officer", 77)), Steel / Electric, Lv 31-33, before Gym 6 (cap 35). Map 621 is not built yet.
+X("Ch7 the Leach Canyons (621) - Directorate Officer, the Escort double (first)", "MERIDIAN_DIRECTORATE", "Officer", 7, 35,
+  "...You'll be in another report.", [
+    P("MAGNETON", 32, "STURDY", "ORANBERRY", "MODEST", "SPARK,FLASHCANNON,THUNDERWAVE,SUPERSONIC", "S"),
+    P("PAWNIARD", 31, "DEFIANT", "ORANBERRY", "ADAMANT", "METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER", "A"),
+])
+X("Ch7 the Leach Canyons (621) - Directorate Officer, the Escort double (second)", "MERIDIAN_DIRECTORATE", "Officer", 77, 35,
+  "It was an arrest with good manners.", [
+    P("KLEFKI", 32, "PRANKSTER", "SITRUSBERRY", "BOLD", "DRAININGKISS,METALSOUND,FAIRYLOCK,ASTONISH", "BPD"),
+    P("ELECTABUZZ", 33, "STATIC", "ORANBERRY", "JOLLY", "THUNDERPUNCH,LOWKICK,LEER,QUICKATTACK", "A", only="nocasual"),
+])
 X("Ch6 the Deep-works (204) - the Bereaved, Duneholt (:ch6_drillsite :directorate)", "HOLLOW_GRUNT_M", "Bereaved", 7, 31,
   "Go on, then. Put the collars back on.", [
     P("SANDILE", 28, "INTIMIDATE", "ORANBERRY", "JOLLY", "CRUNCH,DIG,SANDTOMB,SCARYFACE", "A"),
