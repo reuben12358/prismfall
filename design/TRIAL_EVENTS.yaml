@@ -322,7 +322,8 @@ maps:
   154:
     name: Pell Playhouse - The Grand Stage
     events:
-    - {name: Dorian, key: DORIAN_ENCORE, patch: "existing event 'Dorian' on the Grand Stage: add the branch (EL_ENCORE, 16 badges: Lopunnite)"}
+    - {name: Dorian, key: DORIAN_ENCORE, patch: "existing event 'Dorian' on the Grand Stage: add the branch (EL_ENCORE, 16 badges: Lopunnite)",
+       note: "Placed 2026-11-27 (mapgen/trial_overlay.py PATCHES[154])."}
     # post-game Registry (story/41_SCRIPT_POSTGAME.md): each of these needs a first empty page and cond {switch: POSTGAME}
     - {name: Dorian (playbill), key: PG_DORIAN, near: "the stage door, in his best coat", sprite: DORIAN, trigger: action,
        condition: "switch(160) && switch(270) && !quest_done(:PG_MELOETTA)"}
@@ -487,7 +488,7 @@ maps:
     name: Frostflat Causeway
     events:
     - {name: The Matriarch, key: CAUSEWAY_MATRIARCH, near: "on the causeway's crown by the old cairn (blocks the road at low tide)", sprite: "Followers/KANGASKHAN (large)", trigger: action, condition: "badges >= 16 && !quest_done(:IS_CAUSEWAY_MATRIARCH)",
-       note: "Boss (Lv 78, 3 bars): Kangaskhanite. Put two or three small Kangaskhan 'young ones' around her as decor with the same condition."}
+       note: "Boss (Lv 78, 3 bars): Kangaskhanite. Placed 2026-11-27 at the causeway's crown (mapgen/trial_overlay.py, near 50,12; the road is four tiles wide). The 'young ones' decor is still to do (REFINE_QUEUE)."}
   577:
     name: Frostwick Pass
     events:

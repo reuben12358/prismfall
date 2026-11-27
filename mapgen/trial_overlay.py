@@ -272,3 +272,8 @@ EVENTS[247] = EVENTS.get(247, []) + [
 # The Forge Remembers (Ch17, after the Ring-Day): Brann back at his own table; 244's other Brann events are Ch8 actors.
 EVENTS[244] = EVENTS.get(244, []) + [
     ev('Brann (Hearthguild)', '@Warden Chair', 'BRANN_HEARTHGUILD', 'trainer_LEADER_BRANN', condition='badges >= 15')]
+# Ch18 Mega quests on maps that exist now: Dorian's encore on the Grand Stage (Gym 1's Dorian, 154) and the Causeway
+# Matriarch on the Frostflat Causeway's crown (560; the road is four tiles wide there, so she never shuts it).
+PATCHES[154] = dict(PATCHES.get(154, {}), **{'Dorian': 'DORIAN_ENCORE'})
+EVENTS[560] = EVENTS.get(560, []) + [
+    ev('The Matriarch', (50, 12), 'CAUSEWAY_MATRIARCH', 'Followers/KANGASKHAN', condition='badges >= 16 && !quest_done(:IS_CAUSEWAY_MATRIARCH)')]
