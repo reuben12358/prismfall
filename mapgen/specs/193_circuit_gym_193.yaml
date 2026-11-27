@@ -27,7 +27,7 @@ events:
   pages:
   - commands:
     - You turn the last node onto the Meridian main. The arena door opens. In the corner of the ceiling, the drone's red light has been on the whole time.
-    - switch: [325, true]
+    - switch: [422, true]
     - {se: Battle ball shake}
     - 'PA (Rook''s voice; not his stream voice): Rotom. Cut the feed. ...That bit''s not for chat, buddy. Cut it.'
     trigger: action
@@ -37,7 +37,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: '', dir: down, tile: 25942}
-    cond: {switch: 325}
+    cond: {switch: 422}
   at: [15, 15]
 - type: event
   name: Arena door
@@ -50,7 +50,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: '', dir: down, tile: 25936}
-    cond: {switch: 325}
+    cond: {switch: 422}
   at: [10, 13]
 - type: event
   name: Rook

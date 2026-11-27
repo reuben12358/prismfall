@@ -24,8 +24,8 @@ DXY = {N_: (0, -1), E_: (1, 0), S_: (0, 1), W_: (-1, 0)}
 OPP = {N_: S_, S_: N_, E_: W_, W_: E_}
 H, V = E_ | W_, N_ | S_
 
-# Switch / variable ids (GYM_PUZZLES Gym 4 block 320-324; mapgen/flags.yaml)
-S_190_DOOR, S_LATCH_GATE, S_LATCH_CORE, S_DOCKED, S_191_DOOR, S_SPLICE = 320, 321, 322, 323, 324, 325
+# Switch / variable ids (GYM_PUZZLES Gym 4 block 320-324 + G4_SPLICE = 422; mapgen/flags.yaml)
+S_190_DOOR, S_LATCH_GATE, S_LATCH_CORE, S_DOCKED, S_191_DOOR, S_SPLICE = 320, 321, 322, 323, 324, 422
 V_ALARMS = 320
 
 

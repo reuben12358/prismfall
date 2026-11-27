@@ -582,9 +582,14 @@ def build_541():
               {'if': 'pfm?(:crab_ring)', 'then': ["Ring Boss: Champion of the mudflat! The bucket's yours. The glory's mine."],
                'else': ['Ring Boss: Crabrawler ring! Three bouts, no biting, best of three, winner gets the bucket!',
                         {'choices': ['Step into the ring.', 'Not now.'], 'cancel': 2, 'branches': [
-                            [{'script': 'WildBattle.start(:CRABRAWLER, 15)'}, {'script': 'WildBattle.start(:CRABRAWLER, 15)'},
-                             {'script': 'WildBattle.start(:CRABRAWLER, 16)'}, "Ring Boss: Champion! Here's the bucket.", '(It contains a KING\'S ROCK.)',
-                             {'script': 'pbReceiveItem(:KINGSROCK)'}, {'script': 'pfm_set(:crab_ring)'}],
+                            [{'if': 'WildBattle.start(:CRABRAWLER, 15)', 'then': [
+                                {'if': 'WildBattle.start(:CRABRAWLER, 15)', 'then': [
+                                    {'if': 'WildBattle.start(:CRABRAWLER, 16)', 'then': [
+                                        "Ring Boss: Champion! Here's the bucket.", '(It contains a KING\'S ROCK.)',
+                                        {'script': 'pbReceiveItem(:KINGSROCK)'}, {'script': 'pfm_set(:crab_ring)'}],
+                                     'else': ["Ring Boss: Out of the ring on bout three! Catch your breath and step back in whenever you're ready."]}],
+                                 'else': ["Ring Boss: Out of the ring on bout two! Catch your breath and step back in whenever you're ready."]}],
+                              'else': ["Ring Boss: Out of the ring! Catch your breath and step back in whenever you're ready."]}],
                             ['Ring Boss: The ring is always open. The ring never closes. The tide closes it, twice a day.']]}]}]}]},
           obj('Road Stone II', (38, 6), ['ROAD STONE II. THE WEAVERS\' ROAD. "Saltmere 1, Briarwick 4." A ribbon of undyed silk is tied round it.']),
           obj('The boiling-house', (28, 88), ['THE BOILING-HOUSE. Brine in, salt out, smoke up. A notice: "NO SWIMMING IN THE PANS. THIS MEANS YOU, TERRENCE."']),

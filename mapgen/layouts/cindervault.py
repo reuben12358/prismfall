@@ -246,7 +246,8 @@ def events_255(m):
         # 249 (the Slag Ward) isn't built yet: a plain warp to a missing map crashes, so guard it
         {'type': 'event', 'name': 'Up to the Slag Ward', 'at': [13, 19], 'pages': [{'trigger': 'touch', 'commands': [
             {'if': 'pbRgssExists?("Data/Map249.rxdata")', 'then': [{'transfer': {'map': 249, 'x': 20, 'y': 12, 'dir': 'up'}}],
-             'else': [{'se': 'Player bump'}, MV('player', ['dir_fix_on', 'backward', 'dir_fix_off']), "The stair up to the Slag Ward is roped off."]}]}]},
+             'else': [{'se': 'Player bump'}, {'move': {'who': 'player', 'route': ['dir_fix_on', 'backward', 'dir_fix_off'], 'wait': True}},
+                      "The stair up to the Slag Ward is roped off."]}]}]},
         {'type': 'event', 'name': 'Atmosphere', 'at': [0, 0], 'pages': [{'trigger': 'parallel', 'commands': [{'script': 'pfm_cave_light'}, {'wait': 12}]}]},
         {'type': 'event', 'name': 'The Caldera Crisis', 'at': [13, 16], 'pages': [
             {'commands': []},
@@ -384,8 +385,8 @@ def dress_255(m):
     _place_stamp_over(m, 'lm_junction_on', 12, 7, base_z=1, top_z=1, top_rows=0, solid=True)
     _place_stamp_over(m, 'lm_alarm_on', 9, 7, base_z=1, top_z=1, top_rows=0, solid=True)
     _place_stamp_over(m, 'lm_alarm_on', 16, 7, base_z=1, top_z=1, top_rows=0, solid=True)
-    # Warm industrial wall lamps along the riveted north bulkhead
-    for wx in (10, 13, 15, 18):
+    # Warm industrial wall lamps along the riveted north bulkhead (keep hazard-stripe bay x=18..19 crisp & unobstructed)
+    for wx in (10, 13, 15, 17):
         m.over.append((2, wx, 6, P1('cv_walllamp')))
     # Emergency lever right behind the two Directorate soldiers at (18..19, 10)
     _place_stamp_over(m, 'cv_lever_l', 18, 9, base_z=1, top_z=1, top_rows=0, solid=True)
@@ -425,6 +426,11 @@ def apply_steel_deck(m):
         m.L[0, y, x] = qf0 if (x + y) % 2 == 0 else qf1
         if int(m.L[1, y, x]) in floorpatch_ids:
             m.L[1, y, x] = 0
+    # Crisp 3-tile passable stone service stairwell at (12..14, 19) leading up to the Slag Ward
+    st_l, st_m, st_r = m.STAIRS
+    for sx, st_tile in ((12, st_l), (13, st_m), (14, st_r)):
+        m.L[0, 19, sx] = st_tile
+        m.L[1, 19, sx] = 0
     # Clad the north gauge gallery cliff face (x=9..19, y=5..6) in solid dark riveted-iron Meridian bulkhead plates,
     # reserving hazard stripes (Q_basem) deliberately for the Emergency Lever bay (x=18..19)!
     q_lip, q_face, q_base = P1('Q_lipm'), P1('Q_facem'), P1('Q_basem')

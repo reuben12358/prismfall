@@ -105,11 +105,15 @@ def deepwood():
     struggle = "pbReceiveItem(:BRIGHTPOWDER)"   # was TM Struggle Bug, which the base project has no TM for (Gemini review)
     shelly_end = [say('SHELLY', 'neutral', "You just... walked in. Where I'm from, nobody walks into the sick places and comes out the same."),
                   say('SHELLY', 'happy', "Before I go, could we have one practice battle? Doubles? I'm supposed to be good at this and I don't want to be rusty when I get home."),
-                  {'script': 'Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)'},
-                  say('SHELLY', 'happy', "Your forest sounds like home used to, before the city got sick. Look after it?"),
-                  {'script': 'pbReceiveItem(:SILVERPOWDER)'}, {'script': struggle},
-                  {'switch': ['CAMEO_SHELLY_DONE', True]}, {'script': '$game_variables[123] += 1'},
-                  "(She steps into the pond's reflection and is gone. One pink ribbon floats on the water.)", {'selfswitch': ['A', True]}]
+                  {'if': 'Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)',
+                   'then': [
+                       say('SHELLY', 'happy', "Your forest sounds like home used to, before the city got sick. Look after it?"),
+                       {'script': 'pbReceiveItem(:SILVERPOWDER)'}, {'script': struggle},
+                       {'switch': ['CAMEO_SHELLY_DONE', True]}, {'script': '$game_variables[123] += 1'},
+                       "(She steps into the pond's reflection and is gone. One pink ribbon floats on the water.)", {'selfswitch': ['A', True]}],
+                   'else': [
+                       {'script': '$player.heal_party'},
+                       say('SHELLY', 'panic', "Oh! I'm so sorry, I got carried away—here, let me patch your team up! We can try again whenever you're ready.")]}]
     E.append({'type': 'event', 'name': 'Shelly', 'at': P['shelly'], 'pages': [
         {'graphic': {'sprite': 'NPC 11', 'dir': 'left'}, 'commands': [
             {'if': key(525, 'MASQ'), 'then': shelly_end, 'else': [
@@ -127,8 +131,10 @@ def deepwood():
         {'graphic': {'sprite': 'Followers/MASQUERAIN', 'dir': 'left'}, 'commands': [
             {'if': key(525, 'SHELLY'), 'then': [
                 "Its wings are panes of glass. The eye-spots are the only things on it still moving.",
-                {'script': 'setBattleRule("field", :BLEED)\nsetBattleRule("canLose")\nWildBattle.start(:MASQUERAIN, 19)'},
-                "The Masquerain folds its glass wings and settles on the water. The ringing stops.", setk(525, 'MASQ'), {'selfswitch': ['A', True]}],
+                {'script': 'setBattleRule("field", :BLEED)\nsetBattleRule("canLose")'},
+                {'if': 'WildBattle.start(:MASQUERAIN, 19)',
+                 'then': ["The Masquerain folds its glass wings and settles on the water. The ringing stops.", setk(525, 'MASQ'), {'selfswitch': ['A', True]}],
+                 'else': [{'script': '$player.heal_party'}, "The ringing glass drives you back. You catch your breath by the dew pond."]}],
              'else': ["A glassed Masquerain hovers over the dew pond. It hasn't noticed you."]}]},
         {'cond': {'self': 'A'}, 'graphic': {'sprite': 'Followers/MASQUERAIN', 'dir': 'left'}, 'through': True,
          'commands': ["It rests on the water, calm."]}]})

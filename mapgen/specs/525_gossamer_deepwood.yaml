@@ -69,14 +69,18 @@ events:
       - '\pf[SHELLY,neutral]Shelly: You just... walked in. Where I''m from, nobody walks into the sick places and comes out the same.'
       - '\pf[SHELLY,happy]Shelly: Before I go, could we have one practice battle? Doubles? I''m supposed to be good at this and I don''t want to be rusty
         when I get home.'
-      - {script: 'Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)'}
-      - '\pf[SHELLY,happy]Shelly: Your forest sounds like home used to, before the city got sick. Look after it?'
-      - {script: 'pbReceiveItem(:SILVERPOWDER)'}
-      - {script: 'pbReceiveItem(:BRIGHTPOWDER)'}
-      - switch: [CAMEO_SHELLY_DONE, true]
-      - {script: '$game_variables[123] += 1'}
-      - (She steps into the pond's reflection and is gone. One pink ribbon floats on the water.)
-      - selfswitch: [A, true]
+      - if: 'Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)'
+        then:
+        - '\pf[SHELLY,happy]Shelly: Your forest sounds like home used to, before the city got sick. Look after it?'
+        - {script: 'pbReceiveItem(:SILVERPOWDER)'}
+        - {script: 'pbReceiveItem(:BRIGHTPOWDER)'}
+        - switch: [CAMEO_SHELLY_DONE, true]
+        - {script: '$game_variables[123] += 1'}
+        - (She steps into the pond's reflection and is gone. One pink ribbon floats on the water.)
+        - selfswitch: [A, true]
+        else:
+        - {script: '$player.heal_party'}
+        - '\pf[SHELLY,panic]Shelly: Oh! I''m so sorry, I got carried away—here, let me patch your team up! We can try again whenever you''re ready.'
       else:
       - if: $game_self_switches[[525, 0, 'SHELLY']]
         then: ['\pf[SHELLY,sad]Shelly: The pond''s behind that shimmer. I can''t go near it. You can, can''t you?']
@@ -108,12 +112,15 @@ events:
       - Its wings are panes of glass. The eye-spots are the only things on it still moving.
       - {script: 'setBattleRule("field", :BLEED)
 
-          setBattleRule("canLose")
-
-          WildBattle.start(:MASQUERAIN, 19)'}
-      - The Masquerain folds its glass wings and settles on the water. The ringing stops.
-      - {script: '$game_self_switches[[525, 0, ''MASQ'']] = true'}
-      - selfswitch: [A, true]
+          setBattleRule("canLose")'}
+      - if: WildBattle.start(:MASQUERAIN, 19)
+        then:
+        - The Masquerain folds its glass wings and settles on the water. The ringing stops.
+        - {script: '$game_self_switches[[525, 0, ''MASQ'']] = true'}
+        - selfswitch: [A, true]
+        else:
+        - {script: '$player.heal_party'}
+        - The ringing glass drives you back. You catch your breath by the dew pond.
       else: [A glassed Masquerain hovers over the dew pond. It hasn't noticed you.]
   - cond: {self: A}
     graphic: {sprite: Followers/MASQUERAIN, dir: left}
