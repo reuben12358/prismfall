@@ -229,6 +229,8 @@ def main():
                 gaps.append("TYPE_CHARSETS %s: no graphics/Characters/trainer_%s.png yet (the stand-in stays)" % (t, t))
     pl_src = read("plugins/Prismfall Core/026_PlayerLooks.rb")
     player_sheets = set(re.findall(r":(?:walk|run|cycle|surf|dive|fish|surf_fish)\s*=>\s*\"([A-Za-z0-9_]+)\"", pl_src))
+    for lst in re.findall(r":(?:walk|run|cycle|surf|dive|fish|surf_fish)\s*=>\s*\[([^\]]*)\]", pl_src):   # a fallback list
+        player_sheets.update(re.findall(r'"([A-Za-z0-9_]+)"', lst))
     for sheet in sorted(player_sheets):
         if sheet not in chars:
             (errors if sheet.startswith("trainer_PLAYER") else gaps).append("player sheet graphics/Characters/%s.png missing" % sheet)

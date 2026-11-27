@@ -204,8 +204,20 @@
 *Running note so the work can be picked up. Checker: `python3 -I tools/check_map_events.py --range 5f233ad2..d543a354`.*
 - [x] `tools/check_map_events.py`: static checks of every spec event (trainers + versions, methods, items / species /
   moves, flag names + numeric id collisions, registries, charsets, transfers, ruby syntax). Gemini's 86 specs: 0 errors.
-- [ ] Next: flags.yaml registration of Gemini's non-G7 ids, story layers re-run on changed maps, cutscene-wave duplicates,
-  art handoff checks, strict build in a private copy, REVIEW.md verdicts.
+- [x] flags.yaml: Gemini's G5 / G6 / G8 / G9 / D11 / 576-581 ids registered (67799dbe); G7 left to the Gym 7 agent.
+- [x] Story layers re-run in a private copy (interlude1, ch5's 608 sync, ch8 on 240/243/244/249; dovetail.py + wave14 craft
+  for 109/110; circuit_gym.py for 193): every spec and npy reproduces byte for byte, nothing to rebuild.
+- [x] Art: Core 026 now uses `PLAYER_*_surffish_offset` for surf-fishing (fallback: the fishing sheet); check_art_wiring
+  0 errors (HROTHGAR's 2 files stay unwired, as noted).
+- [x] Strict build of 67799dbe in a private copy: 217 maps, 0 warnings, every puzzle proof ok (G7 ported), all 217
+  committed Map*.rxdata reproduce byte for byte. The committed shared outputs (mapinfos, map_metadata, connections,
+  Prismfall Maps/*.rb) are stale: they lack Gemini's new maps (the coordinator's regen covers it).
+- [ ] Next: real-engine Ch0 ferry (+ message-box frame), Ch5 vault, Interlude I (waiting on run_intro); REVIEW.md verdicts.
+- [ ] Found, not ours to fix (queued in REFINE_QUEUE for Gemini): 160 has no exit into 580 (the Lock Road is unreachable);
+  521's tutor typo (shimmed); 541 / 525 count a run as a win.
+- [ ] Story gaps for a chapter pass: Ch4 has no story layer (V124 CH4_STEP is never set; K2, the eel stall, the strike
+  vote, the Night the Ebb Stopped and 573's bard are unstaged); Ch5's "Juno rejoins at the Four Ways" (594, CH5_STEP
+  1 -> 2, the follower) is unstaged, so 582's gate scene has Juno talk without her having rejoined.
 
 ## Status: Chapter 6 staging agent (2026-11-27)
 *Running note. Layer: `mapgen/layouts/story_ch6.py` (committed 596f2b2a). Next: Gym 5 proof module, the Duneholt
