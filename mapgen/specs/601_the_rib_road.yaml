@@ -82,7 +82,11 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 128\n  $game_temp.player_new_y = 40\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West up the wind-scoured chalk canyon lies the Highwold. Red sandstorm drifts have choked the upper scree switchbacks.)
+      - &id001 {script: 'pbSEPlay("Anim/Wind1", 70, 80)
+
+          pfm_shake(1, 10, 6)'}
+      - &id002 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - 'Caravaneer: Not up the switchbacks. Not in this. The red drifts have choked them.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -97,7 +101,9 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 128\n  $game_temp.player_new_y = 40\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West up the wind-scoured chalk canyon lies the Highwold. Red sandstorm drifts have choked the upper scree switchbacks.)
+      - *id001
+      - *id002
+      - 'Caravaneer: Not up the switchbacks. Not in this. The red drifts have choked them.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -112,7 +118,9 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 128\n  $game_temp.player_new_y = 40\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West up the wind-scoured chalk canyon lies the Highwold. Red sandstorm drifts have choked the upper scree switchbacks.)
+      - *id001
+      - *id002
+      - 'Caravaneer: Not up the switchbacks. Not in this. The red drifts have choked them.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -127,7 +135,9 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 128\n  $game_temp.player_new_y = 40\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West up the wind-scoured chalk canyon lies the Highwold. Red sandstorm drifts have choked the upper scree switchbacks.)
+      - *id001
+      - *id002
+      - 'Caravaneer: Not up the switchbacks. Not in this. The red drifts have choked them.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event

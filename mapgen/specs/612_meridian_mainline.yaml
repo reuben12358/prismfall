@@ -56,7 +56,8 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 602\n  $game_temp.player_new_x = 108\n  $game_temp.player_new_y = 55\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West along the Crown Road cutting lies Candle Down and the pilgrimage cairns. Directorate rail-crews are inspecting a signal switch on the western trestle.)
+      - &id001 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - 'Rail Ganger: Western trestle''s shut while they look at the signal switch. Candle Down''ll keep.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -71,7 +72,8 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 602\n  $game_temp.player_new_x = 108\n  $game_temp.player_new_y = 55\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West along the Crown Road cutting lies Candle Down and the pilgrimage cairns. Directorate rail-crews are inspecting a signal switch on the western trestle.)
+      - *id001
+      - 'Rail Ganger: Western trestle''s shut while they look at the signal switch. Candle Down''ll keep.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -86,7 +88,8 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 602\n  $game_temp.player_new_x = 108\n  $game_temp.player_new_y = 55\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West along the Crown Road cutting lies Candle Down and the pilgrimage cairns. Directorate rail-crews are inspecting a signal switch on the western trestle.)
+      - *id001
+      - 'Rail Ganger: Western trestle''s shut while they look at the signal switch. Candle Down''ll keep.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -101,7 +104,8 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 602\n  $game_temp.player_new_x = 108\n  $game_temp.player_new_y = 55\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
       else:
-      - (West along the Crown Road cutting lies Candle Down and the pilgrimage cairns. Directorate rail-crews are inspecting a signal switch on the western trestle.)
+      - *id001
+      - 'Rail Ganger: Western trestle''s shut while they look at the signal switch. Candle Down''ll keep.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: warp
@@ -132,215 +136,125 @@ events:
   name: Directorate Checkpoint Officer
   at: [56, 33]
   pages:
-  - graphic: {sprite: trainer_MERIDIAN_DIRECTORATE, dir: down}
+  - commands: ['Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the plate.']
     trigger: action
     move: fixed
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
     graphic: {sprite: trainer_MERIDIAN_DIRECTORATE, dir: down}
+    story: ch6
+  - commands: ['Directorate Officer: You''re cleared through the Mainline checkpoint. Keep to the service road — freight trains still run the brass track.']
     trigger: action
     move: fixed
-    commands: ['Directorate Officer: You''re cleared through the Mainline checkpoint. Keep to the service road — freight trains still run the brass track.']
+    graphic: {sprite: trainer_MERIDIAN_DIRECTORATE, dir: down}
+    cond: {switch: 576}
+    story: ch6
   fixed: true
 - type: event
   name: Checkpoint Scanner Trigger
   at: [57, 34]
   pages:
-  - trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Checkpoint Scanner Trigger '
   at: [57, 35]
   pages:
-  - trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Checkpoint Scanner Trigger  '
   at: [57, 36]
   pages:
-  - trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Checkpoint Scanner Trigger   '
   at: [57, 37]
   pages:
-  - trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: Checkpoint Brass Barrier
   at: [58, 34]
   pages:
-  - graphic: {tile: 25935}
+  - commands: ['Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the plate.']
     trigger: action
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    graphic: {tile: 25936}
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25935}
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25936}
+    cond: {switch: 576}
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Checkpoint Brass Barrier '
   at: [58, 35]
   pages:
-  - graphic: {tile: 25935}
+  - commands: ['Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the plate.']
     trigger: action
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    graphic: {tile: 25936}
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25935}
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25936}
+    cond: {switch: 576}
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Checkpoint Brass Barrier  '
   at: [58, 36]
   pages:
-  - graphic: {tile: 25935}
+  - commands: ['Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the plate.']
     trigger: action
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    graphic: {tile: 25936}
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25935}
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25936}
+    cond: {switch: 576}
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Checkpoint Brass Barrier   '
   at: [58, 37]
   pages:
-  - graphic: {tile: 25935}
+  - commands: ['Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the plate.']
     trigger: action
-    commands:
-    - {script: "pbMessage(_INTL(\"Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the scanner plate.\"))\npbMessage(_INTL(\"Drover (in queue): Two\
-        \ weeks ago this was a road.\"))\npbMessage(_INTL(\"Directorate Officer: It's still a road, sir. It's a road with a checkpoint on it.\"))\npbSEPlay(\"Mining\
-        \ reveal\", 75, 120)\npbMessage(_INTL(\"(Your turn. You lay your palm on the brass scanner plate... chime — nothing. NULL.)\"))\npbMessage(_INTL(\"Directorate\
-        \ Officer: ...Hold on.\"))\npbMessage(_INTL(\"(She turns to a ledger chained to the tent pole and runs a gloved finger down the page. She stops.)\"))\nif\
-        \ (pf_choice(:ch5_lowlight_testimony) == :someone_else rescue false)\n  pbMessage(_INTL(\"Directorate Officer: You're flagged. By the Director herself.\"\
-        ))\n  pbMessage(_INTL(\"Directorate Officer: 'Do not obstruct. Report movements.' That's all it says.\"))\n  pbMessage(_INTL(\"Directorate Officer: So I'm\
-        \ not obstructing you. And I'm reporting that you went east toward Ossaria. Have a nice trip.\"))\nelse\n  pbMessage(_INTL(\"Directorate Officer: You're on\
-        \ the Chair's guest list. Gala, Lumen.\"))\n  pbMessage(_INTL(\"Directorate Officer: ...You were THERE?\"))\n  pbMessage(_INTL(\"Directorate Officer: Go on\
-        \ through. And — I'm sorry. About the Lowlight.\"))\n  pbMessage(_INTL(\"Directorate Officer: My sister's on the Spire feeds. She was off that night. She's\
-        \ not been off since.\"))\nend\npbSEPlay(\"Strength push\", 85, 100)\npbMessage(_INTL(\"(The brass barrier swings up across the service road.)\"))\npbMessage(_INTL(\"\
-        Drover (behind you): Oh, very nice. Very fair. Some of us have been here since six.\"))\n$game_switches[576] = true\n$game_variables[126] = 2 if $game_variables[126].to_i\
-        \ < 2\n$game_map.need_refresh = true"}
-  - cond: {switch: 576}
-    graphic: {tile: 25936}
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25935}
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: '', dir: down, tile: 25936}
+    cond: {switch: 576}
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: Mainline Rail Gate
@@ -519,3 +433,104 @@ events:
   hidden: true
   name: HiddenItem (cutting shale)
   fixed: true
+- type: event
+  name: The Checkpoint
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pbBGSPlay("Anim/Wind1", 30, 60) rescue nil'}
+    - {wait: 20}
+    - move:
+        who: Queued Drover
+        route: [turn_right]
+        wait: false
+    - move:
+        who: Queued Pedlar
+        route: [turn_right]
+        wait: true
+    - 'Directorate Officer: Mandate checkpoint. Papers and tint. Hand on the plate.'
+    - move:
+        who: Queued Drover
+        route: [turn_up]
+        wait: true
+    - 'Drover: Two weeks ago this was a road.'
+    - 'Directorate Officer: It''s still a road, sir. It''s a road with a checkpoint on it.'
+    - move:
+        who: player
+        route: [right, turn_right]
+        wait: true
+    - {wait: 16}
+    - {script: 'pbSEPlay("Voltorb Flip mark", 80, 130)'}
+    - {wait: 40}
+    - {script: 'pfm_flash(255, 90, 90, 6, 50)'}
+    - 'Directorate Officer: ...Hold on.'
+    - move:
+        who: Directorate Checkpoint Officer
+        route: [turn_left]
+        wait: true
+    - {script: '2.times { pbSEPlay("GUI menu open", 50, 70); pbWait(0.4) }'}
+    - {wait: 40}
+    - {script: 'pfm_face("Directorate Checkpoint Officer", :player)'}
+    - if: pf_choice(:ch5_lowlight_testimony) == :someone_else
+      then: ['Directorate Officer: You''re flagged. By the Director herself.', 'Directorate Officer: "Do not obstruct. Report movements." That''s all it says.', 'Directorate
+          Officer: So I''m not obstructing you.', 'Directorate Officer: And I''m reporting that you went north. Have a nice trip.']
+      else: ['Directorate Officer: You''re on the Chair''s guest list. Gala, Lumen.', 'Directorate Officer: ...You were THERE?', 'Directorate Officer: Go on through.
+          And — I''m sorry. About the Lowlight.', 'Directorate Officer: My sister''s on the Spire feeds. She was off that night.', 'Directorate Officer: She''s not
+          been off since.']
+    - {script: 'pbSEPlay("Door slide", 90, 70)'}
+    - switch: [576, true]
+    - {script: $game_map.need_refresh = true}
+    - {wait: 20}
+    - {script: 'pfm_face("Queued Drover", :player)'}
+    - 'Drover: Oh, very nice. Very fair.'
+    - 'Drover: Some of us have been here since six.'
+    - {script: pbBGSFade(1.0)}
+    - var: [CH6_STEP, 2]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH6_STEP, 1]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 2]
+  at: [1, 0]
+  story: ch6
+- type: warp
+  name: South to Lumen 54
+  to: {map: 180, x: 1, y: 34, dir: right}
+  at: [54, 63]
+  story: ch6
+- type: warp
+  name: South to Lumen 55
+  to: {map: 180, x: 1, y: 34, dir: right}
+  at: [55, 63]
+  story: ch6
+- type: warp
+  name: South to Lumen 56
+  to: {map: 180, x: 1, y: 34, dir: right}
+  at: [56, 63]
+  story: ch6
+- type: warp
+  name: South to Lumen 57
+  to: {map: 180, x: 1, y: 34, dir: right}
+  at: [57, 63]
+  story: ch6
+- type: warp
+  name: South to Lumen 58
+  to: {map: 180, x: 1, y: 34, dir: right}
+  at: [58, 63]
+  story: ch6
+- type: warp
+  name: South to Lumen 59
+  to: {map: 180, x: 1, y: 34, dir: right}
+  at: [59, 63]
+  story: ch6
+- type: warp
+  name: South to Lumen 60
+  to: {map: 180, x: 1, y: 34, dir: right}
+  at: [60, 63]
+  story: ch6

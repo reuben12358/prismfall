@@ -44,8 +44,7 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 620\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 35\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
       else:
-      - (Through the colossal fossil skull-mouth lies the Marrow Road. Sand pours steadily down the brow of the skull — wait for Sahar's diggers to shore
-        the lintel.)
+      - (Through the colossal fossil skull-mouth lies the Marrow Road. Sand pours steadily down the brow of the skull — wait for Sahar's diggers to shore the lintel.)
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
 - type: event
   name: 'South to Marrow Road '
@@ -59,8 +58,7 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 620\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 35\n  $game_temp.player_new_direction\
           \ = 2\n  $scene.transfer_player\nend"}
       else:
-      - (Through the colossal fossil skull-mouth lies the Marrow Road. Sand pours steadily down the brow of the skull — wait for Sahar's diggers to shore
-        the lintel.)
+      - (Through the colossal fossil skull-mouth lies the Marrow Road. Sand pours steadily down the brow of the skull — wait for Sahar's diggers to shore the lintel.)
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
 - type: event
   name: North to Script Vault (625)
@@ -68,8 +66,7 @@ events:
   pages:
   - graphic: {tile: 25935}
     trigger: action
-    commands: [An ancient Elector seal-stone holds the Script Vault archway fast. Four carved notches on its face match the central Sundial Capstone in
-        the nave below.]
+    commands: [An ancient Elector seal-stone holds the Script Vault archway fast. Four carved notches on its face match the central Sundial Capstone in the nave below.]
   - cond: {switch: 553}
     graphic: {tile: 25936}
     trigger: touch
@@ -82,8 +79,7 @@ events:
   pages:
   - graphic: {tile: 25935}
     trigger: action
-    commands: [An ancient Elector seal-stone holds the Script Vault archway fast. Four carved notches on its face match the central Sundial Capstone in
-        the nave below.]
+    commands: [An ancient Elector seal-stone holds the Script Vault archway fast. Four carved notches on its face match the central Sundial Capstone in the nave below.]
   - cond: {switch: 553}
     graphic: {tile: 25936}
     trigger: touch
@@ -96,8 +92,8 @@ events:
   pages:
   - graphic: {tile: 23504}
     trigger: action
-    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley
-        deeper inside the Script Vault must control these sluices.]
+    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley deeper inside
+        the Script Vault must control these sluices.]
   - cond: {switch: 552}
     through: true
     commands: []
@@ -107,8 +103,8 @@ events:
   pages:
   - graphic: {tile: 23504}
     trigger: action
-    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley
-        deeper inside the Script Vault must control these sluices.]
+    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley deeper inside
+        the Script Vault must control these sluices.]
   - cond: {switch: 552}
     through: true
     commands: []
@@ -118,21 +114,21 @@ events:
   pages:
   - graphic: {tile: 23504}
     trigger: action
-    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley
-        deeper inside the Script Vault must control these sluices.]
+    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley deeper inside
+        the Script Vault must control these sluices.]
   - cond: {switch: 552}
     graphic: {tile: 22709}
     trigger: action
-    commands: ['EXPOSED AUREL SLUICE PLINTH — ''When the western Dry Tide retreated, the first Electors buried the Vault''s treasury beneath four cubits
-        of dune-sand. Only the Script Vault counterweight drains the nave trough.''']
+    commands: ['EXPOSED AUREL SLUICE PLINTH — ''When the western Dry Tide retreated, the first Electors buried the Vault''s treasury beneath four cubits of dune-sand.
+        Only the Script Vault counterweight drains the nave trough.''']
 - type: event
   name: Buried Sluice Relic Coffer
   at: [22, 27]
   pages:
   - graphic: {tile: 23504}
     trigger: action
-    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley
-        deeper inside the Script Vault must control these sluices.]
+    commands: [Wind-packed desert sand chokes this sunken Ossuary sluice trough. Bronze drainage grates glint beneath the grit — a counterweight pulley deeper inside
+        the Script Vault must control these sluices.]
   - cond: {switch: 552}
     graphic: {tile: 24344}
     trigger: action
@@ -156,8 +152,8 @@ events:
   name: Ossuary Field Notes Stele
   at: [18, 35]
   post: false
-  text: 'FIELD NOTES — THE OSSUARY OF DUNES (CAVE). Unown drift in and out of the sandstone walls. They aren''t hiding — they''re the words. (Larch''s margin
-    note: ''Copy everything. Twice.'')'
+  text: 'FIELD NOTES — THE OSSUARY OF DUNES (CAVE). Unown drift in and out of the sandstone walls. They aren''t hiding — they''re the words. (Larch''s margin note:
+    ''Copy everything. Twice.'')'
 - type: event
   name: Ossuary Sundial Capstone
   at: [21, 20]
@@ -165,56 +161,238 @@ events:
   - graphic: {tile: 23029}
     trigger: action
     commands:
-    - {script: "v = ($game_variables[551].to_i + 1) % 4\n$game_variables[551] = v\npbSEPlay(\"Strength push\", 85, 95)\nlines = [\n  \"The sundial capstone\
-        \ turns EAST — the sun-shaft illuminates an Unown glyph: K (KING).\",\n  \"The sundial capstone turns SOUTH — the sun-shaft illuminates an Unown\
-        \ glyph: C (CHAIN).\",\n  \"The sundial capstone turns WEST — the sun-shaft illuminates an Unown glyph: E (EIGHTEEN).\",\n  \"The sundial capstone\
-        \ clicks NORTH — all four ancient glyphs chime in unison!\"\n]\npbMessage(_INTL(\"{1}\", lines[v]))\nif v == 3 && !$game_switches[553]\n  $game_switches[553]\
-        \ = true\n  $game_map.need_refresh = true\n  pbSEPlay(\"Mining reveal\", 95, 95)\n  pfm_shake(2, 8, 12)\n  pbMessage(_INTL(\"Deep in the north sanctum,\
-        \ the ancient Elector seal-stone grinds open, unsealing the Script Vault archway!\"))\nend"}
-- type: sign
+    - {script: "v = ($game_variables[551].to_i + 1) % 4\n$game_variables[551] = v\npbSEPlay(\"Strength push\", 85, 95)\nlines = [\n  \"The sundial capstone turns\
+        \ EAST — the sun-shaft illuminates an Unown glyph: K (KING).\",\n  \"The sundial capstone turns SOUTH — the sun-shaft illuminates an Unown glyph: C (CHAIN).\"\
+        ,\n  \"The sundial capstone turns WEST — the sun-shaft illuminates an Unown glyph: E (EIGHTEEN).\",\n  \"The sundial capstone clicks NORTH — all four ancient\
+        \ glyphs chime in unison!\"\n]\npbMessage(_INTL(\"{1}\", lines[v]))\nif v == 3 && !$game_switches[553]\n  $game_switches[553] = true\n  $game_map.need_refresh\
+        \ = true\n  pbSEPlay(\"Mining reveal\", 95, 95)\n  pfm_shake(2, 8, 12)\n  pbMessage(_INTL(\"Deep in the north sanctum, the ancient Elector seal-stone grinds\
+        \ open, unsealing the Script Vault archway!\"))\nend"}
+- type: event
   name: Mural I — The Gilded King
   at: [9, 18]
   post: false
-  text: 'MURAL I: A king in gold on a throne under a sun, one hand raised as if weighing the sky itself. Below him, white domes and a harbour. His face
-    has been scratched out with a chisel — all but the corner of a smile they missed. (Sahar''s note: ''He isn''t praying. He''s giving the sun an order.'')'
-- type: sign
+  text: 'MURAL I: A king in gold on a throne under a sun, one hand raised as if weighing the sky itself. Below him, white domes and a harbour. His face has been scratched
+    out with a chisel — all but the corner of a smile they missed. (Sahar''s note: ''He isn''t praying. He''s giving the sun an order.'')'
+  pages:
+  - commands:
+    - 'A king in gold, on a throne under a sun, one hand raised as if weighing the sky itself. Below him, his city: towers and domes and a harbour full of ships.
+      His face has been scratched out, very carefully, by someone with a chisel and a lot of time: all but the corner of a smile they missed.'
+    - if: $game_variables[126] == 6
+      then:
+      - '\pf[SAHAR,neutral,,Sahar (companion)]Sahar: A golden king. There''s only one golden king in the old songs.'
+      - 'Sahar: Nobody sings that verse any more.'
+      - 'Sahar: Look at the posture. He isn''t praying.'
+      - 'Sahar: He''s giving the sun an order.'
+      - {script: 'pfm_set(:ch6_mural1)'}
+      - if: pfm_get(:ch6_mural1) && pfm_get(:ch6_mural2) && pfm_get(:ch6_mural3) && pfm_get(:ch6_mural4)
+        then:
+        - {script: 'pf_echo_follow(:stop)'}
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: Sahar (companion)
+            route:
+            - {script: 'moveto(34, 19)'}
+            - turn_up
+            wait: true
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(33, 19)'}
+            - turn_right
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_on]
+            wait: false
+        - {script: '10.times { pbSEPlay("Anim/Wind1", 30, 175); pbWait(0.12) }'}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_off]
+            wait: true
+        - {wait: 16}
+        - {script: 'pfm_item(:DUNEHOLTRUBBING, 1, "Duneholt Rubbing")'}
+        - {script: 'pfm_face("Sahar (companion)", :player)'}
+        - '\pf[SAHAR,neutral,,Sahar (companion)]Sahar: I made two. Keep yours.'
+        - 'Sahar: I burned the first one I ever made; I''m not burning a second.'
+        - switch: [CH6_OSSUARY_DONE, true]
+        - var: [CH6_STEP, 7]
+        - {script: 'pfm_vanish("Sahar (companion)", 24)'}
+    trigger: action
+    move: fixed
+    story: ch6
+- type: event
   name: Mural II — Year of Two Weathers
   at: [17, 16]
   post: false
-  text: 'MURAL II: Two titans tearing at the land — one red rising out of the earth with fire in its back, one blue rising out of the sea with the tide
-    in its arms. Between them, tiny armies hold golden chains along what is now Ossaria''s western Dry Tide.'
-- type: sign
+  text: 'MURAL II: Two titans tearing at the land — one red rising out of the earth with fire in its back, one blue rising out of the sea with the tide in its arms.
+    Between them, tiny armies hold golden chains along what is now Ossaria''s western Dry Tide.'
+  pages:
+  - commands:
+    - 'Two titans tearing at the land: one red, rising out of the earth with fire in its back; one blue, rising out of the sea with the tide in its arms. Between
+      them, the king''s armies, very small, holding chains.'
+    - if: $game_variables[126] == 6
+      then:
+      - 'Sahar: The Year of Two Weathers.'
+      - 'Sahar: The song says the sky and the earth went to war.'
+      - 'Sahar: This says somebody started it.'
+      - {script: 'pfm_face("Sahar (companion)", "Mural II — Year of Two Weathers")'}
+      - move:
+          who: Sahar (companion)
+          route: [step_anime_on, wait 60, step_anime_off]
+          wait: true
+      - '\pf[SAHAR,sad,,Sahar (companion)]Sahar: That''s our western dunes. Before the Dry Tide was dry.'
+      - 'Sahar: The sea came that far once.'
+      - {script: 'pfm_set(:ch6_mural2)'}
+      - if: pfm_get(:ch6_mural1) && pfm_get(:ch6_mural2) && pfm_get(:ch6_mural3) && pfm_get(:ch6_mural4)
+        then:
+        - {script: 'pf_echo_follow(:stop)'}
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: Sahar (companion)
+            route:
+            - {script: 'moveto(34, 19)'}
+            - turn_up
+            wait: true
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(33, 19)'}
+            - turn_right
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_on]
+            wait: false
+        - {script: '10.times { pbSEPlay("Anim/Wind1", 30, 175); pbWait(0.12) }'}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_off]
+            wait: true
+        - {wait: 16}
+        - {script: 'pfm_item(:DUNEHOLTRUBBING, 1, "Duneholt Rubbing")'}
+        - {script: 'pfm_face("Sahar (companion)", :player)'}
+        - '\pf[SAHAR,neutral,,Sahar (companion)]Sahar: I made two. Keep yours.'
+        - 'Sahar: I burned the first one I ever made; I''m not burning a second.'
+        - switch: [CH6_OSSUARY_DONE, true]
+        - var: [CH6_STEP, 7]
+        - {script: 'pfm_vanish("Sahar (companion)", 24)'}
+    trigger: action
+    move: fixed
+    story: ch6
+- type: event
   name: Mural III — The Eighteen-Lit Beast
   at: [34, 18]
   post: false
-  text: 'MURAL III: A great beast ringed by eighteen coloured lights, bound in a chain of eighteen golden locks held by the tiny figure of the golden king.
-    Unown letters shift across the frame — spelling a warning someone tried to bury.'
-- type: sign
+  text: 'MURAL III: A great beast ringed by eighteen coloured lights, bound in a chain of eighteen golden locks held by the tiny figure of the golden king. Unown
+    letters shift across the frame — spelling a warning someone tried to bury.'
+  pages:
+  - commands:
+    - 'A great beast with a ring of eighteen lights round its body, radiant, enormous, and round it a chain: eighteen golden locks, one on each light. The king''s
+      tiny figure holds the end of the chain.'
+    - if: $game_variables[126] == 6
+      then:
+      - '\pf[SAHAR,shocked,dots,Sahar (companion)]Sahar: ...Eighteen locks. One for each.'
+      - 'Sahar: He didn''t pray to it. He tried to lock it up.'
+      - {script: 'pfm_set(:ch6_mural3)'}
+      - if: pfm_get(:ch6_mural1) && pfm_get(:ch6_mural2) && pfm_get(:ch6_mural3) && pfm_get(:ch6_mural4)
+        then:
+        - {script: 'pf_echo_follow(:stop)'}
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: Sahar (companion)
+            route:
+            - {script: 'moveto(34, 19)'}
+            - turn_up
+            wait: true
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(33, 19)'}
+            - turn_right
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_on]
+            wait: false
+        - {script: '10.times { pbSEPlay("Anim/Wind1", 30, 175); pbWait(0.12) }'}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_off]
+            wait: true
+        - {wait: 16}
+        - {script: 'pfm_item(:DUNEHOLTRUBBING, 1, "Duneholt Rubbing")'}
+        - {script: 'pfm_face("Sahar (companion)", :player)'}
+        - '\pf[SAHAR,neutral,,Sahar (companion)]Sahar: I made two. Keep yours.'
+        - 'Sahar: I burned the first one I ever made; I''m not burning a second.'
+        - switch: [CH6_OSSUARY_DONE, true]
+        - var: [CH6_STEP, 7]
+        - {script: 'pfm_vanish("Sahar (companion)", 24)'}
+    trigger: action
+    move: fixed
+    story: ch6
+- type: event
   name: Mural IV — The Falling Lights
   at: [18, 6]
   post: false
-  text: 'MURAL IV: The great beast breaking apart — eighteen lights falling out of it like coloured rain while the golden city tips towers-first into the
-    sea. Three hundred years later, Zenith was built on its roof.'
+  text: 'MURAL IV: The great beast breaking apart — eighteen lights falling out of it like coloured rain while the golden city tips towers-first into the sea. Three
+    hundred years later, Zenith was built on its roof.'
+  pages:
+  - commands:
+    - The beast breaking apart. The eighteen lights falling out of it like rain, each one a different colour. Under them, the golden city tipping into the sea, towers
+      first.
+    - if: $game_variables[126] == 6
+      then:
+      - '\pf[SAHAR,sad,,Sahar (companion)]Sahar: And the lights fell. Eighteen of them. Onto all of us.'
+      - 'Sahar: And the city went into the sea, and three hundred years later we built Zenith on its roof and called it progress.'
+      - {script: 'pfm_set(:ch6_mural4)'}
+      - if: pfm_get(:ch6_mural1) && pfm_get(:ch6_mural2) && pfm_get(:ch6_mural3) && pfm_get(:ch6_mural4)
+        then:
+        - {script: 'pf_echo_follow(:stop)'}
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: Sahar (companion)
+            route:
+            - {script: 'moveto(34, 19)'}
+            - turn_up
+            wait: true
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(33, 19)'}
+            - turn_right
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_on]
+            wait: false
+        - {script: '10.times { pbSEPlay("Anim/Wind1", 30, 175); pbWait(0.12) }'}
+        - move:
+            who: Sahar (companion)
+            route: [step_anime_off]
+            wait: true
+        - {wait: 16}
+        - {script: 'pfm_item(:DUNEHOLTRUBBING, 1, "Duneholt Rubbing")'}
+        - {script: 'pfm_face("Sahar (companion)", :player)'}
+        - '\pf[SAHAR,neutral,,Sahar (companion)]Sahar: I made two. Keep yours.'
+        - 'Sahar: I burned the first one I ever made; I''m not burning a second.'
+        - switch: [CH6_OSSUARY_DONE, true]
+        - var: [CH6_STEP, 7]
+        - {script: 'pfm_vanish("Sahar (companion)", 24)'}
+    trigger: action
+    move: fixed
+    story: ch6
 - type: event
   name: Sahar (Ossuary Sanctum)
   at: [23, 8]
   pages:
-  - graphic: {sprite: SAHAR, dir: down}
+  - commands: []
     trigger: action
     move: fixed
-    commands:
-    - {script: "if $game_switches[116]\n  if $game_switches[553]\n    pbMessage(_INTL(\"Sahar: Keep your copy of the Duneholt Rubbing safe. The north seal-stone\
-        \ stands open — watch your step among the Unown inside the Script Vault.\"))\n  else\n    pbMessage(_INTL(\"Sahar: Keep your copy of the Duneholt\
-        \ Rubbing safe. If you want inside the Script Vault behind me, turn the central Sundial Capstone in the nave below until all four glyphs align.\"\
-        ))\n  end\nelse\n  pbMessage(_INTL(\"Sahar: I sealed this hall in AF 281 on Sovereign Valen's order. I burned my first rubbing and told my crew\
-        \ we'd found a collapsed granary.\"))\n  pbMessage(_INTL(\"Sahar: Look at all four murals: the golden king, the two titans, the chain of eighteen\
-        \ locks, and the lights falling like rain while his city sank into the sea.\"))\n  pbSEPlay(\"Mining reveal\", 90, 100)\n  pbMessage(_INTL(\"Sahar\
-        \ presses a sheet of heavy paper against the third mural and rubs it quickly with red wax — 'S.O., AF 300. AF 281.'\"))\n  pbMessage(_INTL(\"Sahar:\
-        \ I made two. Keep yours — I burned the first rubbing I ever made; I'm not burning a second.\"))\n  pfm_set(:duneholt_rubbing, true) rescue nil\n\
-        \  $game_switches[116] = true\n  $game_variables[126] = 7 if $game_variables[126].to_i < 7\n  $game_map.need_refresh = true\n  if $game_switches[553]\n\
-        \    pbMessage(_INTL(\"Sahar: You already ground open the north seal-stone from the nave sundial — the Script Vault lies open ahead. Watch your\
-        \ step among the Unown.\"))\n  else\n    pbMessage(_INTL(\"Sahar: The north archway behind me still holds an Elector seal-stone. Align all four\
-        \ glyphs on the Sundial Capstone in the nave below to open the Script Vault.\"))\n  end\nend"}
+    story: ch6
 - type: trainer
   name: Trainer(3)
   at: [11, 24]
@@ -254,8 +432,8 @@ events:
     dir_fix: true
     commands:
     - {script: "if $PokemonMap && $PokemonMap.strengthUsed\n  if defined?(pbPushThisEvent)\n    pbPushThisEvent\n  elsif defined?(pfp_push)\n    pfp_push(true)\n\
-        \  end\nelsif defined?(pbStrength) && pbStrength\n  pbPushThisEvent if defined?(pbPushThisEvent)\nelse\n  pbMessage(_INTL(\"A heavy sandstone boulder\
-        \ blocks the side passage. A Pokémon using Strength could shove it aside.\"))\nend"}
+        \  end\nelsif defined?(pbStrength) && pbStrength\n  pbPushThisEvent if defined?(pbPushThisEvent)\nelse\n  pbMessage(_INTL(\"A heavy sandstone boulder blocks\
+        \ the side passage. A Pokémon using Strength could shove it aside.\"))\nend"}
 - type: event
   name: Ossuary Boulder E
   at: [38, 28]
@@ -265,8 +443,8 @@ events:
     dir_fix: true
     commands:
     - {script: "if $PokemonMap && $PokemonMap.strengthUsed\n  if defined?(pbPushThisEvent)\n    pbPushThisEvent\n  elsif defined?(pfp_push)\n    pfp_push(true)\n\
-        \  end\nelsif defined?(pbStrength) && pbStrength\n  pbPushThisEvent if defined?(pbPushThisEvent)\nelse\n  pbMessage(_INTL(\"A heavy sandstone boulder\
-        \ blocks the side passage. A Pokémon using Strength could shove it aside.\"))\nend"}
+        \  end\nelsif defined?(pbStrength) && pbStrength\n  pbPushThisEvent if defined?(pbPushThisEvent)\nelse\n  pbMessage(_INTL(\"A heavy sandstone boulder blocks\
+        \ the side passage. A Pokémon using Strength could shove it aside.\"))\nend"}
 - type: rock_smash
   at: [5, 20]
   name: Cracked Sandstone W
@@ -300,3 +478,123 @@ events:
   at: [19, 25]
   item: STARPIECE
   hidden: true
+- type: event
+  name: Into the Ossuary
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - raw:
+      - 203
+      - [8, 8, 3]
+    - {wait: 30}
+    - {script: 'pbSEPlay("Anim/Saint7", 40, 140)'}
+    - {wait: 20}
+    - {script: pfm_pan_home(30)}
+    - move:
+        who: Sahar (companion)
+        route:
+        - graphic: [SAHAR, 0, 8, 0]
+        - {opacity: 255}
+        wait: true
+    - 'FIELD NOTES: "THE OSSUARY OF DUNES — CAVE. Unown in the walls. They aren''t hiding. They''re the words."'
+    - 'Larch, in the margin: "Copy everything. Twice."'
+    - '\pf[SAHAR,neutral,,Sahar (companion)]Sahar: The Unown are the inscription. They move.'
+    - 'Sahar: That''s why nobody could read it, before.'
+    - 'Sahar: You have to wait for the sentence to come round.'
+    - {script: 'pf_echo_follow(:convoy, ["Sahar (companion)"], spacing: 1)'}
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
+      self: A
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 7]
+  at: [1, 1]
+  story: ch6
+- type: event
+  name: Sahar (companion)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['\pf[SAHAR,neutral,,Sahar (companion)]Sahar: You have to wait for the sentence to come round.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: up}
+    cond:
+      var: [CH6_STEP, 6]
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 7]
+  at: [22, 37]
+  story: ch6
+- type: event
+  name: Unown in the wall 1
+  pages:
+  - commands: []
+    trigger: action
+    move: custom
+    graphic: {sprite: Followers/UNOWN, dir: down, opacity: 150}
+    through: true
+    step_anime: true
+    route: [left, left, left, wait 20, right, right, right, wait 30]
+    speed: 2
+    freq: 3
+  at: [10, 16]
+  story: ch6
+- type: event
+  name: Unown in the wall 2
+  pages:
+  - commands: []
+    trigger: action
+    move: custom
+    graphic: {sprite: Followers/UNOWN, dir: down, opacity: 150}
+    through: true
+    step_anime: true
+    route: [left, left, left, wait 20, right, right, right, wait 30]
+    speed: 2
+    freq: 3
+  at: [30, 16]
+  story: ch6
+- type: event
+  name: Unown in the wall 3
+  pages:
+  - commands: []
+    trigger: action
+    move: custom
+    graphic: {sprite: Followers/UNOWN, dir: down, opacity: 150}
+    through: true
+    step_anime: true
+    route: [left, left, wait 20, right, right, wait 30]
+    speed: 2
+    freq: 3
+  at: [5, 22]
+  story: ch6
+- type: event
+  name: Unown in the wall 4
+  pages:
+  - commands: []
+    trigger: action
+    move: custom
+    graphic: {sprite: Followers/UNOWN, dir: down, opacity: 150}
+    through: true
+    step_anime: true
+    route: [left, left, wait 20, right, right, wait 30]
+    speed: 2
+    freq: 3
+  at: [38, 25]
+  story: ch6

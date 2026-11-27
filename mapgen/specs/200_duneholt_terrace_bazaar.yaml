@@ -72,14 +72,19 @@ events:
   name: The Dig (Duneholt Gym)
   at: [8, 38]
   pages:
-  - trigger: action
-    commands:
-    - if: pbRgssExists?("Data/Map210.rxdata")
+  - commands:
+    - if: $game_variables[126] >= 4
       then:
-      - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 210\n  $game_temp.player_new_x = 10\n  $game_temp.player_new_y = 15\n  $game_temp.player_new_direction\
-          \ = 8\n  $scene.transfer_player\nend"}
-      else: [THE DIG — DUNEHOLT GYM (Warden Sahar Ostrand). The painted timber door is bolted tight; Sahar's excavators are still shoring the lower sand-mirror pit
-          after last night's tremor.]
+      - {se: Door enter}
+      - {script: pfm_fade_out(8)}
+      - transfer: {map: 210, x: 10, y: 15, dir: up}
+      - {script: pfm_fade_in(8)}
+      else:
+      - {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - 'Sahar''s Aide: The Warden''s up at her Dig Lab, on the northwest terrace.'
+    trigger: action
+    move: fixed
+    story: ch6
   fixed: true
 - type: sign
   name: Door plate
@@ -110,7 +115,9 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 810\n  $game_temp.player_new_x = 40\n  $game_temp.player_new_y = 15\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(Duneholt's West Gate out onto the Dry Tide is barred while dust-devils sweep the western flats.)]
+      else:
+      - &id001 {script: 'pbSEPlay("Door slide", 80, 60)'}
+      - 'Gate Guard: West Gate''s barred while the dust-devils are out on the Dry Tide.'
   fixed: true
 - type: event
   name: West to Dry Tide
@@ -123,7 +130,9 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 810\n  $game_temp.player_new_x = 40\n  $game_temp.player_new_y = 15\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(Duneholt's West Gate out onto the Dry Tide is barred while dust-devils sweep the western flats.)]
+      else:
+      - *id001
+      - 'Gate Guard: West Gate''s barred while the dust-devils are out on the Dry Tide.'
   fixed: true
 - type: event
   name: West to Dry Tide
@@ -136,7 +145,9 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 810\n  $game_temp.player_new_x = 40\n  $game_temp.player_new_y = 15\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(Duneholt's West Gate out onto the Dry Tide is barred while dust-devils sweep the western flats.)]
+      else:
+      - *id001
+      - 'Gate Guard: West Gate''s barred while the dust-devils are out on the Dry Tide.'
   fixed: true
 - type: event
   name: West to Dry Tide
@@ -149,7 +160,9 @@ events:
       then:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 810\n  $game_temp.player_new_x = 40\n  $game_temp.player_new_y = 15\n  $game_temp.player_new_direction\
           \ = 4\n  $scene.transfer_player\nend"}
-      else: [(Duneholt's West Gate out onto the Dry Tide is barred while dust-devils sweep the western flats.)]
+      else:
+      - *id001
+      - 'Gate Guard: West Gate''s barred while the dust-devils are out on the Dry Tide.'
   fixed: true
 - type: sign
   name: Duneholt Town Sign

@@ -82,7 +82,9 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 78\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - (North across the chalk rise lies the Highwold and Elowen's Crown Road. Wind-drifted scree has narrowed the pass above the broken viaduct.)
+      - &id001 {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+      - &id002 {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - 'Drover: Scree''s down across the pass. Nobody''s going up to the Highwold till it''s cleared.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -97,7 +99,9 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 78\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - (North across the chalk rise lies the Highwold and Elowen's Crown Road. Wind-drifted scree has narrowed the pass above the broken viaduct.)
+      - *id001
+      - *id002
+      - 'Drover: Scree''s down across the pass. Nobody''s going up to the Highwold till it''s cleared.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -112,7 +116,9 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 78\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - (North across the chalk rise lies the Highwold and Elowen's Crown Road. Wind-drifted scree has narrowed the pass above the broken viaduct.)
+      - *id001
+      - *id002
+      - 'Drover: Scree''s down across the pass. Nobody''s going up to the Highwold till it''s cleared.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: event
@@ -127,7 +133,9 @@ events:
       - {script: "pbFadeOutIn do\n  $game_temp.player_new_map_id = 603\n  $game_temp.player_new_x = 65\n  $game_temp.player_new_y = 78\n  $game_temp.player_new_direction\
           \ = 8\n  $scene.transfer_player\nend"}
       else:
-      - (North across the chalk rise lies the Highwold and Elowen's Crown Road. Wind-drifted scree has narrowed the pass above the broken viaduct.)
+      - *id001
+      - *id002
+      - 'Drover: Scree''s down across the pass. Nobody''s going up to the Highwold till it''s cleared.'
       - {script: 'pbMoveRoute($game_player, [PBMoveRoute::BACKWARD], true)'}
   fixed: true
 - type: sign

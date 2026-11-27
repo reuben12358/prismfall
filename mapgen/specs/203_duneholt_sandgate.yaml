@@ -136,28 +136,60 @@ events:
   name: Sandgate Arrival (Ch6)
   at: [0, 0]
   pages:
-  - cond:
-      var: [126, 2]
-    trigger: autorun
-    commands:
-    - (A canyon mouth walled across in sandstone, with gate-towers carved straight out of the cliff.)
-    - '(Beyond the Sandgate: terraces of sandstone houses climbing the canyon sides round an enormous round well.)'
-    - {script: '$game_variables[126] = 3 if $game_variables[126] == 2'}
-    - {script: 'pfm_quest(:ch6_eighteen_roads, "Eighteen Roads", "Earn the fifth badge at the Dig, Duneholt''s gym.") rescue nil'}
-    - selfswitch: [A, true]
-  - cond: {self: A}
+  - commands: []
     trigger: action
-    commands: []
+    move: fixed
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Wind1", 50, 70)'}
+    - raw:
+      - 203
+      - [8, 6, 3]
+    - {wait: 40}
+    - {script: pfm_pan_home(30)}
+    - move:
+        who: Caravan-mother
+        route: [turn_up]
+        wait: true
+    - {wait: 12}
+    - {script: 'pbSEPlay("Water1", 40, 150)'}
+    - {wait: 10}
+    - move:
+        who: Caravan-mother
+        route: [turn_down]
+        wait: true
+    - 'Caravan-mother: Two notices. One from a man we elected for life and can''t get rid of.'
+    - 'Caravan-mother: One from a company we never elected at all.'
+    - 'Caravan-mother: And the western wells have changed hands twice this year.'
+    - 'Caravan-mother: Both times the new owners had an accent.'
+    - {script: 'pfm_face("Gate Guard", :player)'}
+    - 'Gate Guard: Welcome to Duneholt. Water''s a bone a cup.'
+    - 'Gate Guard: It was free last year.'
+    - {script: '$PokemonGlobal.pf_quests.delete(:ch6_eighteen_roads) rescue nil'}
+    - {script: 'pfm_quest(:ch6_eighteen_roads, "Eighteen Roads", "Earn the fifth badge at the Dig, Duneholt''s gym.")'}
+    - var: [CH6_STEP, 3]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH6_STEP, 2]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 3]
+    story: ch6
   fixed: true
 - type: event
   name: Caravan-mother
   at: [15, 13]
   pages:
-  - graphic: {sprite: NPC 04, dir: right}
+  - commands: ['Caravan-mother: Two notices. One from a man we elected for life and can''t get rid of.', 'Caravan-mother: One from a company we never elected at all.',
+      'Caravan-mother: And the western wells have changed hands twice this year.', 'Caravan-mother: Both times the new owners had an accent.']
     trigger: action
     move: fixed
-    commands: ['Caravan-mother: Two notices. One from a man we elected for life and can''t get rid of.', 'Caravan-mother: One from a company we never elected at all.',
-      'Caravan-mother: And the western wells have changed hands twice this year. Both times the new owners had an accent.']
+    graphic: {sprite: NPC 04, dir: down}
+    story: ch6
   fixed: true
 - type: event
   name: Gate Guard

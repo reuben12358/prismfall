@@ -22,6 +22,47 @@ events:
   - commands: ['Dex, mid-wave, soda crate on his hip. His mouth is open. He was about to tell you the rest.']
     trigger: action
     move: fixed
+  - commands:
+    - {script: 'pfm_face("Directorate Officer (barrier) 1", :player)'}
+    - {script: 'pfm_face("Directorate Officer (barrier) 2", :player)'}
+    - {wait: 24}
+    - move:
+        who: Directorate Officer (barrier) 1
+        route: [turn_right]
+        wait: false
+    - move:
+        who: Directorate Officer (barrier) 2
+        route: [turn_right]
+        wait: true
+    - {script: 'pfm_flash(190, 190, 255, 6, 40)
+
+        pbSEPlay("Anim/Ice1", 40, 70)'}
+    - {wait: 40}
+    - {script: 'pfm_face(:player, "Glass Dex")'}
+    - {wait: 50}
+    - {script: 'pbSEPlay("Heartbeat Sub-Pulse", 80, 45)'}
+    - {wait: 30}
+    - {script: 'pfm_glow(70, 40, 0, 40, 30)'}
+    - {wait: 60}
+    - move:
+        who: player
+        route: [dir_fix_on, backward, dir_fix_off]
+        wait: true
+    - {script: 'pbSEPlay("Ring Glass Harmonic", 25, 60)'}
+    - {wait: 40}
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+    story: ch6
+  - commands: ['Dex, mid-wave, soda crate on his hip. His mouth is open. He was about to tell you the rest.']
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+      self: A
+    story: ch6
   at: [4, 7]
 - type: event
   name: Glass Marta Vell
@@ -295,3 +336,228 @@ events:
   name: The Veil 10
   at: [0, 10]
   to: {map: 180, x: 94, y: 58, dir: left}
+- type: event
+  name: Act II Opener
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pbBGMFade(1.0)
+
+        pbBGSFade(1.0)'}
+    - {script: pfm_fade_out(8)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(7, 7)'}
+        - turn_up
+        wait: true
+    - {script: 'pfm_tone(-14, -26, -10, 44, 30)'}
+    - {script: 'pbSEPlay("Ring Glass Harmonic", 40, 150)'}
+    - {wait: 24}
+    - {script: 'pbSEPlay("Ring Glass Harmonic", 30, 135)'}
+    - {wait: 16}
+    - raw:
+      - 203
+      - [6, 8, 2]
+    - {wait: 30}
+    - {script: 'pbSEPlay("Anim/Ice1", 35, 60)'}
+    - {wait: 20}
+    - {script: pfm_pan_home(30)}
+    - move:
+        who: Directorate Officer (barrier) 1
+        route: [turn_left, wait 20, turn_right]
+        wait: false
+    - move:
+        who: Directorate Officer (barrier) 2
+        route: [wait 10, turn_left, wait 20, turn_right]
+        wait: true
+    - {wait: 10}
+    - move:
+        who: player
+        route: [up, up]
+        wait: true
+    - {wait: 20}
+    - '\pf[ROOK,sad,,Rook (dawn)]Rook: I''m not filming. I''m just sitting.'
+    - 'Rook: I come down every night. The guards let me.'
+    - 'Rook: I think they think I''m doing a segment.'
+    - 'Rook: Chat would say something.'
+    - move:
+        who: Rook (dawn)
+        route: [turn_left, wait 30, turn_down]
+        wait: true
+    - 'Rook: I don''t know what chat would say. I haven''t asked.'
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+      self: A
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 1]
+  at: [2, 0]
+  story: ch6
+- type: event
+  name: Rook (dawn)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['\pf[ROOK,sad,,Rook (dawn)]Rook: I don''t know what chat would say. I haven''t asked.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: ROOK, dir: down}
+    cond:
+      var: [STORY_CHAPTER, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 7]
+  at: [7, 3]
+  story: ch6
+- type: event
+  name: Directorate Officer (barrier) 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_MERIDIAN_DIRECTORATE, dir: right}
+    cond:
+      var: [STORY_CHAPTER, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 7]
+  at: [1, 5]
+  story: ch6
+- type: event
+  name: Directorate Officer (barrier) 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_MERIDIAN_DIRECTORATE, dir: right}
+    cond:
+      var: [STORY_CHAPTER, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 7]
+  at: [1, 10]
+  story: ch6
+- type: event
+  name: Directorate barrier
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: [MERIDIAN SECURITY DIRECTORATE — BY MANDATE OF THE ACCORD — NO ENTRY.]
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  at: [2, 3]
+  story: ch6
+- type: event
+  name: Marlo (shrine)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - 'Marlo: You''re the one who walks in. I saw you, that night.'
+    - 'Marlo: Tell him— no. You can''t tell him anything.'
+    - move:
+        who: Marlo (shrine)
+        route: [turn_left, wait 30]
+        wait: true
+    - 'Marlo: ...Tell him anyway.'
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 22, dir: left}
+    cond:
+      var: [STORY_CHAPTER, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 7]
+  at: [1, 9]
+  story: ch6
+- type: event
+  name: Juno (goodbye)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pfm_face("Juno (goodbye)", :player)'}
+    - {wait: 20}
+    - '\pf[JUNO,sad,,Juno (goodbye)]Juno: I''m not going home.'
+    - 'Juno: There''s a doctor in Mirefen, down in Nadir. Dr Mott.'
+    - 'Juno: He''s got a whole ward of people turning to glass, slowly, and Uncle Rowan sends him seed stock every month for the medicine.'
+    - 'Juno: I was going to send it by post this time.'
+    - 'Juno: I''m not sending it by post. I''m taking it.'
+    - 'Juno: I couldn''t do anything for Dex. I can''t even walk in there.'
+    - 'Juno: But I can carry a sack.'
+    - choices: [I'll come with you., Be careful., '...']
+      branches:
+      - ['\pf[JUNO,happy,,Juno (goodbye)]Juno: You can''t, silly. You''ve got a badge to get.', 'Juno: Duneholt''s north, and Mirefen''s down, and they''re not letting
+          anyone down the lifts any more.', 'Juno: I''ll find a way down. Verdancers always find the way down.', 'Juno: It''s up we''re bad at.']
+      - ['\pf[JUNO,neutral,,Juno (goodbye)]Juno: I''m always careful. I''m careful about everything.', 'Juno: It''s very tiring.']
+      - ['\pf[JUNO,neutral,,Juno (goodbye)]Juno: I know. Me too.']
+      cancel: 3
+    - '\pf[JUNO,happy,,Juno (goodbye)]Juno: Write to me! Gale Post.'
+    - 'Juno: "Juno, Mirefen, the one wearing a tree."'
+    - move:
+        who: Juno (goodbye)
+        route:
+        - jump: [0, 0]
+        wait: false
+    - move:
+        who: player
+        route:
+        - jump: [0, 0]
+        wait: true
+    - {wait: 10}
+    - move:
+        who: Juno (goodbye)
+        route:
+        - through_on
+        - turn_left
+        - left
+        - {opacity: 0}
+        wait: true
+    - var: [CH6_STEP, 1]
+    - {script: '$PokemonGlobal.pf_quests.delete(:ch6_eighteen_roads) rescue nil'}
+    - {script: 'pfm_quest(:ch6_eighteen_roads, "Eighteen Roads", "Earn the fifth badge in Duneholt, up the Brass Road north (the Meridian Mainline out of the Concourse).")'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: JUNO, dir: right}
+    cond:
+      var: [STORY_CHAPTER, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 1]
+  at: [1, 7]
+  story: ch6

@@ -282,8 +282,7 @@ events:
 - type: event
   name: Gym attendant
   pages:
-  - commands: ['Gym attendant: Closed for filming! Rook''s down in the Lowlight doing a community special. East side, down the steps. You can''t miss the
-        floodlights.']
+  - commands: ['Gym attendant: Closed for filming! Rook''s down in the Lowlight doing a community special. East side, down the steps. You can''t miss the floodlights.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 21, dir: down}
@@ -296,8 +295,8 @@ events:
 - type: event
   name: Lift-grille
   pages:
-  - commands: ['LIFT-GRILLE: A grille in the pavement over a shaft that goes down out of sight. The air coming up is warm and tastes of pennies. Painted
-        on the inside of the bars, where you''d only see it looking down: a grey ring, broken at the top.']
+  - commands: ['LIFT-GRILLE: A grille in the pavement over a shaft that goes down out of sight. The air coming up is warm and tastes of pennies. Painted on the inside
+        of the bars, where you''d only see it looking down: a grey ring, broken at the top.']
     trigger: action
     move: fixed
   at: [75, 38]
@@ -393,8 +392,7 @@ events:
 - type: event
   name: Airship Spotter
   pages:
-  - commands: ['Airship Spotter: That''s the Sallow Line''s Dauntless. Then the Meridian Courier. Then — no, that''s a cloud. They''re getting hard to tell
-        apart.']
+  - commands: ['Airship Spotter: That''s the Sallow Line''s Dauntless. Then the Meridian Courier. Then — no, that''s a cloud. They''re getting hard to tell apart.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 16, dir: up}
@@ -418,8 +416,7 @@ events:
 - type: event
   name: Meridian Lineman
   pages:
-  - commands: ['Meridian Lineman: The Spire''s lit gold for the gala. You can see it from the Crownwall, they say. And the Sovereign''s coming. Valen Corrigan.
-        HERE.']
+  - commands: ['Meridian Lineman: The Spire''s lit gold for the gala. You can see it from the Crownwall, they say. And the Sovereign''s coming. Valen Corrigan. HERE.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 25, dir: down}
@@ -427,8 +424,7 @@ events:
 - type: event
   name: Street Performer
   pages:
-  - commands: ['Street Performer: Neon Grid''s in the pavement, kid. Every cobble''s on the circuit. Electric moves sing here, and anything that conducts
-        sings louder.']
+  - commands: ['Street Performer: Neon Grid''s in the pavement, kid. Every cobble''s on the circuit. Electric moves sing here, and anything that conducts sings louder.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 22, dir: down}
@@ -498,3 +494,96 @@ events:
   name: Item
   at: [94, 61]
   item: XSPEED
+- type: event
+  name: To the Meridian Mainline 32
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: &id001
+    - if: $game_variables[126] == 0
+      then:
+      - 'Concourse Porter: A girl with a hatbox was asking after you. Down at the Lowlight, at the stairs.'
+      - move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+      else:
+      - {script: pfm_fade_out(10)}
+      - if: $game_variables[126] == 1
+        then:
+        - transfer: {map: 612, x: 55, y: 36, dir: right}
+        else:
+        - transfer: {map: 612, x: 57, y: 61, dir: up}
+      - {script: pfm_fade_in(10)}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  at: [0, 32]
+  story: ch6
+- type: event
+  name: To the Meridian Mainline 33
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  at: [0, 33]
+  story: ch6
+- type: event
+  name: To the Meridian Mainline 34
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  at: [0, 34]
+  story: ch6
+- type: event
+  name: To the Meridian Mainline 35
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  at: [0, 35]
+  story: ch6
+- type: event
+  name: To the Meridian Mainline 36
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  at: [0, 36]
+  story: ch6
+- type: event
+  name: To the Meridian Mainline 37
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 6]
+  at: [0, 37]
+  story: ch6

@@ -40,12 +40,32 @@ events:
   to: {map: 208, x: 41, y: 19, dir: left}
   se: Door exit
   fixed: true
-- type: warp
+- type: event
   name: To Ossuary of Dunes (624)
   at: [65, 34]
   to: {map: 624, x: 21, y: 37, dir: up}
   se: Door enter
   fixed: true
+  pages:
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 40, 130)'}
+    - move:
+        who: player
+        route: [dir_fix_on, backward, dir_fix_off]
+        wait: true
+    trigger: touch
+    move: fixed
+    story: ch6
+  - commands:
+    - {se: Door enter}
+    - {script: pfm_fade_out(8)}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(8)}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
+    story: ch6
 - type: warp
   name: North to Sinkfield
   at: [106, 0]
@@ -119,637 +139,883 @@ events:
   name: Sahar (Door in the Skull)
   at: [62, 36]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
+    trigger: action
+    move: fixed
     graphic: {sprite: SAHAR, dir: up}
+    cond:
+      var: [CH6_STEP, 5]
+    story: ch6
+  - commands: []
     trigger: action
     move: fixed
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    cond:
+      var: [CH6_STEP, 6]
+    story: ch6
+  - commands: ['\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: The desert keeps everything. It just doesn''t keep it where you left it.']
+    trigger: action
+    move: fixed
     graphic: {sprite: SAHAR, dir: up}
+    cond:
+      var: [CH6_STEP, 7]
+    story: ch6
+  - commands: []
     trigger: action
     move: fixed
-    commands: ['Sahar: The Ossuary lies open through the skull''s mouth. Walk the bones, read all four murals, and bring me what you find inside.']
-  - cond: {switch: 116}
-    graphic: {sprite: SAHAR, dir: right}
-    trigger: action
-    move: fixed
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    cond:
+      var: [CH6_STEP, 9]
+    story: ch6
   fixed: true
 - type: event
   name: Door in the Skull Trigger
   at: [55, 34]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Door in the Skull Trigger '
   at: [55, 35]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Door in the Skull Trigger  '
   at: [55, 36]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Door in the Skull Trigger   '
   at: [55, 37]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Door in the Skull Trigger    '
   at: [55, 38]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Door in the Skull Trigger     '
   at: [55, 39]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Door in the Skull Trigger      '
   at: [55, 40]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Door in the Skull Trigger       '
   at: [55, 41]
   pages:
-  - through: true
-    commands: []
-  - cond:
-      var: [126, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch6
+  - commands:
+    - {script: 'pbSEPlay("Anim/Earth4", 50, 120)'}
+    - raw:
+      - 203
+      - [6, 6, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(60, 40, 10, 20, 20)'}
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 30}
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(63, 37)'}
+        - turn_left
+        wait: true
+    - {script: pfm_pan_home(1)}
+    - {script: pfm_fade_in(14)}
+    - '\pf[SAHAR,shocked,dots,Sahar (Door in the Skull)]Sahar: ...'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,sad,,Sahar (Door in the Skull)]Sahar: I know this door.'
+    - 'Sahar: AF 281. I was thirty-nine.'
+    - 'Sahar: My team took four months and a Claydol to open it. Nine of us.'
+    - 'Sahar: I was so proud I couldn''t sleep.'
+    - 'Sahar: I made rubbings. I wrote a report. I sent it to the Sovereign, because that''s what you do when you find something that changes the history of the world.'
+    - 'Sahar: You tell the Accord.'
+    - move:
+        who: Sahar (Door in the Skull)
+        route: [turn_up]
+        wait: true
+    - {wait: 20}
+    - 'Sahar: He came himself. Valen.'
+    - 'Sahar: He walked through it with a lamp, all the way to the end, alone. And when he came out he said, "Seal it, Sahar. For the realm."'
+    - 'Sahar: So we sealed it. I burned the rubbings.'
+    - 'Sahar: I told my team we''d found a collapsed granary.'
+    - 'Sahar: Two of them still don''t speak to me.'
+    - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+    - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: I buried the truth once because I was told to.'
+    - 'Sahar: The sand has dug it up.'
+    - 'Sahar: I''d rather not argue with sand twice.'
+    - 'Sahar: Walk the bones in there, the way I told you.'
+    - 'Sahar: The floor''s older than the rules about floors. Come on.'
+    - var: [CH6_STEP, 6]
+    - move:
+        who: Sahar (Door in the Skull)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: player
+        route: [right, right, up]
+        wait: true
+    - {script: pfm_fade_out(12)}
+    - {se: Door enter}
+    - transfer: {map: 624, x: 21, y: 37, dir: up}
+    - {script: pfm_fade_in(12)}
     trigger: touch
+    move: fixed
+    cond:
+      var: [CH6_STEP, 5]
     through: true
-    commands:
-    - {script: 'pbMessage(_INTL("Sahar stares up at the colossal carved skull-mouth uncovered by last night''s dune-shift. She has gone very pale."))
-
-        pbMessage(_INTL("Sahar: ...I know this door. AF 281. I was thirty-nine."))
-
-        pbMessage(_INTL("Sahar: My team took four months and a Claydol to open it. Nine of us. I made rubbings, wrote a report, and sent it to the Sovereign."))
-
-        pbMessage(_INTL("Sahar: Valen came himself. He walked through it with a lamp, alone. When he came out he said, ''Seal it, Sahar. For the realm.''"))
-
-        pbMessage(_INTL("Sahar: So we sealed it. I burned the rubbings and told my team we''d found a collapsed granary. Two of them still don''t speak to me."))
-
-        pbMessage(_INTL("Sahar: I buried the truth once because I was told to. The sand has dug it up. I''d rather not argue with sand twice."))
-
-        pbMessage(_INTL("Sahar: Walk the bones in there, the way I told you. The floor''s older than the rules about floors. Come on."))
-
-        $game_variables[126] = 6 if $game_variables[126].to_i < 6
-
-        $game_map.need_refresh = true'}
-  - cond:
-      var: [126, 6]
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 6]
     through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: Kestrel (Ossuary Mouth K3)
   at: [67, 36]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    graphic: {sprite: KESTREL, dir: left}
+  - commands: []
     trigger: action
     move: fixed
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: Kestrel K3 Trigger
   at: [62, 38]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Kestrel K3 Trigger '
   at: [63, 38]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Kestrel K3 Trigger  '
   at: [64, 38]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Kestrel K3 Trigger   '
   at: [65, 38]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Kestrel K3 Trigger    '
   at: [66, 38]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Kestrel K3 Trigger     '
   at: [67, 38]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: 'Kestrel K3 Trigger      '
   at: [68, 38]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 116}
-    trigger: touch
+  - commands: []
+    trigger: action
+    move: fixed
     through: true
-    commands:
-    - {script: "pbMessage(_INTL(\"Sahar stares at the three-hundred-year-old inner seal-stone now lying flat on the bone floor.\"))\npbMessage(_INTL(\"Sahar: It took\
-        \ a team of nine and a Claydol four months to shift that seal in AF 281. ...You leaned on it.\"))\nc_joke = pbMessage(_INTL(\"How do you answer Sahar?\"),\
-        \ [_INTL(\"It was loose.\"), _INTL(\"I was tired.\"), _INTL(\"...\")], 3)\nif c_joke == 0\n  pbMessage(_INTL(\"Sahar: It was NOT loose. Things are not 'loose'\
-        \ around you. Things give up.\"))\nelsif c_joke == 1\n  pbMessage(_INTL(\"Sahar: You were tired, and a three-hundred-year-old seal fell over. I'll put 'The\
-        \ challenger was tired' in the report.\"))\nelse\n  pbMessage(_INTL(\"Sahar: Don't do the silence at me. I'm an archaeologist. I've been stared at by better\
-        \ skulls than you.\"))\nend\npbMessage(_INTL(\"(A familiar voice calls down from the brow of the colossal fossil skull above you!)\"))\npbMessage(_INTL(\"\
-        Kestrel: Told you. Things give up around them. Rivers. Plates. Me. Twice.\"))\npbMessage(_INTL(\"Sahar: ...Twice?\"))\npbMessage(_INTL(\"Kestrel: Don't. (He\
-        \ drops down onto the sand, thinner, his black coat dusty to the knee.)\"))\npbMessage(_INTL(\"Kestrel: I saw the murals over your shoulder — the king and\
-        \ the chain. The Hollow cell came through Duneholt asking about old doors, and everywhere I go there's YOU in front of me!\"))\npbMessage(_INTL(\"Kestrel:\
-        \ Fight me. I need to know if I'm getting closer.\"))\nsetBattleRule(\"field\", :DESERT)\nwon = (Prismfall.rival_battle(:RIVAL_KESTREL, \"Kestrel\", 3) rescue\
-        \ false)\nif won\n  pbMessage(_INTL(\"Kestrel: ...No. Not closer.\"))\n  pbMessage(_INTL(\"(He sits on a fossil rib and draws black lace stitched with a silver\
-        \ ghost-lantern from under his coat — his mother Morwen's Warden veil.)\"))\n  pbMessage(_INTL(\"Kestrel: Everyone keeps telling me to let it go. Nobody saw\
-        \ a body. And now every inn from here to Ebbmouth says the Mourner's Morwen Vane — made to disappear, and come back.\"))\n  c_rumor = pbMessage(_INTL(\"What\
-        \ do you tell Kestrel?\"), [_INTL(\"Then go and find out.\"), _INTL(\"It might not be her, Kestrel.\"), _INTL(\"...\")], 3)\n  if c_rumor == 0\n    pf_choose(:ch6_kestrel_rumor,\
-        \ :encourage) rescue nil\n    pbMessage(_INTL(\"Kestrel: ...Everyone else says 'let it go'. You said 'go'. Then I'm going — all the way.\"))\n  elsif c_rumor\
-        \ == 1\n    pf_choose(:ch6_kestrel_rumor, :warn) rescue nil\n    pbMessage(_INTL(\"Kestrel: I know it might not be her. I KNOW. ...I just need it not to be\
-        \ nobody.\"))\n  else\n    pf_choose(:ch6_kestrel_rumor, :silent) rescue nil\n    pbMessage(_INTL(\"Kestrel: Yeah. That's what Gran says, too. Nothing, very\
-        \ loudly.\"))\n  end\n  pbMessage(_INTL(\"Kestrel: The Hollow cell's gone south and down to Nadir — Mirefen, the char-burners said. I'm going after them.\
-        \ Don't follow me where I can see.\"))\n  $game_switches[117] = true\n  $game_variables[126] = 8 if $game_variables[126].to_i < 8\n  $game_map.need_refresh\
-        \ = true\nelse\n  pbMessage(_INTL(\"Kestrel: Again. I'm not done being right.\"))\nend"}
-  - cond: {switch: 117}
-    through: true
-    commands: []
+    story: ch6
   fixed: true
 - type: event
   name: Gale Post Courier (Ch6 Close)
   at: [60, 40]
   pages:
-  - through: true
-    commands: []
-  - cond: {switch: 117}
-    graphic: {sprite: NPC 14, dir: right}
+  - commands: []
     trigger: action
     move: fixed
-    commands:
-    - {script: 'pbMessage(_INTL("Gale Post Courier (out of breath, sand to the eyebrows): Thought so! You''re the only trainer in Ossaria nobody can describe. Letter
-        from Mirefen — chasing you since Lumen!"))
-
-        pbMessage(_INTL("(Green ink, a little smudged:) ''I found a way down! Now I''m in Mirefen and the whole marsh glows BLUE at night, and Dr Mott says the noodles
-        will kill me.''"))
-
-        pbMessage(_INTL("''Uncle Rowan wrote — he burned his right palm on the kettle the same night as the Lowlight. He''s been away on Warden business every single
-        time something happens. I counted. Come to Mirefen? Bring snacks. — Juno''"))
-
-        pfm_quest(:ch6_eighteen_roads, "Eighteen Roads", "Earn the sixth badge in Mirefen, down the Leach Road into Nadir.") rescue nil
-
-        $game_variables[126] = 9 if $game_variables[126].to_i < 9
-
-        $game_variables[102] = 7 if $game_variables[102].to_i < 7
-
-        $game_self_switches[[620, @event_id, "A"]] = true
-
-        $game_map.need_refresh = true'}
-  - cond: {switch: 117, self: A}
-    graphic: {sprite: NPC 14, dir: right}
-    trigger: action
-    move: fixed
-    commands: ['Gale Post Courier: Safe trails down the Leach Road to Mirefen! Don''t forget Juno''s snacks!']
+    story: ch6
   fixed: true
 - type: sign
   name: Unlabelled Dig Pit Stele
@@ -879,3 +1145,272 @@ events:
   hidden: true
   name: HiddenItem (marrow bone pile)
   fixed: true
+- type: event
+  name: Lecture, Archaeological
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: pfm_get(:ch6_k3_tried)
+      then:
+      - {script: pfm_fade_out(8)}
+      - move:
+          who: Kestrel (brow)
+          route:
+          - graphic: [KESTREL, 0, 2, 0]
+          - {opacity: 255}
+          - {script: 'moveto(66, 36)'}
+          wait: true
+      - move:
+          who: Sahar (Door in the Skull)
+          route:
+          - {opacity: 255}
+          wait: true
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(66, 38)'}
+          - turn_up
+          wait: true
+      - {script: 'pfm_tone(34, -6, -40, 10, 14)'}
+      - '\pf[KESTREL,neutral,,Kestrel (brow)]Kestrel: Again. I''m not done being right.'
+      - &id001 {script: 'pfm_set(:ch6_k3_tried)'}
+      - &id002
+        if: 'Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 3, field: :DESERT)'
+        then:
+        - '\pf[KESTREL,sad,,Kestrel (brow)]Kestrel: ...'
+        - 'Kestrel: No. Not closer.'
+        - move:
+            who: Kestrel (brow)
+            route: [turn_down]
+            wait: true
+        - {wait: 50}
+        - {script: 'pbSEPlay("GUI menu open", 40, 60)
+
+            pfm_glow(26, 26, 40, 20, 20)'}
+        - {wait: 20}
+        - 'Kestrel: Gran''s trunk. It was hers. Her Warden''s veil.'
+        - 'Kestrel: Gran kept it in a trunk that wasn''t even locked, for six years, and never said.'
+        - {script: 'pfm_face("Kestrel (brow)", :player)'}
+        - '\pf[KESTREL,angry,,Kestrel (brow)]Kestrel: Everyone keeps telling me to let it go.'
+        - 'Kestrel: My mother had a seat, and a Plate, and a city that loved her.'
+        - 'Kestrel: Then one night she had nothing. Let WHAT go?'
+        - 'Kestrel: They say she died in exile. Of the wilting. They sent a box.'
+        - 'Kestrel: Nobody saw a body.'
+        - 'Kestrel: Nobody in Gravenmoor will say where she''s buried.'
+        - '\pf[KESTREL,sad,,Kestrel (brow)]Kestrel: And now there''s a man in a mask who talks like her, and the whole realm''s saying it. Every inn from here to
+          Ebbmouth.'
+        - 'Kestrel: The Mourner''s Morwen Vane. She didn''t die.'
+        - 'Kestrel: She was made to disappear, and she came back.'
+        - 'Kestrel: She wasn''t killed by the Bleed. She was made to disappear.'
+        - choices: [Then go and find out., 'It might not be her, Kestrel.', '...']
+          branches:
+          - - {script: 'pf_choose(:ch6_kestrel_rumor, :encourage)'}
+            - '\pf[KESTREL,shocked,jolt,Kestrel (brow)]Kestrel: ...You think it''s her.'
+            - '\pf[KESTREL,happy,,Kestrel (brow)]Kestrel: You think it could be her.'
+            - 'Kestrel: Everyone else says "let it go". You said "go".'
+            - 'Kestrel: Then I''m going. All the way.'
+            - 'Kestrel: Wherever he turns up next, I''ll be closest.'
+          - - {script: 'pf_choose(:ch6_kestrel_rumor, :warn)'}
+            - '\pf[KESTREL,angry,,Kestrel (brow)]Kestrel: I know it might not be her. I KNOW.'
+            - 'Kestrel: Don''t you think I know?'
+            - '\pf[KESTREL,sad,,Kestrel (brow)]Kestrel: ...I just need it not to be nobody.'
+            - move:
+                who: Kestrel (brow)
+                route: [turn_up]
+                wait: true
+          - - {script: 'pf_choose(:ch6_kestrel_rumor, :silent)'}
+            - '\pf[KESTREL,sad,,Kestrel (brow)]Kestrel: Yeah. That''s what Gran says, too.'
+            - 'Kestrel: Nothing, very loudly.'
+          cancel: 3
+        - '\pf[KESTREL,neutral,,Kestrel (brow)]Kestrel: The cell''s gone south and down, to Nadir.'
+        - 'Kestrel: Mirefen, the char-burners said. I''m going after them.'
+        - 'Kestrel: Don''t follow me. You will anyway.'
+        - 'Kestrel: Just don''t do it where I can see.'
+        - move:
+            who: Kestrel (brow)
+            route:
+            - through_on
+            - down
+            - down
+            - down
+            - down
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - {opacity: 0}
+            wait: true
+        - switch: [CH6_K3_DONE, true]
+        - var: [CH6_STEP, 8]
+      else:
+      - {script: 'pfm_tone(34, -6, -40, 10, 30)'}
+      - move:
+          who: Sahar (Door in the Skull)
+          route:
+          - {opacity: 255}
+          - turn_up
+          wait: true
+      - {wait: 30}
+      - {script: 'pfm_face(:player, "Sahar (Door in the Skull)")'}
+      - '\pf[SAHAR,neutral,,Sahar (Door in the Skull)]Sahar: The seal on that inner door was three hundred years old.'
+      - 'Sahar: It took a team of nine and a Claydol four months to shift it in AF 281.'
+      - {script: 'pfm_face("Sahar (Door in the Skull)", :player)'}
+      - '\pf[SAHAR,deadpan,dots,Sahar (Door in the Skull)]Sahar: You leaned on it.'
+      - choices: [It was loose., I was tired., '...']
+        branches:
+        - ['\pf[SAHAR,deadpan,,Sahar (Door in the Skull)]Sahar: It was not loose.', 'Sahar: Things are not "loose" around you. Things give up.']
+        - ['\pf[SAHAR,deadpan,,Sahar (Door in the Skull)]Sahar: You were tired, and a three-hundred-year-old seal fell over.', 'Sahar: I''ll put that in the report.
+            "The challenger was tired."']
+        - ['\pf[SAHAR,deadpan,,Sahar (Door in the Skull)]Sahar: Don''t do the silence at me. I''m an archaeologist.', 'Sahar: I''ve been stared at by better skulls
+            than you.']
+        cancel: 3
+      - move:
+          who: Kestrel (brow)
+          route:
+          - graphic: [KESTREL, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - raw:
+        - 203
+        - [8, 2, 4]
+      - '\pf[KESTREL,smug,,Kestrel (brow)]Kestrel: Told you. Things give up around them.'
+      - 'Kestrel: Rivers. Plates. Me. Twice.'
+      - move:
+          who: Sahar (Door in the Skull)
+          route: [turn_up]
+          wait: true
+      - '\pf[SAHAR,shocked,question,Sahar (Door in the Skull)]Sahar: ...Twice?'
+      - '\pf[KESTREL,deadpan,,Kestrel (brow)]Kestrel: Don''t.'
+      - move:
+          who: Kestrel (brow)
+          route:
+          - through_on
+          - jump: [0, 3]
+          - through_off
+          wait: true
+      - {script: 'pbSEPlay("Anim/Earth4", 50, 110)
+
+          pfm_shake(1, 16, 6)'}
+      - {script: pfm_pan_home(16)}
+      - {script: 'pfm_face(:player, "Kestrel (brow)")'}
+      - {script: 'pfm_face("Kestrel (brow)", :player)'}
+      - '\pf[KESTREL,neutral,,Kestrel (brow)]Kestrel: I saw them. Over your shoulder. The king and the chain.'
+      - 'Kestrel: I was in there before you, in the dark.'
+      - 'Kestrel: I couldn''t read it till you brought the lamp.'
+      - 'Kestrel: I left the lighthouse the night of the Lowlight and I''ve been on the Hollow''s trail ever since.'
+      - 'Kestrel: They''ve got a cell out here. They came through Duneholt last week asking about old doors.'
+      - '\pf[KESTREL,angry,,Kestrel (brow)]Kestrel: And everywhere I go there''s you. In front of me.'
+      - 'Kestrel: Getting there first. Leaning on things.'
+      - 'Kestrel: Fight me. I need to know if I''m getting closer.'
+      - *id001
+      - *id002
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH6_STEP, 7]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 8]
+  at: [1, 0]
+  story: ch6
+- type: event
+  name: Juno's Letter
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {wait: 30}
+    - move:
+        who: Gale Post courier
+        route:
+        - graphic: [NPC 14, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto($game_player.x, $game_player.y + 5)'}
+        - through_on
+        - {speed: 5}
+        - up
+        - up
+        - up
+        - up
+        - turn_up
+        - through_off
+        wait: true
+    - {script: 'pfm_face(:player, "Gale Post courier")'}
+    - move:
+        who: Gale Post courier
+        route:
+        - jump: [0, 0]
+        wait: true
+    - 'Gale Post Courier: \PN? Thought so. You''re the only one in Ossaria nobody can describe.'
+    - 'Gale Post Courier: Letter. It''s been chasing you since Lumen.'
+    - {script: 'pbSEPlay("GUI menu open", 60, 80)'}
+    - {wait: 16}
+    - \c[3]\PN,
+    - \c[3]I found a way down! There was a ferryman on the Leach and he knew Dr Mott, and now I'm in Mirefen and it's BLUE at night, the whole marsh glows, and the
+      noodles are the best I've ever had and Dr Mott says they'll kill me.
+    - \c[3]I'm helping him with his seed-medicine. His ward is very quiet. I'll tell you about it when you come. I don't want to write it.
+    - \c[3]Uncle Rowan wrote. He burned his hand on the kettle, he says, the same night as the Lowlight. His right hand, all across the palm. He's made tea every
+      morning for forty years.
+    - \c[3]He's been "away on Warden business" every time something happens. Every time. I counted.
+    - \c[3]I'm being silly. I know I'm being silly.
+    - \c[3]Come to Mirefen? Bring snacks.
+    - \c[3]— Juno
+    - {script: '$PokemonGlobal.pf_quests.delete(:ch6_eighteen_roads) rescue nil'}
+    - {script: 'pfm_quest(:ch6_eighteen_roads, "Eighteen Roads", "Earn the sixth badge in Mirefen, down the Leach Road into Nadir.")'}
+    - move:
+        who: Gale Post courier
+        route:
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - {script: pfm_fade_in(30)}
+    - var: [CH6_STEP, 9]
+    - var: [STORY_CHAPTER, 7]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH6_STEP, 8]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 9]
+  at: [2, 0]
+  story: ch6
+- type: event
+  name: Kestrel (brow)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [66, 33]
+  story: ch6
+- type: event
+  name: Gale Post courier
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [64, 44]
+  story: ch6

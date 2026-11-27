@@ -19,17 +19,77 @@ events:
   name: Sahar
   at: [10, 5]
   pages:
-  - graphic: {sprite: SAHAR, dir: down}
-    trigger: action
-    move: fixed
-    commands:
+  - commands:
     - if: (pf_trial_ready?(:SAHAR_DIGLAB) rescue false)
       then:
       - {script: 'pf_trial_talk(:SAHAR_DIGLAB)'}
-      else: ['Sahar: Don''t come any closer. You''ll breathe on it.', 'Sahar: ...You''re the challenger. The Lumen one. The one who walks in the glass. Everyone''s
-          heard.', 'Sahar: Sahar Ostrand. I keep the Dig, and the Earth Plate, and a well that''s falling into itself a rung a week while a man in a palace sells
-          the water underneath it.', 'Sahar: One thing, before you go anywhere in Ossaria. Walk the bones, never the sand.', 'Sahar: Where there''s a rib or a road
-          of bone, walk on it. Where there''s only sand, don''t. The desert keeps everything. It just doesn''t keep it where you left it.']
+      else: ['\pf[SAHAR,neutral,,Sahar]Sahar: Walk the bones, never the sand.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: down}
+    story: ch6
+  - commands:
+    - {script: '3.times { pbSEPlay("Anim/Wind1", 25, 160); pbWait(0.6) }'}
+    - '\pf[SAHAR,neutral,,Sahar]Sahar: Don''t come any closer. You''ll breathe on it.'
+    - {wait: 20}
+    - {script: 'pfm_face("Sahar", :player)'}
+    - {wait: 10}
+    - 'Sahar: ...You''re the challenger. The Lumen one.'
+    - 'Sahar: The one who walks in the glass. Everyone''s heard.'
+    - 'Sahar: Sahar Ostrand. I keep the Dig, and the Earth Plate, and a well that''s falling into itself a rung a week while a man in a palace sells the water underneath
+      it.'
+    - '\pf[SAHAR,deadpan,,Sahar]Sahar: You''ll have read his notice. He has a lovely hand.'
+    - 'Sahar: He should have been a calligrapher. We''d all be happier.'
+    - '\pf[SAHAR,neutral,,Sahar]Sahar: One thing, before you go anywhere in Ossaria.'
+    - 'Sahar: Walk the bones, never the sand.'
+    - 'Sahar: Where there''s a rib or a road of bone, walk on it.'
+    - 'Sahar: Where there''s only sand, don''t. The desert keeps everything.'
+    - 'Sahar: It just doesn''t keep it where you left it.'
+    - {script: 'pfm_set(:ch6_met_sahar)'}
+    - {wait: 20}
+    - {script: 'pbSEPlay("Anim/Earth4", 60, 45)
+
+        pfm_shake(1, 20, 14)'}
+    - move:
+        who: Sahar
+        route: [turn_right, wait 30, turn_up]
+        wait: true
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: up}
+    cond:
+      var: [CH6_STEP, 3]
+    story: ch6
+  - commands:
+    - if: (pf_trial_ready?(:SAHAR_DIGLAB) rescue false)
+      then:
+      - {script: 'pf_trial_talk(:SAHAR_DIGLAB)'}
+      else: ['\pf[SAHAR,neutral,,Sahar]Sahar: Walk the bones, never the sand.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: up}
+    cond:
+      var: [CH6_STEP, 3]
+      self: A
+    story: ch6
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 4]
+    story: ch6
+  - commands:
+    - if: (pf_trial_ready?(:SAHAR_DIGLAB) rescue false)
+      then:
+      - {script: 'pf_trial_talk(:SAHAR_DIGLAB)'}
+      else: ['\pf[SAHAR,neutral,,Sahar]Sahar: Walk the bones, never the sand.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: down}
+    cond:
+      var: [CH6_STEP, 9]
+    story: ch6
 - type: event
   name: Rolls of Unearthing Board
   at: [18, 1]

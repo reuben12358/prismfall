@@ -73,6 +73,20 @@ events:
     move: fixed
     commands: ['Directorate Sergeant: Meridian Security Directorate. Move along, citizen.', 'Directorate Sergeant: We''ve had reports of Hollow saboteurs nosing around
         the drill cables. This shaft stays under Accord protection.']
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 3]
+    story: ch6
+  - commands: ['Directorate Sergeant: Meridian Security Directorate. Move along, citizen.', 'Directorate Sergeant: We''ve had reports of Hollow saboteurs nosing around
+        the drill cables. This shaft stays under Accord protection.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_MERIDIAN_DIRECTORATE, dir: down}
+    cond:
+      var: [CH6_STEP, 4]
+    story: ch6
   fixed: true
 - type: event
   name: Caravan-mother
@@ -114,3 +128,857 @@ events:
   hidden: true
   name: HiddenItem (waterwheel bank)
   fixed: true
+- type: event
+  name: The Deep-works
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: "if pfm_get(:ch6_met_sahar)\n  $game_self_switches[[@map_id, @event_id, \"B\"]] = true\n  $game_map.need_refresh = true\nend"}
+    - {wait: 10}
+    trigger: parallel
+    move: fixed
+    cond:
+      var: [CH6_STEP, 3]
+  - commands:
+    - {script: pfm_fade_out(8)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(30, 20)'}
+        - turn_right
+        wait: true
+    - {script: pfm_fade_in(16)}
+    - raw:
+      - 203
+      - [4, 5, 3]
+    - {wait: 30}
+    - {script: pfm_pan_home(30)}
+    - {script: 'pbSEPlay("Anim/Earth4", 80, 45)
+
+        pfm_shake(2, 8, 30)'}
+    - {wait: 24}
+    - {script: 'pbSEPlay("Water1", 70, 60)'}
+    - {wait: 20}
+    - {script: 'pbSEPlay("Anim/Explosion7", 80, 60)
+
+        pfm_shake(5, 14, 16)
+
+        pfm_glow(70, 60, 40, 16, 10)'}
+    - {wait: 10}
+    - move:
+        who: Drilbur 1
+        route:
+        - graphic: [Followers/DRILBUR, 0, 4, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 4}
+        - left
+        - left
+        - up
+        - turn_left
+        wait: false
+    - move:
+        who: Drilbur 2
+        route:
+        - wait 8
+        - graphic: [Followers/DRILBUR, 0, 4, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 4}
+        - left
+        - left
+        - turn_left
+        wait: false
+    - move:
+        who: Drilbur 3
+        route:
+        - wait 16
+        - graphic: [Followers/DRILBUR, 0, 4, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 4}
+        - left
+        - left
+        - down
+        - turn_left
+        wait: false
+    - move:
+        who: Excadrill (Ochre)
+        route:
+        - wait 24
+        - graphic: [Followers/EXCADRILL, 0, 4, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 3}
+        - left
+        - turn_left
+        wait: true
+    - move:
+        who: Meridian Foreman
+        route: [turn_right]
+        wait: true
+    - 'Meridian Foreman: The cores! The CORES are loose!'
+    - 'Meridian Foreman: Somebody''s cut the collars—'
+    - move:
+        who: Bereaved (fence) 1
+        route:
+        - graphic: [trainer_HOLLOW_GRUNT_M, 0, 6, 0]
+        - {opacity: 255}
+        wait: true
+    - move:
+        who: Bereaved (fence) 2
+        route:
+        - graphic: [trainer_HOLLOW_GRUNT_F, 0, 6, 0]
+        - {opacity: 255}
+        wait: true
+    - {script: '3.times { pbSEPlay("Mining pick", 50, 150); pbWait(0.35) }'}
+    - move:
+        who: Caravan boy (drill)
+        route:
+        - graphic: [NPC 05, 0, 6, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - right
+        - right
+        - right
+        - turn_right
+        wait: false
+    - move:
+        who: Caravan girl (drill)
+        route:
+        - wait 6
+        - graphic: [NPC 09, 0, 6, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - right
+        - right
+        - turn_right
+        wait: true
+    - move:
+        who: Drilbur 1
+        route: [left]
+        wait: false
+    - move:
+        who: Drilbur 2
+        route: [left]
+        wait: false
+    - move:
+        who: Drilbur 3
+        route: [left]
+        wait: true
+    - 'Bereaved: Go on! Go on, you''re free, GO!'
+    - 'Caravan Boy: This way! This way, little one!'
+    - move:
+        who: Sergeant (drill)
+        route:
+        - graphic: [trainer_MERIDIAN_DIRECTORATE, 0, 2, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - turn_down
+        wait: false
+    - move:
+        who: Officer (drill) 1
+        route:
+        - wait 6
+        - graphic: [trainer_MERIDIAN_DIRECTORATE, 0, 2, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - turn_down
+        wait: false
+    - move:
+        who: Officer (drill) 2
+        route:
+        - wait 12
+        - graphic: [trainer_MERIDIAN_DIRECTORATE, 0, 2, 0]
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - turn_down
+        wait: true
+    - 'Directorate Sergeant: By Mandate of the Accord! Everyone STOP!'
+    - 'Directorate Sergeant: Those are Meridian assets!'
+    - 'Directorate Sergeant: Those children are aiding saboteurs. Take them.'
+    - move:
+        who: Officer (drill) 1
+        route: [down, left, turn_left]
+        wait: true
+    - move:
+        who: Caravan boy (drill)
+        route:
+        - jump: [0, 0]
+        wait: false
+    - move:
+        who: Mother (terrace)
+        route:
+        - graphic: [NPC 04, 0, 2, 0]
+        - {opacity: 255}
+        wait: true
+    - {script: 'pfm_emote("Mother (terrace)", 3)'}
+    - {script: 'pbSEPlay("Anim/Scream", 70, 100) rescue nil'}
+    - move:
+        who: Excadrill (Ochre)
+        route: [through_on, left, turn_right]
+        wait: true
+    - {script: 'pbSEPlay("Cries/EXCADRILL", 80, 110) rescue nil'}
+    - {wait: 10}
+    - {script: 'pfm_face("Bereaved (fence) 1", :player)'}
+    - 'Bereaved: You! The one from the Lowlight!'
+    - 'Bereaved: Help us get them into the dunes!'
+    - {script: 'pfm_face("Sergeant (drill)", :player)'}
+    - 'Directorate Sergeant: You! Guest of the Chair!'
+    - 'Directorate Sergeant: Help us secure the site!'
+    - choices: [Help the Hollow get the freed Pokémon into the dunes., Help the Directorate secure the site., Shout for Sahar.]
+      branches:
+      - - {script: 'pf_choose(:ch6_drillsite, :hollow)'}
+        - {script: 'setBattleRule("field", :DESERT)'}
+        - if: TrainerBattle.start(:MERIDIAN_DIRECTORATE, "Sergeant", 6)
+          then:
+          - 'Directorate Sergeant: This is obstruction of the Mandate. You''ll be in a report by tonight.'
+          - move:
+              who: Drilbur 1
+              route: &id003
+              - through_on
+              - &id001 {speed: 5}
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - &id002 {opacity: 0}
+              wait: false
+          - move:
+              who: Drilbur 2
+              route:
+              - wait 6
+              - through_on
+              - *id001
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - *id002
+              wait: false
+          - move:
+              who: Drilbur 3
+              route:
+              - wait 12
+              - through_on
+              - *id001
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - *id002
+              wait: false
+          - move:
+              who: Bereaved (fence) 2
+              route:
+              - wait 4
+              - through_on
+              - *id001
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - *id002
+              wait: false
+          - move:
+              who: Caravan girl (drill)
+              route:
+              - wait 10
+              - through_on
+              - *id001
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - left
+              - *id002
+              wait: false
+          - move:
+              who: Excadrill (Ochre)
+              route: [wait 30, turn_right, wait 30, turn_left]
+              wait: true
+          - {script: 'pbSEPlay("Anim/Earth4", 80, 70)
+
+              pfm_shake(2, 12, 10)'}
+          - {script: 'pfm_vanish("Excadrill (Ochre)", 20)'}
+          - {script: 'pfm_face("Bereaved (fence) 1", :player)'}
+          - 'Bereaved: The red giant thanks you. So do we.'
+          - 'Bereaved: ...So does Ochre, the big one.'
+          - 'Bereaved: That was her name, before they put a number on her.'
+          - move:
+              who: Bereaved (fence) 1
+              route: *id003
+              wait: false
+          - move:
+              who: Caravan boy (drill)
+              route:
+              - through_on
+              - {speed: 5}
+              - left
+              - left
+              - up
+              - up
+              - {opacity: 0}
+              wait: false
+          - move:
+              who: Sergeant (drill)
+              route: [turn_down, wait 40, turn_left]
+              wait: true
+          - {wait: 10}
+          - &id004
+            move:
+              who: Sahar (drill)
+              route:
+              - graphic: [SAHAR, 0, 2, 0]
+              - {opacity: 255}
+              - through_on
+              - {speed: 3}
+              - down
+              - down
+              - down
+              - down
+              - down
+              - right
+              - down
+              - turn_right
+              - through_off
+              wait: true
+          - &id005 {script: 'pfm_face("Sahar (drill)", :player)'}
+          - &id006
+            move:
+              who: Sahar (drill)
+              route: [turn_left]
+              wait: true
+          - &id007 {script: 'pbSEPlay("Anim/Earth4", 70, 40)
+
+              pfm_shake(1, 16, 20)'}
+          - &id008 {wait: 10}
+          - &id009 {script: 'pbSEPlay("Water1", 60, 50)'}
+          - '\pf[SAHAR,sad,,Sahar (drill)]Sahar: It dropped again. Did you feel it?'
+          - 'Sahar: A whole rung, just now.'
+          - &id010 {script: 'pfm_face("Sahar (drill)", :player)'}
+          - 'Sahar: They put collars on diggers and sent them down to drink my well for a man in Lumen. And now the Hollow have let them go, and the shaft''s open,
+            and the water will run down it like a drain.'
+          - 'Sahar: Come to the Dig when you''re ready.'
+          - 'Sahar: I''d like to hit something that''s allowed to hit back.'
+          - &id011
+            move:
+              who: Sahar (drill)
+              route:
+              - through_on
+              - left
+              - up
+              - up
+              - up
+              - up
+              - up
+              - {opacity: 0}
+              wait: true
+          - &id012 {script: pfm_fade_out(16)}
+          - &id013
+            move:
+              who: Sergeant (drill)
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id014
+            move:
+              who: Officer (drill) 1
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id015
+            move:
+              who: Officer (drill) 2
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id016
+            move:
+              who: Bereaved (fence) 1
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id017
+            move:
+              who: Bereaved (fence) 2
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id018
+            move:
+              who: Caravan boy (drill)
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id019
+            move:
+              who: Caravan girl (drill)
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id020
+            move:
+              who: Mother (terrace)
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id021
+            move:
+              who: Excadrill (Ochre)
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id022
+            move:
+              who: Drilbur 1
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id023
+            move:
+              who: Drilbur 2
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id024
+            move:
+              who: Drilbur 3
+              route:
+              - {opacity: 0}
+              wait: false
+          - &id025
+            var: [CH6_STEP, 4]
+          - &id026 {script: pfm_fade_in(16)}
+          else:
+          - {exit: true}
+      - - {script: 'pf_choose(:ch6_drillsite, :directorate)'}
+        - {script: 'setBattleRule("field", :DESERT)'}
+        - if: TrainerBattle.start(:HOLLOW_GRUNT_M, "Bereaved", 7)
+          then:
+          - move:
+              who: Bereaved (fence) 1
+              route:
+              - through_on
+              - jump: [-1, -2]
+              - {opacity: 0}
+              wait: false
+          - move:
+              who: Bereaved (fence) 2
+              route:
+              - through_on
+              - jump: [-1, 2]
+              - {opacity: 0}
+              wait: false
+          - {script: '3.times { pbSEPlay("Mining pick", 50, 140); pbWait(0.3) }'}
+          - move:
+              who: Officer (drill) 2
+              route: [through_on, right, right, turn_left]
+              wait: false
+          - move:
+              who: Drilbur 1
+              route:
+              - through_on
+              - right
+              - right
+              - right
+              - {opacity: 0}
+              wait: false
+          - move:
+              who: Drilbur 2
+              route:
+              - wait 8
+              - through_on
+              - right
+              - right
+              - right
+              - {opacity: 0}
+              wait: false
+          - move:
+              who: Drilbur 3
+              route:
+              - wait 16
+              - through_on
+              - right
+              - right
+              - right
+              - {opacity: 0}
+              wait: true
+          - {script: 'pbSEPlay("Cries/EXCADRILL", 90, 90) rescue nil
+
+              pfm_shake(3, 14, 16)'}
+          - move:
+              who: Excadrill (Ochre)
+              route:
+              - jump: [0, 0]
+              - through_on
+              - right
+              - jump: [0, 0]
+              - right
+              - {opacity: 0}
+              wait: true
+          - {script: 'pfm_face("Sergeant (drill)", :player)'}
+          - 'Directorate Sergeant: Good work. Very good work.'
+          - 'Directorate Sergeant: The Directorate remembers its friends.'
+          - {script: 'pfm_item(:MANDATEPASS, 1, "Mandate Pass")'}
+          - move:
+              who: Officer (drill) 1
+              route:
+              - through_on
+              - up
+              - up
+              - up
+              - {opacity: 0}
+              wait: false
+          - move:
+              who: Caravan boy (drill)
+              route:
+              - through_on
+              - wait 4
+              - up
+              - up
+              - up
+              - {opacity: 0}
+              wait: false
+          - {script: 'pfm_face("Mother (terrace)", :player)'}
+          - {wait: 60}
+          - *id004
+          - *id005
+          - *id006
+          - *id007
+          - *id008
+          - *id009
+          - '\pf[SAHAR,sad,,Sahar (drill)]Sahar: It dropped again. Did you feel it?'
+          - 'Sahar: A whole rung, just now.'
+          - *id010
+          - 'Sahar: They put collars on diggers and sent them down to drink my well for a man in Lumen. And now the Hollow have let them go, and the shaft''s open,
+            and the water will run down it like a drain.'
+          - 'Sahar: Come to the Dig when you''re ready.'
+          - 'Sahar: I''d like to hit something that''s allowed to hit back.'
+          - *id011
+          - *id012
+          - *id013
+          - *id014
+          - *id015
+          - *id016
+          - *id017
+          - *id018
+          - *id019
+          - *id020
+          - *id021
+          - *id022
+          - *id023
+          - *id024
+          - *id025
+          - *id026
+          else:
+          - {exit: true}
+      - - {script: 'pf_choose(:ch6_drillsite, :sanctuary)'}
+        - move:
+            who: player
+            route: [turn_up]
+            wait: true
+        - {script: '[90, 55, 30].each { |v| pbSEPlay("Anim/Saint7", v, 90); pbWait(0.55) }'}
+        - *id004
+        - {script: 'pfm_face("Sergeant (drill)", "Sahar (drill)")'}
+        - {script: 'pfm_face("Bereaved (fence) 1", "Sahar (drill)")'}
+        - {script: 'pfm_face(:player, "Sahar (drill)")'}
+        - '\pf[SAHAR,angry,,Sahar (drill)]Sahar: Sergeant. Let go of that child.'
+        - 'Directorate Sergeant: Warden, with respect, the Mandate—'
+        - 'Sahar: The Mandate is two weeks old.'
+        - 'Sahar: The Warden''s right of sanctuary is two hundred and ninety-six years old.'
+        - 'Sahar: "Any child of the city who stands within sight of its Plate stands under its Warden."'
+        - 'Sahar: The Earth Plate is in that well. That child is in sight of it.'
+        - 'Sahar: Under the Concordance, Sergeant. Read it sometime.'
+        - 'Sahar: It''s short. I''ll lend you mine.'
+        - move:
+            who: Sergeant (drill)
+            route: [turn_up, wait 24]
+            wait: false
+        - move:
+            who: Officer (drill) 1
+            route: [wait 12, turn_left, wait 24]
+            wait: true
+        - move:
+            who: Sergeant (drill)
+            route: [turn_left]
+            wait: true
+        - move:
+            who: Caravan boy (drill)
+            route:
+            - through_on
+            - {speed: 4}
+            - left
+            - left
+            - left
+            - turn_right
+            - through_off
+            wait: true
+        - 'Directorate Sergeant: This goes in my report.'
+        - '\pf[SAHAR,deadpan,,Sahar (drill)]Sahar: Spell my name right. It has an H in it nobody hears.'
+        - '\pf[SAHAR,sad,,Sahar (drill)]Sahar: That law covers children, Sergeant.'
+        - {script: 'pfm_face("Sahar (drill)", "Drilbur 1")'}
+        - 'Sahar: It doesn''t cover them.'
+        - 'Sahar: I can''t stop you. I''m sorry.'
+        - move:
+            who: Bereaved (fence) 1
+            route: *id003
+            wait: false
+        - move:
+            who: Bereaved (fence) 2
+            route: *id003
+            wait: false
+        - {script: '2.times { pbSEPlay("Mining pick", 50, 140); pbWait(0.3) }'}
+        - move:
+            who: Drilbur 1
+            route:
+            - through_on
+            - right
+            - right
+            - right
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Drilbur 3
+            route: *id003
+            wait: false
+        - {script: 'pbSEPlay("Cries/EXCADRILL", 90, 90) rescue nil
+
+            pfm_shake(3, 14, 16)'}
+        - move:
+            who: Excadrill (Ochre)
+            route:
+            - jump: [0, 0]
+            - through_on
+            - right
+            - jump: [0, 0]
+            - right
+            - {opacity: 0}
+            wait: true
+        - move:
+            who: Drilbur 2
+            route:
+            - through_on
+            - right
+            - right
+            - right
+            - {opacity: 0}
+            wait: true
+        - move:
+            who: Caravan girl (drill)
+            route:
+            - through_on
+            - {speed: 4}
+            - left
+            - left
+            - turn_right
+            - through_off
+            wait: true
+        - move:
+            who: Sahar (drill)
+            route: [turn_up]
+            wait: true
+        - {wait: 30}
+        - 'Sahar: Two hundred and ninety-six years, and the law still thinks a digger is a shovel.'
+        - {wait: 20}
+        - *id005
+        - *id006
+        - *id007
+        - *id008
+        - *id009
+        - '\pf[SAHAR,sad,,Sahar (drill)]Sahar: It dropped again. Did you feel it?'
+        - 'Sahar: A whole rung, just now.'
+        - *id010
+        - 'Sahar: They put collars on diggers and sent them down to drink my well for a man in Lumen. And now the Hollow have let them go, and the shaft''s open,
+          and the water will run down it like a drain.'
+        - 'Sahar: Come to the Dig when you''re ready.'
+        - 'Sahar: I''d like to hit something that''s allowed to hit back.'
+        - *id011
+        - *id012
+        - *id013
+        - *id014
+        - *id015
+        - *id016
+        - *id017
+        - *id018
+        - *id019
+        - *id020
+        - *id021
+        - *id022
+        - *id023
+        - *id024
+        - *id025
+        - *id026
+      cancel: 0
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH6_STEP, 3]
+      self: B
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH6_STEP, 4]
+  at: [1, 0]
+  story: ch6
+- type: event
+  name: Drilbur 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [37, 21]
+  story: ch6
+- type: event
+  name: Drilbur 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [38, 21]
+  story: ch6
+- type: event
+  name: Drilbur 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [37, 22]
+  story: ch6
+- type: event
+  name: Excadrill (Ochre)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [38, 22]
+  story: ch6
+- type: event
+  name: Bereaved (fence) 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [33, 18]
+  story: ch6
+- type: event
+  name: Bereaved (fence) 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [33, 22]
+  story: ch6
+- type: event
+  name: Caravan boy (drill)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [26, 21]
+  story: ch6
+- type: event
+  name: Caravan girl (drill)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [26, 19]
+  story: ch6
+- type: event
+  name: Sergeant (drill)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [36, 12]
+  story: ch6
+- type: event
+  name: Officer (drill) 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [37, 12]
+  story: ch6
+- type: event
+  name: Officer (drill) 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [38, 12]
+  story: ch6
+- type: event
+  name: Mother (terrace)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [30, 12]
+  story: ch6
+- type: event
+  name: Sahar (drill)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [27, 12]
+  story: ch6
