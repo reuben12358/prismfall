@@ -987,7 +987,7 @@ trainers lean on Lava Plume). **Kingdom:** Ashkaar's forge-guilds, commoners und
 | ID | Name | Values |
 |---|---|---|
 | V335 / V336 / V337 | `G7_AIM_K1 / K2 / K3` | K1: 0 → X1, 1 → X2 · K2: 0 → X2, 1 → X3 · K3: 0 → X1, 1 → X3 |
-| V338 | `G7_QUENCH` | quench charges left (starts 1) |
+| V338 | `G7_QUENCHED` | the one quench charge, shared by Q1–Q3: 0 ready, 1 dry |
 | S335 / S336 / S337 | `G7_POURED_K1 / K2 / K3` | crucible spent |
 | S338 | `G7_TEACH_DONE` | 250 bridge |
 | S339 | `G7_VAULT_DONE` | vault chest |
@@ -1020,7 +1020,7 @@ y24  ##############@##############
 - **Crucible K** (action): if spent: "Empty." Else choose `Aim the spout / Pour`. Aim cycles its two channels and the
   spout graphic turns. Pour: the target channel becomes molten if empty, re-melts if iron, and nothing happens if
   already molten. Then the crucible is spent.
-- **Quench valve Q_k:** if V338 > 0 and channel k is molten → iron, V338 −= 1. Otherwise: "The cistern's dry." or
+- **Quench valve Q_k:** if V338 = 0 (ready) and channel k is molten → iron, V338 = 1 (dry). Otherwise: "The cistern's dry." or
   "Nothing to quench."
 - **Chutes C1/C2** (`touch`): first **drain**: for every molten channel k, X_k = empty and M_k = iron ("A roar below: the
   moulds fill."). Then `pfp_swap_map(252)`.
@@ -1033,12 +1033,15 @@ y24  ##############@##############
 - Each `M<k>` tile: P0 [—] blank (pit) · P1 [S43k on] tile IRON_CAST (passable).
 - Trainers: Worker (8,21), Black Belt (20,8).
 
-> **Built 2026-11-26 (Claude):** maps 250–253 by `mapgen/layouts/foundry_gym.py`, with the model and runtime in
-> `mapgen/puzzles/foundry.py`. That file's coordinates are the ones to use (the trainers and some devices moved, and the
-> trainers are `tools/trainer_gen/routes.py`'s five). `build.py` proves the puzzle on the design and on the built maps.
-> The solver's shortest route is **7 moves**: pour K1 → X1 and K2 → X2 as they stand, quench X2, turn K3 to X3 and
-> pour, chute C1, then chute C2 (no aim on K1/K2). The hand solution below is the same idea with one more aim. The
-> vault takes 3 moves (pour K1, pour K2, chute C1). All of it was walked in the real engine
+> **Built 2026-11-27 (Gemini's crafted maps; proofs ported by Claude):** maps 250–253 are Gemini's
+> `mapgen/layouts/cindervault_gym.py` (6cb085b3); Claude's first pass, `foundry_gym.py`, is superseded. It is this
+> design (same ids, aims, one shared quench, drains, moulds and vault) at Gemini's coordinates: maps 29×27, trenches
+> 5 wide (x 12–16), the bands one row lower. Use the grids in `mapgen/puzzles/foundry.py` (Gemini's built floors).
+> Gemini added 252's ladders C1 / C2 back up beside the chute landings, Apprentice Hessa (status, reset, three hints,
+> puzzleskip) and the Mould-Runner (reset) in place of Sooty's bell-pulls, and a Foundry Medic in 250. `build.py`
+> proves it on the grids and on the built maps: 250 in 2 moves; the Pour Floor + Mould Floor in **7** (pour K1 → X1
+> and K2 → X2 as they stand, quench X2, turn K3 to X3 and pour, chute C1, chute C2); the vault in 3; no soft-lock;
+> both traps real. Brann's pages (story) are `layouts/story_ch8.py`'s. All of it walked in the real engine
 > (`tools/harness/visual/ch8/008_Ch8StoryCapture.rb`, `CH8_VAULT=1`).
 
 **Solution (verified by hand; 3 pours, 1 quench, 2 drains):**
@@ -1052,7 +1055,7 @@ y24  ##############@##############
 finish upstairs is the one that carries you downstairs."
 **Hints (apprentice "Sooty", S band):** 1 "Brann never wastes a pour. Whatever's still hot when you go down, the moulds
 get." 2 "You only need one bridge upstairs. Which one can't the moulds give you?" 3 the solution.
-**Reset:** Sooty → crucibles refilled, aims 0, V338 = 1, X and M all reset, player to the S band.
+**Reset:** Sooty (built: Hessa on 251, the Mould-Runner on 252) → crucibles refilled, aims 0, V338 = 0, X and M all reset, player to the S band.
 
 **MASTERY "forge to break right" (in 252's vault; no extra map).** If X2 is *also* left molten when you take C1, M2 casts
 across the pit and you can reach the **vault**. Its cracked mould has split under the pour and exposes Brann's

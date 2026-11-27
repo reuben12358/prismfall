@@ -1,16 +1,19 @@
 #===============================================================================
 # Ch8 story beats on 244 / 249 / 255 in the real engine, dev tool (mapgen/layouts/story_ch8.py + cindervault.py).
 #   CH8_STEP 3: 240's Foundry doors are barred -> 243: "The Hug" (-> 4, on to 244) -> "My Father" (step stays 4,
-#   :gym7_open) -> 240: through the Foundry doors into Gym 7 (layouts/foundry_gym.py), WALKED: 250 pour + quench + cross
-#   -> 251 / 252 the solver's 7-move route (CH8_VAULT=1 first plays the mastery vault and Sooty's bell-pull reset) ->
-#   253 Brann (LOCKED fight, auto-won) -> the Quench Badge, CH8_STEP 5, out into the square -> 240: the Five Bells
+#   :gym7_open) -> 240: through the Foundry doors into Gemini's Gym 7 (layouts/cindervault_gym.py; proofs
+#   puzzles/foundry.py), WALKED: 250 lever + wheel + cross -> 251 / 252 the solver's 7-move route (CH8_VAULT=1 first
+#   plays the mastery vault and the Mould-Runner's reset) -> 253 Brann (LOCKED fight, auto-won; his pages are
+#   story_ch8.py's) -> the Quench Badge, CH8_STEP 5, out into the square -> 240: the Five Bells
 #   (-> 6) -> 249: the evacuation -> down to 255: the Caldera Crisis (6, S120, V110) -> 244: "Whose Is It"
 #   (:ch8_lightstone, -> 7) -> "Chestnuts" (-> 8) -> 240: "The Herald" (-> 9, S121, V122 1) -> 243: leaving (-> 10,
 #   STORY_CHAPTER 9). No step is set by hand after the start (3).
 # Battles are auto-won; choices come from CH8_CHOICES (0-based, in order: the hug, Sigrun, detonator, caldera branch,
-# Light Stone, Larch at the door), default 1,0,1,0,1,2. No frames unless CH8_SHOTS=1 (every 30th; delete frames/ch8_*
-# and captures_keep/ch8_* after). RESULT lines in demo.log; a stage that fails stops the run (FAIL).
+# Light Stone, Larch at the door), default 1,0,1,0,1,2. No frames unless CH8_SHOTS=1 (every CH8_EVERY-th frame, default
+# 30, never less; delete frames/ch8_* and captures_keep/ch8_* after). RESULT lines in demo.log; a stage that fails stops the run (FAIL).
 #   cp maps_out/Data/Map{240,243,244,249,250,251,252,253,255}.rxdata maps_out/Data/system_prismfall.txt /home/claude/run_intro/game/Data/
+#   (with the lock: see .agent_brief.md; CH8_VAULT=1 CH8_SHOTS=1 CH8_EVERY=45 for the vault and sparse frames;
+#   CH8_WATCHED=1 sets :ashkaar_watched first and talks to 240's oath-guard escort)
 #   bash tools/harness/visual/intro/run_intro.sh --capture $PWD/tools/harness/visual/ch8/008_Ch8StoryCapture.rb --plan ch8story
 # The switch / variable names Essentials needs for switch page conditions (S120 on 244) are what the Debug menu's
 # "Install Prismfall maps" writes into System.rxdata; this plan puts them into $data_system in memory only.
@@ -61,11 +64,12 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
     C8_DIRS = { 2 => [0, 1], 4 => [-1, 0], 6 => [1, 0], 8 => [0, -1] }
 
     # the first step toward a tile next to (tx, ty), going round every event tile but the trench / mould bridges
+    # (Gemini's "X1 12,17", "M2 14,11", "Teach X 10,10": their own pages decide whether they can be walked)
     # (no stepping on a hatch, chute or warp on the way); 0 = there already, nil = no way
     def c8_route(tx, ty)
       blocked = {}
       $game_map.events.each_value do |e|
-        next if e.name =~ /\A([XM]\d|Trench) / || (e.x == tx && e.y == ty)
+        next if e.name =~ /\A([XM]\d|Trench|Teach X) / || (e.x == tx && e.y == ty)
         blocked[[e.x, e.y]] = true
       end
       start = [$game_player.x, $game_player.y]
@@ -90,6 +94,8 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
     # picks = the answers to its prompts. Trainers on the way are fought (auto-won). -> [ok, frames]
     def c8_walk(tx, ty, how = :use, picks = [], limit = 4000)
       map0 = $game_map.map_id
+      tev = $game_map.events.values.find { |e| e.x == tx && e.y == ty }
+      Ch8Cap.g7 = picks.dup            # already now: a target that starts by itself still gets its answers
       f = 0; stuck = 0; acting = false; seen = false
       loop do
         Graphics.update; Input.update
@@ -97,6 +103,13 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
         f += 1
         return [false, f] if f > limit
         busy = c8_busy?
+        # the target already started on its own: the plan's USE press (every 45 frames) as the player stepped up facing
+        # it (253: the causeway runs straight up to Brann), or a touch tile walked onto. The player's update marks it
+        # `starting` after the interpreter has run, so it is still marked here; the interpreter takes it next frame.
+        if busy && !acting && tev && $game_map.map_id == map0 &&
+           (tev.starting || $game_system.map_interpreter.instance_variable_get(:@event_id) == tev.id)
+          acting = true
+        end
         seen = true if busy && acting
         next if busy
         if acting
@@ -178,12 +191,13 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
       $player.party = [DemoRun.mon(:SWAMPERT, 45, [:SURF, :EARTHQUAKE, :ICEBEAM, :PROTECT]),
                        DemoRun.mon(:GARDEVOIR, 45, [:PSYCHIC, :MOONBLAST, :THUNDERBOLT, :PROTECT])]
       $game_variables[129] = 3
+      pfm_set(:ashkaar_watched) if ENV["CH8_WATCHED"] == "1"   # what 652's oath-gate (not built) sets on "(Say nothing.)"
       $game_map.setup(240)                             # the square first: the Foundry's doors at CH8_STEP 3
       $game_player.moveto(21, 3); $game_player.turn_up
       $scene.disposeSpritesets rescue nil
       $scene.createSpritesets
       $game_map.need_refresh = true
-      self.every = 30
+      self.every = [(ENV["CH8_EVERY"] || 30).to_i, 30].max
       record("ch8_story") if ENV["CH8_SHOTS"] == "1"
       self.auto = true
       t0 = System.uptime
@@ -200,38 +214,53 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
       log("RESULT my father: CH8_STEP=#{$game_variables[129]} selfA=#{c8_selfsw('My Father').inspect} gym7_open=#{pfm_get(:gym7_open).inspect} " \
           "pos=#{$game_player.x},#{$game_player.y} brann_opacity=#{$game_map.events.values.find { |e| e.name == 'Brann' }&.opacity} frames=#{f}")
       c8_fail("My Father did not finish") if !c8_selfsw("My Father") || $game_variables[129] != 4
-      # --- up to the square and through the Foundry's doors: Gym 7, walked (layouts/foundry_gym.py, puzzles/foundry.py)
+      if ENV["CH8_WATCHED"] == "1"        # the oath-guard who keeps a PC that said nothing company (story_ch8.py)
+        c8_goto(240, 31, 37, 2)
+        c8_run(90, 90) { false }
+        esc = $game_map.events.values.find { |e| e.name == "Oath-Guard (escort)" }
+        ok, f = c8_walk(31, 38, :use)
+        log("RESULT escort: selfA=#{c8_selfsw('Oath-Guard (escort)').inspect} sprite=#{esc&.character_name.inspect} ok=#{ok} frames=#{f}")
+        c8_fail("the :ashkaar_watched escort did not show") if !c8_selfsw("Oath-Guard (escort)") || esc.character_name.to_s.empty?
+      end
+      # --- up to the square and through the Foundry's doors: Gemini's Gym 7, walked (layouts/cindervault_gym.py; the
+      # route is puzzles/foundry.py's 7-move solution). Gemini's crucible menu is [Aim at the other / Pour / Leave] and
+      # ends after an aim; its chutes ask "Drop down?" (Yes = 0).
       c8_goto(240, 21, 3, 8)
       Ch8Cap.gym = true
       n0 = Ch8Cap.battles.length
       c8_g7("the doors", 240, 21, 2, :touch, [], 250)
-      c8_g7("250 pour", 250, 6, 13, :use)
-      c8_g7("250 quench", 250, 14, 13, :use)
-      c8_g7("250 up the stair", 250, 10, 2, :touch, [], 251)
-      if ENV["CH8_VAULT"] == "1"            # the mastery: leave X2 molten too, C1 casts M2, the cracked mould; Sooty resets
-        c8_g7("vault: pour K1", 251, 3, 19, :use, [1])
-        c8_g7("vault: pour K2", 251, 7, 19, :use, [1])
-        c8_g7("vault: chute C1", 251, 8, 22, :touch, [], 252)
-        c8_g7("vault: the cracked mould", 252, 14, 7, :use)
-        c8_g7("vault: ring for Sooty", 252, 2, 14, :use, [0], 251)
+      log("RESULT 250 arrival: pos=#{$game_player.x},#{$game_player.y} dir=#{$game_player.direction} " \
+          "passable_up=#{$game_player.passable?($game_player.x, $game_player.y, 8)}")
+      c8_fail("250 arrival is not (12, 22)") if [$game_player.x, $game_player.y] != [12, 22]
+      c8_g7("250 pour (lever)", 250, 7, 13, :use)
+      c8_g7("250 quench (wheel)", 250, 17, 13, :use)
+      c8_g7("250 up to the Pour Floor", 250, 12, 4, :touch, [], 251)
+      if ENV["CH8_VAULT"] == "1"            # the mastery: leave X2 molten too, C1 casts M2, the hoard; the Mould-Runner resets
+        c8_g7("vault: pour K1", 251, 5, 19, :use, [1])
+        c8_g7("vault: pour K2", 251, 8, 19, :use, [1])
+        c8_g7("vault: chute C1", 251, 14, 22, :touch, [0], 252)
+        c8_g7("vault: the cracked-mould hoard", 252, 10, 8, :use)
+        c8_g7("vault: the Mould-Runner's reset", 252, 18, 22, :use, [0], 251)
       end
-      c8_g7("pour K1", 251, 3, 19, :use, [1])
-      c8_g7("pour K2", 251, 7, 19, :use, [1])
-      c8_g7("quench X2", 251, 24, 20, :use)
-      c8_g7("aim + pour K3", 251, 11, 19, :use, [0, 1])
-      c8_g7("chute C1", 251, 8, 22, :touch, [], 252)
-      c8_g7("ladder up (mid)", 252, 4, 13, :touch, [], 251)
-      c8_g7("chute C2", 251, 24, 7, :touch, [], 252)
-      c8_g7("ladder up (north)", 252, 24, 2, :touch, [], 251)
-      c8_g7("up to the arena", 251, 14, 0, :touch, [], 253)
-      c8_g7("Brann", 253, 10, 5, :use)
+      c8_g7("pour K1 (X1)", 251, 5, 19, :use, [1])
+      c8_g7("pour K2 (X2)", 251, 8, 19, :use, [1])
+      c8_g7("quench X2 (Q2)", 251, 22, 20, :use)
+      c8_g7("aim K3 (X3)", 251, 11, 19, :use, [0])
+      c8_g7("pour K3 (X3)", 251, 11, 19, :use, [1])
+      c8_g7("chute C1", 251, 14, 22, :touch, [0], 252)
+      c8_g7("ladder H up", 252, 5, 14, :touch, [], 251)
+      c8_g7("chute C2", 251, 23, 8, :touch, [0], 252)
+      c8_g7("north ladder up", 252, 23, 3, :touch, [], 251)
+      c8_g7("up to the arena", 251, 14, 2, :touch, [], 253)
+      c8_g7("Brann", 253, 10, 6, :use)
       f = c8_run(600) { c8_idle? && $game_map.map_id == 240 && $game_variables[129] >= 5 }
       Ch8Cap.gym = false
       log("RESULT gym 7: CH8_STEP=#{$game_variables[129]} badge7=#{$player.badges[6].inspect} TM35=#{$bag.quantity(:TM35)} " \
-          "ELEMENTALSEED=#{$bag.quantity(:ELEMENTALSEED)} story_items=#{(PrismfallMaps.flags[:story_items] rescue nil).inspect} " \
+          "ELEMENTALSEED=#{$bag.quantity(:ELEMENTALSEED)} CHARCOAL=#{$bag.quantity(:CHARCOAL)} vault=#{$game_switches[339]} " \
           "battles=#{Ch8Cap.battles[n0..-1].inspect} quest=#{($PokemonGlobal.pf_quests[:eighteen_roads] rescue nil).inspect} " \
           "map=#{$game_map.map_id} frames=#{f}")
       c8_fail("Gym 7 did not end on CH8_STEP 5 with the badge") if $game_variables[129] < 5 || !$player.badges[6]
+      c8_fail("the vault's hoard was not taken") if ENV["CH8_VAULT"] == "1" && (!$game_switches[339] || $bag.quantity(:ELEMENTALSEED) < 2)
       # --- the Five Bells in the square, then down to the Slag Ward
       f = c8_run(4000) { $game_variables[129] >= 6 && c8_idle? }
       log("RESULT five bells (240): CH8_STEP=#{$game_variables[129]} pos=#{$game_player.x},#{$game_player.y} tone=#{$game_screen.tone.red.round} frames=#{f}")

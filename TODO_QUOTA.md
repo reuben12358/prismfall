@@ -113,7 +113,7 @@
 - 2026-11-26, the Ch5 stage-direction pass: 180 / 181 / 608 (commit 64bd0f3, checked in the engine) and 582 / 186 / 951 (143b374, checked in the engine: scanner -> CH5_STEP 3 with the invitation, the gala -> 7 -> the raid and tag battle -> 8, Rook on the stair) play their bracketed narration (pans, the airship shadow, the grille, the blackout block by block, the violet aftermath, the scanner, the gala and the raid, Rook on the stair). `layouts/story_ch5.py` holds 180/181/608 (run it to sync 608, whose Gemini craft carries events over; 180 via `wave10_towns_craft.py 180`, 181 via `lumen.py 181`); `lumen_interiors.py 582 186 951` regenerates the rest byte for byte. Check: `tools/harness/visual/ch5/011_Ch5StagingCapture.rb` (plans ch5stage_lowlight / ch5stage_spire). Still bracketed: 185's Arena model, 952's fallback text (the cutscene agent's), inline "(...)" asides inside spoken lines.
 - 2026-11-26, Ch6–8 stage-direction pass: Ch6 and Ch7 have no built maps yet (nothing to stage). Ch8: the guarded exits and NPCs on Gemini's 240 / 243 / 249 turn the player back with a sound and a spoken line instead of a bracketed box (`storylayer.replace_lines`, from `story_ch8.py` STAGE); 185's Prism Arena model is a drawn vignette (`mapgen/ruby/019_Vignettes.rb`, eighteen pylons). Also added in `story_ch8.py` from Gemini's cindervault-core handoff: 243 The Hug (CH8_STEP 3 -> 4), 240 the Five Bells in the square (5 -> 6), 240 The Herald (8 -> 9, S121, WAR_STATE 1), 243 leaving (9 -> 10, STORY_CHAPTER 9). Real engine: `ch8/009_Ch8StagingCapture.rb` (all exits/NPCs/vignette) and `ch8/008_Ch8StoryCapture.rb` now plays the whole chapter, CH8_STEP 3 -> 10 (at the time Gym 7 was unbuilt and the run set step 5 itself; see Gym 7 below).
 - 2026-11-26, **Gym 7, the Foundry (250-253)** is built: `mapgen/puzzles/foundry.py` has the model, the proofs and the runtime (`PFFoundry`, flags G7_* V335-339/435-437 S335-339/435-437), and `mapgen/layouts/foundry_gym.py` has the maps. 250 Gate Hall teaches pour/quench (Camper Flint). 251 Pour Floor and 252 Mould Floor hold the 7-move puzzle, Sooty's hints and reset, the bell-pulls, the cracked-mould vault (Elemental Seed x2, Charcoal, Brann's first hammer) and Garran / Ivar / Oda / Dain. 253 Warden Arena runs Brann's LOCKED fight, unchanged, via `Prismfall.gym_battle(pfm_gym(:LEADER_BRANN))`, then the Quench Badge, seven notes, TM35, CH8_STEP 4 -> 5 and out into the square. 240's Foundry doors (`story_ch8.py`, `storylayer.set_pages`) open on `:gym7_open`. `build.py --strict`: 0 warnings, proofs OK on the design and the built maps. Real engine: `ch8/008_Ch8StoryCapture.rb` WALKS the gym (BFS walker, USE on devices) and plays the whole chapter with no hand-set step, CH8_STEP 3 -> 4 (243) -> 5 (253, Brann) -> 6 (240) -> 7 -> 8 (244) -> 9 (240) -> 10 (243). `CH8_VAULT=1` also plays the vault and the bell-pull reset first. Queued for Gemini's visual craft (`mapgen/REFINE_QUEUE.md`).
-- Left: Ch17 `AS_FORGE_REMEMBERS` (Trials owner). Gym 7 (to look at): the four trainers on 251/252 are off the solver's route, so the run fought only Flint and Brann.
+- Left: Ch17 `AS_FORGE_REMEMBERS` (Trials owner). Gym 7 (to look at): the four trainers on 251/252 are off the solver's route, so the run fought only Flint and Brann. (2026-11-27: superseded by Gemini's maps, see "Status: Gym 7 on Gemini's maps" below; on them the route meets Garran and Ivar, Oda and Dain stay optional.)
 
 ## Status: Ch16–21 + post-game trainer PBS agent (2026-11-25)
 *Running note so the work can be picked up. Source of every block: `tools/trainer_gen/gen.py`, the section "CH16-CH21 STORY FIGHTS, THE GROUNDS LADDER AND THE WARDEN'S GAUNTLET". Check with `python3 -I tools/check_script_trainers.py` (scripts vs PBS) and `python3 -I tools/validate_trainers.py`.*
@@ -215,3 +215,23 @@ Sergeant / Bereaved PBS blocks, the real-engine walk (`tools/harness/visual/ch6/
 *Running note. Checks: `run_finale_bosses.rb`, `run_story_hooks.rb`, `winrates_r4.rb` ARC* cells in a private run dir.*
 - [x] Ogerpon on Juno's J4 (168e8c2e); Aurelia 824–826 WATER_SURFACE (996b5b54); Ruin Inverse overlays (133ace4c); Ch11 harpooners checked (b8be22d0).
 - [ ] Arceus extras: telegraph (Casual 2 rounds) + best-field skip at a break built (uncommitted: Bosses 002 / 005 / 103, Field Effects 136, run_finale_bosses 98/98); `:bossboost` HP superseded. Next: same-day A/B of ARC / ARCF / ARCM / ARCG / ARCW / ARCJ, keep Standard / Hard in the 11-26 bands, then BALANCE §7 / §9b and commit.
+
+## Status: Gym 7 on Gemini's maps (Claude, 2026-11-27)
+- [x] Gemini's crafted Cindervault Gym (`layouts/cindervault_gym.py`, 250-253) is canonical; ours (`foundry_gym.py`) is
+  superseded (note at its top; it refuses to run) and its three stale previews are removed.
+- [x] `puzzles/foundry.py` rewritten for Gemini's geometry (ASCII grids of the built floors, V335-339 / S335-339 /
+  V435-437 / S435-437, the shared quench V338). `build.py`: all puzzle proofs pass, design and built: 250 in 2, Pour +
+  Mould Floor in 7 (no soft-lock, needs C2 and a quench), vault in 3, both traps real (also on the built maps).
+- [x] `story_ch8.py`: 253 "Warden Brann" gets the script's scene (portraits, seven notes, quench lines, quest line,
+  CH8_STEP 4 -> 5, out into the square for the Five Bells; Gemini's LOCKED battle call unchanged); 240's Foundry doors
+  land on 250 (12, 22). Run it after `cindervault_gym.py` (REFINE_QUEUE note for Gemini).
+- [x] Real engine (`ch8/008_Ch8StoryCapture.rb`, `CH8_VAULT=1 CH8_WATCHED=1`): the whole of Ch8 with no step set by
+  hand, 3 -> 4 (243) -> 5 (253, Brann) -> 6 (240) -> 7 -> 8 (244) -> 9 (240) -> 10 (243), STORY_CHAPTER 9; the gym
+  walked with the vault (Elemental Seed x2, Charcoal, S339) and the Mould-Runner's reset; Flint, Garran, Ivar, Brann.
+  The walker now also counts a target that the plan's USE press starts by itself (253's causeway faces Brann).
+- [x] `:ashkaar_watched` (story/29 line 146): 240's "Oath-Guard (escort)" at (31, 38) shows when the flag is set (checked
+  in the engine with the flag set by hand) and leaves at CH8_STEP 10.
+- [ ] `:ashkaar_watched` setter: map 652, the Pyre Road oath-gate ("Say True"), is not built. Whoever builds it: the
+  "(Say nothing.)" branch calls `pfm_set(:ashkaar_watched)`.
+- [ ] `docs/cutscene_previews/ch08_key_events.gif` not made (no Ch8 GIF exists yet; this pass fixed Gym 7, it didn't
+  stage the chapter).

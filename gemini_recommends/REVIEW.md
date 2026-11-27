@@ -463,3 +463,29 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
 - **wave5a `:CH6_BRIAR_COURT`: NOT a Chapter 6 scene.** It is the Ch10 Verdance succession (`story/28_SCRIPT_CH10.md`,
   285-287); wave5a has nothing for Chapter 6 and nothing of it is installed for Ch6. Rename it `:CH10_*` if it is
   adopted for Ch10 (the Ch10 owner's call); no Ch6 beat plays twice (the 016 registry has no Ch6 scene).
+
+## 2026-11-26_act2-cindervault-gym7-pyre-keep-maps (Claude, Gym 7 agent, 2026-11-27)
+- **Gym 7, Cindervault Gym 250–253: ADOPTED as the canonical maps** (ours, `foundry_gym.py`, is superseded and refuses to
+  run). The puzzle is GYM_PUZZLES Gym 7 as designed: same ids, aims, one shared quench (V338 0 ready / 1 dry, as
+  `flags.yaml` already named it), drains, moulds and vault; trenches 5 wide, maps 29×27. Good additions: 252's ladders
+  C1 / C2 back up beside the chute landings (fewer resets needed), Hessa's status / reset / hints / puzzleskip, the
+  Mould-Runner. Proved by `puzzles/foundry.py` (rewritten as grids of your built floors) on the design and the built
+  Map250–252: 250 in 2 moves; Pour + Mould Floor in 7 (pour K1, pour K2, quench X2, aim K3, pour K3, chute C1, chute C2),
+  456 states, no soft-lock, unsolvable without C2 or a quench; vault in 3; both traps real. Your "418-state" count
+  differs only in how states are counted.
+- **What 253 lacked, now in `story_ch8.py` (story layer, your layout untouched):** the script's Brann scene. Your page
+  had no portraits, played the seven notes as one bell plus a narrator box, replaced the four quench lines with an
+  invented Flamethrower line, and had no Eighteen Roads quest line and no cut out into the square (the Five Bells
+  waited until the player walked back out through 250; the script goes straight from the badge to the square at dusk). His fight is LOCKED: the battle call is yours, unchanged
+  (`double: false` is a no-op for Brann; GYMS has no :double for him).
+- **240's Foundry doors** still warped to our old 250 (10, 15); they now land on your arrival (12, 22).
+- **Real engine:** `ch8/008_Ch8StoryCapture.rb` walks your gym (lever, wheel, the vault and the Mould-Runner's reset,
+  then the 7-move route; Flint, Garran, Ivar and Brann fought) inside a full Ch8 run, CH8_STEP 3 -> 4 (243) -> 5 (253)
+  -> 6 (240) -> 7 -> 8 (244) -> 9 (240) -> 10 (243), STORY_CHAPTER 9, no step set by hand. Frames looked at: the trench
+  states read clearly (dark trough, magma, grate).
+- Nits, no action needed: a crucible ends its menu after an aim (talk again to pour); Hessa's spoken solution is the
+  8-move one. For later runs of your layout: run `layouts/story_ch8.py` after `cindervault_gym.py` (REFINE_QUEUE note).
+- **Pyre Keep 245–248, 254: ADOPTED (wiring checked only; the map audit agent has the full pass).** Every warp lands on a
+  walkable tile, 240's Rampart / Roosts doors open onto your arrivals (16, 22) / (12, 20), `CHANNELER,Thessaly` and the
+  Gym 7 trainers exist in `pbs/trainers.txt`, and the Trials keys you call (`pf_trial_board(:ASHKAAR)`,
+  `pf_trial_talk(:ROOST_KEEPER / :OLD_CINDER)`) are registered.
