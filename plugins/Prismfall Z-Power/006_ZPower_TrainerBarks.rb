@@ -12,6 +12,19 @@
 #===============================================================================
 module PrismfallSpeech
   BARKS = {
+    # Chapter 6 (story/25_SCRIPT_CH6.md): Gym 5, "(When her ace enters:)" - her Claydol, nicknamed Effigy.
+    [:LEADER_SAHAR, "Sahar"] => { :sendout => { :CLAYDOL => "Effigy. We've dug up older things than this one." } },
+    # K3 on the Marrow Road: "(When Honedge's line enters, now a Doublade:)". K3 only (versions 30-32, Hard 130-132,
+    # Casual 230-232); K4 carries a Doublade too and has its own lines.
+    [:RIVAL_KESTREL, "Kestrel", 30]  => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 31]  => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 32]  => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 130] => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 131] => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 132] => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 230] => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 231] => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
+    [:RIVAL_KESTREL, "Kestrel", 232] => { :sendout => { :DOUBLADE => "Both blades, Morwen. Both." } },
     # Ruin Route R7, the Hijack: Gilded King Aurelius (story/42_SCRIPT_RUIN_KING.md). Gilgamesh's personality only
     # (Reuben 2026-11-24: no portals, no summoned weapons). "Mongrel" turns to delighted respect on Gilt's send-out and
     # is gone for good once Gilt is cornered (:ace_low), in his LoseText and after the battle.
