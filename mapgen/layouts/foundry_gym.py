@@ -206,7 +206,7 @@ def build_252():
               S('pbReceiveItem(:ELEMENTALSEED, 2)'), S('pbReceiveItem(:CHARCOAL)'),
               S('pfm_item(:BRANNSHAMMER, 1, "Brann\'s first hammer") rescue nil'),
               "Brann's first hammer. A brass tag on the haft: FESTIVAL, AF 280. QUARTER-FINAL. LOST TO V.C.",
-              {'switch': [F.S_VAULT, True]}])], tile=P1('cv_hole'))), cx, cy),
+              {'switch': [F.S_VAULT, True]}])], tile=P1('cv_pit1'))), cx, cy),    # solid: a passable tile event can't be used from beside it
           trainer((20, 21), 'ENGINEER', 'Oda', 'left', "Mould floor! It's cooler down here. Slightly.",
                   "The forge wants an hour to cool. So do I."),
           trainer((10, 2), 'COOLTRAINER_M', 'Dain', 'right', "Up top's the Warden. You'll want to warm up first.",

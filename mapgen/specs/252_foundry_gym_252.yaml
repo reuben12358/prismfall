@@ -323,7 +323,7 @@ events:
       - switch: [339, true]
     trigger: action
     move: fixed
-    graphic: {sprite: '', dir: down, tile: 23876}
+    graphic: {sprite: '', dir: down, tile: 23907}
   at: [14, 7]
 - type: trainer
   at: [20, 21]
