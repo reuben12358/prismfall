@@ -45151,6 +45151,138 @@ Pokemon = YAMASK,24
     IV = 8
     EV = 0
 #-------------------------------
+[MERIDIAN_DIRECTORATE,Sergeant,6]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = Stand down? I don't have the paperwork for that.
+Pokemon = MAGNEMITE,28
+    Moves = SPARK,GYROBALL,THUNDERWAVE,SUPERSONIC
+    Ability = STURDY
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 18
+Pokemon = PAWNIARD,29
+    Moves = METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER
+    Ability = DEFIANT
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 18
+Pokemon = KLEFKI,30
+    Moves = DRAININGKISS,METALSOUND,SPIKES,ASTONISH
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = BOLD
+    IV = 18
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Sergeant,106]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = Stand down? I don't have the paperwork for that.
+Pokemon = MAGNEMITE,29
+    Moves = SPARK,GYROBALL,THUNDERWAVE,SUPERSONIC
+    Ability = STURDY
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 26
+    EV = 4,0,0,174,174,0
+Pokemon = PAWNIARD,30
+    Moves = METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER
+    Ability = DEFIANT
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,180,0,180,0,0
+Pokemon = KLEFKI,31
+    Moves = DRAININGKISS,METALSOUND,SPIKES,ASTONISH
+    Ability = PRANKSTER
+    Item = SITRUSBERRY
+    Nature = BOLD
+    IV = 26
+    EV = 186,4,186,0,0,0
+#-------------------------------
+[MERIDIAN_DIRECTORATE,Sergeant,206]
+Items = SUPERPOTION
+LoseText = Stand down? I don't have the paperwork for that.
+Pokemon = MAGNEMITE,26
+    Moves = SPARK,GYROBALL,THUNDERWAVE,SUPERSONIC
+    Ability = STURDY
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 8
+    EV = 0
+Pokemon = PAWNIARD,27
+    Moves = METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER
+    Ability = DEFIANT
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+# Ch6 the Deep-works (204) - the Bereaved, Duneholt (:ch6_drillsite :directorate)
+#-------------------------------
+[HOLLOW_GRUNT_M,Bereaved,7]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = Go on, then. Put the collars back on.
+Pokemon = SANDILE,28
+    Moves = CRUNCH,DIG,SANDTOMB,SCARYFACE
+    Ability = INTIMIDATE
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 18
+Pokemon = DRILBUR,29
+    Moves = ROCKSLIDE,SLASH,DIG,METALCLAW
+    Ability = SANDRUSH
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 18
+Pokemon = NICKIT,30
+    Moves = NIGHTSLASH,NASTYPLOT,SNARL,ASSURANCE
+    Ability = UNBURDEN
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 18
+#-------------------------------
+[HOLLOW_GRUNT_M,Bereaved,107]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = Go on, then. Put the collars back on.
+Pokemon = SANDILE,29
+    Moves = CRUNCH,DIG,SANDTOMB,SCARYFACE
+    Ability = INTIMIDATE
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 26
+    EV = 4,174,0,174,0,0
+Pokemon = DRILBUR,30
+    Moves = ROCKSLIDE,SLASH,DIG,METALCLAW
+    Ability = SANDRUSH
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 26
+    EV = 4,180,0,180,0,0
+Pokemon = NICKIT,31
+    Moves = NIGHTSLASH,NASTYPLOT,SNARL,ASSURANCE
+    Ability = UNBURDEN
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 26
+    EV = 4,0,0,186,186,0
+#-------------------------------
+[HOLLOW_GRUNT_M,Bereaved,207]
+Items = SUPERPOTION
+LoseText = Go on, then. Put the collars back on.
+Pokemon = SANDILE,26
+    Moves = CRUNCH,DIG,SANDTOMB,SCARYFACE
+    Ability = INTIMIDATE
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 8
+    EV = 0
+Pokemon = DRILBUR,27
+    Moves = ROCKSLIDE,SLASH,DIG,METALCLAW
+    Ability = SANDRUSH
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 8
+    EV = 0
+# R16 - Marisol (Grievance) / Ebb Guild exhibition, field :WATER_SURFACE
+#-------------------------------
 # Ch5 Wave 0 rescue (gen.py routes.py): Gym 4, the Circuit Gym trainers
 [ENGINEER,Volta]
 LoseText = Turn the sideways ones. Chat says so.

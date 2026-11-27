@@ -1062,6 +1062,22 @@ X("Ch5 service lifts (951) - the Bereaved lower down", "HOLLOW_GRUNT_M", "Bereav
     P("HOUNDOUR", 25, "FLASHFIRE", "ORANBERRY", "JOLLY", "BITE,FIREFANG,ROAR,SMOG", "A", only="nocasual"),
 ])
 
+# Ch6 the Deep-works (204, :DESERT; story/25_SCRIPT_CH6.md, the :ch6_drillsite choice). Before Gym 5 (cap 31), the
+# script's own rosters: the game's first Directorate battle ("Sergeant", Steel / Electric: Magnemite, Pawniard, Klefki,
+# Lv 28-30) on :hollow, and a Duneholt Bereaved (Ground / Dark: Sandile, Drilbur, Nickit) on :directorate.
+X("Ch6 the Deep-works (204) - Directorate Sergeant, Duneholt (:ch6_drillsite :hollow)", "MERIDIAN_DIRECTORATE", "Sergeant", 6, 31,
+  "Stand down? I don't have the paperwork for that.", [
+    P("MAGNEMITE", 28, "STURDY", "ORANBERRY", "MODEST", "SPARK,GYROBALL,THUNDERWAVE,SUPERSONIC", "S"),
+    P("PAWNIARD", 29, "DEFIANT", "ORANBERRY", "ADAMANT", "METALCLAW,ASSURANCE,SCARYFACE,FURYCUTTER", "A"),
+    P("KLEFKI", 30, "PRANKSTER", "SITRUSBERRY", "BOLD", "DRAININGKISS,METALSOUND,SPIKES,ASTONISH", "BPD", only="nocasual"),
+])
+X("Ch6 the Deep-works (204) - the Bereaved, Duneholt (:ch6_drillsite :directorate)", "HOLLOW_GRUNT_M", "Bereaved", 7, 31,
+  "Go on, then. Put the collars back on.", [
+    P("SANDILE", 28, "INTIMIDATE", "ORANBERRY", "JOLLY", "CRUNCH,DIG,SANDTOMB,SCARYFACE", "A"),
+    P("DRILBUR", 29, "SANDRUSH", "ORANBERRY", "ADAMANT", "ROCKSLIDE,SLASH,DIG,METALCLAW", "A"),
+    P("NICKIT", 30, "UNBURDEN", "SITRUSBERRY", "TIMID", "NIGHTSLASH,NASTYPLOT,SNARL,ASSURANCE", "S", only="nocasual"),
+])
+
 X("R16 - Marisol (Grievance) / Ebb Guild exhibition, field :WATER_SURFACE", "LEADER_MARISOL", "Marisol", 90, 90,
   "The tide always comes back. So will I.", [
     # PRISM_ARENA: Drizzle halves the Flame Plate's opening turn; the Splash Plate follows (rounds 7-9) and Swift Swim
