@@ -258,6 +258,81 @@ check("the Final: one crystal line per Plates turn (#{turns}); the stage is kept
       turns > 0 && log.text.scan("The crystal climbs Valen's throat").length == turns && FieldEffects::StoryHooks.valen_crystal == [turns, 4].min,
       [turns, log.text.scan("The crystal climbs").length, FieldEffects::StoryHooks.valen_crystal])
 
+# The Ruin Route's Inverse (Field Effects 013 section 4). Oracle: the plain chart, inverted per defending type.
+INV_TYPES = [:FIGHTING, :NORMAL, :DRAGON, :POISON, :GHOST, :STEEL, :GROUND, :FIRE]
+inv1  = lambda { |e| (e < 1) ? 2.0 : (e > 1) ? 0.5 : 1.0 }
+chart = lambda { |atk, types, inv| types.inject(1.0) { |m, t| e = Effectiveness.calculate(atk, t); m * (inv ? inv1.call(e) : e) } }
+inv_run = lambda do |title, rounds, &start|
+  rows = []
+  setup = lambda do |battle|
+    battle.define_singleton_method(:pbEndOfRoundPhase) do
+      ret = super()
+      foe = self.battlers.find { |b| b && b.opposes? && !b.fainted? }
+      me  = self.battlers[0]
+      if foe && me && self.decision == 0
+        mv = Battle::Move.from_pokemon_move(self, Pokemon::Move.new(:CLOSECOMBAT))
+        rows << { :turn => self.turnCount, :field => self.field_effect, :borrowed => FieldEffects.borrowed_fields(self).first,
+                  :overlay => FieldEffects::StoryHooks.inverse_overlay?(self), :rules => FieldEffects.effectiveness_rules_active?(self),
+                  :foe => foe.species, :types => foe.pbTypes(true),
+                  :eff => INV_TYPES.map { |t| [t, mv.pbCalcTypeMod(t, me, foe)] }.to_h,
+                  :left => (self.opponent || []).sum { |t| t.party.count { |q| q && q.able? } } }
+      end
+      self.decision = 3 if rounds && self.turnCount >= rounds - 1 && self.decision == 0
+      ret
+    end
+  end
+  log = Harness.run_battle(title, seed: 3, setup: setup) { start.call }
+  [log, rows]
+end
+# Matches the oracle for every type, and at least one type tells the two charts apart (a real test).
+inv_ok = lambda { |rows, inv| !rows.empty? && rows.all? { |r|
+  INV_TYPES.all? { |t| (r[:eff][t] - chart.call(t, r[:types], inv)).abs < 1e-6 } &&
+    INV_TYPES.any? { |t| (chart.call(t, r[:types], true) - chart.call(t, r[:types], false)).abs > 1e-6 } } }
+
+strong_team
+log, rows = inv_run.call("Ruin Gym 16 Nyx", 2) { setBattleRule("canLose"); setBattleRule("double"); TrainerBattle.start(:LEADER_NYX, "Nyx", 1) }
+check("Ruin Gym 16 (Nyx v1, double): :NEW_MOON with the Inverse overlay, announced once", own_errors(log).empty? && rows.first &&
+      rows.first[:field] == :NEW_MOON && rows.all? { |r| r[:overlay] && r[:rules] } && log.text.scan("Nyx's illusions turn the new moon inside out!").length == 1,
+      [rows.first, own_errors(log).first])
+check("...the chart is inverted (Fighting on Weavile x0.25, not x4)", inv_ok.call(rows, true) && rows.first[:eff][:FIGHTING] == 0.25, rows.first)
+strong_team
+log, rows = inv_run.call("Gym 16 Nyx (main)", 1) { setBattleRule("canLose"); setBattleRule("double"); TrainerBattle.start(:LEADER_NYX, "Nyx", 0) }
+check("main-game Gym 16 (Nyx v0): no overlay, the plain chart", rows.first && !rows.first[:overlay] && inv_ok.call(rows, false) &&
+      !log.text.include?("inside out"), rows.first)
+strong_team
+setBattleRule("field", :PRISM_ARENA)
+log, rows = inv_run.call("Hijack Aurelius", 8) { setBattleRule("canLose"); TrainerBattle.start(:GILDED_AURELIUS, "Aurelius", 0) }
+check("the Hijack (Aurelius v0): :PRISM_ARENA running Inverse from turn 1 (Normal on Golurk x2, not immune)",
+      own_errors(log).empty? && rows.first && rows.first[:field] == :PRISM_ARENA && rows.first[:eff][:NORMAL] == 2.0 && inv_ok.call(rows, true) &&
+      log.text.include?("the Prism field turns inside out!"), [rows.first, own_errors(log).first])
+check("...and it holds under every Plates turn", rows.map { |r| r[:borrowed] }.compact.uniq.length >= 2 && rows.all? { |r| r[:overlay] },
+      rows.map { |r| [r[:turn], r[:borrowed], r[:overlay]] })
+# A test Pokemon that can't be knocked out and hits as hard as asked (a logic check, not balance).
+gch = Pokemon.new(:GARCHOMP, 100); gch.forget_all_moves; [:IRONHEAD, :DRAGONCLAW, :STONEEDGE, :FIRESPIN].each { |m| gch.learn_move(m) }
+gch.calc_stats
+{ :@totalhp => 60_000, :@hp => 60_000, :@attack => 3000, :@spatk => 3000, :@speed => 999 }.each { |k, v| gch.instance_variable_set(k, v) }
+$player.party = [gch]
+log, rows = inv_run.call("Ruin Gym 17 Celestine", nil) { setBattleRule("canLose"); TrainerBattle.start(:LEADER_CELESTINE, "Celestine", 1) }
+t = log.text
+line = t.index("Once upon a time, which was the only time.")
+change = t.index("FIELD CHANGE: FAIRY_TALE -> INVERSE")
+last = rows.find { |r| r[:left] == 1 }
+check("Ruin Gym 17 (Celestine v1): :FAIRY_TALE until she is down to her last Pokemon, then her line and :INVERSE, once",
+      own_errors(log).empty? && rows.first && rows.first[:field] == :FAIRY_TALE && line && change && line < change &&
+      t.scan("which was the only time").length == 1 && rows.select { |r| r[:left] > 1 }.all? { |r| r[:field] == :FAIRY_TALE } &&
+      last && last[:field] == :INVERSE && !last[:overlay], [rows.map { |r| [r[:left], r[:field]] }, line, change, own_errors(log).first])
+check("...the Inverse Field's own chart then (no overlay on top)", last && inv_ok.call([last], true), last)
+strong_team
+setBattleRule("field", :VOLCANIC)
+log, rows = inv_run.call("rule inverse", 1) { setBattleRule("canLose"); setBattleRule("inverse"); TrainerBattle.start(:LEADER_NYX, "Nyx", 0) }
+check("setBattleRule(\"inverse\"): the overlay on any field (Volcanic, main-game Nyx)", rows.first && rows.first[:field] == :VOLCANIC &&
+      rows.first[:overlay] && inv_ok.call(rows, true), rows.first)
+strong_team
+setBattleRule("field", :INVERSE)
+log, rows = inv_run.call("rule inverse on Inverse", 1) { setBattleRule("canLose"); setBattleRule("inverse"); TrainerBattle.start(:LEADER_NYX, "Nyx", 0) }
+check("...on :INVERSE itself it never flips twice (still the Inverse chart, not the plain one)", rows.first && rows.first[:overlay] &&
+      inv_ok.call(rows, true), rows.first)
+
 # Juno's Ogerpon (Core 034): on her J4 team only when OGERPON_TRUSTED; hers, never the player's.
 j4 = lambda do
   t = pbLoadTrainer(:RIVAL_JUNO, "Juno", Prismfall::Rival.version_for(4))

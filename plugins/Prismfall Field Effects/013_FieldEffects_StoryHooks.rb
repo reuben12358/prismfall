@@ -23,6 +23,18 @@
 #    at the Gauntlet's light, tears it off and throws it across the arena floor. (The battle hook ends the
 #    Gauntlet's field control.)" On the first Plates turn against RIVAL_KESTREL 80-82 he says his line and the
 #    arena goes still (no field) for the rest of the fight. The Fallen Kestrel (90-92) keeps it on.
+#
+# 4. The Ruin Route's Inverse (story/12_RUIN_ROUTE.md R3 / R4 / R7, story/42_SCRIPT_RUIN_KING.md R7):
+#    - INVERSE_OVERLAYS: the type chart is inverted ON TOP of the battle's own field, from the first turn:
+#      Gym 16 (Ruin) Nyx v1, ":NEW_MOON running Inverse matchups"; the Hijack, Gilded King Aurelius v0, ":PRISM_ARENA
+#      running Inverse" ("the Prism field turns inside out: strengths to weaknesses"), under every Plates turn.
+#      The overlay is the Inverse Field's own chart (FieldEffects.invert_effectiveness, after the fields' own rules;
+#      airborne Pokemon still dodge Ground moves) and never flips twice: with :INVERSE itself up it adds nothing.
+#      It needs a field up (all three fights have one). Events can ask for it too: setBattleRule("inverse").
+#      FieldEffects::StoryHooks.inverse_overlay?(battle) / set_inverse_overlay(battle, on, message).
+#    - LAST_POKEMON_FIELDS: Gym 17 (Ruin) Celestine v1, ":FAIRY_TALE turns :INVERSE for her last Pokemon ('Once
+#      upon a time, which was the only time')": when she is down to her last able Pokemon she says the line and the
+#      field itself becomes :INVERSE (a field change, as the script says), once.
 #===============================================================================
 module FieldEffects
   module StoryHooks
@@ -41,6 +53,19 @@ module FieldEffects
     TEAROFF = { :trainer => [:RIVAL_KESTREL, "Kestrel"], :versions => [80, 81, 82],
                 :line => "No. Not like this. If I beat you, I beat you.",
                 :message => "Kestrel tore the Gauntlet off and threw it across the arena floor! The Plates fall still." }
+
+    INVERSE_OVERLAYS = [
+      { :trainer => [:LEADER_NYX, "Nyx"], :versions => [1],
+        :message => "Nyx's illusions turn the new moon inside out! Type matchups are reversed!" },
+      { :trainer => [:GILDED_AURELIUS, "Aurelius"], :versions => [0],
+        :message => "The eighteen pylons flare Aureate gold, and the Prism field turns inside out! Type matchups are reversed!" }
+    ]
+    INVERSE_RULE_MESSAGE = "The world turns inside out... Type matchups are reversed!"
+
+    LAST_POKEMON_FIELDS = [
+      { :trainer => [:LEADER_CELESTINE, "Celestine"], :versions => [1], :field => :INVERSE,
+        :line => "Once upon a time, which was the only time." }
+    ]
 
     module_function
 
@@ -93,6 +118,7 @@ module FieldEffects
         st[:fired][[:flicker, i]] = true
         start_flicker(battle, row)
       end
+      check_last_pokemon(battle)
     end
 
     def start_flicker(battle, row)
@@ -178,6 +204,90 @@ module FieldEffects
         end
       end
     end
+
+    #---------------------------------------------------------------------------
+    # 4. The Ruin Route's Inverse
+    #---------------------------------------------------------------------------
+    def inverse_overlay?(battle)
+      return (battle && battle.instance_variable_get(:@fe_inverse_overlay)) ? true : false
+    end
+
+    # Turns the overlay on (true) or off; the message is shown when it turns on.
+    def set_inverse_overlay(battle, on, message = nil)
+      return false if !battle
+      was = inverse_overlay?(battle)
+      battle.instance_variable_set(:@fe_inverse_overlay, on ? true : false)
+      FieldEffects.invalidate_cache(battle)
+      battle.pbDisplay(FieldEffects.format(message)) if on && !was && message && !message.empty?
+      return true
+    end
+
+    # Battle start, right after the field's own intro: setBattleRule("inverse"), then the trainer table.
+    def start_overlays(battle)
+      rule = battle.instance_variable_get(:@fe_inverse_rule)
+      set_inverse_overlay(battle, true, INVERSE_RULE_MESSAGE) if rule
+      return if !battle.opponent
+      INVERSE_OVERLAYS.each do |row|
+        next if !opposing_trainer(battle, row[:trainer], row[:versions])
+        set_inverse_overlay(battle, true, row[:message])
+      end
+    end
+
+    # A trainer down to the last able Pokemon of their party: their field turns (once), after their line.
+    def check_last_pokemon(battle)
+      return if !battle || !battle.opponent || battle.decision != 0 || !battle.respond_to?(:change_field)
+      st = state(battle)
+      LAST_POKEMON_FIELDS.each_with_index do |row, i|
+        next if st[:fired][[:last, i]]
+        t = opposing_trainer(battle, row[:trainer], row[:versions])
+        next if !t || t.party.count { |p| p && p.able? } != 1
+        st[:fired][[:last, i]] = true
+        speak(battle, t, row[:line]) if row[:line]
+        battle.change_field(row[:field], row[:message])     # no :message = the new field's own intro
+      end
+    end
+  end
+
+  # The overlay in the type chart (damage, immunities and the AI all go through these two).
+  class << self
+    alias prismfall_inv_modify_effectiveness modify_effectiveness unless method_defined?(:prismfall_inv_modify_effectiveness)
+    def modify_effectiveness(battle, move, move_type, def_type, user, target, eff)
+      eff = prismfall_inv_modify_effectiveness(battle, move, move_type, def_type, user, target, eff)
+      return eff if !StoryHooks.inverse_overlay?(battle)
+      return eff if active_defs(battle).any? { |d| d[:inverse] }     # already the Inverse chart: no double flip
+      return invert_effectiveness(eff)
+    end
+
+    alias prismfall_inv_effectiveness_rules_active? effectiveness_rules_active? unless method_defined?(:prismfall_inv_effectiveness_rules_active?)
+    def effectiveness_rules_active?(battle)
+      return true if StoryHooks.inverse_overlay?(battle)
+      return prismfall_inv_effectiveness_rules_active?(battle)
+    end
+
+    alias prismfall_inv_apply_battle_rule apply_battle_rule unless method_defined?(:prismfall_inv_apply_battle_rule)
+    def apply_battle_rule(battle)
+      rules = ($game_temp) ? $game_temp.battle_rules : nil
+      battle.instance_variable_set(:@fe_inverse_rule, rules["inverse"]) if rules && rules["inverse"]
+      return prismfall_inv_apply_battle_rule(battle)
+    end
+
+    alias prismfall_inv_on_battle_start on_battle_start unless method_defined?(:prismfall_inv_on_battle_start)
+    def on_battle_start(battle)
+      prismfall_inv_on_battle_start(battle)
+      StoryHooks.start_overlays(battle)
+    end
+  end
+end
+
+# setBattleRule("inverse"): the Inverse overlay for this battle, on top of whatever field it has.
+class Game_Temp
+  alias prismfall_inv_add_battle_rule add_battle_rule unless method_defined?(:prismfall_inv_add_battle_rule)
+  def add_battle_rule(rule, var = nil)
+    if rule.to_s.downcase == "inverse"
+      self.battle_rules["inverse"] = true
+      return
+    end
+    prismfall_inv_add_battle_rule(rule, var)
   end
 end
 
@@ -214,6 +324,7 @@ class Battle
     if (!@decision || @decision == 0) && @pf_story_hooks
       FieldEffects::StoryHooks.flush(self)
       FieldEffects::StoryHooks.end_flicker(self)
+      FieldEffects::StoryHooks.check_last_pokemon(self)
     end
     return ret
   end

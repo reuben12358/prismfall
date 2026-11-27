@@ -163,8 +163,8 @@ exceptions:
     - {trainer: ECHO_MORWEN, versions: [90, 190, 290], field: HOLLOW_CATHEDRAL, why: "Night of Masques exhibition at the Crownhaven Cathedral lantern"}
     - {trainer: LEADER_DORIAN, versions: [90, 190, 290], field: GRAND_STAGE, why: "Pageant Bout exhibition (Dorian + Rook)"}
     - {trainer: LEADER_MAGNUS, versions: [1, 101, 201], field: FACTORY, why: "Ruin Gym 15 (his lead's Explosion makes it a Scrapyard)"}
-    - {trainer: LEADER_NYX, versions: [1, 101, 201], field: NEW_MOON, why: "Ruin Gym 16"}
-    - {trainer: LEADER_CELESTINE, versions: [1, 101, 201], field: FAIRY_TALE, why: "Ruin Gym 17 (the event turns it INVERSE for her last Pokemon)"}
+    - {trainer: LEADER_NYX, versions: [1, 101, 201], field: NEW_MOON, why: "Ruin Gym 16 (Inverse matchups on top: the Field Effects 013 overlay)"}
+    - {trainer: LEADER_CELESTINE, versions: [1, 101, 201], field: FAIRY_TALE, why: "Ruin Gym 17 (Field Effects 013 turns it INVERSE when she is down to her last Pokemon)"}
     - {trainer: LEADER_SIGRUN, versions: [1, 101, 201], field: DRAGONS_DEN, why: "Ruin Gym 18"}
     # --- round 2: story admins, the Mourner, the Eevee Octave (playbook 6-7). War soldiers use the map defaults (922-927).
     - {trainer: HOLLOW_THISTLE, versions: [0, 100, 200], field: SILKWOOD, why: "Thistle at the Briarwick pylon: her team is built for the silk wherever the event stands"}
