@@ -439,3 +439,27 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   (`:ch8_lightstone`, V129 6 with S120 -> 7), Chestnuts (-> 8). 249: the Five Bells evacuation (V129 5-6) and the
   ward afterwards by V110. Checked in the real engine on all three choice paths (`tools/harness/visual/ch8/008_Ch8StoryCapture.rb`).
 - Not done here: `AS_FORGE_REMEMBERS` (Ch17, the Trials owner's) and the MAP_AUDIO entries for 244 / 249.
+
+## Chapter 6 on Gemini's maps: act2-duneholt-core-maps, act2-duneholt-gym5-ossaria-maps, act2-ossaria-routes-tunnels-maps, cutscenes-wave5a "Ch6" (Claude, 2026-11-27)
+- **The maps (200-214, 600/601/604-606/610-613/620/624/625/628): ADOPTED** as Chapter 6's canon maps. The road
+  612 -> 600 -> 610 -> 601 -> 613 -> 203 and Duneholt -> 208 -> 620 -> 624 are linked; the guarded exits to unbuilt
+  maps (602, 603, 810) now speak a line instead of printing a bracketed box.
+- **The story events written into the layouts (203 arrival, 209 Sahar, 213 Sahar, 612 checkpoint, 620 door / K3 /
+  courier, 624 Sahar's rubbing, the murals as signs): PARTLY ADOPTED.** Their places and mechanisms stay (the S576
+  barrier, the x 55 touch column on 620, the sundial seal); their pages are replaced by `mapgen/layouts/story_ch6.py`
+  (a story layer, `set_pages`), because they merged and reworded the script's lines, printed its bracketed narration
+  as boxes, and dropped beats (Sahar's calligrapher line, her ace line and the level-35 line, most of K3 and the letter,
+  the murals' Sahar commentary). Re-run the layer after re-running these layouts.
+- **Found and fixed in the layer:** 612 had no way in from Lumen (the script's "Mainline out of the Concourse"):
+  warps 180 (0, 32-37) <-> 612 (54-60, 63). The checkpoint could be walked round through 612's open south fields, and
+  set CH6_STEP 2 from step 0: it now plays as you join the queue (CH6_STEP 1 -> 2). 213's Sahar could be fought before
+  the drill site, skipping `:ch6_drillsite`: the Dig's door on 200 opens at CH6_STEP 4. 207's open Mural Gallery
+  showed the Ossuary's murals before the Ossuary: 206's door stays shut through Chapter 6, as the script writes it.
+- **Gym 5 puzzle: ADOPTED, proved.** `mapgen/puzzles/dig.py` proves it on the built 210-212: 46 states, 5 moves (the
+  entrance drop, lane c, M2 twice, lane b), no soft-locks, unsolvable without the falls or M2. V326 runs d / wall / c
+  where GYM_PUZZLES says c / d / wall from 1: same cycle, same solution (GYM_PUZZLES can be updated to Gemini's order).
+- **Left for Gemini / owners:** the raw ids S552-S555, S576-S581, V551 are not in `mapgen/flags.yaml` (register them);
+  `[612]` / `[613]` encounter tables (encounters owner); art and staging notes in `mapgen/REFINE_QUEUE.md` (Ch6 note).
+- **wave5a `:CH6_BRIAR_COURT`: NOT a Chapter 6 scene.** It is the Ch10 Verdance succession (`story/28_SCRIPT_CH10.md`,
+  285-287); wave5a has nothing for Chapter 6 and nothing of it is installed for Ch6. Rename it `:CH10_*` if it is
+  adopted for Ch10 (the Ch10 owner's call); no Ch6 beat plays twice (the 016 registry has no Ch6 scene).
