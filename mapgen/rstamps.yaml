@@ -23,7 +23,7 @@ tr_oak:    {sheet: sh, at: [0, 26], size: [3, 4], top: 2}
 tr_oak2:   {sheet: sh, at: [0, 140], size: [3, 4], top: 2}
 tr_pine:   {sheet: sh, at: [3, 26], size: [2, 3], top: 2}
 tr_pine2:  {sheet: sh, at: [3, 140], size: [2, 3], top: 2}
-tr_teal:   {sheet: ak, at: [0, 94], size: [3, 4], top: 3}
+tr_teal:   {sheet: ak, at: [1, 94], size: [3, 4], top: 3}
 tr_pink:   {sheet: ak, at: [4, 94], size: [3, 4], top: 3}
 lighthouse: {sheet: ap, at: [0, 367], size: [5, 16], top: 12, door: [2, 15]}
 gl_lamp:   {sheet: gl, at: [7, 357], size: [1, 2], top: 1}
