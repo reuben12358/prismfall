@@ -245,8 +245,7 @@ Sergeant / Bereaved PBS blocks, the real-engine walk (`tools/harness/visual/ch6/
   in the engine with the flag set by hand) and leaves at CH8_STEP 10.
 - [ ] `:ashkaar_watched` setter: map 652, the Pyre Road oath-gate ("Say True"), is not built. Whoever builds it: the
   "(Say nothing.)" branch calls `pfm_set(:ashkaar_watched)`.
-- [ ] `docs/cutscene_previews/ch08_key_events.gif` not made (no Ch8 GIF exists yet; this pass fixed Gym 7, it didn't
-  stage the chapter).
+- [x] `docs/cutscene_previews/ch08_key_events.gif` (1.42 MB, 35 frames from a sparse real-engine run; frames deleted).
 
 ### Reach checks + Trials on the new maps (Trials agent, 2026-11-27) - status
 - [x] `mapgen/reach.py` STANDON / REACH in `build.py` (23303dea; lines 16-17 above).
