@@ -12,7 +12,7 @@
 | 2 | 9 | 0 | 5 | 8 | 0 | 1 |
 | 3 | 6 | 0 | 3 | 6 | 0 | 0 |
 | 4 | 9 | 0 | 7 | 9 | 0 | 0 |
-| 5 | 6 | 1 | 1 | 1 | 0 | 4 |
+| 5 | 6 | 1 | 1 | 5 | 0 | 0 |
 
 ## Every quest
 
@@ -49,40 +49,40 @@
 | **Two Hearths, One Pot** `IS_TWO_HEARTHS` | Isenmar | 4 | 2 | 562 built, 573 built, 576 built | `BRENNA_SIGVALD` `HALVARD` `RIMEWOOD_HIVE` | in maps | in maps |  |
 | **The Lattice Hums Wrong** `ZE_LATTICE_HUM` | Zenith | 4 | 2 | 160 built, 167 built | `KIOSK_PENNY_EBB` `WHEEL_GUILD` `WHEEL_QUAY` `WHEEL_UPPER` | in maps | in maps |  |
 | **The Humming Lamp** `EL_LAMP_LENS` | Elowen | 5 | 3 | 106 built | `HESPER` | in maps | in maps |  |
-| **The Names in Holmsby** `IS_EBB_HOLLOW` | Isenmar | 5 | 3 | 580 planned, 588 planned | `HOLLOW_CORAL` `HOLLOW_STONE` `VEIL_FISHER` | new | needs maps | waits on map 580, 588 |
-| **Customer Support** `ZE_CUSTOMER_SUPPORT` | Zenith | 5 | 3 | 185 planned | `DESK_APPROVALS` `DESK_COMPLIANCE` `DESK_RECORDS` `HELPDESK_ROTOM` | designed | needs maps | waits on map 185 |
-| **The Machine Wants Compliments** `ZE_FIZZBOLT` | Zenith | 5 | 3 | 180 planned | `FIZZBOLT_MACHINE` | designed | needs maps | waits on map 180 |
-| **Off the Beat** `ZE_OCTAVE_OFF_BEAT` | Zenith | 5 | 3 | 180 planned, 181 planned | `LATTICE_JUNCTION` `OCTAVE_CADENCE` | not in maps | needs maps | waits on map 180, 181 |
-| **Product Recall** `ZE_ROTOM_RECALL` | Zenith | 5 | 3 | 183 planned |  | designed | designed |  |
-| **Kevin** `OS_KEVIN` | Ossaria | 6 | 4 | 209 planned |  | designed | designed |  |
-| **The Noon Bell** `OS_OCTAVE_NOON_BELL` | Ossaria | 6 | 4 | 606 ? | `OCTAVE_SONA` `SUN_DRIFT` | not in maps | needs maps | waits on map 606 |
-| **The Riddle Trader** `OS_RIDDLE_CARAVAN` | Ossaria | 6 | 4 | 610 planned |  | designed | designed |  |
-| **Tomb Freight** `OS_TOMB_FREIGHT` | Ossaria | 6 | 4 | 610 planned |  | designed | designed |  |
-| **The Mural Gallery's Missing Letter** `OS_UNOWN_MURALS` | Ossaria | 6 | 0 | 207 planned |  | designed | designed |  |
-| **Ten Years of Light** `ZE_LOWLIGHT_LAMPS` | Zenith | 6 | 0 | 608 planned |  | designed | designed |  |
+| **The Names in Holmsby** `IS_EBB_HOLLOW` | Isenmar | 5 | 3 | 580 built, 588 built | `HOLLOW_CORAL` `HOLLOW_STONE` `VEIL_FISHER` | needs maps | in maps |  |
+| **Customer Support** `ZE_CUSTOMER_SUPPORT` | Zenith | 5 | 3 | 185 built | `DESK_APPROVALS` `DESK_COMPLIANCE` `DESK_RECORDS` `HELPDESK_ROTOM` | needs maps | in maps |  |
+| **The Machine Wants Compliments** `ZE_FIZZBOLT` | Zenith | 5 | 3 | 180 built | `FIZZBOLT_MACHINE` | needs maps | in maps |  |
+| **Off the Beat** `ZE_OCTAVE_OFF_BEAT` | Zenith | 5 | 3 | 180 built, 181 built | `LATTICE_JUNCTION` `OCTAVE_CADENCE` | needs maps | in maps |  |
+| **Product Recall** `ZE_ROTOM_RECALL` | Zenith | 5 | 3 | 183 built |  | designed | designed |  |
+| **Kevin** `OS_KEVIN` | Ossaria | 6 | 4 | 209 built |  | designed | designed |  |
+| **The Noon Bell** `OS_OCTAVE_NOON_BELL` | Ossaria | 6 | 4 | 606 built | `OCTAVE_SONA` `SUN_DRIFT` | needs maps | in maps |  |
+| **The Riddle Trader** `OS_RIDDLE_CARAVAN` | Ossaria | 6 | 4 | 610 built |  | designed | designed |  |
+| **Tomb Freight** `OS_TOMB_FREIGHT` | Ossaria | 6 | 4 | 610 built |  | designed | designed |  |
+| **The Mural Gallery's Missing Letter** `OS_UNOWN_MURALS` | Ossaria | 6 | 0 | 207 built |  | designed | designed |  |
+| **Ten Years of Light** `ZE_LOWLIGHT_LAMPS` | Zenith | 6 | 0 | 608 built |  | designed | designed |  |
 | **Clean Water** `NA_CLEAN_WATER` | Nadir | 7 | 5 | 630 planned |  | designed | designed |  |
-| **A Five Out of Ten** `NA_NOODLE_SCORE` | Nadir | 7 | 5 | 220 planned |  | designed | designed |  |
-| **Lamps Out** `NA_OCTAVE_LAMPS_OUT` | Nadir | 7 | 5 | 220 planned | `FERRYMAN_MIREFEN` `FERRY_LAMP` `OCTAVE_NOCT` | not in maps | needs maps | waits on map 220 |
+| **A Five Out of Ten** `NA_NOODLE_SCORE` | Nadir | 7 | 5 | 220 built |  | designed | designed |  |
+| **Lamps Out** `NA_OCTAVE_LAMPS_OUT` | Nadir | 7 | 5 | 220 built | `FERRYMAN_MIREFEN` `FERRY_LAMP` `OCTAVE_NOCT` | needs maps | in maps |  |
 | **Sewer Royalty** `NA_VENAM` | Nadir | 7 | 6 | 644 planned |  | designed | designed |  |
-| **Something in the Sinkholes** `OS_SINKFIELD` | Ossaria | 7 | 5 | 628 planned |  | designed | designed |  |
-| **Adequate Swords** `AS_ADEQUATE_SWORDS` | Ashkaar | 8 | 6 | 240 planned |  | designed | designed |  |
-| **Afraid of Heights** `AS_AFRAID_OF_HEIGHTS` | Ashkaar | 8 | 6 | 248 planned |  | designed | designed |  |
+| **Something in the Sinkholes** `OS_SINKFIELD` | Ossaria | 7 | 5 | 628 built |  | designed | designed |  |
+| **Adequate Swords** `AS_ADEQUATE_SWORDS` | Ashkaar | 8 | 6 | 240 built, 247 built | `ADEQUATE_OWNER` `ADEQUATE_SIGN` `EXCELLENT_SMITH` `HONEST_COURT` | designed | in maps |  |
+| **Afraid of Heights** `AS_AFRAID_OF_HEIGHTS` | Ashkaar | 8 | 6 | 248 built |  | designed | designed |  |
 | **Ashes Home** `AS_ASHES` | Ashkaar | 8 | 6 | 650 planned |  | designed | designed |  |
 | **The Lava-Tube Terror** `AS_DRUDDIGON` | Ashkaar | 8 | 6 | 664 planned |  | designed | designed |  |
-| **Too Loud for the Choir** `AS_OCTAVE_TOO_LOUD` | Ashkaar | 8 | 6 | 240 planned | `CRUCIBLE_LEGATE` `OCTAVE_FORTE` | not in maps | needs maps | waits on map 240 |
-| **Seven Bouts** `AS_SEVEN_BOUTS` | Ashkaar | 8 | 6 | 240 planned |  | designed | designed |  |
-| **The Trial of Truth** `AS_TRIAL_OF_TRUTH` | Ashkaar | 8 | 6 | 247 planned |  | designed | designed |  |
-| **The Egg Run** `AS_EGG_RUN` | Ashkaar | 9 | 7 | 248 planned |  | designed | designed |  |
-| **Two Lucarios** `NA_GARRET` | Nadir | 9 | 0 | 263 planned |  | designed | designed |  |
-| **Lamplighter Kids** `NA_LAMPLIGHTER_KIDS` | Nadir | 9 | 7 | 260 planned |  | designed | designed |  |
-| **Pit Ringer** `NA_PIT_RINGER` | Nadir | 9 | 7 | 263 planned |  | designed | designed |  |
-| **What the Bride Tree Hears** `EL_EVER_BLOOM` | Elowen | 10 | 8 | 294 planned |  | designed | designed |  |
+| **Too Loud for the Choir** `AS_OCTAVE_TOO_LOUD` | Ashkaar | 8 | 6 | 240 built | `CRUCIBLE_LEGATE` `OCTAVE_FORTE` | needs maps | in maps |  |
+| **Seven Bouts** `AS_SEVEN_BOUTS` | Ashkaar | 8 | 6 | 240 built | `CRUCIBLE_LEGATE` | designed | in maps |  |
+| **The Trial of Truth** `AS_TRIAL_OF_TRUTH` | Ashkaar | 8 | 6 | 247 built | `HALDEN` `HERALD_PYKE` | designed | in maps |  |
+| **The Egg Run** `AS_EGG_RUN` | Ashkaar | 9 | 7 | 248 built |  | designed | designed |  |
+| **Two Lucarios** `NA_GARRET` | Nadir | 9 | 0 | 263 built |  | designed | designed |  |
+| **Lamplighter Kids** `NA_LAMPLIGHTER_KIDS` | Nadir | 9 | 7 | 260 built |  | designed | designed |  |
+| **Pit Ringer** `NA_PIT_RINGER` | Nadir | 9 | 7 | 263 built |  | designed | designed |  |
+| **What the Bride Tree Hears** `EL_EVER_BLOOM` | Elowen | 10 | 8 | 294 built |  | designed | designed |  |
 | **Gerald** `EL_GERALD` | Elowen | 10 | 8 | 682 planned |  | designed | designed |  |
-| **The Rootward Wake** `EL_ROOTWARD_WAKE` | Elowen | 10 | 8 | 296 planned |  | designed | designed |  |
-| **The Bride Tree's Heart** `EL_BRIDE_TREE_HEART` | Elowen | 11 | 9 | 294 planned | `JUNO_BRIDE_TREE` | not in maps | needs maps | waits on map 294 |
+| **The Rootward Wake** `EL_ROOTWARD_WAKE` | Elowen | 10 | 8 | 296 built |  | designed | designed |  |
+| **The Bride Tree's Heart** `EL_BRIDE_TREE_HEART` | Elowen | 11 | 9 | 294 built | `JUNO_BRIDE_TREE` | needs maps | in maps |  |
 | **Crystal Sleep** `IS_ALEXANDRA` | Isenmar | 11 | 10 | 309 planned |  | designed | designed |  |
-| **Eleven Years at One Hole** `IS_ELEVEN_YEARS` | Isenmar | 11 | 9 | 300 planned |  | designed | designed |  |
-| **The Harpoon Rite** `IS_HARPOON_RITE` | Isenmar | 11 | 9 | 306 planned |  | designed | designed |  |
+| **Eleven Years at One Hole** `IS_ELEVEN_YEARS` | Isenmar | 11 | 9 | 300 built |  | designed | designed |  |
+| **The Harpoon Rite** `IS_HARPOON_RITE` | Isenmar | 11 | 9 | 306 built |  | designed | designed |  |
 | **The Sinking Quarter** `IS_SINKING_QUARTER` | Isenmar | 11 | 0 | 309 planned |  | designed | designed |  |
 | **The White Stag** `IS_WHITE_STAG` | Isenmar | 11 | 9 | 710 planned |  | designed | designed |  |
 | **Cut Loose** `ZE_COURIER` | Zenith | 12 | 10 | 730 planned |  | designed | designed |  |
@@ -93,7 +93,7 @@
 | **Better Marks** `AN_STUDENT` | Antumbra | 13 | 11 | 344 planned |  | designed | designed |  |
 | **It Keeps the Rain In** `AN_UMBRELLA` | Antumbra | 13 | 11 | 743 planned |  | designed | designed |  |
 | **The Old Pincer** `EL_OLD_PINCER` | Elowen | 14 | 12 | 526 built, 703 planned | `OLD_PINCER` `WOODWARD_PINCER` | not in maps | not placed | waits on map 703 |
-| **Amber, Again** `OS_AMBER_AGAIN` | Ossaria | 14 | 12 | 209 planned | `SAHAR_DIGLAB` | not in maps | needs maps | waits on map 209 |
+| **Amber, Again** `OS_AMBER_AGAIN` | Ossaria | 14 | 12 | 209 built | `SAHAR_DIGLAB` | needs maps | in maps |  |
 | **The Bonewright's Rite** `OS_BONEWRIGHT` | Ossaria | 14 | 13 | 360 planned |  | designed | designed |  |
 | **The Ring-Day** `OS_RING_DAY` | Ossaria | 14 | 13 | 363 planned | `BASTIAN_LAMPROOM` | not in maps | needs maps | waits on map 363 |
 | **Where the Well Went** `OS_UNDERSANDS` | Ossaria | 14 | 12 | 783 planned |  | designed | designed |  |
@@ -104,21 +104,21 @@
 | **The Saga of the Glass Dunes** `IS_SAGA_OF_THE_ICE` | Isenmar | 15 | 13 | 921 planned |  | designed | designed |  |
 | **The Doll Who Waited** `EL_DOLL_WHO_WAITED` | Elowen | 16 | 14 | 546 built, 547 built | `ATTIC_DOLL` `DOLL_BUTTON` | in maps | in maps |  |
 | **The Lift Strike** `NA_LIFT_STRIKE` | Nadir | 16 | 14 | 830 planned |  | designed | designed |  |
-| **The Laureate's Prize** `ZE_LAUREATE` | Zenith | 16 | 14 | 194 planned |  | designed | designed |  |
+| **The Laureate's Prize** `ZE_LAUREATE` | Zenith | 16 | 14 | 194 built |  | designed | designed |  |
 | **Return to Sender** `ZE_RETURN_TO_SENDER` | Zenith | 16 | 14 | 320 planned, 323 planned, 324 planned, 325 planned | `DEAD_LETTER_DOOR` `GALE_POSTMASTER` | not in maps | needs maps | waits on map 320, 323, 324, 325 |
-| **The Brazier Writ** `AS_BRAZIER_WRIT` | Ashkaar | 17 | 15 | 240 planned | `CRUCIBLE_LEGATE` | not in maps | needs maps | waits on map 240 |
-| **The Forge Remembers** `AS_FORGE_REMEMBERS` | Ashkaar | 17 | 15 | 244 planned | `BRANN_HEARTHGUILD` | not in maps | needs maps | waits on map 244 |
-| **Old Cinder** `AS_OLD_CINDER` | Ashkaar | 17 | 15 | 248 planned | `OLD_CINDER` `ROOST_KEEPER` | not in maps | needs maps | waits on map 248 |
+| **The Brazier Writ** `AS_BRAZIER_WRIT` | Ashkaar | 17 | 15 | 240 built | `CRUCIBLE_LEGATE` | needs maps | in maps |  |
+| **The Forge Remembers** `AS_FORGE_REMEMBERS` | Ashkaar | 17 | 15 | 244 built | `BRANN_HEARTHGUILD` | needs maps | in maps |  |
+| **Old Cinder** `AS_OLD_CINDER` | Ashkaar | 17 | 15 | 248 built | `OLD_CINDER` `ROOST_KEEPER` | needs maps | in maps |  |
 | **Mother Gutter's Ledger** `NA_GUTTER_DEBTS` | Nadir | 17 | 15 | 423 planned |  | designed | designed |  |
 | **Dogs of the Moon Market** `NA_MOON_MARKET_DOGS` | Nadir | 17 | 15 | 423 planned | `KENNEL_CAGE` `OTTOLINE_MOON_MARKET` | not in maps | needs maps | waits on map 423 |
 | **The Tyrant's Heart** `OS_TYRANT_HEART` | Ossaria | 17 | 15 | 360 planned, 773 planned | `NASRIN_CRAGHOLM` `THIRD_VERTEBRA` | not in maps | needs maps | waits on map 360, 773 |
 | **Dreamwalker** `AN_SHIV` | Antumbra | 18 | 17 | 440 planned |  | designed | designed |  |
-| **Encore** `EL_ENCORE` | Elowen | 18 | 16 | 154 built | `DORIAN_ENCORE` | not in maps | not placed |  |
+| **Encore** `EL_ENCORE` | Elowen | 18 | 16 | 154 built | `DORIAN_ENCORE` | not placed | in maps |  |
 | **The Twilight Cloister** `EL_TWILIGHT_CLOISTER` | Elowen | 18 | 16 | 440 planned |  | designed | designed |  |
-| **The Causeway Matriarch** `IS_CAUSEWAY_MATRIARCH` | Isenmar | 18 | 16 | 560 built | `CAUSEWAY_MATRIARCH` | not in maps | not placed |  |
+| **The Causeway Matriarch** `IS_CAUSEWAY_MATRIARCH` | Isenmar | 18 | 16 | 560 built | `CAUSEWAY_MATRIARCH` | not placed | in maps |  |
 | **Sweetrot** `NA_SWEETROT` | Nadir | 18 | 0 | 423 planned |  | designed | designed |  |
 | **Dragonsworn** `AS_DRAGONSWORN` | Ashkaar | 19 | 17 | 460 planned |  | designed | designed |  |
-| **The Memory Kata** `NA_MEMORY_KATA` | Nadir | 19 | 17 | 260 planned | `OTTOLINE_LAST_RUNG` | not in maps | needs maps | waits on map 260 |
+| **The Memory Kata** `NA_MEMORY_KATA` | Nadir | 19 | 17 | 260 built | `OTTOLINE_LAST_RUNG` | needs maps | in maps |  |
 | **The Pavilion Line** `CR_DELEGATION_DISPUTE` | Crownhaven | 20 | 0 | 499 planned |  | designed | designed |  |
 | **Eighteen Shrines** `CR_EIGHTEEN_SHRINES` | Crownhaven | 20 | 18 | 890 planned |  | designed | designed |  |
 | **The Chancellor's Other Ledger** `CR_HOLLIS_LEDGER` | Crownhaven | 20 | 0 | 486 planned |  | designed | designed |  |
@@ -127,7 +127,7 @@
 | **The Ninth Verse** `CR_OCTAVE_NINTH_VERSE` | Crownhaven | 20 | 0 | 489 planned | `OCTAVE_CAROL` | not in maps | needs maps | waits on map 489 |
 | **An Old Man's Errand** `CR_VALENS_ERRAND` | Crownhaven | 20 | 0 | 489 planned |  | designed | designed |  |
 | **Hand of the Accord** `CR_ACCORD_CHAMPIONS` | Crownhaven | 21 | 0 | 496 planned |  | designed | designed |  |
-| **Bedside Manner** `NA_BEDSIDE_MANNER` | Nadir | 21 | 18 | 223 planned | `CORVIN_INFIRMARY` `WARD_BED` `WENLOW_INFIRMARY` | not in maps | needs maps | waits on map 223 |
+| **Bedside Manner** `NA_BEDSIDE_MANNER` | Nadir | 21 | 18 | 223 built | `CORVIN_INFIRMARY` `WARD_BED` `WENLOW_INFIRMARY` | needs maps | in maps |  |
 | **The Meteor Champion** `CR_LIN` | Crownhaven | 22 | 0 | 105 built |  | designed | designed |  |
 
 ## Event and quest-reward Pokemon
@@ -157,32 +157,32 @@
 | `IS_BOMBIRDIER` Bombirdier | boss | 4 | 3 | 561 built | `IS_EGG_THIEF` | in maps |
 | `IS_SNOM` Snom | gift | 4 | 2 | 160 built | `IS_OATH_PARCEL` | in maps |
 | `ZE_CHARCADET` Charcadet | gift | 4 | 2 | 106 built | `ZE_FORM_7B` | in maps |
-| `IS_CORSOLA` Corsola (form 1) | battle | 5 | 3 | 588 planned | `IS_EBB_HOLLOW` | needs maps |
-| `ZE_PORYGON` Porygon | gift | 5 | 3 | 185 planned | `ZE_CUSTOMER_SUPPORT` | needs maps |
-| `OS_CARBINK` Carbink | gift | 6 |  | 209 planned | `OS_KEVIN` | designed |
-| `OS_TRAPINCH` Trapinch | gift | 6 |  | 610 planned | `OS_RIDDLE_CARAVAN` | designed |
-| `ZE_DEX_PICHU` Pichu | gift | 6 |  | 608 planned | `ZE_LOWLIGHT_LAMPS` | designed |
-| `NA_GRIMER` Grimer (form 1) | gift | 7 |  | 220 planned | `NA_NOODLE_SCORE` | designed |
-| `OS_STUNFISK` Stunfisk (form 1) | boss | 7 |  | 628 planned | `OS_SINKFIELD` | designed |
+| `IS_CORSOLA` Corsola (form 1) | battle | 5 | 3 | 588 built | `IS_EBB_HOLLOW` | in maps |
+| `ZE_PORYGON` Porygon | gift | 5 | 3 | 185 built | `ZE_CUSTOMER_SUPPORT` | in maps |
+| `OS_CARBINK` Carbink | gift | 6 |  | 209 built | `OS_KEVIN` | designed |
+| `OS_TRAPINCH` Trapinch | gift | 6 |  | 610 built | `OS_RIDDLE_CARAVAN` | designed |
+| `ZE_DEX_PICHU` Pichu | gift | 6 |  | 608 built | `ZE_LOWLIGHT_LAMPS` | designed |
+| `NA_GRIMER` Grimer (form 1) | gift | 7 |  | 220 built | `NA_NOODLE_SCORE` | designed |
+| `OS_STUNFISK` Stunfisk (form 1) | boss | 7 |  | 628 built | `OS_SINKFIELD` | designed |
 | `AS_DRUDDIGON` Druddigon | boss | 8 |  | 664 planned | `AS_DRUDDIGON` | designed |
 | `AS_HOUNDOUR` Houndour | gift | 8 |  | 650 planned | `AS_ASHES` | designed |
-| `AS_NOIBAT` Noibat | gift | 8 |  | 248 planned | `AS_AFRAID_OF_HEIGHTS` | designed |
+| `AS_NOIBAT` Noibat | gift | 8 |  | 248 built | `AS_AFRAID_OF_HEIGHTS` | designed |
 | `AS_RANK_DEINO` Deino | egg | 8 |  | (rank reward) |  | rank reward |
-| `AS_AXEW_EGG` Axew | egg | 9 |  | 248 planned | `AS_EGG_RUN` | designed |
-| `NA_FALINKS` Falinks | boss | 9 |  | 263 planned | `NA_PIT_RINGER` | designed |
-| `EL_EVER_BLOOM` Floette (form 4) | gift | 10 |  | 294 planned | `EL_EVER_BLOOM` | designed |
+| `AS_AXEW_EGG` Axew | egg | 9 |  | 248 built | `AS_EGG_RUN` | designed |
+| `NA_FALINKS` Falinks | boss | 9 |  | 263 built | `NA_PIT_RINGER` | designed |
+| `EL_EVER_BLOOM` Floette (form 4) | gift | 10 |  | 294 built | `EL_EVER_BLOOM` | designed |
 | `EL_GERALD` Scatterbug | gift | 10 |  | 682 planned | `EL_GERALD` | designed |
 | `EL_RANK_COMFEY` Comfey | gift | 10 |  | (rank reward) |  | rank reward |
-| `IS_CETODDLE` Cetoddle | gift | 11 |  | 300 planned | `IS_HARPOON_RITE` | designed |
+| `IS_CETODDLE` Cetoddle | gift | 11 |  | 300 built | `IS_HARPOON_RITE` | designed |
 | `IS_RANK_LAPRAS` Lapras | gift | 11 |  | (rank reward) |  | rank reward |
-| `IS_TATSUGIRI` Tatsugiri (form 1) | gift | 11 |  | 300 planned | `IS_ELEVEN_YEARS` | designed |
+| `IS_TATSUGIRI` Tatsugiri (form 1) | gift | 11 |  | 300 built | `IS_ELEVEN_YEARS` | designed |
 | `IS_WHITE_STAG` Sawsbuck (form 3) | battle | 11 |  | 701 planned | `IS_WHITE_STAG` | designed |
 | `ZE_KLEFKI` Klefki | gift | 12 |  | 730 planned | `ZE_COURIER` | designed |
 | `AN_HATENNA` Hatenna | gift | 13 |  | 743 planned | `AN_UMBRELLA` | designed |
 | `AN_INDEEDEE` Indeedee (form 1) | gift | 13 |  | 753 planned | `AN_OTHER_HALF` | designed |
 | `EL_OLD_PINCER` Pinsir | boss | 14 | 12 | 703 planned | `EL_OLD_PINCER` | not placed |
 | `OS_YAMASK` Yamask (form 1) | gift | 14 |  | 770 planned | `OS_UNQUIET_ELECTOR` | designed |
-| `AS_OLD_CINDER` Charizard | boss | 17 | 15 | 248 planned | `AS_OLD_CINDER` | needs maps |
-| `IS_CAUSEWAY_MATRIARCH` Kangaskhan | boss | 18 | 16 | 560 built | `IS_CAUSEWAY_MATRIARCH` | not placed |
+| `AS_OLD_CINDER` Charizard | boss | 17 | 15 | 248 built | `AS_OLD_CINDER` | in maps |
+| `IS_CAUSEWAY_MATRIARCH` Kangaskhan | boss | 18 | 16 | 560 built | `IS_CAUSEWAY_MATRIARCH` | in maps |
 | `NA_POLTCHAGEIST` Poltchageist | gift | 18 |  | 423 planned | `NA_SWEETROT` | designed |
 | `CR_OCTAVE_EEVEE` Eevee | gift | 20 |  | 489 planned | `CR_OCTAVE` | partly, needs maps |
