@@ -14,6 +14,7 @@
 - [ ] **(Gemini) Fixes in Gemini-owned layouts** (Wednesday audit): A11 Marram Down 528 (stairs, Headbutt trees), plus the routes_craft, saltmere, lumen and briarwick fixes in Parts A–J.
 - [ ] A9 Thistledown Manor 546 and A10 Pageant Hall 145 (Claude-built; Wednesday audit).
 - [ ] `mapgen/build.py`: a post-paint BFS reachability check, and gate packaging on `export_tilesets_rxdata.py --check`.
+- [ ] `mapgen/build.py`: warn when an action-button event sits on a walk-on tile it can only be faced from the side of (Gym 7's cracked mould couldn't be opened; found in the engine 2026-11-26).
 
 ## 2. Bosses and battle engine
 - [x] **No-legendary-captures safety net** (Gemini Part B.2): Core `027_LegendaryGate.rb` (`Prismfall.legendary_catch_allowed?` / `story_legendary_locked?`; Legendary / Mythical / UB / Paradox flags + Type: Null, Silvally, Kubfu, Urshifu) deflects every wild ball before S160 (Bosses 004 `pbThrowPokeBall`); `:LOYAL_THREE` registered (Bosses 112: three `:catch => false` bosses + `Prismfall::Bosses.loyal_three`, PARTNER_OGRE if `:ch10_ogre == :ogre`). `PARTNER_OGRE` ("Gossamer Ogre", Ogerpon Lv 48) in PBS; harnessed (winrates_r4 cells L3O/L3M/L3F/L3OA/L3FA: Standard 53–98%, Hard prepared 90–100%). 2026-11-23. Still to do: Hard's "second Pokémon at its side" when alone.
