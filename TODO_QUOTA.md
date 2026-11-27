@@ -198,3 +198,10 @@
 *Running note so the work can be picked up. Checks: `python3 -I mapgen/puzzle_check.py`, `ruby -c`, real engine `tools/harness/visual/ch7/`.*
 - [x] Gym 6 proofs on Gemini's built 230-232 (4bb543e9): `mapgen/puzzles/infirmary.py` (230 2 moves, 231 7, 232 16 / 3264 states, rating 6 at its cap; no soft-lock; Quiet Alcove mastery 19 moves).
 - [ ] Next: `mapgen/layouts/story_ch7.py` on 220 / 223 / 233 (+ the gym door gate), build, engine walk of V127, GIF, notes.
+
+## Status: Gemini overnight integration audit (5f233ad2..d543a354) (Claude, 2026-11-27)
+*Running note so the work can be picked up. Checker: `python3 -I tools/check_map_events.py --range 5f233ad2..d543a354`.*
+- [x] `tools/check_map_events.py`: static checks of every spec event (trainers + versions, methods, items / species /
+  moves, flag names + numeric id collisions, registries, charsets, transfers, ruby syntax). Gemini's 86 specs: 0 errors.
+- [ ] Next: flags.yaml registration of Gemini's non-G7 ids, story layers re-run on changed maps, cutscene-wave duplicates,
+  art handoff checks, strict build in a private copy, REVIEW.md verdicts.
