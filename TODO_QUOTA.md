@@ -13,8 +13,9 @@
 - [ ] **(Gemini) Pass 3:** after pass 2, Gemini refines each map in that queue.
 - [ ] **(Gemini) Fixes in Gemini-owned layouts** (Wednesday audit): A11 Marram Down 528 (stairs, Headbutt trees), plus the routes_craft, saltmere, lumen and briarwick fixes in Parts A–J.
 - [ ] A9 Thistledown Manor 546 and A10 Pageant Hall 145 (Claude-built; Wednesday audit).
-- [ ] `mapgen/build.py`: a post-paint BFS reachability check, and gate packaging on `export_tilesets_rxdata.py --check`.
-- [ ] `mapgen/build.py`: warn when an action-button event sits on a walk-on tile it can only be faced from the side of (Gym 7's cracked mould couldn't be opened; found in the engine 2026-11-26).
+- [x] `mapgen/build.py`: a post-paint BFS reachability check (2026-11-27, `mapgen/reach.py`, REACH warnings; also `python3 -I mapgen/reach.py [ids]` on maps_out without a build). Every warp, door and action event must be reachable from the map's arrivals (every built map's transfers, literal scripted transfers / movetos, swaps seeded from the source map's fill, HealingSpot / fly spots, joined edges, `walk_from`); the fill is a superset of any story state (an event counts as whichever page lets you through; Surf, bridges and ledges modelled; puzzle rooms add their model's cells). `--strict` fails only on "exact" maps (no puzzle room, unparsed relocation, Through / jump player route or tile write). First run on HEAD (217 maps): exact misses on **145** Pageant Hall (16 events: the wings and the side boxes are cut off), **244** Hearthguild Hall (the Cider Cask is walled in on all four sides), **249** Slag Ward (3 Door plates in two cut-off pockets); approximate (puzzle rooms): 154 (5 fans / boxes), 546 (Armchair g2). Owners to fix; a spec's `reach_ignore: [regex]` exempts deliberate scenery. Once the g7 proofs pass, `--strict` stops on these.
+- [ ] `mapgen/build.py`: gate packaging on `export_tilesets_rxdata.py --check`.
+- [x] `mapgen/build.py`: warn when an action-button event sits on a walk-on tile it can only be faced from the side of (2026-11-27, `mapgen/reach.py` STANDON: Game_Event#over_trigger?, so only check_event_trigger_here runs it; flags pages that show a tile or a Through charset on a passable tile; it catches the old 252 cracked mould). First run: 100 (6 quay lamps, 3 Through pier NPCs), 132 (4 rope ladders: the Lofts model uses them from beside), 522 / 525 (the sleeping Glassed bugs, Through), 524 (silk seam, silk wall, fallen log: also walkable), 546 (attic hatch), 568 (34 frozen gusts). Owners to fix.
 
 ## 2. Bosses and battle engine
 - [x] **No-legendary-captures safety net** (Gemini Part B.2): Core `027_LegendaryGate.rb` (`Prismfall.legendary_catch_allowed?` / `story_legendary_locked?`; Legendary / Mythical / UB / Paradox flags + Type: Null, Silvally, Kubfu, Urshifu) deflects every wild ball before S160 (Bosses 004 `pbThrowPokeBall`); `:LOYAL_THREE` registered (Bosses 112: three `:catch => false` bosses + `Prismfall::Bosses.loyal_three`, PARTNER_OGRE if `:ch10_ogre == :ogre`). `PARTNER_OGRE` ("Gossamer Ogre", Ogerpon Lv 48) in PBS; harnessed (winrates_r4 cells L3O/L3M/L3F/L3OA/L3FA: Standard 53–98%, Hard prepared 90–100%). 2026-11-23. Still to do: Hard's "second Pokémon at its side" when alone.
@@ -205,3 +206,7 @@
   moves, flag names + numeric id collisions, registries, charsets, transfers, ruby syntax). Gemini's 86 specs: 0 errors.
 - [ ] Next: flags.yaml registration of Gemini's non-G7 ids, story layers re-run on changed maps, cutscene-wave duplicates,
   art handoff checks, strict build in a private copy, REVIEW.md verdicts.
+
+## Status: Chapter 6 staging agent (2026-11-27)
+*Running note. Layer: `mapgen/layouts/story_ch6.py` (committed 596f2b2a). Next: Gym 5 proof module, the Duneholt
+Sergeant / Bereaved PBS blocks, the real-engine walk (`tools/harness/visual/ch6/`), the key-events GIF, notes.*

@@ -836,6 +836,11 @@ def main():
     ctx.arrival_bad = check_arrivals(selected, specs, ctx)
     ctx.seam_bad = check_seams(specs, ctx)
     ctx.spot_bad = check_spots(specs, ctx)
+    try:                                        # STANDON + REACH (mapgen/reach.py): post-paint reachability on the built maps
+        import reach
+        ctx.reach_bad = reach.check(selected, specs, ctx)
+    except Exception as e:                      # a bug in the check must not stop a build
+        ctx.warn('-', 'reach check crashed: %r' % e)
     # trainers referenced by events -> list for the trainer-data owner
     need = set()
     for s in selected:
@@ -871,6 +876,8 @@ def main():
         sys.exit('--strict: %d story gate(s) leak (see GATE warnings)' % ctx.gate_bad)
     if '--strict' in sys.argv and getattr(ctx, 'spot_bad', 0):
         sys.exit('--strict: %d HealingSpot / fly spot problem(s) (see SPOT warnings)' % ctx.spot_bad)
+    if '--strict' in sys.argv and getattr(ctx, 'reach_bad', 0):
+        sys.exit('--strict: %d warp / door / action event(s) out of reach on exact maps (see REACH warnings; mapgen/reach.py)' % ctx.reach_bad)
 
 
 def check_spots(specs, ctx):
