@@ -877,3 +877,27 @@ events:
     through: true
   at: [27, 37]
   story: ch8
+- type: event
+  name: Oath-Guard (escort)
+  pages:
+  - commands:
+    - if: pfm_get(:ashkaar_watched)
+      then:
+      - selfswitch: [A, true]
+      else:
+      - {wait: 40}
+    trigger: parallel
+    move: fixed
+    through: true
+  - commands: ['Oath-Guard: Don''t mind me. You said nothing at the gate.', 'Oath-Guard: I''m the nothing''s escort.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_SOLDIER_M, dir: left}
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH8_STEP, 10]
+  at: [31, 38]
+  story: ch8

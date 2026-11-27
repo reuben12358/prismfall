@@ -21,7 +21,8 @@ The Foundry's doors on 240 open on :gym7_open (set by "My Father") and lead to G
 at 240 (21, 3) for the Five Bells); his fight is LOCKED and the battle call is Gemini's, unchanged. Not here: the Ch17
 Trials quest AS_FORGE_REMEMBERS (the Trials owner's).
 
-It also plays the bracketed narrator boxes of Gemini's guarded exits and NPCs on 240 / 243 / 249 (STAGE below).
+It also plays the bracketed narrator boxes of Gemini's guarded exits and NPCs on 240 / 243 / 249 (STAGE below), and
+puts the :ashkaar_watched oath-guard on 240 (its setter belongs to 652's oath-gate, which is not built yet).
 
 Run after cindervault_town.py / cindervault_core.py / cindervault_gym.py (which rewrite these specs from scratch):
     python3 -I layouts/story_ch8.py && python3 -I build.py 240 243 244 249 253 --no-preview"""
@@ -422,8 +423,22 @@ def events_243():
             walk_on('Gate rider', 33, 11)]
 
 
+# "[if pfm_get(:ashkaar_watched)]": the PC said nothing at the Pyre Road's oath-gate (652, "Say True"; that map is not
+# built yet, and its "(Say nothing.)" branch is what calls pfm_set(:ashkaar_watched)). An oath-guard then keeps the
+# PC company in the town, by the way in from the Caldera Gate, until the chapter closes. A map flag can't be a page
+# condition, so a quiet parallel page turns it into the event's self switch A.
+ESCORT = 'Oath-Guard (escort)'
+def escort_240():
+    return at(ev(ESCORT,
+                 page([IF('pfm_get(:ashkaar_watched)', [{'selfswitch': ['A', True]}], [{'wait': 40}])], trigger='parallel', through=True),
+                 page([N('Oath-Guard', "Don't mind me. You said nothing at the gate."),
+                       N('Oath-Guard', "I'm the nothing's escort.")], GUARD_M, 'left', cond={'self': 'A'}),
+                 page([], cond=V(10))), 31, 38)
+
+
 def events_240():
-    return [at(ev('Five Bells (square)', page([]), page(FIVE_BELLS_SQUARE, cond=V(5), trigger='autorun'), page([], cond=V(6))), 0, 0),
+    return [escort_240(),
+            at(ev('Five Bells (square)', page([]), page(FIVE_BELLS_SQUARE, cond=V(5), trigger='autorun'), page([], cond=V(6))), 0, 0),
             at(ev('The Herald', page([]), page(HERALD, cond=V(8), trigger='autorun'), page([], cond=V(9))), 1, 0),
             walk_on('Brann (square)', 21, 27), walk_on('Larch (square)', 23, 23), walk_on('Sigrun (square)', 23, 27),
             walk_on('Sigrun (balcony)', 22, 15),
