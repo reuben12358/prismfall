@@ -27,6 +27,10 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch8story")
     class << self; attr_accessor :choices, :battles, :gym, :g7; end
   end
   class << DemoRun
+    # with CH8_SHOTS=1, every RESULT line also says which frame file was being written (for picking a beat's frames)
+    alias c8_log0 log unless method_defined?(:c8_log0)
+    def log(msg); c8_log0((@rec && msg.to_s.start_with?("RESULT")) ? "#{msg} shot=#{@shots}" : msg); end
+
     def c8_run(limit, min = 30)
       f = 0
       loop do
