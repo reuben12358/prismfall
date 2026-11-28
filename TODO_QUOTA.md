@@ -198,7 +198,8 @@
 ## Status: Chapter 7 "The Quiet Ward" agent (2026-11-27)
 *Running note so the work can be picked up. Checks: `python3 -I mapgen/puzzle_check.py`, `ruby -c`, real engine `tools/harness/visual/ch7/`.*
 - [x] Gym 6 proofs on Gemini's built 230-232 (4bb543e9): `mapgen/puzzles/infirmary.py` (230 2 moves, 231 7, 232 16 / 3264 states, rating 6 at its cap; no soft-lock; Quiet Alcove mastery 19 moves).
-- [ ] Next: `mapgen/layouts/story_ch7.py` on 220 / 223 / 233 (+ the gym door gate), build, engine walk of V127, GIF, notes.
+- [x] Story layer (fc9efd4a, 837ade58): `mapgen/layouts/story_ch7.py` + `mapgen/ruby/021_QuietWard.rb` on Gemini's 220 / 223 / 230 / 233; MERIDIAN_DIRECTORATE "Officer" v7 + v77 for 621 (c013fba2). Engine: the second half (Gym 6 walked, Corvin, the Ward Night, the close) passes.
+- [ ] Next: one full engine walk with CH7_SHOTS=1, the key-events GIF, REVIEW.md verdict. Needs `python3 -I mapgen/export_tilesets_rxdata.py` first (system_prismfall.txt was stale: without G6 switch names Gym 6's bridges never open).
 
 ## Status: Gemini overnight integration audit (5f233ad2..d543a354) (Claude, 2026-11-27)
 *Running note so the work can be picked up. Checker: `python3 -I tools/check_map_events.py --range 5f233ad2..d543a354`.*
