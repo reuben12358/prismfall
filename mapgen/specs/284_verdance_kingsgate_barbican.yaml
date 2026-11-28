@@ -165,3 +165,58 @@ events:
   name: Item (Hyper Potion)
   at: [10, 16]
   item: HYPERPOTION
+- type: event
+  name: Kingsgate Arrival
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(19, 20)'}
+        - turn_up
+        wait: true
+    - {script: pfm_fade_in(24)}
+    - {script: 'pbSEPlay("Sweet Scent", 70, 80)
+
+        pfm_tone(34, 26, -18, 0, 40)'}
+    - {script: '$game_map.start_scroll(8, 7, 4)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - {wait: 50}
+    - {script: pfm_pan_home(16)}
+    - move:
+        who: Gate Clerk
+        route: [through_on, right, right, down, down, down, down, through_off, turn_down]
+        wait: true
+    - {script: 'pbSEPlay("GUI storage pick up", 60, 110)'}
+    - 'Gate Clerk: Pollen. Wear it. It''s not poison. It just won''t stop.'
+    - 'Gate Clerk: Since the Warden went, the Meadow Plate''s had nobody to hold it in.'
+    - 'Gate Clerk: It''s... spilling. Three days, the whole city.'
+    - 'Gate Clerk: The bakers can''t keep the bread from sprouting.'
+    - move:
+        who: Gate Clerk
+        route: [through_on, up, up, up, up, left, left, through_off, turn_down]
+        wait: false
+    - {script: 'pfm_face(:player, "Woman with a Trowel")'}
+    - {script: '3.times { pbSEPlay("Mining pick", 45, 140); pbWait(0.35) }'}
+    - Under the flowers the soil is grey and dry. The dead leaf she lifts out of it isn't rotten. It's exactly as it fell.
+    - 'Woman with a Trowel: Nothing rots in Verdance. My nan used to say it like it was a blessing.'
+    - switch: [THORNGUARD_HEARTGARDEN, true]
+    - var: [VERDANCE_BLOOM, 1]
+    - var: [CH10_STEP, 3]
+    - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "The Sovereign is in the Heartgarden. Go up through the Market Terraces.")'}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH10_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 3]
+  at: [0, 0]
+  story: ch10

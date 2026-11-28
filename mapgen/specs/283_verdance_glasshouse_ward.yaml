@@ -162,3 +162,69 @@ events:
   at: [39, 10]
   item: MIRACLESEED
   hidden: true
+- type: event
+  name: Thornguard (Heartgarden way)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - 'Thornguard: The Heartgarden''s closed by order of Her Majesty, Queen Maelis Thorne, pending the succession.'
+    - {script: 'pfm_face("Thornguard (Heartgarden way)", :player)'}
+    - {wait: 16}
+    - 'Thornguard: — Oh. You''re expected. Go up.'
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_THORNGUARD, dir: left}
+    cond:
+      var: [CH10_STEP, 3]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 8]
+    through: true
+  at: [45, 10]
+  story: ch10
+- type: event
+  name: Gym 9 doors (shut)
+  pages:
+  - commands:
+    - {script: 'pbSEPlay("Door slide", 70, 60)'}
+    - move:
+        who: player
+        route: [dir_fix_on, backward, dir_fix_off]
+        wait: true
+    - The Heartgarden Gym's glass doors are shut. Nobody has opened them since the Warden went.
+    trigger: touch
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 8]
+    through: true
+  at: [24, 9]
+  story: ch10
+- type: event
+  name: Little Gardener (way up)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(24)}
+    - transfer: {map: 294, x: 21, y: 8, dir: right}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH10_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 10]
+  at: [0, 0]
+  story: ch10

@@ -87,3 +87,56 @@ events:
         \ pbMessage(_INTL(\"Kaito: Stand up. Again. Take the east cage lift back to the entrance — Odessa's waiting on the doorstep with something for your eighth\
         \ badge.\"))\nelse\n  pbMessage(_INTL(\"Kaito: The Promise Badge is yours. A fist is a promise — don't make one you won't keep.\"))\n  pbMessage(_INTL(\"\
         Kaito: Take the east cage lift back to the entrance. Odessa's waiting on the doorstep with HM02 Fly for your eighth badge.\"))\nend"}
+  - commands:
+    - if: pfm?(:ch9_kaito_lost)
+      then: ['\pf[KAITO,neutral,,Warden Kaito Ren]Kaito: Stand up. Again.']
+      else: ['\pf[KAITO,neutral,,Warden Kaito Ren]Kaito: You won the Open.', 'Kaito: That was for them. This isn''t.', 'Kaito: There''s nobody watching this one.',
+        'Kaito: Ironreach''s Warden is whoever wins the Iron Trial.', 'Kaito: I won it nine years ago. Every year somebody tries to take it off me.', 'Kaito: Every
+          year I''m still here.', 'Kaito: Stand up. Again. That''s all I teach. Ready?']
+    - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_KAITO), double: false)'
+      then:
+      - {script: 'Prismfall.award_badge(pfm_gym(:LEADER_KAITO))'}
+      - You received the PROMISE BADGE!
+      - {script: '8.times { |i| pbSEPlay("Anim/HealBell", 70, 64 + i * 8); pbWait(0.22) }
+
+          pfm_glow(60, 44, 10, 20, 20)'}
+      - 'Kaito: It sings.'
+      - 'Kaito: Memory heard it too. Look.'
+      - {script: 'pfm_face("Kaito''s Lucario (Memory)", :player)'}
+      - {script: 'pbSEPlay("Cries/LUCARIO", 50, 90)'}
+      - {wait: 40}
+      - 'Kaito: Lucario feel what''s alive in a room.'
+      - 'Kaito: Sometimes what''s alive in a room is more than the people in it.'
+      - {script: 'pbReceiveItem(:TM31)'}
+      - 'Kaito: Brick Break. It goes through walls.'
+      - 'Kaito: And that badge says Pokémon up to level forty-seven will heed you.'
+      - if: $game_switches[343]
+        then: &id001 ['\pf[KAITO,sad,,Warden Kaito Ren]Kaito: You opened it. It was empty, wasn''t it.', 'Kaito: ...I always hoped it would be.']
+      - move:
+          who: player
+          route: [turn_down]
+          wait: true
+      - {wait: 20}
+      - '\pf[KAITO,sad,,Warden Kaito Ren]Kaito: A fist is a promise.'
+      - 'Kaito: Don''t make one you won''t keep.'
+      - {script: '$game_variables[@@CH9_STEP] = 6 if $game_variables[@@CH9_STEP] < 6'}
+      - selfswitch: [A, true]
+      else:
+      - {script: 'pfm_set(:ch9_kaito_lost)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: KAITO, dir: down}
+    cond:
+      var: [CH9_STEP, 5]
+    story: ch9
+  - commands:
+    - if: $game_switches[343]
+      then: *id001
+      else: ['\pf[KAITO,sad,,Warden Kaito Ren]Kaito: A fist is a promise.', 'Kaito: Don''t make one you won''t keep.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: KAITO, dir: down}
+    cond:
+      var: [CH9_STEP, 5]
+      self: A
+    story: ch9

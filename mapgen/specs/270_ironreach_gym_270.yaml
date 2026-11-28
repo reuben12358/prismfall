@@ -54,6 +54,16 @@ events:
         and a roused crowd hits harder. Psychic and Flying go over their heads, and Fairies don''t care how loud it gets.', 'Gym Guide: Listen close to Kaito''s ring
         rules: Every step you take, the sparring partners take one. Step onto a golden rope line — they can''t cross ropes, and the ring judges call a rope break
         so they can''t tag you while you''re standing on one!', 'Gym Guide: And remember: Strength boulders hold down iron pressure plates — and so do sparring partners!']
+  - graphic: {sprite: NPC 15, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Gym Guide: Kaito''s gym! Fighting-types on the Colosseum.', 'Gym Guide: Every knockout gets the crowd going, and a roused crowd hits harder.', 'Gym
+        Guide: Psychic and Flying go over their heads. Fairies don''t care how loud it gets.', 'Gym Guide: The sparring partners chase you. Every step you take, they
+        take one.', 'Gym Guide: They can''t cross a rope. You can.', 'Gym Guide: That''s the whole lesson, apparently. Kaito says it took him nine years.', 'Gym Guide:
+        Listen close to Kaito''s ring rules: Every step you take, the sparring partners take one. Step onto a golden rope line — they can''t cross ropes, and the
+        ring judges call a rope break so they can''t tag you while you''re standing on one!', 'Gym Guide: And remember: Strength boulders hold down iron pressure
+        plates — and so do sparring partners!']
+    story: ch9
 - type: event
   name: Ring Medic
   at: [13, 13]
@@ -87,6 +97,24 @@ events:
         \ deliver in person when I like the address. Come to Skyreach sometime — we've got a gym, a storm, and the best dead-letter office in the realm!\"))\n  $game_self_switches[[270,\
         \ @event_id, \"A\"]] = true\n  $game_map.need_refresh = true\nelse\n  pbMessage(_INTL(\"Odessa: Keep your wings dry down in these shafts, kid! See you up\
         \ in Skyreach when the wind turns!\"))\nend"}
+  - commands:
+    - if: pfm?(:ch9_fly)
+      then: ['\pf[ODESSA,smug,,Odessa (HM02 Fly)]Odessa: Courier''s privilege. I deliver. In person, when I like the address.']
+      else:
+      - '\pf[ODESSA,happy,,Odessa (HM02 Fly)]Odessa: There you are. Eight badges, says the board.'
+      - 'Odessa: Fly''s allowed at eight, and I don''t trust the post to deliver it.'
+      - {script: 'pbReceiveItem(:HM02)'}
+      - '\pf[ODESSA,smug,,Odessa (HM02 Fly)]Odessa: Courier''s privilege. I deliver. In person, when I like the address.'
+      - 'Odessa: Come to Skyreach sometime.'
+      - 'Odessa: We''ve got a gym, and a storm, and the best dead-letter office in the realm.'
+      - 'Odessa: Don''t tell anyone I said "best". It''s a sad sort of best.'
+      - {script: 'pfm_set(:ch9_fly)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: ODESSA, dir: left}
+    cond:
+      var: [CH9_STEP, 6]
+    story: ch9
 - type: trainer
   name: Trainer(3)
   at: [10, 7]

@@ -54,20 +54,33 @@ events:
   sprite: NPC 07
   dir: down
   text: 'Gate serjeant: The Queen holds court in the Thorn Throne room. Mind the roses. [TODO story]'
-- type: npc
+- type: event
   name: Flower seller
   at: [58, 70]
   sprite: NPC 11
   dir: right
   move: random
   text: 'Flower seller: Everything blooms in Verdance. Nobody asks what it costs the soil. [TODO story]'
-- type: npc
+  pages:
+  - commands: ['Florist: I''m the only florist in Velmora going out of business because of flowers.']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 11, dir: right}
+    story: ch10
+- type: event
   name: Rootward child
   at: [15, 66]
   sprite: NPC 05
   dir: down
   move: random
   text: 'Rootward child: Dig under any step here and the soil comes up grey. [TODO story]'
+  pages:
+  - commands: ['Rootward Boy: Mum says the old Warden was a bad man.', 'Rootward Boy: Gran says he watered our street''s trees every year for nothing.', 'Rootward
+        Boy: Mum says that''s what bad men do, to make you like them.', 'Rootward Boy: Gran says Mum''s never watered anything.']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 05, dir: down}
+    story: ch10
 - type: npc
   name: Bridge warden
   at: [45, 48]
@@ -77,3 +90,126 @@ events:
 - type: warp
   at: [71, 9]
   to: {map: 285, x: 24, y: 60, dir: up}
+- type: event
+  name: Royal Herald (scene)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - move:
+        who: Royal Herald
+        route:
+        - graphic: [trainer_THORNGUARD, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto($game_player.x, $game_player.y - 2)'}
+        - turn_down
+        wait: true
+    - {script: 'pbSEPlay("Anim/HealBell", 60, 120)'}
+    - {script: 'pfm_face(:player, "Royal Herald")'}
+    - {wait: 16}
+    - 'Royal Herald: Her Majesty Queen Maelis Thorne, in these troubled times, of Her great love for Her people, throws open to them the Royal Chase, Her Majesty''s
+      own hunting reserve, for their recreation and the catching of game.'
+    - 'Royal Herald: God save the Queen.'
+    - 'Florist: That''s for the papers. It''s still a lovely park.'
+    - switch: [CH10_ROYAL_CHASE_OPEN, true]
+    - move:
+        who: Royal Herald
+        route:
+        - through_on
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: true
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH10_STEP, 10]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 11]
+  at: [0, 0]
+  story: ch10
+- type: event
+  name: Royal Herald
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [1, 0]
+  story: ch10
+- type: warp
+  name: To Glasshouse Ward 66
+  at: [99, 66]
+  to: {map: 283, x: 2, y: 19, dir: right}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Glasshouse Ward 67
+  at: [99, 67]
+  to: {map: 283, x: 2, y: 19, dir: right}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Kingsgate Barbican 33
+  at: [33, 87]
+  to: {map: 284, x: 19, y: 8, dir: down}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Kingsgate Barbican 34
+  at: [34, 87]
+  to: {map: 284, x: 19, y: 8, dir: down}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Kingsgate Barbican 35
+  at: [35, 87]
+  to: {map: 284, x: 19, y: 8, dir: down}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Kingsgate Barbican 36
+  at: [36, 87]
+  to: {map: 284, x: 19, y: 8, dir: down}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Kingsgate Barbican 37
+  at: [37, 87]
+  to: {map: 284, x: 19, y: 8, dir: down}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Kingsgate Barbican 38
+  at: [38, 87]
+  to: {map: 284, x: 19, y: 8, dir: down}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Kingsgate Barbican 39
+  at: [39, 87]
+  to: {map: 284, x: 19, y: 8, dir: down}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Rootward 74
+  at: [4, 74]
+  to: {map: 296, x: 2, y: 15, dir: right}
+  se: Door exit
+  story: ch10
+- type: warp
+  name: To Rootward 75
+  at: [4, 75]
+  to: {map: 296, x: 2, y: 15, dir: right}
+  se: Door exit
+  story: ch10

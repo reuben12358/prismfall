@@ -154,6 +154,24 @@ events:
         \ fingers on the left, none of them idle. Welcome to the Last Rung.\"))\n  pbMessage(_INTL(\"Six-Fingers Ottoline: Chalk jobs for the Gutter Book are pinned\
         \ right beside me on the post. Don't waste my chalk if you can't hold a stance.\"))\n  pbMessage(_INTL(\"Six-Fingers Ottoline: Top shelf inside? Old Wardguard\
         \ ring-stone. Owner comes in once a year to look at it. Not for sale yet — come back when your badge case sings loud enough.\"))\nend"}
+  - commands: ['Six-Fingers Ottoline: Board''s shut, love. Nobody takes a chalk job with the whole Conclave voting over their heads.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 23, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+    story: ch9
+  - graphic: {sprite: NPC 23, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - {script: "if (pf_trial_ready?(:OTTOLINE_LAST_RUNG) rescue false)\n  pf_trial_talk(:OTTOLINE_LAST_RUNG)\nelse\n  pbMessage(_INTL(\"Six-Fingers Ottoline: Six\
+        \ fingers on the left, none of them idle. Welcome to the Last Rung.\"))\n  pbMessage(_INTL(\"Six-Fingers Ottoline: Chalk jobs for the Gutter Book are pinned\
+        \ right beside me on the post. Don't waste my chalk if you can't hold a stance.\"))\n  pbMessage(_INTL(\"Six-Fingers Ottoline: Top shelf inside? Old Wardguard\
+        \ ring-stone. Owner comes in once a year to look at it. Not for sale yet — come back when your badge case sings loud enough.\"))\nend"}
+    cond:
+      var: [CH9_STEP, 10]
+    story: ch9
 - type: event
   name: Gutter Book Chalk Board
   at: [16, 24]
@@ -164,6 +182,21 @@ events:
       then:
       - {script: 'pf_trial_board(:NADIR)'}
       else: ['GUTTER BOOK — IRONREACH CHALK BOARD: ''Pit Ringer: six bouts in the Iron Pit. Lamplighter Kids: old sump lanterns running low.''']
+  - commands: ['The Gutter Book''s board has been wiped clean. Chalked across it, big: SHUT FOR THE VOTE.']
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+    story: ch9
+  - trigger: action
+    commands:
+    - if: defined?(pf_trial_board)
+      then:
+      - {script: 'pf_trial_board(:NADIR)'}
+      else: ['GUTTER BOOK — IRONREACH CHALK BOARD: ''Pit Ringer: six bouts in the Iron Pit. Lamplighter Kids: old sump lanterns running low.''']
+    cond:
+      var: [CH9_STEP, 10]
+    story: ch9
 - type: sign
   name: Conclave Mandate Notice
   at: [18, 7]
@@ -285,3 +318,84 @@ events:
   at: [40, 22]
   item: ULTRABALL
   hidden: false
+- type: event
+  name: Ironreach Arrival
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(20, 7)'}
+        - turn_down
+        wait: true
+    - {script: 'pbSEPlay("Elevator end", 90, 80)
+
+        pfm_shake(3, 14, 10)'}
+    - {wait: 16}
+    - {script: 'pbSEPlay("Door slide", 80, 60)'}
+    - {script: 'pbSEPlay("Crowd cheer", 70, 90)'}
+    - {script: pfm_fade_in(24)}
+    - {wait: 20}
+    - move:
+        who: Pit Announcer
+        route: [turn_up]
+        wait: true
+    - anim: [Pit Announcer, 3]
+    - 'Pit Announcer: AND HERE COMES A NEW ARRIVAL OFF THE LONG DROP, FOLKS. FIFTEEN, MAYBE SIXTEEN. GOOD SHOES.'
+    - 'Pit Announcer: IT''S... THE NULL KID! THE NULL KID IS IN IRONREACH!'
+    - {script: 'pfm_face(:player, "Pit Announcer")'}
+    - {wait: 20}
+    - 'Pit Announcer: AND THE NULL KID IS... LOOKING AT ME, FOLKS.'
+    - {wait: 16}
+    - 'Pit Announcer: THE NULL KID HAS A VERY STRAIGHT FACE.'
+    - move:
+        who: Old Miner
+        route: [turn_up]
+        wait: true
+    - 'Miner: He does that. He narrates. He''s done it for thirty years.'
+    - 'Miner: He narrated my wedding. He narrated my divorce. It was the same speech.'
+    - move:
+        who: Old Miner
+        route: [turn_right]
+        wait: true
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 3]
+  at: [0, 0]
+  story: ch9
+- type: event
+  name: Pit door (shut)
+  pages:
+  - commands:
+    - {script: 'pbSEPlay("Door slide", 70, 50)'}
+    - move:
+        who: player
+        route: [dir_fix_on, backward, dir_fix_off]
+        wait: true
+    - 'A chalk note on the Pit''s iron door: GONE TO THE CONCLAVE. OPEN AFTER THE OPEN. — K.'
+    trigger: touch
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 5]
+    through: true
+  at: [21, 36]
+  story: ch9

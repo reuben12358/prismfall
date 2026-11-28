@@ -238,6 +238,14 @@ events:
       'Gym Guide: Here''s the catch — every flowering hedge (Stage 3) you leave behind in the puzzle beds starts Juno''s arena garden one stage taller (Stage 1 +
         hedges, up to Stage 5)!', 'Gym Guide: Fewer waterings, harder fight. Clean pruning, calmer arena. Your call — she told me to say ''your call''. She feels
         very strongly about it being your call.']
+  - graphic: {sprite: NPC 12, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Gym Guide: The Heartgarden Gym. Grass-types on a Flower Garden that grows while you fight.', 'Gym Guide: Fire, Ice, Flying, Poison and Bug go straight
+        through them.', 'Gym Guide: Be honest with yourself about Fire: you''ll burn the garden down at full bloom, and that''s a strategy.', 'Gym Guide: Every hedge
+        you leave in the beds, the Warden''s garden starts one stage taller.', 'Gym Guide: Fewer waterings, harder fight. Your call.', 'Gym Guide: She told me to
+        say "your call". She feels very strongly about it being your call.']
+    story: ch10
 - type: event
   name: Conservatory Botanist
   at: [14, 13]

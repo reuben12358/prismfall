@@ -71,3 +71,51 @@ events:
     - {script: "if $game_switches[347]\n  pbMessage(_INTL(\"Juno: You braided the Bride Bower and earned the Meadow Badge fairly. Come visit me under the Bride Tree\
         \ in the Heartgarden whenever you have a minute!\"))\nelse\n  pbMessage(_INTL(\"Juno: The Meadow Badge is yours — and take the east lift if you want a quick\
         \ ride straight down to the entrance. Meet me by the Bride Tree in the Heartgarden soon!\"))\nend"}
+  - commands:
+    - if: pfm?(:ch10_j3_lost)
+      then: ['\pf[JUNO,happy,,Warden Juno Hale]Juno: Again! Sorry. That came out bossy. I''m practising being in charge.']
+      else:
+      - if: $game_variables[345] >= 3
+        then: ['\pf[JUNO,shocked,,Warden Juno Hale]Juno: You let it grow? For me?', 'Juno: ...That''s either kind or tactical and I''m too nervous to ask which.']
+      - '\pf[JUNO,sad,,Warden Juno Hale]Juno: I didn''t want this seat. I wanted him in it.'
+      - '\pf[JUNO,neutral,,Warden Juno Hale]Juno: But the city''s drowning in flowers and nobody else is coming, so.'
+      - '\pf[JUNO,happy,,Warden Juno Hale]Juno: Hi. I''m the Warden of Verdance.'
+      - 'Juno: Please don''t go easy on me. I''ll cry either way.'
+    - {script: 'setBattleRule("fieldStage", 1 + [$game_variables[345], 4].min)'}
+    - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_JUNO), double: false)'
+      then:
+      - '\pf[JUNO,crying,,Warden Juno Hale]Juno: I''m crying. I said I would.'
+      - '\pf[JUNO,happy,,Warden Juno Hale]Juno: ...Take it. The Meadow badge is yours.'
+      - {script: 'Prismfall.award_badge(pfm_gym(:LEADER_JUNO))'}
+      - You received the MEADOW BADGE!
+      - {script: '9.times { |i| pbSEPlay("Anim/HealBell", 70, 62 + i * 8); pbWait(0.22) }
+
+          pfm_tone(30, 40, 10, 0, 20)'}
+      - '\pf[JUNO,neutral,,Warden Juno Hale]Juno: It''s singing. Mine never sang.'
+      - 'Juno: I wrote to Uncle Rowan after Briarwick, about your case doing a chord.'
+      - 'Juno: He wrote back: "That one''ll sing in every gym in the realm, Juno, mark me."'
+      - 'Juno: I didn''t know what he meant.'
+      - '\pf[JUNO,sad,,Warden Juno Hale]Juno: I still don''t.'
+      - {script: pfm_fade_in(30)}
+      - {script: 'pbReceiveItem(:TM53)'}
+      - '\pf[JUNO,neutral,,Warden Juno Hale]Juno: Energy Ball. It''s the first move I ever taught anything.'
+      - 'Juno: And that badge means Pokémon up to level fifty-one will listen to you.'
+      - 'Juno: I checked. Twice. I''m very nervous about getting the numbers wrong.'
+      - {script: '$game_variables[@@CH10_STEP] = 9 if $game_variables[@@CH10_STEP] < 9'}
+      - selfswitch: [A, true]
+      else:
+      - {script: 'pfm_set(:ch10_j3_lost)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: JUNO, dir: down}
+    cond:
+      var: [CH10_STEP, 8]
+    story: ch10
+  - commands: ['\pf[JUNO,neutral,,Warden Juno Hale]Juno: Energy Ball. It''s the first move I ever taught anything.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: JUNO, dir: down}
+    cond:
+      var: [CH10_STEP, 8]
+      self: A
+    story: ch10

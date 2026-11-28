@@ -748,6 +748,215 @@ events:
     trigger: action
     move: fixed
     commands: ['Off-Duty Miner: Best iron kettle in Nadir sits right on this stove. Keeps the coal dust down after a twelve-hour shift.']
+- type: event
+  name: Night Bulletin
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(7, 7)'}
+        - turn_up
+        wait: true
+    - {script: pfm_fade_in(20)}
+    - {script: 'pbSEPlay("PC access", 70, 80)'}
+    - {script: '3.times { pfm_tone(-20, -16, 24, 30, 3); pfm_tone(-44, -36, -6, 40, 3) }'}
+    - 'Gazette Reader: ...unmasked as the Grass Warden, Rowan Ashby of Verdance, who is in Directorate custody.'
+    - 'Gazette Reader: The Conclave has extended the Mandate to every Lattice in the realm.'
+    - 'Gazette Reader: In Lumen, Chairman Voss said Meridian "will carry this responsibility with the seriousness it deserves".'
+    - 'Gazette Reader: One unidentified member of the public was seen to enter the Bleed.'
+    - 'Gazette Reader: Witnesses report they were unharmed.'
+    - move:
+        who: player
+        route: [through_on, down, left, left, through_off, turn_down]
+        wait: true
+    - 'GAZETTE: MOURNER IS GRASS WARDEN'
+    - if: pf_choice(:ch9_teo_sable) == :save_teo
+      then: ['GAZETTE: EBBMOUTH BOY PULLED FROM GLASS']
+      else:
+      - if: pf_choice(:ch9_teo_sable) == :chase_sable
+        then: ['GAZETTE: WARDEN''S BROTHER LOST IN IRONREACH GLASS']
+    - 'GAZETTE: HAMMER BOMBER STILL AT LARGE'
+    - move:
+        who: player
+        route: [through_on, up, right, right, right, up, up, through_off, turn_up]
+        wait: true
+    - 'Nurse: The one who walked in. That was you.'
+    - 'Nurse: ...Here. Your Pokémon are fine.'
+    - {script: 'pbSEPlay("Anim/HealBell", 80, 100)
+
+        $player.heal_party'}
+    - {wait: 20}
+    - 'Nurse: I checked them twice. I don''t know why I checked them twice.'
+    - {script: pfm_fade_out(40)}
+    - {wait: 30}
+    - selfswitch: [A, true]
+    - if: pf_interlude_start(2)
+      then:
+      - {script: 'pfm_card(:PF_IL2_CARD, "Five days earlier. Verdance.")'}
+      - transfer: {map: 294, x: 8, y: 7, dir: down}
+      else:
+      - {script: 'pfm_card(:PF_ACT2_END, "END OF ACT II")'}
+      - var: [CH9_STEP, 12]
+      - var: [STORY_ACT, 3]
+      - var: [STORY_CHAPTER, 10]
+      - {script: 'pf_chapter_card(10) if defined?(pf_chapter_card)'}
+      - {script: pfm_fade_in(30)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 12]
+  at: [0, 0]
+  story: ch9
+- type: event
+  name: Morning
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(7, 6)'}
+        - turn_down
+        wait: true
+    - {script: pfm_fade_in(30)}
+    - {wait: 20}
+    - {script: 'pfm_face("Nell (morning)", :player)'}
+    - 'Nell: You''re awake.'
+    - 'Nell: Mum said not to wake you. I didn''t. I just waited very loudly.'
+    - 'Nell: The lady with the flowers. Juno.'
+    - 'Nell: She went up with the Sovereign''s people in the night. In the Sovereign''s own cage.'
+    - 'Nell: She didn''t want to go and she didn''t want to stay.'
+    - 'Nell: She left you this.'
+    - move:
+        who: Nell (morning)
+        route: [up, turn_up]
+        wait: true
+    - {script: 'pbSEPlay("GUI storage pick up", 70, 110)'}
+    - '"\PN — They''re taking me to Verdance. The Sovereign says I have to be there when they open his letter. I don''t know what letter. I don''t know anything any
+      more. Come the long way if you want. I''d understand. I''d come the long way. — J."'
+    - {script: 'pf_act("Nell (morning)", :hop) rescue nil'}
+    - 'Nell: She saved me.'
+    - 'Nell: The roots came up and she had her arms round me and I couldn''t see anything but flowers.'
+    - 'Nell: Tell her I''ve got the neatest S in Ironreach and she can have it.'
+    - move:
+        who: Nell (morning)
+        route: [down, turn_up]
+        wait: true
+    - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Go to Verdance. Up the Root Road: the Tailings, the Rootdeep''s Lift Road, then the Crown Road west.")'}
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH9_STEP, 12]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 1]
+  at: [1, 0]
+  story: ch10
+- type: event
+  name: Nell (morning)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: ['Nell: Tell her I''ve got the neatest S in Ironreach and she can have it.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 06, dir: up}
+    cond:
+      var: [CH9_STEP, 12]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 1]
+    through: true
+  at: [7, 8]
+  story: ch10
+- type: event
+  name: Mandate scanner arch 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: &id001
+    - {script: 'pbSEPlay("Mining ping", 60, 130)
+
+        pbWait(0.12)
+
+        pbSEPlay("Mining ping", 60, 110)'}
+    - if: '!pfm?(:pc_arch)'
+      then:
+      - if: pf_choice(:pro_fellowship) == :accept
+        then: ['◆ FELLOWSHIP PRIORITY GUEST ◆ Welcome back, \PN. Meridian is glad you''re safe.']
+        else: ['◆ PRIORITY GUEST ◆ Welcome back, \PN. Meridian is glad you''re safe.']
+      - 'Nurse: They put them in every Center last week. Under the Mandate.'
+      - 'Nurse: It''s very polite. It says hello to everyone by name.'
+      - 'Nurse: It says hello to me by name.'
+      - '\pfe[dots]Nurse: I''ve never told it my name.'
+      - {script: 'pfm_set(:pc_arch)'}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_ACT, 3]
+    through: true
+  at: [6, 9]
+  story: ch10
+- type: event
+  name: Mandate scanner arch 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_ACT, 3]
+    through: true
+  at: [7, 9]
+  story: ch10
+- type: event
+  name: Mandate scanner arch 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_ACT, 3]
+    through: true
+  at: [8, 9]
+  story: ch10
 take_events:
 - template: pokecenter
   name: Nurse

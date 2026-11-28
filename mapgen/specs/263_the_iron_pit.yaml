@@ -31,36 +31,84 @@ events:
   at: [21, 32]
   to: {map: 260, x: 33, y: 13, dir: down}
   se: Door exit
-- type: trainer
-  name: Trainer(3)
+- name: Pit Brawler Dunmore
   at: [14, 23]
-  sight: 3
-  dir: right
-  sprite: trainer_BLACKBELT
-  trainer: [BLACKBELT, Dunmore]
-  intro: 'Pit Brawler Dunmore: Round One of the Ironreach Open! My Machoke and I are both wearing shorts — that''s psychological!'
-  after: 'Pit Brawler Dunmore: ...I''m going to need a shirt. Head east across the pit for Round Two!'
-  rules: ['setBattleRule("field", :COLOSSEUM)']
-- type: trainer
-  name: Trainer(3)
+  type: event
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch9
+  - commands:
+    - if: pfm?(:ch9_open1)
+      then: ['Pit Brawler Dunmore: ...I''m going to need a shirt.']
+      else: ['Pit Brawler Dunmore: We''re both wearing shorts. That''s psychological.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_BLACKBELT, dir: right}
+    cond:
+      var: [CH9_STEP, 3]
+    story: ch9
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+    through: true
+    story: ch9
+- name: Crush Kin Ysa
   at: [26, 23]
-  sight: 3
-  dir: left
-  sprite: trainer_CRUSHGIRL
-  trainer: [CRUSHGIRL, Ysa]
-  intro: 'Crush Girl Ysa: Gran''s watching from the east gallery! If I lose, I''ve got to do the washing for a month!'
-  after: 'Crush Girl Ysa: GRAN! I did my BEST! ...She''s saying ''the washing''. I can''t hear her up there, but I know.'
-  rules: ['setBattleRule("field", :COLOSSEUM)']
-- type: trainer
-  name: Trainer(3)
+  type: event
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch9
+  - commands:
+    - if: pfm?(:ch9_open2)
+      then: ['Crush Kin Ysa: GRAN. I did my BEST. ...She''s saying "the washing". I can''t hear her but I know.']
+      else: ['Crush Kin Ysa: Gran''s watching. If I lose, I''ve got to do the washing for a month.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_CRUSHGIRL, dir: left}
+    cond:
+      var: [CH9_STEP, 3]
+    story: ch9
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+    through: true
+    story: ch9
+- name: Old Gristle
   at: [20, 15]
-  sight: 3
-  dir: down
-  sprite: trainer_BLACKBELT
-  trainer: [BLACKBELT, Gristle]
-  intro: 'Old Gristle: I fought Valen Corrigan in this very Pit when he was nineteen. He cried when he won. Don''t you cry!'
-  after: 'Old Gristle: You didn''t cry. That''s worse. You''ve got real grit — go test it against Kaito down in the Gym!'
-  rules: ['setBattleRule("field", :COLOSSEUM)']
+  type: event
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+    story: ch9
+  - commands:
+    - if: pfm?(:ch9_open3)
+      then: ['Old Gristle: You didn''t cry. That''s worse. Go on. The boy in the coat''s waiting, and he''s been staring at you for three rounds.']
+      else: ['Old Gristle: I fought Valen Corrigan in this Pit when he was nineteen.', 'Old Gristle: He was a good boy. He cried when he won. Don''t you cry.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_BLACKBELT, dir: down}
+    cond:
+      var: [CH9_STEP, 3]
+    story: ch9
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+    through: true
+    story: ch9
 - type: event
   name: Nell the Chalk-Girl
   at: [16, 28]
@@ -78,6 +126,322 @@ events:
         $player.heal_party
 
         pbMessage(_INTL("Your party was restored to full fighting shape!"))'}
+  - commands:
+    - if: $game_variables[@@CH9_STEP] == 4
+      then:
+      - if: '!pfm?(:ch9_open1)'
+        then:
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(18, 19)'}
+            - turn_right
+            wait: true
+        - move:
+            who: Pit Brawler Dunmore
+            route:
+            - {script: 'moveto(22, 19)'}
+            - turn_left
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - 'Pit Brawler Dunmore: We''re both wearing shorts. That''s psychological.'
+        - if: pfm_ch9_open(1)
+          then:
+          - 'Pit Announcer: AND THE NULL KID TAKES ROUND ONE, FOLKS. DUNMORE WILL BE LOOKING FOR A SHIRT.'
+          - {script: 'pfm_set(:ch9_open1)'}
+          - {script: pfm_fade_out(10)}
+          - move:
+              who: Pit Brawler Dunmore
+              route:
+              - {script: 'moveto(14, 23)'}
+              - turn_right
+              wait: true
+          - move:
+              who: player
+              route:
+              - {script: 'moveto(17, 28)'}
+              - turn_left
+              wait: true
+          - {script: pfm_fade_in(10)}
+          - &id001 {script: 'pbSEPlay("Anim/HealBell", 85, 100)
+
+              $player.heal_party'}
+          - 'Nell: Here, take a breather by my chalk crate — every Ironreach Open entrant gets patched up between bouts!'
+          else:
+          - {exit: true}
+      - if: '!pfm?(:ch9_open2)'
+        then:
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(18, 19)'}
+            - turn_right
+            wait: true
+        - move:
+            who: Crush Kin Ysa
+            route:
+            - {script: 'moveto(22, 19)'}
+            - turn_left
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - 'Crush Kin Ysa: Gran''s watching. If I lose, I''ve got to do the washing for a month.'
+        - if: pfm_ch9_open(2)
+          then:
+          - {script: 'pfm_set(:ch9_open2)'}
+          - {script: pfm_fade_out(10)}
+          - move:
+              who: Crush Kin Ysa
+              route:
+              - {script: 'moveto(26, 23)'}
+              - turn_left
+              wait: true
+          - move:
+              who: player
+              route:
+              - {script: 'moveto(17, 28)'}
+              - turn_left
+              wait: true
+          - {script: pfm_fade_in(10)}
+          - *id001
+          - 'Nell: Here, take a breather by my chalk crate — every Ironreach Open entrant gets patched up between bouts!'
+          else:
+          - {exit: true}
+      - if: '!pfm?(:ch9_open3)'
+        then:
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(18, 19)'}
+            - turn_right
+            wait: true
+        - move:
+            who: Old Gristle
+            route:
+            - {script: 'moveto(22, 19)'}
+            - turn_left
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - 'Old Gristle: I fought Valen Corrigan in this Pit when he was nineteen.'
+        - 'Old Gristle: He was a good boy. He cried when he won. Don''t you cry.'
+        - if: pfm_ch9_open(3)
+          then:
+          - {script: 'pbSEPlay("Crowd cheer", 80, 70)'}
+          - {wait: 10}
+          - 'The crowd: NULL. KID. NULL. KID.'
+          - {script: 'pbSEPlay("Crowd cheer", 100, 90)'}
+          - {script: 'pfm_set(:ch9_open3)'}
+          - {script: pfm_fade_out(10)}
+          - move:
+              who: Old Gristle
+              route:
+              - {script: 'moveto(20, 15)'}
+              - turn_down
+              wait: true
+          - move:
+              who: player
+              route:
+              - {script: 'moveto(17, 28)'}
+              - turn_left
+              wait: true
+          - {script: pfm_fade_in(10)}
+          - *id001
+          - 'Nell: Here, take a breather by my chalk crate — every Ironreach Open entrant gets patched up between bouts!'
+          else:
+          - {exit: true}
+      - {script: pfm_fade_out(12)}
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(18, 19)'}
+          - turn_right
+          wait: true
+      - move:
+          who: Kestrel
+          route:
+          - {script: 'moveto(22, 19)'}
+          - turn_left
+          wait: true
+      - move:
+          who: Juno (with Rowan)
+          route: [turn_down]
+          wait: true
+      - {script: pfm_fade_in(12)}
+      - {script: 'pbSEPlay("Crowd cheer", 90, 80)'}
+      - {script: '$game_map.start_scroll(8, 8, 5)
+
+          pbWait(0.05) while $game_map.scrolling?'}
+      - {script: 'pf_act("Juno (with Rowan)", :hop) rescue nil'}
+      - {wait: 24}
+      - &id002 {script: pfm_pan_home(16)}
+      - 'Pit Announcer: FOLKS. THE FINAL.'
+      - 'Pit Announcer: ON THE LEFT: THE NULL KID. ON THE RIGHT: KESTREL VANE, OF TEAM COMPOST—'
+      - move:
+          who: Kestrel
+          route: [turn_down]
+          wait: true
+      - '\pf[KESTREL,angry,anger,Kestrel]Kestrel: I WILL COME UP THERE.'
+      - move:
+          who: Kestrel
+          route: [turn_left]
+          wait: true
+      - if: pfm?(:ch9_k4_lost)
+        then: ['Kestrel: Again. The crowd''s had its warm-up.']
+        else: ['Kestrel: Every one of those people is here to watch me lose to you.', 'Kestrel: Let''s disappoint them.']
+      - if: 'Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 4, field: :COLOSSEUM)'
+        then:
+        - 'Pit Announcer: THE NULL KID! THE NULL KID TAKES THE IRONREACH OPEN!'
+        - {script: 'pbSEPlay("Crowd cheer", 100, 100)
+
+            pfm_shake(2, 10, 12)'}
+        - {script: 'pbSEPlay("Mining pick", 70, 120)'}
+        - {wait: 8}
+        - {script: 'pbSEPlay("Mining pick", 70, 110)'}
+        - 'Kestrel: Keep the title. I told you I''m not here for a title.'
+        - move:
+            who: Kestrel
+            route: [turn_up]
+            wait: true
+        - {script: '$game_map.start_scroll(8, 8, 5)
+
+            pbWait(0.05) while $game_map.scrolling?'}
+        - {script: '$game_map.start_scroll(6, 8, 5)
+
+            pbWait(0.05) while $game_map.scrolling?'}
+        - {wait: 10}
+        - {script: 'pfm_vanish("Ysolde", 24)'}
+        - {script: 'pbSEPlay("Mining ping", 40, 150)'}
+        - {wait: 30}
+        - There's only a lantern-hook, swinging.
+        - *id002
+        - '\pf[KESTREL,shocked,question,Kestrel]Kestrel: ...Who was that?'
+        - 'Kestrel: Never mind. Doesn''t matter. Nothing matters till the vote.'
+        - switch: [CH9_K4_DONE, true]
+        - var: [CH9_STEP, 5]
+        - {script: 'pfm_item(:OPENCHAMPIONSCHALK, 1, "Open Champion''s Chalk")'}
+        - A stub of Nell's chalk, wrapped in a strip of red cloth. Ironreach's trophy. It's worth nothing, and nobody in Nadir would sell you one.
+        - {script: pfm_fade_out(12)}
+        - move:
+            who: Kestrel
+            route:
+            - {script: 'moveto(23, 26)'}
+            - turn_down
+            wait: true
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(18, 20)'}
+            - turn_down
+            wait: true
+        - {script: pfm_fade_in(12)}
+        else:
+        - {script: 'pfm_set(:ch9_k4_lost)'}
+      else:
+      - if: $game_variables[@@CH9_STEP] == 3 && !pfm?(:ch9_bracket)
+        then:
+        - {script: pfm_fade_out(10)}
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(17, 28)'}
+            - turn_left
+            wait: true
+        - move:
+            who: Kaito
+            route:
+            - {script: 'moveto(14, 28)'}
+            - turn_right
+            wait: true
+        - move:
+            who: Kestrel (bracket)
+            route:
+            - graphic: [KESTREL, 0, 4, 0]
+            - {opacity: 255}
+            - {script: 'moveto(22, 28)'}
+            - turn_left
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - 'Nell: I''m Nell. I do the board. I''ve done it since I was six.'
+        - 'Nell: I''ve got the neatest S in Ironreach and I''ll fight anyone who says I haven''t.'
+        - '\pf[KAITO,neutral,,Kaito]Kaito: Names for the bracket.'
+        - move:
+            who: Juno (bracket)
+            route:
+            - graphic: [JUNO, 0, 8, 0]
+            - {opacity: 255}
+            - {script: 'moveto(20, 31)'}
+            - turn_up
+            - through_on
+            - {speed: 5}
+            - up
+            - up
+            - left
+            - left
+            - turn_up
+            - through_off
+            wait: true
+        - '\pf[JUNO,happy,exclaim,Juno (bracket)]Juno: Team Compost!'
+        - {script: 'pf_act("Kestrel (bracket)", :hop) rescue nil'}
+        - '\pf[KESTREL,angry,,Kestrel (bracket)]Kestrel: We are NOT— it''s a singles bracket!'
+        - 'Kaito: Team Compost. Two entrants.'
+        - '\pf[KESTREL,panic,,Kestrel (bracket)]Kestrel: Don''t write that down. Why are you writing that down.'
+        - '\pf[KAITO,deadpan,,Kaito]Kaito: A fist is a promise. So is a form.'
+        - move:
+            who: Nell the Chalk-Girl
+            route: [turn_up]
+            wait: true
+        - {script: 'pbSEPlay("Mining pick", 60, 130)'}
+        - {wait: 10}
+        - {script: 'pbSEPlay("Mining pick", 60, 120)'}
+        - {wait: 16}
+        - KESTREL VANE (TEAM COMPOST)
+        - move:
+            who: Nell the Chalk-Girl
+            route: [turn_right]
+            wait: true
+        - '\pfb[KESTREL,crying,sweat,Kestrel (bracket)]Kestrel: My mother was a Warden.'
+        - 'Nell: Is that with one L or two?'
+        - {script: 'pfm_face("Juno (bracket)", :player)'}
+        - 'Juno: I''m not entering. I''m the team.'
+        - 'Juno: Every team needs someone who isn''t in it to shout.'
+        - move:
+            who: Kestrel (bracket)
+            route:
+            - through_on
+            - up
+            - up
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Juno (bracket)
+            route:
+            - through_on
+            - right
+            - right
+            - down
+            - down
+            - {opacity: 0}
+            wait: true
+        - {script: 'pbSetSelfSwitch(%EV[Kestrel]%, "A", true)'}
+        - {script: 'pfm_set(:ch9_bracket)'}
+        else:
+        - *id001
+        - 'Nell: Here, take a breather by my chalk crate — every Ironreach Open entrant gets patched up between bouts!'
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 06, dir: right}
+    cond:
+      var: [CH9_STEP, 3]
+    story: ch9
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+    through: true
+    story: ch9
 - type: event
   name: Pit Announcer
   at: [25, 28]
@@ -188,3 +552,2487 @@ events:
   at: [36, 14]
   item: MAXPOTION
   hidden: false
+- type: event
+  name: The Conclave Opens
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(20, 11)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Kestrel (bench)
+        route:
+        - graphic: [KESTREL, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(24, 11)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Odessa
+        route:
+        - {opacity: 0}
+        - {script: 'moveto(24, 2)'}
+        wait: true
+    - move:
+        who: Ysolde
+        route: [turn_left]
+        wait: true
+    - move:
+        who: Hollis
+        route:
+        - {script: 'moveto(19, 5)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Valen
+        route:
+        - {script: 'moveto(20, 5)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Dorian
+        route:
+        - {script: 'moveto(10, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Tamsin
+        route:
+        - {script: 'moveto(11, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Marisol
+        route:
+        - {script: 'moveto(12, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Rook
+        route:
+        - {script: 'moveto(13, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Sahar
+        route:
+        - {script: 'moveto(14, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Corvin
+        route:
+        - {script: 'moveto(16, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Brann
+        route:
+        - {script: 'moveto(17, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Kaito
+        route:
+        - {script: 'moveto(18, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Rowan
+        route:
+        - {script: 'moveto(22, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Anja
+        route:
+        - {script: 'moveto(23, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Bastian
+        route:
+        - {script: 'moveto(26, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Magnus
+        route:
+        - {script: 'moveto(27, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Celestine
+        route:
+        - {script: 'moveto(28, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Sigrun
+        route:
+        - {script: 'moveto(29, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Ilsa
+        route:
+        - {script: 'moveto(30, 6)'}
+        - turn_down
+        wait: false
+    - {waitmove: true}
+    - {script: '$game_map.start_scroll(8, 3, 6)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - {script: pfm_fade_in(30)}
+    - {script: 'pbSEPlay("Crowd cheer", 60, 70)'}
+    - {wait: 30}
+    - '\pf[HOLLIS,smug,,Hollis]Hollis: Chancellor Ambrose Hollis, for the Accord.'
+    - 'Hollis: The Conclave of AF 300 is in session.'
+    - 'Hollis: The first held in Nadir in a hundred and four years.'
+    - 'Hollis: I''m told the acoustics are extraordinary.'
+    - 'Hollis: I''m told a great many things down here. Most of them through a trumpet.'
+    - 'Pit Announcer: AND THE CHANCELLOR IS MAKING A JOKE, FOLKS.'
+    - {wait: 20}
+    - '\pf[HOLLIS,deadpan,,Hollis]Hollis: ...The roll of the Wardens.'
+    - {script: '$game_map.start_scroll(4, 5, 4)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - 'Hollis: Saltmere.'
+    - '\pf[DORIAN,happy,,Dorian]Dorian: Present, darling, and lit from the left, if anybody''s asking.'
+    - 'Dorian: Nobody ever asks.'
+    - 'Hollis: Briarwick.'
+    - if: pf_choice(:ch2_tamsin) == :help_confess
+      then: ['\pf[TAMSIN,panic,,Tamsin]Tamsin: Present! Sorry. I renegotiated a contract last spring and I''ve been apologising to paper ever since.']
+      else:
+      - if: pf_choice(:ch2_tamsin) == :keep_secret
+        then:
+        - '\pf[TAMSIN,sad,,Tamsin]Tamsin: ...Present.'
+        - move:
+            who: Tamsin
+            route: [turn_down, wait 40]
+            wait: true
+        else: ['\pf[TAMSIN,neutral,,Tamsin]Tamsin: Present. Sorry. Present. ...Briarwick''s books are open, if the Conclave wants to read them. Everyone else has.']
+    - 'Hollis: Ebbmouth.'
+    - '\pf[MARISOL,neutral,,Marisol]Marisol: Present. For the Guild.'
+    - 'Marisol: The Guild votes no on anything with "Mandate" in it, and you can write that down before you ask.'
+    - 'Hollis: Lumen.'
+    - move:
+        who: Rook
+        route: [turn_left, wait 8, turn_down]
+        wait: true
+    - '\pf[ROOK,sad,,Rook]Rook: Here. Chat''s off. Don''t ask.'
+    - 'Hollis: Duneholt.'
+    - '\pf[SAHAR,neutral,,Sahar]Sahar: Present, with a cough, and a well that''s dropped four rungs since spring.'
+    - 'Sahar: I''d like that in the minutes. Spell it with an H.'
+    - 'Hollis: Mirefen.'
+    - '\pf[CORVIN,deadpan,,Corvin]Corvin: Present. I''ve brought my apprentice''s best friend as my plus-one, since my apprentice can''t be trusted with stairs.'
+    - {script: 'pfm_face("Corvin", :player)'}
+    - {wait: 10}
+    - move:
+        who: Corvin
+        route: [turn_down]
+        wait: true
+    - 'Hollis: Cindervault.'
+    - if: pf_choice(:ch8_caldera) == :vent
+      then: ['\pf[BRANN,sad,,Brann]Brann: HERE. With cold forges, a grumble, and a great deal of respect for the person who made them cold.']
+      else:
+      - if: pf_choice(:ch8_caldera) == :dampers
+        then: ['\pf[BRANN,happy,,Brann]Brann: HERE! Forges lit, all of them. Ask me how. Ask the challenger how.']
+        else:
+        - '\pf[BRANN,happy,,Brann]Brann: HERE. The tap''s shut and the Dominar''s still talking about who shut it. Look at the bench, Ambrose.'
+        - {script: 'pfm_face("Brann", :player)'}
+    - 'Hollis: Ironreach.'
+    - '\pf[KAITO,neutral,,Kaito]Kaito: Here.'
+    - {wait: 30}
+    - move:
+        who: Hollis
+        route: [turn_left, wait 30, turn_down]
+        wait: true
+    - {script: '$game_map.start_scroll(6, 10, 4)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - 'Hollis: Verdance.'
+    - move:
+        who: Rowan
+        route: [turn_right, wait 6, turn_down]
+        wait: true
+    - '\pf[ROWAN,happy,,Rowan]Rowan: Present. Forgive the hand. Kettle.'
+    - 'Hollis: Rimeholt.'
+    - '\pf[ANJA,deadpan,,Anja]Anja: Here. It''s forty degrees and there''s a ceiling.'
+    - 'Anja: Southerners call this a city.'
+    - 'Hollis: Skyreach.'
+    - {script: 'pbSEPlay("Anim/Wind1", 90, 60)
+
+        pfm_shadow_pass(40, 60)'}
+    - {script: 'pbSEPlay("Fly", 80, 70)
+
+        pfm_shake(2, 12, 8)'}
+    - move:
+        who: Odessa
+        route:
+        - {opacity: 255}
+        - through_on
+        - {speed: 5}
+        - down
+        - down
+        - down
+        - down
+        - through_off
+        - turn_down
+        wait: true
+    - '\pf[ODESSA,happy,,Odessa]Odessa: Present! Courier''s privilege.'
+    - 'Odessa: The cage queue was forty minutes. I''m not queueing for a vote.'
+    - 'Hollis: Lucent.'
+    - {wait: 20}
+    - {script: 'pf_act("Ilsa", :nod) rescue nil'}
+    - {wait: 30}
+    - 'Hollis: The Provost is present. Cragholm.'
+    - {script: 'pf_act("Bastian", :hop) rescue nil'}
+    - '\pf[BASTIAN,happy,,Bastian]Bastian: Eh?'
+    - 'Hollis: Cragholm, Warden Ore.'
+    - 'Bastian: No, I''ve had my supper, son. Thank you.'
+    - 'Hollis: Gravenmoor.'
+    - {script: 'pf_act("Ysolde", :hop) rescue nil'}
+    - {wait: 10}
+    - '...Present.'
+    - {wait: 16}
+    - {script: 'pfm_face("Ysolde", "Kestrel (bench)")'}
+    - {wait: 40}
+    - 'Hollis: Cogsworth.'
+    - '\pf[MAGNUS,neutral,,Magnus]Magnus: Present. Strade.'
+    - 'Magnus: I have the Mandate''s technical annex in front of me, Chancellor, and I''ve corrected the arithmetic on page nine.'
+    - 'Hollis: Underveil.'
+    - move:
+        who: Nyx
+        route: [turn_left, wait 6, turn_down]
+        wait: true
+    - '\pf[NYX,smug,,Nyx]Nyx: Oh, I''m not on the table, darling. I''m in the gallery.'
+    - 'Nyx: Underveil isn''t seated. It just attends.'
+    - 'Hollis: Gloaming.'
+    - '\pf[CELESTINE,happy,,Celestine]Celestine: Present. I''m always present. That''s rather the problem with me.'
+    - 'Hollis: Wyrmrest.'
+    - move:
+        who: Sigrun
+        route: [turn_up, wait 20, turn_down]
+        wait: true
+    - '\pf[SIGRUN,neutral,,Sigrun]Sigrun: Here. And my father''s envoy is in the gallery, so if the Conclave hears shouting from up there, it isn''t me.'
+    - {script: '$game_map.start_scroll(4, 5, 4)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - 'Hollis: Eighteen Wardens present.'
+    - 'Hollis: Sixteen at the table, which is a quorum, and two who prefer the galleries, which is a tradition.'
+    - move:
+        who: Valen
+        route: [down, turn_down]
+        wait: true
+    - move:
+        who: Ilsa
+        route: [turn_right, right, turn_down]
+        wait: false
+    - '\pf[VALEN,neutral,,Valen]Valen: Thank you, Chancellor.'
+    - 'Valen: We are here for one question.'
+    - 'Valen: The Mandate was granted in Lumen, in a night, for Lumen.'
+    - 'Valen: The Directorate asks for it everywhere, for as long as it takes.'
+    - 'Valen: We''ll hear it, and argue it, and vote on it when the Fist Plate is brought up for the oath.'
+    - 'Valen: In the meantime, I''m told the Ironreach Open is the best thing in Nadir.'
+    - 'Valen: Go and watch it. That''s not a suggestion from the Accord. It''s one from a man who used to fight in it.'
+    - var: [CH9_STEP, 3]
+    - {script: 'pbSEPlay("Crowd cheer", 60, 100)'}
+    - {script: pfm_fade_out(24)}
+    - move:
+        who: Valen
+        route: [up, turn_down]
+        wait: true
+    - move:
+        who: Ilsa
+        route:
+        - {script: 'moveto(30, 6)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Kestrel (bench)
+        route:
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: Ysolde
+        route:
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: Rowan
+        route:
+        - {script: 'moveto(17, 10)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Corvin
+        route:
+        - {script: 'moveto(24, 7)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Dorian
+        route:
+        - {script: 'moveto(9, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Marisol
+        route:
+        - {script: 'moveto(28, 28)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Anja
+        route:
+        - {script: 'moveto(21, 2)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Celestine
+        route:
+        - {script: 'moveto(28, 10)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Bastian
+        route:
+        - {script: 'moveto(4, 13)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Magnus
+        route:
+        - {script: 'moveto(27, 7)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Sigrun
+        route:
+        - {script: 'moveto(8, 7)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Rook
+        route:
+        - {script: 'moveto(5, 27)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Sahar
+        route:
+        - {script: 'moveto(31, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Odessa
+        route:
+        - {script: 'moveto(18, 5)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Kaito
+        route:
+        - {script: 'moveto(14, 28)'}
+        - turn_down
+        wait: false
+    - {waitmove: true}
+    - *id002
+    - {script: pfm_fade_in(24)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 3]
+  at: [0, 0]
+  story: ch9
+- type: event
+  name: The Vote
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(20, 11)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Hollis
+        route:
+        - {script: 'moveto(19, 5)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Valen
+        route:
+        - {script: 'moveto(20, 5)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Dorian
+        route:
+        - {script: 'moveto(10, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Tamsin
+        route:
+        - {script: 'moveto(11, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Marisol
+        route:
+        - {script: 'moveto(12, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Rook
+        route:
+        - {script: 'moveto(13, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Sahar
+        route:
+        - {script: 'moveto(14, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Corvin
+        route:
+        - {script: 'moveto(16, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Brann
+        route:
+        - {script: 'moveto(17, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Kaito
+        route:
+        - {script: 'moveto(18, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Anja
+        route:
+        - {script: 'moveto(23, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Odessa
+        route:
+        - {script: 'moveto(24, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Bastian
+        route:
+        - {script: 'moveto(26, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Magnus
+        route:
+        - {script: 'moveto(27, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Celestine
+        route:
+        - {script: 'moveto(28, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Sigrun
+        route:
+        - {script: 'moveto(29, 6)'}
+        - turn_down
+        wait: false
+    - move:
+        who: Ilsa
+        route:
+        - {script: 'moveto(30, 6)'}
+        - turn_down
+        wait: false
+    - {waitmove: true}
+    - move:
+        who: Kaito
+        route:
+        - {script: 'moveto(20, 7)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Juno (vote)
+        route:
+        - graphic: [JUNO, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(15, 7)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Nell (asleep)
+        route:
+        - graphic: [NPC 06, 0, 4, 0]
+        - {opacity: 255}
+        - {script: 'moveto(16, 7)'}
+        - turn_left
+        wait: true
+    - move:
+        who: Marchetti
+        route:
+        - graphic: [MARCHETTI, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(24, 9)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Kestrel (bench)
+        route:
+        - graphic: [KESTREL, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(24, 11)'}
+        - turn_up
+        wait: true
+    - {script: '$game_map.start_scroll(8, 8, 8)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - {script: pfm_fade_in(30)}
+    - {script: 'pbSEPlay("Ring Glass Harmonic", 50, 60)
+
+        pfm_glow(70, 8, -20, 24, 30)'}
+    - *id002
+    - '\pf[HOLLIS,neutral,,Hollis]Hollis: The question before the Conclave.'
+    - 'Hollis: That the Mandate granted at Lumen be extended to every land where a Lattice stands, and held by the Meridian Security Directorate until the Sovereign
+      revokes it.'
+    - '\pf[MARCHETTI,neutral,,Marchetti]Marchetti: The Directorate asks for the leash so it can keep the dog off the children, Chancellor.'
+    - 'Marchetti: That''s all a leash is.'
+    - '\pf[CORVIN,deadpan,,Corvin]Corvin: I''ve treated a great many people who were kept off things with leashes.'
+    - 'Hollis: The Warden of Mirefen is out of order and correct.'
+    - 'Hollis: The Conclave will vote. Wardens, by hand.'
+    - 'Hollis: For the Mandate—'
+    - {wait: 24}
+    - {script: 'pf_act("Magnus", :hop) rescue nil'}
+    - {wait: 24}
+    - {script: 'pf_act("Anja", :hop) rescue nil'}
+    - {wait: 40}
+    - {wait: 30}
+    - {script: 'pf_act("Rook", :nod) rescue nil'}
+    - {wait: 24}
+    - if: pf_choice(:ch8_caldera) == :shutdown
+      then:
+      - {script: 'pfm_face("Brann", "Valen")'}
+      - {wait: 30}
+      - {script: 'pfm_face("Brann", :player)'}
+      - {wait: 40}
+      - move:
+          who: Brann
+          route: [turn_down]
+          wait: true
+      else:
+      - {script: 'pfm_face("Brann", "Valen")'}
+      - {wait: 50}
+      - move:
+          who: Brann
+          route: [turn_down]
+          wait: true
+      - {wait: 10}
+      - {script: 'pf_act("Brann", :hop) rescue nil'}
+    - {wait: 10}
+    - {script: 'pfm_tone(-255, -255, -255, 0, 0)'}
+    - {wait: 30}
+    - {script: 'pbSEPlay("Crowd gasp", 90, 80)'}
+    - {wait: 50}
+    - {script: 'pbSEPlay("Glitch Tear Static", 80, 100)'}
+    - '\pf[SABLE,happy]Sable: Vote yes on the Mandate. Go on. Give them the leash.'
+    - 'Sable: We''ll give you a reason.'
+    - {script: 'pbSEPlay("Anim/Explosion7", 100, 60)
+
+        pbSEPlay("Mining collapse", 90, 70)
+
+        pfm_shake(9, 12, 24)'}
+    - {wait: 24}
+    - {script: 'pfm_tone(70, -60, -70, 60, 10)'}
+    - {script: '$game_map.start_scroll(8, 4, 6)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - move:
+        who: Cowl 1
+        route:
+        - graphic: [trainer_HOLLOW_GRUNT_M, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(19, 2)'}
+        - turn_right
+        - through_on
+        - {speed: 5}
+        - right
+        - right
+        - right
+        wait: false
+    - move:
+        who: Cowl 2
+        route:
+        - graphic: [trainer_HOLLOW_GRUNT_F, 0, 4, 0]
+        - {opacity: 255}
+        - {script: 'moveto(27, 2)'}
+        - turn_left
+        - through_on
+        - {speed: 5}
+        - left
+        - left
+        - left
+        wait: true
+    - *id002
+    - move:
+        who: Hammer porter 1
+        route:
+        - graphic: [trainer_HOLLOW_GRUNT_M, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(19, 22)'}
+        - turn_up
+        - through_on
+        - {speed: 5}
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - through_off
+        wait: false
+    - move:
+        who: Hammer porter 2
+        route:
+        - graphic: [trainer_HOLLOW_GRUNT_F, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(21, 22)'}
+        - turn_up
+        - through_on
+        - {speed: 5}
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - through_off
+        wait: false
+    - move:
+        who: Kestrel (bench)
+        route:
+        - through_on
+        - {speed: 5}
+        - left
+        - left
+        - left
+        - through_off
+        - turn_down
+        wait: true
+    - '\pf[KESTREL,angry,,Kestrel (bench)]Kestrel: That''s not him. That''s NOT the Mourner.'
+    - 'Kestrel: That''s the Hammer.'
+    - 'Kestrel: With me. Now. Don''t argue.'
+    - {waitmove: true}
+    - move:
+        who: Sable
+        route:
+        - graphic: [SABLE, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(20, 17)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Brisk
+        route:
+        - graphic: [trainer_HOLLOW_ADMIN, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(21, 17)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Hammer porter 1
+        route: [through_on, left, left, turn_right]
+        wait: false
+    - move:
+        who: Hammer porter 2
+        route: [through_on, right, right, turn_left]
+        wait: false
+    - move:
+        who: player
+        route: [through_on, down, down, down, down, through_off, turn_down]
+        wait: false
+    - move:
+        who: Kestrel (bench)
+        route: [through_on, down, down, down, down, through_off, turn_down]
+        wait: true
+    - {waitmove: true}
+    - '\pf[SABLE,happy,,Sable]Sable: Oh, it''s the walking one, and the Vane boy.'
+    - 'Sable: This is going to be a lovely story afterward.'
+    - 'Sable: I''ll tell it on every screen in Velmora.'
+    - 'Captain Brisk: Until they listen.'
+    - if: pfm_ch9_tag
+      then:
+      - {script: 'pbSEPlay("Mining collapse", 100, 50)
+
+          pfm_shake(7, 8, 40)'}
+      - {script: 'pfm_flash(150, 140, 120, 30, 255)'}
+      - move:
+          who: Rubble 1
+          route:
+          - graphic: [Object boulder, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - move:
+          who: Rubble 2
+          route:
+          - graphic: [Object boulder, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - move:
+          who: Rubble 3
+          route:
+          - graphic: [Object boulder, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - move:
+          who: Sable
+          route:
+          - {opacity: 0}
+          wait: true
+      - move:
+          who: Brisk
+          route:
+          - {opacity: 0}
+          wait: true
+      - move:
+          who: Hammer porter 1
+          route:
+          - {opacity: 0}
+          wait: true
+      - move:
+          who: Hammer porter 2
+          route:
+          - {opacity: 0}
+          wait: true
+      - move:
+          who: Kestrel (bench)
+          route:
+          - {script: 'moveto(20, 7)'}
+          - turn_down
+          wait: true
+      - {wait: 40}
+      - {script: '$game_map.start_scroll(8, 3, 5)
+
+          pbWait(0.05) while $game_map.scrolling?'}
+      - '\pf[KESTREL,angry,,Kestrel (bench)]Kestrel: Go UP. Go, I''ll find a way round. GO.'
+      - move:
+          who: Kestrel (bench)
+          route:
+          - through_on
+          - left
+          - left
+          - left
+          - left
+          - {opacity: 0}
+          wait: false
+      - *id002
+      - move:
+          who: Corvin
+          route: [through_on, right, right, right, right, down, down, down, down, down, down, down, down, through_off]
+          wait: true
+      - move:
+          who: player
+          route: [turn_up]
+          wait: true
+      - '\pf[CORVIN,deadpan,,Corvin]Corvin: Hold still. I''m not asking.'
+      - {script: 'pbSEPlay("Use item in party", 80, 100)
+
+          $player.heal_party'}
+      - {wait: 10}
+      - 'Corvin: There. Now go and get hurt somewhere else.'
+      - {script: Prismfall.checkpoint rescue nil}
+      - var: [CH9_STEP, 7]
+      else:
+      - {exit: true}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+  at: [1, 0]
+  story: ch9
+- type: event
+  name: Mandate Jurisdiction
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(20, 22)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Rowan (stretcher)
+        route:
+        - graphic: [ROWAN, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(20, 18)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Squad 1
+        route:
+        - graphic: [trainer_MERIDIAN_DIRECTORATE, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(19, 18)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Squad 2
+        route:
+        - graphic: [trainer_MERIDIAN_DIRECTORATE, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(21, 18)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Squad 3
+        route:
+        - graphic: [trainer_MERIDIAN_DIRECTORATE, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(19, 19)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Squad 4
+        route:
+        - graphic: [trainer_MERIDIAN_DIRECTORATE, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(20, 17)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Marchetti
+        route:
+        - graphic: [MARCHETTI, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(20, 19)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Hollis
+        route:
+        - {script: 'moveto(20, 5)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Sahar
+        route:
+        - {script: 'moveto(14, 6)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Kaito
+        route:
+        - {script: 'moveto(22, 17)'}
+        - turn_left
+        wait: true
+    - move:
+        who: Valen
+        route:
+        - {script: 'moveto(17, 19)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Corvin
+        route:
+        - {script: 'moveto(18, 21)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Brann
+        route:
+        - {script: 'moveto(16, 21)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Calla
+        route:
+        - {script: 'moveto(25, 3)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Nyx
+        route:
+        - {script: 'moveto(27, 3)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Juno (dust)
+        route:
+        - graphic: [JUNO, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(22, 22)'}
+        - turn_down
+        wait: true
+    - {script: 'pfm_tone(40, -50, -60, 60, 30)'}
+    - {script: 'pbSEPlay("Crowd gasp", 60, 60)'}
+    - '\pf[HOLLIS,neutral,,Hollis]Hollis: In the matter before the Conclave, under the emergency articles:'
+    - 'Hollis: the Mandate is carried by acclamation—'
+    - '\pf[SAHAR,angry,,Sahar]Sahar: By WHOSE acclamation? We were under the—'
+    - 'Hollis: —by acclamation, and in force from this hour. Director.'
+    - move:
+        who: Marchetti
+        route: [through_on, down, through_off, turn_down]
+        wait: true
+    - '\pf[MARCHETTI,neutral,,Marchetti]Marchetti: Rowan Ashby.'
+    - 'Marchetti: You''re detained under the Mandate for the Lumen Shatter and the attack on this Conclave.'
+    - '\pf[KAITO,angry,,Kaito]Kaito: He was pulling the wires out. I saw him.'
+    - 'Marchetti: Then he''ll say so, Warden. In custody.'
+    - {script: 'pfm_face("Marchetti", "Valen")'}
+    - {wait: 10}
+    - 'Marchetti: Mandate jurisdiction, Sovereign.'
+    - {script: 'pfm_face("Valen", "Rowan (stretcher)")'}
+    - {wait: 50}
+    - move:
+        who: Valen
+        route: [turn_down]
+        wait: true
+    - {wait: 30}
+    - {script: 'pfm_face("Valen", "Juno (dust)")'}
+    - {wait: 40}
+    - '\pf[VALEN,sad,,Valen]Valen: ...Take him.'
+    - move:
+        who: Squad 1
+        route: [turn_down]
+        wait: false
+    - move:
+        who: Squad 2
+        route: [turn_down]
+        wait: false
+    - move:
+        who: Squad 3
+        route: [turn_down]
+        wait: false
+    - move:
+        who: Squad 4
+        route: [turn_down]
+        wait: false
+    - {wait: 20}
+    - var: [ROWAN_STATUS, 1]
+    - var: [NADIR_STATE, 1]
+    - move:
+        who: Kestrel (bench)
+        route:
+        - graphic: [KESTREL, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(20, 13)'}
+        - turn_down
+        - through_on
+        - down
+        - down
+        - down
+        - right
+        - down
+        - through_off
+        - turn_down
+        wait: true
+    - {script: 'pfm_face("Kestrel (bench)", "Rowan (stretcher)")'}
+    - {wait: 60}
+    - '\pf[KESTREL,shocked,,Kestrel (bench)]Kestrel: ...'
+    - '\pf[KESTREL,sad,,Kestrel (bench)]Kestrel: ...It''s not her.'
+    - {wait: 30}
+    - {script: 'pfm_face("Kestrel (bench)", :player)'}
+    - if: pf_choice(:ch6_kestrel_rumor) == :encourage
+      then:
+      - {script: 'pf_bond_add(:KESTREL, -3)'}
+      - '\pf[KESTREL,angry,,Kestrel (bench)]Kestrel: You said go. You said "go".'
+      - 'Kestrel: I went all the way down a hole for this.'
+      - 'Kestrel: It''s a GARDENER.'
+      else:
+      - if: pf_choice(:ch6_kestrel_rumor) == :warn
+        then:
+        - {script: 'pf_bond_add(:KESTREL, 2)'}
+        - '\pf[KESTREL,angry,,Kestrel (bench)]Kestrel: You said it might not be.'
+        - 'Kestrel: I hate that you were right.'
+        else:
+        - if: pf_choice(:ch6_kestrel_rumor) == :silent
+          then: ['\pf[KESTREL,angry,,Kestrel (bench)]Kestrel: Don''t. Don''t say anything now either.']
+    - move:
+        who: Kestrel (bench)
+        route:
+        - through_on
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: false
+    - if: pf_choice(:ch7_ledger) == :name_him
+      then:
+      - {script: 'pf_bond_add(:JUNO, 2)'}
+      else:
+      - if: pf_choice(:ch7_ledger) == :reassure
+        then:
+        - {script: 'pf_bond_add(:JUNO, -2)'}
+    - move:
+        who: player
+        route: [through_on, right, through_off, turn_right]
+        wait: true
+    - if: pf_choice(:ch3_juno_talk) == :told
+      then: ['\pf[JUNO,sad,,Juno (dust)]Juno: You told me a secret once. On the breakwater. About the scanner.', 'Juno: I kept it. I''m good at secrets. I just don''t
+          look it.', 'Juno: I didn''t know he was keeping one too.', 'Juno: I didn''t know everybody was.']
+      else:
+      - {wait: 60}
+      - {script: 'pfm_face("Corvin", "Juno (dust)")'}
+      - {wait: 40}
+    - if: pf_choice(:ch7_ledger) == :name_him
+      then: ['\pf[JUNO,sad,,Juno (dust)]Juno: You said his name in Mirefen and I ran away from you.', 'Juno: I knew then. I knew in the dispensary.', 'Juno: I just
+          wanted one more week of not knowing.']
+      else:
+      - if: pf_choice(:ch7_ledger) == :reassure
+        then: ['\pf[JUNO,sad,,Juno (dust)]Juno: You said there were loads of R.A.s. You were being kind.', 'Juno: I know you were. I wish you hadn''t been.']
+        else:
+        - if: pf_choice(:ch7_ledger) == :ask_corvin
+          then: ['\pf[JUNO,sad,,Juno (dust)]Juno: Dr Mott knew. Didn''t he.', 'Juno: He treats hands. He doesn''t ask whose.']
+    - '\pf[JUNO,crying,,Juno (dust)]Juno: Don''t go. Don''t say anything. Just don''t go.'
+    - move:
+        who: player
+        route: [turn_down]
+        wait: true
+    - {wait: 50}
+    - move:
+        who: Rowan (stretcher)
+        route: [through_on, down, down, down, down]
+        wait: false
+    - move:
+        who: Squad 1
+        route: [through_on, down, down, down, down]
+        wait: false
+    - move:
+        who: Squad 2
+        route: [through_on, down, down]
+        wait: false
+    - move:
+        who: Squad 3
+        route: [through_on, down, down, down, down]
+        wait: false
+    - move:
+        who: Squad 4
+        route: [through_on, down, down, down, down]
+        wait: false
+    - move:
+        who: Marchetti
+        route: [through_on, down, down, down, down, down, down]
+        wait: false
+    - {waitmove: true}
+    - {wait: 20}
+    - move:
+        who: Rowan (stretcher)
+        route: [turn_right]
+        wait: true
+    - {script: 'pfm_face(:player, "Rowan (stretcher)")'}
+    - {wait: 30}
+    - choices: ['"Why?"', '"I''ll look after her."', '...']
+      branches:
+      - - {script: 'pf_choose(:ch9_rowan_words, :why)'}
+        - '\pf[ROWAN,neutral,,Rowan (stretcher)]Rowan: Ask the Drowned Crown.'
+      - - {script: 'pf_choose(:ch9_rowan_words, :look_after)'}
+        - '\pf[ROWAN,sad,,Rowan (stretcher)]Rowan: I know.'
+        - 'Rowan: That''s why I''m not afraid.'
+      - - {script: 'pf_choose(:ch9_rowan_words, :silent)'}
+        - '\pf[ROWAN,neutral,,Rowan (stretcher)]Rowan: You saw what I saw. In the Lowlight. Didn''t you?'
+      cancel: 3
+    - move:
+        who: Rowan (stretcher)
+        route:
+        - through_on
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Squad 1
+        route:
+        - through_on
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Squad 2
+        route:
+        - through_on
+        - left
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Squad 3
+        route:
+        - through_on
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Squad 4
+        route:
+        - through_on
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Marchetti
+        route:
+        - through_on
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: true
+    - {waitmove: true}
+    - {script: 'pbSEPlay("Door slide", 70, 60)'}
+    - {wait: 20}
+    - {script: 'pbSEPlay("Elevator moving", 70, 80)'}
+    - switch: [CH9_CONCLAVE_DONE, true]
+    - var: [CH9_STEP, 10]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 10]
+  at: [2, 0]
+  story: ch9
+- type: event
+  name: A Seat to Fill
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {wait: 30}
+    - move:
+        who: Valen
+        route: [through_on, right, right, right, right, down, down, through_off, turn_down]
+        wait: true
+    - {script: 'pfm_face(:player, "Valen")'}
+    - {script: 'pbSEPlay("Ring Glass Harmonic", 40, 150)
+
+        pfm_flash(230, 240, 255, 6, 60)'}
+    - {wait: 40}
+    - '\pf[VALEN,neutral,,Valen]Valen: ...'
+    - '\pf[VALEN,sad,,Valen]Valen: Come to Verdance.'
+    - 'Valen: There''s a seat to fill.'
+    - 'Valen: And I think you should see what it costs.'
+    - move:
+        who: Valen
+        route:
+        - through_on
+        - left
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Brann
+        route: [wait 20, through_on, right, right, right, right, down, down, down, down, down, through_off, turn_up]
+        wait: true
+    - {wait: 70}
+    - move:
+        who: Brann
+        route:
+        - through_on
+        - down
+        - down
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: true
+    - {script: '$game_map.start_scroll(8, 14, 6)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - {wait: 20}
+    - move:
+        who: Calla
+        route: [turn_down, wait 24, turn_up]
+        wait: true
+    - {wait: 20}
+    - '\pf[NYX,neutral,,Nyx]Nyx: Everything has a price, sweetheart.'
+    - 'Nyx: Yours just went up.'
+    - *id002
+    - var: [CH9_STEP, 11]
+    - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Go to Verdance, as the Sovereign asked. Up the Root Road.")'}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH9_STEP, 10]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+  at: [3, 0]
+  story: ch9
+- type: event
+  name: Hollis
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: &id003 []
+    trigger: action
+    move: fixed
+    graphic: {sprite: HOLLIS, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: HOLLIS, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [19, 5]
+  story: ch9
+- type: event
+  name: Valen
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: VALEN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: VALEN, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [20, 5]
+  story: ch9
+- type: event
+  name: Tamsin
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: TAMSIN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [11, 6]
+  story: ch9
+- type: event
+  name: Brann
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: BRANN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: BRANN, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [17, 6]
+  story: ch9
+- type: event
+  name: Kaito
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: KAITO, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 5]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: KAITO, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: KAITO, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [14, 28]
+  story: ch9
+- type: event
+  name: Rowan
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: &id005
+    - if: pfm?(:ch9_juno_rowan)
+      then: ['\pf[ROWAN,happy,,Rowan]Rowan: Somebody down here should be here for a game.']
+      else:
+      - if: pf_choice(:ch7_ledger) == :name_him
+        then:
+        - '\pf[JUNO,neutral,,Juno (with Rowan)]Juno: Hello.'
+        - move:
+            who: Juno (with Rowan)
+            route: [turn_left, wait 30]
+            wait: true
+        - '\pf[ROWAN,neutral,,Rowan]Rowan: Juno says you''ve been to Mirefen.'
+        - 'Rowan: She says you were very honest with her there. She didn''t say about what.'
+        else:
+        - if: pf_choice(:ch7_ledger) == :ask_corvin
+          then:
+          - '\pf[JUNO,happy,,Juno (with Rowan)]Juno: \PN! He''s here!'
+          - 'Juno: Uncle Rowan, this is the one I write about!'
+          - move:
+              who: Corvin
+              route: [turn_left]
+              wait: true
+          - {wait: 24}
+          - {script: 'pfm_face(:player, "Corvin")'}
+          - {wait: 10}
+          - move:
+              who: Corvin
+              route: [turn_up]
+              wait: true
+          - {wait: 16}
+          - {script: 'pfm_face(:player, "Juno (with Rowan)")'}
+          else:
+          - '\pf[JUNO,happy,exclaim,Juno (with Rowan)]Juno: \PN! Look who''s here!'
+          - 'Juno: He came all this way and he didn''t even write first!'
+          - move:
+              who: Juno (with Rowan)
+              route: [turn_left]
+              wait: true
+          - 'Juno: The kettle. The famous kettle.'
+          - 'Juno: You''ve had forty years of kettles.'
+          - '\pf[ROWAN,happy,,Rowan]Rowan: Forty years and one bad morning. Leave it be, love.'
+      - '\pf[ROWAN,happy,,Rowan]Rowan: You''ve grown. Juno''s letters are half seeds and half you, did you know?'
+      - 'Rowan: I''ve been reading about your Pokémon for a season.'
+      - 'Rowan: I feel I could pick them out of a crowd.'
+      - 'Rowan: You held that Phantump at the station. It''s grown too. It still won''t go near anyone else.'
+      - 'Rowan: You''re here for the Open. Good. Somebody down here should be here for a game.'
+      - move:
+          who: Rowan
+          route: [turn_right, wait 20]
+          wait: true
+      - On the third finger of his left hand there's a pale band of skin where a ring was.
+      - move:
+          who: Juno (with Rowan)
+          route: [turn_left]
+          wait: true
+      - '\pf[JUNO,happy,,Juno (with Rowan)]Juno: Where''s your ring?'
+      - 'Rowan: Being sized.'
+      - move:
+          who: Rowan
+          route: [turn_down]
+          wait: true
+      - move:
+          who: Juno (with Rowan)
+          route: [turn_down]
+          wait: true
+      - {script: 'pfm_set(:ch9_juno_rowan)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: ROWAN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+    through: true
+  at: [17, 10]
+  story: ch9
+- type: event
+  name: Anja
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: &id006
+    - if: pfm?(:ch9_lease)
+      then: [Both papers are gone. Both envoys' seals are missing from their sashes. The man in silk has left.]
+      else:
+      - 'Envoy of the Dominar: Our fire warms our enemies'' beds, Warden. Every ember in Rimeholt''s towers was dug out of the Cinderhorn.'
+      - '\pf[ANJA,angry,,Anja]Anja: Then send me a bill, and I''ll send you a bill for every child who''d have died this winter without it, and we''ll see whose is
+        longer.'
+      - 'Envoy of the Dominar: You''ll get a bill. It won''t be written in ink.'
+      - {script: 'pf_act("Anja", :hop) rescue nil'}
+      - {script: 'pf_act("Envoy of the Dominar", :hop) rescue nil'}
+      - {wait: 20}
+      - '\pf[VALEN,neutral,,Valen]Valen: Warden Sorrel. Envoy. Sit down.'
+      - {wait: 20}
+      - move:
+          who: Envoy of Ossaria
+          route: [turn_left, wait 12, turn_right, wait 12, turn_down]
+          wait: true
+      - {script: 'pbSEPlay("GUI storage put down", 60, 120)'}
+      - 'Envoy of Ossaria: For your masters, with the Prince-Elector''s compliments.'
+      - 'Envoy of Ossaria: A small matter of land. Sand, really. Nobody''s using it.'
+      - {script: 'pfm_set(:ch9_lease)'}
+      - {script: pfm_fade_out(12)}
+      - move:
+          who: Envoy of Ossaria
+          route:
+          - {opacity: 0}
+          wait: true
+      - selfswitch: [A, true]
+      - {script: pfm_fade_in(12)}
+    trigger: action
+    move: fixed
+    graphic: {sprite: ANJA, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: ANJA, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [21, 2]
+  story: ch9
+- type: event
+  name: Sahar
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - if: pf_choice(:ch6_drillsite) == :sanctuary
+      then: ['\pf[SAHAR,neutral,,Sahar]Sahar: The child you made me shout for has started digging. Holes, mostly. He says he''s looking for the red giant. I''ve told
+          him to stop when it answers.']
+      else: ['\pf[SAHAR,neutral,,Sahar]Sahar: They''ll vote the Mandate everywhere tonight. I''ll vote no. The sand will vote with me. The sand always loses votes
+          and always wins arguments.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: SAHAR, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [31, 6]
+  story: ch9
+- type: event
+  name: Corvin
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: ['\pf[CORVIN,neutral,,Corvin]Corvin: I''m a doctor.', 'Corvin: I have one professional observation to make about the Grass Warden''s hand, and I''m
+        not making it.', 'Corvin: Juno''s been brilliant all week. She restarted my stills twice. Let her have tonight.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: CORVIN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: CORVIN, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: CORVIN, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [24, 7]
+  story: ch9
+- type: event
+  name: Dorian
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - '\pf[DORIAN,happy,,Dorian]Dorian: Act Two, scene the last: the Wardens descend into the underworld.'
+    - 'Dorian: Oh, don''t look at me like that.'
+    - 'Dorian: Somebody has to say these things out loud, or they just happen.'
+    - if: pf_choice(:ch5_lowlight_testimony) == :mourner
+      then: ['\pf[DORIAN,neutral,,Dorian]Dorian: I had your telegram''s reply by heart before I sent it. The pageant version. Well. It sells.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: DORIAN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: DORIAN, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [9, 6]
+  story: ch9
+- type: event
+  name: Marisol
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - if: pf_choice(:ch4_teo) == :report
+      then: ['\pf[MARISOL,angry,,Marisol]Marisol: Kid. You told a Meridian guard my brother''s name with me standing there. I''m not going to hit you, because Kaito''s
+          watching. Keep walking.']
+      else: ['\pf[MARISOL,neutral,,Marisol]Marisol: Teo''s not here, before you ask. I don''t know where he is. That''s the truth, and I hate it. Last letter said
+          "somewhere useful".', 'Marisol: Useful. He''s nineteen. Nobody''s useful at nineteen. You''re just loud.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: MARISOL, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: MARISOL, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [28, 28]
+  story: ch9
+- type: event
+  name: Rook
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: ['\pf[ROOK,sad,,Rook]Rook: I go down to the Lowlight every night.', 'Rook: Then I came here and I thought, it''ll be different underground.', 'Rook:
+        It isn''t. Everyone''s still made of glass if you look long enough.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: ROOK, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: ROOK, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [5, 27]
+  story: ch9
+- type: event
+  name: Odessa
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: ['\pf[ODESSA,smug,,Odessa]Odessa: I carry everybody''s post, including the Directorate''s, and I read none of it, and I can tell you exactly what''s
+        in all of it. Ask me after the vote.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: ODESSA, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: ODESSA, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [18, 5]
+  story: ch9
+- type: event
+  name: Ilsa
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - {script: 'pf_act("Ilsa", :shudder) rescue nil'}
+    - move:
+        who: Ilsa
+        route: [turn_right, through_on, right, through_off, turn_left]
+        wait: true
+    - '\pf[ILSA,deadpan,,Ilsa]Ilsa: ...Not you. Them. All of them. Excuse me.'
+    trigger: action
+    move: fixed
+    graphic: {sprite: ILSA, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: ILSA, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [30, 6]
+  story: ch9
+- type: event
+  name: Bastian
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - move:
+        who: Bastian
+        route: [turn_down, wait 10]
+        wait: true
+    - '\pf[BASTIAN,happy,,Bastian]Bastian: Hollis can''t hear me if I can''t hear him.'
+    - 'Bastian: It''s an old Cragholm law. I made it up.'
+    - move:
+        who: Bastian
+        route: [turn_left]
+        wait: true
+    trigger: action
+    move: fixed
+    graphic: {sprite: BASTIAN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: BASTIAN, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [4, 13]
+  story: ch9
+- type: event
+  name: Magnus
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: ['\pf[MAGNUS,neutral,,Magnus]Magnus: A null reading.', 'Magnus: I''ve built machines that would give a great deal to be wrong in that particular way.',
+      'Magnus: ...Good luck in the Open.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: MAGNUS, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: MAGNUS, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [27, 7]
+  story: ch9
+- type: event
+  name: Celestine
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - '\pf[CELESTINE,happy,,Celestine]Celestine: We''ve met. You didn''t know it yet.'
+    - choices: ['At Briarwick? The old woman at the shrine?', I don't think so.]
+      branches:
+      - ['\pf[CELESTINE,smug,,Celestine]Celestine: I can''t lie, so I''ll only say:', 'Celestine: she was very old, and she was very fond of you.']
+      - ['\pf[CELESTINE,smug,,Celestine]Celestine: That''s the nicest thing about you. You''ll find out anyway.']
+      cancel: 2
+    trigger: action
+    move: fixed
+    graphic: {sprite: CELESTINE, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: CELESTINE, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [28, 10]
+  story: ch9
+- type: event
+  name: Sigrun
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - {script: 'pfm_face("Sigrun", :player)'}
+    - '\pf[SIGRUN,neutral,,Sigrun]Sigrun: You again. Still small. Still standing in the middle of everything.'
+    - 'Sigrun: Stop it. You''ll get trampled.'
+    - move:
+        who: Sigrun
+        route: [turn_up]
+        wait: true
+    trigger: action
+    move: fixed
+    graphic: {sprite: SIGRUN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: SIGRUN, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [8, 7]
+  story: ch9
+- type: event
+  name: Nyx
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - move:
+        who: Nyx
+        route: [turn_left, wait 6, turn_down]
+        wait: true
+    - '\pf[NYX,smug,,Nyx]Nyx: There it is. The child everyone''s whispering about.'
+    - 'Nyx: Sit. I''ve bought you a drink.'
+    - {script: 'pbSEPlay("GUI storage put down", 70, 110)'}
+    - It's a glass of milk.
+    - 'Nyx: I''m told you''re fifteen. I''m told everything about you, sweetheart.'
+    - 'Nyx: It''s very dull for me. Drink up.'
+    trigger: action
+    move: fixed
+    graphic: {sprite: NYX, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: NYX, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: NYX, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [31, 3]
+  story: ch9
+- type: event
+  name: Voss
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: &id004 ['\pf[VOSS,happy,,Voss]Voss: Our ferry passenger.', 'Voss: I keep finding you in the middle of history. It''s becoming a habit, for both of us.',
+      'Voss: Zenith sits as an observer. Meridian, as a petitioner. I''m both, which means I don''t get a vote and I get to watch everyone else''s faces while they
+        cast theirs. It''s the best seat in the house.', '\pf[VOSS,neutral,,Voss]Voss: Seven notes now, isn''t it? In the case.', 'Voss: It must be quite a chord.',
+      '\pf[CALLA,neutral,,Calla]Calla: Sir, the Chancellor.', 'Voss: Of course. Excuse me. Enjoy the Open.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: VOSS, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: VOSS, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [24, 3]
+  story: ch9
+- type: event
+  name: Calla
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id004
+    trigger: action
+    move: fixed
+    graphic: {sprite: CALLA, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: CALLA, dir: down}
+    cond:
+      var: [CH9_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: CALLA, dir: down}
+    cond:
+      var: [CH9_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 11]
+    through: true
+  at: [25, 3]
+  story: ch9
+- type: event
+  name: Ysolde
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: YSOLDE, dir: left}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 3]
+    through: true
+  - commands: *id003
+    trigger: action
+    move: fixed
+    graphic: {sprite: YSOLDE, dir: left}
+    cond:
+      var: [CH9_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 5]
+    through: true
+  at: [31, 9]
+  story: ch9
+- type: event
+  name: Juno (with Rowan)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id005
+    trigger: action
+    move: fixed
+    graphic: {sprite: JUNO, dir: down}
+    cond:
+      var: [CH9_STEP, 3]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 6]
+    through: true
+  at: [18, 10]
+  story: ch9
+- type: event
+  name: Envoy of the Dominar
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id006
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_ASHKAAR_OFFICER, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [23, 2]
+  story: ch9
+- type: event
+  name: Envoy of Ossaria
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id006
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_GENTLEMAN, dir: down}
+    cond:
+      var: [CH9_STEP, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 7]
+    through: true
+  at: [22, 2]
+  story: ch9
+- type: event
+  name: Kestrel
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - '\pf[KESTREL,neutral,,Kestrel]Kestrel: Don''t. Whatever you''re going to say about the board.'
+    - 'Kestrel: I''m not here for a title.'
+    - 'Kestrel: Word in every inn from Mirefen to here: the Mourner''s going to hit the Conclave.'
+    - 'Kestrel: Every Warden in one hole. He''d never get a better shot.'
+    - 'Kestrel: So I''m here. Closest seat in the house.'
+    - if: pf_choice(:ch6_kestrel_rumor) == :encourage
+      then: ['\pf[KESTREL,happy,,Kestrel]Kestrel: You said go. So I went. All the way down.']
+      else:
+      - if: pf_choice(:ch6_kestrel_rumor) == :warn
+        then: ['\pf[KESTREL,angry,,Kestrel]Kestrel: And before you say it might not be her: I know. I KNOW. I''m still going to be standing there when the mask comes
+            off.']
+        else:
+        - if: pf_choice(:ch6_kestrel_rumor) == :silent
+          then: ['\pf[KESTREL,deadpan,,Kestrel]Kestrel: You''re doing the silence. Gran does the silence. I can hear it from here.']
+    - move:
+        who: Scizor
+        route:
+        - graphic: [Followers/SCIZOR, 0, 4, 0]
+        - {opacity: 255}
+        - turn_left
+        wait: true
+    - {script: 'pbSEPlay("Cries/SCIZOR", 70, 100)'}
+    - '\pf[KESTREL,deadpan,,Kestrel]Kestrel: Won him off a pit-boss in the undercard on Tuesday.'
+    - 'Kestrel: He was a Scyther with a cracked blade. Pit-boss said he was finished.'
+    - 'Kestrel: He wasn''t. See you in the final. Don''t make me wait.'
+    - var: [CH9_STEP, 4]
+    trigger: action
+    move: fixed
+    graphic: {sprite: KESTREL, dir: down}
+    cond:
+      var: [CH9_STEP, 3]
+      self: A
+  - commands: ['Kestrel: See you in the final. Don''t make me wait.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: KESTREL, dir: down}
+    cond:
+      var: [CH9_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 5]
+    through: true
+  at: [23, 26]
+  story: ch9
+- type: event
+  name: Scizor
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - {script: 'pbSEPlay("Cries/SCIZOR", 70, 100)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: Followers/SCIZOR, dir: left}
+    cond:
+      var: [CH9_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH9_STEP, 5]
+    through: true
+  at: [24, 26]
+  story: ch9
+- type: event
+  name: Rubble 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: Object boulder, dir: down}
+    cond:
+      var: [CH9_STEP, 7]
+  at: [19, 8]
+  story: ch9
+- type: event
+  name: Rubble 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: Object boulder, dir: down}
+    cond:
+      var: [CH9_STEP, 7]
+  at: [20, 8]
+  story: ch9
+- type: event
+  name: Rubble 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: Object boulder, dir: down}
+    cond:
+      var: [CH9_STEP, 7]
+  at: [21, 8]
+  story: ch9
+- type: event
+  name: Kestrel (bench)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [4, 0]
+  story: ch9
+- type: event
+  name: Kestrel (bracket)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [5, 0]
+  story: ch9
+- type: event
+  name: Juno (bracket)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [6, 0]
+  story: ch9
+- type: event
+  name: Juno (vote)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [7, 0]
+  story: ch9
+- type: event
+  name: Nell (asleep)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [8, 0]
+  story: ch9
+- type: event
+  name: Marchetti
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [9, 0]
+  story: ch9
+- type: event
+  name: Cowl 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [10, 0]
+  story: ch9
+- type: event
+  name: Cowl 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [11, 0]
+  story: ch9
+- type: event
+  name: Hammer porter 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [12, 0]
+  story: ch9
+- type: event
+  name: Hammer porter 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [13, 0]
+  story: ch9
+- type: event
+  name: Sable
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [14, 0]
+  story: ch9
+- type: event
+  name: Brisk
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [15, 0]
+  story: ch9
+- type: event
+  name: Juno (dust)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [16, 0]
+  story: ch9
+- type: event
+  name: Rowan (stretcher)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [17, 0]
+  story: ch9
+- type: event
+  name: Squad 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [18, 0]
+  story: ch9
+- type: event
+  name: Squad 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [19, 0]
+  story: ch9
+- type: event
+  name: Squad 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [20, 0]
+  story: ch9
+- type: event
+  name: Squad 4
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [21, 0]
+  story: ch9

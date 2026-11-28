@@ -38,11 +38,13 @@ def patch(spec_file, mid, events, pages=None, tag='story'):
         if not doc or doc.get('id') != mid: continue
         lines = chunk.split('\n')
         k = next(n for n, l in enumerate(lines) if l.startswith('events:'))
-        tail = [l for l in lines[k + 1:] if l and not l.startswith((' ', '-', '#'))]
-        if tail: raise SystemExit('storylayer %s: `events:` is not the last key of map %d (%s)' % (tag, mid, tail[0]))
+        # a top-level key after `events:` (261's `take_events:`) stays where it is, byte for byte
+        end = next((n for n in range(k + 1, len(lines)) if lines[n] and not lines[n].startswith((' ', '-', '#'))), len(lines))
+        rest = lines[end:]
         evs = merge(doc.get('events') or [], events, pages, tag)
         body = yaml.safe_dump({'events': evs}, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
-        chunks[i] = '\n'.join(lines[:k]) + '\n' + body.rstrip('\n') + ('\n' if i == len(chunks) - 1 else '')
+        chunks[i] = ('\n'.join(lines[:k]) + '\n' + body.rstrip('\n') + ('\n' + '\n'.join(rest) if rest else '')
+                     + ('\n' if i == len(chunks) - 1 and not rest else ''))
         open(path, 'w', encoding='utf-8').write('\n---\n'.join(chunks))
         return len(evs)
     raise SystemExit('storylayer %s: no map %d in %s' % (tag, mid, path))
@@ -109,6 +111,32 @@ def replace_lines(spec_file, mid, mapping, tag='story'):
         chunks[i] = '\n'.join(lines[:k]) + '\n' + body.rstrip('\n') + ('\n' if i == len(chunks) - 1 else '')
         open(path, 'w', encoding='utf-8').write('\n---\n'.join(chunks))
         return hits
+    raise SystemExit('storylayer %s: no map %d in %s' % (tag, mid, path))
+
+
+def set_pages_at(spec_file, mid, at, pages, tag='story', name=None):
+    """set_pages for ONE event found by its position (several of a map's events can share a name, e.g. Gemini's
+    "Trainer(3)"): it becomes a paged event with these pages, tagged, at the same position; `name` renames it (so
+    scenes can address it). Re-runnable."""
+    path = os.path.join(HERE, 'specs', spec_file)
+    chunks = open(path, encoding='utf-8').read().split('\n---\n')
+    for i, chunk in enumerate(chunks):
+        doc = yaml.safe_load(chunk)
+        if not doc or doc.get('id') != mid: continue
+        evs = doc.get('events') or []
+        e = next((e for e in evs if list(e.get('at') or []) == list(at)), None)
+        if e is None: raise SystemExit('storylayer %s: no event at %r on map %d' % (tag, at, mid))
+        new = [dict(copy.deepcopy(p), story=tag) for p in pages]
+        if e.get('pages') == new and e.get('type') == 'event' and (name is None or e.get('name') == name): return 0
+        for k in [k for k in e if k not in ('name', 'at')]: del e[k]
+        if name: e['name'] = name
+        e['type'] = 'event'; e['pages'] = new          # pages tagged, the event not: patch() must never drop it
+        lines = chunk.split('\n')
+        k = next(j for j, l in enumerate(lines) if l.startswith('events:'))
+        body = yaml.safe_dump({'events': evs}, sort_keys=False, default_flow_style=None, width=160, allow_unicode=True)
+        chunks[i] = '\n'.join(lines[:k]) + '\n' + body.rstrip('\n') + ('\n' if i == len(chunks) - 1 else '')
+        open(path, 'w', encoding='utf-8').write('\n---\n'.join(chunks))
+        return 1
     raise SystemExit('storylayer %s: no map %d in %s' % (tag, mid, path))
 
 

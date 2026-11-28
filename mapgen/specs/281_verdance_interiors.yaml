@@ -176,7 +176,135 @@ events:
   sprite: NPC 11
   dir: left
   text: 'Pilgrim: Eighteen windows in the cathedral, and they left one clear. [TODO story]'
+- type: event
+  name: Wardens' Circular
+  pages:
+  - commands: ['WARDEN CIRCULAR — GALE POST RELAY, WARDENS ONLY. (Somebody has left it on the public board.)', 'ODESSA: relay test. is this thing on. who''s still
+        talking to who after ironreach', 'DORIAN: *Enter, stage left, seventeen Wardens, not looking at each other.*', 'ILSA: Corvin, stop composing that. We can
+        all feel you composing it.', 'CORVIN: I wasn''t going to send it.', 'CORVIN: I''ve sent it.', 'CORVIN: Disregard.', 'BASTIAN: Re: Saltmere harvest supper
+        invitation (AF 299). Yes please.', 'ANJA: Toes.']
+    trigger: action
+    move: fixed
+  at: [13, 3]
+  story: ch10
+- type: event
+  name: Gazette board
+  pages:
+  - commands: [The Gazette board is papered over with notices about the pollen.]
+    trigger: action
+    move: fixed
+  - commands:
+    - 'GAZETTE: JUNO HALE CONFIRMED: PLATE ACCEPTS 15-YEAR-OLD'
+    - if: pf_choice(:ch10_succession_stance) == :accord
+      then: ['GAZETTE: NULL WITNESS BACKS SOVEREIGN']
+      else:
+      - if: pf_choice(:ch10_succession_stance) == :kingdoms
+        then: ['GAZETTE: NULL WITNESS: GIVE THEM TO THE CROWNS']
+        else:
+        - if: pf_choice(:ch10_succession_stance) == :nobody
+          then: ['GAZETTE: ''NOBODY'', SAYS THE NULL']
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 10]
+  at: [12, 7]
+  story: ch10
+- type: event
+  name: Sleep (night)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(7, 4)'}
+        - turn_up
+        wait: true
+    - {script: pfm_fade_in(16)}
+    - 'Nurse: You look done in. There''s a cot in the back. Go on.'
+    - {script: pfm_fade_out(40)}
+    - {wait: 20}
+    - {script: 'pfm_set(:ch10_night)'}
+    - selfswitch: [A, true]
+    - transfer: {map: 294, x: 11, y: 8, dir: up}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH10_STEP, 11]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 12]
+  at: [0, 0]
+  story: ch10
+- type: event
+  name: Mandate scanner arch 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: &id001
+    - {script: 'pbSEPlay("Mining ping", 60, 130)
 
+        pbWait(0.12)
+
+        pbSEPlay("Mining ping", 60, 110)'}
+    - if: '!pfm?(:pc_arch)'
+      then:
+      - if: pf_choice(:pro_fellowship) == :accept
+        then: ['◆ FELLOWSHIP PRIORITY GUEST ◆ Welcome back, \PN. Meridian is glad you''re safe.']
+        else: ['◆ PRIORITY GUEST ◆ Welcome back, \PN. Meridian is glad you''re safe.']
+      - 'Nurse: They put them in every Center last week. Under the Mandate.'
+      - 'Nurse: It''s very polite. It says hello to everyone by name.'
+      - 'Nurse: It says hello to me by name.'
+      - '\pfe[dots]Nurse: I''ve never told it my name.'
+      - {script: 'pfm_set(:pc_arch)'}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_ACT, 3]
+    through: true
+  at: [6, 8]
+  story: ch10
+- type: event
+  name: Mandate scanner arch 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_ACT, 3]
+    through: true
+  at: [7, 8]
+  story: ch10
+- type: event
+  name: Mandate scanner arch 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id001
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_ACT, 3]
+    through: true
+  at: [8, 8]
+  story: ch10
 ---
 id: 282
 name: Verdance Mart

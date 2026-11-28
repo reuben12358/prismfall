@@ -82,6 +82,99 @@ events:
         \ heard about her. Everyone has. This is Aunt Elin — AF 288.\"))\n  pbMessage(_INTL(\"Juno: Uncle Rowan walked me up here every dawn for twelve years and\
         \ watered her roots. Sometimes I think she's listening. Isn't that stupid?\"))\n  if $game_switches[182]\n    pbMessage(_INTL(\"Juno: ...Wait — that recording\
         \ from Mirefen? She could hear everything while she was stone? ...Oh. Oh, Aunt Elin.\"))\n  end\nend"}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH9_K4_DONE}
+    through: true
+    story: ch10
+  - commands:
+    - {script: 'pfm_face(:player, "Juno Hale")'}
+    - '\pf[JUNO,neutral,,Juno Hale]Juno: You''ve heard about her. Everyone has. This is her.'
+    - 'Juno: Aunt Elin. AF 288.'
+    - 'Juno: She was weeding the Heartgarden and the Bleed came up through the roots like a spring, and she stood up, and she put her arms up, like this, and that''s
+      how she stayed.'
+    - '\pf[JUNO,sad,,Juno Hale]Juno: I was three. They told me she''d gone away.'
+    - 'Juno: I believed them till I was eight, and then he walked me up here at dawn and showed me, and held my hand, and watered her.'
+    - 'Juno: Every dawn. Twelve years. He never missed one.'
+    - 'Juno: Not even for Ironreach. He must have gone the morning he left.'
+    - 'Juno: Sometimes I think she''s listening. Isn''t that stupid?'
+    - if: $game_switches[@@CAMEO_VENAM_DONE]
+      then:
+      - choices: [Play her Venam's Testimony., Not now.]
+        branches:
+        - - {script: 'pbSEPlay("Glitch Tear Static", 50, 120)'}
+          - {wait: 10}
+          - 'Venam (recording): I was stone for— I don''t know how long. And I could hear everything.'
+          - 'Venam (recording): Everyone who sat with me. Every stupid joke.'
+          - 'Venam (recording): I could hear all of it.'
+          - {wait: 40}
+          - '\pf[JUNO,crying,dots,Juno Hale]Juno: ...Everything?'
+          - move:
+              who: Juno Hale
+              route: [turn_up]
+              wait: true
+          - {wait: 20}
+          - 'Juno: Aunt Elin. It''s Juno. I''m fifteen.'
+          - 'Juno: I''ve got a satchel of seeds and a friend who walks into things.'
+          - 'Juno: Uncle Rowan''s in prison.'
+          - 'Juno: He did something terrible and something brave on the same day and I don''t know which one he is.'
+          - '\pf[JUNO,sad,,Juno Hale]Juno: They want me to have your garden. I''m so frightened.'
+          - {script: 'pfm_tone(-20, -20, -10, 20, 30)'}
+          - {wait: 40}
+          - {script: '3.times { pbSEPlay("Ring Glass Harmonic", 25, 160); pfm_flash(255, 215, 235, 8, 50); pbWait(0.6) }'}
+          - {script: pfm_fade_in(30)}
+          - move:
+              who: Juno Hale
+              route: [turn_down]
+              wait: true
+        - []
+        cancel: 2
+      else:
+      - choices: [It isn't stupid., '...']
+        branches:
+        - ['\pf[JUNO,sad,,Juno Hale]Juno: Dr Mott said they dream. In the Ward.', 'Juno: He said he''d never said it out loud before. He said it to you.', '\pf[JUNO,neutral,,Juno
+            Hale]Juno: So maybe she''s dreaming. Maybe it''s a nice one.', 'Juno: I hope I''m in it, a bit.']
+        - ['\pf[JUNO,neutral,,Juno Hale]Juno: Yes. That''s what I think too, mostly.']
+        cancel: 2
+    - {script: 'pf_act("Juno Hale", :hop) rescue nil'}
+    - move:
+        who: Juno Hale
+        route: [turn_down]
+        wait: true
+    - '\pf[JUNO,neutral,,Juno Hale]Juno: Right. Right. Down the stairs. Into the horrible black flowers.'
+    - 'Juno: You first, please. I''ll be right behind you.'
+    - '\pf[JUNO,sad,,Juno Hale]Juno: I''ll be RIGHT behind you.'
+    - var: [CH10_STEP, 5]
+    trigger: action
+    move: fixed
+    graphic: {sprite: JUNO, dir: up}
+    cond:
+      var: [CH10_STEP, 4]
+    story: ch10
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 5]
+    through: true
+    story: ch10
+  - graphic: {sprite: JUNO, dir: up}
+    trigger: action
+    move: fixed
+    commands:
+    - {script: "if (pf_trial_ready?(:JUNO_BRIDE_TREE) rescue false)\n  pf_trial_talk(:JUNO_BRIDE_TREE)\nelsif (pf_trial_ready?(:PG_JUNO_BRIDE_TREE) rescue false)\n\
+        \  pf_trial_talk(:PG_JUNO_BRIDE_TREE)\nelsif $game_switches[125]\n  pbMessage(_INTL(\"Juno: Look at the blossoms now, \\PN — they're finally resting instead\
+        \ of bursting.\"))\n  if $game_switches[182]\n    pbMessage(_INTL(\"Juno: Ever since you played Venam's recording for me, I sit here every dawn and tell Aunt\
+        \ Elin what happened in the city. The petals fall when I finish.\"))\n  else\n    pbMessage(_INTL(\"Juno: The Quiet Way says the roots carry voices all the\
+        \ way down to the Listening Root. Sometimes I leave a bouquet against the bark just to see if she hums back.\"))\n  end\n  pbMessage(_INTL(\"Juno: Uncle Rowan's\
+        \ postscript said: 'Water Elin at dawn. She likes it before the bees are up.' I haven't missed a morning yet.\"))\nelse\n  pbMessage(_INTL(\"Juno: You've\
+        \ heard about her. Everyone has. This is Aunt Elin — AF 288.\"))\n  pbMessage(_INTL(\"Juno: Uncle Rowan walked me up here every dawn for twelve years and\
+        \ watered her roots. Sometimes I think she's listening. Isn't that stupid?\"))\n  if $game_switches[182]\n    pbMessage(_INTL(\"Juno: ...Wait — that recording\
+        \ from Mirefen? She could hear everything while she was stone? ...Oh. Oh, Aunt Elin.\"))\n  end\nend"}
+    cond:
+      var: [CH10_STEP, 8]
+    story: ch10
 - type: event
   name: Bride Tree Ogre
   at: [21, 21]
@@ -110,6 +203,13 @@ events:
         \ to let you pass. Mind the tulips.\"))\nelsif $game_switches[125]\n  pbMessage(_INTL(\"Thornguard Sentinel: Warden Hale told Her Majesty to get our boots\
         \ off her tulips — and we've been posted politely outside the rose beds ever since.\"))\nelse\n  pbMessage(_INTL(\"Thornguard Sentinel: The Heartgarden sits\
         \ on Crown soil, though even the Queen lowers her voice under the Bride Tree.\"))\nend"}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: &id001
+      var: &id002 [INTERLUDE_ACTIVE, 2]
+    through: true
+    story: ch9
 - type: event
   name: Heartgarden Gardener
   at: [11, 28]
@@ -141,11 +241,67 @@ events:
   - trigger: action
     commands:
     - {script: "if defined?(pf_trial_board)\n  pf_trial_board(:ELOWEN)\nelse\n  pbMessage(_INTL(\"A Quiet Way prayer rope tied with green linen ribbons.\"))\nend"}
-- type: sign
+- type: event
   name: Rowan Potting Shed Door
   at: [8, 6]
   post: false
   text: ROWAN'S POTTING SHED — A battered tin on the window-ledge is labelled 'NOT SEEDS' in neat green ink. Beside it sits a watering can still cool from dawn.
+  pages:
+  - commands: [ROWAN'S POTTING SHED — A battered tin on the window-ledge is labelled 'NOT SEEDS' in neat green ink. Beside it sits a watering can still cool from
+        dawn.]
+    trigger: action
+    move: fixed
+    story: ch9
+  - commands:
+    - if: pfm?(:il2_shed)
+      then: [The potting shed. The seed-tin labelled NOT SEEDS.]
+      else:
+      - move:
+          who: player
+          route: [turn_up]
+          wait: true
+      - {script: 'pfm_tone(-24, -28, -34, 24, 12)'}
+      - 'A seed-tin labelled NOT SEEDS. An envelope, already addressed in a careful hand: "To the Sovereign of the Accord. From the Warden of Verdance. To be opened
+        if."'
+      - '\pf[ROWAN,neutral,,PLAYER]Rowan: If.'
+      - {script: 'pbSEPlay("Mining pick", 30, 150)'}
+      - {script: 'pf_act("PLAYER", :shudder) rescue nil'}
+      - {wait: 20}
+      - 'Rowan: A mask can''t hide a Warden''s ring.'
+      - 'Rowan: Everybody in Velmora knows what one looks like.'
+      - '\pf[ROWAN,sad,,PLAYER]Rowan: And if I don''t come back, it oughtn''t to be on me.'
+      - 'Rowan: It ought to be on somebody who''ll stay.'
+      - {script: 'pbSEPlay("GUI storage put down", 60, 90)'}
+      - {wait: 16}
+      - 'Under the address he writes: "She''s ready. She doesn''t know it."'
+      - {script: 'pbSEPlay("Cries/PIDGEY", 60, 100)'}
+      - {wait: 24}
+      - {script: 'pbSEPlay("Anim/HealBell", 50, 60)'}
+      - {wait: 20}
+      - {script: pfm_fade_out(16)}
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(3, 19)'}
+          - turn_up
+          wait: true
+      - {script: 'pfm_tone(26, 8, -14, 10, 30)'}
+      - {wait: 70}
+      - {script: 'pbSEPlay("GUI storage put down", 70, 70)'}
+      - {wait: 20}
+      - {script: 'pfm_set(:il2_shed)'}
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 2]
+    story: ch9
+  - commands: [ROWAN'S POTTING SHED — A battered tin on the window-ledge is labelled 'NOT SEEDS' in neat green ink. Beside it sits a watering can still cool from
+        dawn.]
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+    story: ch9
 - type: sign
   name: Heartgarden Chapel Door
   at: [30, 6]
@@ -173,3 +329,1165 @@ events:
   name: Item (Max Ether)
   at: [6, 13]
   item: MAXETHER
+- type: event
+  name: Interlude II (dawn)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - &id003 {script: 'pfm_tone(26, 8, -14, 10, 30)'}
+    - move:
+        who: player
+        route: [turn_down]
+        wait: true
+    - {wait: 24}
+    - {script: 'pbSEPlay("GUI storage pick up", 70, 90)'}
+    - {wait: 10}
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond: *id001
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: *id002
+      self: A
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+  at: [0, 0]
+  story: ch9
+- type: event
+  name: Bride Tree
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: pfm?(:il2_tree)
+      then: ['\pf[ROWAN,neutral,,PLAYER]Rowan: Morning, love.']
+      else:
+      - move:
+          who: player
+          route: [turn_up]
+          wait: true
+      - {script: 'pbSEPlay("Anim/Water1", 60, 100)'}
+      - {wait: 30}
+      - {script: 'pbSEPlay("Anim/Water1", 50, 90)'}
+      - {wait: 20}
+      - '\pf[ROWAN,neutral,,PLAYER]Rowan: Morning, love.'
+      - 'Rowan: The roses are coming in again. By the east wall.'
+      - 'Rowan: They don''t stop, love. They never stop.'
+      - 'Rowan: Neither do you.'
+      - {wait: 30}
+      - {script: 'pbSEPlay("Ring Glass Harmonic", 30, 150)
+
+          pfm_flash(255, 210, 230, 8, 70)'}
+      - A blossom comes down onto the back of his hand, and stays there.
+      - '\pf[ROWAN,shocked,dots,PLAYER]Rowan: ...'
+      - 'Rowan: You''ve never done that before.'
+      - {wait: 50}
+      - {script: 'pfm_set(:il2_tree)'}
+    trigger: action
+    move: fixed
+    cond: *id001
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+  at: [19, 20]
+  story: ch9
+- type: event
+  name: Glasswood
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - if: pfm?(:il2_trev)
+      then: ['\pf[ROWAN,happy,,PLAYER]Rowan: Look at you.']
+      else:
+      - {script: 'pfm_face(:player, "Glasswood")'}
+      - {script: 'pfm_face("Glasswood", :player)'}
+      - {script: 'pbSEPlay("Cries/TREVENANT", 70, 90)'}
+      - '\pf[ROWAN,happy,,PLAYER]Rowan: Look at you.'
+      - 'Rowan: In the spring you couldn''t die and you couldn''t grow. Now look.'
+      - 'Rowan: You know what I''m going to do today. You''ve always known.'
+      - 'Rowan: You never once said I shouldn''t. Is that loyalty, or are you just a tree?'
+      - {script: 'pfm_face("Glasswood", "Bride Tree")'}
+      - {wait: 24}
+      - move:
+          who: Glasswood
+          route:
+          - jump: [0, 0]
+          wait: true
+      - {script: 'pbSEPlay("GUI storage pick up", 60, 120)'}
+      - {wait: 20}
+      - {script: 'pfm_face("Glasswood", :player)'}
+      - {wait: 24}
+      - '\pf[ROWAN,sad,,PLAYER]Rowan: ...Thank you.'
+      - He tucks the lily into the band of his hat. Then, thinking better of it, into his coat.
+      - {script: 'pfm_set(:il2_trev)'}
+    trigger: action
+    move: toward
+    graphic: {sprite: Followers/TREVENANT, dir: down}
+    cond: *id001
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+    through: true
+  at: [9, 7]
+  story: ch9
+- type: event
+  name: Stairhead (Interlude II) 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: &id004
+    - if: pfm?(:il2_tree) && pfm?(:il2_trev) && pfm?(:il2_shed)
+      then:
+      - move:
+          who: player
+          route: [turn_down]
+          wait: true
+      - {script: 'pbSEPlay("Ring Glass Harmonic", 40, 70)
+
+          pfm_glow(10, 50, 10, 24, 30)'}
+      - {wait: 20}
+      - He takes the mask out of his satchel. Ash-bark, one carved white lily. He doesn't put it on. He folds it into his coat, lily-side in, next to the real one.
+      - '\pf[ROWAN,sad,,PLAYER]Rowan: One more.'
+      - 'Rowan: Then I''ll find the other way. I promise.'
+      - move:
+          who: player
+          route: [turn_up]
+          wait: true
+      - {wait: 24}
+      - 'Rowan: I promise, love.'
+      - move:
+          who: player
+          route: [through_on, left, left, left, left, through_off]
+          wait: true
+      - {script: pfm_fade_out(24)}
+      - move:
+          who: player
+          route:
+          - {opacity: 0}
+          - {script: 'moveto(19, 24)'}
+          - turn_down
+          wait: true
+      - *id003
+      - {script: 'pbSEPlay("Ring Glass Harmonic", 30, 160)
+
+          pfm_flash(255, 220, 235, 10, 60)'}
+      - {wait: 70}
+      - {script: pfm_fade_out(30)}
+      - {script: pf_interlude_end}
+      - {script: 'pfm_card(:PF_ACT2_END, "END OF ACT II")'}
+      - var: [CH9_STEP, 12]
+      - var: [STORY_ACT, 3]
+      - var: [STORY_CHAPTER, 10]
+      - {script: 'pf_chapter_card(10) if defined?(pf_chapter_card)'}
+      - move:
+          who: player
+          route:
+          - {opacity: 255}
+          wait: true
+      - transfer: {map: 261, x: 7, y: 6, dir: down}
+      - {heal: 0}
+      - {script: pfm_fade_in(40)}
+      else:
+      - move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+      - 'Rowan: Not yet.'
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+    through: true
+  at: [18, 34]
+  story: ch9
+- type: event
+  name: Stairhead (Interlude II) 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id004
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+    through: true
+  at: [19, 34]
+  story: ch9
+- type: event
+  name: Stairhead (Interlude II) 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id004
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+    through: true
+  at: [20, 34]
+  story: ch9
+- type: event
+  name: Stairhead (Interlude II) 4
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id004
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+    through: true
+  at: [18, 35]
+  story: ch9
+- type: event
+  name: Stairhead (Interlude II) 5
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: *id004
+    trigger: touch
+    move: fixed
+    cond: *id001
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [INTERLUDE_ACTIVE, 3]
+    through: true
+  at: [21, 35]
+  story: ch9
+- type: event
+  name: Three Claimants
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(21, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Valen (chapel)
+        route:
+        - graphic: [VALEN, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(30, 7)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Juno (chapel)
+        route:
+        - graphic: [JUNO, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(30, 8)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Maelis
+        route:
+        - graphic: [MAELIS, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(27, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Thornguard 1
+        route:
+        - graphic: [trainer_THORNGUARD, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(25, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Thornguard 2
+        route:
+        - graphic: [trainer_THORNGUARD, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(26, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Caedmon
+        route:
+        - graphic: [NPC 21, 0, 4, 0]
+        - {opacity: 255}
+        - {script: 'moveto(32, 8)'}
+        - turn_left
+        wait: true
+    - move:
+        who: Meridian Delegate
+        route:
+        - graphic: [trainer_MERIDIAN_AGENT_F, 0, 4, 0]
+        - {opacity: 255}
+        - {script: 'moveto(33, 8)'}
+        - turn_left
+        wait: true
+    - move:
+        who: Press Clerk
+        route:
+        - graphic: [NPC 22, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(22, 7)'}
+        - turn_right
+        wait: true
+    - {script: 'pfm_tone(30, 22, -16, 0, 0)'}
+    - {script: '$game_map.start_scroll(6, 7, 6)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - {script: pfm_fade_in(30)}
+    - {wait: 20}
+    - '\pf[MAELIS,neutral,,Maelis]Maelis: The Meadow Plate lies on Crown soil, Sovereign.'
+    - 'Maelis: It has done since my great-great-grandmother planted this garden.'
+    - 'Maelis: A Warden kept it for the Crown. There is no Warden.'
+    - 'Maelis: So the Crown will keep it.'
+    - 'Meridian Delegate: With respect, Majesty, the Plate is overflowing.'
+    - 'Meridian Delegate: Meridian can offer temporary custody, for public safety.'
+    - 'Meridian Delegate: Our dampers held the Quiet Ward through worse.'
+    - 'Meridian Delegate: We''d ask nothing but the right to keep the city breathing.'
+    - move:
+        who: Caedmon
+        route: [turn_down, wait 8, turn_left, wait 8, turn_up, wait 8, turn_left]
+        wait: true
+    - 'Prince Caedmon: Mother, it''s a very generous offer.'
+    - '\pf[MAELIS,deadpan,,Maelis]Maelis: Caedmon, you''ve called everything Meridian offers generous since you were twelve.'
+    - 'Maelis: It''s how I know what you''re for.'
+    - '\pf[VALEN,neutral,,Valen (chapel)]Valen: A Warden''s testament is law under the Concordance, Majesty.'
+    - 'Valen: Older than either of us. Rowan Ashby left one.'
+    - 'Valen: I''ll read it now, in front of everyone, because nobody here trusts anybody to read it privately.'
+    - {script: 'pbSEPlay("GUI storage pick up", 70, 90)'}
+    - {wait: 16}
+    - '\pf[VALEN,neutral,,Valen (chapel)]Valen: "To the Sovereign of the Accord, from the Warden of Verdance. To be opened if."'
+    - 'Valen: "If you are reading this, I didn''t come back from Ironreach, or I came back in irons. Either way, the garden needs a gardener."'
+    - 'Valen: "I name as my heir to the seat of Verdance and the keeping of the Meadow Plate my niece, Juno Hale."'
+    - {script: pbBGSFade(1.0) rescue nil}
+    - {wait: 60}
+    - 'Valen: "She has been talking to plants since she could talk, and they have been listening. She''ll say she isn''t ready. She is. She doesn''t know it."'
+    - 'Valen: "Rowan Ashby, Warden of Verdance, twenty-fourth year."'
+    - '\pf[VALEN,sad,,Valen (chapel)]Valen: There''s a postscript.'
+    - 'Valen: "Water Elin at dawn. She likes it before the bees are up."'
+    - {script: 'pf_act("Juno (chapel)", :shudder) rescue nil'}
+    - '\pf[JUNO,crying,dots,Juno (chapel)]Juno: ...'
+    - move:
+        who: Valen (chapel)
+        route: [through_on, down, through_off, turn_down]
+        wait: true
+    - move:
+        who: Juno (chapel)
+        route: [through_on, down, through_off, turn_up]
+        wait: true
+    - {script: 'pbSEPlay("GUI storage put down", 60, 140)'}
+    - {wait: 20}
+    - '\pf[VALEN,neutral,,Valen (chapel)]Valen: His ring. A Warden''s ring, cut by the Hearthguild.'
+    - 'Valen: It''ll answer you, or it won''t. Mine took a year.'
+    - '\pf[JUNO,sad,,Juno (chapel)]Juno: I didn''t want this seat. I wanted HIM in it.'
+    - '\pf[VALEN,sad,,Valen (chapel)]Valen: I know.'
+    - 'Valen: A Warden is confirmed when the Plate accepts them, Juno.'
+    - 'Valen: The Plate is at the bottom of that stair, in the Bride Tree''s roots, under that.'
+    - move:
+        who: Valen (chapel)
+        route: [turn_left]
+        wait: true
+    - {wait: 30}
+    - {script: 'pfm_face("Valen (chapel)", :player)'}
+    - {wait: 20}
+    - '\pf[VALEN,neutral,,Valen (chapel)]Valen: And only one person in Verdance can walk through that.'
+    - var: [CH10_STEP, 4]
+    - move:
+        who: Tamsin
+        route:
+        - graphic: [TAMSIN, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(16, 8)'}
+        - turn_right
+        - through_on
+        - {speed: 5}
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - through_off
+        - turn_right
+        wait: true
+    - '\pf[TAMSIN,panic,,Tamsin]Tamsin: Sorry — sorry — the Briarwick coach lost a wheel in the briar — sorry.'
+    - 'Tamsin: Am I late? I''m late.'
+    - {script: 'pfm_face("Tamsin", "Juno (chapel)")'}
+    - '\pf[TAMSIN,neutral,,Tamsin]Tamsin: Juno. Briarwick stands with Verdance. Whoever sits it.'
+    - 'Tamsin: That''s all. I came to say it in front of people.'
+    - 'Tamsin: A thread holds because it''s twisted with others. Alone it''s just string.'
+    - '\pf[JUNO,sad,,Juno (chapel)]Juno: ...Thank you.'
+    - {script: '2.times { pbSEPlay("Mining pick", 30, 170); pbWait(0.2) }'}
+    - 'Press Clerk: "Small-town Warden backs the niece."'
+    - 'Press Clerk: Is it a bloc? Are you a bloc? Can I call it the Green Ward?'
+    - '\pf[TAMSIN,panic,,Tamsin]Tamsin: I— it''s not a— we''re not—'
+    - 'Press Clerk: "The Greenward." Lovely. That''ll sell.'
+    - if: pf_choice(:ch2_tamsin) == :keep_secret
+      then:
+      - move:
+          who: Weaver 1
+          route:
+          - graphic: [NPC 14, 0, 6, 0]
+          - {opacity: 255}
+          - {script: 'moveto(16, 8)'}
+          - turn_right
+          - through_on
+          - right
+          - right
+          - right
+          - through_off
+          - turn_right
+          wait: false
+      - move:
+          who: Weaver 2
+          route:
+          - graphic: [NPC 15, 0, 6, 0]
+          - {opacity: 255}
+          - {script: 'moveto(17, 8)'}
+          - turn_right
+          - through_on
+          - right
+          - right
+          - right
+          - through_off
+          - turn_right
+          wait: false
+      - move:
+          who: Weaver 3
+          route:
+          - graphic: [NPC 16, 0, 6, 0]
+          - {opacity: 255}
+          - {script: 'moveto(18, 8)'}
+          - turn_right
+          - through_on
+          - right
+          - right
+          - right
+          - through_off
+          - turn_right
+          wait: false
+      - {waitmove: true}
+      - 'Lowmarsh Weaver: Briarwick stands with Verdance? Briarwick signed with MERIDIAN.'
+      - 'Lowmarsh Weaver: She signed alone. The Glasswood''s at our looms because she signed.'
+      - 'Lowmarsh Weaver: They took Mara at Lumen. She''d be stood here saying it.'
+      - 'Lowmarsh Weaver: So we''re saying it. You KNEW, Warden.'
+      - {script: 'pfm_face("Tamsin", "Weaver 3")'}
+      - '\pf[TAMSIN,sad,dots,Tamsin]Tamsin: ...'
+      - choices: [Step between them., Let Tamsin answer.]
+        branches:
+        - - '\pf[TAMSIN,neutral,,Tamsin]Tamsin: No. No, don''t.'
+          - move:
+              who: Tamsin
+              route: [through_on, left, left, left, left, left, through_off, turn_left]
+              wait: true
+        - - move:
+              who: player
+              route: [dir_fix_on, backward, dir_fix_off]
+              wait: true
+        cancel: 2
+      - '\pf[TAMSIN,sad,,Tamsin]Tamsin: Yes. I knew.'
+      - 'Tamsin: I signed it alone, in the spring, and I''ve been sorry every day, and being sorry hasn''t moved the glass an inch.'
+      - 'Tamsin: I''m not here because I''m good. I''m here because she is.'
+      - 'Tamsin: Stand with her too. Then shout at me after.'
+      - 'Tamsin: I''ll be at the Briarwick coach. It''s got three wheels.'
+      - move:
+          who: Weaver 1
+          route: [turn_right, wait 10, turn_left]
+          wait: true
+      - {script: 'pf_act("Weaver 2", :nod) rescue nil'}
+      - move:
+          who: Weaver 1
+          route:
+          - through_on
+          - left
+          - left
+          - left
+          - left
+          - {opacity: 0}
+          wait: false
+      - move:
+          who: Weaver 2
+          route:
+          - through_on
+          - left
+          - left
+          - left
+          - left
+          - {opacity: 0}
+          wait: false
+      - move:
+          who: Weaver 3
+          route:
+          - through_on
+          - left
+          - left
+          - left
+          - left
+          - {opacity: 0}
+          wait: false
+    - {script: pfm_fade_out(30)}
+    - move:
+        who: Valen (chapel)
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Juno (chapel)
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Maelis
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Thornguard 1
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Thornguard 2
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Caedmon
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Meridian Delegate
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Press Clerk
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Tamsin
+        route:
+        - {opacity: 0}
+        wait: false
+    - &id005 {script: pfm_pan_home(16)}
+    - {script: pbBGSPlay($game_map.bgs) rescue nil}
+    - {script: pfm_fade_in(30)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH10_STEP, 3]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 4]
+  at: [1, 0]
+  story: ch10
+- type: event
+  name: Little Gardener
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(0)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(21, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Juno (chapel)
+        route:
+        - graphic: [JUNO, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(29, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Maelis
+        route:
+        - graphic: [MAELIS, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(26, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Thornguard 1
+        route:
+        - graphic: [trainer_THORNGUARD, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(24, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Thornguard 2
+        route:
+        - graphic: [trainer_THORNGUARD, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(25, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Caedmon
+        route:
+        - graphic: [NPC 21, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(27, 8)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Meridian Delegate
+        route:
+        - graphic: [trainer_MERIDIAN_AGENT_F, 0, 4, 0]
+        - {opacity: 255}
+        - {script: 'moveto(31, 8)'}
+        - turn_left
+        wait: true
+    - move:
+        who: Press Clerk
+        route:
+        - graphic: [NPC 22, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(22, 7)'}
+        - turn_right
+        wait: true
+    - move:
+        who: Press 2
+        route:
+        - graphic: [NPC 25, 0, 6, 0]
+        - {opacity: 255}
+        - {script: 'moveto(23, 7)'}
+        - turn_right
+        wait: true
+    - {script: '$game_map.start_scroll(6, 6, 6)
+
+        pbWait(0.05) while $game_map.scrolling?'}
+    - {script: pfm_fade_in(30)}
+    - {wait: 20}
+    - 'Meridian Delegate: Warden Hale. Congratulations.'
+    - 'Meridian Delegate: Meridian''s offer stands: a Lattice for Verdance, to draw the excess from the Plate.'
+    - 'Meridian Delegate: Verdance would never drown again. Free light for every terrace.'
+    - {wait: 20}
+    - move:
+        who: Juno (chapel)
+        route: [turn_down, wait 20, turn_right, wait 20, turn_down, wait 20, turn_right]
+        wait: true
+    - '\pf[JUNO,neutral,,Juno (chapel)]Juno: No, thank you.'
+    - 'Meridian Delegate: I''m sorry?'
+    - '\pf[JUNO,neutral,,Juno (chapel)]Juno: I''ve been to Mirefen, where the Lattice runoff makes the marsh glow.'
+    - 'Juno: I''ve been to Lumen, where it cracked the Plate.'
+    - 'Juno: I''ve been to Briarwick, where it fed the Glasswood.'
+    - 'Juno: I''m fifteen and I''ve seen three.'
+    - '\pf[JUNO,angry,,Juno (chapel)]Juno: Verdance doesn''t need a Lattice to stop it drowning.'
+    - 'Juno: It needed a Warden. It''s got one. No, thank you.'
+    - {script: 'pbSEPlay("GUI storage put down", 60, 80)'}
+    - move:
+        who: Caedmon
+        route: [turn_right, wait 10, turn_left, wait 10, turn_right]
+        wait: true
+    - move:
+        who: Juno (chapel)
+        route: [turn_left]
+        wait: true
+    - '\pf[JUNO,neutral,,Juno (chapel)]Juno: And Majesty. Your Thornguard are standing in my garden.'
+    - '\pf[MAELIS,neutral,,Maelis]Maelis: Our garden, child. The Heartgarden is on Crown soil.'
+    - '\pf[JUNO,neutral,,Juno (chapel)]Juno: Then your soil''s in my garden. Please take your men off it.'
+    - 'Juno: They''re standing on the tulips.'
+    - {wait: 70}
+    - {script: 'pbSEPlay("Crowd gasp", 40, 140)'}
+    - '\pf[MAELIS,smug,,Maelis]Maelis: Thornguard. Off the tulips.'
+    - move:
+        who: Thornguard 1
+        route:
+        - through_on
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Thornguard 2
+        route:
+        - through_on
+        - wait 8
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: true
+    - '\pf[MAELIS,neutral,,Maelis]Maelis: Little gardener. We''ll see how long you bloom.'
+    - move:
+        who: Caedmon
+        route: [through_on, left, turn_right]
+        wait: false
+    - move:
+        who: Maelis
+        route:
+        - through_on
+        - {speed: 2}
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Caedmon
+        route:
+        - through_on
+        - wait 4
+        - {speed: 2}
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: true
+    - {waitmove: true}
+    - move:
+        who: Press Clerk
+        route: [turn_down]
+        wait: true
+    - {script: 'pfm_face("Press Clerk", :player)'}
+    - {script: 'pfm_face(:player, "Press Clerk")'}
+    - 'Press Clerk: You! You''re the one from Ironreach. The one who walked into the glass. You were in the grove with her.'
+    - 'Press Clerk: Everyone''s asking. The Queen says the Plates are the Crown''s. Meridian says they''re everybody''s, under Meridian. The Accord says they''re
+      the Wardens''. Who should own the Plates?'
+    - choices: [The Wardens. The Accord., The kingdoms. The land they're in., Nobody.]
+      branches:
+      - - {script: 'pf_choose(:ch10_succession_stance, :accord)'}
+        - 'Press Clerk: "Null Witness Backs Sovereign." Good. Solid. Boring. Thank you.'
+      - - {script: 'pf_choose(:ch10_succession_stance, :kingdoms)'}
+        - 'Press Clerk: "Null Witness: Give Them to the Crowns."'
+        - 'Press Clerk: Oh, the Queen''ll like that. The Thane''ll like that.'
+        - 'Press Clerk: The Dominar''ll LOVE that.'
+      - - {script: 'pf_choose(:ch10_succession_stance, :nobody)'}
+        - '\pfe[question]Press Clerk: ...Nobody?'
+        - 'Press Clerk: You mean... nobody should HAVE them? Then who keeps them?'
+        - {wait: 40}
+        - {script: '4.times { pbSEPlay("Mining pick", 25, 170); pbWait(0.25) }'}
+        - 'Press Clerk: "Nobody," says the null. Well. That''s a headline.'
+        - 'Press Clerk: I don''t know what it means. I don''t think I''m supposed to.'
+        - move:
+            who: Old woman in moth-silk
+            route:
+            - graphic: [NPC 11, 0, 6, 0]
+            - {opacity: 255}
+            - {script: 'moveto(17, 8)'}
+            - turn_right
+            wait: true
+        - move:
+            who: player
+            route: [turn_left]
+            wait: true
+        - {wait: 50}
+        - move:
+            who: player
+            route: [turn_right]
+            wait: true
+        - {wait: 10}
+        - move:
+            who: Old woman in moth-silk
+            route:
+            - {opacity: 0}
+            wait: true
+        - move:
+            who: player
+            route: [turn_left]
+            wait: true
+        - {wait: 20}
+      cancel: 0
+    - var: [CH10_STEP, 10]
+    - {script: pfm_fade_out(24)}
+    - move:
+        who: Juno (chapel)
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Meridian Delegate
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Press Clerk
+        route:
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Press 2
+        route:
+        - {opacity: 0}
+        wait: false
+    - *id005
+    - {script: pfm_fade_in(24)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH10_STEP, 9]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 10]
+  at: [2, 0]
+  story: ch10
+- type: event
+  name: Dear Uncle Rowan
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: pfm?(:ch10_night)
+      then:
+      - selfswitch: [A, true]
+    trigger: parallel
+    move: fixed
+    cond:
+      var: [CH10_STEP, 11]
+  - commands:
+    - move:
+        who: player
+        route:
+        - {opacity: 0}
+        - {script: 'moveto(11, 8)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Juno (night)
+        route:
+        - graphic: [JUNO, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(8, 7)'}
+        - turn_up
+        wait: true
+    - {script: 'pfm_tone(-90, -80, -30, 60, 0)'}
+    - {wait: 10}
+    - {script: 'pfm_tone(-70, -66, -20, 50, 40)'}
+    - {wait: 30}
+    - {script: 'pbSEPlay("Mining pick", 25, 180)'}
+    - {wait: 30}
+    - {script: 'pbSEPlay("Mining pick", 25, 180)'}
+    - {wait: 20}
+    - Dear Uncle Rowan,
+    - 'Crossed out: "How could you" — "Are you hurt" — "I took your seat, I''m sorry" — "I watered her this morning. Before the bees."'
+    - move:
+        who: Juno (night)
+        route:
+        - turn_down
+        - jump: [0, 0]
+        - wait 6
+        - turn_up
+        wait: true
+    - {script: 'pbSEPlay("GUI storage put down", 40, 150)
+
+        pbWait(0.4)
+
+        pbSEPlay("Ring Glass Harmonic", 20, 170)
+
+        pfm_flash(240, 240, 255, 6, 40)'}
+    - {wait: 24}
+    - move:
+        who: Juno (night)
+        route:
+        - turn_down
+        - jump: [0, 0]
+        - wait 6
+        - turn_up
+        wait: true
+    - {script: 'pbSEPlay("GUI storage put down", 40, 150)
+
+        pbWait(0.4)
+
+        pbSEPlay("Ring Glass Harmonic", 20, 170)
+
+        pfm_flash(240, 240, 255, 6, 40)'}
+    - {wait: 24}
+    - move:
+        who: Juno (night)
+        route:
+        - turn_down
+        - jump: [0, 0]
+        - wait 6
+        - turn_up
+        wait: true
+    - {script: 'pbSEPlay("GUI storage put down", 40, 150)
+
+        pbWait(0.4)
+
+        pbSEPlay("Ring Glass Harmonic", 20, 170)
+
+        pfm_flash(240, 240, 255, 6, 40)'}
+    - {wait: 24}
+    - {wait: 30}
+    - move:
+        who: Juno (night)
+        route: [turn_up]
+        wait: true
+    - {wait: 60}
+    - if: pf_choice(:ch10_ogre) == :ogre
+      then:
+      - move:
+          who: Ogre (night)
+          route:
+          - graphic: [Followers/OGERPON, 0, 2, 0]
+          - {opacity: 255}
+          - {script: 'moveto(9, 8)'}
+          - turn_down
+          wait: true
+      - {wait: 60}
+    - {script: pfm_fade_out(40)}
+    - {script: 'pfm_set(:ch10_night, false)'}
+    - var: [CH10_STEP, 12]
+    - var: [STORY_CHAPTER, 11]
+    - {script: 'pf_chapter_card(11) if defined?(pf_chapter_card)'}
+    - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the tenth badge in Rimeholt, up the Hart Road through the Hoarwood into Isenmar. Juno wants to
+        come.")'}
+    - move:
+        who: player
+        route:
+        - {opacity: 255}
+        wait: true
+    - selfswitch: [A, false]
+    - transfer: {map: 281, x: 7, y: 4, dir: down}
+    - {heal: 0}
+    - {script: pfm_fade_in(40)}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH10_STEP, 11]
+      self: A
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH10_STEP, 12]
+  at: [3, 0]
+  story: ch10
+- type: event
+  name: Valen (chapel)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [4, 0]
+  story: ch10
+- type: event
+  name: Juno (chapel)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [5, 0]
+  story: ch10
+- type: event
+  name: Maelis
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [6, 0]
+  story: ch10
+- type: event
+  name: Thornguard 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [7, 0]
+  story: ch10
+- type: event
+  name: Thornguard 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [8, 0]
+  story: ch10
+- type: event
+  name: Caedmon
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [9, 0]
+  story: ch10
+- type: event
+  name: Meridian Delegate
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [10, 0]
+  story: ch10
+- type: event
+  name: Press Clerk
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [11, 0]
+  story: ch10
+- type: event
+  name: Press 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [12, 0]
+  story: ch10
+- type: event
+  name: Tamsin
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [13, 0]
+  story: ch10
+- type: event
+  name: Weaver 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [14, 0]
+  story: ch10
+- type: event
+  name: Weaver 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [15, 0]
+  story: ch10
+- type: event
+  name: Weaver 3
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [16, 0]
+  story: ch10
+- type: event
+  name: Old woman in moth-silk
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [17, 0]
+  story: ch10
+- type: event
+  name: Juno (night)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [18, 0]
+  story: ch10
+- type: event
+  name: Ogre (night)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [19, 0]
+  story: ch10
