@@ -4,7 +4,7 @@
 # choice, the manifest name, difficulty), then the rail twice (Edda, then Voss: PRO_FERRY_DONE), then the gangway
 # to Ferrow's Landing (100). Also takes ONE frame of a message box (the Deckhand's line) to check the speech
 # windowskin ("speech hgss 1", Gemini's centred skin of 2026-11-26): Captures/ferry_msgbox.bmp.
-# RESULT lines in demo.log. No frame sequence is recorded.
+# RESULT lines in demo.log. No frame sequence is recorded. Switch names come from Data/system_prismfall.txt, in memory.
 #   cp maps_out/Data/Map{100,108,109,110}.rxdata maps_out/Data/system_prismfall.txt /home/claude/run_intro/game/Data/
 #   bash tools/harness/visual/intro/run_intro.sh --capture $PWD/tools/harness/visual/intro/012_Ch0FerryCapture.rb --plan ferry
 #===============================================================================
@@ -62,7 +62,20 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ferry")
       File.write("#{DemoRun::ROOT}/demo.log", "") rescue Dir.mkdir(DemoRun::ROOT)
       log("ferry capture boot ok")
       Graphics.transition(0)
+      # as the vault plan: no install prompt (it waits for a key); set the deck up by hand below
+      PrismfallMaps.define_singleton_method(:apply_start_position) { false } if defined?(PrismfallMaps)
       Game.start_new
+      # switch-conditioned pages need the switch NAMED in System.rxdata (Game_Event#switchIsOn?); the test copy may
+      # not have run the installer: name ours in memory only (Data/system_prismfall.txt, as the installer would)
+      if defined?(PrismfallMapInstaller) && FileTest.exist?(PrismfallMapInstaller::SYSTEM_FILE)
+        named = 0
+        PrismfallMapInstaller.system_entries.each do |kind, id, name|
+          names = (kind == "S") ? $data_system.switches : $data_system.variables
+          next if !names[id].to_s.empty?
+          names[id] = name; named += 1
+        end
+        log("switch / variable names added in memory: #{named}")
+      end
       $PokemonSystem.textspeed = 2
       $PokemonSystem.battlescene = 1
       if $game_map.map_id != 109
@@ -95,12 +108,27 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ferry")
         log("RESULT rail #{i + 1}: frames=#{f} dove_edda=#{pfm?(:dove_edda)} dove_voss=#{pfm?(:dove_voss)} " \
             "PRO_FERRY_DONE=#{$game_switches[done_sw]} pos=#{$game_player.x},#{$game_player.y} lines=#{FerryCap.lines}")
       end
-      # 3. the gangway to Ferrow's Landing
+      # 3. the gangway to Ferrow's Landing (the Deckhand walks at random and can stand in the way: step again
+      # every second until the deck is left, and say who was in the way)
       $game_player.moveto(9, 14); $game_player.turn_down
       ferry_play(300) { |n| n > 10 && !busy? }
-      $game_player.move_down
-      f = ferry_play(3000) { |n| $game_map.map_id != 109 && n > 60 && !busy? }
-      log("RESULT gangway: map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y} frames=#{f}")
+      tries = 0; blockers = []
+      gw = ferry_ev("Gangway")
+      f = ferry_play(3000) do |n|
+        if $game_map.map_id == 109 && !busy? && n % 60 == 1
+          if $game_player.x != 9 || $game_player.y != 14
+            $game_player.moveto(9, 14); $game_player.turn_down
+          end
+          who = $game_map.events.values.find { |e| e.x == 9 && e.y == 15 && e.character_name != "" }
+          blockers << who.name if who && !blockers.include?(who.name)
+          tries += 1
+          $game_player.move_down
+        end
+        $game_map.map_id != 109 && n > 60 && !busy?
+      end
+      log("RESULT gangway: map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y} frames=#{f} tries=#{tries} " \
+          "blocked_by=#{blockers.inspect} gangway_page=#{(gw.instance_variable_get(:@page) && gw.list.length) rescue '?'} " \
+          "last_line=#{FerryCap.text[0, 60].inspect}")
       self.auto = false
       log("done")
     end
