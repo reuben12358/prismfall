@@ -134,3 +134,27 @@ map's row there when you do). Check any map with `python3 -I mapgen/reach.py <id
 5. **560 Frostflat Causeway**: the Causeway Matriarch (Ch18, `CAUSEWAY_MATRIARCH`) now stands near (50, 12); the design
    wants two or three small Kangaskhan "young ones" fishing around her as decor (same condition: `badges >= 16 &&
    !quest_done(:IS_CAUSEWAY_MATRIARCH)`).
+
+### Note for Gemini (Claude, 2026-11-27): Chapter 6 runs on your Duneholt / Ossaria maps; what rides on them
+- **Story layer:** `layouts/story_ch6.py` stages story/25_SCRIPT_CH6.md on 180, 200, 203, 204, 206, 209, 210, 213, 600,
+  601, 608, 612, 620, 624 (new events by name, `set_pages` on yours: they keep their place). After you re-run
+  `duneholt_exterior.py`, `duneholt_interiors.py`, `duneholt_gym.py`, `ossaria_routes.py`, `ossaria_landmarks.py`,
+  `wave8_story_craft.py` (608) or `wave10_towns_craft.py` (180), run `python3 -I layouts/story_ch6.py` before building,
+  and keep these event names: Sandgate Arrival (Ch6), Caravan-mother, Gate Guard, Sahar (209), Meridian Foreman,
+  Directorate Sergeant (204), Queued Drover / Pedlar, Directorate Checkpoint Officer, Checkpoint Scanner Trigger /
+  Brass Barrier, The Dig (Duneholt Gym), Gym Guide, Sahar's Aide (210), Warden Sahar, Door in the Skull Trigger,
+  Sahar (Door in the Skull), To Ossuary of Dunes (624), the four Mural events, West to Mural Gallery (206).
+- **Map links:** 612 had no way in from Lumen. The layer adds 180 (0, 32-37) -> 612 and 612 (54-60, 63) -> 180 (1, 34).
+  A drawn gateway at 612's south edge (the Mainline leaving the Concourse) would help; keep the tiles walkable.
+- **Art / dressing wanted:** 608: the shrine round the glass ring at the Veil's edge (soda cans, candles in jars, chalk
+  names) and the new brass barrier (the officers stand at (1, 5) and (1, 10)). 204: the deep-works (derrick, shaft,
+  fence, pipe) by the shaft at (37, 21) and the well's carved rungs; collar-and-cable Drilbur / Excadrill sheets.
+  620: the Ossuary door at (65, 34) is drawn open before the dune-shift (CH6_STEP < 6, Sahar's scene uncovers it); a
+  sand-buried variant for before. 624: the inner seal-stone lying flat once S553 is set (Sahar's joke). 206: a
+  "closed for restoration" door on the gallery arch (it stays shut through Chapter 6).
+- **Unbuilt:** 602 Candle Down and 603 the Highwold (their beats and six routes.py trainers wait; no CH6_STEP lives
+  there). 628 Sinkfield: the sandal beat needs a sandal sprite and a touch tile halfway along the bone path (its two
+  lines are still bracketed boxes on an action event).
+- **Ids:** S552-S555, S576-S581, V551 are not in `mapgen/flags.yaml`; `[612]` / `[613]` have no encounter tables.
+- **Gym 5:** `puzzles/dig.py` proves 210-212 on the built maps (5 moves, no soft-locks). If you move a lane, mirror,
+  ladder or Nadim / Samim, `build.py --strict` re-proves it.
