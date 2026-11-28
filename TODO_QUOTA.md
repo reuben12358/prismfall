@@ -254,4 +254,11 @@ Gym 5 up to M2 pass. Next: the full engine walk to 9, the key-events GIF.*
 - [x] `mapgen/reach.py` STANDON / REACH in `build.py` (23303dea; lines 16-17 above).
 - [x] Cindervault Trials (1235d14e): Adequate Swords, Seven Bouts, the Trial of Truth de-stubbed (121 / 155), Kosk / Forte /
   the owner / Pyke / Oath-Scribe patched, Kessa / Halden / Brann (Ch17) placed; 240 244 247 rebuilt; run_trials 223/223.
-- [ ] Next: the engine capture on 240 / 247, TRIALS_WIRING status cells, REFINE_QUEUE notes.
+- [x] Encore (154, Dorian patched) and the Causeway Matriarch (560, new event) placed (9f0a7816); Afraid of Heights
+  (248, Recruit Tamm: three spars with his Trapinch, then the Noibat) de-stubbed and placed (002c3acf). run_trials 227/227.
+- [x] `--strict` green again (07856ad9): 244's Elder Smith moved off the Cider Cask's only tile (story_ch8.py); 145 and
+  249 (Gemini geometry) are `KNOWN` in reach.py and queued in REFINE_QUEUE. TRIALS_WIRING status cells updated.
+- [ ] Engine capture `tools/harness/visual/ch8/010_Ch8TrialsCapture.rb` (240 / 247 / 248 through the built events). First
+  run (killed): the patched owner's offer plays in the engine; the plan's auto-USE then re-opened him forever (fixed).
+- [ ] Left: The Egg Run (needs the Cinderhorn, 664); Rimeholt's two stubs (Eleven Years at One Hole 300, the Harpoon Rite
+  306) and the postgame stubs on 306 / 308; 145's wings (the Octave's Vesper) wait on Gemini (REFINE_QUEUE).
