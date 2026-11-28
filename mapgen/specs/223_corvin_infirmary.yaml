@@ -444,7 +444,9 @@ events:
     - 'Wenlow: And this is Ama. She''s nine.'
     - {script: 'pbSEPlay("Anim/Ice1", 35, 120)
 
-        pfm_glow(26, 30, 44, 16, 12)'}
+        pfm_tone(14, 22, 40, 20, 12)'}
+    - {wait: 14}
+    - {script: 'pfm_tone(-12, -8, 6, 40, 16)'}
     - '\pf[WENLOW,happy,,Wenlow]Wenlow: She likes being told about the weather up top.'
     - 'Wenlow: I tell her every morning. I make some of it up.'
     - {script: 'pfm_face(:player, "Corvin Mott")'}
@@ -587,7 +589,7 @@ events:
           - {script: 'moveto(14, 11)'}
           wait: true
       - {script: 'pfm_veil(11, 8, 3, 1, 1)'}
-      - {script: 'pfm_tone(-120, -116, -70, 110, 30)'}
+      - {script: 'pfm_tone(-96, -92, -50, 100, 30)'}
       - {script: '2.times { |i| pbSEPlay("Ring Glass Harmonic", 60 + i * 15, 58 + i * 12); pbWait(0.6) }'}
       - raw:
         - 203
@@ -699,7 +701,7 @@ events:
           - {script: 'moveto(12, 7)'}
           - turn_down
           wait: true
-      - {script: 'pfm_tone(-120, -116, -70, 110, 1)'}
+      - {script: 'pfm_tone(-96, -92, -50, 100, 1)'}
       - {script: 'pfm_tone(-70, -70, -60, 230, 16)'}
       - {script: pfm_dreaming_eyes(3.4)}
       - {wait: 60}
@@ -717,9 +719,11 @@ events:
           who: Corvin Mott
           route: [turn_left]
           wait: true
-      - {script: 'pfm_tone(-120, -116, -70, 110, 10)'}
+      - {script: 'pfm_tone(-96, -92, -50, 100, 10)'}
       - '\pf[CORVIN,shocked,,Corvin Mott]Corvin: ...'
-      - {script: 'pfm_glow(70, 50, 10, 20, 50)'}
+      - {script: 'pfm_tone(-40, -58, -96, 70, 16)'}
+      - {wait: 50}
+      - {script: 'pfm_tone(-96, -92, -50, 100, 16)'}
       - {script: 'pfm_face("Corvin Mott", :player)'}
       - 'Corvin: You saw that. Tell me you saw that.'
       - {script: 'pbSEPlay("Mining hammer", 80, 60)
@@ -730,7 +734,7 @@ events:
       - '\pf[JUNO,neutral]Juno: The stills are on the coils!'
       - 'Juno: It''s — it''s taking! Is it taking?'
       - {script: pfm_veil_off(70)}
-      - {script: 'pfm_tone(-120, -116, -70, 110, 30)'}
+      - {script: 'pfm_tone(-96, -92, -50, 100, 30)'}
       - {script: 'pbSEPlay("Anim/Saint1", 30, 60)
 
           pf_emote("Ward bed 2 (Mister Garrod), size(2,2)", :music)'}

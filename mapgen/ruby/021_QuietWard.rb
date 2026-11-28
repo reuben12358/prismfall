@@ -25,7 +25,7 @@ module PrismfallVeil
     @rect = [x, y, w, h]
     @map = $game_map.map_id
     @alpha = 0.0
-    @target = (safe?) ? 110.0 : 170.0
+    @target = (safe?) ? 150.0 : 235.0
     @rate = @target / [dur, 1].max
     wait_settle
   end
@@ -55,10 +55,10 @@ module PrismfallVeil
       k = (Math.sin(x / 5.0) * 0.5) + 0.5
       ph.times do |y|
         edge = [y, ph - 1 - y].min / 12.0
-        a = (([edge, 1.0].min) * (110 + (k * 90))).round
+        a = (([edge, 1.0].min) * (150 + (k * 100))).round
         next if a <= 0
-        g = 150 + (((x * 7) + (y * 3)) % 40)
-        bmp.set_pixel(x, y, Color.new(g - 10, g - 20, g + 30, a)) if (x + y).even? || y % 3 == 0
+        g = 190 + (((x * 7) + (y * 3)) % 50)
+        bmp.set_pixel(x, y, Color.new(g - 40, g - 10, 255, a)) if (x + y).even? || y % 3 == 0
       end
     end
     return bmp
@@ -74,7 +74,7 @@ module PrismfallVeil
       @spr = Sprite.new(Spriteset_Map.viewport)
       @spr.bitmap = build(@rect[2], @rect[3])
       @spr.z = 8500
-      @spr.blend_type = 1
+      @spr.blend_type = 0
     end
     if @alpha < @target
       @alpha = [@alpha + @rate, @target].min

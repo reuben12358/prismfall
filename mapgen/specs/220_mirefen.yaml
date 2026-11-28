@@ -671,7 +671,7 @@ events:
           - {opacity: 255}
           - {script: 'moveto(33, 13)'}
           wait: true
-      - {script: 'pfm_tone(-80, -66, -20, 70, 40)'}
+      - {script: 'pfm_tone(-56, -46, -8, 50, 40)'}
       - '\pf[CORVIN,neutral,,Corvin (roof)]Corvin: Sit. It''s bog coffee. It tastes exactly like it sounds.'
       - 'Corvin: I haven''t slept properly since AF 288. You get used to it.'
       - 'Corvin: You don''t, actually. You get used to saying you''ve got used to it.'
@@ -688,7 +688,7 @@ events:
       - 'Sable: Let''s start with you.'
       - {script: 'pbSEPlay("PC close", 90, 50)
 
-          pfm_tone(-120, -116, -70, 110, 4)'}
+          pfm_tone(-96, -92, -50, 100, 4)'}
       - {wait: 24}
       - {script: '3.times { |i| pbSEPlay("Ring Glass Harmonic", 45 + i * 15, 64 + i * 12); pbWait(0.6) }'}
       - move:
@@ -770,7 +770,7 @@ events:
           - {opacity: 255}
           - {script: 'moveto(33, 13)'}
           wait: true
-      - {script: 'pfm_tone(-80, -66, -20, 70, 40)'}
+      - {script: 'pfm_tone(-56, -46, -8, 50, 40)'}
       - {wait: 20}
       - '\pf[CORVIN,sad,,Corvin (roof)]Corvin: Do you know why nobody in my Ward is dead?'
       - 'Corvin: They''re not dying. They''re dreaming.'
@@ -865,7 +865,7 @@ events:
     trigger: action
     move: fixed
   - commands:
-    - {script: 'pfm_tone(-24, -22, -14, 110, 40)'}
+    - {script: 'pfm_tone(-12, -12, -6, 90, 40)'}
     - raw:
       - 203
       - [2, 6, 4]

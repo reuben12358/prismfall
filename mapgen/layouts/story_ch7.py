@@ -48,8 +48,8 @@ STEP = 'CH7_STEP'
 SWEET = '@@SWEETROT_TAKEN'
 SE.NAMES.update({'CORVIN': 'Corvin', 'WENLOW': 'Wenlow', 'SABLE': 'Sable', 'GUTTER': 'Mother Gutter', 'JUNO': 'Juno'})
 FILES = {220: '220_mirefen.yaml', 223: '223_corvin_infirmary.yaml', 230: '230_mirefen_gym.yaml', 233: '233_mirefen_gym_233.yaml'}
-NIGHT = 'pfm_tone(-80, -66, -20, 70, %d)'          # night over the blue-glowing marsh
-DARK = 'pfm_tone(-120, -116, -70, 110, %d)'         # the Infirmary's lamps out
+NIGHT = 'pfm_tone(-56, -46, -8, 50, %d)'           # night over the blue-glowing marsh
+DARK = 'pfm_tone(-96, -92, -50, 100, %d)'           # the Infirmary's lamps out
 
 
 def V(n, **kw): return dict({'var': [STEP, n]}, **kw)
@@ -232,7 +232,7 @@ VEIL = [
     MV('Corvin Mott', ['turn_left']),
     S(DARK % 10),
     P('CORVIN', 'shocked', "...", '', 'Corvin Mott'),
-    S('pfm_glow(70, 50, 10, 20, 50)'),                                                  # the lamp to her face, a long time
+    S('pfm_tone(-40, -58, -96, 70, 16)'), {'wait': 50}, S(DARK % 16),               # the lamp to her face, a long time
     S('pfm_face("Corvin Mott", :player)'),
     N('Corvin', "You saw that. Tell me you saw that."),
     S('pbSEPlay("Mining hammer", 80, 60)\npbWait(0.35)\npbSEPlay("Anim/Smokescreen", 70, 90)'),   # iron, steam: the chime falters
@@ -281,7 +281,7 @@ ROOF2 = [
 
 # ============================================================================================ 220 chapter close
 CLOSE = [
-    S('pfm_tone(-24, -22, -14, 110, 40)'),                                               # morning; the marsh grey again
+    S('pfm_tone(-12, -12, -6, 90, 40)'),                                                 # morning; the marsh grey again
     {'raw': [203, [2, 6, 4]]}, {'raw': [203, [6, 8, 4]]},                                # to the walls
     S('2.times { pbSEPlay("Mining hammer", 70, 80); pbWait(0.4) }'),                     # every ring hammered over
     'Chalked under a hammered ring: "NOT OURS. — the Hollow".',
@@ -379,7 +379,7 @@ QUIET_WARD = [
     N('Wenlow', "And the Tull twins, both at stage two, in the beds together because they cried when we split them up."),
     MV('Wenlow', ['through_on', {'speed': 5}] + ['left'] * 16 + ['up', 'turn_up', 'through_off']), S('pfm_face(:player, "Wenlow")'),
     N('Wenlow', "And this is Ama. She's nine."),
-    S('pbSEPlay("Anim/Ice1", 35, 120)\npfm_glow(26, 30, 44, 16, 12)'),                   # her hair turned to salt, catching the lamp
+    S('pbSEPlay("Anim/Ice1", 35, 120)\npfm_tone(14, 22, 40, 20, 12)'), {'wait': 14}, S('pfm_tone(-12, -8, 6, 40, 16)'),   # salt hair catching the lamp
     P('WENLOW', 'happy', "She likes being told about the weather up top.", '', 'Wenlow'),
     N('Wenlow', "I tell her every morning. I make some of it up."),
     S('pfm_face(:player, "Corvin Mott")'), {'wait': 24},                                 # at the end of the ward, writing

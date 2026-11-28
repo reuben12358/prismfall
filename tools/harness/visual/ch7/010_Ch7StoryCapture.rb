@@ -217,7 +217,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
       $scene.disposeSpritesets rescue nil
       $scene.createSpritesets
       $game_map.need_refresh = true
-      self.every = 30
+      self.every = [(ENV["CH7_EVERY"] || 30).to_i, 15].max
       self.auto = true
       t0 = System.uptime
       if ENV["CH7_FROM"] == "gym"                      # debug shortcut: the first half's state, set by hand
@@ -225,6 +225,14 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
         pf_choose(:ch7_ledger, :reassure) rescue nil
         log("RESULT by hand (CH7_FROM=gym): V127 4, V128 2, S118, S119, :ch7_ledger :reassure")
         return c7_second_half(t0)
+      end
+      if ENV["CH7_FROM"] == "ward"                     # debug shortcut: through Gym 6, set by hand
+        $game_variables[127] = 5; $game_variables[128] = 1; $game_switches[118] = true; $game_switches[119] = true
+        $player.badges[5] = true
+        pf_choose(:ch7_ledger, :reassure) rescue nil
+        log("RESULT by hand (CH7_FROM=ward): V127 5, V128 1, S118, S119, badge 6, :ch7_ledger :reassure")
+        c7_shots(true)
+        return c7_ward(t0)
       end
       c7_shots(true)
       # --- 220: the arrival
@@ -303,6 +311,10 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
       log("RESULT gym 6: badge6=#{$player.badges[5].inspect} TM84=#{$bag.quantity(:TM84)} battles=#{Ch7Cap.battles[n0..-1].inspect} " \
           "#{c7_state} frames=#{f}")
       c7_fail("Gym 6 did not end on CH7_STEP 5 with the badge") if $game_variables[127] < 5 || !$player.badges[5]
+      c7_ward(t0)
+    end
+
+    def c7_ward(t0)
       # --- 220: the Ward Night, then the close
       c7_goto(220, 31, 14, 8)
       ok, f = c7_walk(31, 12, :touch)
