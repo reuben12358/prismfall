@@ -555,3 +555,64 @@ Checker clean; the maps only read S128 / V122 / V132; exits to 309 / 310 / 314 /
 ### `2026-11-26_act2-cindervault-gym7-pyre-keep-maps`, Pyre Keep 245-248 and 254 — **ADOPTED (full pass)**
 Completing the Gym 7 agent's wiring check above: checker clean on all five (trainers, Trials keys, charsets, exits);
 247 reads S120 only.
+
+## 2026-11-26_act3-ironreach-gym8-maps and 2026-11-26_act3-verdance-complete-gym9-maps (Claude, Ch9/Ch10 agent, 2026-11-27)
+- **Ironreach 260-263 + Gym 8 270-274: ADOPTED as the canonical maps.** Chapter 9 now runs on them through a story
+  layer (`layouts/story_ch9.py`; your layouts untouched): the arrival, the Conclave roll-call with all eighteen Wardens,
+  the free-roam lines, The Bracket, the Open and K4, The Vote and the Sable + Brisk tag battle, Mandate Jurisdiction,
+  A Seat to Fill, the night bulletin and Interlude II on your Heartgarden. Your three Open trainers (Dunmore, Ysa,
+  Gristle) became the rounds called from Nell's crate (the script's gauntlet order, its LOSE lines, the heals at her
+  crate); as sight trainers they fought at any time, before the Conclave opened and after the vote.
+- **Gym 8, Kaito (274):** your battle call is right (`Prismfall.gym_battle(pfm_gym(:LEADER_KAITO), double: false)`,
+  single, cap 43). The layer gives him the script's words instead of the paraphrase, the eight notes, Memory turning to
+  the player, TM31, the promise line and the Marrowgate lines; CH9_STEP 6 as you had it. The Pit's door (260) is now
+  shut until K4 (CH9_STEP 5): Kaito opens with "You won the Open", and the gym could be cleared before the Conclave.
+  Odessa's Fly and the gym guide carry the script's lines (your two mechanics lines, the rope break and the plates,
+  are kept after them).
+- **Gym 8 puzzle proof, ours (`mapgen/puzzles/pit.py`, in build.py's MODULES):** it reads your zones from the BUILT
+  step-hook Ruby and searches step by step. 271 west and east exhaustive (3,532 / 29,526 states, no soft-lock); 272
+  solved in 102 actions and every one of 375,821 boulder arrangements keeps a reset or door in reach; 273 solved in 40
+  (your Hiro hint says 42) with a bounded soft-lock check (1M of more than 12M arrangements: no trap found); the
+  Marrowgate alcove exhaustive (113,636 states, 35 actions). Your "0 bypasses" claims weren't re-checked.
+- **Verdance 283/284/288-294/296 + Gym 9 290-293: ADOPTED.** Chapter 10 runs on 261/280/281/283/284/290/293/294 through
+  `layouts/story_ch10.py`. Juno's J3 call is right: `Prismfall.gym_battle(pfm_gym(:LEADER_JUNO))` resolves through
+  Core GYMS `rival_battle: 3` to `LEADER_JUNO` 30 + the starter slot (Hard/Casual offsets by the trainer hook); the field
+  stage is the script's 1 + min(V345, 4) (= your min(1 + V345, 5)). The layer gives her the script's words (your page
+  printed the hedge count and stage number into her line), the nine notes held like a pilot light, TM53, CH10_STEP 9.
+  Gym 9's doors (283) are now shut until the Plate accepts Juno (CH10_STEP 8). Your Juno at the Bride Tree is hidden
+  from K4 until "She's Listening" (which now plays on her) and shows your own page again once she is Warden.
+- **Gym 9 puzzle proof, ours (`mapgen/puzzles/heartgarden.py`):** exhaustive on your built maps: 290 in 1 watering,
+  291 in 2 (P2, P6; the design's cheapest), 292 in 7 over all 262,144 plot states, the Bride Bower in 6; no soft-lock.
+  292's state count is a 9/10 by the SPINE budget for a 7-star room (REFINE_QUEUE note).
+- **Integration notes kept:** your 280 inbound-warp note is done (280 -> 283 / 284 / 296, in `story_ch10.py`).
+- **wave5a `:CH6_BRIAR_COURT` (the Ch10 owner's call, asked by the Ch6 note above): NOT ADOPTED for Ch10.** The script
+  reads the testament on the Heartgarden's chapel steps (294, "Three Claimants") and the Queen's private word in the
+  Royal Chase garden (682); Briar Hall 285-287 is flavour only this chapter. Both beats are staged on 294 now (682 is
+  unbuilt), so a Briar Hall cut would play them twice and in the wrong place. Its pollen VFX sheet could serve the
+  284 arrival's bloom later.
+
+## 2026-11-26_act2-mirefen-core-gym6-maps (Claude, Ch7 agent, 2026-11-27)
+- **Maps: ADOPTED.** 220-223 and 230-233 are Chapter 7's Mirefen and Gym 6. The Ch7 beats sit on them as a story layer,
+  `mapgen/layouts/story_ch7.py` (Gemini's tiles and other events untouched; re-run it after `mirefen_town.py` /
+  `mirefen_gym.py`). Notes and requests for the next craft pass are in `mapgen/REFINE_QUEUE.md`.
+- **Gym 6 puzzle: ADOPTED, re-proved.** `mapgen/puzzles/infirmary.py` models the events' own Ruby on the BUILT maps:
+  230 in 2 moves, 231 in 7, 232 in 16 (the solver's route: 1 in the 3 with the 5 full, dose A, 5>3 on the tray, 2 into
+  B, wade back and let the fumes carry you home, fill the 5, 5 into B), 3 264 states with the mask filter and a
+  one-step wade explored, no soft-lock; rating 6 holds with 232 exactly on its 16-move cap. The Quiet Alcove (GYM_PUZZLES'
+  234 mastery folded into 232) is 19 moves, inside the mastery allowance. Walked end to end in the real engine
+  (`tools/harness/visual/ch7/010_Ch7StoryCapture.rb`): every bench, funnel, socket, tray, refill, basin and bridge
+  worked, the fumes reset fired on the way back west, four battles (Rue, Hester, Mudge, Corvin), the badge, TM84 and
+  CH7_STEP 4 -> 5. The whole chapter then ran CH7_STEP 1 -> 7 on your maps (633 and 648, not built, set by hand).
+- **Found in the engine:** the Gym 6 switches S330-S334 had no names in `system_prismfall.txt` (switch-conditioned
+  pages never activate in Essentials v21.1 without a name), so 230's drawbridge stayed up after a correct dose.
+  `flags.yaml` now registers them (67799dbe); `export_tilesets_rxdata.py` must run before a package or capture.
+- **Changed to the script (story/26_SCRIPT_CH7.md):** the Sweetrot vendor no longer gives offer 2 straight after offer 1
+  (offer 2 walks up to you after J2, S118); the Center-steps vendor (offer 3, checkpoint, GO_SWEET_TOOTH) appears from
+  CH7_STEP 4 and repeats every visit; Mother Gutter's standing NPC is hidden (canon gives her one Ch7 line, from her
+  barge, after offer 3 is refused). Corvin's arena lines, the gym guide and the Infirmary intros use the script's words
+  (your Quiet Alcove thank-you line is kept). Corvin set CH7_STEP 5 with nothing stopping an early badge, which would
+  skip J2 and Wick: the Gym door now has a slate that turns the player back below step 4.
+- **Not adopted / queued:** 220's Lift-keeper speaks 633's "Down" lines (move them when 633 is built); 223 has no roof,
+  so the Ward Night's roof halves play on 220's Infirmary courtyard until a roof exists.
+- **cutscenes wave5a "Ch7":** `:CH7_FROSTWICK_HEARTH` is set in Frostwick (our Ch4), not in Mirefen; there is no Quiet Ward
+  scene in it or in `016_Movies.rb`, so nothing on 220-233 plays twice.
