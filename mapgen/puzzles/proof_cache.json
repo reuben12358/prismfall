@@ -1,0 +1,77 @@
+{
+ "gym8_p271e": {
+  "key": "c91d7f281b3523d2c07e80bcbb7c1cf2",
+  "lines": [
+   "ok   Gym 8 271 east (the rope lines) [built map]: 29526 reachable states, shortest 39 actions (38 steps, 1 pushes/uses): RRRRRRRUUUUUUUUULLLLUUUUUUUUUUUUUURRDRr",
+   "  proved: every reachable state can still reach S340 (no soft-lock)"
+  ],
+  "ok": true
+ },
+ "gym8_p271w": {
+  "key": "c91d7f281b3523d2c07e80bcbb7c1cf2",
+  "lines": [
+   "ok   Gym 8 271 west (the pillar) [built map]: 3532 reachable states, shortest 30 actions (29 steps, 1 pushes/uses): LLLLLULUUURUULLLLUUUUUUURRUUUu",
+   "  proved: every reachable state can still reach S344 (no soft-lock)"
+  ],
+  "ok": true
+ },
+ "gym8_p272": {
+  "key": "45fc2c16171eeec59feaaffefed4c81d",
+  "lines": [
+   "ok   Gym 8 272 boulders and plates [built map]: solved, 102 actions (94 steps, 8 pushes/uses), replayed through the engine rules from the door: LLUURUULUULLLLLLuUuULRuRRRRRRRUURLLLLLLLDLuDRRRRRRRRRURRRRRRUDDDDRuUuULRRUULLUULDDDRDRuLLLLLLLLRRUULLu",
+   "  proved: over all 375821 reachable boulder arrangements, no pocket outside the partner zone is cut off from a reset or a door"
+  ],
+  "ok": true
+ },
+ "gym8_p273": {
+  "key": "e8a496baea72933c39945b90afd50b90",
+  "lines": [
+   "ok   Gym 8 273 the gauntlet [built map]: solved, 40 actions (36 steps, 4 pushes/uses), replayed through the engine rules from the door: LUUULLUUUULUrRrRrUUUUUDDLLLULUUUrRURRRRD",
+   "  bounded: the first 1000000 boulder arrangements (of more) leave no pocket outside the partner zone cut off from a reset or a door; NOT exhaustive"
+  ],
+  "ok": true
+ },
+ "gym8_p273m": {
+  "key": "e8a496baea72933c39945b90afd50b90",
+  "lines": [
+   "ok   Gym 8 273 Marrowgate (mastery) [built map]: 113636 reachable states, shortest 35 actions (30 steps, 5 pushes/uses): RRURRRRDRRRRRRUUUUUUUuUuUuUuUuDDRRR",
+   "  proved: every reachable state can still reach S343 (no soft-lock)"
+  ],
+  "ok": true
+ },
+ "gym9_p290": {
+  "key": "3367a3f79cdaf3cd9809c11a5b394a4a",
+  "lines": [
+   "ok   Gym 9 290 [built map]: 7 reachable states, shortest solution 1 moves: P0_L",
+   "  rated 2/10: within budget (1 of 3 moves, 7 of 16 states)"
+  ],
+  "ok": true
+ },
+ "gym9_p291": {
+  "key": "f08f2a2196213ea819bbf663166e2070",
+  "lines": [
+   "ok   Gym 9 291 [built map]: 256 reachable states, shortest solution 2 moves: water P2 > water P6",
+   "  rated 4/10: within budget (2 of 8 moves, 256 of 256 states)"
+  ],
+  "ok": true
+ },
+ "gym9_p292": {
+  "key": "7e85d30ba37ae6dfaafbe0e09444b0d4",
+  "lines": [
+   "ok   Gym 9 292 [built map]: 262144 reachable states, shortest solution 7 waterings: water A1 > water A1 > water A1 > water A4 > water B2 > water B2 > water B4",
+   "  the route replayed with directional walking: every spigot reached, the goal reached",
+   "  note: 334 one-way edges (bank and rail tiles) are two-way in the soft-lock search"
+  ],
+  "ok": true
+ },
+ "gym9_p292m": {
+  "key": "7e85d30ba37ae6dfaafbe0e09444b0d4",
+  "lines": [
+   "ok   Gym 9 292 Bride Bower [built map]: 256 reachable states, shortest solution 6 waterings: Bower water M1 > Bower water M2 > Bower water M3 > Bower water M3 > Bower water M3 > Bower water M4",
+   "  rated 4/10: within budget (6 of 8 moves, 256 of 256 states)",
+   "  the route replayed with directional walking: every spigot reached, the goal reached",
+   "  note: 351 one-way edges (bank and rail tiles) are two-way in the soft-lock search"
+  ],
+  "ok": true
+ }
+}

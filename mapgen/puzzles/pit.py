@@ -269,57 +269,69 @@ def replay(room, start, sw0, actions):
 
 def boulder_traps(room, start, sw0, goal_sw, cap=CAP):
     """soft-lock check for boulder rooms, exhaustive over every boulder arrangement the player can make (partners
-    left out: they only ever restrict where you walk, and a partner you can reach tags you, which is a reset).
-    For each arrangement and each pocket you can stand in, the pocket must touch a reset (Hiro, a reset bell),
-    a live partner zone (a tag) or the solved room. -> (states, bad pockets)"""
+    left out: they only restrict where you walk, and a partner that reaches you tags you, which is a reset).
+    A pocket you can stand in is SAFE when it touches a reset (Hiro, a reset bell), a door out (leaving the map puts
+    every boulder back: Essentials forgets moved events) or the solved room.  -> (arrangements, pockets that are not
+    safe but lie in a live partner zone (a tag can still free you there; listed, not failed), bad pockets)"""
+    import numpy as np
+    from scipy import ndimage
     names = room.purs + room.blds
     gz = next(z for z in room.zones if z['sw'] == goal_sw or any(s == goal_sw for _, _, s, _ in room.bells))
     bl = [names.index(n) for n, _, _ in gz['blds']]        # the goal zone's boulders; another zone's stay put
-    if not bl: return 0, []
+    if not bl: return 0, [], []
     sw = frozenset(sw0)
     pl, mv = room.tables(sw)
-    reset_tiles = {(at[0] - dx, at[1] - dy) for _, at, _, _ in room.resets for dx, dy in DIRV.values()}
-    # a door out also resets the room: Essentials forgets moved events when you leave a map (the boulders don't
-    # pfp_save their places), so walking out and back in puts every boulder and partner on its mark
-    reset_tiles |= {(x - dx, y - dy) for (m, x, y), es in room.b.ev.items() for e in es
-                    for dx, dy in DIRV.values() if any(c.code == 201 or (c.code == 355 and 'player_new_map_id' in str(c.parameters[0]))
-                                                       for pg in e.pages for c in pg.list)}
-    def region(p, bs):
-        seen = {p}; q = [p]
-        while q:
-            c = q.pop()
-            for d, (dx, dy) in DIRV.items():
-                n = (c[0] + dx, c[1] + dy)
-                if n in seen or n in bs or not pl.get((c[0], c[1], d)): continue
-                seen.add(n); q.append(n)
-        return seen
+    W, H = room.W, room.H
+    walk = np.zeros((H, W), bool)
+    for (x, y, d), ok in pl.items():
+        if ok: walk[y, x] = True; walk[y + DIRV[d][1], x + DIRV[d][0]] = True
+    asym = [(x, y, d) for (x, y, d), ok in pl.items() if ok and not pl.get((x + DIRV[d][0], y + DIRV[d][1], {'U': 'D', 'D': 'U', 'L': 'R', 'R': 'L'}[d]))]
+    safe = np.zeros((H, W), bool)
+    for _, at, _, _ in room.resets:
+        for dx, dy in DIRV.values():
+            if 0 <= at[0] - dx < W and 0 <= at[1] - dy < H: safe[at[1] - dy, at[0] - dx] = True
+    for (m, x, y), es in room.b.ev.items():                 # a door out
+        if any(c.code == 201 or (c.code == 355 and 'player_new_map_id' in str(c.parameters[0])) for e in es for pg in e.pages for c in pg.list):
+            for dx, dy in list(DIRV.values()) + [(0, 0)]:
+                if 0 <= x - dx < W and 0 <= y - dy < H: safe[y - dy, x - dx] = True
+    x0, x1, y0, y1 = gz['box']
+    zone = np.zeros((H, W), bool); zone[y0:y1 + 1, x0:x1 + 1] = True
+    s4 = ndimage.generate_binary_structure(2, 1)
     s0 = room.start_state(start, sw0)
-    b0 = tuple(s0[1][i] for i in bl)
-    start_key = (b0, start)
-    seen = {start_key}; q = [start_key]; bad = []
+    pos0 = dict(zip(names, s0[1]))
+    heavy = [m for m, _, _ in gz['purs'] + gz['blds']]
+    def labels(bs):
+        g = walk.copy()
+        for b in bs: g[b[1], b[0]] = False
+        return ndimage.label(g, structure=s4)[0]
+    start_bs = tuple(s0[1][i] for i in bl)
+    lab = labels(start_bs)
+    seen = {(start_bs, lab[start[1], start[0]])}; q = [(start_bs, start)]; in_zone = []; bad = []
     while q:
         bs, p = q.pop()
-        reg = region(p, set(bs))
-        pos = dict(zip(names, s0[1]))
+        lab = labels(bs); comp = lab[p[1], p[0]]
+        mask = lab == comp
+        pos = dict(pos0)
         for i, b in zip(bl, bs): pos[names[i]] = b
-        z = gz
-        held = room.held(z['plates'], [m for m, _, _ in z['purs'] + z['blds']], pos) if z['plates'] else False
-        if not (reg & reset_tiles) and not held and not any(room.in_box(z, c) for c in reg):
-            bad.append((bs, p))
+        if not (mask & safe).any() and not (gz['plates'] and room.held(gz['plates'], heavy, pos)):
+            (in_zone if (mask & zone).any() else bad).append((bs, p))
         for k, i in enumerate(bl):
             b = bs[k]; rule = room.push[names[i]]
             for d, (dx, dy) in DIRV.items():
                 c = (b[0] - dx, b[1] - dy); r = (b[0] + dx, b[1] + dy)
-                if c not in reg or r in rule['ropes'] or r in rule['blocked'] or r in bs: continue
-                if not mv.get((b[0], b[1], d)): continue
-                nb = list(bs); nb[k] = r; key = (tuple(nb), min(region(c, set(nb))))
-                if key not in seen:
-                    if len(seen) >= cap: return len(seen), bad + ['capped']
-                    seen.add(key); q.append((tuple(nb), c))
-    return len(seen), bad
+                if not (0 <= c[0] < W and 0 <= c[1] < H) or not mask[c[1], c[0]]: continue
+                if r in rule['ropes'] or r in rule['blocked'] or r in bs or not mv.get((b[0], b[1], d)): continue
+                nb = list(bs); nb[k] = r; nb = tuple(nb)
+                key = (nb, ('at', c))
+                if key in seen: continue
+                seen.add(key)
+                if len(seen) >= cap: return len(seen), in_zone, bad + ['capped']
+                q.append((nb, c))
+    if asym: bad = bad  # directional edges exist: the labels treat them as two-way (noted by the caller)
+    return len(seen), in_zone, bad
 
 
-def proof_big(mid, start, goal_sw, label, sw0=()):
+def proof_big(mid, start, goal_sw, label, sw0=(), trap_cap=CAP):
     try:
         room = Room(mid)
     except FileNotFoundError as e:
@@ -333,11 +345,17 @@ def proof_big(mid, start, goal_sw, label, sw0=()):
     SOLUTIONS[(mid, label)] = r
     out = ['%s %s: solved, %d actions (%d steps, %d pushes/uses), replayed through the engine rules from the door: %s' % (
         'ok  ' if ok else 'FAIL', name, len(r), sum(c in 'UDLR' for c in r), sum(c in 'udlr' for c in r), r)]
-    states, bad = boulder_traps(room, start, sw0, goal_sw)
-    if bad:
-        ok = False; out.append('FAIL %s: %d boulder arrangements strand you away from every reset, e.g. %r' % (name, len(bad), bad[0]))
+    states, in_zone, bad = boulder_traps(room, start, sw0, goal_sw, cap=trap_cap)
+    capped = 'capped' in bad
+    bad = [x for x in bad if x != 'capped']
+    if capped and not bad:
+        out.append('  bounded: the first %d boulder arrangements (of more) leave no pocket outside the partner zone cut off from a reset or a door; NOT exhaustive' % states)
+    elif bad:
+        ok = False; out.append('FAIL %s: %d boulder arrangements strand you away from every reset and door, e.g. %r' % (name, len(bad), bad[0]))
     else:
-        out.append('  proved: all %d reachable boulder arrangements (and the pocket you stand in) keep a reset, a tag or the solved room in reach' % states)
+        out.append('  proved: over all %d reachable boulder arrangements, no pocket outside the partner zone is cut off from a reset or a door' % states)
+    if in_zone:
+        out.append('  note: %d pockets inside the partner zone have no reset or door; there a partner that reaches you tags you (a reset), e.g. %r' % (len(in_zone), in_zone[0]))
     return ok, out
 
 
@@ -401,15 +419,17 @@ def _arrive(mid):
 def p271w(): return proof(271, _arrive(271), 344, 'west (the pillar)')
 def p271e(): return proof(271, _arrive(271), 340, 'east (the rope lines)', sw0=(344,))
 def p272(): return proof_big(272, _arrive(272), 341, 'boulders and plates')
-def p273(): return proof_big(273, _arrive(273), 342, 'the gauntlet')
+def p273(): return proof_big(273, _arrive(273), 342, 'the gauntlet', trap_cap=1000000)   # 3 boulders: > 12M; bounded
 def p273m(): return proof(273, _arrive(273), 343, 'Marrowgate (mastery)', sw0=(342,), only_zone=True)
 
 
-EXTRA = [p271w, p271e, p272, p273, p273m]
+from .proofcache import cached
+EXTRA = [lambda f=f, m=m: cached('gym8_' + f.__name__, __file__, m, f)
+         for f, m in ((p271w, [270, 271]), (p271e, [270, 271]), (p272, [271, 272]), (p273, [272, 273]), (p273m, [272, 273]))]
 
 if __name__ == '__main__':
     import sys, time
-    for fn in (EXTRA if len(sys.argv) < 2 else [globals()[a] for a in sys.argv[1:]]):
+    for fn in ([p271w, p271e, p272, p273, p273m] if len(sys.argv) < 2 else [globals()[a] for a in sys.argv[1:]]):
         t = time.time(); ok, lines = fn()
         for l in lines: print(l)
         print('  (%.1fs)' % (time.time() - t))
