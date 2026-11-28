@@ -26,6 +26,10 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch6story")
     class << self; attr_accessor :choices, :battles, :gym, :g5; end
   end
   class << DemoRun
+    # with CH6_SHOTS=1, every RESULT line also says which frame file was being written (for picking a beat's frames)
+    alias c6_log0 log unless method_defined?(:c6_log0)
+    def log(msg); c6_log0((@rec && msg.to_s.start_with?("RESULT")) ? "#{msg} shot=#{@shots}" : msg); end
+
     def c6_run(limit, min = 30)
       f = 0
       loop do
@@ -245,7 +249,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch6story")
       c6_step("212 ladder Hc", 212, 22, 12, :touch, [], 211)
       c6_step("211 M2 (1)", 211, 25, 12, :use, [0])
       c6_step("211 M2 (2)", 211, 25, 12, :use, [0])
-      c6_step("211 drop into lane b", 211, 20, 19, :touch, [], 212)
+      c6_step("211 drop into lane b", 211, 22, 20, :touch, [], 212)
       c6_step("212 ladder Hb", 212, 18, 20, :touch, [], 211)
       c6_step("211 up to the arena", 211, 14, 2, :touch, [], 213)
       c6_step("Sahar", 213, 10, 4, :use)
