@@ -178,10 +178,13 @@ module Prismfall
     }.freeze
     # The variants' structure differs (Gilded's four-piece last bar, Judgment's partner, War's forced locks), so each
     # scales its bar HP to land near Bound's difficulty (harness-tuned 2026-11-26; Casual only where it fell short).
+    # 2026-11-27: the best-field skip at a break (:prism_best_field) cost Bound, Gilded and Hard War their band
+    # (BALANCE.md section 9b "Best-field skip"), so those take back bar HP; the variants still in band are untouched.
     ARCEUS_VARIANT_HP = {
-      :ARCEUS_GILDED        => { :CASUAL => 1.0, :STANDARD => 0.8,  :HARD => 0.8 },
-      :ARCEUS_JUDGMENT      => { :CASUAL => 1.0, :STANDARD => 1.45, :HARD => 1.3 },
-      :ARCEUS_WAR           => { :CASUAL => 0.4, :STANDARD => 0.4,  :HARD => 0.4 },
+      :ARCEUS_BOUND         => { :CASUAL => 0.8, :STANDARD => 0.8,  :HARD => 0.75 },
+      :ARCEUS_GILDED        => { :CASUAL => 0.7, :STANDARD => 0.7,  :HARD => 0.65 },
+      :ARCEUS_JUDGMENT      => { :CASUAL => 1.0, :STANDARD => 1.45, :HARD => 1.2 },
+      :ARCEUS_WAR           => { :CASUAL => 0.4, :STANDARD => 0.4,  :HARD => 0.3 },
       :ARCEUS_MISCALIBRATED => { :CASUAL => 1.0, :STANDARD => 1.15, :HARD => 1.15 }
     }.freeze
 

@@ -12,6 +12,7 @@
 # uses the few healing items a player carries (BAG below; Hard forbids the Bag in trainer battles).
 #
 #   PRISM_MODES=CASUAL,STANDARD,HARD   PRISM_FIGHTS=K1,J1,G1,G2,G3,K2   PRISM_SEEDS=20 (per starter)
+#   PRISM_SEED_OFFSET=20 runs seeds 21-40 instead (add fights to an earlier run without repeating its seeds)
 #   PRISM_STARTERS=Fire (only those starters)   PRISM_FORCE=SPECIES (the first catch is that species: "a player who
 #   found it"; a fight's own :force list does the same for every run of that fight)
 #   PRISM_FOE_NOMEGA=1 takes MEGARING from every foe (the same fight without its Mega, for comparison)
@@ -33,6 +34,7 @@ FileUtils.mkdir_p(File.join(OUT_DIR, "logs"))
 MODES  = (ENV["PRISM_MODES"] || "CASUAL,STANDARD,HARD").split(",").map { |s| s.strip.upcase.to_sym }
 FIGHTS = (ENV["PRISM_FIGHTS"] || "K1,J1,G1,G2,G3,K2").split(",").map { |s| s.strip.upcase }
 SEEDS  = (ENV["PRISM_SEEDS"] || "20").to_i
+SEED_OFFSET = (ENV["PRISM_SEED_OFFSET"] || "0").to_i   # seeds 1+offset .. SEEDS+offset (more fights without re-running the first)
 KEEP_LOGS = ENV["PRISM_KEEP_LOGS"] == "1"
 PLAYER_SKILL = (ENV["PRISM_PLAYER_SKILL"] || "100").to_i
 class Player < Trainer
@@ -471,7 +473,7 @@ MODES.each do |mode|
     WR::STARTERS.each do |sname, lines|
       next if ENV["PRISM_STARTERS"] && !ENV["PRISM_STARTERS"].split(",").map(&:strip).include?(sname)
       Prismfall.record_starter(lines[0])
-      runs = (1..SEEDS).map do |s|
+      runs = ((1 + SEED_OFFSET)..(SEEDS + SEED_OFFSET)).map do |s|
         seed = 40_000 + fight.sum * 7 + s * 101 + lines[0].to_s.sum
         Harness.set_badges(f[:badges])
         Prismfall::LevelCap.set_override(f[:lvcap] || f[:cap])

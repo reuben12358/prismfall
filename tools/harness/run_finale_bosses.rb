@@ -321,8 +321,9 @@ fresh(:CASUAL); c = bs.create_pokemon(:ARCEUS_FINALE)
 fresh(:STANDARD); s = bs.create_pokemon(:ARCEUS_FINALE)
 fresh(:HARD); h = bs.create_pokemon(:ARCEUS_FINALE)
 b0 = bs.create_pokemon(:ARCEUS_FINALE); bs.strip(b0)
-check("bar HP by difficulty (2026-11-26): Casual x0.5, Standard x0.32, Hard x0.32 of Arceus's max HP",
-      c.totalhp == (b0.totalhp * 0.5).round && s.totalhp == (b0.totalhp * 0.32).round && h.totalhp == (b0.totalhp * 0.32).round,
+check("bar HP by difficulty (2026-11-26): Casual x0.5, Standard x0.32, Hard x0.32 of Arceus's max HP; Bound x0.8 / 0.8 / 0.75 " \
+      "of that (2026-11-27, after the best-field skip): 0.4 / 0.256 / 0.24",
+      c.totalhp == (b0.totalhp * 0.4).round && s.totalhp == (b0.totalhp * 0.256).round && h.totalhp == (b0.totalhp * 0.24).round,
       [b0.totalhp, c.totalhp, s.totalhp, h.totalhp].inspect)
 check("offence: Casual x0.6 < Standard x0.8 = Hard x0.8; Hard is faster", c.spatk < s.spatk && s.spatk == h.spatk && h.speed > s.speed,
       [c.spatk, s.spatk, h.spatk, s.speed, h.speed].inspect)

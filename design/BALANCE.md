@@ -308,7 +308,7 @@ Core already runs this stage through `EliteBattle.bossBattle(:ARCEUS, 100, 1, fa
 
 | | Casual | Standard | Hard |
 |---|---|---|---|
-| `:bossboost` HP / other stats | 1.5 / 1.1 | 2.0 / 1.25 (Core default) | 2.5 / 1.3 (Spe 1.15) |
+| `:bossboost` HP / other stats *(superseded, below)* | 1.5 / 1.1 | 2.0 / 1.25 (Core default) | 2.5 / 1.3 (Spe 1.15) |
 | Bar HP (× boosted max HP; bar count is set by the story variant) | 0.6 | 1.0 | 1.25 |
 | Recover in sets | no | yes, max 2 uses per phase | yes |
 | Telegraph next Plate | 2 turns ahead | 1 turn ahead | 1 turn ahead |
@@ -330,8 +330,16 @@ Standard: Recover at most twice a bar (Hard: no limit; Casual: no Recover). Forc
 ×1.0, per-variant bar HP, defences-only forced locks when nobody is asked, Gilded's four-piece last bar. The bar-HP row
 in the table above (×0.6 / ×1.0 / ×1.25) is the original design; the shipped numbers are Casual ×0.5, Standard and Hard
 ×0.32 of Arceus's own max HP.
-Not built: the "best field against the player's active" skip at a break, the 2-turn Casual telegraph, `:bossboost`
-HP. Win rates: §9b.
+**Built 2026-11-27 (Bosses 005 / 103, Field Effects 136):** the "best field against the player's active" skip at a
+break, on every difficulty as step 2 below has it (Bosses `:prism_best_field`: of the new bar's fields, the type best
+against the player's own active Pokemon, a tag partner not counted, ties in gym order; the cycle then goes on from it in
+gym order; bar 1 still opens on Gym 1's field; "Arceus turns the Plates against X!" when it skips), and the telegraph by
+difficulty (`:prism_telegraph`, the arena's writable `:telegraph`: Casual "begins to glow... In 2 turns", then "glows
+brighter" the round before; Standard / Hard one round, as before). The skip cost Bound, Gilded and Judgment / War on
+Hard their bands, so those variants took back bar HP (§9b "Best-field skip"). **Superseded, not built:** the
+`:bossboost` row (HP x1.5 / 2.0 / 2.5, other stats x1.1-1.3). Since the 2026-11-26 retune, bar HP and stats are set
+directly per difficulty as fractions of Arceus's own max HP (`ARCEUS_MULTS`, `ARCEUS_VARIANT_HP`), tuned in the harness
+without it; bossboost on top would only multiply bar HP again (x2 is the pre-retune 0% prepared). Win rates: §9b.
 
 **Alignment with NARRATIVE_KEYS §6.6 (authoritative for bar counts):** a "phase" below = one **bar**. Default
 `ARCEUS_BOUND` has 6 bars; bar *k* holds the Plates of gyms 3k−2..3k (bar 1 Normal/Bug/Water since SPINE Rev 14 … bar 6 Dark/Fairy/Dragon), so
@@ -523,6 +531,32 @@ no-strategy harness: Standard typical under ~10%, Standard prepared 25–40%, Ha
   regeneration, the in-battle choice and his lines are untouched. Quent (same NULL, already 37–45% / 18–22%) keeps the
   drops-only reset. On Hard the reset pushed Voss to 23% prepared (above the 10–20% band he was already in at 12%), so
   Hard keeps the drops-only reset: 13% prepared, 10% with the conduit live (60 fights). Standard: 27% / 20% at 60.
+
+**Best-field skip and telegraph, 2026-11-27 (§7; Bosses `:prism_best_field` / `:prism_telegraph`).** Same harness,
+cells ARC / ARCF / ARCM / ARCG / ARCW / ARCJ, typical / prepared, 60 fights unless marked (120: seeds 1-40, via the new
+`PRISM_SEED_OFFSET`). The runs are seeded: a run of the 11-26 code reproduced the 11-26 table cell for cell (Casual ARC
+43% / 60%), so that table is the "before". The telegraph changes no number (the AI pilot doesn't read it). The skip
+alone cost Standard Bound 37 -> 23% and Gilded 40 -> 25% prepared, Hard Bound 13 -> 7%, Gilded 12 -> 5%, War 10 -> 3%,
+and Casual Gilded 38 -> 12% typical. Fix: bar HP back only where a band was lost (`ARCEUS_VARIANT_HP`): Bound x0.8 /
+x0.8 / x0.75 (new entry; Casual / Standard / Hard), Gilded x0.7 / x0.7 / x0.65 (was 1.0 / 0.8 / 0.8), Hard Judgment
+x1.2 (was 1.3; x1.25 gave 8% at 120, a hit-per-bar threshold), Hard War x0.3 (was 0.4; x0.28 and x0.25 gave 7% / 8% at
+120, so HP is not War's lever there). Miscalibrated, Standard War and Standard Judgment kept theirs (still in band after
+the skip). Every Standard / Hard prepared cell is in its band and all but two end below their 11-26 rate; the two are
+Hard Judgment (16% at 120 vs 13% at 120) and Hard ARCF (9% at 120 vs 8% at 60), both within the noise.
+
+| Fight (cap 100) | Casual typ / prep | Standard typ / prep | Hard typ / prep | 11-26, before the skip (C / S / H prep) |
+|---|---|---|---|---|
+| Arceus, Bound | 55% / 73% | 2% / 31% (120) | 2% / 11% (120) | 60 / 37 / 13 |
+| Arceus, Bound, one in three refuses | 28% / 23% | 2% / 15% | 2% / 9% (120) | 35 / 18 / 8 |
+| Arceus, Miscalibrated (unchanged) | 52% / 70% | 2% / 33% | 2% / 15% | 67 / 40 / 22 |
+| Arceus, Gilded | 52% / 78% | 2% / 28% (120) | 2% / 12% (120) | 58 / 40 / 12 |
+| Arceus, War | 58% / 62% | 5% / 33% | 2% / 10% (120) | 68 / 35 / 10 |
+| Arceus, Judgment | 62% / 70% | 12% / 32% | 0% / 16% (120) | 67 / 40 / 5 (13 at 120) |
+
+Bands (11-26): Standard typical under ~10% (Judgment 12%, 10% before: Giratina at your side), prepared 25-40%; Hard
+typical ~0%, prepared 10-20%; Casual may be eased (it is: Bound, Gilded, Judgment rose; ARCF prepared 35 -> 23%, Miscalibrated
+and War a few points lower, within the noise of 60 fights). `run_finale_bosses.rb` 98/98 (the bar-HP check now 0.4 / 0.256 / 0.24
+for Bound).
 
 **Ch10 Loyal Three (2026-11-23; Bosses 112, cells L3O / L3M / L3F with the Ogre, L3OA / L3FA alone):** Lv 48 / 49 / 50,
 1 / 2 / 3 bars, Standard HP ×1.5 and ×1.15–1.25 elsewhere, Hard HP ×1.5 and ×1.2–1.25. A typical Lv 49–51 six (60 a
