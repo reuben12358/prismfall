@@ -66,7 +66,7 @@
 | **Sewer Royalty** `NA_VENAM` | Nadir | 7 | 6 | 644 planned |  | designed | designed |  |
 | **Something in the Sinkholes** `OS_SINKFIELD` | Ossaria | 7 | 5 | 628 built |  | designed | designed |  |
 | **Adequate Swords** `AS_ADEQUATE_SWORDS` | Ashkaar | 8 | 6 | 240 built, 247 built | `ADEQUATE_OWNER` `ADEQUATE_SIGN` `EXCELLENT_SMITH` `HONEST_COURT` | designed | in maps |  |
-| **Afraid of Heights** `AS_AFRAID_OF_HEIGHTS` | Ashkaar | 8 | 6 | 248 built |  | designed | designed |  |
+| **Afraid of Heights** `AS_AFRAID_OF_HEIGHTS` | Ashkaar | 8 | 6 | 248 built | `TAMM` | designed | in maps |  |
 | **Ashes Home** `AS_ASHES` | Ashkaar | 8 | 6 | 650 planned |  | designed | designed |  |
 | **The Lava-Tube Terror** `AS_DRUDDIGON` | Ashkaar | 8 | 6 | 664 planned |  | designed | designed |  |
 | **Too Loud for the Choir** `AS_OCTAVE_TOO_LOUD` | Ashkaar | 8 | 6 | 240 built | `CRUCIBLE_LEGATE` `OCTAVE_FORTE` | needs maps | in maps |  |
@@ -166,7 +166,7 @@
 | `OS_STUNFISK` Stunfisk (form 1) | boss | 7 |  | 628 built | `OS_SINKFIELD` | designed |
 | `AS_DRUDDIGON` Druddigon | boss | 8 |  | 664 planned | `AS_DRUDDIGON` | designed |
 | `AS_HOUNDOUR` Houndour | gift | 8 |  | 650 planned | `AS_ASHES` | designed |
-| `AS_NOIBAT` Noibat | gift | 8 |  | 248 built | `AS_AFRAID_OF_HEIGHTS` | designed |
+| `AS_NOIBAT` Noibat | gift | 8 |  | 248 built | `AS_AFRAID_OF_HEIGHTS` | in maps |
 | `AS_RANK_DEINO` Deino | egg | 8 |  | (rank reward) |  | rank reward |
 | `AS_AXEW_EGG` Axew | egg | 9 |  | 248 built | `AS_EGG_RUN` | designed |
 | `NA_FALINKS` Falinks | boss | 9 |  | 263 built | `NA_PIT_RINGER` | designed |
