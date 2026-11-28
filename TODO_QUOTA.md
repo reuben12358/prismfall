@@ -267,7 +267,9 @@ Gym 5 up to M2 pass. Next: the full engine walk to 9, the key-events GIF.*
   (248, Recruit Tamm: three spars with his Trapinch, then the Noibat) de-stubbed and placed (002c3acf). run_trials 227/227.
 - [x] `--strict` green again (07856ad9): 244's Elder Smith moved off the Cider Cask's only tile (story_ch8.py); 145 and
   249 (Gemini geometry) are `KNOWN` in reach.py and queued in REFINE_QUEUE. TRIALS_WIRING status cells updated.
-- [ ] Engine capture `tools/harness/visual/ch8/010_Ch8TrialsCapture.rb` (240 / 247 / 248 through the built events). First
-  run (killed): the patched owner's offer plays in the engine; the plan's auto-USE then re-opened him forever (fixed).
+- [x] Engine capture `tools/harness/visual/ch8/010_Ch8TrialsCapture.rb` (real engine, the built 240 / 247 / 248 events):
+  Adequate Swords offer -> Kessa's battle (:VOLCANIC) -> the Oath-Scribe's court ('excellent') -> home (Metal Coat, sign
+  ready); Seven Bouts done (7 bouts, Ilka's a double, Corran on :DRAGONS_DEN; Charcoal, Fire Stone); Tribune Halden hidden
+  until the Trial, then Pyke's Trial of Truth -> the Halden duel -> done (Flame Orb); Tamm's offer and first spar.
 - [ ] Left: The Egg Run (needs the Cinderhorn, 664); Rimeholt's two stubs (Eleven Years at One Hole 300, the Harpoon Rite
   306) and the postgame stubs on 306 / 308; 145's wings (the Octave's Vesper) wait on Gemini (REFINE_QUEUE).
