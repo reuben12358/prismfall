@@ -102,9 +102,9 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[247] = :DRAGONS_DEN   # Pyre Keep - Hall of Oaths
   FieldEffects::MAP_FIELDS[248] = :DRAGONS_DEN   # Pyre Keep - Dragon Roosts
   FieldEffects::MAP_FIELDS[249] = :SCRAPYARD   # Cindervault - Slag Ward
-  FieldEffects::MAP_FIELDS[250] = :VOLCANIC   # Cindervault Gym - Gate Hall
-  FieldEffects::MAP_FIELDS[251] = :VOLCANIC   # Cindervault Gym - Pour Floor
-  FieldEffects::MAP_FIELDS[252] = :VOLCANIC   # Cindervault Gym - Mould Floor
+  FieldEffects::MAP_FIELDS[250] = :VOLCANIC   # Cindervault Gym - Entrance
+  FieldEffects::MAP_FIELDS[251] = :VOLCANIC   # Cindervault Gym - Puzzle Room 1
+  FieldEffects::MAP_FIELDS[252] = :VOLCANIC   # Cindervault Gym - Puzzle Room 2
   FieldEffects::MAP_FIELDS[253] = :VOLCANIC   # Cindervault Gym - Warden Arena
   FieldEffects::MAP_FIELDS[254] = :HOLLOW_CATHEDRAL   # Pyre Keep - Ancestor Crypts
   FieldEffects::MAP_FIELDS[255] = :VOLCANIC   # Cindervault - Tap Chamber
@@ -306,6 +306,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[603] = :MEADOW   # The Highwold
   FieldEffects::MAP_FIELDS[604] = :CAVE   # Static Tunnels
   FieldEffects::MAP_FIELDS[605] = :CAVE   # Static Tunnels Depths
+  FieldEffects::MAP_FIELDS[606] = :NONE   # Temple of the Noon Sun
   FieldEffects::MAP_FIELDS[608] = :BLEED   # The Lowlight (Shattered)
   FieldEffects::MAP_FIELDS[610] = :DESERT   # Copperdune
   FieldEffects::MAP_FIELDS[611] = :NONE   # Copperdune Pokémon Center

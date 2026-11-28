@@ -65,18 +65,78 @@ module PrismfallMaps
     191 => { :bgm => "Gym - Warden Hall", :bgs => "Machinery - Zenith", :bgs_volume => 50 },   # Circuit Gym - Breadboard Hall
     192 => { :bgm => "Gym - Warden Hall", :bgs => "Machinery - Zenith", :bgs_volume => 55 },   # Circuit Gym - Live Wire Hall
     193 => { :bgm => "Gym - Warden Hall", :bgs => "Machinery - Zenith", :bgs_volume => 60 },   # Circuit Gym - Core
+    200 => { :bgm => "Route - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 35 },   # Duneholt - Terrace Bazaar
+    201 => { :bgs => "" },   # Duneholt Pokémon Center
+    202 => { :bgs => "" },   # Duneholt Mart
+    203 => { :bgm => "Route - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 45 },   # Duneholt - Sandgate
+    204 => { :bgm => "Route - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 30 },   # Duneholt - Aquifer Quarter
+    205 => { :bgm => "Route - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 25 },   # Elector's Palace - Courtyard
+    206 => { :bgm => "Theme - Accord", :bgs => "" },   # Elector's Palace - Hall of Audience
+    207 => { :bgm => "Theme - Accord", :bgs => "" },   # Elector's Palace - Mural Gallery
+    208 => { :bgm => "Dungeon - Cave", :bgs => "Drip - Nadir", :bgs_volume => 45 },   # Necropolis of the Electors
+    209 => { :bgm => "Intro - Larch Lab", :bgs => "" },   # Sahar's Dig Lab
+    210 => { :bgm => "Gym - Warden Hall", :bgs => "Wind - Isenmar", :bgs_volume => 25 },   # Duneholt Gym - Entrance
+    211 => { :bgm => "Gym - Warden Hall", :bgs => "Wind - Isenmar", :bgs_volume => 35 },   # Duneholt Gym - Puzzle Room 1
+    212 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 35 },   # Duneholt Gym - Puzzle Room 2
+    213 => { :bgm => "Gym - Warden Hall", :bgs => "Wind - Isenmar", :bgs_volume => 30 },   # Duneholt Gym - Warden Arena
+    214 => { :bgm => "Route - Ossaria", :bgs => "Drip - Nadir", :bgs_volume => 35 },   # Duneholt - Sinkwells
+    220 => { :bgm => "Town - Nadir", :bgs => "Drip - Nadir", :bgs_volume => 60, :rain => true },   # Mirefen
+    221 => { :bgs => "" },   # Mirefen Pokémon Center
+    222 => { :bgs => "" },   # Mirefen Mart
+    223 => { :bgm => "Town - Nadir", :bgs => "" },   # Corvin Mott's Infirmary
+    230 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 45 },   # Mirefen Gym - Entrance
+    231 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 50 },   # Mirefen Gym - Puzzle Room 1
+    232 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 55 },   # Mirefen Gym - Puzzle Room 2
+    233 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 55 },   # Mirefen Gym - Warden Arena
     240 => { :bgm => "Town - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 55 },   # Cindervault - Forge Terraces
     243 => { :bgm => "Town - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 55 },   # Cindervault - Caldera Gate
     244 => { :bgm => "Town - Ashkaar", :bgs => "" },   # Hearthguild Hall
+    245 => { :bgm => "Town - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 55 },   # Pyre Keep - Rampart
+    246 => { :bgm => "Theme - Accord", :bgs => "Lava - Ashkaar", :bgs_volume => 35 },   # Pyre Keep - Ember Throne
+    247 => { :bgm => "Theme - Accord", :bgs => "" },   # Pyre Keep - Hall of Oaths
+    248 => { :bgm => "Town - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 60 },   # Pyre Keep - Dragon Roosts
     249 => { :bgm => "Town - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 55 },   # Cindervault - Slag Ward
+    250 => { :bgm => "Gym - Warden Hall", :bgs => "Lava - Ashkaar", :bgs_volume => 40 },   # Cindervault Gym - Entrance
+    251 => { :bgm => "Gym - Warden Hall", :bgs => "Lava - Ashkaar", :bgs_volume => 50 },   # Cindervault Gym - Puzzle Room 1
+    252 => { :bgm => "Gym - Warden Hall", :bgs => "Lava - Ashkaar", :bgs_volume => 55 },   # Cindervault Gym - Puzzle Room 2
+    253 => { :bgm => "Gym - Warden Hall", :bgs => "Lava - Ashkaar", :bgs_volume => 55 },   # Cindervault Gym - Warden Arena
+    254 => { :bgm => "Dungeon - Cave", :bgs => "Lava - Ashkaar", :bgs_volume => 40 },   # Pyre Keep - Ancestor Crypts
     255 => { :bgm => "Route - Ashkaar", :bgs => "Lava - Ashkaar", :bgs_volume => 75 },   # Cindervault - Tap Chamber
+    260 => { :bgm => "Town - Nadir", :bgs => "Drip - Nadir", :bgs_volume => 35 },   # Ironreach
+    261 => { :bgs => "" },   # Ironreach Pokémon Center
+    262 => { :bgs => "" },   # Ironreach Mart
+    263 => { :bgm => "Route - Nadir", :bgs => "Drip - Nadir", :bgs_volume => 30 },   # The Iron Pit
+    270 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 25 },   # Ironreach Gym - Entrance
+    271 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 25 },   # Ironreach Gym - Puzzle Room 1
+    272 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 25 },   # Ironreach Gym - Puzzle Room 2
+    273 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 25 },   # Ironreach Gym - Puzzle Room 3
+    274 => { :bgm => "Gym - Warden Hall", :bgs => "Drip - Nadir", :bgs_volume => 25 },   # Ironreach Gym - Warden Arena
     280 => { :bgm => "Town - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 45, :rain => true },   # Verdance - Market Terraces
     281 => { :bgs => "" },   # Verdance Pokémon Center
     282 => { :bgs => "" },   # Verdance Mart
+    283 => { :bgm => "Town - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 45, :rain => true },   # Verdance - Glasshouse Ward
+    284 => { :bgm => "Town - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 45, :rain => true },   # Verdance - Kingsgate Barbican
     285 => { :bgm => "Town - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 40, :rain => true },   # Briar Hall - Upper Court
     286 => { :bgm => "Theme - Accord", :bgs => "" },   # Briar Hall - Great Hall
     287 => { :bgm => "Theme - Accord", :bgs => "" },   # Briar Hall - Throne Room
+    288 => { :bgm => "Theme - Accord", :bgs => "" },   # Briar Hall - Royal Gallery
+    289 => { :bgm => "Dungeon - Cave", :bgs => "Drip - Nadir", :bgs_volume => 45 },   # Briar Hall - Thorn Crypts
+    290 => { :bgm => "Gym - Warden Hall", :bgs => "Gossamer Deepwood", :bgs_volume => 25 },   # Verdance Gym - Entrance
+    291 => { :bgm => "Gym - Warden Hall", :bgs => "Gossamer Deepwood", :bgs_volume => 25 },   # Verdance Gym - Puzzle Room 1
+    292 => { :bgm => "Gym - Warden Hall", :bgs => "Gossamer Deepwood", :bgs_volume => 25 },   # Verdance Gym - Puzzle Room 2
+    293 => { :bgm => "Gym - Warden Hall", :bgs => "Gossamer Deepwood", :bgs_volume => 25 },   # Verdance Gym - Warden Arena
+    294 => { :bgm => "Town - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 45, :rain => true },   # The Heartgarden
     295 => { :bgm => "Mood - Mystery", :bgs => "" },   # Cathedral of the Evergreen
+    296 => { :bgm => "Town - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 35, :rain => true },   # Verdance - Rootward
+    300 => { :bgm => "Town - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 55, :rain => true },   # Rimeholt - Thane's Harbour
+    301 => { :bgs => "" },   # Rimeholt Pokémon Center
+    302 => { :bgs => "" },   # Rimeholt Mart
+    303 => { :bgm => "Town - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 60, :rain => true },   # Rimeholt - Icewall Gate
+    304 => { :bgm => "Town - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 50, :rain => true },   # Rimeholt - Sled Market
+    305 => { :bgm => "Town - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 65, :rain => true },   # Whalebone Keep - Bailey
+    306 => { :bgm => "Theme - Accord", :bgs => "" },   # Whalebone Keep - Mead Hall
+    307 => { :bgm => "Theme - Accord", :bgs => "" },   # Whalebone Keep - Thane's Seat
+    308 => { :bgm => "Dungeon - Ruins", :bgs => "Drip - Nadir", :bgs_volume => 45 },   # Whalebone Keep - Ice Vault
     520 => { :bgm => "Route - Elowen", :bgs => "Saltmere Harbor", :bgs_volume => 60, :rain => true },   # The Ferrymen's Mile
     521 => { :bgm => "Route - Elowen", :bgs => "" },   # Windfall Row
     522 => { :bgm => "Mood - Mystery", :bgs => "Glassfall Bleed", :bgs_volume => 70, :rain => true },   # The Glassed Orchard
@@ -100,6 +160,7 @@ module PrismfallMaps
     562 => { :bgm => "Route - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 60, :rain => true },   # The Rimewood
     563 => { :bgm => "Route - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 60, :rain => true },   # Rimewood Glade
     564 => { :bgm => "Dungeon - Cave", :bgs => "Drip - Nadir", :bgs_volume => 65 },   # Gullcry Caves
+    565 => { :bgm => "Dungeon - Cave", :bgs => "Drip - Nadir", :bgs_volume => 70 },   # Gullcry Caves B1F
     566 => { :bgm => "Route - Elowen", :bgs => "" },   # Spinners' Rise
     568 => { :bgm => "Mood - Mystery", :bgs => "Glassfall Bleed", :bgs_volume => 70, :rain => true },   # The Rehearsal
     570 => { :bgm => "Town - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 50, :rain => true },   # Frostwick
@@ -112,10 +173,32 @@ module PrismfallMaps
     577 => { :bgm => "Route - Borderlands", :bgs => "Wind - Isenmar", :bgs_volume => 70, :rain => true },   # Frostwick Pass
     578 => { :bgm => "Route - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 60, :rain => true },   # Rimewood Path
     579 => { :bgm => "Route - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 65, :rain => true },   # The Wolfsrime
+    580 => { :bgm => "Route - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 60, :rain => true },   # The Reedholms
+    581 => { :bgm => "Route - Borderlands", :bgs => "Wind - Isenmar", :bgs_volume => 65, :rain => true },   # The Icefall Locks
     582 => { :bgm => "Town - Zenith", :bgs => "Machinery - Zenith", :bgs_volume => 40 },   # Lumen West Gate
+    584 => { :bgm => "Dungeon - Cave", :bgs => "Machinery - Zenith", :bgs_volume => 55 },   # Voltaic Sluiceworks
+    585 => { :bgm => "Dungeon - Cave", :bgs => "Machinery - Zenith", :bgs_volume => 65 },   # Sluiceworks Turbine Hall
+    588 => { :bgm => "Mood - Mystery", :bgs => "Glassfall Bleed", :bgs_volume => 70, :rain => true },   # Ebb Hollow
+    590 => { :bgm => "Town - Isenmar", :bgs => "Wind - Isenmar", :bgs_volume => 55, :rain => true },   # Brassfall
+    591 => { :bgs => "" },   # Brassfall Pokémon Center
+    592 => { :bgm => "Route - Borderlands", :bgs => "Wind - Isenmar", :bgs_volume => 60, :rain => true },   # The Icecutters' Haul
     593 => { :bgm => "Route - Borderlands", :bgs => "Machinery - Zenith", :bgs_volume => 35, :rain => true },   # The Arc-Lamp Mile
     594 => { :bgm => "Route - Elowen", :bgs => "", :rain => true },   # Wallshadow Row
+    595 => { :bgm => "Route - Elowen", :bgs => "Gossamer Deepwood", :bgs_volume => 45, :rain => true },   # Coppice Ride
+    600 => { :bgm => "Route - Borderlands", :bgs => "Wind - Isenmar", :bgs_volume => 45 },   # The Brass Dunes
+    601 => { :bgm => "Route - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 60 },   # The Rib Road
+    604 => { :bgm => "Route - Nadir", :bgs => "Machinery - Zenith", :bgs_volume => 50 },   # Static Tunnels
+    605 => { :bgm => "Dungeon - Cave", :bgs => "Drip - Nadir", :bgs_volume => 55 },   # Static Tunnels Depths
+    606 => { :bgm => "Dungeon - Ruins", :bgs => "" },   # Temple of the Noon Sun
     608 => { :bgm => "Route - Antumbra", :bgs => "Glassfall Bleed", :bgs_volume => 75, :rain => true },   # The Lowlight (Shattered)
+    610 => { :bgm => "Town - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 35 },   # Copperdune
+    611 => { :bgs => "" },   # Copperdune Pokémon Center
+    612 => { :bgm => "Route - Borderlands", :bgs => "Machinery - Zenith", :bgs_volume => 45 },   # The Meridian Mainline
+    613 => { :bgm => "Route - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 50 },   # Sunbleach Flats
+    620 => { :bgm => "Route - Ossaria", :bgs => "Wind - Isenmar", :bgs_volume => 55 },   # The Marrow Road
+    624 => { :bgm => "Dungeon - Ruins", :bgs => "Drip - Nadir", :bgs_volume => 40 },   # Ossuary of Dunes
+    625 => { :bgm => "Dungeon - Ruins", :bgs => "Drip - Nadir", :bgs_volume => 35 },   # Ossuary of Dunes - Script Vault
+    628 => { :bgm => "Mood - Mystery", :bgs => "Glassfall Bleed", :bgs_volume => 70 },   # Sinkfield
     920 => { :bgm => "War - March", :bgs => "War - Distant Battle", :bgs_volume => 65, :rain => true },   # The Rimed Sands
     924 => { :bgm => "War - March", :bgs => "War - Distant Battle", :bgs_volume => 70, :rain => true },   # Ashkaar Siege Camp
     925 => { :bgm => "War - Battlefield", :bgs => "Glassfall Bleed", :bgs_volume => 70, :rain => true },   # The Steamline

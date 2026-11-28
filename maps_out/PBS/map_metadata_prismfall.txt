@@ -351,6 +351,143 @@ Name = Meridian Spire - Dark Stone Core
 MapPosition = 0,16,16
 SnapEdges = true
 #-------------------------------
+[200]   # Duneholt - Terrace Bazaar
+Name = Duneholt
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,17,3
+#-------------------------------
+[201]   # Duneholt Pokémon Center
+Name = Duneholt Pokémon Center
+ShowArea = false
+HealingSpot = 200,9,22
+MapPosition = 0,17,3
+#-------------------------------
+[202]   # Duneholt Mart
+Name = Duneholt Mart
+MapPosition = 0,17,3
+#-------------------------------
+[203]   # Duneholt - Sandgate
+Name = Duneholt
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,17,3
+#-------------------------------
+[204]   # Duneholt - Aquifer Quarter
+Name = Duneholt
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,17,3
+#-------------------------------
+[205]   # Elector's Palace - Courtyard
+Name = Elector's Palace
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,17,3
+#-------------------------------
+[206]   # Elector's Palace - Hall of Audience
+Name = Elector's Palace
+Outdoor = false
+MapPosition = 0,17,3
+#-------------------------------
+[207]   # Elector's Palace - Mural Gallery
+Name = Elector's Palace
+Outdoor = false
+MapPosition = 0,17,3
+#-------------------------------
+[208]   # Necropolis of the Electors
+Name = Necropolis of the Electors
+Outdoor = false
+ShowArea = true
+BattleBack = cave1
+MapPosition = 0,17,3
+#-------------------------------
+[209]   # Sahar's Dig Lab
+Name = Sahar's Dig Lab
+MapPosition = 0,17,3
+#-------------------------------
+[210]   # Duneholt Gym - Entrance
+Name = Duneholt Gym
+SnapEdges = true
+MapPosition = 0,17,3
+BattleBack = desert
+#-------------------------------
+[211]   # Duneholt Gym - Puzzle Room 1
+Name = Duneholt Gym
+SnapEdges = true
+MapPosition = 0,17,3
+BattleBack = desert
+#-------------------------------
+[212]   # Duneholt Gym - Puzzle Room 2
+Name = Duneholt Gym
+SnapEdges = true
+MapPosition = 0,17,3
+BattleBack = desert
+#-------------------------------
+[213]   # Duneholt Gym - Warden Arena
+Name = Duneholt Gym
+SnapEdges = true
+MapPosition = 0,17,3
+BattleBack = desert
+#-------------------------------
+[214]   # Duneholt - Sinkwells
+Name = Duneholt
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,17,3
+#-------------------------------
+[220]   # Mirefen
+Name = Mirefen
+Outdoor = true
+ShowArea = true
+Bicycle = true
+HealingSpot = 220,8,16
+MapPosition = 0,20,13
+BattleBack = water
+#-------------------------------
+[221]   # Mirefen Pokémon Center
+Name = Mirefen Pokémon Center
+ShowArea = false
+HealingSpot = 220,8,16
+MapPosition = 0,20,13
+#-------------------------------
+[222]   # Mirefen Mart
+Name = Mirefen Mart
+MapPosition = 0,20,13
+#-------------------------------
+[223]   # Corvin Mott's Infirmary
+Name = Corvin Mott's Infirmary
+MapPosition = 0,20,13
+#-------------------------------
+[230]   # Mirefen Gym - Entrance
+Name = Mirefen Gym
+SnapEdges = true
+MapPosition = 0,20,13
+BattleBack = water
+#-------------------------------
+[231]   # Mirefen Gym - Puzzle Room 1
+Name = Mirefen Gym
+SnapEdges = true
+MapPosition = 0,20,13
+BattleBack = water
+#-------------------------------
+[232]   # Mirefen Gym - Puzzle Room 2
+Name = Mirefen Gym
+SnapEdges = true
+MapPosition = 0,20,13
+BattleBack = water
+#-------------------------------
+[233]   # Mirefen Gym - Warden Arena
+Name = Mirefen Gym
+SnapEdges = true
+MapPosition = 0,20,13
+BattleBack = water
+#-------------------------------
 [240]   # Cindervault - Forge Terraces
 Name = Cindervault
 Outdoor = true
@@ -379,6 +516,32 @@ Name = Hearthguild Hall
 SnapEdges = true
 MapPosition = 0,24,8
 #-------------------------------
+[245]   # Pyre Keep - Rampart
+Name = Pyre Keep
+Outdoor = true
+ShowArea = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
+[246]   # Pyre Keep - Ember Throne
+Name = Pyre Keep
+SnapEdges = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
+[247]   # Pyre Keep - Hall of Oaths
+Name = Pyre Keep
+SnapEdges = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
+[248]   # Pyre Keep - Dragon Roosts
+Name = Pyre Keep - Dragon Roosts
+Outdoor = true
+ShowArea = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
 [249]   # Cindervault - Slag Ward
 Name = Cindervault
 Outdoor = true
@@ -386,31 +549,96 @@ ShowArea = true
 MapPosition = 0,24,8
 BattleBack = cave1
 #-------------------------------
-[250]   # Cindervault Gym - Gate Hall
+[250]   # Cindervault Gym - Entrance
 Name = Cindervault Gym
-MapPosition = 0,24,8
 SnapEdges = true
+MapPosition = 0,24,8
+BattleBack = cave1
 #-------------------------------
-[251]   # Cindervault Gym - Pour Floor
+[251]   # Cindervault Gym - Puzzle Room 1
 Name = Cindervault Gym
-MapPosition = 0,24,8
 SnapEdges = true
+MapPosition = 0,24,8
+BattleBack = cave1
 #-------------------------------
-[252]   # Cindervault Gym - Mould Floor
+[252]   # Cindervault Gym - Puzzle Room 2
 Name = Cindervault Gym
-MapPosition = 0,24,8
 SnapEdges = true
+MapPosition = 0,24,8
+BattleBack = cave1
 #-------------------------------
 [253]   # Cindervault Gym - Warden Arena
 Name = Cindervault Gym
-MapPosition = 0,24,8
 SnapEdges = true
+MapPosition = 0,24,8
+BattleBack = cave1
+#-------------------------------
+[254]   # Pyre Keep - Ancestor Crypts
+Name = Pyre Keep - Ancestor Crypts
+SnapEdges = true
+ShowArea = true
+MapPosition = 0,24,8
+BattleBack = cave1
 #-------------------------------
 [255]   # Cindervault - Tap Chamber
 Name = Cindervault
 SnapEdges = true
 MapPosition = 0,24,8
 BattleBack = cave1
+#-------------------------------
+[260]   # Ironreach
+Name = Ironreach
+Outdoor = true
+ShowArea = true
+HealingSpot = 260,8,14
+MapPosition = 0,16,13
+BattleBack = city
+#-------------------------------
+[261]   # Ironreach Pokémon Center
+Name = Ironreach Pokémon Center
+ShowArea = false
+HealingSpot = 260,8,14
+MapPosition = 0,16,13
+#-------------------------------
+[262]   # Ironreach Mart
+Name = Ironreach Mart
+MapPosition = 0,16,13
+#-------------------------------
+[263]   # The Iron Pit
+Name = The Iron Pit
+SnapEdges = true
+MapPosition = 0,16,13
+BattleBack = indoor3
+#-------------------------------
+[270]   # Ironreach Gym - Entrance
+Name = Ironreach Gym
+SnapEdges = true
+MapPosition = 0,16,13
+BattleBack = indoor3
+#-------------------------------
+[271]   # Ironreach Gym - Puzzle Room 1
+Name = Ironreach Gym
+SnapEdges = true
+MapPosition = 0,16,13
+BattleBack = indoor3
+#-------------------------------
+[272]   # Ironreach Gym - Puzzle Room 2
+Name = Ironreach Gym
+SnapEdges = true
+MapPosition = 0,16,13
+BattleBack = indoor3
+#-------------------------------
+[273]   # Ironreach Gym - Puzzle Room 3
+Name = Ironreach Gym
+SnapEdges = true
+MapPosition = 0,16,13
+BattleBack = indoor3
+#-------------------------------
+[274]   # Ironreach Gym - Warden Arena
+Name = Ironreach Gym
+SnapEdges = true
+MapPosition = 0,16,13
+BattleBack = indoor3
 #-------------------------------
 [280]   # Verdance - Market Terraces
 Name = Verdance
@@ -427,6 +655,22 @@ MapPosition = 0,9,10
 [282]   # Verdance Mart
 Name = Verdance Mart
 MapPosition = 0,9,10
+#-------------------------------
+[283]   # Verdance - Glasshouse Ward
+Name = Verdance - Glasshouse Ward
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,9,10
+BattleBack = field
+#-------------------------------
+[284]   # Verdance - Kingsgate Barbican
+Name = Verdance - Kingsgate Barbican
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,9,10
+BattleBack = field
 #-------------------------------
 [285]   # Briar Hall - Upper Court
 Name = Briar Hall
@@ -445,10 +689,127 @@ Name = Briar Hall
 Outdoor = false
 MapPosition = 0,9,10
 #-------------------------------
+[288]   # Briar Hall - Royal Gallery
+Name = Briar Hall
+Outdoor = false
+MapPosition = 0,9,10
+#-------------------------------
+[289]   # Briar Hall - Thorn Crypts
+Name = Briar Hall - Thorn Crypts
+Outdoor = false
+ShowArea = true
+BattleBack = cave1
+MapPosition = 0,9,10
+#-------------------------------
+[290]   # Verdance Gym - Entrance
+Name = Verdance Gym
+SnapEdges = true
+MapPosition = 0,9,10
+BattleBack = field
+#-------------------------------
+[291]   # Verdance Gym - Puzzle Room 1
+Name = Verdance Gym
+SnapEdges = true
+MapPosition = 0,9,10
+BattleBack = field
+#-------------------------------
+[292]   # Verdance Gym - Puzzle Room 2
+Name = Verdance Gym
+SnapEdges = true
+MapPosition = 0,9,10
+BattleBack = field
+#-------------------------------
+[293]   # Verdance Gym - Warden Arena
+Name = Verdance Gym
+SnapEdges = true
+MapPosition = 0,9,10
+BattleBack = field
+#-------------------------------
+[294]   # The Heartgarden
+Name = The Heartgarden
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,9,10
+BattleBack = field
+#-------------------------------
 [295]   # Cathedral of the Evergreen
 Name = Cathedral of the Evergreen
 Outdoor = false
 MapPosition = 0,9,10
+#-------------------------------
+[296]   # Verdance - Rootward
+Name = Verdance - Rootward
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,9,10
+BattleBack = field
+#-------------------------------
+[300]   # Rimeholt - Thane's Harbour
+Name = Rimeholt - Thane's Harbour
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,3,2
+BattleBack = snow
+Weather = Snow,20
+#-------------------------------
+[301]   # Rimeholt Pokémon Center
+Name = Rimeholt Pokémon Center
+ShowArea = false
+HealingSpot = 300,10,15
+MapPosition = 0,3,2
+#-------------------------------
+[302]   # Rimeholt Mart
+Name = Rimeholt Mart
+MapPosition = 0,3,2
+#-------------------------------
+[303]   # Rimeholt - Icewall Gate
+Name = Rimeholt - Icewall Gate
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,3,2
+BattleBack = snow
+Weather = Snow,25
+#-------------------------------
+[304]   # Rimeholt - Sled Market
+Name = Rimeholt - Sled Market
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,3,2
+BattleBack = snow
+Weather = Snow,20
+#-------------------------------
+[305]   # Whalebone Keep - Bailey
+Name = Whalebone Keep - Bailey
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,3,2
+BattleBack = snow
+Weather = Snow,25
+#-------------------------------
+[306]   # Whalebone Keep - Mead Hall
+Name = Whalebone Keep - Mead Hall
+Outdoor = false
+ShowArea = true
+MapPosition = 0,3,2
+#-------------------------------
+[307]   # Whalebone Keep - Thane's Seat
+Name = Whalebone Keep - Thane's Seat
+Outdoor = false
+ShowArea = true
+MapPosition = 0,3,2
+#-------------------------------
+[308]   # Whalebone Keep - Ice Vault
+Name = Whalebone Keep - Ice Vault
+Outdoor = false
+ShowArea = true
+BattleBack = cave1
+MapPosition = 0,3,2
 #-------------------------------
 [520]   # The Ferrymen's Mile
 Name = The Ferrymen's Mile
@@ -586,6 +947,12 @@ MapPosition = 0,2,8
 BattleBack = cave1
 SnapEdges = true
 #-------------------------------
+[565]   # Gullcry Caves B1F
+Name = Gullcry Caves B1F
+MapPosition = 0,2,8
+BattleBack = cave1
+SnapEdges = true
+#-------------------------------
 [566]   # Spinners' Rise
 Name = Spinners' Rise
 Outdoor = true
@@ -663,10 +1030,67 @@ BattleBack = snow
 Weather = Snow,10
 MapPosition = 0,7,11
 #-------------------------------
+[580]   # The Reedholms
+Name = The Reedholms
+Outdoor = true
+ShowArea = true
+MapPosition = 0,4,7
+BattleBack = water
+Weather = Rain,40
+#-------------------------------
+[581]   # The Icefall Locks
+Name = The Icefall Locks
+Outdoor = true
+ShowArea = true
+MapPosition = 0,8,7
+BattleBack = snow
+Weather = Snow,25
+#-------------------------------
 [582]   # Lumen West Gate
 Name = Lumen West Gate
 MapPosition = 0,14,14
 SnapEdges = true
+#-------------------------------
+[584]   # Voltaic Sluiceworks
+Name = Voltaic Sluiceworks
+MapPosition = 0,4,6
+BattleBack = indoor3
+SnapEdges = true
+#-------------------------------
+[585]   # Sluiceworks Turbine Hall
+Name = Sluiceworks Turbine Hall
+MapPosition = 0,4,6
+BattleBack = indoor3
+SnapEdges = true
+#-------------------------------
+[588]   # Ebb Hollow
+Name = Ebb Hollow
+Outdoor = true
+ShowArea = true
+MapPosition = 0,4,8
+BattleBack = water
+#-------------------------------
+[590]   # Brassfall
+Name = Brassfall
+Outdoor = true
+ShowArea = true
+MapPosition = 0,7,7
+BattleBack = snow
+Weather = Snow,15
+#-------------------------------
+[591]   # Brassfall Pokémon Center
+Name = Brassfall Pokémon Center
+ShowArea = false
+HealingSpot = 590,11,22
+MapPosition = 0,7,7
+#-------------------------------
+[592]   # The Icecutters' Haul
+Name = The Icecutters' Haul
+Outdoor = true
+ShowArea = true
+MapPosition = 0,6,7
+BattleBack = snow
+Weather = Snow,20
 #-------------------------------
 [593]   # The Arc-Lamp Mile
 Name = The Arc-Lamp Mile
@@ -680,12 +1104,119 @@ Outdoor = true
 ShowArea = true
 MapPosition = 0,11,9
 #-------------------------------
+[595]   # Coppice Ride
+Name = Coppice Ride
+Outdoor = true
+ShowArea = true
+MapPosition = 0,10,8
+BattleBack = field
+#-------------------------------
+[600]   # The Brass Dunes
+Name = The Brass Dunes
+Outdoor = true
+ShowArea = true
+Bicycle = true
+BattleBack = desert
+MapPosition = 0,14,5
+#-------------------------------
+[601]   # The Rib Road
+Name = The Rib Road
+Outdoor = true
+ShowArea = true
+Bicycle = true
+BattleBack = desert
+Weather = Sandstorm,40
+MapPosition = 0,16,4
+#-------------------------------
+[604]   # Static Tunnels
+Name = Static Tunnels
+Outdoor = false
+ShowArea = true
+BattleBack = cave1
+DarkMap = true
+MapPosition = 0,15,4
+#-------------------------------
+[605]   # Static Tunnels Depths
+Name = Static Tunnels Depths
+Outdoor = false
+ShowArea = true
+BattleBack = cave1
+DarkMap = true
+MapPosition = 0,15,4
+#-------------------------------
+[606]   # Temple of the Noon Sun
+Name = Temple of the Noon Sun
+Outdoor = false
+ShowArea = true
+SnapEdges = true
+MapPosition = 0,15,4
+#-------------------------------
 [608]   # The Lowlight (Shattered)
 Name = The Lowlight
 Outdoor = true
 ShowArea = true
 SnapEdges = true
 MapPosition = 0,16,16
+#-------------------------------
+[610]   # Copperdune
+Name = Copperdune
+Outdoor = true
+ShowArea = true
+Bicycle = true
+HealingSpot = 610,29,12
+MapPosition = 0,15,5
+BattleBack = desert
+#-------------------------------
+[611]   # Copperdune Pokémon Center
+Name = Copperdune Pokémon Center
+ShowArea = false
+HealingSpot = 610,29,12
+MapPosition = 0,15,5
+#-------------------------------
+[612]   # The Meridian Mainline
+Name = The Meridian Mainline
+Outdoor = true
+ShowArea = true
+Bicycle = true
+BattleBack = rocky
+MapPosition = 0,17,15
+#-------------------------------
+[613]   # Sunbleach Flats
+Name = Sunbleach Flats
+Outdoor = true
+ShowArea = true
+Bicycle = true
+BattleBack = desert
+MapPosition = 0,16,3
+#-------------------------------
+[620]   # The Marrow Road
+Name = The Marrow Road
+Outdoor = true
+ShowArea = true
+Bicycle = true
+BattleBack = desert
+MapPosition = 0,17,4
+#-------------------------------
+[624]   # Ossuary of Dunes
+Name = Ossuary of Dunes
+Outdoor = false
+ShowArea = true
+BattleBack = cave1
+MapPosition = 0,16,5
+#-------------------------------
+[625]   # Ossuary of Dunes - Script Vault
+Name = Ossuary Script Vault
+Outdoor = false
+ShowArea = true
+BattleBack = cave1
+MapPosition = 0,16,5
+#-------------------------------
+[628]   # Sinkfield
+Name = Sinkfield
+Outdoor = true
+ShowArea = true
+BattleBack = desert
+MapPosition = 0,18,3
 #-------------------------------
 [920]   # The Rimed Sands
 Name = The Rimed Sands

@@ -71,6 +71,13 @@ end
 def pfm_quest?(id);      return !$PokemonGlobal.pf_quests[id].nil?;                 end
 def pfm_quest_done?(id); q = $PokemonGlobal.pf_quests[id]; return !!(q && q[:done]); end
 
+# Windfall Row's Headbutt tutor (521; Gemini's wave12 craft carries route2.py's event over) calls
+# pbMoveTutorChoice, which no Essentials defines (the tutor is pbMoveTutorChoose): NoMethodError on talking to
+# Coll. Queued for Gemini in REFINE_QUEUE; this keeps the event working meanwhile (tools/check_map_events.py).
+def pbMoveTutorChoice(move, movelist = nil, bymachine = false, oneusemachine = false)
+  return pbMoveTutorChoose(move, movelist, bymachine, oneusemachine)
+end
+
 def pfm_money(n)
   $player.money += n
   pbMessage("\\me[Item get]" + _INTL("\\PN received ${1}!", n.to_s_formatted) + "\\wtnp[30]")

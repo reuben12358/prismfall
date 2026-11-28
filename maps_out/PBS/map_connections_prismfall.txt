@@ -16,6 +16,14 @@
 160,N,0,167,S,0
 # Lumen City - The Concourse (180) - Lumen City - The Lowlight (181)
 180,E,52,181,W,4
+# Duneholt - Terrace Bazaar (200) - Duneholt - Sandgate (203)
+200,S,22,203,N,18
+# Duneholt - Terrace Bazaar (200) - Elector's Palace - Courtyard (205)
+200,N,22,205,S,18
+# Duneholt - Terrace Bazaar (200) - Duneholt - Aquifer Quarter (204)
+200,E,20,204,W,16
+# Duneholt - Aquifer Quarter (204) - Duneholt - Sinkwells (214)
+204,S,18,214,N,18
 # The Ferrymen's Mile (520) - Windfall Row (521)
 520,N,30,521,S,58
 # The Ferrymen's Mile (520) - Lacecliff Walk (527)
@@ -40,6 +48,14 @@
 570,E,23,577,W,37
 # Rimewood Path (578) - The Rimewood (562)
 578,N,36,562,S,26
+# The Reedholms (580) - The Icecutters' Haul (592)
+580,E,10,592,W,0
+# The Icefall Locks (581) - Brassfall (590)
+581,W,84,590,E,0
+# The Icefall Locks (581) - Coppice Ride (595)
+581,E,0,595,W,20
+# Brassfall (590) - The Icecutters' Haul (592)
+590,W,0,592,E,16
 # The Rimed Sands (920) - The Steamline (925)
 920,E,13,925,W,13
 # Ashkaar Siege Camp (924) - The Steamline (925)

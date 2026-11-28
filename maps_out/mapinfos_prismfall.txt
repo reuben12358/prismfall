@@ -69,24 +69,80 @@
 197	194	Zenith Council Hall - Council Chamber
 198	185	Meridian Spire - Executive Gallery
 199	185	Meridian Spire - Dark Stone Core
+200	0	Duneholt - Terrace Bazaar
+201	200	Duneholt Pokémon Center
+202	200	Duneholt Mart
+203	200	Duneholt - Sandgate
+204	200	Duneholt - Aquifer Quarter
+205	200	Elector's Palace - Courtyard
+206	205	Elector's Palace - Hall of Audience
+207	206	Elector's Palace - Mural Gallery
+208	200	Necropolis of the Electors
+209	200	Sahar's Dig Lab
+210	200	Duneholt Gym - Entrance
+211	210	Duneholt Gym - Puzzle Room 1
+212	210	Duneholt Gym - Puzzle Room 2
+213	210	Duneholt Gym - Warden Arena
+214	200	Duneholt - Sinkwells
+220	0	Mirefen
+221	220	Mirefen Pokémon Center
+222	220	Mirefen Mart
+223	220	Corvin Mott's Infirmary
+230	220	Mirefen Gym - Entrance
+231	230	Mirefen Gym - Puzzle Room 1
+232	230	Mirefen Gym - Puzzle Room 2
+233	230	Mirefen Gym - Warden Arena
 240	0	Cindervault - Forge Terraces
 241	240	Cindervault Pokémon Center
 242	240	Cindervault Mart
 243	0	Cindervault - Caldera Gate
 244	249	Hearthguild Hall
+245	240	Pyre Keep - Rampart
+246	245	Pyre Keep - Ember Throne
+247	245	Pyre Keep - Hall of Oaths
+248	245	Pyre Keep - Dragon Roosts
 249	0	Cindervault - Slag Ward
-250	240	Cindervault Gym - Gate Hall
-251	250	Cindervault Gym - Pour Floor
-252	250	Cindervault Gym - Mould Floor
+250	240	Cindervault Gym - Entrance
+251	250	Cindervault Gym - Puzzle Room 1
+252	250	Cindervault Gym - Puzzle Room 2
 253	250	Cindervault Gym - Warden Arena
+254	245	Pyre Keep - Ancestor Crypts
 255	249	Cindervault - Tap Chamber
+260	0	Ironreach
+261	260	Ironreach Pokémon Center
+262	260	Ironreach Mart
+263	260	The Iron Pit
+270	260	Ironreach Gym - Entrance
+271	270	Ironreach Gym - Puzzle Room 1
+272	270	Ironreach Gym - Puzzle Room 2
+273	270	Ironreach Gym - Puzzle Room 3
+274	270	Ironreach Gym - Warden Arena
 280	0	Verdance - Market Terraces
 281	280	Verdance Pokémon Center
 282	280	Verdance Mart
+283	280	Verdance - Glasshouse Ward
+284	280	Verdance - Kingsgate Barbican
 285	280	Briar Hall - Upper Court
 286	285	Briar Hall - Great Hall
 287	285	Briar Hall - Throne Room
+288	286	Briar Hall - Royal Gallery
+289	288	Briar Hall - Thorn Crypts
+290	283	Verdance Gym - Entrance
+291	290	Verdance Gym - Puzzle Room 1
+292	290	Verdance Gym - Puzzle Room 2
+293	290	Verdance Gym - Warden Arena
+294	283	The Heartgarden
 295	280	Cathedral of the Evergreen
+296	280	Verdance - Rootward
+300	0	Rimeholt - Thane's Harbour
+301	300	Rimeholt Pokémon Center
+302	300	Rimeholt Mart
+303	300	Rimeholt - Icewall Gate
+304	300	Rimeholt - Sled Market
+305	300	Whalebone Keep - Bailey
+306	305	Whalebone Keep - Mead Hall
+307	306	Whalebone Keep - Thane's Seat
+308	306	Whalebone Keep - Ice Vault
 520	0	The Ferrymen's Mile
 521	0	Windfall Row
 522	521	The Glassed Orchard
@@ -110,6 +166,7 @@
 562	0	The Rimewood
 563	562	Rimewood Glade
 564	561	Gullcry Caves
+565	564	Gullcry Caves B1F
 566	0	Spinners' Rise
 568	560	The Rehearsal
 570	0	Frostwick
@@ -122,10 +179,32 @@
 577	0	Frostwick Pass
 578	0	Rimewood Path
 579	0	The Wolfsrime
+580	0	The Reedholms
+581	0	The Icefall Locks
 582	180	Lumen West Gate
+584	580	Voltaic Sluiceworks
+585	584	Sluiceworks Turbine Hall
+588	580	Ebb Hollow
+590	0	Brassfall
+591	590	Brassfall Pokémon Center
+592	0	The Icecutters' Haul
 593	0	The Arc-Lamp Mile
 594	0	Wallshadow Row
+595	0	Coppice Ride
+600	0	The Brass Dunes
+601	0	The Rib Road
+604	600	Static Tunnels
+605	604	Static Tunnels Depths
+606	613	Temple of the Noon Sun
 608	180	The Lowlight (Shattered)
+610	0	Copperdune
+611	610	Copperdune Pokémon Center
+612	0	The Meridian Mainline
+613	0	Sunbleach Flats
+620	0	The Marrow Road
+624	620	Ossuary of Dunes
+625	624	Ossuary of Dunes - Script Vault
+628	620	Sinkfield
 920	0	The Rimed Sands
 924	0	Ashkaar Siege Camp
 925	0	The Steamline
