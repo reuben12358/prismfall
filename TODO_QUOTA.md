@@ -213,7 +213,16 @@
 - [x] Strict build of 67799dbe in a private copy: 217 maps, 0 warnings, every puzzle proof ok (G7 ported), all 217
   committed Map*.rxdata reproduce byte for byte. The committed shared outputs (mapinfos, map_metadata, connections,
   Prismfall Maps/*.rb) are stale: they lack Gemini's new maps (the coordinator's regen covers it).
-- [ ] Next: real-engine Ch0 ferry (+ message-box frame), Ch5 vault, Interlude I (waiting on run_intro); REVIEW.md verdicts.
+- [x] Real engine: Ch0 ferry on the re-tiled 109 (Prologue, Edda, Voss, PRO_FERRY_DONE, gangway to 100, the customs
+  line; plan intro/012, `--plan ferry`), Ch5 vault (CH5_STEP 8 -> 9 -> 12), Interlude I (-> 13, Act 2, party restored);
+  one message-box frame with Gemini's centred `speech hgss 1` looks right; both looks resolve surf_fish to the new sheets.
+- [x] Cutscene waves 4b / 5a: nothing installed or wired, so nothing plays twice; verdict per beat in REVIEW.md (ferry and
+  608: ours stays; Ch4's two: neither plays until a Ch4 layer exists; Zenith council: not canon; Briar Court: Ch9-10).
+- [x] Strict build again at 4b8f8728: rxdata all reproduce; it now fails only on the new REACH check (23303dea, 20
+  out-of-reach events on 145 / 154 / 244 / 249; none on Gemini's overnight maps) - the systems agent's to triage.
+- [x] REVIEW.md verdicts appended for every non-chapter-agent proposal of the 15 commits.
+- [ ] Cutscene pass (queued): adopt `:CH5_LOWLIGHT_VALEN`'s staging on 608 alone, with story/24's words, retiring the
+  duplicated Rook / Voss / Valen talk pages; Ch4 layer to take `:CH4_EBB_STOPPED` / `:CH7_FROSTWICK_HEARTH`'s staging.
 - [ ] Found, not ours to fix (queued in REFINE_QUEUE for Gemini): 160 has no exit into 580 (the Lock Road is unreachable);
   521's tutor typo (shimmed); 541 / 525 count a run as a win.
 - [ ] Story gaps for a chapter pass: Ch4 has no story layer (V124 CH4_STEP is never set; K2, the eel stall, the strike

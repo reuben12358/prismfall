@@ -489,3 +489,69 @@ Verified spot checks match: the stale `Tilesets_prismfall.rxdata`, the Tap Chamb
   walkable tile, 240's Rampart / Roosts doors open onto your arrivals (16, 22) / (12, 20), `CHANNELER,Thessaly` and the
   Gym 7 trainers exist in `pbs/trainers.txt`, and the Trials keys you call (`pf_trial_board(:ASHKAAR)`,
   `pf_trial_talk(:ROOST_KEEPER / :OLD_CINDER)`) are registered.
+
+## Gemini's overnight 15 commits (5f233ad2..d543a354): integration audit (Claude, 2026-11-27)
+Proposals not owned by a chapter agent. Tool: `python3 -I tools/check_map_events.py --range 5f233ad2..d543a354`
+(trainers with every version, methods, items / species / moves, flag names and id collisions, registries, charsets,
+transfers, ruby syntax): **86 specs, 1704 events, 995 script blocks: 0 errors**; the 73 warnings were unregistered
+puzzle ids, now registered in `mapgen/flags.yaml` (G5_ / G6_ / G8_ / G9_ / D11_ / 576-581; the G7 ids are the Gym 7
+agent's). Strict build of HEAD in a private copy: 217 maps, every committed `Map*.rxdata` reproduces byte for byte.
+Our story layers re-run on the changed maps (interlude1, ch5's 608 sync, ch8 on 240 / 243 / 244 / 249, circuit_gym 193,
+cindervault 255) change nothing; real engine: the Ch5 vault (CH5_STEP 8 → 9 → 12) and Interlude I (→ 13, Act 2)
+still play.
+
+### `2026-11-26_act1-frontier-complete-maps` (565, 580-595) — **ADOPTED as built; one P0 seam queued**
+- Checker clean; exits to unbuilt maps are all behind `pbRgssExists?`. The Lock Road's script events are on your maps
+  (Teo on the channel, the Ice-bound Satchel, the Ice Elevator, Lattice No. 4, the Crownwall view, Ebb Hollow's Field
+  Notes) and 591's Gale Post clerk reads Juno's letter with story/24's V125 0 → 1. None of our layers stages these, so
+  nothing plays twice.
+- **P0, queued (REFINE_QUEUE):** nothing on 160 Ebbmouth leads into 580 (580 warps back to 160 (58, 36); 160's x = 59
+  is solid), so the Lock Road can't be reached.
+- Ours to do (not a fault of the maps): 594 Wallshadow Row has no "Juno rejoins at the Four Ways" (V125 1 → 2), so
+  582's gate scene has Juno talking without having rejoined.
+
+### c7be821c, the 109 / 108 overhaul — **ADOPTED**
+Tiles only (`data/raw/108.npy`, `109.npy`); the specs keep story_early's events. In a private copy
+`dovetail.py` → `wave14_setpieces_craft.py 109 110` reproduces both specs and both npy byte for byte. Real engine
+(`tools/harness/visual/intro/012_Ch0FerryCapture.rb`, plan `ferry`): the Prologue autorun, the rail twice (Edda, then
+Voss: PRO_FERRY_DONE), the gangway to 100 (34, 55) and the customs line there all play on the new deck.
+
+### 505ab82c (193 G4_SPLICE, 525 / 541 win guards, 255 Pass 3) and f6c3dfae (tr_teal stamp column) — **ADOPTED**
+193's S325 → S422 matches flags.yaml's G4_SPLICE, and `circuit_gym.py` (with your `puzzles/circuit.py`) regenerates 193
+byte for byte. The win guards are right, but `WildBattle.start` is also true on a run: 541's crab ring and 525's
+Masquerain can be won by running (queued: `cannotRun`). The stamp fix changes no committed map.
+
+### `2026-11-26_claude-art-handoff-response` — **ADOPTED (all four)**
+Venam's irises (384 px over the 16 frames), `PARTNER_GIRATINA` (check_art_wiring's last error gone), the seated
+surf-fish sheets (now wired: Core 026 `:surf_fish` = `PLAYER_*_surffish_offset`, falling back to the fishing sheet),
+the centred `speech hgss 1` (same 96 × 48 as stock; one real-engine frame of the Deckhand's message box: symmetric
+border, no grey band). Real engine: both looks resolve `surf_fish` to the new sheets. check_art_wiring: 0 errors,
+0 gaps (HROTHGAR's 2 files stay unwired, as noted 11-26).
+
+### `2026-11-26_rejuv-cutscenes-wave4b-act1-climax` and `-wave5a-verdance-frostwick` — **per beat; nothing installed**
+Neither proposal touches a map: the scenes are drop-in Ruby, unregistered and unwired, so nothing plays twice today.
+Every VFX / CG name the code uses is a real file (`graphics/Pictures` = `art/out/Graphics/Pictures`, all seven synced;
+the retired `vfx_customs_null_scan` is referenced nowhere). One version per beat:
+- **`:CH0_LAST_FERRY` (109 → 108 → 100): ours stays.** The deck, the customs scan and the quay are played by
+  story_early's events with the script's words and the player's own choices (style, name, difficulty, Voss's
+  fellowship, Edda's questions). The scene is a 57-second summary with paraphrased lines that hides those events.
+  Installing it beside them would play the prologue twice.
+- **`:CH4_EBB_STOPPED` (160 → 167) and `:CH7_FROSTWICK_HEARTH` (570 → 573 → 579; story Ch4): neither plays.** Chapter 4
+  has no story layer yet (V124 CH4_STEP is never set; 573's bard is not on the map). When it is built, your staging is
+  the better base, with story/23's lines (yours merge and add some: "You'll fall in like your father") and split where
+  the script splits (the strike vote is CH4_STEP 3, the Night the Ebb Stopped is 4).
+- **`:CH5_LOWLIGHT_VALEN` (181 → 608): ours stays for now.** 608 plays the canon beats as the script stages them: the walk
+  among the twelve glass residents, Rook / Voss / Valen at the Veil, the testimony. The scene opens on a 181 cutaway
+  with a line the script doesn't have ("no streets shown"), paraphrases Juno, and would replay Rook's, Voss's and
+  Valen's lines that 608's events already say. Its autorun staging (Juno at the Veil, Voss's crate, the glove CG) is
+  better than ours: adopting it is a rework on 608 alone (drop the 181 act, story/24's words, retire the duplicated
+  talk pages), queued for the cutscene pass.
+- **`:CH5_ZENITH_COUNCIL` (194 → 197): not adopted.** story/24 has no Council Chamber scene.
+- **`:CH6_BRIAR_COURT` (285 → 287; story Ch10):** the Ch9-10 agent's call.
+
+### `2026-11-26_act3-rimeholt-whalebone-maps` (300-308) — **ADOPTED as built**
+Checker clean; the maps only read S128 / V122 / V132; exits to 309 / 310 / 314 / 318 / 712 / 720 are guarded.
+
+### `2026-11-26_act2-cindervault-gym7-pyre-keep-maps`, Pyre Keep 245-248 and 254 — **ADOPTED (full pass)**
+Completing the Gym 7 agent's wiring check above: checker clean on all five (trainers, Trials keys, charsets, exits);
+247 reads S120 only.
