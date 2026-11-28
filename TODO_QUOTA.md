@@ -221,9 +221,11 @@
   1 -> 2, the follower) is unstaged, so 582's gate scene has Juno talk without her having rejoined.
 
 ## Status: Chapter 6 staging agent (2026-11-27)
-*Running note. Layer: `mapgen/layouts/story_ch6.py` (committed 596f2b2a). Next: Gym 5 proof module, the Duneholt
-Sergeant / Bereaved PBS blocks, the real-engine walk (`tools/harness/visual/ch6/`), the key-events GIF, notes.*
-
+*Running note. Done and committed: the story layer `mapgen/layouts/story_ch6.py` (596f2b2a + fixes), the Duneholt
+Sergeant v6 / Bereaved v7 PBS blocks (78dde2ee), the Gym 5 proof `mapgen/puzzles/dig.py` (07a262b0), the ace /
+Doublade barks (6e4efd7c), 206's gallery shut in Ch6 (1434a145), REVIEW verdict (6f413f35), REFINE_QUEUE note
+(46049504), the capture plan `tools/harness/visual/ch6/010_Ch6StoryCapture.rb`. Engine so far: CH6_STEP 0 -> 4 and
+Gym 5 up to M2 pass. Next: the full engine walk to 9, the key-events GIF.*
 ## Status: battle-systems backlog agent (2026-11-27)
 *Running note. Checks: `run_finale_bosses.rb`, `run_story_hooks.rb`, `winrates_r4.rb` ARC* cells in a private run dir.*
 - [x] Ogerpon on Juno's J4 (168e8c2e); Aurelia 824–826 WATER_SURFACE (996b5b54); Ruin Inverse overlays (133ace4c); Ch11 harpooners checked (b8be22d0).
