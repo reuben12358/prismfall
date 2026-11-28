@@ -45,11 +45,10 @@ events:
     trigger: action
     move: fixed
     commands:
-    - {script: "if (pf_trial_ready?(:WENLOW_INFIRMARY) rescue false)\n  pf_trial_talk(:WENLOW_INFIRMARY)\nelse\n  pbMessage(_INTL(\"Wenlow: Oh! Visitors! Hello! I'm\
-        \ Wenlow, I'm the apprentice, mind the tray — there! Saved it.\"))\n  if $game_variables[128].to_i >= 1\n    pbMessage(_INTL(\"Wenlow: Oh — oh no, you've\
-        \ had a Sweetrot. I can smell it. Peaches! Please don't have another one. We've a whole ward of people who had another one.\"))\n  end\n  pbMessage(_INTL(\"\
-        Wenlow: Doctor Mott's up in the Quiet Ward through the north archway, and Juno's in the east dispensary putting twenty years of ledgers in alphabetical order!\"\
-        ))\n  pbMessage(_INTL(\"Wenlow: Do say hello to Ama by the north-west window if you go up. She likes being told about the weather up top.\"))\nend"}
+    - {script: "if (pf_trial_ready?(:WENLOW_INFIRMARY) rescue false)\n  pf_trial_talk(:WENLOW_INFIRMARY)\nelse\n  if $game_variables[@@SWEETROT_TAKEN].to_i >= 1\n\
+        \    pbMessage(_INTL(\"Wenlow: Don't have another one. Please. Don't have another one.\"))\n  else\n    pbMessage(_INTL(\"Wenlow: I'll introduce you. I always\
+        \ introduce people. It's polite.\"))\n  end\nend"}
+    story: ch7
   - cond: {switch: CH16_PURGE_BEGUN}
     through: true
     trigger: action
@@ -87,12 +86,11 @@ events:
     trigger: action
     move: fixed
     commands:
-    - {script: "if (pf_trial_ready?(:CORVIN_INFIRMARY) rescue false)\n  pf_trial_talk(:CORVIN_INFIRMARY)\nelsif (pfm_gym_won?(:LEADER_CORVIN) rescue false)\n  pbMessage(_INTL(\"\
-        Corvin: Back again? Sit, tongue out, follow the finger. Lovely. Total bill: zero Pokédollars.\"))\n  pbMessage(_INTL(\"Corvin: My Quiet Ward's stable tonight.\
-        \ If you're heading east past Lake Sallow into Ashkaar, keep your head down — Cindervault's hotter than the Mire.\"))\nelse\n  pbMessage(_INTL(\"Corvin: Corvin\
-        \ Mott. Warden, doctor, and the reason the Sump Barons don't sleep well. The mask's for the smell, mostly.\"))\n  pbMessage(_INTL(\"Corvin: I've a ward of\
-        \ forty patients slowly turning into garden furniture. Forgive me if I don't stand for the Sovereign's anthem.\"))\n  pbMessage(_INTL(\"Corvin: When you're\
-        \ ready for a formal examination, my Gym hall is just south down Mirefen's east boardwalk. Bring a clean head — and count to four.\"))\nend"}
+    - {script: "if (pf_trial_ready?(:CORVIN_INFIRMARY) rescue false)\n  pf_trial_talk(:CORVIN_INFIRMARY)\nelse\n  if (pfm_gym_won?(:LEADER_CORVIN) rescue false)\n\
+        \    pbMessage(_INTL(\"Corvin: Sit. Tongue out. Follow the finger. Lovely.\"))\n    pbMessage(_INTL(\"Corvin: My Quiet Ward's stable tonight. If you're heading\
+        \ east past Lake Sallow into Ashkaar, keep your head down.\"))\n  else\n    pbMessage(_INTL(\"Corvin: Your friend's in the dispensary, doing something devastatingly\
+        \ cheerful to my filing.\"))\n    pbMessage(_INTL(\"Corvin: Go and stop her. Or don't.\"))\n  end\nend"}
+    story: ch7
 - type: event
   name: Juno Hale
   at: [19, 13]
@@ -100,8 +98,190 @@ events:
   - graphic: {sprite: JUNO, dir: down}
     trigger: action
     move: fixed
-    commands: ['Juno: You came! Look at Dr Mott''s ledgers — every burn, every Fixing, every Sweetrot since AF 288, in no order at ALL.', 'Juno: I''m putting them
-        in order by year. He hates it. He hasn''t stopped me.', 'Juno: I had noodles outside too — the cook gave me three out of ten. Said I talked to the bowl!']
+    commands:
+    - if: $game_variables[@@CH7_STEP] == 2
+      then:
+      - if: pfm_get(:ch7_j2_tried)
+        then: ['\pf[JUNO,angry,,Juno Hale]Juno: Again. Please. I''m not done not thinking.']
+        else:
+        - {script: pfm_fade_out(8)}
+        - move:
+            who: player
+            route:
+            - {script: 'moveto(19, 14)'}
+            - turn_up
+            wait: true
+        - move:
+            who: Juno Hale
+            route: [turn_down]
+            wait: true
+        - {script: pfm_fade_in(10)}
+        - '\pf[JUNO,happy,,Juno Hale]Juno: You came! You brought — you didn''t bring snacks.'
+        - 'Juno: That''s fine. I''ve had noodles. Three out of ten, he gave me.'
+        - 'Juno: He said I talked to the bowl.'
+        - 'Juno: Dr Mott keeps every patient in these.'
+        - 'Juno: Every burn, every Fixing, every Sweetrot. In no order at ALL.'
+        - 'Juno: I''m putting them in order. He hates it. He hasn''t stopped me.'
+        - 'Juno: This one''s this spring. The Shatter. The night of the gala.'
+        - 'Juno: He was up all night, look, nineteen people—'
+        - move:
+            who: Juno Hale
+            route: [turn_up]
+            wait: true
+        - {script: 'pbSEPlay("GUI storage put down", 50, 140)'}
+        - {wait: 40}
+        - '\pf[JUNO,neutral,,Juno Hale]Juno: "R.A. Second-degree Bleed-burn, right palm and fingers. Lightning pattern. Discretion."'
+        - '\pf[JUNO,neutral,dots,Juno Hale]Juno: ...'
+        - move:
+            who: Corvin Mott
+            route:
+            - through_on
+            - {speed: 6}
+            - down
+            - down
+            - down
+            - down
+            - down
+            - down
+            - down
+            - down
+            - down
+            - right
+            - right
+            - right
+            - right
+            - right
+            - right
+            - turn_right
+            wait: true
+        - {script: 'pbSEPlay("GUI storage pick up", 70, 80)'}
+        - {wait: 10}
+        - '\pf[CORVIN,neutral,,Corvin Mott]Corvin: That one''s not filed yet. My handwriting. You''d never read it.'
+        - move:
+            who: Corvin Mott
+            route: [left, left, left, left, left, left, up, up, up, up, up, up, up, up, up, turn_down, through_off]
+            wait: false
+        - {wait: 50}
+        - move:
+            who: Juno Hale
+            route: [turn_down]
+            wait: true
+        - '\pf[JUNO,happy,sweat,Juno Hale]Juno: R.A.! There''s loads of R.A.s.'
+        - 'Juno: Roberta Ash. Rufus... Ardley.'
+        - 'Juno: There''s a man on the stilt-walk called Ras.'
+        - 'Juno: Right palm. Lightning.'
+        - '\pf[JUNO,angry,,Juno Hale]Juno: Fight me. On the stilt-walk. Now.'
+        - 'Juno: I need to hit something that isn''t a thought.'
+      - {script: 'pfm_set(:ch7_j2_tried)'}
+      - {script: 'EliteBattle.set(:nextBattleScript, { "lastOpp" => "He wouldn''t. He WOULDN''T." }) if defined?(EliteBattle)'}
+      - if: 'Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 2, field: :CORROSIVE_MIRE)'
+        then:
+        - '\pf[JUNO,sad,,Juno Hale]Juno: ...'
+        - 'Juno: He burned his hand on the kettle. That''s what he wrote.'
+        - 'Juno: The right one. The same night.'
+        - 'Juno: He''s never burned himself on anything in his life.'
+        - 'Juno: He picks up hot pots with his bare hands.'
+        - 'Juno: Aunt Elin used to shout at him for it.'
+        - '\pf[JUNO,crying,,Juno Hale]Juno: Say it isn''t. Say something.'
+        - choices: ['"Rowan Ashby."', '"There''s loads of R.A.s."', 'Ask Corvin. Later, alone.']
+          branches:
+          - - {script: 'pf_choose(:ch7_ledger, :name_him)'}
+            - '\pf[JUNO,angry,,Juno Hale]Juno: Don''t. Don''t you DARE say his name like it''s an answer.'
+            - 'Juno: You don''t know him.'
+            - 'Juno: You met him for ten minutes in a station with a sick Phantump.'
+            - 'Juno: You don''t KNOW him.'
+            - move:
+                who: Juno Hale
+                route:
+                - through_on
+                - {speed: 5}
+                - left
+                - down
+                - left
+                - left
+                - left
+                - left
+                - left
+                - left
+                - down
+                - down
+                - down
+                - {opacity: 0}
+                wait: true
+            - {script: 'pfm_vanish("Juno Hale", 1)'}
+          - - {script: 'pf_choose(:ch7_ledger, :reassure)'}
+            - '\pf[JUNO,angry,,Juno Hale]Juno: ...There are. Aren''t there. There are loads.'
+            - '\pf[JUNO,happy,,Juno Hale]Juno: Thank you. I''m being silly. I said in my letter, I''m being silly.'
+            - 'Juno: I just needed somebody else to say it.'
+            - move:
+                who: player
+                route:
+                - jump: [0, 0]
+                wait: false
+            - move:
+                who: Juno Hale
+                route:
+                - jump: [0, 0]
+                wait: true
+            - {wait: 20}
+            - move:
+                who: Juno Hale
+                route: [turn_up]
+                wait: true
+          - - {script: 'pf_choose(:ch7_ledger, :ask_corvin)'}
+            - '\pf[JUNO,happy,,Juno Hale]Juno: ...Yes. Ask him. You ask him. I can''t.'
+            - {script: pfm_fade_out(20)}
+            - move:
+                who: Corvin Mott
+                route:
+                - {script: 'moveto(16, 5)'}
+                - turn_up
+                wait: true
+            - move:
+                who: player
+                route:
+                - {script: 'moveto(15, 5)'}
+                - turn_right
+                wait: true
+            - {script: pfm_fade_in(20)}
+            - {script: 'pbSEPlay("GUI storage pick up", 40, 120)'}
+            - {wait: 20}
+            - {script: 'pfm_face("Corvin Mott", :player)'}
+            - '\pf[CORVIN,neutral,,Corvin Mott]Corvin: I''m a doctor. I treat hands. I don''t ask whose.'
+            - 'Corvin: And I''d thank you not to ask me twice, because the second time I might tell you, and then it''d be yours to carry. Not mine.'
+            - {script: pfm_fade_out(20)}
+            - move:
+                who: Corvin Mott
+                route:
+                - {script: 'moveto(12, 4)'}
+                - turn_down
+                wait: true
+            - move:
+                who: player
+                route:
+                - {script: 'moveto(19, 14)'}
+                - turn_up
+                wait: true
+            - move:
+                who: Juno Hale
+                route: [turn_down]
+                wait: true
+            - {script: pfm_fade_in(20)}
+            - '\pf[JUNO,sad,,Juno Hale]Juno: ...He wouldn''t say. I can tell. Good. He''s a good doctor.'
+            - move:
+                who: Juno Hale
+                route: [turn_up]
+                wait: true
+            - {script: 'pbSEPlay("GUI storage put down", 30, 90)'}
+            - 'Juno: I''m going to stop reading these now.'
+          cancel: 0
+        - switch: [CH7_J2_DONE, true]
+        - var: [CH7_STEP, 3]
+      else:
+      - if: $game_variables[@@CH7_STEP] >= 3
+        then: ['Juno: I''m putting them in order. He hates it. He hasn''t stopped me.']
+        else: ['Juno: Dr Mott keeps every patient in these.', 'Juno: Every burn, every Fixing, every Sweetrot. In no order at ALL.']
+    story: ch7
 - type: event
   name: Recovering Sump-Worker
   at: [4, 12]
@@ -155,3 +335,471 @@ events:
   at: [6, 11]
   post: false
   text: A brass short-wave radio tuned to the Cragholm hospital band. Through faint marsh static, a crackle of clean mountain wind whispers over the speaker.
+- type: event
+  name: The Quiet Ward
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - move:
+        who: player
+        route: [up, up, up]
+        wait: true
+    - move:
+        who: Wenlow
+        route: [right, right, turn_down]
+        wait: true
+    - move:
+        who: Wenlow
+        route:
+        - jump: [0, 0]
+        wait: false
+    - {script: 'pbSEPlay("Anim/Crash", 50, 140)'}
+    - '\pf[WENLOW,happy,exclaim,Wenlow]Wenlow: Oh! Visitors! Hello!'
+    - 'Wenlow: I''m Wenlow, I''m the apprentice, mind the tray, mind the — there. Saved it.'
+    - 'Wenlow: You''re Juno''s friend, aren''t you? She said you''d come.'
+    - 'Wenlow: She said you''d come and stand in a doorway looking serious.'
+    - 'Wenlow: You''re doing it now!'
+    - if: $game_variables[@@SWEETROT_TAKEN] >= 1
+      then: ['\pf[WENLOW,panic,sweat,Wenlow]Wenlow: Oh — oh no, you''ve had a Sweetrot. I can smell it. Peaches.', 'Wenlow: Don''t have another one. Please. Don''t
+          have another one.', 'Wenlow: We''ve a whole ward of people who had another one.']
+    - '\pf[WENLOW,happy,,Wenlow]Wenlow: Doctor''s in the Quiet Ward. Come up. You can meet everyone.'
+    - 'Wenlow: I''ll introduce you. I always introduce people. It''s polite.'
+    - {script: pbBGMFade(1.5)}
+    - move:
+        who: Corvin Mott
+        route: [turn_up]
+        wait: false
+    - move:
+        who: Wenlow
+        route:
+        - through_on
+        - {speed: 4}
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - turn_up
+        - through_off
+        wait: false
+    - move:
+        who: player
+        route: [wait 12, up, up, up, up, up, up, up, up]
+        wait: true
+    - {script: 'pfm_tone(-12, -8, 6, 40, 30)'}
+    - {script: 'pfm_face(:player, "Wenlow")'}
+    - '\pf[WENLOW,neutral,,Wenlow]Wenlow: This is Mister Garrod. He hums. We don''t know the tune.'
+    - {script: 'pf_emote("Ward bed 2 (Mister Garrod), size(2,2)", :music)'}
+    - 'Wenlow: If you know it, tell us; he''d like that.'
+    - move:
+        who: Wenlow
+        route: [through_on, down, right, right, right, right, right, right, right, right, right, right, up, turn_up, through_off]
+        wait: true
+    - {script: 'pfm_face(:player, "Wenlow")'}
+    - 'Wenlow: That''s Old Fen. Glass to the elbow on the left.'
+    - 'Wenlow: Plays cards with his right. He cheats. We let him.'
+    - move:
+        who: Wenlow
+        route: [through_on, down, right, right, right, turn_right, through_off]
+        wait: true
+    - {script: 'pfm_face(:player, "Wenlow")'}
+    - 'Wenlow: And the Tull twins, both at stage two, in the beds together because they cried when we split them up.'
+    - move:
+        who: Wenlow
+        route:
+        - through_on
+        - {speed: 5}
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - up
+        - turn_up
+        - through_off
+        wait: true
+    - {script: 'pfm_face(:player, "Wenlow")'}
+    - 'Wenlow: And this is Ama. She''s nine.'
+    - {script: 'pbSEPlay("Anim/Ice1", 35, 120)
+
+        pfm_glow(26, 30, 44, 16, 12)'}
+    - '\pf[WENLOW,happy,,Wenlow]Wenlow: She likes being told about the weather up top.'
+    - 'Wenlow: I tell her every morning. I make some of it up.'
+    - {script: 'pfm_face(:player, "Corvin Mott")'}
+    - {wait: 24}
+    - '\pf[CORVIN,deadpan,,Corvin Mott]Corvin: Wenlow, you''ve introduced them to every patient on the floor, haven''t you.'
+    - '\pf[WENLOW,happy,,Wenlow]Wenlow: Yes, Doctor!'
+    - 'Corvin: Good. Somebody should.'
+    - move:
+        who: Corvin Mott
+        route: [turn_down]
+        wait: true
+    - 'Corvin: Corvin Mott. Warden, doctor, and the reason the Sump Barons don''t sleep well.'
+    - 'Corvin: The mask''s for the smell, mostly.'
+    - 'Corvin: I''ve a ward of forty patients slowly turning into garden furniture. Forgive me if I don''t stand for the Sovereign''s anthem.'
+    - 'Corvin: Your friend''s in the dispensary, doing something devastatingly cheerful to my filing.'
+    - 'Corvin: Go and stop her. Or don''t.'
+    - 'Corvin: She found a ledger I''d lost in AF 296.'
+    - {script: $game_map.autoplay}
+    - {script: pfm_fade_in(20)}
+    - var: [CH7_STEP, 2]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH7_STEP, 1]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 2]
+  at: [0, 0]
+  story: ch7
+- type: event
+  name: Invoice
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: pfm_fade_out(10)}
+    - move:
+        who: player
+        route:
+        - {script: 'moveto(12, 12)'}
+        - turn_up
+        wait: true
+    - move:
+        who: Corvin Mott
+        route:
+        - {script: 'moveto(12, 11)'}
+        - turn_down
+        wait: true
+    - move:
+        who: Wenlow
+        route:
+        - {script: 'moveto(13, 10)'}
+        - turn_down
+        wait: true
+    - {script: pfm_fade_in(14)}
+    - '\pf[CORVIN,deadpan,,Corvin Mott]Corvin: Sit. Tongue out. Follow the finger. Lovely.'
+    - move:
+        who: player
+        route: [turn_left, wait 8, turn_right, wait 8, turn_up]
+        wait: true
+    - 'Corvin: Your bill.'
+    - {script: 'pfm_item(:INVOICE, 1, "Invoice")'}
+    - 'INVOICE: "Item: one (1) heart attack, mine. Item: gauze. Item: the look on Wenlow''s face. TOTAL: ₽0."'
+    - choices: [I'm fine., The rain went up.]
+      branches:
+      - ['\pf[CORVIN,angry,,Corvin Mott]Corvin: You walked into a marsh that rains UPWARD.', 'Corvin: "Fine" is not on the menu, dear.']
+      - ['\pf[CORVIN,angry,,Corvin Mott]Corvin: I''m aware of the direction of the rain.', 'Corvin: I''m a Warden. I get a memo.']
+      cancel: 1
+    - '\pf[WENLOW,happy,,Wenlow]Wenlow: Doctor, they did bring back the medicine-runner''s sack—'
+    - '\pf[CORVIN,deadpan,,Corvin Mott]Corvin: Wenlow, I''m having an emotion. Don''t help.'
+    - '\pf[WENLOW,panic,sweat,Wenlow]Wenlow: Sorry, Doctor!'
+    - move:
+        who: Wenlow
+        route:
+        - jump: [0, 0]
+        wait: false
+    - {script: 'pbSEPlay("Anim/Crash", 80, 110)
+
+        pfm_shake(2, 14, 6)'}
+    - {wait: 20}
+    - 'Corvin: ...Item four. One tray.'
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH7_STEP, 4]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 5]
+  at: [1, 0]
+  story: ch7
+- type: event
+  name: The Ward Night (Veil)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: pfm_get(:ch7_ward_night).to_i == 1
+      then:
+      - {script: 'pfm_set(:ch7_ward_night, 2)'}
+      - move:
+          who: Juno Hale
+          route:
+          - {opacity: 0}
+          - through_on
+          wait: false
+      - move:
+          who: Wenlow
+          route:
+          - {opacity: 0}
+          - through_on
+          wait: false
+      - move:
+          who: Corvin Mott
+          route:
+          - {script: 'moveto(12, 9)'}
+          - turn_up
+          wait: true
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(13, 11)'}
+          - turn_up
+          wait: true
+      - move:
+          who: Wenlow (night)
+          route:
+          - graphic: [WENLOW, 0, 8, 0]
+          - {opacity: 255}
+          - {script: 'moveto(14, 11)'}
+          wait: true
+      - {script: 'pfm_veil(11, 8, 3, 1, 1)'}
+      - {script: 'pfm_tone(-120, -116, -70, 110, 30)'}
+      - {script: '2.times { |i| pbSEPlay("Ring Glass Harmonic", 60 + i * 15, 58 + i * 12); pbWait(0.6) }'}
+      - raw:
+        - 203
+        - [8, 4, 2]
+      - {script: 'pbSEPlay("Anim/Ice1", 60, 70)'}
+      - {wait: 20}
+      - {wait: 24}
+      - {script: pfm_pan_home(24)}
+      - move:
+          who: Corvin Mott
+          route:
+          - {speed: 4}
+          - turn_up
+          - wait 10
+          wait: true
+      - {script: 'pbSEPlay("Anim/Fire1", 70, 120)
+
+          pfm_shake(1, 20, 4)'}
+      - move:
+          who: Corvin Mott
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+      - move:
+          who: Juno (night)
+          route:
+          - graphic: [JUNO, 0, 8, 0]
+          - {opacity: 255}
+          - through_on
+          - {speed: 5}
+          - up
+          - up
+          - up
+          - up
+          - up
+          - left
+          - up
+          - turn_up
+          - through_off
+          wait: true
+      - '\pf[JUNO,shocked,,Juno (night)]Juno: It''s the same. It''s the Lowlight. It''s the—'
+      - {script: 'pfm_face("Corvin Mott", "Juno (night)")'}
+      - '\pf[CORVIN,neutral,,Corvin Mott]Corvin: The dampers hold the ward''s Bleed down.'
+      - 'Corvin: Without them it goes up like this, and in an hour every patient on that floor is stage four.'
+      - 'Corvin: Stage four doesn''t come back.'
+      - 'Corvin: The stills. Juno. The seed-medicine stills run on peat, not current.'
+      - 'Corvin: If we can get the stills to the damper coils, the medicine might hold them — might—'
+      - '\pf[JUNO,neutral,,Juno (night)]Juno: I''ll do it. I know where the stills are.'
+      - 'Juno: I''ve been sorting this building for a week.'
+      - move:
+          who: Juno (night)
+          route:
+          - through_on
+          - {speed: 5}
+          - down
+          - right
+          - down
+          - down
+          - down
+          - down
+          - down
+          - {opacity: 0}
+          wait: false
+      - move:
+          who: Wenlow (night)
+          route:
+          - through_on
+          - {speed: 5}
+          - wait 6
+          - down
+          - left
+          - left
+          - down
+          - down
+          - down
+          - down
+          - down
+          - {opacity: 0}
+          wait: true
+      - {script: 'pfm_face("Corvin Mott", :player)'}
+      - {script: 'pfm_face(:player, "Corvin Mott")'}
+      - {wait: 20}
+      - 'Corvin: I''ve heard about you. The Lowlight. You walked in.'
+      - '\pf[CORVIN,sad,,Corvin Mott]Corvin: The child nearest the window. Ama.'
+      - 'Corvin: She''s the furthest along and she''s the smallest.'
+      - 'Corvin: If anyone goes past three tonight, it''s her.'
+      - 'Corvin: I''m a doctor. I can''t ask you to walk into that.'
+      - 'Corvin: So I''m not asking.'
+      - move:
+          who: player
+          route: [through_on, up, up, up, up, up]
+          wait: true
+      - {script: 'pfm_tone(-70, -70, -60, 230, 16)'}
+      - {script: '1.times { |i| pbSEPlay("Ring Glass Harmonic", 85 + i * 15, 52 + i * 12); pbWait(0.6) }'}
+      - {wait: 30}
+      - {script: 'pbSEPlay("Anim/Saint7", 45, 40)'}
+      - {wait: 40}
+      - move:
+          who: player
+          route: [left, left, left, left, left, left, left, left, left, left, up, turn_up, through_off]
+          wait: true
+      - {script: 'pbSEPlay("Anim/Ice1", 55, 60)'}
+      - {wait: 24}
+      - {script: pfm_fade_out(12)}
+      - {script: 'pbSEPlay("Anim/Ice5", 70, 70)'}
+      - {wait: 16}
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(12, 7)'}
+          - turn_down
+          wait: true
+      - {script: 'pfm_tone(-120, -116, -70, 110, 1)'}
+      - {script: 'pfm_tone(-70, -70, -60, 230, 16)'}
+      - {script: pfm_dreaming_eyes(3.4)}
+      - {wait: 60}
+      - move:
+          who: player
+          route: [through_on, down, down, through_off, turn_down]
+          wait: true
+      - move:
+          who: Ama
+          route:
+          - graphic: [NPC 29, 0, 2, 0]
+          - {opacity: 255}
+          wait: true
+      - move:
+          who: Corvin Mott
+          route: [turn_left]
+          wait: true
+      - {script: 'pfm_tone(-120, -116, -70, 110, 10)'}
+      - '\pf[CORVIN,shocked,,Corvin Mott]Corvin: ...'
+      - {script: 'pfm_glow(70, 50, 10, 20, 50)'}
+      - {script: 'pfm_face("Corvin Mott", :player)'}
+      - 'Corvin: You saw that. Tell me you saw that.'
+      - {script: 'pbSEPlay("Mining hammer", 80, 60)
+
+          pbWait(0.35)
+
+          pbSEPlay("Anim/Smokescreen", 70, 90)'}
+      - '\pf[JUNO,neutral]Juno: The stills are on the coils!'
+      - 'Juno: It''s — it''s taking! Is it taking?'
+      - {script: pfm_veil_off(70)}
+      - {script: 'pfm_tone(-120, -116, -70, 110, 30)'}
+      - {script: 'pbSEPlay("Anim/Saint1", 30, 60)
+
+          pf_emote("Ward bed 2 (Mister Garrod), size(2,2)", :music)'}
+      - {wait: 30}
+      - move:
+          who: Wenlow (night)
+          route:
+          - graphic: [WENLOW, 0, 8, 0]
+          - {opacity: 255}
+          - {script: 'moveto(12, 12)'}
+          - through_on
+          - {speed: 5}
+          - right
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - right
+          - right
+          - right
+          - up
+          - turn_up
+          - through_off
+          wait: true
+      - '\pf[WENLOW,crying,,Wenlow (night)]Wenlow: Old Fen? Old Fen, can you hear me?'
+      - {wait: 40}
+      - 'Wenlow: ...He winked. Doctor, he WINKED.'
+      - {script: 'pfm_set(:ch7_ward_night, 2)'}
+      - {script: pfm_fade_out(30)}
+      - transfer: {map: 220, x: 32, y: 13, dir: right}
+      else:
+      - {erase: true}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH7_STEP, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 6]
+  at: [2, 0]
+  story: ch7
+- type: event
+  name: Wenlow (night)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [14, 11]
+  story: ch7
+- type: event
+  name: Juno (night)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [12, 17]
+  story: ch7
+- type: event
+  name: Ama
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [11, 10]
+  story: ch7

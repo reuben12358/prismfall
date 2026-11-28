@@ -286,47 +286,153 @@ events:
   name: Sweetrot Vendor
   at: [21, 31]
   pages:
-  - graphic: {sprite: NPC 21, dir: down}
+  - commands:
+    - move:
+        who: Sweetrot Vendor
+        route: [face_player]
+        wait: true
+    - {script: 'pbSEPlay("Sweet Scent", 45, 120)'}
+    - {wait: 16}
+    - 'Sweet Vendor: Sweetrot! Try one. First one''s free.'
+    - 'Sweet Vendor: First one''s always free, sweetling.'
+    - choices: [Take one., 'No, thank you.']
+      branches:
+      - - {script: '$game_variables[@@SWEETROT_TAKEN] += 1'}
+        - {script: 'pf_emote(:player, :heart)
+
+            pfm_sweetrot(1)'}
+        - {script: 'pf_emote(:player, :dots, wait: true)'}
+      - ['Sweet Vendor: Next time. There''s always a next time, down here.']
+      cancel: 2
+    - move:
+        who: Singing Child
+        route: [turn_right]
+        wait: true
+    - {script: 'pf_emote("Singing Child", :music)'}
+    - 'Child: ♪ One for the sweet and two for the tongue,'
+    - 'Child: the peach that keeps you, keeps you young... ♪'
+    - selfswitch: [A, true]
     trigger: action
     move: fixed
-    commands:
-    - {script: "if $game_variables[128].to_i == 0\n  pbMessage(_INTL(\"Sweet Vendor: Sweetrot! Try one. Soft as mochi, sweet as summer peaches. First one's free,\
-        \ sweetling.\"))\n  if pbConfirmMessage(_INTL(\"Take a pastel Sweetrot?\"))\n    $game_variables[128] = 1\n    pbSEPlay(\"Sweet Scent\", 85, 100)\n    pbMessage(_INTL(\"\
-        It's soft and cool and tastes of peaches, and for a second everything is fine. Everything is so fine. You'd agree with anyone about anything.\"))\n    pbMessage(_INTL(\"\
-        The feeling goes. You want another one. You don't know why.\"))\n  else\n    pbMessage(_INTL(\"Sweet Vendor: Next time. There's always a next time, down here.\"\
-        ))\n  end\nelsif $game_variables[128].to_i == 1\n  pbMessage(_INTL(\"Sweet Vendor: You look like you've had a day, sweetling. Another Sweetrot? Half price,\
-        \ just for you.\"))\n  if pbConfirmMessage(_INTL(\"Take a second Sweetrot?\"))\n    $game_variables[128] = 2\n    pbSEPlay(\"Sweet Scent\", 85, 100)\n   \
-        \ pbMessage(_INTL(\"Peaches. Everything is fine. The marsh is fine. You'd agree with anyone.\"))\n    pbMessage(_INTL(\"It fades. You want another one even\
-        \ more than the last.\"))\n    pbMessage(_INTL(\"Wenlow (calling from the Infirmary walk above): NO! No no no — please, that's two! Don't take a third one!\"\
-        ))\n  else\n    pbMessage(_INTL(\"Sweet Vendor: (smiling the exact same smile) Next time's the charm, sweetling.\"))\n  end\nelse\n  pbMessage(_INTL(\"Sweet\
-        \ Vendor: (smiling the exact same smile) My sister by the Pokémon Center steps saved the pink one just for you, sweetling.\"))\nend"}
+    graphic: {sprite: NPC 21, dir: down}
+    story: ch7
+  - commands:
+    - move:
+        who: Sweetrot Vendor
+        route: [face_player]
+        wait: true
+    - if: $game_variables[@@SWEETROT_TAKEN] >= 1
+      then: ['Sweet Vendor: First one''s always free, sweetling.']
+      else: ['Sweet Vendor: Next time. There''s always a next time, down here.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 21, dir: down}
+    cond: {self: A}
+    story: ch7
 - type: event
   name: Sweet Vendor (Center Steps)
   at: [10, 17]
   pages:
-  - graphic: {sprite: NPC 23, dir: left}
+  - commands: []
     trigger: action
     move: fixed
-    commands:
-    - {script: "pbMessage(_INTL(\"Sweet Vendor: I saved you the best one, sweetling. The pink. Nobody else gets the pink.\"))\nif $game_variables[128].to_i >= 2\n\
-        \  Prismfall.checkpoint if defined?(Prismfall) && Prismfall.respond_to?(:checkpoint)\n  if pbConfirmMessage(_INTL(\"Take the pink Sweetrot?\"))\n    if pbConfirmMessage(_INTL(\"\
-        ...Really? Wenlow begged you not to take a third one.\"))\n      $game_variables[128] = $game_variables[128].to_i + 1\n      pbSEPlay(\"Sweet Scent\", 90,\
-        \ 90)\n      pbMessage(_INTL(\"Peaches. And then nothing is ever wrong again, and you never wonder why again, and you are so very happy, for the rest of your\
-        \ life.\"))\n      if defined?(Prismfall) && Prismfall.respond_to?(:game_over)\n        Prismfall.game_over(:GO_SWEET_TOOTH)\n      end\n    else\n      pbMessage(_INTL(\"\
-        Sweet Vendor: Mother Gutter will be so disappointed.\"))\n    end\n  else\n    pbMessage(_INTL(\"Sweet Vendor: Mother Gutter will be so disappointed.\"))\n\
-        \  end\nelse\n  if pbConfirmMessage(_INTL(\"Take the pink Sweetrot?\"))\n    $game_variables[128] = $game_variables[128].to_i + 1\n    pbSEPlay(\"Sweet Scent\"\
-        , 85, 100)\n    pbMessage(_INTL(\"Peaches. For a heartbeat, everything in Velmora feels soft and fine. Then it vanishes, leaving a strange ache for more.\"\
-        ))\n    if $game_variables[128].to_i >= 2\n      pbMessage(_INTL(\"Wenlow (calling from the Infirmary walk above): NO! No no no — please, that's two! Don't\
-        \ take a third one!\"))\n    end\n  else\n    pbMessage(_INTL(\"Sweet Vendor: Mother Gutter is patient. Peaches are patient.\"))\n  end\nend"}
+    story: ch7
+  - commands:
+    - if: $game_variables[@@SWEETROT_TAKEN] >= 2
+      then:
+      - {script: Prismfall.checkpoint}
+    - move:
+        who: Sweet Vendor (Center Steps)
+        route: [face_player]
+        wait: true
+    - {script: 'pbSEPlay("GUI storage pick up", 60, 110)'}
+    - {wait: 12}
+    - 'Sweet Vendor: I saved you the best one. The pink.'
+    - 'Sweet Vendor: Nobody else gets the pink.'
+    - if: $game_variables[@@SWEETROT_TAKEN] >= 2
+      then:
+      - choices: [Take it., No.]
+        branches:
+        - - '...Really?'
+          - choices: [Take it., No.]
+            branches:
+            - - {script: '$game_variables[@@SWEETROT_TAKEN] += 1'}
+              - {script: 'pf_emote(:player, :heart)
+
+                  pfm_tone(110, 50, 80, 0, 50)'}
+              - {wait: 40}
+              - {script: 'pfm_tone(255, 220, 230, 0, 60)'}
+              - {script: 'Prismfall.game_over(:GO_SWEET_TOOTH)'}
+            - &id001
+              - 'Sweet Vendor: Mother Gutter will be so disappointed.'
+              - move:
+                  who: Mother Gutter
+                  route:
+                  - {opacity: 255}
+                  - turn_right
+                  wait: false
+              - move:
+                  who: Muk (barge)
+                  route:
+                  - {opacity: 255}
+                  - step_anime_on
+                  wait: true
+              - move:
+                  who: Mother Gutter
+                  route:
+                  - {speed: 2}
+                  - down
+                  wait: false
+              - move:
+                  who: Muk (barge)
+                  route:
+                  - {speed: 2}
+                  - down
+                  wait: true
+              - '\pf[GUTTER,happy,,Mother Gutter]Mother Gutter: No she won''t, dear. She''s patient. Peaches are patient.'
+              - move:
+                  who: Mother Gutter
+                  route:
+                  - down
+                  - down
+                  - {opacity: 0}
+                  wait: false
+              - move:
+                  who: Muk (barge)
+                  route:
+                  - down
+                  - down
+                  - {opacity: 0}
+                  wait: true
+            cancel: 2
+        - *id001
+        cancel: 2
+      else:
+      - choices: [Take it., No.]
+        branches:
+        - - {script: '$game_variables[@@SWEETROT_TAKEN] += 1'}
+          - {script: 'pf_emote(:player, :heart)
+
+              pfm_sweetrot(1)'}
+          - {script: 'pf_emote(:player, :dots, wait: true)'}
+        - *id001
+        cancel: 2
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 23, dir: left}
+    cond:
+      var: [CH7_STEP, 4]
+    story: ch7
 - type: event
   name: Mother Gutter
   at: [4, 20]
   pages:
-  - graphic: {sprite: GUTTER, dir: right}
+  - commands: []
     trigger: action
     move: fixed
-    commands: ['Mother Gutter: Oh, don''t mind an old woman by her barge, dear. Just listening to the drips and watching the peaches ripen.', 'Mother Gutter: My Muk''s
-        asleep in the hull — step light on the planks. Peaches are patient, and so am I.']
+    graphic: {sprite: GUTTER, dir: right}
+    through: true
+    story: ch7
 - type: event
   name: Lift-keeper
   at: [14, 7]
@@ -403,3 +509,478 @@ events:
   at: [26, 18]
   item: ANTIDOTE
   hidden: true
+- type: event
+  name: Arrival (Mirefen)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {wait: 20}
+    - raw:
+      - 203
+      - [2, 9, 3]
+    - {script: '3.times { pbSEPlay("Anim/Bubble1", 45, 70); pbWait(0.5) }'}
+    - raw:
+      - 203
+      - [6, 8, 3]
+    - {wait: 30}
+    - {script: 'pfm_glow(-10, 20, 60, 24, 16)'}
+    - {script: pfm_pan_home(30)}
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH7_STEP, 1]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 2]
+  at: [0, 0]
+  story: ch7
+- type: event
+  name: Offer 2 (walkway)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pfm_approach("Sweet Vendor (walkway)", 3, 1)'}
+    - 'Sweet Vendor: You look like you''ve had a day.'
+    - 'Sweet Vendor: Here. This one''s half price. Because I like you.'
+    - choices: [Take one., No.]
+      branches:
+      - - {script: '$game_variables[@@SWEETROT_TAKEN] += 1'}
+        - {script: 'pf_emote(:player, :heart)
+
+            pfm_sweetrot(2)'}
+        - {script: 'pf_emote(:player, :dots, wait: true)'}
+        - if: $game_variables[@@SWEETROT_TAKEN] >= 2
+          then:
+          - {script: 'pfm_approach("Wenlow (walkway)", 4, 3)'}
+          - '\pf[WENLOW,panic,sweat,Wenlow (walkway)]Wenlow: NO. No no no. That''s two. Please. That''s two.'
+          - move:
+              who: Wenlow (walkway)
+              route:
+              - through_on
+              - away_player
+              - away_player
+              - {opacity: 0}
+              wait: false
+      - - {wait: 24}
+        - 'Sweet Vendor: Third time''s the charm, sweetling.'
+      cancel: 2
+    - move:
+        who: Sweet Vendor (walkway)
+        route:
+        - through_on
+        - away_player
+        - away_player
+        - away_player
+        - {opacity: 0}
+        wait: true
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond: {switch: CH7_J2_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [1, 0]
+  story: ch7
+- type: event
+  name: Sweet Vendor (walkway)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 21, dir: up, opacity: 0}
+    through: true
+  at: [28, 18]
+  story: ch7
+- type: event
+  name: Wenlow (walkway)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: WENLOW, dir: up, opacity: 0}
+    through: true
+  at: [28, 17]
+  story: ch7
+- type: event
+  name: Muk (barge)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    graphic: {sprite: Followers/MUK, dir: right, opacity: 0}
+    through: true
+  at: [5, 20]
+  story: ch7
+- type: event
+  name: Gym door slate
+  pages:
+  - commands:
+    - if: $game_variables[@@CH7_STEP] < 4
+      then:
+      - {script: 'pbSEPlay("Player bump", 80, 80)'}
+      - 'A slate hangs on the Gym door, chalked in an impatient hand: "ON ROUNDS. — C. MOTT."'
+      - move:
+          who: player
+          route: [dir_fix_on, backward, dir_fix_off]
+          wait: true
+    trigger: touch
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 4]
+    through: true
+  at: [37, 30]
+  story: ch7
+- type: event
+  name: Ward Night (roof)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - if: pfm_get(:ch7_ward_night).to_i == 0
+      then:
+      - {script: pfm_fade_out(16)}
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(32, 13)'}
+          - turn_right
+          wait: true
+      - move:
+          who: Corvin (roof)
+          route:
+          - graphic: [CORVIN, 0, 4, 0]
+          - {opacity: 255}
+          - {script: 'moveto(33, 13)'}
+          wait: true
+      - {script: 'pfm_tone(-80, -66, -20, 70, 40)'}
+      - '\pf[CORVIN,neutral,,Corvin (roof)]Corvin: Sit. It''s bog coffee. It tastes exactly like it sounds.'
+      - 'Corvin: I haven''t slept properly since AF 288. You get used to it.'
+      - 'Corvin: You don''t, actually. You get used to saying you''ve got used to it.'
+      - {script: pfm_screens(3)}
+      - {wait: 10}
+      - {script: 'pbSEPlay("Glitch Tear Static", 60, 70)'}
+      - {wait: 16}
+      - '\pf[SABLE,happy]Sable: Evening, Nadir!'
+      - 'Sable: The Mourner''s gone soft. You can tell; he''s stopped turning up.'
+      - 'Sable: He wants to "carry them home". Bless.'
+      - 'Sable: The Hammer hasn''t gone soft. The Hammer doesn''t carry things.'
+      - 'Sable: The Hammer breaks them, until somebody up there listens.'
+      - 'Sable: Cindervault''s next. Light for everyone, right?'
+      - 'Sable: Let''s start with you.'
+      - {script: 'pbSEPlay("PC close", 90, 50)
+
+          pfm_tone(-120, -116, -70, 110, 4)'}
+      - {wait: 24}
+      - {script: '3.times { |i| pbSEPlay("Ring Glass Harmonic", 45 + i * 15, 64 + i * 12); pbWait(0.6) }'}
+      - move:
+          who: Corvin (roof)
+          route: [turn_up]
+          wait: true
+      - '\pf[CORVIN,shocked,jolt,Corvin (roof)]Corvin: The dampers.'
+      - 'Corvin: The ward''s dampers run on Zenith current off the Gutterfall junction.'
+      - 'Corvin: Somebody''s CUT the junction—'
+      - {script: pbSEPlay("Door exit")}
+      - move:
+          who: Wenlow (roof)
+          route:
+          - graphic: [WENLOW, 0, 2, 0]
+          - {opacity: 255}
+          - {script: 'moveto(31, 11)'}
+          - through_on
+          - {speed: 5}
+          - down
+          - turn_right
+          - through_off
+          wait: true
+      - '\pf[WENLOW,panic,,Wenlow (roof)]Wenlow: Doctor! Doctor, the ward, the Bleed''s coming up off the beds, it''s — it''s a Veil, Doctor, it''s a Veil across
+        the door, I can''t get IN—'
+      - move:
+          who: Corvin (roof)
+          route:
+          - through_on
+          - {speed: 5}
+          - left
+          - up
+          - left
+          - up
+          - {opacity: 0}
+          wait: false
+      - move:
+          who: Wenlow (roof)
+          route:
+          - through_on
+          - {speed: 5}
+          - up
+          - {opacity: 0}
+          wait: true
+      - {script: 'pfm_set(:ch7_ward_night, 1)'}
+      - {script: pfm_fade_out(14)}
+      - transfer: {map: 223, x: 13, y: 11, dir: up}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [CH7_STEP, 5]
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 6]
+    through: true
+  at: [31, 12]
+  story: ch7
+- type: event
+  name: Ward Night (after)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: pfm_get(:ch7_ward_night).to_i == 2
+      then:
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(32, 13)'}
+          - turn_right
+          wait: true
+      - move:
+          who: Corvin (roof)
+          route:
+          - graphic: [CORVIN, 0, 4, 0]
+          - {opacity: 255}
+          - {script: 'moveto(33, 13)'}
+          wait: true
+      - {script: 'pfm_tone(-80, -66, -20, 70, 40)'}
+      - {wait: 20}
+      - '\pf[CORVIN,sad,,Corvin (roof)]Corvin: Do you know why nobody in my Ward is dead?'
+      - 'Corvin: They''re not dying. They''re dreaming.'
+      - 'Corvin: I''ve watched their eyes move under the glass for twelve years, and I''ve never said it out loud, because a doctor who says "dreaming" about a stage-three
+        Fixing gets laughed out of the Accord''s medical college.'
+      - 'Corvin: You saw it too. So now there''s two of us. Two''s a study.'
+      - 'Corvin: Somebody should find out what they''re dreaming about.'
+      - {script: pbSEPlay("Door exit")}
+      - move:
+          who: Juno (roof)
+          route:
+          - graphic: [JUNO, 0, 2, 0]
+          - {opacity: 255}
+          - {script: 'moveto(31, 11)'}
+          - through_on
+          - down
+          - down
+          - turn_right
+          - through_off
+          wait: true
+      - '\pf[JUNO,sad,,Juno (roof)]Juno: The Hammer did this. Sable did this. On purpose. To a ward full of people who can''t run.'
+      - 'Juno: The man in the mask, in Saltmere. He never hurt anyone.'
+      - 'Juno: He said "let the land grieve". He sounded sad.'
+      - '\pf[JUNO,angry,,Juno (roof)]Juno: She doesn''t sound sad. She sounds like she''s enjoying it.'
+      - '\pf[CORVIN,deadpan,,Corvin (roof)]Corvin: That''s how you tell them apart, in my experience.'
+      - 'Corvin: The ones who are enjoying it.'
+      - {script: 'pfm_item(:INVOICE, 1, "Invoice")'}
+      - 'INVOICE: "Item: one (1) ward, carried. Item: one (1) child, carried. Item: the look on my face. TOTAL: ₽0."'
+      - var: [CH7_STEP, 6]
+      - {script: 'pfm_set(:ch7_ward_night, 3)'}
+      - {script: pfm_fade_out(30)}
+      - move:
+          who: Corvin (roof)
+          route:
+          - {opacity: 0}
+          wait: false
+      - move:
+          who: Juno (roof)
+          route:
+          - {opacity: 0}
+          wait: true
+      - move:
+          who: player
+          route:
+          - {script: 'moveto(16, 8)'}
+          - turn_down
+          wait: true
+      else:
+      - {erase: true}
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH7_STEP, 5]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 6]
+  at: [2, 0]
+  story: ch7
+- type: event
+  name: Corvin (roof)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [33, 13]
+  story: ch7
+- type: event
+  name: Wenlow (roof)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [33, 12]
+  story: ch7
+- type: event
+  name: Juno (roof)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [32, 12]
+  story: ch7
+- type: event
+  name: Chapter 7 close
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - {script: 'pfm_tone(-24, -22, -14, 110, 40)'}
+    - raw:
+      - 203
+      - [2, 6, 4]
+    - raw:
+      - 203
+      - [6, 8, 4]
+    - {script: '2.times { pbSEPlay("Mining hammer", 70, 80); pbWait(0.4) }'}
+    - 'Chalked under a hammered ring: "NOT OURS. — the Hollow".'
+    - {script: pfm_pan_home(30)}
+    - move:
+        who: Mirefen Woman (morning)
+        route:
+        - graphic: [NPC 12, 0, 4, 0]
+        - {opacity: 255}
+        - {script: 'moveto(13, 9)'}
+        - right
+        - turn_right
+        wait: true
+    - 'Mirefen Woman: The Hammer did the ward. The Hollow did the chalk.'
+    - 'Mirefen Woman: I didn''t know there were two kinds. Now there''s two kinds.'
+    - move:
+        who: Ferryman (morning)
+        route:
+        - graphic: [trainer_SAILOR, 0, 8, 0]
+        - {opacity: 255}
+        - {script: 'moveto(16, 11)'}
+        - up
+        - up
+        - turn_up
+        wait: true
+    - 'Ferryman: Surf''s yours, if the Doctor says so.'
+    - 'Ferryman: Lake Sallow''s east, past Leechman''s Walk. Then up into Ashkaar.'
+    - 'Ferryman: Mind the sulfur. Mind the dragons. Mind everything.'
+    - move:
+        who: Mirefen Woman (morning)
+        route:
+        - left
+        - left
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: Ferryman (morning)
+        route:
+        - down
+        - down
+        - down
+        - {opacity: 0}
+        wait: false
+    - move:
+        who: player
+        route: [turn_up]
+        wait: true
+    - move:
+        who: Wenlow (lift)
+        route:
+        - graphic: [WENLOW, 0, 2, 0]
+        - {opacity: 255}
+        - {script: 'moveto(16, 6)'}
+        - step_anime_on
+        - turn_left
+        - wait 4
+        - turn_right
+        - wait 4
+        - turn_left
+        - wait 4
+        - turn_right
+        - wait 4
+        - turn_left
+        - wait 4
+        - turn_right
+        - wait 4
+        - turn_down
+        wait: true
+    - '\pf[WENLOW,happy,,Wenlow (lift)]Wenlow: Come back! Bring Juno! Bring snacks! Bring weather!'
+    - {script: "if !pfm_quest(:eighteen_roads, \"Eighteen Roads\", \"Earn the seventh badge in Cindervault, across Lake Sallow into Ashkaar.\")\n  $PokemonGlobal.pf_quests[:eighteen_roads][:text]\
+        \ = \"Earn the seventh badge in Cindervault, across Lake Sallow into Ashkaar.\"\n  pbMessage(\"\\\\se[GUI save choice]\" + _INTL(\"QUEST LOG: \\\"Eighteen\
+        \ Roads\\\" — Earn the seventh badge in Cindervault, across Lake Sallow into Ashkaar.\"))\nend"}
+    - var: [CH7_STEP, 7]
+    - var: [STORY_CHAPTER, 8]
+    trigger: autorun
+    move: fixed
+    cond:
+      var: [CH7_STEP, 6]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond:
+      var: [CH7_STEP, 7]
+  at: [3, 0]
+  story: ch7
+- type: event
+  name: Mirefen Woman (morning)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [13, 9]
+  story: ch7
+- type: event
+  name: Ferryman (morning)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [16, 11]
+  story: ch7
+- type: event
+  name: Wenlow (lift)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [16, 6]
+  story: ch7

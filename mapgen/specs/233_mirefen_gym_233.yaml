@@ -44,25 +44,45 @@ events:
   name: Warden Corvin Mott
   at: [10, 5]
   pages:
-  - graphic: {sprite: CORVIN, dir: down}
+  - commands:
+    - if: pfm_get(:ch7_g6_tried)
+      then: ['Corvin: Back on the table. Good. Second opinions are healthy.']
+      else:
+      - {script: 'pbSEPlay("Battle ball shake", 60, 90)'}
+      - {wait: 12}
+      - '\pf[CORVIN,neutral,,Warden Corvin Mott]Corvin: Everything''s poison, dear. Dose makes the cure.'
+      - 'Corvin: Two at once, because nobody in Nadir ever has only one thing wrong with them.'
+      - '\pf[CORVIN,smug,,Warden Corvin Mott]Corvin: Don''t worry. I''m a doctor. I know exactly how much this hurts.'
+    - {script: 'pfm_set(:ch7_g6_tried)'}
+    - {script: 'EliteBattle.set(:nextBattleScript, { "lastOpp" => "Ward. The patient one. Hold them." }) if defined?(EliteBattle)'}
+    - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_CORVIN), double: true)'
+      then:
+      - '\pf[CORVIN,deadpan,dots,Warden Corvin Mott]Corvin: ...Well. That''s the correct dose.'
+      - {script: 'Prismfall.award_badge(pfm_gym(:LEADER_CORVIN))'}
+      - {script: '6.times { |i| pbSEPlay("Anim/HealBell", 70, 76 + i * 9); pbWait(0.24) }
+
+          pfm_glow(30, 60, 90, 16, 12)'}
+      - 'Corvin: Your case sings. I''d have that looked at.'
+      - 'Corvin: Not by me. I''m busy.'
+      - {script: 'pbReceiveItem(:TM84)'}
+      - 'Corvin: Poison Jab. Close in, quick, and they go home feeling worse.'
+      - 'Corvin: It''s the bedside manner I was never taught. And that badge says Pokémon up to level thirty-nine will heed you.'
+      - 'Corvin: The ferrymen will teach yours Surf. Lake Sallow''s that way.'
+      - 'Corvin: Cindervault''s past it. Don''t drink the lake either.'
+      - if: $game_switches[333]
+        then: ['Corvin: ...And Wenlow told me you measured for the Quiet Alcove too. Four and nine isn''t easy. Thank you. Don''t tell him I said that.']
+      - {script: '$game_variables[@@CH7_STEP] = 5 if $game_variables[@@CH7_STEP] < 5'}
+      - selfswitch: [A, true]
     trigger: action
     move: fixed
-    commands:
-    - {script: "pbMessage(_INTL(\"Corvin: Everything's poison, dear. Dose makes the cure.\"))\npbMessage(_INTL(\"Corvin: Two at once, because nobody in\
-        \ Nadir ever has only one thing wrong with them.\"))\npbMessage(_INTL(\"Corvin: Don't worry. I'm a doctor. I know exactly how much this hurts.\"\
-        ))\nif Prismfall.gym_battle(pfm_gym(:LEADER_CORVIN), double: true)\n  pbMessage(_INTL(\"Corvin: ...Well. That's the correct dose.\"))\n  Prismfall.award_badge(pfm_gym(:LEADER_CORVIN))\n\
-        \  pbSEPlay(\"Anim/HealBell\", 90, 100)\n  pbMessage(_INTL(\"Six clear notes ring out as the Remedy Badge settles in. Light runs along your badge\
-        \ case's seams like water in a channel.\"))\n  pbMessage(_INTL(\"Corvin: Your case sings. I'd have that looked at. Not by me. I'm busy.\"))\n  pbReceiveItem(:TM84)\n\
-        \  pbMessage(_INTL(\"Corvin: Poison Jab. Close in, quick, and they go home feeling worse. It's the bedside manner I was never taught.\"))\n  pbMessage(_INTL(\"\
-        Corvin: The ferrymen down on Mirefen's south steps will give you Surf now. Lake Sallow's east, past Leechman's Walk. Cindervault's past it. Don't\
-        \ drink the lake either.\"))\n  if $game_switches[333]\n    pbMessage(_INTL(\"Corvin: ...And Wenlow told me you measured for the Quiet Alcove too.\
-        \ Four and nine isn't easy. Thank you. Don't tell him I said that.\"))\n  end\n  $game_variables[127] = 5 if $game_variables[127].to_i < 5\n  $game_self_switches[[233,\
-        \ @event_id, \"A\"]] = true\n  $game_map.need_refresh = true\nend"}
+    graphic: {sprite: CORVIN, dir: down}
+    story: ch7
   - cond: {self: A}
     graphic: {sprite: CORVIN, dir: down}
     trigger: action
     move: fixed
     commands:
-    - {script: "if $game_switches[333]\n  pbMessage(_INTL(\"Corvin: Four and nine in the Quiet Alcove, and clean work in the Theatre. You'd make a passable\
-        \ apothecary if you weren't busy collecting Badges.\"))\nend\npbMessage(_INTL(\"Corvin: Take the east lift if you want a quick ride down to the\
-        \ lobby — and mind the ferrymen for Surf before heading east to Ashkaar.\"))"}
+    - {script: "if $game_switches[333]\n  pbMessage(_INTL(\"Corvin: Four and nine in the Quiet Alcove, and clean work in the Theatre. You'd make a passable apothecary\
+        \ if you weren't busy collecting Badges.\"))\nend\npbMessage(_INTL(\"Corvin: Take the east lift if you want a quick ride down to the lobby — and mind the\
+        \ ferrymen for Surf before heading east to Ashkaar.\"))"}
+    story: ch7

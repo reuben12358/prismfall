@@ -90,26 +90,43 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
     end
 
     # walk to (tx, ty) and use it (:use) or walk into it (:touch); picks = the answers to its prompts -> [ok, frames]
+    # `seen` only counts the TARGET's own event running (or a new map): a trainer who spots you on the way is fought
+    # and the walk goes on; an action that nothing answered for 90 idle frames is tried again
     def c7_walk(tx, ty, how = :use, picks = [], limit = 5000)
       map0 = $game_map.map_id
-      f = 0; stuck = 0; acting = false; seen = false
+      target = $game_map.events.values.find { |e| e.x == tx && e.y == ty }
+      f = 0; stuck = 0; acting = false; seen = false; waited = 0
       loop do
         Graphics.update; Input.update
         $scene.update
         f += 1
         return [false, f] if f > limit
         busy = c7_busy?
-        seen = true if busy && acting
+        if busy && acting
+          run_id = $game_system.map_interpreter.instance_variable_get(:@event_id)
+          seen = true if $game_map.map_id != map0 || !target || run_id == target.id
+        end
         next if busy
         if acting
-          next if !seen && $game_map.map_id == map0
+          if !seen && $game_map.map_id == map0
+            waited += 1
+            if waited > 90
+              acting = false; waited = 0
+            end
+            next
+          end
           Ch7Cap.picks = []
           return [true, f]
         end
         d = c7_route(tx, ty)
         if d.nil?
           stuck += 1
-          return [false, f] if stuck > 90
+          if stuck > 90
+            col = (ty - 6..ty + 6).map { |y| "#{tx},#{y}:#{$game_player.passable?(tx, y + 1, 8) ? 'u' : '-'}#{$game_map.passable?(tx, y, 2) ? 'd' : '-'}" }
+            evs = $game_map.events.values.select { |e| (e.x - tx).abs <= 2 && (e.y - ty).abs <= 6 }.map { |e| "#{e.name}@#{e.x},#{e.y}:t#{e.tile_id}/#{e.through}" }
+            log("stuck to #{tx},#{ty} from #{$game_player.x},#{$game_player.y}: #{col.join(' ')} | #{evs.join('; ')}")
+            return [false, f]
+          end
           next
         end
         stuck = 0
@@ -117,7 +134,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
           dx, dy = tx - $game_player.x, ty - $game_player.y
           dir = (dx > 0) ? 6 : (dx < 0) ? 4 : (dy > 0) ? 2 : 8
           Ch7Cap.picks = picks.dup
-          acting = true
+          acting = true; waited = 0
           if how == :touch
             $game_player.move_generic(dir)
           else
@@ -160,20 +177,21 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
       log("names: #{e.message}")
     end
 
+    # one frame folder for the whole run; record() resets the frame counter, so keep the numbering across segments
     def c7_shots(on)
       return if ENV["CH7_SHOTS"] != "1"
-      (on) ? record("ch7_story") : stop
-    end
-
-    def c7_record_keep(name)        # record() resets the frame counter; keep numbering across segments
-      @c7_shots = @shots if @shots
-      record(name)
-      @shots = @c7_shots if @c7_shots
+      if on
+        record("ch7_story")
+        @shots = @c7_kept if @c7_kept
+      else
+        @c7_kept = @shots
+        stop
+      end
     end
 
     def c7_state
       "V127=#{$game_variables[127]} V128=#{$game_variables[128]} S118=#{$game_switches[118]} S119=#{$game_switches[119]} " \
-        "map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y}"
+        "map=#{$game_map.map_id} pos=#{$game_player.x},#{$game_player.y} shot=#{@shots.inspect}"
     end
 
     def run
@@ -202,6 +220,12 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
       self.every = 30
       self.auto = true
       t0 = System.uptime
+      if ENV["CH7_FROM"] == "gym"                      # debug shortcut: the first half's state, set by hand
+        $game_variables[127] = 4; $game_variables[128] = 2; $game_switches[118] = true; $game_switches[119] = true
+        pf_choose(:ch7_ledger, :reassure) rescue nil
+        log("RESULT by hand (CH7_FROM=gym): V127 4, V128 2, S118, S119, :ch7_ledger :reassure")
+        return c7_second_half(t0)
+      end
       c7_shots(true)
       # --- 220: the arrival
       f = c7_run(3000) { c7_selfsw("Arrival (Mirefen)") && c7_idle? }
@@ -244,8 +268,13 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
       # --- 220: offer 3 at the Center steps
       c7_goto(220, 10, 19, 8)
       ok, f = c7_walk(10, 17, :use)
-      f2 = c7_run(600) { c7_idle? }
-      log("RESULT offer 3: ok=#{ok} #{c7_state} frames=#{f + f2}")
+      $game_player.turn_down                           # away from her: the plan's USE presses must not talk again
+      log("RESULT offer 3: ok=#{ok} #{c7_state} frames=#{f}")
+      c7_fail("offer 3 was taken (V128 #{$game_variables[128]})") if $game_variables[128] > 2
+      c7_second_half(t0)
+    end
+
+    def c7_second_half(t0)
       # --- Gym 6, walked (mapgen/puzzles/infirmary.py's route)
       c7_shots(false)
       Ch7Cap.gym = true
@@ -326,7 +355,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("ch7story")
   alias c7_pbShowCommands pbShowCommands unless defined?(c7_pbShowCommands)
   def pbShowCommands(msgwindow, commands = nil, cmdIfCancel = 0, defaultCmd = 0)
     if DemoRun.auto && commands && commands.length > 1
-      pick = Ch7Cap.gym ? (Ch7Cap.picks.shift || commands.length - 1) : (Ch7Cap.choices.shift || 0)
+      pick = Ch7Cap.gym ? (Ch7Cap.picks.shift || commands.length - 1) : (Ch7Cap.choices.shift || commands.length - 1)
       pick = commands.length - 1 if pick >= commands.length
       DemoRun.log("choice #{pick}: #{commands[pick]}")
       20.times { Graphics.update }

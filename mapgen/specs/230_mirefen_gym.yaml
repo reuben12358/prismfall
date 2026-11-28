@@ -40,8 +40,8 @@ events:
   at: [9, 6]
   pages:
   - trigger: action
-    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the
-        east Teach Funnel to extend the bridge!]
+    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the east Teach
+        Funnel to extend the bridge!]
   - cond: {switch: 334}
     graphic: {tile: 24393}
     trigger: action
@@ -51,8 +51,8 @@ events:
   at: [9, 7]
   pages:
   - trigger: action
-    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the
-        east Teach Funnel to extend the bridge!]
+    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the east Teach
+        Funnel to extend the bridge!]
     graphic: {tile: 26015}
   - cond: {switch: 334}
     graphic: {tile: 24393}
@@ -63,8 +63,8 @@ events:
   at: [10, 6]
   pages:
   - trigger: action
-    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the
-        east Teach Funnel to extend the bridge!]
+    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the east Teach
+        Funnel to extend the bridge!]
   - cond: {switch: 334}
     graphic: {tile: 24393}
     trigger: action
@@ -74,8 +74,8 @@ events:
   at: [10, 7]
   pages:
   - trigger: action
-    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the
-        east Teach Funnel to extend the bridge!]
+    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the east Teach
+        Funnel to extend the bridge!]
     graphic: {tile: 26017}
   - cond: {switch: 334}
     graphic: {tile: 24393}
@@ -86,8 +86,8 @@ events:
   at: [11, 6]
   pages:
   - trigger: action
-    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the
-        east Teach Funnel to extend the bridge!]
+    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the east Teach
+        Funnel to extend the bridge!]
   - cond: {switch: 334}
     graphic: {tile: 24393}
     trigger: action
@@ -97,8 +97,8 @@ events:
   at: [11, 7]
   pages:
   - trigger: action
-    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the
-        east Teach Funnel to extend the bridge!]
+    commands: [A locked iron sluice-gate bars the open corrosive mire channel. Fill the 3-flask at the west Tap Bench and pour exact 3 measures into the east Teach
+        Funnel to extend the bridge!]
     graphic: {tile: 26015}
   - cond: {switch: 334}
     graphic: {tile: 24393}
@@ -111,15 +111,15 @@ events:
   - graphic: {tile: 24000}
     trigger: action
     commands:
-    - {script: "loop do\n  s = $game_variables[330].to_i\n  b = $game_variables[331].to_i\n  cmds = [\n    _INTL(\"Fill 3-Flask (now {1}/3)\", s),\n   \
-        \ _INTL(\"Fill 5-Flask (now {1}/5)\", b),\n    _INTL(\"Pour 3 -> 5\"),\n    _INTL(\"Pour 5 -> 3\"),\n    _INTL(\"Tip out 3-Flask\"),\n    _INTL(\"\
-        Tip out 5-Flask\"),\n    _INTL(\"Step away\")\n  ]\n  ch = pbMessage(_INTL(\"Ward Tap Bench — [3-Flask: {1}/3 | 5-Flask: {2}/5]\", s, b), cmds,\
-        \ cmds.length)\n  case ch\n  when 0\n    $game_variables[330] = 3\n    pbSEPlay(\"Anim/Water1\", 80, 105)\n  when 1\n    $game_variables[331] =\
-        \ 5\n    pbSEPlay(\"Anim/Water1\", 80, 95)\n  when 2\n    amt = [s, 5 - b].min\n    if amt > 0\n      $game_variables[330] = s - amt\n      $game_variables[331]\
-        \ = b + amt\n      pbSEPlay(\"Anim/Water2\", 80, 100)\n    else\n      pbSEPlay(\"GUI sel buzzer\", 75, 100)\n    end\n  when 3\n    amt = [b, 3\
-        \ - s].min\n    if amt > 0\n      $game_variables[331] = b - amt\n      $game_variables[330] = s + amt\n      pbSEPlay(\"Anim/Water2\", 80, 100)\n\
-        \    else\n      pbSEPlay(\"GUI sel buzzer\", 75, 100)\n    end\n  when 4\n    $game_variables[330] = 0\n    pbSEPlay(\"Anim/Bubble1\", 75, 100)\n\
-        \  when 5\n    $game_variables[331] = 0\n    pbSEPlay(\"Anim/Bubble1\", 75, 100)\n  else\n    break\n  end\nend"}
+    - {script: "loop do\n  s = $game_variables[330].to_i\n  b = $game_variables[331].to_i\n  cmds = [\n    _INTL(\"Fill 3-Flask (now {1}/3)\", s),\n    _INTL(\"Fill\
+        \ 5-Flask (now {1}/5)\", b),\n    _INTL(\"Pour 3 -> 5\"),\n    _INTL(\"Pour 5 -> 3\"),\n    _INTL(\"Tip out 3-Flask\"),\n    _INTL(\"Tip out 5-Flask\"),\n\
+        \    _INTL(\"Step away\")\n  ]\n  ch = pbMessage(_INTL(\"Ward Tap Bench — [3-Flask: {1}/3 | 5-Flask: {2}/5]\", s, b), cmds, cmds.length)\n  case ch\n  when\
+        \ 0\n    $game_variables[330] = 3\n    pbSEPlay(\"Anim/Water1\", 80, 105)\n  when 1\n    $game_variables[331] = 5\n    pbSEPlay(\"Anim/Water1\", 80, 95)\n\
+        \  when 2\n    amt = [s, 5 - b].min\n    if amt > 0\n      $game_variables[330] = s - amt\n      $game_variables[331] = b + amt\n      pbSEPlay(\"Anim/Water2\"\
+        , 80, 100)\n    else\n      pbSEPlay(\"GUI sel buzzer\", 75, 100)\n    end\n  when 3\n    amt = [b, 3 - s].min\n    if amt > 0\n      $game_variables[331]\
+        \ = b - amt\n      $game_variables[330] = s + amt\n      pbSEPlay(\"Anim/Water2\", 80, 100)\n    else\n      pbSEPlay(\"GUI sel buzzer\", 75, 100)\n    end\n\
+        \  when 4\n    $game_variables[330] = 0\n    pbSEPlay(\"Anim/Bubble1\", 75, 100)\n  when 5\n    $game_variables[331] = 0\n    pbSEPlay(\"Anim/Bubble1\", 75,\
+        \ 100)\n  else\n    break\n  end\nend"}
 - type: event
   name: Teach Funnel (Needs 3)
   at: [14, 9]
@@ -127,22 +127,21 @@ events:
   - graphic: {tile: 17872}
     trigger: action
     commands:
-    - {script: "if $game_switches[334]\n  pbMessage(_INTL(\"Ward Teach Funnel: Already dosed with exact 3 measures. The iron crossing is open!\"))\nelse\n\
-        \  s = $game_variables[330].to_i\n  b = $game_variables[331].to_i\n  cmds = [\n    _INTL(\"Pour 3-Flask ({1} {2})\", s, s == 1 ? \"measure\" : \"\
-        measures\"),\n    _INTL(\"Pour 5-Flask ({1} {2})\", b, b == 1 ? \"measure\" : \"measures\"),\n    _INTL(\"Step back\")\n  ]\n  ch = pbMessage(_INTL(\"\
-        Ward Teach Funnel — Needs EXACTLY 3 measures. [3-Flask: {1}/3 | 5-Flask: {2}/5]\", s, b), cmds, 3)\n  if ch == 0 || ch == 1\n    amt = (ch == 0)\
-        \ ? s : b\n    $game_variables[(ch == 0) ? 330 : 331] = 0\n    if amt == 0\n      pbSEPlay(\"GUI sel buzzer\", 75, 100)\n      pbMessage(_INTL(\"\
-        That flask is empty! Fill and measure at the Tap Bench first.\"))\n    elsif amt == 3\n      $game_switches[334] = true\n      $game_map.need_refresh\
-        \ = true\n      pbSEPlay(\"Anim/HealBell\", 90, 100)\n      pfm_shake(4, 10, 8) if defined?(pfm_shake)\n      pbMessage(_INTL(\"Three exact measures\
-        \ fizz green-gold! The ward's sluice drawbridge clanks down over the Corrosive Mire!\"))\n    else\n      pbSEPlay(\"GUI sel buzzer\", 85, 95)\n\
-        \      pbMessage(_INTL(\"The funnel hisses and drains!\"))\n      pbMessage(_INTL(\"Wenlow: That was {1}! The funnel wants 3. 'Dose makes the cure,'\
-        \ sir says. Sir says it a lot!\", amt))\n    end\n  end\nend"}
+    - {script: "if $game_switches[334]\n  pbMessage(_INTL(\"Ward Teach Funnel: Already dosed with exact 3 measures. The iron crossing is open!\"))\nelse\n  s = $game_variables[330].to_i\n\
+        \  b = $game_variables[331].to_i\n  cmds = [\n    _INTL(\"Pour 3-Flask ({1} {2})\", s, s == 1 ? \"measure\" : \"measures\"),\n    _INTL(\"Pour 5-Flask ({1}\
+        \ {2})\", b, b == 1 ? \"measure\" : \"measures\"),\n    _INTL(\"Step back\")\n  ]\n  ch = pbMessage(_INTL(\"Ward Teach Funnel — Needs EXACTLY 3 measures.\
+        \ [3-Flask: {1}/3 | 5-Flask: {2}/5]\", s, b), cmds, 3)\n  if ch == 0 || ch == 1\n    amt = (ch == 0) ? s : b\n    $game_variables[(ch == 0) ? 330 : 331] =\
+        \ 0\n    if amt == 0\n      pbSEPlay(\"GUI sel buzzer\", 75, 100)\n      pbMessage(_INTL(\"That flask is empty! Fill and measure at the Tap Bench first.\"\
+        ))\n    elsif amt == 3\n      $game_switches[334] = true\n      $game_map.need_refresh = true\n      pbSEPlay(\"Anim/HealBell\", 90, 100)\n      pfm_shake(4,\
+        \ 10, 8) if defined?(pfm_shake)\n      pbMessage(_INTL(\"Three exact measures fizz green-gold! The ward's sluice drawbridge clanks down over the Corrosive\
+        \ Mire!\"))\n    else\n      pbSEPlay(\"GUI sel buzzer\", 85, 95)\n      pbMessage(_INTL(\"The funnel hisses and drains!\"))\n      pbMessage(_INTL(\"Wenlow:\
+        \ That was {1}! The funnel wants 3. 'Dose makes the cure,' sir says. Sir says it a lot!\", amt))\n    end\n  end\nend"}
 - type: sign
   name: Corvin's Sign
   at: [10, 10]
   post: false
-  text: 'WARDEN CORVIN MOTT''S RULE: ''If you can count to three, you can count to anything. Measure, don''t guess.'' (Fill the 3-flask at the west tap,
-    then pour it into the east funnel!)'
+  text: 'WARDEN CORVIN MOTT''S RULE: ''If you can count to three, you can count to anything. Measure, don''t guess.'' (Fill the 3-flask at the west tap, then pour
+    it into the east funnel!)'
 - type: event
   name: Gym Guide
   at: [7, 13]
@@ -150,9 +149,9 @@ events:
   - graphic: {sprite: NPC 14, dir: right}
     trigger: action
     move: fixed
-    commands: ['Gym Guide: Yo, champ in the making! Welcome to the Mirefen Infirmary Gym — Poison-types on the Corrosive Mire!', 'Gym Guide: Ground and
-        Psychic cut right through it. Fairies melt fast, and Poison moves even corrode Steel-types down here.', 'Gym Guide: Doctor Mott fights two Pokémon
-        at once — says it''s because patients in Nadir never have only one thing wrong with them. Good luck!']
+    commands: ['Gym Guide: The Infirmary! Poison-types on the Corrosive Mire.', 'Gym Guide: Ground and Psychic cut through it. Fairies melt.', 'Gym Guide: The Doctor
+        fights two at once.', 'Gym Guide: He says it''s because patients come in pairs.']
+    story: ch7
 - type: event
   name: Apothecary Medic
   at: [13, 13]
